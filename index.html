@@ -111,10 +111,30 @@
 </ul>
 <h1 id="5-在本地启动博客"><a href="#5-在本地启动博客" class="headerlink" title="5.在本地启动博客"></a>5.在本地启动博客</h1><p><code>hexo server</code> or <code>hexo s</code></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">注意：是在http://localhost:4000/上进行，而不是https</span><br></pre></td></tr></table></figure>
+
+<h1 id="6-新建博客文章"><a href="#6-新建博客文章" class="headerlink" title="6.新建博客文章"></a>6.新建博客文章</h1><p><code>hexo n &quot;文章题目&quot;</code></p>
+<p>写完一篇文章后</p>
+<ul>
+<li>清理一下<code>hexo clean</code></li>
+<li>重新生成<code>hexo g</code></li>
+</ul>
+<h1 id="7-部署到github上"><a href="#7-部署到github上" class="headerlink" title="7.部署到github上"></a>7.部署到github上</h1><h2 id="7-1-在github上新建一个仓库"><a href="#7-1-在github上新建一个仓库" class="headerlink" title="7.1 在github上新建一个仓库"></a>7.1 在github上新建一个仓库</h2><p>仓库名字：<code>用户名.github.io</code></p>
+<h2 id="7-2-在Blog文件夹下安装deployer"><a href="#7-2-在Blog文件夹下安装deployer" class="headerlink" title="7.2 在Blog文件夹下安装deployer"></a>7.2 在Blog文件夹下安装deployer</h2><p><code>cnpm install --save hexo-deployer-git</code></p>
+<h2 id="7-3-在Blog文件夹下打开-config-yml文件"><a href="#7-3-在Blog文件夹下打开-config-yml文件" class="headerlink" title="7.3 在Blog文件夹下打开_config.yml文件"></a>7.3 在Blog文件夹下打开_config.yml文件</h2><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/one-command-deployment</span></span><br><span class="line"></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line"></span><br><span class="line">  <span class="string">type:</span> <span class="string">&#x27;git&#x27;</span></span><br><span class="line"></span><br><span class="line">  <span class="string">repo:</span> <span class="string">&#x27;https://github.com/yq010105/yq010105.github.io.git&#x27;</span></span><br><span class="line"></span><br><span class="line">  <span class="string">branch:</span> <span class="string">&#x27;master&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="7-4-然后将Blog部署到github中"><a href="#7-4-然后将Blog部署到github中" class="headerlink" title="7.4 然后将Blog部署到github中"></a>7.4 然后将Blog部署到github中</h2><p><code>hexo d</code></p>
+<h1 id="Last"><a href="#Last" class="headerlink" title="Last"></a>Last</h1><p>使用Hexo博客方法<br>在写完文章后：</p>
+<ul>
+<li><code>hexo clean</code>清除</li>
+<li><code>hexo g</code>生成</li>
+<li><code>hexo s</code>在本地预览，在<a target="_blank" rel="noopener" href="http://localhost:4000/%E4%B8%AD%E6%9F%A5%E7%9C%8B">http://localhost:4000/中查看</a></li>
+<li><code>hexo d</code>推到github上，在<a target="_blank" rel="noopener" href="https://yq010105.github.io/">Hexo (yq010105.github.io)</a>中查看</li>
+</ul>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/06/08/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" data-id="cl451h5nv00000grj59j47zh0" data-title="Hexo博客搭建" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/06/08/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" data-id="cl451qwap0000r0rjheho02qv" data-title="Hexo博客搭建" class="article-share-link">Share</a>
       
       
       
@@ -165,7 +185,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/06/08/hello-world/" data-id="cl451h5o300010grj4w4p41cg" data-title="Hello World" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/06/08/hello-world/" data-id="cl451qwau0001r0rj6hm499bc" data-title="Hello World" class="article-share-link">Share</a>
       
       
       
