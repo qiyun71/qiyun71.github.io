@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
   <meta name="description" content="关于我使用 Markdown 以来学到的知识，即markdown的操作方法">
@@ -108,6 +108,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -142,11 +143,38 @@
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -416,7 +444,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E7%A9%BA%E6%A0%BC"><span class="nav-number">1.</span> <span class="nav-text">1. 空格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E9%93%BE%E6%8E%A5"><span class="nav-number">2.</span> <span class="nav-text">2. 链接</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E8%A1%8C%E5%86%85%E5%BC%8F-%E6%96%B9%E4%BE%BF%E7%AE%80%E6%B4%81"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 行内式(方便简洁)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E9%94%9A%E7%82%B9%EF%BC%88%E6%9C%89%E4%BA%86%E7%9B%AE%E5%BD%95%E7%9A%84%E8%AF%9D%EF%BC%8C%E5%9F%BA%E6%9C%AC%E4%B8%8D%E7%94%A8%E4%BA%86%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 锚点（有了目录的话，基本不用了）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%9B%BE%E7%89%87"><span class="nav-number">3.</span> <span class="nav-text">3. 图片</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E7%BD%91%E7%BB%9C%E5%9B%BE%E7%89%87%E7%9A%84%E6%B7%BB%E5%8A%A0"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 网络图片的添加</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87%E7%9A%84%E6%B7%BB%E5%8A%A0"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 本地图片的添加</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E8%A1%A8%E6%A0%BC"><span class="nav-number">4.</span> <span class="nav-text">4. 表格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E8%AE%BE%E7%BD%AE%E5%AD%97%E4%BD%93%E5%A4%A7%E5%B0%8F%E9%A2%9C%E8%89%B2"><span class="nav-number">5.</span> <span class="nav-text">5. 设置字体大小颜色</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E5%BE%85%E5%8A%9E%E6%B8%85%E5%8D%95"><span class="nav-number">6.</span> <span class="nav-text">6. 待办清单</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E7%A9%BA%E6%A0%BC"><span class="nav-text">1. 空格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E9%93%BE%E6%8E%A5"><span class="nav-text">2. 链接</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E8%A1%8C%E5%86%85%E5%BC%8F-%E6%96%B9%E4%BE%BF%E7%AE%80%E6%B4%81"><span class="nav-text">2.1 行内式(方便简洁)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E9%94%9A%E7%82%B9%EF%BC%88%E6%9C%89%E4%BA%86%E7%9B%AE%E5%BD%95%E7%9A%84%E8%AF%9D%EF%BC%8C%E5%9F%BA%E6%9C%AC%E4%B8%8D%E7%94%A8%E4%BA%86%EF%BC%89"><span class="nav-text">2.2 锚点（有了目录的话，基本不用了）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%9B%BE%E7%89%87"><span class="nav-text">3. 图片</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E7%BD%91%E7%BB%9C%E5%9B%BE%E7%89%87%E7%9A%84%E6%B7%BB%E5%8A%A0"><span class="nav-text">3.1 网络图片的添加</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87%E7%9A%84%E6%B7%BB%E5%8A%A0"><span class="nav-text">3.2 本地图片的添加</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E8%A1%A8%E6%A0%BC"><span class="nav-text">4. 表格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E8%AE%BE%E7%BD%AE%E5%AD%97%E4%BD%93%E5%A4%A7%E5%B0%8F%E9%A2%9C%E8%89%B2"><span class="nav-text">5. 设置字体大小颜色</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E5%BE%85%E5%8A%9E%E6%B8%85%E5%8D%95"><span class="nav-text">6. 待办清单</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -513,6 +541,10 @@
   
 
 
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 

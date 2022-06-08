@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
   <meta name="description" content="参考教程">
@@ -112,6 +112,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -146,11 +147,38 @@
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -366,7 +394,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0-plt-%E6%89%93%E5%BC%80-opencv-%E5%9B%BE%E5%83%8F"><span class="nav-number">1.</span> <span class="nav-text">0. plt 打开 opencv 图像</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-plt-plot-x-y"><span class="nav-number">2.</span> <span class="nav-text">1. plt.plot(x,y)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-plt-figure-%E7%94%A8%E6%9D%A5%E7%94%BB%E5%9B%BE%EF%BC%8C%E8%87%AA%E5%AE%9A%E4%B9%89%E7%94%BB%E5%B8%83%E5%A4%A7%E5%B0%8F"><span class="nav-number">3.</span> <span class="nav-text">2. plt.figure()用来画图，自定义画布大小</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3%E3%80%81plt-subplot-222"><span class="nav-number">4.</span> <span class="nav-text">3、plt.subplot(222)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4%E3%80%81plt-xlim-%E8%AE%BE%E7%BD%AE-x-%E8%BD%B4%E6%88%96%E8%80%85-y-%E8%BD%B4%E5%88%BB%E5%BA%A6%E8%8C%83%E5%9B%B4"><span class="nav-number">5.</span> <span class="nav-text">4、plt.xlim 设置 x 轴或者 y 轴刻度范围</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5%E3%80%81plt-xticks-%EF%BC%9A%E8%AE%BE%E7%BD%AE-x-%E8%BD%B4%E5%88%BB%E5%BA%A6%E7%9A%84%E8%A1%A8%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="nav-number">6.</span> <span class="nav-text">5、plt.xticks()：设置 x 轴刻度的表现方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-plt-scatter-%E2%80%93%E6%95%A3%E7%82%B9%E5%9B%BE"><span class="nav-number">7.</span> <span class="nav-text">6. plt.scatter()–散点图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7%E3%80%81ax2-set-title-%E2%80%98xxx%E2%80%99-%E8%AE%BE%E7%BD%AE%E6%A0%87%E9%A2%98%EF%BC%8C%E7%94%BB%E5%9B%BE"><span class="nav-number">8.</span> <span class="nav-text">7、ax2.set_title(‘xxx’)设置标题，画图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-plt-hist%EF%BC%88%EF%BC%89%E7%BB%98%E5%88%B6%E7%9B%B4%E6%96%B9%E5%9B%BE"><span class="nav-number">9.</span> <span class="nav-text">8. plt.hist（）绘制直方图</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0-plt-%E6%89%93%E5%BC%80-opencv-%E5%9B%BE%E5%83%8F"><span class="nav-text">0. plt 打开 opencv 图像</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-plt-plot-x-y"><span class="nav-text">1. plt.plot(x,y)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-plt-figure-%E7%94%A8%E6%9D%A5%E7%94%BB%E5%9B%BE%EF%BC%8C%E8%87%AA%E5%AE%9A%E4%B9%89%E7%94%BB%E5%B8%83%E5%A4%A7%E5%B0%8F"><span class="nav-text">2. plt.figure()用来画图，自定义画布大小</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3%E3%80%81plt-subplot-222"><span class="nav-text">3、plt.subplot(222)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4%E3%80%81plt-xlim-%E8%AE%BE%E7%BD%AE-x-%E8%BD%B4%E6%88%96%E8%80%85-y-%E8%BD%B4%E5%88%BB%E5%BA%A6%E8%8C%83%E5%9B%B4"><span class="nav-text">4、plt.xlim 设置 x 轴或者 y 轴刻度范围</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5%E3%80%81plt-xticks-%EF%BC%9A%E8%AE%BE%E7%BD%AE-x-%E8%BD%B4%E5%88%BB%E5%BA%A6%E7%9A%84%E8%A1%A8%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="nav-text">5、plt.xticks()：设置 x 轴刻度的表现方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-plt-scatter-%E2%80%93%E6%95%A3%E7%82%B9%E5%9B%BE"><span class="nav-text">6. plt.scatter()–散点图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7%E3%80%81ax2-set-title-%E2%80%98xxx%E2%80%99-%E8%AE%BE%E7%BD%AE%E6%A0%87%E9%A2%98%EF%BC%8C%E7%94%BB%E5%9B%BE"><span class="nav-text">7、ax2.set_title(‘xxx’)设置标题，画图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-plt-hist%EF%BC%88%EF%BC%89%E7%BB%98%E5%88%B6%E7%9B%B4%E6%96%B9%E5%9B%BE"><span class="nav-text">8. plt.hist（）绘制直方图</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -463,6 +491,10 @@
   
 
 
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 

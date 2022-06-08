@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
   <meta name="description" content="学习C#的笔记">
@@ -106,6 +106,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -140,11 +141,38 @@
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -342,7 +370,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0-C-%E5%AD%A6%E4%B9%A0%E5%89%8D%E7%9A%84-bb"><span class="nav-number">1.</span> <span class="nav-text">0. C#学习前的 bb</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E8%AF%AD%E8%A8%80%E6%A0%87%E5%87%86%E7%9A%84%E2%80%94%E2%80%94hello-world"><span class="nav-number">2.</span> <span class="nav-text">1. 语言标准的——hello world!!!</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-Console"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 Console</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-WPF"><span class="nav-number">2.2.</span> <span class="nav-text">1.2 WPF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-Windows-Forms-App-old"><span class="nav-number">2.3.</span> <span class="nav-text">1.3 Windows Forms App(old)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-ASP-NET-Web-Forms-old"><span class="nav-number">2.4.</span> <span class="nav-text">1.4 ASP.NET Web Forms(old)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-ASP-NET-MVC"><span class="nav-number">2.5.</span> <span class="nav-text">1.5 ASP.NET MVC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6-WCF"><span class="nav-number">2.6.</span> <span class="nav-text">1.6 WCF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-7-Windows-Store-Application"><span class="nav-number">2.7.</span> <span class="nav-text">1.7 Windows Store Application</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-8-Windows-Phone-Application-%E5%B7%B2%E7%BB%8F%E5%87%89%E9%80%8F%E4%BA%86%EF%BC%9F%EF%BC%9F%EF%BC%9F"><span class="nav-number">2.8.</span> <span class="nav-text">1.8 Windows Phone Application(已经凉透了？？？)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-9-Cloud"><span class="nav-number">2.9.</span> <span class="nav-text">1.9 Cloud</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-10-WF"><span class="nav-number">2.10.</span> <span class="nav-text">1.10 WF</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E7%B1%BB%E4%B8%8E%E5%90%8D%E7%A7%B0%E7%A9%BA%E9%97%B4"><span class="nav-number">3.</span> <span class="nav-text">2. 类与名称空间</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E5%89%96%E6%9E%90-Hello-World-%E7%A8%8B%E5%BA%8F"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 剖析 Hello World 程序</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0-C-%E5%AD%A6%E4%B9%A0%E5%89%8D%E7%9A%84-bb"><span class="nav-text">0. C#学习前的 bb</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E8%AF%AD%E8%A8%80%E6%A0%87%E5%87%86%E7%9A%84%E2%80%94%E2%80%94hello-world"><span class="nav-text">1. 语言标准的——hello world!!!</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-Console"><span class="nav-text">1.1 Console</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-WPF"><span class="nav-text">1.2 WPF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-Windows-Forms-App-old"><span class="nav-text">1.3 Windows Forms App(old)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-ASP-NET-Web-Forms-old"><span class="nav-text">1.4 ASP.NET Web Forms(old)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-ASP-NET-MVC"><span class="nav-text">1.5 ASP.NET MVC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6-WCF"><span class="nav-text">1.6 WCF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-7-Windows-Store-Application"><span class="nav-text">1.7 Windows Store Application</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-8-Windows-Phone-Application-%E5%B7%B2%E7%BB%8F%E5%87%89%E9%80%8F%E4%BA%86%EF%BC%9F%EF%BC%9F%EF%BC%9F"><span class="nav-text">1.8 Windows Phone Application(已经凉透了？？？)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-9-Cloud"><span class="nav-text">1.9 Cloud</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-10-WF"><span class="nav-text">1.10 WF</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E7%B1%BB%E4%B8%8E%E5%90%8D%E7%A7%B0%E7%A9%BA%E9%97%B4"><span class="nav-text">2. 类与名称空间</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E5%89%96%E6%9E%90-Hello-World-%E7%A8%8B%E5%BA%8F"><span class="nav-text">2.1 剖析 Hello World 程序</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -439,6 +467,10 @@
   
 
 
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 

@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
   <meta name="description" content="python写的几个小程序，慢慢写，很垃圾，基本上是方便我装B学习生活的代码">
@@ -104,6 +104,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -138,11 +139,38 @@
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -319,7 +347,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E6%AF%8F%E6%97%A5%E6%89%8B%E5%8A%A8%E8%AE%B0%E5%BD%95%E6%94%AF%E4%BB%98%E5%AE%9D%E5%9F%BA%E9%87%91%E4%BD%99%E9%A2%9D"><span class="nav-number">1.</span> <span class="nav-text">1. 每日手动记录支付宝基金余额</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E5%8F%AA%E6%9C%89%E4%B8%80%E6%94%AF%E5%9F%BA%E9%87%91%E6%97%B6%E7%9A%84%E4%BB%A3%E7%A0%81"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 只有一支基金时的代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E4%B8%89%E6%94%AF%E5%9F%BA%E9%87%91%E6%97%B6%E7%9A%84%E4%BB%A3%E7%A0%81"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 三支基金时的代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E5%9B%BE%E4%B8%AD%E5%9B%BE%E2%80%94%E2%80%94%E5%B0%86%E4%B8%80%E5%B9%85%E5%9B%BE%E5%A5%97%E5%A8%83"><span class="nav-number">2.</span> <span class="nav-text">2. 图中图——将一幅图套娃</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E5%A5%BD%E5%A5%87%E5%BF%83%E2%80%94%E2%80%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%A3%80%E6%9F%A5%E5%93%AA%E4%BA%9B%E7%BD%91%E7%AB%99%E8%83%BD%E6%89%93%E5%BC%80"><span class="nav-number">3.</span> <span class="nav-text">3. 好奇心——用程序检查哪些网站能打开</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E5%88%9D%E6%AD%A5%EF%BC%8C%E5%8F%AA%E8%83%BD%E6%A3%80%E6%9F%A5-IP-%E5%9C%B0%E5%9D%80-%E4%B8%8D%E6%88%90%E7%86%9F%E7%9A%84%E6%8E%A2%E7%B4%A2"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 初步，只能检查 IP 地址##不成熟的探索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E5%BC%80%E5%A7%8B%E5%8A%A0%E4%B8%80%E7%82%B9%E7%BB%86%E8%8A%82%EF%BC%8C%E4%B9%9F%E4%B8%8D%E5%A4%AA%E5%AE%8C%E5%96%84"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 开始加一点细节，也不太完善</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E6%AF%8F%E6%97%A5%E6%89%8B%E5%8A%A8%E8%AE%B0%E5%BD%95%E6%94%AF%E4%BB%98%E5%AE%9D%E5%9F%BA%E9%87%91%E4%BD%99%E9%A2%9D"><span class="nav-text">1. 每日手动记录支付宝基金余额</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E5%8F%AA%E6%9C%89%E4%B8%80%E6%94%AF%E5%9F%BA%E9%87%91%E6%97%B6%E7%9A%84%E4%BB%A3%E7%A0%81"><span class="nav-text">1.1 只有一支基金时的代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E4%B8%89%E6%94%AF%E5%9F%BA%E9%87%91%E6%97%B6%E7%9A%84%E4%BB%A3%E7%A0%81"><span class="nav-text">1.2 三支基金时的代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E5%9B%BE%E4%B8%AD%E5%9B%BE%E2%80%94%E2%80%94%E5%B0%86%E4%B8%80%E5%B9%85%E5%9B%BE%E5%A5%97%E5%A8%83"><span class="nav-text">2. 图中图——将一幅图套娃</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E5%A5%BD%E5%A5%87%E5%BF%83%E2%80%94%E2%80%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%A3%80%E6%9F%A5%E5%93%AA%E4%BA%9B%E7%BD%91%E7%AB%99%E8%83%BD%E6%89%93%E5%BC%80"><span class="nav-text">3. 好奇心——用程序检查哪些网站能打开</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E5%88%9D%E6%AD%A5%EF%BC%8C%E5%8F%AA%E8%83%BD%E6%A3%80%E6%9F%A5-IP-%E5%9C%B0%E5%9D%80-%E4%B8%8D%E6%88%90%E7%86%9F%E7%9A%84%E6%8E%A2%E7%B4%A2"><span class="nav-text">3.1 初步，只能检查 IP 地址##不成熟的探索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E5%BC%80%E5%A7%8B%E5%8A%A0%E4%B8%80%E7%82%B9%E7%BB%86%E8%8A%82%EF%BC%8C%E4%B9%9F%E4%B8%8D%E5%A4%AA%E5%AE%8C%E5%96%84"><span class="nav-text">3.2 开始加一点细节，也不太完善</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -416,6 +444,10 @@
   
 
 
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 
