@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Learn-PyThon_LCU</title>
+      <link href="/2022/06/08/Learn-PyThon-LCU/"/>
+      <url>/2022/06/08/Learn-PyThon-LCU/</url>
+      
+        <content type="html"><![CDATA[<p>LOL提供了丰富的接口（除了马服），可以利用这些接口来完成一些操作。使用Python来调用LOL提供的API，可以使用一些大佬造的轮子。</p><span id="more"></span><p>拳头提供的API接口说明可以在<a href="https://developer.riotgames.com/">开发者网站</a>中查看，可以使用拳头账号获得一个api key来调用api，且key需要每天进行更换。<br><img src="/img/python/lcu/riot_developer.png" alt="拳头开发者网站"></p><p>拳头的API收集：</p><ul><li><a href="https://developer.riotgames.com/apis">官方开发者网站API</a></li><li><a href="http://www.mingweisamuel.com/lcu-schema/tool/#/">抓包得到的API</a></li></ul><p>拳头的开发者网站文档：<br>在<a href="https://developer.riotgames.com/docs/lol">开发者网站doc</a>可以得到一些json数据，如当前版本全部英雄的信息，全部装备的信息等等</p><h1 id="1-RiotWatcher"><a href="#1-RiotWatcher" class="headerlink" title="1.RiotWatcher"></a>1.RiotWatcher</h1><p><a href="https://riot-watcher.readthedocs.io/en/latest/">RiotWatcher</a>参考知乎大佬<a href="https://www.zhihu.com/people/luo-po-gong-zi">京暮研Shinra</a>的<a href="https://www.zhihu.com/column/c_1376912368698499072">教程</a>来进行初步学习</p><h1 id="2-lcu-driver"><a href="#2-lcu-driver" class="headerlink" title="2.lcu-driver"></a>2.lcu-driver</h1><p><a href="https://lcu-driver.readthedocs.io/en/latest/index.html">lcu-driver</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习力 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Python </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Hexo博客重新搭建</title>
       <link href="/2022/06/08/Learn-Hexo%E5%8D%9A%E5%AE%A2%E5%86%8D%E6%AC%A1%E6%90%AD%E5%BB%BA/"/>
       <url>/2022/06/08/Learn-Hexo%E5%8D%9A%E5%AE%A2%E5%86%8D%E6%AC%A1%E6%90%AD%E5%BB%BA/</url>
