@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/yqq/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Python_format&amp;emsp;&amp;emsp;&amp;emsp;一种格式化字符串函数str.format()  参考教程网站和CSDN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python中format函数的学习">
+<meta property="og:url" content="http://example.com/2020/02/11/Learn-Python_format/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Python_format&amp;emsp;&amp;emsp;&amp;emsp;一种格式化字符串函数str.format()  参考教程网站和CSDN">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-02-11T12:56:10.000Z">
+<meta property="article:modified_time" content="2022-06-08T06:23:08.031Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2020/02/11/Learn-Python_format/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Python中format函数的学习 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/02/11/Learn-Python_format/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python中format函数的学习
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-11 20:56:10" itemprop="dateCreated datePublished" datetime="2020-02-11T20:56:10+08:00">2020-02-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-06-08 14:23:08" itemprop="dateModified" datetime="2022-06-08T14:23:08+08:00">2022-06-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E5%8A%9B/" itemprop="url" rel="index"><span itemprop="name">学习力</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><strong>Python_format&amp;emsp;&amp;emsp;&amp;emsp;一种格式化字符串函数<code>str.format()</code></strong></p>
+<blockquote>
+<p>参考教程<a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-format.html">网站</a>和<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_19691995/article/details/84197252">CSDN</a></p>
+</blockquote>
+<span id="more"></span>
+
+<p><strong>python_format</strong></p>
+<p>&amp;emsp;&amp;emsp;&amp;emsp;<strong><code>str.format()</code>，它增强了字符串格式化的功能</strong><br>&amp;emsp;&amp;emsp;&amp;emsp;<strong>基本语法是通过 {} 和 : 来代替以前的 %</strong><br><strong>你也可以<code>print(f&#39;字符&#123;参数1&#125;字符&#123;参数2&#125;字符&#39;)</code></strong></p>
+<h2 id="1-format-函数可以接受不限个参数，位置可以不按顺序"><a href="#1-format-函数可以接受不限个参数，位置可以不按顺序" class="headerlink" title="1. format 函数可以接受不限个参数，位置可以不按顺序"></a>1. format 函数可以接受不限个参数，位置可以不按顺序</h2><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;<span class="string">&quot;&#123;&#125; &#123;&#125;&quot;</span>.<span class="built_in">format</span>(<span class="string">&quot;hello&quot;</span>, <span class="string">&quot;world&quot;</span>)    <span class="comment"># 不设置指定位置，按默认顺序</span></span><br><span class="line"><span class="string">&#x27;hello world&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;&#123;0&#125; &#123;1&#125;&quot;</span>.<span class="built_in">format</span>(<span class="string">&quot;hello&quot;</span>, <span class="string">&quot;world&quot;</span>)  <span class="comment"># 设置指定位置</span></span><br><span class="line"><span class="string">&#x27;hello world&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;&#123;1&#125; &#123;0&#125; &#123;1&#125;&quot;</span>.<span class="built_in">format</span>(<span class="string">&quot;hello&quot;</span>, <span class="string">&quot;world&quot;</span>)  <span class="comment"># 设置指定位置</span></span><br><span class="line"><span class="string">&#x27;world hello world&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-设置参数"><a href="#2-设置参数" class="headerlink" title="2. 设置参数"></a>2. 设置参数</h2><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;网站名：&#123;name&#125;, 地址 &#123;url&#125;&quot;</span>.<span class="built_in">format</span>(name=<span class="string">&quot;菜鸟教程&quot;</span>, url=<span class="string">&quot;www.runoob.com&quot;</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 通过字典设置参数</span></span><br><span class="line">site = &#123;<span class="string">&quot;name&quot;</span>: <span class="string">&quot;菜鸟教程&quot;</span>, <span class="string">&quot;url&quot;</span>: <span class="string">&quot;www.runoob.com&quot;</span>&#125;</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;网站名：&#123;name&#125;, 地址 &#123;url&#125;&quot;</span>.<span class="built_in">format</span>(**site))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 通过列表索引设置参数</span></span><br><span class="line">my_list = [<span class="string">&#x27;菜鸟教程&#x27;</span>, <span class="string">&#x27;www.runoob.com&#x27;</span>]</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;网站名：&#123;0[0]&#125;, 地址 &#123;0[1]&#125;&quot;</span>.<span class="built_in">format</span>(my_list))  <span class="comment"># &quot;0&quot; 是必须的</span></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">网站名：菜鸟教程, 地址 www.runoob.com</span></span><br><span class="line"><span class="string">网站名：菜鸟教程, 地址 www.runoob.com</span></span><br><span class="line"><span class="string">网站名：菜鸟教程, 地址 www.runoob.com</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>通过字典和列表的另一种写法</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">hash</span> = &#123;<span class="string">&#x27;name&#x27;</span>:<span class="string">&#x27;hoho&#x27;</span>,<span class="string">&#x27;age&#x27;</span>:<span class="number">18</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;my name is &#123;name&#125;,age is &#123;age&#125;&#x27;</span>.<span class="built_in">format</span>(**<span class="built_in">hash</span>)        <span class="comment">#**dict</span></span><br><span class="line"><span class="string">&#x27;my name is hoho,age is 18&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>li = [<span class="string">&#x27;hoho&#x27;</span>,<span class="number">18</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;my name is &#123;&#125; ,age &#123;&#125;&#x27;</span>.<span class="built_in">format</span>(*li)               <span class="comment">#*[]迭代列表</span></span><br><span class="line"><span class="string">&#x27;my name is hoho ,age 18&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-向str-format传入对象"><a href="#3-向str-format传入对象" class="headerlink" title="3. 向str.format传入对象"></a>3. 向<code>str.format</code>传入对象</h2><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">AssignValue</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, value</span>):</span><br><span class="line">        self.value = value</span><br><span class="line">my_value = AssignValue(<span class="number">6</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;value 为: &#123;0.value&#125;&#x27;</span>.<span class="built_in">format</span>(my_value))  <span class="comment"># &quot;0&quot; 是可选的</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># value 为: 6</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="4-数字格式化"><a href="#4-数字格式化" class="headerlink" title="4. 数字格式化"></a>4. 数字格式化</h2><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(<span class="string">&quot;&#123;:.2f&#125;&quot;</span>.<span class="built_in">format</span>(<span class="number">3.1415926</span>));</span><br><span class="line"><span class="number">3.14</span></span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="center">数字</th>
+<th align="center">格式</th>
+<th align="center">输出</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">3.1415926</td>
+<td align="center">{:.2f}</td>
+<td align="center">3.14</td>
+<td align="center">保留小数点后两位</td>
+</tr>
+<tr>
+<td align="center">3.1415926</td>
+<td align="center">{:+.2f}</td>
+<td align="center">+3.14</td>
+<td align="center">带符号保留小数点后两位</td>
+</tr>
+<tr>
+<td align="center">-1</td>
+<td align="center">{:+.2f}</td>
+<td align="center">-1.00</td>
+<td align="center">带符号保留小数点后两位</td>
+</tr>
+<tr>
+<td align="center">2.71828</td>
+<td align="center">{:.0f}</td>
+<td align="center">3</td>
+<td align="center">不带小数</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">{:0&gt;2d}</td>
+<td align="center">05</td>
+<td align="center">数字补零</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">{:x&lt;4d}</td>
+<td align="center">5xxx</td>
+<td align="center">数字补 x (填充右边, 宽度为 4)</td>
+</tr>
+<tr>
+<td align="center">10</td>
+<td align="center">{:x&lt;4d}</td>
+<td align="center">10xx</td>
+<td align="center">数字补 x (填充右边, 宽度为 4)</td>
+</tr>
+<tr>
+<td align="center">1000000</td>
+<td align="center">{:,}</td>
+<td align="center">1,000,000</td>
+<td align="center">以逗号分隔的数字格式</td>
+</tr>
+<tr>
+<td align="center">0.25</td>
+<td align="center">{:.2%}</td>
+<td align="center">25.00%</td>
+<td align="center">百分比格式</td>
+</tr>
+<tr>
+<td align="center">1000000000</td>
+<td align="center">{:.2e}</td>
+<td align="center">1.00e+09</td>
+<td align="center">指数记法</td>
+</tr>
+<tr>
+<td align="center">13</td>
+<td align="center">{:&gt;10d}</td>
+<td align="center">13</td>
+<td align="center">右对齐 (默认, 宽度为 10)</td>
+</tr>
+<tr>
+<td align="center">13</td>
+<td align="center">{:&lt;10d}</td>
+<td align="center">13</td>
+<td align="center">左对齐 (宽度为 10)</td>
+</tr>
+<tr>
+<td align="center">13</td>
+<td align="center">{:^10d}</td>
+<td align="center">13</td>
+<td align="center">中间对齐 (宽度为 10)</td>
+</tr>
+<tr>
+<td align="center">11</td>
+<td align="center">‘{:b}’.format(11)</td>
+<td align="center">1011</td>
+<td align="center">进制</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">‘{:d}’.format(11)</td>
+<td align="center">11</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">‘{:o}’.format(11)</td>
+<td align="center">13</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">‘{:x}’.format(11)</td>
+<td align="center">b</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">‘{:#x}’.format(11)</td>
+<td align="center">0xb</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">‘{:#X}’.format(11)</td>
+<td align="center">0XB</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>^, &lt;, &gt; 分别是居中、左对齐、右对齐，后面带宽度， : 号后面带填充的字符，只能是一个字符，不指定则默认是用空格填充</strong></li>
+<li><strong>+ 表示在正数前显示 +，负数前显示 -； （空格）表示在正数前加空格</strong></li>
+<li><strong>b、d、o、x 分别是二进制、十进制、八进制、十六进制</strong></li>
+</ul>
+<h2 id="5-此外还可以用大括号-来转义大括号"><a href="#5-此外还可以用大括号-来转义大括号" class="headerlink" title="5. 此外还可以用大括号 {} 来转义大括号"></a>5. 此外还可以用大括号 {} 来转义大括号</h2><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span> (<span class="string">&quot;&#123;&#125; 对应的位置是 &#123;&#123;0&#125;&#125;&quot;</span>.<span class="built_in">format</span>(<span class="string">&quot;runoob&quot;</span>))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>_结果为_：<strong>runoob 对应的位置是 {0}</strong></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/02/10/Make-Python_%E7%88%AC%E8%99%AB/" rel="prev" title="自己写的几个爬虫">
+      <i class="fa fa-chevron-left"></i> 自己写的几个爬虫
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/02/12/Source-App/" rel="next" title="APP share">
+      APP share <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-format-%E5%87%BD%E6%95%B0%E5%8F%AF%E4%BB%A5%E6%8E%A5%E5%8F%97%E4%B8%8D%E9%99%90%E4%B8%AA%E5%8F%82%E6%95%B0%EF%BC%8C%E4%BD%8D%E7%BD%AE%E5%8F%AF%E4%BB%A5%E4%B8%8D%E6%8C%89%E9%A1%BA%E5%BA%8F"><span class="nav-number">1.</span> <span class="nav-text">1. format 函数可以接受不限个参数，位置可以不按顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E8%AE%BE%E7%BD%AE%E5%8F%82%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">2. 设置参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%90%91str-format%E4%BC%A0%E5%85%A5%E5%AF%B9%E8%B1%A1"><span class="nav-number">3.</span> <span class="nav-text">3. 向str.format传入对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%95%B0%E5%AD%97%E6%A0%BC%E5%BC%8F%E5%8C%96"><span class="nav-number">4.</span> <span class="nav-text">4. 数字格式化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E6%AD%A4%E5%A4%96%E8%BF%98%E5%8F%AF%E4%BB%A5%E7%94%A8%E5%A4%A7%E6%8B%AC%E5%8F%B7-%E6%9D%A5%E8%BD%AC%E4%B9%89%E5%A4%A7%E6%8B%AC%E5%8F%B7"><span class="nav-number">5.</span> <span class="nav-text">5. 此外还可以用大括号 {} 来转义大括号</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/yqq/anime.min.js"></script>
+  <script src="/yqq/velocity/velocity.min.js"></script>
+  <script src="/yqq/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

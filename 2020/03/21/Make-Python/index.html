@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/yqq/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="python写的几个小程序，慢慢写，很垃圾，基本上是方便我装B学习生活的代码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自己写的几个python小程序">
+<meta property="og:url" content="http://example.com/2020/03/21/Make-Python/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="python写的几个小程序，慢慢写，很垃圾，基本上是方便我装B学习生活的代码">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-03-21T14:45:11.000Z">
+<meta property="article:modified_time" content="2022-06-08T06:13:44.456Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2020/03/21/Make-Python/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>自己写的几个python小程序 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/03/21/Make-Python/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          自己写的几个python小程序
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-03-21 22:45:11" itemprop="dateCreated datePublished" datetime="2020-03-21T22:45:11+08:00">2020-03-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-06-08 14:13:44" itemprop="dateModified" datetime="2022-06-08T14:13:44+08:00">2022-06-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF%E5%8A%9B/" itemprop="url" rel="index"><span itemprop="name">技术力</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>python写的几个小程序，慢慢写，很垃圾，基本上是方便我<del>装B</del>学习生活的代码</p>
+<span id="more"></span>
+
+<h1 id="1-每日手动记录支付宝基金余额"><a href="#1-每日手动记录支付宝基金余额" class="headerlink" title="1. 每日手动记录支付宝基金余额"></a>1. 每日手动记录支付宝基金余额</h1><h2 id="1-1-只有一支基金时的代码"><a href="#1-1-只有一支基金时的代码" class="headerlink" title="1.1 只有一支基金时的代码"></a>1.1 只有一支基金时的代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> openpyxl <span class="keyword">as</span> xl</span><br><span class="line"><span class="keyword">from</span> openpyxl <span class="keyword">import</span> Workbook</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> plotly.offline <span class="keyword">as</span> ptly</span><br><span class="line"><span class="keyword">import</span> plotly.graph_objs <span class="keyword">as</span> go</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">daily_init</span>():</span><br><span class="line">    wb = Workbook()</span><br><span class="line">    ws = wb.active</span><br><span class="line">    ws[<span class="string">&#x27;A1&#x27;</span>] = <span class="string">&#x27;日期&#x27;</span></span><br><span class="line">    ws[<span class="string">&#x27;B1&#x27;</span>] = <span class="string">&#x27;基金余额&#x27;</span></span><br><span class="line">    ws[<span class="string">&#x27;A2&#x27;</span>] = <span class="string">&#x27;03/21/20&#x27;</span></span><br><span class="line">    ws[<span class="string">&#x27;B2&#x27;</span>] = <span class="number">10.00</span></span><br><span class="line">    wb.save(<span class="string">&#x27;fund.xlsx&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">daily_save</span>():</span><br><span class="line">    filex = <span class="string">&quot;fund.xlsx&quot;</span></span><br><span class="line">    <span class="keyword">if</span> os.path.exists(filex):</span><br><span class="line">        wb = xl.load_workbook(<span class="string">&#x27;fund.xlsx&#x27;</span>)</span><br><span class="line">        sheet = wb[<span class="string">&#x27;Sheet&#x27;</span>]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        wb = Workbook()</span><br><span class="line">        sheet = wb[<span class="string">&#x27;Sheet&#x27;</span>]</span><br><span class="line"></span><br><span class="line">    ws = wb.active</span><br><span class="line">    ws[<span class="string">&#x27;A1&#x27;</span>] = <span class="string">&#x27;日期&#x27;</span></span><br><span class="line">    ws[<span class="string">&#x27;B1&#x27;</span>] = <span class="string">&#x27;基金余额&#x27;</span></span><br><span class="line">    ws[<span class="string">&#x27;A2&#x27;</span>] = <span class="string">&#x27;03/21/20&#x27;</span></span><br><span class="line">    ws[<span class="string">&#x27;B2&#x27;</span>] = <span class="number">10.00</span></span><br><span class="line"></span><br><span class="line">    today = datag()</span><br><span class="line">    td_yues = today[<span class="number">1</span>]</span><br><span class="line">    td_yue = td_yues[sheet.max_row-<span class="number">2</span>]</span><br><span class="line">    daily = <span class="built_in">float</span>(<span class="built_in">input</span>(<span class="string">&quot;\n请输入今天的收益/亏损：&quot;</span>))</span><br><span class="line">    yue = td_yue + daily</span><br><span class="line"></span><br><span class="line">    dt = time.strftime(<span class="string">&quot;%D&quot;</span>, time.localtime())</span><br><span class="line">    maxrow = sheet.max_row + <span class="number">1</span></span><br><span class="line">    ws.cell(row=maxrow,column=<span class="number">1</span>,value=dt)</span><br><span class="line">    ws.cell(row=maxrow,column=<span class="number">2</span>,value=yue)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;\n数据已保存:<span class="subst">&#123;dt&#125;</span> \t <span class="subst">&#123;yue&#125;</span> \n&#x27;</span>)</span><br><span class="line">    wb.save(<span class="string">&#x27;fund.xlsx&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">datag</span>():</span><br><span class="line">    filex = <span class="string">&#x27;fund.xlsx&#x27;</span></span><br><span class="line">    <span class="keyword">if</span> os.path.exists(filex):</span><br><span class="line">        wb = xl.load_workbook(<span class="string">&#x27;fund.xlsx&#x27;</span>)</span><br><span class="line">        sheet = wb[<span class="string">&#x27;Sheet&#x27;</span>]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        wb = Workbook()</span><br><span class="line">        sheet = wb[<span class="string">&#x27;Sheet&#x27;</span>]</span><br><span class="line"></span><br><span class="line">    ws = wb.active</span><br><span class="line">    dts = []</span><br><span class="line">    yues = []</span><br><span class="line">    <span class="keyword">for</span> row <span class="keyword">in</span> ws.iter_rows(min_row=<span class="number">2</span>, min_col=<span class="number">1</span>,max_col=<span class="number">1</span>,max_row=sheet.max_row ):</span><br><span class="line">        <span class="keyword">for</span> cell <span class="keyword">in</span> row:</span><br><span class="line">            dts.append(<span class="built_in">str</span>(cell.value))</span><br><span class="line">    <span class="keyword">for</span> row <span class="keyword">in</span> ws.iter_rows(min_row=<span class="number">2</span>, min_col=<span class="number">2</span>,max_col=<span class="number">2</span>,max_row=sheet.max_row ):</span><br><span class="line">        <span class="keyword">for</span> cell <span class="keyword">in</span> row:</span><br><span class="line">            yues.append(cell.value)</span><br><span class="line">    wb.save(<span class="string">&#x27;fund.xlsx&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> dts,yues</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">datalook</span>():</span><br><span class="line">    wb = xl.load_workbook(<span class="string">&#x27;fund.xlsx&#x27;</span>)</span><br><span class="line">    sheet = wb[<span class="string">&#x27;Sheet&#x27;</span>]</span><br><span class="line">    ws = wb.active</span><br><span class="line">    dts = []</span><br><span class="line">    yues = []</span><br><span class="line">    <span class="keyword">for</span> row <span class="keyword">in</span> ws.iter_rows(min_row=<span class="number">2</span>, min_col=<span class="number">1</span>,max_col=<span class="number">1</span>,max_row=sheet.max_row ):</span><br><span class="line">        <span class="keyword">for</span> cell <span class="keyword">in</span> row:</span><br><span class="line">            dts.append(<span class="built_in">str</span>(cell.value))</span><br><span class="line">    <span class="keyword">for</span> row <span class="keyword">in</span> ws.iter_rows(min_row=<span class="number">2</span>, min_col=<span class="number">2</span>,max_col=<span class="number">2</span>,max_row=sheet.max_row ):</span><br><span class="line">        <span class="keyword">for</span> cell <span class="keyword">in</span> row:</span><br><span class="line">            yues.append(cell.value)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(sheet.max_row-<span class="number">1</span>):</span><br><span class="line">        <span class="built_in">print</span>(dts[i],end=<span class="string">&#x27;\t&#x27;</span>)</span><br><span class="line">        <span class="built_in">print</span>(yues[i])</span><br><span class="line"></span><br><span class="line"><span class="comment"># def check():</span></span><br><span class="line"><span class="comment">#     # 读取Excel中Sheet中的数据</span></span><br><span class="line"><span class="comment">#     data = pd.DataFrame(pd.read_excel(&#x27;fund.xlsx&#x27;, &#x27;Sheet&#x27;))</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#     # 查看读取数据内容</span></span><br><span class="line"><span class="comment">#     print(data)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#     # 查看是否有重复行</span></span><br><span class="line"><span class="comment">#     re_row = data.duplicated()</span></span><br><span class="line"><span class="comment">#     print(re_row)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#     # 查看去除重复行的数据</span></span><br><span class="line"><span class="comment">#     no_re_row = data.drop_duplicates()</span></span><br><span class="line"><span class="comment">#     print(no_re_row)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#     # 查看基于[物品]列去除重复行的数据</span></span><br><span class="line"><span class="comment">#     wp = data.drop_duplicates([&#x27;日期&#x27;])</span></span><br><span class="line"><span class="comment">#     print(wp)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#     # 将去除重复行的数据输出到excel表中</span></span><br><span class="line"><span class="comment">#     no_re_row.to_excel(&quot;fund.xlsx&quot;)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">qs</span>():</span><br><span class="line">    dys = datag()</span><br><span class="line">    dts = dys[<span class="number">0</span>]</span><br><span class="line">    yues = dys[<span class="number">1</span>]</span><br><span class="line">    data = []</span><br><span class="line"></span><br><span class="line">    trace1 = go.Scatter(x=dts,</span><br><span class="line">                        y=yues,</span><br><span class="line">                        mode=<span class="string">&#x27;lines+markers&#x27;</span>,  <span class="comment"># mode可选&#x27;markers&#x27;,&#x27;lines&#x27;,&#x27;lines+markers&#x27;</span></span><br><span class="line">                        name= <span class="string">&#x27;Money&#x27;</span>,</span><br><span class="line">                        marker=<span class="built_in">dict</span>(size=<span class="number">10</span>,  <span class="comment"># 若设为变量则可用散点大小表示变量大小</span></span><br><span class="line">                                    color=<span class="string">&#x27;rgba(152, 0, 0, .8)&#x27;</span>,</span><br><span class="line">                                    line=<span class="built_in">dict</span>(width=<span class="number">2</span>,</span><br><span class="line">                                                color=<span class="string">&#x27;rgb(0, 0, 0)&#x27;</span></span><br><span class="line">                                                ),</span><br><span class="line">                                    opacity=[]</span><br><span class="line">                                    )</span><br><span class="line">                        )</span><br><span class="line">    data.append(trace1)</span><br><span class="line">    axis_template = <span class="built_in">dict</span>(</span><br><span class="line">        showgrid=<span class="literal">True</span>,  <span class="comment"># 网格</span></span><br><span class="line">        zeroline=<span class="literal">True</span>,  <span class="comment"># 是否显示基线,即沿着(0,0)画出x轴和y轴</span></span><br><span class="line">        nticks=<span class="number">20</span>,</span><br><span class="line">        showline=<span class="literal">True</span>,</span><br><span class="line">        title=<span class="string">&#x27;Date&#x27;</span>,</span><br><span class="line">        mirror=<span class="string">&#x27;all&#x27;</span>,</span><br><span class="line">        zerolinecolor=<span class="string">&quot;#FF0000&quot;</span></span><br><span class="line">    )</span><br><span class="line">    ayis_template = <span class="built_in">dict</span>(</span><br><span class="line">        showgrid=<span class="literal">True</span>,  <span class="comment"># 网格</span></span><br><span class="line">        zeroline=<span class="literal">True</span>,  <span class="comment"># 是否显示基线,即沿着(0,0)画出x轴和y轴</span></span><br><span class="line">        nticks=<span class="number">20</span>,</span><br><span class="line">        showline=<span class="literal">True</span>,</span><br><span class="line">        title=<span class="string">&#x27;Money&#x27;</span>,</span><br><span class="line">        mirror=<span class="string">&#x27;all&#x27;</span>,</span><br><span class="line">        zerolinecolor=<span class="string">&quot;#FF0000&quot;</span></span><br><span class="line">    )</span><br><span class="line">    layout = go.Layout(font=<span class="built_in">dict</span>(family=<span class="string">&#x27;Courier New, monospace&#x27;</span>, size=<span class="number">18</span>, color=<span class="string">&#x27;#3D3D3D&#x27;</span>),</span><br><span class="line">                        title=<span class="string">&#x27;基金实况&#x27;</span> ,xaxis=axis_template,yaxis=ayis_template</span><br><span class="line">                        )</span><br><span class="line">    fig = go.Figure(data=data, layout=layout)</span><br><span class="line">    ptly.plot(fig, filename=<span class="string">&#x27;fund.html&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    filexx = <span class="string">&#x27;fund.xlsx&#x27;</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(filexx):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;----什么？这是你的第一次？好了，已经帮你弄好了（指初始化）----&#x27;</span>)</span><br><span class="line">        daily_init()</span><br><span class="line">        exit()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        p = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&#x27;今天是否保存过数据了呢？0/1：&#x27;</span>))</span><br><span class="line">        <span class="keyword">if</span> p == <span class="number">1</span> :</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;\n----哦，你已经好了？那算了----\n&#x27;</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            daily_save()</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;----好了，保存好了----\n&#x27;</span>)</span><br><span class="line">    pd = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&#x27;想不想看一下趋势图-0/1：&#x27;</span>))</span><br><span class="line">    <span class="keyword">if</span> pd == <span class="number">1</span> :</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;\n----那就给你看一下吧----\n&#x27;</span>)</span><br><span class="line">        qs()</span><br><span class="line">        datalook()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;\n----既然不想看，那就算了吧----&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>然后可以再桌面新建一个<code>fund.bat</code>脚本直接运行</p>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">e:</span></span><br><span class="line"><span class="function"><span class="title">cd</span> <span class="title">E</span>:/<span class="title">learn</span>/<span class="title">py</span>/<span class="title">fund</span>	# 进入到<span class="title">fund</span>所在目录</span></span><br><span class="line"><span class="function"><span class="title">python</span> <span class="title">fund.py</span>		# 运行<span class="title">python</span>文件</span></span><br><span class="line"><span class="function"><span class="title">pause</span>				# 让屏幕停留</span></span><br></pre></td></tr></table></figure>
+
+<p>功能：可以记录日常的基金走势，然后记录数据</p>
+<p>不足：不能够自动删除 excel 中的重复的数据，（如同一天的数据）</p>
+<h2 id="1-2-三支基金时的代码"><a href="#1-2-三支基金时的代码" class="headerlink" title="1.2 三支基金时的代码"></a>1.2 三支基金时的代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> openpyxl <span class="keyword">as</span> xl</span><br><span class="line"><span class="keyword">from</span> openpyxl <span class="keyword">import</span> Workbook</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> plotly.offline <span class="keyword">as</span> ptly</span><br><span class="line"><span class="keyword">import</span> plotly.graph_objs <span class="keyword">as</span> go</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据初始化</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">daily_init</span>():</span><br><span class="line">    wb = Workbook()</span><br><span class="line">    ws = wb.active</span><br><span class="line">    ws[<span class="string">&#x27;A1&#x27;</span>] = <span class="string">&#x27;日期&#x27;</span></span><br><span class="line">    ws[<span class="string">&#x27;B1&#x27;</span>] = <span class="string">&#x27;总额&#x27;</span></span><br><span class="line">    ws[<span class="string">&#x27;C1&#x27;</span>] = <span class="string">&#x27;嘉合&#x27;</span></span><br><span class="line">    ws[<span class="string">&#x27;D1&#x27;</span>] = <span class="string">&#x27;白酒&#x27;</span></span><br><span class="line">    ws[<span class="string">&#x27;E1&#x27;</span>] = <span class="string">&#x27;沪深&#x27;</span></span><br><span class="line"></span><br><span class="line">    ws[<span class="string">&#x27;A2&#x27;</span>] = <span class="string">&#x27;04/04/20&#x27;</span></span><br><span class="line">    ws[<span class="string">&#x27;B2&#x27;</span>] = <span class="number">810.00</span></span><br><span class="line">    ws[<span class="string">&#x27;C2&#x27;</span>] = <span class="number">100.00</span></span><br><span class="line">    ws[<span class="string">&#x27;D2&#x27;</span>] = <span class="number">210.00</span></span><br><span class="line">    ws[<span class="string">&#x27;E2&#x27;</span>] = <span class="number">500.00</span></span><br><span class="line">    wb.save(<span class="string">&#x27;fund3.xlsx&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据保存</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">daily_save</span>():</span><br><span class="line">    filex = <span class="string">&quot;fund3.xlsx&quot;</span></span><br><span class="line">    <span class="keyword">if</span> os.path.exists(filex):</span><br><span class="line">        wb = xl.load_workbook(<span class="string">&#x27;fund3.xlsx&#x27;</span>)</span><br><span class="line">        sheet = wb[<span class="string">&#x27;Sheet&#x27;</span>]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        wb = Workbook()</span><br><span class="line">        sheet = wb[<span class="string">&#x27;Sheet&#x27;</span>]</span><br><span class="line"></span><br><span class="line">    ws = wb.active</span><br><span class="line">    ws[<span class="string">&#x27;A1&#x27;</span>] = <span class="string">&#x27;日期&#x27;</span></span><br><span class="line">    ws[<span class="string">&#x27;B1&#x27;</span>] = <span class="string">&#x27;总额&#x27;</span></span><br><span class="line">    ws[<span class="string">&#x27;C1&#x27;</span>] = <span class="string">&#x27;嘉合&#x27;</span></span><br><span class="line">    ws[<span class="string">&#x27;D1&#x27;</span>] = <span class="string">&#x27;白酒&#x27;</span></span><br><span class="line">    ws[<span class="string">&#x27;E1&#x27;</span>] = <span class="string">&#x27;沪深&#x27;</span></span><br><span class="line"></span><br><span class="line">    ws[<span class="string">&#x27;A2&#x27;</span>] = <span class="string">&#x27;04/04/20&#x27;</span></span><br><span class="line">    ws[<span class="string">&#x27;B2&#x27;</span>] = <span class="number">810.00</span></span><br><span class="line">    ws[<span class="string">&#x27;C2&#x27;</span>] = <span class="number">100.00</span></span><br><span class="line">    ws[<span class="string">&#x27;D2&#x27;</span>] = <span class="number">210.00</span></span><br><span class="line">    ws[<span class="string">&#x27;E2&#x27;</span>] = <span class="number">500.00</span></span><br><span class="line"></span><br><span class="line">    today = datag()</span><br><span class="line">    td_yues1 = today[<span class="number">1</span>]</span><br><span class="line">    td_yue1 = td_yues1[sheet.max_row-<span class="number">2</span>]</span><br><span class="line">    td_yues2 = today[<span class="number">2</span>]</span><br><span class="line">    td_yue2 = td_yues2[sheet.max_row-<span class="number">2</span>]</span><br><span class="line">    td_yues3 = today[<span class="number">3</span>]</span><br><span class="line">    td_yue3 = td_yues3[sheet.max_row-<span class="number">2</span>]</span><br><span class="line"></span><br><span class="line">    daily1 = <span class="built_in">float</span>(<span class="built_in">input</span>(<span class="string">&quot;\n请输入嘉和今天的收益/亏损：&quot;</span>))</span><br><span class="line">    daily2 = <span class="built_in">float</span>(<span class="built_in">input</span>(<span class="string">&quot;\n请输入白酒今天的收益/亏损：&quot;</span>))</span><br><span class="line">    daily3 = <span class="built_in">float</span>(<span class="built_in">input</span>(<span class="string">&quot;\n请输入沪深今天的收益/亏损：&quot;</span>))</span><br><span class="line">    yue1 = td_yue1 + daily1</span><br><span class="line">    yue2 = td_yue2 + daily2</span><br><span class="line">    yue3 = td_yue3 + daily3</span><br><span class="line">    yue0 = <span class="built_in">round</span>(yue1,<span class="number">2</span>) + <span class="built_in">round</span>(yue2,<span class="number">2</span>) + <span class="built_in">round</span>(yue3,<span class="number">2</span>)</span><br><span class="line">    dt = time.strftime(<span class="string">&quot;%D&quot;</span>, time.localtime())</span><br><span class="line">    maxrow = sheet.max_row + <span class="number">1</span></span><br><span class="line">    ws.cell(row=maxrow, column=<span class="number">1</span>, value=dt)</span><br><span class="line">    ws.cell(row=maxrow, column=<span class="number">2</span>, value=yue0)</span><br><span class="line">    ws.cell(row=maxrow, column=<span class="number">3</span>, value=yue1)</span><br><span class="line">    ws.cell(row=maxrow, column=<span class="number">4</span>, value=yue2)</span><br><span class="line">    ws.cell(row=maxrow, column=<span class="number">5</span>, value=yue3)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;\n数据已保存:<span class="subst">&#123;dt&#125;</span> \t <span class="subst">&#123;yue0&#125;</span> == <span class="subst">&#123;yue1&#125;</span> + <span class="subst">&#123;yue2&#125;</span> + <span class="subst">&#123;yue3&#125;</span> \n&#x27;</span>)</span><br><span class="line">    wb.save(<span class="string">&#x27;fund3.xlsx&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据获取</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">datag</span>():</span><br><span class="line">    filex = <span class="string">&#x27;fund3.xlsx&#x27;</span></span><br><span class="line">    <span class="keyword">if</span> os.path.exists(filex):</span><br><span class="line">        wb = xl.load_workbook(<span class="string">&#x27;fund3.xlsx&#x27;</span>)</span><br><span class="line">        sheet = wb[<span class="string">&#x27;Sheet&#x27;</span>]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        wb = Workbook()</span><br><span class="line">        sheet = wb[<span class="string">&#x27;Sheet&#x27;</span>]</span><br><span class="line"></span><br><span class="line">    ws = wb.active</span><br><span class="line">    dts = []</span><br><span class="line"></span><br><span class="line">    yues1 = []</span><br><span class="line">    yues2 = []</span><br><span class="line">    yues3 = []</span><br><span class="line">    <span class="keyword">for</span> row <span class="keyword">in</span> ws.iter_rows(min_row=<span class="number">2</span>, min_col=<span class="number">1</span>, max_col=<span class="number">1</span>, max_row=sheet.max_row):</span><br><span class="line">        <span class="keyword">for</span> cell <span class="keyword">in</span> row:</span><br><span class="line">            dts.append(<span class="built_in">str</span>(cell.value))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> row <span class="keyword">in</span> ws.iter_rows(min_row=<span class="number">2</span>, min_col=<span class="number">3</span>, max_col=<span class="number">3</span>, max_row=sheet.max_row):</span><br><span class="line">        <span class="keyword">for</span> cell <span class="keyword">in</span> row:</span><br><span class="line">            yues1.append(cell.value)</span><br><span class="line">    <span class="keyword">for</span> row <span class="keyword">in</span> ws.iter_rows(min_row=<span class="number">2</span>, min_col=<span class="number">4</span>, max_col=<span class="number">4</span>, max_row=sheet.max_row):</span><br><span class="line">        <span class="keyword">for</span> cell <span class="keyword">in</span> row:</span><br><span class="line">            yues2.append(cell.value)</span><br><span class="line">    <span class="keyword">for</span> row <span class="keyword">in</span> ws.iter_rows(min_row=<span class="number">2</span>, min_col=<span class="number">5</span>, max_col=<span class="number">5</span>, max_row=sheet.max_row):</span><br><span class="line">        <span class="keyword">for</span> cell <span class="keyword">in</span> row:</span><br><span class="line">            yues3.append(cell.value)</span><br><span class="line">    wb.save(<span class="string">&#x27;fund3.xlsx&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> dts, yues1, yues2, yues3</span><br><span class="line"></span><br><span class="line"><span class="comment"># 看数据</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">datalook</span>():</span><br><span class="line">    wb = xl.load_workbook(<span class="string">&#x27;fund3.xlsx&#x27;</span>)</span><br><span class="line">    sheet = wb[<span class="string">&#x27;Sheet&#x27;</span>]</span><br><span class="line">    ws = wb.active</span><br><span class="line">    dts = []</span><br><span class="line">    yues0 = []</span><br><span class="line">    yues1 = []</span><br><span class="line">    yues2 = []</span><br><span class="line">    yues3 = []</span><br><span class="line">    <span class="keyword">for</span> row <span class="keyword">in</span> ws.iter_rows(min_row=<span class="number">2</span>, min_col=<span class="number">1</span>, max_col=<span class="number">1</span>, max_row=sheet.max_row):</span><br><span class="line">        <span class="keyword">for</span> cell <span class="keyword">in</span> row:</span><br><span class="line">            dts.append(<span class="built_in">str</span>(cell.value))</span><br><span class="line">    <span class="keyword">for</span> row <span class="keyword">in</span> ws.iter_rows(min_row=<span class="number">2</span>, min_col=<span class="number">2</span>, max_col=<span class="number">2</span>, max_row=sheet.max_row):</span><br><span class="line">        <span class="keyword">for</span> cell <span class="keyword">in</span> row:</span><br><span class="line">            yues0.append(cell.value)</span><br><span class="line">    <span class="keyword">for</span> row <span class="keyword">in</span> ws.iter_rows(min_row=<span class="number">2</span>, min_col=<span class="number">3</span>, max_col=<span class="number">3</span>, max_row=sheet.max_row):</span><br><span class="line">        <span class="keyword">for</span> cell <span class="keyword">in</span> row:</span><br><span class="line">            yues1.append(cell.value)</span><br><span class="line">    <span class="keyword">for</span> row <span class="keyword">in</span> ws.iter_rows(min_row=<span class="number">2</span>, min_col=<span class="number">4</span>, max_col=<span class="number">4</span>, max_row=sheet.max_row):</span><br><span class="line">        <span class="keyword">for</span> cell <span class="keyword">in</span> row:</span><br><span class="line">            yues2.append(cell.value)</span><br><span class="line">    <span class="keyword">for</span> row <span class="keyword">in</span> ws.iter_rows(min_row=<span class="number">2</span>, min_col=<span class="number">5</span>, max_col=<span class="number">5</span>, max_row=sheet.max_row):</span><br><span class="line">        <span class="keyword">for</span> cell <span class="keyword">in</span> row:</span><br><span class="line">            yues3.append(cell.value)</span><br><span class="line">    yues0r = [<span class="built_in">round</span>(i,<span class="number">2</span>) <span class="keyword">for</span> i <span class="keyword">in</span> yues0]</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;日期&#x27;</span>,end=<span class="string">&#x27;\t\t&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;总额&#x27;</span>,end=<span class="string">&#x27;\t\t&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;嘉合&#x27;</span>,end=<span class="string">&#x27;\t&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;白酒&#x27;</span>,end=<span class="string">&#x27;\t&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;沪深&#x27;</span>,end=<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(sheet.max_row-<span class="number">1</span>):</span><br><span class="line">        <span class="built_in">print</span>(dts[i], end=<span class="string">&#x27;\t&#x27;</span>)</span><br><span class="line">        <span class="built_in">print</span>(yues0r[i],end=<span class="string">&#x27;\t\t&#x27;</span>)</span><br><span class="line">        <span class="built_in">print</span>(yues1[i],end=<span class="string">&#x27;\t&#x27;</span>)</span><br><span class="line">        <span class="built_in">print</span>(yues2[i],end=<span class="string">&#x27;\t&#x27;</span>)</span><br><span class="line">        <span class="built_in">print</span>(yues3[i])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 看趋势图</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">qs</span>():</span><br><span class="line">    dys = datag()</span><br><span class="line">    dts = dys[<span class="number">0</span>]</span><br><span class="line">    yues1 = dys[<span class="number">1</span>]</span><br><span class="line">    yues2 = dys[<span class="number">2</span>]</span><br><span class="line">    yues3 = dys[<span class="number">3</span>]</span><br><span class="line">    data = []</span><br><span class="line"></span><br><span class="line">    trace1 = go.Scatter(x=dts,</span><br><span class="line">                        y=yues1,</span><br><span class="line">                        mode=<span class="string">&#x27;lines+markers&#x27;</span>,  <span class="comment"># mode可选&#x27;markers&#x27;,&#x27;lines&#x27;,&#x27;lines+markers&#x27;</span></span><br><span class="line">                        name=<span class="string">&#x27;嘉和&#x27;</span>,</span><br><span class="line">                        marker=<span class="built_in">dict</span>(size=<span class="number">10</span>,  <span class="comment"># 若设为变量则可用散点大小表示变量大小</span></span><br><span class="line">                                    color=<span class="string">&#x27;rgba(152, 0, 0, .8)&#x27;</span>,</span><br><span class="line">                                    line=<span class="built_in">dict</span>(width=<span class="number">2</span>,</span><br><span class="line">                                              color=<span class="string">&#x27;rgb(0, 0, 0)&#x27;</span></span><br><span class="line">                                              ),</span><br><span class="line">                                    opacity=[]</span><br><span class="line">                                    )</span><br><span class="line">                        )</span><br><span class="line">    trace2 = go.Scatter(x=dts,</span><br><span class="line">                        y=yues2,</span><br><span class="line">                        mode=<span class="string">&#x27;lines+markers&#x27;</span>,  <span class="comment"># mode可选&#x27;markers&#x27;,&#x27;lines&#x27;,&#x27;lines+markers&#x27;</span></span><br><span class="line">                        name=<span class="string">&#x27;白酒&#x27;</span>,</span><br><span class="line">                        marker=<span class="built_in">dict</span>(size=<span class="number">10</span>,  <span class="comment"># 若设为变量则可用散点大小表示变量大小</span></span><br><span class="line">                                    color=<span class="string">&#x27;rgba( 0,152, 0, .8)&#x27;</span>,</span><br><span class="line">                                    line=<span class="built_in">dict</span>(width=<span class="number">2</span>,</span><br><span class="line">                                              color=<span class="string">&#x27;rgb(0, 0, 0)&#x27;</span></span><br><span class="line">                                              ),</span><br><span class="line">                                    opacity=[]</span><br><span class="line">                                    )</span><br><span class="line">                        )</span><br><span class="line">    trace3 = go.Scatter(x=dts,</span><br><span class="line">                        y=yues3,</span><br><span class="line">                        mode=<span class="string">&#x27;lines+markers&#x27;</span>,  <span class="comment"># mode可选&#x27;markers&#x27;,&#x27;lines&#x27;,&#x27;lines+markers&#x27;</span></span><br><span class="line">                        name=<span class="string">&#x27;沪深&#x27;</span>,</span><br><span class="line">                        marker=<span class="built_in">dict</span>(size=<span class="number">10</span>,  <span class="comment"># 若设为变量则可用散点大小表示变量大小</span></span><br><span class="line">                                    color=<span class="string">&#x27;rgba( 0, 0, 152,.8)&#x27;</span>,</span><br><span class="line">                                    line=<span class="built_in">dict</span>(width=<span class="number">2</span>,</span><br><span class="line">                                              color=<span class="string">&#x27;rgb(0, 0, 0)&#x27;</span></span><br><span class="line">                                              ),</span><br><span class="line">                                    opacity=[]</span><br><span class="line">                                    )</span><br><span class="line">                        )</span><br><span class="line"></span><br><span class="line">    data = [trace1, trace2, trace3]</span><br><span class="line">    axis_template = <span class="built_in">dict</span>(</span><br><span class="line">        showgrid=<span class="literal">True</span>,  <span class="comment"># 网格</span></span><br><span class="line">        zeroline=<span class="literal">True</span>,  <span class="comment"># 是否显示基线,即沿着(0,0)画出x轴和y轴</span></span><br><span class="line">        nticks=<span class="number">20</span>,</span><br><span class="line">        showline=<span class="literal">True</span>,</span><br><span class="line">        title=<span class="string">&#x27;Date&#x27;</span>,</span><br><span class="line">        mirror=<span class="string">&#x27;all&#x27;</span>,</span><br><span class="line">        zerolinecolor=<span class="string">&quot;#FF0000&quot;</span></span><br><span class="line">    )</span><br><span class="line">    ayis_template = <span class="built_in">dict</span>(</span><br><span class="line">        showgrid=<span class="literal">True</span>,  <span class="comment"># 网格</span></span><br><span class="line">        zeroline=<span class="literal">True</span>,  <span class="comment"># 是否显示基线,即沿着(0,0)画出x轴和y轴</span></span><br><span class="line">        nticks=<span class="number">20</span>,</span><br><span class="line">        showline=<span class="literal">True</span>,</span><br><span class="line">        title=<span class="string">&#x27;Money&#x27;</span>,</span><br><span class="line">        mirror=<span class="string">&#x27;all&#x27;</span>,</span><br><span class="line">        zerolinecolor=<span class="string">&quot;#FF0000&quot;</span></span><br><span class="line">    )</span><br><span class="line">    layout = go.Layout(font=<span class="built_in">dict</span>(family=<span class="string">&#x27;Courier New, monospace&#x27;</span>, size=<span class="number">18</span>, color=<span class="string">&#x27;#3D3D3D&#x27;</span>),</span><br><span class="line">                       title=<span class="string">&#x27;基金实况&#x27;</span>, xaxis=axis_template, yaxis=ayis_template</span><br><span class="line">                       )</span><br><span class="line">    fig = go.Figure(data=data, layout=layout)</span><br><span class="line">    ptly.plot(fig, filename=<span class="string">&#x27;fund3.html&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>():</span><br><span class="line">    filexx = <span class="string">&#x27;fund3.xlsx&#x27;</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(filexx):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;----什么？这是你的第一次？好了，已经帮你弄好了（指初始化）----&#x27;</span>)</span><br><span class="line">        daily_init()</span><br><span class="line">        exit()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        p = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&#x27;今天是否保存过数据了呢？0/1：&#x27;</span>))</span><br><span class="line">        <span class="keyword">if</span> p == <span class="number">1</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;\n----哦，你已经好了？那算了----\n&#x27;</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            daily_save()</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;----好了，保存好了----\n&#x27;</span>)</span><br><span class="line">    pd = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&#x27;想不想看一下趋势图-0/1：&#x27;</span>))</span><br><span class="line">    <span class="keyword">if</span> pd == <span class="number">1</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;\n----那就给你看一下吧----\n&#x27;</span>)</span><br><span class="line">        qs()</span><br><span class="line">        datalook()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;\n----既然不想看，那就算了吧----&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-图中图——将一幅图套娃"><a href="#2-图中图——将一幅图套娃" class="headerlink" title="2. 图中图——将一幅图套娃"></a>2. 图中图——将一幅图套娃</h1><p><a target="_blank" rel="noopener" href="https://space.bilibili.com/39665558">迷糊老师</a>的程序，hhh 很好玩，b 站<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1QE411P7GV">迷糊老师视频</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">fill_img_with_img</span>(<span class="params">imgParent, imgChild</span>):</span><br><span class="line">    imgSize =(imgParent.width*imgChild.width, imgParent.height*imgChild.height)</span><br><span class="line">    imgRet = Image.new(<span class="string">&#x27;L&#x27;</span>, imgSize, <span class="string">&#x27;white&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    i = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> w <span class="keyword">in</span> <span class="built_in">range</span>(imgParent.width):</span><br><span class="line">        <span class="built_in">print</span>(i)</span><br><span class="line">        i += <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> h <span class="keyword">in</span> <span class="built_in">range</span>(imgParent.height):</span><br><span class="line">            <span class="keyword">if</span> imgParent.getpixel((w, h)) &lt; <span class="number">127</span>:</span><br><span class="line">                imgRet.paste(imgChild,(w*imgChild.width, h*imgChild.height))</span><br><span class="line">    <span class="keyword">return</span> imgRet</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    imgParent = Image.<span class="built_in">open</span>(<span class="string">&#x27;parent.jpg&#x27;</span>)</span><br><span class="line">    imgParent = imgParent.convert(<span class="string">&#x27;L&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    imgChild = Image.<span class="built_in">open</span>(<span class="string">&#x27;child2.png&#x27;</span>)</span><br><span class="line">    imgChild = imgChild.convert(<span class="string">&#x27;L&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    imgRet = fill_img_with_img(imgParent,imgChild)</span><br><span class="line"></span><br><span class="line">    imgRet.save(<span class="string">&#x27;result.png&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h1 id="3-好奇心——用程序检查哪些网站能打开"><a href="#3-好奇心——用程序检查哪些网站能打开" class="headerlink" title="3. 好奇心——用程序检查哪些网站能打开"></a>3. 好奇心——用程序检查哪些网站能打开</h1><h2 id="3-1-初步，只能检查-IP-地址-不成熟的探索"><a href="#3-1-初步，只能检查-IP-地址-不成熟的探索" class="headerlink" title="3.1 初步，只能检查 IP 地址##不成熟的探索"></a>3.1 初步，只能检查 IP 地址##不成熟的探索</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> urllib.request</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> error , request</span><br><span class="line"></span><br><span class="line">f = <span class="built_in">open</span>(<span class="string">&#x27;re.txt&#x27;</span>,<span class="string">&quot;w&quot;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line"></span><br><span class="line">j = <span class="number">0</span></span><br><span class="line">k = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">255</span>):</span><br><span class="line">    htmls = []</span><br><span class="line">    https = []</span><br><span class="line">    http = <span class="string">&#x27;http://123.56.22.&#x27;</span> + <span class="built_in">str</span>(i)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        reponse = request.urlopen(http)</span><br><span class="line">        https.append(http)</span><br><span class="line">        j += <span class="number">1</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;这是第<span class="subst">&#123;j&#125;</span>个网站了&#x27;</span>)</span><br><span class="line">        f.write(<span class="string">&#x27;url&#x27;</span> + <span class="string">&#x27;\t&#x27;</span> + http + <span class="string">&#x27;\n&#x27;</span> )</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">    <span class="keyword">except</span> error.URLError <span class="keyword">as</span> e:</span><br><span class="line">        k += <span class="number">1</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;访问页面出错1,<span class="subst">&#123;k&#125;</span>次了&#x27;</span>)</span><br><span class="line">    <span class="keyword">except</span> urllib.error.URLError:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;访问页面出错2&#x27;</span>)</span><br><span class="line"><span class="comment"># print(f&#x27;总共是&#123;https&#125;&#x27;)</span></span><br><span class="line">f.close()</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-2-开始加一点细节，也不太完善"><a href="#3-2-开始加一点细节，也不太完善" class="headerlink" title="3.2 开始加一点细节，也不太完善"></a>3.2 开始加一点细节，也不太完善</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/18/Learn-WT%E7%BB%88%E7%AB%AF/" rel="prev" title="WindowsTerminal的配置">
+      <i class="fa fa-chevron-left"></i> WindowsTerminal的配置
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/25/Learn-HCJ%E5%89%8D%E7%AB%AF/" rel="next" title="前端开发的基础知识">
+      前端开发的基础知识 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E6%AF%8F%E6%97%A5%E6%89%8B%E5%8A%A8%E8%AE%B0%E5%BD%95%E6%94%AF%E4%BB%98%E5%AE%9D%E5%9F%BA%E9%87%91%E4%BD%99%E9%A2%9D"><span class="nav-number">1.</span> <span class="nav-text">1. 每日手动记录支付宝基金余额</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E5%8F%AA%E6%9C%89%E4%B8%80%E6%94%AF%E5%9F%BA%E9%87%91%E6%97%B6%E7%9A%84%E4%BB%A3%E7%A0%81"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 只有一支基金时的代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E4%B8%89%E6%94%AF%E5%9F%BA%E9%87%91%E6%97%B6%E7%9A%84%E4%BB%A3%E7%A0%81"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 三支基金时的代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E5%9B%BE%E4%B8%AD%E5%9B%BE%E2%80%94%E2%80%94%E5%B0%86%E4%B8%80%E5%B9%85%E5%9B%BE%E5%A5%97%E5%A8%83"><span class="nav-number">2.</span> <span class="nav-text">2. 图中图——将一幅图套娃</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E5%A5%BD%E5%A5%87%E5%BF%83%E2%80%94%E2%80%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%A3%80%E6%9F%A5%E5%93%AA%E4%BA%9B%E7%BD%91%E7%AB%99%E8%83%BD%E6%89%93%E5%BC%80"><span class="nav-number">3.</span> <span class="nav-text">3. 好奇心——用程序检查哪些网站能打开</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E5%88%9D%E6%AD%A5%EF%BC%8C%E5%8F%AA%E8%83%BD%E6%A3%80%E6%9F%A5-IP-%E5%9C%B0%E5%9D%80-%E4%B8%8D%E6%88%90%E7%86%9F%E7%9A%84%E6%8E%A2%E7%B4%A2"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 初步，只能检查 IP 地址##不成熟的探索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E5%BC%80%E5%A7%8B%E5%8A%A0%E4%B8%80%E7%82%B9%E7%BB%86%E8%8A%82%EF%BC%8C%E4%B9%9F%E4%B8%8D%E5%A4%AA%E5%AE%8C%E5%96%84"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 开始加一点细节，也不太完善</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/yqq/anime.min.js"></script>
+  <script src="/yqq/velocity/velocity.min.js"></script>
+  <script src="/yqq/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

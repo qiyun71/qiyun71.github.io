@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/yqq/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="有一定的 python 自学基础，基础不扎实python，边学爬虫，边把不会的 python 知识不全">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python-Note">
+<meta property="og:url" content="http://example.com/2020/02/09/Learn-Python/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="有一定的 python 自学基础，基础不扎实python，边学爬虫，边把不会的 python 知识不全">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-02-09T07:38:38.000Z">
+<meta property="article:modified_time" content="2022-06-08T06:31:44.959Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2020/02/09/Learn-Python/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Python-Note | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/02/09/Learn-Python/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python-Note
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-09 15:38:38" itemprop="dateCreated datePublished" datetime="2020-02-09T15:38:38+08:00">2020-02-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-06-08 14:31:44" itemprop="dateModified" datetime="2022-06-08T14:31:44+08:00">2022-06-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E5%8A%9B/" itemprop="url" rel="index"><span itemprop="name">学习力</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><strong>有一定的 python 自学基础，基础不扎实</strong><br><strong>python，边学爬虫，边把不会的 python 知识不全</strong></p>
+<span id="more"></span>
+
+<h1 id="1-文件管理（txt）"><a href="#1-文件管理（txt）" class="headerlink" title="1. 文件管理（txt）"></a>1. 文件管理（txt）</h1><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fd = <span class="built_in">open</span>(<span class="string">&#x27;file.txt&#x27;</span>,<span class="string">&#x27;w&#x27;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>)      <span class="comment">#utf-8 or GBK</span></span><br><span class="line">fd.write(content)</span><br><span class="line">fd.close()</span><br></pre></td></tr></table></figure>
+
+<p>其中 content 可以是字符串，变量，\t ……</p>
+<hr/>
+
+<table>
+<thead>
+<tr>
+<th align="center">r</th>
+<th align="center">w</th>
+<th align="center">a</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">只读</td>
+<td align="center">覆盖写</td>
+<td align="center">添加写</td>
+</tr>
+</tbody></table>
+<h2 id="1-1-文件的readlines和readline"><a href="#1-1-文件的readlines和readline" class="headerlink" title="1.1 文件的readlines和readline"></a>1.1 文件的readlines和readline</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">f.readlines()<span class="comment"># 全部读取最后返回一个列表存所有的类,每行后面都会带有“\n”</span></span><br><span class="line">f.readline()<span class="comment"># 读取一列数据</span></span><br></pre></td></tr></table></figure>
+
+
+<h1 id="2-csv-文件"><a href="#2-csv-文件" class="headerlink" title="2. csv 文件"></a>2. csv 文件</h1><h2 id="2-1-列表序列数据"><a href="#2-1-列表序列数据" class="headerlink" title="2.1 列表序列数据"></a>2.1 列表序列数据</h2><ul>
+<li>headers :表头</li>
+<li>rows :内容</li>
+<li>f<em>csv &#x3D; csv.writer(f)&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;_f 为 open(‘file.txt’,’w’,encoding&#x3D;’utf-8’)</em></li>
+<li>f_csv.writerow(headers)</li>
+<li>f_csv.writerows(rows)</li>
+</ul>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"></span><br><span class="line">headers = [<span class="string">&#x27;class&#x27;</span>,<span class="string">&#x27;name&#x27;</span>,<span class="string">&#x27;sex&#x27;</span>,<span class="string">&#x27;height&#x27;</span>,<span class="string">&#x27;year&#x27;</span>]</span><br><span class="line"></span><br><span class="line">rows = [</span><br><span class="line">        [<span class="number">1</span>,<span class="string">&#x27;xiaoming&#x27;</span>,<span class="string">&#x27;male&#x27;</span>,<span class="number">168</span>,<span class="number">23</span>],</span><br><span class="line">        [<span class="number">1</span>,<span class="string">&#x27;xiaohong&#x27;</span>,<span class="string">&#x27;female&#x27;</span>,<span class="number">162</span>,<span class="number">22</span>],</span><br><span class="line">        [<span class="number">2</span>,<span class="string">&#x27;xiaozhang&#x27;</span>,<span class="string">&#x27;female&#x27;</span>,<span class="number">163</span>,<span class="number">21</span>],</span><br><span class="line">        [<span class="number">2</span>,<span class="string">&#x27;xiaoli&#x27;</span>,<span class="string">&#x27;male&#x27;</span>,<span class="number">158</span>,<span class="number">21</span>]</span><br><span class="line">    ]</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;test.csv&#x27;</span>,<span class="string">&#x27;w&#x27;</span>,newline=<span class="string">&#x27;&#x27;</span>)<span class="keyword">as</span> f:</span><br><span class="line">    f_csv = csv.writer(f)</span><br><span class="line">    f_csv.writerow(headers)</span><br><span class="line">    f_csv.writerows(rows)</span><br></pre></td></tr></table></figure>
+
+<p><em>注意：如果打开 csv 文件出现空行的情况，那么需要添加一个参数 newline&#x3D;”</em><br><code>with open(&#39;test.csv&#39;,&#39;w&#39;,newline=&#39;&#39;)as f:</code></p>
+<table>
+<thead>
+<tr>
+<th align="center">class</th>
+<th align="center">name</th>
+<th align="center">sex</th>
+<th align="center">height</th>
+<th align="center">year</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">xiaoming</td>
+<td align="center">male</td>
+<td align="center">168</td>
+<td align="center">23</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">xiaohong</td>
+<td align="center">female</td>
+<td align="center">162</td>
+<td align="center">22</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">xiaozhang</td>
+<td align="center">female</td>
+<td align="center">163</td>
+<td align="center">21</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">xiaoli</td>
+<td align="center">male</td>
+<td align="center">158</td>
+<td align="center">21</td>
+</tr>
+</tbody></table>
+<h2 id="2-2-字典序列数据"><a href="#2-2-字典序列数据" class="headerlink" title="2.2 字典序列数据"></a>2.2 字典序列数据</h2><ul>
+<li>headers :表头</li>
+<li>rows :内容</li>
+<li>f_csv &#x3D; DictWriter(f,headers)</li>
+<li>f_csv.writeheader()</li>
+<li>f_csv.writerows(rows)</li>
+</ul>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"></span><br><span class="line">headers = [<span class="string">&#x27;class&#x27;</span>,<span class="string">&#x27;name&#x27;</span>,<span class="string">&#x27;sex&#x27;</span>,<span class="string">&#x27;height&#x27;</span>,<span class="string">&#x27;year&#x27;</span>]</span><br><span class="line"></span><br><span class="line">rows = [</span><br><span class="line">        &#123;<span class="string">&#x27;class&#x27;</span>:<span class="number">1</span>,<span class="string">&#x27;name&#x27;</span>:<span class="string">&#x27;xiaoming&#x27;</span>,<span class="string">&#x27;sex&#x27;</span>:<span class="string">&#x27;male&#x27;</span>,<span class="string">&#x27;height&#x27;</span>:<span class="number">168</span>,<span class="string">&#x27;year&#x27;</span>:<span class="number">23</span>&#125;,</span><br><span class="line">        &#123;<span class="string">&#x27;class&#x27;</span>:<span class="number">1</span>,<span class="string">&#x27;name&#x27;</span>:<span class="string">&#x27;xiaohong&#x27;</span>,<span class="string">&#x27;sex&#x27;</span>:<span class="string">&#x27;female&#x27;</span>,<span class="string">&#x27;height&#x27;</span>:<span class="number">162</span>,<span class="string">&#x27;year&#x27;</span>:<span class="number">22</span>&#125;,</span><br><span class="line">        &#123;<span class="string">&#x27;class&#x27;</span>:<span class="number">2</span>,<span class="string">&#x27;name&#x27;</span>:<span class="string">&#x27;xiaozhang&#x27;</span>,<span class="string">&#x27;sex&#x27;</span>:<span class="string">&#x27;female&#x27;</span>,<span class="string">&#x27;height&#x27;</span>:<span class="number">163</span>,<span class="string">&#x27;year&#x27;</span>:<span class="number">21</span>&#125;,</span><br><span class="line">        &#123;<span class="string">&#x27;class&#x27;</span>:<span class="number">2</span>,<span class="string">&#x27;name&#x27;</span>:<span class="string">&#x27;xiaoli&#x27;</span>,<span class="string">&#x27;sex&#x27;</span>:<span class="string">&#x27;male&#x27;</span>,<span class="string">&#x27;height&#x27;</span>:<span class="number">158</span>,<span class="string">&#x27;year&#x27;</span>:<span class="number">21</span>&#125;,</span><br><span class="line">    ]</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;test2.csv&#x27;</span>,<span class="string">&#x27;w&#x27;</span>,newline=<span class="string">&#x27;&#x27;</span>)<span class="keyword">as</span> f:</span><br><span class="line">    f_csv = csv.DictWriter(f,headers)</span><br><span class="line">    f_csv.writeheader()</span><br><span class="line">    f_csv.writerows(rows)</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="center">class</th>
+<th align="center">name</th>
+<th align="center">sex</th>
+<th align="center">height</th>
+<th align="center">year</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">xiaoming</td>
+<td align="center">male</td>
+<td align="center">168</td>
+<td align="center">23</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">xiaohong</td>
+<td align="center">female</td>
+<td align="center">162</td>
+<td align="center">22</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">xiaozhang</td>
+<td align="center">female</td>
+<td align="center">163</td>
+<td align="center">21</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">xiaoli</td>
+<td align="center">male</td>
+<td align="center">158</td>
+<td align="center">21</td>
+</tr>
+</tbody></table>
+<h2 id="2-3-csv-文件的读"><a href="#2-3-csv-文件的读" class="headerlink" title="2.3 csv 文件的读"></a>2.3 csv 文件的读</h2><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;test.csv&#x27;</span>)<span class="keyword">as</span> f:</span><br><span class="line">    f_csv = csv.reader(f)</span><br><span class="line">    <span class="keyword">for</span> row <span class="keyword">in</span> f_csv:</span><br><span class="line">        <span class="built_in">print</span>(row)</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;result</span></span><br><span class="line"><span class="string">[&#x27;class&#x27;, &#x27;name&#x27;, &#x27;sex&#x27;, &#x27;height&#x27;, &#x27;year&#x27;]</span></span><br><span class="line"><span class="string">[&#x27;1&#x27;, &#x27;xiaoming&#x27;, &#x27;male&#x27;, &#x27;168&#x27;, &#x27;23&#x27;]</span></span><br><span class="line"><span class="string">[&#x27;1&#x27;, &#x27;xiaohong&#x27;, &#x27;female&#x27;, &#x27;162&#x27;, &#x27;22&#x27;]</span></span><br><span class="line"><span class="string">[&#x27;2&#x27;, &#x27;xiaozhang&#x27;, &#x27;female&#x27;, &#x27;163&#x27;, &#x27;21&#x27;]</span></span><br><span class="line"><span class="string">[&#x27;2&#x27;, &#x27;xiaoli&#x27;, &#x27;male&#x27;, &#x27;158&#x27;, &#x27;21&#x27;]</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;test.csv&#x27;</span>)<span class="keyword">as</span> f:</span><br><span class="line">    f_csv = csv.reader(f)</span><br><span class="line">    <span class="keyword">for</span> row <span class="keyword">in</span> f_csv:</span><br><span class="line">        <span class="built_in">print</span>(row[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;result</span></span><br><span class="line"><span class="string">class</span></span><br><span class="line"><span class="string">1</span></span><br><span class="line"><span class="string">1</span></span><br><span class="line"><span class="string">2</span></span><br><span class="line"><span class="string">2</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/katyusha1/article/details/81606175" title="CSDN">网站</a></p>
+</blockquote>
+<h1 id="3-with-open-as-读写文件"><a href="#3-with-open-as-读写文件" class="headerlink" title="3. with open () as 读写文件"></a>3. with open () as 读写文件</h1><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 读文件</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;file.txt&#x27;</span>,<span class="string">&#x27;r&#x27;</span>,) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="built_in">print</span>(f.read())</span><br><span class="line"><span class="comment"># 不需调用f.close()</span></span><br><span class="line"><span class="comment"># 如果文件过大则用read(size)比较保险</span></span><br><span class="line"><span class="comment"># 如果文件是配置文件readlines()较为方便</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 写文件</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;file.txt&#x27;</span>,<span class="string">&#x27;w&#x27;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(<span class="string">&#x27;Hello World !&#x27;</span>)</span><br><span class="line"><span class="comment"># 文本文件    encoding 字符编码：gbk，utf-8</span></span><br><span class="line"><span class="comment"># 二进制文件  rb模式读取:图片,视频</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/xrinosvip/article/details/82019844" title="CSDN">网站</a></p>
+</blockquote>
+<h1 id="4-os-中创建文件夹"><a href="#4-os-中创建文件夹" class="headerlink" title="4. os 中创建文件夹"></a>4. os 中创建文件夹</h1><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">main_path = <span class="string">&#x27;E:/os/&#x27;</span>    <span class="comment">#创建一个路径</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(main_path):   <span class="comment">#如果该路径不存在</span></span><br><span class="line">    os.makedirs(main_path)  <span class="comment">#则新建一个路径</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>删除文件:</strong><code>os.remove(path)</code></p>
+<h1 id="5-将图片保存在文件夹中"><a href="#5-将图片保存在文件夹中" class="headerlink" title="5. 将图片保存在文件夹中"></a>5. 将图片保存在文件夹中</h1><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">dir</span> = <span class="string">&#x27;文件路径&#x27;</span> + name +<span class="string">&#x27;.jpg&#x27;</span>     <span class="comment">#文件名</span></span><br><span class="line">url_get = requests.get(url)         <span class="comment">#从url中获取图片信息</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="built_in">dir</span>,<span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> f:           <span class="comment">#打开图片文件，保存图片信息</span></span><br><span class="line">    f.writer(url_get.content)</span><br></pre></td></tr></table></figure>
+
+<h1 id="6-try…except-语句"><a href="#6-try…except-语句" class="headerlink" title="6. try…except 语句"></a>6. try…except 语句</h1><h2 id="6-1-语法"><a href="#6-1-语法" class="headerlink" title="6.1 语法"></a>6.1 <strong>语法</strong></h2><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#python 异常处理</span></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">&lt;语句&gt;        <span class="comment">#运行别的代码</span></span><br><span class="line"><span class="keyword">except</span> &lt;名字&gt;：</span><br><span class="line">&lt;语句&gt;        <span class="comment">#如果在try部份引发了&#x27;name&#x27;异常</span></span><br><span class="line"><span class="keyword">except</span> &lt;名字&gt;，&lt;数据&gt;:</span><br><span class="line">&lt;语句&gt;        <span class="comment">#如果引发了&#x27;name&#x27;异常，获得附加的数据</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">&lt;语句&gt;        <span class="comment">#如果没有异常发生</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="6-2-使用-except-而不带任何异常类型"><a href="#6-2-使用-except-而不带任何异常类型" class="headerlink" title="6.2 使用 except 而不带任何异常类型"></a>6.2 <strong>使用 except 而不带任何异常类型</strong></h2><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    正常的操作</span><br><span class="line">   ......................</span><br><span class="line"><span class="keyword">except</span>:</span><br><span class="line">    发生异常，执行这块代码</span><br><span class="line">   ......................</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    如果没有异常执行这块代码</span><br></pre></td></tr></table></figure>
+
+<p><strong>以上方式 try-except 语句捕获所有发生的异常。但这不是一个很好的方式，我们不能通过该程序识别出具体的异常信息。因为它捕获所有的异常</strong></p>
+<h2 id="6-3-使用-except-而带多种异常类型"><a href="#6-3-使用-except-而带多种异常类型" class="headerlink" title="6.3 使用 except 而带多种异常类型"></a>6.3 <strong>使用 except 而带多种异常类型</strong></h2><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    正常的操作</span><br><span class="line">   ......................</span><br><span class="line"><span class="keyword">except</span>(Exception1[, Exception2[,...ExceptionN]]]):</span><br><span class="line">   发生以上多个异常中的一个，执行这块代码</span><br><span class="line">   ......................</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    如果没有异常执行这块代码</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-4-try-finally-语句"><a href="#6-4-try-finally-语句" class="headerlink" title="6.4 try-finally 语句"></a>6.4 <strong>try-finally 语句</strong></h2><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">&lt;语句&gt;</span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">&lt;语句&gt;    <span class="comment">#退出try时总会执行</span></span><br><span class="line"><span class="keyword">raise</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="6-5-异常的参数"><a href="#6-5-异常的参数" class="headerlink" title="6.5 异常的参数"></a>6.5 <strong>异常的参数</strong></h2><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    正常的操作</span><br><span class="line">   ......................</span><br><span class="line"><span class="keyword">except</span> ExceptionType, Argument:</span><br><span class="line">    你可以在这输出 Argument 的值...</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-6-用户自定义异常"><a href="#6-6-用户自定义异常" class="headerlink" title="6.6 用户自定义异常"></a>6.6 <strong>用户自定义异常</strong></h2><ul>
+<li>通过创建一个新的异常类，程序可以命名它们自己的异常。异常应该是典型的继承自 Exception 类，通过直接或间接的方式</li>
+<li>以下为与 RuntimeError 相关的实例,实例中创建了一个类，基类为 RuntimeError，用于在异常触发时输出更多的信息</li>
+<li>在 try 语句块中，用户自定义的异常后执行 except 块语句，变量 e 是用于创建 Networkerror 类的实例</li>
+</ul>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Networkerror</span>(<span class="title class_ inherited__">RuntimeError</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, arg</span>):</span><br><span class="line">        self.args = arg</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>在你定义以上类后，你可以触发该异常，如下所示：</strong></li>
+</ul>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="keyword">raise</span> Networkerror(<span class="string">&quot;Bad hostname&quot;</span>)</span><br><span class="line"><span class="keyword">except</span> Networkerror,e:</span><br><span class="line">    <span class="built_in">print</span> e.args</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="center">异常名称</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">BaseException</td>
+<td align="center">所有异常的基类</td>
+</tr>
+<tr>
+<td align="center">SystemExit</td>
+<td align="center">解释器请求退出</td>
+</tr>
+<tr>
+<td align="center">KeyboardInterrupt</td>
+<td align="center">用户中断执行(通常是输入^C)</td>
+</tr>
+<tr>
+<td align="center">Exception</td>
+<td align="center">常规错误的基类</td>
+</tr>
+<tr>
+<td align="center">StopIteration</td>
+<td align="center">迭代器没有更多的值</td>
+</tr>
+<tr>
+<td align="center">GeneratorExit</td>
+<td align="center">生成器(generator)发生异常来通知退出</td>
+</tr>
+<tr>
+<td align="center">StandardError</td>
+<td align="center">所有的内建标准异常的基类</td>
+</tr>
+<tr>
+<td align="center">ArithmeticError</td>
+<td align="center">所有数值计算错误的基类</td>
+</tr>
+<tr>
+<td align="center">FloatingPointError</td>
+<td align="center">浮点计算错误</td>
+</tr>
+<tr>
+<td align="center">OverflowError</td>
+<td align="center">数值运算超出最大限制</td>
+</tr>
+<tr>
+<td align="center">ZeroDivisionError</td>
+<td align="center">除(或取模)零 (所有数据类型)</td>
+</tr>
+<tr>
+<td align="center">AssertionError</td>
+<td align="center">断言语句失败</td>
+</tr>
+<tr>
+<td align="center">AttributeError</td>
+<td align="center">对象没有这个属性</td>
+</tr>
+<tr>
+<td align="center">EOFError</td>
+<td align="center">没有内建输入,到达 EOF 标记</td>
+</tr>
+<tr>
+<td align="center">EnvironmentError</td>
+<td align="center">操作系统错误的基类</td>
+</tr>
+<tr>
+<td align="center">IOError</td>
+<td align="center">输入&#x2F;输出操作失败</td>
+</tr>
+<tr>
+<td align="center">OSError</td>
+<td align="center">操作系统错误</td>
+</tr>
+<tr>
+<td align="center">WindowsError</td>
+<td align="center">系统调用失败</td>
+</tr>
+<tr>
+<td align="center">ImportError</td>
+<td align="center">导入模块&#x2F;对象失败</td>
+</tr>
+<tr>
+<td align="center">LookupError</td>
+<td align="center">无效数据查询的基类</td>
+</tr>
+<tr>
+<td align="center">IndexError</td>
+<td align="center">序列中没有此索引(index)</td>
+</tr>
+<tr>
+<td align="center">KeyError</td>
+<td align="center">映射中没有这个键</td>
+</tr>
+<tr>
+<td align="center">MemoryError</td>
+<td align="center">内存溢出错误(对于 Python 解释器不是致命的)</td>
+</tr>
+<tr>
+<td align="center">NameError</td>
+<td align="center">未声明&#x2F;初始化对象 (没有属性)</td>
+</tr>
+<tr>
+<td align="center">UnboundLocalError</td>
+<td align="center">访问未初始化的本地变量</td>
+</tr>
+<tr>
+<td align="center">ReferenceError</td>
+<td align="center">弱引用(Weak reference)试图访问已经垃圾回收了的对象</td>
+</tr>
+<tr>
+<td align="center">RuntimeError</td>
+<td align="center">一般的运行时错误</td>
+</tr>
+<tr>
+<td align="center">NotImplementedError</td>
+<td align="center">尚未实现的方法</td>
+</tr>
+<tr>
+<td align="center">SyntaxError Python</td>
+<td align="center">语法错误</td>
+</tr>
+<tr>
+<td align="center">IndentationError</td>
+<td align="center">缩进错误</td>
+</tr>
+<tr>
+<td align="center">TabError Tab</td>
+<td align="center">和空格混用</td>
+</tr>
+<tr>
+<td align="center">SystemError</td>
+<td align="center">一般的解释器系统错误</td>
+</tr>
+<tr>
+<td align="center">TypeError</td>
+<td align="center">对类型无效的操作</td>
+</tr>
+<tr>
+<td align="center">ValueError</td>
+<td align="center">传入无效的参数</td>
+</tr>
+<tr>
+<td align="center">UnicodeError Unicode</td>
+<td align="center">相关的错误</td>
+</tr>
+<tr>
+<td align="center">UnicodeDecodeError Unicode</td>
+<td align="center">解码时的错误</td>
+</tr>
+<tr>
+<td align="center">UnicodeEncodeError Unicode</td>
+<td align="center">编码时错误</td>
+</tr>
+<tr>
+<td align="center">UnicodeTranslateError Unicode</td>
+<td align="center">转换时错误</td>
+</tr>
+<tr>
+<td align="center">Warning</td>
+<td align="center">警告的基类</td>
+</tr>
+<tr>
+<td align="center">DeprecationWarning</td>
+<td align="center">关于被弃用的特征的警告</td>
+</tr>
+<tr>
+<td align="center">FutureWarning</td>
+<td align="center">关于构造将来语义会有改变的警告</td>
+</tr>
+<tr>
+<td align="center">OverflowWarning</td>
+<td align="center">旧的关于自动提升为长整型(long)的警告</td>
+</tr>
+<tr>
+<td align="center">PendingDeprecationWarning</td>
+<td align="center">关于特性将会被废弃的警告</td>
+</tr>
+<tr>
+<td align="center">RuntimeWarning</td>
+<td align="center">可疑的运行时行为(runtime behavior)的警告</td>
+</tr>
+<tr>
+<td align="center">SyntaxWarning</td>
+<td align="center">可疑的语法的警告</td>
+</tr>
+<tr>
+<td align="center">UserWarning</td>
+<td align="center">用户代码生成的警告</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>参考<a target="_blank" rel="noopener" href="https://www.runoob.com/python/python-exceptions.html">教程</a></p>
+</blockquote>
+<h1 id="7-python-小知识点"><a href="#7-python-小知识点" class="headerlink" title="7. python 小知识点"></a>7. python 小知识点</h1><h2 id="7-1-换行符-‘-n’-和-回车符-‘-r’-的区别？"><a href="#7-1-换行符-‘-n’-和-回车符-‘-r’-的区别？" class="headerlink" title="7.1 换行符 ‘\n’ 和 回车符 ‘\r’ 的区别？"></a>7.1 换行符 ‘\n’ 和 回车符 ‘\r’ 的区别？</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">换行符就是另起一新行，光标在新行的开头；</span><br><span class="line">\n</span><br><span class="line">回车符就是光标回到一旧行的开头；(即光标目前所在的行为旧行)</span><br><span class="line">\r</span><br><span class="line">在解析文本或其他格式的文件内容时，常常要碰到判定回车式换行的地方</span><br><span class="line">这个时候就要注意既要判定&quot;\r\n&quot;又要判定&quot;\n&quot;。</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-2-Python-中-import-from…import-import…as-的区别"><a href="#7-2-Python-中-import-from…import-import…as-的区别" class="headerlink" title="7.2 Python 中 import, from…import,import…as 的区别"></a>7.2 Python 中 import, from…import,import…as 的区别</h2><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"><span class="built_in">print</span>(datetime.datetime.now())</span><br></pre></td></tr></table></figure>
+
+<p>以上代码实现输出系统当前时间，是引入整个 datetime 包，然后再调用 datetime 这个类中的 now()方法</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line"><span class="built_in">print</span>(datetime.now())</span><br></pre></td></tr></table></figure>
+
+<p>这里是从 datetime 包中只导入 datetime 这个类，让后再调用 datetime 这个类中的 now()方法实现同样的目的</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime <span class="keyword">as</span> dt</span><br><span class="line"><span class="built_in">print</span>(dt.datetime.now())</span><br></pre></td></tr></table></figure>
+
+<p>假如你嫌 datetime 这个包名称太长，想要给它取个别名，以后每次用到它的时候都用它的别名代替它，这时就需要用到 import…as</p>
+<h2 id="7-3-Python-中-n-、-m-、-1-、-1-、-1-、-2-1-和-1-的含义"><a href="#7-3-Python-中-n-、-m-、-1-、-1-、-1-、-2-1-和-1-的含义" class="headerlink" title="7.3 Python 中[ : n]、[m : ]、[-1]、[:-1]、[::-1]、[2::-1]和[1:]的含义"></a>7.3 Python 中[ : n]、[m : ]、[-1]、[:-1]、[::-1]、[2::-1]和[1:]的含义</h2><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">[m : ] 代表列表中的第m+<span class="number">1</span>项到最后一项</span><br><span class="line"></span><br><span class="line">[ : n] 代表列表中的第一项到第n项</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">a=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3.4</span>,<span class="number">5</span>]</span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line">[ <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> ]</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(a[-<span class="number">1</span>])     取最后一个元素</span><br><span class="line">结果：[<span class="number">5</span>]</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(a[:-<span class="number">1</span>])     除了最后一个取全部</span><br><span class="line">结果：[ <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> ]</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(a[::-<span class="number">1</span>])     取从后向前（相反）的元素</span><br><span class="line">结果：[ <span class="number">5</span> <span class="number">4</span> <span class="number">3</span> <span class="number">2</span> <span class="number">1</span> ]</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(a[<span class="number">2</span>::-<span class="number">1</span>])     取从下标为<span class="number">2</span>的元素翻转读取</span><br><span class="line">结果：[ <span class="number">3</span> <span class="number">2</span> <span class="number">1</span> ]</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(a[<span class="number">1</span>:])     取第二个到最后一个元素</span><br><span class="line">结果：[<span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span>]</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-4-python-浮点数保留几位小数"><a href="#7-4-python-浮点数保留几位小数" class="headerlink" title="7.4 python 浮点数保留几位小数"></a>7.4 python 浮点数保留几位小数</h2><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">5.026</span></span><br><span class="line"></span><br><span class="line">b = <span class="number">5.000</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">round</span>(a,<span class="number">2</span>)</span><br><span class="line"><span class="comment"># 5.03</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">round</span>(b,<span class="number">2</span>)</span><br><span class="line"><span class="comment"># 5.0</span></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;%.2f&#x27;</span> % a</span><br><span class="line"><span class="comment"># &#x27;5.03&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;%.2f&#x27;</span> % b</span><br><span class="line"><span class="comment"># &#x27;5.00&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">float</span>(<span class="string">&#x27;%.2f&#x27;</span> % a)</span><br><span class="line"><span class="comment"># 5.03</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">float</span>(<span class="string">&#x27;%.2f&#x27;</span> % b)</span><br><span class="line"><span class="comment"># 5.0</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="8-python-中陌生的函数"><a href="#8-python-中陌生的函数" class="headerlink" title="8. python 中陌生的函数"></a>8. python 中陌生的函数</h1><p><em>自己还不太熟悉的</em></p>
+<h2 id="8-1-str-split-对字符串进行切片–返回一个列表"><a href="#8-1-str-split-对字符串进行切片–返回一个列表" class="headerlink" title="8.1 str.split() 对字符串进行切片–返回一个列表"></a>8.1 <code>str.split()</code> <strong>对字符串进行切片–返回一个列表</strong></h2><ul>
+<li>语法<code>str.split(str=&quot;&quot;, num=string.count(str)).</code></li>
+</ul>
+<ul>
+<li>str：分隔符，默认为所有的空字符，包括空格、换行、指标</li>
+<li>num：分割次数，默认为-1，即分割所有</li>
+</ul>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># example</span></span><br><span class="line">txt = <span class="string">&quot;Google#Runoob#Taobao#Facebook&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 第二个参数为 1，返回两个参数列表</span></span><br><span class="line">x = txt.split(<span class="string">&quot;#&quot;</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(x)         <span class="comment">#[&#x27;Google&#x27;, &#x27;Runoob#Taobao#Facebook&#x27;]</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>参考教程：<a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-split.html" title="runoob.com">RUNOOB</a></p>
+</blockquote>
+<h2 id="8-2-str-find-检测字符串中是否包含子字符串-str"><a href="#8-2-str-find-检测字符串中是否包含子字符串-str" class="headerlink" title="8.2 str.find() 检测字符串中是否包含子字符串 str"></a>8.2 <code>str.find()</code> <strong>检测字符串中是否包含子字符串 str</strong></h2><ul>
+<li><em>如果包含子字符串返回开始的索引值，否则返回-1</em></li>
+</ul>
+<ul>
+<li>语法<code>str.find(str, beg=0, end=len(string))</code></li>
+<li>str – 指定检索的字符串</li>
+<li>beg – 开始索引，默认为 0</li>
+<li>end – 结束索引，默认为字符串的长度</li>
+</ul>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># example</span></span><br><span class="line">str1 = <span class="string">&quot;this is string example....wow!!!&quot;</span>;</span><br><span class="line">str2 = <span class="string">&quot;exam&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> str1.find(str2);          <span class="comment">#15</span></span><br><span class="line"><span class="built_in">print</span> str1.find(str2, <span class="number">10</span>);      <span class="comment">#15</span></span><br><span class="line"><span class="built_in">print</span> str1.find(str2, <span class="number">40</span>);      <span class="comment">#-1,查不到返回-1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="8-3-string-join"><a href="#8-3-string-join" class="headerlink" title="8.3 string.join()"></a>8.3 <code>string.join()</code></h2><ul>
+<li>语法 <code>&#39;sep&#39;.join(seq)</code><em>以 sep 作为分隔符，将 seq 所有的元素合并成一个新的字符串</em> <em>返回值：返回一个以分隔符 sep 连接各个元素后生成的字符串</em></li>
+<li>sep：分隔符。可以为空</li>
+<li>seq：要连接的元素序列、字符串、元组、字典</li>
+</ul>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>seq1 = [<span class="string">&#x27;hello&#x27;</span>,<span class="string">&#x27;good&#x27;</span>,<span class="string">&#x27;boy&#x27;</span>,<span class="string">&#x27;doiido&#x27;</span>] <span class="comment">#对序列操作</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span> <span class="string">&#x27; &#x27;</span>.join(seq1)</span><br><span class="line">hello good boy doiido</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span> <span class="string">&#x27;:&#x27;</span>.join(seq1)</span><br><span class="line">hello:good:boy:doiido</span><br><span class="line"></span><br><span class="line"><span class="comment"># 对字符串操作</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>seq2 = <span class="string">&quot;hello good boy doiido&quot;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span> <span class="string">&#x27;:&#x27;</span>.join(seq2)</span><br><span class="line">h:e:l:l:o: :g:o:o:d: :b:o:y: :d:o:i:i:d:o</span><br><span class="line"></span><br><span class="line"><span class="comment"># 对元组操作</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>seq3 = (<span class="string">&#x27;hello&#x27;</span>,<span class="string">&#x27;good&#x27;</span>,<span class="string">&#x27;boy&#x27;</span>,<span class="string">&#x27;doiido&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span> <span class="string">&#x27;:&#x27;</span>.join(seq3)</span><br><span class="line">hello:good:boy:doiido</span><br><span class="line"></span><br><span class="line"><span class="comment"># 对字典操作</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>seq4 = &#123;<span class="string">&#x27;hello&#x27;</span>:<span class="number">1</span>,<span class="string">&#x27;good&#x27;</span>:<span class="number">2</span>,<span class="string">&#x27;boy&#x27;</span>:<span class="number">3</span>,<span class="string">&#x27;doiido&#x27;</span>:<span class="number">4</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span> <span class="string">&#x27;:&#x27;</span>.join(seq4)</span><br><span class="line">boy:good:doiido:hello</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>另一个 <code>os.path.join()</code></strong></li>
+</ul>
+<ul>
+<li>语法 <code>os.path.join(path1[,path2[,......]])</code></li>
+</ul>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment"># 合并目录</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> os</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.path.join(<span class="string">&#x27;/hello/&#x27;</span>,<span class="string">&#x27;good/boy/&#x27;</span>,<span class="string">&#x27;doiido&#x27;</span>)</span><br><span class="line"><span class="string">&#x27;/hello/good/boy/doiido&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>参考<a target="_blank" rel="noopener" href="https://www.cnblogs.com/sui776265233/p/10755525.html">博客网站</a></p>
+</blockquote>
+<h2 id="8-4-ord-amp-chr"><a href="#8-4-ord-amp-chr" class="headerlink" title="8.4 ord() &amp; chr()"></a>8.4 ord() &amp; chr()</h2><p>ord()<br>将字符转化为ascii码</p>
+<p>chr()<br>将ascii码转化为字母或实际数字</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>)  <span class="comment"># 返回ASCII码 97</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">chr</span>(<span class="number">97</span>)   <span class="comment"># 返回 字母&#x27;a&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="9-python中类的相关知识"><a href="#9-python中类的相关知识" class="headerlink" title="9. python中类的相关知识"></a>9. python中类的相关知识</h1><h2 id="9-1-类的定义和创建"><a href="#9-1-类的定义和创建" class="headerlink" title="9.1 类的定义和创建"></a>9.1 类的定义和创建</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义类，类名为Cname</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Cname</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建cname1实例</span></span><br><span class="line">cname1 = Cname()</span><br></pre></td></tr></table></figure>
+
+<h2 id="9-2-类中的实例属性与类属性"><a href="#9-2-类中的实例属性与类属性" class="headerlink" title="9.2 类中的实例属性与类属性"></a>9.2 类中的实例属性与类属性</h2><ul>
+<li>实例属性：用于区分不同的实例，不同的类有不同的实例属性</li>
+<li>类属性：是每个实例共有的属性，每个实例共有的属性</li>
+</ul>
+<h3 id="9-2-1-实例属性"><a href="#9-2-1-实例属性" class="headerlink" title="9.2.1 实例属性"></a>9.2.1 实例属性</h3><p><code>cname1.name = y</code> <code>cname2.name = q</code><br>每个实例有了name属性后就可以访问<br><code>print(cname1.name)</code> <code>print(cname2.name)</code></p>
+<p>但是这样会比较麻烦，所以可以在每个实例中统一加上name属性</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Cname</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self,name</span>):  <span class="comment"># 初始化一个属性r</span></span><br><span class="line">        self.name = name</span><br></pre></td></tr></table></figure>
+
+<p><strong>__init__() 方法的第一个参数必须是 self</strong><br><em>self 代表类的实例，是通过类创建的实例</em></p>
+<p>然后创建实例，就可以直接带上参数 <code>cname1 = Cname(y)</code><br>然后访问实例属性 <code>print(cname1.name)</code></p>
+<h3 id="9-2-2-类属性"><a href="#9-2-2-类属性" class="headerlink" title="9.2.2 类属性"></a>9.2.2 类属性</h3><p>类的属性绑定后，所有实例都可以访问，而且<strong>实例访问的类属性都相同</strong><br><strong>实例属性每个实例各自拥有，互相独立，而类属性有且只有一份</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Cname</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    zhongz = <span class="string">&#x27;people&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self,name</span>):</span><br><span class="line">        self.name = name</span><br><span class="line"></span><br><span class="line">cname1 = Cname(<span class="string">&#x27;y&#x27;</span>)</span><br><span class="line">cname2 = Cname(<span class="string">&#x27;q&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;--------&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(cname1.zhongz)    <span class="comment"># people</span></span><br><span class="line"><span class="built_in">print</span>(cname2.zhongz)    <span class="comment"># people</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 通过类名修改了类属性后</span></span><br><span class="line">Cname.zhongz = <span class="string">&#x27;tenshi&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;--------&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(cname1.zhongz)    <span class="comment"># tenshi</span></span><br><span class="line"><span class="built_in">print</span>(cname2.zhongz)    <span class="comment"># tenshi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 通过实例名修改了类属性</span></span><br><span class="line">cname1.zhongz = <span class="string">&#x27;mea&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;--------&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(cname1.zhongz)    <span class="comment"># mea</span></span><br><span class="line"><span class="built_in">print</span>(cname2.zhongz)    <span class="comment"># tenshi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除了cname1的类属性zhongz后</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;--------&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(cname1.zhongz)    <span class="comment"># mea</span></span><br><span class="line"><span class="keyword">del</span> cname1.zhongz</span><br><span class="line"><span class="built_in">print</span>(cname1.zhongz)    <span class="comment"># tenshi</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>要修改类属性，不要再实例上修改，而是在类名上修改</strong></p>
+<h2 id="9-3-类的实例方法"><a href="#9-3-类的实例方法" class="headerlink" title="9.3 类的实例方法"></a>9.3 类的实例方法</h2><p><strong>method</strong> is the <strong>function</strong> in <strong>class</strong> <del>英语四级差点没过的渣渣</del><br><strong>方法是表明这个类用是来做什么,方法就是类中的函数</strong></p>
+<p><em>最简单的一个方法：打印属性</em></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Cname</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    zhongz = <span class="string">&#x27;people&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self,name</span>):</span><br><span class="line">        self.name = name</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">printname</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(self.name) <span class="comment"># 打印名字</span></span><br><span class="line"></span><br><span class="line">cname1 = Cname(<span class="string">&#x27;y&#x27;</span>)</span><br><span class="line">cname2 = Cname(<span class="string">&#x27;q&#x27;</span>)</span><br><span class="line">cname1.printname()  <span class="comment"># y</span></span><br><span class="line">cname2.printname()  <span class="comment"># q</span></span><br></pre></td></tr></table></figure>
+
+<p><code>printname(self)</code>就是一个最简单的方法</p>
+<h2 id="9-4-类中的访问限制"><a href="#9-4-类中的访问限制" class="headerlink" title="9.4 类中的访问限制"></a>9.4 类中的访问限制</h2><h3 id="9-4-1-属性的访问限制"><a href="#9-4-1-属性的访问限制" class="headerlink" title="9.4.1 属性的访问限制"></a>9.4.1 属性的访问限制</h3><p>python的类中的属性，如果有些属性不希望被外部访问，我们可以属性命名时以双下划线开头 <code>__</code>，如 <code>__age</code></p>
+<blockquote>
+<p>但，如果一个属性以”__xxx__“的形式定义，那么它可以被外部访问。以”__xxx__“定义的属性在Python的类中被称为特殊属性，有很多预定义的特殊属性是以“__xxx__”定义，所以我们不要把普通属性用”__xxx__“定义。</p>
+</blockquote>
+<blockquote>
+<p><strong>加双下划线__xx 的属性，可以通过“ _类名__xx ”可以访问到属性的值 如<code>Cname._Cname__age</code></strong></p>
+</blockquote>
+<h3 id="9-4-2-方法的访问限制"><a href="#9-4-2-方法的访问限制" class="headerlink" title="9.4.2 方法的访问限制"></a>9.4.2 方法的访问限制</h3><p>在方法名前加双下划线，如<code>def __printage():</code><br>此时，该方法只能在类的内部使用，而无法被外部调用</p>
+<h2 id="9-5-类中的装饰方法"><a href="#9-5-类中的装饰方法" class="headerlink" title="9.5 类中的装饰方法"></a>9.5 类中的装饰方法</h2><ul>
+<li><code>@classmethod</code>    用来修饰类方法。使用在与类进行交互，但不和其实例进行交互的函数方法上</li>
+<li><code>@staticmethod</code>   用来修饰静态方法。使用在有些与类相关函数，但不使用该类或该类的实例。如更改环境变量、修改其他类的属性等</li>
+</ul>
+<p><em>classmethod必须使用类的对象作为第一个参数，而staticmethod则可以不传递任何参数</em></p>
+<h3 id="9-5-1-classmethod-修饰方法——类方法"><a href="#9-5-1-classmethod-修饰方法——类方法" class="headerlink" title="9.5.1 @classmethod 修饰方法——类方法"></a>9.5.1 @classmethod 修饰方法——类方法</h3><p>类方法，我们不用通过实例化类就能访问的方法。而且@classmethod 装饰的方法不能使用实例属性，只能是类属性。它主要使用在和类进行交互，但不和其实例进行交互的函数方法上。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Cname</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    zhongz = <span class="string">&#x27;people&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self,name</span>):</span><br><span class="line">        self.name = name</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">printname</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(self.name)</span><br><span class="line">    </span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">printwe</span>(<span class="params">cls</span>):</span><br><span class="line">        <span class="built_in">print</span>(cls.zhongz)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Cname.printname()   # 没有实例化 ，会发生错误</span></span><br><span class="line">Cname.printwe()     <span class="comment"># 没有实例化也可以访问</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>printwe(cls)中cls表示的是类，它和self类实例有一定的差别。类方法中都是使用cls，实例方法中使用self</p>
+</blockquote>
+<h3 id="9-5-2-staticmethod-修饰方法——静态方法"><a href="#9-5-2-staticmethod-修饰方法——静态方法" class="headerlink" title="9.5.2 @staticmethod 修饰方法——静态方法"></a>9.5.2 @staticmethod 修饰方法——静态方法</h3><p><code>@staticmethod</code> 不强制要求传递参数（它做的事与类方法或实例方法一样）<br><code>@staticmethod</code> 使用在有些和类相关函数，但不使用该类或者该类的实例。如更改环境变量、修改其他类的属性等<br><code>@staticmethod</code> 修饰的方法是放在类外的函数，我们为了方便将他移动到了类里面，它对类的运行无影响</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Date</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">   day = <span class="number">0</span></span><br><span class="line">   month = <span class="number">0</span></span><br><span class="line">   year = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">   <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, year=<span class="number">0</span>, month=<span class="number">0</span>, day=<span class="number">0</span></span>):</span><br><span class="line">       self.day = day</span><br><span class="line">       self.month = month</span><br><span class="line">       self.year = year</span><br><span class="line"></span><br><span class="line"><span class="meta">   @classmethod</span></span><br><span class="line">   <span class="keyword">def</span> <span class="title function_">from_string</span>(<span class="params">cls, date_as_string</span>):</span><br><span class="line">       year, month, day = date_as_string.split(<span class="string">&#x27;-&#x27;</span>)</span><br><span class="line">       date = cls(year, month, day)</span><br><span class="line">       <span class="keyword">return</span> date</span><br><span class="line">    <span class="comment"># 返回的是类的实例</span></span><br><span class="line"></span><br><span class="line"><span class="meta">   @staticmethod</span></span><br><span class="line">   <span class="keyword">def</span> <span class="title function_">is_date_valid</span>(<span class="params">date_as_string</span>):</span><br><span class="line">       <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">      用来校验日期的格式是否正确</span></span><br><span class="line"><span class="string">       &quot;&quot;&quot;</span></span><br><span class="line">       year, month, day = date_as_string.split(<span class="string">&#x27;-&#x27;</span>)</span><br><span class="line">       <span class="keyword">return</span> <span class="built_in">int</span>(year) &lt;= <span class="number">3999</span> <span class="keyword">and</span> <span class="built_in">int</span>(month) &lt;= <span class="number">12</span> <span class="keyword">and</span> <span class="built_in">int</span>(day) &lt;= <span class="number">31</span></span><br><span class="line"></span><br><span class="line">date1 = Date.from_string(<span class="string">&#x27;2012-05-10&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(date1.year, date1.month, date1.day)</span><br><span class="line">is_date = Date.is_date_valid(<span class="string">&#x27;2012-09-18&#x27;</span>) <span class="comment"># 格式正确 返回True</span></span><br></pre></td></tr></table></figure>
+
+<p>is_date_valid(date_as_string) 只有一个参数，它的运行不会影响类的属性</p>
+<blockquote>
+<p>@staticmethod修饰方法 is_date_valid(date_as_string)中无实例化参数self或者cls；而@classmethod修饰的方法中有from_string(cls, date_as_string) 类参数cls</p>
+</blockquote>
+<h2 id="9-6-python中的property的使用"><a href="#9-6-python中的property的使用" class="headerlink" title="9.6 python中的property的使用"></a>9.6 python中的property的使用</h2><p>property的作用</p>
+<ul>
+<li>作为装饰器 @property将类方法转换为类属性（只读）</li>
+<li>property重新实现一个属性的setter和getter方法</li>
+</ul>
+<h3 id="9-6-1-property将类方法转换为只读属性"><a href="#9-6-1-property将类方法转换为只读属性" class="headerlink" title="9.6.1 @property将类方法转换为只读属性"></a>9.6.1 @property将类方法转换为只读属性</h3><p>经常使用，将类的属性设置为不可修改</p>
+<p>将一个类方法转变成一个类属性</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Circle</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">   __pi = <span class="number">3.14</span></span><br><span class="line"></span><br><span class="line">   <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, r</span>):</span><br><span class="line">       self.r = r</span><br><span class="line"></span><br><span class="line"><span class="meta">   @property</span></span><br><span class="line">   <span class="keyword">def</span> <span class="title function_">pi</span>(<span class="params">self</span>):</span><br><span class="line">       <span class="keyword">return</span> self.__pi</span><br><span class="line"></span><br><span class="line">circle1 = Circle(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">print</span>(circle1.pi)</span><br><span class="line">circle1.pi=<span class="number">3.14159</span>  <span class="comment"># 出现AttributeError异常</span></span><br></pre></td></tr></table></figure>
+
+<p>创建实例后我们可以使用circle1.pi 自己获取方法的返回值，而且他只能读不能修改</p>
+<h3 id="9-6-2-property重新实现setter和getter方法"><a href="#9-6-2-property重新实现setter和getter方法" class="headerlink" title="9.6.2 property重新实现setter和getter方法"></a>9.6.2 property重新实现setter和getter方法</h3><p>我也不太懂hhh</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Circle</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">   __pi = <span class="number">3.14</span></span><br><span class="line"></span><br><span class="line">   <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, r</span>):</span><br><span class="line">       self.r = r</span><br><span class="line"></span><br><span class="line">   <span class="keyword">def</span> <span class="title function_">get_pi</span>(<span class="params">self</span>):</span><br><span class="line">       <span class="keyword">return</span> self.__pi</span><br><span class="line"></span><br><span class="line">   <span class="keyword">def</span> <span class="title function_">set_pi</span>(<span class="params">self, pi</span>):</span><br><span class="line">       Circle.__pi = pi</span><br><span class="line"></span><br><span class="line">   pi = <span class="built_in">property</span>(get_pi, set_pi)</span><br><span class="line"></span><br><span class="line">circle1 = Circle(<span class="number">2</span>)</span><br><span class="line">circle1.pi = <span class="number">3.14</span>  <span class="comment"># 设置 pi的值</span></span><br><span class="line"><span class="built_in">print</span>(circle1.pi)  <span class="comment"># 访问 pi的值</span></span><br></pre></td></tr></table></figure>
+
+<p>当我们以这种方式使用属性函数时，它允许pi属性设置并获取值本身而不破坏原有代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Circle</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">   __pi = <span class="number">3.14</span></span><br><span class="line"></span><br><span class="line">   <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, r</span>):</span><br><span class="line">       self.r = r</span><br><span class="line"></span><br><span class="line"><span class="meta">   @property</span></span><br><span class="line">   <span class="keyword">def</span> <span class="title function_">pi</span>(<span class="params">self</span>):</span><br><span class="line">       <span class="keyword">return</span> self.__pi</span><br><span class="line"></span><br><span class="line"><span class="meta">   @pi.setter</span></span><br><span class="line">   <span class="keyword">def</span> <span class="title function_">pi</span>(<span class="params">self, pi</span>):</span><br><span class="line">       Circle.__pi = pi</span><br><span class="line"></span><br><span class="line">circle1 = Circle(<span class="number">2</span>)</span><br><span class="line">circle1.pi = <span class="number">3.14</span>  <span class="comment"># 设置 pi的值</span></span><br><span class="line"><span class="built_in">print</span>(circle1.pi)  <span class="comment"># 访问 pi的值</span></span><br></pre></td></tr></table></figure>
+
+<p>把一个getter方法变成属性，只需要加上@property就可以了，如上此时pi(self)方法，@property本身又创建了另一个装饰器@pi.setter，负责把一个setter方法变成属性赋值，于是，将@pi.setter加到pi(self, pi)上，我们就拥有一个可控的属性操作</p>
+<blockquote>
+<p>参考<a target="_blank" rel="noopener" href="https://www.zhihu.com/people/lyzf">知乎大佬</a>的<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/30223570">教程</a><br>感谢大佬让我搞懂了python的类，虽然最后的不太懂，但是基础是懂了</p>
+</blockquote>
+<p>接着学aaaaaaa</p>
+<h2 id="9-7-类的继承-—-大师，我悟了"><a href="#9-7-类的继承-—-大师，我悟了" class="headerlink" title="9.7 类的继承  — 大师，我悟了"></a>9.7 类的继承  — 大师，我悟了</h2><h3 id="9-7-1-类的继承"><a href="#9-7-1-类的继承" class="headerlink" title="9.7.1 类的继承"></a>9.7.1 类的继承</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Animal</span>(<span class="title class_ inherited__">object</span>):  <span class="comment">#  python3中所有类都可以继承于object基类</span></span><br><span class="line">   <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, name, age</span>):</span><br><span class="line">       self.name = name</span><br><span class="line">       self.age = age</span><br><span class="line"></span><br><span class="line">   <span class="keyword">def</span> <span class="title function_">call</span>(<span class="params">self</span>):</span><br><span class="line">       <span class="built_in">print</span>(self.name, <span class="string">&#x27;会叫&#x27;</span>)</span><br><span class="line"><span class="comment"># 现在我们需要定义一个Cat猫类继承于Animal，猫类比动物类多一个sex属性。</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Cat</span>(<span class="title class_ inherited__">Animal</span>):</span><br><span class="line">   <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self,name,age,sex</span>):</span><br><span class="line">       <span class="built_in">super</span>(Cat, self).__init__(name,age)  <span class="comment"># 不要忘记从Animal类引入属性</span></span><br><span class="line">       self.sex=sex</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:  <span class="comment"># 单模块被引用时下面代码不会受影响，用于调试</span></span><br><span class="line">   c = Cat(<span class="string">&#x27;喵喵&#x27;</span>, <span class="number">2</span>, <span class="string">&#x27;男&#x27;</span>)  <span class="comment">#  Cat继承了父类Animal的属性</span></span><br><span class="line">c.call()  <span class="comment"># 输出 喵喵 会叫 ，Cat继承了父类Animal的方法 </span></span><br></pre></td></tr></table></figure>
+
+<p>我悟了：类的继承一般都是object，然后如果想要继承自己的类，则可以把object继承对象改一下，原来类名后括号里的东西是继承对象</p>
+<p>一定要用 <code>super(Cat, self).__init__(name,age)</code> 去初始化父类，否则，继承自 Animal的 Cat子类将没有 <code>name</code> 和 <code>age</code> 两个属性</p>
+<p>函数<code>super(Cat, self)</code>将返回当前类继承的父类，即 Animal，然后调用<code>__init__()</code>方法，注意self参数已在<code>super()</code>中传入，在<code>__init__()</code>中将隐式传递，不能再写出self</p>
+<h3 id="9-7-2-Python对子类方法的重构"><a href="#9-7-2-Python对子类方法的重构" class="headerlink" title="9.7.2 Python对子类方法的重构"></a>9.7.2 Python对子类方法的重构</h3><p>子类中的方法要求跟父类中的方法不同时，可以在子类中重构方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Cat</span>(<span class="title class_ inherited__">Animal</span>):</span><br><span class="line">   <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, name, age, sex</span>):</span><br><span class="line">       <span class="built_in">super</span>(Cat, self).__init__(name,age)</span><br><span class="line">       self.sex = sex</span><br><span class="line"></span><br><span class="line">   <span class="keyword">def</span> <span class="title function_">call</span>(<span class="params">self</span>):</span><br><span class="line">       <span class="built_in">print</span>(self.name,<span class="string">&#x27;会“喵喵”叫&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">   c = Cat(<span class="string">&#x27;喵喵&#x27;</span>, <span class="number">2</span>, <span class="string">&#x27;男&#x27;</span>)</span><br><span class="line">   c.call()  <span class="comment"># 输出：喵喵 会“喵喵”叫</span></span><br></pre></td></tr></table></figure>
+
+<p>当我们在子类中重构父类的方法后，Cat子类的实例先会在自己的类Cat中查找该方法，当找不到该方法时才会去父类Animal中查找对应的方法</p>
+<h3 id="9-7-3-Python中子类与父类的关系"><a href="#9-7-3-Python中子类与父类的关系" class="headerlink" title="9.7.3 Python中子类与父类的关系"></a>9.7.3 Python中子类与父类的关系</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Animal</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">   <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Cat</span>(<span class="title class_ inherited__">Animal</span>):</span><br><span class="line">   <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">A= Animal()</span><br><span class="line">C = Cat()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>“A”是Animal类的实例，但，“A”不是Cat类的实例。</li>
+<li>“C”是Animal类的实例，“C”也是Cat类的实例。</li>
+</ul>
+<p>函数 <code>isinstance(变量,类型)</code><br>判断变量的类型，判断对象之间的关系</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;&quot;A&quot; IS Animal?&#x27;</span>, <span class="built_in">isinstance</span>(A, Animal))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;&quot;A&quot; IS Cat?&#x27;</span>, <span class="built_in">isinstance</span>(A, Cat))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;&quot;C&quot; IS Animal?&#x27;</span>, <span class="built_in">isinstance</span>(C, Animal))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;&quot;C&quot; IS Cat?&#x27;</span>, <span class="built_in">isinstance</span>(C, Cat))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"><span class="string">&quot;A&quot;</span> IS Animal? <span class="literal">True</span></span><br><span class="line"><span class="string">&quot;A&quot;</span> IS Cat? <span class="literal">False</span></span><br><span class="line"><span class="string">&quot;C&quot;</span> IS Animal? <span class="literal">True</span></span><br><span class="line"><span class="string">&quot;C&quot;</span> IS Cat? <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="9-7-4-python中多态"><a href="#9-7-4-python中多态" class="headerlink" title="9.7.4 python中多态"></a>9.7.4 python中多态</h3><p>类具有继承关系，并且子类类型可以向上转型看做父类类型，如果我们从 Animal派生出 Cat和Dog，并都写了一个 call() 方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Animal</span>(<span class="title class_ inherited__">object</span>):  </span><br><span class="line">   <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, name, age</span>):</span><br><span class="line">       self.name = name</span><br><span class="line">       self.age = age</span><br><span class="line">   <span class="keyword">def</span> <span class="title function_">call</span>(<span class="params">self</span>):</span><br><span class="line">       <span class="built_in">print</span>(self.name, <span class="string">&#x27;会叫&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Cat</span>(<span class="title class_ inherited__">Animal</span>):</span><br><span class="line">   <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, name, age, sex</span>):</span><br><span class="line">       <span class="built_in">super</span>(Cat, self).__init__(name, age)</span><br><span class="line">       self.sex = sex</span><br><span class="line"></span><br><span class="line">   <span class="keyword">def</span> <span class="title function_">call</span>(<span class="params">self</span>):</span><br><span class="line">       <span class="built_in">print</span>(self.name, <span class="string">&#x27;会“喵喵”叫&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Dog</span>(<span class="title class_ inherited__">Animal</span>):</span><br><span class="line">   <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, name, age, sex</span>):</span><br><span class="line">       <span class="built_in">super</span>(Dog, self).__init__(name, age)</span><br><span class="line">       self.sex = sex</span><br><span class="line">   <span class="keyword">def</span> <span class="title function_">call</span>(<span class="params">self</span>):</span><br><span class="line">       <span class="built_in">print</span>(self.name, <span class="string">&#x27;会“汪汪”叫&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>我们定义一个do函数，接收一个变量 ‘all’,如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">do</span>(<span class="params"><span class="built_in">all</span></span>):</span><br><span class="line">   <span class="built_in">all</span>.call()</span><br><span class="line"></span><br><span class="line">A = Animal(<span class="string">&#x27;小黑&#x27;</span>,<span class="number">4</span>)</span><br><span class="line">C = Cat(<span class="string">&#x27;喵喵&#x27;</span>, <span class="number">2</span>, <span class="string">&#x27;男&#x27;</span>)</span><br><span class="line">D = Dog(<span class="string">&#x27;旺财&#x27;</span>, <span class="number">5</span>, <span class="string">&#x27;女&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> (A,C,D):</span><br><span class="line">   do(x)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出结果</span></span><br><span class="line"><span class="comment"># 小黑 会叫</span></span><br><span class="line"><span class="comment"># 喵喵 会“喵喵”叫</span></span><br><span class="line"><span class="comment"># 旺财 会“汪汪”叫</span></span><br></pre></td></tr></table></figure>
+
+<p>这种行为称为多态。也就是说，方法调用将作用在 all 的实际类型上。C 是 Cat 类型，它实际上拥有自己的 call() 方法以及从 Animal 继承的 call 方法<br>而调用 C .call() 总是先查找它自身的定义，如果没有定义，则顺着继承链向上查找，直到在某个父类中找到为止</p>
+<blockquote>
+<p>注意事项</p>
+<ul>
+<li>在继承中基类的构造方法（<code>__init__()方法</code>）不会被自动调用，它需要在其派生类的构造方法中亲自专门调用。</li>
+<li>在调用基类的方法时，需要加上基类的类名前缀，且需要带上self参数变量。而在类中调用普通函数时并不需要带上self参数</li>
+<li>Python总是首先查找对应类的方法，如果它不能在派生类中找到对应的方法，它才开始到基类中逐个查找。（先在本类中查找调用的方法，找不到才去基类中找）</li>
+</ul>
+</blockquote>
+<h1 id="10-几个python编写技巧"><a href="#10-几个python编写技巧" class="headerlink" title="10. 几个python编写技巧"></a>10. 几个python编写技巧</h1><h2 id="10-1-变量的交换"><a href="#10-1-变量的交换" class="headerlink" title="10.1 变量的交换"></a>10.1 变量的交换</h2><p><code>a,b = b,a</code></p>
+<h2 id="10-2-字符串格式化"><a href="#10-2-字符串格式化" class="headerlink" title="10.2 字符串格式化"></a>10.2 字符串格式化</h2><p><code>print(&quot;Hi, I&#39;m %s . I&#39;m from %s . And I&#39;m %d&quot; % (name,country,age))</code><br><code>print(&quot;Hi, I&#39;m &#123;&#125; . I&#39;m from &#123;&#125; . And I&#39;m &#123;&#125;&quot;.format(name,country,age))</code><br><code>print(f&quot;Hi, I&#39;m &#123;name&#125; . I&#39;m from &#123;country&#125; . And I&#39;m &#123;age+1&#125;&quot;</code></p>
+<h2 id="10-3-Yield语法"><a href="#10-3-Yield语法" class="headerlink" title="10.3 Yield语法"></a>10.3 Yield语法</h2><p>yield不需要整个列表生成完毕后再输出，可以一个一个输出</p>
+<p>每当一个数据生成时，可以直接输出</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">fibonacci</span>(<span class="params">n</span>):</span><br><span class="line">    a = <span class="number">0</span></span><br><span class="line">    b = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">        <span class="keyword">yield</span> a</span><br><span class="line">        a, b = b, a+b</span><br><span class="line">    <span class="keyword">return</span> nums</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> fibonacci(<span class="number">10</span>):</span><br><span class="line">    <span class="built_in">print</span>(i)</span><br></pre></td></tr></table></figure>
+
+<h2 id="10-4-列表解析式"><a href="#10-4-列表解析式" class="headerlink" title="10.4 列表解析式"></a>10.4 列表解析式</h2>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/02/09/Tools-Github/" rel="prev" title="Github的一些基本知识">
+      <i class="fa fa-chevron-left"></i> Github的一些基本知识
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/02/10/Make-Python_%E7%88%AC%E8%99%AB/" rel="next" title="自己写的几个爬虫">
+      自己写的几个爬虫 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%EF%BC%88txt%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">1. 文件管理（txt）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E6%96%87%E4%BB%B6%E7%9A%84readlines%E5%92%8Creadline"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 文件的readlines和readline</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-csv-%E6%96%87%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">2. csv 文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E5%88%97%E8%A1%A8%E5%BA%8F%E5%88%97%E6%95%B0%E6%8D%AE"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 列表序列数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E5%AD%97%E5%85%B8%E5%BA%8F%E5%88%97%E6%95%B0%E6%8D%AE"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 字典序列数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-csv-%E6%96%87%E4%BB%B6%E7%9A%84%E8%AF%BB"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 csv 文件的读</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-with-open-as-%E8%AF%BB%E5%86%99%E6%96%87%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">3. with open () as 读写文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-os-%E4%B8%AD%E5%88%9B%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="nav-number">4.</span> <span class="nav-text">4. os 中创建文件夹</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E5%B0%86%E5%9B%BE%E7%89%87%E4%BF%9D%E5%AD%98%E5%9C%A8%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%AD"><span class="nav-number">5.</span> <span class="nav-text">5. 将图片保存在文件夹中</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-try%E2%80%A6except-%E8%AF%AD%E5%8F%A5"><span class="nav-number">6.</span> <span class="nav-text">6. try…except 语句</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-1-%E8%AF%AD%E6%B3%95"><span class="nav-number">6.1.</span> <span class="nav-text">6.1 语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2-%E4%BD%BF%E7%94%A8-except-%E8%80%8C%E4%B8%8D%E5%B8%A6%E4%BB%BB%E4%BD%95%E5%BC%82%E5%B8%B8%E7%B1%BB%E5%9E%8B"><span class="nav-number">6.2.</span> <span class="nav-text">6.2 使用 except 而不带任何异常类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-3-%E4%BD%BF%E7%94%A8-except-%E8%80%8C%E5%B8%A6%E5%A4%9A%E7%A7%8D%E5%BC%82%E5%B8%B8%E7%B1%BB%E5%9E%8B"><span class="nav-number">6.3.</span> <span class="nav-text">6.3 使用 except 而带多种异常类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-4-try-finally-%E8%AF%AD%E5%8F%A5"><span class="nav-number">6.4.</span> <span class="nav-text">6.4 try-finally 语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-5-%E5%BC%82%E5%B8%B8%E7%9A%84%E5%8F%82%E6%95%B0"><span class="nav-number">6.5.</span> <span class="nav-text">6.5 异常的参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-6-%E7%94%A8%E6%88%B7%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%82%E5%B8%B8"><span class="nav-number">6.6.</span> <span class="nav-text">6.6 用户自定义异常</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-python-%E5%B0%8F%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="nav-number">7.</span> <span class="nav-text">7. python 小知识点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#7-1-%E6%8D%A2%E8%A1%8C%E7%AC%A6-%E2%80%98-n%E2%80%99-%E5%92%8C-%E5%9B%9E%E8%BD%A6%E7%AC%A6-%E2%80%98-r%E2%80%99-%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">7.1.</span> <span class="nav-text">7.1 换行符 ‘\n’ 和 回车符 ‘\r’ 的区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-2-Python-%E4%B8%AD-import-from%E2%80%A6import-import%E2%80%A6as-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">7.2.</span> <span class="nav-text">7.2 Python 中 import, from…import,import…as 的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-3-Python-%E4%B8%AD-n-%E3%80%81-m-%E3%80%81-1-%E3%80%81-1-%E3%80%81-1-%E3%80%81-2-1-%E5%92%8C-1-%E7%9A%84%E5%90%AB%E4%B9%89"><span class="nav-number">7.3.</span> <span class="nav-text">7.3 Python 中[ : n]、[m : ]、[-1]、[:-1]、[::-1]、[2::-1]和[1:]的含义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-4-python-%E6%B5%AE%E7%82%B9%E6%95%B0%E4%BF%9D%E7%95%99%E5%87%A0%E4%BD%8D%E5%B0%8F%E6%95%B0"><span class="nav-number">7.4.</span> <span class="nav-text">7.4 python 浮点数保留几位小数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-python-%E4%B8%AD%E9%99%8C%E7%94%9F%E7%9A%84%E5%87%BD%E6%95%B0"><span class="nav-number">8.</span> <span class="nav-text">8. python 中陌生的函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#8-1-str-split-%E5%AF%B9%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BF%9B%E8%A1%8C%E5%88%87%E7%89%87%E2%80%93%E8%BF%94%E5%9B%9E%E4%B8%80%E4%B8%AA%E5%88%97%E8%A1%A8"><span class="nav-number">8.1.</span> <span class="nav-text">8.1 str.split() 对字符串进行切片–返回一个列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-2-str-find-%E6%A3%80%E6%B5%8B%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E6%98%AF%E5%90%A6%E5%8C%85%E5%90%AB%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2-str"><span class="nav-number">8.2.</span> <span class="nav-text">8.2 str.find() 检测字符串中是否包含子字符串 str</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-3-string-join"><span class="nav-number">8.3.</span> <span class="nav-text">8.3 string.join()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-4-ord-amp-chr"><span class="nav-number">8.4.</span> <span class="nav-text">8.4 ord() &amp; chr()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-python%E4%B8%AD%E7%B1%BB%E7%9A%84%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86"><span class="nav-number">9.</span> <span class="nav-text">9. python中类的相关知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#9-1-%E7%B1%BB%E7%9A%84%E5%AE%9A%E4%B9%89%E5%92%8C%E5%88%9B%E5%BB%BA"><span class="nav-number">9.1.</span> <span class="nav-text">9.1 类的定义和创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-2-%E7%B1%BB%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%B1%9E%E6%80%A7%E4%B8%8E%E7%B1%BB%E5%B1%9E%E6%80%A7"><span class="nav-number">9.2.</span> <span class="nav-text">9.2 类中的实例属性与类属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-2-1-%E5%AE%9E%E4%BE%8B%E5%B1%9E%E6%80%A7"><span class="nav-number">9.2.1.</span> <span class="nav-text">9.2.1 实例属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-2-2-%E7%B1%BB%E5%B1%9E%E6%80%A7"><span class="nav-number">9.2.2.</span> <span class="nav-text">9.2.2 类属性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-3-%E7%B1%BB%E7%9A%84%E5%AE%9E%E4%BE%8B%E6%96%B9%E6%B3%95"><span class="nav-number">9.3.</span> <span class="nav-text">9.3 类的实例方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-4-%E7%B1%BB%E4%B8%AD%E7%9A%84%E8%AE%BF%E9%97%AE%E9%99%90%E5%88%B6"><span class="nav-number">9.4.</span> <span class="nav-text">9.4 类中的访问限制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-4-1-%E5%B1%9E%E6%80%A7%E7%9A%84%E8%AE%BF%E9%97%AE%E9%99%90%E5%88%B6"><span class="nav-number">9.4.1.</span> <span class="nav-text">9.4.1 属性的访问限制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-4-2-%E6%96%B9%E6%B3%95%E7%9A%84%E8%AE%BF%E9%97%AE%E9%99%90%E5%88%B6"><span class="nav-number">9.4.2.</span> <span class="nav-text">9.4.2 方法的访问限制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-5-%E7%B1%BB%E4%B8%AD%E7%9A%84%E8%A3%85%E9%A5%B0%E6%96%B9%E6%B3%95"><span class="nav-number">9.5.</span> <span class="nav-text">9.5 类中的装饰方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-5-1-classmethod-%E4%BF%AE%E9%A5%B0%E6%96%B9%E6%B3%95%E2%80%94%E2%80%94%E7%B1%BB%E6%96%B9%E6%B3%95"><span class="nav-number">9.5.1.</span> <span class="nav-text">9.5.1 @classmethod 修饰方法——类方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-5-2-staticmethod-%E4%BF%AE%E9%A5%B0%E6%96%B9%E6%B3%95%E2%80%94%E2%80%94%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95"><span class="nav-number">9.5.2.</span> <span class="nav-text">9.5.2 @staticmethod 修饰方法——静态方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-6-python%E4%B8%AD%E7%9A%84property%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">9.6.</span> <span class="nav-text">9.6 python中的property的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-6-1-property%E5%B0%86%E7%B1%BB%E6%96%B9%E6%B3%95%E8%BD%AC%E6%8D%A2%E4%B8%BA%E5%8F%AA%E8%AF%BB%E5%B1%9E%E6%80%A7"><span class="nav-number">9.6.1.</span> <span class="nav-text">9.6.1 @property将类方法转换为只读属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-6-2-property%E9%87%8D%E6%96%B0%E5%AE%9E%E7%8E%B0setter%E5%92%8Cgetter%E6%96%B9%E6%B3%95"><span class="nav-number">9.6.2.</span> <span class="nav-text">9.6.2 property重新实现setter和getter方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-7-%E7%B1%BB%E7%9A%84%E7%BB%A7%E6%89%BF-%E2%80%94-%E5%A4%A7%E5%B8%88%EF%BC%8C%E6%88%91%E6%82%9F%E4%BA%86"><span class="nav-number">9.7.</span> <span class="nav-text">9.7 类的继承  — 大师，我悟了</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-7-1-%E7%B1%BB%E7%9A%84%E7%BB%A7%E6%89%BF"><span class="nav-number">9.7.1.</span> <span class="nav-text">9.7.1 类的继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-7-2-Python%E5%AF%B9%E5%AD%90%E7%B1%BB%E6%96%B9%E6%B3%95%E7%9A%84%E9%87%8D%E6%9E%84"><span class="nav-number">9.7.2.</span> <span class="nav-text">9.7.2 Python对子类方法的重构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-7-3-Python%E4%B8%AD%E5%AD%90%E7%B1%BB%E4%B8%8E%E7%88%B6%E7%B1%BB%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">9.7.3.</span> <span class="nav-text">9.7.3 Python中子类与父类的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-7-4-python%E4%B8%AD%E5%A4%9A%E6%80%81"><span class="nav-number">9.7.4.</span> <span class="nav-text">9.7.4 python中多态</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-%E5%87%A0%E4%B8%AApython%E7%BC%96%E5%86%99%E6%8A%80%E5%B7%A7"><span class="nav-number">10.</span> <span class="nav-text">10. 几个python编写技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#10-1-%E5%8F%98%E9%87%8F%E7%9A%84%E4%BA%A4%E6%8D%A2"><span class="nav-number">10.1.</span> <span class="nav-text">10.1 变量的交换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-2-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%A0%BC%E5%BC%8F%E5%8C%96"><span class="nav-number">10.2.</span> <span class="nav-text">10.2 字符串格式化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-3-Yield%E8%AF%AD%E6%B3%95"><span class="nav-number">10.3.</span> <span class="nav-text">10.3 Yield语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-4-%E5%88%97%E8%A1%A8%E8%A7%A3%E6%9E%90%E5%BC%8F"><span class="nav-number">10.4.</span> <span class="nav-text">10.4 列表解析式</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/yqq/anime.min.js"></script>
+  <script src="/yqq/velocity/velocity.min.js"></script>
+  <script src="/yqq/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

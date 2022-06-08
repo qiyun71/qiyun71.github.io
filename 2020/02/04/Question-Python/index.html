@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/yqq/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Python的一些问题，包括bug，还有编辑器的使用问题等等">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python学习中遇到的问题">
+<meta property="og:url" content="http://example.com/2020/02/04/Question-Python/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Python的一些问题，包括bug，还有编辑器的使用问题等等">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-02-04T15:01:44.000Z">
+<meta property="article:modified_time" content="2022-06-08T06:32:52.372Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2020/02/04/Question-Python/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Python学习中遇到的问题 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/02/04/Question-Python/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python学习中遇到的问题
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-04 23:01:44" itemprop="dateCreated datePublished" datetime="2020-02-04T23:01:44+08:00">2020-02-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-06-08 14:32:52" itemprop="dateModified" datetime="2022-06-08T14:32:52+08:00">2022-06-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%97%A0%E5%8A%9B/" itemprop="url" rel="index"><span itemprop="name">无力</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Python的一些问题，包括bug，还有编辑器的使用问题等等</p>
+<span id="more"></span>
+
+<h1 id="1-新版-pycharm-问题"><a href="#1-新版-pycharm-问题" class="headerlink" title="1. 新版 pycharm 问题"></a>1. 新版 pycharm 问题</h1><p><strong>使用 Pycharm 遇到的问题</strong><br><em>VS code 天下第一</em></p>
+<h2 id="问题-1：pycharm-双击打不开"><a href="#问题-1：pycharm-双击打不开" class="headerlink" title="问题 1：pycharm 双击打不开"></a>问题 1：pycharm 双击打不开</h2><p>已解决：可能时进程中已经有了 pycharm，在任务管理器里结束进程，然后重新打开</p>
+<h2 id="问题-2：pycharm-打开后回有两个窗口，而且不能再窗口上操作"><a href="#问题-2：pycharm-打开后回有两个窗口，而且不能再窗口上操作" class="headerlink" title="问题 2：pycharm 打开后回有两个窗口，而且不能再窗口上操作"></a>问题 2：pycharm 打开后回有两个窗口，而且不能再窗口上操作</h2><p>重装可以解决，但不知道什么原因，猜测可能是打开文件太多，加载不了</p>
+<h1 id="2-Python的一些BUG"><a href="#2-Python的一些BUG" class="headerlink" title="2. Python的一些BUG"></a>2. Python的一些BUG</h1><p>写程序用一分钟，找BUG需要一天</p>
+<h2 id="2-1-class传参的一些问题"><a href="#2-1-class传参的一些问题" class="headerlink" title="2.1 class传参的一些问题"></a>2.1 class传参的一些问题</h2><p><em>takes 2 positional arguments but 30 were given</em><br>大概就是只需要两个位置参数，但是我给了30个，<code>黑人问号？？？</code></p>
+<p>就是这个程序， 主要就是用多线程来爬取图片，然后到第二部，获得子页面的图片url资源地址时出错，无法解决</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> lxml.html</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Pool</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建 Thread 的子类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyThread</span>(threading.Thread):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, func, args</span>):</span><br><span class="line">        threading.Thread.__init__(self)</span><br><span class="line">        self.func = func</span><br><span class="line">        self.args = args</span><br><span class="line">        self.result = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">run</span>(<span class="params">self</span>):</span><br><span class="line">        self.result = self.func(*self.args)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">getresult</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> self.result</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建爬取图片的类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">WallGet</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, headers, pages</span>):</span><br><span class="line">        self.headers = headers</span><br><span class="line">        self.pages = pages</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 很快就完了</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_url</span>(<span class="params">self</span>):</span><br><span class="line">        pages = self.pages</span><br><span class="line">        url_pics = []</span><br><span class="line">        page = <span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> page &lt;= <span class="built_in">int</span>(pages):</span><br><span class="line">            url = <span class="string">&#x27;https://wallhaven.cc/search?categories=010&amp;purity=100&amp;resolutions=1280x800&amp;sorting=relevance&amp;order=desc&amp;page=&#x27;</span> + \</span><br><span class="line">                <span class="built_in">str</span>(page)</span><br><span class="line">            html = requests.get(url, headers=self.headers).content.decode()</span><br><span class="line">            selector = lxml.html.fromstring(html)</span><br><span class="line"></span><br><span class="line">            url_pic = selector.xpath(</span><br><span class="line">                <span class="string">&#x27;//*[@id=&quot;thumbs&quot;]/section/ul/li/figure/a/@href&#x27;</span>)</span><br><span class="line">            url_pics.append(url_pic)</span><br><span class="line">            page += <span class="number">1</span></span><br><span class="line">        urls = []</span><br><span class="line">        <span class="keyword">for</span> url_pic <span class="keyword">in</span> url_pics:</span><br><span class="line">            <span class="keyword">for</span> url <span class="keyword">in</span> url_pic:</span><br><span class="line">                urls.append(url)</span><br><span class="line">        <span class="keyword">return</span> urls</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 单个图片url的获取</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_picurl</span>(<span class="params">self, url</span>):</span><br><span class="line">        html2 = requests.get(url, headers=self.headers).content.decode()</span><br><span class="line">        img_url = re.findall(<span class="string">r&#x27;&quot;wallpaper&quot; src=&quot;(.*?)&quot;&#x27;</span>, html2, re.S)[<span class="number">0</span>]</span><br><span class="line">        <span class="built_in">print</span>(img_url)</span><br><span class="line">        <span class="keyword">return</span> img_url</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">down_img</span>(<span class="params">self, imgurls</span>):</span><br><span class="line">        i = <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> imgurl <span class="keyword">in</span> imgurls:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&#x27;下载图片第<span class="subst">&#123;i&#125;</span>张&#x27;</span>)</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                pic = requests.get(imgurl, timeout=<span class="number">10</span>)</span><br><span class="line">            <span class="keyword">except</span> requests.exceptions.ConnectionError:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&#x27;图片无法下载&#x27;</span>)</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">except</span> requests.exceptions.ReadTimeout:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&#x27;requests.exceptions.ReadTimeout&#x27;</span>)</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">            main_path = <span class="string">r&#x27;E:\\wallhaven\\&#x27;</span></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(main_path):</span><br><span class="line">                os.makedirs(main_path)</span><br><span class="line"></span><br><span class="line">            <span class="built_in">dir</span> = <span class="string">&#x27;E:\\wallhaven\\&#x27;</span> + <span class="built_in">str</span>(i) + <span class="string">&#x27;.jpg&#x27;</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">with</span> <span class="built_in">open</span>(<span class="built_in">dir</span>, <span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">                f.write(pic.content)</span><br><span class="line">            i += <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行主程序</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>():</span><br><span class="line">    headers = &#123;</span><br><span class="line">        <span class="string">&quot;User-Agent&quot;</span>: <span class="string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.116 Safari/537.36&quot;</span>&#125;</span><br><span class="line">    pages = <span class="built_in">input</span>(<span class="string">&#x27;输入要多少页： &#x27;</span>)</span><br><span class="line">    wallget = WallGet(headers, pages)</span><br><span class="line">    urls = wallget.get_url()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;每页图片链接获取完成&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(urls)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 调试的时候这句话出现问题</span></span><br><span class="line">    <span class="comment"># th = MyThread(wallget.get_picurl,(urls[0]))</span></span><br><span class="line">    <span class="comment"># th.start()</span></span><br><span class="line">    <span class="comment"># 同样，直接用也会出现问题</span></span><br><span class="line">    th2 = threading.Thread(target= wallget.get_picurl,args=(urls[<span class="number">0</span>]))</span><br><span class="line">    th2.start()</span><br><span class="line">    <span class="comment"># print(th.getresult())</span></span><br><span class="line">    exit()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    l = []</span><br><span class="line">    <span class="keyword">for</span> url <span class="keyword">in</span> urls:</span><br><span class="line">        th = MyThread(wallget.get_picurl, (url))</span><br><span class="line">        th.start()</span><br><span class="line">        l.append(th)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> l:</span><br><span class="line">        i.join()</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;图片url资源地址获取完成&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
+<p><em>出错提示信息</em></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Exception in thread Thread<span class="number">-1</span>:</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">&quot;D:\py\lib\threading.py&quot;</span>, line <span class="number">917</span>, in _bootstrap_inner</span><br><span class="line">    self.run()</span><br><span class="line">  File <span class="string">&quot;D:\py\lib\threading.py&quot;</span>, line <span class="number">865</span>, in run</span><br><span class="line">    self._target(*self._args, **self._kwargs)</span><br><span class="line">TypeError: get_picurl() takes <span class="number">2</span> positional arguments but <span class="number">30</span> were given</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-2-改用了Pool线程操作后"><a href="#2-2-改用了Pool线程操作后" class="headerlink" title="2.2 改用了Pool线程操作后"></a>2.2 改用了Pool线程操作后</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/02/04/Learn-Hexo/" rel="prev" title="Hexo搭建博客的基本知识">
+      <i class="fa fa-chevron-left"></i> Hexo搭建博客的基本知识
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/02/08/Learn-Spider%E7%88%AC%E8%99%AB/" rel="next" title="Spider-Note">
+      Spider-Note <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E6%96%B0%E7%89%88-pycharm-%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">1. 新版 pycharm 问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98-1%EF%BC%9Apycharm-%E5%8F%8C%E5%87%BB%E6%89%93%E4%B8%8D%E5%BC%80"><span class="nav-number">1.1.</span> <span class="nav-text">问题 1：pycharm 双击打不开</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98-2%EF%BC%9Apycharm-%E6%89%93%E5%BC%80%E5%90%8E%E5%9B%9E%E6%9C%89%E4%B8%A4%E4%B8%AA%E7%AA%97%E5%8F%A3%EF%BC%8C%E8%80%8C%E4%B8%94%E4%B8%8D%E8%83%BD%E5%86%8D%E7%AA%97%E5%8F%A3%E4%B8%8A%E6%93%8D%E4%BD%9C"><span class="nav-number">1.2.</span> <span class="nav-text">问题 2：pycharm 打开后回有两个窗口，而且不能再窗口上操作</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Python%E7%9A%84%E4%B8%80%E4%BA%9BBUG"><span class="nav-number">2.</span> <span class="nav-text">2. Python的一些BUG</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-class%E4%BC%A0%E5%8F%82%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 class传参的一些问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E6%94%B9%E7%94%A8%E4%BA%86Pool%E7%BA%BF%E7%A8%8B%E6%93%8D%E4%BD%9C%E5%90%8E"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 改用了Pool线程操作后</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/yqq/anime.min.js"></script>
+  <script src="/yqq/velocity/velocity.min.js"></script>
+  <script src="/yqq/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

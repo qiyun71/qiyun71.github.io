@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/yqq/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="一款美观的可以代替power shell的软件——WindowsTerminal">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WindowsTerminal的配置">
+<meta property="og:url" content="http://example.com/2020/03/18/Learn-WT%E7%BB%88%E7%AB%AF/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="一款美观的可以代替power shell的软件——WindowsTerminal">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.sspai.com/editor/u_spencerwoo/15836861908691.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1">
+<meta property="og:image" content="http://example.com/img/sys/key.png">
+<meta property="article:published_time" content="2020-03-18T14:48:23.000Z">
+<meta property="article:modified_time" content="2022-06-08T06:16:34.413Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Windows">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.sspai.com/editor/u_spencerwoo/15836861908691.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1">
+
+<link rel="canonical" href="http://example.com/2020/03/18/Learn-WT%E7%BB%88%E7%AB%AF/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>WindowsTerminal的配置 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/03/18/Learn-WT%E7%BB%88%E7%AB%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          WindowsTerminal的配置
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-03-18 22:48:23" itemprop="dateCreated datePublished" datetime="2020-03-18T22:48:23+08:00">2020-03-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-06-08 14:16:34" itemprop="dateModified" datetime="2022-06-08T14:16:34+08:00">2022-06-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E5%8A%9B/" itemprop="url" rel="index"><span itemprop="name">学习力</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>一款美观的可以代替power shell的软件——WindowsTerminal</p>
+<span id="more"></span>
+
+<h1 id="发现"><a href="#发现" class="headerlink" title="发现"></a>发现</h1><p>偶然间看到了<a target="_blank" rel="noopener" href="https://sspai.com/post/59380">这篇文章</a>，然后发现Windows terminal(wt)真的香，以下内容都是这篇文章的具体概况（自己的垃圾理解，太过于概括，建议看原文）</p>
+<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>想要自定义一个美观的Windows terminal窗口，只需要打开Windows terminal的配置文件，即settings中设置<code>profiles.json</code>文件就可以配置了。</p>
+<h1 id="配置介绍"><a href="#配置介绍" class="headerlink" title="配置介绍"></a>配置介绍</h1><p>配置文件<code>profiles.json</code>中分为几个部分</p>
+<ul>
+<li><strong>全局属性</strong>：位于 JSON 最外侧，包含有设置亮暗主题、默认 Profile 等项目的配置</li>
+<li>**环境入口 <code>profiles</code>**：一个列表，其中包含有 Windows Terminal 下拉菜单中唤起的各种环境（比如打开 PowerShell 环境、WSL 环境或 SSH 至远程服务器的环境……）与各种环境里 Windows Terminal 的显示方案（比如字体、背景、色彩方案等）</li>
+<li>**配色主题 <code>schemes</code>**：一个配色方案列表，其中包含有 Windows Terminal 在上一项「环境入口」中可以调用的「色彩主题」</li>
+<li>**快捷键绑定 <code>keybindings</code>**：自定义快捷键</li>
+</ul>
+<p><img src="https://cdn.sspai.com/editor/u_spencerwoo/15836861908691.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" alt="profiles.json的文件格式"></p>
+<h2 id="全局属性"><a href="#全局属性" class="headerlink" title="全局属性"></a>全局属性</h2><ul>
+<li><code>&quot;defaultProfile&quot;</code>即打开wt默认打开的环境,相对应得就是底下得<code>&quot;guid&quot;</code>后面的唯一标识码</li>
+</ul>
+<ul>
+<li><p>Terminal 亮暗主题设置 <code>&quot;requestedTheme&quot;</code>：可以为 <code>&quot;system&quot;</code>（跟随系统）、<code>&quot;light&quot;</code> 或 <code>&quot;dark&quot;</code></p>
+</li>
+<li><p>Terminal 初始大小：<code>&quot;initialCols&quot;</code> 和 <code>&quot;initialRows&quot;</code></p>
+</li>
+</ul>
+<h2 id="profiles"><a href="#profiles" class="headerlink" title="profiles"></a>profiles</h2><p>可以看到刚下载下来的已经配置好的窗口有三个：PowerShell、cmd以及Azure Cloud Shell</p>
+<p>在每一个窗口的配置中有着几个属性：</p>
+<ul>
+<li><code>&quot;guid&quot;</code>唯一标识码 、<code>&quot;name&quot;</code>窗口名称、<code>&quot;commandline&quot;</code>打开的命令行</li>
+<li>接下来就是自定义的属性（基础）<ul>
+<li><code>&quot;background&quot;</code>背景颜色：<code>&quot;#000000&quot;</code></li>
+<li><code>&quot;acrylicOpacity&quot;</code>亚克力效果透明度：<code>0.6</code></li>
+<li><code>&quot;useAcrylic&quot;</code>亚克力效果：<code>true</code></li>
+<li><code>&quot;colorScheme&quot;</code>底下的schemes中配置的颜色名字：<code>&quot;name&quot;</code></li>
+<li><code>&quot;backgroundImage&quot;</code>背景图片，放在<code>C:\Users\&#123;用户名&#125;\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe</code>目录的<code>RoamingState</code>文件夹中假如命名为<code>back.png</code>,然后配置：<code>&quot;ms-appdata:///roaming/back.png&quot;</code></li>
+<li><code>&quot;backgroundImageStretchMode&quot;</code><em>按比例放大</em>:<code>&quot;uniformToFill&quot;</code></li>
+<li><code>&quot;backgroundImageOpacity&quot;</code>图片的透明度:<code>0.6</code></li>
+<li><code>&quot;foreground&quot;</code>字体颜色 : <code>&quot;#e03c8a&quot;</code>，<code>fontFace</code> 字体样式:<code>Consolas</code>, <code>fontSize</code> 字体大小:<code>16</code></li>
+<li><code>&quot;icon&quot;</code> 添加小图标: <code>&quot;ms-appdata:///roaming/sshicon.ico&quot;</code>也是放在<code>RoamingState</code>中</li>
+<li>进一步的美化<ul>
+<li><code>&quot;cursorColor&quot; </code>光标颜色: <code>&quot;#7EA2B4&quot;</code></li>
+<li><code>&quot;cursorShape&quot; </code>光标形状: <code>&quot;bar&quot;</code></li>
+<li>更进一步具体配置看<a target="_blank" rel="noopener" href="https://www.baidu.com/">百度上的大佬</a>_,或者参考<a target="_blank" rel="noopener" href="https://github.com/mbadolato/iTerm2-Color-Schemes">schemes</a>中的配置可以在<a target="_blank" rel="noopener" href="https://iterm2colorschemes.com/">官网</a>预览</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>详情可以参考我的配置文件</strong></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;$schema&quot;</span><span class="punctuation">:</span> <span class="string">&quot;https://aka.ms/terminal-profiles-schema&quot;</span><span class="punctuation">,</span></span><br><span class="line"></span><br><span class="line">    <span class="attr">&quot;defaultProfile&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&#123;61c54bbd-c2c6-5271-96e7-009a87ff44bf&#125;&quot;</span><span class="punctuation">,</span></span><br><span class="line"></span><br><span class="line">    <span class="attr">&quot;requestedTheme&quot;</span><span class="punctuation">:</span> <span class="string">&quot;light&quot;</span><span class="punctuation">,</span></span><br><span class="line"></span><br><span class="line">    <span class="attr">&quot;profiles&quot;</span><span class="punctuation">:</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">    </span><br><span class="line">        <span class="attr">&quot;defaults&quot;</span><span class="punctuation">:</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="comment">// Put settings here that you want to apply to all profiles</span></span><br><span class="line">        <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;list&quot;</span><span class="punctuation">:</span></span><br><span class="line">        <span class="punctuation">[</span></span><br><span class="line">            <span class="punctuation">&#123;</span></span><br><span class="line">                <span class="comment">// Make changes here to the powershell.exe profile</span></span><br><span class="line">                <span class="attr">&quot;guid&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&#123;61c54bbd-c2c6-5271-96e7-009a87ff44bf&#125;&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;PowerShell&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;commandline&quot;</span><span class="punctuation">:</span> <span class="string">&quot;powershell.exe&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;hidden&quot;</span><span class="punctuation">:</span> <span class="keyword">false</span><span class="punctuation">,</span></span><br><span class="line">            <span class="comment">// &quot;profiles&quot;: [ ... ] 项目中 PowerShell 环境的配置</span></span><br><span class="line">            </span><br><span class="line">                <span class="comment">// &quot;background&quot;: &quot;#013456&quot;,</span></span><br><span class="line">                <span class="comment">// &quot;acrylicOpacity&quot;: 0.8,  // 亚克力效果透明度</span></span><br><span class="line">                <span class="comment">// &quot;useAcrylic&quot;: true  // 亚克力效果</span></span><br><span class="line">                <span class="comment">// &quot;colorScheme&quot;: &quot;name&quot;,//schemes中配置的主题颜色</span></span><br><span class="line">                <span class="attr">&quot;backgroundImage&quot;</span><span class="punctuation">:</span> <span class="string">&quot;ms-appdata:///roaming/back.png&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;backgroundImageStretchMode&quot;</span><span class="punctuation">:</span> <span class="string">&quot;uniformToFill&quot;</span><span class="punctuation">,</span> <span class="comment">// 按比例放大</span></span><br><span class="line">                <span class="attr">&quot;backgroundImageOpacity&quot;</span><span class="punctuation">:</span> <span class="number">0.6</span> <span class="comment">//图片透明的</span></span><br><span class="line">            <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="punctuation">&#123;</span></span><br><span class="line">                <span class="comment">// Make changes here to the cmd.exe profile</span></span><br><span class="line">                <span class="attr">&quot;guid&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&#123;0caa0dad-35be-5f56-a8ff-afceeeaa6101&#125;&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;cmd&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;commandline&quot;</span><span class="punctuation">:</span> <span class="string">&quot;cmd.exe&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;hidden&quot;</span><span class="punctuation">:</span> <span class="keyword">false</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;backgroundImage&quot;</span><span class="punctuation">:</span> <span class="string">&quot;ms-appdata:///roaming/cmd.jpg&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;backgroundImageStretchMode&quot;</span><span class="punctuation">:</span> <span class="string">&quot;uniformToFill&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;backgroundImageOpacity&quot;</span><span class="punctuation">:</span> <span class="number">0.6</span></span><br><span class="line">            <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="punctuation">&#123;</span></span><br><span class="line">                <span class="attr">&quot;guid&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&#123;b453ae62-4e3d-5e58-b989-0a998ec441b8&#125;&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;hidden&quot;</span><span class="punctuation">:</span> <span class="keyword">false</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Azure Cloud Shell&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;source&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Windows.Terminal.Azure&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;backgroundImage&quot;</span><span class="punctuation">:</span> <span class="string">&quot;ms-appdata:///roaming/azu.jpg&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;backgroundImageStretchMode&quot;</span><span class="punctuation">:</span> <span class="string">&quot;uniformToFill&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;backgroundImageOpacity&quot;</span><span class="punctuation">:</span> <span class="number">0.6</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;foreground&quot;</span><span class="punctuation">:</span> <span class="string">&quot;#e03c8a&quot;</span>  <span class="comment">//字体颜色 fontFace 字体样式, fontSize 字体大小</span></span><br><span class="line">            <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="punctuation">&#123;</span></span><br><span class="line">                <span class="attr">&quot;guid&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&#123;a060905f-d089-43d9-9422-cd748e7f0230&#125;&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;SSH-aliyun&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;commandline&quot;</span><span class="punctuation">:</span> <span class="string">&quot;powershell.exe ssh yq@123.56.22.122&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;icon&quot;</span><span class="punctuation">:</span> <span class="string">&quot;ms-appdata:///roaming/sshicon.ico&quot;</span><span class="punctuation">,</span>  <span class="comment">// 添加小图标</span></span><br><span class="line">                <span class="attr">&quot;backgroundImage&quot;</span><span class="punctuation">:</span> <span class="string">&quot;ms-appdata:///roaming/ssh.jpg&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;backgroundImageStretchMode&quot;</span><span class="punctuation">:</span> <span class="string">&quot;uniformToFill&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;backgroundImageOpacity&quot;</span><span class="punctuation">:</span> <span class="number">0.6</span></span><br><span class="line">            <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="punctuation">&#123;</span></span><br><span class="line">                <span class="attr">&quot;acrylicOpacity&quot;</span> <span class="punctuation">:</span> <span class="number">0.75</span><span class="punctuation">,</span>               <span class="comment">//毛玻璃透明效果透明度</span></span><br><span class="line">                <span class="attr">&quot;closeOnExit&quot;</span> <span class="punctuation">:</span> <span class="keyword">true</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;commandline&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;bash.exe&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;cursorColor&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;#7EA2B4&quot;</span><span class="punctuation">,</span>           <span class="comment">//光标颜色</span></span><br><span class="line">                <span class="attr">&quot;cursorShape&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;bar&quot;</span><span class="punctuation">,</span>               <span class="comment">//光标形状</span></span><br><span class="line">                <span class="attr">&quot;fontFace&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;Consolas&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;fontSize&quot;</span> <span class="punctuation">:</span> <span class="number">16</span><span class="punctuation">,</span>                      <span class="comment">//字体大小</span></span><br><span class="line">                <span class="attr">&quot;guid&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;&#123;019f913c-595c-4498-a934-e01e71cd4cbf&#125;&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;historySize&quot;</span> <span class="punctuation">:</span> <span class="number">9001</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;icon&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;ms-appdata:///roaming/bashicon.ico&quot;</span><span class="punctuation">,</span> <span class="comment">//图标地址</span></span><br><span class="line">                <span class="attr">&quot;name&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;Git-bash&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;padding&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;0, 0, 0, 0&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;snapOnInput&quot;</span> <span class="punctuation">:</span> <span class="keyword">true</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;startingDirectory&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;%USERPROFILE%&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;useAcrylic&quot;</span> <span class="punctuation">:</span> <span class="keyword">true</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;backgroundImage&quot;</span><span class="punctuation">:</span> <span class="string">&quot;ms-appdata:///roaming/bash.jpg&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;backgroundImageStretchMode&quot;</span><span class="punctuation">:</span> <span class="string">&quot;uniformToFill&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;backgroundImageOpacity&quot;</span><span class="punctuation">:</span> <span class="number">0.6</span></span><br><span class="line">            <span class="punctuation">&#125;</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Add custom color schemes to this array</span></span><br><span class="line">    <span class="attr">&quot;schemes&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Add any keybinding overrides to this array.</span></span><br><span class="line">    <span class="comment">// To unbind a default keybinding, set the command to &quot;unbound&quot;</span></span><br><span class="line">    <span class="attr">&quot;keybindings&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="punctuation">&#123;</span> <span class="attr">&quot;command&quot;</span><span class="punctuation">:</span> <span class="string">&quot;closePane&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;keys&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;ctrl+w&quot;</span><span class="punctuation">]</span> <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="punctuation">&#123;</span> <span class="attr">&quot;command&quot;</span><span class="punctuation">:</span> <span class="string">&quot;closeWindow&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;keys&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;alt+f4&quot;</span><span class="punctuation">]</span> <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="punctuation">&#123;</span> <span class="attr">&quot;command&quot;</span><span class="punctuation">:</span> <span class="string">&quot;copy&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;keys&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;ctrl+c&quot;</span><span class="punctuation">]</span> <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="punctuation">&#123;</span> <span class="attr">&quot;command&quot;</span><span class="punctuation">:</span> <span class="string">&quot;paste&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;keys&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;ctrl+v&quot;</span><span class="punctuation">]</span> <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="punctuation">&#123;</span> <span class="attr">&quot;command&quot;</span><span class="punctuation">:</span> <span class="string">&quot;newTab&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;keys&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;ctrl+t&quot;</span><span class="punctuation">]</span> <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="schemes"><a href="#schemes" class="headerlink" title="schemes"></a>schemes</h2><p><a target="_blank" rel="noopener" href="https://iterm2colorschemes.com/">scheme官网</a>有着最丰富的颜色配置</p>
+<p>参照着schemes的配置学习如何自定义配置</p>
+<p>也可以<a target="_blank" rel="noopener" href="https://www.cnblogs.com/KiraYoshikage/p/11443741.html">参考大佬学习</a></p>
+<h2 id="keybindings快捷键"><a href="#keybindings快捷键" class="headerlink" title="keybindings快捷键"></a><code>keybindings</code>快捷键</h2><p><img src="/img/sys/key.png" alt="快捷键配置"></p>
+<blockquote>
+<p>参考文档：<a target="_blank" rel="noopener" href="https://sspai.com/post/59380">少数派</a></p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Windows/" rel="tag"># Windows</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/15/Learn-Linux/" rel="prev" title="Linux-Note">
+      <i class="fa fa-chevron-left"></i> Linux-Note
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/21/Make-Python/" rel="next" title="自己写的几个python小程序">
+      自己写的几个python小程序 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%91%E7%8E%B0"><span class="nav-number">1.</span> <span class="nav-text">发现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-number">2.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E4%BB%8B%E7%BB%8D"><span class="nav-number">3.</span> <span class="nav-text">配置介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E5%B1%9E%E6%80%A7"><span class="nav-number">3.1.</span> <span class="nav-text">全局属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#profiles"><span class="nav-number">3.2.</span> <span class="nav-text">profiles</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#schemes"><span class="nav-number">3.3.</span> <span class="nav-text">schemes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#keybindings%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="nav-number">3.4.</span> <span class="nav-text">keybindings快捷键</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/yqq/anime.min.js"></script>
+  <script src="/yqq/velocity/velocity.min.js"></script>
+  <script src="/yqq/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

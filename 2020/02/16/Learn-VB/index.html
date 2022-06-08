@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/yqq/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="VB 语言学习笔记  参考教程 _ Visual Basic 是一种相当容易学习的高阶程序语言，它可使你编写几乎任何的程序_">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Learn-VB">
+<meta property="og:url" content="http://example.com/2020/02/16/Learn-VB/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="VB 语言学习笔记  参考教程 _ Visual Basic 是一种相当容易学习的高阶程序语言，它可使你编写几乎任何的程序_">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/img/VB/VB2_1.jpg">
+<meta property="og:image" content="http://example.com/img/VB/VB2_2.jpg">
+<meta property="article:published_time" content="2020-02-16T05:32:49.000Z">
+<meta property="article:modified_time" content="2020-05-07T13:43:47.481Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="VB">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/VB/VB2_1.jpg">
+
+<link rel="canonical" href="http://example.com/2020/02/16/Learn-VB/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Learn-VB | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/02/16/Learn-VB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Learn-VB
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-16 13:32:49" itemprop="dateCreated datePublished" datetime="2020-02-16T13:32:49+08:00">2020-02-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-05-07 21:43:47" itemprop="dateModified" datetime="2020-05-07T21:43:47+08:00">2020-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E5%8A%9B/" itemprop="url" rel="index"><span itemprop="name">学习力</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><strong>VB 语言学习笔记</strong></p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.vbtutor.net/chinese/vbtutor_Chinese.html">参考教程</a> _ Visual Basic 是一种相当容易学习的高阶程序语言，它可使你编写几乎任何的程序_</p>
+</blockquote>
+<span id="more"></span>
+
+<h1 id="1-第一个-VB-程序Hello-World"><a href="#1-第一个-VB-程序Hello-World" class="headerlink" title="1. 第一个 VB 程序Hello World"></a>1. 第一个 VB 程序<code>Hello World</code></h1><figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Private</span> <span class="keyword">Sub</span> Form_Load ( )</span><br><span class="line"></span><br><span class="line">Form1.show</span><br><span class="line"></span><br><span class="line">Print <span class="string">&quot;Hello World&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="1-1-几个小例子"><a href="#1-1-几个小例子" class="headerlink" title="1.1 几个小例子"></a>1.1 几个小例子</h2><figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Private</span> <span class="keyword">Sub</span> Form_Activate ( )</span><br><span class="line"></span><br><span class="line">Print <span class="number">20</span> + <span class="number">10</span></span><br><span class="line">Print <span class="number">20</span> - <span class="number">10</span></span><br><span class="line">Print <span class="number">20</span> * <span class="number">10</span></span><br><span class="line">Print <span class="number">20</span> / <span class="number">10</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line"></span><br><span class="line"># <span class="built_in">or</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">Private</span> <span class="keyword">Sub</span> Form_Activate ( )</span><br><span class="line"></span><br><span class="line">Print <span class="number">20</span> + <span class="number">10</span>, <span class="number">20</span> ?<span class="number">10</span>, <span class="number">20</span> * <span class="number">10</span>, <span class="number">20</span> / <span class="number">10</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line"></span><br><span class="line"># <span class="built_in">or</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">Private</span> <span class="keyword">Sub</span> Form_Activate ( )</span><br><span class="line"></span><br><span class="line">x = <span class="number">20</span></span><br><span class="line">y = <span class="number">10</span></span><br><span class="line">Print x + y</span><br><span class="line">Print x - y</span><br><span class="line">Print x * y</span><br><span class="line">Print x / y</span><br><span class="line"></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="1-2-让程序窗口固定不变"><a href="#1-2-让程序窗口固定不变" class="headerlink" title="1.2 让程序窗口固定不变"></a>1.2 让程序窗口固定不变</h2><p><strong>属性窗口</strong> 设置为<br><code>BorderStyle</code> : <code>Fixed Single</code><br><code>MaxButton</code> :   <code>False</code><br><code>MinButton</code> :    <code>True</code>    </p>
+<h1 id="2-控件-amp-控件的属性"><a href="#2-控件-amp-控件的属性" class="headerlink" title="2. 控件&amp;控件的属性"></a>2. 控件&amp;控件的属性</h1><h2 id="2-1-控件的属性"><a href="#2-1-控件的属性" class="headerlink" title="2.1 控件的属性"></a>2.1 控件的属性</h2><ul>
+<li>可以在属性窗口里修改<br><img src="/img/VB/VB2_1.jpg" alt="属性窗口"></li>
+<li>也可以在代码中实现修改</li>
+</ul>
+<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Private</span> <span class="keyword">Sub</span> Form_Load()</span><br><span class="line">Form1.Show</span><br><span class="line">Form1.BackColor = <span class="number">&amp;H000000FF&amp;</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line">## 窗口背景颜色</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Private</span> <span class="keyword">Sub</span> Form_Load()</span><br><span class="line">Shape1.Shape = <span class="number">3</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line">## shape控件形状</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-2-常见控件"><a href="#2-2-常见控件" class="headerlink" title="2.2 常见控件"></a>2.2 常见控件</h2><p><img src="/img/VB/VB2_2.jpg" alt="控件介绍"></p>
+<h3 id="2-2-1-文本框-TextBox"><a href="#2-2-1-文本框-TextBox" class="headerlink" title="2.2.1 文本框(TextBox)"></a>2.2.1 文本框(TextBox)</h3><p>文本框是是用来接收用户输入的控件，以及作为显示器输出。它可以处理字符串（纯文字）和数字数据，但不能处理图象或图片。一个文本框中的文字可以用 Val 函数来转换为数字和数据</p>
+<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Private</span> <span class="keyword">Sub</span> Command1_Click()</span><br><span class="line"></span><br><span class="line">‘把文本框<span class="number">1</span>和文本框<span class="number">2</span>的值加起来</span><br><span class="line"></span><br><span class="line">Sum = Val(Text1.<span class="keyword">Text</span>) + Val(Text2.<span class="keyword">Text</span>)</span><br><span class="line"></span><br><span class="line">‘中标签上显示答案</span><br><span class="line"></span><br><span class="line">Label1.Caption = Sum</span><br><span class="line"></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-2-标签-Label"><a href="#2-2-2-标签-Label" class="headerlink" title="2.2.2 标签(Label)"></a>2.2.2 标签(Label)</h3><ul>
+<li>标签是一个非常有用处的控件，因为它不仅是用来提供指示和指导，它也可以被用来显示输出。它的一个最重要的特性是标题</li>
+<li>利用语法 Label.Caption ，它可以显示文字和数字数据。你可以在属性窗口或在运行时改变它的标题</li>
+</ul>
+<h3 id="2-2-3-命令按钮-CommandButton"><a href="#2-2-3-命令按钮-CommandButton" class="headerlink" title="2.2.3 命令按钮(CommandButton)"></a>2.2.3 命令按钮(CommandButton)</h3><p>命令按钮是一个很重要的控件，因为它被户点击它时可以执行命令去运作一个程序</p>
+<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Private</span> <span class="keyword">Sub</span> Command1_Click ()</span><br><span class="line"></span><br><span class="line">Statements</span><br><span class="line"></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-4-图片框-PictureBox"><a href="#2-2-4-图片框-PictureBox" class="headerlink" title="2.2.4 图片框(PictureBox)"></a>2.2.4 图片框(PictureBox)</h3><p>图片框可用来处理图形。你可以下载一个图片，在设计阶段就在属性窗口从选定的文件夹选择图片。您也可以在程序运行时加载图片，其指令是 LoadPicture</p>
+<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Picture1.Picture=LoadPicture (<span class="string">&quot;C:\VB program\Images\grape.gif&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-5-图像方框-Image"><a href="#2-2-5-图像方框-Image" class="headerlink" title="2.2.5 图像方框(Image)"></a>2.2.5 图像方框(Image)</h3><p>图像方框 是另一个处理图象和照片的控件。它和图片框的功能几乎是相同的。不过，其中有一个重大的区别，它可以调整大小,它也可以用 LoadPicture 方法来加载图片</p>
+<h3 id="2-2-6-列表框-ListBox"><a href="#2-2-6-列表框-ListBox" class="headerlink" title="2.2.6 列表框(ListBox)"></a>2.2.6 列表框(ListBox)</h3><p>列表框的功能是陈列一个项目清单以便用户可以通过点击来选择项目。如果要增加项目，我们可以利用 additem 方法</p>
+<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Private</span> <span class="keyword">Sub</span> Form_Load ( )</span><br><span class="line"></span><br><span class="line">List1.AddItem “第一课”</span><br><span class="line"></span><br><span class="line">List1.AddItem “第二课”</span><br><span class="line"></span><br><span class="line">List1.AddItem “第三课”</span><br><span class="line"></span><br><span class="line">List1.AddItem “第四课”</span><br><span class="line"></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-7-组合框-ComboBox"><a href="#2-2-7-组合框-ComboBox" class="headerlink" title="2.2.7 组合框(ComboBox)"></a>2.2.7 组合框(ComboBox)</h3><p>组合框展现一个下拉式项目清单。用户可以通过点击来选择项目，从名单上。为了增添项目名单，我们可以利用 AddItem &#96;这方法</p>
+<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Private</span> <span class="keyword">Sub</span> Form_Load ( )</span><br><span class="line"></span><br><span class="line">Combo1.AddItem “Item1”</span><br><span class="line"></span><br><span class="line">Combo1.AddItem “Item2”</span><br><span class="line"></span><br><span class="line">Combo1.AddItem “Item3”</span><br><span class="line"></span><br><span class="line">Combo1.AddItem “Item4”</span><br><span class="line"></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-8-复选框-CheckBox"><a href="#2-2-8-复选框-CheckBox" class="headerlink" title="2.2.8 复选框(CheckBox)"></a>2.2.8 复选框(CheckBox)</h3><ul>
+<li>复选框让用户可以选择或取消选择一个选项。当复选框被选中时，其值是设定为 1。如不被选中，其值设定为 0_</li>
+<li>你可以用程序来设定复选框的属性，如键入 check1.value &#x3D; 1 ，就表示它被选中，check1.value &#x3D; 0 就表示它不被选中，并用它来执行某些动作</li>
+</ul>
+<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Private</span> <span class="keyword">Sub</span> Check1_Click ()</span><br><span class="line"></span><br><span class="line"><span class="keyword">If</span> Check1.Value = <span class="number">0</span> <span class="keyword">Then</span></span><br><span class="line"></span><br><span class="line">Form1.BackColor = vbRed</span><br><span class="line"></span><br><span class="line"><span class="keyword">ElseIf</span> Check1.Value = <span class="number">1</span> <span class="keyword">Then</span></span><br><span class="line"></span><br><span class="line">Form1.BackColor = vbBlue</span><br><span class="line"></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-9-选项框-OptionButton"><a href="#2-2-9-选项框-OptionButton" class="headerlink" title="2.2.9 选项框(OptionButton)"></a>2.2.9 选项框(OptionButton)</h3><p>选项框也可以让用户自由选择一个项目。但是，在同一时间中只有一个选项框可被选择。当一个选项框被选定时，其价值被设定为”True”时，反之则其价值被设定为”False</p>
+<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Private</span> <span class="keyword">Sub</span> Option1_Click ( )</span><br><span class="line"></span><br><span class="line">Shape1.Shape = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">Private</span> <span class="keyword">Sub</span> Option2_Click()</span><br><span class="line"></span><br><span class="line">Shape1.Shape = <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">Private</span> <span class="keyword">Sub</span> Option3_Click()</span><br><span class="line"></span><br><span class="line">Shape1.Shape = <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">Private</span> <span class="keyword">Sub</span> Option4_Click()</span><br><span class="line"></span><br><span class="line">Shape1.Shape = <span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">Private</span> <span class="keyword">Sub</span> Option5_Click()</span><br><span class="line"></span><br><span class="line">Shape1.Shape = <span class="number">4</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">Private</span> <span class="keyword">Sub</span> Option6_Click()</span><br><span class="line"></span><br><span class="line">Shape1.Shape = <span class="number">5</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-10-驱动器列表框-DriveListBox"><a href="#2-2-10-驱动器列表框-DriveListBox" class="headerlink" title="2.2.10 驱动器列表框(DriveListBox)"></a>2.2.10 驱动器列表框(DriveListBox)</h3><p>驱动器列表框，是用来显示在您的计算机上所有的驱动器。当你把这个控件纳入表格然后去运行程序，你将能够选择不同的驱动器</p>
+<h3 id="2-2-11-目录列表框-DirListBox"><a href="#2-2-11-目录列表框-DirListBox" class="headerlink" title="2.2.11 目录列表框(DirListBox)"></a>2.2.11 目录列表框(DirListBox)</h3><p>目录列表框是用来显示清单目录或文件夹中选择一个驱动器。当你把这个控件纳入表格然后去运行程序，你将能够从所选驱动器中选择不同的目录</p>
+<h3 id="2-2-12-文件列表框-FileListBox"><a href="#2-2-12-文件列表框-FileListBox" class="headerlink" title="2.2.12 文件列表框(FileListBox)"></a>2.2.12 文件列表框(FileListBox)</h3><p>文件列表框是用来显示文件列表在选定的目录或文件夹。当你把这个控件纳入表格然后去运行程序，你将能够从文件的列表中选择一个目录</p>
+<h1 id="3-编写-VB-的程序代码"><a href="#3-编写-VB-的程序代码" class="headerlink" title="3. 编写 VB 的程序代码"></a>3. 编写 VB 的程序代码</h1><figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Private</span> <span class="keyword">Sub</span> Command1_Click</span><br><span class="line">  程序代码</span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure>
+
+<p><em>Sub 实际上是整个程序的一部分, 也称为子程序</em><br>用来设定一个对象的属性或传递价值于它的语法是：<code>object.property</code> <em>对象和属性是以一个点来分开</em><br>举例</p>
+<ul>
+<li>form1.show 的意思是显示表 1</li>
+<li>label1.visible &#x3D;true 的意思是把 label1 设置为可被显示</li>
+<li>Text1.text &#x3D; “ VB6” ，目的就是要把 VB6 显示于 text1 的文本框中</li>
+<li>Text2.text &#x3D; 100 ，是把 100 的数目显示于 text2 文本框中</li>
+<li>Timer1.enabled &#x3D;false，是要禁用 Timer1 计时器</li>
+</ul>
+<p><strong>几个例子</strong></p>
+<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Private</span> <span class="keyword">Sub</span> Command1_click</span><br><span class="line"></span><br><span class="line">Label1.Visible=<span class="literal">false</span></span><br><span class="line"></span><br><span class="line">Label2.Visible=<span class="literal">True</span></span><br><span class="line"></span><br><span class="line">Text1.<span class="keyword">Text</span>=”你是正确的!”</span><br><span class="line"></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">sub</span></span><br><span class="line">----</span><br><span class="line"><span class="keyword">Private</span> <span class="keyword">Sub</span> Command1_click</span><br><span class="line"></span><br><span class="line">Label1.Caption=” 欢迎”</span><br><span class="line"></span><br><span class="line">Image1.visible=<span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">sub</span></span><br><span class="line">----</span><br><span class="line"><span class="keyword">Private</span> <span class="keyword">Sub</span> Command1_click</span><br><span class="line"></span><br><span class="line">Pictuire1.Show=<span class="literal">true</span></span><br><span class="line"></span><br><span class="line">Timer1.Enabled=<span class="literal">True</span></span><br><span class="line"></span><br><span class="line">Lable1.Caption=”开始计数“</span><br><span class="line"></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">sub</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>两个重要的 VB 函数：VAL 和 STR</strong><br><em>VAL 的作用把键入文本框的文字转换成数值， 而 STR 刚好相反，它是把数值转换成字串</em></p>
+<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Private</span> <span class="keyword">Sub</span> Form_Activate()</span><br><span class="line"></span><br><span class="line">  Text3.<span class="keyword">text</span>=text1.<span class="keyword">text</span>+text2.<span class="keyword">text</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line"># 输入 <span class="number">12</span> ， <span class="number">3</span></span><br><span class="line"># 得到 <span class="number">123</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Private</span> <span class="keyword">Sub</span> Form_Activate()</span><br><span class="line"></span><br><span class="line">  Text3.<span class="keyword">text</span>=val(text1.<span class="keyword">text</span>)+val(text2.<span class="keyword">text</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line"># 输入 <span class="number">12</span> ，<span class="number">3</span></span><br><span class="line"># 得到 <span class="number">15</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="4-VB-数据处理"><a href="#4-VB-数据处理" class="headerlink" title="4. VB 数据处理"></a>4. VB 数据处理</h1><h2 id="4-1-VB-基本数据"><a href="#4-1-VB-基本数据" class="headerlink" title="4.1 VB 基本数据"></a>4.1 VB 基本数据</h2><h3 id="4-1-1-数字数据"><a href="#4-1-1-数字数据" class="headerlink" title="4.1.1 数字数据"></a>4.1.1 数字数据</h3><p>数字数据是由数目构成的数据，可以进行数字运算，如加，减，乘，除等</p>
+<table>
+<thead>
+<tr>
+<th align="center">类型</th>
+<th align="center">取值范围</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Byte</td>
+<td align="center">0 至 255</td>
+</tr>
+<tr>
+<td align="center">Integer</td>
+<td align="center">-32,768 至 32,767</td>
+</tr>
+<tr>
+<td align="center">Long</td>
+<td align="center">-2,147,483,648 至 2,147,483,648</td>
+</tr>
+<tr>
+<td align="center">Single</td>
+<td align="center">-3.402823E+38 至 -1.401298E-45 负 &amp;&amp;&amp;&amp; 1.401298E-45 至 3.402823E+38 正数.</td>
+</tr>
+<tr>
+<td align="center">Double</td>
+<td align="center">-1.79769313486232e+308 至 -4.94065645841247E-324 负数 &amp;&amp;&amp;&amp; 4.94065645841247E-324 至 1.79769313486232e+308 正数.</td>
+</tr>
+<tr>
+<td align="center">Currency</td>
+<td align="center">-922,337,203,685,477.5808 至 922,337,203,685,477.5807</td>
+</tr>
+<tr>
+<td align="center">Decimal</td>
+<td align="center">+&#x2F;- 79,228,162,514,264,337,593,543,950,335 如果没有小数点 &amp;&amp;&amp;&amp; +&#x2F;- 7.9228162514264337593543950335 (28 个小数点）.</td>
+</tr>
+</tbody></table>
+<h3 id="4-1-2-非数据类型"><a href="#4-1-2-非数据类型" class="headerlink" title="4.1.2 非数据类型"></a>4.1.2 非数据类型</h3><table>
+<thead>
+<tr>
+<th align="center">类型</th>
+<th align="center">范围</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">String(fixed length)</td>
+<td align="center">1 to 65,400 字符</td>
+</tr>
+<tr>
+<td align="center">String(variable length)</td>
+<td align="center">0 to 20 亿 字符</td>
+</tr>
+<tr>
+<td align="center">Date</td>
+<td align="center">公元 100 年正月一日至 9999 年十二月三十一日</td>
+</tr>
+<tr>
+<td align="center">Boolean</td>
+<td align="center">True 或 False（对或错）</td>
+</tr>
+<tr>
+<td align="center">Object</td>
+<td align="center">任何嵌入对象</td>
+</tr>
+<tr>
+<td align="center">Variant(numeric)</td>
+<td align="center">任何价值大如 Double</td>
+</tr>
+<tr>
+<td align="center">Variant(text)</td>
+<td align="center">与 variable-length string 相同</td>
+</tr>
+</tbody></table>
+<h3 id="4-1-3-后缀文的符号"><a href="#4-1-3-后缀文的符号" class="headerlink" title="4.1.3 后缀文的符号"></a>4.1.3 后缀文的符号</h3><p>后缀文是让你把数字转让给一个数据. 在某些情况下，我们需要在一个字的后面增加一个后缀文，使 VB 可以计算得更准确</p>
+<table>
+<thead>
+<tr>
+<th align="center">后缀</th>
+<th align="center">数据类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">&amp;</td>
+<td align="center">Long</td>
+</tr>
+<tr>
+<td align="center">!</td>
+<td align="center">Single</td>
+</tr>
+<tr>
+<td align="center">#</td>
+<td align="center">Double</td>
+</tr>
+<tr>
+<td align="center">@</td>
+<td align="center">Currency</td>
+</tr>
+</tbody></table>
+<p>此外，我们需要把字符串文字用开关引号 “ “ 围起来，日期和时间则用#标志围起来。字符串可以包含任何字符，包括数字</p>
+<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">memberName=<span class="string">&quot;Turban, John.&quot;</span></span><br><span class="line">TelNumber=<span class="string">&quot;1800-900-888-777&quot;</span></span><br><span class="line">LastDay=#<span class="number">31</span>-Dec-<span class="number">00</span>#</span><br><span class="line">ExpTime=<span class="literal">#12:00 am#</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="4-2-变数的管理-变量"><a href="#4-2-变数的管理-变量" class="headerlink" title="4.2 变数的管理(变量)"></a>4.2 变数的管理(变量)</h2><h3 id="4-2-1-变数名称"><a href="#4-2-1-变数名称" class="headerlink" title="4.2.1 变数名称"></a>4.2.1 变数名称</h3><p><strong>为变数命名时的规则</strong></p>
+<ul>
+<li>它必须小于 255 个字符</li>
+<li>不得有间隔</li>
+<li>不能以号码来开始</li>
+<li>不能用点</li>
+</ul>
+<h3 id="4-2-2-变数的宣示"><a href="#4-2-2-变数的宣示" class="headerlink" title="4.2.2 变数的宣示"></a>4.2.2 变数的宣示</h3><p><code>Dim variableName as DataType</code></p>
+<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Dim</span> password <span class="keyword">As</span> <span class="type">String</span></span><br><span class="line"><span class="keyword">Dim</span> yourName <span class="keyword">As</span> <span class="type">String</span></span><br><span class="line"><span class="keyword">Dim</span> firstnum <span class="keyword">As</span> <span class="type">Integer</span></span><br><span class="line"><span class="keyword">Dim</span> secondnum <span class="keyword">As</span> <span class="type">Integer</span></span><br><span class="line"><span class="keyword">Dim</span> total <span class="keyword">As</span> <span class="type">Integer</span></span><br><span class="line"><span class="keyword">Dim</span> doDate <span class="keyword">As</span> <span class="type">Date</span></span><br><span class="line"></span><br><span class="line"># <span class="built_in">or</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">Dim</span> password <span class="keyword">As</span> <span class="type">String</span>,  yourName <span class="keyword">As</span> <span class="type">String</span>, firstnum <span class="keyword">As</span> <span class="type">Integer</span>,.............</span><br></pre></td></tr></table></figure>
+
+<p>假如我们没有特别指明数据类型， VB 将自动宣告变数的类型<br>要宣示字符串，有两种可能的方式，一为可变长度的字符串，另一个为固定长度字符串。为可变长度的字符串，只是用同样的格式<br>对于固定长度字符串，你必须使用如下的格式:Dim VariableName as String _ n<br>如：<code>Dim yourName as String _ 10</code></p>
+<h2 id="4-3-VB-的常数和变数"><a href="#4-3-VB-的常数和变数" class="headerlink" title="4.3 VB 的常数和变数"></a>4.3 VB 的常数和变数</h2><h3 id="4-3-1-常数"><a href="#4-3-1-常数" class="headerlink" title="4.3.1 常数"></a>4.3.1 常数</h3><p>常数代表固定不变的数据，它可能是数字或文字。在使用常数时，我们必须预先宣示它们<br>宣示常数的格式是：<code>Const constantname As datatype=initializer</code><br>constantname 是我们自己制定的名称，datatype 是资料类型而 initializer 则是初始设定值</p>
+<p>如下例子</p>
+<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Const</span>  Num  <span class="keyword">As</span> <span class="type">Integer</span> = <span class="number">9.8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">Const</span> Pi <span class="keyword">As</span> <span class="type">Single</span>  = <span class="number">3.142</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">Const</span> SchoolName <span class="keyword">As</span> <span class="type">String</span>  = <span class="string">&quot;中华中学“</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-3-2-变数"><a href="#4-3-2-变数" class="headerlink" title="4.3.2 变数"></a>4.3.2 变数</h3><p>变数是在程序运送时会改变的数据，而常数在运算时是固定不变的。虽然我们在开始时可给于变数一个数值（初始值），但在程序运作时它的数值是可以改变的<br>变数的宣告格式如下：<code>Dim VariableName as Datatype[=initializer]</code></p>
+<p>如下例字</p>
+<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Dim</span> Num <span class="keyword">As</span> <span class="type">Single</span>=<span class="number">1.234</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">Dim</span> Num1,Num2  <span class="keyword">As</span> <span class="type">Integer</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">Dim</span> yourName <span class="keyword">As</span> <span class="type">String</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">Dim</span> starName <span class="keyword">As</span> <span class="type">String</span>=<span class="string">&quot;刘翔”</span></span><br></pre></td></tr></table></figure>
+
+<p>以 Dim 宣告各种变数 之后, 我们可以用以下的格式 赋值于这些变数 Variable&#x3D;Expression</p>
+<p>变数可以是一个已宣布的变数或控件的属性值. 它也可以是一个数学表达式, 一个字符串, 一个 布尔值 (对或错) 等等</p>
+<h3 id="4-3-3-VB-运算符"><a href="#4-3-3-VB-运算符" class="headerlink" title="4.3.3 VB 运算符"></a>4.3.3 VB 运算符</h3><table>
+<thead>
+<tr>
+<th align="center">运算符</th>
+<th align="center">数学函数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">^</td>
+<td align="center">指数</td>
+</tr>
+<tr>
+<td align="center">*</td>
+<td align="center">乘法</td>
+</tr>
+<tr>
+<td align="center">&#x2F;</td>
+<td align="center">除法</td>
+</tr>
+<tr>
+<td align="center">Mod</td>
+<td align="center">整除后的余数</td>
+</tr>
+<tr>
+<td align="center">\</td>
+<td align="center">整数除法 19\4&#x3D;4</td>
+</tr>
+<tr>
+<td align="center">+or&amp;</td>
+<td align="center">字串串连”v”&amp;”b”&#x3D;”vb”</td>
+</tr>
+</tbody></table>
+<p><strong>几个例子</strong></p>
+<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Dim</span> firstName <span class="keyword">As</span> <span class="type">String</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">Dim</span> secondName <span class="keyword">As</span> <span class="type">String</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">Dim</span> yourName <span class="keyword">As</span> <span class="type">String</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">Private</span> <span class="keyword">Sub</span> Command1_Click()</span><br><span class="line"></span><br><span class="line">firstName = Text1.<span class="keyword">Text</span></span><br><span class="line"></span><br><span class="line">secondName = Text2.<span class="keyword">Text</span></span><br><span class="line"></span><br><span class="line">yourName = secondName + <span class="string">&quot;  &quot;</span> + firstName</span><br><span class="line"></span><br><span class="line">Label1.Caption = yourName</span><br><span class="line"></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Dim</span> number1, number2, number3 <span class="keyword">as</span> <span class="type">Integer</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">Dim</span> total, average <span class="keyword">as</span> variant</span><br><span class="line"></span><br><span class="line"><span class="keyword">Private</span> <span class="keyword">sub</span> Form_Click</span><br><span class="line"></span><br><span class="line">number1=val(Text1.<span class="keyword">Text</span>)</span><br><span class="line">number2=val(Text2.<span class="keyword">Text</span>)</span><br><span class="line">number3= val(Text3.<span class="keyword">Text</span>)</span><br><span class="line"></span><br><span class="line">Total=number1+number2+number3</span><br><span class="line"></span><br><span class="line">Average=Total/<span class="number">5</span></span><br><span class="line"></span><br><span class="line">Label1.Caption=Total</span><br><span class="line"></span><br><span class="line">Label2.Caption=Average</span><br><span class="line"></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/VB/" rel="tag"># VB</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/02/16/Learn-VB%E4%BD%9C%E4%B8%9A2/" rel="prev" title="VB-Note">
+      <i class="fa fa-chevron-left"></i> VB-Note
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/02/17/Make-Python%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98/" rel="next" title="用python解决问题">
+      用python解决问题 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E7%AC%AC%E4%B8%80%E4%B8%AA-VB-%E7%A8%8B%E5%BA%8FHello-World"><span class="nav-number">1.</span> <span class="nav-text">1. 第一个 VB 程序Hello World</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E5%87%A0%E4%B8%AA%E5%B0%8F%E4%BE%8B%E5%AD%90"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 几个小例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E8%AE%A9%E7%A8%8B%E5%BA%8F%E7%AA%97%E5%8F%A3%E5%9B%BA%E5%AE%9A%E4%B8%8D%E5%8F%98"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 让程序窗口固定不变</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E6%8E%A7%E4%BB%B6-amp-%E6%8E%A7%E4%BB%B6%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="nav-number">2.</span> <span class="nav-text">2. 控件&amp;控件的属性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E6%8E%A7%E4%BB%B6%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 控件的属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E5%B8%B8%E8%A7%81%E6%8E%A7%E4%BB%B6"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 常见控件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-1-%E6%96%87%E6%9C%AC%E6%A1%86-TextBox"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.2.1 文本框(TextBox)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-2-%E6%A0%87%E7%AD%BE-Label"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.2.2 标签(Label)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-3-%E5%91%BD%E4%BB%A4%E6%8C%89%E9%92%AE-CommandButton"><span class="nav-number">2.2.3.</span> <span class="nav-text">2.2.3 命令按钮(CommandButton)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-4-%E5%9B%BE%E7%89%87%E6%A1%86-PictureBox"><span class="nav-number">2.2.4.</span> <span class="nav-text">2.2.4 图片框(PictureBox)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-5-%E5%9B%BE%E5%83%8F%E6%96%B9%E6%A1%86-Image"><span class="nav-number">2.2.5.</span> <span class="nav-text">2.2.5 图像方框(Image)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-6-%E5%88%97%E8%A1%A8%E6%A1%86-ListBox"><span class="nav-number">2.2.6.</span> <span class="nav-text">2.2.6 列表框(ListBox)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-7-%E7%BB%84%E5%90%88%E6%A1%86-ComboBox"><span class="nav-number">2.2.7.</span> <span class="nav-text">2.2.7 组合框(ComboBox)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-8-%E5%A4%8D%E9%80%89%E6%A1%86-CheckBox"><span class="nav-number">2.2.8.</span> <span class="nav-text">2.2.8 复选框(CheckBox)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-9-%E9%80%89%E9%A1%B9%E6%A1%86-OptionButton"><span class="nav-number">2.2.9.</span> <span class="nav-text">2.2.9 选项框(OptionButton)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-10-%E9%A9%B1%E5%8A%A8%E5%99%A8%E5%88%97%E8%A1%A8%E6%A1%86-DriveListBox"><span class="nav-number">2.2.10.</span> <span class="nav-text">2.2.10 驱动器列表框(DriveListBox)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-11-%E7%9B%AE%E5%BD%95%E5%88%97%E8%A1%A8%E6%A1%86-DirListBox"><span class="nav-number">2.2.11.</span> <span class="nav-text">2.2.11 目录列表框(DirListBox)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-12-%E6%96%87%E4%BB%B6%E5%88%97%E8%A1%A8%E6%A1%86-FileListBox"><span class="nav-number">2.2.12.</span> <span class="nav-text">2.2.12 文件列表框(FileListBox)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E7%BC%96%E5%86%99-VB-%E7%9A%84%E7%A8%8B%E5%BA%8F%E4%BB%A3%E7%A0%81"><span class="nav-number">3.</span> <span class="nav-text">3. 编写 VB 的程序代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-VB-%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86"><span class="nav-number">4.</span> <span class="nav-text">4. VB 数据处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-VB-%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 VB 基本数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-1-%E6%95%B0%E5%AD%97%E6%95%B0%E6%8D%AE"><span class="nav-number">4.1.1.</span> <span class="nav-text">4.1.1 数字数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-2-%E9%9D%9E%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">4.1.2.</span> <span class="nav-text">4.1.2 非数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-3-%E5%90%8E%E7%BC%80%E6%96%87%E7%9A%84%E7%AC%A6%E5%8F%B7"><span class="nav-number">4.1.3.</span> <span class="nav-text">4.1.3 后缀文的符号</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-%E5%8F%98%E6%95%B0%E7%9A%84%E7%AE%A1%E7%90%86-%E5%8F%98%E9%87%8F"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 变数的管理(变量)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-1-%E5%8F%98%E6%95%B0%E5%90%8D%E7%A7%B0"><span class="nav-number">4.2.1.</span> <span class="nav-text">4.2.1 变数名称</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-2-%E5%8F%98%E6%95%B0%E7%9A%84%E5%AE%A3%E7%A4%BA"><span class="nav-number">4.2.2.</span> <span class="nav-text">4.2.2 变数的宣示</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-VB-%E7%9A%84%E5%B8%B8%E6%95%B0%E5%92%8C%E5%8F%98%E6%95%B0"><span class="nav-number">4.3.</span> <span class="nav-text">4.3 VB 的常数和变数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-1-%E5%B8%B8%E6%95%B0"><span class="nav-number">4.3.1.</span> <span class="nav-text">4.3.1 常数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-2-%E5%8F%98%E6%95%B0"><span class="nav-number">4.3.2.</span> <span class="nav-text">4.3.2 变数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-3-VB-%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">4.3.3.</span> <span class="nav-text">4.3.3 VB 运算符</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/yqq/anime.min.js"></script>
+  <script src="/yqq/velocity/velocity.min.js"></script>
+  <script src="/yqq/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
