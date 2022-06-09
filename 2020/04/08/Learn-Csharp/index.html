@@ -6,8 +6,8 @@
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 6.2.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
 <link rel="stylesheet" href="/css/main.css">
@@ -17,25 +17,27 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="学习C#的笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C#-Note">
-<meta property="og:url" content="http://example.com/2020/04/08/Learn-C#/index.html">
+<meta property="og:url" content="http://example.com/2020/04/08/Learn-Csharp/index.html">
 <meta property="og:site_name" content="YunQi">
 <meta property="og:description" content="学习C#的笔记">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/img/cs/program.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/blogs/pictures/20220609173231.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/blogs/pictures/2022-06-09-14-56-30.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/blogs/pictures/2022-06-09-15-00-46.png">
 <meta property="article:published_time" content="2020-04-08T01:23:49.000Z">
-<meta property="article:modified_time" content="2022-06-08T06:29:50.145Z">
+<meta property="article:modified_time" content="2022-06-09T09:34:35.168Z">
 <meta property="article:author" content="Yun qi">
 <meta property="article:tag" content="C#">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/img/cs/program.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/blogs/pictures/20220609173231.png">
 
-<link rel="canonical" href="http://example.com/2020/04/08/Learn-C#/">
+<link rel="canonical" href="http://example.com/2020/04/08/Learn-Csharp/">
 
 
 <script id="page-configurations">
@@ -196,10 +198,10 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/04/08/Learn-C#/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/04/08/Learn-Csharp/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpeg">
       <meta itemprop="name" content="Yun qi">
       <meta itemprop="description" content="">
     </span>
@@ -213,6 +215,11 @@
         </h1>
 
         <div class="post-meta">
+          
+              <i class="fa fa-thumb-tack" aria-hidden="true"></i> 
+              <font color="GREEN">置顶</font>
+              <span class="post-meta-divider">|</span>
+          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-calendar"></i>
@@ -226,7 +233,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-06-08 14:29:50" itemprop="dateModified" datetime="2022-06-08T14:29:50+08:00">2022-06-08</time>
+                <time title="Modified: 2022-06-09 17:34:35" itemprop="dateModified" datetime="2022-06-09T17:34:35+08:00">2022-06-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -255,7 +262,7 @@
 <blockquote>
 <p>参考<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1wx411K7rb">b 站的视频学习</a></p>
 </blockquote>
-<p><img src="/img/cs/program.png" alt="编程"></p>
+<p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/blogs/pictures/20220609173231.png" alt="20220609173231.png"></p>
 <h1 id="0-C-学习前的-bb"><a href="#0-C-学习前的-bb" class="headerlink" title="0. C#学习前的 bb"></a>0. C#学习前的 bb</h1><p>C# 窗体应用，我的初步感受就是 VB+Java（狗头）<br>VB 现在正在学，但是 Java 是没学过 hhh</p>
 <p>C# 是面向对象的语言，然而 C# 进一步提供了对面向组件 (component-oriented) 编程的支持。现代软件设计日益依赖于自包含和自描述功能包形式的软件组件。这种组件的关键在于，它们通过属性、方法和事件来提供编程模型；它们具有提供了关于组件的声明性信息的特性；同时，它们还编入了自己的文档。C# 提供的语言构造直接支持这些概念，这使得 C# 语言自然而然成为创建和使用软件组件之选。（copy from _csharp language specification 5.0 中文_）</p>
 <h1 id="1-语言标准的——hello-world"><a href="#1-语言标准的——hello-world" class="headerlink" title="1. 语言标准的——hello world!!!"></a>1. 语言标准的——hello world!!!</h1><h2 id="1-1-Console"><a href="#1-1-Console" class="headerlink" title="1.1 Console"></a>1.1 Console</h2><p>控制台.NET Framework</p>
@@ -287,6 +294,9 @@
 <p><strong>又如<code>System</code>名称空间中的<code>Console</code>类，类中的<code>WriteLine</code>方法</strong></p>
 <p><strong><code>using System</code></strong> 跟 python 中的<code>import</code>差不多</p>
 <p>就是：<br>有<code>using System;</code> 直接用<code>Console.WriteLine</code><br>没有<code>using System;</code>则必须用<code>System.Console.WriteLine</code></p>
+<h1 id="3-WPF-App-NET"><a href="#3-WPF-App-NET" class="headerlink" title="3.WPF App(.NET)"></a>3.WPF App(.NET)</h1><p>跟VB很像，拖拽控件，编写控件程序，设计界面，所见即所得。</p>
+<p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/blogs/pictures/2022-06-09-14-56-30.png" alt="2022-06-09-14-56-30.png" title="Visual Studio的WPF App项目界面"></p>
+<p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/blogs/pictures/2022-06-09-15-00-46.png" alt="2022-06-09-15-00-46.png" title="HelloWorld-program"></p>
 
     </div>
 
@@ -370,12 +380,14 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0-C-%E5%AD%A6%E4%B9%A0%E5%89%8D%E7%9A%84-bb"><span class="nav-text">0. C#学习前的 bb</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E8%AF%AD%E8%A8%80%E6%A0%87%E5%87%86%E7%9A%84%E2%80%94%E2%80%94hello-world"><span class="nav-text">1. 语言标准的——hello world!!!</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-Console"><span class="nav-text">1.1 Console</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-WPF"><span class="nav-text">1.2 WPF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-Windows-Forms-App-old"><span class="nav-text">1.3 Windows Forms App(old)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-ASP-NET-Web-Forms-old"><span class="nav-text">1.4 ASP.NET Web Forms(old)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-ASP-NET-MVC"><span class="nav-text">1.5 ASP.NET MVC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6-WCF"><span class="nav-text">1.6 WCF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-7-Windows-Store-Application"><span class="nav-text">1.7 Windows Store Application</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-8-Windows-Phone-Application-%E5%B7%B2%E7%BB%8F%E5%87%89%E9%80%8F%E4%BA%86%EF%BC%9F%EF%BC%9F%EF%BC%9F"><span class="nav-text">1.8 Windows Phone Application(已经凉透了？？？)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-9-Cloud"><span class="nav-text">1.9 Cloud</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-10-WF"><span class="nav-text">1.10 WF</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E7%B1%BB%E4%B8%8E%E5%90%8D%E7%A7%B0%E7%A9%BA%E9%97%B4"><span class="nav-text">2. 类与名称空间</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E5%89%96%E6%9E%90-Hello-World-%E7%A8%8B%E5%BA%8F"><span class="nav-text">2.1 剖析 Hello World 程序</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0-C-%E5%AD%A6%E4%B9%A0%E5%89%8D%E7%9A%84-bb"><span class="nav-text">0. C#学习前的 bb</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E8%AF%AD%E8%A8%80%E6%A0%87%E5%87%86%E7%9A%84%E2%80%94%E2%80%94hello-world"><span class="nav-text">1. 语言标准的——hello world!!!</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-Console"><span class="nav-text">1.1 Console</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-WPF"><span class="nav-text">1.2 WPF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-Windows-Forms-App-old"><span class="nav-text">1.3 Windows Forms App(old)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-ASP-NET-Web-Forms-old"><span class="nav-text">1.4 ASP.NET Web Forms(old)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-ASP-NET-MVC"><span class="nav-text">1.5 ASP.NET MVC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6-WCF"><span class="nav-text">1.6 WCF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-7-Windows-Store-Application"><span class="nav-text">1.7 Windows Store Application</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-8-Windows-Phone-Application-%E5%B7%B2%E7%BB%8F%E5%87%89%E9%80%8F%E4%BA%86%EF%BC%9F%EF%BC%9F%EF%BC%9F"><span class="nav-text">1.8 Windows Phone Application(已经凉透了？？？)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-9-Cloud"><span class="nav-text">1.9 Cloud</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-10-WF"><span class="nav-text">1.10 WF</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E7%B1%BB%E4%B8%8E%E5%90%8D%E7%A7%B0%E7%A9%BA%E9%97%B4"><span class="nav-text">2. 类与名称空间</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E5%89%96%E6%9E%90-Hello-World-%E7%A8%8B%E5%BA%8F"><span class="nav-text">2.1 剖析 Hello World 程序</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-WPF-App-NET"><span class="nav-text">3.WPF App(.NET)</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yun qi"
+      src="/images/avatar.jpeg">
   <div class="site-description" itemprop="description"></div>
 </div>
 <div class="site-state-wrap motion-element">
@@ -401,6 +413,14 @@
       </div>
   </nav>
 </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yq010105" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yq010105" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/29010355" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;29010355" rel="noopener" target="_blank"><i class="fa fa-star fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
 
 
 
@@ -429,8 +449,6 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Yun qi</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
-  </div>
 
         
 
