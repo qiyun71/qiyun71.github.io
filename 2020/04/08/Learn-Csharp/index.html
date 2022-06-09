@@ -20,18 +20,27 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="学习C#的笔记">
+  <meta name="description" content="学习 C#的笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C#-Note">
 <meta property="og:url" content="http://example.com/2020/04/08/Learn-Csharp/index.html">
 <meta property="og:site_name" content="YunQi">
-<meta property="og:description" content="学习C#的笔记">
+<meta property="og:description" content="学习 C#的笔记">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/blogs/pictures/20220609173231.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/blogs/pictures/20220609192636.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/blogs/pictures/20220609192848.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/blogs/pictures/20220609194354.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/blogs/pictures/20220609200539.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/blogs/pictures/20220609201227.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/blogs/pictures/20220609201316.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/blogs/pictures/20220609202044.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/blogs/pictures/20220609202321.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/blogs/pictures/20220609203808.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/blogs/pictures/2022-06-09-14-56-30.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/blogs/pictures/2022-06-09-15-00-46.png">
 <meta property="article:published_time" content="2020-04-08T01:23:49.000Z">
-<meta property="article:modified_time" content="2022-06-09T09:34:35.168Z">
+<meta property="article:modified_time" content="2022-06-09T13:46:45.690Z">
 <meta property="article:author" content="Yun qi">
 <meta property="article:tag" content="C#">
 <meta name="twitter:card" content="summary">
@@ -233,7 +242,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-06-09 17:34:35" itemprop="dateModified" datetime="2022-06-09T17:34:35+08:00">2022-06-09</time>
+                <time title="Modified: 2022-06-09 21:46:45" itemprop="dateModified" datetime="2022-06-09T21:46:45+08:00">2022-06-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -256,7 +265,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>学习C#的笔记</p>
+        <p>学习 C#的笔记</p>
 <span id="more"></span>
 
 <blockquote>
@@ -288,13 +297,36 @@
 <p>Console App : <code>Console.WriteLine(&quot;Hello World~&quot;);</code></p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"><span class="keyword">using</span> System.Linq;</span><br><span class="line"><span class="keyword">using</span> System.Text;</span><br><span class="line"><span class="keyword">using</span> System.Threading.Tasks;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">ConsoleApphello</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">class</span> <span class="title">Program</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="built_in">string</span>[] args</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            Console.WriteLine(<span class="string">&quot;Hello World&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>类 class <code>Program</code>(自己写的)和<code>Console</code>(调用 C#的类)<br><code>WriteLine</code>方法</p>
+<p>类 class <code>Program</code>(自己写的)和<code>Console</code>(调用 C#的类)<br>使用 Console 类中的<code>WriteLine</code>方法来进行 print</p>
 <p>名称空间 namespace <code>HelloWorld</code>，默认跟创建 project 时名称一样</p>
 <p><strong>核心理解：</strong></p>
 <p><strong>又如<code>System</code>名称空间中的<code>Console</code>类，类中的<code>WriteLine</code>方法</strong></p>
-<p><strong><code>using System</code></strong> 跟 python 中的<code>import</code>差不多</p>
+<p><strong><code>using System</code></strong> 跟 python 中的<code>import</code>差不多，将类引用到自己的程序中</p>
 <p>就是：<br>有<code>using System;</code> 直接用<code>Console.WriteLine</code><br>没有<code>using System;</code>则必须用<code>System.Console.WriteLine</code></p>
-<h1 id="3-WPF-App-NET"><a href="#3-WPF-App-NET" class="headerlink" title="3.WPF App(.NET)"></a>3.WPF App(.NET)</h1><p>跟VB很像，拖拽控件，编写控件程序，设计界面，所见即所得。</p>
+<h2 id="2-2-类库"><a href="#2-2-类库" class="headerlink" title="2.2 类库"></a>2.2 类库</h2><p>类库的引用可以分为两种</p>
+<ul>
+<li>黑盒 DLL 引用（无源代码）</li>
+<li>白盒 项目直接引用（有源代码）</li>
+</ul>
+<h3 id="黑盒："><a href="#黑盒：" class="headerlink" title="黑盒："></a>黑盒：</h3><h4 id="a-本地引用"><a href="#a-本地引用" class="headerlink" title="a.本地引用"></a>a.本地引用</h4><p>从其他人手中获得 dll 类库和 doc 文档，来进行引用</p>
+<p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/blogs/pictures/20220609192636.png" alt="20220609192636.png"></p>
+<p>浏览打开 dll 文件，即可引用类库</p>
+<p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/blogs/pictures/20220609192848.png" alt="20220609192848.png"></p>
+<h4 id="b-网络引用"><a href="#b-网络引用" class="headerlink" title="b.网络引用"></a>b.网络引用</h4><p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/blogs/pictures/20220609194354.png" alt="20220609194354.png"></p>
+<p>黑盒引用无法修改dll中的错误</p>
+<h4 id="c-NuGet添加类库"><a href="#c-NuGet添加类库" class="headerlink" title="c.NuGet添加类库"></a>c.NuGet添加类库</h4><p>手动添加网络类库时，可能引用的某个类库还依赖着其他的底层类库，需要将该类库的所有依赖类库也一起引用进来，很麻烦。</p>
+<p>使用NuGet可以将需要引用的类库与其依赖的底层类库一起打包引用进来，<em>有点像Pycharm中的安装轮子，pip？</em><br><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/blogs/pictures/20220609200539.png" alt="20220609200539.png"></p>
+<h3 id="白盒："><a href="#白盒：" class="headerlink" title="白盒："></a>白盒：</h3><p><strong>一个项目可以属于多个solution，一个solution中可以有多个项目</strong></p>
+<p>添加已存在项目到solution<br><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/blogs/pictures/20220609201227.png" alt="20220609201227.png"></p>
+<p>然后就可以直接引用项目中的类库了<br><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/blogs/pictures/20220609201316.png" alt="20220609201316.png"></p>
+<p>可以通过打断点，然后start debugging，逐语句执行找错误，<strong>找到真正的错误:Root cause!</strong><br><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/blogs/pictures/20220609202044.png" alt="20220609202044.png"></p>
+<h3 id="建立自己的类库项目"><a href="#建立自己的类库项目" class="headerlink" title="建立自己的类库项目"></a>建立自己的类库项目</h3><p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/blogs/pictures/20220609202321.png" alt="20220609202321.png"></p>
+<p><strong>注意：使用.Net Framework创建</strong></p>
+<p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/blogs/pictures/20220609203808.png" alt="20220609203808.png"></p>
+<h2 id="2-3-依赖关系"><a href="#2-3-依赖关系" class="headerlink" title="2.3 依赖关系"></a>2.3 依赖关系</h2><p>在自己写的类中引用了别人的类库，即为我的类依赖于别人的类库，如果该类库出现错误，则我的类也会有问题。</p>
+<p>极其重要，尽量选择较弱的依赖关系，<strong>高内聚，低耦合</strong></p>
+<h3 id="UML类图"><a href="#UML类图" class="headerlink" title="UML类图"></a>UML类图</h3><p>通用建模语言，用图表达程序。</p>
+<h1 id="3-WPF-App-NET"><a href="#3-WPF-App-NET" class="headerlink" title="3.WPF App(.NET)"></a>3.WPF App(.NET)</h1><p>跟 VB 很像，拖拽控件，编写控件程序，设计界面，所见即所得。</p>
 <p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/blogs/pictures/2022-06-09-14-56-30.png" alt="2022-06-09-14-56-30.png" title="Visual Studio的WPF App项目界面"></p>
 <p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/blogs/pictures/2022-06-09-15-00-46.png" alt="2022-06-09-15-00-46.png" title="HelloWorld-program"></p>
 
@@ -380,7 +412,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0-C-%E5%AD%A6%E4%B9%A0%E5%89%8D%E7%9A%84-bb"><span class="nav-text">0. C#学习前的 bb</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E8%AF%AD%E8%A8%80%E6%A0%87%E5%87%86%E7%9A%84%E2%80%94%E2%80%94hello-world"><span class="nav-text">1. 语言标准的——hello world!!!</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-Console"><span class="nav-text">1.1 Console</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-WPF"><span class="nav-text">1.2 WPF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-Windows-Forms-App-old"><span class="nav-text">1.3 Windows Forms App(old)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-ASP-NET-Web-Forms-old"><span class="nav-text">1.4 ASP.NET Web Forms(old)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-ASP-NET-MVC"><span class="nav-text">1.5 ASP.NET MVC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6-WCF"><span class="nav-text">1.6 WCF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-7-Windows-Store-Application"><span class="nav-text">1.7 Windows Store Application</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-8-Windows-Phone-Application-%E5%B7%B2%E7%BB%8F%E5%87%89%E9%80%8F%E4%BA%86%EF%BC%9F%EF%BC%9F%EF%BC%9F"><span class="nav-text">1.8 Windows Phone Application(已经凉透了？？？)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-9-Cloud"><span class="nav-text">1.9 Cloud</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-10-WF"><span class="nav-text">1.10 WF</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E7%B1%BB%E4%B8%8E%E5%90%8D%E7%A7%B0%E7%A9%BA%E9%97%B4"><span class="nav-text">2. 类与名称空间</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E5%89%96%E6%9E%90-Hello-World-%E7%A8%8B%E5%BA%8F"><span class="nav-text">2.1 剖析 Hello World 程序</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-WPF-App-NET"><span class="nav-text">3.WPF App(.NET)</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0-C-%E5%AD%A6%E4%B9%A0%E5%89%8D%E7%9A%84-bb"><span class="nav-text">0. C#学习前的 bb</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E8%AF%AD%E8%A8%80%E6%A0%87%E5%87%86%E7%9A%84%E2%80%94%E2%80%94hello-world"><span class="nav-text">1. 语言标准的——hello world!!!</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-Console"><span class="nav-text">1.1 Console</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-WPF"><span class="nav-text">1.2 WPF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-Windows-Forms-App-old"><span class="nav-text">1.3 Windows Forms App(old)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-ASP-NET-Web-Forms-old"><span class="nav-text">1.4 ASP.NET Web Forms(old)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-ASP-NET-MVC"><span class="nav-text">1.5 ASP.NET MVC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6-WCF"><span class="nav-text">1.6 WCF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-7-Windows-Store-Application"><span class="nav-text">1.7 Windows Store Application</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-8-Windows-Phone-Application-%E5%B7%B2%E7%BB%8F%E5%87%89%E9%80%8F%E4%BA%86%EF%BC%9F%EF%BC%9F%EF%BC%9F"><span class="nav-text">1.8 Windows Phone Application(已经凉透了？？？)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-9-Cloud"><span class="nav-text">1.9 Cloud</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-10-WF"><span class="nav-text">1.10 WF</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E7%B1%BB%E4%B8%8E%E5%90%8D%E7%A7%B0%E7%A9%BA%E9%97%B4"><span class="nav-text">2. 类与名称空间</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E5%89%96%E6%9E%90-Hello-World-%E7%A8%8B%E5%BA%8F"><span class="nav-text">2.1 剖析 Hello World 程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E7%B1%BB%E5%BA%93"><span class="nav-text">2.2 类库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%BB%91%E7%9B%92%EF%BC%9A"><span class="nav-text">黑盒：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#a-%E6%9C%AC%E5%9C%B0%E5%BC%95%E7%94%A8"><span class="nav-text">a.本地引用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#b-%E7%BD%91%E7%BB%9C%E5%BC%95%E7%94%A8"><span class="nav-text">b.网络引用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#c-NuGet%E6%B7%BB%E5%8A%A0%E7%B1%BB%E5%BA%93"><span class="nav-text">c.NuGet添加类库</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%99%BD%E7%9B%92%EF%BC%9A"><span class="nav-text">白盒：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B%E8%87%AA%E5%B7%B1%E7%9A%84%E7%B1%BB%E5%BA%93%E9%A1%B9%E7%9B%AE"><span class="nav-text">建立自己的类库项目</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-%E4%BE%9D%E8%B5%96%E5%85%B3%E7%B3%BB"><span class="nav-text">2.3 依赖关系</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#UML%E7%B1%BB%E5%9B%BE"><span class="nav-text">UML类图</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-WPF-App-NET"><span class="nav-text">3.WPF App(.NET)</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -395,7 +427,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-count">49</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
