@@ -538,6 +538,8 @@ B-->C
 A-->C
 ```
 
+---
+
 # 4. 类型、变量和对象
 
 ## 4.1 数据类型作用
@@ -898,7 +900,7 @@ namespace CSharpMethodExample
 ### 5.2.1 方法的声明定义不分家
 
 - 方法的声明：
-  <attributes> <修饰符的有效组合> <partial> 返回类型 方法名(形式参数) 方法体
+  <attributes> <修饰符的有效组合> <partial> 返回类型 方法名(形式参数parameter) 方法体
   - 修饰符：new public private async static 等等
   - 返回类型：type void
   - 方法名：标识符（动词或动词短语）
@@ -911,10 +913,47 @@ public double GetCircleArea(double r)
 }
 ```
 
+- 静态方法 static 与类绑定
+- 实例方法 与实例绑定
+
+例如一个类Calculator，new一个实例`Calculator c = new Calculator();`，如果是静态方法，用`Calculator.方法`来调用，如果是实例方法，则需要使用`c.方法`来调用
+
+调用方法需要传入必要的实参：argument
+要写成`c.GetCircleArea(x,y)`，而不能写成`c.GetCircleArea(double x,double y)`
+
+{% note primary %}
+形参parameter是变量，实参argument是值
+{% endnote %}
+
 ## 5.3 构造器-特殊的方法
+
+constructor构造器，是类型的成员之一
+
+instance constructor实例构造器，构造实例在内存中的内部结构
+
+**自定义构造器**
+`ctor + tab*2`
+
+- 没有参数构造器
+![20220629193542](https://raw.githubusercontent.com/yq010105/Blog_images/main/blogs/pictures/20220629193542.png)
+
+- 有参数构造器
+![20220629194137](https://raw.githubusercontent.com/yq010105/Blog_images/main/blogs/pictures/20220629194137.png)
 
 ## 5.4 方法的重载 overload
 
-## 5.5 如何 debug
+同一个类下，有两个相同的方法名，但签名不同
+
+声明带有重载的方法：
+- 方法签名method signature ，方法签名由方法的名称、类型形参<T>的个数和它的每一个形参的类型和*形参传递模式|种类*（值、引用ref或输出out）组成（按从左到右的顺序）。**不包含返回类型**
+- 实例构造函数签名由它的每一个形参的类型和形参传递模式（值、引用或输出）组成（按从左到右的顺序）。
+- 重载决策：根据传入的参数类型选择一个最佳的函数成员来实施调用
+
+## 5.5 如何对方法进行debug
+
+- 设置断点
+- 观察差方法调用时的call stack调用堆栈：该程序语句的父级（谁调用的当前语句）
+- Step-into逐语句，Step-over逐过程（不用进入另一个方法），Step-out跳出（返回上层）
+- 观察局部变量的值和变化
 
 ## 5.6 方法的调用与栈\*

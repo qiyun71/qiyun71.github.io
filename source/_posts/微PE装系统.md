@@ -50,7 +50,7 @@ categories: 技术力
 `diskpart` | `list disk` | `select disk 0` | `clean` | `convert gpt`或者`convert mbr` `exit`退出
 
 # 3. 开始安装系统
-打开电脑，狂按F12(惠普台式机)，进入Bios界面，选择启动项为从U盘启动，然后重启电脑
+打开电脑，狂按~~F12(惠普台式机)~~不是F12而是F10，进入Bios界面，选择启动项为从U盘启动，然后重启电脑
 
 ## 磁盘分区格式与启动引导的关系
 UEFI启动的PE，分区表类型GUID/GPT（比较新）
