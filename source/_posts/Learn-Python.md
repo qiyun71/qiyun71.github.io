@@ -949,4 +949,33 @@ for i in fibonacci(10):
     print(i)
 ```
 
-## 10.4 列表解析式
+## 10.4 map和zip的使用
+
+`map(function,sequence)`
+对序列sequence中每个元素都执行函数function操作，如`map(str,mylist)`：将列表中的每一项转换成字符串。
+list()将每一项转换成列表
+
+`zip(*list)`返回的是一个元组，转置
+```python
+list = [[1,2,3],[4,5,6],[7,8,9]]
+t = zip(*list)
+print t
+
+# output
+[(1, 4, 7), (2, 5, 8), (3, 6, 9)]
+
+x = [1,2,3,4,5]
+y = [6,7,8,9,10]
+a = zip(x,y)
+print a
+
+# output
+[(1, 6), (2, 7), (3, 8), (4, 9), (5, 10)]
+```
+
+eg：将多个列表合并创建json数组
+
+new_list = list(map(list, zip(address, temp)))
+jsonify({
+    'data': new_list
+})

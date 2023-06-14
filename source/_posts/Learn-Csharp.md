@@ -1,7 +1,7 @@
 ---
 title: C#-Note
 img:
-top: true
+top: false
 toc: true
 cover: false
 date: 2020-04-08 09:23:49
@@ -957,3 +957,24 @@ instance constructor实例构造器，构造实例在内存中的内部结构
 - 观察局部变量的值和变化
 
 ## 5.6 方法的调用与栈\*
+
+对satck frame（方法被调用时在内存中的布局）的分析，方法调用如何使用栈内存
+
+main（主调者caller）中调用other（被调者callee）函数，需要传入实参时，实参归main管。
+
+# 6. 操作符
+
+## 6.1 操作符概览
+
+![20220703193132](https://raw.githubusercontent.com/yq010105/Blog_images/main/blogs/pictures/20220703193132.png)
+
+## 6.1 操作符的本质
+
+## 6.1 操作符的优先级
+
+## 6.1 同级操作符的运算顺序
+
+## 6.1 各类操作符示例
+
+
+# 7. 表达式、语句

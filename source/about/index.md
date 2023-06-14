@@ -18,14 +18,17 @@ layout: "about"
 
 <!-- <div style="float: right; padding-right: 180px; padding-top: 80px; font-size: 17px;"><p style="display: inline;background-color:pink;">English本当🔨の<b>机械生</b> <br> 19歳、学生です、でぶです</p></div> -->
 
-<div><p style="text-align: center;"><s style="color: #ddd">English本当🔨の</s><b>机械生</b>：会一点Python，目前在考驾照，空余时间学习C#</p>
+<div><p style="text-align: center;">Name: Yun Qi , a graduate student at USTB</p>
 </div>
 
+<div style= "text-align: center">My research direction: NeRF & 3D reconstruction</div>
 
 <!-- <p style="display: inline; font-size: 17px;"></p> -->
 
 
 <hr style="border-top: 1px solid #DDDDDD;">
+
+
 
 <!-- 我的一些链接 -->
 
@@ -67,18 +70,19 @@ layout: "about"
 
 <div>
 
-- [ ] [考驾照](/2022/06/14/Learn-科目一/)
-- [ ] [学会C#](/2020/04/08/Learn-Csharp/)
-- [ ] 学单片机<p style="display: inline; border: 1px dashed #ddd; color: #ddd">做点东西出来</p>
-- [ ] [Linux学习](/2020/03/15/Learn-Linux/)<p style="display: inline; border: 1px dashed #ddd; color: #ddd">搭建服务器</p>
+
+<!-- - [ ] [熟悉C#](/2020/04/08/Learn-Csharp/) -->
+<!-- - [ ] 学单片机<p style="display: inline; border: 1px dashed #ddd; color: #ddd">做点东西出来</p> -->
+<!-- - [ ] [熟悉Linux操作](/2020/03/15/Learn-Linux/)<p style="display: inline; border: 1px dashed #ddd; color: #ddd">搭建服务器</p> -->
 
 <!-- </div> -->
 
 <!-- <div style="float: left;"> -->
 
-- [x] 拥有个人博客
+<!-- - [x] 拥有个人博客
 - [x] 四级
 - [x] 萌芽杯
 - [x] 六级 <p style="display: inline; border: 1px dashed #ddd; color: #ddd">四级只有449分,六级451分</p>
 - [x] 考研 <p style="display: inline; border: 1px dashed #ddd; color: #ddd">北京科技大学</p>
+- [x] [考驾照](/2022/06/14/Learn-科目一/) -->
 </div>
