@@ -5,9 +5,9 @@ toc: true
 top: false
 cover: false
 date: 2020-02-16 13:32:49
-categories: 学习力
+categories: VB
 tags:
-    - VB
+    - VB Note
 summary: 正式学习VB前的自学
 password:
 ---

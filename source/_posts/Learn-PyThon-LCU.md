@@ -2,8 +2,8 @@
 title: Python调用LOL的API
 date: 2022-06-08 21:14:26
 tags:
-    - Python
-categories: 学习力
+    - LOL API
+categories: Python
 ---
 
 LOL提供了丰富的接口（除了马服），可以利用这些接口来完成一些操作。使用Python来调用LOL提供的API，可以使用一些大佬造的轮子。

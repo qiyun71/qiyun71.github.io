@@ -100,6 +100,9 @@ ignore:
 ## Themes: https://hexo.io/themes/
 theme: next
 
+# image
+hexo-asset-folder: true
+
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:

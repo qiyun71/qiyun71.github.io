@@ -4,7 +4,7 @@ date: 2022-06-08 11:21:35
 toc: true
 tags: 
     - Hexo
-categories: 学习力
+categories: Hexo
 ---
 
 Hexo博客搭建教程，参考[CodeSheep](https://space.bilibili.com/384068749)大佬的[视频教程](https://www.bilibili.com/video/BV1Yb411a7ty)。主要是记录Hexo博客搭建和部署的步骤流程，方便更加快速的配置部署。

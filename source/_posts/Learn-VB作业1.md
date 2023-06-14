@@ -5,9 +5,9 @@ toc: true
 top: false
 cover: false
 date: 2020-05-07 13:32:49
-categories: 学习力
+categories: VB
 tags:
-    - VB
+    - VB Practise
 summary: VB作业，因为笔记本里的东西太多了，所以新写一篇
 password:
 ---

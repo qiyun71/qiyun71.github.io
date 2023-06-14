@@ -6,10 +6,10 @@ toc: true
 cover: false
 coverImg: /img/cover/mengya1.jpg
 img: /img/cover/mengya1.jpg
-categories: 技术力
+categories: Python
 summary: 项目-识别表的指针，python代码的构造过程，并没有写完（萌芽杯比赛项目）
 tags:
-  - Python
+  - Python Practise
   - Compete
 ---
 项目-识别表的指针，python代码的构造过程，并没有写完（萌芽杯比赛项目）

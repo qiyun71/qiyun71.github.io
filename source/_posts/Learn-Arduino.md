@@ -2,10 +2,10 @@
 title: Arduino学习
 date: 2020-10-19 22:22:22
 toc: true
-categories: 学习力
+categories: Arduino
 summary: 单片机基础
 tags:
-  - 单片机
+  - Arduino Note
 ---
 
 Arduino学习
