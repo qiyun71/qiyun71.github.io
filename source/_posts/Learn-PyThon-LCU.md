@@ -13,9 +13,7 @@ LOL提供了丰富的接口，可以利用这些接口来完成一些操作。�
 拳头提供的API接口说明可以在[开发者网站](https://developer.riotgames.com/)中查看，可以使用拳头账号获得一个api key来调用api，且key需要每天进行更换。
 ![拳头开发者网站](/img/python/lcu/riot_developer.png)
 
-
-拳头的API收集：
-- [官方开发者网站API](https://developer.riotgames.com/apis)
+[网站API](https://developer.riotgames.com/apis)
 - [抓包得到的API](http://www.mingweisamuel.com/lcu-schema/tool/#/)
 
 拳头的开发者网站文档：
