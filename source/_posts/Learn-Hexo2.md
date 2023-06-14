@@ -1,5 +1,5 @@
 ---
-title: Hexo博客重新搭建
+title: Hexo 简单流程
 date: 2022-06-08 11:21:35
 toc: true
 tags: 
