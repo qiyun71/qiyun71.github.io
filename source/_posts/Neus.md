@@ -2,7 +2,7 @@
 title: Neus
 date: 2023-06-14 22:14:49
 tags:
-    - NeRF 
+    - Neus
     - 3D Reconstruction
 categories: NeRF
 ---

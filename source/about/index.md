@@ -18,15 +18,28 @@ layout: "about"
 
 <!-- <div style="float: right; padding-right: 180px; padding-top: 80px; font-size: 17px;"><p style="display: inline;background-color:pink;">English本当🔨の<b>机械生</b> <br> 19歳、学生です、でぶです</p></div> -->
 
-<div><p style="text-align: center;">Name: Yun Qi , a graduate student at USTB</p>
+<div><p style="text-align: center;">My name is Yun Qi , a graduate student at <a href="https://www.ustb.edu.cn/" onmouseover="this.style.color='#6F7276'" onmouseout="this.style.color='#252A2F'">USTB</a>(2022~2025)</p></div>
+
+
+
+
+<div style="display: flex; align-items: center;">
+    <div style="width: 60%; padding: 40px;border-left:25px solid #000;">
+        <div><b>Research direction</b>: NeRF & 3D reconstruction</div>
+        <div><b>Interest</b>: 3D Printing; DIY; Robot; Modeling</div>
+        <div><b>Language</b>: Python; C++; C#; VB; Arduino</div>
+        <div><b>Tools</b>: Pytorch; Blender; Creo; Arduino IDE</div>
+        <div><b>Mail</b>:
+        <a href="mailto:yuanqi053@gmail.com" style="text-decoration: none; color: #252A2F; font-size: 17px;" onmouseover="this.style.color='#6F7276'" onmouseout="this.style.color='#252A2F'">yuanqi053@gmail</a></div>
+    </div>
+    <div style="width: 40%; text-align: center;">
+        <img src="https://yq010105.github.io/images/avatar.jpeg" style="width: 200px; border-radius: 50%;">
+    </div>
 </div>
-
-<div style= "text-align: center">My research direction: NeRF & 3D reconstruction</div>
-
 <!-- <p style="display: inline; font-size: 17px;"></p> -->
 
 
-<hr style="border-top: 1px solid #DDDDDD;">
+<!-- <hr style="border-top: 1px solid #DDDDDD;"> -->
 
 
 
