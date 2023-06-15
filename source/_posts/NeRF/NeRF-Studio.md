@@ -67,7 +67,6 @@ cd autodl-tmp
 
 
 
-
 ## 使用viewer
 [nerfstudio viewer](https://viewer.nerf.studio/)
 

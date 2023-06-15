@@ -28,7 +28,12 @@ archive_dir: archives
 category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
-skip_render: [README.md,draw/**,wssb.md,_post/.obsidian/**,_post/Scripts/**,_post/Templates/**]
+skip_render: 
+  - 'README.md'
+  - 'draw/**'
+  - '_posts/.obsidian/**'
+  - '_posts/Scripts/**'
+  - '_posts/Templates/**'
 
 
 # Writing

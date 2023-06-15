@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "NeRF/Surface Reconstruction/Neus.md",
+                "file": "NeRF/NeRF-Studio.md",
                 "mode": "source",
                 "backlinks": false,
                 "source": false
@@ -81,7 +81,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "NeRF/Surface Reconstruction/Neus.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -112,9 +111,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "NeRF/Surface Reconstruction/Neus.md"
-              }
+              "state": {}
             }
           },
           {
@@ -149,7 +146,6 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "NeRF/Surface Reconstruction/Neus.md",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -219,24 +215,24 @@
   },
   "left-ribbon": {
     "hiddenItems": {
+      "templater-obsidian:Templater": false,
+      "table-editor-obsidian:Advanced Tables Toolbar": false,
       "canvas:新建白板": false,
       "switcher:打开快速切换": false,
-      "graph:查看关系图谱": false,
       "daily-notes:打开/创建今天的日记": false,
-      "templates:插入模板": false,
+      "templates:插入模板": true,
       "command-palette:打开命令面板": false,
+      "graph:查看关系图谱": false,
       "markdown-importer:打开 Markdown 格式转换器": false,
       "audio-recorder:开始/结束录音": false,
-      "workspaces:管理工作区布局": false,
-      "table-editor-obsidian:Advanced Tables Toolbar": false,
-      "templater-obsidian:Templater": false
+      "workspaces:管理工作区布局": false
     }
   },
-  "active": "5b6d0bfa996a2173",
+  "active": "b54784dd06945442",
   "lastOpenFiles": [
-    "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl.md",
-    "NeRF/Surface Reconstruction/Neus.md",
     "NeRF/NeRF-Studio.md",
+    "NeRF/Surface Reconstruction/Neus.md",
+    "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl.md",
     "Python Practise/Make-Python_爬虫.md",
     "Learn/未命名",
     "Python Practise/Make-mengya.md",

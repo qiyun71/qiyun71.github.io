@@ -1,16 +1,16 @@
 {
   "recentFiles": [
     {
+      "basename": "NeRF-Studio",
+      "path": "NeRF/NeRF-Studio.md"
+    },
+    {
       "basename": "Neus",
       "path": "NeRF/Surface Reconstruction/Neus.md"
     },
     {
       "basename": "Neus-Instant-nsr-pl",
       "path": "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl.md"
-    },
-    {
-      "basename": "NeRF-Studio",
-      "path": "NeRF/NeRF-Studio.md"
     },
     {
       "basename": "Make-Python_爬虫",

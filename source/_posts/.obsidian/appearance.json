@@ -6,7 +6,7 @@
   "interfaceFontFamily": "HarmonyOS Sans SC,HarmonyOS Sans TC,JetBrains Mono",
   "textFontFamily": "HarmonyOS Sans SC,JetBrains Mono",
   "monospaceFontFamily": "HarmonyOS Sans SC,JetBrains Mono",
-  "accentColor": "",
+  "accentColor": "#51a1cd",
   "nativeMenus": false,
   "enabledCssSnippets": [
     "custom-admonitions.838117"
