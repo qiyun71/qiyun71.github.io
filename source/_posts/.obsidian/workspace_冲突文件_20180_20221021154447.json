@@ -1,0 +1,212 @@
+{
+  "main": {
+    "id": "57bed02957ac2c76",
+    "type": "split",
+    "children": [
+      {
+        "id": "15d905b1c9ba6324",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b3012dd735617800",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "研究生/Matlab笔记.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "e47f12396c3f44e2",
+    "type": "split",
+    "children": [
+      {
+        "id": "4b1070af652f8263",
+        "type": "tabs",
+        "dimension": 47.42138364779874,
+        "children": [
+          {
+            "id": "8e8a871735863769",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "byCreatedTimeReverse"
+              }
+            }
+          },
+          {
+            "id": "fe80941d99755e63",
+            "type": "leaf",
+            "state": {
+              "type": "calendar",
+              "state": {}
+            }
+          },
+          {
+            "id": "15b0ca6b5a59a5e6",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "b3a1783d0ecb065f",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          },
+          {
+            "id": "917cbf8f3752e4ec",
+            "type": "leaf",
+            "state": {
+              "type": "advanced-tables-toolbar",
+              "state": {}
+            }
+          }
+        ]
+      },
+      {
+        "id": "bc28ed75956b6d1b",
+        "type": "tabs",
+        "dimension": 52.57861635220126,
+        "children": [
+          {
+            "id": "086707e82c339e3f",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "研究生/Matlab笔记.md"
+              }
+            }
+          },
+          {
+            "id": "649ba9adaacda732",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": false
+              }
+            }
+          },
+          {
+            "id": "39287e9bb20932ab",
+            "type": "leaf",
+            "state": {
+              "type": "localgraph",
+              "state": {
+                "file": "研究生/Matlab笔记.md",
+                "options": {
+                  "collapse-filter": true,
+                  "search": "",
+                  "localJumps": 4,
+                  "localBacklinks": true,
+                  "localForelinks": true,
+                  "localInterlinks": false,
+                  "showTags": false,
+                  "showAttachments": false,
+                  "hideUnresolved": false,
+                  "collapse-color-groups": true,
+                  "colorGroups": [
+                    {
+                      "query": "",
+                      "color": {
+                        "a": 1,
+                        "rgb": 14048348
+                      }
+                    }
+                  ],
+                  "collapse-display": false,
+                  "showArrow": true,
+                  "textFadeMultiplier": 0,
+                  "nodeSizeMultiplier": 1,
+                  "lineSizeMultiplier": 1,
+                  "collapse-forces": false,
+                  "centerStrength": 0.518713248970312,
+                  "repelStrength": 10,
+                  "linkStrength": 1,
+                  "linkDistance": 250,
+                  "scale": 0.701326409323112,
+                  "close": true
+                }
+              }
+            }
+          }
+        ],
+        "currentTab": 2
+      }
+    ],
+    "direction": "horizontal",
+    "width": 264
+  },
+  "right": {
+    "id": "030ccac2adcfb23a",
+    "type": "split",
+    "children": [
+      {
+        "id": "9a76ee4b37c02b43",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d6cc3bfe65089281",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "研究生/Matlab笔记.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 266.6190490722656,
+    "collapsed": true
+  },
+  "ribbon": {
+    "mostRecentAction": ""
+  },
+  "active": "b3012dd735617800",
+  "lastOpenFiles": [
+    "研究生/信号分析与处理/Matlab信号处理相关.md",
+    "研究生/信号分析与处理/信号分析与处理.md",
+    "研究生/Matlab笔记.md",
+    "研究生/深度学习/人工智能导论/AAAI-2022-Visual Sound Localization in the Wild by Cross-Modal Interference Erasing.md",
+    "Blog/Blog.md",
+    "研究生/研究生.md",
+    "研究生/学习生活/学习生活.md",
+    "研究生/List/List.md",
+    "研究生/深度学习/人工智能导论/人工智能导论.md",
+    "研究生/深度学习/人工智能导论/Python_AI.md"
+  ]
+}

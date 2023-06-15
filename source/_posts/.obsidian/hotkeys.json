@@ -1,0 +1,59 @@
+{
+  "obsidian-plugin-toc:create-toc": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "Numpad6"
+    }
+  ],
+  "markdown-importer:open": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "M"
+    }
+  ],
+  "editor:fold-all": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "PageUp"
+    }
+  ],
+  "editor:unfold-all": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "PageDown"
+    }
+  ],
+  "editor:toggle-highlight": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "="
+    }
+  ],
+  "editor:toggle-code": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "-"
+    }
+  ],
+  "editor:toggle-strikethrough": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "Delete"
+    }
+  ]
+}

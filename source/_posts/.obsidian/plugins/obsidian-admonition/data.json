@@ -1,0 +1,28 @@
+{
+  "userAdmonitions": {},
+  "syntaxHighlight": true,
+  "copyButton": true,
+  "version": "9.3.1",
+  "autoCollapse": true,
+  "defaultCollapseType": "closed",
+  "injectColor": true,
+  "parseTitles": true,
+  "dropShadow": true,
+  "hideEmpty": false,
+  "open": {
+    "admonitions": true,
+    "icons": false,
+    "other": false,
+    "advanced": true
+  },
+  "icons": [],
+  "useFontAwesome": true,
+  "rpgDownloadedOnce": false,
+  "msDocConverted": false,
+  "useSnippet": true,
+  "snippetPath": "custom-admonitions.838117",
+  "syncLinks": true,
+  "enableMarkdownProcessor": false,
+  "allowMSSyntax": true,
+  "livePreviewMS": true
+}

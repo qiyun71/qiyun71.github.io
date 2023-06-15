@@ -1,0 +1,27 @@
+{
+  "enabledButtons": [
+    {
+      "id": "editor:toggle-code",
+      "icon": "code-glyph",
+      "name": "代码块",
+      "showButtons": "both"
+    },
+    {
+      "id": "editor:insert-link",
+      "icon": "link-glyph",
+      "name": "插入链接",
+      "showButtons": "both"
+    },
+    {
+      "id": "editor:toggle-blockquote",
+      "icon": "quote-glyph",
+      "name": "引用",
+      "showButtons": "both"
+    }
+  ],
+  "desktop": true,
+  "titleLeft": [],
+  "titleRight": [],
+  "titleCenter": [],
+  "paneRelief": false
+}

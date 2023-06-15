@@ -4,7 +4,7 @@ date: 2023-06-14 23:15:07
 tags:
     - Neus
     - Training & Inference Efficiency
-categories: NeRF
+categories: NeRF/Surface Reconstruction
 ---
 
 使用[Instant-ngp](https://github.com/NVlabs/instant-ngp)中的技术，使Neus可以更快的进行inference，大概只需要5~10min生成一个模型

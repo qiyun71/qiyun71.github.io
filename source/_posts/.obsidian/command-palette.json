@@ -1,0 +1,9 @@
+{
+  "pinned": [
+    "markdown-prettifier:markdown-prettifier-run",
+    "obsidian-admonition:insert-admonition",
+    "obsidian-plugin-toc:create-toc",
+    "workspace:export-pdf",
+    "open-with-default-app:show"
+  ]
+}

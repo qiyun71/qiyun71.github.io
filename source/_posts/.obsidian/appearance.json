@@ -1,0 +1,15 @@
+{
+  "baseFontSize": 18,
+  "theme": "system",
+  "translucency": false,
+  "cssTheme": "Minimal",
+  "interfaceFontFamily": "HarmonyOS Sans SC,HarmonyOS Sans TC,JetBrains Mono",
+  "textFontFamily": "HarmonyOS Sans SC,JetBrains Mono",
+  "monospaceFontFamily": "HarmonyOS Sans SC,JetBrains Mono",
+  "accentColor": "",
+  "nativeMenus": false,
+  "enabledCssSnippets": [
+    "custom-admonitions.838117"
+  ],
+  "showViewHeader": false
+}

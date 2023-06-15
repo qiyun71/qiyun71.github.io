@@ -1,0 +1,203 @@
+{
+  "recentFiles": [
+    {
+      "basename": "Neus",
+      "path": "NeRF/Surface Reconstruction/Neus.md"
+    },
+    {
+      "basename": "Neus-Instant-nsr-pl",
+      "path": "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl.md"
+    },
+    {
+      "basename": "NeRF-Studio",
+      "path": "NeRF/NeRF-Studio.md"
+    },
+    {
+      "basename": "Make-Python_爬虫",
+      "path": "Python Practise/Make-Python_爬虫.md"
+    },
+    {
+      "basename": "Make-mengya",
+      "path": "Python Practise/Make-mengya.md"
+    },
+    {
+      "basename": "NeRF-Principle",
+      "path": "NeRF/NeRF-Principle.md"
+    },
+    {
+      "basename": "Front-matter.md",
+      "path": "Templates/Front-matter.md.md"
+    },
+    {
+      "basename": "Learn-VB作业1",
+      "path": "Learn/Learn-VB作业1.md"
+    },
+    {
+      "basename": "Make-Python_bilibili",
+      "path": "Python Practise/Make-Python_bilibili.md"
+    },
+    {
+      "basename": "2023-06-02_员琪",
+      "path": "NeRF/汇报/2023-06-02_员琪.md"
+    },
+    {
+      "basename": "2023-06-01_员琪",
+      "path": "NeRF/汇报/2023-06-01_员琪.md"
+    },
+    {
+      "basename": "2023-05-31_员琪",
+      "path": "NeRF/汇报/2023-05-31_员琪.md"
+    },
+    {
+      "basename": "Instant-nsr-pl",
+      "path": "NeRF/文献阅读&code/表面重建/速度改进/Instant-nsr-pl.md"
+    },
+    {
+      "basename": "Code",
+      "path": "NeRF/Py_Code&Math/Code.md"
+    },
+    {
+      "basename": "NeRF Neural Radiance Field in 3D Vision, A Comprehensive Review",
+      "path": "NeRF/文献阅读&code/review/NeRF Neural Radiance Field in 3D Vision, A Comprehensive Review.md"
+    },
+    {
+      "basename": "NeRF代码",
+      "path": "NeRF/文献阅读&code/NeRF初始文原理/NeRF代码.md"
+    },
+    {
+      "basename": "NeRF论文",
+      "path": "NeRF/文献阅读&code/NeRF初始文原理/NeRF论文.md"
+    },
+    {
+      "basename": "NeRF原理简述",
+      "path": "NeRF/文献阅读&code/NeRF初始文原理/NeRF原理简述.md"
+    },
+    {
+      "basename": "Neus",
+      "path": "NeRF/文献阅读&code/表面重建/Neus.md"
+    },
+    {
+      "basename": "NeRF++",
+      "path": "NeRF/文献阅读&code/前背景分离/NeRF++.md"
+    },
+    {
+      "basename": "体渲染函数公式",
+      "path": "NeRF/文献阅读&code/NeRF初始文原理/公式推导/体渲染函数公式.md"
+    },
+    {
+      "basename": "NeRF原理笔记",
+      "path": "NeRF/文献阅读&code/NeRF初始文原理/公式推导/NeRF原理笔记.md"
+    },
+    {
+      "basename": "光线模型",
+      "path": "NeRF/文献阅读&code/NeRF初始文原理/公式推导/光线模型.md"
+    },
+    {
+      "basename": "总结",
+      "path": "NeRF/文献阅读&code/review/awesome-NeRF/总结.md"
+    },
+    {
+      "basename": "Nerf-studio",
+      "path": "NeRF/文献阅读&code/框架/Nerf-studio.md"
+    },
+    {
+      "basename": "NeRF发展",
+      "path": "NeRF/文献阅读&code/review/NeRF发展.md"
+    },
+    {
+      "basename": "Matlab笔记",
+      "path": "研究生/编程/Matlab笔记.md"
+    },
+    {
+      "basename": "LaTex笔记",
+      "path": "研究生/编程/LaTex笔记.md"
+    },
+    {
+      "basename": "文献阅读",
+      "path": "模板/文献阅读.md"
+    },
+    {
+      "basename": "nerf_math_Chinese",
+      "path": "附件/nerf_math_Chinese.pdf"
+    },
+    {
+      "basename": "Urban Radiance Fields",
+      "path": "NeRF/文献阅读&code/大规模场景/Urban Radiance Fields.md"
+    },
+    {
+      "basename": "more_results2",
+      "path": "附件/more_results2.mp4"
+    },
+    {
+      "basename": "DL",
+      "path": "Work/深度学习/DL.md"
+    },
+    {
+      "basename": "AutoDL",
+      "path": "Work/深度学习/AutoDL.md"
+    },
+    {
+      "basename": "Dogs_VS_Cats代码",
+      "path": "Work/深度学习/Pytorch/Pytorch项目代码/Dogs_VS_Cats代码.md"
+    },
+    {
+      "basename": "Pytorch学习",
+      "path": "Work/深度学习/Pytorch/Pytorch学习.md"
+    },
+    {
+      "basename": "2.1 ndarray数据操作",
+      "path": "Work/深度学习/动手学深度学习课件/2.1 ndarray数据操作.md"
+    },
+    {
+      "basename": "Python查缺补漏",
+      "path": "研究生/编程/Python/Python查缺补漏.md"
+    },
+    {
+      "basename": "submit-pr",
+      "path": "NeRF/文献阅读&code/review/awesome-NeRF/submit-pr.md"
+    },
+    {
+      "basename": "MindSpore实验环境搭建",
+      "path": "Work/深度学习/人工智能导论/MindSpore实验环境搭建.md"
+    },
+    {
+      "basename": "Pasted image 20221115130308",
+      "path": "附件/Pasted image 20221115130308.png"
+    },
+    {
+      "basename": "Python_numpy",
+      "path": "Work/深度学习/Pytorch/Python_numpy.md"
+    },
+    {
+      "basename": "Pytorch项目",
+      "path": "Work/深度学习/Pytorch/Pytorch项目.md"
+    },
+    {
+      "basename": "2023",
+      "path": "研究生/学习生活/记日月/2023.md"
+    },
+    {
+      "basename": "英语",
+      "path": "研究生/List/英语.md"
+    },
+    {
+      "basename": "建模与仿真",
+      "path": "研究生/研一课程/建模与仿真/建模与仿真.md"
+    },
+    {
+      "basename": "2945.468400",
+      "path": "附件/2945.468400.pdf"
+    },
+    {
+      "basename": "2210.00379",
+      "path": "附件/2210.00379.pdf"
+    },
+    {
+      "basename": "AAAI-2022-Visual Sound Localization in the Wild by Cross-Modal Interference Erasing",
+      "path": "Work/深度学习/人工智能导论/AAAI-2022-Visual Sound Localization in the Wild by Cross-Modal Interference Erasing.md"
+    }
+  ],
+  "omittedPaths": [],
+  "maxLength": null,
+  "openType": "tab"
+}

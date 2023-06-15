@@ -1,0 +1,16 @@
+{
+  "customFolder": "Day Planners",
+  "mode": 0,
+  "mermaid": false,
+  "notesToDates": [
+    {
+      "notePath": "任务规划/日程计划.md",
+      "date": "Tue Nov 15 2022"
+    }
+  ],
+  "completePastItems": true,
+  "circularProgress": true,
+  "nowAndNextInStatusBar": true,
+  "showTaskNotification": false,
+  "timelineZoomLevel": 4
+}
