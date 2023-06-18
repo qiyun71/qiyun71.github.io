@@ -8,19 +8,33 @@
         "type": "tabs",
         "children": [
           {
-            "id": "5b6d0bfa996a2173",
+            "id": "9ab3093fe5619332",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "NeRF/NeRF-Studio.md",
+                "file": "NeRF/NeRF-Principle.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "773555be26e1f31b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "NeRF/NeRF-code.md",
                 "mode": "source",
                 "backlinks": false,
                 "source": false
               }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -81,6 +95,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "NeRF/NeRF-code.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -111,7 +126,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "NeRF/NeRF-code.md"
+              }
             }
           },
           {
@@ -146,6 +163,7 @@
             "state": {
               "type": "localgraph",
               "state": {
+                "file": "NeRF/NeRF-code.md",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -228,22 +246,23 @@
       "workspaces:管理工作区布局": false
     }
   },
-  "active": "b54784dd06945442",
+  "active": "773555be26e1f31b",
   "lastOpenFiles": [
-    "NeRF/NeRF-Studio.md",
+    "NeRF/NeRF-Principle.md",
+    "NeRF/NeRF-code.md",
+    "Templates/Front-matter.md.md",
     "NeRF/Surface Reconstruction/Neus.md",
+    "NeRF/NeRF-Studio.md",
+    "Learn/Learn-VB作业1.md",
     "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl.md",
     "Python Practise/Make-Python_爬虫.md",
     "Learn/未命名",
     "Python Practise/Make-mengya.md",
-    "NeRF/NeRF-Principle.md",
-    "Templates/Front-matter.md.md",
     "NeRF/Nerfstudio/NeRFs.md",
     "Scripts/get_guid.js",
     "Scripts",
     "scripts",
     "未命名.canvas",
-    "Learn/Learn-VB作业1.md",
     "Templates",
     "img/VB/zy/zy1_1.png.md",
     "img/VB/zy",

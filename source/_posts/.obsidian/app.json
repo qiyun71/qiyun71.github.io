@@ -15,7 +15,7 @@
   "readableLineLength": false,
   "trashOption": "system",
   "alwaysUpdateLinks": true,
-  "attachmentFolderPath": "./attachments",
+  "attachmentFolderPath": "",
   "showFrontmatter": true,
   "useTab": false,
   "communityThemeSortOrder": "download",
@@ -25,5 +25,8 @@
   "rightToLeft": false,
   "showInlineTitle": false,
   "focusNewTab": true,
-  "useMarkdownLinks": true
+  "useMarkdownLinks": true,
+  "spellcheckLanguages": [
+    "zh-CN"
+  ]
 }
