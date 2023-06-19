@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "NeRF/NeRF-Principle.md",
+                "file": "Reports/2023-06-19.md",
                 "mode": "source",
                 "backlinks": false,
                 "source": false
@@ -22,6 +22,19 @@
           },
           {
             "id": "3bd848d7ec015305",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "0763dbe0b04f8e0d",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -95,7 +108,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "NeRF/NeRF-code.md",
+                "file": "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -127,7 +140,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "NeRF/NeRF-code.md"
+                "file": "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl.md"
               }
             }
           },
@@ -163,7 +176,7 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "NeRF/NeRF-code.md",
+                "file": "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl.md",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -248,15 +261,17 @@
   },
   "active": "3bd848d7ec015305",
   "lastOpenFiles": [
-    "NeRF/NeRF-Principle.md",
     "NeRF/NeRF-code.md",
-    "NeRF-code.md",
+    "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl.md",
+    "Reports/2023-06-19.md",
     "NeRF/NeRF-Studio.md",
-    "NeRF/NeRF-code 1.md",
+    "Reports",
+    "NeRF/NeRF-Principle.md",
     "NeRF/Surface Reconstruction/Neus.md",
+    "NeRF-code.md",
+    "NeRF/NeRF-code 1.md",
     "Templates/Front-matter.md.md",
     "Learn/Learn-VB作业1.md",
-    "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl.md",
     "Python Practise/Make-Python_爬虫.md",
     "Learn/未命名",
     "Python Practise/Make-mengya.md",
@@ -283,9 +298,7 @@
     "NeRF/文献阅读&code/NeRF初始文原理/NeRF原理简述.md",
     "NeRF/文献阅读&code/表面重建/Neus.md",
     "NeRF/文献阅读&code/前背景分离/NeRF++.md",
-    "NeRF/文献阅读&code/NeRF初始文原理/公式推导/体渲染函数公式.md",
     "附件/Pasted image 20230612205212.png",
-    "NeRF/文献阅读&code/框架",
     "附件/Pasted image 20230606154824.png",
     "附件/Pasted image 20230606154405.png",
     "附件/Pasted image 20230606154119.png",
