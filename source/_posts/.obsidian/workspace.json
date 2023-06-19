@@ -21,7 +21,7 @@
             }
           },
           {
-            "id": "773555be26e1f31b",
+            "id": "3bd848d7ec015305",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -246,13 +246,14 @@
       "workspaces:管理工作区布局": false
     }
   },
-  "active": "773555be26e1f31b",
+  "active": "3bd848d7ec015305",
   "lastOpenFiles": [
-    "NeRF/NeRF-Principle.md",
+    "NeRF/NeRF-code 1.md",
     "NeRF/NeRF-code.md",
-    "Templates/Front-matter.md.md",
-    "NeRF/Surface Reconstruction/Neus.md",
+    "NeRF/NeRF-Principle.md",
     "NeRF/NeRF-Studio.md",
+    "NeRF/Surface Reconstruction/Neus.md",
+    "Templates/Front-matter.md.md",
     "Learn/Learn-VB作业1.md",
     "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl.md",
     "Python Practise/Make-Python_爬虫.md",
@@ -283,7 +284,6 @@
     "NeRF/文献阅读&code/前背景分离/NeRF++.md",
     "NeRF/文献阅读&code/NeRF初始文原理/公式推导/体渲染函数公式.md",
     "NeRF/文献阅读&code/NeRF初始文原理/公式推导/NeRF原理笔记.md",
-    "NeRF/文献阅读&code/NeRF初始文原理/公式推导/光线模型.md",
     "附件/Pasted image 20230612205212.png",
     "NeRF/文献阅读&code/框架",
     "附件/Pasted image 20230606154824.png",

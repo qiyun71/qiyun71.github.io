@@ -31,10 +31,10 @@ pip install ninja git+https://github.com/NVlabs/tiny-cuda-nn/#subdirectory=bindi
 pip install nerfstudio
 
 默认源不好用，使用清华源
-pip install scrapy -i https://pypi.tuna.tsinghua.edu.cn/simple
+pip install nerfstudio -i https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 
-安装FFmpeg
+### 安装FFmpeg
 [在Ubuntu 20.04 中安装FFMPEG-之路教程 (onitroad.com)](https://www.onitroad.com/jc/linux/ubuntu/faq/how-to-install-ffmpeg-on-ubuntu-20-04.html)
 ```
 sudo apt update 
@@ -42,6 +42,10 @@ sudo apt install ffmpeg
 
 ffmpeg -version
 ```
+
+### 安装Colmap
+
+`sudo apt install colmap`
 
 ## 训练model
 
@@ -59,8 +63,9 @@ AutoDL连接不了google drive，只能使用自己的数据集or：
 
 `ns-process-data {images, video} --data {DATA_PATH} --output-dir {PROCESSED_DATA_DIR}`
 
+eg: 
 cd autodl-tmp
-`ns-process-data images --data data/images --output-dir data/nerfstudio/poster`
+`ns-process-data images --data data/images --output-dir data/nerfstudio/images_name`
 
 ### Train model
 `ns-train nerfacto --data data/nerfstudio/poster`

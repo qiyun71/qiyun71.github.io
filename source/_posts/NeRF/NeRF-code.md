@@ -13,19 +13,20 @@ categories: NeRF
 code流程：(按照函数)
 1. train()
     1. config_parser() 命令行参数输入
-    2. load_blender_data() 数据加载
+    2. load_???_data() 数据加载
         1. pose_spherical() 坐标变换矩阵，c2w （渲染视频时，相机的位姿）
     3. create_nerf() 创建NeRF网络
         1. get_embedder() 位置编码
             1. Embedder()
         2. NeRF() 构建网络
-        包括了一个使用run_network的函数network_query_fn
-    1. if args.render_only: render_path() 渲染视频
-        1. render() 
-        2. to8b()  --> to8b = lambda x : (255*np.clip(x,0,1)).astype(np.uint8)
-    2. get_rays_np() 获取光线 numpy
-    3. get_rays() 获取光线 Tensor
-    4. render() 渲染
+            包括了一个构建了一个run_network的函数network_query_fn
+    4. if args.render_only: 
+        1. render_path() 渲染视频
+            1. render() 
+        2. to8b()  - 将rgbs图片的rgb值放大255倍`to8b = lambda x : (255*np.clip(x,0,1)).astype(np.uint8) `
+    5. get_rays_np() 获取光线 numpy
+    6. get_rays() 获取光线 Tensor
+    7. render() 渲染
         1. get_rays()
         2. ndc_rays()
         3. batchify_rays()
@@ -35,8 +36,9 @@ code流程：(按照函数)
                         2. fn = network_fn = model
                 2. raw2outputs()
                 3. sample_pdf()
-    5. img2mse() 计算loss
-    6. mse2psnr() 计算信噪比
+    8. img2mse() 计算loss
+    9. mse2psnr() 计算信噪比
+
 
 
 # config_parser()
@@ -76,7 +78,21 @@ args = parser.parse_args()
 basedir = args.basedir
 ```
 
-# load_blender_data(basedir, half_res=False, testskip=1)
+# load_???\_data()
+## load_llff_data()
+
+输入：
+- args.datadir ：'./data/llff/fern'
+- args.factor,
+- recenter=True, 
+- bd_factor=.75,
+- spherify=args.spherify
+- path_zflat=False
+
+输出：
+
+
+## load_blender_data(basedir, half_res=False, testskip=1)
 
 输入：
 - basedir，数据集路径'E:\\3\\Work\dataset\\nerf_synthetic\\chair'
@@ -120,9 +136,40 @@ args = parser.parse_args()
 输出：
 - render_kwargs_train
 - render_kwargs_test
+```
+render_kwargs_train = {
+    'network_query_fn' : network_query_fn,
+    'perturb' : args.perturb, # 默认为1 --perturb：在训练时对输入进行扰动
+    'N_importance' : args.N_importance, # --N_importance：每条射线的附加精细采样数
+    'network_fine' : model_fine,
+    'N_samples' : args.N_samples, # --N_samples：每条射线的粗略采样数
+    'network_fn' : model,
+    'use_viewdirs' : args.use_viewdirs, # --use_viewdirs：使用全5D的输入代替3D的输入
+    'white_bkgd' : args.white_bkgd,
+    'raw_noise_std' : args.raw_noise_std, # 默认0 --raw_noise_std：添加到输入的噪声标准差
+}
+
+# NDC only good for LLFF-style forward facing data
+# NDC 全称是 Normalized Device Coordinates，即归一化设备坐标
+if args.dataset_type != 'llff' or args.no_ndc:
+    print('Not ndc!')
+    render_kwargs_train['ndc'] = False
+    render_kwargs_train['lindisp'] = args.lindisp
+    
+render_kwargs_test = {k : render_kwargs_train[k] for k in render_kwargs_train}
+render_kwargs_test['perturb'] = False
+render_kwargs_test['raw_noise_std'] = 0.
+```
 - start ：global step
-- grad_vars
+- grad_vars：model的参数列表，包括权重和偏置
+    - `grad_vars = list(model.parameters())`
+    - if args.N_importance > 0: `grad_vars += list(model_fine.parameters())`
 - optimizer
+```
+optimizer = torch.optim.Adam(params=grad_vars, lr=args.lrate, betas=(0.9, 0.999))
+
+if 加载了ckpt ：  optimizer.load_state_dict(ckpt['optimizer_state_dict'])
+```
 
 ## NeRF(nn.Module)
 
@@ -131,6 +178,8 @@ args = parser.parse_args()
 def __init__(self, D=8, W=256, input_ch=3, input_ch_views=3, output_ch=4, skips=[4], use_viewdirs=False)
 
 >[Pytorch 中的 forward理解 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/357021687)
+
+
 ```
 model = NeRF(...) 实例化
 model(input) 相当于 model.forward(input)
@@ -142,8 +191,7 @@ model(input) 相当于 model.forward(input)
 - use_viewdirs=args.use_viewdirs
 
 
-
-# get_rays_np(H, W, K, c2w) numpy版本(narray)
+## get_rays_np(H, W, K, c2w) numpy版本(narray)
 
 通过输入的图片大小和相机参数，得到从相机原点到图片每个像素的光线（方向向量d和相机原点o）
 
@@ -171,15 +219,50 @@ c2w = np.array([
 - rays_o：光线原点（世界坐标系下）(800, 800, 3)
 - rays_d：光线的方向向量（世界坐标系下）(800, 800, 3)
 
-# render()
 
-`(H, W, K, chunk=1024*32, rays=None, c2w=None, ndc=True,near=0., far=1.,use_viewdirs=False, c2w_staticcam=None, **kwargs)`
 
-渲染流程图
+# if render_only:
+## render_path()
 
-<div class="mxgraph" style="max-width:100%;border:1px solid transparent;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;nav&quot;:true,&quot;resize&quot;:true,&quot;toolbar&quot;:&quot;zoom layers lightbox&quot;,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;Electron\&quot; modified=\&quot;2023-06-18T08:47:40.341Z\&quot; agent=\&quot;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/14.6.13 Chrome/89.0.4389.128 Electron/12.0.7 Safari/537.36\&quot; etag=\&quot;FGUkbtxcUlMtdqIB7Mou\&quot; version=\&quot;14.6.13\&quot; type=\&quot;device\&quot;&gt;&lt;diagram id=\&quot;SaKEZgpW3Xd3I7sOL0pk\&quot; name=\&quot;第 1 页\&quot;&gt;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&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
+输入：
+- render_poses, 测试集的渲染相机位姿  200 * 4 * 4 
+- hwf, 
+- K, 相机内参矩阵
+- chunk, `args.chunk=1024*32`
+- render_kwargs = render_kwargs_test
+- gt_imgs=None, 
+- savedir=None, 
+- render_factor=0
+
+输出：
+- rgbs, 200 x W x H x 3
+- disps，200xWxH
+
+```
+render_path(render_poses, hwf, K, args.chunk, render_kwargs_test, gt_imgs=images, savedir=testsavedir, render_factor=args.render_factor)
+```
+
+### render()
+
+```
+rgb, disp, acc, _ = render(H, W, K, chunk=chunk, c2w=c2w[:3,:4], **render_kwargs)
+```
+
+### 
+
+
+需要对render输入的光线做batch: `rays = batch_rays`
+
+#### 在train()中
+
+<div class="mxgraph" style="max-width:100%;border:1px solid transparent;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;nav&quot;:true,&quot;resize&quot;:true,&quot;toolbar&quot;:&quot;zoom layers lightbox&quot;,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;Electron\&quot; modified=\&quot;2023-06-19T03:20:26.056Z\&quot; agent=\&quot;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/14.6.13 Chrome/89.0.4389.128 Electron/12.0.7 Safari/537.36\&quot; etag=\&quot;B7AM0VIngZ7lAPHURmRf\&quot; version=\&quot;14.6.13\&quot; type=\&quot;device\&quot;&gt;&lt;diagram id=\&quot;bZodXSPFXZZJwMvDvhFf\&quot; name=\&quot;第 1 页\&quot;&gt;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&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
 <script type="text/javascript" src="https://viewer.diagrams.net/js/viewer-static.min.js"></script>
 
+# render()
+
+```
+(H, W, K, chunk=1024*32, rays=None, c2w=None, ndc=True,near=0., far=1.,use_viewdirs=False, c2w_staticcam=None, **kwargs)
+```
 
 输入
 - H
@@ -190,6 +273,7 @@ c2w = np.array([
 - verbose=i < 10   
 - retraw=True
 - render_kwargs_train
+
 ```
 render_kwargs_train = {
     'network_query_fn' : network_query_fn,
@@ -205,10 +289,18 @@ render_kwargs_train = {
 ```
 
 输出：`ret_list + [ret_dict]`
-- rgb: `all_ret['rgb_map']`
+- rgb: `all_ret['rgb_map']` 
 - disp: `all_ret['disp_map']`
 - acc: `all_ret['acc_map']`
 - extras: `[{'raw': raw , '...': ...}]`
+eg:  `all_ret['raw'] : W * H * N_samples +N_importance * 4`
+eg: `all_ret['rgb_map'] : W * H * 3`
+
+
+## 渲染流程图
+
+<div class="mxgraph" style="max-width:100%;border:1px solid transparent;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;nav&quot;:true,&quot;resize&quot;:true,&quot;toolbar&quot;:&quot;zoom layers lightbox&quot;,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;Electron\&quot; modified=\&quot;2023-06-19T05:46:35.107Z\&quot; agent=\&quot;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/14.6.13 Chrome/89.0.4389.128 Electron/12.0.7 Safari/537.36\&quot; etag=\&quot;Q9G_GM6F3ujZ4JYMg4De\&quot; version=\&quot;14.6.13\&quot; type=\&quot;device\&quot;&gt;&lt;diagram id=\&quot;SaKEZgpW3Xd3I7sOL0pk\&quot; name=\&quot;第 1 页\&quot;&gt;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&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
+<script type="text/javascript" src="https://viewer.diagrams.net/js/viewer-static.min.js"></script>
 
 ## get_rays(H, W, K, c2w) torch版本(tensor)
 
@@ -241,6 +333,8 @@ c2w = np.array([
 
 ## ndc_rays(H, W, focal, near, rays_o, rays_d)
 
+仅需要对LLFF做Projection 变换到NDC坐标系下
+
 输入：
 - H
 - W
@@ -254,10 +348,10 @@ c2w = np.array([
 - rays_d
 
 
-## batchify_rays(rays_flat, chunk=1024*32, **kwargs)
+## batchify_rays(rays_flat, chunk=1024\*32, \*\*kwargs)
 
 输入：
-- rays_flat
+- rays_flat: (WxH)x8 or (WxH)x11
 - chunk=1024\*32
 - \*\*kwargs
 
@@ -265,7 +359,7 @@ c2w = np.array([
 输出：
 - all_ret: 将ret = {'rgb_map' : rgb_map, 'disp_map' : disp_map, 'acc_map' : acc_map} 拼接起来
 
-ret：chunk(1024 \* 32) --> all_ret：800x800
+**ret：chunk(1024 \* 32) --> all_ret：800x800**
 
 ### render_rays()
 
@@ -366,3 +460,18 @@ chunk = N_rays，射线数
 
 输出：
 - samples:  chunk * N_importance
+
+
+
+# img2mse() and mse2psnr()
+
+```
+img2mse = lambda x, y : torch.mean((x - y) ** 2)
+mse2psnr = lambda x : -10. * torch.log(x) / torch.log(torch.Tensor([10.]))
+```
+
+ 数学公式： 
+ 
+ $\text{MSE}(x, y) = \frac{1}{N}\sum_{i=1}^{N}(x_i - y_i)^2$
+
+ $\text{PSNR}(x) = -10 \cdot \frac{\ln(x)}{\ln(10)}$

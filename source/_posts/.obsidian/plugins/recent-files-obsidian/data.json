@@ -9,16 +9,16 @@
       "path": "NeRF/NeRF-Principle.md"
     },
     {
-      "basename": "Front-matter.md",
-      "path": "Templates/Front-matter.md.md"
+      "basename": "NeRF-Studio",
+      "path": "NeRF/NeRF-Studio.md"
     },
     {
       "basename": "Neus",
       "path": "NeRF/Surface Reconstruction/Neus.md"
     },
     {
-      "basename": "NeRF-Studio",
-      "path": "NeRF/NeRF-Studio.md"
+      "basename": "Front-matter.md",
+      "path": "Templates/Front-matter.md.md"
     },
     {
       "basename": "Learn-VB作业1",
@@ -195,10 +195,6 @@
     {
       "basename": "2210.00379",
       "path": "附件/2210.00379.pdf"
-    },
-    {
-      "basename": "AAAI-2022-Visual Sound Localization in the Wild by Cross-Modal Interference Erasing",
-      "path": "Work/深度学习/人工智能导论/AAAI-2022-Visual Sound Localization in the Wild by Cross-Modal Interference Erasing.md"
     }
   ],
   "omittedPaths": [],

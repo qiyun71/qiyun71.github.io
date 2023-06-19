@@ -90,12 +90,20 @@ NeRF的体积渲染方法提出沿着每条光线进行多次采样（上图（a
 
 loss函数
 $$\mathcal L=\mathcal L_{color}+\lambda\mathcal L_{reg}+\beta\mathcal L_{mask}.$$
-- $$\mathcal{L}_{color}=\frac{1}{m}\sum_k\mathcal{R}(\hat{C}_k,C_k).$$ 类似[IDR](https://lioryariv.github.io/idr/)
-- $$\mathcal{L}_{r e g}=\frac{1}{n m}\sum_{k,i}(\|\nabla f(\hat{\mathbf{p}}_{k,i})\|_{2}-1)^{2}.$$[IGR](https://github.com/amosgropp/IGR)
-- $$\mathcal{L}_{mask}=\mathrm{BCE}(M_k,\hat{O}_k)$$
-    - $$\hat{O}_k=\sum_{i=1}^n T_{k,i}\alpha_{k,i}$$ 为沿着相机ray的权重之和
-    - $$M_{k} ∈ {0, 1}$$为是否使用mask监督
-    - BCE是二值交叉熵损失
+$$\mathcal{L}_{color}=\frac{1}{m}\sum_k\mathcal{R}(\hat{C}_k,C_k).$$
+类似[IDR](https://lioryariv.github.io/idr/)
+
+---
+$$\mathcal{L}_{r e g}=\frac{1}{n m}\sum_{k,i}(\|\nabla f(\hat{\mathbf{p}}_{k,i})\|_{2}-1)^{2}.$$
+[IGR](https://github.com/amosgropp/IGR)
+
+---
+
+$$\mathcal{L}_{mask}=\mathrm{BCE}(M_k,\hat{O}_k)$$
+沿着相机ray的权重之和：
+$$\hat{O}_k=\sum_{i=1}^n T_{k,i}\alpha_{k,i}$$
+是否使用mask监督: (BCE是二值交叉熵损失)
+$$M_{k} ∈ {0, 1}$$
 
 分层采样类似NeRF
 
