@@ -10,36 +10,14 @@ categories: NeRF
 
 <!--more-->
 
-code流程：(按照函数)
-1. train()
-    1. config_parser() 命令行参数输入
-    2. load_???_data() 数据加载
-        1. pose_spherical() 坐标变换矩阵，c2w （渲染视频时，相机的位姿）
-    3. create_nerf() 创建NeRF网络
-        1. get_embedder() 位置编码
-            1. Embedder()
-        2. NeRF() 构建网络
-            包括了一个构建了一个run_network的函数network_query_fn
-    4. if args.render_only: 
-        1. render_path() 渲染视频
-            1. render() 
-        2. to8b()  - 将rgbs图片的rgb值放大255倍`to8b = lambda x : (255*np.clip(x,0,1)).astype(np.uint8) `
-    5. get_rays_np() 获取光线 numpy
-    6. get_rays() 获取光线 Tensor
-    7. render() 渲染
-        1. get_rays()
-        2. ndc_rays()
-        3. batchify_rays()
-            1. render_rays()
-                1. run_network()
-                        1. batchify()
-                        2. fn = network_fn = model
-                2. raw2outputs()
-                3. sample_pdf()
-    8. img2mse() 计算loss
-    9. mse2psnr() 计算信噪比
+# train流程：
+
+<iframe frameborder="0" style="width:100%;height:1724px;" src="https://viewer.diagrams.net/?highlight=0000ff&edit=_blank&layers=1&nav=1&title=train%E6%B5%81%E7%A8%8B.drawio#R7V1bk6O4Ff41rkoe4gKJ6%2BP0TM%2Fmsj1JZVJJ9sklG9kmDYgVcru9vz6SARss2aOYxoIUVVM9Rki2ONJ37jrM4Of0%2FSeK8u0LiXAyA1b0PoNfZgBA13f5f6LlULbYrmeVLRsaR1XbueF7%2FBuuGutuuzjCRasjIyRhcd5uXJEswyvWakOUkn2725ok7V%2FN0QZLDd9XKJFb%2FxVHbFu2BsA%2Ft%2F8Rx5tt%2Fcu2F5Z3UlR3rp6k2KKI7BtN8HkGP1NCWPkpff%2BME0G9mi7luK9X7p4mRnHGdAZ8%2B4ePf8qfQ7b6y28L9mf89PLPT3%2BoJluwQ%2F3AOOLPX10SyrZkQzKUPJ9bnyjZZREW32rxq3OfnwnJeaPNG%2F%2BDGTtUi4l2jPCmLUuT6i5%2Bj9m%2FxfC5W1390rjz5b365uPFob7IGD00BonLX5r3zsOOV%2FW4NclYNRHb49fl84qHvErGqqkgO7rCN2hXb0dEN5jd6AdOi81hgkmK%2Bfz4OIoTxOK39jxQtV03p37nFeUfqkX9Hxa4%2Bt43lOyqX2IUxdnvfi8t%2FHlZxUrstzHD33N0pMCeg7u9hGqyvmHK8PttwsqEqAc4YF6zi4pbBBV09mfk2TVj2DZQ51p9Uc%2BSyDThQxcfQBMf0CQ%2BgIQPLknW8WbBn7jA9CZOLDM4gf4lTmxPARSgAIrXG1CCCSh3AwVqAsW%2BsjEegxQoISUhKFrM4Nfy3yJCDI0DLyeBYQwvRuFiN8Byho4aLj1ue0dz2%2Fsmd72j3vXLBPO1oEPd89Cy5xpb3lNsedjXlvckSkpk4yZSLj6udjQ5PFG0ehUb40f0ayuuPVAT%2BJJmerLqGuRUMZATV%2FlwcvoSOXNS4EWRbzGNuf06wF3pBMPblTYcCyc%2BKy4tteWsxRiwgHVNYNszycNPzzMpp32ucWhyjW3Z0bGiGDG8yDBdD5AZKtRS6JtWS213Qsr9SNF1eNiOUaTILo9v%2BO9fBwgRaEkQcaCrB5HeFAYwuQQ7QETX5jMsTGSrL8NsT%2Bjr4tcdpofFOuN3jzcsussW1c0BQgiEkuniqLzq7kO96v4Eofsh5OlCCBiFkGzu8%2BkucLrEUTRIv7pC2sDAuLQZoXk6HKiEmlABRqECZUfYxA4%2FfI2h0eBJPc0GO4zX4ofoppjT0pdMsoQT7NMMeCgV7C5bFvmJWE1GuSXpclcYYZKh02KQriMzSMD5qCuzyKA3FjlpE%2FfDB%2BjarMA1CZ96mg34VKDJEdsOUZkAkt7tAePKhGzWHHAh0Y4%2FNWsTqGCUvOLPJCGUt2QkExBax0ly0YSSeJPxyxWnEubtT4KGIhjxqbqRxlF0xJ9qRdpr1seiQGlR3FA2hhzFmvQWxgGjSZzokwu5ulzIbBzBvcKFBAP6kdAeIENSOQIeypCgUV%2FayINvQNcRAIz60oDsCGAkWI5DZvvQNESAbDhc8po0TveUE0vsBSK6xhEmg6OuIydR%2BLoakdMbAzIT7%2FogO%2BAeKf6BDCjQzVuEXeNd1dC%2FkZjP8ezbtqzLHRXaFzulfIhq4MVmOc2kQxqfMxbtbYC2J9TNLAiMZojX07zwZFN0KBZZPgLVT5FpoM15e8s0gHI6cSYLrf9bU9R2ZXVcoWs81BSFo0lKHqA2DnUj29BoOnN9OnESWH2usRcYFViym%2B%2Fsphi%2BbAp1DzP1lp%2FgTPmiHUDia4LEsdQ7o6NVAAOvtZ1s61JgljPrzSaAcmZ%2BrS8OEIAQtMkV6uag9ubxcCab6n701Qrjj9Fn1Kaqp9nU%2FqPVCSOlHytJ1uvB48W2jLsIXaPiauR6u6PrxHKMBsA9b2KK%2Fa%2BxZ3SNHdklskRstY3Xh7FoD7ZlPKboTkjpgBTdQLxj9lD2tUD8UHHiSEaJeZxM3r4OONE2co3G3r3JlHrAGntdHRndeKHsbhj2kSSJF9owNM0Lp2OvHXCim4HvGj32Wk9ToV0PECTepWJtHiQemEByN0hc7dDRh3jFP1GuCDc65MLZXTS%2B%2BcJp7l3yZOBfFBO9GOA6twfwD%2BUcPtS17sqRrcZJ3PqIbqMpLQvSDh3cwNK0BnpLhPOMnjMcObg9Xae7Z%2FQMmic73SnaA7Jj%2BY6NwmoGitMaDxaC02GzDjjRTfjr7Ie9SwhKMg0Gt4WgFGq%2BGNCPEKyp2IBxgdI8wYs8GmKhIwnF0DGN4jrGPaH4HhTr%2BojNZkF5so%2BYEbrazleIDQ4jUhzF0dUI%2B8PIdDCx3sI6NWqN%2BjbqaTb2OkqSBcVCWIlcCi8RadRLyj9txCd%2BZ5HEhbg9A0%2Fir3tsi%2BIVm7lfBocPG7hz0E4TtB1VppKjqDzQW56gL0viY3FgkbgyosrAtoKOD63B6gM1HX%2F%2B07fnl79%2BGREpVfbJY0l5pUp79DYeKkJVRtVDqRgY1Q9HHhv1teu6G80hCCZ39gPWODDq8fJV1fuLYla7h%2BN0A9ICD5ArqhQeV2U3P1bhkW2qYxWrYyBNDBaed7bFFEsEZTRG2ebqgbt%2BqelC6c1SKqWnDrE9pGyVbRlNzriztB8YDAfSzc4Iu0qZ%2B3yJtXFyAm%2Flj7gaULsc4F%2B%2Bzu8yZBfeHtCP89GXs004AwV5kQ3xdBkE8quyzHPRYDSelQFqHoF20QCz2qXsGqi9MFH8VrthhDIyX6LV6x7R6FhJ4NiD%2F2Kjk2IcyVmccvrSecFwfn3gwOCoUmo8lSB%2BLBxlk7l5Xm98xR0C3SN8vWUT2JbZhLr7dJvBsDjdAIvZuiiBbAy8oKMFcFyw60CxjQAFeHL9KVV574e%2BXzac0m464ETXBAiMJuEHssqsEOkZ3i8Sik5V3DQ1gV0elWNOKsGYdQHVoZiH6gLhCG3yFhpNOn4D3UTw0KhTsJ7mbTwW6E3AarXFq9e8tLw1Ickfnw9cx3xvjBeKvurFjI%2BFotFznCOHYqhrJYdGTzyHWlZyLoSaFS%2BquqaWsHmLSkxajeKn1f1RYA6EsmdqAJibzoR2wJyu2dbZI91tjWWz7QbmGC5YcUwjaqGuPG0trvAxiShO0Ua8SWAU2FNUIlZjT5Vz0N9L0SyjSQdtW9DSBF%2FbFrQNgk87HGTUFgy1bMEafDktIz4t6LFfo3ReibxRwM1zwkHCzWjVpI%2BAm0HXS6hr6nV2Ud4VfT2V7T8dOfBuB1P9Oghw74DAud3frlUrdf9%2BgrWhlqW7ScgSJQvBZGZlOrDoKeAxWvbi9che%2BCUlhDVXij%2Fm9uV40hQ%2B%2Fxc%3D"></iframe>
 
 
+
+## if use_batching
+<iframe frameborder="0" style="width:100%;height:1113px;" src="https://viewer.diagrams.net/?highlight=0000ff&edit=_blank&layers=1&nav=1&title=train.drawio#R7Vxbb6M4FP41SO1DK%2B4hjyFNdx52Ryt1tJ15ipzgEHYIzgKZJPvr1wabm01C2obLNtJoCr5hvuNz8flMJG26OfwWgu36D%2BRAX1Jl5yBpT5Kqqpam4z%2Bk5JiWKKoqpyVu6Dm0LC948f6FtJA123kOjEoNY4T82NuWC5coCOAyLpWBMET7crMV8stP3QIXcgUvS%2BDzpa%2BeE6%2FTUksd5eVfoOeu2ZMVc5zWbABrTN8kWgMH7QtF2kzSpiFCcXq1OUyhT9BjuKT9nmtqs4mFMIibdHA27vyvb64%2B%2F%2Fa6kr%2F9%2B2VvTF8fjHSUX8Df0Remk42PDAE3RLutpNkrFMRUPoqF72lPGMbwIBIFWLARZH6qSgYAXjoQbWAcHnETOpAm0y501YzoNPe5BJQRbbIuos8KAZW6mw2dA4MvKDYX4KScx2m%2F9mL4sgVLcr%2FH6oAxWscbn%2BCFL0G0TdfnyjtA5xI8i7jVC5EH88jA5MHTReDp1wJPHSB4bJTyQlQ7x1IbLpZqGUulcyx1Dssvh9eDNhhAu9dss5fuY9w37zHqs9KaPfce1gDB66v3GA8Xy955DzaDivvQB4No96qtiMJq08fPtaMtCEowmv%2FsyE7JXiIfhZI2wZWhu7jDU8P%2F8OPlwtU9uSTAyQTLhxXYeP4x7YMHApttUqnhzSmWBPR%2FwdhbAq6mPEiUSIQMoVjbQ6UunSWpDFC4AX65ek%2FBJPV6Os%2Bk0odxDMMH%2FKpLL3CF%2FbHI4wfge26QVi%2BxwGFYrvYCJ1kGpF4uTC2pjEMQRCs8KBs%2BgFmDPQqd8tOL3Rdg%2BZM478B5qGCu6laGtaqP82ujgLzjRVsfUNS9wPcKD175CMTFCTHh4iuX%2FP2KRZ4glS4GvLjS9ZDWchpG3hSXn1G0N%2BnV6UhD0YySVRKplGrwKqVdTaP46BU6LnyhtyiM18hFAfBneamdCJmYnicin7zN7whtKXZ%2F46V6pOCBXYzKyMKDF38vXP8gQz0a9O7pQEdObo7sJsDv%2B714U%2BhFbvNuyR3rJ5YiecnTMsSYoF24hA0segxCF56yq7p4UYTQB7H3qzyRjxcxv225Gc2b0RyO0dT0vhlNq0ujySzjZUYzt5M%2FSmayfaNpNjSaSk0yox2rachdyvhtjvF9Mo6wROIJoUBwSWIxaNmzR6B7kjtaB7rVqffkU1a7CM4XIF6uiUWvLpJwjTaLXdSJoVStSv5gxFtKVbRjs65mKUedWspMc34UagZjKfWmhrJm296SgvA5oiOM6qKHgpSiOEQ%2F4TSNepjBWWFbUymigdkTjco0m%2BgIDiX9Ca3YeI6TLByRxpUX0zWUTqso3ZhXOpHOqdfSOfUW79%2Fi%2FSHH%2B3pZoTSj63hfbXzqoe7l389RVVy7Zgpcuzx6FMCSpb4%2FHpdek8vq5cccLIGdVq4WHDG0hgVfc6qqZTR7feTmDJoNyKp20VR4kxeCYzTHnor5j0XIXMddiCTVDh3yn7u4P%2FTtVMQ58DOz2R3ejBe4bZTesFFipvzsTknrNBHPpnmRTnWqTWfIrDzeoHbLlDs3XNqNIr7tfkS7H2%2BO5%2B0FSYcnAvkAdkJVutgUhVmtboU0PqjqqZ%2BqiuOtfusD%2FRQLqs77KVm8LBr7Kdr1T%2BThOWbLyZTFq4mNkM6LdqoslGwW7zg%2Be%2FqsAU33DTqoKXEoCPsgqcyhkFk4IFon76d8cBTUNF%2Bsq51GQXx68g7bYhLm3B%2FO7y34FgOJjazut8hag%2BPXPcBO1ZtgJ8qpX%2B8rigYnsmHgMM1f%2BGj5s2KVAqfAo2bfdgk91RuI%2FiaG5yNtTQ3lVJCPIZAPK3unH9Mq6RLLrMg9nT%2FnyPiBKqlmq7qAruwRTXMo0dRADxloVtOIa9ypT%2BS%2FWbDJAQN8%2BXWOd1tOurGxD3e4la3cC%2FIB%2F19%2BdaxWvYGAEMp2PK1QrBrPeScHQuYkn5PtMNWDTQRVjVfStTjP29mfW5xjQbZbKM7rfden8t59ZkqTZ8l6lma6ZFvSZAK3CCvkzJDGsmTNovVutcIoprU4YqMX9leWZqgINAdW6SaVoFaDKkUWcIjCDzquFpAafLIuQJ9HF4y%2BHR0xPt1xrZbjEb1pPGJ0ylTofDxCZ8x5s96yEwa3A9eMzmk%2BQ%2BBpLmcnKDVBeQkxKZFzELV8wymyoZ5pOEcznOIY6gmG0%2BzCCWqhCa%2BQkQoZo1BLJwi5hIREqNAJBQ2WvQ1wYSQZdrB9JNE62jwu18hbwjtKOtxLxlMt2ZBr1E34rQm%2FKs66oKP9QM2sJDc0Qe4rO%2F3VSnhs8BnbhLfGkdo0uXAG7RZ6QFobDQ4YDgY7tdWIdRgpbWMk9wy3vvxKxmU7pJHg1GaruDHD23PcTI5CGYmyLK0i15fzmWeQMznkhEet20RO9EFHdZt%2BVfLp5Fa8ZerJrJFfO9TTyNAeRzWadSn7NKoat5bPY5iCqGM2lsaTJO1pSuOpZE9ICY57rDFJfeLysUkZCVXOUqNEklgjfT4MZHGinAblWVdyJEyQGmfRZE3zz5IXHFW2AKYgLyjMkBtXM0F9%2BUWyM8a78ktuGZ%2FbmenmwywRUUSX%2BDn1KDFHNwWRTp4P%2BSgFwbf5b%2B6mpjf%2F6WJt9h8%3D"></iframe>
 
 # config_parser()
 
@@ -171,6 +149,28 @@ optimizer = torch.optim.Adam(params=grad_vars, lr=args.lrate, betas=(0.9, 0.999)
 if 加载了ckpt ：  optimizer.load_state_dict(ckpt['optimizer_state_dict'])
 ```
 
+## get_embedder(args.multires, args.i_embed)
+
+输入：
+- args.multires, 输入的L
+- args.i_embed，默认为0，使用位置编码，-1为无位置编码
+
+输出：
+- embed, 位置编码函数，`将(1024 * 32 * 64) * 3处理为 (1024 * 32 * 64) * 63`
+    - input_ch = 3 , L = 10 并且包括输入维度
+- embedder_obj.out_dim : 输出的维度
+
+### Embedder()
+
+```
+class Embedder:
+    def __init__(self, **kwargs):
+        self.kwargs = kwargs
+        self.create_embedding_fn()
+    def create_embedding_fn(self):  
+    
+```
+
 ## NeRF(nn.Module)
 
 继承nn.Module构建的类
@@ -190,36 +190,14 @@ model(input) 相当于 model.forward(input)
 - input_ch_views=input_ch_views
 - use_viewdirs=args.use_viewdirs
 
+## network_query_fn
 
-## get_rays_np(H, W, K, c2w) numpy版本(narray)
-
-通过输入的图片大小和相机参数，得到从相机原点到图片每个像素的光线（方向向量d和相机原点o）
-
-输入：
-- H：图片的高
-- W：图片的宽
-- K：相机内参矩阵
 ```
-K = np.array([
-    [focal, 0, 0.5*W],
-    [0, focal, 0.5*H],
-    [0, 0, 1]
-])
+network_query_fn = lambda inputs, viewdirs, network_fn : run_network(inputs, viewdirs, network_fn,
+    embed_fn=embed_fn,
+    embeddirs_fn=embeddirs_fn,
+    netchunk=args.netchunk)
 ```
-- c2w：相机外参矩阵
-```
-c2w = np.array([
-            [ -0.9980267286300659,  0.04609514772891998,  -0.042636688798666, -0.17187398672103882],
-            [ -0.06279052048921585,  -0.7326614260673523, 0.6776907444000244, 2.731858730316162],
-            [-3.7252898543727042e-09, 0.6790306568145752,0.7341099381446838, 2.959291696548462],
-            [ 0.0,0.0,0.0,1.0 ]])
-```
-
-输出：从相机原点到800x800图片中每个像素生成的光线 $r(t)=\textbf{o}+t\textbf{d}$
-- rays_o：光线原点（世界坐标系下）(800, 800, 3)
-- rays_d：光线的方向向量（世界坐标系下）(800, 800, 3)
-
-
 
 # if render_only:
 ## render_path()
@@ -248,15 +226,39 @@ render_path(render_poses, hwf, K, args.chunk, render_kwargs_test, gt_imgs=images
 rgb, disp, acc, _ = render(H, W, K, chunk=chunk, c2w=c2w[:3,:4], **render_kwargs)
 ```
 
-### 
+
+
+# get_rays_np(H, W, K, c2w) numpy版本(narray)
+
+通过输入的图片大小和相机参数，得到从相机原点到图片每个像素的光线（方向向量d和相机原点o）
+
+输入：
+- H：图片的高
+- W：图片的宽
+- K：相机内参矩阵
+```
+K = np.array([
+    [focal, 0, 0.5*W],
+    [0, focal, 0.5*H],
+    [0, 0, 1]
+])
+```
+- c2w：相机外参矩阵
+```
+c2w = np.array([
+            [ -0.9980267286300659,  0.04609514772891998,  -0.042636688798666, -0.17187398672103882],
+            [ -0.06279052048921585,  -0.7326614260673523, 0.6776907444000244, 2.731858730316162],
+            [-3.7252898543727042e-09, 0.6790306568145752,0.7341099381446838, 2.959291696548462],
+            [ 0.0,0.0,0.0,1.0 ]])
+```
+
+输出：从相机原点到800x800图片中每个像素生成的光线 $r(t)=\textbf{o}+t\textbf{d}$
+- rays_o：光线原点（世界坐标系下）(800, 800, 3)
+- rays_d：光线的方向向量（世界坐标系下）(800, 800, 3)
 
 
 需要对render输入的光线做batch: `rays = batch_rays`
 
-#### 在train()中
-
-<div class="mxgraph" style="max-width:100%;border:1px solid transparent;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;nav&quot;:true,&quot;resize&quot;:true,&quot;toolbar&quot;:&quot;zoom layers lightbox&quot;,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;Electron\&quot; modified=\&quot;2023-06-19T03:20:26.056Z\&quot; agent=\&quot;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/14.6.13 Chrome/89.0.4389.128 Electron/12.0.7 Safari/537.36\&quot; etag=\&quot;B7AM0VIngZ7lAPHURmRf\&quot; version=\&quot;14.6.13\&quot; type=\&quot;device\&quot;&gt;&lt;diagram id=\&quot;bZodXSPFXZZJwMvDvhFf\&quot; name=\&quot;第 1 页\&quot;&gt;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&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
-<script type="text/javascript" src="https://viewer.diagrams.net/js/viewer-static.min.js"></script>
 
 # render()
 
@@ -299,8 +301,8 @@ eg: `all_ret['rgb_map'] : W * H * 3`
 
 ## 渲染流程图
 
-<div class="mxgraph" style="max-width:100%;border:1px solid transparent;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;nav&quot;:true,&quot;resize&quot;:true,&quot;toolbar&quot;:&quot;zoom layers lightbox&quot;,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;Electron\&quot; modified=\&quot;2023-06-19T05:46:35.107Z\&quot; agent=\&quot;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/14.6.13 Chrome/89.0.4389.128 Electron/12.0.7 Safari/537.36\&quot; etag=\&quot;Q9G_GM6F3ujZ4JYMg4De\&quot; version=\&quot;14.6.13\&quot; type=\&quot;device\&quot;&gt;&lt;diagram id=\&quot;SaKEZgpW3Xd3I7sOL0pk\&quot; name=\&quot;第 1 页\&quot;&gt;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&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
-<script type="text/javascript" src="https://viewer.diagrams.net/js/viewer-static.min.js"></script>
+<iframe frameborder="0" style="width:100%;height:1583px;" src="https://viewer.diagrams.net/?highlight=0000ff&edit=_blank&layers=1&nav=1&title=render%E6%B5%81%E7%A8%8B.drawio#R7R1bc6O2%2Btcwm3QmHu7gR1%2BS3Zme7mm7Z7qnTx5sY5uzGFzAcbK%2F%2FkhCAiR9tnECNkncmW6MJJD47jcJxRitnz4n3mb1Wzz3Q0VX50%2BKMVZ0XTMNFf3BLc95i62becMyCeZ0UNnwLfjp00Z633IbzP2UG5jFcZgFG75xFkeRP8u4Ni9J4h0%2FbBGH%2FKwbb%2BlLDd9mXii3fg%2Fm2SpvdXWnbP%2FiB8sVm1mz%2B3nP2mOD6ZukK28e7ypNxr1ijJI4zvJf66eRH2LgMbjk9z3s6S0WlvhRVucG77P%2FFD5Gz9%2F%2BUhePm1%2FT2V9L444uNs2e2Qv7c%2FT%2B9DJOslW8jCMvvC9bh0m8jeY%2BfqqKrsox%2F4rjDWrUUOP%2F%2FCx7psj0tlmMmlbZOqS9%2FlOQ%2FRff3rPo1d%2BVnvETfTK5eGYXUZY8V27Cl39X%2B8rbyBW7bxFHGV2IZqBrGWoUkGm8TWb%2BAVAx6vOSpZ8dGKfn4zAcKxNQnHz247WP1ocGJH7oZcEjT2ceJddlMa7EKPpBkXoCgulzH71wS2dae0GEWkKMLXQz%2Fp0lpE2ghBLPGDW7VZD53zYegdEOMTuP09pwfvSTzH86CBnaa1mUc54Zb9HrXcmIRduqwoSm2hIwzUtyi1bhlZJzjnELxysl67TOLXpNbjE6xS26xC3ozed%2B0n3ecC%2FNG%2FZVk9TlDaMmb1id4g1D4g20%2BkniPaed4w5HFbnDkrjDAZjDaIs5GCdeiDtepDkuxR1WTe5wO8UdlsQd0Xz2Nrij0AkX4w7jqjvqcodbkzs07VLssXncjf%2F8t7P68vB898fU%2FPEzjfw747KO5tkRPPfSVcHijWIbBK9pNo1tcusgQQKsMmATB1GWVp78O24oJYvLCxZDjEgcHq6Z%2FcPjbdU6eAP6ka%2B4pNPi1V8unVxJsk%2B9bLYKFs%2FdFO%2Bia6Bf3DXQLuo3vy35rtUNM2kXizOBEkh337eA5wR6u%2BiG4eu0IuElGWsYYtBNE8RCvlR6W0k1p%2BoKXZjIOCL8xfHFwmprC%2BGGdrQFQ6gUQnobysKwLq4snKuyqC096kZZtW6FkswLO3x6%2B0huS1%2FUxXhLHsFRKevq7agLy3G4eUz3sPQ3hCDHqeMdxzpJuwjjW1IuuqRcIj%2FbxcmPyT9bP3meLCJFt0NEF8NpwvGX%2Fc8W55kJJd6lhBQHaIBmbJ4IPbJ%2B9GtJ%2FuKb1GQbTegEnddcpn5xzXVZE%2Fhtaa66UV7NbkWOnSp%2BHINnd8s8zfgUxrckHuQgtL%2Be%2BnMiFjrGvnZfAJAqs68LcG9rQWj9GoSuz712Te7VLxakOLhuIJaHWpV7S3FdxbWVe1tx%2B8qwr9ybyhC1qLhlMFIG2iK6ma220Y9f0HjbuMW3DExl4OAfQ1VxHzrHaEzyFIxmA3rSADjNao3TNAlIXS%2Bj0Tg%2BO1pG05Lxzyyct%2BbusXULpQNEN3WxuMZ2nR6vnUxNLiBgCqxp7QTnz67lNfXZ5HI%2B8uvYRPbusOGmkp8qc%2FQqTWtabZ1fffX%2FfLjp9Xq3neMny%2BS5yTZkbtL0s6qgy7LTG1ZBdf22jll%2BuuwaYX7pHKuIbpFtyqxyXrfo3Qc12uIUpy6ndMxYcyROmSW%2Bl%2FmTyE8WnWcYC6h2OCvDGLKxe%2FMdXWOP8cst%2FYGYSo1xhFbuwgnERkK4AUKWuk39yWPg7%2BZBIicfEYgzHkFplsQ%2F%2FFEcosUZ4yiOMDcvgjAUmrwwWEbocoYQhwx4Y4gRFsy8cEA71sF8TkQBRBG8eGiBKAyhskiHspo2QBVi8qI5qpDTwnkgQaYIrlmTfeUPgzUwFw0VpraHNbnmnQSJLGVo09jQYIwxRy%2BGmCFxnn%2BC9NnYwB36iDXN86YRseW9hOCODViw6w%2BDa0fg0D6A6%2F5ZcW1KuA6izRYnBdRc0vKc%2BXWSeutN6KN%2BG%2F1AYImmKf6DOw2xkWD6ZLEuyfRSlNM1kSXRFckB7PdLPjWSfzqU%2FGuPfGQHAyQfkXpuS%2BS9njyIypdo5OjECCbDj0U%2Fpi3QDyB%2BikTxeehHTk3Q%2BOi8JiLtRkjoRqShbOUjfA1um3g4%2F0aHX4dh5COQo1h8YgGWjw7laNojR7nqfQ85vor8IL%2BlSQqEng8R4YckOiExaOtAVPa8JlhfIro7dHmE8MzOiz35JaQ3eBNEh6%2FZdAoWWv2%2BqjZEjEJ1tw1tWmmLGOEtVRJSup6kLi7OfdYDy6Md3cRwscMe4NVcK82bR3Hz%2B1ReV2kue%2FWJt9PjbZb7Zh2LZotFra4D6OTzHnkj%2ByVmruuQQhwt0f9THMIaPSjuB%2FIfLcFgdw1ZXZ3VdDJlex3RuQKFiQ4Grhoxpn5O0DLSwzO%2FehIaU70GwgSBAXiO6jkFhiVnOrD9myynkzWCCQl3K7aqWEOKshHBmDXGjbguw9BUajPPg3RDbsIYluOplYdAd3uzWXHz0cE7AppUHkyWVxIuuEx%2Fk60OTgVT44nqpU3rW4jG96G9FJA8c9uyvuXEy9dJsN4ge8uLELwkvb2K19NtehGd7aj8ziTXAnQ2yySdBXjX81RAwxaEFVDPBMNUv5Rde2jZFf7IJdRkM%2B9ejYajuUI9bf%2BcZ1KAAJTN2r%2F9Q%2F6AykMJYAWQZURo%2BtF8gE%2BlRdfTMJ79yJseArx4SufsEFy3sFLYwbPEbmGnyOLBoTf1w6E3%2B7EkCxVMl%2BM8f06WfTmLAsflHeKJoxxKqVLtaRorr6BkeccOJ37pplg2JF4sUp%2Fb7yrvKBN1rkjqOVykjbPHH%2BSqPVXVLNNy%2B4aj9V3%2BsXv2475gDxqIBNkPyb2BCbKTQWO9mbQVs9%2BsYa%2FXQ0YbouHBnYbtLzonbz4KqQu9iSUcNFDerQPiuJJsB6q7dR2wf2yrJdkOpxF4T%2FTN4apF87%2FYs89OSlGBzZit1cvB5pZ1NWHr6kfoTAh44MX2uxxc9%2FU0A8hE1lTgWM7z2sja2wqeOxrviCNgXRyCspuxXw3RMqxKlPSjRTNdTVREQFz9zIpI3g5x2JjYg8Vrjh%2BZGbKMg8LVJmArtoffN%2FMFlAbPn6%2B7j5wN7IjBYF6NwtpGIbT97ExHB7%2FuHFFZ3mZxMlv1Zl7GDtkgB3QMHvBpG3QTxiCXx%2FjcjqEyHJEf98rAUu5dZYhucnBLf4xbuma1SF%2FyADcrndVqAbawJTiapeZ2tOIMP9F03qcipMPl9z6xzF3ZX%2BTy8gE0OVf2s2ydM27K5qePmQePr3oOKQxEr4%2FT6SSQFOa9D%2BTBzc4F7xoRmzAuLIQCb%2FeJBbiIe4Pz%2FeLgQ6tNN14ELhdbJnfUyCDhOmZnKPgDas2AX5wj9BfZy2bY%2Bxr1H2Qw8B0ulyhMO87e48omEKTz9fBrhBGwZ3ADVNQMYAjpS9YtJTE6laryXFH%2F7c%2FLLMupynNLLq8maocWiWUkv0omNTu1TCSq%2BVVS2d2pRf6cpNmcW2VuRqDWm58lS48IkNdoBP5SHr7aRtPAS4lB8OCFqX8LTkt2TVnDr%2FmpztZ435vDPt%2F5rQxN9KyL81YqVoYJ7Xgq3O3mzQy5yIPU7YThpNvmxl6J%2B6p6NvpG%2BQ6H7798aXRnYCMrlO2O6lpfpHaOMnljKrgJ6J1qMenqfpOmEYO1FTyfaLQ0IuJaDDtp4mdmoL3mJrS7rt%2Ba5JMD63JQ8Ro%2FFDftCp6yA50ZYAF4bC14CGz6PqXWtQk392V1sk3NfLTGtqmJjtXnihF4uWK3MWC%2F%2BWrf4uPlhS0IbTeGDk1qrWLVBL6astcfr%2BJ6CMjJRlC9fw%2FDvukbmfa6qyGnM9FbATK5hq71gCNYW4uKQlvJ%2FGwSBimp%2FIsw1nDDPJhl3Y8yW1Bm9axRZmBn2VE7e5aTMfUAb%2BjpSezPbcXaXnjrIHzOh6788NHH5L3fGq905JPinihO1l5Y6dtRuOBOk4pjNfQzxEN3aM2zIFrKd%2B6PdJKeANFFRJ%2BpspWQnizxonSBnsSeSVgXoyxO5vx8xY3Tohj4ToCVjreIYTDpZp%2F%2BsBjEsAERehRaQRQGbKZFGHuZML0osgp%2FvU3%2FoAnzUfQDoE8OQLUFrR3qbF0492zatlLJaPZUU1fa3mluHbBt8GS%2F%2B0mAoIuV0ivLxs26GVDrYl%2BSPrhuQC42lRnA4zF3ezP%2BOaWgrNz6SnsZyZ7CUmaiwqpE9Dj7HAEsX9uZEghnhwaWtBA4ygjmx4IHciAhcBTx2o8FDaQaE49zcknwGwdccz2e%2B0R5TLvX69FmvOXBGfNZiDqA6rqjaji2WDAGmq3QztTWshbATnuBVF4Ydv2S4%2FV7%2FufX%2FM9M3%2B1F6qvRZzWDJvbpuwJJ0BdmINeiNcPKlHeANIMjotDy813vH3ChUX9wQxFG0WdwJ0YJd82P39UOlltkUnH7mQZF16ETCJr4uANsz8nlS21w6CKeIRevPM%2B3POk35k79fWvsqwMiVofC6u35RXI0sHH2PcSkUp8YVb%2F5Oh7hYsT%2BWOnn3wZTFddR7h1laCjDIfts2PD9cDVYlNjWJ1tgopDDb0fDRVIkqEAkApdhClYc36PsS96amLK4PilixHWLQSP9eNyIDTmSVgbjR1wnFEJiA%2BAoEus9EkhSK7EktRJOYrdDEaUCKkJQ6ZjpPStIvBxo4P8WC%2FneMiCfIxzzpK70EXP2MYu6DmXXIWHX%2FkBxTVIbTCqL6ZiHI3Y0JxhesdJKJqG62OE9tNhW10hFh4wJXHHtKgMb3XhHV0hhxg68x%2Bfho2WPKyssxrj4XfoGGzM4ec3NBxObUpoarzSh8yygTxU4rYlH4PzxeuWbUsb4o2SZbGHbswvpuLPWE1j7fcsTUiJlVqRMjHAaqWmNaFxOI5JkynvXh%2F9ZBTi9Tf7xwjRWyPHE6N9iJ64a57sU0LsnN7ftSc%2FGjk80xMCODXkdDQUN0GUSY4gWfZ%2FRW65%2BI59PNO7%2FDw%3D%3D"></iframe>
+
 
 ## get_rays(H, W, K, c2w) torch版本(tensor)
 
