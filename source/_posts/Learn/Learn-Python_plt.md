@@ -3,9 +3,10 @@ title: Python中Plt库的学习
 date: 2020-02-21 11:37:01
 summary: Python plt 的学习过程，可以让数据可视化，还可以展示图像
 toc: true
-categories: Python
+categories: Learn
 tags:
-  - Matplotlib
+    - Matplotlib
+    - Python
 ---
 
 > [参考教程](https://blog.csdn.net/qiurisiyu2016/article/details/80187177)

@@ -4,7 +4,7 @@ top: false
 toc: true
 cover: false
 date: 2020-03-25 12:04:47
-categories: 前端
+categories: Learn
 tags:
   - Frontend
 summary: 学习前端前的基础知识，对，没错，就是html、css和js

@@ -3,10 +3,11 @@ title: Python中Opencv库的学习
 date: 2020-02-18 20:42:34
 summary: Python中opencv的学习和使用，可以操作图片，跟ps中知识挺像的hhh
 toc: true
-categories: Python
+categories: Learn
 tags:
   - OpenCV
   - Compete
+  - Python
 ---
 Python中opencv的学习和使用，可以操作图片，跟ps中知识挺像的hhh
 <!--more-->

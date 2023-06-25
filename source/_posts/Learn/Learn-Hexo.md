@@ -2,7 +2,7 @@
 title: Hexo搭建博客的基本知识
 date: 2020-02-04 15:34:18
 toc: true
-categories: Hexo
+categories: Learn
 summary: Hexo博客基本操作，包括主题的修改和博客文件的备份等等
 tags:
   - Hexo

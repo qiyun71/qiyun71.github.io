@@ -2,7 +2,7 @@
 title: Arduino学习
 date: 2020-10-19 22:22:22
 toc: true
-categories: Arduino
+categories: Learn
 summary: 单片机基础
 tags:
   - Arduino Note

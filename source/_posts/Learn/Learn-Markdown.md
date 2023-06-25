@@ -2,7 +2,7 @@
 title: Markdown基本知识
 date: 2020-02-08 12:00:45
 toc: true
-categories: Markdown
+categories: Learn
 summary: 关于我使用 Markdown 以来学到的知识，即markdown的操作方法
 tags:
   - Markdown Note

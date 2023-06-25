@@ -5,7 +5,7 @@ top: false
 toc: true
 img: /img/cover/vb.jpg
 summary: VB语言学习过程，这个学期开始学习VB，提前作预习，VB笔记本
-categories: VB
+categories: Learn
 tags:
   - VB Practise
 ---

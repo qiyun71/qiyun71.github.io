@@ -5,7 +5,7 @@ top: false
 toc: true
 cover: false
 date: 2020-04-08 09:23:49
-categories: C#
+categories: Learn
 tags:
   - C# Note
 summary: 学习C#的笔记

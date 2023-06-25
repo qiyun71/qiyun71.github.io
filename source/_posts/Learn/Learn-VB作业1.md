@@ -5,7 +5,7 @@ toc: true
 top: false
 cover: false
 date: 2020-05-07 13:32:49
-categories: VB
+categories: Learn
 tags:
     - VB Practise
 summary: VB作业，因为笔记本里的东西太多了，所以新写一篇

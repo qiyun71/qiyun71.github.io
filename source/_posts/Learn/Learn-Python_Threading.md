@@ -4,9 +4,10 @@ top: false
 cover: false
 date: 2020-04-04 18:27:32
 toc: true
-categories: Python
+categories: Learn
 tags:
     - Threading
+    - Python
 summary: Python中的多线程，如何使用
 password:
 ---

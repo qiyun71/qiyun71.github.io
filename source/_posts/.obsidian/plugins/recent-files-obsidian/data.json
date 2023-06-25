@@ -1,36 +1,104 @@
 {
   "recentFiles": [
     {
+      "basename": "Neus",
+      "path": "NeRF/Surface Reconstruction/Neus.md"
+    },
+    {
       "basename": "Neus-Instant-nsr-pl",
       "path": "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl.md"
-    },
-    {
-      "basename": "NeRF-code",
-      "path": "NeRF/NeRF-code.md"
-    },
-    {
-      "basename": "2023-06-19",
-      "path": "Reports/2023-06-19.md"
-    },
-    {
-      "basename": "NeRF-Studio",
-      "path": "NeRF/NeRF-Studio.md"
     },
     {
       "basename": "NeRF-Principle",
       "path": "NeRF/NeRF-Principle.md"
     },
     {
-      "basename": "Neus",
-      "path": "NeRF/Surface Reconstruction/Neus.md"
+      "basename": "NeRF-code",
+      "path": "NeRF/NeRF-code.md"
     },
     {
-      "basename": "Front-matter.md",
-      "path": "Templates/Front-matter.md.md"
+      "basename": "NeRF-Studio",
+      "path": "NeRF/NeRF-Studio.md"
+    },
+    {
+      "basename": "NeRF-review",
+      "path": "NeRF/NeRF-review.md"
+    },
+    {
+      "basename": "Learn-PyTorch",
+      "path": "Learn/Learn-PyTorch.md"
+    },
+    {
+      "basename": "2023-06-19",
+      "path": "Reports/2023-06-19.md"
+    },
+    {
+      "basename": "Make-Py-Tools",
+      "path": "Python Practise/Make-Py-Tools.md"
+    },
+    {
+      "basename": "Learn-Arduino",
+      "path": "Learn/Learn-Arduino.md"
+    },
+    {
+      "basename": "Learn-Csharp",
+      "path": "Learn/Learn-Csharp.md"
+    },
+    {
+      "basename": "Learn-HCJ前端",
+      "path": "Learn/Learn-HCJ前端.md"
+    },
+    {
+      "basename": "Learn-Hexo",
+      "path": "Learn/Learn-Hexo.md"
+    },
+    {
+      "basename": "Learn-Hexo2",
+      "path": "Learn/Learn-Hexo2.md"
+    },
+    {
+      "basename": "Learn-Markdown",
+      "path": "Learn/Learn-Markdown.md"
+    },
+    {
+      "basename": "Learn-Python-LCU",
+      "path": "Learn/Learn-Python-LCU.md"
+    },
+    {
+      "basename": "Learn-Python_OPEN_CV",
+      "path": "Learn/Learn-Python_OPEN_CV.md"
+    },
+    {
+      "basename": "Learn-Python",
+      "path": "Learn/Learn-Python.md"
+    },
+    {
+      "basename": "Learn-Python_Threading",
+      "path": "Learn/Learn-Python_Threading.md"
+    },
+    {
+      "basename": "Learn-Python_plt",
+      "path": "Learn/Learn-Python_plt.md"
+    },
+    {
+      "basename": "Learn-Spider爬虫",
+      "path": "Learn/Learn-Spider爬虫.md"
+    },
+    {
+      "basename": "Learn-VB",
+      "path": "Learn/Learn-VB.md"
+    },
+    {
+      "basename": "Learn-VB作业2",
+      "path": "Learn/Learn-VB作业2.md"
     },
     {
       "basename": "Learn-VB作业1",
       "path": "Learn/Learn-VB作业1.md"
+    },
+    {
+      "basename": "Make-Python_bilibili",
+      "path": "Python Practise/Make-Python_bilibili.md"
     },
     {
       "basename": "Make-Python_爬虫",
@@ -41,8 +109,8 @@
       "path": "Python Practise/Make-mengya.md"
     },
     {
-      "basename": "Make-Python_bilibili",
-      "path": "Python Practise/Make-Python_bilibili.md"
+      "basename": "Front-matter.md",
+      "path": "Templates/Front-matter.md.md"
     },
     {
       "basename": "2023-06-02_员琪",
@@ -131,74 +199,6 @@
     {
       "basename": "Urban Radiance Fields",
       "path": "NeRF/文献阅读&code/大规模场景/Urban Radiance Fields.md"
-    },
-    {
-      "basename": "more_results2",
-      "path": "附件/more_results2.mp4"
-    },
-    {
-      "basename": "DL",
-      "path": "Work/深度学习/DL.md"
-    },
-    {
-      "basename": "AutoDL",
-      "path": "Work/深度学习/AutoDL.md"
-    },
-    {
-      "basename": "Dogs_VS_Cats代码",
-      "path": "Work/深度学习/Pytorch/Pytorch项目代码/Dogs_VS_Cats代码.md"
-    },
-    {
-      "basename": "Pytorch学习",
-      "path": "Work/深度学习/Pytorch/Pytorch学习.md"
-    },
-    {
-      "basename": "2.1 ndarray数据操作",
-      "path": "Work/深度学习/动手学深度学习课件/2.1 ndarray数据操作.md"
-    },
-    {
-      "basename": "Python查缺补漏",
-      "path": "研究生/编程/Python/Python查缺补漏.md"
-    },
-    {
-      "basename": "submit-pr",
-      "path": "NeRF/文献阅读&code/review/awesome-NeRF/submit-pr.md"
-    },
-    {
-      "basename": "MindSpore实验环境搭建",
-      "path": "Work/深度学习/人工智能导论/MindSpore实验环境搭建.md"
-    },
-    {
-      "basename": "Pasted image 20221115130308",
-      "path": "附件/Pasted image 20221115130308.png"
-    },
-    {
-      "basename": "Python_numpy",
-      "path": "Work/深度学习/Pytorch/Python_numpy.md"
-    },
-    {
-      "basename": "Pytorch项目",
-      "path": "Work/深度学习/Pytorch/Pytorch项目.md"
-    },
-    {
-      "basename": "2023",
-      "path": "研究生/学习生活/记日月/2023.md"
-    },
-    {
-      "basename": "英语",
-      "path": "研究生/List/英语.md"
-    },
-    {
-      "basename": "建模与仿真",
-      "path": "研究生/研一课程/建模与仿真/建模与仿真.md"
-    },
-    {
-      "basename": "2945.468400",
-      "path": "附件/2945.468400.pdf"
-    },
-    {
-      "basename": "2210.00379",
-      "path": "附件/2210.00379.pdf"
     }
   ],
   "omittedPaths": [],

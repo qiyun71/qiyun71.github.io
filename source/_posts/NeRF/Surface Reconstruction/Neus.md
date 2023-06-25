@@ -86,6 +86,8 @@ NeRF的体积渲染方法提出沿着每条光线进行多次采样（上图（a
 
 
 
+
+
 ## 训练
 
 loss函数
@@ -106,6 +108,150 @@ $$\hat{O}_k=\sum_{i=1}^n T_{k,i}\alpha_{k,i}$$
 $$M_{k} ∈ {0, 1}$$
 
 分层采样类似NeRF
+
+
+
+# Code
+
+## 网络Network
+
+### NeRF
+
+同NeRF网络
+![Pasted image 20221206180113.png|600](https://raw.githubusercontent.com/yq010105/Blog_images/main/Pasted%20image%2020221206180113.png)
+
+
+### SDFNetwork
+
+激活函数 $\text{Softplus}(x) = \frac{\log(1 + e^{\beta x})}{\beta}$
+
+网络结构：
+![SDFNetwork.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/SDFNetwork.png)
+
+
+## dataset
+
+- 相机内外参数矩阵
+- 光线的生成以及坐标变换
+
+BlendedMVS/bmvs_bear/cameras_sphere
+
+```
+"""
+(4, 4) world_mats_np0
+[[-1.0889766e+02  3.2340955e+02  6.2724188e+02 -1.6156446e+04] 
+[-4.8021997e+02 -3.6971255e+02  2.8318774e+02 -8.9503633e+03]
+[ 2.4123600e-01 -4.2752099e-01  8.7122399e-01 -2.1731400e+01]
+[ 0.0000000e+00  0.0000000e+00  0.0000000e+00  1.0000000e+00]]
+(4, 4) scale_mats_np0
+[[ 1.6737139  0.         0.        -2.702419 ]
+[ 0.         1.6737139  0.        -1.3968586]
+[ 0.         0.         1.6737139 27.347609 ]
+[ 0.         0.         0.         1.       ]]
+"""
+
+P = world_mat @ scale_mat
+"""
+[[-1.8226353e+02  5.4129504e+02  1.0498235e+03  8.3964941e+02]
+ [-8.0375085e+02 -6.1879303e+02  4.7397528e+02  6.0833594e+02]
+ [ 4.0376005e-01 -7.1554786e-01  1.4581797e+00  2.0397587e+00]
+ [ 0.0000000e+00  0.0000000e+00  0.0000000e+00  1.0000000e+00]]
+
+[[-1.8226353e+02  5.4129504e+02  1.0498235e+03  8.3964941e+02]
+ [-8.0375085e+02 -6.1879303e+02  4.7397528e+02  6.0833594e+02]
+ [ 4.0376005e-01 -7.1554786e-01  1.4581797e+00  2.0397587e+00]]
+ """
+P = P[:3, :4]
+```
+
+将P分解为相机内参和外参矩阵，in dataset.py
+
+```
+out = cv.decomposeProjectionMatrix(P)
+K = out[0] # 3x3
+[[1.00980786e+03 1.61999036e-04 6.39247803e+02]
+ [0.00000000e+00 1.00980774e+03 4.83591949e+02]
+ [0.00000000e+00 0.00000000e+00 1.67371416e+00]]
+ 
+R = out[1] # 3x3
+[[-0.33320493  0.8066752   0.48810825]
+ [-0.9114712  -0.40804535  0.05214698]
+ [ 0.24123597 -0.42752096  0.87122387]]
+
+t = out[2] # 4x1
+[[-0.16280915]
+ [ 0.30441687]
+ [-0.69216055]
+ [ 0.6338275 ]]
+ 
+K = K / K[2, 2]
+[[6.0333350e+02 9.6790143e-05 3.8193369e+02]
+ [0.0000000e+00 6.0333344e+02 2.8893341e+02]
+ [0.0000000e+00 0.0000000e+00 1.0000000e+00]]
+
+intrinsics = np.eye(4)
+intrinsics[:3, :3] = K # intrinsics: 4x4 为相机内参矩阵
+[[6.03333496e+02 9.67901433e-05 3.81933685e+02 0.00000000e+00]
+ [0.00000000e+00 6.03333435e+02 2.88933411e+02 0.00000000e+00]
+ [0.00000000e+00 0.00000000e+00 1.00000000e+00 0.00000000e+00]
+ [0.00000000e+00 0.00000000e+00 0.00000000e+00 1.00000000e+00]]
+
+pose = np.eye(4, dtype=np.float32)
+pose[:3, :3] = R.transpose()
+pose[:3, 3] = (t[:3] / t[3])[:, 0] # pose: 4x4 为相机外参矩阵
+[[-0.33320493 -0.9114712   0.24123597 -0.25686666]
+ [ 0.8066752  -0.40804535 -0.42752096  0.48028347]
+ [ 0.48810825  0.05214698  0.87122387 -1.092033  ]
+ [ 0.          0.          0.          1.        ]]
+
+世界坐标系下，光线的原点：
+[[-0.25686666]
+ [ 0.48028347]
+ [-1.092033  ]
+ [ 1.        ]]
+```
+
+然后生成光线，in `dataset.py/gen_random_rays_at` by img_idx ，batch_size, 并将rays的像素坐标转换到世界坐标系下
+
+p_pixel --> p_camera --> p_world
+`intrinsics @ p_pixel`:  `3x3 @ 3x1`
+`pose @ p_camera`:  `3x3 @ 3x1`
+
+```
+def gen_random_rays_at(self, img_idx, batch_size):
+    """
+    Generate random rays at world space from one camera.
+    """
+    pixels_x = torch.randint(low=0, high=self.W, size=[batch_size]) 
+    pixels_y = torch.randint(low=0, high=self.H, size=[batch_size])
+    color = self.images[img_idx][(pixels_y, pixels_x)]    # batch_size, 3
+    mask = self.masks[img_idx][(pixels_y, pixels_x)]      # batch_size, 3
+    # p : 像素坐标系下的坐标
+    p = torch.stack([pixels_x, pixels_y, torch.ones_like(pixels_y)], dim=-1).float()  # batch_size, 3
+    # 将p转换到相机坐标系下
+    # matmul : [1, 3, 3] x [batch_size, 3, 1] -> [batch_size, 3, 1] -> [batch_size, 3]
+    p = torch.matmul(self.intrinsics_all_inv[img_idx, None, :3, :3], p[:, :, None]).squeeze() # batch_size, 3
+    # rays_v ：将p归一化
+    rays_v = p / torch.linalg.norm(p, ord=2, dim=-1, keepdim=True)    # batch_size, 3
+    # rays_v ：将p转换到世界坐标系下
+    # matmul : [1, 3, 3] x [batch_size, 3, 1] -> [batch_size, 3, 1] -> [batch_size, 3]
+    rays_v = torch.matmul(self.pose_all[img_idx, None, :3, :3], rays_v[:, :, None]).squeeze()  # batch_size, 3
+    # [1,3].expand([batch_size, 3])
+    rays_o = self.pose_all[img_idx, None, :3, 3].expand(rays_v.shape) # batch_size, 3
+    return torch.cat([rays_o.cpu(), rays_v.cpu(), color, mask[:, :1]], dim=-1).cuda()    # batch_size, 10
+```
+
+根据rays_o 和rays_d 计算出near和far两个平面
+```
+def near_far_from_sphere(self, rays_o, rays_d):
+    a = torch.sum(rays_d**2, dim=-1, keepdim=True)
+    b = 2.0 * torch.sum(rays_o * rays_d, dim=-1, keepdim=True)
+    mid = 0.5 * (-b) / a
+    # rays_o 在 rays_d 方向上的投影 / rays_d 在 rays_d 方向上的投影
+    near = mid - 1.0
+    far = mid + 1.0
+    return near, far
+```
 
 # 实验
 
@@ -130,11 +276,6 @@ UNISURF：将表面渲染与以占用场做场景表示的体积渲染统一起�
 
 设感兴趣的物体在单位球体内，每批采样512条光线，单个RTX2080Ti：14h（with mask），16h（without mask）
 对于w/o mask ，使用NeRF++对背景进行建模，网络架构和初始化方案与IDR相似
-
-
-# Code
-
-
 
 ## 环境配置：
 autodl镜像：
@@ -241,3 +382,19 @@ python exp_runner.py --mode validate_mesh --conf ./confs/womask.conf --case bmvs
 image文件夹就是rgb图片数据，算法默认支持png格式。
 mask文件夹包含的是模型的前景图像，前景和后景以黑色和白色区分，如果配置文件选择withou mask，其实这个文件夹的数据是没有意义的。但必须有文件，且名称、图像像素要和image的图像一一对应。
 最后是cameras_sphere.npz文件，它包括了相机的属性和图像的位姿信息等，这个是需要我们自己计算的。官方给出了两种计算方案，第二种是用colmap计算npz文件。
+
+## 使用Colmap生成npz文件
+
+```
+cd colmap_preprocess
+python img2poses.py ${data_dir}
+```
+
+将会生成：`${data_dir}/sparse_points.ply`，在meshlab中选择多余部分的Vertices，并删除，然后保存为`${data_dir}/sparse_points_interest.ply`.
+
+然后
+```
+python gen_cameras.py ${data_dir}
+```
+
+就会在 ${data_dir}下生成preprocessed，包括image、mask和cameras_sphere.npz

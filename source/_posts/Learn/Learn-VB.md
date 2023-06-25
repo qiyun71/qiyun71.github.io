@@ -5,7 +5,7 @@ toc: true
 top: false
 cover: false
 date: 2020-02-16 13:32:49
-categories: VB
+categories: Learn
 tags:
     - VB Note
 summary: 正式学习VB前的自学

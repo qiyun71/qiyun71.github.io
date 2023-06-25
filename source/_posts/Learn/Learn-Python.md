@@ -3,9 +3,9 @@ title: Python-Note
 date: 2020-02-09 15:38:38
 toc: true
 summary: Python 语言学习笔记本
-categories: Python
+categories: Learn
 tags:
-  - Python Note
+  - Python
 ---
 
 **有一定的 python 自学基础，基础不扎实**
