@@ -189,7 +189,7 @@ img_path = os.path.join(self.config.root_dir, 'image', f'{i:03d}.png')
 - 修改images中的照片数据or自己做一个照片数据（毛绒玩具）
 
 
-### eg: 使用自定义数据集对M590三维重建
+### eg: 使用neus自定义数据集对M590三维重建
 
 - 拍M590视频
 - video2img.py，将mp4按帧拆分成png，并生成mask文件夹
@@ -203,7 +203,7 @@ img_path = os.path.join(self.config.root_dir, 'image', f'{i:03d}.png')
 
 ![image.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230625163416.png)
 
-- 根据sparse_points.ply在meshlab中进行clean操作，只保留interest区域的点云
+- 根据sparse_points.ply在meshlab中进行clean操作，只保留interest区域的点云，并保存为${data_dir}/sparse_points_interest.ply
 
 ![image.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230625163527.png)
 

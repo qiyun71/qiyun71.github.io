@@ -87,7 +87,6 @@ NeRF的体积渲染方法提出沿着每条光线进行多次采样（上图（a
 
 
 
-
 ## 训练
 
 loss函数
@@ -113,6 +112,11 @@ $$M_{k} ∈ {0, 1}$$
 
 # Code
 
+## Runner().train流程图
+<iframe frameborder="0" style="width:100%;height:1153px;" src="https://viewer.diagrams.net/?highlight=0000ff&edit=_blank&layers=1&nav=1&title=Runner.drawio#R7V1Zk6M4Ev41RFd1RBPcx6Ndx8zG7vTudE3s7DwRlC3bTBlwA66jf%2F1KQtiA0gbbXG57ImraiEtk6stM5SEJ6p3%2F%2Fkvkrha%2FhVO0FBRp%2Bi6o94KiaJZq4H9Iy0faohiWlrbMI2%2BatsnbhifvB2KNEmtde1MUFy5MwnCZeKti4yQMAjRJCm1uFIVvxctm4bL41pU7R1zD08Rd8q1%2FetNkkbZairlt%2FxV580X2Ztmw0zO%2Bm13MviReuNPwLdekPgjqXRSGSfrLf79DS0K9jC7pfY87zm46FqEgqXPDaKV9cxdf3e9%2F%2BN%2FXc%2FlpFKhfvrCnvLrLNftgQTGW%2BHnjWYgfi3udfDBSGN%2FXYXbiS0wZNcIXyMbqfXsS%2F5qTf7%2BtMTui7Fm4U%2Bnj0pOMHpsnK1G4DqaI9FPGp98WXoKeVu6EnH3D4wq3LRJ%2FyU6TJ7FxIhubp%2BXpkH0UihL0nmtidPkFhT5Kog98SXY2YxobpXLGs7cty2WJtS1y7NZYm8tG2Xzz6C0j8A%2FGiwP4YnA0QlM8LtlhGCWLcB4G7vJh2zreUlHCR9tr%2FhWGK0a7v1GSfDDiueskLFIWvXvJ%2F8jtos6O%2FsqduX9nT6YHH9lBgD83dxM5%2FCt%2FbnsbPcruq83FOFxHE7SHVAqTCm40R8me65jcIXTcOyYitHQT77WI%2F8YZrHDAW0XhBMVxKstm3pxIKw8zdjdYpH7AosuY1Xm4KDoAF1Xn4aK3BRfzCpe6cNFqwkUfFFw0Di73buLGKLm5PQOAqJA%2BgQDSmj6RrStC6iJEr4kQ2RwURHQOIl9R8hZGL%2FE5IMTqW4VYAPm%2BPd58%2Fhyj5UwkKlnQx598MsMRsWk7%2ByTo98OTPapctGRVmaerqnZpyWYdyBH26f6RDU2YvPF05gTpBWdCZaN3KvMTuScvmC%2FRf93Ic4MJ2kvwV3bReVFdA8a2ZnRKdd6K%2F4YwjSJM%2Br0Ej7KrzoziwDjXuh3nKkdxjmrxwl2Rn5N1tPwYR%2B7khajxKvIVfRAtEFOxlbLSk3WOnApATdlqi5wb39TVLKw0CzNzr9ouZKAZiF2Y9TsHmSSMJgsxXCWeL46mrj84wcMbiJrOY6VbAxGQNFesVECgEivZE4eCFZvDyle0fkqVOorOwtmgq31PpZSrO66%2B9zoLalUiZWD%2Ba37CsQzdKW6ZLNDkZRV6NN5Dwz%2FPURb5IQ5t5xlbZOvVGSDJkHpHEm%2FueoGXcLRLyPxtTnHUPeG0UvDMNEVAV0sb67dAOb0lyqlXy7a%2BDKobE1CGZdkqfFQgonFnMYlcLzgLbW2YvcuYa6y5PlLqxgaUYQGFjw1ELEFDoodSmq9xFoiRew8VKHysgAqcQatlwzD7V8rXKXR9UVN3Cq0Oawqt8FPop7Xvu9HHnxGGwHnIGFPrW8ZkL7tCpRoqat05tKoOCioqP4der6ZugpwlcqOAhIcifDRExKiKmIViGGQsKMfFVEWzU9TYV9TURo1aFzXWsFDD%2B0Rw%2Fx3Pd%2BfIWaHIHyJeiIaRC3ixe3cuadecsPpgqesi0YaVFKbyLpI5CrBaCaahj%2F%2F5iB13kDmUmmaIuilt%2FlNKygZyMVqGaJldaht%2BHthM9YRPJ5MSm1RKS4Kt8ymlEKWSpIMm7J1WU2QPvjIqjzBbKrAJyKbqmEsKzyV9%2FOwmk4VDGaHcEUZIgn5P%2FVaELfgCKsRCcbJaEzlGLqEtr%2FmWSbgMo%2FSn78Yv%2BC56%2B136HJk8Ub%2FnWIQpmRT5ECdR%2BILu6NPU%2ByAMiEqcectlqcldevMAH04wfxBuHxO%2BeBN3OWInfG863ekXKgrfVkCqlXgPGO9gAqPSGvOBSJc%2Fd7zpO%2BER5VR%2BJFwMp3S9yCkD1HxQ1mN7rDJ4nD7Ygj0SrEfhwRDsO2E8Ii1Y7lu28KCTdtsQHjRhbJFG3DK%2BE0b0hz0Wxg%2FCg0muxMr74ZGcsu7oNbYwNvY%2B2RCssTCy6cBgjx%2BN6AtVeocpjDX6HlOwNcGmz7AswaZvtnT6DJM8cvx4QUNKMYtDyqw9pMy2hpR%2BdQzXL%2BCqm4eYTTgHMhXR%2BDzEALmRMyN%2FEZ6NxKsFigbp7aKTEaOoMWHUdD0F0Xhve2oP5Syh6QXJtrK6lHWQTXKX%2BlLnZx9k4KccmpEfF8MeQ1VFreg3ViSIQ9YWcJ3wyJA5LlwVUIVeqVRAmQnRvQKyvv%2FD%2BLf3I%2FDff3%2F%2BcL%2BPvX8%2BhH2npeY4vOV3szxulqcwEY1BGRVZv%2FP6jyZrD9KMMFUxyx3ZrIcD6iciJrUOzQidTxDK%2FFhT7zXzYW0si8ysuGN6bMa0WXpHvHKD7BaS6zunhHei%2BXPON5a%2FKNecexvQAegNkzB23AB3ZEmCpV544DsuRvXqWbR5s2gHNPK6dfoY1ySH%2BhLaqKt1h1UooPPeolx9N6n1vlkl8RCltaGLVtFW1TQwtV2zxE4DtzoQdyo6yqXP%2BC9wYtdfLVG88aBSR7di4FZMo%2BA5Xl2WCDRkTZSL%2BlcDixWwAhbVLqcfOj%2BNr%2BAoYad6YUELgH0qyD5pa2d1o8eu7svaeiybFFa7L4c10zB4Lw5d2CFwPH%2BFuUfWz6CClolXZl9mEdS8ZluE%2FvM67kmr6bqoFJNdVRBEJJCfza7yIGptLQKDjwB%2BIH7top9XvulS0XepyRBftE4N9Gs%2BZX3BVjdFzBhWPqXBp4itV8zQGKQXhdjlSgEpuqodYJdrbZW3GEBgPO%2FEALKMiDT7wgQTyWdZolnCpxnlQjq8A6Rs0G%2BcMxWekHzbDwf3OT7snvJ78Uyu%2BgFHuXhgPftIXkHObEarEydodeBXkNFPbWvl82fv6jvaYXlLhmiWIKdAykm1YMdlewqKDyrPSKaX5JE%2FkpMXucEc3UAD5ZZC7mKYqBiaqBR9gLoETp8MzG27HSaCMYUzjL0VTIytxdF4XCazFQbs9YNZeoY87SrWBvEUJOLA7ETe6zhxEyc1HQZrKBYduAaYbNC5oWjyvoRymnPR3CG2DmfmXIzmAhx%2FugGaH9p2atCJ5lJaMvj3BV8hK7Yrmz9Ab84x97U3N1i6MWHyjUfnBMThJgvpohaE6hJs9x3Tj8s1%2FhVNNIvJj7AYxc2i3pLbHUQftBZsI%2Bjjq06KsbQxJ6DZfBT%2FKItpEqKhdSZNP7S8ttp1oAIDFQzYEsNAaWmWCg5UYJ0qmqTkTMIIOeE6ib3pIH1thlF0SZsqFCjYauemrSdY6fYabct%2BH5bH18J8EaQNUBsA07C32oB93W7LcUqvSKuEyNgmkfO9dhR0%2FbGmy9F9T%2B0sZ4YQ0KGc6kj1BhMibXaIaaCphy0umHypoxZFs6sjFZanllqSp2CIT1UUEYi8Gm2pp16DfMOWp3VdNQPzvml9cnQw3reTOCr3tlbUvm7z2ScbwX8eqSdaDfnXZuoJzGveH3dZqSeAh80EA3xtZZ%2FARupPv0DR8WJMBlbv6qhgh946irCtnLuALvge5578n3QF%2BG12U2nJCXsTe3zcdctmIdJdt%2BAfaT%2B2Y2zzQSdIA96vlJuuD3GaDqTEWAelqrc2Vwc2nwnCCxKs5VFvdZrTB7MEqB540IXRozC2M1fU8%2FyWrqdxT1bGSFfPGFlkP0S6Xsa9YMv0x5isyPFgkHU3xgpdoONRsNW3kK6xczlMNnRee4KZFbuWB2hPg%2FY6ERj21C4jerUGHdZMQOGN1X6Cjk0kHvLVSN3mLIIureb7fXzaY65WrjPK0hdP0atH6mmDTl5%2FPIHo0m6dk6hU16zelwudh0arXP%2Fc5WrhFrucNg250ylSp86EmQY7T52eZsBVlGPLY3eR%2BTVVIG8IlaxdOElYB2Ygcns2EL9ERGv6EhrEn%2Bi4%2FJQ%2BqeYYLbapQnHxw7vTIlKsWwXYsO4BUNoF8io0Q52GEh42%2FsvyV1V0n4os1u2c%2BCp19%2BBe1H39Gx27MesAO6LPb%2FSVlypKtrv87PUUa9BCXq3FyYDd%2BFqTJDukhlQtDapgP51lYGdJecAzoWpzuf47iD2dQYP%2B3tf33GvqPn8euVMPD67sHZtjMUJ09%2B%2BbPS%2Bh9LotyuAqmpGpBnuXLEoCy8ySvODV2fltJ9IQ44%2BlWrIXbxsapuZuUVb9DokW27QiYSebgTqpZuttSyPMQVG0gWGxMf%2FGA%2FjqBYQMbLFL9uBC26mfcbEqQyqpDAusa9fgFY5ay1HtdR%2FSgXvggCWN4Asb33f0yBhWKR1SlljDzhAWd4csdxDBygi7fzm31MRwZl6A8nYGbWjK2MgpTvp733MPEKJYN%2BT7HaEk7bXO1MYm6bpZHenEa7%2BoJklLQ9%2FEXuG77%2BwVSRhNFiI%2Bvino5KnnY5aSokly9ILQKm35I1qjW0wBqeLrD%2BjSTjurJnUPHC0DNURAWyA%2F5MoXFOl%2Fom2Qf1HpfLoPxnFDfGcI%2B4jdSDLDgE5uGtHldklsbo5zily321Lk79LMeP8hza3o7e7Xl%2FHfz787Tr9Fyt3p8ZKKPVKxA3uXwtZRv5E0ftU10l2yj0%2FMZ3%2F1nuWhW2XrwwaXzpZEG0ieayLFAwSGegVGbWBAO5WCRFX6xAWwLymgrWj0LVwlno%2BZFIn4L3SIJry5ra3wCM5EEsl5c6ND7iu9mtTE7b57aDA2uH23cruk5pNFbAmsUtvufdc4lHtdjne4UN6N0BpI1jpC8r5O7gcyRkBE60qZkUyu2221Ng8nDjsAQ3bDyZbLcLIsEE6Q30dvD0u9bjYwLCxVYsQ4ESOw80WRTc75Im8Wv8yekwKd3Vri%2BWGumN3wr0JggoI4jJ5DrAXFeOIuyXL6Z4E%2Bzue6E31QimuL6LuQkrZGNBnghQWvs%2FrUZLU8mrH7ipzJAk1eqCu3S5vwNBgp5f04BwKjfpfxOjMcAZWFMFGlPoG0e8%2FqHELwWW%2FqJsjxfHeOzgdH2kCNQblXJ0mxkk2qiaNiJZvcHY4yHlYDqSsvyd5u1kSSj%2BLF%2BQBJN4uld4MB0oB2DBo%2BkOr6KORenRRZN%2FcDab2iMFoiNwq8YE7ysM9IMXH7kkoSH9Ha5Dx2BaZ%2BN0Q8Bkyy0Jd1l62pUbkSr9ovmGo5HPAXpKads0KRf0YwMkoV4QqAIr1bFPVbY9ndKgXNoKjuJCnNte4NRfwsaY4Ch1Y4ukk7SwCc6IgzVFEx7c1%2FZgEn%2BL%2BOtxmFmXohq4I3E2CqPQ3q1TG3pxw5rUsCqiIIAL7QZKU0pd5YvfNFEXt8EMWCp51QrJHK1Aj0ymEGDQSbAqilJkpVYK5U2NRNbEUjZQXf6XN%2FqpVoTxsR5eIlxaw9Ipoog4RHxICM%2FeHLXmB1JfjCU0OXp%2FGUL0gjO3I7M%2FIXhT7LFB2kvaLJoqFu7RW7ABgV3qfB3G5D1I29UrEt%2BtFSNN2jiMrPbFVXulnRD291Q1pvr0KVT%2FQorZ26WQ6wsPNrpyL1p98dsUmRWjfMrPRqzvZbr9XdZlQd8%2FTU2Ty99dB6rW10gomMrPZvV7mWImV287E3qMzMaqq8ay%2FZuQUKB6nordJuw%2BDOPVAtR2tqXVXOD%2BP9ye26HrvOajn2djOHiXCdkLWYWD1j2Z4iZ4Mw8t0lu2BwwNE3QMmkkQZlBAGL6bSHnLOZRDaIgNpFG2ojWg5QY6XsMEMu8TftGZfDerK%2BzCqOdqo%2FWd97QzvqDyhP8fz5DpgziOMLBojwXOFHRkAZnPhuW7uBedsL3eQduJ7%2FFmHS09uOXo%2BPOYu9MIjZQJDcYIr%2Fn%2FI%2FrnjUnoqjRr%2F1i0CK7IOJm6CA5C9sxy3xp85JUHZ%2B3PZ07fQ1j56DOnUOUMtiZHn%2FgQnYoWZbMNOu4bADtHBtO9Tu0w5Vd%2BfXNhQO4xIJhxUNU7loGJCi0WksTBtQ8u3wYQaU7sNU7TWLPetmDmZY0UXuJHGydwzRGaLqumjJB2ZpkD0bjA6tP21AObaDx0sm3arx0mtaoN6vDMxxtH4hz%2FB5qveyDJmiZuIgc6mydLWd0%2FTyDXqVW1srOwLUDub1Gdl%2FLpkOrtHSvUy%2FhioPwD%2BQ6g1f2GuoUuNTvTO8zDy0nMbnhxY4ONQ9WiqqjY%2F2szzTDQt8kutBHD7s0H1n%2BXQoDpdr4sRKj7%2BvUfThzNbB5JoOwpcClEo9VRUUtFBCiNVWKYCuXKVsfSlb16FzspV1mizgHTprfJiinG2SZqtkO7SRSTZRIy2WMB7lwKw%2F0PP2SLA0sksavsrKLhyNyClLEcb25hqyMPuDLliSML4bqARXCtjTwJWWd4ltozX4XSeu9eGXbbBbDb9%2BJ658sC9VRCgWHh4JQOzRV%2BeVjs%2FcYrNbRZlEnhvMl4XLk9zlpYjTGaBNx7g6wEiy2uLMdYWrA9BWd0qh95pQrvNTCowfEnEQ%2F0j%2FHSJC8MDfOaMwVBleSEeF0SK3t7giP6mghEXvK4yD4dFVV6RalIS24DmKjPgwCsl0aetUwh%2B6%2BC2cInLF%2FwE%3D"></iframe>
+
+
+
 ## 网络Network
 
 ### NeRF
@@ -128,6 +132,45 @@ $$M_{k} ∈ {0, 1}$$
 网络结构：
 ![SDFNetwork.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/SDFNetwork.png)
 
+input: pts, 采样点的三维坐标 batch_size * n_samples x 3
+output: 257个数 batch_size * n_samples x 257
+
+`sdf(pts) = output[:, :1]`:  batch_size * n_samples x 1，采样点的sdf值
+
+### RenderingNetwork
+
+![RenderingNetwork.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/RenderingNetwork.png)
+
+input: rendering_input :`[batch_size * n_samples ,  3 + 27 + 3+ 256 = 289]`
+`rendering_input = torch.cat([points, view_dirs, normals, feature_vectors], dim=-1)`
+- pts: batch_size * n_samples, 3
+- gradients: batch_size * n_samples, 3
+- dirs: batch_size * n_samples, 3
+    - 位置编码 to view_dirs: batch_size * n_samples , 27
+- feature_vector: batch_size * n_samples, 256
+
+output: sampled_color采样点的RGB颜色 batch_size * n_samples , 3
+
+### SingleVarianceNetwork
+
+```
+class SingleVarianceNetwork(nn.Module):
+    def __init__(self, init_val):
+        super(SingleVarianceNetwork, self).__init__()
+        # variance 模型可以跟踪和优化这个参数，使其在训练过程中进行更新
+        self.register_parameter('variance', nn.Parameter(torch.tensor(init_val)))
+
+    def forward(self, x):
+        # torch.zeros([1, 3])
+        # 大小为 [len(x), 1] 的张量，每个元素都是 exp(variance * 10.0)
+        return torch.ones([len(x), 1]) * torch.exp(self.variance * 10.0)
+
+in Runner:
+self.deviation_network = SingleVarianceNetwork(**self.conf['model.variance_network']).to(self.device)
+```
+
+render中
+`inv_s = deviation_network(torch.zeros([1, 3]))[:, :1].clip(1e-6, 1e6) `
 
 ## dataset
 
@@ -211,6 +254,7 @@ pose[:3, 3] = (t[:3] / t[3])[:, 0] # pose: 4x4 为相机外参矩阵
  [ 1.        ]]
 ```
 
+### 光线生成(随机)
 然后生成光线，in `dataset.py/gen_random_rays_at` by img_idx ，batch_size, 并将rays的像素坐标转换到世界坐标系下
 
 p_pixel --> p_camera --> p_world
@@ -241,6 +285,7 @@ def gen_random_rays_at(self, img_idx, batch_size):
     return torch.cat([rays_o.cpu(), rays_v.cpu(), color, mask[:, :1]], dim=-1).cuda()    # batch_size, 10
 ```
 
+### 计算near和far(from o,d)
 根据rays_o 和rays_d 计算出near和far两个平面
 ```
 def near_far_from_sphere(self, rays_o, rays_d):
@@ -253,6 +298,65 @@ def near_far_from_sphere(self, rays_o, rays_d):
     return near, far
 ```
 
+### box的min和max(to生成mesh模型)
+
+```
+'''
+(4, 4) scale_mats_np0
+[[ 1.6737139  0.         0.        -2.702419 ]
+[ 0.         1.6737139  0.        -1.3968586]
+[ 0.         0.         1.6737139 27.347609 ]
+[ 0.         0.         0.         1.       ]]
+'''
+object_bbox_min = np.array([-1.01, -1.01, -1.01, 1.0])
+object_bbox_max = np.array([ 1.01,  1.01,  1.01, 1.0])
+# Object scale mat: region of interest to **extract mesh**
+object_scale_mat = np.load(os.path.join(self.data_dir, self.object_cameras_name))['scale_mat_0'] # 4x4
+
+# object_bbox_? > object_scale_mat缩放+平移 > scale_mat缩放+平移
+object_bbox_min = np.linalg.inv(self.scale_mats_np[0]) @ object_scale_mat @ object_bbox_min[:, None] # 4x1
+object_bbox_max = np.linalg.inv(self.scale_mats_np[0]) @ object_scale_mat @ object_bbox_max[:, None] # 4x1
+self.object_bbox_min = object_bbox_min[:3, 0] # 3
+self.object_bbox_max = object_bbox_max[:3, 0] # 3
+```
+
+## render
+
+### validate_mesh
+根据一个$resolution^3$ 的sdf场，生成mesh的ply文件
+
+#### extract_geometry
+
+**extract_fields**
+input:
+- bound_min : 3 ; bound_max : 3 ; resolution : 64 
+- query_func : pts -> sdf
+
+output: u  
+u : resolution x resolution x resolution, 为box 中每个点的sdf值
+
+**extract_geometry**
+
+根据体积数据和阈值重建出表面
+
+>[pmneila/PyMCubes: Marching cubes (and related tools) for Python (github.com)](https://github.com/pmneila/PyMCubes)
+
+
+input:
+- bound_min, bound_max, resolution, 
+- threshold, 用于`vertices, triangles = mcubes.marching_cubes(u, threshold)`，在等threshold面上，生成mesh的v和t
+- query_func，根据位置pts利用network计算出sdf
+    - query_func=lambda pts: -self.sdf_network.sdf(pts)
+output:
+- vertices：三角形网格点
+    - N_v , 3: 3为点的三维坐标
+- triangles：三角形网格
+    -  N_t , 3: 3为三角形网格顶点的索引index
+
+根据v和t，`mesh = trimesh.Trimesh(vertices, triangles)`生成mesh，并导出ply：
+```
+mesh.export(os.path.join(self.base_exp_dir, 'meshes', '{:0>8d}.ply'.format(self.iter_step)))
+```
 # 实验
 
 ## Dataset：DTU&BlendedMVS
@@ -306,7 +410,7 @@ python exp_runner.py --mode train --conf ./confs/wmask.conf --case bmvs_clock #�
 python exp_runner.py --mode train --conf ./confs/wmask.conf --case bmvs_clock --is_continue
 将mesh模型精细化
 python exp_runner.py --mode validate_mesh --conf ./confs/wmask.conf --case bmvs_clock --is_continue
-多视角渲染成mp4
+插值多视角渲染成mp4(0~1之间新视角生成)
 python exp_runner.py --mode interpolate_000_001 --conf ./confs/wmask.conf --case bmvs_clock --is_continue
 ```
 ![Pasted image 20230601130943.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/Pasted%20image%2020230601130943.png)
@@ -324,6 +428,9 @@ Neus： (结果与resolution无关)
 
 
 虽然运行后，面数更多了，但是细节处依然不清楚，可能需要继续增加训练的步数
+- 看代码后：resolution可以增加object的分辨率，再缩放到物体实际大小
+    - 可以看到vertices和faces都增加了，但由于sdf生成的相同，因此表面变得更精细，但细节处不清楚的地方依然不清楚
+
 ### eg2: bear_womask
 ```
 python exp_runner.py --mode train --conf ./confs/womask.conf --case bmvs_bear  #没有mask
@@ -348,6 +455,26 @@ python exp_runner.py --mode validate_mesh --conf ./confs/womask.conf --case bmvs
 
 ### Neus如何给模型加纹理：
 >[How to reconstruct texture after generating mesh ? · Issue #48 · Totoro97/NeuS (github.com)](https://github.com/Totoro97/NeuS/issues/48)
+
+
+## 渲染自定义视角的视频
+
+根据中间两个img进行插值，中间插入生成的新视图图片
+
+```
+python exp_runner.py --mode interpolate_<img_idx_0>_<img_idx_1> --conf <config_file> --case <case_name> --is_continue # use latest checkpoint
+
+eg:
+python exp_runner.py --mode train --conf ./confs/womask.conf --case bmvs_bear
+python exp_runner.py --mode interpolate_1_2 --conf ./confs/womask.conf --case bmvs_bear --is_continue # use latest checkpoint
+```
+
+eg: 1 to 2
+![00300000_1_2.gif](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/00300000_1_2.gif)
+
+<div style="display: flex; justify-content: center;"> <img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/001.png" alt="Image 1" style="width: 50%; height: auto; margin: 10px;"> to <img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/002.png" alt="Image 2" style="width: 50%; height: auto; margin: 10px;"> </div>
+
+
 
 # 自定义数据集
 自己拍一组照片: **手机或者相机 绕 物体拍一周，每张的角度不要超过30°（保证有overlap区域）**
