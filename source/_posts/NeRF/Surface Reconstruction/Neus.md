@@ -357,6 +357,273 @@ output:
 ```
 mesh.export(os.path.join(self.base_exp_dir, 'meshes', '{:0>8d}.ply'.format(self.iter_step)))
 ```
+
+## 数据集自定义
+
+### imgs2poses.py
+
+是否使用过colmap：
+- 如果已经使用colmap生成了`sparse/0/`下的` ['cameras', 'images', 'points3D']`文件，将获得sparse_points.ply
+- 若没有，则使用`run_colmap()`，即可生成sparse/0/下文件
+
+#### run_colmap()
+
+```
+def run_colmap(basedir, match_type):
+    
+    logfile_name = os.path.join(basedir, 'colmap_output.txt')
+    logfile = open(logfile_name, 'w')
+    
+    feature_extractor_args = [
+        'colmap', 'feature_extractor', 
+            '--database_path', os.path.join(basedir, 'database.db'), 
+            '--image_path', os.path.join(basedir, 'images'),
+            '--ImageReader.single_camera', '1',
+            # '--SiftExtraction.use_gpu', '0',
+    ]
+    # subprocess.check_output: 运行命令行程序，等待程序运行完成，然后返回输出结果
+    feat_output = ( subprocess.check_output(feature_extractor_args, universal_newlines=True) )
+    logfile.write(feat_output)
+    print('Features extracted')
+
+    exhaustive_matcher_args = [
+        'colmap', match_type, 
+            '--database_path', os.path.join(basedir, 'database.db'), 
+    ]
+
+    match_output = ( subprocess.check_output(exhaustive_matcher_args, universal_newlines=True) )
+    logfile.write(match_output)
+    print('Features matched')
+    
+    p = os.path.join(basedir, 'sparse')
+    if not os.path.exists(p):
+        os.makedirs(p)
+
+    # mapper_args = [
+    #     'colmap', 'mapper', 
+    #         '--database_path', os.path.join(basedir, 'database.db'), 
+    #         '--image_path', os.path.join(basedir, 'images'),
+    #         '--output_path', os.path.join(basedir, 'sparse'),
+    #         '--Mapper.num_threads', '16',
+    #         '--Mapper.init_min_tri_angle', '4',
+    # ]
+    mapper_args = [
+        'colmap', 'mapper',
+            '--database_path', os.path.join(basedir, 'database.db'),
+            '--image_path', os.path.join(basedir, 'images'),
+            '--output_path', os.path.join(basedir, 'sparse'), # --export_path changed to --output_path in colmap 3.6
+            '--Mapper.num_threads', '16',
+            '--Mapper.init_min_tri_angle', '4',
+            '--Mapper.multiple_models', '0',
+            '--Mapper.extract_colors', '0',
+    ]
+
+    map_output = ( subprocess.check_output(mapper_args, universal_newlines=True) )
+    logfile.write(map_output)
+    logfile.close()
+    print('Sparse map created')
+    
+    print( 'Finished running COLMAP, see {} for logs'.format(logfile_name) )
+```
+
+上述代码相当于分别运行:
+```
+colmap feature_extractor --database_path os.path.join(basedir, 'database.db') --image_path os.path.join(basedir, 'images') --ImageReader.single_camera 1
+colmap match_type --database_path os.path.join(basedir, 'database.db')
+match_type : exhaustive_matcher Or sequential_matcher
+colmap mapper --database_path os.path.join(basedir, 'database.db') --image_path os.path.join(basedir, 'images') --output_path os.path.join(basedir, 'sparse') --Mapper.num_threads 16 --Mapper.init_min_tri_angle 4 --Mapper.multiple_models 0 --Mapper.extract_colors 0
+```
+
+- feature_extractor: Perform **feature extraction or import features** for a set of images.
+- exhaustive_matcher: Perform **feature matching** after performing feature extraction.
+- mapper: **Sparse 3D reconstruction / mapping of the dataset** using SfM after performing feature extraction and matching.
+
+然后将命令行的输出结果保存到logfile即`basedir/colmap_output.txt`中
+
+> colmap命令行：[Command-line Interface — COLMAP 3.8-dev documentation](https://colmap.github.io/cli.html)
+> dense中深度图转换：[COLMAP简明教程 导入指定参数 命令行 导出深度图 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/584386128)
+
+### load_colmap_data() to colmap_read_model.py
+`python .\colmap_read_model.py E:\BaiduSyncdisk\NeRF_Proj\NeuS\video2bmvs\M590\sparse\0 .bin`
+
+读取`['cameras', 'images', 'points3D']`文件的数据
+
+input:
+- basedir
+output: 
+- poses, shape: 3 x 5 x num_images, include c2w: 3x4xn and hwf: 3x1xn
+- pts3d, 一个长度为num_points字典，key为point3D_id，value为Point3D对象
+- perm, # 按照name排序，返回排序后的索引的列表：`[from 0 to num_images-1]`
+
+#### cameras images and pts3d be like: 
+
+| var     | example |
+| ------- | ------- |
+| cameras |    `{1: Camera(id=1, model='SIMPLE_RADIAL', width=960, height=544, params=array([ 5.07683492e+02,  4.80000000e+02,  2.72000000e+02, -5.37403479e-03])), ...}`     |
+| images  |     `{1: Image(id=1, qvec=array([ 0.8999159 , -0.29030237,  0.07162026,  0.31740581]), tvec=array([ 0.29762954, -2.81576928,  1.41888716]), camera_id=1, name='000.png', xys=xys, point3D_ids=point3D_ids, ...}`    |
+| pts3D        |   `{1054: Point3D(id=1054, xyz=array([1.03491375, 1.65809594, 3.83718124]), rgb=array([147, 146, 137]), error=array(0.57352093), image_ids=array([115, 116, 117, 114, 113, 112]), point2D_idxs=array([998, 822, 912, 977, 889, 817])), ...}`      |
+
+xys and point3D_ids in images be like:
+
+```
+xys=array([[ 83.70032501,   2.57579875],
+       [ 83.70032501,   2.57579875],
+       [469.29092407,   2.57086968],
+       ...,
+       [759.08764648, 164.65560913],
+       [533.28503418, 297.13980103],
+       [837.11437988, 342.07727051]]), 
+point3D_ids=array([  -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,       
+ -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+ -1,   -1,   -1,   -1, 9109,   -1,   -1,   -1,   -1,   -1,   -1,
+ -1,   -1,   -1,   -1,   -1, 8781,   -1,   -1, 8628,   -1,   -1,
+ -1, 2059,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+ -1,   -1,   -1,   -1, 8791,   -1,   -1, 8683,   -1, 8387,   -1,
+ -1,   -1,   -1,   -1,   -1, 9008, 9007,   -1, 9161, 8786,   -1,
+ -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+ -1,   -1,   -1,   -1,   -1,   -1,   -1, 9175,   -1,   -1,   -1,
+9053,   -1,   -1,   -1,   -1, 8756,   -1,   -1,   -1,   -1,   -1,
+ -1, 9024,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, 9111,
+ -1,   -1, 9018,   -1, 9004,   -1,   -1,   -1,   -1,   -1,   -1,
+ -1,   -1,   -1,   -1,   -1, 8992,   -1,   -1,   -1,   -1,   -1,
+4701,   -1, 9067,   -1, 9166, 3880,   -1,   -1,   -1,   -1,   -1,
+ -1,   -1,   -1,   -1,   -1,   -1,   -1, 8725,   -1, 9112,   -1,
+ -1,   -1,   -1, 8990,   -1, 8793, 9118, 8847, 9009, 9140, 9012,
+ -1,   -1,   -1, 7743, 9065, 8604, 3935,   -1,   -1,   -1,   -1,
+9075,   -1,   -1, 8966,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+ -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+ -1,   -1,   -1,   -1,   -1,   19,   -1,   -1,   -1,   -1,   -1,
+9017,   -1,   -1,   -1, 9020,   -1, 9005,   -1,   -1,   -1,   -1,
+ -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, 8696,
+ -1,   -1, 8930,   -1,   -1, 8970,   -1,   -1,   -1,   -1, 9076,
+ -1, 9114, 8925,   -1, 8915,   -1, 9077, 8851, 8655, 5885, 4073,
+ -1, 3839,   -1,   -1,   -1,   -1, 9165, 9078,   -1,   -1,   -1,
+ -1,   -1,   -1,   -1, 9055,   -1,   -1,   -1,   -1,   -1,   -1,
+ -1,   -1,   -1,   -1, 9017,   -1,   -1,   -1,   -1,   -1,   -1,
+ -1, 8682,   -1,   -1, 9170,   -1, 7562, 7556,   -1,   -1,   -1,
+ -1,   -1,   -1,   -1,   -1, 8962, 9079,   -1,   -1,   -1, 8586,
+8224,   -1,   -1,   -1,   -1, 1399, 9168, 6439, 9121, 8255, 9169,
+ -1, 9151, 8971, 4698, 9171, 9172,   -1,   -1, 8898, 3916,   -1,
+ -1,   -1, 1788,   -1,   -1,   -1, 9080,   -1,   -1,   -1,   -1,
+ -1,   -1, 2097,   -1, 4103,   -1,   -1,   -1,   -1, 2073,   -1,
+ -1, 1771,   -1,   -1,   -1,   -1,   -1,   -1, 8813,   -1, 9030,
+ -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, 8841, 9081,
+ -1,   -1,   -1, 8977,   -1, 8372, 9057, 6807, 9082, 5941, 4181,
+1675,   -1, 1683,   -1,   -1, 1503, 9083, 1973, 9071, 2679, 2412,
+3238,   -1, 9164, 1796, 9174,   -1,   -1,   -1,   -1,   -1,   -1,
+9042, 9084,   -1,   -1,   -1,   -1,   -1, 9051, 9050,   -1, 9085,
+ -1, 9158, 9086,  853, 7671, 9128,   -1,   -1, 9058,   -1, 9087,
+ -1, 8502, 9102,   -1, 9106,   -1, 9039,   -1,   -1,   -1, 9069,
+ -1, 2261,   -1, 1793, 2643,   -1,   -1, 8810, 8945,   -1,   -1,
+ -1,   -1,   -1, 9043,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+9142,   -1,   -1, 9122, 9089, 9090, 8863, 9103, 2161, 2446,   -1,
+ -1,   -1,   -1,   -1, 9104,   -1, 9060, 9131,   -1,   -1,   -1,
+ -1, 8980, 8706,   -1, 9105, 9091, 9173,   -1,   -1, 2996,   -1,
+ -1, 9092,   -1,   -1,   -1,   -1, 9094, 9095, 9096, 9097, 9156,
+ -1,   -1,   -1,   -1, 8772, 8818,   -1,   -1, 9162, 9062, 9098,
+ -1,   -1, 8907, 9099, 8985, 4624,   -1, 3746, 8951,   -1,   -1,
+8908,   -1, 9135, 8986, 9101,   -1,   -1,   -1, 9137,   -1]))}
+```
+
+#### cameras文件
+
+input:
+- path_to_model_file, `camerasfile = os.path.join(realdir, 'sparse/0/cameras.bin')`
+output:
+- cameras，一个长度为num_cameras字典，key为camera_id，value为Camera对象
+
+使用:
+```
+camerasfile = os.path.join(realdir, 'sparse/0/cameras.bin')
+camdata = read_model.read_cameras_binary(camerasfile)
+
+list_of_keys = list(camdata.keys()) # list from 1 to num_cameras
+cam = camdata[list_of_keys[0]] # Camera(id=1, model='SIMPLE_RADIAL', width=960, height=544, params=array([ 5.07683492e+02,  4.80000000e+02,  2.72000000e+02, -5.37403479e-03]))
+print( 'Cameras', len(cam)) # Cameras 5
+
+h, w, f = cam.height, cam.width, cam.params[0]
+hwf = np.array([h,w,f]).reshape([3,1])
+```
+
+#### images文件
+
+input:
+- path_to_model_file,`imagesfile = os.path.join(realdir, 'sparse/0/images.bin')`
+output:
+- images，一个长度为num_reg_images字典，key为image_id，value为Image对象
+
+使用:
+```
+imagesfile = os.path.join(realdir, 'sparse/0/images.bin')
+imdata = read_model.read_images_binary(imagesfile)
+
+w2c_mats = []
+bottom = np.array([0,0,0,1.]).reshape([1,4])
+
+names = [imdata[k].name for k in imdata] # 一个长度为num_images的list，每个元素为图片的名字
+print( 'Images #', len(names)) 
+perm = np.argsort(names) # 按照name排序，返回排序后的索引的列表：[from 0 to num_images-1]
+for k in imdata:
+    im = imdata[k]
+    R = im.qvec2rotmat() # 将旋转向量转换成旋转矩阵 3x3
+    t = im.tvec.reshape([3,1]) # 平移向量 3x1
+    m = np.concatenate([np.concatenate([R, t], 1), bottom], 0) # 4x4
+    w2c_mats.append(m) # 一个长度为num_images的list，每个元素为4x4的矩阵
+
+w2c_mats = np.stack(w2c_mats, 0) # num_images x 4 x 4
+c2w_mats = np.linalg.inv(w2c_mats) # num_images x 4 x 4
+
+poses = c2w_mats[:, :3, :4].transpose([1,2,0]) # 3 x 4 x num_images
+poses = np.concatenate([poses, np.tile(hwf[..., np.newaxis], [1,1,poses.shape[-1]])], 1)
+# tile : 将hwf扩展成3 x 1 x 1 ，然后tile成3 x 1 x num_images，tile表示在某个维度上重复多少次
+# poses : 3 x 5 x num_images ，c2w：3 x 4 x num_images and hwf: 3 x 1 x num_images
+
+# must switch to [-u, r, -t] from [r, -u, t], NOT [r, u, -t]
+poses = np.concatenate([poses[:, 1:2, :], poses[:, 0:1, :], -poses[:, 2:3, :], poses[:, 3:4, :], poses[:, 4:5, :]], 1)
+```
+
+其中`R = im.qvec2rotmat()`将旋转向量转换成旋转矩阵:
+
+如果给定旋转向量为 [qw, qx, qy, qz]，其中 qw 是标量部分，qx, qy, qz 是向量部分，可以通过以下步骤将旋转向量转换为旋转矩阵：
+
+构造单位四元数 q：
+```css
+q = qw + qx * i + qy * j + qz * k  其中 i, j, k 是虚部的基本单位向量。
+```
+
+计算旋转矩阵 R(w2c)：
+``` perl
+R = | 1 - 2*(qy^2 + qz^2)   2*(qx*qy - qw*qz)   2*(qx*qz + qw*qy) |
+    | 2*(qx*qy + qw*qz)     1 - 2*(qx^2 + qz^2) 2*(qy*qz - qw*qx) |
+    | 2*(qx*qz - qw*qy)     2*(qy*qz + qw*qx)   1 - 2*(qx^2 + qy^2) |
+```
+
+```python
+def qvec2rotmat(qvec):
+    return np.array([
+        [1 - 2 * qvec[2]**2 - 2 * qvec[3]**2,
+         2 * qvec[1] * qvec[2] - 2 * qvec[0] * qvec[3],
+         2 * qvec[3] * qvec[1] + 2 * qvec[0] * qvec[2]],
+        [2 * qvec[1] * qvec[2] + 2 * qvec[0] * qvec[3],
+         1 - 2 * qvec[1]**2 - 2 * qvec[3]**2,
+         2 * qvec[2] * qvec[3] - 2 * qvec[0] * qvec[1]],
+        [2 * qvec[3] * qvec[1] - 2 * qvec[0] * qvec[2],
+         2 * qvec[2] * qvec[3] + 2 * qvec[0] * qvec[1],
+         1 - 2 * qvec[1]**2 - 2 * qvec[2]**2]])
+```
+
+#### points3D文件
+
+input:
+- path_to_model_file: `points3dfile = os.path.join(realdir, 'sparse/0/points3D.bin')`
+output:
+- pts3D, 一个长度为num_points字典，key为point3D_id，value为Point3D对象
+
+```
+points3dfile = os.path.join(realdir, 'sparse/0/points3D.bin')
+pts3d = read_model.read_points3d_binary(points3dfile)
+```
+
 # 实验
 
 ## Dataset：DTU&BlendedMVS
