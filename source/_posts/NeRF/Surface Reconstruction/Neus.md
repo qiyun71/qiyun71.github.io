@@ -8,10 +8,11 @@ categories: NeRF/Surface Reconstruction
 ---
 
 NeuS: Learning Neural Implicit Surfaces by Volume Rendering for Multi-view Reconstruction
+实现了三维重建：从图片中获得点云
 
 <!-- more -->
 
-[Totoro97/NeuS: Code release for NeuS (github.com)](https://github.com/Totoro97/NeuS)
+[Code: Totoro97/NeuS: Code release for NeuS (github.com)](https://github.com/Totoro97/NeuS)
 [Project Page](https://lingjie0206.github.io/papers/NeuS/)
 
 Neus的总目标是实现从2D图像输入中以高保真度重建对象和场景。
@@ -19,11 +20,21 @@ Neus的总目标是实现从2D图像输入中以高保真度重建对象和场�
 最近的新视角合成神经方法，如NeRF[Mildenhall等人，2020]及其变体，使用体积渲染来产生具有优化鲁棒性的神经场景表示，即使对于非常复杂的对象也是如此。**然而，从这种学习的隐式表示中提取高质量的表面是困难的，因为在表示中没有足够的表面约束。**
 在NeuS中，我们提出将表面表示为有符号距离函数（SDF）的零水平集，并开发了一种新的体积渲染方法来训练神经SDF表示。我们观察到，传统的体积渲染方法会导致固有的几何误差（即偏差）对于表面重建，因此提出了一个新的公式，它在一阶近似中没有偏差，从而即使在没有掩码监督的情况下也能实现更准确的表面重建。
 在DTU数据集和BlendedMVS数据集上的实验证明，NeuS在高质量表面重建方面优于现有技术，尤其是对于具有复杂结构和自遮挡的对象和场景。
+
+# 不足之处
+
+- 对于无纹理物体(例如反光和阴影区域)的重建效果并不理想
+- 需要手动在meshlab中clean稀疏点云ply中其他噪音位置的点云，这也是本文所说不需mask监督的方法
+- (in paper:)一个有趣的未来研究方向是根据不同的局部几何特征，对不同空间位置具有不同方差的概率以及场景表示的优化进行建模
+
 # 引言+相关工作
 
 ## SDF简单理解
 SDF：输入一个空间中的点，输出为该点到某个表面（可以是曲面）最近的距离，符号在表面外部为正，内部为负。
 给定一个物体的平面，我们定义SDF为空间某点到该平面距离为0的位置的点的集合（也就是物体表面的点）。如果空间中某点在物体表面之外，那么SDF>0；反之如果空间中某点在物体表面之内，那么SDF<0。这样子就可以找到物体表面在三维空间中的位置，自然而然的生成三维表面。
+
+![image.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230629135016.png)
+
   1. mesh是一种由图表示的数据结构，基于顶点、边、面共同组成的多面体。它可以十分灵活的表示复杂物体的表面，在计算机图形学中有着广泛的应用。从nerf输出的物理意义就可以想到，density可以用来表示空间中沿光线照射方向的密度，**那么我们可以通过基于密度的阈值来控制得到的mesh**。这种方法的好处是，训练好一个nerf的模型就可以得到一个mesh了。但是这种方式也有很大的缺点：一是训练结果会有很多噪音而且生成的mesh会有很多的空洞，二是很难控制一个合理的阈值。
   2. 这里我们可以考虑使用有向距离场（Signed distance function 简称 SDF）来取代nerf建模。使用SDF的一大好处是，SDF函数本身在空间是连续的，这样子就不需要考虑离散化的问题。我们之后使用Marching cubes方法来生成mesh。
   3. NeRF生成一个带有密度和颜色信息的模型，通过使用SDF来代替密度，在密度大的地方表示为物体的表面，就可以生成一个mesh模型。
@@ -87,7 +98,7 @@ NeRF的体积渲染方法提出沿着每条光线进行多次采样（上图（a
 
 
 
-## 训练
+## 训练损失函数
 
 loss函数
 $$\mathcal L=\mathcal L_{color}+\lambda\mathcal L_{reg}+\beta\mathcal L_{mask}.$$
@@ -255,7 +266,7 @@ pose[:3, 3] = (t[:3] / t[3])[:, 0] # pose: 4x4 为相机外参矩阵
 ```
 
 ### 光线生成(随机)
-然后生成光线，in `dataset.py/gen_random_rays_at` by img_idx ，batch_size, 并将rays的像素坐标转换到世界坐标系下
+然后生成光线，in `dataset.py/gen_random_rays_at()` by img_idx ，batch_size, 并将rays的像素坐标转换到世界坐标系下
 
 p_pixel --> p_camera --> p_world
 `intrinsics @ p_pixel`:  `3x3 @ 3x1`
@@ -287,6 +298,7 @@ def gen_random_rays_at(self, img_idx, batch_size):
 
 ### 计算near和far(from o,d)
 根据rays_o 和rays_d 计算出near和far两个平面
+
 ```
 def near_far_from_sphere(self, rays_o, rays_d):
     a = torch.sum(rays_d**2, dim=-1, keepdim=True)
@@ -320,9 +332,388 @@ self.object_bbox_min = object_bbox_min[:3, 0] # 3
 self.object_bbox_max = object_bbox_max[:3, 0] # 3
 ```
 
-## render
+## render()
 
-### validate_mesh
+input: 
+- rays_o, 
+- rays_d, 
+- near, far : batch_sizex1,batch_sizex1
+- background_rgb=background_rgb,
+- cos_anneal_ratio=self.get_cos_anneal_ratio()
+
+```
+image_perm = self.get_image_perm()
+res_step = self.end_iter - self.iter_step
+
+for iter_i in tqdm(range(res_step)):
+    data = self.dataset.gen_random_rays_at(image_perm[self.iter_step % len(image_perm)], self.batch_size)
+    # data : [batch_size, 10] : [rays_o.cpu(), rays_v.cpu(), color, mask[:, :1]]
+    rays_o, rays_d, true_rgb, mask = data[:, :3], data[:, 3: 6], data[:, 6: 9], data[:, 9: 10]
+    
+    near, far = self.dataset.near_far_from_sphere(rays_o, rays_d)
+    
+    background_rgb = None
+    if self.use_white_bkgd:
+        background_rgb = torch.ones([1, 3])
+
+    render_out = self.renderer.render(rays_o, rays_d, near, far,
+                                      background_rgb=background_rgb,
+                                      cos_anneal_ratio=self.get_cos_anneal_ratio())
+```
+
+output: render_out字典
+{
+    'color_fine': color_fine, # batch_size, 3
+    's_val': s_val, # batch_size, 1
+    'cdf_fine': ret_fine['cdf'], # batch_size, n_samples
+    'weight_sum': weights_sum, # batch_size, 1
+    'weight_max': torch.max(weights, dim=-1, keepdim=True)[0], # batch_size, 1
+    'gradients': gradients, # batch_size, n_samples, 3
+    'weights': weights, # batch_size, n_samples or batch_size, n_samples + n_outside
+    'gradient_error': ret_fine['gradient_error'], # 1
+    'inside_sphere': ret_fine['inside_sphere'] # batch_size, n_samples
+}
+```
+ret_fine = self.render_core(rays_o,
+                            rays_d,
+                            z_vals,
+                            sample_dist,
+                            self.sdf_network,
+                            self.deviation_network,
+                            self.color_network,
+                            background_rgb=background_rgb,
+                            background_alpha=background_alpha,
+                            background_sampled_color=background_sampled_color,
+                            cos_anneal_ratio=cos_anneal_ratio)
+                            
+color_fine = ret_fine['color']
+weights = ret_fine['weights']
+weights_sum = weights.sum(dim=-1, keepdim=True)
+gradients = ret_fine['gradients']
+s_val = ret_fine['s_val'].reshape(batch_size, n_samples).mean(dim=-1, keepdim=True) # [batch_size, 1]
+```
+
+function:
+
+```
+render:
+
+batch_size = len(rays_o)
+sample_dist = 2.0 / self.n_samples   # Assuming the region of interest is a unit sphere 
+z_vals = torch.linspace(0.0, 1.0, self.n_samples) # [n_samples]
+z_vals = near + (far - near) * z_vals[None, :]  # [batch_size, n_samples]
+拍照物体的采样点z方向坐标
+```
+
+```
+物体外的z坐标(背景)
+z_vals_outside = None
+if self.n_outside > 0:
+    z_vals_outside = torch.linspace(1e-3, 1.0 - 1.0 / (self.n_outside + 1.0), self.n_outside) # [n_outside]
+
+n_samples = self.n_samples
+perturb = self.perturb
+```
+
+```
+添加扰动：
+if perturb_overwrite >= 0:
+    perturb = perturb_overwrite
+if perturb > 0:
+    t_rand = (torch.rand([batch_size, 1]) - 0.5) # [batch_size, 1]
+    z_vals = z_vals + t_rand * 2.0 / self.n_samples # [batch_size, n_samples]
+
+    if self.n_outside > 0:
+        mids = .5 * (z_vals_outside[..., 1:] + z_vals_outside[..., :-1]) # [n_outside - 1]
+        upper = torch.cat([mids, z_vals_outside[..., -1:]], -1)     # [n_outside]
+        lower = torch.cat([z_vals_outside[..., :1], mids], -1)      # [n_outside]
+        t_rand = torch.rand([batch_size, z_vals_outside.shape[-1]]) # [batch_size, n_outside]
+        z_vals_outside = lower[None, :] + (upper - lower)[None, :] * t_rand
+        # Z_vals_outside:  1Xn_outside + 1Xn_outside * batch_sizeXn_outside = batch_sizeXn_outside
+
+if self.n_outside > 0:
+    z_vals_outside = far / torch.flip(z_vals_outside, dims=[-1]) + 1.0 / self.n_samples # [batch_size, n_outside]
+    # filp: 将tensor的维度进行翻转，如[1,2,3] -> [3,2,1] ，倒序排列
+
+背景outside:
+background_alpha = None
+background_sampled_color = None
+```
+
+
+
+### get_cos_anneal_ratio
+
+output: 
+- 数1或者比一小的数$\frac{iterstep}{anneal}, anneal=50000$
+- or 1 when anneal_end = 0
+
+### 精采样n_importance
+
+if self.n_importance > 0: 精采样
+
+```
+with torch.no_grad(): # 不需要计算梯度
+    # pts : [batch_size, 1, 3] + [batch_size, 1, 3] * [batch_size, n_samples, 1] = [batch_size, n_samples, 3]
+    pts = rays_o[:, None, :] + rays_d[:, None, :] * z_vals[..., :, None] # [batch_size, n_samples, 3]
+    sdf = self.sdf_network.sdf(pts.reshape(-1, 3)).reshape(batch_size, self.n_samples)
+    # pts.reshape(-1, 3) : [batch_size * n_samples, 3]
+    # sdf : [batch_size * n_samples , 1] -> [batch_size, n_samples]
+
+    for i in range(self.up_sample_steps):
+        # [batch_size, n_importance // up_sample_steps] per step
+        new_z_vals = self.up_sample(rays_o,
+                                    rays_d,
+                                    z_vals,
+                                    sdf,
+                                    self.n_importance // self.up_sample_steps,
+                                    64 * 2**i)
+        # # [batch_size, n_samples + n_importance // up_sample_steps], [batch_size, n_samples + n_importance // up_sample_steps]
+        z_vals, sdf = self.cat_z_vals(rays_o,
+                                    rays_d,
+                                    z_vals,
+                                    new_z_vals,
+                                    sdf,
+                                    last=(i + 1 == self.up_sample_steps))
+    # new_z_vals : [batch_size, n_importance]
+    # z_vals : [batch_size, n_samples + n_importance]
+
+n_samples = self.n_samples + self.n_importance
+```
+
+#### up_sample(self, rays_o, rays_d, z_vals, sdf, n_importance, inv_s):
+
+input:
+- rays_o,
+- rays_d,
+- z_vals, batch_size X n_samples
+- sdf, batch_size X n_samples
+- self.n_importance // self.up_sample_steps, 每步处理$\frac{importance}{sampls.steps}$
+- `64 * 2**i` , $64  \cdot  2^{i}$
+
+output:
+- new_z_vals: batch_size X n_importance // up_sample_steps * steps_i
+
+function:
+- pts: batch_size,n_samples,3
+- radius: batch_size, n_samples
+    - pts的2-范数norm(ord=2)
+- inside_sphere: batch_size, n_samples - 1
+    - `inside_sphere = (radius[:, :-1] < 1.0) | (radius[:, 1:] < 1.0)`
+    - point是否在单位圆的空间内
+- prev_sdf, next_sdf: batch_size, n_samples - 1 光线上sdf的前后
+    - `prev_sdf[1] = next_sdf[0] = sdf[1]` 
+- prev_z_vals, next_z_vals: batch_size, n_samples - 1 光线上z坐标的前后
+    - `prev_z_vals[1] = next_z_vals[0] = z_vals[1]` 
+- mid.sdf: batch_size, n_samples - 1 , $mid.sdf = \frac{prev.sdf + next.sdf}{2} = \frac{f(p_{i})+f(p_{i+1})}{2}$
+- cos_val: batch_size, n_samples - 1 ,$cos.val = \frac{next.sdf - prev.sdf}{next.z.vals - prev.z.vals + 1e-5} = \frac{f(p_{i})-f(p_{i+1})}{z_{i}-z_{i+1}}$
+
+- prev_cos_val：batch_size, n_samples - 1、
+    - 将cos_val堆叠，且最后一个删除，第一个插入0
+    - `prev_cos_val[0] = 0, prev_cos_val[1] = cos_val[0]`
+- cos_val: batch_size, n_samples - 1, 2 
+    - stack prev_cos_val and cos_val
+- cos_val: batch_size, n_samples - 1
+    - 在prev_cos_val和cos_val之间选择最小值，这一步的目的是当发生一条光线穿过物体两次时，具有更好的鲁棒性
+- cos_val: batch_size, n_samples - 1
+    - 将cos_val限制在$-1 \times 10^{3}$和0之间，并将在单位圆空间外的值置False
+    - `cos_val.clip(-1e3, 0.0) * inside_sphere`
+- dist: batch_size, n_samples - 1 , $dist = next.z.vals- prev.z.vals= z_{i+1}-z_{i}$
+    - 两点之间的距离
+
+batch_size, n_samples - 1: 
+- prev_esti_sdf: $\frac{mid.sdf - cos.val * dist}{2} \approx f(p_{i})$
+- next_esti_sdf: $\frac{mid.sdf + cos.val * dist}{2} \approx f(p_{i+1})$
+- prev_cdf: $prev.cdf = sigmoid(prev.esti.sdf \times inv.s) = sigmoid(\approx f(p_{i})\times 64  \cdot  2^{i})$
+- next_cdf: $next.cdf = sigmoid(next.esti.sdf \times inv.s) = sigmoid(\approx f(p_{i+1})\times 64  \cdot  2^{i})$
+- alpha: $\alpha = \frac{prev.cdf - next.cdf + 1 \times 10^{-5}}{prev.cdf + 1 \times 10^{-5}}$ is  $\alpha_i=\max\left(\frac{\Phi_s(f(\mathbf{p}(t_i))))-\Phi_s(f(\mathbf{p}(t_{i+1})))}{\Phi_s(f(\mathbf{p}(t_i)))},0\right).$
+- weights: $w_{i} = \alpha_{i} \cdot T_{i} =\alpha_{i} \cdot \prod_{j=1}^{i-1}(1-\alpha_j)$
+    - in code : `weights = alpha * torch.cumprod(torch.cat([torch.ones([batch_size, 1]), 1. - alpha + 1e-7], -1), -1)[:, :-1]`
+
+`z_samples = sample_pdf(z_vals, weights, n_importance, det=True).detach()`
+
+##### sample_pdf(z_vals, weights, n_importance, det=True)
+
+like NeRF
+
+input:
+- z_vals, batch_size X n_samples
+- weights, batch_size, n_samples - 1
+- n_importance, 
+- det=True
+
+output:
+- z_samples, batch_size X n_importance 经过逆变换采样得到的采样点的z坐标值
+
+#### cat_z_vals(rays_o,rays_d,z_vals,new_z_vals,sdf,last=(i + 1 == self.up_sample_steps))
+
+将原来的z_vals和经过逆变换采样得到的new_z_vals一起cat起来
+
+input:
+- rays_o,
+- rays_d,
+- z_vals, batch_size X n_samples
+- new_z_vals, `batch_size X n_importance // up_sample_steps * steps_i`
+- sdf, batch_size X n_samples
+- last=(i + 1 == self.up_sample_steps): true(last step) or false
+
+output:
+- z_vals, `batch_size X n_samples + n_importance // up_sample_steps * steps_i`
+- sdf,  `batch_size X n_samples + n_importance // up_sample_steps * steps_i` when not last
+
+**last:** 
+```
+z_vals : batch_size X n_samples + n_importance 
+n_samples = self.n_samples + self.n_important
+```
+
+**then :**
+- z_vals : batch_size X n_samples
+
+### render_core_outside(rays_o, rays_d, z_vals_feed, sample_dist, self.nerf)
+
+```
+in render()
+# Background model
+if self.n_outside > 0:
+    z_vals_feed = torch.cat([z_vals, z_vals_outside], dim=-1) # [batch_size, n_samples + n_outside]
+    z_vals_feed, _ = torch.sort(z_vals_feed, dim=-1)
+    ret_outside = self.render_core_outside(rays_o, rays_d, z_vals_feed, sample_dist, self.nerf)
+
+    background_sampled_color = ret_outside['sampled_color']
+    background_alpha = ret_outside['alpha']
+```
+
+input: 
+- rays_o, `[batch_size,  3]`
+- rays_d, `[batch_size,  3]`
+- z_vals_feed, `batch_size, n_samples + n_outside` ,实际上此处为`[batch_size, n_samples + n_outside +n_importance]`
+- sample_dist, $sample.dist = \frac{2.0}{n.samples}$
+- self.nerf, NeRF神经网络，使用nerf渲染函数进行color的计算
+    - 如果使用了白色背景，color还需累加白背景
+        - `background_rgb = torch.ones([1, 3])`
+        - `color = color + background_rgb * (1.0 - weights_sum)`
+
+output: ret_outside字典
+{
+    'color': color, # batch_size, 3
+    'sampled_color': sampled_color, # batch_size, n_samples + n_outside, 3
+    'alpha': alpha, # batch_size, n_samples + n_outside
+    'weights': weights, # batch_size, n_samples + n_outside
+}
+
+function: like NeRF
+- dis_to_center: batch_size, n_samples, 1 , 
+    - 坐标的2范数，并限制在$1$ ~ $1 \times 10^{10}$
+- pts: batch_size, n_samples, 4, `torch.cat([pts / dis_to_center, 1.0 / dis_to_center], dim=-1)`
+    - 归一化pts, $\frac{x}{\sqrt{x^{2}+y^{2}+z^{2}}},\frac{y}{\sqrt{x^{2}+y^{2}+z^{2}}},\frac{z}{\sqrt{x^{2}+y^{2}+z^{2}}},\frac{1}{\sqrt{x^{2}+y^{2}+z^{2}}}$
+
+### render_core()
+
+```
+render continue
+    background_sampled_color = ret_outside['sampled_color']
+    background_alpha = ret_outside['alpha']
+
+# Render core
+ret_fine = self.render_core(rays_o,
+                            rays_d,
+                            z_vals,
+                            sample_dist,
+                            self.sdf_network,
+                            self.deviation_network,
+                            self.color_network,
+                            background_rgb=background_rgb,
+                            background_alpha=background_alpha,
+                            background_sampled_color=background_sampled_color,
+                            cos_anneal_ratio=cos_anneal_ratio)
+```
+
+input:
+- rays_o, `[batch_size,  3]`
+- rays_d, `[batch_size,  3]`
+- z_vals, `batch_size, n_samples` ,实际上为`batch_size, n_samples + n_importance` 
+- sample_dist, $sample.dist = \frac{2.0}{n.samples}$
+- self.sdf_network, sdf神经网络
+- self.deviation_network, inv_s参数神经网络
+- self.color_network, 采样点color神经网络
+- background_rgb=background_rgb,
+- background_alpha=background_alpha, `batch_size, n_samples + n_outside`
+- background_sampled_color=background_sampled_color, `batch_size, n_samples + n_outside, 3`
+- cos_anneal_ratio=cos_anneal_ratio ,数1或者比一小的数$\frac{iterstep}{anneal}, anneal=50000$
+
+output: ret_fine字典
+{
+    'color': color, # batch_size, 3
+    'sdf': sdf, # batch_size * n_samples, 1
+    'dists': dists, # batch_size, n_samples
+    'gradients': gradients.reshape(batch_size, n_samples, 3),
+    's_val': 1.0 / inv_s, # batch_size * n_samples, 1
+    'mid_z_vals': mid_z_vals, # batch_size, n_samples
+    'weights': weights, # batch_size, n_samples or batch_size, n_samples + n_outside
+    'cdf': c.reshape(batch_size, n_samples), # batch_size, n_samples
+    'gradient_error': gradient_error, # 1
+    'inside_sphere': inside_sphere # batch_size, n_samples
+}
+
+function:
+- dists: batch_size, n_samples - 1 
+    - 采样点间距离,$dists = z_{i+1} - z_{i}$
+- dists: batch_size, n_samples
+    - 最后一行添加固定的粗采样点间距: $sample.dist = \frac{2.0}{n.samples}$
+- mid_z_vals: batch_size, n_samples , $mid = z_{i} + \frac{dist_{i}}{2}$
+- pts: batch_size, n_samples, 3 , $pts = \boldsymbol{o} + \boldsymbol{d} \cdot mid$
+- dirs: batch_size, n_samples, 3 
+    - 方向向量扩展得到 `rays_d[:, None, :].expand(batch_size, n_samples, 3)`
+- pts: reshape to batch_size * n_samples, 3 
+- dirs: reshape to batch_size * n_samples, 3 
+- sdf_nn_output: batch_size * n_samples, 257 =  sdf_network(pts)
+- sdf: batch_size * n_samples, 1 `sdf = sdf_nn_output[:, :1]`
+- feature_vector: batch_size * n_samples, 256 `feature_vector = sdf_nn_output[:, 1:]`
+- gradients: batch_size * n_samples, 3 梯度,sdf对输入pts_xyz的梯度，与法向量有关
+
+```
+def gradient(self, x):
+    # x : [batch_size * n_samples , 3]
+    x.requires_grad_(True) 
+    y = self.sdf(x) # y : [batch_size * n_samples , 1]
+    d_output = torch.ones_like(y, requires_grad=False, device=y.device) # d_output : [batch_size * n_samples , 1]
+    # torch.autograd.grad : 计算梯度,返回一个元组，元组中的每个元素都是输入的梯度
+    gradients = torch.autograd.grad(
+        outputs=y,
+        inputs=x,
+        grad_outputs=d_output,
+        create_graph=True,
+        retain_graph=True,
+        only_inputs=True)[0]
+    return gradients.unsqueeze(1) # unsqueeze(1) : 在第1维增加一个维度
+    # return : [batch_size * n_samples , 1 , 3]
+```
+
+- sampled_color: batch_size, n_samples, 3
+    - `color_network(pts, gradients, dirs, feature_vector).reshape(batch_size, n_samples, 3)`
+- inv_s: `deviation_network(torch.zeros([1, 3]))[:, :1].clip(1e-6, 1e6) `
+    - 一个可以更新的变量 $1 \times e^{10.0 \cdot var}$ ，并将其限制在$1 \times 10^{-6}$ ~ $1 \times 10^{6}$之间
+
+```
+class SingleVarianceNetwork(nn.Module):
+    def __init__(self, init_val):
+        super(SingleVarianceNetwork, self).__init__()
+        # variance 模型可以跟踪和优化这个参数，使其在训练过程中进行更新
+        self.register_parameter('variance', nn.Parameter(torch.tensor(init_val)))
+
+    def forward(self, x):
+        # torch.zeros([1, 3])
+        # 大小为 [len(x), 1] 的张量，每个元素都是 exp(variance * 10.0)
+        return torch.ones([len(x), 1]) * torch.exp(self.variance * 10.0)
+```
+
+- inv_s: expand a num to `batch_size * n_samples, 1 `
+- true_cos: batch_size * n_samples, 1 , $true.cos = dx \cdot gx + dy \cdot gy + dz \cdot gz$
+- iter_cos: $= -(relu(-true.cos * 0.5 + 0.5) \cdot (1.0 - cos.anneal.ratio)+  relu(-true.cos) * cos.anneal.ratio)$
+- estimated_next_sdf: sdf
+ 
+### validate_mesh生成mesh模型
 根据一个$resolution^3$ 的sdf场，生成mesh的ply文件
 
 #### extract_geometry
@@ -360,6 +751,8 @@ mesh.export(os.path.join(self.base_exp_dir, 'meshes', '{:0>8d}.ply'.format(self.
 
 ## 数据集自定义
 
+### custom_data流程图
+<iframe frameborder="0" style="width:100%;height:833px;" src="https://viewer.diagrams.net/?highlight=0000ff&edit=_blank&layers=1&nav=1&title=custom_data.drawio#R7Vxdc5s4FP01nmw7Ew%2BID5vHOIm7D7udzmRn2j55FCPbpICokB3TX78SiE8pMc0aQ9bOQ4IuEhb36BxdXSkeGbfB%2FhOB0eZv7CJ%2FBDR3PzLuRgDopq2zP9ySZBZ7AjLDmniuqFQaHrxfSBg1Yd16LoprFSnGPvWiunGJwxAtac0GCcHP9Wor7Nc%2FNYJrJBkeltCXrV89l27EWzhaaf8TeeuN%2BGRnKm4EMK8rDPEGuvi5YjLuR8YtwZhmV8H%2BFvncd7lbsnbzF%2B4W%2FSIopG0aOFMUff30z%2FWX%2B8l8PwnJLJnvrgUWMU3y90Uue31RxIRu8BqH0L8vrTOCt6GL%2BFM1Virr%2FIVxxIw6Mz4hShOBJdxSzEwbGvjiLtp79BtvPrZE6Xvlzt1ePDktJHkhpCSpNOLF79V7ZbO0lLfL3o%2B%2F1ItuE6YYb8lS1Hp6Mr651F2Es59m8FlPrPvJ7joffZCsEX2lHijAZaRAOECsP6wdQT6k3q7eDyhG57qoVyLILgSIakBf6%2BQO%2BlvxSV6wjkGEYxSPo0SCuwST%2B%2F9541H0EMHUD8%2BM0HXgVjikAlXdLpyr8OUOEYr2FZPsDnHXsrIWQh10W7DlueSanjNoU%2BGZpXXkQOv%2FzojWIB4kBGhJCFNJwr4YAiSGrFG4SAnyx4dX%2BKENgR%2FA7Jsf%2BbzcD0H0Cj1KshwiSI0eJVs6J4jZkiDOsAjSK8LvSwLbIjwZFMKmJIErz2dBNmvGfzEfxzQthdwHzC8xYp8jDwuywcHjNu5FGHMdEsJoAFkYizpVYZx2JYy25NSEu7ThMvZ2tO6bmBL8A91iHxNmCXHI6cTw8Bsm6HvrkBWXzGeI2WfcVx5bqNyIG4HnuikXVWDU%2BdkBHmZ9ojIVeJgKOEBXcIBLINdaxSYtVQwMK5KbSIzzMXQXS%2BwHMFq4kMIBBnTGZNxgylQR0uVh30lCuqnkxxCfj3AVEpTPJIbVr3I5EhxkG4pRPcABDSbWQf%2BdeIkiL%2FEeYYxcj4zAbQDpcrOgSYTOaIhPGxDpCoiMU45xfXqZnVvnHY2W07NuD2p6zvtdoWEmYsy2QpBuCVowxhG4pIxLwPY5%2BR751ZpfFXWrjH2lUhQx5h1VHHNW%2B2hFjxQkGw0igiIaqK5bNAUVbasrmCwJJv47uzgPfTScBixW34sXXXL%2BKeXxTUm23uTRbimPR8%2FBpE1vCIFJpUKEvZDGlSd%2F4YZK3kJvhP9i4VwOl%2ByJ5eApuvYfOC4nJ7iv6smd%2BcfxI8%2F42DDgrAsf4ygFpqm5I2t2tYQBIjC%2BYgEVe8qVF8A1KkqZC4y7q5Eli8jQFFmX1mOqTJJxyvUYeCV%2BPRdJ1p3Dq2RbAUp3kixHM%2BmeUTbmIzbeXXGJSHBOONVXz5aCPcpsRmdAGXKe%2BrK0OJDQO5z5G9gWlbyDEcMdGu4urj0GdT2zHAVPyrnoNPOMHBWUeRL%2Byhd9A3oju2Up5iHlPlN3E5Gc9s5jNNfb1WCxf2756bIZR%2BdaOPqG1UjDp%2BJuEdeJp7CYMMxtaB8xMSwCxUUW2o0jP8lrs3eoNqiY097UrcfvIKd9M2TNDjuF%2FLSTNrqfj2a3I%2BdmIP3NOMUbqcPsF7pXtYXbYJEF3OkwBZoh%2Flq%2F%2BY7nw2Fj3KCxbahorBcqfRL9NcAlUmkdqTgtIxVDH1akIu%2FmeCtWXqVZz%2BLIRYi5yH5O6VRIVbnkdtEKbv2iihTeDOcchq2Ia057DiMfABWPB17orZIBxoW2NraBU%2Fmpq9RUUwSJ2rQQs6o%2FzSP4U3lEfNKnSJ3ivJ9SL96mUoZiPaV0aq%2BaZMirJ34EVuT0hnhKXHdAI0unWj6pdjCPMXkrERzQ8SKtJS3qc7feCS1eHu0tWGGeiBXKD3cuOnd0QKd9AirHAQRBV%2BQ1suXh8cMBSdMUDn55H9JqI3NdnaVRO9HsVefeQgu9N1ooDmqonWr0yQt5I0PwopbjWXh8LY9imiV7BsYUEzSZovrPMeVBis6oIkdVRfYsVZwh%2BlFWHL13xek1K%2FKmibg%2FxZm2VJxeBUc%2BX%2FyMie8uAkjlVAcDBmhsKbJwvSUdHF8svc0Mrcp3dMcX%2B93N0D0Grq2naKvX0FWeo2P%2BlQTvkTKgcUJA%2BS%2Fep2WMfOIxIigieInimHkKzNPtFe5UnG4i5bst84%2By8xstAxj%2FOFhJZFoWcbRhIRZbivySt4OOiaLy2NRRQQWq%2FRRbAar9%2B6CyYvktGdmJuPKrRoz7fwE%3D"></iframe>
 ### imgs2poses.py
 
 是否使用过colmap：
@@ -624,6 +1017,81 @@ points3dfile = os.path.join(realdir, 'sparse/0/points3D.bin')
 pts3d = read_model.read_points3d_binary(points3dfile)
 ```
 
+### gen_cameras.py
+
+根据pose.npy文件和sparse_points_interest.ply文件来生成cameras_sphere.npz
+- pose.npy主要保存每张图片的c2w矩阵和hwf
+- sparse_points_interest.ply用来生成相机缩放矩阵，将感兴趣的部位保存下来
+
+**world_mat_{i}:**
+
+```
+h, w, f = hwf[i, 0], hwf[i, 1], hwf[i, 2]
+intrinsic = np.diag([f, f, 1.0, 1.0]).astype(np.float32)
+intrinsic[0, 2] = (w - 1) * 0.5
+intrinsic[1, 2] = (h - 1) * 0.5
+
+intrinsic = 
+[[ focal,  0.       ,   (w-1)/2  , 0 ]
+[ 0.  ,       focal ,   (h-1)/2   , 0]
+[ 0.  ,       0.      ,   1.            , 0]
+[ 0.  ,       0.      ,   0.            , 1. ]]
+np.float32
+
+convert_mat = np.zeros([4, 4], dtype=np.float32)
+convert_mat[0, 1] = 1.0
+convert_mat[1, 0] = 1.0
+convert_mat[2, 2] =-1.0
+convert_mat[3, 3] = 1.0
+pose = np.diag([1.0, 1.0, 1.0, 1.0]).astype(np.float32)
+pose[:3, :4] = poses_raw[i]
+
+pose = 
+[[r1,        r2       ,  r3            ,  tx]
+[ r1 ,       r2      ,   r3             , ty]
+[ r1 ,       r2      ,   r3             , tz]
+[ 0.  ,       0.      ,   0.            , 1. ]]
+convert_mat =
+[[0.,      1.      ,  0           , 0]
+[1.,       0.       ,  0            , 0]
+[0.,       0.       ,  -1.          , 0]
+[0.,       0.       ,  0            , 1.]]
+np.float32
+
+pose = pose @ convert_mat
+
+pose = 
+[[r2,        r1       ,  -r3            ,  tx]
+[ r2 ,       r1      ,   -r3             , ty]
+[ r2 ,       r1      ,   -r3             , tz]
+[ 0.  ,       0.      ,   0.            , 1. ]]
+
+w2c = np.linalg.inv(pose)
+
+world_mat = intrinsic @ w2c
+world_mat = world_mat.astype(np.float32)
+```
+
+pose要乘以covert_mat是因为在load_colmap_data时对pose进行了翻转
+
+```
+# must switch to [-u, r, -t] from [r, -u, t], NOT [r, u, -t]
+poses = np.concatenate([poses[:, 1:2, :], poses[:, 0:1, :], -poses[:, 2:3, :], poses[:, 3:4, :], poses[:, 4:5, :]], 1)
+```
+
+**scale_mat_{i}:**
+
+```
+pcd = trimesh.load(os.path.join(work_dir, 'sparse_points_interest.ply'))
+vertices = pcd.vertices
+bbox_max = np.max(vertices, axis=0) 
+bbox_min = np.min(vertices, axis=0)
+center = (bbox_max + bbox_min) * 0.5
+radius = np.linalg.norm(vertices - center, ord=2, axis=-1).max()
+scale_mat = np.diag([radius, radius, radius, 1.0]).astype(np.float32)
+scale_mat[:3, 3] = center
+```
+
 # 实验
 
 ## Dataset：DTU&BlendedMVS
@@ -720,6 +1188,13 @@ python exp_runner.py --mode validate_mesh --conf ./confs/womask.conf --case bmvs
 
 
 
+### eg3: Miku
+```
+python exp_runner.py --mode train --conf ./confs/womask.conf --case Miku
+python exp_runner.py --mode validate_mesh --conf ./confs/womask.conf --case Miku --is_continue
+
+```
+
 ### Neus如何给模型加纹理：
 >[How to reconstruct texture after generating mesh ? · Issue #48 · Totoro97/NeuS (github.com)](https://github.com/Totoro97/NeuS/issues/48)
 
@@ -742,8 +1217,9 @@ eg: 1 to 2
 <div style="display: flex; justify-content: center;"> <img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/001.png" alt="Image 1" style="width: 50%; height: auto; margin: 10px;"> to <img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/002.png" alt="Image 2" style="width: 50%; height: auto; margin: 10px;"> </div>
 
 
+# Neus使用自制数据集
 
-# 自定义数据集
+## 自定义数据集colmap操作
 自己拍一组照片: **手机或者相机 绕 物体拍一周，每张的角度不要超过30°（保证有overlap区域）**
 >[colmap简介及入门级使用 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/397760339)
 
@@ -768,7 +1244,7 @@ eg: 1 to 2
 
 
 
-# Neus使用自制数据集
+## Neus命令操作
 
 >[(18条消息) 基于Nerf的三维重建算法Neus初探_Alpha狗蛋的博客-CSDN博客](https://blog.csdn.net/mockbird123/article/details/129934066)
 
@@ -777,7 +1253,9 @@ image文件夹就是rgb图片数据，算法默认支持png格式。
 mask文件夹包含的是模型的前景图像，前景和后景以黑色和白色区分，如果配置文件选择withou mask，其实这个文件夹的数据是没有意义的。但必须有文件，且名称、图像像素要和image的图像一一对应。
 最后是cameras_sphere.npz文件，它包括了相机的属性和图像的位姿信息等，这个是需要我们自己计算的。官方给出了两种计算方案，第二种是用colmap计算npz文件。
 
-## 使用Colmap生成npz文件
+### 使用Colmap生成npz文件
+
+可以提前通过colmap运行得到sparse/0/中的文件，或者通过img2poses中的run_colmap()生成，然后再得到sparse_points.ply
 
 ```
 cd colmap_preprocess

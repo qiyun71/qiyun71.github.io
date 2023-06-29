@@ -32,6 +32,19 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "78105bd57832283e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "NeRF/Efficiency/NeRF-InstantNGP.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              }
+            }
           }
         ]
       }
@@ -45,7 +58,7 @@
       {
         "id": "4b1070af652f8263",
         "type": "tabs",
-        "dimension": 70.75055187637969,
+        "dimension": 61.215469613259664,
         "children": [
           {
             "id": "8e8a871735863769",
@@ -118,7 +131,7 @@
       {
         "id": "3d2f21c2dced65ad",
         "type": "tabs",
-        "dimension": 29.249448123620308,
+        "dimension": 38.78453038674033,
         "children": [
           {
             "id": "086707e82c339e3f",
@@ -247,14 +260,17 @@
   },
   "active": "4da6f35ae4c164fe",
   "lastOpenFiles": [
-    "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl.md",
+    "NeRF/NeRF-code.md",
     "NeRF/Surface Reconstruction/Neus.md",
+    "NeRF/Efficiency/NeRF-InstantNGP.md",
+    "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl.md",
+    "NeRF/NeRF-Studio.md",
+    "Miku 1.mp4",
+    "Miku.mp4",
     "Note!!!.md",
     "Reports/2023-06-19.md",
     "2023-06-19.pdf",
-    "NeRF/Efficiency/NeRF-InstantNGP.md",
     "NeRF/NeRF-review.md",
-    "NeRF/NeRF-code.md",
     "NeRF/Efficiency",
     "未命名",
     "Python Practise/Make-Py-Tools.md",
@@ -267,7 +283,6 @@
     "Learn/Learn-Python_Threading.md",
     "Learn/Learn-Python-LCU.md",
     "Learn/Learn-VB.md",
-    "NeRF/NeRF-Studio.md",
     "Learn/Learn-Arduino.md",
     "Learn/Learn-Csharp.md",
     "Learn/Learn-HCJ前端.md",
@@ -281,8 +296,6 @@
     "Scripts",
     "scripts",
     "未命名.canvas",
-    "Templates",
-    "img/VB/zy",
     "附件/Pasted image 20230612205212.png",
     "附件/Pasted image 20230606154824.png",
     "附件/Pasted image 20230606154405.png",

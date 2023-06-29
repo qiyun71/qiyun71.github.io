@@ -7,7 +7,12 @@ tags:
 categories: NeRF/Surface Reconstruction
 ---
 
-使用[Instant-ngp](https://github.com/NVlabs/instant-ngp)中的技术，使Neus可以更快的进行inference，大概只需要5~10min生成一个模型
+使用[Instant-ngp](https://github.com/NVlabs/instant-ngp)中的编码技术，使Neus可以更快的进行inference，大概只需要5~10min生成一个模型
+
+>[NVlabs/instant-ngp: Instant neural graphics primitives: lightning fast NeRF and more (github.com)](https://github.com/NVlabs/instant-ngp)
+>[zhaofuq/Instant-NSR: Pytorch implementation of fast surface resconstructor (github.com)](https://github.com/zhaofuq/Instant-NSR)
+>[kwea123/ngp_pl: Instant-ngp in pytorch+cuda trained with pytorch-lightning (high quality with high speed, with only few lines of legible code) (github.com)](https://github.com/kwea123/ngp_pl)
+
 
 <!-- more -->
 
@@ -227,6 +232,13 @@ img_path = os.path.join(self.config.root_dir, 'image', f'{i:03d}.png')
 ![M590.gif](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/M590.gif)
 
 ![image.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230625165030.png)
+
+
+
+### eg: 对Miku进行重建
+
+数据集：
+
 
 
 ## 自定义数据集

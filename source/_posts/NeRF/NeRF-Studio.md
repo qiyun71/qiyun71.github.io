@@ -67,6 +67,23 @@ eg:
 cd autodl-tmp
 `ns-process-data images --data data/images --output-dir data/nerfstudio/images_name`
 
+跳过图像处理：复制和缩放
+`ns-process-data images --data data/Miku/image/ --output-dir data/nerfstudio/Miku --skip-image-processing`
+
+```
+06.29:
+(nerfstudio) root@autodl-container-7092458c99-5f01fa1c:~/autodl-tmp# ns-process-data images  --data data/Miku/image/ --output-dir data/nerfstudio/Miku --skip-image-processing --skip-colmap  
+[15:37:47] Only single camera shared for all images is supported.
+数据集必须是单个相机去拍照物体？？？
+无所谓：无卡开机用cpu算
+ns-process-data images  --data data/Miku/image/ --output-dir data/nerfstudio/Miku --skip-image-processing --no-gpu
+依然不行
+
+问题&原因：
+qt.qpa.xcb: could not connect to display qt.qpa.plugin: Could not load the Qt platform plugin "xcb" in "" even though it was found.  This application failed to start because no Qt platform plugin could be initialized. Reinstalling the application may fix this problem.
+最大的可能就是 --SiftExtraction.use_gpu 1  必须要求GPU带一个显示器
+```
+
 ### Train model
 `ns-train nerfacto --data data/nerfstudio/poster`
 

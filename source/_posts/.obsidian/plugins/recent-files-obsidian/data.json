@@ -5,8 +5,20 @@
       "path": "NeRF/Surface Reconstruction/Neus.md"
     },
     {
+      "basename": "NeRF-code",
+      "path": "NeRF/NeRF-code.md"
+    },
+    {
+      "basename": "NeRF-InstantNGP",
+      "path": "NeRF/Efficiency/NeRF-InstantNGP.md"
+    },
+    {
       "basename": "Neus-Instant-nsr-pl",
       "path": "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl.md"
+    },
+    {
+      "basename": "NeRF-Studio",
+      "path": "NeRF/NeRF-Studio.md"
     },
     {
       "basename": "Note!!!",
@@ -17,16 +29,8 @@
       "path": "Reports/2023-06-19.md"
     },
     {
-      "basename": "NeRF-InstantNGP",
-      "path": "NeRF/Efficiency/NeRF-InstantNGP.md"
-    },
-    {
       "basename": "NeRF-review",
       "path": "NeRF/NeRF-review.md"
-    },
-    {
-      "basename": "NeRF-code",
-      "path": "NeRF/NeRF-code.md"
     },
     {
       "basename": "Make-Py-Tools",
@@ -67,10 +71,6 @@
     {
       "basename": "Learn-VB",
       "path": "Learn/Learn-VB.md"
-    },
-    {
-      "basename": "NeRF-Studio",
-      "path": "NeRF/NeRF-Studio.md"
     },
     {
       "basename": "Learn-Arduino",
