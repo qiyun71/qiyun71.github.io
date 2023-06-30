@@ -11,12 +11,13 @@ categories:
 流程图点击编辑，更方便观看
 ![image.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230627160834.png)
 
-| My post                                                                        | Brief description            |
-| ------------------------------------------------------------------------------ | ---------------------------- |
-| [NeRF](2023/06/14/NeRF/NeRF-Principle/) + [Code](/2023/06/15/NeRF/NeRF-code/)  | NeRF原理 + 代码理解          |
-| [Neus](/2023/06/14/NeRF/Surface%20Reconstruction/Neus/)                        | 表面重建方法                 |
-| [Instant Neus](/2023/06/14/NeRF/Surface%20Reconstruction/Neus-Instant-nsr-pl/) | Neus+InstantNGP_tiny-cuda-nn |
-|                [NeRF进展](/2023/06/25/NeRF/NeRF-review/)                                                                |             追踪一些最近的NeRF进展                 |
+| My post                                                                                                                | Brief description            |
+| ---------------------------------------------------------------------------------------------------------------------- | ---------------------------- |
+| [NeRF](2023/06/14/NeRF/NeRF-Principle/) + [Code](/2023/06/15/NeRF/NeRF-code/)                                          | NeRF原理 + 代码理解          |
+| [Neus](/2023/06/14/NeRF/Surface%20Reconstruction/Neus/) + [Code](/2023/06/30/NeRF/Surface%20Reconstruction/Neus-code/) | 表面重建方法                 |
+| [Instant Neus](/2023/06/14/NeRF/Surface%20Reconstruction/Neus-Instant-nsr-pl/)                                         | Neus+InstantNGP_tiny-cuda-nn |
+| [Nerfstudio](/2023/06/15/NeRF/NeRF-Studio/)                                                                              | 一个更加方便训练和观察NeRF的框架      |
+| [NeRF进展](/2023/06/25/NeRF/NeRF-review/)                                                                                                                          |     追踪一些最近的NeRF进展                          |
 
 <!-- more -->
 

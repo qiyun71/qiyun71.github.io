@@ -21,6 +21,19 @@
             }
           },
           {
+            "id": "11610709ae67ae02",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "NeRF/Surface Reconstruction/Neus-code.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              }
+            }
+          },
+          {
             "id": "b500c671ccb6268d",
             "type": "leaf",
             "state": {
@@ -46,7 +59,8 @@
               }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -107,7 +121,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "NeRF/Surface Reconstruction/Neus.md",
+                "file": "NeRF/Surface Reconstruction/Neus-code.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -139,7 +153,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "NeRF/Surface Reconstruction/Neus.md"
+                "file": "NeRF/Surface Reconstruction/Neus-code.md"
               }
             }
           },
@@ -175,7 +189,7 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "NeRF/Surface Reconstruction/Neus.md",
+                "file": "NeRF/Surface Reconstruction/Neus-code.md",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -258,16 +272,23 @@
       "workspaces:管理工作区布局": false
     }
   },
-  "active": "4da6f35ae4c164fe",
+  "active": "11610709ae67ae02",
   "lastOpenFiles": [
-    "NeRF/NeRF-code.md",
     "NeRF/Surface Reconstruction/Neus.md",
+    "NeRF/Surface Reconstruction/Neus-code.md",
+    "NeRF/NeRF-Studio.md",
     "NeRF/Efficiency/NeRF-InstantNGP.md",
     "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl.md",
-    "NeRF/NeRF-Studio.md",
+    "2023/06/14/NeRF/Surface Reconstruction/Neus-Instant-nsr-pl.md",
+    "Note!!!.md",
+    "2023/06/14/NeRF/Surface Reconstruction",
+    "2023/06/14/NeRF",
+    "2023/06/14",
+    "2023/06",
+    "2023",
+    "NeRF/NeRF-code.md",
     "Miku 1.mp4",
     "Miku.mp4",
-    "Note!!!.md",
     "Reports/2023-06-19.md",
     "2023-06-19.pdf",
     "NeRF/NeRF-review.md",
@@ -289,12 +310,6 @@
     "Learn/Learn-Hexo.md",
     "Learn/Learn-Hexo2.md",
     "Learn/Learn-Markdown.md",
-    "Learn/Learn-Python_OPEN_CV.md",
-    "Reports",
-    "Learn/未命名",
-    "Scripts/get_guid.js",
-    "Scripts",
-    "scripts",
     "未命名.canvas",
     "附件/Pasted image 20230612205212.png",
     "附件/Pasted image 20230606154824.png",

@@ -1,12 +1,16 @@
 {
   "recentFiles": [
     {
+      "basename": "Neus-code",
+      "path": "NeRF/Surface Reconstruction/Neus-code.md"
+    },
+    {
       "basename": "Neus",
       "path": "NeRF/Surface Reconstruction/Neus.md"
     },
     {
-      "basename": "NeRF-code",
-      "path": "NeRF/NeRF-code.md"
+      "basename": "NeRF-Studio",
+      "path": "NeRF/NeRF-Studio.md"
     },
     {
       "basename": "NeRF-InstantNGP",
@@ -17,12 +21,12 @@
       "path": "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl.md"
     },
     {
-      "basename": "NeRF-Studio",
-      "path": "NeRF/NeRF-Studio.md"
-    },
-    {
       "basename": "Note!!!",
       "path": "Note!!!.md"
+    },
+    {
+      "basename": "NeRF-code",
+      "path": "NeRF/NeRF-code.md"
     },
     {
       "basename": "2023-06-19",
@@ -191,14 +195,6 @@
     {
       "basename": "NeRF发展",
       "path": "NeRF/文献阅读&code/review/NeRF发展.md"
-    },
-    {
-      "basename": "Matlab笔记",
-      "path": "研究生/编程/Matlab笔记.md"
-    },
-    {
-      "basename": "LaTex笔记",
-      "path": "研究生/编程/LaTex笔记.md"
     }
   ],
   "omittedPaths": [],

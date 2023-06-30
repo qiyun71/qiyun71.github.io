@@ -47,7 +47,9 @@ ffmpeg -version
 
 `sudo apt install colmap`
 
-## 训练model
+## 加载数据&训练model
+
+`ns-train nerfacto --data data/nerfstudio/poster`
 
 ### Download some test data:
 
@@ -57,13 +59,15 @@ ffmpeg -version
 AutoDL连接不了google drive，只能使用自己的数据集or：
     使用google的colab下载数据集并将其打包成zip，然后再上传到autodl
 ```
-### use own data 
+### Use Own Data 
+
+{% note primary %} 配好环境后，可以在任意地址创建文件夹，放入需要训练的数据集 {% endnote %}
 
 `ns-process-data {video,images,polycam,record3d} --data {DATA_PATH} --output-dir {PROCESSED_DATA_DIR}`
 
 `ns-process-data {images, video} --data {DATA_PATH} --output-dir {PROCESSED_DATA_DIR}`
 
-eg: 
+eg: Miku
 cd autodl-tmp
 `ns-process-data images --data data/images --output-dir data/nerfstudio/images_name`
 
@@ -82,10 +86,54 @@ ns-process-data images  --data data/Miku/image/ --output-dir data/nerfstudio/Mik
 问题&原因：
 qt.qpa.xcb: could not connect to display qt.qpa.plugin: Could not load the Qt platform plugin "xcb" in "" even though it was found.  This application failed to start because no Qt platform plugin could be initialized. Reinstalling the application may fix this problem.
 最大的可能就是 --SiftExtraction.use_gpu 1  必须要求GPU带一个显示器
+
+
+06.30:
+使用3090开机但是use no gpu
+ns-process-data images  --data data/Miku/image/ --output-dir data/nerfstudio/Miku --skip-image-processing --no-gpu
+
+[15:32:40] 🎉 Done extracting COLMAP features.                                                       colmap_utils.py:131
+[15:49:59] 🎉 Done matching COLMAP features.                                                         colmap_utils.py:145
+[15:53:28] 🎉 Done COLMAP bundle adjustment.                                                         colmap_utils.py:167
+[15:53:56] 🎉 Done refining intrinsics.                                                              colmap_utils.py:176
+           🎉 🎉 🎉 All DONE 🎉 🎉 🎉                                                images_to_nerfstudio_dataset.py:100
+           Starting with 178 images                                                  images_to_nerfstudio_dataset.py:103
+           Colmap matched 178 images                                                 images_to_nerfstudio_dataset.py:103
+           COLMAP found poses for all images, CONGRATS!                              images_to_nerfstudio_dataset.py:103
+train：
+ns-train nerfacto --data data/nerfstudio/Miku
+
 ```
+
+in viewer: 
+
+it's easy to view results and process
+
+![image.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230630161446.png)
+
 
 ### Train model
 `ns-train nerfacto --data data/nerfstudio/poster`
+
+## export 
+### mesh
+
+手动调整参数得到命令：
+
+```
+ns-export poisson --load-config outputs/Miku/nerfacto/2023-06-30_155708/config.yml --output-dir exports/mesh/ --target-num-faces 50000 --num-pixels-per-side 2048 --normal-method open3d --num-points 1000000 --remove-outliers True --use-bounding-box True --bounding-box-min -0.5 -0.5 -1 --bounding-box-max 0.5 0.5 0
+
+output: 
+Loading latest checkpoint from load_dir  
+✅ Done loading checkpoint from outputs/Miku/nerfacto/2023-06-30_155708/nerfstudio_models/step-000029999.ckpt  
+☁ Computing Point Cloud ☁ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 00:05  
+✅ Cleaning Point Cloud  
+✅ Estimating Point Cloud Normals  
+✅ Generated PointCloud with 1008679 points.  
+Computing Mesh... this may take a while.
+
+CPU生成mesh的速度很慢 大约用了1个小时多，效果也不是很好，因为使用的是nerf的方法，零水平集有很多坑洞
+```
 
 
 
@@ -110,11 +158,11 @@ qt.qpa.xcb: could not connect to display qt.qpa.plugin: Could not load the Qt pl
 `ssh -L 7007:localhost:7007 <username>@<remote-machine-ip>`
 
 需要在本地再开一个终端，并运行，将本地的6006端口与远程的7007进行绑定
-- `ssh -L 7007:localhost:7007 root@connect.beijinga.seetacloud.com -p 23394`
+- eg: `ssh -L 7007:localhost:7007 root@connect.beijinga.seetacloud.com -p 23394`
 
 此时打开[nerfstudio viewer](https://viewer.nerf.studio/)，在Getting started中输入ws://localhost:7007，即可在viewer中查看
 
-#### 更换服务器端口
+#### 更换服务器的端口
 - 当服务器的7007被占用时：
     默认为7007，修改端口7007为6006 并训练
     `ns-train nerfacto --data data/nerfstudio/poster --viewer.websocket-port 6006`
