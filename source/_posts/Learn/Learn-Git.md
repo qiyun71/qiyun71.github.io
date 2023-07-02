@@ -13,6 +13,13 @@ categories: Learn
 
 # git教程
 
+平时使用：
+```
+git add .
+git commit -m shuoming
+git push
+```
+
 >[工作区和暂存区 - 廖雪峰的官方网站 (liaoxuefeng.com)](https://www.liaoxuefeng.com/wiki/896043488029600/897271968352576)
 
 ![image.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230626160832.png)

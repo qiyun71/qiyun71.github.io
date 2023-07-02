@@ -237,8 +237,20 @@ img_path = os.path.join(self.config.root_dir, 'image', f'{i:03d}.png')
 
 ### eg: 对Miku进行重建
 
-数据集：
+```
+python launch.py --config configs/neus-dtu.yaml --gpu 0 --train
 
+test: 设置 neus-dtu.yaml 中的 resolution 为1024
+python launch.py --config configs/neus-dtu.yaml --resume /root/autodl-tmp/instant-nsr-pl/exp/neus-dtu-Miku/@20230629-132903/ckpt/epoch=0-step=20000.ckpt --gpu 0 --test
+```
+
+效果不太好
+
+![image.png|300](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230630210349.png)
+
+更改resolution=1024 后，点更多更细致，但是由于训练出来的sdf网络相同，在相近的两个位置，sdf值相同，因此大体还是一样的模型，只是细节处有所不同
+
+![images](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230630212921.png)
 
 
 ## 自定义数据集

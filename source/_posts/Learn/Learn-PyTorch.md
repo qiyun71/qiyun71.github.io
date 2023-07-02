@@ -11,6 +11,48 @@ categories: Learn
 
 <!-- more -->
 
+# GPU
+
+```
+Neus: 
+torch.set_default_tensor_type('torch.cuda.FloatTensor')
+parser.add_argument('--gpu', type=int, default=0)
+torch.cuda.set_device(args.gpu)
+
+self.device = torch.device('cuda')
+network = Network(**self.conf['model.nerf']).to(self.device)
+
+#################################################################
+NeRF:
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+model = NeRF().to(device)
+render_poses = torch.Tensor(render_poses).to(device)
+```
+
+```
+torch.device('cpu'), torch.device('cuda'), torch.device('cuda:1')
+如果有多个GPU，我们使用`torch.device(f'cuda:{i}')` 来表示第i块GPU（i从0开始）。 另外，`cuda:0`和`cuda`是等价的。
+
+查询gpu数量
+torch.cuda.device_count()
+
+查询张量所在设备
+x = torch.tensor([1, 2, 3])
+x.device   #device(type='cpu') 默认为gpu，也可为cpu
+```
+
+两张量相互运算需要在同一台设备上`Z = X.cuda(1)`
+
+![image.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230702204507.png)
+
+```
+给网络指定设备
+net = nn.Sequential(nn.Linear(3, 1))
+net = net.to(device=try_gpu())
+```
+
+==只要所有的数据和参数都在同一个设备上， 我们就可以有效地学习模型==
+
 # 优化器
 
 ## Adam多个model参数，然后更新lr

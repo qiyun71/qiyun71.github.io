@@ -8,6 +8,32 @@
         "type": "tabs",
         "children": [
           {
+            "id": "657dc13fd329a75d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Learn/Learn-DeepLearning.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "00ab4c8a67d5df66",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Learn/Learn-PyTorch.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              }
+            }
+          },
+          {
             "id": "4da6f35ae4c164fe",
             "type": "leaf",
             "state": {
@@ -21,7 +47,7 @@
             }
           },
           {
-            "id": "11610709ae67ae02",
+            "id": "9750286c21a86a2b",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -121,7 +147,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "NeRF/Surface Reconstruction/Neus-code.md",
+                "file": "Learn/Learn-PyTorch.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -153,7 +179,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "NeRF/Surface Reconstruction/Neus-code.md"
+                "file": "Learn/Learn-PyTorch.md"
               }
             }
           },
@@ -189,7 +215,7 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "NeRF/Surface Reconstruction/Neus-code.md",
+                "file": "Learn/Learn-PyTorch.md",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -272,13 +298,21 @@
       "workspaces:管理工作区布局": false
     }
   },
-  "active": "11610709ae67ae02",
+  "active": "00ab4c8a67d5df66",
   "lastOpenFiles": [
-    "NeRF/Surface Reconstruction/Neus.md",
+    "Learn/Learn-DeepLearning.md",
     "NeRF/Surface Reconstruction/Neus-code.md",
-    "NeRF/NeRF-Studio.md",
-    "NeRF/Efficiency/NeRF-InstantNGP.md",
+    "NeRF/Surface Reconstruction/Neus.md",
+    "Learn/Learn-Git.md",
+    "NeRF/NeRF-Principle.md",
     "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl.md",
+    "NeRF/Efficiency/NeRF-InstantNGP.md",
+    "NeRF/Surface Reconstruction/pose.ply",
+    "NeRF/Surface Reconstruction/interactive_point_cloud 1.html",
+    "NeRF/Surface Reconstruction/interactive_point_cloud.html",
+    "interactive_point_cloud.html",
+    "Reports/2023-06-19.md",
+    "NeRF/NeRF-Studio.md",
     "2023/06/14/NeRF/Surface Reconstruction/Neus-Instant-nsr-pl.md",
     "Note!!!.md",
     "2023/06/14/NeRF/Surface Reconstruction",
@@ -288,16 +322,9 @@
     "2023",
     "NeRF/NeRF-code.md",
     "Miku 1.mp4",
-    "Miku.mp4",
-    "Reports/2023-06-19.md",
-    "2023-06-19.pdf",
     "NeRF/NeRF-review.md",
-    "NeRF/Efficiency",
-    "未命名",
     "Python Practise/Make-Py-Tools.md",
     "Learn/Learn-PyTorch.md",
-    "NeRF/NeRF-Principle.md",
-    "Learn/Learn-Git.md",
     "Learn/Learn-VB作业1.md",
     "Learn/Learn-VB作业2.md",
     "Learn/Learn-Spider爬虫.md",
@@ -309,7 +336,6 @@
     "Learn/Learn-HCJ前端.md",
     "Learn/Learn-Hexo.md",
     "Learn/Learn-Hexo2.md",
-    "Learn/Learn-Markdown.md",
     "未命名.canvas",
     "附件/Pasted image 20230612205212.png",
     "附件/Pasted image 20230606154824.png",

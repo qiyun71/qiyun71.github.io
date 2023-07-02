@@ -42,7 +42,7 @@ t通过 $t_{i} \sim \mathcal{U}\left[t_{n}+\frac{i-1}{N}\left(t_{f}-t_{n}\right)
 ![v2-f5e8824a9163b874e71166425d3e654c_720w.webp](https://raw.githubusercontent.com/yq010105/Blog_images/main/v2-f5e8824a9163b874e71166425d3e654c_720w.webp)
 
 
-$$\begin{bmatrix}X_c\\ Y_c\\ Z_c\end{bmatrix}=\begin{bmatrix}f_x&0&c_x\\ 0&f_y&c_y\\ 0&0&1\end{bmatrix}\begin{bmatrix}x\\ y\\ 1\end{bmatrix}$$
+$$\begin{bmatrix}X_c\\ Y_c\\ Z_c\end{bmatrix}=\mathbf{\begin{bmatrix}f_x&0&c_x\\ 0&f_y&c_y\\ 0&0&1\end{bmatrix}}^{-1} \begin{bmatrix}x\\ y\\ 1\end{bmatrix}$$
 
 ```python
 相机内参矩阵
@@ -58,7 +58,7 @@ focal = .5 * W / np.tan(.5 * camera_angle_x)
 ## 相机三维坐标-->世界三维坐标XYZ
 
 $$
-\begin{bmatrix}X\\ Y\\ Z\\ 1\end{bmatrix}=\begin{bmatrix}r_{11}&r_{12}&p_{13}&t_x\\ r_{21}&r_{22}&r_{23}&t_y\\ r_{31}&r_{32}&r_{33}&t_z\\ 0&0&0&1\end{bmatrix}\begin{bmatrix}X_c\\ Y_c\\ Z_c\\ 1\end{bmatrix}
+\begin{bmatrix}X\\ Y\\ Z\\ 1\end{bmatrix}=\begin{bmatrix}r_{11}&r_{12}&r_{13}&t_x\\ r_{21}&r_{22}&r_{23}&t_y\\ r_{31}&r_{32}&r_{33}&t_z\\ 0&0&0&1\end{bmatrix}\begin{bmatrix}X_c\\ Y_c\\ Z_c\\ 1\end{bmatrix}
 $$
 
 >[NeRF: How NDC Works | Will (yconquesty.github.io)](https://yconquesty.github.io/blog/ml/nerf/nerf_ndc.html#background)

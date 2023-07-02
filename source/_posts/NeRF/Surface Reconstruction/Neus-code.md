@@ -16,6 +16,26 @@ categories: NeRF/Surface Reconstruction
 ## Runner().train流程图
 <iframe frameborder="0" style="width:100%;height:1153px;" src="https://viewer.diagrams.net/?highlight=0000ff&edit=_blank&layers=1&nav=1&title=Runner.drawio#R7V1Zk6M4Ev41RFd1RBPcx6Ndx8zG7vTudE3s7DwRlC3bTBlwA66jf%2F1KQtiA0gbbXG57ImraiEtk6stM5SEJ6p3%2F%2Fkvkrha%2FhVO0FBRp%2Bi6o94KiaJZq4H9Iy0faohiWlrbMI2%2BatsnbhifvB2KNEmtde1MUFy5MwnCZeKti4yQMAjRJCm1uFIVvxctm4bL41pU7R1zD08Rd8q1%2FetNkkbZairlt%2FxV580X2Ztmw0zO%2Bm13MviReuNPwLdekPgjqXRSGSfrLf79DS0K9jC7pfY87zm46FqEgqXPDaKV9cxdf3e9%2F%2BN%2FXc%2FlpFKhfvrCnvLrLNftgQTGW%2BHnjWYgfi3udfDBSGN%2FXYXbiS0wZNcIXyMbqfXsS%2F5qTf7%2BtMTui7Fm4U%2Bnj0pOMHpsnK1G4DqaI9FPGp98WXoKeVu6EnH3D4wq3LRJ%2FyU6TJ7FxIhubp%2BXpkH0UihL0nmtidPkFhT5Kog98SXY2YxobpXLGs7cty2WJtS1y7NZYm8tG2Xzz6C0j8A%2FGiwP4YnA0QlM8LtlhGCWLcB4G7vJh2zreUlHCR9tr%2FhWGK0a7v1GSfDDiueskLFIWvXvJ%2F8jtos6O%2FsqduX9nT6YHH9lBgD83dxM5%2FCt%2FbnsbPcruq83FOFxHE7SHVAqTCm40R8me65jcIXTcOyYitHQT77WI%2F8YZrHDAW0XhBMVxKstm3pxIKw8zdjdYpH7AosuY1Xm4KDoAF1Xn4aK3BRfzCpe6cNFqwkUfFFw0Di73buLGKLm5PQOAqJA%2BgQDSmj6RrStC6iJEr4kQ2RwURHQOIl9R8hZGL%2FE5IMTqW4VYAPm%2BPd58%2Fhyj5UwkKlnQx598MsMRsWk7%2ByTo98OTPapctGRVmaerqnZpyWYdyBH26f6RDU2YvPF05gTpBWdCZaN3KvMTuScvmC%2FRf93Ic4MJ2kvwV3bReVFdA8a2ZnRKdd6K%2F4YwjSJM%2Br0Ej7KrzoziwDjXuh3nKkdxjmrxwl2Rn5N1tPwYR%2B7khajxKvIVfRAtEFOxlbLSk3WOnApATdlqi5wb39TVLKw0CzNzr9ouZKAZiF2Y9TsHmSSMJgsxXCWeL46mrj84wcMbiJrOY6VbAxGQNFesVECgEivZE4eCFZvDyle0fkqVOorOwtmgq31PpZSrO66%2B9zoLalUiZWD%2Ba37CsQzdKW6ZLNDkZRV6NN5Dwz%2FPURb5IQ5t5xlbZOvVGSDJkHpHEm%2FueoGXcLRLyPxtTnHUPeG0UvDMNEVAV0sb67dAOb0lyqlXy7a%2BDKobE1CGZdkqfFQgonFnMYlcLzgLbW2YvcuYa6y5PlLqxgaUYQGFjw1ELEFDoodSmq9xFoiRew8VKHysgAqcQatlwzD7V8rXKXR9UVN3Cq0Oawqt8FPop7Xvu9HHnxGGwHnIGFPrW8ZkL7tCpRoqat05tKoOCioqP4der6ZugpwlcqOAhIcifDRExKiKmIViGGQsKMfFVEWzU9TYV9TURo1aFzXWsFDD%2B0Rw%2Fx3Pd%2BfIWaHIHyJeiIaRC3ixe3cuadecsPpgqesi0YaVFKbyLpI5CrBaCaahj%2F%2F5iB13kDmUmmaIuilt%2FlNKygZyMVqGaJldaht%2BHthM9YRPJ5MSm1RKS4Kt8ymlEKWSpIMm7J1WU2QPvjIqjzBbKrAJyKbqmEsKzyV9%2FOwmk4VDGaHcEUZIgn5P%2FVaELfgCKsRCcbJaEzlGLqEtr%2FmWSbgMo%2FSn78Yv%2BC56%2B136HJk8Ub%2FnWIQpmRT5ECdR%2BILu6NPU%2ByAMiEqcectlqcldevMAH04wfxBuHxO%2BeBN3OWInfG863ekXKgrfVkCqlXgPGO9gAqPSGvOBSJc%2Fd7zpO%2BER5VR%2BJFwMp3S9yCkD1HxQ1mN7rDJ4nD7Ygj0SrEfhwRDsO2E8Ii1Y7lu28KCTdtsQHjRhbJFG3DK%2BE0b0hz0Wxg%2FCg0muxMr74ZGcsu7oNbYwNvY%2B2RCssTCy6cBgjx%2BN6AtVeocpjDX6HlOwNcGmz7AswaZvtnT6DJM8cvx4QUNKMYtDyqw9pMy2hpR%2BdQzXL%2BCqm4eYTTgHMhXR%2BDzEALmRMyN%2FEZ6NxKsFigbp7aKTEaOoMWHUdD0F0Xhve2oP5Syh6QXJtrK6lHWQTXKX%2BlLnZx9k4KccmpEfF8MeQ1VFreg3ViSIQ9YWcJ3wyJA5LlwVUIVeqVRAmQnRvQKyvv%2FD%2BLf3I%2FDff3%2F%2BcL%2BPvX8%2BhH2npeY4vOV3szxulqcwEY1BGRVZv%2FP6jyZrD9KMMFUxyx3ZrIcD6iciJrUOzQidTxDK%2FFhT7zXzYW0si8ysuGN6bMa0WXpHvHKD7BaS6zunhHei%2BXPON5a%2FKNecexvQAegNkzB23AB3ZEmCpV544DsuRvXqWbR5s2gHNPK6dfoY1ySH%2BhLaqKt1h1UooPPeolx9N6n1vlkl8RCltaGLVtFW1TQwtV2zxE4DtzoQdyo6yqXP%2BC9wYtdfLVG88aBSR7di4FZMo%2BA5Xl2WCDRkTZSL%2BlcDixWwAhbVLqcfOj%2BNr%2BAoYad6YUELgH0qyD5pa2d1o8eu7svaeiybFFa7L4c10zB4Lw5d2CFwPH%2BFuUfWz6CClolXZl9mEdS8ZluE%2FvM67kmr6bqoFJNdVRBEJJCfza7yIGptLQKDjwB%2BIH7top9XvulS0XepyRBftE4N9Gs%2BZX3BVjdFzBhWPqXBp4itV8zQGKQXhdjlSgEpuqodYJdrbZW3GEBgPO%2FEALKMiDT7wgQTyWdZolnCpxnlQjq8A6Rs0G%2BcMxWekHzbDwf3OT7snvJ78Uyu%2BgFHuXhgPftIXkHObEarEydodeBXkNFPbWvl82fv6jvaYXlLhmiWIKdAykm1YMdlewqKDyrPSKaX5JE%2FkpMXucEc3UAD5ZZC7mKYqBiaqBR9gLoETp8MzG27HSaCMYUzjL0VTIytxdF4XCazFQbs9YNZeoY87SrWBvEUJOLA7ETe6zhxEyc1HQZrKBYduAaYbNC5oWjyvoRymnPR3CG2DmfmXIzmAhx%2FugGaH9p2atCJ5lJaMvj3BV8hK7Yrmz9Ab84x97U3N1i6MWHyjUfnBMThJgvpohaE6hJs9x3Tj8s1%2FhVNNIvJj7AYxc2i3pLbHUQftBZsI%2Bjjq06KsbQxJ6DZfBT%2FKItpEqKhdSZNP7S8ttp1oAIDFQzYEsNAaWmWCg5UYJ0qmqTkTMIIOeE6ib3pIH1thlF0SZsqFCjYauemrSdY6fYabct%2BH5bH18J8EaQNUBsA07C32oB93W7LcUqvSKuEyNgmkfO9dhR0%2FbGmy9F9T%2B0sZ4YQ0KGc6kj1BhMibXaIaaCphy0umHypoxZFs6sjFZanllqSp2CIT1UUEYi8Gm2pp16DfMOWp3VdNQPzvml9cnQw3reTOCr3tlbUvm7z2ScbwX8eqSdaDfnXZuoJzGveH3dZqSeAh80EA3xtZZ%2FARupPv0DR8WJMBlbv6qhgh946irCtnLuALvge5578n3QF%2BG12U2nJCXsTe3zcdctmIdJdt%2BAfaT%2B2Y2zzQSdIA96vlJuuD3GaDqTEWAelqrc2Vwc2nwnCCxKs5VFvdZrTB7MEqB540IXRozC2M1fU8%2FyWrqdxT1bGSFfPGFlkP0S6Xsa9YMv0x5isyPFgkHU3xgpdoONRsNW3kK6xczlMNnRee4KZFbuWB2hPg%2FY6ERj21C4jerUGHdZMQOGN1X6Cjk0kHvLVSN3mLIIureb7fXzaY65WrjPK0hdP0atH6mmDTl5%2FPIHo0m6dk6hU16zelwudh0arXP%2Fc5WrhFrucNg250ylSp86EmQY7T52eZsBVlGPLY3eR%2BTVVIG8IlaxdOElYB2Ygcns2EL9ERGv6EhrEn%2Bi4%2FJQ%2BqeYYLbapQnHxw7vTIlKsWwXYsO4BUNoF8io0Q52GEh42%2FsvyV1V0n4os1u2c%2BCp19%2BBe1H39Gx27MesAO6LPb%2FSVlypKtrv87PUUa9BCXq3FyYDd%2BFqTJDukhlQtDapgP51lYGdJecAzoWpzuf47iD2dQYP%2B3tf33GvqPn8euVMPD67sHZtjMUJ09%2B%2BbPS%2Bh9LotyuAqmpGpBnuXLEoCy8ySvODV2fltJ9IQ44%2BlWrIXbxsapuZuUVb9DokW27QiYSebgTqpZuttSyPMQVG0gWGxMf%2FGA%2FjqBYQMbLFL9uBC26mfcbEqQyqpDAusa9fgFY5ay1HtdR%2FSgXvggCWN4Asb33f0yBhWKR1SlljDzhAWd4csdxDBygi7fzm31MRwZl6A8nYGbWjK2MgpTvp733MPEKJYN%2BT7HaEk7bXO1MYm6bpZHenEa7%2BoJklLQ9%2FEXuG77%2BwVSRhNFiI%2Bvino5KnnY5aSokly9ILQKm35I1qjW0wBqeLrD%2BjSTjurJnUPHC0DNURAWyA%2F5MoXFOl%2Fom2Qf1HpfLoPxnFDfGcI%2B4jdSDLDgE5uGtHldklsbo5zily321Lk79LMeP8hza3o7e7Xl%2FHfz787Tr9Fyt3p8ZKKPVKxA3uXwtZRv5E0ftU10l2yj0%2FMZ3%2F1nuWhW2XrwwaXzpZEG0ieayLFAwSGegVGbWBAO5WCRFX6xAWwLymgrWj0LVwlno%2BZFIn4L3SIJry5ra3wCM5EEsl5c6ND7iu9mtTE7b57aDA2uH23cruk5pNFbAmsUtvufdc4lHtdjne4UN6N0BpI1jpC8r5O7gcyRkBE60qZkUyu2221Ng8nDjsAQ3bDyZbLcLIsEE6Q30dvD0u9bjYwLCxVYsQ4ESOw80WRTc75Im8Wv8yekwKd3Vri%2BWGumN3wr0JggoI4jJ5DrAXFeOIuyXL6Z4E%2Bzue6E31QimuL6LuQkrZGNBnghQWvs%2FrUZLU8mrH7ipzJAk1eqCu3S5vwNBgp5f04BwKjfpfxOjMcAZWFMFGlPoG0e8%2FqHELwWW%2FqJsjxfHeOzgdH2kCNQblXJ0mxkk2qiaNiJZvcHY4yHlYDqSsvyd5u1kSSj%2BLF%2BQBJN4uld4MB0oB2DBo%2BkOr6KORenRRZN%2FcDab2iMFoiNwq8YE7ysM9IMXH7kkoSH9Ha5Dx2BaZ%2BN0Q8Bkyy0Jd1l62pUbkSr9ovmGo5HPAXpKads0KRf0YwMkoV4QqAIr1bFPVbY9ndKgXNoKjuJCnNte4NRfwsaY4Ch1Y4ukk7SwCc6IgzVFEx7c1%2FZgEn%2BL%2BOtxmFmXohq4I3E2CqPQ3q1TG3pxw5rUsCqiIIAL7QZKU0pd5YvfNFEXt8EMWCp51QrJHK1Aj0ymEGDQSbAqilJkpVYK5U2NRNbEUjZQXf6XN%2FqpVoTxsR5eIlxaw9Ipoog4RHxICM%2FeHLXmB1JfjCU0OXp%2FGUL0gjO3I7M%2FIXhT7LFB2kvaLJoqFu7RW7ABgV3qfB3G5D1I29UrEt%2BtFSNN2jiMrPbFVXulnRD291Q1pvr0KVT%2FQorZ26WQ6wsPNrpyL1p98dsUmRWjfMrPRqzvZbr9XdZlQd8%2FTU2Ty99dB6rW10gomMrPZvV7mWImV287E3qMzMaqq8ay%2FZuQUKB6nordJuw%2BDOPVAtR2tqXVXOD%2BP9ye26HrvOajn2djOHiXCdkLWYWD1j2Z4iZ4Mw8t0lu2BwwNE3QMmkkQZlBAGL6bSHnLOZRDaIgNpFG2ojWg5QY6XsMEMu8TftGZfDerK%2BzCqOdqo%2FWd97QzvqDyhP8fz5DpgziOMLBojwXOFHRkAZnPhuW7uBedsL3eQduJ7%2FFmHS09uOXo%2BPOYu9MIjZQJDcYIr%2Fn%2FI%2FrnjUnoqjRr%2F1i0CK7IOJm6CA5C9sxy3xp85JUHZ%2B3PZ07fQ1j56DOnUOUMtiZHn%2FgQnYoWZbMNOu4bADtHBtO9Tu0w5Vd%2BfXNhQO4xIJhxUNU7loGJCi0WksTBtQ8u3wYQaU7sNU7TWLPetmDmZY0UXuJHGydwzRGaLqumjJB2ZpkD0bjA6tP21AObaDx0sm3arx0mtaoN6vDMxxtH4hz%2FB5qveyDJmiZuIgc6mydLWd0%2FTyDXqVW1srOwLUDub1Gdl%2FLpkOrtHSvUy%2FhioPwD%2BQ6g1f2GuoUuNTvTO8zDy0nMbnhxY4ONQ9WiqqjY%2F2szzTDQt8kutBHD7s0H1n%2BXQoDpdr4sRKj7%2BvUfThzNbB5JoOwpcClEo9VRUUtFBCiNVWKYCuXKVsfSlb16FzspV1mizgHTprfJiinG2SZqtkO7SRSTZRIy2WMB7lwKw%2F0PP2SLA0sksavsrKLhyNyClLEcb25hqyMPuDLliSML4bqARXCtjTwJWWd4ltozX4XSeu9eGXbbBbDb9%2BJ658sC9VRCgWHh4JQOzRV%2BeVjs%2FcYrNbRZlEnhvMl4XLk9zlpYjTGaBNx7g6wEiy2uLMdYWrA9BWd0qh95pQrvNTCowfEnEQ%2F0j%2FHSJC8MDfOaMwVBleSEeF0SK3t7giP6mghEXvK4yD4dFVV6RalIS24DmKjPgwCsl0aetUwh%2B6%2BC2cInLF%2FwE%3D"></iframe>
 
+[数据集自定义](#数据集自定义)：根据imgs2poses.py生成sparse_points.ply和poses.npy文件，若先前没有经过colmap，则会生成`sparse\0\*.bin`[文件](#cameras文件),(cameras.bin, images.bin , points3D.bin)。然后根据gen_cameras.py文件，通过pose.npy读取第一个相机的c2w矩阵将第一个相机的单位坐标系保存为pose.ply文件，通过pose.npy和sparse_points_interest.ply文件生成preprocessed文件夹下的cameras_sphere.npz，并复制images生成image和mask文件夹下图片。
+- imgs2poses.py
+    - sparse_points.ply：读取points3D文件中的所有点，生成的稀疏点云文件
+    - poses.npy：通过cameras.bin和images.bin文件计算出的[pose数据](#images文件)：大小num_images x 3 x 5，包括num_images x 3 x 4的c2w矩阵和num_images x 3的hwf数据
+- gen_cameras.py
+    - [pose.ply](#pose文件)：读取第一个相机的pose，将该相机坐标系下的原点、xyz轴单位坐标转换到世界坐标系下，然后生成点云保存为pose.ply文件
+    - [cameras_sphere.npz](#两个矩阵)
+        - world_mat：通过pose.npz读取pose矩阵，分解为c2w和hwf，并将c2w求逆得到w2c，将hwf转化为intrinsic相机内参矩阵，最后得到`world_mat=intrinsic @ w2c`
+        - scale_mat：通过sparse_points_interest.ply文件，将其中的感兴趣区域，在世界坐标系下计算出scale_mat，**该矩阵用于将世界坐标系原点缩放并平移到感兴趣区域的中心出，使得世界坐标系下的单位圆即为感兴趣的区域**，这也是不需要mask的原因
+        - image和mask：将images数据集文件夹下图片复制到preprocessed文件夹下的image下和并根据数据集图片生成同样大小的白色图片，放入mask文件夹
+
+[数据处理](#dataset)：
+- 读取cameras_sphere.npz文件、image和mask文件，获得相机的内外参矩阵intrinsics, pose，并对intrinsics求逆得到intrinsics_inv，在[生成光线](#光线生成)时用于将图片像素的坐标转换为光线在世界坐标系下的原点o和方向向量d。
+- 通过o和d，生成场景中的near和far，即在每条光线上采样时，采样点的最近坐标和最远坐标
+
+[渲染](#render)：
+- 根据o、d、near和far，以及其他参数，经过MLP网络，得到颜色值、sdf对输入pts_xyz的梯度等信息，然后计算loss，最后通过反向传播不断更新网络的参数，训练出最终的4个MLP网络
+- 根据训练好的MLP网络，通过一个新相机点的位置，生成一系列光线，在光线上进行采样获得点云的坐标，然后将坐标输入MLP网络，获得三维空间中每个点云的颜色、SDF和梯度等信息。
+    - 颜色跟观察方向有关、SDF与方向无关、梯度与方向无关，颜色可以用来生成新视点的图片、视频，SDF可以用来根据threshold选取零水平集来生成mesh模型表面，梯度可以做法向量图。
+
 
 
 ## 构建的网络Network
@@ -88,12 +108,18 @@ BlendedMVS/bmvs_bear/cameras_sphere
 
 ```
 """
-(4, 4) world_mats_np0
+in gen_cameras : 
+w2c = np.linalg.inv(pose)
+
+(4, 4) world_mats_np0 = intrinsic @ w2c 
 [[-1.0889766e+02  3.2340955e+02  6.2724188e+02 -1.6156446e+04] 
 [-4.8021997e+02 -3.6971255e+02  2.8318774e+02 -8.9503633e+03]
 [ 2.4123600e-01 -4.2752099e-01  8.7122399e-01 -2.1731400e+01]
 [ 0.0000000e+00  0.0000000e+00  0.0000000e+00  1.0000000e+00]]
-(4, 4) scale_mats_np0
+
+(4, 4) scale_mats_np0 : sparse_points_interest中，以中心点为圆心，最远距离为半径的一个区域
+    scale_mat = np.diag([radius, radius, radius, 1.0]).astype(np.float32)
+    scale_mat[:3, 3] = center
 [[ 1.6737139  0.         0.        -2.702419 ]
 [ 0.         1.6737139  0.        -1.3968586]
 [ 0.         0.         1.6737139 27.347609 ]
@@ -147,7 +173,7 @@ intrinsics[:3, :3] = K # intrinsics: 4x4 为相机内参矩阵
  [0.00000000e+00 0.00000000e+00 0.00000000e+00 1.00000000e+00]]
 
 pose = np.eye(4, dtype=np.float32)
-pose[:3, :3] = R.transpose()
+pose[:3, :3] = R.transpose() # 正交矩阵 其转置等于逆
 pose[:3, 3] = (t[:3] / t[3])[:, 0] # pose: 4x4 为相机外参矩阵
 [[-0.33320493 -0.9114712   0.24123597 -0.25686666]
  [ 0.8066752  -0.40804535 -0.42752096  0.48028347]
@@ -162,12 +188,24 @@ pose[:3, 3] = (t[:3] / t[3])[:, 0] # pose: 4x4 为相机外参矩阵
  [ 1.        ]]
 ```
 
-### 光线生成(随机)
+### 光线生成
+
+gen_random_rays_at()随机生成光线
 然后生成光线，in `dataset.py/gen_random_rays_at()` by img_idx ，batch_size, 并将rays的像素坐标转换到世界坐标系下
 
-p_pixel --> p_camera --> p_world
-`intrinsics @ p_pixel`:  `3x3 @ 3x1`
-`pose @ p_camera`:  `3x3 @ 3x1`
+p_pixel --> p_camera --> p_world (or rays_d)
+
+`p_camera = intrinsics_inv @ p_pixel`:  `3x3 @ 3x1`
+
+$\begin{bmatrix} \frac{1}{f} & 0 & -\frac{W}{2 \cdot f}  \\ 0 & \frac{1}{f} & -\frac{H}{2 \cdot f} \\ 0 & 0 & 1 \\ \end{bmatrix} \begin{pmatrix} i \\ j \\ 1 \\ \end{pmatrix} = \begin{pmatrix} \frac{i-\frac{W}{2}}{f} \\ -\frac{j-\frac{H}{2}}{f} \\ -1 \\ \end{pmatrix}$
+
+`p_world = pose @ p_camera`:  `3x3 @ 3x1`
+
+$\begin{bmatrix} r_{11}&r_{12}&r_{13}\\ r_{21}&r_{22}&r_{23}\\ r_{31}&r_{32}&r_{33} \end{bmatrix} \begin{pmatrix} x_{c} \\ y_{c} \\ z_{c} \\ \end{pmatrix} = \begin{pmatrix} x_{w} \\ y_{w} \\ z_{w} \\ \end{pmatrix} = rays_d$
+
+`rays_o = pose[:3, 3]` $= \begin{bmatrix} t_{x} \\ t_{y} \\ t_{z} \end{bmatrix}$，为相机坐标系原点在世界坐标系下位置
+
+$pose = \begin{bmatrix}r_{11}&r_{12}&r_{13}&t_x\\ r_{21}&r_{22}&r_{23}&t_y\\ r_{31}&r_{32}&r_{33}&t_z\\ 0&0&0&1\end{bmatrix}$
 
 ```
 def gen_random_rays_at(self, img_idx, batch_size):
@@ -230,7 +268,7 @@ self.object_bbox_max = object_bbox_max[:3, 0] # 3
 ```
 
 
-## render()
+## render
 
 input: 
 - rays_o, 
@@ -663,11 +701,10 @@ class SingleVarianceNetwork(nn.Module):
 
 ![image.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230630132744.png)
 
-![image.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230630174602.png)
 
+<div style="display:flex; justify-content:space-between;"> <img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230630174602.png" alt="Image 1" style="width:50%;"><div style="width:10px;"></div> <img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230630174609.png" alt="Image 2" style="width:50%;"> </div>
 可以看出sigmoid函数的导数是一个偶函数，即$\phi(-x) = \phi(x)$
 
-![image.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230630174609.png)
 
 
 - inv_s: expand a num to `batch_size * n_samples, 1 `
@@ -826,8 +863,91 @@ if self.iter_step % len(image_perm) == 0:
     image_perm = self.get_image_perm() # 重新随机一下image
 ```
 
+#### validate_image
+
+将图片缩小resolution_level倍进行光线生成，然后分批次进行渲染，每批大小为batch_size
+
+```
+def validate_image(self, idx=-1, resolution_level=-1):
+    if idx < 0:
+        idx = np.random.randint(self.dataset.n_images)
+
+    print('Validate: iter: {}, camera: {}'.format(self.iter_step, idx))
+
+    if resolution_level < 0:
+        resolution_level = self.validate_resolution_level
+    rays_o, rays_d = self.dataset.gen_rays_at(idx, resolution_level=resolution_level)
+    H, W, _ = rays_o.shape
+    rays_o = rays_o.reshape(-1, 3).split(self.batch_size) # H*W / batch_size 个元组，每个元组中有batch_size个ray: (batch_size, 3)
+    rays_d = rays_d.reshape(-1, 3).split(self.batch_size) 
+```
+
+最终得到该图片每个像素的颜色值out_rgb_fine，以及inside_sphere内的法向量值out_normal_fine
+
+```
+for rays_o_batch, rays_d_batch in zip(rays_o, rays_d):
+    # rays_o_batch: (batch_size, 3) rays_d_batch: (batch_size, 3)
+    near, far = self.dataset.near_far_from_sphere(rays_o_batch, rays_d_batch)
+    background_rgb = torch.ones([1, 3]) if self.use_white_bkgd else None
+
+    render_out = self.renderer.render(rays_o_batch,
+                                      rays_d_batch,
+                                      near,
+                                      far,
+                                      cos_anneal_ratio=self.get_cos_anneal_ratio(),
+                                      background_rgb=background_rgb)
+
+    def feasible(key): return (key in render_out) and (render_out[key] is not None)
+    
+    if feasible('color_fine'):
+        out_rgb_fine.append(render_out['color_fine'].detach().cpu().numpy())
+    if feasible('gradients') and feasible('weights'):
+        n_samples = self.renderer.n_samples + self.renderer.n_importance
+        # (batch_size, n_samples, 3) * (batch_size, n_samples, 1) -> (batch_size, n_samples, 3)
+        normals = render_out['gradients'] * render_out['weights'][:, :n_samples, None] 
+        if feasible('inside_sphere'):
+            normals = normals * render_out['inside_sphere'][..., None]
+        normals = normals.sum(dim=1).detach().cpu().numpy()
+        out_normal_fine.append(normals)
+    del render_out
+```
+
+然后进行图片的拼接和保存
+
+<div style="display:flex; justify-content:space-between;"> <img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/00282500_0_22.png" alt="Image 1" style="width:10%;"><div style="width:10px;"></div> <img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/00282500_0_22%20(1).png" alt="Image 2" style="width:20%;"> </div>
+
+```
+img_fine = None
+if len(out_rgb_fine) > 0:
+    img_fine = (np.concatenate(out_rgb_fine, axis=0).reshape([H, W, 3, -1]) * 256).clip(0, 255)
+
+normal_img = None
+if len(out_normal_fine) > 0:
+    normal_img = np.concatenate(out_normal_fine, axis=0)
+    rot = np.linalg.inv(self.dataset.pose_all[idx, :3, :3].detach().cpu().numpy())
+    normal_img = (np.matmul(rot[None, :, :], normal_img[:, :, None])
+                  .reshape([H, W, 3, -1]) * 128 + 128).clip(0, 255)
+
+os.makedirs(os.path.join(self.base_exp_dir, 'validations_fine'), exist_ok=True)
+os.makedirs(os.path.join(self.base_exp_dir, 'normals'), exist_ok=True)
+
+for i in range(img_fine.shape[-1]):  # img_fine.shape[-1] = 1
+    if len(out_rgb_fine) > 0:
+        cv.imwrite(os.path.join(self.base_exp_dir,
+                                'validations_fine',
+                                '{:0>8d}_{}_{}.png'.format(self.iter_step, i, idx)),
+                   np.concatenate([img_fine[..., i],
+                                   self.dataset.image_at(idx, resolution_level=resolution_level)]))
+    if len(out_normal_fine) > 0:
+        cv.imwrite(os.path.join(self.base_exp_dir,
+                                'normals',
+                                '{:0>8d}_{}_{}.png'.format(self.iter_step, i, idx)),
+                   normal_img[..., i])
+```
+
 #### validate_mesh生成mesh模型
-根据一个$resolution^3$ 的sdf场，生成mesh的ply文件
+
+根据一个$resolution^3$ 的sdf场，将阈值为0的点使用marching_cubes方法生成vertices和triangles，然后生成mesh的ply文件
 
 ##### extract_geometry
 
@@ -845,7 +965,6 @@ u : resolution x resolution x resolution, 为box 中每个点的sdf值
 
 >[pmneila/PyMCubes: Marching cubes (and related tools) for Python (github.com)](https://github.com/pmneila/PyMCubes)
 
-
 input:
 - bound_min, bound_max, resolution, 
 - threshold, 用于`vertices, triangles = mcubes.marching_cubes(u, threshold)`，在等threshold面上，生成mesh的v和t
@@ -856,6 +975,8 @@ output:
     - N_v , 3: 3为点的三维坐标
 - triangles：三角形网格
     -  N_t , 3: 3为三角形网格顶点的索引index
+
+![images.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230630210635.png)
 
 根据v和t，`mesh = trimesh.Trimesh(vertices, triangles)`生成mesh，并导出ply：
 ```
@@ -1137,6 +1258,32 @@ pts3d = read_model.read_points3d_binary(points3dfile)
 - pose.npy主要保存每张图片的c2w矩阵和hwf
 - sparse_points_interest.ply用来生成相机缩放矩阵，将感兴趣的部位保存下来
 
+#### pose文件
+pose.ply in Miku
+![image.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230702145000.png)
+
+
+```
+work_dir = sys.argv[1]
+poses_hwf = np.load(os.path.join(work_dir, 'poses.npy')) # n_images, 3, 5
+poses_raw = poses_hwf[:, :, :4] # n_images, 3, 4
+hwf = poses_hwf[:, :, 4] # n_images, 3
+pose = np.diag([1.0, 1.0, 1.0, 1.0]) # 4, 4 对角线为1，其余为0
+pose[:3, :4] = poses_raw[0] # 3, 4 ， pose: 4, 4
+pts = []
+# 下面四句是将相机坐标系的四个点转换到世界坐标系
+# 世界坐标系下 原点，x轴，y轴，z轴
+pts.append((pose @ np.array([0, 0, 0, 1])[:, None]).squeeze()[:3]) # 4, 1 -> 4 -> 3
+pts.append((pose @ np.array([1, 0, 0, 1])[:, None]).squeeze()[:3])
+pts.append((pose @ np.array([0, 1, 0, 1])[:, None]).squeeze()[:3])
+pts.append((pose @ np.array([0, 0, 1, 1])[:, None]).squeeze()[:3])
+pts = np.stack(pts, axis=0)
+pcd = trimesh.PointCloud(pts)
+pcd.export(os.path.join(work_dir, 'pose.ply'))
+```
+
+#### 两个矩阵
+
 **world_mat_{i}:**
 
 ```
@@ -1204,4 +1351,106 @@ center = (bbox_max + bbox_min) * 0.5
 radius = np.linalg.norm(vertices - center, ord=2, axis=-1).max()
 scale_mat = np.diag([radius, radius, radius, 1.0]).astype(np.float32)
 scale_mat[:3, 3] = center
+```
+
+
+## interpolate_view
+
+生成一个视频，从img_idx_0中间插值生成新视图的图片，过渡到img_idx_1，然后再回到img_idx_0，共2s，60frames
+
+eg: 0 to 38 render video
+
+![00300000_0_38.gif](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/00300000_0_38.gif)
+
+插值：$ratio = \frac{\sin{\left(\frac{i}{frames}-0.5 \right)\cdot \pi}}{2}+\frac{1}{2} = 0.5 \rightarrow 1 \rightarrow 0.5$ 
+
+```
+def interpolate_view(self, img_idx_0, img_idx_1):
+    images = []
+    n_frames = 60
+    for i in range(n_frames):
+        print(i)
+        images.append(self.render_novel_image(img_idx_0,
+                                              img_idx_1,
+                                              np.sin(((i / n_frames) - 0.5) * np.pi) * 0.5 + 0.5,
+                      resolution_level=4))
+    # 做出了视频像是循环的效果
+    for i in range(n_frames):
+        images.append(images[n_frames - i - 1])
+
+    fourcc = cv.VideoWriter_fourcc(*'mp4v')
+    video_dir = os.path.join(self.base_exp_dir, 'render')
+    os.makedirs(video_dir, exist_ok=True)
+    h, w, _ = images[0].shape
+    writer = cv.VideoWriter(os.path.join(video_dir,
+                                         '{:0>8d}_{}_{}.mp4'.format(self.iter_step, img_idx_0, img_idx_1)),
+                            fourcc, 30, (w, h))
+
+    for image in images:
+        writer.write(image)
+
+    writer.release()
+```
+
+
+```
+def render_novel_image(self, idx_0, idx_1, ratio, resolution_level):
+    """
+    Interpolate view between two cameras.
+    """
+    rays_o, rays_d = self.dataset.gen_rays_between(idx_0, idx_1, ratio, resolution_level=resolution_level)
+    H, W, _ = rays_o.shape
+    rays_o = rays_o.reshape(-1, 3).split(self.batch_size)
+    rays_d = rays_d.reshape(-1, 3).split(self.batch_size)
+
+    out_rgb_fine = []
+    for rays_o_batch, rays_d_batch in zip(rays_o, rays_d):
+        near, far = self.dataset.near_far_from_sphere(rays_o_batch, rays_d_batch)
+        background_rgb = torch.ones([1, 3]) if self.use_white_bkgd else None
+
+        render_out = self.renderer.render(rays_o_batch,
+                                          rays_d_batch,
+                                          near,
+                                          far,
+                                          cos_anneal_ratio=self.get_cos_anneal_ratio(),
+                                          background_rgb=background_rgb)
+
+        out_rgb_fine.append(render_out['color_fine'].detach().cpu().numpy())
+
+        del render_out
+```
+
+```
+def gen_rays_between(self, idx_0, idx_1, ratio, resolution_level=1):
+    """
+    Interpolate pose between two cameras.
+    """
+    l = resolution_level # 4
+    tx = torch.linspace(0, self.W - 1, self.W // l)
+    ty = torch.linspace(0, self.H - 1, self.H // l)
+    pixels_x, pixels_y = torch.meshgrid(tx, ty)
+    p = torch.stack([pixels_x, pixels_y, torch.ones_like(pixels_y)], dim=-1)  # W, H, 3
+    p = torch.matmul(self.intrinsics_all_inv[0, None, None, :3, :3], p[:, :, :, None]).squeeze()  # W, H, 3
+    rays_v = p / torch.linalg.norm(p, ord=2, dim=-1, keepdim=True)  # W, H, 3
+    trans = self.pose_all[idx_0, :3, 3] * (1.0 - ratio) + self.pose_all[idx_1, :3, 3] * ratio
+    pose_0 = self.pose_all[idx_0].detach().cpu().numpy()
+    pose_1 = self.pose_all[idx_1].detach().cpu().numpy()
+    pose_0 = np.linalg.inv(pose_0)
+    pose_1 = np.linalg.inv(pose_1)
+    rot_0 = pose_0[:3, :3]
+    rot_1 = pose_1[:3, :3]
+    rots = Rot.from_matrix(np.stack([rot_0, rot_1]))
+    key_times = [0, 1]
+    slerp = Slerp(key_times, rots)
+    rot = slerp(ratio)
+    pose = np.diag([1.0, 1.0, 1.0, 1.0])
+    pose = pose.astype(np.float32)
+    pose[:3, :3] = rot.as_matrix()
+    pose[:3, 3] = ((1.0 - ratio) * pose_0 + ratio * pose_1)[:3, 3]
+    pose = np.linalg.inv(pose)
+    rot = torch.from_numpy(pose[:3, :3]).cuda()
+    trans = torch.from_numpy(pose[:3, 3]).cuda()
+    rays_v = torch.matmul(rot[None, None, :3, :3], rays_v[:, :, :, None]).squeeze()  # W, H, 3
+    rays_o = trans[None, None, :3].expand(rays_v.shape)  # W, H, 3
+    return rays_o.transpose(0, 1), rays_v.transpose(0, 1)
 ```
