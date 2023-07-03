@@ -35,7 +35,10 @@ t通过 $t_{i} \sim \mathcal{U}\left[t_{n}+\frac{i-1}{N}\left(t_{f}-t_{n}\right)
 
 已知：图片大小，所选图片上的像素位置，相机参数(焦距、相机位姿)。光线经过坐标变换：图片二维的像素坐标构建-->相机三维坐标-->世界坐标，得到光线在世界坐标系下的原点和方向向量, 然后对ray_o和ray_d进行NDC坐标变换，将锥形区域变换为一个2x2x2的正方体区域。(LLFF数据集)
 
-从世界坐标系到相机坐标系的投影我们称为相机外参矩阵（反之为相机姿态矩阵），而从像素坐标系到相机坐标系的投影我们称为相机内参矩阵（用K来表示，由相机焦距与中心点决定）。[旷视3d CV master系列训练营三：NeRF在实际场景中的应用 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/553665958)
+>[世界坐标系、相机坐标系和图像坐标系的转换_相机坐标系到图像坐标系_滴滴滴'cv的博客-CSDN博客](https://blog.csdn.net/weixin_38842821/article/details/125933604?spm=1001.2014.3001.5506)
+
+
+从世界坐标系到相机坐标系的投影我们称为相机外参矩阵（反之为相机姿态矩阵），而从相机坐标系到像素坐标系的投影我们称为相机内参矩阵（用K来表示，由相机焦距与中心点决定）。[旷视3d CV master系列训练营三：NeRF在实际场景中的应用 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/553665958)
 
 ## 图片二维坐标-->相机三维坐标 $X_{c}, Y_{c},Z_{c}$
 
@@ -57,6 +60,7 @@ focal = .5 * W / np.tan(.5 * camera_angle_x)
 ```
 ## 相机三维坐标-->世界三维坐标XYZ
 
+$$外参矩阵^{-1} = \begin{bmatrix}r_{11}&r_{12}&r_{13}&t_x\\ r_{21}&r_{22}&r_{23}&t_y\\ r_{31}&r_{32}&r_{33}&t_z\\ 0&0&0&1\end{bmatrix}$$
 $$
 \begin{bmatrix}X\\ Y\\ Z\\ 1\end{bmatrix}=\begin{bmatrix}r_{11}&r_{12}&r_{13}&t_x\\ r_{21}&r_{22}&r_{23}&t_y\\ r_{31}&r_{32}&r_{33}&t_z\\ 0&0&0&1\end{bmatrix}\begin{bmatrix}X_c\\ Y_c\\ Z_c\\ 1\end{bmatrix}
 $$

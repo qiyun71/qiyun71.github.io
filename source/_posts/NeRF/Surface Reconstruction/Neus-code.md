@@ -2,12 +2,22 @@
 title: Neus代码理解
 date: 2023-06-30 13:45:48
 tags:
-    - Neus code
+    - Code
     - Python
 categories: NeRF/Surface Reconstruction
 ---
 
 [Neus代码](https://github.com/Totoro97/NeuS)的理解
+
+NeRF与Neus相机坐标系的对比：
+
+![image.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230703144039.png)
+
+| Method | Pixel to Camera coordinate                                                                                                   |
+| ------ | ----------------------------------------------------------------------------------------------------- |
+| NeRF   | $\vec d = \begin{pmatrix} \frac{i-\frac{W}{2}}{f} \\ -\frac{j-\frac{H}{2}}{f} \\ -1 \\ \end{pmatrix}$ , $intrinsics = K = \begin{bmatrix} f & 0 & \frac{W}{2}  \\ 0 & f & \frac{H}{2}  \\ 0 & 0 & 1 \\ \end{bmatrix}$|
+| Neus   | $\vec d = intrinsics^{-1} \times  pixel = \begin{bmatrix} \frac{1}{f} & 0 & -\frac{W}{2 \cdot f}  \\ 0 & \frac{1}{f} & -\frac{H}{2 \cdot f} \\ 0 & 0 & 1 \\ \end{bmatrix} \begin{pmatrix} i \\ j \\ 1 \\ \end{pmatrix} = \begin{pmatrix} \frac{i-\frac{W}{2}}{f} \\ \frac{j-\frac{H}{2}}{f} \\ 1 \\ \end{pmatrix}$                                                                                                      |
+
 
 <!-- more -->
 
@@ -111,12 +121,14 @@ BlendedMVS/bmvs_bear/cameras_sphere
 in gen_cameras : 
 w2c = np.linalg.inv(pose)
 
-(4, 4) world_mats_np0 = intrinsic @ w2c 
+世界坐标系到像素坐标系转换矩阵
+(4, 4) world_mats_np0 = intrinsic @ w2c =w2pixel
 [[-1.0889766e+02  3.2340955e+02  6.2724188e+02 -1.6156446e+04] 
 [-4.8021997e+02 -3.6971255e+02  2.8318774e+02 -8.9503633e+03]
 [ 2.4123600e-01 -4.2752099e-01  8.7122399e-01 -2.1731400e+01]
 [ 0.0000000e+00  0.0000000e+00  0.0000000e+00  1.0000000e+00]]
 
+将世界坐标系平移缩放到感兴趣物体的中心
 (4, 4) scale_mats_np0 : sparse_points_interest中，以中心点为圆心，最远距离为半径的一个区域
     scale_mat = np.diag([radius, radius, radius, 1.0]).astype(np.float32)
     scale_mat[:3, 3] = center
@@ -174,7 +186,7 @@ intrinsics[:3, :3] = K # intrinsics: 4x4 为相机内参矩阵
 
 pose = np.eye(4, dtype=np.float32)
 pose[:3, :3] = R.transpose() # 正交矩阵 其转置等于逆
-pose[:3, 3] = (t[:3] / t[3])[:, 0] # pose: 4x4 为相机外参矩阵
+pose[:3, 3] = (t[:3] / t[3])[:, 0] # pose: 4x4 为相机外参矩阵的逆
 [[-0.33320493 -0.9114712   0.24123597 -0.25686666]
  [ 0.8066752  -0.40804535 -0.42752096  0.48028347]
  [ 0.48810825  0.05214698  0.87122387 -1.092033  ]
@@ -197,7 +209,7 @@ p_pixel --> p_camera --> p_world (or rays_d)
 
 `p_camera = intrinsics_inv @ p_pixel`:  `3x3 @ 3x1`
 
-$\begin{bmatrix} \frac{1}{f} & 0 & -\frac{W}{2 \cdot f}  \\ 0 & \frac{1}{f} & -\frac{H}{2 \cdot f} \\ 0 & 0 & 1 \\ \end{bmatrix} \begin{pmatrix} i \\ j \\ 1 \\ \end{pmatrix} = \begin{pmatrix} \frac{i-\frac{W}{2}}{f} \\ -\frac{j-\frac{H}{2}}{f} \\ -1 \\ \end{pmatrix}$
+$\begin{bmatrix} \frac{1}{f} & 0 & -\frac{W}{2 \cdot f}  \\ 0 & \frac{1}{f} & -\frac{H}{2 \cdot f} \\ 0 & 0 & 1 \\ \end{bmatrix} \begin{pmatrix} i \\ j \\ 1 \\ \end{pmatrix} = \begin{pmatrix} \frac{i-\frac{W}{2}}{f} \\ \frac{j-\frac{H}{2}}{f} \\ 1 \\ \end{pmatrix}$
 
 `p_world = pose @ p_camera`:  `3x3 @ 3x1`
 
@@ -924,6 +936,8 @@ if len(out_rgb_fine) > 0:
 normal_img = None
 if len(out_normal_fine) > 0:
     normal_img = np.concatenate(out_normal_fine, axis=0)
+    # pose: c2w 
+    # rot: w2c
     rot = np.linalg.inv(self.dataset.pose_all[idx, :3, :3].detach().cpu().numpy())
     normal_img = (np.matmul(rot[None, :, :], normal_img[:, :, None])
                   .reshape([H, W, 3, -1]) * 128 + 128).clip(0, 255)
@@ -1329,6 +1343,7 @@ pose =
 
 w2c = np.linalg.inv(pose)
 
+# world_mat is w2pixel
 world_mat = intrinsic @ w2c
 world_mat = world_mat.astype(np.float32)
 ```

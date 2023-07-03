@@ -46,3 +46,15 @@ git restore lib
 
 ```
 
+# 删除远程仓库文件，保留本地文件：
+
+```
+git rm --cached 文件 //本地中该文件不会被删除
+
+git rm -r --cached 文件夹 //删除文件夹
+
+git commit -m '删除某个文件'
+
+git push
+```
+

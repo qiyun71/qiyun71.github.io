@@ -1,20 +1,24 @@
 {
   "recentFiles": [
     {
-      "basename": "Learn-PyTorch",
-      "path": "Learn/Learn-PyTorch.md"
-    },
-    {
-      "basename": "Learn-DeepLearning",
-      "path": "Learn/Learn-DeepLearning.md"
+      "basename": "Neus-Instant-nsr-pl-code",
+      "path": "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl-code.md"
     },
     {
       "basename": "Neus-code",
       "path": "NeRF/Surface Reconstruction/Neus-code.md"
     },
     {
+      "basename": "Neus-Instant-nsr-pl",
+      "path": "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl.md"
+    },
+    {
       "basename": "Neus",
       "path": "NeRF/Surface Reconstruction/Neus.md"
+    },
+    {
+      "basename": "Note!!!",
+      "path": "Note!!!.md"
     },
     {
       "basename": "Learn-Git",
@@ -25,28 +29,28 @@
       "path": "NeRF/NeRF-Principle.md"
     },
     {
-      "basename": "Neus-Instant-nsr-pl",
-      "path": "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl.md"
+      "basename": "NeRF-code",
+      "path": "NeRF/NeRF-code.md"
     },
     {
       "basename": "NeRF-InstantNGP",
       "path": "NeRF/Efficiency/NeRF-InstantNGP.md"
     },
     {
-      "basename": "2023-06-19",
-      "path": "Reports/2023-06-19.md"
+      "basename": "Learn-DeepLearning",
+      "path": "Learn/Learn-DeepLearning.md"
     },
     {
       "basename": "NeRF-Studio",
       "path": "NeRF/NeRF-Studio.md"
     },
     {
-      "basename": "Note!!!",
-      "path": "Note!!!.md"
+      "basename": "Learn-PyTorch",
+      "path": "Learn/Learn-PyTorch.md"
     },
     {
-      "basename": "NeRF-code",
-      "path": "NeRF/NeRF-code.md"
+      "basename": "2023-06-19",
+      "path": "Reports/2023-06-19.md"
     },
     {
       "basename": "NeRF-review",
@@ -191,14 +195,6 @@
     {
       "basename": "总结",
       "path": "NeRF/文献阅读&code/review/awesome-NeRF/总结.md"
-    },
-    {
-      "basename": "Nerf-studio",
-      "path": "NeRF/文献阅读&code/框架/Nerf-studio.md"
-    },
-    {
-      "basename": "NeRF发展",
-      "path": "NeRF/文献阅读&code/review/NeRF发展.md"
     }
   ],
   "omittedPaths": [],
