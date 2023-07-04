@@ -8,17 +8,18 @@ categories:
 ---
 
 
-流程图点击编辑，更方便观看
+<p style= "text-align: center;">流程图点击编辑，更方便观看</p>
+
 ![image.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230627160834.png)
 
 | My post                                                                                                                | Brief description                | status                                                                                        |
 | ---------------------------------------------------------------------------------------------------------------------- | -------------------------------- | --------------------------------------------------------------------------------------------- |
 | [NeRF](2023/06/14/NeRF/NeRF-Principle/) + [Code](/2023/06/15/NeRF/NeRF-code/)                                          | NeRF原理 + 代码理解              | Completed                                                                                     |
-| [Neus](/2023/06/14/NeRF/Surface%20Reconstruction/Neus/) + [Code](/2023/06/30/NeRF/Surface%20Reconstruction/Neus-code/) | 表面重建方法                     | Completed                                                                                     |
-|                        [InstantNGP](/2023/06/27/NeRF/Efficiency/NeRF-InstantNGP/)                                                                                          |          加速NeRF的训练和推理                        |                 In progress                                                                                                                                                                 |
+| [Neus](/2023/06/14/NeRF/Surface%20Reconstruction/Neus/) + [Code](/2023/06/30/NeRF/Surface%20Reconstruction/Neus-code/) | 表面重建方法 SDFNetwork                     | Completed                                                                                     |
+|                        [InstantNGP](/2023/06/27/NeRF/Efficiency/NeRF-InstantNGP/) + [Tiny-cuda-nn](/2023/07/04/NeRF/Efficiency/NeRF-InstantNGP-code/)                                                                                         |          加速NeRF的训练和推理                     |                 In progress                                                                                                                                                                 |
 | [Instant Neus](/2023/06/14/NeRF/Surface%20Reconstruction/Neus-Instant-nsr-pl/) + [Code](/2023/07/03/NeRF/Surface%20Reconstruction/Neus-Instant-nsr-pl-code/)                                           | Neus+InstantNGP_tiny-cuda-nn     | In progress                                                                                   |
 | [Nerfstudio](/2023/06/15/NeRF/NeRF-Studio/)                                                                            | 一个更加方便训练和观察NeRF的框架 | Completed in AutoDL                                                                           |
-| [NeRF进展](/2023/06/25/NeRF/NeRF-review/)                                                                              | 追踪一些最近的NeRF进展           | Following [Jason陪你练绝技的个人空间_哔哩哔哩_bilibili](https://space.bilibili.com/455056488) |
+| [NeRF进展](/2023/06/25/NeRF/NeRF-review/)                                                                              | 追踪一些最近的NeRF进展           | Following [Jason陪你练绝技 in Bilibili](https://space.bilibili.com/455056488/channel/collectiondetail?sid=910368) |
 
 <!-- more -->
 

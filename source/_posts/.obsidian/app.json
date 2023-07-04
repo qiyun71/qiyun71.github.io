@@ -23,10 +23,11 @@
   "showUnsupportedFiles": false,
   "spellcheck": true,
   "rightToLeft": false,
-  "showInlineTitle": false,
+  "showInlineTitle": true,
   "focusNewTab": true,
   "useMarkdownLinks": true,
   "spellcheckLanguages": [
     "zh-CN"
-  ]
+  ],
+  "foldHeading": true
 }

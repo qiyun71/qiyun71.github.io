@@ -731,7 +731,6 @@ circle1.pi=3.14159  # 出现AttributeError异常
 
 ### 9.6.2 property重新实现setter和getter方法
 
-我也不太懂hhh
 
 ```python
 class Circle(object):
@@ -781,9 +780,8 @@ print(circle1.pi)  # 访问 pi的值
 >参考[知乎大佬](https://www.zhihu.com/people/lyzf)的[教程](https://zhuanlan.zhihu.com/p/30223570)
 >感谢大佬让我搞懂了python的类，虽然最后的不太懂，但是基础是懂了
 
-接着学aaaaaaa
 
-## 9.7 类的继承  --- 大师，我悟了
+## 9.7 类的继承 
 
 ### 9.7.1 类的继承
 
@@ -802,8 +800,8 @@ class Cat(Animal):
        self.sex=sex
 
 if __name__ == '__main__':  # 单模块被引用时下面代码不会受影响，用于调试
-   c = Cat('喵喵', 2, '男')  #  Cat继承了父类Animal的属性
-c.call()  # 输出 喵喵 会叫 ，Cat继承了父类Animal的方法 
+    c = Cat('喵喵', 2, '男')  #  Cat继承了父类Animal的属性
+    c.call()  # 输出 喵喵 会叫 ，Cat继承了父类Animal的方法 
 ```
 
 我悟了：类的继承一般都是object，然后如果想要继承自己的类，则可以把object继承对象改一下，原来类名后括号里的东西是继承对象
@@ -979,3 +977,157 @@ new_list = list(map(list, zip(address, temp)))
 jsonify({
     'data': new_list
 })
+
+# 11. 装饰器
+
+>[装饰器 - 廖雪峰的官方网站 (liaoxuefeng.com)](https://www.liaoxuefeng.com/wiki/1016959663602400/1017451662295584)
+
+eg：
+
+```
+import time 
+import functools
+
+def metric(fn):
+    # print('%s executed in %s ms' % (fn.__name__, 10.24))
+    @functools.wraps(fn)
+    def wrapper(*args, **kw):
+        start = time.time()
+        res = fn(*args, **kw)
+        end = time.time()
+        print('{:s} executed in {:5f} ms, ' 'and the result is {:d}'.format(fn.__name__, (end - start), res))
+        return fn(*args, **kw)
+    return wrapper
+
+# 测试
+@metric
+def fast(x, y):
+    time.sleep(0.0012)
+    return x + y;
+
+@metric
+def slow(x, y, z):
+    time.sleep(0.1234)
+    return x * y * z;
+
+f = fast(11, 22)
+s = slow(11, 22, 33)
+if f != 33:
+    print('测试失败!')
+elif s != 7986:
+    print('测试失败!')
+
+"""
+print(fast.__name__)
+如果有@functools.wraps(fn)，则返回fast
+如果没有@functools.wraps(fn)，则返回wrapper
+"""
+print(fast.__name__)
+
+output: 
+fast executed in 0.013472 ms, and the result is 33
+slow executed in 0.124733 ms, and the result is 7986
+fast
+```
+
+```
+def log(func):
+    def wrapper(*args, **kw):
+        print('call %s():' % func.__name__)
+        return func(*args, **kw)
+    return wrapper
+
+@log
+def now():
+    print('2015-3-25')
+
+执行：now()
+output:
+call now():
+2015-3-25
+```
+
+把`@log`放到`now()`函数的定义处，相当于执行了语句：
+
+```
+now = log(now)
+```
+
+由于log()是一个decorator，返回一个函数，所以，原来的now()函数仍然存在，只是现在同名的now变量指向了新的函数，于是调用now()将执行新函数，即在log()函数中返回的wrapper()函数。
+
+## 装饰器需要参数
+
+如果decorator本身需要传入参数，那就需要编写一个返回decorator的高阶函数，写出来会更复杂。比如，要自定义log的文本：
+
+```
+def log(text):
+    def decorator(func):
+        def wrapper(*args, **kw):
+            print('%s %s():' % (text, func.__name__))
+            return func(*args, **kw)
+        return wrapper
+    return decorator
+```
+这个3层嵌套的decorator用法如下：
+
+```
+@log('execute')
+def now():
+    print('2015-3-25')
+```
+
+执行结果如下：
+
+```
+>>> now()
+execute now():
+2015-3-25
+```
+
+和两层嵌套的decorator相比，3层嵌套的效果是这样的：
+
+```
+>>> now = log('execute')(now)
+```
+
+## 原始函数属性复制到装饰后的函数中
+
+
+以上两种decorator的定义都没有问题，但还差最后一步。因为我们讲了函数也是对象，它有`__name__`等属性，但你去看经过decorator装饰之后的函数，它们的`__name__`已经从原来的`'now'`变成了`'wrapper'`：
+
+```
+>>> now.__name__
+'wrapper'
+```
+
+因为返回的那个`wrapper()`函数名字就是`'wrapper'`，所以，需要把原始函数的`__name__`等属性复制到`wrapper()`函数中，否则，有些依赖函数签名的代码执行就会出错。
+
+不需要编写`wrapper.__name__ = func.__name__`这样的代码，Python内置的`functools.wraps`就是干这个事的，所以，一个完整的decorator的写法如下：
+
+```
+import functools
+
+def log(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kw):
+        print('call %s():' % func.__name__)
+        return func(*args, **kw)
+    return wrapper
+```
+
+或者针对带参数的decorator：
+
+```
+import functools
+
+def log(text):
+    def decorator(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kw):
+            print('%s %s():' % (text, func.__name__))
+            return func(*args, **kw)
+        return wrapper
+    return decorator
+```
+
+`import functools`是导入`functools`模块。模块的概念稍候讲解。现在，只需记住在定义`wrapper()`的前面加上`@functools.wraps(func)`即可。

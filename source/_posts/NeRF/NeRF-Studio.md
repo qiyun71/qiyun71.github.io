@@ -67,7 +67,7 @@ AutoDL连接不了google drive，只能使用自己的数据集or：
 
 `ns-process-data {images, video} --data {DATA_PATH} --output-dir {PROCESSED_DATA_DIR}`
 
-eg: Miku
+#### eg: Miku
 cd autodl-tmp
 `ns-process-data images --data data/images --output-dir data/nerfstudio/images_name`
 
@@ -105,9 +105,7 @@ ns-train nerfacto --data data/nerfstudio/Miku
 
 ```
 
-in viewer: 
-
-it's easy to view results and process
+in viewer:  it is easy to view results and process
 
 ![image.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230630161446.png)
 
@@ -132,7 +130,7 @@ Loading latest checkpoint from load_dir
 ✅ Generated PointCloud with 1008679 points.  
 Computing Mesh... this may take a while.
 
-CPU生成mesh的速度很慢 大约用了1个小时多，效果也不是很好，因为使用的是nerf的方法，零水平集有很多坑洞
+CPU生成mesh的速度很慢 大约用了1个小时多，效果也不是很好，因为使用的是nerfacto的方法，零水平集有很多坑洞
 ```
 
 

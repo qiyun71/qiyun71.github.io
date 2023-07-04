@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "a79d20d79b8878e1",
+        "id": "fe62a7498b6e2a50",
         "type": "tabs",
         "children": [
           {
-            "id": "4da6f35ae4c164fe",
+            "id": "098a0905093ea4ec",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "NeRF/Surface Reconstruction/Neus.md",
+                "file": "NeRF/Efficiency/NeRF-InstantNGP-code.md",
                 "mode": "source",
                 "backlinks": false,
                 "source": false
@@ -21,59 +21,19 @@
             }
           },
           {
-            "id": "9750286c21a86a2b",
+            "id": "9d26546e69be94a9",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "NeRF/Surface Reconstruction/Neus-code.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "efd7e90dda9f6026",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "b500c671ccb6268d",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl-code.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "7827ad80802c52ec",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Note!!!.md",
+                "file": "NeRF/Efficiency/NeRF-InstantNGP.md",
                 "mode": "source",
                 "backlinks": false,
                 "source": false
               }
             }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "vertical"
@@ -134,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl-code.md",
+                "file": "NeRF/Efficiency/NeRF-InstantNGP-code.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -166,7 +126,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl-code.md"
+                "file": "NeRF/Efficiency/NeRF-InstantNGP-code.md"
               }
             }
           },
@@ -194,7 +154,6 @@
       {
         "id": "43edafb5d29f89ff",
         "type": "tabs",
-        "dimension": 46.96132596685083,
         "children": [
           {
             "id": "39287e9bb20932ab",
@@ -202,7 +161,7 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl-code.md",
+                "file": "NeRF/Efficiency/NeRF-InstantNGP-code.md",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -249,21 +208,6 @@
           }
         ],
         "currentTab": 1
-      },
-      {
-        "id": "74ad77380e347a20",
-        "type": "tabs",
-        "dimension": 53.03867403314917,
-        "children": [
-          {
-            "id": "b54784dd06945442",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {}
-            }
-          }
-        ]
       }
     ],
     "direction": "horizontal",
@@ -285,13 +229,25 @@
       "workspaces:管理工作区布局": false
     }
   },
-  "active": "b500c671ccb6268d",
+  "active": "098a0905093ea4ec",
   "lastOpenFiles": [
+    "NeRF/Efficiency/NeRF-InstantNGP.md",
+    "NeRF/Efficiency/NeRF-InstantNGP-code.md",
+    "NeRF/NeRF-code.md",
     "NeRF/Surface Reconstruction/Neus-code.md",
-    "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl.md",
-    "NeRF/Surface Reconstruction/Neus.md",
-    "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl-code.md",
     "Note!!!.md",
+    "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl.md",
+    "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl-code.md",
+    "Learn/Learn-Hexo2.md",
+    "Learn/Learn-Hexo.md",
+    "Learn/Learn-Markdown.md",
+    "NeRF/NeRF-Studio.md",
+    "NeRF/Surface Reconstruction/Neus.md",
+    "Learn/Learn-Python.md",
+    "Reports/2023-07-04.md",
+    "Reports/2023-06-19.md",
+    "Learn/Learn-PyTorch.md",
+    "Learn/Learn-DeepLearning.md",
     "2023/07/03/NeRF/Surface Reconstruction/Neus-Instant-nsr-pl.md",
     "2023/07/03/NeRF/Surface Reconstruction",
     "2023/07/03/NeRF",
@@ -300,16 +256,10 @@
     "2023",
     "Learn/Learn-Git.md",
     "NeRF/NeRF-Principle.md",
-    "NeRF/NeRF-code.md",
-    "NeRF/Efficiency/NeRF-InstantNGP.md",
-    "Learn/Learn-DeepLearning.md",
-    "NeRF/NeRF-Studio.md",
-    "Learn/Learn-PyTorch.md",
     "NeRF/Surface Reconstruction/pose.ply",
     "NeRF/Surface Reconstruction/interactive_point_cloud 1.html",
     "NeRF/Surface Reconstruction/interactive_point_cloud.html",
     "interactive_point_cloud.html",
-    "Reports/2023-06-19.md",
     "2023/06/14/NeRF/Surface Reconstruction/Neus-Instant-nsr-pl.md",
     "2023/06/14/NeRF/Surface Reconstruction",
     "NeRF/NeRF-review.md",
@@ -317,12 +267,6 @@
     "Learn/Learn-VB作业1.md",
     "Learn/Learn-VB作业2.md",
     "Learn/Learn-Spider爬虫.md",
-    "Learn/Learn-Python_Threading.md",
-    "Learn/Learn-Python-LCU.md",
-    "Learn/Learn-VB.md",
-    "Learn/Learn-Arduino.md",
-    "Learn/Learn-Csharp.md",
-    "Learn/Learn-HCJ前端.md",
     "未命名.canvas",
     "附件/Pasted image 20230612205212.png",
     "附件/Pasted image 20230606154824.png",

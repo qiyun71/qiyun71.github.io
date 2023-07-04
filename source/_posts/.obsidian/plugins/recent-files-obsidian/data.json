@@ -1,24 +1,72 @@
 {
   "recentFiles": [
     {
-      "basename": "Neus-Instant-nsr-pl-code",
-      "path": "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl-code.md"
+      "basename": "NeRF-InstantNGP-code",
+      "path": "NeRF/Efficiency/NeRF-InstantNGP-code.md"
+    },
+    {
+      "basename": "NeRF-InstantNGP",
+      "path": "NeRF/Efficiency/NeRF-InstantNGP.md"
+    },
+    {
+      "basename": "NeRF-code",
+      "path": "NeRF/NeRF-code.md"
     },
     {
       "basename": "Neus-code",
       "path": "NeRF/Surface Reconstruction/Neus-code.md"
     },
     {
+      "basename": "Note!!!",
+      "path": "Note!!!.md"
+    },
+    {
       "basename": "Neus-Instant-nsr-pl",
       "path": "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl.md"
+    },
+    {
+      "basename": "Neus-Instant-nsr-pl-code",
+      "path": "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl-code.md"
+    },
+    {
+      "basename": "Learn-Hexo2",
+      "path": "Learn/Learn-Hexo2.md"
+    },
+    {
+      "basename": "Learn-Hexo",
+      "path": "Learn/Learn-Hexo.md"
+    },
+    {
+      "basename": "Learn-Markdown",
+      "path": "Learn/Learn-Markdown.md"
+    },
+    {
+      "basename": "NeRF-Studio",
+      "path": "NeRF/NeRF-Studio.md"
     },
     {
       "basename": "Neus",
       "path": "NeRF/Surface Reconstruction/Neus.md"
     },
     {
-      "basename": "Note!!!",
-      "path": "Note!!!.md"
+      "basename": "Learn-Python",
+      "path": "Learn/Learn-Python.md"
+    },
+    {
+      "basename": "2023-07-04",
+      "path": "Reports/2023-07-04.md"
+    },
+    {
+      "basename": "2023-06-19",
+      "path": "Reports/2023-06-19.md"
+    },
+    {
+      "basename": "Learn-PyTorch",
+      "path": "Learn/Learn-PyTorch.md"
+    },
+    {
+      "basename": "Learn-DeepLearning",
+      "path": "Learn/Learn-DeepLearning.md"
     },
     {
       "basename": "Learn-Git",
@@ -27,30 +75,6 @@
     {
       "basename": "NeRF-Principle",
       "path": "NeRF/NeRF-Principle.md"
-    },
-    {
-      "basename": "NeRF-code",
-      "path": "NeRF/NeRF-code.md"
-    },
-    {
-      "basename": "NeRF-InstantNGP",
-      "path": "NeRF/Efficiency/NeRF-InstantNGP.md"
-    },
-    {
-      "basename": "Learn-DeepLearning",
-      "path": "Learn/Learn-DeepLearning.md"
-    },
-    {
-      "basename": "NeRF-Studio",
-      "path": "NeRF/NeRF-Studio.md"
-    },
-    {
-      "basename": "Learn-PyTorch",
-      "path": "Learn/Learn-PyTorch.md"
-    },
-    {
-      "basename": "2023-06-19",
-      "path": "Reports/2023-06-19.md"
     },
     {
       "basename": "NeRF-review",
@@ -97,24 +121,8 @@
       "path": "Learn/Learn-HCJ前端.md"
     },
     {
-      "basename": "Learn-Hexo",
-      "path": "Learn/Learn-Hexo.md"
-    },
-    {
-      "basename": "Learn-Hexo2",
-      "path": "Learn/Learn-Hexo2.md"
-    },
-    {
-      "basename": "Learn-Markdown",
-      "path": "Learn/Learn-Markdown.md"
-    },
-    {
       "basename": "Learn-Python_OPEN_CV",
       "path": "Learn/Learn-Python_OPEN_CV.md"
-    },
-    {
-      "basename": "Learn-Python",
-      "path": "Learn/Learn-Python.md"
     },
     {
       "basename": "Learn-Python_plt",
@@ -191,10 +199,6 @@
     {
       "basename": "光线模型",
       "path": "NeRF/文献阅读&code/NeRF初始文原理/公式推导/光线模型.md"
-    },
-    {
-      "basename": "总结",
-      "path": "NeRF/文献阅读&code/review/awesome-NeRF/总结.md"
     }
   ],
   "omittedPaths": [],

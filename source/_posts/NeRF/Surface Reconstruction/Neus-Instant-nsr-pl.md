@@ -52,6 +52,7 @@ autodl镜像：
     - `conda init bash` 初始化bash终端
     - `conda activate inneus`
     - `pip install -r requirements.txt`
+        - torch=2.0.1 , torchvision=0.15.2 ,pytorch-lightning= 1.9.5
     - `pip install git+https://github.com/NVlabs/tiny-cuda-nn/#subdirectory=bindings/torch`
     - `pip install trimesh -i https://mirrors.ustc.edu.cn/pypi/web/simple/`
 
