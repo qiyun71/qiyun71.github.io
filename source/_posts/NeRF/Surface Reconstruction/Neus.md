@@ -8,8 +8,9 @@ categories: NeRF/Surface Reconstruction
 ---
 
 NeuS: Learning Neural Implicit Surfaces by Volume Rendering for Multi-view Reconstruction
-实现了三维重建：从图片中获得点云
+[NeuS: Learning Neural Implicit Surfaces by Volume Rendering for Multi-view Reconstruction (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4718711588576575489&noteId=1791151226962648064)
 
+实现了三维重建：从多视角图片中重建出了mesh模型
 
 <!-- more -->
 
@@ -28,10 +29,13 @@ Neus的总目标是实现从2D图像输入中以高保真度重建对象和场�
 - 通过手动在meshlab中clean稀疏点云ply中其他噪音位置的点云，构建了一个精确的bounds，可以将模型不包括背景且几乎没有噪声的生成出来
 - 通过构建SDF场，其零水平集相比NeRF的密度场水平集(Threshold = 25)，生成的mesh更加精细，或者说更加平滑
     - 对图片中深度突然变化的部分，sdf也可以很好的重建出来
+
 ## 不足
 - 对于无纹理物体(例如反光和阴影区域)的重建效果并不理想
 - 需要手动在meshlab中clean稀疏点云ply中其他噪音位置的点云，这也是本文所说不需mask监督的方法
 - (in paper:)一个有趣的未来研究方向是根据不同的局部几何特征，对不同空间位置具有不同方差的概率以及场景表示的优化进行建模
+
+[Neus与NeRF对比](#Neus与NeRF对比)
 
 # 引言+相关工作
 
@@ -89,49 +93,50 @@ NeRF的体积渲染方法提出沿着每条光线进行多次采样（上图（a
 
 其为sigmoid函数的导数 $\Phi_s(x)=(1+e^{-sx})^{-1},\text{i.e.,}\phi_s(x)=\Phi_s'(x)$
 
+### Neus与NeRF对比
 
-### Neus与NeRF 体渲染函数对比
+相同点：
 
-| Project          | Neus                                                                                                                   | NeRF                                                                                                                                                                                      |
-| ---------------- | ---------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 渲染函数         | $$C(\mathbf{o},\mathbf{v})=\int_{0}^{+\infty}w(t)c(\mathbf{p}(t),\mathbf{v})\mathrm{d}t,$$                               | $$\mathrm{C}(r)=\int_{\mathrm{t}_{\mathrm{n}}}^{\mathrm{t}_{\mathrm{f}}} \mathrm{T}(\mathrm{t}) \sigma(\mathrm{r}(\mathrm{t})) \mathrm{c}(\mathrm{r}(\mathrm{t}), \mathrm{d}) \mathrm{dt}$$ |
-| 权重             | $$w(t)=T(t)\rho(t),\text{where}T(t)=\exp\left(-\int_0^t\rho(u)\mathrm{d}u\right).$$ **无偏、且遮挡**                     | $$w(t)=T(t)\sigma(t) , \text { where } \mathrm{T}(\mathrm{t})=\exp \left(-\int_{\mathrm{t}_{\mathrm{n}}}^{\mathrm{t}} \sigma(\mathrm{r}(\mathrm{s})) \mathrm{ds}\right)$$   **遮挡但有偏**  |
-| 不透明度密度函数 | $$\rho(t)=\max\left(\frac{-\frac{\mathrm{d}\Phi_s}{\mathrm{d}t}(f(\mathbf{p}(t)))}{\Phi_s(f(\mathbf{p}(t)))},0\right).$$ | $$\sigma(t)=\phi_s(f(\mathbf{p}(t)))$$                                                                                                                                                      |
-| 离散化                 |       $$\hat{C}=\sum_{i=1}^n T_i\alpha_i c_i,$$  $$T_i=\prod_{j=1}^{i-1}(1-\alpha_j)$$ $$\alpha_i=\max\left(\frac{\Phi_s(f(\mathbf{p}(t_i))))-\Phi_s(f(\mathbf{p}(t_{i+1})))}{\Phi_s(f(\mathbf{p}(t_i)))},0\right).$$                                                                                                                 |                                                               $$\hat{C}(\mathbf{r})=\sum_{i=1}^{N} T_{i}\left(1-\exp \left(-\sigma_{i} \delta_{i}\right)\right) \mathbf{c}_{i} \text {, where } T_{i}=\exp \left(-\sum_{j=1}^{i-1} \sigma_{j} \delta_{j}\right)$$                                                                                                                            |
+- 使用NeRF提出的频率编码方式进行位置编码
+- 使用了从像素坐标到世界坐标系转换的方式来生成光线(o,d) 
+
+不同点之一——使用了不同的相机坐标变换：
+
+![image.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230703144039.png)
+
+| Method | Pixel to Camera coordinate                                                                                                                                                                                                                                                                                         | 
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| NeRF   | $\vec d = \begin{pmatrix} \frac{i-\frac{W}{2}}{f} \\ -\frac{j-\frac{H}{2}}{f} \\ -1 \\ \end{pmatrix}$ , $intrinsics = K = \begin{bmatrix} f & 0 & \frac{W}{2}  \\ 0 & f & \frac{H}{2}  \\ 0 & 0 & 1 \\ \end{bmatrix}$                                                                                              | 
+| Neus   | $\vec d = intrinsics^{-1} \times  pixel = \begin{bmatrix} \frac{1}{f} & 0 & -\frac{W}{2 \cdot f}  \\ 0 & \frac{1}{f} & -\frac{H}{2 \cdot f} \\ 0 & 0 & 1 \\ \end{bmatrix} \begin{pmatrix} i \\ j \\ 1 \\ \end{pmatrix} = \begin{pmatrix} \frac{i-\frac{W}{2}}{f} \\ \frac{j-\frac{H}{2}}{f} \\ 1 \\ \end{pmatrix}$ |     
+
+不同点：
+
+体渲染、采样方式、训练出来的网络模型以及near、far计算方式
+
+| Project          | Neus                                                                                                                                                                                                       | NeRF                                                                                                                                                                                                                                                  |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 渲染函数         | $C(\mathbf{o},\mathbf{v})=\int_{0}^{+\infty}w(t)c(\mathbf{p}(t),\mathbf{v})\mathrm{d}t$                                                                                                                    | $\mathrm{C}(r)=\int_{\mathrm{t}_{\mathrm{n}}}^{\mathrm{t}_{\mathrm{f}}} \mathrm{T}(\mathrm{t}) \sigma(\mathrm{r}(\mathrm{t})) \mathrm{c}(\mathrm{r}(\mathrm{t}), \mathrm{d}) \mathrm{dt}$                                                             |
+| 权重             | $w(t)=T(t)\rho(t),\text{where}T(t)=\exp\left(-\int_0^t\rho(u)\mathrm{d}u\right)$ **无偏、且遮挡**                                                                                                          | $w(t)=T(t)\sigma(t) , \text { where } \mathrm{T}(\mathrm{t})=\exp \left(-\int_{\mathrm{t}_{\mathrm{n}}}^{\mathrm{t}} \sigma(\mathrm{r}(\mathrm{s})) \mathrm{ds}\right)$   **遮挡但有偏**                                                              |
+| 不透明度密度函数 | $\rho(t)=\max\left(\frac{-\frac{\mathrm{d}\Phi_s}{\mathrm{d}t}(f(\mathbf{p}(t)))}{\Phi_s(f(\mathbf{p}(t)))},0\right)$                                                                                      | $\sigma(t) = \sigma_{i}=raw2alpha(raw[...,3] + noise, dists)$                                                                                                                                                                                         |
+| 离散化           | $\hat{C}=\sum_{i=1}^n T_i\alpha_i c_i$     $T_i=\prod_{j=1}^{i-1}(1-\alpha_j)$ $\alpha_i=\max\left(\frac{\Phi_s(f(\mathbf{p}(t_i))))-\Phi_s(f(\mathbf{p}(t_{i+1})))}{\Phi_s(f(\mathbf{p}(t_i)))},0\right)$ | $\hat{C}(\mathbf{r})=\sum_{i=1}^{N} T_{i}\alpha_{i}\mathbf{c}_{i}$ $\hat{C}(\mathbf{r})=\sum_{i=1}^{N} T_{i}\left(1-\exp \left(-\sigma_{i} \delta_{i}\right)\right) \mathbf{c}_{i}$ $T_{i}=\exp \left(-\sum_{j=1}^{i-1} \sigma_{j} \delta_{j}\right)$ |
+| 精采样           | 使用sdf_network得到的sdf求出cos，并得到估计的sdf，求出$\alpha$和weight，用权重逆变换采样                                                                                                                   | 经过MLP得到$\sigma$，求出$\alpha$和weight，用权重逆变换采样                                                                                                                                                                                           |
+| 网络模型         | 隐式SDF场                                                                                                                                                                                                  | 隐式密度点云场                                                                                                                                                                                                                                        |
+| near_far         | 根据光线的原点和方向向量计算                                                                                                                                                                               |         不同的数据集有不同的计算方式                                                                                                                                                                                                                                              |
+
 
 权重函数，Neus(右)，NeRF(左)
 ![Pasted image 20230606154119.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/Pasted%20image%2020230606154119.png)
 
 
-### 重要推导
-
-why `true_cos = (dirs * gradients).sum(-1, keepdim=True)`
-
-
-
 ## 训练损失函数
 
-loss函数
+loss函数：
 $$\mathcal L=\mathcal L_{color}+\lambda\mathcal L_{reg}+\beta\mathcal L_{mask}.$$
-$$\mathcal{L}_{color}=\frac{1}{m}\sum_k\mathcal{R}(\hat{C}_k,C_k).$$
-Eikonal term,类似[IDR](https://lioryariv.github.io/idr/)
-
----
-$$\mathcal{L}_{r e g}=\frac{1}{n m}\sum_{k,i}(\|\nabla f(\hat{\mathbf{p}}_{k,i})\|_{2}-1)^{2}.$$
-[IGR](https://github.com/amosgropp/IGR)
-
----
-
-$$\mathcal{L}_{mask}=\mathrm{BCE}(M_k,\hat{O}_k)$$
-沿着相机ray的权重之和：
-$$\hat{O}_k=\sum_{i=1}^n T_{k,i}\alpha_{k,i}$$
-是否使用mask监督: (BCE是二值交叉熵损失)
-$$M_{k} ∈ {0, 1}$$
-
-分层采样类似NeRF
-
-
-
+颜色损失：$\mathcal{L}_{color}=\frac{1}{m}\sum_k\mathcal{R}(\hat{C}_k,C_k).$
+Eikonal term,类似[IDR](https://lioryariv.github.io/idr/):$\mathcal{L}_{r e g}=\frac{1}{n m}\sum_{k,i}(\|\nabla f(\hat{\mathbf{p}}_{k,i})\|_{2}-1)^{2}.$
+[IGR](https://github.com/amosgropp/IGR)：$\mathcal{L}_{mask}=\mathrm{BCE}(M_k,\hat{O}_k)$
+- 沿着相机ray的权重之和：$\hat{O}_k=\sum_{i=1}^n T_{k,i}\alpha_{k,i}$
+- 是否使用mask监督: (BCE是二值交叉熵损失)：$M_{k} ∈ {0, 1}$
 
 # 实验
 

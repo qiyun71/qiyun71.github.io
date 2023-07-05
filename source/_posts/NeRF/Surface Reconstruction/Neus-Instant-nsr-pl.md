@@ -19,7 +19,7 @@ categories: NeRF/Surface Reconstruction
 无论文，来源Neus的issue：[Train NeuS in 10min using Instant-NGP acceleration techniques · Issue #78 · Totoro97/NeuS (github.com)](https://github.com/Totoro97/NeuS/issues/78)
 [bennyguo/instant-nsr-pl: Neural Surface reconstruction based on Instant-NGP. Efficient and customizable boilerplate for your research projects. Train NeuS in 10min! (github.com)](https://github.com/bennyguo/instant-nsr-pl)
 
-环境配置：
+# 环境配置
 autodl镜像：
     GPU 3090
     PyTorch  1.10.0
@@ -57,7 +57,7 @@ autodl镜像：
     - `pip install trimesh -i https://mirrors.ustc.edu.cn/pypi/web/simple/`
 
 
-# 数据集：
+# 数据集
 ## NeRF-Synthetic，解压并放在/load文件夹下，The file structure should be like `load/nerf_synthetic/lego`.
 
 ```
@@ -195,7 +195,27 @@ img_path = os.path.join(self.config.root_dir, 'image', f'{i:03d}.png')
 - 修改images中的照片数据or自己做一个照片数据（毛绒玩具）
 
 
-### eg: 使用neus自定义数据集对M590三维重建
+
+## 自定义数据集
+
+### 服务器环境配置colmap (未完成)
+
+```text
+git clone https://ceres-solver.googlesource.com/ceres-solver
+cd ceres-solver
+git checkout $(git describe --tags) # Checkout the latest release
+mkdir build
+cd build
+cmake .. -DBUILD_TESTING=OFF -DBUILD_EXAMPLES=OFF
+make -j
+sudo make install
+```
+
+### 本地处理数据集(同neus类似BMVS数据集形式)
+
+同neus使用自定义数据集[Neus](/2023/06/14/NeRF/Surface%20Reconstruction/Neus/#Neus使用自制数据集)
+
+#### eg: 使用neus自定义数据集对M590三维重建
 
 - 拍M590视频
 - video2img.py，将mp4按帧拆分成png，并生成mask文件夹
@@ -225,7 +245,7 @@ img_path = os.path.join(self.config.root_dir, 'image', f'{i:03d}.png')
 ![GIF 2023-6-25 16-44-37.gif](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/GIF%202023-6-25%2016-44-37.gif)
 
 
-#### 分析
+##### 分析
 
 - 数据集使用xiaomi13录制成视频然后跳帧选取图片得到，会有一些反光和阴影
 - M590的右键部分有一块大的缺陷，这是由于数据集在右键部分信息太少(反光，阴影)
@@ -236,7 +256,7 @@ img_path = os.path.join(self.config.root_dir, 'image', f'{i:03d}.png')
 
 
 
-### eg: 对Miku进行重建
+#### eg: 对Miku进行重建
 
 ```
 python launch.py --config configs/neus-dtu.yaml --gpu 0 --train
@@ -254,22 +274,4 @@ python launch.py --config configs/neus-dtu.yaml --resume /root/autodl-tmp/instan
 ![images](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230630212921.png)
 
 
-## 自定义数据集
-
-### 服务器环境配置colmap (未完成)
-
-```text
-git clone https://ceres-solver.googlesource.com/ceres-solver
-cd ceres-solver
-git checkout $(git describe --tags) # Checkout the latest release
-mkdir build
-cd build
-cmake .. -DBUILD_TESTING=OFF -DBUILD_EXAMPLES=OFF
-make -j
-sudo make install
-```
-
-### 本地处理数据集(同neus)
-
-同neus使用自定义数据集[Neus | YunQi (yq010105.github.io)](https://yq010105.github.io/2023/06/14/NeRF/Surface%20Reconstruction/Neus/)
 

@@ -14,7 +14,8 @@ Instant Neus的代码理解
 
 <!-- more -->
 
-文件结构：
+使用了PyTorch Lightning库
+# 文件结构：
 
 ```
 ├───configs  # 配置文件
@@ -63,3 +64,185 @@ Instant Neus的代码理解
 │ obj.py  
 │ __init__.py  
 ```
+
+# datasets
+
+## init
+
+```
+datasets = {}
+
+def register(name):
+    def decorator(cls):
+        datasets[name] = cls
+        return cls
+    return decorator
+
+def make(name, config): # dtu ,config.datasets
+    dataset = datasets[name](config) # dataset = datasets['dtu'](config)
+    return dataset
+
+from . import blender, colmap, dtu
+```
+
+## dtu
+
+### load_K_Rt_from_P
+
+### create_spheric_poses
+
+### DTUDatasetBase
+
+### DTUDataset
+
+### DTUIterableDataset
+
+### DTUDataModule
+@datasets.register('dtu')
+
+# models
+
+## init
+
+`@models.register('neus')` 修饰器的作用：
+- 主要是为了实例化NeuSModel()的同时，在models字典中同时存入一个NeuSModel()值，对应的key为'neus'
+
+当运行 `neus_model = NeuSModel()` 时，会运行`neus_model = register('neus')(NeusModel)`
+返回给neus_model的值为decorator(cls) 函数的返回值，即NeusModel
+
+
+```
+models = {}
+
+def register(name):
+    def decorator(cls):
+        models[name] = cls
+        return cls
+    return decorator
+
+def make(name, config):
+    model = models[name](config)
+    return model
+
+from . import nerf, neus, geometry, texture
+```
+
+## base
+
+### BaseModel
+
+其他model需要继承于BaseModel
+
+## neus
+
+Neus中的两个网络
+
+### VarianceNetwork
+
+sigmoid函数的s参数在训练中变化
+
+### NeuSModel
+@models.register('neus')
+
+#### setup
+
+#### update_step
+#### isosurface
+
+#### get_alpha
+#### forward_bg_
+#### forward_
+#### forward
+#### train
+#### eval
+#### regularizations
+
+#### export
+@torch.no_grad()
+
+## network_utils
+
+各种编码方式和NeRF的MLP网络
+
+### VanillaFrequency
+
+Vanilla：最初始的
+即NeRF中的频率编码方式
+
+### ProgressiveBandHashGrid
+
+### CompositeEncoding
+
+### get_encoding
+
+### VanillaMLP
+
+NeRF中的MLP
+
+
+### sphere_init_tcnn_network
+
+### get_mlp
+
+
+### EncodingWithNetwork
+
+### get_encoding_with_network
+
+
+## geometry
+
+### contract_to_unisphere
+
+### MarchingCubeHelper
+
+### BaseImplicitGeometry
+
+### VolumeDensity
+@models.register('volume-density')
+
+### VolumeSDF
+@models.register('volume-sdf')
+
+# systems
+
+## init
+
+```
+systems = {}
+
+def register(name):
+    def decorator(cls):
+        systems[name] = cls
+        return cls
+    return decorator
+
+def make(name, config, load_from_checkpoint=None):
+    if load_from_checkpoint is None:
+        system = systems[name](config)
+    else:
+        system = systems[name].load_from_checkpoint(load_from_checkpoint, strict=False, config=config)
+    return system
+
+from . import nerf, neus
+```
+
+## neus
+
+### NeuSSystem
+@systems.register('neus-system')
+
+#### prepare
+
+#### forward
+#### preprocess_data
+#### training_step
+#### validation_step
+#### validation_epoch_end
+#### test_step
+#### test_epoch_end
+#### export
+
+
+
+

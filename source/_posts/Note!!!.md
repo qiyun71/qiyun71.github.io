@@ -9,8 +9,10 @@ categories:
 
 
 <p style= "text-align: center;">流程图点击编辑，更方便观看</p>
+<div style="text-align:center">
+    <img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230627160834.png" alt="Image" />
+</div>
 
-![image.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230627160834.png)
 
 | My post                                                                                                                | Brief description                | status                                                                                        |
 | ---------------------------------------------------------------------------------------------------------------------- | -------------------------------- | --------------------------------------------------------------------------------------------- |
@@ -20,6 +22,8 @@ categories:
 | [Instant Neus](/2023/06/14/NeRF/Surface%20Reconstruction/Neus-Instant-nsr-pl/) + [Code](/2023/07/03/NeRF/Surface%20Reconstruction/Neus-Instant-nsr-pl-code/)                                           | Neus+InstantNGP_tiny-cuda-nn     | In progress                                                                                   |
 | [Nerfstudio](/2023/06/15/NeRF/NeRF-Studio/)                                                                            | 一个更加方便训练和观察NeRF的框架 | Completed in AutoDL                                                                           |
 | [NeRF进展](/2023/06/25/NeRF/NeRF-review/)                                                                              | 追踪一些最近的NeRF进展           | Following [Jason陪你练绝技 in Bilibili](https://space.bilibili.com/455056488/channel/collectiondetail?sid=910368) |
+
+
 
 <!-- more -->
 

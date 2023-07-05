@@ -18,11 +18,13 @@ InstantNGP环境配置和使用，由于需要使用GUI，且笔记本GPU配置�
 
 # Tiny-cuda-nn
 
+>[tiny-cuda-nn/samples/mlp_learning_an_image_pytorch.py at master · NVlabs/tiny-cuda-nn · GitHub](https://github.com/nvlabs/tiny-cuda-nn/blob/master/samples/mlp_learning_an_image_pytorch.py)
+
 ```
-	model = tcnn.NetworkWithInputEncoding(n_input_dims=2, 
-																		n_output_dims=n_channels, 
-																		encoding_config=config["encoding"], 
-																		network_config=config["network"]).to(device)
+model = tcnn.NetworkWithInputEncoding(n_input_dims=2, 
+                        n_output_dims=n_channels, 
+                        encoding_config=config["encoding"], 
+                        network_config=config["network"]).to(device)
 
 """
 # encoding_config = 
@@ -58,7 +60,47 @@ network: a lightning fast ["fully fused" multi-layer perceptron](https://raw.git
 - n_neurons: 64
 - n_hidden_layers: 隐藏层数2
 
-# 环境配置及运行
+```
+image =  Image(args.image, device) # model
+
+model = tcnn.NetworkWithInputEncoding(n_input_dims=2, 
+                                                                    n_output_dims=n_channels, 
+                                                                    encoding_config=config["encoding"], 
+                                                                    network_config=config["network"]).to(device)
+optimizer = torch.optim.Adam(model.parameters(), lr=0.01)
+
+batch_size = 2**18
+interval = 10
+
+print(f"Beginning optimization with {args.n_steps} training steps.")
+
+try:
+    batch = torch.rand([batch_size, 2], device=device, dtype=torch.float32)
+    traced_image = torch.jit.trace(image, batch) 
+    # 对 `image` 进行跟踪，记录其在给定输入数据上的执行过程，并生成一个跟踪模型。
+    # 生成的跟踪模型可以被保存、加载和执行，而且通常具有比原始模型更高的执行效率。
+    # 只能跟踪具有固定输入形状的模型或函数
+except:
+    # If tracing causes an error, fall back to regular execution
+    print(f"WARNING: PyTorch JIT trace failed. Performance will be slightly worse than regular.")
+    traced_image = image
+
+for i in range(args.n_steps):
+    batch = torch.rand([batch_size, 2], device=device, dtype=torch.float32)
+    targets = traced_image(batch)
+    output = model(batch)
+
+    relative_l2_error = (output - targets.to(output.dtype))**2 / (output.detach()**2 + 0.01)
+    loss = relative_l2_error.mean()
+
+    optimizer.zero_grad()
+    loss.backward()
+    optimizer.step()
+
+tcnn.free_temporary_memory()
+```
+
+# NGP环境配置及运行
 
 配置前下载：
 

@@ -14,10 +14,10 @@ NeRF与Neus相机坐标系的对比：
 
 ![image.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230703144039.png)
 
-| Method | Pixel to Camera coordinate                                                                                                   |
-| ------ | ----------------------------------------------------------------------------------------------------- |
-| NeRF   | $\vec d = \begin{pmatrix} \frac{i-\frac{W}{2}}{f} \\ -\frac{j-\frac{H}{2}}{f} \\ -1 \\ \end{pmatrix}$ , $intrinsics = K = \begin{bmatrix} f & 0 & \frac{W}{2}  \\ 0 & f & \frac{H}{2}  \\ 0 & 0 & 1 \\ \end{bmatrix}$|
-| Neus   | $\vec d = intrinsics^{-1} \times  pixel = \begin{bmatrix} \frac{1}{f} & 0 & -\frac{W}{2 \cdot f}  \\ 0 & \frac{1}{f} & -\frac{H}{2 \cdot f} \\ 0 & 0 & 1 \\ \end{bmatrix} \begin{pmatrix} i \\ j \\ 1 \\ \end{pmatrix} = \begin{pmatrix} \frac{i-\frac{W}{2}}{f} \\ \frac{j-\frac{H}{2}}{f} \\ 1 \\ \end{pmatrix}$                                                                                                      |
+| Method | Pixel to Camera coordinate                                                                                                                                                                                                                                                                                         | 
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| NeRF   | $\vec d = \begin{pmatrix} \frac{i-\frac{W}{2}}{f} \\ -\frac{j-\frac{H}{2}}{f} \\ -1 \\ \end{pmatrix}$ , $intrinsics = K = \begin{bmatrix} f & 0 & \frac{W}{2}  \\ 0 & f & \frac{H}{2}  \\ 0 & 0 & 1 \\ \end{bmatrix}$                                                                                              | 
+| Neus   | $\vec d = intrinsics^{-1} \times  pixel = \begin{bmatrix} \frac{1}{f} & 0 & -\frac{W}{2 \cdot f}  \\ 0 & \frac{1}{f} & -\frac{H}{2 \cdot f} \\ 0 & 0 & 1 \\ \end{bmatrix} \begin{pmatrix} i \\ j \\ 1 \\ \end{pmatrix} = \begin{pmatrix} \frac{i-\frac{W}{2}}{f} \\ \frac{j-\frac{H}{2}}{f} \\ 1 \\ \end{pmatrix}$ |     
 
 
 <!-- more -->
@@ -49,68 +49,10 @@ NeRF与Neus相机坐标系的对比：
 
 
 
-## 构建的网络Network
-
-Neus中共构建了4个network：
-- NeRF：训练物体outside即背景的颜色
-- SDFNetwork：训练点云中的sdf值
-- RenderingNetwork：训练点云的RGB
-- SingleVarianceNetwork：训练一个单变量invs，用于计算$cdf = sigmoid(estimated.sdf  \cdot inv.s)$
-
-### NeRF
-
-同NeRF网络
-![Pasted image 20221206180113.png|600](https://raw.githubusercontent.com/yq010105/Blog_images/main/Pasted%20image%2020221206180113.png)
-
-
-### SDFNetwork
-
-激活函数 $\text{Softplus}(x) = \frac{\log(1 + e^{\beta x})}{\beta}$
-
-网络结构：
-![SDFNetwork.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/SDFNetwork.png)
-
-input: pts, 采样点的三维坐标 batch_size * n_samples x 3
-output: 257个数 batch_size * n_samples x 257
-
-`sdf(pts) = output[:, :1]`:  batch_size * n_samples x 1，采样点的sdf值
-
-### RenderingNetwork
-
-![RenderingNetwork.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/RenderingNetwork.png)
-
-input: rendering_input :`[batch_size * n_samples ,  3 + 27 + 3+ 256 = 289]`
-`rendering_input = torch.cat([points, view_dirs, normals, feature_vectors], dim=-1)`
-- pts: batch_size * n_samples, 3
-- gradients: batch_size * n_samples, 3
-- dirs: batch_size * n_samples, 3
-    - 位置编码 to view_dirs: batch_size * n_samples , 27
-- feature_vector: batch_size * n_samples, 256
-
-output: sampled_color采样点的RGB颜色 batch_size * n_samples , 3
-
-### SingleVarianceNetwork
-
-```
-class SingleVarianceNetwork(nn.Module):
-    def __init__(self, init_val):
-        super(SingleVarianceNetwork, self).__init__()
-        # variance 模型可以跟踪和优化这个参数，使其在训练过程中进行更新
-        self.register_parameter('variance', nn.Parameter(torch.tensor(init_val)))
-
-    def forward(self, x):
-        # torch.zeros([1, 3])
-        # 大小为 [len(x), 1] 的张量，每个元素都是 exp(variance * 10.0)
-        return torch.ones([len(x), 1]) * torch.exp(self.variance * 10.0)
-
-in Runner:
-self.deviation_network = SingleVarianceNetwork(**self.conf['model.variance_network']).to(self.device)
-```
-
-render中
-`inv_s = deviation_network(torch.zeros([1, 3]))[:, :1].clip(1e-6, 1e6) `
 
 ## dataset
+
+`self.dataset = Dataset(self.conf['dataset'])`
 
 - 相机内外参数矩阵
 - 光线的生成以及坐标变换
@@ -280,6 +222,89 @@ self.object_bbox_min = object_bbox_min[:3, 0] # 3
 self.object_bbox_max = object_bbox_max[:3, 0] # 3
 ```
 
+
+
+## 构建的网络Network
+
+```
+# Networks
+params_to_train = []
+self.nerf_outside = NeRF(**self.conf['model.nerf']).to(self.device) # 创建一个NeRF网络
+self.sdf_network = SDFNetwork(**self.conf['model.sdf_network']).to(self.device) # 创建一个SDF网络
+self.deviation_network = SingleVarianceNetwork(**self.conf['model.variance_network']).to(self.device)
+self.color_network = RenderingNetwork(**self.conf['model.rendering_network']).to(self.device)
+params_to_train += list(self.nerf_outside.parameters())
+params_to_train += list(self.sdf_network.parameters())
+params_to_train += list(self.deviation_network.parameters())
+params_to_train += list(self.color_network.parameters())
+
+self.optimizer = torch.optim.Adam(params_to_train, lr=self.learning_rate)
+
+self.renderer = NeuSRenderer(self.nerf_outside,
+                             self.sdf_network,
+                             self.deviation_network,
+                             self.color_network,
+                             **self.conf['model.neus_renderer'])
+```
+
+Neus中共构建了4个network：
+- NeRF：训练物体outside即背景的颜色
+- SDFNetwork：训练点云中的sdf值
+- RenderingNetwork：训练点云的RGB
+- SingleVarianceNetwork：训练一个单变量invs，用于计算$cdf = sigmoid(estimated.sdf  \cdot inv.s)$
+
+### NeRF
+
+同NeRF网络
+![Pasted image 20221206180113.png|600](https://raw.githubusercontent.com/yq010105/Blog_images/main/Pasted%20image%2020221206180113.png)
+
+
+### SDFNetwork
+
+激活函数 $\text{Softplus}(x) = \frac{\log(1 + e^{\beta x})}{\beta}$
+
+网络结构：
+![SDFNetwork.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/SDFNetwork.png)
+
+input: pts, 采样点的三维坐标 batch_size * n_samples x 3
+output: 257个数 batch_size * n_samples x 257
+
+`sdf(pts) = output[:, :1]`:  batch_size * n_samples x 1，采样点的sdf值
+
+### RenderingNetwork
+
+![RenderingNetwork.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/RenderingNetwork.png)
+
+input: rendering_input :`[batch_size * n_samples ,  3 + 27 + 3+ 256 = 289]`
+`rendering_input = torch.cat([points, view_dirs, normals, feature_vectors], dim=-1)`
+- pts: batch_size * n_samples, 3
+- gradients: batch_size * n_samples, 3
+- dirs: batch_size * n_samples, 3
+    - 位置编码 to view_dirs: batch_size * n_samples , 27
+- feature_vector: batch_size * n_samples, 256
+
+output: sampled_color采样点的RGB颜色 batch_size * n_samples , 3
+
+### SingleVarianceNetwork
+
+```
+class SingleVarianceNetwork(nn.Module):
+    def __init__(self, init_val):
+        super(SingleVarianceNetwork, self).__init__()
+        # variance 模型可以跟踪和优化这个参数，使其在训练过程中进行更新
+        self.register_parameter('variance', nn.Parameter(torch.tensor(init_val)))
+
+    def forward(self, x):
+        # torch.zeros([1, 3])
+        # 大小为 [len(x), 1] 的张量，每个元素都是 exp(variance * 10.0)
+        return torch.ones([len(x), 1]) * torch.exp(self.variance * 10.0)
+
+in Runner:
+self.deviation_network = SingleVarianceNetwork(**self.conf['model.variance_network']).to(self.device)
+```
+
+render中
+`inv_s = deviation_network(torch.zeros([1, 3]))[:, :1].clip(1e-6, 1e6) `
 
 ## render
 
@@ -716,14 +741,20 @@ class SingleVarianceNetwork(nn.Module):
 
 
 <div style="display:flex; justify-content:space-between;"> <img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230630174602.png" alt="Image 1" style="width:50%;"><div style="width:10px;"></div> <img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230630174609.png" alt="Image 2" style="width:50%;"> </div>
+
 可以看出sigmoid函数的导数是一个偶函数，即$\phi(-x) = \phi(x)$
-
-
 
 - inv_s: expand a num to `batch_size * n_samples, 1 `
 - true_cos: $true.cos = \frac{dx \cdot gx + dy \cdot gy + dz \cdot gz}{\sqrt{dx^{2}+dy^{2}+dz^{2}} \cdot \sqrt{gx^{2}+gy^{2}+gz^{2}}}$ 为sdf梯度方向，即物体表面的法线方向向量$\vec g$与光线方向向量$\vec d$的夹角
     - batch_size * n_samples, 1 
     - `true_cos = (dirs * gradients).sum(-1, keepdim=True)`
+
+{% note info %}
+why `true_cos = (dirs * gradients).sum(-1, keepdim=True)`
+- cdf对t的导数：$\frac{\mathrm{d}\Phi_s}{\mathrm{d}t}(f(\mathbf{p}(t)))= \nabla f(\mathbf{p}(t))\cdot\mathbf{v} \cdot \phi_s(f(\mathbf{p}(t)))$
+- sdf对t的导数：$\frac{\mathrm{d}f(\mathbf{p}(t))}{\mathrm{d}t}= \nabla f(\mathbf{p}(t))\cdot\mathbf{v}$，即为true_cos
+{% endnote %}
+
 - iter_cos: $= -[relu(\frac{-true.cos+1}{2}) \cdot (1.0 - cos.anneal.ratio)+  relu(-true.cos) \cdot cos.anneal.ratio]$
     - batch_size * n_samples, 1 
     - iter_cos 总是非正数
