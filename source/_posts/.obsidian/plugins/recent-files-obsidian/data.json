@@ -1,36 +1,64 @@
 {
   "recentFiles": [
     {
-      "basename": "Neus-Instant-nsr-pl-code",
-      "path": "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl-code.md"
+      "basename": "Instant-NSR",
+      "path": "NeRF/Surface Reconstruction/Instant-NSR.md"
     },
     {
-      "basename": "Learn-DeepLearning",
-      "path": "Learn/Learn-DeepLearning.md"
+      "basename": "NeRF-Mine",
+      "path": "NeRF/NeRF-Mine.md"
+    },
+    {
+      "basename": "Note!!!",
+      "path": "Note!!!.md"
+    },
+    {
+      "basename": "Neus-Instant-nsr-pl-code",
+      "path": "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl-code.md"
     },
     {
       "basename": "Neus-Instant-nsr-pl",
       "path": "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl.md"
     },
     {
-      "basename": "Neus-code",
-      "path": "NeRF/Surface Reconstruction/Neus-code.md"
+      "basename": "Make-Python_爬虫",
+      "path": "Python Practise/Make-Python_爬虫.md"
     },
     {
-      "basename": "Neus",
-      "path": "NeRF/Surface Reconstruction/Neus.md"
+      "basename": "Make-Python_bilibili",
+      "path": "Python Practise/Make-Python_bilibili.md"
     },
     {
-      "basename": "NeRF-InstantNGP-code",
-      "path": "NeRF/Efficiency/NeRF-InstantNGP-code.md"
+      "basename": "Make-mengya",
+      "path": "Python Practise/Make-mengya.md"
+    },
+    {
+      "basename": "NeRF-InstantNGP",
+      "path": "NeRF/Efficiency/NeRF-InstantNGP.md"
     },
     {
       "basename": "NeRF-review",
       "path": "NeRF/NeRF-review.md"
     },
     {
-      "basename": "Note!!!",
-      "path": "Note!!!.md"
+      "basename": "Learn-Hexo2",
+      "path": "Learn/Learn-Hexo2.md"
+    },
+    {
+      "basename": "Neus",
+      "path": "NeRF/Surface Reconstruction/Neus.md"
+    },
+    {
+      "basename": "Neus-code",
+      "path": "NeRF/Surface Reconstruction/Neus-code.md"
+    },
+    {
+      "basename": "Learn-DeepLearning",
+      "path": "Learn/Learn-DeepLearning.md"
+    },
+    {
+      "basename": "NeRF-InstantNGP-code",
+      "path": "NeRF/Efficiency/NeRF-InstantNGP-code.md"
     },
     {
       "basename": "NeRF-Principle",
@@ -43,14 +71,6 @@
     {
       "basename": "NeRF-code",
       "path": "NeRF/NeRF-code.md"
-    },
-    {
-      "basename": "NeRF-InstantNGP",
-      "path": "NeRF/Efficiency/NeRF-InstantNGP.md"
-    },
-    {
-      "basename": "Learn-Hexo2",
-      "path": "Learn/Learn-Hexo2.md"
     },
     {
       "basename": "Learn-Hexo",
@@ -129,18 +149,6 @@
       "path": "Learn/Learn-Python_plt.md"
     },
     {
-      "basename": "Make-Python_bilibili",
-      "path": "Python Practise/Make-Python_bilibili.md"
-    },
-    {
-      "basename": "Make-Python_爬虫",
-      "path": "Python Practise/Make-Python_爬虫.md"
-    },
-    {
-      "basename": "Make-mengya",
-      "path": "Python Practise/Make-mengya.md"
-    },
-    {
       "basename": "Front-matter.md",
       "path": "Templates/Front-matter.md.md"
     },
@@ -191,10 +199,6 @@
     {
       "basename": "体渲染函数公式",
       "path": "NeRF/文献阅读&code/NeRF初始文原理/公式推导/体渲染函数公式.md"
-    },
-    {
-      "basename": "NeRF原理笔记",
-      "path": "NeRF/文献阅读&code/NeRF初始文原理/公式推导/NeRF原理笔记.md"
     }
   ],
   "omittedPaths": [],

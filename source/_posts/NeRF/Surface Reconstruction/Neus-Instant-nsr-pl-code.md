@@ -9,8 +9,10 @@ categories: NeRF/Surface Reconstruction
 ---
 
 Instant Neus的代码理解
-
->[Welcome to ⚡ PyTorch Lightning — PyTorch Lightning 1.9.5 documentation](https://lightning.ai/docs/pytorch/1.9.5/)
+参考了：
+- [ngp_pl](https://github.com/kwea123/ngp_pl): Great Instant-NGP implementation in PyTorch-Lightning! Background model and GUI supported.
+    - [Welcome to ⚡ PyTorch Lightning — PyTorch Lightning 1.9.5 documentation](https://lightning.ai/docs/pytorch/1.9.5/)
+- [Instant-NSR](https://github.com/zhaofuq/Instant-NSR): NeuS implementation using multiresolution hash encoding.
 
 <!-- more -->
 
@@ -227,6 +229,45 @@ def make(name, config, load_from_checkpoint=None):
 from . import nerf, neus
 ```
 
+## base
+
+### BaseSystem
+
+#### init
+
+#### prepare
+
+#### forward
+
+#### C
+
+#### preprocess_data
+
+#### on_train_batch_start
+
+#### on_validation_batch_start
+
+
+#### on_test_batch_start
+
+#### on_predict_batch_start
+
+#### training_step
+
+#### validation_step
+
+#### validation_epoch_end
+
+
+#### test_step
+
+#### test_epoch_end
+
+#### export
+
+#### configure_optimizers
+
+
 ## neus
 
 ### NeuSSystem
@@ -242,6 +283,8 @@ from . import nerf, neus
 #### test_step
 #### test_epoch_end
 #### export
+
+
 
 
 
