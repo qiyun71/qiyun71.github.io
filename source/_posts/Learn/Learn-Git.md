@@ -10,6 +10,41 @@ categories: Learn
 
 <!-- more -->
 
+# clone
+
+## 克隆子目录
+
+1. 初始化：
+git init
+
+2. 连接远端库：
+git remote add origin url
+
+3. 启用"Sparse Checkout"功能：
+git config core.sparsecheckout true
+
+4. 添加想要clone的目录：
+echo “子目录路径” >> .git/info/sparse-checkout
+注意：子目录路径不包含clone的一级文件夹名称：
+例如库路径是：
+https://A/B/C/example.git
+我们想clone example下的D/E/F目录，则：
+`echo “D/E/F” >> .git/info/sparse-checkout`
+
+5. pull代码：
+git pull origin master
+或者不包含历史版本的clone：
+git pull --depth 1 origin master
+
+
+>版权声明：本文为CSDN博主「luo870604851」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+>原文链接：https://blog.csdn.net/luo870604851/article/details/119748749
+
+## 克隆私有仓库
+
+>[(21条消息) Git clone 克隆私有项目_git clone 项目_风信子的猫Redamancy的博客-CSDN博客](https://blog.csdn.net/weixin_45508265/article/details/124340158)
+
+`git clone http://tokens-name:tokens@github.com/YOUR-USERNAME/YOUR-REPOSITORY`
 
 # git教程
 
@@ -57,4 +92,8 @@ git commit -m '删除某个文件'
 
 git push
 ```
+
+# 新建仓库
+
+
 

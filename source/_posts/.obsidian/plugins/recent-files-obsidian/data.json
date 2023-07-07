@@ -5,20 +5,40 @@
       "path": "NeRF/Surface Reconstruction/Instant-NSR.md"
     },
     {
+      "basename": "NeRF-InstantNGP-code",
+      "path": "NeRF/Efficiency/NeRF-InstantNGP-code.md"
+    },
+    {
+      "basename": "Learn-Git",
+      "path": "Learn/Learn-Git.md"
+    },
+    {
       "basename": "NeRF-Mine",
       "path": "NeRF/NeRF-Mine.md"
     },
     {
-      "basename": "Note!!!",
-      "path": "Note!!!.md"
+      "basename": "Neus-Instant-nsr-pl",
+      "path": "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl.md"
     },
     {
       "basename": "Neus-Instant-nsr-pl-code",
       "path": "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl-code.md"
     },
     {
-      "basename": "Neus-Instant-nsr-pl",
-      "path": "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl.md"
+      "basename": "NeRF-InstantNGP",
+      "path": "NeRF/Efficiency/NeRF-InstantNGP.md"
+    },
+    {
+      "basename": "Learn-PyTorch",
+      "path": "Learn/Learn-PyTorch.md"
+    },
+    {
+      "basename": "Learn-Python",
+      "path": "Learn/Learn-Python.md"
+    },
+    {
+      "basename": "Note!!!",
+      "path": "Note!!!.md"
     },
     {
       "basename": "Make-Python_爬虫",
@@ -31,10 +51,6 @@
     {
       "basename": "Make-mengya",
       "path": "Python Practise/Make-mengya.md"
-    },
-    {
-      "basename": "NeRF-InstantNGP",
-      "path": "NeRF/Efficiency/NeRF-InstantNGP.md"
     },
     {
       "basename": "NeRF-review",
@@ -57,16 +73,8 @@
       "path": "Learn/Learn-DeepLearning.md"
     },
     {
-      "basename": "NeRF-InstantNGP-code",
-      "path": "NeRF/Efficiency/NeRF-InstantNGP-code.md"
-    },
-    {
       "basename": "NeRF-Principle",
       "path": "NeRF/NeRF-Principle.md"
-    },
-    {
-      "basename": "Learn-Python",
-      "path": "Learn/Learn-Python.md"
     },
     {
       "basename": "NeRF-code",
@@ -91,14 +99,6 @@
     {
       "basename": "2023-06-19",
       "path": "Reports/2023-06-19.md"
-    },
-    {
-      "basename": "Learn-PyTorch",
-      "path": "Learn/Learn-PyTorch.md"
-    },
-    {
-      "basename": "Learn-Git",
-      "path": "Learn/Learn-Git.md"
     },
     {
       "basename": "Make-Py-Tools",

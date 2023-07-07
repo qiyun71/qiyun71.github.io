@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl-code.md",
+                "file": "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl.md",
                 "mode": "source",
                 "backlinks": false,
                 "source": false
@@ -34,12 +34,25 @@
             }
           },
           {
+            "id": "154cb73c06aacdba",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "NeRF/NeRF-Mine.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              }
+            }
+          },
+          {
             "id": "306e5b4b7387b2f6",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "NeRF/Efficiency/NeRF-InstantNGP.md",
+                "file": "NeRF/Efficiency/NeRF-InstantNGP-code.md",
                 "mode": "source",
                 "backlinks": false,
                 "source": false
@@ -245,23 +258,25 @@
   },
   "active": "e228b1b624913b45",
   "lastOpenFiles": [
+    "NeRF/Efficiency/NeRF-InstantNGP-code.md",
+    "Learn/Learn-Git.md",
     "NeRF/NeRF-Mine.md",
-    "Note!!!.md",
     "NeRF/Surface Reconstruction/Instant-NSR.md",
-    "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl-code.md",
     "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl.md",
+    "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl-code.md",
+    "NeRF/Efficiency/NeRF-InstantNGP.md",
+    "Learn/Learn-PyTorch.md",
+    "Learn/Learn-Python.md",
+    "Note!!!.md",
     "Python Practise/Make-Python_爬虫.md",
     "Python Practise/Make-Python_bilibili.md",
     "Python Practise/Make-mengya.md",
-    "NeRF/Efficiency/NeRF-InstantNGP.md",
     "NeRF/NeRF-review.md",
     "Learn/Learn-Hexo2.md",
     "NeRF/Surface Reconstruction/Neus.md",
     "NeRF/Surface Reconstruction/Neus-code.md",
     "Learn/Learn-DeepLearning.md",
-    "NeRF/Efficiency/NeRF-InstantNGP-code.md",
     "NeRF/NeRF-Principle.md",
-    "Learn/Learn-Python.md",
     "NeRF/NeRF-code.md",
     "2023",
     "2023/06/14/NeRF/Surface Reconstruction/Neus.md",
@@ -274,8 +289,6 @@
     "NeRF/NeRF-Studio.md",
     "Reports/2023-07-04.md",
     "Reports/2023-06-19.md",
-    "Learn/Learn-PyTorch.md",
-    "2023/07/03/NeRF/Surface Reconstruction/Neus-Instant-nsr-pl.md",
     "2023/07/03/NeRF/Surface Reconstruction",
     "2023/07/03/NeRF",
     "2023/07/03",

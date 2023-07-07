@@ -94,3 +94,12 @@ Adam_in_Neus: params_to_train is a list
         for g in self.optimizer.param_groups:
             g['lr'] = self.learning_rate * learning_factor
 ```
+
+# 私有成员
+带双下划线函数
+
+| function   | brief description |
+| ---------- | ----------------- |
+| `nn.module.__repr__`  |        当print(model)时会运行该函数           |
+| `__del__`           |         当`del object`时运行该函数           |
+

@@ -10,10 +10,27 @@ categories: NeRF/Efficiency
 
 InstantNGP: [Instant Neural Graphics Primitives with a Multiresolution Hash Encoding (nvlabs.github.io)](https://nvlabs.github.io/instant-ngp/)
 
-**哈希函数在cuda(cuda c++)中进行编程**，不需深挖具体代码，初学只需理解多分辨率哈希编码思想。i.e.目前只需要学会使用tiny-cuda-nn即可：
-[NVlabs/tiny-cuda-nn: Lightning fast C++/CUDA neural network framework (github.com)](https://github.com/nvlabs/tiny-cuda-nn#pytorch-extension)
+**哈希函数在cuda(cuda c++)中进行编程**，不需深挖具体代码，初学只需理解多分辨率哈希编码思想。i.e.目前只需要学会使用tiny-cuda-nn即可：[NVlabs/tiny-cuda-nn: Lightning fast C++/CUDA neural network framework (github.com)](https://github.com/nvlabs/tiny-cuda-nn#pytorch-extension)
 
+**哈希编码思想：**
 哈希编码后的输出值的数量与L(分辨率数量)、F(特征向量维度)有关，eg: L=16,F=2，则输入一个坐标xyz，根据多分辨率体素网格，插值出来L个特征值，每个特征值维度为2，因此输出值的维度为32
+
+
+![image.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230703160333.png)
+
+$$\begin{aligned}
+N_{l} & :=\left\lfloor N_{\mathrm{min}}\cdot b^{l}\right\rfloor,  \\
+&b:=\exp\left(\frac{\ln N_{\mathrm{max}}-\ln N_{\mathrm{min}}}{L-1}\right).
+\end{aligned}
+$$
+L为分辨率数量，l为分辨率序号。示例中L=2，$N_{0}= N_{min} =2$ , $N_{1}= N_{max}= 3$ , $b = \frac{3}{2}$
+
+- L：多分辨率
+- T：每个分辨率下有T个特征向量
+- F：特征向量的维度
+- 最小和最大分辨率：$N_{min} , N_{max}$
+
+![image.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230703160145.png)
 
 <!-- more -->
 
