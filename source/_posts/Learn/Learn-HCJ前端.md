@@ -904,6 +904,7 @@ img、input表单类、td单元格等，可以对他们设置宽高和对齐属�
 ### 2.7.1 行高测量
 
 行高测量：有英文的话基线与基线间的距离、中文可以直接量底线
+
 ![行高测量](/img/hcj/hgcl.png)
 
 ### 2.7.2 单行文本垂直居中
@@ -1431,7 +1432,8 @@ float属性定义浮动
 漂浮在普通流的上面，脱离标准流，*脱标*
 float让盒子漂浮在标准流的上面，所以第二个标准流的盒子跑到浮动盒子的地下
 
-![浮动](/img/hcj/float.png)
+![float.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/float.png)
+
 
 **漏**
 浮动的盒子原来的位置留给下面标准流的盒子，不占有原来的位置
@@ -1450,7 +1452,8 @@ float特性，float会改变元素的display属性
 先给定一个标准流的父级盒子，然后浮动流在标准流中浮动
 **完整的网页 = 标准流 + 浮动 + 定位**
 
-![浮动案例](/img/hcj/floatex1.png)
+![floatex1.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/floatex1.png)
+
 
 ```html
 <!DOCTYPE html>
@@ -1517,7 +1520,8 @@ float特性，float会改变元素的display属性
 </html>
 ```
 
-![浮动导航栏案例](/img/hcj/floatex2.png)
+![floatex2.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/floatex2.png)
+
 
 **导航栏用li+a搭配更好**
 
@@ -1596,14 +1600,18 @@ float特性，float会改变元素的display属性
 
 #### **7. 浮动的扩展**
 
-![浮动元素与父盒子的关系](/img/hcj/floatkz.png)
+![floatkz.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/floatkz.png)
+
 
 * 浮动元素与父盒子的关系
   * 子盒子的浮动参考父盒子对齐
   * 不会与父元素的边框重叠，也不会超过父盒子的内边距
 
-![浮动元素与父盒子的关系](/img/hcj/floatkz1.png)
-![浮动元素与父盒子的关系](/img/hcj/floatkz2.png)
+
+![floatkz1.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/floatkz1.png)
+
+
+![floatkz2.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/floatkz2.png)
 
 两个都不浮动，则就两行显示，跟1不浮动、2浮动一样
 
@@ -1719,7 +1727,9 @@ Cutterman切图神器
 
 **html编辑的快捷方法**
 
-![快捷键操作](/img/hcj/kjj.png)
+![kjj.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/kjj.png)
+
+
 
 * `w200` 生成 `width: 200px;`
 * `h200` 生成 `height: 200px;`

@@ -553,8 +553,9 @@ A-->C
 - 强类型编程语言 C#
   - 数据受类型的约束很强
 - 弱类型编程语言 C++/JavaScript
-  - 数据受类型的 约束很弱 - c++中可能出现 if(x=200)可以编译成功的错误，一般在 c++写成 if(200==x)的形式，防止错误
-    {% endnote %}
+- 数据受类型的 约束很弱 - c++中可能出现 if(x=200)可以编译成功的错误，一般在 c++写成 `if(200==x)`的形式，防止错误
+
+{% endnote %}
 
 数据类型包含的信息
 
@@ -900,7 +901,7 @@ namespace CSharpMethodExample
 ### 5.2.1 方法的声明定义不分家
 
 - 方法的声明：
-  <attributes> <修饰符的有效组合> <partial> 返回类型 方法名(形式参数parameter) 方法体
+ ` <attributes> <修饰符的有效组合> <partial> `返回类型 方法名(形式参数parameter) 方法体
   - 修饰符：new public private async static 等等
   - 返回类型：type void
   - 方法名：标识符（动词或动词短语）
@@ -935,6 +936,7 @@ instance constructor实例构造器，构造实例在内存中的内部结构
 `ctor + tab*2`
 
 - 没有参数构造器
+
 ![20220629193542](https://raw.githubusercontent.com/yq010105/Blog_images/main/blogs/pictures/20220629193542.png)
 
 - 有参数构造器
@@ -945,7 +947,7 @@ instance constructor实例构造器，构造实例在内存中的内部结构
 同一个类下，有两个相同的方法名，但签名不同
 
 声明带有重载的方法：
-- 方法签名method signature ，方法签名由方法的名称、类型形参<T>的个数和它的每一个形参的类型和*形参传递模式|种类*（值、引用ref或输出out）组成（按从左到右的顺序）。**不包含返回类型**
+- 方法签名method signature ，方法签名由方法的名称、类型形参`<T>`的个数和它的每一个形参的类型和*形参传递模式|种类*（值、引用ref或输出out）组成（按从左到右的顺序）。**不包含返回类型**
 - 实例构造函数签名由它的每一个形参的类型和形参传递模式（值、引用或输出）组成（按从左到右的顺序）。
 - 重载决策：根据传入的参数类型选择一个最佳的函数成员来实施调用
 
@@ -965,6 +967,7 @@ main（主调者caller）中调用other（被调者callee）函数，需要传�
 # 6. 操作符
 
 ## 6.1 操作符概览
+
 
 ![20220703193132](https://raw.githubusercontent.com/yq010105/Blog_images/main/blogs/pictures/20220703193132.png)
 

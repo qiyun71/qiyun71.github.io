@@ -12,7 +12,10 @@ LOL提供了丰富的接口，可以利用这些接口来完成一些操作。�
 <!--more-->
 
 拳头提供的API接口说明可以在[开发者网站](https://developer.riotgames.com/)中查看，可以使用拳头账号获得一个api key来调用api，且key需要每天进行更换。
-![拳头开发者网站](/img/python/lcu/riot_developer.png)
+
+![riot_developer.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/riot_developer.png)
+![Uploading file...i2f0f]()
+
 
 [网站API](https://developer.riotgames.com/apis)
 - [抓包得到的API](http://www.mingweisamuel.com/lcu-schema/tool/#/)
@@ -71,7 +74,8 @@ print(champion_kr)
 - freeChampionIdsForNewPlayers 给新手玩家的免费英雄
 
 可以通过ID来查看英雄的名字，使用[拳头官网的json文件](http://ddragon.leagueoflegends.com/cdn/12.9.1/data/zh_CN/champion.json)
-![官网json文件](../img/2022-06-09-10-02-03.png)
+![2022-06-09-10-02-03.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/2022-06-09-10-02-03.png)
+
 
 实现思路：
 
@@ -139,7 +143,8 @@ pd.set_option('display.max_colwidth', 200)
 #### Ⅰ.by_summoner
 *获得所有英雄的熟练度信息*
 
-![官方api信息](../img/2022-06-09-11-21-43.png)
+![2022-06-09-11-21-43.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/2022-06-09-11-21-43.png)
+
 
 使用：`lol_watcher.champion_mastery.by_summoner(region,summoner_id)`
 return: List[ChampionMasteryDTO]: This object contains a list of Champion Mastery information for player and champion combination.
@@ -227,7 +232,9 @@ return:	SummonerDTO: represents a summoner
 
 #### Ⅲ.by_name
 
-![根据faker的summonerName查询](../img/2022-06-09-11-06-41.png)
+![2022-06-09-11-06-41.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/2022-06-09-11-06-41.png)
+
+
 ```py
 region = "kr"
 summoner_name = 'Hide on bush'

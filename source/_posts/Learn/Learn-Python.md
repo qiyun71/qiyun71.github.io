@@ -43,7 +43,7 @@ f.readline()# 读取一列数据
 
 - headers :表头
 - rows :内容
-- f*csv = csv.writer(f)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\_f 为 open('file.txt','w',encoding='utf-8')*
+- `f*csv = csv.writer(f)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\_f 为 open('file.txt','w',encoding='utf-8')*`
 - f_csv.writerow(headers)
 - f_csv.writerows(rows)
 

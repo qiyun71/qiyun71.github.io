@@ -44,9 +44,14 @@ plt.show()
 # 1. plt.plot(x,y)
 
 `format_string的内容`
-![string内容图片](/img/plt/plot1.png)
-![string内容图片](/img/plt/plot2.png)
-![string内容图片](/img/plt/plot3.png)
+
+![plot1.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/plot1.png)
+
+![plot2.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/plot2.png)
+
+![plot3.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/plot3.png)
+
+
 `**kwargs`
 
 \*\*kwards：
@@ -64,7 +69,9 @@ plt.show()
 ```
 
 **展示**
-![plot](/img/plt/plot4.png)
+
+![plot4.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/plot4.png)
+
 
 # 2. plt.figure()用来画图，自定义画布大小
 
@@ -79,7 +86,8 @@ plt.show()
 plt.close()
 ```
 
-![展示图片](/img/plt/figure1.png)
+![figure1.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/figure1.png)
+
 
 # 3、plt.subplot(222)
 
@@ -120,7 +128,9 @@ plt.close()
 ```
 
 **展示**
-![xticks代码展示](/img/plt/xticks.png)
+
+![xticks.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/xticks.png)
+
 
 # 6. plt.scatter()--散点图
 
@@ -170,7 +180,9 @@ plt.show()
 ```
 
 **展示**
-![title展示](/img/plt/title1.png)
+
+![title1.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/title1.png)
+
 
 # 8. plt.hist（）绘制直方图
 

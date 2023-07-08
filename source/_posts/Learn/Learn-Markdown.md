@@ -80,6 +80,8 @@ l
 <!-- <img src="url" width = "100" height = "100" div align=center /> -->
 ```
 
+![picture_exam.jpeg](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/picture_exam.jpeg)
+
 ![avatar](/img/picture_exam.jpeg "example")
 <img src="/img/picture_exam.jpeg " width = 10% height = 10% div align=center />
 

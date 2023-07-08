@@ -37,8 +37,8 @@ Arduino学习
 
 - 蓝牙主功能:无线发送数据
 类型:串口输出
+![arduino.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/arduino.png)
 
-![arduino入门](/img/arduino/arduino.png)
 
 ## 1.1 注释
 
@@ -184,7 +184,8 @@ void loop() {
 
 一位8段共阴极数码管
 
-![LED数码管](/img/arduino/led.png)
+![led.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/led.png)
+
 
 不同引脚给出高电平，就能显示不同的数字
 

@@ -331,7 +331,9 @@ blackhat = cv2.morphologyEx(img,cv2.MORPH_BLACKHAT,kernel)
 
 ## 0.15 图像梯度-Sobel 算子
 
-![sobel](/img/opencv/1.jpg)
+![1.jpg](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/1.jpg)
+
+
 梯度：边缘位置的像素数值不同，数值差越大，梯度越大
 边缘检测，物体分辨
 右减左，下减上 &emsp; 从右到左，从下至上
@@ -364,10 +366,13 @@ sobelxy = cv2.addWeighted(sobelx,0.5,sobely,0.5,0)
 ## 0.16 图像梯度 Scharr&&Laplacian 算子
 
 scharr -- 更敏感 -- 描绘轮廓更细致
-![sobel](/img/opencv/2.jpg)
+![2.jpg](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/2.jpg)
+
 
 laplacian -- 二阶导 -- 更更敏感，对噪音点敏感，很少单独使用
-![sobel](/img/opencv/3.png)
+
+![3.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/3.png)
+
 
 ```
 scharrx = cv2.Scharr(img,cv2.CV_64F,1,0)
@@ -383,7 +388,9 @@ res = np.hstack((scharrxy,laplacian))
 ```
 
 三种算子区别
-![三种算子区别](/img/opencv/123区别.png)
+
+![123区别.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/123%E5%8C%BA%E5%88%AB.png)
+
 
 ## 0.17 Canny 边缘检测--综合
 
@@ -442,7 +449,8 @@ down = cv2.pyrDown(img)
 down_up = cv2.pyrDown(up)
 ```
 
-![拉普拉斯金字塔](/img/opencv/拉普拉斯.png)
+![拉普拉斯.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF.png)
+
 
 - 拉普拉斯金字塔
   原始 - 先 down 再 up = result
@@ -662,7 +670,9 @@ cv2.imshow('result',res_clahe)
 
 - 高频：变化剧烈的灰度分量，eg：边界
 - 低频：变化缓慢的灰度变量，eg：一片大海
-  ![傅里叶](/img/opencv/傅里叶.png)
+
+  ![傅里叶.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/%E5%82%85%E9%87%8C%E5%8F%B6.png)
+
   滤波
   低通滤波器：只保留低频，图像变得模糊
   高通滤波器：只保留高频，图像细节增强
