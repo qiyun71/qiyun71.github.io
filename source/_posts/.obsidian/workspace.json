@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Learn/Learn-DeepLearning.md",
+                "file": "Note!!!.md",
                 "mode": "source",
                 "backlinks": false,
                 "source": false
@@ -81,7 +81,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Learn/Learn-DeepLearning.md",
+                "file": "Note!!!.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -113,7 +113,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Learn/Learn-DeepLearning.md"
+                "file": "Note!!!.md"
               }
             }
           },
@@ -148,7 +148,7 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "Learn/Learn-DeepLearning.md",
+                "file": "Note!!!.md",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -218,13 +218,14 @@
   },
   "active": "ac9943a352041c18",
   "lastOpenFiles": [
+    "Learn/Learn-DeepLearning.md",
+    "Note!!!.md",
     "Learn/Learn-Python.md",
     "Learn/Learn-Python_Threading.md",
     "Learn/Learn-Python_plt.md",
     "Learn/Learn-Spider爬虫.md",
     "Learn/Learn-PyTorch.md",
     "Learn/Learn-Git.md",
-    "Learn/Learn-DeepLearning.md",
     "Learn/Learn-Arduino.md",
     "Learn/Learn-Csharp.md",
     "Learn/Learn-HCJ前端.md",
@@ -244,7 +245,6 @@
     "NeRF/Surface Reconstruction/Instant-NSR.md",
     "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl-code.md",
     "NeRF/Efficiency/NeRF-InstantNGP.md",
-    "Note!!!.md",
     "Python Practise/Make-Python_爬虫.md",
     "2023",
     "2023/06/14/NeRF/Surface Reconstruction",

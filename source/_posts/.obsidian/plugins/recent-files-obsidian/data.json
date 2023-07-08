@@ -1,6 +1,10 @@
 {
   "recentFiles": [
     {
+      "basename": "Note!!!",
+      "path": "Note!!!.md"
+    },
+    {
       "basename": "Learn-DeepLearning",
       "path": "Learn/Learn-DeepLearning.md"
     },
@@ -83,10 +87,6 @@
     {
       "basename": "NeRF-InstantNGP",
       "path": "NeRF/Efficiency/NeRF-InstantNGP.md"
-    },
-    {
-      "basename": "Note!!!",
-      "path": "Note!!!.md"
     },
     {
       "basename": "Make-Python_爬虫",
