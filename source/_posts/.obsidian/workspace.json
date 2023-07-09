@@ -4,11 +4,50 @@
     "type": "split",
     "children": [
       {
-        "id": "8b4a35d084537d15",
+        "id": "bc1a585d20aeb6fe",
         "type": "tabs",
         "children": [
           {
-            "id": "ac9943a352041c18",
+            "id": "67eda98990f94dfb",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Learn/Learn-PyTorch.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "dcb67dcfae85d8af",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "NeRF/Surface Reconstruction/Instant-NSR-code.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "5cbb6657a3db2010",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl-code.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "8da7623d49e64bda",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -19,8 +58,22 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "8610f9cc525b832d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "NeRF/Surface Reconstruction/Instant-NSR.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -81,7 +134,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Note!!!.md",
+                "file": "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl-code.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -113,7 +166,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Note!!!.md"
+                "file": "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl-code.md"
               }
             }
           },
@@ -132,7 +185,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 257.5001640319824
   },
   "right": {
     "id": "030ccac2adcfb23a",
@@ -148,7 +201,7 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "Note!!!.md",
+                "file": "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl-code.md",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -216,15 +269,23 @@
       "workspaces:管理工作区布局": false
     }
   },
-  "active": "ac9943a352041c18",
+  "active": "5cbb6657a3db2010",
   "lastOpenFiles": [
-    "Learn/Learn-DeepLearning.md",
+    "NeRF/Surface Reconstruction/Instant-NSR-code.md",
+    "NeRF/Surface Reconstruction/Instant-NSR.md",
+    "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl.md",
+    "NeRF/Surface Reconstruction/Neus.md",
+    "Learn/Learn-PyTorch.md",
     "Note!!!.md",
+    "NeRF/NeRF-Mine.md",
+    "NeRF/Surface Reconstruction/Neus-code.md",
+    "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl-code.md",
+    "NeRF/NeRF-code.md",
+    "Learn/Learn-DeepLearning.md",
     "Learn/Learn-Python.md",
     "Learn/Learn-Python_Threading.md",
     "Learn/Learn-Python_plt.md",
     "Learn/Learn-Spider爬虫.md",
-    "Learn/Learn-PyTorch.md",
     "Learn/Learn-Git.md",
     "Learn/Learn-Arduino.md",
     "Learn/Learn-Csharp.md",
@@ -238,14 +299,6 @@
     "img/plt",
     "img",
     "Learn/Learn-VB作业2.md",
-    "Learn/Learn-VB作业1.md",
-    "NeRF/Efficiency/NeRF-InstantNGP-code.md",
-    "NeRF/NeRF-Mine.md",
-    "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl.md",
-    "NeRF/Surface Reconstruction/Instant-NSR.md",
-    "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl-code.md",
-    "NeRF/Efficiency/NeRF-InstantNGP.md",
-    "Python Practise/Make-Python_爬虫.md",
     "2023",
     "2023/06/14/NeRF/Surface Reconstruction",
     "2023/06/14/NeRF",

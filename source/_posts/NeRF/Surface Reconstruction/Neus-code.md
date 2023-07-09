@@ -224,7 +224,7 @@ self.object_bbox_max = object_bbox_max[:3, 0] # 3
 
 
 
-## 构建的网络Network
+## 神经网络结构Network
 
 ```
 # Networks

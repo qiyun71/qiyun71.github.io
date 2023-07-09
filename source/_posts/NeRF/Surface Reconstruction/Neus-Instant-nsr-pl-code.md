@@ -89,18 +89,15 @@ from . import blender, colmap, dtu
 
 ## dtu
 
-### load_K_Rt_from_P
+数据集加载操作，返回一个DataLoader
 
-### create_spheric_poses
-
-### DTUDatasetBase
-
-### DTUDataset
-
-### DTUIterableDataset
-
-### DTUDataModule
-@datasets.register('dtu')
+- load_K_Rt_from_P
+- create_spheric_poses
+- DTUDatasetBase
+- DTUDataset
+- DTUIterableDataset
+- DTUDataModule
+    - @datasets.register('dtu')
 
 # models
 
@@ -109,7 +106,7 @@ from . import blender, colmap, dtu
 `@models.register('neus')` 修饰器的作用：
 - 主要是为了实例化NeuSModel()的同时，在models字典中同时存入一个NeuSModel()值，对应的key为'neus'
 
-当运行 `neus_model = NeuSModel()` 时，会运行`neus_model = register('neus')(NeusModel)`
+当运行 `neus_model = NeuSModel()` 时，即例如运行`self.texture = models.make(self.config.texture.name, self.config.texture)`时 ，会运行`neus_model = register('neus')(NeusModel)`
 返回给neus_model的值为decorator(cls) 函数的返回值，即NeusModel
 
 
@@ -131,7 +128,7 @@ from . import nerf, neus, geometry, texture
 
 ## base
 
-### BaseModel
+- BaseModel
 
 其他model需要继承于BaseModel
 
@@ -146,65 +143,54 @@ sigmoid函数的s参数在训练中变化
 ### NeuSModel
 @models.register('neus')
 
-#### setup
-
-#### update_step
-#### isosurface
-
-#### get_alpha
-#### forward_bg_
-#### forward_
-#### forward
-#### train
-#### eval
-#### regularizations
-
-#### export
-@torch.no_grad()
+- setup
+- update_step
+- isosurface：判断是否等值面
+- get_alpha：获取$\alpha$值
+- forward_bg_：背景的输出
+- forward_：前景输出
+- forward
+- train
+- eval
+- regularizations
+- export：导出mesh
+    - @torch.no_grad()
 
 ## network_utils
 
 各种编码方式和NeRF的MLP网络
 
-### VanillaFrequency
+- VanillaFrequency
 
 Vanilla：最初始的
 即NeRF中的频率编码方式
 
-### ProgressiveBandHashGrid
-
-### CompositeEncoding
-
-### get_encoding
-
-### VanillaMLP
-
-NeRF中的MLP
-
-
-### sphere_init_tcnn_network
-
-### get_mlp
-
-
-### EncodingWithNetwork
-
-### get_encoding_with_network
-
+- ProgressiveBandHashGrid
+- CompositeEncoding
+- get_encoding
+- VanillaMLP
+    - NeRF中的MLP
+- sphere_init_tcnn_network
+- get_mlp
+- EncodingWithNetwork
+- get_encoding_with_network
 
 ## geometry
 
-### contract_to_unisphere
+- contract_to_unisphere
+- MarchingCubeHelper
+- BaseImplicitGeometry
+- VolumeDensity
+    - @models.register('volume-density')
+- VolumeSDF
+    - @models.register('volume-sdf')
 
-### MarchingCubeHelper
+## texture
 
-### BaseImplicitGeometry
-
-### VolumeDensity
-@models.register('volume-density')
-
-### VolumeSDF
-@models.register('volume-sdf')
+- VolumeRadiance
+    - @models.register('volume-radiance')
+- VolumeColor
+    - @models.register('volume-color')
 
 # systems
 
@@ -231,61 +217,21 @@ from . import nerf, neus
 
 ## base
 
-### BaseSystem
-
-#### init
-
-#### prepare
-
-#### forward
-
-#### C
-
-#### preprocess_data
-
-#### on_train_batch_start
-
-#### on_validation_batch_start
-
-
-#### on_test_batch_start
-
-#### on_predict_batch_start
-
-#### training_step
-
-#### validation_step
-
-#### validation_epoch_end
-
-
-#### test_step
-
-#### test_epoch_end
-
-#### export
-
-#### configure_optimizers
-
+- BaseSystem
 
 ## neus
 
-### NeuSSystem
-@systems.register('neus-system')
-
-#### prepare
-
-#### forward
-#### preprocess_data
-#### training_step
-#### validation_step
-#### validation_epoch_end
-#### test_step
-#### test_epoch_end
-#### export
-
-
-
+- ### NeuSSystem
+    - @systems.register('neus-system')
+- prepare
+- forward
+- preprocess_data
+- training_step
+- validation_step
+- validation_epoch_end
+- test_step
+- test_epoch_end
+- export
 
 
 
