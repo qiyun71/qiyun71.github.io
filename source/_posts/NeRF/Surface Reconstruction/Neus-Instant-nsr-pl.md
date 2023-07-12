@@ -225,7 +225,7 @@ sudo make install
 
 - 使用img2poses.py得到sparse_points.ply
     - `cd colmap_preprocess       ##neus/preprocess_custom_data/colmap_preprocess/`
-    - `python img2poses.py ${data_dir}`
+    - `python imgs2poses.py ${data_dir}`
 
 ![image.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230625163416.png)
 
@@ -269,9 +269,48 @@ python launch.py --config configs/neus-dtu.yaml --resume /root/autodl-tmp/instan
 
 ![image.png|300](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230630210349.png)
 
-更改resolution=1024 后，点更多更细致，但是由于训练出来的sdf网络相同，在相近的两个位置，sdf值相同，因此大体还是一样的模型，只是细节处有所不同
+更改resolution=1024 后，点更多更细致，但是由于训练出来的sdf网络相同，在相近的两个位置，sdf值相同，因此大体还是一样的模型，只是细节处有所不同(面数多了)
 
 ![images](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230630212921.png)
 
 
+##### 使用更高质量的数据集
+当使用更高质量的数据集(178x1080x1920)时，会爆显存(RTX3090-24G)，下采样到(540x960)...
+
+```yaml
+name: dtu
+root_dir: ./load/miku 
+cameras_file: cameras_sphere.npz
+img_downscale: 2 # specify training image size by either img_wh or img_downscale
+n_test_traj_steps: 60
+apply_mask: false
+```
+
+当使用原来的cameras_sphere.npz文件，即高质量数据集使用低质量生成的相机内参矩阵和c2w矩阵时，对应不上，会导致生成的隐式模型错位(左2,4)，生成的背景也很杂乱(3)
+
+
+![image.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230712135714.png)
+
+且FFMPEG会报错
+```
+IMAGEIO FFMPEG_WRITER WARNING: input image is not divisible by macro_block_size=16, resizing from (3240, 960) to (3248, 960) to ensure video compatibility with most codecs and players. To prevent resizing, make your input image divisible by the macro_block_size or set the macro_block_size to 1 (risking incompatibility).
+[swscaler @ 0x5d9be80] Warning: data is not aligned! This can lead to a speed loss
+```
+
+重新使用colmap和img2poses.py及gen_cameras.py生成一下cameras_sphere.npz：
+
+cd to colmap_preprocess
+
+`python imgs2poses.py ..\Miku`
+
+`python gen_cameras.py ..\Miku`
+
+cd to instant-nsr-pl
+
+`python launch.py --config configs/neus-dtu.yaml --gpu 0 --train`
+
+`python launch.py --config configs/neus-dtu.yaml --resume exp/neus-dtu-miku_l/@20230712-162601/ckpt/epoch=0-step=20000.ckpt --gpu 0 --test`
+
+依然会error: This can lead to a speed loss，数据未对齐
+![image.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230712165423.png)
 

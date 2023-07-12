@@ -97,3 +97,6 @@ git push
 
 
 
+使用token链接仓库信息
+`git remote set-url origin https://<your_token>@github.com/<USERNAME>/<REPO>.git`
+

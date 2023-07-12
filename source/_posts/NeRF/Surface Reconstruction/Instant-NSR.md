@@ -13,8 +13,14 @@ categories: NeRF/Surface Reconstruction
 
 ![pipeline](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/pipeline.jpg)
 
-
 <!-- more -->
+
+不足：
+- 数据集需要手动mask
+
+数据集图片：
+<img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/004.png" style="width:50%;">
+
 
 # 论文
 

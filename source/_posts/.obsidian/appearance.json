@@ -1,11 +1,11 @@
 {
-  "baseFontSize": 21,
+  "baseFontSize": 22,
   "theme": "system",
   "translucency": false,
   "cssTheme": "Minimal",
   "interfaceFontFamily": "HarmonyOS Sans SC,HarmonyOS Sans TC,JetBrains Mono",
   "textFontFamily": "HarmonyOS Sans SC,JetBrains Mono",
-  "monospaceFontFamily": "HarmonyOS Sans SC,JetBrains Mono",
+  "monospaceFontFamily": "JetBrains Mono,HarmonyOS Sans SC",
   "accentColor": "#51a1cd",
   "nativeMenus": false,
   "enabledCssSnippets": [

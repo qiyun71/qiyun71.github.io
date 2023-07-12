@@ -10,6 +10,7 @@ date updated: 2023-06-25 13:09
 追踪一些最新的NeRF研究
 
 <!-- more -->
+
 # 最新进展
 
 ## 应用方面
@@ -29,13 +30,26 @@ date updated: 2023-06-25 13:09
 
 ## 表面重建
 
-| Year |                                                                       Title&Project Page                                                                        | Brief Description |
-| ---- |:---------------------------------------------------------------------------------------------------------------------------------------------------------------:|:-----------------:|
-| 2020 |                                     [NeRF: Neural Radiance Fields (matthewtancik.com)](https://www.matthewtancik.com/nerf)                                      |      初始文       |
-| 2021 | [NeuS: Learning Neural Implicit Surfaces by Volume Rendering for Multi-view Reconstruction (lingjie0206.github.io)](https://lingjie0206.github.io/papers/NeuS/) |  SDF表面重建方法  |
-| 2022 |               [Instant Neural Graphics Primitives with a Multiresolution Hash Encoding (nvlabs.github.io)](https://nvlabs.github.io/instant-ngp/)               | 多分辨率哈希编码  |
-| 2022 |   [Human Performance Modeling and Rendering via Neural Animated Mesh (zhaofuq.github.io)](https://zhaofuq.github.io/NeuralAM/)                                                                                                                                                              |   快速表面重建             |
+| Year |                                                                                                       Title&Project Page                                                                                                        | Brief Description |
+| ---- |:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:-----------------:|
+| 2020 |                                                                     [NeRF: Neural Radiance Fields (matthewtancik.com)](https://www.matthewtancik.com/nerf)                                                                      |      初始文       |
+| 2021 |                                 [NeuS: Learning Neural Implicit Surfaces by Volume Rendering for Multi-view Reconstruction (lingjie0206.github.io)](https://lingjie0206.github.io/papers/NeuS/)                                 |  SDF表面重建方法  |
+| 2022 |                                               [Instant Neural Graphics Primitives with a Multiresolution Hash Encoding (nvlabs.github.io)](https://nvlabs.github.io/instant-ngp/)                                               | 多分辨率哈希编码  |
+| 2022 |                                                  [Human Performance Modeling and Rendering via Neural Animated Mesh (zhaofuq.github.io)](https://zhaofuq.github.io/NeuralAM/)                                                   |   快速表面重建    |
+| 2023 | [bennyguo/instant-nsr-pl: Neural Surface reconstruction based on Instant-NGP. Efficient and customizable boilerplate for your research projects. Train NeuS in 10min! (github.com)](https://github.com/bennyguo/instant-nsr-pl) | Neus+NeRF+Nerfacc+tcnn                  |
 
+## 采样方法
+
+| Year | Title&Project Page                                                                                    |   Brief Description  | 
+| ---- | ----------------------------------------------------------------------------------------- | --- |
+| 2023 | [NerfAcc Documentation — nerfacc 0.5.3 documentation](https://www.nerfacc.com/en/latest/) |  一种新的采样方法可以加速NeRF   |
+
+## 框架
+
+| Year | Title&Project Page                                                                      | Brief Description     |
+| ---- | --------------------------------------------------------------------------------------- | --------------------- |
+| 2023    |       [nerfstudio](https://docs.nerf.studio/en/latest/)                                                                                  |      集成现有的NeRF方法                 |
+| 2022 | [SDFStudio (autonomousvision.github.io)](https://autonomousvision.github.io/sdfstudio/) | 集成基于SDF的NeRF方法 |
 
 # 个人理解
 ## 20230705-NeRF_Neus_InstantNGP

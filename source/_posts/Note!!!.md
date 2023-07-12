@@ -8,11 +8,6 @@ categories: null
 date updated: 2023-07-06 13:32
 ---
 
-<p style= "text-align: center;">流程图点击编辑，更方便观看</p>
-<div style="text-align:center">
-    <img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230627160834.png" alt="Image" />
-</div>
-
 | My post                                                                                                                                                      | Brief description            | status                                                                                                       |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------- | ------------------------------------------------------------------------------------------------------------ |
 | [NeRF](2023/06/14/NeRF/NeRF-Principle/) + [Code](/2023/06/15/NeRF/NeRF-code/)                                                                                | NeRF原理 + 代码理解                | Completed                                                                                                    |
@@ -26,6 +21,10 @@ date updated: 2023-07-06 13:32
 Related link :  [3D Reconstruction](https://paperswithcode.com/task/3d-reconstruction)
 
 <!-- more -->
+<p style= "text-align: center;">流程图点击编辑，更方便观看</p>
+<div style="text-align:center">
+    <img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230627160834.png" alt="Image" />
+</div>
 
 基于Drawio绘制的流程图，导出为嵌入的Iframe
 

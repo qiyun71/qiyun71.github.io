@@ -34,7 +34,7 @@ $m_{s}$训练SDF的网络表示为:$(x,F_{geo})=m_{s}(p,F_{hash}).$
     - 每个三维采样点的3个输入空间位置值
     - 来自哈希编码位置的32个输出值
 - output
-    - sdf值，然后我们将截断的函数应用于输出SDF值，该值使用sigmoid激活将其映射到`[−1,1]`。
+    - sdf值，然后我们将截断的函数应用于输出SDF值，该值使用sigmoid激活将其映射到`[−1,1]`：`sigma = F.relu(h[..., 0])`
     - 15维的$F_{geo}$值
 
 ![m_s.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/m_s.png)
