@@ -89,7 +89,7 @@ NeRF的体积渲染方法提出沿着每条光线进行多次采样（上图（a
 - c：编码与点x和观察方向v相关联的颜色
 这两个函数都被MLP编码，物体的表面有SDF的零水平集表示 $\mathcal{S}=\left\{\mathbf{x}\in\mathbb{R}^3|f(\mathbf{x})=0\right\}.$
 
-定义概率密度函数 $\begin{aligned} \phi_s(x)& =se^{-sx}/(1+e^{-sx})^2  \end{aligned}$
+定义概率密度函数 $\phi_s(x) =\frac{se^{-sx}}{(1+e^{-sx})^{2}}$
 
 其为sigmoid函数的导数 $\Phi_s(x)=(1+e^{-sx})^{-1},\text{i.e.,}\phi_s(x)=\Phi_s'(x)$
 

@@ -220,6 +220,16 @@ object_bbox_min = np.linalg.inv(self.scale_mats_np[0]) @ object_scale_mat @ obje
 object_bbox_max = np.linalg.inv(self.scale_mats_np[0]) @ object_scale_mat @ object_bbox_max[:, None] # 4x1
 self.object_bbox_min = object_bbox_min[:3, 0] # 3
 self.object_bbox_max = object_bbox_max[:3, 0] # 3
+如果
+render_cameras_name = cameras_sphere.npz
+object_cameras_name = cameras_sphere.npz
+两文件相同，则 
+np.linalg.inv(self.scale_mats_np[0]) @ object_scale_mat = 
+[[ 1.0000000e+00  0.0000000e+00  0.0000000e+00  0.0000000e+00]
+ [ 0.0000000e+00  1.0000000e+00  0.0000000e+00 -5.9604645e-08]
+ [ 0.0000000e+00  0.0000000e+00  1.0000000e+00  0.0000000e+00]
+ [ 0.0000000e+00  0.0000000e+00  0.0000000e+00  1.0000000e+00]]
+object_bbox_min , object_bbox_max 只平移，不缩放
 ```
 
 
@@ -1117,25 +1127,31 @@ colmap mapper --database_path os.path.join(basedir, 'database.db') --image_path 
 > colmap命令行：[Command-line Interface — COLMAP 3.8-dev documentation](https://colmap.github.io/cli.html)
 > dense中深度图转换：[COLMAP简明教程 导入指定参数 命令行 导出深度图 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/584386128)
 
-### load_colmap_data() to colmap_read_model.py
+#### load_colmap_data() to colmap_read_model.py
+
 `python .\colmap_read_model.py E:\BaiduSyncdisk\NeRF_Proj\NeuS\video2bmvs\M590\sparse\0 .bin`
 
 读取`['cameras', 'images', 'points3D']`文件的数据
 
 input:
 - basedir
+
 output: 
-- poses, shape: 3 x 5 x num_images, include c2w: 3x4xn and hwf: 3x1xn
+- poses, shape: 3 x 5 x num_images
+    - c2w: 3x4xn 
+    - hwf: 3x1xn
 - pts3d, 一个长度为num_points字典，key为point3D_id，value为Point3D对象
 - perm, # 按照name排序，返回排序后的索引的列表：`[from 0 to num_images-1]`
 
-#### cameras images and pts3d be like: 
+##### cameras images and pts3d be like: 
 
-| var     | example |
-| ------- | ------- |
-| cameras |    `{1: Camera(id=1, model='SIMPLE_RADIAL', width=960, height=544, params=array([ 5.07683492e+02,  4.80000000e+02,  2.72000000e+02, -5.37403479e-03])), ...}`     |
-| images  |     `{1: Image(id=1, qvec=array([ 0.8999159 , -0.29030237,  0.07162026,  0.31740581]), tvec=array([ 0.29762954, -2.81576928,  1.41888716]), camera_id=1, name='000.png', xys=xys, point3D_ids=point3D_ids, ...}`    |
-| pts3D        |   `{1054: Point3D(id=1054, xyz=array([1.03491375, 1.65809594, 3.83718124]), rgb=array([147, 146, 137]), error=array(0.57352093), image_ids=array([115, 116, 117, 114, 113, 112]), point2D_idxs=array([998, 822, 912, 977, 889, 817])), ...}`      |
+>[Output Format — COLMAP 3.8-dev documentation](https://colmap.github.io/format.html#cameras-txt)
+
+| var     | example                                                                                                                                                                                                                                    | info                                         |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------- |
+| cameras | `{1: Camera(id=1, model='SIMPLE_RADIAL', width=960, height=544, params=array([ 5.07683492e+02,  4.80000000e+02,  2.72000000e+02, -5.37403479e-03])), ...}`                                                                                 | w,h,f=params[0]                              |
+| images  | `{1: Image(id=1, qvec=array([ 0.8999159 , -0.29030237,  0.07162026,  0.31740581]), tvec=array([ 0.29762954, -2.81576928,  1.41888716]), camera_id=1, name='000.png', xys=xys, point3D_ids=point3D_ids, ...}`                               | perm = np.argsort(names),qvec,tvec to m=w2c_mats:4x4, |
+| pts3D   | `{1054: Point3D(id=1054, xyz=array([1.03491375, 1.65809594, 3.83718124]), rgb=array([147, 146, 137]), error=array(0.57352093), image_ids=array([115, 116, 117, 114, 113, 112]), point2D_idxs=array([998, 822, 912, 977, 889, 817])), ...}` |                                              |
 
 xys and point3D_ids in images be like:
 
@@ -1199,7 +1215,7 @@ point3D_ids=array([  -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,  
 8908,   -1, 9135, 8986, 9101,   -1,   -1,   -1, 9137,   -1]))}
 ```
 
-#### cameras文件
+##### cameras文件
 
 input:
 - path_to_model_file, `camerasfile = os.path.join(realdir, 'sparse/0/cameras.bin')`
@@ -1219,7 +1235,7 @@ h, w, f = cam.height, cam.width, cam.params[0]
 hwf = np.array([h,w,f]).reshape([3,1])
 ```
 
-#### images文件
+##### images文件
 
 input:
 - path_to_model_file,`imagesfile = os.path.join(realdir, 'sparse/0/images.bin')`
@@ -1286,7 +1302,7 @@ def qvec2rotmat(qvec):
          1 - 2 * qvec[1]**2 - 2 * qvec[2]**2]])
 ```
 
-#### points3D文件
+##### points3D文件
 
 input:
 - path_to_model_file: `points3dfile = os.path.join(realdir, 'sparse/0/points3D.bin')`
@@ -1296,6 +1312,51 @@ output:
 ```
 points3dfile = os.path.join(realdir, 'sparse/0/points3D.bin')
 pts3d = read_model.read_points3d_binary(points3dfile)
+```
+
+#### save_poses.py
+
+input:
+- basedir, 
+- poses, shape: 3 x 5 x num_images
+    - c2w: 3x4xn 
+    - hwf: 3x1xn
+- pts3d, 一个长度为num_points字典，key为point3D_id，value为Point3D对象
+    - `{1054: Point3D(id=1054, xyz=array([1.03491375, 1.65809594, 3.83718124]), rgb=array([147, 146, 137]), error=array(0.57352093), image_ids=array([115, 116, 117, 114, 113, 112]), point2D_idxs=array([998, 822, 912, 977, 889, 817])), ...}`
+- perm, # 按照name排序，返回排序后的索引的列表：`[from 0 to num_images-1]`
+
+save:
+- sparse_points.ply : 
+    - pcd = trimesh.PointCloud(pts) , pts: num_points x 3
+- poses.npy : num_images x 3 x 5
+
+```python
+def save_poses(basedir, poses, pts3d, perm):
+    pts_arr = []
+    vis_arr = []
+    for k in pts3d: # k为空间点的id
+        pts_arr.append(pts3d[k].xyz) # 每个空间点的三维坐标
+        cams = [0] * poses.shape[-1] # 一个长度为num_images的list，每个元素为0
+        for ind in pts3d[k].image_ids: # 每个空间点对应的图片index
+            if len(cams) < ind - 1:
+                print('ERROR: the correct camera poses for current points cannot be accessed')
+                return
+            cams[ind-1] = 1 # 将第k个空间点对应图片的index 在cams列表中置为1
+        vis_arr.append(cams) 
+    # pts_arr shape： num_points x 3
+    #vis_arr shape： num_points x num_images
+
+    pts = np.stack(pts_arr, axis=0) # num_points x 3
+    pcd = trimesh.PointCloud(pts)
+    pcd.export(os.path.join(basedir, 'sparse_points.ply'))
+
+    pts_arr = np.array(pts_arr)
+    vis_arr = np.array(vis_arr)
+    print('Points', pts_arr.shape, 'Visibility', vis_arr.shape )
+    # pose: 3 x 5 x num_images
+    poses = np.moveaxis(poses, -1, 0) # 将最后一个维度移动到第一个维度 num_images x 3 x 5
+    poses = poses[perm] # 按照perm排序 num_images x 3 x 5
+    np.save(os.path.join(basedir, 'poses.npy'), poses) # num_images x 3 x 5
 ```
 
 ### gen_cameras.py
@@ -1309,7 +1370,7 @@ pose.ply in Miku
 ![image.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230702145000.png)
 
 
-```
+```python
 work_dir = sys.argv[1]
 poses_hwf = np.load(os.path.join(work_dir, 'poses.npy')) # n_images, 3, 5
 poses_raw = poses_hwf[:, :, :4] # n_images, 3, 4
@@ -1330,9 +1391,11 @@ pcd.export(os.path.join(work_dir, 'pose.ply'))
 
 #### 两个矩阵
 
+
+
 **world_mat_{i}:**
 
-```
+```python
 h, w, f = hwf[i, 0], hwf[i, 1], hwf[i, 2]
 intrinsic = np.diag([f, f, 1.0, 1.0]).astype(np.float32)
 intrinsic[0, 2] = (w - 1) * 0.5
@@ -1382,14 +1445,14 @@ world_mat = world_mat.astype(np.float32)
 
 pose要乘以covert_mat是因为在load_colmap_data时对pose进行了翻转
 
-```
+```python
 # must switch to [-u, r, -t] from [r, -u, t], NOT [r, u, -t]
 poses = np.concatenate([poses[:, 1:2, :], poses[:, 0:1, :], -poses[:, 2:3, :], poses[:, 3:4, :], poses[:, 4:5, :]], 1)
 ```
 
 **scale_mat_{i}:**
 
-```
+```python
 pcd = trimesh.load(os.path.join(work_dir, 'sparse_points_interest.ply'))
 vertices = pcd.vertices
 bbox_max = np.max(vertices, axis=0) 
@@ -1411,7 +1474,7 @@ eg: 0 to 38 render video
 
 插值：$ratio = \frac{\sin{\left(\frac{i}{frames}-0.5 \right)\cdot \pi}}{2}+\frac{1}{2} = 0.5 \rightarrow 1 \rightarrow 0.5$ 
 
-```
+```python
 def interpolate_view(self, img_idx_0, img_idx_1):
     images = []
     n_frames = 60
@@ -1440,7 +1503,7 @@ def interpolate_view(self, img_idx_0, img_idx_1):
 ```
 
 
-```
+```python
 def render_novel_image(self, idx_0, idx_1, ratio, resolution_level):
     """
     Interpolate view between two cameras.
@@ -1467,7 +1530,7 @@ def render_novel_image(self, idx_0, idx_1, ratio, resolution_level):
         del render_out
 ```
 
-```
+```python
 def gen_rays_between(self, idx_0, idx_1, ratio, resolution_level=1):
     """
     Interpolate pose between two cameras.

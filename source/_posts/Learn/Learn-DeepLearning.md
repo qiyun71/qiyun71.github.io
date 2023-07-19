@@ -135,3 +135,18 @@ $$
 (鞍点 in 3D)saddle point be like: 
 ![image.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230702201813.png)
 
+
+
+# 位置编码
+
+Position Embedding 与 Position encoding的区别
+
+> [两个PE的不同](https://www.zhihu.com/question/402387099/answer/1366825959  )
+
+  
+
+position embedding：随网络一起训练出来的位置向量，与前面说的一致，可以理解成动态的，即每次训练结果可能不一样。
+
+position encoding：根据一定的编码规则计算出来位置表示，比如
+
+$$\gamma(p)=\left(\sin \left(2^{0} \pi p\right), \cos \left(2^{0} \pi p\right), \cdots, \sin \left(2^{L-1} \pi p\right), \cos \left(2^{L-1} \pi p\right)\right)$$

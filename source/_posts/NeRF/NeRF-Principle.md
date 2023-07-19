@@ -7,6 +7,8 @@ categories: NeRF
 ---
 NeRF（Neural Radiance Fields）是一种用于生成逼真三维场景的计算机图形学方法。通过神经网络对场景中的每个空间点进行建模，NeRF可以估计每个点的颜色和密度信息。利用渲染方程，NeRF能够合成高质量的逼真图像。相较于传统的渲染方法，NeRF能够处理复杂的光照和反射效果，广泛应用于虚拟现实、增强现实、电影制作和游戏开发等领域。然而，NeRF方法仍面临一些挑战，如计算复杂度和对训练数据的依赖性。研究人员正在不断改进NeRF，以提高其效率和扩展性。
 
+[NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4544709973778259969&noteId=752432474097127424)
+
 <!-- more -->
 
 > 大佬的公式推导+代码分析[NeRF: A Volume Rendering Perspective | Will (yconquesty.github.io)](https://yconquesty.github.io/blog/ml/nerf/nerf_rendering.html#prerequisites)

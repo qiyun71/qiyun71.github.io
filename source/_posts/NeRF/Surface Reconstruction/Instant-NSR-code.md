@@ -122,8 +122,6 @@ U-Net:
 
 
 
-
-
 # 编码方式
 
 Instant-NSR自己集成了`cuda.C++`程序，可以实现哈希编码而不需要安装tiny-cuda-nn扩展

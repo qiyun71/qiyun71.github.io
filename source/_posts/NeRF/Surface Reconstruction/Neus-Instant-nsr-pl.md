@@ -13,6 +13,7 @@ categories: NeRF/Surface Reconstruction
 >[zhaofuq/Instant-NSR: Pytorch implementation of fast surface resconstructor (github.com)](https://github.com/zhaofuq/Instant-NSR)
 >[kwea123/ngp_pl: Instant-ngp in pytorch+cuda trained with pytorch-lightning (high quality with high speed, with only few lines of legible code) (github.com)](https://github.com/kwea123/ngp_pl)
 
+***neus：对无纹理的区域处理的很差***
 
 <!-- more -->
 
@@ -292,7 +293,7 @@ apply_mask: false
 ![image.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230712135714.png)
 
 且FFMPEG会报错
-```
+```bash
 IMAGEIO FFMPEG_WRITER WARNING: input image is not divisible by macro_block_size=16, resizing from (3240, 960) to (3248, 960) to ensure video compatibility with most codecs and players. To prevent resizing, make your input image divisible by the macro_block_size or set the macro_block_size to 1 (risking incompatibility).
 [swscaler @ 0x5d9be80] Warning: data is not aligned! This can lead to a speed loss
 ```
@@ -313,4 +314,15 @@ cd to instant-nsr-pl
 
 依然会error: This can lead to a speed loss，数据未对齐
 ![image.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230712165423.png)
+
+
+##### 使用更高质量的数据集，将step增加一倍
+
+![image.png|999](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230714165754.png)
+
+![it40000-test (2).gif](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/it40000-test%20(2).gif)
+
+
+
+
 

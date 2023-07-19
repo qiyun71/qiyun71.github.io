@@ -43,6 +43,7 @@ git pull --depth 1 origin master
 ## 克隆私有仓库
 
 >[(21条消息) Git clone 克隆私有项目_git clone 项目_风信子的猫Redamancy的博客-CSDN博客](https://blog.csdn.net/weixin_45508265/article/details/124340158)
+>[How to Fix “Support for password authentication was removed” error in GitHub – Collabnix](https://collabnix.com/how-to-fix-support-for-password-authentication-was-removed-error-in-github/)
 
 `git clone http://tokens-name:tokens@github.com/YOUR-USERNAME/YOUR-REPOSITORY`
 

@@ -4,64 +4,86 @@ date: 2023-06-25T13:01:00.000Z
 tags:
   - NeRF review
 categories: NeRF
-date updated: 2023-06-25 13:09
+date updated: 2023-07-18 15:50
 ---
 
 追踪一些最新的NeRF研究
 
 <!-- more -->
 
-# 最新进展
+NeRF++ 前背景分离
+Mip-NeRF锥形光线
 
-## 应用方面
+# NeRF
 
-| Year |                                          Title&Project Page                                          |   Brief Description    |
-| ---- |:----------------------------------------------------------------------------------------------------:|:----------------------:|
-| 2023 | [Seeing the World through Your Eyes (world-from-eyes.github.io)](https://world-from-eyes.github.io/) | 从人眼的倒影中重建物体 |                                                                                                      |                        |
+ECCV 2020 Oral - Best Paper Honorable Mention
 
-## 表面重建
+| Year |                                              Title&Project Page                                             | Brief Description | Conf/Jour |
+| ---- | :---------------------------------------------------------------------------------------------------------: | :---------------: | :-------: |
+| 2020 | [NeRF:Representing Scenes as Neural Radiance Fields for View Synthesis](https://www.matthewtancik.com/nerf) |        初始文        |    ECCV   |
 
-| Year |                                          Title&Project Page                                          |   Brief Description    |
-| ---- |:----------------------------------------------------------------------------------------------------:|:----------------------:|
-| 2023 | [Neural Kernel Surface Reconstruction (nvidia.com)](https://research.nvidia.com/labs/toronto-ai/NKSR/) | 从点云中进行表面重建 |                                                                                                      |                        |
+## Surface Reconstruction
 
+| Year |                                                            Title&Project Page                                                           |                          Brief Description                         |                               Conf/Jour                               |
+| ---- | :-------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------: | :-------------------------------------------------------------------: |
+| 2021 | [NeuS: Learning Neural Implicit Surfaces by Volume Rendering for Multi-view Reconstruction](https://lingjie0206.github.io/papers/NeuS/) |                           Neus: SDF表面重建方法                           |                                NeurIPS                                |
+| 2022 |                 [Human Performance Modeling and Rendering via Neural Animated Mesh](https://zhaofuq.github.io/NeuralAM/)                |                   NSR: Neus_TSDF + NGP，但是依赖mask                  |                             SIGGRAPH Asia                             |
+| 2023 |                                  [bennyguo/instant-nsr-pl](https://github.com/bennyguo/instant-nsr-pl)                                  |                       Neus+NeRF+Nerfacc+tcnn                       |                                  None                                 |
+| 2023 |             [Neuralangelo: High-Fidelity Neural Surface Reconstruction](https://research.nvidia.com/labs/dir/neuralangelo/)             |                        NGP_but数值梯度+Neus_SDF                        | IEEE Conference on Computer Vision and Pattern Recognition (**CVPR**) |
+| 2023 |                                        [PermutoSDF](https://radualexandru.github.io/permuto_sdf/)                                       | NGP_butPermutohedral lattice + Neus_SDF，曲率损失和颜色MLP正则解决镜面+无纹理区域，更光滑 |                      IEEE/CVF Conference on CVPR                      |
+| 2023 |                                            [NeuDA](https://3d-front-future.github.io/neuda/)                                            |                NGP_butDeformable Anchors+HPE + Neus                |                                  CVPR                                 |
 
-# 之前研究
+## Speed
 
-## 表面重建
+| Year |                                                Title&Project Page                                                | Brief Description |                Conf/Jour                |
+| ---- | :--------------------------------------------------------------------------------------------------------------: | :---------------: | :-------------------------------------: |
+| 2022 | [Instant Neural Graphics Primitives with a Multiresolution Hash Encoding](https://nvlabs.github.io/instant-ngp/) |      多分辨率哈希编码     | ACM Transactions on Graphics (SIGGRAPH) |
 
-| Year |                                                                                                       Title&Project Page                                                                                                        | Brief Description |
-| ---- |:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:-----------------:|
-| 2020 |                                                                     [NeRF: Neural Radiance Fields (matthewtancik.com)](https://www.matthewtancik.com/nerf)                                                                      |      初始文       |
-| 2021 |                                 [NeuS: Learning Neural Implicit Surfaces by Volume Rendering for Multi-view Reconstruction (lingjie0206.github.io)](https://lingjie0206.github.io/papers/NeuS/)                                 |  SDF表面重建方法  |
-| 2022 |                                               [Instant Neural Graphics Primitives with a Multiresolution Hash Encoding (nvlabs.github.io)](https://nvlabs.github.io/instant-ngp/)                                               | 多分辨率哈希编码  |
-| 2022 |                                                  [Human Performance Modeling and Rendering via Neural Animated Mesh (zhaofuq.github.io)](https://zhaofuq.github.io/NeuralAM/)                                                   |   快速表面重建    |
-| 2023 | [bennyguo/instant-nsr-pl: Neural Surface reconstruction based on Instant-NGP. Efficient and customizable boilerplate for your research projects. Train NeuS in 10min! (github.com)](https://github.com/bennyguo/instant-nsr-pl) | Neus+NeRF+Nerfacc+tcnn                  |
+## Sampling
 
-## 采样方法
+| Year | Title&Project Page                                                          | Brief Description | Conf/Jour |
+| ---- | --------------------------------------------------------------------------- | ----------------- | :-------: |
+| 2023 | [NerfAcc Documentation — nerfacc 0.5.3](https://www.nerfacc.com/en/latest/) | 一种新的采样方法可以加速NeRF  |   arXiv   |
 
-| Year | Title&Project Page                                                                                    |   Brief Description  | 
-| ---- | ----------------------------------------------------------------------------------------- | --- |
-| 2023 | [NerfAcc Documentation — nerfacc 0.5.3 documentation](https://www.nerfacc.com/en/latest/) |  一种新的采样方法可以加速NeRF   |
+## Sparse images/Generalization
 
-## 框架
+| Year | Title&Project Page                                                                                                    | Brief Description    |     Conf/Jour    |
+| ---- | --------------------------------------------------------------------------------------------------------------------- | -------------------- | :--------------: |
+| 2022 | [SparseNeuS: Fast Generalizable Neural Surface Reconstruction from Sparse Views](https://www.xxlong.site/SparseNeuS/) | 稀疏视图重建               |       ECCV       |
+| 2023 | [SparseNeRF](https://sparsenerf.github.io/)                                                                           | 利用来自现实世界不准确观测的深度先验知识 | Technical Report |
 
-| Year | Title&Project Page                                                                      | Brief Description     |
-| ---- | --------------------------------------------------------------------------------------- | --------------------- |
-| 2023    |       [nerfstudio](https://docs.nerf.studio/en/latest/)                                                                                  |      集成现有的NeRF方法                 |
-| 2022 | [SDFStudio (autonomousvision.github.io)](https://autonomousvision.github.io/sdfstudio/) | 集成基于SDF的NeRF方法 |
+## Large Scale Scene
 
-# 个人理解
-## 20230705-NeRF_Neus_InstantNGP
+| Year | Title&Project Page                                                                                            | Brief Description | Conf/Jour |
+| ---- | ------------------------------------------------------------------------------------------------------------- | ----------------- | :-------: |
+| 2020 | [nerfplusplus: improves over nerf in 360 capture of unbounded scenes](https://github.com/Kai-46/nerfplusplus) |      将背景的采样点表示为四维向量，与前景分别使用不同的MLP进行训练             |   arXiv   |
 
-基于NeRF的方法主要包括以下部分：
-- 神经网络结构-->训练出来模型
-- 位置编码方式
-- 体渲染函数
-    - 不透明度，累计透光率，权重，颜色
-- 采样点的采样方式(精采样)
-- 光线的生成方式，near和far的计算方式
+## PointClouds
 
-在NeRF的基础上生成mesh模型：需要确定物体的表面，用不同的方法可以生成不同的隐式模型，如NeRF为位置转密度颜色，Neus为位置转SDF。以空间原点为中心，根据bound_min和bound_max生成一个resolution x resolution x resolution立方点云模型，根据隐式模型，生成其中每个点的密度颜色或者sdf值，然后选择零水平集为物体的表面，根据物体表面上的点生成三角形网格，并得到mesh模型。
+| Year | Title&Project Page                                                                                                                                    | Brief Description |                Conf/Jour               |
+| ---- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- | :------------------------------------: |
+| 2023 | [Globally Consistent Normal Orientation for Point Clouds by Regularizing the Winding-Number Field](https://xrvitd.github.io/Projects/GCNO/index.html) | 使得稀疏点云和薄壁点云法向量一致  | ACM Transactions on Graphics(SIGGRAPH) |
+| 2023 | [Neural Kernel Surface Reconstruction](https://research.nvidia.com/labs/toronto-ai/NKSR/)                                                             | 从点云中进行表面重建        |           CVPR 2023 Highlight          |
 
+{% note info %}
+Neus的法向量通过sdf的梯度来求得，这篇Globally Consistent Normal法向量通过Winding-Number Field来规则化
+{% endnote %}
 
+## Shadow&Highlight
+
+| Year | Title&Project Page                                                                              | Brief Description | Conf/Jour |
+| ---- | ----------------------------------------------------------------------------------------------- | ----------------- | :-------: |
+| 2023 | [Relighting Neural Radiance Fields with Shadow and Highlight Hints](https://nrhints.github.io/) | 数据集使用相机位姿和灯源位姿    |  SIGGRAPH |
+
+## Framework
+
+| Year | Title&Project Page                                         | Brief Description |   Conf/Jour  |
+| ---- | ---------------------------------------------------------- | ----------------- | :----------: |
+| 2023 | [nerfstudio](https://docs.nerf.studio/en/latest/)          | 集成现有的NeRF方法       | ACM SIGGRAPH |
+| 2022 | [SDFStudio](https://autonomousvision.github.io/sdfstudio/) | 集成基于SDF的NeRF方法    |     None     |
+
+## 有趣的应用
+
+| Year |                            Title&Project Page                            | Brief Description | Conf/Jour |
+| ---- | :----------------------------------------------------------------------: | :---------------: | --------- |
+| 2023 | [Seeing the World through Your Eyes](https://world-from-eyes.github.io/) |    从人眼的倒影中重建物体    | None      |

@@ -8,15 +8,19 @@ categories: NeRF/Surface Reconstruction
 ---
 
 [Human Performance Modeling and Rendering via Neural Animated Mesh (zhaofuq.github.io)](https://zhaofuq.github.io/NeuralAM/)
+[Human Performance Modeling and Rendering via Neural Animated Mesh (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4669786505854582785&noteId=1856547936358141696)
 
 可以理解为对Neus使用多分辨率哈希编码进行加速
+- 使用TSDF代替SDF
+- 有限差分函数计算SDF的梯度，在tiny-CUDAnn并未集成，公开了自己的CUDAC++代码
 
 ![pipeline](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/pipeline.jpg)
 
-<!-- more -->
-
 不足：
 - 数据集需要手动mask
+
+<!-- more -->
+
 
 数据集图片：
 <img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/004.png" style="width:50%;">
@@ -162,6 +166,9 @@ $m_{s}$训练SDF的网络表示为:$(x,F_{geo})=m_{s}(p,F_{hash}).$
 为了避免$\Phi_s(x)$中的值溢出，我们引入截断有符号距离函数（TSDF），表示为$\hat x$。由于TSDF的值范围为-1到1，这种修改确保了数值稳定性。我们将SDF输出应用于Sigmoid函数𝜋(·)，而不是直接截断SDF，以实现更好的收敛性并避免梯度消失问题。
 $\pi(x)=\frac{1-e^{-bx}}{1+e^{-bx}}.$, 此时$\Phi_s(x) = \frac{1}{1+e^{-b \cdot \pi(x)}}$
 
+![image.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230717165905.png)
+
+
 类似于Instant-NGP [Müller et al. 2022]，我们将样本点的几何编码$𝐹_{𝑔𝑒𝑜}$、位置p和视线方向v输入到一个颜色网络$𝑚_{𝑐}$中，以预测其颜色$\hat C$。此外，我们还将点的法线n作为输入的一部分。法线即为SDF的梯度。*引入n的原因是为了隐式地对输出的SDF进行规范化，基于这样一个观察：如果邻近采样点的法线也相近，颜色网络倾向于输出相似的颜色。由于我们将法线定义为SDF的一阶导数，法线的梯度可以反向传播到SDF中。将法线添加到输入中可以使重建的表面更加平滑，尤其是对于无纹理区域。*
 
 {% note info %}
@@ -178,7 +185,7 @@ $$\begin{gathered}
 \end{gathered}
 $$
 {% note success %}
-对于类似于Instant-NGP的基于CUDA的加速，我们采用有限差分函数来近似计算方程6和8中的梯度，以实现高效的法线计算。这种策略避免了繁琐的二阶梯度反向传播，而这在现有的库如tiny-CUDANN [Müller 2021]中仍然没有得到完全支持。为了促进更加忠实的CUDA实现的未来工作，我们将公开发布我们的版本。
+对于类似于Instant-NGP的基于CUDA的加速，我们采用有限差分函数来近似计算方程6和8中的梯度，以实现高效的法线计算。这种策略避免了繁琐的二阶梯度反向传播，而这在现有的库如tiny-CUDAnn [Müller 2021]中仍然没有得到完全支持。为了促进更加忠实的CUDA实现的未来工作，我们将公开发布我们的版本。
 {% endnote %}
 
 ## 神经动画网格
@@ -453,4 +460,99 @@ python train_nerf.py "inputs/pipaxing-singleframe"  --workspace "/root/tf-logs" 
 <div> <img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/0006_depth.png" style="width:73%"> <p style="text-align:center;">depth_img</p> </div> 
 <div> <img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/0006_normal.png" style="width:73%"> <p style="text-align:center;">normal_img</p> </div> 
 </div>
+
+
+
+# ~~NeRF-Mine: 基于InstantNSR在没有mask的情况下生成结果很差，放弃该项目~~
+
+方便在本地和服务器之间拷贝
+
+基于[instant-NSR](https://github.com/zhaofuq/Instant-NSR) = [Neus](https://github.com/Totoro97/NeuS)+ [InstantNGP](https://github.com/NVlabs/instant-ngp)
+
+
+# 环境配置
+选择RTX3090单卡，镜像配置：
+
+- PyTorch  1.10.0
+- Python  3.8(ubuntu20.04)
+- Cuda  11.3
+
+```
+source /etc/network_turbo
+
+git clone https://github.com/yq010105/NeRF-Mine.git
+
+cd NeRF-Mine
+```
+
+
+- `conda create -n nsr python=3.8`
+- `conda activate nsr`
+- `pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple`
+- 可选`pip install git+https://github.com/NVlabs/tiny-cuda-nn/#subdirectory=bindings/torch`
+
+## error
+```
+1
+Failed to build pysdf  
+ERROR: Could not build wheels for pysdf, which is required to install pyproject.toml-based projects
+
+先取消pysdf的安装，安装完其他后再进行pysdf的安装
+
+2
+加载cpp扩展时，锁住：
+File "run.py", line 6, in <module>  
+from models.network_sdf import NeRFNetwork  
+File "/root/autodl-tmp/NeRF-Mine/models/network_sdf.py", line 8, in <module>  
+from encoder.encoding import get_encoder  
+File "/root/autodl-tmp/NeRF-Mine/encoder/encoding.py", line 8, in <module>  
+from encoder.shencoder import SHEncoder  
+File "/root/autodl-tmp/NeRF-Mine/encoder/shencoder/__init__.py", line 1, in <module>  
+from .sphere_harmonics import SHEncoder  
+File "/root/autodl-tmp/NeRF-Mine/encoder/shencoder/sphere_harmonics.py", line 9, in <module>  
+from .backend import _backend  
+File "/root/autodl-tmp/NeRF-Mine/encoder/shencoder/backend.py", line 6, in <module>  
+_backend = load(name='_sh_encoder',  
+File "/root/miniconda3/envs/nsr/lib/python3.8/site-packages/torch/utils/cpp_extension.py", line 1284, in load  
+return _jit_compile(  
+File "/root/miniconda3/envs/nsr/lib/python3.8/site-packages/torch/utils/cpp_extension.py", line 1523, in _jit_compile  
+baton.wait()  
+File "/root/miniconda3/envs/nsr/lib/python3.8/site-packages/torch/utils/file_baton.py", line 42, in wait  
+time.sleep(self.wait_seconds)  
+KeyboardInterrupt
+
+原因：
+当加载hash编码后，快速加载了shen编码，导致cpp_extension.py依然被占用，因此，只需加一个延时，让两个库导入时后者慢一步，解除程序的占用
+方法：
+删除/root/.cache/torch_extensions/py38_cu117/下文件_hash_encoder
+
+
+from encoder.hashencoder import HashEncoder
+之间添加延时 time.sleep(10)
+from encoder.shencoder import SHEncoder
+Note!延时在运行过第一次后可以注释掉
+```
+
+> error2:[(21条消息) torch.utils.cpp_extension.load卡住无响应_zParquet的博客-CSDN博客](https://blog.csdn.net/qq_38677322/article/details/109696077)
+
+# 在示例数据集上训练
+
+下载InstantNSR提供的示例数据集：a test dataset [dance](https://drive.google.com/drive/folders/180qoFqABXjBDwW2hHa14A6bmV-Sj1qqJ?usp=sharing)，放入inputs目录下
+
+```
+# 开始训练
+python run.py --conf confs/dtu.conf --downscale 1 --network sdf
+or
+python run.py --conf confs/dtu.conf
+
+# 提取网格mesh
+python run.py --downscale 1 --network sdf --mode mesh
+
+# 生成特定的目标相机图片
+python run.py --downscale 1 --network sdf --mode render
+```
+
+训练结果不理想：猜想是由于没有去除后面的背景，可以说nsr是一个依赖mask的方法
+
+![image.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230710211129.png)
 

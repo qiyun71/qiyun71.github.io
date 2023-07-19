@@ -9,6 +9,8 @@ categories: NeRF/Sampling
 
 一种可以加速NeRF的高效采样策略
 [NerfAcc Documentation — nerfacc 0.5.3 documentation](https://www.nerfacc.com/en/latest/)
+[NerfAcc: Efficient Sampling Accelerates NeRFs (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4753910162394202113&noteId=1865424779362415616)
+
 
 `pip install nerfacc`
 

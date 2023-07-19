@@ -9,6 +9,7 @@ categories: NeRF/Efficiency
 ---
 
 InstantNGP: [Instant Neural Graphics Primitives with a Multiresolution Hash Encoding (nvlabs.github.io)](https://nvlabs.github.io/instant-ngp/)
+[Instant Neural Graphics Primitives with a Multiresolution Hash Encoding (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4667039735068246017&noteId=1702708284370548992)
 
 **哈希函数在cuda(cuda c++)中进行编程**，不需深挖具体代码，初学只需理解多分辨率哈希编码思想。i.e.目前只需要学会使用tiny-cuda-nn即可：[NVlabs/tiny-cuda-nn: Lightning fast C++/CUDA neural network framework (github.com)](https://github.com/nvlabs/tiny-cuda-nn#pytorch-extension)
 
