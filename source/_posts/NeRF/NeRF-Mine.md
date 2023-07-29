@@ -1,5 +1,5 @@
 ---
-title: 基于Instant-NSR创建一个项目
+title: 基于Instant-nsr-pl创建一个项目
 date: 2023-07-06 21:17:54
 tags:
     - NeRF
@@ -7,29 +7,30 @@ tags:
 categories: NeRF
 ---
 
-自己的项目：基于Instant-NSR-pl——[yq010105/NeRF-Mine (github.com)](https://github.com/yq010105/NeRF-Mine)
+自己的项目：基于Instant-nsr-pl——[yq010105/NeRF-Mine (github.com)](https://github.com/yq010105/NeRF-Mine)
 
 <!-- more -->
 
 pip install -r requirements
 
+tensorboard --port 6007 --logdir /root/tf-logs
 
 文件结构：
+- confs/ 配置文件
 - encoder/ 编码方式
 - process_data/ 处理数据集
 - models/ 放一些网络的结构和网络的运行和方法
 - systems/ 训练的程序
-- utils/
+- utils/ 工具类函数
 - run.py
 
-- confs/ 配置文件
 - inputs/ 数据集
 - outputs/ 输出和log文件
-    - logs filepath: /root/tf-logs
+    - logs filepath: /root/tf-logs/name_in_conf/trial_name
 
 ```bash
-python run.py 
-
+# train
+python run.py --config ./confs/dtu.yaml --train
 ```
 
 # 代码结构
@@ -39,6 +40,12 @@ python run.py
 ```
 eg: dtu.yaml
 
+
+'trainer': {'epochs': 200, 'val_freq': 5, 'outputs_dir': './outputs\\neu  
+s-dtu-Miku', 'trial_name': '@20230723-131350', 'save_dir': './outputs\\neus-dtu-Miku\\@202  
+30723-131350\\save', 'ckpt_dir': './outputs\\neus-dtu-Miku\\@20230723-131350\\ckpt', 'code  
+_dir': './outputs\\neus-dtu-Miku\\@20230723-131350\\code', 'config_dir': './outputs\\neus-  
+dtu-Miku\\@20230723-131350\\config'}
 
 ```
 
@@ -59,6 +66,121 @@ def config_parser():
     return args, extras
 ```
 
+# process_data
+
+```
+{'pose': tensor([[[-0.0898,  0.8295, -0.5512,  1.3804],
+         [ 0.0600,  0.5570,  0.8284, -2.0745],
+         [ 0.9941,  0.0413, -0.0998,  0.0576],
+         [ 0.0000,  0.0000,  0.0000,  1.0000]]], device='cuda:0'), 
+'direction': tensor([[[[-0.3379, -0.5977,  1.0000],
+          [-0.3354, -0.5977,  1.0000],
+          [-0.3329, -0.5977,  1.0000],
+          ...,
+          [ 0.3341, -0.5977,  1.0000],
+          [ 0.3366, -0.5977,  1.0000],
+          [ 0.3391, -0.5977,  1.0000]],
+
+         [[-0.3379, -0.5952,  1.0000],
+          [-0.3354, -0.5952,  1.0000],
+          [-0.3329, -0.5952,  1.0000],
+          ...,
+          [ 0.3341, -0.5952,  1.0000],
+          [ 0.3366, -0.5952,  1.0000],
+          [ 0.3391, -0.5952,  1.0000]],
+
+         [[-0.3379, -0.5927,  1.0000],
+          [-0.3354, -0.5927,  1.0000],
+          [-0.3329, -0.5927,  1.0000],
+          ...,
+          [ 0.3341, -0.5927,  1.0000],
+          [ 0.3366, -0.5927,  1.0000],
+          [ 0.3391, -0.5927,  1.0000]],
+
+         ...,
+
+         [[-0.3379,  0.5940,  1.0000],
+          [-0.3354,  0.5940,  1.0000],
+          [-0.3329,  0.5940,  1.0000],
+          ...,
+          [ 0.3341,  0.5940,  1.0000],
+          [ 0.3366,  0.5940,  1.0000],
+          [ 0.3391,  0.5940,  1.0000]],
+
+         [[-0.3379,  0.5965,  1.0000],
+          [-0.3354,  0.5965,  1.0000],
+          [-0.3329,  0.5965,  1.0000],
+          ...,
+          [ 0.3341,  0.5965,  1.0000],
+          [ 0.3366,  0.5965,  1.0000],
+          [ 0.3391,  0.5965,  1.0000]],
+
+         [[-0.3379,  0.5990,  1.0000],
+          [-0.3354,  0.5990,  1.0000],
+          [-0.3329,  0.5990,  1.0000],
+          ...,
+          [ 0.3341,  0.5990,  1.0000],
+          [ 0.3366,  0.5990,  1.0000],
+          [ 0.3391,  0.5990,  1.0000]]]], device='cuda:0'), 
+'index': tensor([124]), 'H': ['480'], 'W': ['272'], 
+'image': tensor([[[[0.3242, 0.3438, 0.3164],
+          [0.3281, 0.3477, 0.3203],
+          [0.3320, 0.3398, 0.3125],
+          ...,
+          [0.0469, 0.0469, 0.0469],
+          [0.0469, 0.0469, 0.0469],
+          [0.0469, 0.0469, 0.0469]],
+
+         [[0.2969, 0.3164, 0.2891],
+          [0.3008, 0.3203, 0.2930],
+          [0.3125, 0.3203, 0.2930],
+          ...,
+          [0.0469, 0.0469, 0.0469],
+          [0.0469, 0.0469, 0.0469],
+          [0.0469, 0.0469, 0.0469]],
+
+         [[0.2812, 0.3008, 0.2734],
+          [0.2578, 0.2773, 0.2500],
+          [0.2812, 0.2891, 0.2617],
+          ...,
+          [0.0469, 0.0469, 0.0469],
+          [0.0469, 0.0469, 0.0469],
+          [0.0469, 0.0469, 0.0469]],
+
+         ...,
+
+         [[0.5977, 0.6133, 0.5938],
+          [0.5977, 0.6133, 0.5938],
+          [0.5977, 0.6133, 0.5938],
+          ...,
+          [0.6328, 0.7578, 0.8828],
+          [0.6328, 0.7578, 0.8828],
+          [0.6289, 0.7539, 0.8789]],
+
+         [[0.5977, 0.6133, 0.5938],
+          [0.5977, 0.6133, 0.5938],
+          [0.5977, 0.6133, 0.5938],
+          ...,
+          [0.6328, 0.7578, 0.8828],
+          [0.6328, 0.7578, 0.8828],
+          [0.6328, 0.7578, 0.8828]],
+
+         [[0.5977, 0.6133, 0.5938],
+          [0.5977, 0.6133, 0.5938],
+          [0.5977, 0.6133, 0.5938],
+          ...,
+          [0.6289, 0.7539, 0.8789],
+          [0.6328, 0.7578, 0.8828],
+          [0.6328, 0.7578, 0.8828]]]], device='cuda:0'), 
+  'mask': tensor([[[0.9961, 0.9961, 0.9961,  ..., 0.9961, 0.9961, 0.9961],
+         [0.9961, 0.9961, 0.9961,  ..., 0.9961, 0.9961, 0.9961],
+         [0.9961, 0.9961, 0.9961,  ..., 0.9961, 0.9961, 0.9961],
+         ...,
+         [0.9961, 0.9961, 0.9961,  ..., 0.9961, 0.9961, 0.9961],
+         [0.9961, 0.9961, 0.9961,  ..., 0.9961, 0.9961, 0.9961],
+         [0.9961, 0.9961, 0.9961,  ..., 0.9961, 0.9961, 0.9961]]],
+       device='cuda:0')}
+```
 
 # NeRF个人理解
 
@@ -98,8 +220,6 @@ $LPIPS(x,y)=\sum\limits_{l}^{L}\dfrac{1}{H_lW_l}\sum\limits_{h,w}^{H_l,W_l}||w_l
 DTU. The DTU dataset [Large Scale Multi-view Stereopsis Evaluation-论文阅读讨论-ReadPaper](https://readpaper.com/paper/2085905957) consists of different static scenes with a wide variety of materials, appearance, and geometry, where each scene contains 49 or 64 images with the resolution of 1600 x 1200. We use the same 15 scenes as IDR [[PDF] SPIDR: SDF-based Neural Point Fields for Illumination and Deformation-论文阅读讨论-ReadPaper](https://readpaper.com/paper/4679926840484184065) to evaluate our approach. Experiments are conducted to investigate both the with (w/) and without (w/o) foreground mask settings. As DTU provides the ground truth point clouds, we measure the recovered surfaces through the commonly studied Chamfer Distance (CD) for quantitative comparisons.
 
 BlendedMVS. The BlendedMVS dataset [[PDF] BlendedMVS: A Large-scale Dataset for Generalized Multi-view Stereo Networks-论文阅读讨论-ReadPaper](https://readpaper.com/paper/2990386223) consists of a variety of complex scenes, where each scene provides 31 to 143 multi-view images with the image size of 768 ×576. We use the same 7 scenes as NeuS [[PDF] NeuS: Learning Neural Implicit Surfaces by Volume Rendering for Multi-view Reconstruction-论文阅读讨论-ReadPaper](https://readpaper.com/paper/3173522942) to validate our method. We only present qualitative comparisons on this dataset, because the ground truth point clouds are not available.
-
-
 
 
 数据集的构建依赖Colmap即SFM和Multi-View Stereo
@@ -152,3 +272,51 @@ Neus: [NeuS/preprocess_custom_data at main · Totoro97/NeuS (github.com)](https:
 nerf_synthetic
 nerf_llff_data
 
+# BUG
+
+```
+Error
+1.
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 26.00 MiB (GPU 0; 23.69 GiB total capacity; 20.89 GiB already allocated; 23.69 MiB free; 22.11 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF  0% 0/2 [00:01<?, ?it/s]
+
+with torch.no_grad():
+    val_epoch
+
+2.
+[2023-07-25 21:10:06,584] INFO: ==>Training Epoch 1, lr = 0.010000  
+loss=0.3620 (nan), lr=0.008147: : 100% 178/178 [00:15<00:00, 11.85it/s]  
+[2023-07-25 21:10:21,609] INFO: ==>Training Epoch 2, lr = 0.008147  
+loss=0.1856 (0.3541), lr=0.006637: : 100% 178/178 [00:13<00:00, 13.39it/s]  
+[2023-07-25 21:10:34,907] INFO: ==>Training Epoch 3, lr = 0.006637  
+loss=0.1963 (0.2716), lr=0.005408: : 100% 178/178 [00:13<00:00, 13.45it/s]  
+[2023-07-25 21:10:48,139] INFO: ==>Training Epoch 4, lr = 0.005408  
+loss=nan (nan), lr=0.004406: : 100% 178/178 [00:06<00:00, 26.05it/s]  
+[2023-07-25 21:10:54,974] INFO: ==>Training Epoch 5, lr = 0.004406  
+loss=nan (nan), lr=0.003589: : 100% 178/178 [00:03<00:00, 46.24it/s]  
+[2023-07-25 21:10:58,824] INFO: ==>Validation at epoch 5  
+0% 0/2 [00:00<?, ?it/s]/root/NeRF-Mine/utils/mixins.py:160: RuntimeWarning: invalid value encountered i  
+n divide  
+img = (img - img.min()) / (img.max() - img.min())  
+/root/NeRF-Mine/utils/mixins.py:169: RuntimeWarning: invalid value encountered in cast  
+img = (img * 255.).astype(np.uint8)  
+psnr=4.844281196594238: : 100% 2/2 [00:05<00:00, 2.52s/it]  
+[2023-07-25 21:11:03,865] INFO: ==>Training Epoch 6, lr = 0.003589  
+loss=nan (nan), lr=0.002924: : 100% 178/178 [00:03<00:00, 47.74it/s]  
+[2023-07-25 21:11:07,595] INFO: ==>Training Epoch 7, lr = 0.002924
+
+inv_s  ----> nan ， loss_mask ----> nan , loss_eikonal ----> nan
+都有问题
+sdf_grad_samples: 突然变为 0,3
+
+guess1: lr太高1e-2 √
+
+3.
+训练出来的test_Video和mesh位置不准确 --> 数据集加载时的c2w没处理
+
+4.
+训练的效果不好且很慢 --> 没有使用processHashGrid
+lr太低可能陷入局部最优
+
+NOTE：训练过程中loss突然变得很大
+TODO：防止过拟合-->添加 torch.cuda.amp.GradScaler() 解决 loss为nan或inf的问题
+```

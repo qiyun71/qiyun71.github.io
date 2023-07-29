@@ -11,6 +11,7 @@ categories: NeRF/Sampling
 [NerfAcc Documentation — nerfacc 0.5.3 documentation](https://www.nerfacc.com/en/latest/)
 [NerfAcc: Efficient Sampling Accelerates NeRFs (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4753910162394202113&noteId=1865424779362415616)
 
+NerfAcc = Instant-NGP的Occupancy Grid + Mip-NeRF 360的Proposal Network
 
 `pip install nerfacc`
 
@@ -192,7 +193,7 @@ Insights from Unified Formulation.
 
 ### Implementation Details
 
-NerfAcc结合了两种可以与辐射场表示解耦的高级采样方法，即来自Instant-NGP的占用网格和来自Mip-NeRF 360的提议网络。
+NerfAcc结合了两种可以与辐射场表示解耦的高级采样方法，即**来自Instant-NGP的占用网格和来自Mip-NeRF 360的提议网络**。
 
 伪代码：
 ![image.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230711134348.png)

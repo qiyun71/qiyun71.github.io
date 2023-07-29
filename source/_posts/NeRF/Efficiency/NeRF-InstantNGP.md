@@ -4,7 +4,7 @@ date: 2023-06-27 18:31:55
 tags:
     - NeRF
     - NVIDIA
-    - Training & Inference Efficiency
+    - Efficiency
 categories: NeRF/Efficiency
 ---
 

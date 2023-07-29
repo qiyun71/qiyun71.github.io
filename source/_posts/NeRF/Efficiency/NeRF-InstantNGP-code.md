@@ -6,7 +6,7 @@ tags:
     - NVIDIA
     - Python
     - Code
-    - Training & Inference Efficiency
+    - Efficiency
 categories: NeRF/Efficiency
 ---
 

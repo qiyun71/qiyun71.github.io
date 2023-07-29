@@ -1,88 +1,112 @@
 {
   "recentFiles": [
     {
-      "basename": "NeRF-Mine",
-      "path": "NeRF/NeRF-Mine.md"
-    },
-    {
-      "basename": "NerfAcc",
-      "path": "NeRF/Sampling/NerfAcc.md"
-    },
-    {
-      "basename": "Neus",
-      "path": "NeRF/Neus.canvas"
-    },
-    {
-      "basename": "NeRF-review",
-      "path": "NeRF/NeRF-review.md"
-    },
-    {
-      "basename": "NeRF++",
-      "path": "NeRF/LargeScaleScene/NeRF++.md"
-    },
-    {
-      "basename": "Neus",
-      "path": "NeRF/Surface Reconstruction/Neus.md"
-    },
-    {
-      "basename": "Instant-NSR",
-      "path": "NeRF/Surface Reconstruction/Instant-NSR.md"
-    },
-    {
-      "basename": "Neus-Instant-nsr-pl-code",
-      "path": "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl-code.md"
-    },
-    {
-      "basename": "Neus-code",
-      "path": "NeRF/Surface Reconstruction/Neus-code.md"
-    },
-    {
-      "basename": "SparseNeuS",
-      "path": "NeRF/Sparse/SparseNeuS.md"
-    },
-    {
-      "basename": "NeuDA",
-      "path": "NeRF/Surface Reconstruction/NeuDA.md"
-    },
-    {
-      "basename": "Learn-DeepLearning",
-      "path": "Learn/Learn-DeepLearning.md"
+      "basename": "Sampling",
+      "path": "NeRF/NeRF/Sampling.md"
     },
     {
       "basename": "NeRF-Principle",
       "path": "NeRF/NeRF-Principle.md"
     },
     {
-      "basename": "PermutoSDF",
-      "path": "NeRF/Surface Reconstruction/PermutoSDF.md"
+      "basename": "NeRF-review",
+      "path": "NeRF/NeRF-review.md"
     },
     {
-      "basename": "Neuralangelo",
-      "path": "NeRF/Surface Reconstruction/Neuralangelo.md"
+      "basename": "Encoding",
+      "path": "NeRF/NeRF/Encoding.md"
     },
     {
-      "basename": "Instant-NSR-code",
-      "path": "NeRF/Surface Reconstruction/Instant-NSR-code.md"
-    },
-    {
-      "basename": "NeRF-Studio",
-      "path": "NeRF/NeRF-Studio.md"
-    },
-    {
-      "basename": "Neus-Instant-nsr-pl",
-      "path": "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl.md"
+      "basename": "Learn-DeepLearning",
+      "path": "Learn/Learn-DeepLearning.md"
     },
     {
       "basename": "NeRF-InstantNGP",
       "path": "NeRF/Efficiency/NeRF-InstantNGP.md"
     },
     {
-      "basename": "NeRF-code",
-      "path": "NeRF/NeRF-code.md"
+      "basename": "NeRF-Mine",
+      "path": "NeRF/NeRF-Mine.md"
     },
     {
-      "basename": "Learn-Git",
-      "path": "Learn/Learn-Git.md"
+      "basename": "Note!!!",
+      "path": "Note!!!.md"
+    },
+    {
+      "basename": "Zip-NeRF",
+      "path": "NeRF/Efficiency/Zip-NeRF.md"
+    },
+    {
+      "basename": "NeRO",
+      "path": "NeRF/Surface Reconstruction/Shadow&Highlight/NeRO.md"
+    },
+    {
+      "basename": "Neus",
+      "path": "NeRF/Neus.canvas"
+    },
+    {
+      "basename": "NerfAcc",
+      "path": "NeRF/Sampling/NerfAcc.md"
+    },
+    {
+      "basename": "Mip-NeRF",
+      "path": "NeRF/Sampling/Mip-NeRF.md"
+    },
+    {
+      "basename": "Instant-NSR",
+      "path": "NeRF/Surface Reconstruction/Instant-NSR.md"
+    },
+    {
+      "basename": "Mip-NeRF 360",
+      "path": "NeRF/LargeScaleScene/Mip-NeRF 360.md"
+    },
+    {
+      "basename": "Tri-MipRF",
+      "path": "NeRF/Efficiency/Encoding/Tri-MipRF.md"
+    },
+    {
+      "basename": "Neus-code",
+      "path": "NeRF/Surface Reconstruction/Neus-code.md"
+    },
+    {
+      "basename": "Neus-Instant-nsr-pl",
+      "path": "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl.md"
+    },
+    {
+      "basename": "Neus-Instant-nsr-pl-code",
+      "path": "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl-code.md"
+    },
+    {
+      "basename": "NeRF++",
+      "path": "NeRF/LargeScaleScene/NeRF++.md"
+    },
+    {
+      "basename": "SparseNeuS",
+      "path": "NeRF/Sparse/SparseNeuS.md"
+    },
+    {
+      "basename": "Instant-NSR-code",
+      "path": "NeRF/Surface Reconstruction/Instant-NSR-code.md"
+    },
+    {
+      "basename": "Neuralangelo",
+      "path": "NeRF/Surface Reconstruction/Neuralangelo.md"
+    },
+    {
+      "basename": "PermutoSDF",
+      "path": "NeRF/Surface Reconstruction/PermutoSDF.md"
+    },
+    {
+      "basename": "NeuDA",
+      "path": "NeRF/Surface Reconstruction/NeuDA.md"
+    },
+    {
+      "basename": "NeRF-InstantNGP-code",
+      "path": "NeRF/Efficiency/NeRF-InstantNGP-code.md"
+    },
+    {
+      "basename": "Neus",
+      "path": "NeRF/Surface Reconstruction/Neus.md"
     },
     {
       "basename": "2023-07-04",
@@ -93,16 +117,24 @@
       "path": "Reports/2023-06-19.md"
     },
     {
-      "basename": "Learn-Python",
-      "path": "Learn/Learn-Python.md"
+      "basename": "NeRF-code",
+      "path": "NeRF/NeRF-code.md"
     },
     {
-      "basename": "Note!!!",
-      "path": "Note!!!.md"
+      "basename": "NeRF-Studio",
+      "path": "NeRF/NeRF-Studio.md"
     },
     {
       "basename": "Learn-PyTorch",
       "path": "Learn/Learn-PyTorch.md"
+    },
+    {
+      "basename": "Learn-Git",
+      "path": "Learn/Learn-Git.md"
+    },
+    {
+      "basename": "Learn-Python",
+      "path": "Learn/Learn-Python.md"
     },
     {
       "basename": "Learn-Python_Threading",
@@ -149,10 +181,6 @@
       "path": "Learn/Learn-Python_OPEN_CV.md"
     },
     {
-      "basename": "NeRF-InstantNGP-code",
-      "path": "NeRF/Efficiency/NeRF-InstantNGP-code.md"
-    },
-    {
       "basename": "Make-Python_爬虫",
       "path": "Python Practise/Make-Python_爬虫.md"
     },
@@ -171,34 +199,6 @@
     {
       "basename": "Front-matter.md",
       "path": "Templates/Front-matter.md.md"
-    },
-    {
-      "basename": "2023-06-02_员琪",
-      "path": "NeRF/汇报/2023-06-02_员琪.md"
-    },
-    {
-      "basename": "2023-06-01_员琪",
-      "path": "NeRF/汇报/2023-06-01_员琪.md"
-    },
-    {
-      "basename": "2023-05-31_员琪",
-      "path": "NeRF/汇报/2023-05-31_员琪.md"
-    },
-    {
-      "basename": "Instant-nsr-pl",
-      "path": "NeRF/文献阅读&code/表面重建/速度改进/Instant-nsr-pl.md"
-    },
-    {
-      "basename": "Code",
-      "path": "NeRF/Py_Code&Math/Code.md"
-    },
-    {
-      "basename": "NeRF Neural Radiance Field in 3D Vision, A Comprehensive Review",
-      "path": "NeRF/文献阅读&code/review/NeRF Neural Radiance Field in 3D Vision, A Comprehensive Review.md"
-    },
-    {
-      "basename": "NeRF代码",
-      "path": "NeRF/文献阅读&code/NeRF初始文原理/NeRF代码.md"
     }
   ],
   "omittedPaths": [],

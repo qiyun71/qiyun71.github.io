@@ -11,6 +11,7 @@ categories: NeRF/LargeScaleScene
 
 [NeRF++: Analyzing and Improving Neural Radiance Fields. (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4498415698728083457&noteId=1798375069007427072)
 
+![image.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230718165249.png)
 
 创新：一种前背景分离的方法
 挑战：

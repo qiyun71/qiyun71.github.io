@@ -2,7 +2,8 @@
 title: NeuDA
 date: 2023-07-18 13:56:14
 tags:
-    - 
+    - Surface Reconstruction
+    - NeuDA
 categories: NeRF/Surface Reconstruction
 ---
 
@@ -14,6 +15,10 @@ NeuDA变形后的grid距离Surface更近一些，即可以使采样点插值时�
 
 创新：Deformable Anchors、HPE、$\mathcal{L}_{norm}$
 - 改进了NGP中的grid表示，8个顶点存储feature-->存储锚点位置，锚点位置经过PE后输入进SDF网络
+
+![image.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230718145119.png)
+
+![image.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230718144934.png)
 
 <!-- more -->
 

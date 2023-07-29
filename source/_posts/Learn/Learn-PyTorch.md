@@ -10,6 +10,47 @@ categories: Learn
 基于Pytorch学习DL时，学习到的一些技巧/code
 
 <!-- more -->
+# 环境配置
+
+## windows 
+
+>[关于国内conda安装cuda11.6+pytorch的那些事。 – 王大神 (dashen.wang)](https://dashen.wang/1283.html)
+
+使用miniconda创建虚拟环境
+- conda create -n mine python=3.8
+- conda activate mine
+
+安装cuda
+
+```
+换源：
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/menpo/
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/bioconda/
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/msys2/
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge
+conda config --set show_channel_urls true
+
+安装：
+conda install pytorch torchvision torchaudio pytorch-cuda=11.6
+
+Found conflicts:
+Package pytorch conflicts for:  
+torchaudio -> pytorch[version='1.10.0|1.10.1|1.10.2|1.11.0|1.12.0|1.12.1|1.13.0|1.13.1|2.0  
+.0|2.0.1|1.9.1|1.9.0|1.8.1|1.8.0|1.7.1|1.7.0|1.6.0']  
+torchvision -> pytorch[version='1.10.0|1.10.1|1.10.2|2.0.1|2.0.0|1.13.1|1.13.0|1.12.1|1.12  
+.0|1.11.0|1.9.1|1.9.0|1.8.1|1.8.0|1.7.1|1.7.0|1.6.0|1.5.1']
+...
+
+使用以下命令安装
+> conda install -c gpytorch gpytorch
+
+安装带cuda的torch
+pip install torch==2.0.0+cu118 torchvision==0.15.1+cu118 torchaudio==2.0.1 --index-url https://download.pytorch.org/whl/cu118 --user
+```
 
 # GPU
 

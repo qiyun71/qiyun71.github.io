@@ -3,6 +3,7 @@ title: NeRF代码理解
 date: 2023-06-15 14:50:33
 tags:
     - Code
+    - NeRF
     - Python
 categories: NeRF
 ---

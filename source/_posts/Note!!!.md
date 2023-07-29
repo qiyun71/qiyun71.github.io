@@ -3,25 +3,25 @@ title: Note!!!
 date: 2023-06-27T16:09:09.000Z
 top: true
 tags:
-  - null
-categories: null
-date updated: 2023-07-12 22:51
+  - NeRF
+categories: NeRF
+date updated: 2023-07-22 14:18
 ---
 
-| My post                                                                                                                                                      | Brief description                | status                                                                                                            |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| [NeRF](2023/06/14/NeRF/NeRF-Principle/) + [Code](/2023/06/15/NeRF/NeRF-code/)                                                                                | NeRF原理 + 代码理解              | Completed                                                                                                         |
-| [Neus](/2023/06/14/NeRF/Surface%20Reconstruction/Neus/) + [Code](/2023/06/30/NeRF/Surface%20Reconstruction/Neus-code/)                                       | 表面重建方法 SDFNetwork          | Completed                                                                                                         |
-| [InstantNGP](/2023/06/27/NeRF/Efficiency/NeRF-InstantNGP/) + [Tiny-cuda-nn](/2023/07/04/NeRF/Efficiency/NeRF-InstantNGP-code/)                               | 加速NeRF的训练和推理             | In progress                                                                                                       |
-| [Instant Neus](/2023/06/14/NeRF/Surface%20Reconstruction/Neus-Instant-nsr-pl/) + [Code](/2023/07/03/NeRF/Surface%20Reconstruction/Neus-Instant-nsr-pl-code/) | Neus+Tcnn+NSR+pl                 | In progress                                                                                                       |
-| [Instant-NSR](/2023/07/06/NeRF/Surface%20Reconstruction/Instant-NSR/) + [Code](/2023/07/09/NeRF/Surface%20Reconstruction/Instant-NSR-code/)                  | 快速表面重建                     | In progress                                                                                                       |
+| My post                                                                                                                                                      | Brief description       | status            |
+| --------------------------------------------------------------- | ----------------------- | ----------------- |
+| [NeRF](2023/06/14/NeRF/NeRF-Principle/) + [Code](/2023/06/15/NeRF/NeRF-code/)                                                                                | NeRF原理 + 代码理解     | Completed         |
+| [Neus](/2023/06/14/NeRF/Surface%20Reconstruction/Neus/) + [Code](/2023/06/30/NeRF/Surface%20Reconstruction/Neus-code/)                                       | 表面重建方法 SDFNetwork | Completed         |
+| [InstantNGP](/2023/06/27/NeRF/Efficiency/NeRF-InstantNGP/) + [Tiny-cuda-nn](/2023/07/04/NeRF/Efficiency/NeRF-InstantNGP-code/)                               | 加速NeRF的训练和推理    | Completed（Tcnn） |
+| [Instant Neus](/2023/06/14/NeRF/Surface%20Reconstruction/Neus-Instant-nsr-pl/) + [Code](/2023/07/03/NeRF/Surface%20Reconstruction/Neus-Instant-nsr-pl-code/) | Neus+Tcnn+NSR+pl        | Completed         |
+| [Instant-NSR](/2023/07/06/NeRF/Surface%20Reconstruction/Instant-NSR/) + [Code](/2023/07/09/NeRF/Surface%20Reconstruction/Instant-NSR-code/)                  | 快速表面重建            | Completed         |
+| [NeRF-Mine](/2023/07/06/NeRF/NeRF-Mine/)       |   基于Instant-nsr-pl创建的项目                      | 	In progress                 |
 
 
-| My post                                                                                                                                                      | Brief description                | status                                                                                                            |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| [Nerfstudio](/2023/06/15/NeRF/NeRF-Studio/)                                                                                                                  | 一个更加方便训练和观察NeRF的框架 | Completed in AutoDL                                                                                               |
-| [NeRF Review](/2023/06/25/NeRF/NeRF-review/)                                                                                                                    | 追踪一些最近的NeRF进展           | Following [Jason陪你练绝技 in Bilibili](https://space.bilibili.com/455056488/channel/collectiondetail?sid=910368) |
-
+| My post                                      | Brief description  | status                                                                                                       |
+| -------------------------------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------ |
+| [Nerfstudio](/2023/06/15/NeRF/NeRF-Studio/)  | 一个更加方便训练和观察NeRF的框架 | Completed in AutoDL                                                                                          |
+| [NeRF Review](/2023/06/25/NeRF/NeRF-review/) | 追踪一些NeRF的进展        | Following [Jason陪你练绝技 in Bilibili](https://space.bilibili.com/455056488/channel/collectiondetail?sid=910368) |
 
 Related link :  [3D Reconstruction](https://paperswithcode.com/task/3d-reconstruction)
 

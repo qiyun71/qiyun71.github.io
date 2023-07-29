@@ -4,76 +4,23 @@
     "type": "split",
     "children": [
       {
-        "id": "fbdeb6b561f03a46",
+        "id": "b92d24e60a7e9f5b",
         "type": "tabs",
         "children": [
           {
-            "id": "4968b2a1aaff6e81",
+            "id": "716933f0104ba6ec",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "NeRF/LargeScaleScene/NeRF++.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "8e62f7221de006e4",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "NeRF/Surface Reconstruction/Neus.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "6796d9fc579892a4",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "NeRF/NeRF-Mine.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "724454c4656c7032",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "NeRF/NeRF-review.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "27c47679c6584f8c",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "NeRF/Sampling/NerfAcc.md",
+                "file": "NeRF/NeRF/Sampling.md",
                 "mode": "source",
                 "backlinks": false,
                 "source": false
               }
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -134,7 +81,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "NeRF/NeRF-Mine.md",
+                "file": "NeRF/NeRF/Sampling.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -166,7 +113,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "NeRF/NeRF-Mine.md"
+                "file": "NeRF/NeRF/Sampling.md"
               }
             }
           },
@@ -185,8 +132,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 257.5001640319824,
-    "collapsed": true
+    "width": 257.5001640319824
   },
   "right": {
     "id": "030ccac2adcfb23a",
@@ -202,7 +148,7 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "NeRF/NeRF-Mine.md",
+                "file": "NeRF/NeRF/Sampling.md",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -270,46 +216,47 @@
       "workspaces:管理工作区布局": false
     }
   },
-  "active": "6796d9fc579892a4",
+  "active": "716933f0104ba6ec",
   "lastOpenFiles": [
-    "NeRF/Sampling/NerfAcc.md",
-    "NeRF/Neus.canvas",
-    "NeRF/NeRF-Mine.md",
-    "NeRF/NeRF-review.md",
-    "NeRF/LargeScaleScene/NeRF++.md",
-    "NeRF/Surface Reconstruction/Neus.md",
-    "NeRF/Surface Reconstruction/Instant-NSR.md",
-    "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl-code.md",
-    "NeRF/Surface Reconstruction/Neus-code.md",
-    "NeRF/Sparse/SparseNeuS.md",
-    "NeRF/Surface Reconstruction/NeuDA.md",
-    "Learn/Learn-DeepLearning.md",
     "NeRF/NeRF-Principle.md",
-    "NeRF/Surface Reconstruction/PermutoSDF.md",
-    "NeRF/Surface Reconstruction/Neuralangelo.md",
-    "NeRF/Surface Reconstruction/Instant-NSR-code.md",
-    "NeRF/LargeScaleScene",
-    "NeRF/未命名.md",
-    "Pasted image 20230718132040.png",
-    "NeRF/NeRF-Studio.md",
-    "NeRF/Sparse",
-    "NeRF/NeRF-code.md",
-    "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl.md",
-    "Learn/Learn-Git.md",
-    "Reports/2023-07-04.md",
-    "Reports/2023-06-19.md",
+    "NeRF/NeRF-review.md",
+    "NeRF/NeRF/Sampling.md",
+    "NeRF/NeRF/Encoding.md",
+    "Learn/Learn-DeepLearning.md",
     "NeRF/Efficiency/NeRF-InstantNGP.md",
+    "NeRF/NeRF-Mine.md",
+    "Note!!!.md",
+    "NeRF/Efficiency/Zip-NeRF.md",
+    "NeRF/Surface Reconstruction/Shadow&Highlight/NeRO.md",
+    "NeRF/Neus.canvas",
+    "NeRF/Sampling/NerfAcc.md",
+    "NeRF/Sampling/Mip-NeRF.md",
+    "NeRF/Surface Reconstruction/Instant-NSR.md",
+    "NeRF/LargeScaleScene/Mip-NeRF 360.md",
+    "NeRF/Efficiency/Encoding/Tri-MipRF.md",
+    "NeRF/Surface Reconstruction/Neus-code.md",
+    "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl.md",
+    "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl-code.md",
+    "NeRF/LargeScaleScene/NeRF++.md",
+    "NeRF/Sparse/SparseNeuS.md",
+    "NeRF/Surface Reconstruction/Instant-NSR-code.md",
+    "NeRF/Surface Reconstruction/Neuralangelo.md",
+    "NeRF/Surface Reconstruction/PermutoSDF.md",
+    "NeRF/Surface Reconstruction/NeuDA.md",
+    "().md",
+    "NeRF/Surface Reconstruction/Shadow&Highlight",
+    "NeRF/Surface Reconstruction/未命名.md",
+    "NeRF/Efficiency/Encoding",
+    "NeRF/NeRF",
+    "NeRF/LargeScaleScene",
+    "Pasted image 20230718132040.png",
+    "NeRF/Sparse",
     "NeRF/Surface Reconstruction/1.canvas",
-    "未命名.md",
-    "revie.md",
     "2023/06/15/NeRF",
     "2023/06/15",
     "2023/06",
     "2023",
     "NeRF/Sampling",
-    "img/plt",
-    "img",
-    "2023/06/14/NeRF/Surface Reconstruction",
     "未命名.canvas",
     "附件/Pasted image 20230612205212.png",
     "附件/Pasted image 20230606154824.png",

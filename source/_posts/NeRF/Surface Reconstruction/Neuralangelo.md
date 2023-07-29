@@ -12,6 +12,7 @@ categories: NeRF/Surface Reconstruction
 SR Issue: Current methods struggle to recover detailed structures of real-world scenes
 To address : present Neuralangelo (combines the representation power of multi-resolution 3D hash grids with neural surface rendering) 
 - numerical gradients for computing higher-order derivatives as a smoothing operation
+    - ![image.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230716140552.png)
 - coarse-to-fine optimization on the hash grids controlling different levels of details
 even wo auxiliary inputs such as depth , Neuralangelo can effectively recover dense 3D surface structures from multi-view images with fidelity保真 significantly surpassing previous methods, enabling detailed large-scale scene reconstruction from RGB video captures.
 

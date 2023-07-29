@@ -2,7 +2,8 @@
 title: Nerfstudio——简化NeRF流程
 date: 2023-06-15 12:16:19
 tags:
-    - NeRF Framework
+    - NeRF
+    - Framework
 categories: NeRF
 ---
 
