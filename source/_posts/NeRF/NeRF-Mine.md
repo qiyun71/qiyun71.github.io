@@ -200,17 +200,46 @@ def config_parser():
 
 ## 质量评估指标
 
+L1_loss : $loss(x,y)=\frac{1}{n}\sum_{i=1}^{n}|y_i-f(x_i)|$
+L2_loss: $loss(x,y)=\frac{1}{n}\sum_{i=1}^{n}(y_i-f(x_i))^2$
+
 在标准设置中通过NeRF进行的新颖视图合成使用了视觉质量评估指标作为基准。这些指标试图评估单个图像的质量，要么有(完全参考)，要么没有(无参考)地面真相图像。峰值信噪比(PSNR)，结构相似指数度量(SSIM)[32]，学习感知图像补丁相似性(LPIPS)[33]是目前为止在NeRF文献中最常用的。
 
 ### PSNR↑
+峰值信噪比Peak Signal to Noise Ratio
 PSNR是一个无参考的质量评估指标
 $PSNR(I)=10\cdot\log_{10}(\dfrac{MAX(I)^2}{MSE(I)})$
+$MSE=\frac1{mn}\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}[I(i,j)-K(i,j)]^2$
+$MAX(I)^{2}$（动态范围可能的最大像素值，b位：$2^{b}-1$），eg: 8位图像则$MAX(I)^{2} = 255$
 
 ### SSIM↑
+结构相似性Structural Similarity Index Measure
 SSIM是一个完整的参考质量评估指标。
 $SSIM(x,y)=\dfrac{(2\mu_x\mu_y+C_1)(2\sigma_{xy}+C_2)}{(\mu_x^2+\mu_y^2+C_1)(\sigma_x^2+\sigma_y^2+C_2)}$
+衡量了两张图片之间相似度：($C_1,C_2$为常数防止除以0)
+$S(x,y)=l(x,y)^{{\alpha}}\cdot c(x,y)^{{\beta}}\cdot s(x,y)^{{\gamma}}$
+$C_1=(K_1L)^2,C_2=(K_2L)^2,C_3=C_2/2$
+$K_{1}= 0.01 , K_{2} = 0.03 , L = 2^{b}-1$
+- 亮度，图像x与图像y亮度 $l(x,y) =\frac{2\mu_x\mu_y+C_1}{\mu_x^2+\mu_y^2+C_1}$
+    - $\mu_{x} =\frac1N\sum_{i=1}^Nx_i$像素均值
+        - $x_i$像素值，N总像素数
+    - 当x与y相同时，$l(x,y) = 1$
+- 对比度，$c(x,y)=\frac{2\sigma_x\sigma_y+C_2}{\sigma_x^2+\sigma_y^2+C_2}$
+    - 图像标准差$\sigma_x=(\frac1{N-1}\sum_{i=1}^N(x_i-\mu_x)^2)^{\frac12}$
+- 结构对比，$s(x,y)=\frac{\sigma_{xy}+C_3}{\sigma_x\sigma_y+C_3}$
+    - 图像的协方差$\sigma_{xy}=\frac1{N-1}\sum_{i=1}^N(x_i-\mu_x)(y_i-\mu_y)$
+实际使用中(圆对称高斯加权公式)，使用一个高斯核对局部像素求SSIM，最后对所有的局部SSIM求平均得到MSSIM
+
+使用高斯核，均值、标准差和协方差变为：
+$\mu_{x}=\sum_{i}w_{i}x_{i}$
+$\sigma_{x}=(\sum_{i}w_{i}(x_{i}-\mu_{x})^{2})^{1/2}$
+$\sigma_{xy}=\sum_{i}w_{i}(x_{i}-\mu_{x})(y_{i}-\mu_{y})$
 
 ### LPIPS↓
+学习感知图像块相似度Learned Perceptual Image Patch Similarity
+**LPIPS 比传统方法（比如L2/PSNR, SSIM, FSIM）更符合人类的感知情况**。**LPIPS的值越低表示两张图像越相似，反之，则差异越大。**
+![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230801170138.png)
+
 LPIPS是一个完整的参考质量评估指标，它使用了学习的卷积特征。分数是由多层特征映射的加权像素级MSE给出的。
 $LPIPS(x,y)=\sum\limits_{l}^{L}\dfrac{1}{H_lW_l}\sum\limits_{h,w}^{H_l,W_l}||w_l\odot(x^l_{hw}-y^l_{hw})||^2_2$
 

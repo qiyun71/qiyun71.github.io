@@ -128,7 +128,7 @@ intrinsics[:3, :3] = K # intrinsics: 4x4 为相机内参矩阵
  [0.00000000e+00 0.00000000e+00 0.00000000e+00 1.00000000e+00]]
 
 pose = np.eye(4, dtype=np.float32)
-pose[:3, :3] = R.transpose() # 正交矩阵 其转置等于逆
+pose[:3, :3] = R.transpose() # 正交矩阵 其转置等于逆 w2c --> c2w
 pose[:3, 3] = (t[:3] / t[3])[:, 0] # pose: 4x4 为相机外参矩阵的逆
 [[-0.33320493 -0.9114712   0.24123597 -0.25686666]
  [ 0.8066752  -0.40804535 -0.42752096  0.48028347]
@@ -188,6 +188,9 @@ def gen_random_rays_at(self, img_idx, batch_size):
 
 ### 计算near和far(from o,d)
 根据rays_o 和rays_d 计算出near和far两个平面
+
+![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230803193755.png)
+
 
 ```
 def near_far_from_sphere(self, rays_o, rays_d):
@@ -267,15 +270,16 @@ Neus中共构建了4个network：
 
 同NeRF网络
 ![Pasted image 20221206180113.png|600](https://raw.githubusercontent.com/yq010105/Blog_images/main/Pasted%20image%2020221206180113.png)
-
+- 84-->256-->256-->256-->256-->256+84-->256-->256-->256+27-->128-->3
+- 84-->256-->256-->256-->256-->256+84-->256-->256-->256-->1
 
 ### SDFNetwork
 
 激活函数 $\text{Softplus}(x) = \frac{\log(1 + e^{\beta x})}{\beta}$
 
 网络结构：
-![SDFNetwork.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/SDFNetwork.png)
-
+![SDFNetwork](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/SDFNetwork_modify.png)
+- 39-->256-->256-->256-->217-->256-->256-->256-->256-->257
 input: pts, 采样点的三维坐标 batch_size * n_samples x 3
 output: 257个数 batch_size * n_samples x 257
 
@@ -1149,7 +1153,7 @@ output:
 
 | var     | example                                                                                                                                                                                                                                    | info                                         |
 | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------- |
-| cameras | `{1: Camera(id=1, model='SIMPLE_RADIAL', width=960, height=544, params=array([ 5.07683492e+02,  4.80000000e+02,  2.72000000e+02, -5.37403479e-03])), ...}`                                                                                 | w,h,f=params[0]                              |
+| cameras | `{1: Camera(id=1, model='SIMPLE_RADIAL', width=960, height=544, params=array([ 5.07683492e+02,  4.80000000e+02,  2.72000000e+02, -5.37403479e-03])), ...}`                                                                                 | f, cx, cy, k=params                              |
 | images  | `{1: Image(id=1, qvec=array([ 0.8999159 , -0.29030237,  0.07162026,  0.31740581]), tvec=array([ 0.29762954, -2.81576928,  1.41888716]), camera_id=1, name='000.png', xys=xys, point3D_ids=point3D_ids, ...}`                               | perm = np.argsort(names),qvec,tvec to m=w2c_mats:4x4, |
 | pts3D   | `{1054: Point3D(id=1054, xyz=array([1.03491375, 1.65809594, 3.83718124]), rgb=array([147, 146, 137]), error=array(0.57352093), image_ids=array([115, 116, 117, 114, 113, 112]), point2D_idxs=array([998, 822, 912, 977, 889, 817])), ...}` |                                              |
 
@@ -1221,6 +1225,8 @@ input:
 - path_to_model_file, `camerasfile = os.path.join(realdir, 'sparse/0/cameras.bin')`
 output:
 - cameras，一个长度为num_cameras字典，key为camera_id，value为Camera对象
+
+>[colmap 相机模型及参数 - 小小灰迪 - 博客园 (cnblogs.com)](https://www.cnblogs.com/xiaohuidi/p/15767477.html)
 
 使用:
 ```

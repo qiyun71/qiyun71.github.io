@@ -63,6 +63,7 @@ $$
     - 几何中的细节无法重建出来（太光滑）
     - 由于颜色依赖法向量估计，表面法线的错误会导致难以拟合正确的颜色
     - 依赖于准确的输入相机姿势，并且估计反射物体上的相机姿势通常需要稳定的纹理，如用于图像匹配的校准板。
+    - 很慢，在3090(24G)上，Stage1的隐式重建需要大概10个小时左右
 
 纹理校准板
 
@@ -217,6 +218,7 @@ $\mathbf{c}_{\mathrm{specular}}\approx\underbrace{\int_{\Omega}L(\omega_{i})D(\r
 
 BRDF的积分可以由$\begin{aligned}M_{\mathrm{specular}}=((1-m)*0.04+m*\mathrm{a})*F_1+F_2,\end{aligned}$直接计算
 - where 𝐹1 and 𝐹2 are two pre-computed scalars depending on the roughness 𝜌
+- 
 
 ### 漫反射颜色
 
@@ -298,8 +300,8 @@ $\frac{\omega_i\cdot\mathbf{n}}\pi\approx D(1.0,\mathbf{n}).$
 - Importance sampling
     - 在蒙特卡洛采样中，漫反射颜色c漫反射是通过用**余弦加权半球概率**对射线进行采样来计算的$\mathbf{c}_{\mathrm{diffuse}}=\frac{1}{N_{d}}\sum_{i}^{N_{d}}(1-m)\mathrm{a}L(\omega_{i}),$
     - 𝑖 是第i个样本射线和$𝜔_{𝑖}$是此采样光线的方向。
-    - 对于镜面反射颜色C，我们将GGX分布应用为正态分布𝐷. 然后，通过DDX分布的射线采样$𝑁_{𝑠}$条光线来计算镜面颜色$c_{specular}$ [Cook和Torrance1982]$\mathbf{c}_{\mathrm{specular}}=\frac{1}{N_{s}}\sum_{i}^{N_{s}}\frac{FG(\omega_{0}\cdot\mathbf{h})}{(\mathbf{n}\cdot\mathbf{h})(\mathbf{n}\cdot\omega_{\mathbf{0}})}L(\omega_{i}),$
-    - 其中 h 是 𝜔𝑖 和 𝜔𝑜 之间的半向向量。为了评估上述两个式子我们仍然使用与第一阶段相同的材料 MLP [𝑚, 𝜌, a] = $g_{material}$来计算金属度 𝑚、粗糙度和反照率 a。第二阶段的灯表示𝐿(𝜔𝑖)与第一阶段相同。由于几何是固定的，我们通过跟踪给定几何中的光线而不是从 MLP 中预测它来直接计算遮挡概率。同时，对于真实数据，我们在沿方向𝜔从p发出沿p的射线的边界球体$q_{p,𝜔}$上添加交点，如图4所示，作为直接轻MLP$𝑔_{direct}$的附加输入。
+    - 对于镜面反射颜色C，我们将GGX分布应用为**正态分布𝐷**. 然后，通过DDX分布的射线采样$𝑁_{𝑠}$条光线来计算镜面颜色$c_{specular}$ [Cook和Torrance1982]$\mathbf{c}_{\mathrm{specular}}=\frac{1}{N_{s}}\sum_{i}^{N_{s}}\frac{FG(\omega_{0}\cdot\mathbf{h})}{(\mathbf{n}\cdot\mathbf{h})(\mathbf{n}\cdot\omega_{\mathbf{0}})}L(\omega_{i}),$
+    - 其中 h 是 𝜔𝑖 和 𝜔𝑜 之间的半向向量。为了评估上述两个式子我们仍然使用与第一阶段相同的材料 MLP [𝑚, 𝜌, a] = $g_{material}$来计算金属度 𝑚、粗糙度和反照率 a。第二阶段的灯表示$𝐿(𝜔_𝑖)$与第一阶段相同。由于几何是固定的，我们通过跟踪给定几何中的光线而不是从 MLP 中预测它来直接计算遮挡概率。同时，对于真实数据，我们在沿方向𝜔从p发出沿p的射线的边界球体$q_{p,𝜔}$上添加交点，如图4所示，作为直接轻MLP$𝑔_{direct}$的附加输入。
 
 - Regularization terms
     - $\ell_{\mathrm{smooth}}=\|g_{\mathrm{material}}(\mathrm{p})-g_{\mathrm{material}}(\mathrm{p}+\epsilon)\|_{2},$
@@ -329,3 +331,165 @@ BRDF。在实验中，我们观察到我们的**BRDF估计主要存在不正确�
 # 数据集
 
 [https://connecthkuhk-my.sharepoint.com/:f:/g/personal/yuanly_connect_hku_hk/EvNz_o6SuE1MsXeVyB0VoQ0B9zL8NZXjQQg0KknIh6RKjQ?e=jCLH0W](https://connecthkuhk-my.sharepoint.com/:f:/g/personal/yuanly_connect_hku_hk/EvNz_o6SuE1MsXeVyB0VoQ0B9zL8NZXjQQg0KknIh6RKjQ?e=jCLH0W)
+
+
+# 实验
+
+## 环境配置
+AutoDL:
+- pytorch 1.11.0 
+- Python  3.8(ubuntu20.04)
+- Cuda  11.3
+
+pip install
+ - [nvdiffrast](https://nvlabs.github.io/nvdiffrast/#installation).
+ - [raytracing](https://github.com/ashawkey/raytracing)
+ 
+```
+git clone https://github.com/liuyuan-pal/NeRO.git
+cd NeRO
+pip install -r requirements.txt
+
+# nvdiffrast
+git clone https://github.com/NVlabs/nvdiffrast
+pip install .
+
+# raytracing
+git clone https://github.com/ashawkey/raytracing
+cd raytracing
+pip install .
+
+pip install --upgrade protobuf
+```
+
+## 运行 
+[liuyuan-pal/NeRO: [SIGGRAPH2023] NeRO: Neural Geometry and BRDF Reconstruction of Reflective Objects from Multiview Images (github.com)](https://github.com/liuyuan-pal/NeRO)
+
+data:  Models and datasets all can be found [here](https://connecthkuhk-my.sharepoint.com/:f:/g/personal/yuanly_connect_hku_hk/EvNz_o6SuE1MsXeVyB0VoQ0B9zL8NZXjQQg0KknIh6RKjQ?e=MaonKe).
+```
+NeRO
+|-- data
+    |-- GlossyReal
+        |-- bear 
+            ...
+    |-- GlossySynthetic
+        |-- bell
+            ...
+```
+
+### Stage 1 重建shape
+
+**训练程序获取隐式模型：**
+```
+# reconstructing the "bell" of the Glossy Synthetic dataset
+python run_training.py --cfg configs/shape/syn/bell.yaml
+
+# reconstructing the "bear" of the Glossy Real dataset
+python run_training.py --cfg configs/shape/real/bear.yaml
+```
+
+Intermediate results will be saved at `data/train_vis`. Models will be saved at `data/model`.
+
+data/model/bear_shape
+- (tensorboard logs_dir)logs: events.out.tfevents.1690871015.autodl-container-6a4811bc52-8879d78f
+- model_best.pth --> model_dir = /data/model/bear_shape
+- model.pth  --> model_dir = /data/model/bear_shape
+- train.txt --> logs_dir = (/data/model/bear_shape --> /root/tf-logs)
+- val.txt --> logs_dir
+![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230801155011.png)
+
+
+data/train_vis/bear_shape-val --> 14999-index-0.jpg
+![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230801152018.png)
+
+
+**Extract mesh from the model.**
+
+```
+python extract_mesh.py --cfg configs/shape/syn/bell.yaml
+python extract_mesh.py --cfg configs/shape/real/bear.yaml
+```
+The extracted meshes will be saved at `data/meshes`.
+
+### Stage 2  Material estimation or texture
+
+ply mesh data
+```
+NeRO
+|-- data
+    |-- GlossyReal
+        |-- bear 
+            ...
+    |-- GlossySynthetic
+        |-- bell
+            ...
+    |-- meshes
+        | -- bell_shape-300000.ply
+        | -- bear_shape-300000.ply
+             ...
+```
+
+**训练BRDF色彩：**
+```
+# estimate BRDF of the "bell" of the Glossy Synthetic dataset
+python run_training.py --cfg configs/material/syn/bell.yaml
+
+# estimate BRDF of the "bear" of the Glossy Real dataset
+python run_training.py --cfg configs/material/real/bear.yaml
+```
+Intermediate results will be saved at `data/train_vis`. Models will be saved at `data/model`.
+
+
+**Extract materials from the model**
+
+```
+python extract_materials.py --cfg configs/material/syn/bell.yaml
+python extract_materials.py --cfg configs/material/real/bear.yaml
+```
+
+The extracted materials will be saved at `data/materials`.
+
+### Relighting
+
+```
+NeRO
+|-- data
+    |-- GlossyReal
+        |-- bear 
+            ...
+    |-- GlossySynthetic
+        |-- bell
+            ...
+    |-- meshes
+        | -- bell_shape-300000.ply
+        | -- bear_shape-300000.ply
+             ...
+    |-- materials
+        | -- bell_material-100000
+            | -- albedo.npy
+            | -- metallic.npy
+            | -- roughness.npy
+        | -- bear_material-100000
+            | -- albedo.npy
+            | -- metallic.npy
+            | -- roughness.npy
+    |-- hdr
+        | -- neon_photostudio_4k.exr
+```
+
+```
+python relight.py --blender <path-to-your-blender> \
+                  --name bell-neon \
+                  --mesh data/meshes/bell_shape-300000.ply \
+                  --material data/materials/bell_material-100000 \
+                  --hdr data/hdr/neon_photostudio_4k.exr \
+                  --trans
+                  
+python relight.py --blender <path-to-your-blender> \
+                  --name bear-neon \
+                  --mesh data/meshes/bear_shape-300000.ply \
+                  --material data/materials/bear_material-100000 \
+                  --hdr data/hdr/neon_photostudio_4k.exr
+```
+
+The relighting results will be saved at `data/relight` with the directory name of `bell-neon` or `bear-neon`. This command means that we use `neon_photostudio_4k.exr` to relight the object.

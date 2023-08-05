@@ -129,6 +129,23 @@ yaml:
       n_frequencies: 10
 ```
 
+## IPE
+Mip-NeRF集成位置编码
+
+对多元高斯近似截锥体的均值和协方差进行编码
+
+$$\begin{aligned}
+\gamma(\mathbf{\mu},\mathbf{\Sigma})& =\mathrm{E}_{\mathbf{x}\sim\mathcal{N}(\mathbf{\mu}_\gamma,\mathbf{\Sigma}_\gamma)}[\gamma(\mathbf{x})]  \\
+&=\begin{bmatrix}\sin(\mathbf{\mu}_\gamma)\circ\exp(-(1/2)\mathrm{diag}(\mathbf{\Sigma}_\gamma))\\\cos(\mathbf{\mu}_\gamma)\circ\exp(-(1/2)\mathrm{diag}(\mathbf{\Sigma}_\gamma))\end{bmatrix}
+\end{aligned}$$
+
+IPE可以将大区域的高频编码求和为0
+![ipe_anim_horiz.gif](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/ipe_anim_horiz.gif)
+
+![image.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230721153610.png)
+
+
+
 # HashGrid
 
 ![image.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230703160333.png)

@@ -26,8 +26,6 @@
   "showInlineTitle": true,
   "focusNewTab": true,
   "useMarkdownLinks": true,
-  "spellcheckLanguages": [
-    "zh-CN"
-  ],
+  "spellcheckLanguages": null,
   "foldHeading": true
 }

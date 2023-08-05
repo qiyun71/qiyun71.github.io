@@ -4,23 +4,76 @@
     "type": "split",
     "children": [
       {
-        "id": "b92d24e60a7e9f5b",
+        "id": "c32f89397e11dc4c",
         "type": "tabs",
         "children": [
           {
-            "id": "716933f0104ba6ec",
+            "id": "49cc27ca8a26b7a9",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "NeRF/NeRF/Sampling.md",
+                "file": "NeRF/NeRF-Mine.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "e1e9a8d3cba48421",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "NeRF/NeRF/Math.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "59dfd1436f4b7d21",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "NeRF/Surface Reconstruction/Neus-code.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "decab5766fa2f90b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "NeRF/Surface Reconstruction/Shadow&Highlight/NeRO-code.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "86c60791247a684c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "NeRF/Surface Reconstruction/Shadow&Highlight/NeRO.md",
                 "mode": "source",
                 "backlinks": false,
                 "source": false
               }
             }
           }
-        ]
+        ],
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -32,7 +85,7 @@
       {
         "id": "4b1070af652f8263",
         "type": "tabs",
-        "dimension": 55.58011049723756,
+        "dimension": 50.607734806629836,
         "children": [
           {
             "id": "8e8a871735863769",
@@ -40,7 +93,7 @@
             "state": {
               "type": "file-explorer",
               "state": {
-                "sortOrder": "byCreatedTime"
+                "sortOrder": "alphabetical"
               }
             }
           },
@@ -81,7 +134,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "NeRF/NeRF/Sampling.md",
+                "file": "NeRF/Surface Reconstruction/Shadow&Highlight/NeRO.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -105,7 +158,7 @@
       {
         "id": "3d2f21c2dced65ad",
         "type": "tabs",
-        "dimension": 44.41988950276244,
+        "dimension": 49.392265193370164,
         "children": [
           {
             "id": "086707e82c339e3f",
@@ -113,7 +166,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "NeRF/NeRF/Sampling.md"
+                "file": "NeRF/Surface Reconstruction/Shadow&Highlight/NeRO.md"
               }
             }
           },
@@ -148,7 +201,7 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "NeRF/NeRF/Sampling.md",
+                "file": "NeRF/Surface Reconstruction/Shadow&Highlight/NeRO.md",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -216,36 +269,39 @@
       "workspaces:管理工作区布局": false
     }
   },
-  "active": "716933f0104ba6ec",
+  "active": "86c60791247a684c",
   "lastOpenFiles": [
-    "NeRF/NeRF-Principle.md",
-    "NeRF/NeRF-review.md",
-    "NeRF/NeRF/Sampling.md",
     "NeRF/NeRF/Encoding.md",
-    "Learn/Learn-DeepLearning.md",
-    "NeRF/Efficiency/NeRF-InstantNGP.md",
-    "NeRF/NeRF-Mine.md",
-    "Note!!!.md",
-    "NeRF/Efficiency/Zip-NeRF.md",
+    "NeRF/NeRF/Math.md",
+    "NeRF/NeRF/Sampling.md",
+    "NeRF/Sparse/FORGE.md",
     "NeRF/Surface Reconstruction/Shadow&Highlight/NeRO.md",
-    "NeRF/Neus.canvas",
-    "NeRF/Sampling/NerfAcc.md",
-    "NeRF/Sampling/Mip-NeRF.md",
-    "NeRF/Surface Reconstruction/Instant-NSR.md",
-    "NeRF/LargeScaleScene/Mip-NeRF 360.md",
-    "NeRF/Efficiency/Encoding/Tri-MipRF.md",
+    "NeRF/Surface Reconstruction/Shadow&Highlight/NeRO-code.md",
     "NeRF/Surface Reconstruction/Neus-code.md",
+    "NeRF/NeRF-Mine.md",
+    "cameras.bin",
+    "images.bin",
+    "points3D.bin",
+    "project.ini",
+    "NeRF/NeRF-code.md",
+    "NeRF/Surface Reconstruction/Neus.md",
+    "Learn/Learn-Python.md",
+    "NeRF/NeRF-Principle.md",
+    "NeRF/NeRF.canvas",
+    "NeRF/Sparse/SparseNeuS.md",
+    "NeRF/Sampling/Mip-NeRF.md",
+    "NeRF/Efficiency/Zip-NeRF.md",
+    "NeRF/Efficiency/Encoding/Tri-MipRF.md",
+    "NeRF/LargeScaleScene/Mip-NeRF 360.md",
+    "NeRF/Sampling/NerfAcc.md",
+    "NeRF/Efficiency/NeRF-InstantNGP.md",
+    "NeRF/NeRF-review.md",
+    "Learn/Learn-DeepLearning.md",
+    "Note!!!.md",
+    "NeRF/Surface Reconstruction/Instant-NSR.md",
     "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl.md",
     "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl-code.md",
-    "NeRF/LargeScaleScene/NeRF++.md",
-    "NeRF/Sparse/SparseNeuS.md",
-    "NeRF/Surface Reconstruction/Instant-NSR-code.md",
-    "NeRF/Surface Reconstruction/Neuralangelo.md",
-    "NeRF/Surface Reconstruction/PermutoSDF.md",
-    "NeRF/Surface Reconstruction/NeuDA.md",
-    "().md",
     "NeRF/Surface Reconstruction/Shadow&Highlight",
-    "NeRF/Surface Reconstruction/未命名.md",
     "NeRF/Efficiency/Encoding",
     "NeRF/NeRF",
     "NeRF/LargeScaleScene",
@@ -253,10 +309,6 @@
     "NeRF/Sparse",
     "NeRF/Surface Reconstruction/1.canvas",
     "2023/06/15/NeRF",
-    "2023/06/15",
-    "2023/06",
-    "2023",
-    "NeRF/Sampling",
     "未命名.canvas",
     "附件/Pasted image 20230612205212.png",
     "附件/Pasted image 20230606154824.png",

@@ -1,72 +1,100 @@
 {
   "recentFiles": [
     {
-      "basename": "Sampling",
-      "path": "NeRF/NeRF/Sampling.md"
-    },
-    {
-      "basename": "NeRF-Principle",
-      "path": "NeRF/NeRF-Principle.md"
-    },
-    {
-      "basename": "NeRF-review",
-      "path": "NeRF/NeRF-review.md"
+      "basename": "NeRO",
+      "path": "NeRF/Surface Reconstruction/Shadow&Highlight/NeRO.md"
     },
     {
       "basename": "Encoding",
       "path": "NeRF/NeRF/Encoding.md"
     },
     {
-      "basename": "Learn-DeepLearning",
-      "path": "Learn/Learn-DeepLearning.md"
+      "basename": "Math",
+      "path": "NeRF/NeRF/Math.md"
     },
     {
-      "basename": "NeRF-InstantNGP",
-      "path": "NeRF/Efficiency/NeRF-InstantNGP.md"
+      "basename": "Sampling",
+      "path": "NeRF/NeRF/Sampling.md"
+    },
+    {
+      "basename": "FORGE",
+      "path": "NeRF/Sparse/FORGE.md"
+    },
+    {
+      "basename": "NeRO-code",
+      "path": "NeRF/Surface Reconstruction/Shadow&Highlight/NeRO-code.md"
+    },
+    {
+      "basename": "Neus-code",
+      "path": "NeRF/Surface Reconstruction/Neus-code.md"
     },
     {
       "basename": "NeRF-Mine",
       "path": "NeRF/NeRF-Mine.md"
     },
     {
-      "basename": "Note!!!",
-      "path": "Note!!!.md"
-    },
-    {
-      "basename": "Zip-NeRF",
-      "path": "NeRF/Efficiency/Zip-NeRF.md"
-    },
-    {
-      "basename": "NeRO",
-      "path": "NeRF/Surface Reconstruction/Shadow&Highlight/NeRO.md"
+      "basename": "NeRF-code",
+      "path": "NeRF/NeRF-code.md"
     },
     {
       "basename": "Neus",
-      "path": "NeRF/Neus.canvas"
+      "path": "NeRF/Surface Reconstruction/Neus.md"
     },
     {
-      "basename": "NerfAcc",
-      "path": "NeRF/Sampling/NerfAcc.md"
+      "basename": "Learn-Python",
+      "path": "Learn/Learn-Python.md"
+    },
+    {
+      "basename": "NeRF-Principle",
+      "path": "NeRF/NeRF-Principle.md"
+    },
+    {
+      "basename": "NeRF",
+      "path": "NeRF/NeRF.canvas"
+    },
+    {
+      "basename": "SparseNeuS",
+      "path": "NeRF/Sparse/SparseNeuS.md"
     },
     {
       "basename": "Mip-NeRF",
       "path": "NeRF/Sampling/Mip-NeRF.md"
     },
     {
-      "basename": "Instant-NSR",
-      "path": "NeRF/Surface Reconstruction/Instant-NSR.md"
-    },
-    {
-      "basename": "Mip-NeRF 360",
-      "path": "NeRF/LargeScaleScene/Mip-NeRF 360.md"
+      "basename": "Zip-NeRF",
+      "path": "NeRF/Efficiency/Zip-NeRF.md"
     },
     {
       "basename": "Tri-MipRF",
       "path": "NeRF/Efficiency/Encoding/Tri-MipRF.md"
     },
     {
-      "basename": "Neus-code",
-      "path": "NeRF/Surface Reconstruction/Neus-code.md"
+      "basename": "Mip-NeRF 360",
+      "path": "NeRF/LargeScaleScene/Mip-NeRF 360.md"
+    },
+    {
+      "basename": "NerfAcc",
+      "path": "NeRF/Sampling/NerfAcc.md"
+    },
+    {
+      "basename": "NeRF-InstantNGP",
+      "path": "NeRF/Efficiency/NeRF-InstantNGP.md"
+    },
+    {
+      "basename": "NeRF-review",
+      "path": "NeRF/NeRF-review.md"
+    },
+    {
+      "basename": "Learn-DeepLearning",
+      "path": "Learn/Learn-DeepLearning.md"
+    },
+    {
+      "basename": "Note!!!",
+      "path": "Note!!!.md"
+    },
+    {
+      "basename": "Instant-NSR",
+      "path": "NeRF/Surface Reconstruction/Instant-NSR.md"
     },
     {
       "basename": "Neus-Instant-nsr-pl",
@@ -79,10 +107,6 @@
     {
       "basename": "NeRF++",
       "path": "NeRF/LargeScaleScene/NeRF++.md"
-    },
-    {
-      "basename": "SparseNeuS",
-      "path": "NeRF/Sparse/SparseNeuS.md"
     },
     {
       "basename": "Instant-NSR-code",
@@ -105,20 +129,12 @@
       "path": "NeRF/Efficiency/NeRF-InstantNGP-code.md"
     },
     {
-      "basename": "Neus",
-      "path": "NeRF/Surface Reconstruction/Neus.md"
-    },
-    {
       "basename": "2023-07-04",
       "path": "Reports/2023-07-04.md"
     },
     {
       "basename": "2023-06-19",
       "path": "Reports/2023-06-19.md"
-    },
-    {
-      "basename": "NeRF-code",
-      "path": "NeRF/NeRF-code.md"
     },
     {
       "basename": "NeRF-Studio",
@@ -131,10 +147,6 @@
     {
       "basename": "Learn-Git",
       "path": "Learn/Learn-Git.md"
-    },
-    {
-      "basename": "Learn-Python",
-      "path": "Learn/Learn-Python.md"
     },
     {
       "basename": "Learn-Python_Threading",
@@ -187,18 +199,6 @@
     {
       "basename": "Make-Python_bilibili",
       "path": "Python Practise/Make-Python_bilibili.md"
-    },
-    {
-      "basename": "Make-mengya",
-      "path": "Python Practise/Make-mengya.md"
-    },
-    {
-      "basename": "Make-Py-Tools",
-      "path": "Python Practise/Make-Py-Tools.md"
-    },
-    {
-      "basename": "Front-matter.md",
-      "path": "Templates/Front-matter.md.md"
     }
   ],
   "omittedPaths": [],
