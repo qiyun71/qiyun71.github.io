@@ -4,6 +4,7 @@ date: 2023-07-14 22:06:48
 tags:
     - Neuralangelo
     - Surface Reconstruction
+    - Encoding
 categories: NeRF/Surface Reconstruction
 ---
 [Neuralangelo: High-Fidelity Neural Surface Reconstruction (nvidia.com)](https://research.nvidia.com/labs/dir/neuralangelo/)

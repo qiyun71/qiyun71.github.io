@@ -5,7 +5,6 @@ tags:
     - Encoding
     - Efficiency
     - Sampling
-
 categories: NeRF/Efficiency/Encoding
 ---
 

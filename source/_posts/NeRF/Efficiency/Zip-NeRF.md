@@ -2,7 +2,10 @@
 title: Zip-NeRF
 date: 2023-07-29 12:59:25
 tags:
-    - 
+    - Encoding
+    - Sampling
+    - Zip-NeRF
+    - Efficiency
 categories: NeRF/Efficiency
 ---
 

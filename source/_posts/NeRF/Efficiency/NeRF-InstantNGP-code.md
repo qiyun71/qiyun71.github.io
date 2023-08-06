@@ -3,7 +3,7 @@ title: InstantNGP环境配置和tiny-cuda-nn用法
 date: 2023-07-04 14:40:26
 tags:
     - NeRF
-    - NVIDIA
+    - InstantNGP
     - Python
     - Code
     - Efficiency

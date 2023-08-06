@@ -2,9 +2,12 @@
 title: Math
 date: 2023-07-31 19:59:15
 tags:
-    - 
+    - Math
+    - NeRF
 categories: NeRF/NeRF
 ---
+
+NeRF相关的数学知识
 
 <!-- more -->
 

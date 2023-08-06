@@ -4,6 +4,7 @@ date: 2023-07-16 17:21:17
 tags:
     - Surface Reconstruction
     - PermutoSDF
+    - Encoding
 categories: NeRF/Surface Reconstruction
 ---
 [PermutoSDF (radualexandru.github.io)](https://radualexandru.github.io/permuto_sdf/)

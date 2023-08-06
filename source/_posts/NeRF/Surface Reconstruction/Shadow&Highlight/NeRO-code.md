@@ -205,7 +205,7 @@ data:
 | SDFNetwork            | VanillaFrequency(L=6)        | 2x3x6+3=39                         | 257      | 8     | 256     |
 | SingleVarianceNetwork | None                         | ...                                | ...      | ...   | ...     |
 | NeRFNetwork           | VanillaFrequency(Lp=10,Lv=4) | 2x4x10+4=84(Nerf++:4) & 2x3x4+3=27 | 4        | 8     | 256     |
-| AppShadingNetwork     | VanillaFrequency             |                                    |          |       |         |
+| AppShadingNetwork     | VanillaFrequency             | ...                                | ...      | ...   | ...     | 
 
 - FG_LUT: `[1,256,256,2]`
     - from assets/bsdf_256_256.bin

@@ -5,12 +5,19 @@ tags:
     - Shadow&Highlight
     - Reflective Objects
     - Surface Reconstruction
+    - NeRO
 categories: NeRF/Surface Reconstruction/Shadow&Highlight
 ---
 
 [NeRO: Neural Geometry and BRDF Reconstruction of Reflective Objects from Multiview Images (liuyuan-pal.github.io)](https://liuyuan-pal.github.io/NeRO/)
 
 [NeRO: Neural Geometry and BRDF Reconstruction of Reflective Objects from Multiview Images (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4761535311519940609&noteId=1889502311513975040)
+> [[PDF] NeRD: Neural Reflectance Decomposition From Image Collections](https://readpaper.com/paper/3204455502)
+> [[PDF] SAMURAI: Shape And Material from Unconstrained Real-world Arbitrary Image collections](https://readpaper.com/paper/692131090958098432)
+> [[PDF] Relighting4D: Neural Relightable Human from Videos](https://readpaper.com/paper/4645908786821742593)
+> [[PDF] Neural 3D Scene Reconstruction with the Manhattan-world Assumption](https://readpaper.com/paper/682591079116292096)
+> [[PDF] NeROIC: Neural Rendering of Objects from Online Image Collections](https://readpaper.com/paper/640484809354805248)
+
 
 对金属材质的物体重建效果很好
 
@@ -22,6 +29,9 @@ categories: NeRF/Surface Reconstruction/Shadow&Highlight
 - Stage2：蒙特卡罗采样固定几何形状，重建更精确的表面BRDF和环境光
     - $\mathbf{c}_{\mathrm{diffuse}}=\frac{1}{N_{d}}\sum_{i}^{N_{d}}(1-m)\mathrm{a}L(\omega_{i}),$
     - $\mathbf{c}_{\mathrm{specular}}=\frac{1}{N_{s}}\sum_{i}^{N_{s}}\frac{FG(\omega_{0}\cdot\mathbf{h})}{(\mathbf{n}\cdot\mathbf{h})(\mathbf{n}\cdot\omega_{\mathbf{0}})}L(\omega_{i}),$
+
+<!-- more -->
+
 
 ![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230728142918.png)
 
@@ -70,7 +80,6 @@ $$
 ![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230728161948.png)
 
 
-<!-- more -->
 
 # Conclusion
 
@@ -218,7 +227,6 @@ $\mathbf{c}_{\mathrm{specular}}\approx\underbrace{\int_{\Omega}L(\omega_{i})D(\r
 
 BRDF的积分可以由$\begin{aligned}M_{\mathrm{specular}}=((1-m)*0.04+m*\mathrm{a})*F_1+F_2,\end{aligned}$直接计算
 - where 𝐹1 and 𝐹2 are two pre-computed scalars depending on the roughness 𝜌
-- 
 
 ### 漫反射颜色
 
@@ -324,10 +332,6 @@ BRDF。在实验中，我们观察到我们的**BRDF估计主要存在不正确�
 姿态估计。另一个限制是我们的方法依赖于准确的输入相机姿势，并且估计反射物体上的相机姿势通常需要稳定的纹理，如用于图像匹配的校准板。没有校准板，我们可以从其他共同可见的非反射物体或在IMU等设备的帮助下恢复姿势。
 
 
-
-
-
-
 # 数据集
 
 [https://connecthkuhk-my.sharepoint.com/:f:/g/personal/yuanly_connect_hku_hk/EvNz_o6SuE1MsXeVyB0VoQ0B9zL8NZXjQQg0KknIh6RKjQ?e=jCLH0W](https://connecthkuhk-my.sharepoint.com/:f:/g/personal/yuanly_connect_hku_hk/EvNz_o6SuE1MsXeVyB0VoQ0B9zL8NZXjQQg0KknIh6RKjQ?e=jCLH0W)
@@ -396,11 +400,14 @@ data/model/bear_shape
 - model.pth  --> model_dir = /data/model/bear_shape
 - train.txt --> logs_dir = (/data/model/bear_shape --> /root/tf-logs)
 - val.txt --> logs_dir
-![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230801155011.png)
+
+tensorboard --> train/loss 40k step左，240k step右
+<div style="display:flex; justify-content:space-between;"> <img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230801155011.png" alt="Image 1" style="width:50%;"><div style="width:10px;"></div> <img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230806154947.png" alt="Image 2" style="width:50%;"> </div>
 
 
-data/train_vis/bear_shape-val --> 14999-index-0.jpg
-![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230801152018.png)
+data/train_vis/bear_shape-val --> 14999-index-0.jpg左，244999-index-0.jpg右
+
+<div style="display:flex; justify-content:space-between;"> <img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230801152018.png" alt="Image 1" style="width:50%;"><div style="width:10px;"></div> <img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230806153943.png" alt="Image 2" style="width:50%;"> </div>
 
 
 **Extract mesh from the model.**
@@ -410,6 +417,25 @@ python extract_mesh.py --cfg configs/shape/syn/bell.yaml
 python extract_mesh.py --cfg configs/shape/real/bear.yaml
 ```
 The extracted meshes will be saved at `data/meshes`.
+
+```
+(nero) root@autodl-container-6a4811bc52-8879d78f:~/autodl-tmp/NeRO# python extract_mesh.py --cfg confi  
+gs/shape/real/bear.yaml  
+successfully load bear_shape step 300000!  
+/root/miniconda3/lib/python3.8/site-packages/torch/functional.py:568: UserWarning: torch.meshgrid: in  
+an upcoming release, it will be required to pass the indexing argument. (Triggered internally at ../a  
+ten/src/ATen/native/TensorShape.cpp:2228.)  
+return _VF.meshgrid(tensors, **kwargs) # type: ignore[attr-defined]
+
+将return _VF.meshgrid(tensors, **kwargs) # type: ignore[attr-defined]
+修改为return _VF.meshgrid(tensors, **kwargs, indexing = ‘ij’) # type: ignore[attr-defined]，警告解除
+————————————————
+
+应该是torch版本不匹配，亲测有效，不再出现UserWarning
+————————————————
+版权声明：本文为CSDN博主「余幼时即嗜学^」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/weixin_45103604/article/details/124717008
+```
 
 ### Stage 2  Material estimation or texture
 

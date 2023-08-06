@@ -4,6 +4,7 @@ date: 2023-07-18 13:56:14
 tags:
     - Surface Reconstruction
     - NeuDA
+    - Encoding
 categories: NeRF/Surface Reconstruction
 ---
 

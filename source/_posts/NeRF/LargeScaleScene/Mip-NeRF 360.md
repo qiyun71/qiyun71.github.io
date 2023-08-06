@@ -10,7 +10,7 @@ categories: NeRF/LargeScaleScene
 
 [mip-NeRF 360 (jonbarron.info)](https://jonbarron.info/mipnerf360/)
 
-[[PDF] Mip-NeRF 360: Unbounded Anti-Aliased Neural Radiance Fields-论文阅读讨论-ReadPaper](https://readpaper.com/paper/3215769467)
+[Mip-NeRF 360: Unbounded Anti-Aliased Neural Radiance Fields (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4606723627252981761&noteId=1881063981903029504)
 
 - novel Kalman-like scene parameterization：将场景参数化，将单位球外背景采样的截头锥参数化到r=2的球体内，单位球内的截头锥不受影响
 

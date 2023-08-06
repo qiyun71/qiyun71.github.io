@@ -4,7 +4,7 @@ date: 2023-07-09 12:17:53
 tags:
     - Code
     - Python
-    - NSR
+    - Instant-NSR
 categories: NeRF/Surface Reconstruction
 ---
 

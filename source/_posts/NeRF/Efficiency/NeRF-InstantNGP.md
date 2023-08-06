@@ -3,7 +3,7 @@ title: InstantNGP
 date: 2023-06-27 18:31:55
 tags:
     - NeRF
-    - NVIDIA
+    - InstantNGP
     - Efficiency
 categories: NeRF/Efficiency
 ---

@@ -7,30 +7,63 @@ tags:
 categories: NeRF
 ---
 
-自己的项目：基于Instant-nsr-pl——[yq010105/NeRF-Mine (github.com)](https://github.com/yq010105/NeRF-Mine)
+基于Instant-nsr-pl(NSR,NGP,PytorchLightning)代码构建——[yq010105/NeRF-Mine (github.com)](https://github.com/yq010105/NeRF-Mine)
+- 保留omegaconf、nerfacc、Mip-nerf，类似文件结构
+- 去除pytorch-lightning，使用pytorch
+
+NeRF主要部分：
+- 神经网络结构-->训练出来模型，即3D模型的隐式表达
+    - 网络类型一般为MLP，相当于训练一个函数，输入采样点的位置，可以输出该点的信息(eg: density, sdf, color...)
+- [采样方式](/2023/07/29/NeRF/NeRF/Sampling/)：沿着光线进行采样获取采样点
+- [位置编码](/2023/07/20/NeRF/NeRF/Encoding/)：对采样点的位置xyz和方向dir进行编码，使得MLP的输入为高频的信息
+- [数学相关](/2023/07/31/NeRF/NeRF/Math/)：光线的生成、坐标变换、体渲染公式、BRDF……
+- 体渲染函数：
+    - NeRF：$\mathrm{C}(r)=\int_{\mathrm{t}_{\mathrm{n}}}^{\mathrm{t}_{\mathrm{f}}} \mathrm{T}(\mathrm{t}) \sigma(\mathrm{r}(\mathrm{t})) \mathrm{c}(\mathrm{r}(\mathrm{t}), \mathrm{d}) \mathrm{dt} =\sum_{i=1}^{N} T_{i}\left(1-\exp \left(-\sigma_{i} \delta_{i}\right)\right) \mathbf{c}_{i}$
+        - 不透明度$\sigma$，累计透光率 --> 权重
+        - 颜色值
+    - Neus：$C(\mathbf{o},\mathbf{v})=\int_{0}^{+\infty}w(t)c(\mathbf{p}(t),\mathbf{v})\mathrm{d}t$
+        - sdf, dirs, gradients, invs --> $\alpha$ --> 权重
+        - 颜色值
+    - NeRO：$\mathbf{c}(\omega_{0})=\mathbf{c}_{\mathrm{diffuse}}+\mathbf{c}_{\mathrm{specular}} =\int_{\Omega}(1-m)\frac{\mathbf{a}}{\pi}L(\omega_{i})(\omega_{i}\cdot\mathbf{n})d\omega_{i} + \int_{\Omega}\frac{DFG}{4(\omega_{i}\cdot\mathbf{n})(\omega_{0}\cdot\mathbf{n})}L(\omega_{i})(\omega_{i}\cdot\mathbf{n})d\omega_{i}$
+        - 漫反射颜色：Light(直射光)，金属度m、反照率a
+        - 镜面反射颜色：Light(直射光+间接光)，金属度m、反照率a、粗糙度$\rho$ ，碰撞概率occ_prob，间接光碰撞human的human_light
+        - 详情见[NeRO Code](/2023/08/01/NeRF/Surface%20Reconstruction/Shadow&Highlight/NeRO-code/)
+- 隐式模型导出(.stl、.obj、.ply等)显式模型：利用trimesh，torchmcubes，mcubes等库
+    - 根据sdf和threshold，获取物体表面的vertices和faces(如需还要生成vertices对应的colors)。
+    - 然后根据vertices、faces和colors，由trimesh生成mesh并导出模型为obj等格式
 
 <!-- more -->
 
-pip install -r requirements
-
-tensorboard --port 6007 --logdir /root/tf-logs
-
-文件结构：
+NeRF-Mine文件结构：
 - confs/ 配置文件
+    - dtu.yaml
 - encoder/ 编码方式
+    - get_encoding.py
+    - frequency.py
+    - hashgrid.py
+    - spherical.py
 - process_data/ 处理数据集
+    - dtu.py
 - models/ 放一些网络的结构和网络的运行和方法
+    - network.py 基本网络结构
+    - neus.py neus的网络结构
+    - utils.py
 - systems/ 训练的程序
+    - neus.py 训练neus的程序
 - utils/ 工具类函数
-- run.py
-
+- run.py 主程序
 - inputs/ 数据集
 - outputs/ 输出和log文件
     - logs filepath: /root/tf-logs/name_in_conf/trial_name
 
 ```bash
-# train
-python run.py --config ./confs/dtu.yaml --train
+# 训练
+python run.py --config confs/dtu.yaml --train
+# 恢复训练
+python run.py --config confs/dtu.yaml --train --resume ckpt_path
+
+# test to 生成mesh + video
+python run.py --config confs/dtu.yaml --test --resume ckpt_path
 ```
 
 # 代码结构
@@ -46,7 +79,6 @@ s-dtu-Miku', 'trial_name': '@20230723-131350', 'save_dir': './outputs\\neus-dtu-
 30723-131350\\save', 'ckpt_dir': './outputs\\neus-dtu-Miku\\@20230723-131350\\ckpt', 'code  
 _dir': './outputs\\neus-dtu-Miku\\@20230723-131350\\code', 'config_dir': './outputs\\neus-  
 dtu-Miku\\@20230723-131350\\config'}
-
 ```
 
 ## run.py
@@ -182,42 +214,31 @@ def config_parser():
        device='cuda:0')}
 ```
 
-# NeRF个人理解
-
-## 20230705-NeRF_Neus_InstantNGP
-
-基于NeRF的方法主要包括以下部分：
-
-- 神经网络结构-->训练出来模型
-- 位置编码方式：将点云位置使用编码得到高频的信息
-- 体渲染函数：
-  - 不透明度，累计透光率，权重，颜色
-- 采样点的采样方式(精采样)
-- 光线的生成方式，near和far的计算方式
-
-在NeRF的基础上生成mesh模型：需要确定物体的表面，用不同的方法可以生成不同的隐式模型，如NeRF为位置转密度颜色，Neus为位置转SDF。以空间原点为中心，根据bound_min和bound_max生成一个resolution x resolution x resolution立方点云模型，根据隐式模型，生成其中每个点的密度颜色或者sdf值，然后选择零水平集为物体的表面，根据物体表面上的点生成三角形网格，并得到mesh模型。
 
 
-## 质量评估指标
+
+# 质量评估指标
 
 L1_loss : $loss(x,y)=\frac{1}{n}\sum_{i=1}^{n}|y_i-f(x_i)|$
 L2_loss: $loss(x,y)=\frac{1}{n}\sum_{i=1}^{n}(y_i-f(x_i))^2$
 
 在标准设置中通过NeRF进行的新颖视图合成使用了视觉质量评估指标作为基准。这些指标试图评估单个图像的质量，要么有(完全参考)，要么没有(无参考)地面真相图像。峰值信噪比(PSNR)，结构相似指数度量(SSIM)[32]，学习感知图像补丁相似性(LPIPS)[33]是目前为止在NeRF文献中最常用的。
 
-### PSNR↑
+## PSNR↑
 峰值信噪比Peak Signal to Noise Ratio
 PSNR是一个无参考的质量评估指标
 $PSNR(I)=10\cdot\log_{10}(\dfrac{MAX(I)^2}{MSE(I)})$
 $MSE=\frac1{mn}\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}[I(i,j)-K(i,j)]^2$
 $MAX(I)^{2}$（动态范围可能的最大像素值，b位：$2^{b}-1$），eg: 8位图像则$MAX(I)^{2} = 255$
 
-### SSIM↑
+## SSIM↑
 结构相似性Structural Similarity Index Measure
 SSIM是一个完整的参考质量评估指标。
 $SSIM(x,y)=\dfrac{(2\mu_x\mu_y+C_1)(2\sigma_{xy}+C_2)}{(\mu_x^2+\mu_y^2+C_1)(\sigma_x^2+\sigma_y^2+C_2)}$
 衡量了两张图片之间相似度：($C_1,C_2$为常数防止除以0)
-$S(x,y)=l(x,y)^{{\alpha}}\cdot c(x,y)^{{\beta}}\cdot s(x,y)^{{\gamma}}$
+
+$S(x,y)=l(x,y)^{\alpha}\cdot c(x,y)^{\beta}\cdot s(x,y)^{\gamma}$
+
 $C_1=(K_1L)^2,C_2=(K_2L)^2,C_3=C_2/2$
 $K_{1}= 0.01 , K_{2} = 0.03 , L = 2^{b}-1$
 - 亮度，图像x与图像y亮度 $l(x,y) =\frac{2\mu_x\mu_y+C_1}{\mu_x^2+\mu_y^2+C_1}$
@@ -235,7 +256,7 @@ $\mu_{x}=\sum_{i}w_{i}x_{i}$
 $\sigma_{x}=(\sum_{i}w_{i}(x_{i}-\mu_{x})^{2})^{1/2}$
 $\sigma_{xy}=\sum_{i}w_{i}(x_{i}-\mu_{x})(y_{i}-\mu_{y})$
 
-### LPIPS↓
+## LPIPS↓
 学习感知图像块相似度Learned Perceptual Image Patch Similarity
 **LPIPS 比传统方法（比如L2/PSNR, SSIM, FSIM）更符合人类的感知情况**。**LPIPS的值越低表示两张图像越相似，反之，则差异越大。**
 ![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230801170138.png)
@@ -243,13 +264,14 @@ $\sigma_{xy}=\sum_{i}w_{i}(x_{i}-\mu_{x})(y_{i}-\mu_{y})$
 LPIPS是一个完整的参考质量评估指标，它使用了学习的卷积特征。分数是由多层特征映射的加权像素级MSE给出的。
 $LPIPS(x,y)=\sum\limits_{l}^{L}\dfrac{1}{H_lW_l}\sum\limits_{h,w}^{H_l,W_l}||w_l\odot(x^l_{hw}-y^l_{hw})||^2_2$
 
-## Dataset
+# Dataset
 
 
-DTU. The DTU dataset [Large Scale Multi-view Stereopsis Evaluation-论文阅读讨论-ReadPaper](https://readpaper.com/paper/2085905957) consists of different static scenes with a wide variety of materials, appearance, and geometry, where each scene contains 49 or 64 images with the resolution of 1600 x 1200. We use the same 15 scenes as IDR [[PDF] SPIDR: SDF-based Neural Point Fields for Illumination and Deformation-论文阅读讨论-ReadPaper](https://readpaper.com/paper/4679926840484184065) to evaluate our approach. Experiments are conducted to investigate both the with (w/) and without (w/o) foreground mask settings. As DTU provides the ground truth point clouds, we measure the recovered surfaces through the commonly studied Chamfer Distance (CD) for quantitative comparisons.
+**DTU**. The DTU dataset [Large Scale Multi-view Stereopsis Evaluation-论文阅读讨论-ReadPaper](https://readpaper.com/paper/2085905957) consists of different static scenes with a wide variety of materials, appearance, and geometry, where each scene contains 49 or 64 images with the resolution of 1600 x 1200. We use the same 15 scenes as IDR [[PDF] SPIDR: SDF-based Neural Point Fields for Illumination and Deformation-论文阅读讨论-ReadPaper](https://readpaper.com/paper/4679926840484184065) to evaluate our approach. Experiments are conducted to investigate both the with (w/) and without (w/o) foreground mask settings. As DTU provides the ground truth point clouds, we measure the recovered surfaces through the commonly studied Chamfer Distance (CD) for quantitative comparisons.
 
-BlendedMVS. The BlendedMVS dataset [[PDF] BlendedMVS: A Large-scale Dataset for Generalized Multi-view Stereo Networks-论文阅读讨论-ReadPaper](https://readpaper.com/paper/2990386223) consists of a variety of complex scenes, where each scene provides 31 to 143 multi-view images with the image size of 768 ×576. We use the same 7 scenes as NeuS [[PDF] NeuS: Learning Neural Implicit Surfaces by Volume Rendering for Multi-view Reconstruction-论文阅读讨论-ReadPaper](https://readpaper.com/paper/3173522942) to validate our method. We only present qualitative comparisons on this dataset, because the ground truth point clouds are not available.
+**BlendedMVS**. The BlendedMVS dataset [[PDF] BlendedMVS: A Large-scale Dataset for Generalized Multi-view Stereo Networks-论文阅读讨论-ReadPaper](https://readpaper.com/paper/2990386223) consists of a variety of complex scenes, where each scene provides 31 to 143 multi-view images with the image size of 768 ×576. We use the same 7 scenes as NeuS [[PDF] NeuS: Learning Neural Implicit Surfaces by Volume Rendering for Multi-view Reconstruction-论文阅读讨论-ReadPaper](https://readpaper.com/paper/3173522942) to validate our method. We only present qualitative comparisons on this dataset, because the ground truth point clouds are not available.
 
+## 自定义数据集
 
 数据集的构建依赖Colmap即SFM和Multi-View Stereo
 - Structure-from-Motion Revisited
@@ -349,3 +371,10 @@ lr太低可能陷入局部最优
 NOTE：训练过程中loss突然变得很大
 TODO：防止过拟合-->添加 torch.cuda.amp.GradScaler() 解决 loss为nan或inf的问题
 ```
+
+## 导出mesh区域错误
+
+![image.png|500](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230806160731.png)
+
+- 可能是mesh网格的ijk区域大小设置有问题
+- 或没有将bound进行坐标变换到训练时的世界坐标系
