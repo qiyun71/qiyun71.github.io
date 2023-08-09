@@ -4,10 +4,10 @@
 
 # Site
 title: YunQi
-subtitle: ''
+subtitle: 'Note'
 description: ''
 keywords:
-author: Yun qi
+author: Qi Yun
 language: en
 timezone: ''
 
@@ -113,7 +113,7 @@ hexo-asset-folder: true
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: 'git'
-  repo: 'https://github.com/yq010105/yq010105.github.io.git'
+  repo: 'https://github.com/qiyun71/qiyun71.github.io.git'
   branch: 'master'
 
 search:

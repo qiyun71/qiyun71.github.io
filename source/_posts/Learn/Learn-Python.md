@@ -161,7 +161,7 @@ with open('file.txt','w',encoding='utf-8') as f:
 
 > 参考[网站](https://blog.csdn.net/xrinosvip/article/details/82019844 "CSDN")
 
-# 4. os 中创建文件夹
+# 4. os
 
 ```py
 import os
@@ -172,6 +172,16 @@ if not os.path.exists(main_path):   #如果该路径不存在
 ```
 
 **删除文件:**`os.remove(path)`
+
+## os.path.abspath
+
+```
+print(os.path.abspath('.'))
+
+运行PS E:\BaiduSyncdisk\NeRF_Proj\NeRO> & F:/miniconda/envs/nero/python.exe e:/BaiduSyncdisk/NeRF_Proj/NeRO/blender_backend/relight_backend.py
+
+输出：E:\BaiduSyncdisk\NeRF_Proj\NeRO
+```
 
 # 5. 将图片保存在文件夹中
 

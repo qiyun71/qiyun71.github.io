@@ -5,7 +5,7 @@ top: true
 tags:
   - NeRF
 categories: NeRF
-date updated: 2023-08-06 17:06
+date updated: 2023-08-09T22:24:16.000Z
 ---
 
 | My post                                                                                                                                                        | Brief description     | status          |
@@ -21,9 +21,9 @@ date updated: 2023-08-06 17:06
 | My post                                      | Brief description  | status                                                                                                       |
 | -------------------------------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------ |
 | [Nerfstudio](/2023/06/15/NeRF/NeRF-Studio/)  | 一个更加方便训练和查看训练过程的框架 | Completed in AutoDL                                                                                          |
-| [NeRF Review](/2023/06/25/NeRF/NeRF-review/) | 追踪一些NeRF的进展和笔记link        | Following [Jason陪你练绝技 in Bilibili](https://space.bilibili.com/455056488/channel/collectiondetail?sid=910368) |
+| [NeRF Review](/2023/06/25/NeRF/NeRF-review/) | 追踪一些NeRF的进展和笔记link | Following [Jason陪你练绝技 in Bilibili](https://space.bilibili.com/455056488/channel/collectiondetail?sid=910368) |
 
-Related link :  [3D Reconstruction](https://paperswithcode.com/task/3d-reconstruction) [awesome-NeRF-papers](https://github.com/lif314/awesome-NeRF-papers)
+Related link :  [3D Reconstruction](https://paperswithcode.com/task/3d-reconstruction) | [awesome-NeRF-papers](https://github.com/lif314/awesome-NeRF-papers)
 
 <!-- more -->
 

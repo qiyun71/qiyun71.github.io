@@ -11,7 +11,7 @@ Python写的一些小工具
 <!-- more -->
 
 # video2image
-```
+```python
 import cv2
 import os
 
@@ -53,7 +53,7 @@ split_video_to_images(video_path, output_folder, frame_interval)
 
 To get images dataset like BlendedMVS
 
-```
+```python
 # coding:utf-8
 import cv2
 import os
@@ -87,4 +87,56 @@ def get_mask(dir):
             img_mask = img_mask * 255
             cv2.imwrite(img_file_mask, img_mask)
     print('get mask done!')
+```
+
+# 利用ffmpeg的图片转视频
+
+NeRO的Relight后生成图片，需要生成一个可循环的视频
+
+```python
+import os
+from PIL import Image
+
+just_video = True
+# 输入文件夹路径和输出文件夹路径
+input_folder = "E:\\BaiduSyncdisk\\NeRF_Proj\\NeRO\\data\\relight\\bear-neon\\"
+image_file_suffix = None
+
+if not just_video:
+    # 获取输入文件夹中的所有图片文件
+    image_files = [f for f in os.listdir(input_folder) if f.lower().endswith(('.jpg', '.jpeg', '.png', '.gif'))]
+    image_files.sort(key=lambda x:int(x.split('.')[0]))
+    # print(image_files)
+    image_num =  len(image_files)
+    print('==>图片数量: ' + str(image_num))
+
+    out_image_th = 0
+    image_file_suffix = image_files[0].split('.')[-1]
+    # 倒序复制图片
+    for image_file in image_files:
+        out_image_name = image_num * 2 - 1 - out_image_th
+        out_image_name = str(out_image_name) + '.' + image_file_suffix
+        print("==>正在处理图片：", image_file , '-->' , out_image_name)
+        out_image_th += 1
+        input_path = os.path.join(input_folder, image_file)
+        output_path = os.path.join(input_folder, out_image_name)
+
+        # 打开图片并倒序保存
+        image = Image.open(input_path)
+        image.save(output_path)
+
+    print("==>处理完成")
+
+
+import subprocess
+# ffmpeg -r 15 -i %3d.jpg video.avi -vf  "scale=ih*16/9:ih:force_original_aspect_ratio=decrease,pad=ih*16/9:ih:(ow-iw)/2:(oh-ih)/2"
+frame = 120
+video_name = 'nero_relight.mp4'
+if image_file_suffix is None:
+    image_file_suffix = 'png'
+cmds=[
+    'ffmpeg', '-r' , str(frame) , '-i' , input_folder + '%d.'+image_file_suffix ,
+    '-vf' , "scale=ih*16/9:ih:force_original_aspect_ratio=decrease,pad=ih*16/9:ih:(ow-iw)/2:(oh-ih)/2" , video_name
+]
+subprocess.run(cmds)
 ```

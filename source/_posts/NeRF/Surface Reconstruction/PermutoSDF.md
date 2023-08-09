@@ -7,8 +7,14 @@ tags:
     - Encoding
 categories: NeRF/Surface Reconstruction
 ---
-[PermutoSDF (radualexandru.github.io)](https://radualexandru.github.io/permuto_sdf/)
-[PermutoSDF: Fast Multi-View Reconstruction with Implicit Surfaces using Permutohedral Lattices (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4738634003066650625&noteId=1873869258829705728)
+
+| Title     | PermutoSDF: Fast Multi-View Reconstruction with Implicit Surfaces using Permutohedral Lattices                                                                                                                 |
+| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Author    | [Radu Alexandru Rosu](https://radualexandru.github.io/), [Sven Behnke](http://www.ais.uni-bonn.de/behnke/)                                                                                                     |
+| Conf/Jour | CVPR                                                                                                                                                                                                            |
+| Year      | 2023                                                                                                                                                                                                           |
+| Project   | [PermutoSDF (radualexandru.github.io)](https://radualexandru.github.io/permuto_sdf/)                                                                                                                           |
+| Paper     | [PermutoSDF: Fast Multi-View Reconstruction with Implicit Surfaces using Permutohedral Lattices (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4738634003066650625&noteId=1873869258829705728) |
 
 ![image.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230716172220.png)
 

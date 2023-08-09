@@ -7,11 +7,13 @@ tags:
 categories: NeRF/Sampling
 ---
 
-[google/mipnerf (github.com)](https://github.com/google/mipnerf)
-
-[Mip-NeRF: A Multiscale Representation for Anti-Aliasing Neural Radiance Fields (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4557703956856315905&noteId=1753570799523020032)
-
-
+| Title     | Mip-NeRF: A Multiscale Representation for Anti-Aliasing Neural Radiance Fields                                                                                                                 |
+| --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Author    | Jonathan T. Barron and Ben Mildenhall and Matthew Tancik and Peter Hedman and Ricardo Martin-Brualla and Pratul P. Srinivasan                                                                  |
+| Conf/Jour | 2021 IEEE/CVF International Conference on Computer Vision (ICCV)                                                                                                                                                                                           |
+| Year      | 2021                                                                                                                                                                                           |
+| Project   | [google/mipnerf (github.com)](https://github.com/google/mipnerf)                                                                                                                               |
+| Paper     | [Mip-NeRF: A Multiscale Representation for Anti-Aliasing Neural Radiance Fields (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4557703956856315905&noteId=1753570799523020032) |
 
 ![image.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230721125154.png)
 

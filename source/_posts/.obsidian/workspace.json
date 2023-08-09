@@ -4,29 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "e72c19f536a05a7f",
+        "id": "1d1daab5e8f97aea",
         "type": "tabs",
         "children": [
           {
-            "id": "f951957718c268b2",
+            "id": "fe5cdbad7039edf7",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "NeRF/Surface Reconstruction/Shadow&Highlight/NeRO.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "0833dd5bc49395fc",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "NeRF/Surface Reconstruction/UNISURF.md",
+                "file": "Python Practise/Make-Py-Tools.md",
                 "mode": "source",
                 "backlinks": false,
                 "source": false
@@ -45,7 +32,7 @@
       {
         "id": "4b1070af652f8263",
         "type": "tabs",
-        "dimension": 72.81767955801105,
+        "dimension": 58.232044198895025,
         "children": [
           {
             "id": "8e8a871735863769",
@@ -94,7 +81,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "NeRF/Surface Reconstruction/Shadow&Highlight/NeRO.md",
+                "file": "Python Practise/Make-Py-Tools.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -112,23 +99,6 @@
               "type": "bookmarks",
               "state": {}
             }
-          }
-        ]
-      },
-      {
-        "id": "3d2f21c2dced65ad",
-        "type": "tabs",
-        "dimension": 27.18232044198895,
-        "children": [
-          {
-            "id": "086707e82c339e3f",
-            "type": "leaf",
-            "state": {
-              "type": "outline",
-              "state": {
-                "file": "NeRF/Surface Reconstruction/Shadow&Highlight/NeRO.md"
-              }
-            }
           },
           {
             "id": "649ba9adaacda732",
@@ -142,10 +112,27 @@
             }
           }
         ]
+      },
+      {
+        "id": "76565ee9f59edd2d",
+        "type": "tabs",
+        "dimension": 41.767955801104975,
+        "children": [
+          {
+            "id": "086707e82c339e3f",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Python Practise/Make-Py-Tools.md"
+              }
+            }
+          }
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 257.5001640319824
+    "width": 243.50016403198242
   },
   "right": {
     "id": "030ccac2adcfb23a",
@@ -161,7 +148,7 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "NeRF/Surface Reconstruction/Shadow&Highlight/NeRO.md",
+                "file": "Python Practise/Make-Py-Tools.md",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -206,12 +193,11 @@
               "state": {}
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 229.5,
+    "width": 246.5,
     "collapsed": true
   },
   "left-ribbon": {
@@ -229,34 +215,34 @@
       "workspaces:管理工作区布局": false
     }
   },
-  "active": "f951957718c268b2",
+  "active": "fe5cdbad7039edf7",
   "lastOpenFiles": [
-    "NeRF/Surface Reconstruction/UNISURF.md",
-    "NeRF/NeRF-review.md",
-    "NeRF/Efficiency/NeRF-InstantNGP.md",
-    "NeRF/Efficiency/NeRF-InstantNGP-code.md",
-    "NeRF/Efficiency/Zip-NeRF.md",
-    "NeRF/Efficiency/Encoding/Tri-MipRF.md",
-    "NeRF/Interesting/PAniC-3D.md",
-    "NeRF/LargeScaleScene/NeRF++.md",
-    "NeRF/LargeScaleScene/Mip-NeRF 360.md",
-    "NeRF/NeRF/Encoding.md",
-    "NeRF/NeRF/Math.md",
-    "NeRF/NeRF/Sampling.md",
-    "NeRF/Sampling/NerfAcc.md",
-    "NeRF/Sampling/Mip-NeRF.md",
-    "NeRF/Sparse/FORGE.md",
-    "NeRF/Sparse/SparseNeuS.md",
-    "NeRF/Surface Reconstruction/PermutoSDF.md",
     "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl-code.md",
     "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl.md",
-    "NeRF/Surface Reconstruction/Neus.md",
-    "NeRF/Surface Reconstruction/Neus-code.md",
-    "NeRF/Surface Reconstruction/Neuralangelo.md",
-    "NeRF/Surface Reconstruction/NeuDA.md",
-    "NeRF/Surface Reconstruction/Instant-NSR-code.md",
-    "NeRF/Surface Reconstruction/Instant-NSR.md",
+    "NeRF/Efficiency/Encoding/Tri-MipRF.md",
+    "NeRF/Surface Reconstruction/Shadow&Highlight/NeRO.md",
+    "Templates/Front-matter.md.md",
+    "Note!!!.md",
+    "NeRF/Surface Reconstruction/Shadow&Highlight/ShadowNeuS.md",
+    "Python Practise/Make-mengya.md",
     "NeRF/Surface Reconstruction/Shadow&Highlight/NeRO-code.md",
+    "NeRF/Surface Reconstruction/Instant-NSR.md",
+    "NeRF/Sparse/SparseNeuS.md",
+    "NeRF/Sparse/FORGE.md",
+    "NeRF/Sampling/NerfAcc.md",
+    "NeRF/Sampling/Mip-NeRF.md",
+    "NeRF/NeRF/Encoding.md",
+    "NeRF/LargeScaleScene/NeRF++.md",
+    "NeRF/LargeScaleScene/Mip-NeRF 360.md",
+    "NeRF/Interesting/PAniC-3D.md",
+    "NeRF/Efficiency/Zip-NeRF.md",
+    "NeRF/Efficiency/TensoRF.md",
+    "NeRF/Efficiency/Strivec.md",
+    "NeRF/Efficiency/NeRF-InstantNGP.md",
+    "NeRF/NeRF/Math.md",
+    "NeRF/NeRF-review.md",
+    "NeRF/Efficiency/NeRF-InstantNGP-code.md",
+    "NeRF/NeRF-Studio.md",
     "NeRF/NeRF.canvas",
     "NeRF/Interesting",
     "NeRF/Interested",

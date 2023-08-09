@@ -205,7 +205,15 @@ data:
 | SDFNetwork            | VanillaFrequency(L=6)        | 2x3x6+3=39                         | 257      | 8     | 256     |
 | SingleVarianceNetwork | None                         | ...                                | ...      | ...   | ...     |
 | NeRFNetwork           | VanillaFrequency(Lp=10,Lv=4) | 2x4x10+4=84(Nerf++:4) & 2x3x4+3=27 | 4        | 8     | 256     |
-| AppShadingNetwork     | VanillaFrequency             | ...                                | ...      | ...   | ...     | 
+| AppShadingNetwork     | VanillaFrequency             | ...                                | ...      | ...   | ...     |
+| metallic_predictor    | None                         | 256 + 3 = 259                      | 1        | 4     | 256     |
+| roughness_predictor   | None                         | 256 + 3 = 259                      | 1        | 4     | 256     |
+| albedo_predictor      | None                         | 256 + 3 = 259                      | 3        | 4     | 256     |
+| outer_light           | IDE(Ref-NeRF)                | 72                                 | 3        | 4     | 256     |
+| inner_light           | VanillaFrequency+IDE         | 51 + 72 = 123                      | 3        | 4     | 256     |
+| inner_weight          | VanillaFrequency             | 51 + 39 = 90                       | 1        | 4     | 256     |
+| human_light_predictor | IPE                          | 2 x 2 x 6 = 24                     | 4        | 4     | 256     |
+
 
 - FG_LUT: `[1,256,256,2]`
     - from assets/bsdf_256_256.bin
@@ -402,5 +410,112 @@ return F.l1_loss(occ_prob[mask], occ_prob_gt)
 
 ## NeROMaterialRenderer
 
-# 
+### MLP
 
+shader_network = MCShadingNetwork
+- feats_network = MaterialFeatsNetwork
+    - 51-->256-->256-->256-->256+51-->256-->256-->256-->256
+    - 51: pts = get_embedder(8,3)(x) = 8 x 2 x 3 + 3 = 51
+- metallic_predictor
+    - 259-->256-->256-->256-->1
+    - 259 = 256(feature) + 3(pts)
+- roughness_predictor
+    - 259-->256-->256-->256-->1
+- albedo_predictor
+    - 259-->256-->256-->256-->3
+- outer_light
+    - 144-->256-->256-->256-->3
+    - 144 = 72 x 2 = `torch.cat([outer_enc, sphere_pts], -1)`
+        - outer_enc = self.sph_enc(directions, 0) = 72
+        - sphere_pts = self.sph_enc(sphere_pts, 0) = 72
+- human_light
+    - 24-->256-->256-->256-->4
+    - 24: `pos_enc = IPE(mean, var, 0, 6)  # 2*2*6`
+- inner_light
+    - 123(51 + 72)-->256-->256-->256-->3
+    - 123 = `torch.cat([pos_enc, dir_enc], -1)`
+        - pos_enc = self.pos_enc(points)  = 51
+            - self.pos_enc = get_embedder(8, 3)
+        - dir_enc = self.sph_enc(reflections, 0) = 72
+
+| MLP                 | Encoding             | in_dims            | out_dims | layer | neurons |
+| ------------------- | -------------------- | ------------------ | -------- | ----- | ------- |
+| light_pts           | single parameter     | ...                | ...      | ...   | ...     |
+| MCShadingNetwork    | ...                  | ...                | ...      | ...   | ...     |
+| feats_network       | VanillaFrequency     | 8 x 2 x 3 + 3 = 51 | 256      | 8     | 256     |
+| metallic_predictor  | None                 | 256 + 3 = 259      | 1        | 4     | 256     |
+| roughness_predictor | None                 | 256 + 3 = 259      | 1        | 4     | 256     |
+| albedo_predictor    | None                 | 256 + 3 = 259      | 3        | 4     | 256     |
+| outer_light         | IDE                  | 72 + 72 = 144      | 3        | 4     | 256     |
+| human_light         | IPE                  | 2 x 2 x 6 = 24     | 4        | 4     | 256     |
+| inner_light         | VanillaFrequency+IDE | 51 + 72 = 123      | 3        | 4     | 256     |
+
+
+# Relight
+
+```cmd
+python relight.py --blender <path-to-your-blender> \
+                  --name bear-neon \
+                  --mesh data/meshes/bear_shape-300000.ply \
+                  --material data/materials/bear_material-100000 \
+                  --hdr data/hdr/neon_photostudio_4k.exr
+
+eg: 
+python relight.py --blender F:\Blender\blender.exe --name bear-neon --mesh data/meshes/bear_shape-300000.ply --material data/materials/bear_material-100000 --hdr data/hdr/neon_photostudio_4k.exr
+```
+
+```python
+import argparse
+import subprocess
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--blender', type=str)
+    parser.add_argument('--mesh', type=str)
+    parser.add_argument('--material', type=str)
+    parser.add_argument('--hdr', type=str)
+    parser.add_argument('--name', type=str)
+    parser.add_argument('--trans', dest='trans', action='store_true', default=False)
+    args = parser.parse_args()
+
+    cmds=[
+        args.blender, '--background', '--python', 'blender_backend/relight_backend.py', '--',
+        '--output', f'data/relight/{args.name}',
+        '--mesh', args.mesh,
+        '--material', args.material,
+        '--env_fn', args.hdr,
+    ]
+    if args.trans:
+        cmds.append('--trans')
+    subprocess.run(cmds)
+
+if __name__=="__main__":
+    main()
+```
+
+运行python relight.py后，子进程在cmd中运行以下命令：
+
+```
+F:\Blender\blender.exe --background # 无UI界面渲染，在后台运行
+--python blender_backend/relight_backend.py # 运行给定的 Python 脚本文件
+-- # 结束option processing，后续参数保持不变。通过 Python 的 sys.argv 访问，下面的参数用于python脚本程序
+--output data/relight/bear-neon
+--mesh data/meshes/bear_shape-300000.ply
+--material data/materials/bear_material-100000
+--env_fn  data/hdr/neon_photostudio_4k.exr
+
+即先后台运行blender，在blender中运行python脚本：
+python relight_backend.py --output data/relight/bear-neon
+    --mesh data/meshes/bear_shape-300000.ply
+    --material data/materials/bear_material-100000
+    --env_fn  data/hdr/neon_photostudio_4k.exr
+```
+
+## blender中运行的python脚本
+
+**blender_backend/relight_backend.py**: 
+
+import bpy
+
+**blender_backend/blender_utils.py**: 

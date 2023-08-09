@@ -7,8 +7,15 @@ tags:
     - Encoding
 categories: NeRF/Surface Reconstruction
 ---
-[Neuralangelo: High-Fidelity Neural Surface Reconstruction (nvidia.com)](https://research.nvidia.com/labs/dir/neuralangelo/)
-[Neuralangelo: High-Fidelity Neural Surface Reconstruction (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4766570421235482625&noteId=1871247300347519744)
+
+| Title     | Neuralangelo: High-Fidelity Neural Surface Reconstruction                                                                                                                                                                                                                                                                               |
+| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Author    | [Zhaoshuo Li](https://mli0603.github.io/)[Thomas Müller](https://tom94.net/)[Alex Evans](https://research.nvidia.com/person/alex-evans)[Russell H. Taylor](https://www.cs.jhu.edu/~rht/)[Mathias Unberath](https://mathiasunberath.github.io/)[Ming-Yu Liu](https://mingyuliu.net/)[Chen-Hsuan Lin](https://chenhsuanlin.bitbucket.io/) |
+| Conf/Jour | IEEE Conference on Computer Vision and Pattern Recognition (CVPR)                                                                                                                                                                                                                                                                       |
+| Year      | 2023                                                                                                                                                                                                                                                                                                                                    |
+| Project   | [Neuralangelo: High-Fidelity Neural Surface Reconstruction (nvidia.com)](https://research.nvidia.com/labs/dir/neuralangelo/)                                                                                                                                                                                                            |
+| Paper     | [Neuralangelo: High-Fidelity Neural Surface Reconstruction (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4766570421235482625&noteId=1871247300347519744)                                                                                                                                                               |
+
 **创新：新的计算梯度的方法——数值梯度、粗到精地逐步优化——数值梯度的补偿$\epsilon$，粗网格先激活，当$\epsilon$减小到精网格的空间大小时，逐步激活精网格**
 SR Issue: Current methods struggle to recover detailed structures of real-world scenes
 To address : present Neuralangelo (combines the representation power of multi-resolution 3D hash grids with neural surface rendering) 

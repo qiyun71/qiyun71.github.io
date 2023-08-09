@@ -9,9 +9,13 @@ tags:
 categories: NeRF/Efficiency
 ---
 
-[Zip-NeRF (jonbarron.info)](https://jonbarron.info/zipnerf/)
-
-[Zip-NeRF: Anti-Aliased Grid-Based Neural Radiance Fields (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4762187901551247361&noteId=1892446988470107392)
+| Title     | Zip-NeRF: Anti-Aliased Grid-Based Neural Radiance Fields                                                                                                                                                                                                |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Author    | [Jonathan T. Barron](https://jonbarron.info/)[Ben Mildenhall](http://bmild.github.io/)[Dor Verbin](http://dorverbin.github.io/)[Pratul P. Srinivasan](https://pratulsrinivasan.github.io/)[Peter Hedman](https://phogzone.com/) |
+| Conf/Jour | ICCV                                                                                                                                                                                                                            |
+| Year      | 2023                                                                                                                                                                                                                            |
+| Project   | [Zip-NeRF (jonbarron.info)](https://jonbarron.info/zipnerf/)                                                                                                                                                                    |
+| Paper     | [Zip-NeRF: Anti-Aliased Grid-Based Neural Radiance Fields (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4762187901551247361&noteId=1892446988470107392)                                                        |
 
 Zip-NeRF在抗混叠(包括NeRF从空间坐标到颜色和密度的学习映射的空间混叠，以及沿每条射线在线蒸馏过程中使用的损失函数的z-混叠)方面都取得了很好的效果，并且速度相比前作Mip-NeRF 360 提高了24X
 

@@ -7,6 +7,7 @@ tags:
     - Python
     - Code
     - Efficiency
+    - Encoding
 categories: NeRF/Efficiency
 ---
 

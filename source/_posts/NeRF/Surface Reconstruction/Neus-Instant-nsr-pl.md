@@ -1,5 +1,5 @@
 ---
-title: Instant Neus
+title: Instant-nsr-pl
 date: 2023-06-14 23:15:07
 tags:
     - Neus

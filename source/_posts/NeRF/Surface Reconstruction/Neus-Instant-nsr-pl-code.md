@@ -1,5 +1,5 @@
 ---
-title: Instant Neus的代码理解
+title: Instant-nsr-pl的代码理解
 date: 2023-07-03 22:02:46
 tags:
     - Python

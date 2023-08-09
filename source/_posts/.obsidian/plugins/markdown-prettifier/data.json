@@ -3,9 +3,9 @@
   "emphasis": "*",
   "rule": "-",
   "createHeaderIfNotPresent": true,
-  "newHeaderTemplate": "\ndate created: \"{{date:YYYY-MM-DD HH:mm}}\" \n",
+  "newHeaderTemplate": "\ndate created: {{date:YYYY-MM-DD HH:mm:ss}}\n",
   "updateHeader": true,
-  "updateHeaderTemplate": "\ndate updated: \"{{date:YYYY-MM-DD HH:mm}}\" \n",
+  "updateHeaderTemplate": "\ndate updated: {{date:YYYY-MM-DD HH:mm:ss}}\n",
   "listItemIndent": "one",
   "newlinesAroundHeadings": true
 }

@@ -8,9 +8,13 @@ tags:
 categories: NeRF/Surface Reconstruction
 ---
 
-[NeuDA (3d-front-future.github.io)](https://3d-front-future.github.io/neuda/)
-
-[NeuDA: Neural Deformable Anchor for High-Fidelity Implicit Surface Reconstruction (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4738274314005004289&noteId=1876559968197187840)
+| Title     | NeuDA: Neural Deformable Anchor for High-Fidelity Implicit Surface Reconstruction                                                                                                                 |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Author    | Bowen Cai	,Jinchi Huang,	Rongfei Jia	,Chengfei Lv,	Huan Fu*                                                                                                                                       |
+| Conf/Jour | CVPR                                                                                                                                                                                               |
+| Year      | 2023                                                                                                                                                                                              |
+| Project   | [NeuDA (3d-front-future.github.io)](https://3d-front-future.github.io/neuda/)                                                                                                                     |
+| Paper     | [NeuDA: Neural Deformable Anchor for High-Fidelity Implicit Surface Reconstruction (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4738274314005004289&noteId=1876559968197187840) |
 
 NeuDA变形后的grid距离Surface更近一些，即可以使采样点插值时更多依赖于表面，即渲染时也会更多地考虑到3D空间相邻的信息
 

@@ -7,9 +7,13 @@ tags:
 categories: NeRF/Interesting
 ---
 
-[ShuhongChen/panic3d-anime-reconstruction: CVPR 2023: PAniC-3D Stylized Single-view 3D Reconstruction from Portraits of Anime Characters (github.com)](https://github.com/ShuhongChen/panic3d-anime-reconstruction)
-
-[PAniC-3D: Stylized Single-view 3D Reconstruction from Portraits of Anime Characters (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4738337093785239553&noteId=1903166679687203840)
+| Title     | PAniC-3D: Stylized Single-view 3D Reconstruction from Portraits of Anime Characters                                                                                                                                 |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Author    | Chen, Shuhong and Zhang, Kevin and Shi, Yichun and Wang, Heng and Zhu, Yiheng and Song, Guoxian and An, Sizhe and Kristjansson, Janus and Yang, Xiao and Matthias Zwicker                                           |
+| Conf/Jour | CVPR                                                                                                                                                                                                                |
+| Year      | 2023                                                                                                                                                                                                                |
+| Project   | [ShuhongChen/panic3d-anime-reconstruction: CVPR 2023: PAniC-3D Stylized Single-view 3D Reconstruction from Portraits of Anime Characters (github.com)](https://github.com/ShuhongChen/panic3d-anime-reconstruction) |
+| Paper     | [PAniC-3D: Stylized Single-view 3D Reconstruction from Portraits of Anime Characters (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4738337093785239553&noteId=1903166679687203840)                 |
 
 基于**EG3D无条件生成模型**
 PAniC-3D对比PixelNeRF、EG3D(+Img2stylegan or +PTI)、Pifu

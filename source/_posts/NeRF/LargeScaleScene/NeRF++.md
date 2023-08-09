@@ -7,9 +7,14 @@ tags:
 categories: NeRF/LargeScaleScene
 ---
 
-[Kai-46/nerfplusplus: improves over nerf in 360 capture of unbounded scenes (github.com)](https://github.com/Kai-46/nerfplusplus)
+| Title     | NeRF++: Analyzing and Improving Neural Radiance Fields                                                                                                                  |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Author    | Kai Zhang, Gernot Riegler, Noah Snavely, Vladlen Koltun                                                                                                                 |
+| Conf/Jour | arXiv: Computer Vision and Pattern Recognition                                                                                                                                                                    |
+| Year      | 2020                                                                                                                                                                    |
+| Project   | [Kai-46/nerfplusplus: improves over nerf in 360 capture of unbounded scenes (github.com)](https://github.com/Kai-46/nerfplusplus)                                       |
+| Paper     | [NeRF++: Analyzing and Improving Neural Radiance Fields. (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4498415698728083457&noteId=1798375069007427072) |
 
-[NeRF++: Analyzing and Improving Neural Radiance Fields. (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4498415698728083457&noteId=1798375069007427072)
 
 ![image.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230718165249.png)
 

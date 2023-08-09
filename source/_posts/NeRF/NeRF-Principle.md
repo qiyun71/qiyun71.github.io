@@ -6,9 +6,18 @@ tags:
     - Principle
 categories: NeRF
 ---
+
+| Title     | NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis                                                                                                                                                          |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Author    | [Ben Mildenhall*](https://bmild.github.io/)[Pratul P. Srinivasan*](https://pratulsrinivasan.github.io/)[Matthew Tancik*](https://www.matthewtancik.com/)[Jonathan T. Barron](https://jonbarron.info/)[Ravi Ramamoorthi](http://cseweb.ucsd.edu/~ravir/)[Ren Ng](https://www2.eecs.berkeley.edu/Faculty/Homepages/yirenng.html) |
+| Conf/Jour | ECCV 2020 Oral - Best Paper Honorable Mention                                                                                                                                                                                   |
+| Year      | 2020                                                                                                                                                                                                                            |
+| Project   | [NeRF: Neural Radiance Fields (matthewtancik.com)](https://www.matthewtancik.com/nerf)                                                                                                                                          |
+| Paper     | [NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4544709973778259969&noteId=752432474097127424)                                           |
+
 NeRF（Neural Radiance Fields）是一种用于生成逼真三维场景的计算机图形学方法。通过神经网络对场景中的每个空间点进行建模，NeRF可以估计每个点的颜色和密度信息。利用渲染方程，NeRF能够合成高质量的逼真图像。相较于传统的渲染方法，NeRF能够处理复杂的光照和反射效果，广泛应用于虚拟现实、增强现实、电影制作和游戏开发等领域。然而，NeRF方法仍面临一些挑战，如计算复杂度和对训练数据的依赖性。研究人员正在不断改进NeRF，以提高其效率和扩展性。
 
-[NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4544709973778259969&noteId=752432474097127424)
+
 
 <!-- more -->
 

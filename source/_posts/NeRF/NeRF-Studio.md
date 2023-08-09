@@ -7,6 +7,14 @@ tags:
 categories: NeRF
 ---
 
+| Title     | Nerfstudio: A Modular Framework for Neural Radiance Field Development                                                                                                                                                                       |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Author    | Tancik, Matthew and Weber, Ethan and Ng, Evonne and Li, Ruilong and Yi, Brentand Kerr, Justin and Wang, Terrance and Kristoffersen, Alexander and Austin,Jake and Salahi, Kamyar and Ahuja, Abhik and McAllister, David and Kanazawa,Angjoo |
+| Conf/Jour | ACM SIGGRAPH 2023 Conference Proceedings                                                                                                                                                                                                    |
+| Year      | 2023                                                                                                                                                                                                                                        |
+| Project   | [nerfstudio-project/nerfstudio: A collaboration friendly studio for NeRFs (github.com)](https://github.com/nerfstudio-project/nerfstudio/)                                                                                                  |
+| Paper     | [Nerfstudio: A Modular Framework for Neural Radiance Field Development (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4762351665164582913&noteId=1908666225137730048)                                                       |
+
 [Nerfstudio](https://github.com/nerfstudio-project/nerfstudio/)提供了一个简单的API，可以简化创建、训练和测试NeRF的端到端过程。该库通过将每个组件模块化，支持更易于理解的NeRF实现。通过更模块化的NeRF，我们希望为探索这项技术提供更用户友好的体验。
 
 <!-- more -->

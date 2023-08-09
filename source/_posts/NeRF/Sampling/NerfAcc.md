@@ -7,9 +7,16 @@ tags:
 categories: NeRF/Sampling
 ---
 
+| Title     | NerfAcc: Efficient Sampling Accelerates NeRFs                                                                                                                 |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Author    | Li, Ruilong and Gao, Hang and Tancik, Matthew and Kanazawa, Angjoo                                                                                            |
+| Conf/Jour | arXiv preprint arXiv:2305.04966                                                                                                                                                          |
+| Year      | 2023                                                                                                                                                          |
+| Project   | [NerfAcc Documentation — nerfacc 0.5.3 documentation](https://www.nerfacc.com/en/latest/)                                                                     |
+| Paper     | [NerfAcc: Efficient Sampling Accelerates NeRFs (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4753910162394202113&noteId=1865424779362415616) |
+
 一种可以加速NeRF的高效采样策略
-[NerfAcc Documentation — nerfacc 0.5.3 documentation](https://www.nerfacc.com/en/latest/)
-[NerfAcc: Efficient Sampling Accelerates NeRFs (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4753910162394202113&noteId=1865424779362415616)
+![image.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230711120805.png)
 
 NerfAcc = Instant-NGP的Occupancy Grid + Mip-NeRF 360的Proposal Network
 

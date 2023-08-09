@@ -110,7 +110,7 @@ $\mathbf{C} = - \mathbf{R}^{\top} t$
 Phong Reflection Model
 $I_{Phong}=k_{a}I_{a}+k_{d}(n\cdot l)I_{d}+k_{s}(r\cdot v)^{\alpha}I_{s}$
 - 其中下标$a$表示环境光（Ambient Light），下标$d$表示漫射光（Diffuse Light），下标$s$表示镜面光（Specular Light），$k$表示反射系数或者材质颜色，$I$表示光的颜色或者亮度，$\alpha$可以模拟表面粗糙程度，值越小越粗糙，越大越光滑
-- 入射方向$\mathbf{l}$，反射方向$\mathbf{r} = 2(\mathbf{n} \cdot \mathbf{l})\mathbf{n} - \mathbf{l}$，法向量$\mathbf{n}$，观察方向$\mathbf{v}$
+- 入射方向$\mathbf{l}$，反射方向$\mathbf{r} = 2(\mathbf{n} \cdot \mathbf{l})\mathbf{n} - \mathbf{l}$，法向量$\mathbf{n}$
 - ![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230803205658.png)
 
 - 漫射光和高光分别会根据入射方向、反射方向和观察方向的变化而变化，还可以通过$\alpha$参数来调节表面粗糙程度，从而控制高光区域大小和锐利程度，而且运算简单，适合当时的计算机处理能力。

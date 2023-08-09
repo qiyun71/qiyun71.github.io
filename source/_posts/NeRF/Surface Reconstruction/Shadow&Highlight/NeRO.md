@@ -1,84 +1,93 @@
 ---
 title: NeRO
-date: 2023-07-27 12:21:17
+date: 2023-07-27T12:21:17.000Z
 tags:
-    - Shadow&Highlight
-    - Reflective Objects
-    - Surface Reconstruction
-    - NeRO
+  - Shadow&Highlight
+  - Reflective Objects
+  - Surface Reconstruction
+  - NeRO
 categories: NeRF/Surface Reconstruction/Shadow&Highlight
+date updated: 2023-08-09T22:26:28.000Z
 ---
 
-[NeRO: Neural Geometry and BRDF Reconstruction of Reflective Objects from Multiview Images (liuyuan-pal.github.io)](https://liuyuan-pal.github.io/NeRO/)
+| Title     | NeRO: Neural Geometry and BRDF Reconstruction of Reflective Objects from Multiview Images                                                                                                                                                                                                                                                                                                                       |
+| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Author    | [Yuan Liu](https://liuyuan-pal.github.io/), [Peng Wang](https://totoro97.github.io/), [Cheng Lin](https://clinplayer.github.io/), [Xiaoxiao Long](https://www.xxlong.site/), [Jiepeng Wang](https://jiepengwang.github.io/), [Lingjie Liu](https://lingjie0206.github.io/), [Taku Komura](https://homepages.inf.ed.ac.uk/tkomura/), [Wenping Wang](https://engineering.tamu.edu/cse/profiles/Wang-Wenping.html) |
+| Conf/Jour | SIGGRAPH 2023                                                                                                                                                                                                                                                                                                                                                                                                   |
+| Year      | 2023                                                                                                                                                                                                                                                                                                                                                                                                            |
+| Project   | [NeRO: Neural Geometry and BRDF Reconstruction of Reflective Objects from Multiview Images (liuyuan-pal.github.io)](https://liuyuan-pal.github.io/NeRO/)                                                                                                                                                                                                                                                        |
+| Paper     | [NeRO: Neural Geometry and BRDF Reconstruction of Reflective Objects from Multiview Images (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4761535311519940609&noteId=1889502311513975040)                                                                                                                                                                                                       |
 
-[NeRO: Neural Geometry and BRDF Reconstruction of Reflective Objects from Multiview Images (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4761535311519940609&noteId=1889502311513975040)
+Reference
+
 > [[PDF] NeRD: Neural Reflectance Decomposition From Image Collections](https://readpaper.com/paper/3204455502)
 > [[PDF] SAMURAI: Shape And Material from Unconstrained Real-world Arbitrary Image collections](https://readpaper.com/paper/692131090958098432)
 > [[PDF] Relighting4D: Neural Relightable Human from Videos](https://readpaper.com/paper/4645908786821742593)
 > [[PDF] Neural 3D Scene Reconstruction with the Manhattan-world Assumption](https://readpaper.com/paper/682591079116292096)
 > [[PDF] NeROIC: Neural Rendering of Objects from Online Image Collections](https://readpaper.com/paper/640484809354805248)
 
-
-对金属材质的物体重建效果很好
-
+对金属反光材质的物体重建效果很好
 
 ![imgae](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230728162856.png)
 
 提出了一种新的光表示方法，颜色由漫反射和镜面反射两部分组成，通过两个阶段的方法来实现
+
 - Stage1：使用集成方向编码来近似光积分，使用shadow MLP对直接光和间接光进行model，学习到了表面几何形状
 - Stage2：蒙特卡罗采样固定几何形状，重建更精确的表面BRDF和环境光
-    - $\mathbf{c}_{\mathrm{diffuse}}=\frac{1}{N_{d}}\sum_{i}^{N_{d}}(1-m)\mathrm{a}L(\omega_{i}),$
-    - $\mathbf{c}_{\mathrm{specular}}=\frac{1}{N_{s}}\sum_{i}^{N_{s}}\frac{FG(\omega_{0}\cdot\mathbf{h})}{(\mathbf{n}\cdot\mathbf{h})(\mathbf{n}\cdot\omega_{\mathbf{0}})}L(\omega_{i}),$
+  - $\mathbf{c}_{\mathrm{diffuse}}=\frac{1}{N_{d}}\sum_{i}^{N_{d}}(1-m)\mathrm{a}L(\omega_{i}),$
+  - $\mathbf{c}_{\mathrm{specular}}=\frac{1}{N_{s}}\sum_{i}^{N_{s}}\frac{FG(\omega_{0}\cdot\mathbf{h})}{(\mathbf{n}\cdot\mathbf{h})(\mathbf{n}\cdot\omega_{\mathbf{0}})}L(\omega_{i}),$
 
 <!-- more -->
-
 
 ![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230728142918.png)
 
 Stage1 MLP：
+
 - SDF&Material：
-    - input: p2PE
-    - output: Albedo , Metallic , Roughness, SDF
+  - input: p2PE
+  - output: Albedo , Metallic , Roughness, SDF
 - Refection计算：SDF2n法向量 , v观察方向 --> t反射方向
 - Direct Light：
-    - input: Roughness&t to IDE
-    - output: shading
+  - input: Roughness&t to IDE
+  - output: shading
 - Indirect Light: 间接光与球空间中的位置有关
-    - input: Roughness&t to IDE , p2PE
-    - output: shading
+  - input: Roughness&t to IDE , p2PE
+  - output: shading
 - Occlusion Prob: 来确定在渲染中将使用直接灯光还是间接灯光
-    - input: t2DE, p2PE
-    - output: shading
+  - input: t2DE, p2PE
+  - output: shading
 - Opaque Density计算：SDF --> w权重
-- Shading计算： Albedo , Metallic , shading --> c颜色 
-    - Light integral approximation ， 由 $g_{direct}$输出、$g_{indirect}$输出和遮挡概率s(t)计算出光积分
-    - 由漫射光积分、镜面反射光积分、反照率a和金属度m计算出最终该点的颜色
+- Shading计算： Albedo , Metallic , shading --> c颜色
+  - Light integral approximation ， 由 $g_{direct}$输出、$g_{indirect}$输出和遮挡概率s(t)计算出光积分
+  - 由漫射光积分、镜面反射光积分、反照率a和金属度m计算出最终该点的颜色
 
 $$\begin{gathered}
 \mathbf{c}(\omega_{0})=\mathbf{c}_{\mathrm{diffuse}}+\mathbf{c}_{\mathrm{specular}}, \\
 \mathbf{c}_{\mathrm{diffuse}}=\int_{\Omega}(1-m)\frac{\mathbf{a}}{\pi}L(\omega_{i})(\omega_{i}\cdot\mathbf{n})d\omega_{i}, \\
 \mathbf{c}_{\mathrm{specular}}=\int_{\Omega}\frac{DFG}{4(\omega_{i}\cdot\mathbf{n})(\omega_{0}\cdot\mathbf{n})}L(\omega_{i})(\omega_{i}\cdot\mathbf{n})d\omega_{i}. 
 \end{gathered}$$
+光近似：
 $\mathbf{c}_{\mathrm{diffuse}}=\text{a}(1-m)\underbrace{\int_{\Omega}L(\omega_{i})\frac{\omega_{i}\cdot\mathbf{n}}{\pi}d\omega_{i},}_{L_{\mathrm{diffuse}}}$
 $\mathbf{c}_{\mathrm{specular}}\approx\underbrace{\int_{\Omega}L(\omega_{i})D(\rho,\mathbf{t})d\omega_{i}}_{L_{\mathrm{specular}}}\cdot\underbrace{\int_{\Omega}\frac{DFG}{4(\omega_{0}\cdot\mathbf{n})}d\omega_{i},}_{M_{\mathrm{specular}}}$
+其中亮度可以分为直接光(outer sphere)和间接光(inner sphere)
+
 $$
 \begin{aligned}L_{\mathrm{specular}}&\approx[1-s(\mathrm{t})]\int_{\Omega}g_{\mathrm{direct}}(SH(\omega_l))D(\rho,\mathrm{t})d\omega_l+\\&s(\mathrm{t})\int_{\Omega}g_{\mathrm{indirect}}(SH(\omega_l),\mathrm{p})D(\rho,\mathrm{t})d\omega_l\\&\approx[1-s(\mathrm{t})]g_{\mathrm{direct}}(\int_{\Omega}SH(\omega_l)D(\rho,\mathrm{t})d\omega_l)+\\&s(\mathrm{t})g_{\mathrm{indirect}}(\int_{\Omega}SH(\omega_i)D(\rho,\mathrm{t})d\omega_l,\mathrm{p}).\end{aligned}
-$$
 
-![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230728135126.png)
+$$
+![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230728135846.png)
 
 - 优点
-    - 不需mask，主要目标是重建物体的几何形状和BRDF
+    - 不需mask，主要目标是重建物体的几何形状和BRDF的颜色
 - 不足
     - 几何中的细节无法重建出来（太光滑）
     - 由于颜色依赖法向量估计，表面法线的错误会导致难以拟合正确的颜色
     - 依赖于准确的输入相机姿势，并且估计反射物体上的相机姿势通常需要稳定的纹理，如用于图像匹配的校准板。
-    - 很慢，在3090(24G)上，Stage1的隐式重建需要大概10个小时左右
+    - 很慢，在3090(24G)上，Stage1的隐式重建需要大概10个小时左右，Stage2的BRDF色彩重建需要3个半小时左右
 
 纹理校准板
 
 ![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230728161948.png)
-
 
 
 # Conclusion
@@ -253,8 +262,10 @@ $L(\omega_i)=[1-s(\omega_i)]g_\text{direct}(SH(\omega_i))+s(\omega_i)g_\text{ind
 
 我们使用集成方向编码来近似光积分
 
-$$
+$$$
+
 \begin{aligned}L_{\mathrm{specular}}&\approx[1-s(\mathrm{t})]\int_{\Omega}g_{\mathrm{direct}}(SH(\omega_l))D(\rho,\mathrm{t})d\omega_l+\\&s(\mathrm{t})\int_{\Omega}g_{\mathrm{indirect}}(SH(\omega_l),\mathrm{p})D(\rho,\mathrm{t})d\omega_l\\&\approx[1-s(\mathrm{t})]g_{\mathrm{direct}}(\int_{\Omega}SH(\omega_l)D(\rho,\mathrm{t})d\omega_l)+\\&s(\mathrm{t})g_{\mathrm{indirect}}(\int_{\Omega}SH(\omega_i)D(\rho,\mathrm{t})d\omega_l,\mathrm{p}).\end{aligned}
+
 $$
 
 在第一个近似中，我们使用遮挡概率𝑠(t)以替换不同光线的遮挡概率𝑠 (𝜔𝑖 )。在第二近似中，我们交换MLP的阶数和积分
@@ -316,8 +327,6 @@ $\frac{\omega_i\cdot\mathbf{n}}\pi\approx D(1.0,\mathbf{n}).$
     - $\ell_{\mathrm{light}}=\sum_{c}^{3}([L_{\mathrm{diffuse}}]_{C}-\frac{1}{3}\sum_{c}^{3}[L_{\mathrm{diffuse}}]_{C}),$
     - $\ell=\ell_{\mathrm{render}}+\lambda_{\mathrm{smooth}}\ell_{\mathrm{smooth}}+\lambda_{\mathrm{light}}\ell_{\mathrm{light}},$
 
-
-
 # Limitations
 
 几何。虽然我们成功地重建了反射物体的形状，但我们的方法仍然无法捕获一些细微的细节，如图19所示。主要原因是渲染函数强烈依赖于神经SDF估计的表面法线，但神经SDF往往会产生平滑的表面法线。因此，神经 SDF 很难产生突然的正常变化来重建细微的细节，例如“Angel”的布料纹理、“Cat”的胡子和“Maneki”的纹理。
@@ -336,7 +345,6 @@ BRDF。在实验中，我们观察到我们的**BRDF估计主要存在不正确�
 
 [https://connecthkuhk-my.sharepoint.com/:f:/g/personal/yuanly_connect_hku_hk/EvNz_o6SuE1MsXeVyB0VoQ0B9zL8NZXjQQg0KknIh6RKjQ?e=jCLH0W](https://connecthkuhk-my.sharepoint.com/:f:/g/personal/yuanly_connect_hku_hk/EvNz_o6SuE1MsXeVyB0VoQ0B9zL8NZXjQQg0KknIh6RKjQ?e=jCLH0W)
 
-
 # 实验
 
 ## 环境配置
@@ -353,6 +361,7 @@ pip install
 git clone https://github.com/liuyuan-pal/NeRO.git
 cd NeRO
 pip install -r requirements.txt
+-i https://pypi.tuna._tsinghua_.edu.cn/simple
 
 # nvdiffrast
 git clone https://github.com/NVlabs/nvdiffrast
@@ -364,6 +373,7 @@ cd raytracing
 pip install .
 
 pip install --upgrade protobuf
+pip install trimesh
 ```
 
 ## 运行 
@@ -418,7 +428,11 @@ python extract_mesh.py --cfg configs/shape/real/bear.yaml
 ```
 The extracted meshes will be saved at `data/meshes`.
 
+![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230807144740.png)
+
+
 ```
+bug: 
 (nero) root@autodl-container-6a4811bc52-8879d78f:~/autodl-tmp/NeRO# python extract_mesh.py --cfg confi  
 gs/shape/real/bear.yaml  
 successfully load bear_shape step 300000!  
@@ -465,6 +479,14 @@ python run_training.py --cfg configs/material/real/bear.yaml
 ```
 Intermediate results will be saved at `data/train_vis`. Models will be saved at `data/model`.
 
+tensorboard --> train/loss 7k step左，100K step右
+
+<div style="display:flex; justify-content:space-between;"> <img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230807145209.png" alt="Image 1" style="width:50%;"><div style="width:10px;"></div> <img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230807182741.png" alt="Image 2" style="width:50%;"> </div>
+
+
+data/train_vis/bear_material-val/99999-index-0.jpg
+![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230807181830.png)
+
 
 **Extract materials from the model**
 
@@ -475,7 +497,14 @@ python extract_materials.py --cfg configs/material/real/bear.yaml
 
 The extracted materials will be saved at `data/materials`.
 
+data/materials/bear_material-100000/
+- albedo.npy
+- metallic.npy
+- roughness.npy
+
 ### Relighting
+
+使用blender进行relighting，渲染在hdr场景下的镜面反射物体
 
 ```
 NeRO
@@ -516,6 +545,17 @@ python relight.py --blender <path-to-your-blender> \
                   --mesh data/meshes/bear_shape-300000.ply \
                   --material data/materials/bear_material-100000 \
                   --hdr data/hdr/neon_photostudio_4k.exr
+
+eg: 
+python relight.py --blender F:\Blender\blender.exe --name bear-neon --mesh data/meshes/bear_shape-300000.ply --material data/materials/bear_material-100000 --hdr data/hdr/neon_photostudio_4k.exr
+
+KeyError: 'bpy_prop_collection[key]: key "Principled BSDF" not found'
+--> 需要将blender界面设置成英文
 ```
 
+> [KeyError: 'bpy_prop_collection\[key\]: key "Principled BSDF" not found' · Issue #601 · carson-katri/dream-textures (github.com)](https://github.com/carson-katri/dream-textures/issues/601)
+
 The relighting results will be saved at `data/relight` with the directory name of `bell-neon` or `bear-neon`. This command means that we use `neon_photostudio_4k.exr` to relight the object.
+
+<iframe title="nero relightNeRO reproduce: relight bear of Glossy Real dataset in neon_photostudio_4k scene" src="https://www.youtube.com/embed/Npva_2r9tWk?feature=oembed" height="113" width="200" allowfullscreen="" allow="fullscreen" style="aspect-ratio: 16 / 9; width: 100%; height: 100%;"></iframe>
+$$

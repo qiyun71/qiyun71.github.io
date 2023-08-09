@@ -8,9 +8,13 @@ tags:
 categories: NeRF/LargeScaleScene
 ---
 
-[mip-NeRF 360 (jonbarron.info)](https://jonbarron.info/mipnerf360/)
-
-[Mip-NeRF 360: Unbounded Anti-Aliased Neural Radiance Fields (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4606723627252981761&noteId=1881063981903029504)
+| Title     | Mip-NeRF 360: Unbounded Anti-Aliased Neural Radiance Fields                                                                                                                                                                                           |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Author    | [Jonathan T. Barron](https://jonbarron.info/)  [Ben Mildenhall](http://bmild.github.io/)  [Dor Verbin](https://scholar.harvard.edu/dorverbin/home) [Pratul P. Srinivasan](https://pratulsrinivasan.github.io/)  [Peter Hedman](https://phogzone.com/) |
+| Conf/Jour | CVPR 2022 (Oral Presentation)                                                                                                                                                                                                                                               |
+| Year      | 2022                                                                                                                                                                                                                                                  |
+| Project   | [mip-NeRF 360 (jonbarron.info)](https://jonbarron.info/mipnerf360/)                                                                                                                                                                                   |
+| Paper     | [Mip-NeRF 360: Unbounded Anti-Aliased Neural Radiance Fields (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4606723627252981761&noteId=1881063981903029504)                                                                           |
 
 - novel Kalman-like scene parameterization：将场景参数化，将单位球外背景采样的截头锥参数化到r=2的球体内，单位球内的截头锥不受影响
 

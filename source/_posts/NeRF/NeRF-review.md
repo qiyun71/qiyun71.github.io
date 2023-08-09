@@ -22,14 +22,15 @@ ECCV 2020 Oral - Best Paper Honorable Mention
 
 # Dalao
 
-| PhD.School  |                                                     Homepage                                                    |                  Paper                 |
-| ----------- | :-------------------------------------------------------------------------------------------------------------: | :------------------------------------: |
-| HKU         |                 [刘缘Yuan Liu - Homepage (liuyuan-pal.github.io)](https://liuyuan-pal.github.io/)                 |                Neus,NeRO               |
-| CUHK        |                       [胡文博HU, Wenbo's Homepage (wbhu.github.io)](https://wbhu.github.io/)                       |                Tri-MipRF               |
-| HKU         | [Peng Wang (王鹏) (notion.site)](https://quartz-khaan-c6f.notion.site/Peng-Wang-0ab0a2521ecf40f5836581770c14219c) |                  Neus                  |
-| UC Berkeley |                                      [Jon Barron](https://jonbarron.info/)                                      | Mip-NeRF,Mip-NeRF360,Zip-NeRF,Ref-NeRF |
-| UC Berkeley |                                 [Matthew Tancik](https://www.matthewtancik.com/)                                | NerfStudio,NerfAcc,Plenoxels,Mip-NeRF, |
-| UC Berkeley |                           [Ben Mildenhall (bmild.github.io)](https://bmild.github.io/)                          |                  NeRF                  |
+| PhD.School              |                                                     Homepage                                                      |                 Paper                  |
+| ----------------------- |:-----------------------------------------------------------------------------------------------------------------:|:--------------------------------------:|
+| HKU                     |                 [刘缘Yuan Liu - Homepage (liuyuan-pal.github.io)](https://liuyuan-pal.github.io/)                 |               Neus,NeRO                |
+| CUHK                    |                      [胡文博HU, Wenbo's Homepage (wbhu.github.io)](https://wbhu.github.io/)                       |               Tri-MipRF                |
+| HKU                     | [Peng Wang (王鹏) (notion.site)](https://quartz-khaan-c6f.notion.site/Peng-Wang-0ab0a2521ecf40f5836581770c14219c) |                  Neus                  |
+| UC Berkeley             |                                       [Jon Barron](https://jonbarron.info/)                                       | Mip-NeRF,Mip-NeRF360,Zip-NeRF,Ref-NeRF |
+| UC Berkeley             |                                 [Matthew Tancik](https://www.matthewtancik.com/)                                  | NerfStudio,NerfAcc,Plenoxels,Mip-NeRF, |
+| UC Berkeley             |                           [Ben Mildenhall (bmild.github.io)](https://bmild.github.io/)                            |                  NeRF                  |
+| ShanghaiTech University |                         [陈安沛Anpei Chen (apchenstu.github.io)](https://apchenstu.github.io/)                          | TensoRF                                       |
 
 ## Surface Reconstruction
 
@@ -42,7 +43,7 @@ ECCV 2020 Oral - Best Paper Honorable Mention
 | [2023](/2023/07/16/NeRF/Surface%20Reconstruction/PermutoSDF/)            |                                                [PermutoSDF](https://radualexandru.github.io/permuto_sdf/)                                                |       NGP_butPermutohedral lattice + Neus_SDF，曲率损失和颜色MLP正则解决镜面+无纹理区域，更光滑       |                      IEEE/CVF Conference on CVPR                      |
 | [2023](/2023/07/18/NeRF/Surface%20Reconstruction/NeuDA/)                 |                                                    [NeuDA](https://3d-front-future.github.io/neuda/)                                                     |                                 NGP_butDeformable Anchors+HPE + Neus                                  |                                 CVPR                                  |
 | [2023](/2023/07/27/NeRF/Surface%20Reconstruction/Shadow&Highlight/NeRO/) |             [NeRO: Neural Geometry and BRDF Reconstruction of Reflective Objects from Multiview Images](https://liuyuan-pal.github.io/NeRO/)             | Neus_SDF 新的光表示方法可以重建准确的几何和BRDF，但是细节处由于太光滑而忽略，反射颜色也依赖准确的法线 |                          SIGGRAPH (ACM TOG)                           |
-| [2021](/2023/08/06/NeRF/Surface%20Reconstruction/UNISURF/)               | [UNISURF: Unifying Neural Implicit Surfaces and Radiance Fields for Multi-View Reconstruction (moechsle.github.io)](https://moechsle.github.io/unisurf/) |                                                                                                       | ICCV (oral)                                                                      |
+| [2021](/2023/08/06/NeRF/Surface%20Reconstruction/UNISURF/)               | [UNISURF: Unifying Neural Implicit Surfaces and Radiance Fields for Multi-View Reconstruction (moechsle.github.io)](https://moechsle.github.io/unisurf/) | UNISURF用占用值来表示表面，代替NeRF中的$\alpha$                                                                                                      |                              ICCV (oral)                              |
 
 ## Shadow&Highlight
 

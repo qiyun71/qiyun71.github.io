@@ -7,8 +7,13 @@ tags:
 categories: NeRF/Surface Reconstruction
 ---
 
-NeuS: Learning Neural Implicit Surfaces by Volume Rendering for Multi-view Reconstruction
-[NeuS: Learning Neural Implicit Surfaces by Volume Rendering for Multi-view Reconstruction (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4718711588576575489&noteId=1791151226962648064)
+| Title     | NeuS: Learning Neural Implicit Surfaces by Volume Rendering for Multi-view Reconstruction                                                                                                                                                                                                                                                                              |
+| --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Author    | [Peng Wang](https://totoro97.github.io/about.html)    [Lingjie Liu](https://lingjie0206.github.io/)    [Yuan Liu](https://liuyuan-pal.github.io/)    [Christian Theobalt](http://people.mpi-inf.mpg.de/~theobalt/)    [Taku Komura](https://www.cs.hku.hk/index.php/people/academic-staff/taku)    [Wenping Wang](https://www.cs.hku.hk/people/academic-staff/wenping) |
+| Conf/Jour | NeurIPS 2021 (Spotlight)                                                                                                                                                                                                                                                                                                                                                                   |
+| Year      | 2021                                                                                                                                                                                                                                                                                                                                                                   |
+| Project   | [NeuS: Learning Neural Implicit Surfaces by Volume Rendering for Multi-view Reconstruction (lingjie0206.github.io)](https://lingjie0206.github.io/papers/NeuS/)                                                                                                                                                                                                        |
+| Paper     | [NeuS: Learning Neural Implicit Surfaces by Volume Rendering for Multi-view Reconstruction (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4718711588576575489&noteId=1791151226962648064)                                                                                                                                                              |
 
 实现了三维重建：从多视角图片中重建出了mesh模型
 
