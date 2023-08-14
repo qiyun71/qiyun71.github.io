@@ -1,24 +1,44 @@
 {
   "recentFiles": [
     {
-      "basename": "Make-Py-Tools",
-      "path": "Python Practise/Make-Py-Tools.md"
+      "basename": "NeRO-code",
+      "path": "NeRF/Surface Reconstruction/Shadow&Highlight/NeRO-code.md"
     },
     {
-      "basename": "Neus-Instant-nsr-pl-code",
-      "path": "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl-code.md"
+      "basename": "Math",
+      "path": "NeRF/NeRF/Math.md"
     },
     {
-      "basename": "Neus-Instant-nsr-pl",
-      "path": "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl.md"
+      "basename": "NeRFactor",
+      "path": "NeRF/Surface Reconstruction/Shadow&Highlight/NeRFactor.md"
     },
     {
-      "basename": "Tri-MipRF",
-      "path": "NeRF/Efficiency/Encoding/Tri-MipRF.md"
+      "basename": "PlankAssembly",
+      "path": "NeRF/Surface Reconstruction/PlankAssembly.md"
+    },
+    {
+      "basename": "NeRF-Mine",
+      "path": "NeRF/NeRF-Mine.md"
     },
     {
       "basename": "NeRO",
       "path": "NeRF/Surface Reconstruction/Shadow&Highlight/NeRO.md"
+    },
+    {
+      "basename": "Neus",
+      "path": "NeRF/Surface Reconstruction/Neus.md"
+    },
+    {
+      "basename": "2023-08-07",
+      "path": "Reports/2023-08-07.md"
+    },
+    {
+      "basename": "A Critical Analysis of NeRF-Based 3D Reconstruction",
+      "path": "NeRF/Review/A Critical Analysis of NeRF-Based 3D Reconstruction.md"
+    },
+    {
+      "basename": "NeRF-review",
+      "path": "NeRF/NeRF-review.md"
     },
     {
       "basename": "Front-matter.md",
@@ -29,108 +49,76 @@
       "path": "Note!!!.md"
     },
     {
-      "basename": "ShadowNeuS",
-      "path": "NeRF/Surface Reconstruction/Shadow&Highlight/ShadowNeuS.md"
-    },
-    {
-      "basename": "Make-mengya",
-      "path": "Python Practise/Make-mengya.md"
-    },
-    {
-      "basename": "NeRO-code",
-      "path": "NeRF/Surface Reconstruction/Shadow&Highlight/NeRO-code.md"
-    },
-    {
-      "basename": "Instant-NSR",
-      "path": "NeRF/Surface Reconstruction/Instant-NSR.md"
-    },
-    {
-      "basename": "SparseNeuS",
-      "path": "NeRF/Sparse/SparseNeuS.md"
-    },
-    {
-      "basename": "FORGE",
-      "path": "NeRF/Sparse/FORGE.md"
-    },
-    {
-      "basename": "NerfAcc",
-      "path": "NeRF/Sampling/NerfAcc.md"
-    },
-    {
-      "basename": "Mip-NeRF",
-      "path": "NeRF/Sampling/Mip-NeRF.md"
-    },
-    {
-      "basename": "Encoding",
-      "path": "NeRF/NeRF/Encoding.md"
-    },
-    {
-      "basename": "NeRF++",
-      "path": "NeRF/LargeScaleScene/NeRF++.md"
-    },
-    {
-      "basename": "Mip-NeRF 360",
-      "path": "NeRF/LargeScaleScene/Mip-NeRF 360.md"
-    },
-    {
-      "basename": "PAniC-3D",
-      "path": "NeRF/Interesting/PAniC-3D.md"
-    },
-    {
-      "basename": "Zip-NeRF",
-      "path": "NeRF/Efficiency/Zip-NeRF.md"
-    },
-    {
-      "basename": "TensoRF",
-      "path": "NeRF/Efficiency/TensoRF.md"
-    },
-    {
-      "basename": "Strivec",
-      "path": "NeRF/Efficiency/Strivec.md"
-    },
-    {
-      "basename": "NeRF-InstantNGP",
-      "path": "NeRF/Efficiency/NeRF-InstantNGP.md"
-    },
-    {
-      "basename": "Math",
-      "path": "NeRF/NeRF/Math.md"
-    },
-    {
-      "basename": "NeRF-review",
-      "path": "NeRF/NeRF-review.md"
-    },
-    {
-      "basename": "NeRF-InstantNGP-code",
-      "path": "NeRF/Efficiency/NeRF-InstantNGP-code.md"
+      "basename": "git",
+      "path": "Reports/git.md"
     },
     {
       "basename": "NeRF-Studio",
       "path": "NeRF/NeRF-Studio.md"
     },
     {
+      "basename": "NeRF-InstantNGP-code",
+      "path": "NeRF/Efficiency/NeRF-InstantNGP-code.md"
+    },
+    {
+      "basename": "Encoding",
+      "path": "NeRF/NeRF/Encoding.md"
+    },
+    {
+      "basename": "Sampling",
+      "path": "NeRF/NeRF/Sampling.md"
+    },
+    {
+      "basename": "Strivec",
+      "path": "NeRF/Efficiency/Strivec.md"
+    },
+    {
+      "basename": "NeRF++",
+      "path": "NeRF/LargeScaleScene/NeRF++.md"
+    },
+    {
+      "basename": "PAniC-3D",
+      "path": "NeRF/Interesting/PAniC-3D.md"
+    },
+    {
+      "basename": "TensoRF",
+      "path": "NeRF/Efficiency/TensoRF.md"
+    },
+    {
       "basename": "NeRF-Principle",
       "path": "NeRF/NeRF-Principle.md"
     },
     {
-      "basename": "UNISURF",
-      "path": "NeRF/Surface Reconstruction/UNISURF.md"
-    },
-    {
-      "basename": "PermutoSDF",
-      "path": "NeRF/Surface Reconstruction/PermutoSDF.md"
-    },
-    {
-      "basename": "NeRF-Mine",
-      "path": "NeRF/NeRF-Mine.md"
+      "basename": "NeRF-InstantNGP",
+      "path": "NeRF/Efficiency/NeRF-InstantNGP.md"
     },
     {
       "basename": "NeRF-code",
       "path": "NeRF/NeRF-code.md"
     },
     {
-      "basename": "Neus",
-      "path": "NeRF/Surface Reconstruction/Neus.md"
+      "basename": "Tri-MipRF",
+      "path": "NeRF/Efficiency/Encoding/Tri-MipRF.md"
+    },
+    {
+      "basename": "Ref-NeRF",
+      "path": "NeRF/Surface Reconstruction/Shadow&Highlight/Ref-NeRF.md"
+    },
+    {
+      "basename": "FORGE",
+      "path": "NeRF/Sparse/FORGE.md"
+    },
+    {
+      "basename": "ShadowNeuS",
+      "path": "NeRF/Surface Reconstruction/Shadow&Highlight/ShadowNeuS.md"
+    },
+    {
+      "basename": "UNISURF",
+      "path": "NeRF/Surface Reconstruction/UNISURF.md"
+    },
+    {
+      "basename": "SparseNeuS",
+      "path": "NeRF/Sparse/SparseNeuS.md"
     },
     {
       "basename": "Neuralangelo",
@@ -141,56 +129,44 @@
       "path": "NeRF/Surface Reconstruction/NeuDA.md"
     },
     {
+      "basename": "PermutoSDF",
+      "path": "NeRF/Surface Reconstruction/PermutoSDF.md"
+    },
+    {
       "basename": "Instant-NSR-code",
       "path": "NeRF/Surface Reconstruction/Instant-NSR-code.md"
     },
     {
-      "basename": "Ref-NeRF",
-      "path": "NeRF/Surface Reconstruction/Shadow&Highlight/Ref-NeRF.md"
+      "basename": "Instant-NSR",
+      "path": "NeRF/Surface Reconstruction/Instant-NSR.md"
     },
     {
-      "basename": "NeRF",
-      "path": "NeRF/NeRF.canvas"
+      "basename": "Neus-Instant-nsr-pl",
+      "path": "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl.md"
     },
     {
       "basename": "Neus-code",
       "path": "NeRF/Surface Reconstruction/Neus-code.md"
     },
     {
-      "basename": "Sampling",
-      "path": "NeRF/NeRF/Sampling.md"
+      "basename": "NerfAcc",
+      "path": "NeRF/Sampling/NerfAcc.md"
     },
     {
-      "basename": "2023-08-07",
-      "path": "Reports/2023-08-07.md"
+      "basename": "Mip-NeRF",
+      "path": "NeRF/Sampling/Mip-NeRF.md"
     },
     {
-      "basename": "Learn-Python",
-      "path": "Learn/Learn-Python.md"
+      "basename": "Mip-NeRF 360",
+      "path": "NeRF/LargeScaleScene/Mip-NeRF 360.md"
     },
     {
-      "basename": "git",
-      "path": "Reports/git.md"
+      "basename": "Zip-NeRF",
+      "path": "NeRF/Efficiency/Zip-NeRF.md"
     },
     {
-      "basename": "2023-06-19",
-      "path": "Reports/2023-06-19.md"
-    },
-    {
-      "basename": "2023-07-04",
-      "path": "Reports/2023-07-04.md"
-    },
-    {
-      "basename": "2023-08-05-Job",
-      "path": "Reports/2023-08-05-Job.md"
-    },
-    {
-      "basename": "Learn-Csharp",
-      "path": "Learn/Learn-Csharp.md"
-    },
-    {
-      "basename": "Learn-Git",
-      "path": "Learn/Learn-Git.md"
+      "basename": "NeRF",
+      "path": "NeRF/NeRF.canvas"
     },
     {
       "basename": "Learn-DeepLearning",
@@ -199,6 +175,30 @@
     {
       "basename": "Learn-PyTorch",
       "path": "Learn/Learn-PyTorch.md"
+    },
+    {
+      "basename": "Make-Py-Tools",
+      "path": "Python Practise/Make-Py-Tools.md"
+    },
+    {
+      "basename": "Neus-Instant-nsr-pl-code",
+      "path": "NeRF/Surface Reconstruction/Neus-Instant-nsr-pl-code.md"
+    },
+    {
+      "basename": "Make-mengya",
+      "path": "Python Practise/Make-mengya.md"
+    },
+    {
+      "basename": "Learn-Python",
+      "path": "Learn/Learn-Python.md"
+    },
+    {
+      "basename": "2023-06-19",
+      "path": "Reports/2023-06-19.md"
+    },
+    {
+      "basename": "2023-07-04",
+      "path": "Reports/2023-07-04.md"
     }
   ],
   "omittedPaths": [],

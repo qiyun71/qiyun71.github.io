@@ -23,6 +23,15 @@ categories: Learn
 
 学习顺序MLP-RNN-seq2seq/编码器解码器架构-注意力机制-自注意力-transformer。
 
+# Model
+
+## U-Net
+
+> [U-Net (labml.ai)](https://nn.labml.ai/unet/index.html)
+
+
+图像分割
+
 # Loss
 
 损失函数在训练过程中，突然变得很大或者nan

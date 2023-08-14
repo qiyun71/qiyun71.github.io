@@ -10,18 +10,18 @@ date updated: 2023-08-09T22:24:16.000Z
 
 | My post                                                                                                                                                        | Brief description     | status          |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- | --------------- |
-| [NeRF](2023/06/14/NeRF/NeRF-Principle/) + [Code](/2023/06/15/NeRF/NeRF-code/)                                                                                  | NeRF原理 + 代码理解         | Completed       |
-| [Neus](/2023/06/14/NeRF/Surface%20Reconstruction/Neus/) + [Code](/2023/06/30/NeRF/Surface%20Reconstruction/Neus-code/)                                         | 表面重建方法 SDFNetwork     | Completed       |
-| [InstantNGP](/2023/06/27/NeRF/Efficiency/NeRF-InstantNGP/) + [Tiny-cuda-nn](/2023/07/04/NeRF/Efficiency/NeRF-InstantNGP-code/)                                 | 加速NeRF的训练和推理          | Completed（Tcnn） |
-| [Instant-nsr-pl](/2023/06/14/NeRF/Surface%20Reconstruction/Neus-Instant-nsr-pl/) + [Code](/2023/07/03/NeRF/Surface%20Reconstruction/Neus-Instant-nsr-pl-code/) | Neus+Tcnn+NSR+pl      | Completed       |
-| [Instant-NSR](/2023/07/06/NeRF/Surface%20Reconstruction/Instant-NSR/) + [Code](/2023/07/09/NeRF/Surface%20Reconstruction/Instant-NSR-code/)                    | 快速表面重建                | Completed       |
-| [NeRO](/2023/07/27/NeRF/Surface%20Reconstruction/Shadow&Highlight/NeRO/) + [Code](/2023/08/01/NeRF/Surface%20Reconstruction/Shadow&Highlight/NeRO-code/)       | 考虑镜面和漫反射的体渲染函数        | In Processing   |
-| [NeRF-Mine](/2023/07/06/NeRF/NeRF-Mine/)                                                                                                                       | 基于Instant-nsr-pl创建的项目 | Completed       |
+| [NeRF](/NeRF/NeRF-Principle) + [Code](/NeRF/NeRF-code)                                                                                  | NeRF原理 + 代码理解         | Completed       |
+| [Neus](/NeRF/Surface%20Reconstruction/Neus) + [Code](/NeRF/Surface%20Reconstruction/Neus-code)                                         | 表面重建方法 SDFNetwork     | Completed       |
+| [InstantNGP](/NeRF/Efficiency/NeRF-InstantNGP) + [Tiny-cuda-nn](/NeRF/Efficiency/NeRF-InstantNGP-code)                                 | 加速NeRF的训练和推理          | Completed（Tcnn） |
+| [Instant-nsr-pl](/NeRF/Surface%20Reconstruction/Neus-Instant-nsr-pl) + [Code](/NeRF/Surface%20Reconstruction/Neus-Instant-nsr-pl-code) | Neus+Tcnn+NSR+pl      | Completed       |
+| [Instant-NSR](/NeRF/Surface%20Reconstruction/Instant-NSR) + [Code](/NeRF/Surface%20Reconstruction/Instant-NSR-code)                    | 快速表面重建                | Completed       |
+| [NeRO](/NeRF/Surface%20Reconstruction/Shadow&Highlight/NeRO) + [Code](/NeRF/Surface%20Reconstruction/Shadow&Highlight/NeRO-code)       | 考虑镜面和漫反射的体渲染函数        | In Processing   |
+| [NeRF-Mine](/NeRF/NeRF-Mine)                                                                                                                       | 基于Instant-nsr-pl创建的项目 | Completed       |
 
 | My post                                      | Brief description  | status                                                                                                       |
 | -------------------------------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------ |
-| [Nerfstudio](/2023/06/15/NeRF/NeRF-Studio/)  | 一个更加方便训练和查看训练过程的框架 | Completed in AutoDL                                                                                          |
-| [NeRF Review](/2023/06/25/NeRF/NeRF-review/) | 追踪一些NeRF的进展和笔记link | Following [Jason陪你练绝技 in Bilibili](https://space.bilibili.com/455056488/channel/collectiondetail?sid=910368) |
+| [Nerfstudio](/NeRF/NeRF-Studio)  | 一个更加方便训练和查看训练过程的框架 | Completed in AutoDL                                                                                          |
+| [NeRF Review](/NeRF/NeRF-review) | 追踪一些NeRF的进展和笔记link | Following [Jason陪你练绝技 in Bilibili](https://space.bilibili.com/455056488/channel/collectiondetail?sid=910368) |
 
 Related link :  [3D Reconstruction](https://paperswithcode.com/task/3d-reconstruction) | [awesome-NeRF-papers](https://github.com/lif314/awesome-NeRF-papers)
 

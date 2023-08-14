@@ -450,6 +450,71 @@ shader_network = MCShadingNetwork
 | human_light         | IPE                  | 2 x 2 x 6 = 24     | 4        | 4     | 256     |
 | inner_light         | VanillaFrequency+IDE | 51 + 72 = 123      | 3        | 4     | 256     |
 
+### Render
+
+- `_init_geometry`
+    - self.mesh = open3d.io.read_triangle_mesh(self.cfg['mesh']) 读取 Stage1得到的mesh
+    - self.ray_tracer = raytracing.RayTracer(np.asarray(self.mesh.vertices), np.asarray(self.mesh.triangles))
+- `_init_dataset`
+    - parse_database_name 返回`self.database = GlossyRealDatabase(self.cfg['database_name'])`
+    - get_database_split :  `self.train_ids, self.test_ids =img_ids[1:], img_ids[:1]`
+    - if is_train:
+        - build_imgs_info : train and test 
+            - return {'imgs': images, 'Ks': Ks, 'poses': poses}
+        - imgs_info_to_torch : train and test
+        - `_construct_ray_batch(train_imgs_info)`
+            - train_imgs_info to ray_batch
+        - tbn = imn
+        - `_shuffle_train_batch`
+
+```python
+def _init_dataset(self, is_train):
+    # train/test split
+    self.database = parse_database_name(self.cfg['database_name'])
+    self.train_ids, self.test_ids = get_database_split(self.database, 'validation')
+    self.train_ids = np.asarray(self.train_ids)
+
+    if is_train:
+        self.train_imgs_info = build_imgs_info(self.database, self.train_ids)
+        self.train_imgs_info = imgs_info_to_torch(self.train_imgs_info, 'cpu')
+        self.train_num = len(self.train_ids)
+
+        self.test_imgs_info = build_imgs_info(self.database, self.test_ids)
+        self.test_imgs_info = imgs_info_to_torch(self.test_imgs_info, 'cpu')
+        self.test_num = len(self.test_ids)
+
+        self.train_batch = self._construct_ray_batch(self.train_imgs_info)
+        self.tbn = self.train_batch['rays_o'].shape[0]
+        self._shuffle_train_batch()
+
+self.train_batch from _construct_ray_batch's return ray_batch: 
+if is_train:
+    ray_batch={
+        'rays_o': rays_o[hit_mask].to(device),
+        'rays_d': rays_d[hit_mask].to(device),
+        'inters': inters[hit_mask].to(device),
+        'normals': normals[hit_mask].to(device),
+        'depth': depth[hit_mask].to(device),
+        'human_poses': human_poses[hit_mask].to(device),
+        'rgb': rgb[hit_mask].to(device),
+    }
+else:
+    assert imn==1
+    ray_batch={
+        'rays_o': rays_o[0].to(device),
+        'rays_d': rays_d[0].to(device),
+        'inters': inters[0].to(device),
+        'normals': normals[0].to(device),
+        'depth': depth[0].to(device),
+        'human_poses': human_poses[0].to(device),
+        'rgb': rgb[0].to(device),
+        'hit_mask': hit_mask[0].to(device),
+    }
+```
+
+- `_init_shader`
+    - `self.cfg['shader_cfg']['is_real'] = self.cfg['database_name'].startswith('real')`
+    - `self.shader_network = MCShadingNetwork(self.cfg['shader_cfg'], lambda o,d: self.trace(o,d))`
 
 # Relight
 

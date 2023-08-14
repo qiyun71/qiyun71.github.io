@@ -61,19 +61,22 @@ Stage1 MLP：
   - Light integral approximation ， 由 $g_{direct}$输出、$g_{indirect}$输出和遮挡概率s(t)计算出光积分
   - 由漫射光积分、镜面反射光积分、反照率a和金属度m计算出最终该点的颜色
 
-$$\begin{gathered}
+$$
+\begin{gathered}
 \mathbf{c}(\omega_{0})=\mathbf{c}_{\mathrm{diffuse}}+\mathbf{c}_{\mathrm{specular}}, \\
 \mathbf{c}_{\mathrm{diffuse}}=\int_{\Omega}(1-m)\frac{\mathbf{a}}{\pi}L(\omega_{i})(\omega_{i}\cdot\mathbf{n})d\omega_{i}, \\
 \mathbf{c}_{\mathrm{specular}}=\int_{\Omega}\frac{DFG}{4(\omega_{i}\cdot\mathbf{n})(\omega_{0}\cdot\mathbf{n})}L(\omega_{i})(\omega_{i}\cdot\mathbf{n})d\omega_{i}. 
-\end{gathered}$$
+\end{gathered}
+$$
 光近似：
 $\mathbf{c}_{\mathrm{diffuse}}=\text{a}(1-m)\underbrace{\int_{\Omega}L(\omega_{i})\frac{\omega_{i}\cdot\mathbf{n}}{\pi}d\omega_{i},}_{L_{\mathrm{diffuse}}}$
 $\mathbf{c}_{\mathrm{specular}}\approx\underbrace{\int_{\Omega}L(\omega_{i})D(\rho,\mathbf{t})d\omega_{i}}_{L_{\mathrm{specular}}}\cdot\underbrace{\int_{\Omega}\frac{DFG}{4(\omega_{0}\cdot\mathbf{n})}d\omega_{i},}_{M_{\mathrm{specular}}}$
 其中亮度可以分为直接光(outer sphere)和间接光(inner sphere)
 
 $$
-\begin{aligned}L_{\mathrm{specular}}&\approx[1-s(\mathrm{t})]\int_{\Omega}g_{\mathrm{direct}}(SH(\omega_l))D(\rho,\mathrm{t})d\omega_l+\\&s(\mathrm{t})\int_{\Omega}g_{\mathrm{indirect}}(SH(\omega_l),\mathrm{p})D(\rho,\mathrm{t})d\omega_l\\&\approx[1-s(\mathrm{t})]g_{\mathrm{direct}}(\int_{\Omega}SH(\omega_l)D(\rho,\mathrm{t})d\omega_l)+\\&s(\mathrm{t})g_{\mathrm{indirect}}(\int_{\Omega}SH(\omega_i)D(\rho,\mathrm{t})d\omega_l,\mathrm{p}).\end{aligned}
-
+\begin{aligned}
+L_{\mathrm{specular}}&\approx[1-s(\mathrm{t})]\int_{\Omega}g_{\mathrm{direct}}(SH(\omega_l))D(\rho,\mathrm{t})d\omega_l+\\&s(\mathrm{t})\int_{\Omega}g_{\mathrm{indirect}}(SH(\omega_l),\mathrm{p})D(\rho,\mathrm{t})d\omega_l\\&\approx[1-s(\mathrm{t})]g_{\mathrm{direct}}(\int_{\Omega}SH(\omega_l)D(\rho,\mathrm{t})d\omega_l)+\\&s(\mathrm{t})g_{\mathrm{indirect}}(\int_{\Omega}SH(\omega_i)D(\rho,\mathrm{t})d\omega_l,\mathrm{p}).
+\end{aligned}
 $$
 ![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230728135846.png)
 
@@ -135,8 +138,6 @@ ${\displaystyle f_{\text{r}}(\omega _{\text{i}},\,\omega _{\text{r}})\,=\,{\frac
 - 为了评估NeRO的性能，我们引入了一个合成数据集和一个真实数据集，这两个数据集都包含被复杂环境光照射的反射物体。在这两个数据集上，NeRO都成功地重建了反射物体的几何和表面BRDF，而基线MVS方法和神经重建方法都失败了。我们的方法的输出是一个带有估计BRDF参数的三角形网格，可以很容易地用于下游应用，如重照明。
 
 ![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230727123733.png)
-
-
 
 ## RELATED WORKS
 
@@ -262,10 +263,10 @@ $L(\omega_i)=[1-s(\omega_i)]g_\text{direct}(SH(\omega_i))+s(\omega_i)g_\text{ind
 
 我们使用集成方向编码来近似光积分
 
-$$$
-
-\begin{aligned}L_{\mathrm{specular}}&\approx[1-s(\mathrm{t})]\int_{\Omega}g_{\mathrm{direct}}(SH(\omega_l))D(\rho,\mathrm{t})d\omega_l+\\&s(\mathrm{t})\int_{\Omega}g_{\mathrm{indirect}}(SH(\omega_l),\mathrm{p})D(\rho,\mathrm{t})d\omega_l\\&\approx[1-s(\mathrm{t})]g_{\mathrm{direct}}(\int_{\Omega}SH(\omega_l)D(\rho,\mathrm{t})d\omega_l)+\\&s(\mathrm{t})g_{\mathrm{indirect}}(\int_{\Omega}SH(\omega_i)D(\rho,\mathrm{t})d\omega_l,\mathrm{p}).\end{aligned}
-
+$$
+\begin{aligned}
+L_{\mathrm{specular}}&\approx[1-s(\mathrm{t})]\int_{\Omega}g_{\mathrm{direct}}(SH(\omega_l))D(\rho,\mathrm{t})d\omega_l+\\&s(\mathrm{t})\int_{\Omega}g_{\mathrm{indirect}}(SH(\omega_l),\mathrm{p})D(\rho,\mathrm{t})d\omega_l\\&\approx[1-s(\mathrm{t})]g_{\mathrm{direct}}(\int_{\Omega}SH(\omega_l)D(\rho,\mathrm{t})d\omega_l)+\\&s(\mathrm{t})g_{\mathrm{indirect}}(\int_{\Omega}SH(\omega_i)D(\rho,\mathrm{t})d\omega_l,\mathrm{p}).
+\end{aligned}
 $$
 
 在第一个近似中，我们使用遮挡概率𝑠(t)以替换不同光线的遮挡概率𝑠 (𝜔𝑖 )。在第二近似中，我们交换MLP的阶数和积分
@@ -558,4 +559,4 @@ KeyError: 'bpy_prop_collection[key]: key "Principled BSDF" not found'
 The relighting results will be saved at `data/relight` with the directory name of `bell-neon` or `bear-neon`. This command means that we use `neon_photostudio_4k.exr` to relight the object.
 
 <iframe title="nero relightNeRO reproduce: relight bear of Glossy Real dataset in neon_photostudio_4k scene" src="https://www.youtube.com/embed/Npva_2r9tWk?feature=oembed" height="113" width="200" allowfullscreen="" allow="fullscreen" style="aspect-ratio: 16 / 9; width: 100%; height: 100%;"></iframe>
-$$
+

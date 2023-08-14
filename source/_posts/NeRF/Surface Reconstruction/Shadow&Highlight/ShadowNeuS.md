@@ -8,13 +8,13 @@ tags:
 categories: NeRF/Surface Reconstruction/Shadow&Highlight
 ---
 
-| Title     | ShadowNeuS: Neural SDF Reconstruction by Shadow Ray Supervision         |
-| --------- | ----------------------------------------------------------------------- |
-| Author    | Jingwang Ling and Zhibo Wang and Feng Xu                                |
-| Conf/Jour | CVPR                                                                    |
-| Year      | 2023                                                                    |
-| Project   | [ShadowNeuS (gerwang.github.io)](https://gerwang.github.io/shadowneus/) |
-| Paper     | [ShadowNeuS: Neural SDF Reconstruction by Shadow Ray Supervision (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4736823086481948673&noteId=1908667790249771264)                                                                        |
+| Title     | ShadowNeuS: Neural SDF Reconstruction by Shadow Ray Supervision                                                                                                                 |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Author    | Jingwang Ling and Zhibo Wang and Feng Xu                                                                                                                                        |
+| Conf/Jour | CVPR                                                                                                                                                                            |
+| Year      | 2023                                                                                                                                                                            |
+| Project   | [ShadowNeuS (gerwang.github.io)](https://gerwang.github.io/shadowneus/)                                                                                                         |
+| Paper     | [ShadowNeuS: Neural SDF Reconstruction by Shadow Ray Supervision (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4736823086481948673&noteId=1908667790249771264) |
 
 ![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230809181405.png)
 方法：假设场景不发光，且忽略相互反射

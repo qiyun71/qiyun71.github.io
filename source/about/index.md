@@ -30,7 +30,7 @@ layout: "about"
     <!-- border-left:25px solid #000; -->
     <div style="width: 60%; padding: 40px;">
         <div style="text-align: left; font-weight: bold;">Yun Qi</div>
-        <div style="text-align: left;">a graduate student at <a href="https://www.ustb.edu.cn/" onmouseover="this.style.color='#6F7276'" onmouseout="this.style.color='#252A2F'">USTB</a>(2022~2025)</div>
+        <div style="text-align: left;">Master Student at <a href="https://www.ustb.edu.cn/" onmouseover="this.style.color='#6F7276'" onmouseout="this.style.color='#252A2F'">USTB</a>(2022~2025)</div>
         <!-- <div><b>Research direction</b>: NeRF & 3D Reconstruction</div>
         <div><b>Interest</b>: 3D Printing; DIY; Robot; Modeling</div>
         <div><b>Language</b>: Python; C++; C#; VB; Arduino</div>

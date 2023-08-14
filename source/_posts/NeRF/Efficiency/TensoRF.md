@@ -7,8 +7,8 @@ tags:
 categories: NeRF/Efficiency
 ---
 
-| Title     | TensoRF: Tensorial Radiance Fields                                                                                                                                                                           |
-| --------- | ------------------------------------------------------------------------------------------------------------------ |
+| Title     | TensoRF: Tensorial Radiance Fields                                                                                                                                                                                                                             |
+| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Author    | [Anpei Chen*](https://apchenstu.github.io/), [Zexiang Xu*](http://cseweb.ucsd.edu/~zex014/), [Andreas Geiger](http://www.cvlibs.net/), [Jingyi Yu](https://sist.shanghaitech.edu.cn/2020/0707/c7499a53862/page.htm), [Hao Su](https://cseweb.ucsd.edu/~haosu/) |
 | Conf/Jour | ECCV                                                                                                                                                                                                                                                           |
 | Year      | 2022                                                                                                                                                                                                                                                           |

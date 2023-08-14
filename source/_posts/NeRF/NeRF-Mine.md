@@ -14,9 +14,9 @@ categories: NeRF
 NeRF主要部分：
 - 神经网络结构-->训练出来模型，即3D模型的隐式表达
     - 网络类型一般为MLP，相当于训练一个函数，输入采样点的位置，可以输出该点的信息(eg: density, sdf, color...)
-- [采样方式](/2023/07/29/NeRF/NeRF/Sampling/)：沿着光线进行采样获取采样点
-- [位置编码](/2023/07/20/NeRF/NeRF/Encoding/)：对采样点的位置xyz和方向dir进行编码，使得MLP的输入为高频的信息
-- [数学相关](/2023/07/31/NeRF/NeRF/Math/)：光线的生成、坐标变换、体渲染公式、BRDF……
+- [采样方式](/NeRF/NeRF/Sampling)：沿着光线进行采样获取采样点
+- [位置编码](/NeRF/NeRF/Encoding)：对采样点的位置xyz和方向dir进行编码，使得MLP的输入为高频的信息
+- [数学相关](/NeRF/NeRF/Math)：光线的生成、坐标变换、体渲染公式、BRDF……
 - 体渲染函数：
     - NeRF：$\mathrm{C}(r)=\int_{\mathrm{t}_{\mathrm{n}}}^{\mathrm{t}_{\mathrm{f}}} \mathrm{T}(\mathrm{t}) \sigma(\mathrm{r}(\mathrm{t})) \mathrm{c}(\mathrm{r}(\mathrm{t}), \mathrm{d}) \mathrm{dt} =\sum_{i=1}^{N} T_{i}\left(1-\exp \left(-\sigma_{i} \delta_{i}\right)\right) \mathbf{c}_{i}$
         - 不透明度$\sigma$，累计透光率 --> 权重
@@ -27,7 +27,7 @@ NeRF主要部分：
     - NeRO：$\mathbf{c}(\omega_{0})=\mathbf{c}_{\mathrm{diffuse}}+\mathbf{c}_{\mathrm{specular}} =\int_{\Omega}(1-m)\frac{\mathbf{a}}{\pi}L(\omega_{i})(\omega_{i}\cdot\mathbf{n})d\omega_{i} + \int_{\Omega}\frac{DFG}{4(\omega_{i}\cdot\mathbf{n})(\omega_{0}\cdot\mathbf{n})}L(\omega_{i})(\omega_{i}\cdot\mathbf{n})d\omega_{i}$
         - 漫反射颜色：Light(直射光)，金属度m、反照率a
         - 镜面反射颜色：Light(直射光+间接光)，金属度m、反照率a、粗糙度$\rho$ ，碰撞概率occ_prob，间接光碰撞human的human_light
-        - 详情见[NeRO Code](/2023/08/01/NeRF/Surface%20Reconstruction/Shadow&Highlight/NeRO-code/)
+        - 详情见[NeRO Code](/NeRF/Surface%20Reconstruction/Shadow&Highlight/NeRO-code)
 - 隐式模型导出(.stl、.obj、.ply等)显式模型：利用trimesh，torchmcubes，mcubes等库
     - 根据sdf和threshold，获取物体表面的vertices和faces(如需还要生成vertices对应的colors)。
     - 然后根据vertices、faces和colors，由trimesh生成mesh并导出模型为obj等格式
