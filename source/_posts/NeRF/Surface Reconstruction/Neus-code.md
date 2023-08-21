@@ -35,7 +35,7 @@ NeRF与Neus相机坐标系的对比：
     - [pose.ply](#pose文件)：读取第一个相机的pose，将该相机坐标系下的原点、xyz轴单位坐标转换到世界坐标系下，然后生成点云保存为pose.ply文件
     - [cameras_sphere.npz](#两个矩阵)
         - world_mat：通过pose.npz读取pose矩阵，分解为c2w和hwf，并将c2w求逆得到w2c，将hwf转化为intrinsic相机内参矩阵，最后得到`world_mat=intrinsic @ w2c`
-        - scale_mat：通过sparse_points_interest.ply文件，将其中的感兴趣区域，在世界坐标系下计算出scale_mat，**该矩阵用于将世界坐标系原点缩放并平移到感兴趣区域的中心出，使得世界坐标系下的单位圆即为感兴趣的区域**，这也是不需要mask的原因
+        - scale_mat：通过sparse_points_interest.ply文件，将其中的感兴趣区域，在世界坐标系下计算出scale_mat，**该矩阵用于将世界坐标系原点缩放并平移到感兴趣区域的中心处，使得世界坐标系下的单位圆即为感兴趣的区域**，这也是不需要mask的原因
         - image和mask：将images数据集文件夹下图片复制到preprocessed文件夹下的image下和并根据数据集图片生成同样大小的白色图片，放入mask文件夹
 
 [数据处理](#dataset)：

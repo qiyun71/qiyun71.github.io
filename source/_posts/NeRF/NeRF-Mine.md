@@ -58,12 +58,12 @@ NeRF-Mine文件结构：
 
 ```bash
 # 训练
-python run.py --config confs/dtu.yaml --train
+python run.py --config confs/neus-dtu.yaml --train
 # 恢复训练
-python run.py --config confs/dtu.yaml --train --resume ckpt_path
+python run.py --config confs/neus-dtu.yaml --train --resume ckpt_path
 
 # test to 生成mesh + video
-python run.py --config confs/dtu.yaml --test --resume ckpt_path
+python run.py --config confs/neus-dtu.yaml --test --resume ckpt_path
 ```
 
 # 代码结构
@@ -323,6 +323,8 @@ Neus: [NeuS/preprocess_custom_data at main · Totoro97/NeuS (github.com)](https:
 nerf_synthetic
 nerf_llff_data
 
+- [x] tf-logs 在测试时会新加一个文件夹问题
+
 # BUG
 
 ```
@@ -378,3 +380,5 @@ TODO：防止过拟合-->添加 torch.cuda.amp.GradScaler() 解决 loss为nan�
 
 - 可能是mesh网格的ijk区域大小设置有问题
 - 或没有将bound进行坐标变换到训练时的世界坐标系
+
+

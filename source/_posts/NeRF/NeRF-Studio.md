@@ -54,6 +54,31 @@ ffmpeg -version
 
 ### 安装Colmap
 
+```text
+sudo apt update
+sudo apt upgrade
+sudo apt-get install \
+    git \
+    cmake \
+    build-essential \
+    libboost-program-options-dev \
+    libboost-filesystem-dev \
+    libboost-graph-dev \
+    libboost-system-dev \
+    libboost-test-dev \
+    libeigen3-dev \
+    libsuitesparse-dev \
+    libfreeimage-dev \
+    libmetis-dev \
+    libgoogle-glog-dev \
+    libgflags-dev \
+    libglew-dev \
+    qtbase5-dev \
+    libqt5opengl5-dev \
+    libcgal-dev
+如果一次安装不上，可以继续下步，缺什么装什么
+```
+
 `sudo apt install colmap`
 
 ## 加载数据&训练model
@@ -166,6 +191,7 @@ CPU生成mesh的速度很慢 大约用了1个小时多，效果也不是很好�
 
 需要在本地再开一个终端，并运行，将本地的6006端口与远程的7007进行绑定
 - eg: `ssh -L 7007:localhost:7007 root@connect.beijinga.seetacloud.com -p 23394`
+- ssh -L 7007:localhost:7007 root@<remote-machine-ip> -p port
 
 此时打开[nerfstudio viewer](https://viewer.nerf.studio/)，在Getting started中输入ws://localhost:7007，即可在viewer中查看
 

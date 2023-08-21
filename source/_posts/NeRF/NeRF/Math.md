@@ -63,6 +63,20 @@ def srgb_to_linear(srgb):
 
 # 坐标变换
 
+## 相机内参矩阵intrinsic
+
+![image.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230703144039.png)
+
+> 理解与[NeRF OpenCV OpenGL COLMAP DeepVoxels坐标系朝向_nerf坐标系_培之的博客-CSDN博客](https://blog.csdn.net/OrdinaryMatthew/article/details/126670351)一致
+
+NeRF = OpenGL = Blender
+Neus = Colmap
+
+| Method | Pixel to Camera coordinate                                                                                                                                                                                                                                                                                         | 
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| NeRF   | $\vec d = \begin{pmatrix} \frac{i-\frac{W}{2}}{f} \\ -\frac{j-\frac{H}{2}}{f} \\ -1 \\ \end{pmatrix}$ , $intrinsics = K = \begin{bmatrix} f & 0 & \frac{W}{2}  \\ 0 & f & \frac{H}{2}  \\ 0 & 0 & 1 \\ \end{bmatrix}$                                                                                              | 
+| Neus   | $\vec d = intrinsics^{-1} \times  pixel = \begin{bmatrix} \frac{1}{f} & 0 & -\frac{W}{2 \cdot f}  \\ 0 & \frac{1}{f} & -\frac{H}{2 \cdot f} \\ 0 & 0 & 1 \\ \end{bmatrix} \begin{pmatrix} i \\ j \\ 1 \\ \end{pmatrix} = \begin{pmatrix} \frac{i-\frac{W}{2}}{f} \\ \frac{j-\frac{H}{2}}{f} \\ 1 \\ \end{pmatrix}$ |     
+
 ## 相机外参矩阵w2c
 
 > [相机位姿(camera pose)与外参矩阵 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/642715876)
@@ -155,6 +169,7 @@ $\mathbf{C} = - \mathbf{R}^{\top} t$
 
 # 反射Reflection
 
+
 >[基于物理着色：BRDF - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/21376124)
 
 Phong Reflection Model
@@ -165,12 +180,14 @@ $I_{Phong}=k_{a}I_{a}+k_{d}(n\cdot l)I_{d}+k_{s}(r\cdot v)^{\alpha}I_{s}$
 
 - 漫射光和高光分别会根据入射方向、反射方向和观察方向的变化而变化，还可以通过$\alpha$参数来调节表面粗糙程度，从而控制高光区域大小和锐利程度，而且运算简单，适合当时的计算机处理能力。
 
-Blinn-Phong Reflection Model
+
+## Blinn-Phong Reflection Model
 $I_{Blinn-Phong}=k_aI_a+k_d(n\cdot l)I_d+k_s(n\cdot h)^\alpha I_s$
 - 半角向量$\mathbf{h}$为光线入射向量和观察向量的中间向量：$h=\frac{l+v}{||l+v||}$
 - Blinn-Phong相比Phong，在观察方向趋向平行于表面时，高光形状会拉长，更接近真实情况。
 
-**基于物理的分析模型**
+## 基于物理的分析模型
+
 1967年Torrance-Sparrow在Theory for Off-Specular Reflection From Roughened Surfaces中使用辐射度学和微表面理论推导出粗糙表面的高光反射模型，1981年**Cook-Torrance**在A Reflectance Model for Computer Graphics中把这个模型引入到计算机图形学领域，现在无论是CG电影，还是3D游戏，基于物理着色都是使用的这个模型。**Cook-Torrance**：ROBERT L. COOK 和 KENNETH E. TORRANCE，提出这个BRDF的文章叫做《A Reflectance Model for Computer Graphics》，发表于1982年。
 > PBR 中的 Cook-Torrance BRDF 中，Cook-Torrance 是谁？ - 房燕良的回答 - 知乎 https://www.zhihu.com/question/351339310/answer/865238779
 

@@ -111,9 +111,9 @@ meta_info={
 
 - `_parse_colmap` 从cache.pkl中读取数据，如果cache.pkl不存在，则从`/colmap/sparse/0`中读取并将数据写入到cache.pkl中
     - self.poses (3,4), self.Ks (3,3), self.image_names(dict is img_ids : img_name), self.img_ids(list len is num_images)
-- `_normalize` 读取object_point_cloud.ply，获得截取出来的物体点云坐标，将该点云坐标标准化到单位bound中，并降世界基坐标系转换到手动设置的坐标系即up、forward
+- `_normalize` 读取object_point_cloud.ply，获得截取出来的物体点云坐标，将该点云坐标标准化到单位bound中，并将世界基坐标系转换到手动设置的坐标系即up、forward
     - 即`_normalize`将点云坐标从原来的世界坐标系w转换到新的坐标系w'下
-    - 将pose的w2c数据转换为w'2c，其中w'原点在object_point_cloud.ply中心，xyz轴是自定义的轴，如上，但是scale不变
+    - 将pose的w2c数据转换为w'2c，其中w'原点在object_point_cloud.ply中心，xyz轴是自定义的轴，如上图，但是scale不变
 - `database_name: real/bear/raw_1024`中最后一个raw_1024
     - 如果以raw开头：
         - 将images中图片缩放并保存到images_raw_1024中
@@ -158,7 +158,7 @@ data:
 ```
 
 
-# Network
+# Network&Render
 
 ## NeROShapeRenderer
 
@@ -255,6 +255,8 @@ def train_step(self, step):
     return outputs
 ```
 
+#### train_step
+
 - `_process_ray_batch`
     - input：ray_batch, poses
     - output：rays_o, rays_d, near, far, human_poses[idxs]
@@ -284,7 +286,7 @@ def train_step(self, step):
             - `sampled_color[inner_mask], occ_info = self.color_network(points[inner_mask], gradients, -dirs[inner_mask], feature_vector, human_poses_pt[inner_mask], step=step)`
                 - sampled_color : 采样点颜色
                 - occ_info : dict {'reflective': reflective, 'occ_prob': occ_prob,}
-            - `gradient_error = (torch.linalg.norm(gradients, ord=2, dim=-1) - 1.0) ** 2`
+            - `gradient_error = (torch.linalg.norm(gradients, ord=2, dim=-1) - 1.0) ** 2` 梯度损失
         - alpha -- > weight 
         - sampled_color, weight --> color
         - outputs = {'ray_rgb': color,  'gradient_error': gradient_error,}
@@ -299,7 +301,7 @@ def train_step(self, step):
             - else: `outputs['loss_occ'] = torch.zeros(1)`
         - if not is_train: `outputs.update(self.compute_validation_info(z_vals, rays_o, rays_d, weights, human_poses, step))`
         - return outputs
-- rgb_loss: `outputs['loss_rgb'] = self.compute_rgb_loss(outputs['ray_rgb'], train_ray_batch['rgbs'])`
+- **rgb_loss**: `outputs['loss_rgb'] = self.compute_rgb_loss(outputs['ray_rgb'], train_ray_batch['rgbs'])`
 
 ```python
 cfg['rgb_loss'] = 'charbonier'
@@ -326,26 +328,13 @@ def compute_rgb_loss(self, rgb_pr, rgb_gt):
 ![occ.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/occ.png)
 
 
-反射光线与单位球交点，到pts的距离dist
+##### loss_occ
 
 ```python
-def get_sphere_intersection(pts, dirs):
-    dtx = torch.sum(pts*dirs,dim=-1,keepdim=True) # rn,1
-    xtx = torch.sum(pts**2,dim=-1,keepdim=True) # rn,1
-    dist = dtx ** 2 - xtx + 1
-    assert torch.sum(dist<0)==0
-    dist = -dtx + torch.sqrt(dist+1e-6) # rn,1
-    return dist
+inter_dist, inter_prob, inter_sdf = get_intersection(self.sdf_inter_fun, self.deviation_network, points[mask], reflective[mask], sn0=64, sn1=16)  # pn,sn-1
+occ_prob_gt = torch.sum(inter_prob, -1, keepdim=True)
+return F.l1_loss(occ_prob[mask], occ_prob_gt)
 ```
-
-![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230805163513.png)
-
-从pts采样点，长度dist，方向为reflective，均匀采样sn个点
-- 获取sn个采样点的sn-1个中点的坐标、sdf和invs
-- 选取其中在物体表面上的点：`surface_mask = (cos_val < 0)`
-- 计算这些点的sdf和权重
-- 表面采样点的权重之和即为occ_prob_gt
-- occ_prob_gt与occ_prob进行求L1损失即为loss_occ
 
 ```python
 def get_intersection(sdf_fun, inv_fun, pts, dirs, sn0=128, sn1=9):
@@ -378,7 +367,31 @@ def get_intersection(sdf_fun, inv_fun, pts, dirs, sn0=128, sn1=9):
         hit_weights[inside_mask] = weights
         hit_sdf[inside_mask] = mid_sdf
     return hit_z_vals, hit_weights, hit_sdf
+```
 
+
+反射光线与单位球交点，到pts的距离dist
+
+```python
+def get_sphere_intersection(pts, dirs):
+    dtx = torch.sum(pts*dirs,dim=-1,keepdim=True) # rn,1
+    xtx = torch.sum(pts**2,dim=-1,keepdim=True) # rn,1
+    dist = dtx ** 2 - xtx + 1
+    assert torch.sum(dist<0)==0
+    dist = -dtx + torch.sqrt(dist+1e-6) # rn,1
+    return dist
+```
+
+![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230805163513.png)
+
+从pts采样点，长度dist，方向为reflective，均匀采样sn个点
+- 获取sn个采样点的sn-1个中点的坐标、sdf和invs
+- 选取其中在物体表面上的点：`surface_mask = (cos_val < 0)`
+- 计算这些点的sdf和权重
+- 表面采样点的权重之和即为occ_prob_gt
+- occ_prob_gt与occ_prob进行求L1损失即为loss_occ
+
+```python
 def get_weights(sdf_fun, inv_fun, z_vals, origins, dirs):
     points = z_vals.unsqueeze(-1) * dirs.unsqueeze(-2) + origins.unsqueeze(-2) # pn,sn,3
     inv_s = inv_fun(points[:, :-1, :])[..., 0]  # pn,sn-1
@@ -400,13 +413,7 @@ def get_weights(sdf_fun, inv_fun, z_vals, origins, dirs):
     weights = alpha * torch.cumprod(torch.cat([torch.ones([alpha.shape[0], 1]), 1. - alpha + 1e-7], -1), -1)[:, :-1]
     mid_sdf[~surface_mask]=-1.0
     return weights, mid_sdf
-
-inter_dist, inter_prob, inter_sdf = get_intersection(self.sdf_inter_fun, self.deviation_network, points[mask], reflective[mask], sn0=64, sn1=16)  # pn,sn-1
-occ_prob_gt = torch.sum(inter_prob, -1, keepdim=True)
-return F.l1_loss(occ_prob[mask], occ_prob_gt)
 ```
-
-
 
 ## NeROMaterialRenderer
 
@@ -454,7 +461,9 @@ shader_network = MCShadingNetwork
 
 - `_init_geometry`
     - self.mesh = open3d.io.read_triangle_mesh(self.cfg['mesh']) 读取 Stage1得到的mesh
-    - self.ray_tracer = raytracing.RayTracer(np.asarray(self.mesh.vertices), np.asarray(self.mesh.triangles))
+        - [open3d.io.read_triangle_mesh — Open3D 0.16.0 documentation](http://www.open3d.org/docs/0.16.0/python_api/open3d.io.read_triangle_mesh.html#open3d.io.read_triangle_mesh)
+    - self.ray_tracer = raytracing.RayTracer(np.asarray(self.mesh.vertices), np.asarray(self.mesh.triangles)) 获得raytracer,用于根据rays_o和rays_d得到intersections, face_normals, depth
+        - [ashawkey/raytracing: A CUDA Mesh RayTracer with BVH acceleration, with python bindings and a GUI. (github.com)](https://github.com/ashawkey/raytracing)
 - `_init_dataset`
     - parse_database_name 返回`self.database = GlossyRealDatabase(self.cfg['database_name'])`
     - get_database_split :  `self.train_ids, self.test_ids =img_ids[1:], img_ids[:1]`
@@ -514,7 +523,12 @@ else:
 
 - `_init_shader`
     - `self.cfg['shader_cfg']['is_real'] = self.cfg['database_name'].startswith('real')`
-    - `self.shader_network = MCShadingNetwork(self.cfg['shader_cfg'], lambda o,d: self.trace(o,d))`
+    - `self.shader_network = MCShadingNetwork(self.cfg['shader_cfg'], lambda o,d: self.trace(o,d))` -- MLP Network
+- forward
+    - if is_train: self.train_step(step)
+
+
+
 
 # Relight
 

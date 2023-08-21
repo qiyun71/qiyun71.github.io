@@ -24,11 +24,6 @@ NeRF相关的论文 at CVPR/ICCV/ECCV/NIPS/ICML/ICLR/SIGGRAPH
 | UC Berkeley             |                           [Ben Mildenhall (bmild.github.io)](https://bmild.github.io/)                          |                  NeRF                  |
 | ShanghaiTech University |                       [陈安沛Anpei Chen (apchenstu.github.io)](https://apchenstu.github.io/)                       |                 TensoRF                |
 
-# Review
-
-| Year                                                                                 |                                        Title&Project Page                                        | Brief Description | Conf/Jour |
-| ------------------------------------------------------------------------------------ |:------------------------------------------------------------------------------------------------:|:-----------------:|:---------:|
-| [2023](/NeRF/Review/A%20Critical%20Analysis%20of%20NeRF-Based%203D%20Reconstruction) | [A Critical Analysis of NeRF-Based 3D Reconstruction](https://www.mdpi.com/2072-4292/15/14/3585) |   对比了Colmap摄影测量法和NeRF-based方法在3D Reconstruction中的优劣       |   MDPI remote sensing    |
 
 # NeRF
 
@@ -39,30 +34,7 @@ ECCV 2020 Oral - Best Paper Honorable Mention
 | [2020](/NeRF/NeRF-Principle) | [NeRF:Representing Scenes as Neural Radiance Fields for View Synthesis](https://www.matthewtancik.com/nerf) |        初始文        |    ECCV   |
 
 
-## Surface Reconstruction
-
-| Year                                                                     |                                                                    Title&Project Page                                                                    |                          Brief Description                         |                               Conf/Jour                               |
-| ------------------------------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------: | :-------------------------------------------------------------------: |
-| [2021](/NeRF/Surface%20Reconstruction/Neus)                  |          [NeuS: Learning Neural Implicit Surfaces by Volume Rendering for Multi-view Reconstruction](https://lingjie0206.github.io/papers/NeuS/)         |                           Neus: SDF表面重建方法                          |                                NeurIPS                                |
-| [2022](/NeRF/Surface%20Reconstruction/Instant-NSR)           |                         [Human Performance Modeling and Rendering via Neural Animated Mesh](https://zhaofuq.github.io/NeuralAM/)                         |                    NSR: Neus_TSDF + NGP，但是依赖mask                   |                             SIGGRAPH Asia                             |
-| [2023](/NeRF/Surface%20Reconstruction/Neus-Instant-nsr-pl)   |                                           [bennyguo/instant-nsr-pl](https://github.com/bennyguo/instant-nsr-pl)                                          |                       Neus+NeRF+Nerfacc+tcnn                       |                                  None                                 |
-| [2023](/NeRF/Surface%20Reconstruction/Neuralangelo)          |                      [Neuralangelo: High-Fidelity Neural Surface Reconstruction](https://research.nvidia.com/labs/dir/neuralangelo/)                     |                        NGP_but数值梯度+Neus_SDF                        | IEEE Conference on Computer Vision and Pattern Recognition (**CVPR**) |
-| [2023](/NeRF/Surface%20Reconstruction/PermutoSDF)            |                                                [PermutoSDF](https://radualexandru.github.io/permuto_sdf/)                                                | NGP_butPermutohedral lattice + Neus_SDF，曲率损失和颜色MLP正则解决镜面+无纹理区域，更光滑 |                      IEEE/CVF Conference on CVPR                      |
-| [2023](/NeRF/Surface%20Reconstruction/NeuDA)                 |                                                     [NeuDA](https://3d-front-future.github.io/neuda/)                                                    |                NGP_butDeformable Anchors+HPE + Neus                |                                  CVPR                                 |
-| [2023](/NeRF/Surface%20Reconstruction/Shadow&Highlight/NeRO) |             [NeRO: Neural Geometry and BRDF Reconstruction of Reflective Objects from Multiview Images](https://liuyuan-pal.github.io/NeRO/)             |      Neus_SDF 新的光表示方法可以重建准确的几何和BRDF，但是细节处由于太光滑而忽略，反射颜色也依赖准确的法线     |                           SIGGRAPH (ACM TOG)                          |
-| [2021](/NeRF/Surface%20Reconstruction/UNISURF)               | [UNISURF: Unifying Neural Implicit Surfaces and Radiance Fields for Multi-View Reconstruction (moechsle.github.io)](https://moechsle.github.io/unisurf/) |                  UNISURF用占用值来表示表面，代替NeRF中的$\alpha$                 |                              ICCV (oral)                              |
-
-## Shadow&Highlight
-
-| Year                                                                           | Title&Project Page                                                                                                               | Brief Description                                         |      Conf/Jour     |
-| ------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- | :----------------: |
-| 2023                                                                           | [Relighting Neural Radiance Fields with Shadow and Highlight Hints](https://nrhints.github.io/)                                  | 数据集使用相机位姿和灯源位姿                                            |      SIGGRAPH      |
-| [2023](/NeRF/Surface%20Reconstruction/Shadow&Highlight/NeRO)       | [NeRO: Neural Geometry and BRDF Reconstruction of Reflective Objects from Multiview Images](https://liuyuan-pal.github.io/NeRO/) | Neus_SDF 新的光表示方法可以重建准确的几何和BRDF，但是细节处由于太光滑而忽略，反射颜色也依赖准确的法线 | SIGGRAPH (ACM TOG) |
-| [2023](/NeRF/Surface%20Reconstruction/Shadow&Highlight/ShadowNeuS) | [ShadowNeuS (gerwang.github.io)](https://gerwang.github.io/shadowneus/)                                                          | 多光照下单视图重建SDF+RGB图像重建外观+BRDF                               |        CVPR        |
-| [2022](/NeRF/Surface%20Reconstruction/Shadow&Highlight/Ref-NeRF)   | [Ref-NeRF (dorverbin.github.io)](https://dorverbin.github.io/refnerf/)                                                           | 基于球面谐波的IDE编码+预测表面法向+BRDF                                  |        CVPR        |
-| [2021](/NeRF/Surface%20Reconstruction/Shadow&Highlight/NeRFactor)  | [NeRFactor (xiuming.info)](https://xiuming.info/projects/nerfactor/)                                                             |                                                           |      SIGGRAPH      |
-
-## Speed
+## Efficiency
 
 ### Encoding
 
@@ -76,8 +48,22 @@ ECCV 2020 Oral - Best Paper Honorable Mention
 | [2023](/NeRF/Efficiency/Zip-NeRF)                          |                                            [Zip-NeRF (jonbarron.info)](https://jonbarron.info/zipnerf/)                                             |                                     NGP + Mip-NeRF360                                     |                                 ICCV                                  |
 | [2023](/NeRF/Efficiency/Encoding/Tri-MipRF)                | [Tri-MipRF: Tri-Mip Representation for Efficient Anti-Aliasing Neural Radiance Fields (wbhu.github.io)](https://wbhu.github.io/projects/Tri-MipRF/) |                Tri-MipRF encoding(TensoRF + NGP)+ Cone Sampling(Mip-NeRF)                 |                                 ICCV                                  |
 | [2022](/NeRF/Efficiency/TensoRF)                           |                          [TensoRF: Tensorial Radiance Fields (apchenstu.github.io)](https://apchenstu.github.io/TensoRF/)                           |                                                                                           |                                 ECCV                                  |
-| [2023](/NeRF/Efficiency/Strivec)                             |                                   [Zerg-Overmind/Strivec (github.com)](https://github.com/Zerg-Overmind/Strivec)                                    |                                                                                           |                                 ICCV                                  |
-|                                                            |                                                                                                                                                     |                                                                                           |                                                                       |
+| [2023](/NeRF/Efficiency/Strivec)                           |                                   [Zerg-Overmind/Strivec (github.com)](https://github.com/Zerg-Overmind/Strivec)                                    |                                                                                           |                                 ICCV                                  |
+| [2023](/NeRF/Efficiency/3D%20Gaussian%20Splatting)         |        [3D Gaussian Splatting for Real-Time Radiance Field Rendering (inria.fr)](https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/)         | 优化3D高斯点云，并使用splatting渲染方式，实现实时高分辨率训练+渲染                                                                                          |                               SIGGRAPH                                |
+
+## Large Scale Scene
+
+| Year                                                     | Title&Project Page                                                                                            | Brief Description                      | Conf/Jour |
+| -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | -------------------------------------- | :-------: |
+| [2020](/NeRF/LargeScaleScene/NeRF++)         | [nerfplusplus: improves over nerf in 360 capture of unbounded scenes](https://github.com/Kai-46/nerfplusplus) | 将背景的采样点表示为四维向量，与前景分别使用不同的MLP进行训练       |   arXiv   |
+| [2022](/NeRF/LargeScaleScene/Mip-NeRF%20360) | [mip-NeRF 360](https://jonbarron.info/mipnerf360/)                                                            | 将单位球外的背景参数化，小型提议网络进行精采样，正则化dist消除小区域云雾 |    CVPR   |
+
+## Review
+
+| Year                                                                                 |                                        Title&Project Page                                        |                         Brief Description                         |      Conf/Jour      |
+| ------------------------------------------------------------------------------------ |:------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------:|:-------------------:|
+| [2023](/NeRF/Review/A%20Critical%20Analysis%20of%20NeRF-Based%203D%20Reconstruction) | [A Critical Analysis of NeRF-Based 3D Reconstruction](https://www.mdpi.com/2072-4292/15/14/3585) | 对比了Colmap摄影测量法和NeRF-based方法在3D Reconstruction中的优劣 | MDPI remote sensing |
+| [2023](/NeRF/Review/NeRF%20in%20the%20industrial%20and%20robotics%20domain)          |                 [Maftej/iisnerf (github.com)](https://github.com/Maftej/iisnerf)                 |                探索了NeRF在工业和机器人领域的应用                 | None                    |
 
 ## Sampling
 
@@ -88,13 +74,6 @@ ECCV 2020 Oral - Best Paper Honorable Mention
 | [2023](/NeRF/Sampling/NerfAcc)  | [NerfAcc Documentation — nerfacc 0.5.3](https://www.nerfacc.com/en/latest/) | 一种新的采样方法可以加速NeRF     |   arXiv   |
 | [2021](/NeRF/Sampling/Mip-NeRF) | [mip-NeRF ](https://jonbarron.info/mipnerf/)                                | 截头圆锥体采样方法+IPEncoding |    ICCV   |
 
-## Large Scale Scene
-
-| Year                                                     | Title&Project Page                                                                                            | Brief Description                      | Conf/Jour |
-| -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | -------------------------------------- | :-------: |
-| [2020](/NeRF/LargeScaleScene/NeRF++)         | [nerfplusplus: improves over nerf in 360 capture of unbounded scenes](https://github.com/Kai-46/nerfplusplus) | 将背景的采样点表示为四维向量，与前景分别使用不同的MLP进行训练       |   arXiv   |
-| [2022](/NeRF/LargeScaleScene/Mip-NeRF%20360) | [mip-NeRF 360](https://jonbarron.info/mipnerf360/)                                                            | 将单位球外的背景参数化，小型提议网络进行精采样，正则化dist消除小区域云雾 |    CVPR   |
-
 ## Sparse images/Generalization
 
 | Year                                        | Title&Project Page                                                                                                    | Brief Description                      |     Conf/Jour    |
@@ -103,6 +82,30 @@ ECCV 2020 Oral - Best Paper Honorable Mention
 | 2023                                        | [SparseNeRF](https://sparsenerf.github.io/)                                                                           | 利用来自现实世界不准确观测的深度先验知识                   | Technical Report |
 | 2021                                        | [pixelNeRF: Neural Radiance Fields from One or Few Images (alexyu.net)](https://alexyu.net/pixelnerf/)                |                                        |       CVPR       |
 | [2022](/NeRF/Sparse/FORGE)      | [FORGE (ut-austin-rpl.github.io)](https://ut-austin-rpl.github.io/FORGE/)                                             | voxel特征提取2D-->3D+相机姿态估计+特征共享和融合+神经隐式重建 |       ArXiv      |
+
+## Surface Reconstruction
+
+| Year                                                         |                                                                                  Title&Project Page                                                                                  |                                           Brief Description                                           |                               Conf/Jour                               |
+| ------------------------------------------------------------ |:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------:|
+| [2021](/NeRF/Surface%20Reconstruction/Neus)                  |                       [NeuS: Learning Neural Implicit Surfaces by Volume Rendering for Multi-view Reconstruction](https://lingjie0206.github.io/papers/NeuS/)                        |                                         Neus: SDF表面重建方法                                         |                                NeurIPS                                |
+| [2022](/NeRF/Surface%20Reconstruction/Instant-NSR)           |                                       [Human Performance Modeling and Rendering via Neural Animated Mesh](https://zhaofuq.github.io/NeuralAM/)                                       |                                  NSR: Neus_TSDF + NGP，但是依赖mask                                   |                             SIGGRAPH Asia                             |
+| [2023](/NeRF/Surface%20Reconstruction/Neus-Instant-nsr-pl)   |                                                        [bennyguo/instant-nsr-pl](https://github.com/bennyguo/instant-nsr-pl)                                                         |                                        Neus+NeRF+Nerfacc+tcnn                                         |                                 None                                  |
+| [2023](/NeRF/Surface%20Reconstruction/Neuralangelo)          |                                   [Neuralangelo: High-Fidelity Neural Surface Reconstruction](https://research.nvidia.com/labs/dir/neuralangelo/)                                    |                                       NGP_but数值梯度+Neus_SDF                                        | IEEE Conference on Computer Vision and Pattern Recognition (**CVPR**) |
+| [2023](/NeRF/Surface%20Reconstruction/PermutoSDF)            |                                                              [PermutoSDF](https://radualexandru.github.io/permuto_sdf/)                                                              |       NGP_butPermutohedral lattice + Neus_SDF，曲率损失和颜色MLP正则解决镜面+无纹理区域，更光滑       |                      IEEE/CVF Conference on CVPR                      |
+| [2023](/NeRF/Surface%20Reconstruction/NeuDA)                 |                                                                  [NeuDA](https://3d-front-future.github.io/neuda/)                                                                   |                                 NGP_butDeformable Anchors+HPE + Neus                                  |                                 CVPR                                  |
+| [2023](/NeRF/Surface%20Reconstruction/Shadow&Highlight/NeRO) |                           [NeRO: Neural Geometry and BRDF Reconstruction of Reflective Objects from Multiview Images](https://liuyuan-pal.github.io/NeRO/)                           | Neus_SDF 新的光表示方法可以重建准确的几何和BRDF，但是细节处由于太光滑而忽略，反射颜色也依赖准确的法线 |                          SIGGRAPH (ACM TOG)                           |
+| [2021](/NeRF/Surface%20Reconstruction/UNISURF)               |               [UNISURF: Unifying Neural Implicit Surfaces and Radiance Fields for Multi-View Reconstruction ](https://moechsle.github.io/unisurf/)               |                            UNISURF用占用值来表示表面，代替NeRF中的$\alpha$                            |                              ICCV (oral)                              |
+| [2023](/NeRF/Surface%20Reconstruction/PlankAssembly)         | [PlankAssembly: Robust 3D Reconstruction from Three Orthographic Views with Learnt Shape Programs](https://manycore-research.github.io/PlankAssembly/) |                  基于Transform的自注意力提出模型,将2D三视图转化成3D模型的代码形式DSL                  | ICCV                                                                      |
+
+## Shadow&Highlight
+
+| Year                                                               | Title&Project Page                                                                                                               | Brief Description                                                                                     |     Conf/Jour      |
+| ------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |:------------------:|
+| 2023                                                               | [Relighting Neural Radiance Fields with Shadow and Highlight Hints](https://nrhints.github.io/)                                  | 数据集使用相机位姿和灯源位姿                                                                          |      SIGGRAPH      |
+| [2023](/NeRF/Surface%20Reconstruction/Shadow&Highlight/NeRO)       | [NeRO: Neural Geometry and BRDF Reconstruction of Reflective Objects from Multiview Images](https://liuyuan-pal.github.io/NeRO/) | Neus_SDF 新的光表示方法可以重建准确的几何和BRDF，但是细节处由于太光滑而忽略，反射颜色也依赖准确的法线 | SIGGRAPH (ACM TOG) |
+| [2023](/NeRF/Surface%20Reconstruction/Shadow&Highlight/ShadowNeuS) | [ShadowNeuS (gerwang.github.io)](https://gerwang.github.io/shadowneus/)                                                          | 多光照下单视图重建SDF+RGB图像重建外观+BRDF                                                            |        CVPR        |
+| [2022](/NeRF/Surface%20Reconstruction/Shadow&Highlight/Ref-NeRF)   | [Ref-NeRF (dorverbin.github.io)](https://dorverbin.github.io/refnerf/)                                                           | 基于球面谐波的IDE编码+预测表面法向+BRDF                                                               |        CVPR        |
+| [2021](/NeRF/Surface%20Reconstruction/Shadow&Highlight/NeRFactor)  | [NeRFactor (xiuming.info)](https://xiuming.info/projects/nerfactor/)                                                             | NeRFactor在未知光照条件下从图像中恢复物体形状和反射率                                                 |      SIGGRAPH      |
 
 ## PointClouds
 

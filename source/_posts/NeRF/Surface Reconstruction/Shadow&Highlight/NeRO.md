@@ -560,3 +560,17 @@ The relighting results will be saved at `data/relight` with the directory name
 
 <iframe title="nero relightNeRO reproduce: relight bear of Glossy Real dataset in neon_photostudio_4k scene" src="https://www.youtube.com/embed/Npva_2r9tWk?feature=oembed" height="113" width="200" allowfullscreen="" allow="fullscreen" style="aspect-ratio: 16 / 9; width: 100%; height: 100%;"></iframe>
 
+
+## eg
+
+syn/bell: 
+
+```
+# stage1
+python run_training.py --cfg configs/shape/syn/bell.yaml
+python extract_mesh.py --cfg configs/shape/syn/bell.yaml
+# stage2
+python run_training.py --cfg configs/material/syn/bell.yaml
+python extract_materials.py --cfg configs/material/syn/bell.yaml
+```
+
