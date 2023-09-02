@@ -3,8 +3,8 @@ title: A Critical Analysis of NeRF-Based 3D Reconstruction
 date: 2023-08-12T15:32:14.000Z
 tags:
   - Review
-  - 3D Reconstruction
   - NeRF
+  - 3DReconstruction
 categories: NeRF/Review
 date updated: 2023-08-12T15:37:23.000Z
 ---

@@ -5,7 +5,7 @@ toc: true
 categories: Learn
 summary: 单片机基础
 tags:
-  - Arduino Note
+  - Note
 ---
 
 Arduino学习

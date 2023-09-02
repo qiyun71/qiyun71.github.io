@@ -2,8 +2,8 @@
 title: Python调用LOL的API
 date: 2022-06-08 21:14:26
 tags:
-    - LOL API
-    - Python
+  - LOL
+  - Python
 categories: Learn
 ---
 

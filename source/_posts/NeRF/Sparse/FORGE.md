@@ -2,8 +2,8 @@
 title: FORGE
 date: 2023-08-03 14:11:36
 tags:
-    - Sparse Images
-    - 3D Reconstruction
+  - Sparse
+  - 3DReconstruction
 categories: NeRF/Sparse
 ---
 

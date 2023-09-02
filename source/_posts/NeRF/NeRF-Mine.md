@@ -2,14 +2,14 @@
 title: 基于Instant-nsr-pl创建一个项目
 date: 2023-07-06 21:17:54
 tags:
-    - NeRF
-    - MyProject
+  - NeRF
+  - Neus
 categories: NeRF
 ---
 
 基于Instant-nsr-pl(NSR,NGP,PytorchLightning)代码构建——[yq010105/NeRF-Mine (github.com)](https://github.com/yq010105/NeRF-Mine)
 - 保留omegaconf、nerfacc、Mip-nerf，类似文件结构
-- 去除pytorch-lightning，使用pytorch
+- 去除pytorch-lightning框架，使用pytorch
 
 NeRF主要部分：
 - 神经网络结构-->训练出来模型，即3D模型的隐式表达
@@ -27,7 +27,7 @@ NeRF主要部分：
     - NeRO：$\mathbf{c}(\omega_{0})=\mathbf{c}_{\mathrm{diffuse}}+\mathbf{c}_{\mathrm{specular}} =\int_{\Omega}(1-m)\frac{\mathbf{a}}{\pi}L(\omega_{i})(\omega_{i}\cdot\mathbf{n})d\omega_{i} + \int_{\Omega}\frac{DFG}{4(\omega_{i}\cdot\mathbf{n})(\omega_{0}\cdot\mathbf{n})}L(\omega_{i})(\omega_{i}\cdot\mathbf{n})d\omega_{i}$
         - 漫反射颜色：Light(直射光)，金属度m、反照率a
         - 镜面反射颜色：Light(直射光+间接光)，金属度m、反照率a、粗糙度$\rho$ ，碰撞概率occ_prob，间接光碰撞human的human_light
-        - 详情见[NeRO Code](/NeRF/Surface%20Reconstruction/Shadow&Highlight/NeRO-code)
+        - 详情见[NeRO Code](/NeRF/SurfaceReconstruction/Shadow&Highlight/NeRO-code)
 - 隐式模型导出(.stl、.obj、.ply等)显式模型：利用trimesh，torchmcubes，mcubes等库
     - 根据sdf和threshold，获取物体表面的vertices和faces(如需还要生成vertices对应的colors)。
     - 然后根据vertices、faces和colors，由trimesh生成mesh并导出模型为obj等格式
@@ -68,85 +68,155 @@ python run.py --config confs/neus-dtu.yaml --test --resume ckpt_path
 
 # 代码结构
 
-## confs
 
+## confs配置文件
+
+```yaml
+name: ${model.name}-${dataset.name}-${basename:${dataset.root_dir}}
+seed: 7 #3407
+tag: ''
+
+dataset:
+  name: dtu
+  root_dir: ./inputs/dtu_scan24
+  render_cameras_name: cameras_sphere.npz
+  object_cameras_name: cameras_sphere.npz
+  img_downscale: 1
+  apply_mask: False
+  test_steps: 60
+...
 ```
-eg: dtu.yaml
 
+**omegaconf**获取yaml中参数
+**argparse**获取终端输入的参数
 
-'trainer': {'epochs': 200, 'val_freq': 5, 'outputs_dir': './outputs\\neu  
-s-dtu-Miku', 'trial_name': '@20230723-131350', 'save_dir': './outputs\\neus-dtu-Miku\\@202  
-30723-131350\\save', 'ckpt_dir': './outputs\\neus-dtu-Miku\\@20230723-131350\\ckpt', 'code  
-_dir': './outputs\\neus-dtu-Miku\\@20230723-131350\\code', 'config_dir': './outputs\\neus-  
-dtu-Miku\\@20230723-131350\\config'}
+```python
+# ============ Register OmegaConf Recolvers ============= #
+OmegaConf.register_new_resolver('calc_exp_lr_decay_rate', lambda factor, n: factor**(1./n))
+OmegaConf.register_new_resolver('add', lambda a, b: a + b)
+OmegaConf.register_new_resolver('sub', lambda a, b: a - b)
+OmegaConf.register_new_resolver('mul', lambda a, b: a * b)
+OmegaConf.register_new_resolver('div', lambda a, b: a / b)
+OmegaConf.register_new_resolver('idiv', lambda a, b: a // b)
+OmegaConf.register_new_resolver('basename', lambda p: os.path.basename(p))
+# ======================================================= #
+
+def load_config(*yaml_files, cli_args=[]):
+    yaml_confs = [OmegaConf.load(f) for f in yaml_files]
+    cli_conf = OmegaConf.from_cli(cli_args)
+    conf = OmegaConf.merge(*yaml_confs, cli_conf)
+    OmegaConf.resolve(conf) # 就地解析所有配置文件的内插$
+    return conf
+
+def config_to_primitive(config, resolve=True):
+    return OmegaConf.to_container(config, resolve=resolve)
 ```
 
-## run.py
-
-```
-import argparse
-
-def config_parser():
+```python
+def get_args():
     parser = argparse.ArgumentParser()
-    
-    args = parser.parse_args() 
-    or 
+    parser.add_argument('--config', required=True, help='path to config file')
+
+    parser.add_argument('--resume', default=None, help='path to the weights to be resumed')
+
+    group = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument('--train', action='store_true')
+    group.add_argument('--mesh', action='store_true')
+    group.add_argument('--test', action='store_true')
+
+    parser.add_argument('--outputs_dir', default='./outputs')
+    parser.add_argument('--logs_dir', default='/root/tf-logs')
+
     args, extras = parser.parse_known_args()
-    
-    return args
-    or
     return args, extras
 ```
 
-# process_data
+## run.py主程序
+
+**获取配置文件和终端输入**
+
+```python
+# extras：其他config_parser中没有添加的arg
+args, extras = get_args()
+from utils.misc import load_config, seed_everything
+config = load_config(args.config, cli_args=extras)
+
+config.trainer.outputs_dir = config.get('outputs_dir') or os.path.join(args.outputs_dir, config.name)
+
+# args.resume : /root/autodl-tmp/new/NeRF-Mine/outputs/neus-dtu-Miku/@20230815-154030/ckpt/ckpt_000200.pth
+if args.resume is not None:
+    config.trainer.trial_name = args.resume.split('/')[-3]
+else: 
+    config.trainer.trial_name = config.get('trial_name') or (config.tag + datetime.now().strftime('@%Y%m%d-%H%M%S'))
+
+config.trainer.logs_dir = config.get('logs_dir') or os.path.join(args.logs_dir, config.name ,config.trainer.trial_name)
+config.trainer.save_dir = config.get('save_dir') or os.path.join(config.trainer.outputs_dir, config.trainer.trial_name, 'save')
+config.trainer.ckpt_dir = config.get('ckpt_dir') or os.path.join(config.trainer.outputs_dir, config.trainer.trial_name, 'ckpt')
+config.trainer.code_dir = config.get('code_dir') or os.path.join(config.trainer.outputs_dir, config.trainer.trial_name, 'code')
+config.trainer.config_dir = config.get('config_dir') or os.path.join(config.trainer.outputs_dir, config.trainer.trial_name, 'config')
+
+if 'seed' not in config:
+    config.seed = int(time.time() * 1000) % 1000
+seed_everything(config.seed)
+
+os.environ["KMP_DUPLICATE_LIB_OK"]  =  "TRUE"
+```
+
+**global seed setting**
+
+```python
+def seed_everything(seed):
+    random.seed(seed)
+    os.environ['PYTHONHASHSEED'] = str(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed(seed)
+```
+
+### 根据配置导入模块
+
+- from models.neus import NeuSModel
+    - model = NeuSModel(config.model)
+- from systems.neus import Trainer
+    - trainer = Trainer(model, config.trainer, args)
+- from process_data.dtu import NeRFDataset
+    - train_dm = NeRFDataset(config.dataset,stage='train')
+        - train_loader = torch.utils.data.DataLoader(train_dm, batch_size=3, shuffle=True)
+    - val_dm = NeRFDataset(config.dataset,stage = 'valid')
+        - val_loader = torch.utils.data.DataLoader(val_dm, batch_size=1)
+    - test_dm = NeRFDataset(config.dataset,stage='test')
+        - test_loader = torch.utils.data.DataLoader(test_dm, batch_size=1)
+
+运行：
+- trainer.train(train_loader, val_loader)
+- trainer.test(test_loader)
+- trainer.mesh()
+
+## process_data
+
+**train**
+
+for data in train_loader:
+
+data:
+- pose: torch.Size([4, 4])
+- direction: torch.Size([960, 544, 3])
+- index: torch.Size([1])
+- H: 960
+- W: 544
+- image: torch.Size([960, 544, 3])
+- mask: torch.Size([960, 544])
 
 ```
 {'pose': tensor([[[-0.0898,  0.8295, -0.5512,  1.3804],
          [ 0.0600,  0.5570,  0.8284, -2.0745],
          [ 0.9941,  0.0413, -0.0998,  0.0576],
          [ 0.0000,  0.0000,  0.0000,  1.0000]]], device='cuda:0'), 
+
 'direction': tensor([[[[-0.3379, -0.5977,  1.0000],
           [-0.3354, -0.5977,  1.0000],
           [-0.3329, -0.5977,  1.0000],
           ...,
-          [ 0.3341, -0.5977,  1.0000],
-          [ 0.3366, -0.5977,  1.0000],
-          [ 0.3391, -0.5977,  1.0000]],
-
-         [[-0.3379, -0.5952,  1.0000],
-          [-0.3354, -0.5952,  1.0000],
-          [-0.3329, -0.5952,  1.0000],
-          ...,
-          [ 0.3341, -0.5952,  1.0000],
-          [ 0.3366, -0.5952,  1.0000],
-          [ 0.3391, -0.5952,  1.0000]],
-
-         [[-0.3379, -0.5927,  1.0000],
-          [-0.3354, -0.5927,  1.0000],
-          [-0.3329, -0.5927,  1.0000],
-          ...,
-          [ 0.3341, -0.5927,  1.0000],
-          [ 0.3366, -0.5927,  1.0000],
-          [ 0.3391, -0.5927,  1.0000]],
-
-         ...,
-
-         [[-0.3379,  0.5940,  1.0000],
-          [-0.3354,  0.5940,  1.0000],
-          [-0.3329,  0.5940,  1.0000],
-          ...,
-          [ 0.3341,  0.5940,  1.0000],
-          [ 0.3366,  0.5940,  1.0000],
-          [ 0.3391,  0.5940,  1.0000]],
-
-         [[-0.3379,  0.5965,  1.0000],
-          [-0.3354,  0.5965,  1.0000],
-          [-0.3329,  0.5965,  1.0000],
-          ...,
-          [ 0.3341,  0.5965,  1.0000],
-          [ 0.3366,  0.5965,  1.0000],
-          [ 0.3391,  0.5965,  1.0000]],
-
          [[-0.3379,  0.5990,  1.0000],
           [-0.3354,  0.5990,  1.0000],
           [-0.3329,  0.5990,  1.0000],
@@ -154,49 +224,14 @@ def config_parser():
           [ 0.3341,  0.5990,  1.0000],
           [ 0.3366,  0.5990,  1.0000],
           [ 0.3391,  0.5990,  1.0000]]]], device='cuda:0'), 
-'index': tensor([124]), 'H': ['480'], 'W': ['272'], 
+              
+'index': tensor([124]), 
+'H': ['480'], 
+'W': ['272'], 
 'image': tensor([[[[0.3242, 0.3438, 0.3164],
           [0.3281, 0.3477, 0.3203],
           [0.3320, 0.3398, 0.3125],
-          ...,
-          [0.0469, 0.0469, 0.0469],
-          [0.0469, 0.0469, 0.0469],
-          [0.0469, 0.0469, 0.0469]],
-
-         [[0.2969, 0.3164, 0.2891],
-          [0.3008, 0.3203, 0.2930],
-          [0.3125, 0.3203, 0.2930],
-          ...,
-          [0.0469, 0.0469, 0.0469],
-          [0.0469, 0.0469, 0.0469],
-          [0.0469, 0.0469, 0.0469]],
-
-         [[0.2812, 0.3008, 0.2734],
-          [0.2578, 0.2773, 0.2500],
-          [0.2812, 0.2891, 0.2617],
-          ...,
-          [0.0469, 0.0469, 0.0469],
-          [0.0469, 0.0469, 0.0469],
-          [0.0469, 0.0469, 0.0469]],
-
          ...,
-
-         [[0.5977, 0.6133, 0.5938],
-          [0.5977, 0.6133, 0.5938],
-          [0.5977, 0.6133, 0.5938],
-          ...,
-          [0.6328, 0.7578, 0.8828],
-          [0.6328, 0.7578, 0.8828],
-          [0.6289, 0.7539, 0.8789]],
-
-         [[0.5977, 0.6133, 0.5938],
-          [0.5977, 0.6133, 0.5938],
-          [0.5977, 0.6133, 0.5938],
-          ...,
-          [0.6328, 0.7578, 0.8828],
-          [0.6328, 0.7578, 0.8828],
-          [0.6328, 0.7578, 0.8828]],
-
          [[0.5977, 0.6133, 0.5938],
           [0.5977, 0.6133, 0.5938],
           [0.5977, 0.6133, 0.5938],
@@ -204,34 +239,79 @@ def config_parser():
           [0.6289, 0.7539, 0.8789],
           [0.6328, 0.7578, 0.8828],
           [0.6328, 0.7578, 0.8828]]]], device='cuda:0'), 
-  'mask': tensor([[[0.9961, 0.9961, 0.9961,  ..., 0.9961, 0.9961, 0.9961],
-         [0.9961, 0.9961, 0.9961,  ..., 0.9961, 0.9961, 0.9961],
-         [0.9961, 0.9961, 0.9961,  ..., 0.9961, 0.9961, 0.9961],
-         ...,
-         [0.9961, 0.9961, 0.9961,  ..., 0.9961, 0.9961, 0.9961],
-         [0.9961, 0.9961, 0.9961,  ..., 0.9961, 0.9961, 0.9961],
-         [0.9961, 0.9961, 0.9961,  ..., 0.9961, 0.9961, 0.9961]]],
-       device='cuda:0')}
+'mask': tensor([[[0.9961, 0.9961, 0.9961,  ..., 0.9961, 0.9961, 0.9961],
+     [0.9961, 0.9961, 0.9961,  ..., 0.9961, 0.9961, 0.9961],
+     [0.9961, 0.9961, 0.9961,  ..., 0.9961, 0.9961, 0.9961],
+     ...,
+     [0.9961, 0.9961, 0.9961,  ..., 0.9961, 0.9961, 0.9961],
+     [0.9961, 0.9961, 0.9961,  ..., 0.9961, 0.9961, 0.9961],
+     [0.9961, 0.9961, 0.9961,  ..., 0.9961, 0.9961, 0.9961]]],
+   device='cuda:0')}
 ```
 
+# 实验
 
+## 环境配置
 
+```text
+conda remove -n  需要删除的环境名 --all
+```
 
-# 质量评估指标
+## Dataset
+
+| Paper      | Dataset                                          | Link                                                                                                                                      |
+| ---------- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| NeRF       | nerf_synthetic,nerf_llff_data,LINEMOD,deepvoxels | [bmild/nerf: Code release for NeRF (Neural Radiance Fields) (github.com)](https://github.com/bmild/nerf#project-page--video--paper--data) |
+| Neus       | dtu,BlenderMVS,custom                            | [Totoro97/NeuS: Code release for NeuS (github.com)](https://github.com/Totoro97/NeuS#project-page---paper--data)                          |
+| Point-NeRF | dtu,nerf_synthetic,ScanNet,Tanks and temple                                                 | [Xharlie/pointnerf: Point-NeRF: Point-based Neural Radiance Fields (github.com)](https://github.com/Xharlie/pointnerf#data-preparation)   |
+
+自定义数据集：
+[NeuS/preprocess_custom_data at main · Totoro97/NeuS (github.com)](https://github.com/Totoro97/NeuS/tree/main/preprocess_custom_data)
+    - [Neus_custom_data](/NeRF/SurfaceReconstruction/Neus#Neus使用自制数据集)
+    - [Neus-Instant-nsr-pl](/NeRF/SurfaceReconstruction/Neus-Instant-nsr-pl#自定义数据集)
+
+```
+<case_name>
+|-- cameras_xxx.npz    # camera parameters
+    |-- camera_mat_{}.npy，intrinsic
+    |-- camera_mat_inv_{}.npy
+    |-- world_mat_{}.npy，intrinsic @ w2c --> world to pixel
+    |-- world_mat_inv_{}.npy
+    |-- scale_mat_{}.npy ，根据手动清除point得到的sparse_points_interest.ply
+    |-- scale_mat_inv_{}.npy
+|-- image
+    |-- 000.png        # target image for each view
+    |-- 001.png
+    ...
+|-- mask
+    |-- 000.png        # target mask each view (For unmasked setting, set all pixels as 255)
+    |-- 001.png
+    ...
+```
+
+## Metrics
 
 L1_loss : $loss(x,y)=\frac{1}{n}\sum_{i=1}^{n}|y_i-f(x_i)|$
 L2_loss: $loss(x,y)=\frac{1}{n}\sum_{i=1}^{n}(y_i-f(x_i))^2$
 
 在标准设置中通过NeRF进行的新颖视图合成使用了视觉质量评估指标作为基准。这些指标试图评估单个图像的质量，要么有(完全参考)，要么没有(无参考)地面真相图像。峰值信噪比(PSNR)，结构相似指数度量(SSIM)[32]，学习感知图像补丁相似性(LPIPS)[33]是目前为止在NeRF文献中最常用的。
 
-## PSNR↑
+### PSNR↑
 峰值信噪比Peak Signal to Noise Ratio
 PSNR是一个无参考的质量评估指标
 $PSNR(I)=10\cdot\log_{10}(\dfrac{MAX(I)^2}{MSE(I)})$
 $MSE=\frac1{mn}\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}[I(i,j)-K(i,j)]^2$
 $MAX(I)^{2}$（动态范围可能的最大像素值，b位：$2^{b}-1$），eg: 8位图像则$MAX(I)^{2} = 255$
 
-## SSIM↑
+```python
+# Neus
+psnr = 20.0 * torch.log10(1.0 / (((color_fine - true_rgb)**2 * mask).sum() / (mask_sum * 3.0)).sqrt())
+
+# instant-nsr-pl
+psnr = -10. * torch.log10(torch.mean((pred_rgb.to(gt_rgb)-gt_rgb)**2))
+```
+
+### SSIM↑
 结构相似性Structural Similarity Index Measure
 SSIM是一个完整的参考质量评估指标。
 $SSIM(x,y)=\dfrac{(2\mu_x\mu_y+C_1)(2\sigma_{xy}+C_2)}{(\mu_x^2+\mu_y^2+C_1)(\sigma_x^2+\sigma_y^2+C_2)}$
@@ -256,7 +336,7 @@ $\mu_{x}=\sum_{i}w_{i}x_{i}$
 $\sigma_{x}=(\sum_{i}w_{i}(x_{i}-\mu_{x})^{2})^{1/2}$
 $\sigma_{xy}=\sum_{i}w_{i}(x_{i}-\mu_{x})(y_{i}-\mu_{y})$
 
-## LPIPS↓
+### LPIPS↓
 学习感知图像块相似度Learned Perceptual Image Patch Similarity
 **LPIPS 比传统方法（比如L2/PSNR, SSIM, FSIM）更符合人类的感知情况**。**LPIPS的值越低表示两张图像越相似，反之，则差异越大。**
 ![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230801170138.png)
@@ -264,68 +344,13 @@ $\sigma_{xy}=\sum_{i}w_{i}(x_{i}-\mu_{x})(y_{i}-\mu_{y})$
 LPIPS是一个完整的参考质量评估指标，它使用了学习的卷积特征。分数是由多层特征映射的加权像素级MSE给出的。
 $LPIPS(x,y)=\sum\limits_{l}^{L}\dfrac{1}{H_lW_l}\sum\limits_{h,w}^{H_l,W_l}||w_l\odot(x^l_{hw}-y^l_{hw})||^2_2$
 
-# Dataset
 
 
-**DTU**. The DTU dataset [Large Scale Multi-view Stereopsis Evaluation-论文阅读讨论-ReadPaper](https://readpaper.com/paper/2085905957) consists of different static scenes with a wide variety of materials, appearance, and geometry, where each scene contains 49 or 64 images with the resolution of 1600 x 1200. We use the same 15 scenes as IDR [[PDF] SPIDR: SDF-based Neural Point Fields for Illumination and Deformation-论文阅读讨论-ReadPaper](https://readpaper.com/paper/4679926840484184065) to evaluate our approach. Experiments are conducted to investigate both the with (w/) and without (w/o) foreground mask settings. As DTU provides the ground truth point clouds, we measure the recovered surfaces through the commonly studied Chamfer Distance (CD) for quantitative comparisons.
-
-**BlendedMVS**. The BlendedMVS dataset [[PDF] BlendedMVS: A Large-scale Dataset for Generalized Multi-view Stereo Networks-论文阅读讨论-ReadPaper](https://readpaper.com/paper/2990386223) consists of a variety of complex scenes, where each scene provides 31 to 143 multi-view images with the image size of 768 ×576. We use the same 7 scenes as NeuS [[PDF] NeuS: Learning Neural Implicit Surfaces by Volume Rendering for Multi-view Reconstruction-论文阅读讨论-ReadPaper](https://readpaper.com/paper/3173522942) to validate our method. We only present qualitative comparisons on this dataset, because the ground truth point clouds are not available.
-
-## 自定义数据集
-
-数据集的构建依赖Colmap即SFM和Multi-View Stereo
-- Structure-from-Motion Revisited
-    - Feature detection and extraction
-    - Feature matching and geometric verification
-    - Structure and motion reconstruction
-- Pixelwise View Selection for Unstructured Multi-View Stereo
-    - get a dense point cloud
-
-> [colmap tutorial](https://colmap.github.io/tutorial.html)
-
-[SFM算法原理初简介 | jiajie (gitee.io)](https://jiajiewu.gitee.io/post/tech/slam-sfm/sfm-intro/)
-
-![image.png|500](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230717204531.png)
-
-SFM - 稀疏重建: 
-- 特征提取 , ref: [非常详细的sift算法原理解析_可时间倒数了的博客-CSDN博客](https://blog.csdn.net/u010440456/article/details/81483145)
-    - eg：sift算法(Scale-invariant feature transform)是一种电脑视觉的算法用来侦测与描述影像中的局部性特征，它在空间尺度中寻找极值点，并提取出其位置、尺度、旋转不变量，此算法由 David Lowe在1999年所发表，2004年完善总结
-- 特征匹配，ref: [sfm流程概述_神气爱哥的博客-CSDN博客](https://blog.csdn.net/qingcaichongchong/article/details/62424661)
-
-
-## Neus
-
-DTU、BlendedMVS、Neus_custom_data
-
-Neus: [NeuS/preprocess_custom_data at main · Totoro97/NeuS (github.com)](https://github.com/Totoro97/NeuS/tree/main/preprocess_custom_data)
-
-```
-<case_name>
-|-- cameras_xxx.npz    # camera parameters
-    |-- camera_mat_{}.npy，intrinsic
-    |-- camera_mat_inv_{}.npy
-    |-- world_mat_{}.npy，intrinsic @ w2c --> world to pixel
-    |-- world_mat_inv_{}.npy
-    |-- scale_mat_{}.npy ，根据手动清除point得到的sparse_points_interest.ply
-    |-- scale_mat_inv_{}.npy
-|-- image
-    |-- 000.png        # target image for each view
-    |-- 001.png
-    ...
-|-- mask
-    |-- 000.png        # target mask each view (For unmasked setting, set all pixels as 255)
-    |-- 001.png
-    ...
-```
-
-## NeRF
-
-nerf_synthetic
-nerf_llff_data
-
-- [x] tf-logs 在测试时会新加一个文件夹问题
 
 # BUG
+
+- [x] tf-logs 在测试时会新加一个文件夹问题
+- [x] 训练过程中出现的loss错误
 
 ```
 Error
@@ -374,11 +399,45 @@ NOTE：训练过程中loss突然变得很大
 TODO：防止过拟合-->添加 torch.cuda.amp.GradScaler() 解决 loss为nan或inf的问题
 ```
 
-## 导出mesh区域错误
+- [x] 导出mesh区域错误
 
 ![image.png|500](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230806160731.png)
 
 - 可能是mesh网格的ijk区域大小设置有问题
 - 或没有将bound进行坐标变换到训练时的世界坐标系
 
+## Add
 
+### Floaters No More
+
+- OOM
+
+```
+0% 0/60 [00:00<?, ?it/s]Traceback (most recent call last):  
+File "run.py", line 97, in <module>  
+main()  
+File "run.py", line 88, in main  
+trainer.train(train_loader, val_loader)  
+File "/root/autodl-tmp/NeRF-Mine/systems/neus.py", line 164, in train  
+self.train_epoch(train_loader)  
+File "/root/autodl-tmp/NeRF-Mine/systems/neus.py", line 197, in train_epoch  
+self.scaler.scale(loss).backward()  
+File "/root/miniconda3/envs/neus/lib/python3.8/site-packages/torch/_tensor.py", line 488  
+, in backward  
+torch.autograd.backward(  
+File "/root/miniconda3/envs/neus/lib/python3.8/site-packages/torch/autograd/__init__.py"  
+, line 197, in backward  
+Variable._execution_engine.run_backward( # Calls into the C++ engine to run the backw  
+ard pass  
+File "/root/miniconda3/envs/neus/lib/python3.8/site-packages/torch/autograd/function.py"  
+, line 267, in apply  
+return user_fn(self, *args)  
+File "/root/autodl-tmp/NeRF-Mine/models/neus.py", line 29, in backward  
+return grad_output_colors * scaling.unsqueeze(-1), grad_output_sigmas * scaling, grad_  
+output_ray_dist  
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 13.58 GiB (GPU 0; 23.70  
+GiB total capacity; 5.30 GiB already allocated; 7.14 GiB free; 14.86 GiB reserved in tota  
+l by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to a  
+void fragmentation. See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF  
+0% 0/60 [00:00<?, ?it/s]
+```

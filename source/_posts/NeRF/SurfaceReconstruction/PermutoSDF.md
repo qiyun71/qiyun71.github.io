@@ -2,10 +2,11 @@
 title: PermutoSDF
 date: 2023-07-16 17:21:17
 tags:
-    - Surface Reconstruction
-    - PermutoSDF
-    - Encoding
-categories: NeRF/Surface Reconstruction
+  - Encoding
+  - SurfaceReconstruction
+  - Efficiency
+  - Neus
+categories: NeRF/SurfaceReconstruction
 ---
 
 | Title     | PermutoSDF: Fast Multi-View Reconstruction with Implicit Surfaces using Permutohedral Lattices                                                                                                                 |

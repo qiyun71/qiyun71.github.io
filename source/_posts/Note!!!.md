@@ -11,11 +11,11 @@ date updated: 2023-08-09T22:24:16.000Z
 | My post                                                                                                                                                        | Brief description     | status          |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- | --------------- |
 | [NeRF](/NeRF/NeRF-Principle) + [Code](/NeRF/NeRF-code)                                                                                  | NeRF原理 + 代码理解         | Completed       |
-| [Neus](/NeRF/Surface%20Reconstruction/Neus) + [Code](/NeRF/Surface%20Reconstruction/Neus-code)                                         | 表面重建方法 SDFNetwork     | Completed       |
+| [Neus](/NeRF/SurfaceReconstruction/Neus) + [Code](/NeRF/SurfaceReconstruction/Neus-code)                                         | 表面重建方法 SDFNetwork     | Completed       |
 | [InstantNGP](/NeRF/Efficiency/NeRF-InstantNGP) + [Tiny-cuda-nn](/NeRF/Efficiency/NeRF-InstantNGP-code)                                 | 加速NeRF的训练和推理          | Completed（Tcnn） |
-| [Instant-nsr-pl](/NeRF/Surface%20Reconstruction/Neus-Instant-nsr-pl) + [Code](/NeRF/Surface%20Reconstruction/Neus-Instant-nsr-pl-code) | Neus+Tcnn+NSR+pl      | Completed       |
-| [Instant-NSR](/NeRF/Surface%20Reconstruction/Instant-NSR) + [Code](/NeRF/Surface%20Reconstruction/Instant-NSR-code)                    | 快速表面重建                | Completed       |
-| [NeRO](/NeRF/Surface%20Reconstruction/Shadow&Highlight/NeRO) + [Code](/NeRF/Surface%20Reconstruction/Shadow&Highlight/NeRO-code)       | 考虑镜面和漫反射的体渲染函数        | In Processing   |
+| [Instant-nsr-pl](/NeRF/SurfaceReconstruction/Neus-Instant-nsr-pl) + [Code](/NeRF/SurfaceReconstruction/Neus-Instant-nsr-pl-code) | Neus+Tcnn+NSR+pl      | Completed       |
+| [Instant-NSR](/NeRF/SurfaceReconstruction/Instant-NSR) + [Code](/NeRF/SurfaceReconstruction/Instant-NSR-code)                    | 快速表面重建                | Completed       |
+| [NeRO](/NeRF/SurfaceReconstruction/Shadow&Highlight/NeRO) + [Code](/NeRF/SurfaceReconstruction/Shadow&Highlight/NeRO-code)       | 考虑镜面和漫反射的体渲染函数        | In Processing   |
 | [NeRF-Mine](/NeRF/NeRF-Mine)                                                                                                                       | 基于Instant-nsr-pl创建的项目 | Completed       |
 
 | My post                                      | Brief description  | status                                                                                                       |

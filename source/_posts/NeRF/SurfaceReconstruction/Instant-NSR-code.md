@@ -2,10 +2,12 @@
 title: Instant-NSR代码理解
 date: 2023-07-09 12:17:53
 tags:
-    - Code
-    - Python
-    - Instant-NSR
-categories: NeRF/Surface Reconstruction
+  - Code
+  - Python
+  - SurfaceReconstruction
+  - Efficiency
+  - Neus
+categories: NeRF/SurfaceReconstruction
 ---
 
 对[Instant-NSR](https://github.com/zhaofuq/Instant-NSR)代码的理解

@@ -2,8 +2,7 @@
 title: Learn-cs148
 date: 2023-08-16 19:02:57
 tags:
-  - Learn
-  - Computer Graphics
+  - CG
 categories: Learn
 ---
 

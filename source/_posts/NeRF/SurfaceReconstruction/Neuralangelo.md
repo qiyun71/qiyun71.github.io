@@ -2,10 +2,11 @@
 title: Neuralangelo
 date: 2023-07-14 22:06:48
 tags:
-    - Neuralangelo
-    - Surface Reconstruction
-    - Encoding
-categories: NeRF/Surface Reconstruction
+  - Encoding
+  - SurfaceReconstruction
+  - Efficiency
+  - Neus
+categories: NeRF/SurfaceReconstruction
 ---
 
 | Title     | Neuralangelo: High-Fidelity Neural Surface Reconstruction                                                                                                                                                                                                                                                                               |

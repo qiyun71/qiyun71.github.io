@@ -2,9 +2,9 @@
 title: Neus
 date: 2023-06-14 22:14:49
 tags:
-    - Neus
-    - Surface Reconstruction
-categories: NeRF/Surface Reconstruction
+  - Neus
+  - SurfaceReconstruction
+categories: NeRF/SurfaceReconstruction
 ---
 
 | Title     | NeuS: Learning Neural Implicit Surfaces by Volume Rendering for Multi-view Reconstruction                                                                                                                                                                                                                                                                              |

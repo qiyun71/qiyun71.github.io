@@ -1,6 +1,7 @@
 {
   "pinned": [
     "markdown-prettifier:markdown-prettifier-run",
+    "daily-notes",
     "obsidian-admonition:insert-admonition",
     "obsidian-plugin-toc:create-toc",
     "workspace:export-pdf",

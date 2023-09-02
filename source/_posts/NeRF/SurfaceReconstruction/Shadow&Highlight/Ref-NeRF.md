@@ -2,9 +2,8 @@
 title: Ref-NeRF
 date: 2023-08-08 20:45:57
 tags:
-    - Shadow&Highlight
-    - Ref-NeRF
-categories: NeRF/Surface Reconstruction/Shadow&Highlight
+  - Shadow&Highlight
+categories: NeRF/SurfaceReconstruction/Shadow&Highlight
 ---
 
 | Title     | Ref-NeRF: Structured View-Dependent Appearance for Neural Radiance Fields                                                                                                                 |

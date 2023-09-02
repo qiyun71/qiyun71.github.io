@@ -2,9 +2,10 @@
 title: PlankAssembly
 date: 2023-08-13 16:03:58
 tags:
-  - 3D Reconstruction
   - CAD
-categories: NeRF/Surface Reconstruction
+  - Transformer
+  - 3DReconstruction
+categories: NeRF/SurfaceReconstruction
 ---
 
 | Title     | PlankAssembly: Robust 3D Reconstruction from Three Orthographic Views with Learnt Shape Programs                                                                                                                                                                                                                            |

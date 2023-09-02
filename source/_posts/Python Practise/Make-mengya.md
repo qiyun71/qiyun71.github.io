@@ -9,8 +9,8 @@ img: /img/cover/mengya1.jpg
 categories: Python
 summary: 项目-识别表的指针，python代码的构造过程，并没有写完（萌芽杯比赛项目）
 tags:
-  - Python Practise
-  - Compete
+  - Python
+  - Practise
 ---
 项目-识别表的指针，python代码的构造过程，并没有写完（萌芽杯比赛项目）
 

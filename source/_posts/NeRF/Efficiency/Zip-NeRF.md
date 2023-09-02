@@ -2,10 +2,9 @@
 title: Zip-NeRF
 date: 2023-07-29 12:59:25
 tags:
-    - Encoding
-    - Sampling
-    - Zip-NeRF
-    - Efficiency
+  - Encoding
+  - Sampling
+  - Efficiency
 categories: NeRF/Efficiency
 ---
 
@@ -135,6 +134,8 @@ Normalizing Metric Distance:
 
 # Results
 
+
+
 我们的模型是在JAX[6]中实现的，基于mip-NeRF 360代码库[20]，重新实现了iNGP的体素网格金字塔和哈希值，取代了mip-NeRF 360使用的大型MLP。我们的**整体模型架构与mip-NeRF 360相同**，除了第2节和第3节中引入的抗锯齿调整，以及我们在这里描述的一些额外修改。
 
 像mip-NeRF 360一样，我们使用两轮提议采样，每次64个样本，然后在最后的NeRF采样轮中使用32个样本。我们的抗混叠级间损失被施加在两轮提议采样上，第一轮的矩形脉冲宽度为r = 0.03，第二轮为r = 0.003，损耗乘数为0.01。我们对每一轮提议采样使用单独的提议iNGP和MLP，并且我们的NeRF MLP使用比iNGP使用的更大的依赖于视图的分支。详见附录。
@@ -143,3 +144,151 @@ Normalizing Metric Distance:
 
 - 360 Dataset
 - Multiscale 360 Dataset
+
+# 实验
+
+## 非论文code
+
+[SuLvXiangXin/zipnerf-pytorch: Unofficial implementation of ZipNeRF (github.com)](https://github.com/SuLvXiangXin/zipnerf-pytorch)
+
+### 环境配置
+
+```
+# Clone the repo.
+git clone https://github.com/SuLvXiangXin/zipnerf-pytorch.git
+cd zipnerf-pytorch
+
+# Make a conda environment.
+conda create --name zipnerf python=3.9
+conda activate zipnerf
+
+# Install requirements.
+pip install -r requirements.txt
+
+# Install other extensions
+pip install ./gridencoder
+
+# Install nvdiffrast (optional, for textured mesh)
+git clone https://github.com/NVlabs/nvdiffrast
+pip install ./nvdiffrast
+
+# Install a specific cuda version of torch_scatter 
+# see more detail at https://github.com/rusty1s/pytorch_scatter
+CUDA=cu117
+pip install torch-scatter -f https://data.pyg.org/whl/torch-2.0.0+${CUDA}.html
+```
+
+### Train
+
+- Dataset
+
+```
+mkdir data
+cd data
+
+# e.g. mipnerf360 data
+wget http://storage.googleapis.com/gresearch/refraw360/360_v2.zip
+unzip 360_v2.zip
+```
+
+- Train
+
+```
+# Configure your training (DDP? fp16? ...)
+# see https://huggingface.co/docs/accelerate/index for details
+accelerate config
+
+# Where your data is 
+DATA_DIR=data/360_v2/bicycle
+EXP_NAME=360_v2/bicycle
+
+# Experiment will be conducted under "exp/${EXP_NAME}" folder
+# "--gin_configs=configs/360.gin" can be seen as a default config 
+# and you can add specific config useing --gin_bindings="..." 
+accelerate launch train.py \
+    --gin_configs=configs/360.gin \
+    --gin_bindings="Config.data_dir = '${DATA_DIR}'" \
+    --gin_bindings="Config.exp_name = '${EXP_NAME}'" \
+    --gin_bindings="Config.factor = 4"
+
+# or you can also run without accelerate (without DDP)
+CUDA_VISIBLE_DEVICES=0 python train.py \
+    --gin_configs=configs/360.gin \
+    --gin_bindings="Config.data_dir = '${DATA_DIR}'" \
+    --gin_bindings="Config.exp_name = '${EXP_NAME}'" \
+      --gin_bindings="Config.factor = 4" 
+
+# alternatively you can use an example training script 
+bash scripts/train_360.sh
+
+# blender dataset
+bash scripts/train_blender.sh
+```
+
+```
+# metric, render image, etc can be viewed through tensorboard
+tensorboard --logdir "exp/${EXP_NAME}" 
+
+autoDl:
+tensorboard --logdir "exp/${EXP_NAME}" --port 6007
+lsof -i:6007
+    kill -7 PID
+ps -ef | grep tensorboard | awk '{print $2}' | xargs kill -9
+```
+
+- Render video
+
+```
+accelerate launch render.py \
+    --gin_configs=configs/360.gin \
+    --gin_bindings="Config.data_dir = '${DATA_DIR}'" \
+    --gin_bindings="Config.exp_name = '${EXP_NAME}'" \
+    --gin_bindings="Config.render_path = True" \
+    --gin_bindings="Config.render_path_frames = 480" \
+    --gin_bindings="Config.render_video_fps = 60" \
+    --gin_bindings="Config.factor = 4"  
+
+# alternatively you can use an example rendering script 
+bash scripts/render_360.sh
+```
+
+- Evaluate
+
+```
+# using the same exp_name as in training
+accelerate launch eval.py \
+    --gin_configs=configs/360.gin \
+    --gin_bindings="Config.data_dir = '${DATA_DIR}'" \
+    --gin_bindings="Config.exp_name = '${EXP_NAME}'" \
+    --gin_bindings="Config.factor = 4"
+
+
+# alternatively you can use an example evaluating script 
+bash scripts/eval_360.sh
+```
+
+- Extract mesh
+
+```
+# more configuration can be found in internal/configs.py
+accelerate launch extract.py \
+    --gin_configs=configs/360.gin \
+    --gin_bindings="Config.data_dir = '${DATA_DIR}'" \
+    --gin_bindings="Config.exp_name = '${EXP_NAME}'" \
+    --gin_bindings="Config.factor = 4"
+#    --gin_bindings="Config.mesh_radius = 1"  # (optional) smaller for more details e.g. 0.2 in bicycle scene
+#    --gin_bindings="Config.isosurface_threshold = 20"  # (optional) empirical value
+#    --gin_bindings="Config.mesh_voxels=134217728"  # (optional) number of voxels used to extract mesh, e.g. 134217728 equals to 512**3 . Smaller values may solve OutoFMemoryError
+#    --gin_bindings="Config.vertex_color = True"  # (optional) saving mesh with vertex color instead of atlas which is much slower but with more details.
+#    --gin_bindings="Config.vertex_projection = True"  # (optional) use projection for vertex color
+
+# or extracting mesh using tsdf method
+accelerate launch tsdf.py \
+    --gin_configs=configs/360.gin \
+    --gin_bindings="Config.data_dir = '${DATA_DIR}'" \
+    --gin_bindings="Config.exp_name = '${EXP_NAME}'" \
+    --gin_bindings="Config.factor = 4"
+
+# alternatively you can use an example script 
+bash scripts/extract_360.sh
+```

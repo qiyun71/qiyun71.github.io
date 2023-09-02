@@ -2,8 +2,8 @@
 title: NeRF++
 date: 2023-07-18 15:46:05
 tags:
-    - NeRF
-    - Large Scale Scene
+  - NeRF
+  - LargeScaleScene
 categories: NeRF/LargeScaleScene
 ---
 

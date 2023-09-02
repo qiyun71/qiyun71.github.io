@@ -4,8 +4,9 @@ date: 2023-08-01T15:17:39.000Z
 tags:
   - Code
   - Python
-  - NeRO
-categories: NeRF/Surface Reconstruction/Shadow&Highlight
+  - Shadow&Highlight
+  - Neus
+categories: NeRF/SurfaceReconstruction/Shadow&Highlight
 date updated: 2023-08-03 14:33
 ---
 

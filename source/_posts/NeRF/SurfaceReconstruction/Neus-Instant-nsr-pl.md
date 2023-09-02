@@ -2,9 +2,9 @@
 title: Instant-nsr-pl
 date: 2023-06-14 23:15:07
 tags:
-    - Neus
-    - Training & Inference Efficiency
-categories: NeRF/Surface Reconstruction
+  - Neus
+  - Efficiency
+categories: NeRF/SurfaceReconstruction
 ---
 
 使用[Instant-ngp](https://github.com/NVlabs/instant-ngp)中的编码技术，使Neus可以更快的进行inference，大概只需要5~10min生成一个模型
@@ -214,7 +214,7 @@ sudo make install
 
 ### 本地处理数据集(同neus类似BMVS数据集形式)
 
-同neus使用自定义数据集[Neus](/2023/06/14/NeRF/Surface%20Reconstruction/Neus/#Neus使用自制数据集)
+同neus使用自定义数据集[Neus](/NeRF/SurfaceReconstruction/Neus#Neus使用自制数据集)
 
 #### eg: 使用neus自定义数据集对M590三维重建
 
@@ -320,7 +320,9 @@ cd to instant-nsr-pl
 
 ![image.png|999](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230714165754.png)
 
-![it40000-test (2).gif](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/it40000-test%20(2).gif)
+![it40000-test2.gif](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/it40000-test2.gif)
+
+
 
 
 

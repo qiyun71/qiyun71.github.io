@@ -2,10 +2,10 @@
 title: ShadowNeuS
 date: 2023-08-08 19:32:36
 tags:
-    - Shadow&Highlight
-    - ShadowNeuS
-    - Surface Reconstruction
-categories: NeRF/Surface Reconstruction/Shadow&Highlight
+  - Shadow&Highlight
+  - SurfaceReconstruction
+  - Neus
+categories: NeRF/SurfaceReconstruction/Shadow&Highlight
 ---
 
 | Title     | ShadowNeuS: Neural SDF Reconstruction by Shadow Ray Supervision                                                                                                                 |

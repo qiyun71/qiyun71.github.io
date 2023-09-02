@@ -2,8 +2,7 @@
 title: NeRF原理
 date: 2023-06-14 20:35:31
 tags:
-    - NeRF
-    - Principle
+  - NeRF
 categories: NeRF
 ---
 

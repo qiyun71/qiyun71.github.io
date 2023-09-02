@@ -1158,7 +1158,228 @@
         "collapsed": true
       },
       "active": "3edce958ea0cd043"
+    },
+    "Blog": {
+      "main": {
+        "id": "57bed02957ac2c76",
+        "type": "split",
+        "children": [
+          {
+            "id": "aad8c4dae9ff9b40",
+            "type": "tabs",
+            "children": [
+              {
+                "id": "692b99e5a01d956a",
+                "type": "leaf",
+                "state": {
+                  "type": "markdown",
+                  "state": {
+                    "file": "NeRF/NeRF-Mine.md",
+                    "mode": "source",
+                    "backlinks": false,
+                    "source": false
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "direction": "vertical"
+      },
+      "left": {
+        "id": "e47f12396c3f44e2",
+        "type": "split",
+        "children": [
+          {
+            "id": "4b1070af652f8263",
+            "type": "tabs",
+            "dimension": 60.44198895027625,
+            "children": [
+              {
+                "id": "8e8a871735863769",
+                "type": "leaf",
+                "state": {
+                  "type": "file-explorer",
+                  "state": {
+                    "sortOrder": "byCreatedTime"
+                  }
+                }
+              },
+              {
+                "id": "6e42e86658aee5bb",
+                "type": "leaf",
+                "state": {
+                  "type": "bookmarks",
+                  "state": {}
+                }
+              },
+              {
+                "id": "649ba9adaacda732",
+                "type": "leaf",
+                "state": {
+                  "type": "tag",
+                  "state": {
+                    "sortOrder": "frequency",
+                    "useHierarchy": false
+                  }
+                }
+              },
+              {
+                "id": "917cbf8f3752e4ec",
+                "type": "leaf",
+                "state": {
+                  "type": "advanced-tables-toolbar",
+                  "state": {}
+                }
+              },
+              {
+                "id": "15b0ca6b5a59a5e6",
+                "type": "leaf",
+                "state": {
+                  "type": "search",
+                  "state": {
+                    "query": "",
+                    "matchingCase": false,
+                    "explainSearch": false,
+                    "collapseAll": false,
+                    "extraContext": false,
+                    "sortOrder": "alphabetical"
+                  }
+                }
+              },
+              {
+                "id": "b3a1783d0ecb065f",
+                "type": "leaf",
+                "state": {
+                  "type": "starred",
+                  "state": {}
+                }
+              },
+              {
+                "id": "d6cc3bfe65089281",
+                "type": "leaf",
+                "state": {
+                  "type": "backlink",
+                  "state": {
+                    "file": "NeRF/NeRF-Mine.md",
+                    "collapseAll": false,
+                    "extraContext": false,
+                    "sortOrder": "alphabetical",
+                    "showSearch": false,
+                    "searchQuery": "",
+                    "backlinkCollapsed": false,
+                    "unlinkedCollapsed": true
+                  }
+                }
+              }
+            ],
+            "currentTab": 3
+          },
+          {
+            "id": "76565ee9f59edd2d",
+            "type": "tabs",
+            "dimension": 39.55801104972376,
+            "children": [
+              {
+                "id": "086707e82c339e3f",
+                "type": "leaf",
+                "state": {
+                  "type": "outline",
+                  "state": {
+                    "file": "NeRF/NeRF-Mine.md"
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "direction": "horizontal",
+        "width": 220.50016403198242
+      },
+      "right": {
+        "id": "030ccac2adcfb23a",
+        "type": "split",
+        "children": [
+          {
+            "id": "43edafb5d29f89ff",
+            "type": "tabs",
+            "children": [
+              {
+                "id": "39287e9bb20932ab",
+                "type": "leaf",
+                "state": {
+                  "type": "localgraph",
+                  "state": {
+                    "file": "NeRF/NeRF-Mine.md",
+                    "options": {
+                      "collapse-filter": true,
+                      "search": "",
+                      "localJumps": 4,
+                      "localBacklinks": true,
+                      "localForelinks": true,
+                      "localInterlinks": false,
+                      "showTags": false,
+                      "showAttachments": false,
+                      "hideUnresolved": false,
+                      "collapse-color-groups": true,
+                      "colorGroups": [
+                        {
+                          "query": "",
+                          "color": {
+                            "a": 1,
+                            "rgb": 14048348
+                          }
+                        }
+                      ],
+                      "collapse-display": false,
+                      "showArrow": true,
+                      "textFadeMultiplier": 0,
+                      "nodeSizeMultiplier": 1,
+                      "lineSizeMultiplier": 1,
+                      "collapse-forces": false,
+                      "centerStrength": 0.518713248970312,
+                      "repelStrength": 10,
+                      "linkStrength": 1,
+                      "linkDistance": 250,
+                      "scale": 1.425869590402511,
+                      "close": true
+                    }
+                  }
+                }
+              },
+              {
+                "id": "02d0d2220a9ac3cc",
+                "type": "leaf",
+                "state": {
+                  "type": "recent-files",
+                  "state": {}
+                }
+              }
+            ],
+            "currentTab": 1
+          }
+        ],
+        "direction": "horizontal",
+        "width": 243.5,
+        "collapsed": true
+      },
+      "left-ribbon": {
+        "hiddenItems": {
+          "templater-obsidian:Templater": false,
+          "table-editor-obsidian:Advanced Tables Toolbar": false,
+          "canvas:新建白板": false,
+          "switcher:打开快速切换": false,
+          "command-palette:打开命令面板": false,
+          "daily-notes:打开/创建今天的日记": false,
+          "templates:插入模板": true,
+          "graph:查看关系图谱": false,
+          "markdown-importer:打开 Markdown 格式转换器": false,
+          "audio-recorder:开始/结束录音": false,
+          "workspaces:管理工作区布局": false
+        }
+      },
+      "active": "8e8a871735863769"
     }
   },
-  "active": "yjs2"
+  "active": "Blog"
 }

@@ -2,11 +2,10 @@
 title: Tri-MipRF
 date: 2023-07-26T00:00:00.000Z
 tags:
-  - Encoding
   - Efficiency
   - Sampling
-  - Tri-MipRF
-categories: NeRF/Efficiency/Encoding
+  - TensorDecomposition
+categories: NeRF/Efficiency
 date updated: 2023-08-09T22:30:25.000Z
 ---
 

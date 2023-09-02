@@ -5,8 +5,7 @@ summary: Python plt 的学习过程，可以让数据可视化，还可以展示
 toc: true
 categories: Learn
 tags:
-    - Matplotlib
-    - Python
+  - Python
 ---
 
 > [参考教程](https://blog.csdn.net/qiurisiyu2016/article/details/80187177)

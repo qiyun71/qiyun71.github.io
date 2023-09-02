@@ -6,8 +6,8 @@ cover: false
 date: 2020-03-25 12:04:47
 categories: Learn
 tags:
-  - Frontend
-summary: 学习前端前的基础知识，对，没错，就是html、css和js
+  - HCJ
+summary: 
 password:
 ---
 
@@ -820,7 +820,7 @@ h1 {
 
 * 预定义颜色：red，green，blue，pink等等
 * 十六进制：#FF0000，#000000黑色，#ffffff白色，#ff0000红色
-  * 简写：#ccc   由 #cccccc简写，两两相同
+  * 简写：#ccc   由 `#cccccc`简写，两两相同
 * RGB颜色：`rgb(255,0,0)` `rgb(100%,0%,0%)`
 
 ### 2.5.2 文本水平对齐方式

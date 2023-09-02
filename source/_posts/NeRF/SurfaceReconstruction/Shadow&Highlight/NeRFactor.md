@@ -2,9 +2,8 @@
 title: NeRFactor
 date: 2023-08-11 13:27:25
 tags:
-  - NeRFactor
   - Shadow&Highlight
-categories: NeRF/Surface Reconstruction/Shadow&Highlight
+categories: NeRF/SurfaceReconstruction/Shadow&Highlight
 ---
 
 | Title     | NeRFactor: Neural Factorization of Shape and Reflectance Under an Unknown Illumination                                                                                                                                                                                                                        |

@@ -2,10 +2,11 @@
 title: NeuDA
 date: 2023-07-18 13:56:14
 tags:
-    - Surface Reconstruction
-    - NeuDA
-    - Encoding
-categories: NeRF/Surface Reconstruction
+  - Encoding
+  - SurfaceReconstruction
+  - Efficiency
+  - Neus
+categories: NeRF/SurfaceReconstruction
 ---
 
 | Title     | NeuDA: Neural Deformable Anchor for High-Fidelity Implicit Surface Reconstruction                                                                                                                 |

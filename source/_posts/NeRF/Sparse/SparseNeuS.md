@@ -2,9 +2,9 @@
 title: SparseNeuS
 date: 2023-07-18 13:20:24
 tags:
-    - Sparse Images
-    - Neus
-    - 3D Reconstruction
+  - Sparse
+  - 3DReconstruction
+  - Neus
 categories: NeRF/Sparse
 ---
 

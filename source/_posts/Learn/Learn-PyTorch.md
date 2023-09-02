@@ -144,3 +144,33 @@ Adam_in_Neus: params_to_train is a list
 | `nn.module.__repr__`  |        当print(model)时会运行该函数           |
 | `__del__`           |         当`del object`时运行该函数           |
 
+
+# torch.cuda
+
+## cuda事件计算程序运行时间
+
+```python
+iter_start = torch.cuda.Event(enable_timing = True)
+iter_end = torch.cuda.Event(enable_timing = True)
+iter_start.record()
+# iter 1 code
+iter_end.record()
+
+print(f'iter time: {iter_start.elapsed_time(iter_end)}')
+```
+
+eg:
+```python
+import torch
+
+iter_start = torch.cuda.Event(enable_timing = True)
+iter_end = torch.cuda.Event(enable_timing = True)
+iter_start.record()
+
+a = torch.tensor([1,2,3,4,5,6,7,8,9,10]).cuda()
+
+iter_end.record()
+
+timestamp = iter_start.elapsed_time(iter_end)
+print(f'iter time: {timestamp:03f}')
+```

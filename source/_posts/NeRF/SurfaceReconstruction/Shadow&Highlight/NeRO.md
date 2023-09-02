@@ -3,10 +3,9 @@ title: NeRO
 date: 2023-07-27T12:21:17.000Z
 tags:
   - Shadow&Highlight
-  - Reflective Objects
-  - Surface Reconstruction
-  - NeRO
-categories: NeRF/Surface Reconstruction/Shadow&Highlight
+  - SurfaceReconstruction
+  - Neus
+categories: NeRF/SurfaceReconstruction/Shadow&Highlight
 date updated: 2023-08-09T22:26:28.000Z
 ---
 

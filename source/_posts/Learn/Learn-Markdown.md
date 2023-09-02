@@ -5,7 +5,8 @@ toc: true
 categories: Learn
 summary: 关于我使用 Markdown 以来学到的知识，即markdown的操作方法
 tags:
-  - Markdown Note
+  - Note
+  - Markdown
 ---
 关于我使用 Markdown 以来学到的知识，即markdown的操作方法
 <!--more-->

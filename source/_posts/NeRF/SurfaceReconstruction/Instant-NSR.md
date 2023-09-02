@@ -2,9 +2,10 @@
 title: Instant-NSR
 date: 2023-07-06 13:28:05
 tags:
-    - Surface Reconstruction
-    - Instant-NSR
-categories: NeRF/Surface Reconstruction
+  - SurfaceReconstruction
+  - Efficiency
+  - Neus
+categories: NeRF/SurfaceReconstruction
 ---
 
 | Title     | Human Performance Modeling and Rendering via Neural Animated Mesh                                                                                                                                                                                                                                                                                                                                                                         |
@@ -408,7 +409,7 @@ U-Net:
 
 ## 环境配置
 
-如[instant-nsr-pl](/2023/06/14/NeRF/Surface%20Reconstruction/Neus-Instant-nsr-pl/)中环境配置tiny-cuda-nn
+如[instant-nsr-pl](/NeRF/SurfaceReconstruction/Neus-Instant-nsr-pl)中环境配置tiny-cuda-nn
 
 创建conda环境：
 - `conda create -n nsr python=3.8`

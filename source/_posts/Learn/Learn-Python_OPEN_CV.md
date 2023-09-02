@@ -5,8 +5,6 @@ summary: Python中opencv的学习和使用，可以操作图片，跟ps中知识
 toc: true
 categories: Learn
 tags:
-  - OpenCV
-  - Compete
   - Python
 ---
 Python中opencv的学习和使用，可以操作图片，跟ps中知识挺像的hhh

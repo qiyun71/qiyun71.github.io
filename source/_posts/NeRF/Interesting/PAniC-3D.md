@@ -2,8 +2,8 @@
 title: PAniC-3D
 date: 2023-08-06 13:27:19
 tags:
-    - NeRF
-    - Anime
+  - NeRF
+  - 3DReconstruction
 categories: NeRF/Interesting
 ---
 

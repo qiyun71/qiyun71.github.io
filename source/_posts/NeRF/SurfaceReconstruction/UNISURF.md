@@ -2,9 +2,9 @@
 title: UNISURF
 date: 2023-08-06 14:32:58
 tags:
-    - Surface Reconstruction
-    - UNISURF
-categories: NeRF/Surface Reconstruction
+  - UNISURF
+  - SurfaceReconstruction
+categories: NeRF/SurfaceReconstruction
 ---
 
 | Title     | UNISURF: Unifying Neural Implicit Surfaces and Radiance Fields for Multi-View Reconstruction                                                                                                                 |

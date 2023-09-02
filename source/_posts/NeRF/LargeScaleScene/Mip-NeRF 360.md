@@ -2,9 +2,9 @@
 title: Mip-NeRF 360
 date: 2023-07-21 16:28:43
 tags:
-    - NeRF
-    - Large Scale Scene
-    - Sampling
+  - NeRF
+  - Sampling
+  - LargeScaleScene 
 categories: NeRF/LargeScaleScene
 ---
 

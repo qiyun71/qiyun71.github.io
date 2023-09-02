@@ -2,9 +2,10 @@
 title: 3D Gaussian Splatting
 date: 2023-08-17 19:43:10
 tags:
-  - 3D Gaussian Splatting
-  - Real-Time Rendering
-categories: NeRF/Efficiency
+  - PointCloud
+  - Splatting
+  - Real-time
+categories: NeRF/PointCloud
 ---
 
 | Title     | 3D Gaussian Splatting  for Real-Time Radiance Field Rendering                                                                                                                                                                                                                                    |
@@ -337,6 +338,22 @@ SIBR_remoteGaussian_app中操作：
 - W, A, S, D, Q, E控制相机移动
 - I, K, J, L, U, O控制相机旋转
 
-自定义数据集- ./data/Miku
-- `python convert.py -s <location> [--resize] #If not resizing, ImageMagick is not needed`
-- python convert.py -s ./data/Miku
+
+### 自定义数据集
+
+- 自定义数据集- ./data/Miku
+    - `python convert.py -s <location> [--resize] #If not resizing, ImageMagick is not needed`
+    - python convert.py -s ./data/Miku，如果之前使用过colmap生成了sparse/0/，则只需要undistortion
+    - `ssh -L 6009:localhost:6009 root@connect.beijinga.seetacloud.com -p 22938`
+    - `SIBR_remoteGaussian_app -s E:\Download\Miku --port 6009 --rendering-size 480 240 --force-aspect-ratio`
+
+results
+
+![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230824163133.png)
+
+相比于对MLP进行优化，3D Gaussian Splatting直接对有意义的点云进行优化
+- **渲染效果非常好(分辨率高)，速度快**
+    - **但是比较吃显存**
+    - 输出的点云中必定包含周围的环境，除非适用mask将训练数据只限定到感兴趣物体
+
+![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230824164154.png)
