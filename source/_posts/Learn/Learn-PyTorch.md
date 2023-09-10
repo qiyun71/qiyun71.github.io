@@ -136,6 +136,41 @@ Adam_in_Neus: params_to_train is a list
             g['lr'] = self.learning_rate * learning_factor
 ```
 
+## lr
+
+> [lr scheduler介绍和可视化 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/611364321)
+
+lr_scheduler.nameLR
+
+| nameLR            | Brief                                                                                                                                          |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| ConstantLR        | init_lr乘以factor持续total_iters                                                                                                               |
+| CosineAnnealingLR | 构造一个cos函数，周期为`2T_max`,学习率区间为`[init_lr,eta_min]`，cos向左平移last_epoch个iter                                                   |
+| CyclicLR          | 三种mode：triangular三角波amplitude不变，triangular2每个cycle的amplitude减半，exp_range每个cycle iteration将amplitude缩放为$gamma^{iteration}$ |
+| ExponentialLR     | 指数减小lr：$gamma^{iter}$                                                                                                                     |
+| LambdaLR          | 使用自定义的lambda来处理lr                                                                                                                     |
+| StepLR            | 阶梯每step_size步将lr乘以gamma                                                                                                                 |
+| MultiStepLR       | 在`milestones = [30,80]`处将lr乘以gamma                                                                                                        |
+| OneCycleLR        | not chainable，lr先上升到max_lr,然后减小。最大值处的step为`total_step * pct_start = epochs * steps_per_epoch * pct_start`                      |
+| ConstantLR        | 前total_iters的lr为`init_lr * factor`                                                                                                          |
+| LinearLR          | 从`init_lr * start_factor`开始线性增长total_iters步到 `init_lr * end_factor `                                                                  |
+| MultiplicativeLR  | 学习率从init_lr 根据`lr_lambda = lambda step: factor`非线性衰减：$lr = factor^{step}$                                                                                                                                               |
+
+
+
+连接多个lr
+
+| nameLR                        | Brief                                        |
+| ----------------------------- | -------------------------------------------- |
+| SequentialLR     | **milestones**前为scheduler1，后为scheduler2 |
+| ChainedScheduler | 多个scheduler叠加                            |
+|                               |                                              |
+
+
+
+
+
+
 # 私有成员
 带双下划线函数
 

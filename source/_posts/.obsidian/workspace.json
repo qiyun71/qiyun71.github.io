@@ -8,7 +8,33 @@
         "type": "tabs",
         "children": [
           {
-            "id": "692b99e5a01d956a",
+            "id": "9ba661baa419d74f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Learn/Learn-PyTorch.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "2539036f8376d61c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Reports/2023-09-02.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "29daf966c1a28180",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -21,19 +47,33 @@
             }
           },
           {
-            "id": "eee1e7eb68dade8c",
+            "id": "dc8c4ddcd95c7983",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "NeRF/Efficiency/Zip-NeRF.md",
+                "file": "NeRF/Efficiency/NeRF-InstantNGP.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "ff583c511b0ea361",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "NeRF/SurfaceReconstruction/Neus.md",
                 "mode": "source",
                 "backlinks": false,
                 "source": false
               }
             }
           }
-        ]
+        ],
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -113,7 +153,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "NeRF/NeRF-Mine.md",
+                "file": "NeRF/SurfaceReconstruction/Neus.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -137,7 +177,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "NeRF/NeRF-Mine.md"
+                "file": "NeRF/SurfaceReconstruction/Neus.md"
               }
             }
           }
@@ -161,7 +201,7 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "NeRF/NeRF-Mine.md",
+                "file": "NeRF/SurfaceReconstruction/Neus.md",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -229,36 +269,36 @@
       "canvas:新建白板": false
     }
   },
-  "active": "692b99e5a01d956a",
+  "active": "ff583c511b0ea361",
   "lastOpenFiles": [
-    "NeRF/Efficiency/Zip-NeRF.md",
+    "NeRF/SurfaceReconstruction/IDR.md",
     "NeRF/NeRF-Mine.md",
+    "Learn/Learn-PyTorch.md",
+    "Reports/2023-09-02.md",
+    "NeRF/Efficiency/NeRF-InstantNGP.md",
+    "NeRF/Efficiency/NeRF-InstantNGP-code.md",
+    "NeRF/SurfaceReconstruction/Neus.md",
+    "NeRF/NeRF/Math.md",
+    "NeRF/SurfaceReconstruction/Neus-code.md",
+    "Reports/git.md",
+    "NeRF/Sampling/NerfAcc.md",
+    "NeRF/SurfaceReconstruction/Shadow&Highlight/NeRO-code.md",
+    "NeRF/SurfaceReconstruction/Neus-Instant-nsr-pl-code.md",
+    "NeRF/SurfaceReconstruction/NeuS2.md",
+    "NeRF/SurfaceReconstruction/HF-NeuS.md",
+    "NeRF/SurfaceReconstruction/Geo-Neus.md",
+    "NeRF/NeRF-Principle.md",
+    "NeRF/LargeScaleScene/Mip-NeRF 360.md",
+    "NeRF/SurfaceReconstruction/Neus-Instant-nsr-pl.md",
+    "NeRF/SurfaceReconstruction/NeUDF.md",
+    "NeRF/Efficiency/Zip-NeRF.md",
+    "NeRF/Efficiency/Tri-MipRF.md",
+    "NeRF/Sparse/FreeNeRF.md",
     "img/bilibili/comment.png.md",
     "img/bilibili",
     "img",
     "Learn/Learn-Markdown.md",
-    "NeRF/SurfaceReconstruction/Neus-Instant-nsr-pl.md",
-    "NeRF/SurfaceReconstruction/Neus.md",
-    "NeRF/SurfaceReconstruction/Shadow&Highlight/NeRO-code.md",
     "NeRF/SurfaceReconstruction/Instant-NSR.md",
-    "NeRF/SurfaceReconstruction/Neus-Instant-nsr-pl 1.md",
-    "NeRF/NeRF-Studio.md",
-    "NeRF/NeRF-code.md",
-    "NeRF/NeRF-review.md",
-    "Note!!!.md",
-    "Learn/Learn-Arduino.md",
-    "Learn/Learn-Csharp.md",
-    "Learn/Learn-HCJ前端.md",
-    "Learn/Learn-Hexo.md",
-    "Learn/Learn-Hexo2.md",
-    "Learn/Learn-Python-LCU.md",
-    "Learn/Learn-Python_OPEN_CV.md",
-    "Learn/Learn-Python.md",
-    "Learn/Learn-Python_Threading.md",
-    "Learn/Learn-Python_plt.md",
-    "Learn/Learn-PyTorch.md",
-    "Learn/Learn-Spider爬虫.md",
-    "Learn/Learn-Git.md",
     "未命名.canvas",
     "NeRF/PointCloud",
     "Review",

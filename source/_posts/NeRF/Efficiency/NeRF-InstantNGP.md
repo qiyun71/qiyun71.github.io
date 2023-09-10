@@ -36,6 +36,7 @@ L为分辨率数量，l为分辨率序号。示例中L=2，$N_{0}= N_{min} =2$ ,
 - T：每个分辨率下有T个特征向量
 - F：特征向量的维度
 - 最小和最大分辨率：$N_{min} , N_{max}$
+- b：每个level的缩放per_level_scale $b= e^{\frac{ln(\frac{N_{max}}{N_{min}})}{L-1}}$
 
 ![image.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230703160145.png)
 

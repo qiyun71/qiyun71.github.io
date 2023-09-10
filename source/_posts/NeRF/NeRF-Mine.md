@@ -32,6 +32,11 @@ NeRF主要部分：
     - 根据sdf和threshold，获取物体表面的vertices和faces(如需还要生成vertices对应的colors)。
     - 然后根据vertices、faces和colors，由trimesh生成mesh并导出模型为obj等格式
 
+
+Future：
+- 消除颜色or纹理与几何的歧义，Neus(X-->MLP-->SDF)的方法会将物体的纹理建模到物体的几何中
+- 
+
 <!-- more -->
 
 NeRF-Mine文件结构：
@@ -67,7 +72,6 @@ python run.py --config confs/neus-dtu.yaml --test --resume ckpt_path
 ```
 
 # 代码结构
-
 
 ## confs配置文件
 
@@ -289,6 +293,15 @@ conda remove -n  需要删除的环境名 --all
     ...
 ```
 
+## Loss
+
+### Eikonal
+
+$\mathcal{L}_{r e g}=\frac{1}{n m}\sum_{k,i}(\|\nabla f(\hat{\mathbf{p}}_{k,i})\|_{2}-1)^{2}.$
+
+
+
+
 ## Metrics
 
 L1_loss : $loss(x,y)=\frac{1}{n}\sum_{i=1}^{n}|y_i-f(x_i)|$
@@ -344,8 +357,23 @@ $\sigma_{xy}=\sum_{i}w_{i}(x_{i}-\mu_{x})(y_{i}-\mu_{y})$
 LPIPS是一个完整的参考质量评估指标，它使用了学习的卷积特征。分数是由多层特征映射的加权像素级MSE给出的。
 $LPIPS(x,y)=\sum\limits_{l}^{L}\dfrac{1}{H_lW_l}\sum\limits_{h,w}^{H_l,W_l}||w_l\odot(x^l_{hw}-y^l_{hw})||^2_2$
 
+### CD↓
+Chamfer Distance倒角距离
+
+$d_{\mathrm{CD}}(S_1,S_2)=\frac{1}{S_1}\sum_{x\in S_1}\min_{y\in S_2}\lVert x-y\rVert_2^2+\frac{1}{S_2}\sum_{y\in S_2}\min_{x\in S_1}\lVert y-x\rVert_2^2$
+
+S1和S2分别表示两组3D点云，第一项代表S1中任意一点x到S2的最小距离之和，第二项则表示S2中任意一点y到S1的最小距离之和。
+如果该距离较大，则说明两组点云区别较大；如果距离较小，则说明重建效果较好。
+
+# Results
 
 
+
+
+## Excel Function
+
+将C5：23.98 22.79 25.21 26.03 28.32 29.80 27.45 28.89 26.03 28.93 32.47 30.78 29.37 34.23 33.95，按空格拆分填入C3到Q3
+`=TRIM(MID(SUBSTITUTE($C$5," ",REPT(" ",LEN($C$5))),(COLUMN()-COLUMN($C$3))*LEN($C$5)+1,LEN($C$5)))`
 
 # BUG
 
@@ -441,3 +469,41 @@ l by PyTorch) If reserved memory is >> allocated memory try setting max_split_si
 void fragmentation. See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF  
 0% 0/60 [00:00<?, ?it/s]
 ```
+
+## Update
+
+### Nerfacc 
+0.3.5 --> 0.5.3
+
+error1：loss_eikonal一直增大
+
+- 在fg中添加了def alpha_fn(t_starts,t_ends,ray_indices):
+- 在fg中使用ray_aabb_intersect计算near和far
+
+效果差原因：
+- 0.5.3由于Contraction在射线遍历时低效，不再使用ContractionType，因此对于背景bg使用self.scene_aabb会出现问题
+
+解决test：
+- 对于背景的unbounded采用prop网格
+
+error1.5: 
+
+- loss_rgb_mse和l1损失为nan
+- 解决：背景color值为负数
+
+
+error2: 对unbounded采用prop网格后，由于网络参数太多，出现OOM
+
+```
+OOM
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 162.00 MiB (GPU 0; 23.70 GiB total capacity; 21.16 GiB already allocated; 150.56 MiB free; 22.31 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+
+set PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:32
+```
+
+> [通过设置PYTORCH_CUDA_ALLOC_CONF中的max_split_size_mb解决Pytorch的显存碎片化导致的CUDA:Out Of Memory问题_梦音Yune的博客-CSDN博客](https://blog.csdn.net/MirageTanker/article/details/127998036)
+
+
+- max_split_size_mb设置后，显存也不足
+- 调小prop的网格参数，prop_network主要由Hash Table和MLP两部分组成，调小 HashTable 的n_levels
+
