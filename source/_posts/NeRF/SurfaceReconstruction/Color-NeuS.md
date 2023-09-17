@@ -205,3 +205,39 @@ $\Theta^{*},\Pi^{*}=\operatorname*{arg}_{\Theta,\Pi}\mathcal{L}(\Theta,\Pi),$
 
 ![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230901154219.png)
 
+# 实验
+
+## 环境配置
+
+```bash
+git clone https://github.com/Colmar-zlicheng/Color-NeuS.git
+cd Color-NeuS
+conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia
+pip install -r requirement.txt
+pip install "git+https://github.com/facebookresearch/pytorch3d.git"
+```
+
+## 运行
+
+```bash
+# train
+python train.py -g 0 --config configs/Color_NeuS_${DATASET}.yaml -obj ${OBJECT_NAME} --exp_id ${EXP_ID}
+
+eg:
+# DTU: dtu_scan83
+python train.py -g 0 --config configs/Color_NeuS_dtu.yaml -obj 83 --exp_id Color_NeuS_dtu_83
+
+# Inference
+python evaluation.py -g 0 --config configs/Color_NeuS_${DATASET}.yaml -obj ${OBJECT_NAME} -rr 512 --reload ${PATH_TO_CHECKPOINT}
+
+eg:
+python evaluation.py -g 0 --cfg configs/Color_NeuS_${DATASET}.yaml -obj ${OBJECT_NAME} -rr 512 --reload ${PATH_TO_CHECKPOINT}
+```
+
+### Miku
+`python train.py -g 0 --cfg ./config/Color_NeuS_dtu.yml -obj Miku`
+大概需要8h左右
+
+恢复训练，添加关机指令： && /usr/bin/shutdown
+`python train.py -g 0 --cfg ./config/Color_NeuS_dtu.yml -obj Miku --resume /root/autodl-tmp/Color-NeuS/exp/default_2023_0917_2027_15 && /usr/bin/shutdown`
+

@@ -374,7 +374,7 @@ mask文件夹包含的是模型的前景图像，前景和后景以黑色和白�
 
 ```
 cd colmap_preprocess
-python img2poses.py ${data_dir}
+python imgs2poses.py ${data_dir}
 ```
 
 将会生成：`${data_dir}/sparse_points.ply`，在meshlab中选择多余部分的Vertices，并删除，然后保存为`${data_dir}/sparse_points_interest.ply`.

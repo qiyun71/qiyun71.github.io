@@ -905,7 +905,7 @@ img、input表单类、td单元格等，可以对他们设置宽高和对齐属�
 
 行高测量：有英文的话基线与基线间的距离、中文可以直接量底线
 
-![行高测量](/img/hcj/hgcl.png)
+`![行高测量](/img/hcj/hgcl.png)`
 
 ### 2.7.2 单行文本垂直居中
 
@@ -1047,7 +1047,7 @@ div {
 **盒子模型Box Model**
 * 盒子组成四部分：Border厚度（边缘），content内容，Padding内边距，Margin盒子与盒子间的距离（外边距）
 
-![盒子模型](/img/hcj/boxmodel.png)
+`![盒子模型](/img/hcj/boxmodel.png)`
 
 ### 2.10.2 盒子边框border
 
@@ -1107,7 +1107,7 @@ input {
 
 ---
 
-![新浪导航](/img/hcj/xldh.png)
+`![新浪导航](/img/hcj/xldh.png)`
 
 给盒子指定一个padding而不给宽度，实现不同内容，不同宽度
 
@@ -1158,7 +1158,7 @@ input {
 
 **盒子模型的计算**
 
-![盒子模型](/img/hcj/boxmodel.png)
+`![盒子模型](/img/hcj/boxmodel.png)`
 
 **盒子的实际大小 = 内容宽度 高度 + 内边距 + 边框**
 
@@ -1239,7 +1239,7 @@ input {
 
 ### 2.10.5 盒子综合案例
 
-![盒子综合案例](/img/hcj/boxlizi.png)
+`![盒子综合案例](/img/hcj/boxlizi.png)`
 
 ```html
 <!DOCTYPE html>
@@ -1339,7 +1339,7 @@ border-radius: 20%;
 box-shadow: 2px 2px 2px 2px #000 ;
 ```
 
-![picture](/img/hcj/shadow.png)
+`![picture](/img/hcj/shadow.png)`
 
 ## 2.11 CSS书写规范
 

@@ -1,6 +1,6 @@
 {
-  "baseFontSize": 22,
-  "theme": "system",
+  "baseFontSize": 16,
+  "theme": "moonstone",
   "translucency": false,
   "cssTheme": "Minimal",
   "interfaceFontFamily": "HarmonyOS Sans SC,HarmonyOS Sans TC,JetBrains Mono",

@@ -227,3 +227,74 @@ $\mathbf{x}_{c}=R_{i-1}^{c}(\mathbf{x}_{i-1}+T_{i-1}^{c})=R_{i}^{c}(\mathbf{x}_{
     - with or without :
         - GTP
         - PT
+
+
+## 环境配置
+
+PyTorch  1.11.0 | Python  3.8(ubuntu20.04) | Cuda  11.3
+
+升级cmake 3.18以上
+`sudo apt-get install xorg-dev`
+
+```bash
+git clone --recursive https://github.com/19reborn/NeuS2
+cd NeuS2
+
+cmake . -B build
+cmake --build build --config RelWithDebInfo -j 
+
+# conda create env
+conda create -n neus2 python= your image
+conda activate neus2
+pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+commentjson~=0.9.0
+imageio~=2.16.0
+numpy~=1.21.2
+pybind11~=2.7.1
+scipy~=1.7.1
+tqdm~=4.62.2
+opencv-python~=4.5.5.62
+trimesh
+tensorboard
+https://pypi.tuna.tsinghua.edu.cn/simple
+
+# install pytorch and pytorch3d
+pip install torch
+pip install "git+https://github.com/facebookresearch/pytorch3d.git@stable"
+```
+
+> [pytorch3d/INSTALL.md at main · facebookresearch/pytorch3d (github.com)](https://github.com/facebookresearch/pytorch3d/blob/main/INSTALL.md)
+
+## 运行
+
+```python 
+# run c++
+./build/testbed --scene ${data_path}/transform.json
+## eg:
+./build/testbed --scene ./data/neus/dtu_scan114/transform_train.json -n dtu.json --no-gui
+## questions:
+no output
+
+# run python
+python scripts/run.py --scene ${data_path}/transform.json --name ${your_experiment_name} --network ${config_name} --n_steps ${training_steps}
+## eg: autodl-tmp/NeuS2/data/neus/dtu_scan114/transform_train.json
+python scripts/run.py --scene ./data/neus/dtu_scan114/transform_train.json --name neus --network dtu.json --n_steps -1
+
+# 数据转换
+python tools/data_format_from_neus.py --dataset_name dtu_scan114 --copy_image
+or 
+python tools/data_format_from_neus.py --dataset_all --copy_image 
+```
+
+### Miku
+
+```python
+python scripts/run.py --scene ./data/neus/Miku/transform_train.json --name Miku --network dtu.json --n_steps 20000
+```
+
+neuspp --> womask
+
+```python
+python scripts/run.py --scene ./data/neus/Miku/transform_train.json --name Miku --network womask.json --n_steps -1
+```
+

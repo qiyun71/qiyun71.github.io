@@ -27,5 +27,6 @@
   "focusNewTab": true,
   "useMarkdownLinks": true,
   "spellcheckLanguages": null,
-  "foldHeading": true
+  "foldHeading": true,
+  "vimMode": false
 }

@@ -8,12 +8,12 @@
         "type": "tabs",
         "children": [
           {
-            "id": "9ba661baa419d74f",
+            "id": "52f389ba833e76a9",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Learn/Learn-PyTorch.md",
+                "file": "NeRF/NeRF-review.md",
                 "mode": "source",
                 "backlinks": false,
                 "source": false
@@ -21,12 +21,12 @@
             }
           },
           {
-            "id": "2539036f8376d61c",
+            "id": "7488482262b66356",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Reports/2023-09-02.md",
+                "file": "NeRF/SurfaceReconstruction/Color-NeuS.md",
                 "mode": "source",
                 "backlinks": false,
                 "source": false
@@ -34,7 +34,7 @@
             }
           },
           {
-            "id": "29daf966c1a28180",
+            "id": "a56886f546b6c7f1",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -45,35 +45,9 @@
                 "source": false
               }
             }
-          },
-          {
-            "id": "dc8c4ddcd95c7983",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "NeRF/Efficiency/NeRF-InstantNGP.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "ff583c511b0ea361",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "NeRF/SurfaceReconstruction/Neus.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              }
-            }
           }
         ],
-        "currentTab": 4
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -85,7 +59,7 @@
       {
         "id": "4b1070af652f8263",
         "type": "tabs",
-        "dimension": 60.44198895027625,
+        "dimension": 66.01671309192201,
         "children": [
           {
             "id": "8e8a871735863769",
@@ -117,14 +91,6 @@
             }
           },
           {
-            "id": "917cbf8f3752e4ec",
-            "type": "leaf",
-            "state": {
-              "type": "advanced-tables-toolbar",
-              "state": {}
-            }
-          },
-          {
             "id": "15b0ca6b5a59a5e6",
             "type": "leaf",
             "state": {
@@ -153,7 +119,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "NeRF/SurfaceReconstruction/Neus.md",
+                "file": "NeRF/SurfaceReconstruction/Color-NeuS.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -167,9 +133,9 @@
         ]
       },
       {
-        "id": "76565ee9f59edd2d",
+        "id": "fdddf239627c8d58",
         "type": "tabs",
-        "dimension": 39.55801104972376,
+        "dimension": 33.98328690807799,
         "children": [
           {
             "id": "086707e82c339e3f",
@@ -177,7 +143,27 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "NeRF/SurfaceReconstruction/Neus.md"
+                "file": "NeRF/SurfaceReconstruction/Color-NeuS.md"
+              }
+            }
+          },
+          {
+            "id": "2e6aa82c45a60795",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency"
+              }
+            }
+          },
+          {
+            "id": "606870b940b42433",
+            "type": "leaf",
+            "state": {
+              "type": "file-properties",
+              "state": {
+                "file": "NeRF/SurfaceReconstruction/Color-NeuS.md"
               }
             }
           }
@@ -185,7 +171,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 289.5001640319824
+    "width": 250.50831985473633
   },
   "right": {
     "id": "030ccac2adcfb23a",
@@ -196,12 +182,28 @@
         "type": "tabs",
         "children": [
           {
+            "id": "02d0d2220a9ac3cc",
+            "type": "leaf",
+            "state": {
+              "type": "recent-files",
+              "state": {}
+            }
+          },
+          {
+            "id": "f17e01ff8aefd21b",
+            "type": "leaf",
+            "state": {
+              "type": "advanced-tables-toolbar",
+              "state": {}
+            }
+          },
+          {
             "id": "39287e9bb20932ab",
             "type": "leaf",
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "NeRF/SurfaceReconstruction/Neus.md",
+                "file": "NeRF/SurfaceReconstruction/Color-NeuS.md",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -232,22 +234,14 @@
                   "repelStrength": 10,
                   "linkStrength": 1,
                   "linkDistance": 250,
-                  "scale": 1.425869590402511,
+                  "scale": 0.24192488792136296,
                   "close": true
                 }
               }
             }
-          },
-          {
-            "id": "02d0d2220a9ac3cc",
-            "type": "leaf",
-            "state": {
-              "type": "recent-files",
-              "state": {}
-            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "horizontal",
@@ -257,48 +251,48 @@
   "left-ribbon": {
     "hiddenItems": {
       "templater-obsidian:Templater": false,
-      "switcher:打开快速切换": false,
-      "command-palette:打开命令面板": false,
+      "switcher:打开快速切换": true,
+      "command-palette:打开命令面板": true,
       "templates:插入模板": true,
       "graph:查看关系图谱": true,
-      "table-editor-obsidian:Advanced Tables Toolbar": false,
       "markdown-importer:打开 Markdown 格式转换器": true,
       "audio-recorder:开始/结束录音": true,
       "workspaces:管理工作区布局": true,
       "daily-notes:打开/创建今天的日记": false,
-      "canvas:新建白板": false
+      "canvas:新建白板": true,
+      "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "ff583c511b0ea361",
+  "active": "7488482262b66356",
   "lastOpenFiles": [
-    "NeRF/SurfaceReconstruction/IDR.md",
     "NeRF/NeRF-Mine.md",
-    "Learn/Learn-PyTorch.md",
-    "Reports/2023-09-02.md",
-    "NeRF/Efficiency/NeRF-InstantNGP.md",
-    "NeRF/Efficiency/NeRF-InstantNGP-code.md",
-    "NeRF/SurfaceReconstruction/Neus.md",
-    "NeRF/NeRF/Math.md",
-    "NeRF/SurfaceReconstruction/Neus-code.md",
+    "Reports/Other notes for obsidian.md",
+    "Templates/Front-matter.md.md",
+    "NeRF/NeRF-review.md",
+    "Reports/2023-06-19.md",
     "Reports/git.md",
-    "NeRF/Sampling/NerfAcc.md",
-    "NeRF/SurfaceReconstruction/Shadow&Highlight/NeRO-code.md",
-    "NeRF/SurfaceReconstruction/Neus-Instant-nsr-pl-code.md",
+    "NeRF/SurfaceReconstruction/Shadow&Highlight/Ref-NeuS.md",
+    "NeRF/SurfaceReconstruction/Color-NeuS.md",
+    "NeRF/Review/2023 Conf about NeRF.md",
+    "NeRF/NeRF/Encoding.md",
+    "NeRF/Efficiency/BakedSDF.md",
+    "Reports/2023-09-02.md",
+    "Note!!!.md",
+    "NeRF/SurfaceReconstruction/FlexiCubes.md",
+    "Learn/Learn-Colmap.md",
+    "Reports/new.md",
+    "Learn/Learn-HCJ前端.md",
     "NeRF/SurfaceReconstruction/NeuS2.md",
-    "NeRF/SurfaceReconstruction/HF-NeuS.md",
+    "Python Practise/Make-Python_bilibili.md",
+    "Learn/Learn-Markdown.md",
+    "NeRF/Review/A Critical Analysis of NeRF-Based 3D Reconstruction.md",
+    "NeRF/SurfaceReconstruction/IDR.md",
     "NeRF/SurfaceReconstruction/Geo-Neus.md",
-    "NeRF/NeRF-Principle.md",
-    "NeRF/LargeScaleScene/Mip-NeRF 360.md",
-    "NeRF/SurfaceReconstruction/Neus-Instant-nsr-pl.md",
-    "NeRF/SurfaceReconstruction/NeUDF.md",
-    "NeRF/Efficiency/Zip-NeRF.md",
-    "NeRF/Efficiency/Tri-MipRF.md",
-    "NeRF/Sparse/FreeNeRF.md",
-    "img/bilibili/comment.png.md",
+    "NeRF/SurfaceReconstruction/HF-NeuS.md",
+    "Python Practise/Make-Py-Tools.md",
+    "NeRF/SurfaceReconstruction/Neus.md",
     "img/bilibili",
     "img",
-    "Learn/Learn-Markdown.md",
-    "NeRF/SurfaceReconstruction/Instant-NSR.md",
     "未命名.canvas",
     "NeRF/PointCloud",
     "Review",

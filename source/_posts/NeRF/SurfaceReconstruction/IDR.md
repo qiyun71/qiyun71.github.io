@@ -6,13 +6,13 @@ tags:
 categories: NeRF/SurfaceReconstruction
 ---
 
-| Title     | Multiview Neural Surface Reconstruction by Disentangling Geometry and Appearance |
-| --------- | ------------------------------------------------------------------------------- |
-| Author    | Lior Yariv, Yoni Kasten, Dror Moran, Meirav Galun, Matan Atzmon, Ronen Basri, Yaron Lipman                                                                                |
-| Conf/Jour | NeurIPS                                                                         |
-| Year      | 2020                                                                            |
-| Project   | [Multiview Neural Surface Reconstruction by Disentangling Geometry and Appearance (lioryariv.github.io)](https://lioryariv.github.io/idr/)                                                                                |
-| Paper     | [Multiview Neural Surface Reconstruction by Disentangling Geometry and Appearance (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4545153915959271425&noteId=1815797245432115712)                                                                                |
+| Title     | Multiview Neural Surface Reconstruction by Disentangling Geometry and Appearance                                                                                                                 |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Author    | Lior Yariv, Yoni Kasten, Dror Moran, Meirav Galun, Matan Atzmon, Ronen Basri, Yaron Lipman                                                                                                       |
+| Conf/Jour | NeurIPS                                                                                                                                                                                          |
+| Year      | 2020                                                                                                                                                                                             |
+| Project   | [Multiview Neural Surface Reconstruction by Disentangling Geometry and Appearance (lioryariv.github.io)](https://lioryariv.github.io/idr/)                                                       |
+| Paper     | [Multiview Neural Surface Reconstruction by Disentangling Geometry and Appearance (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4545153915959271425&noteId=1815797245432115712) |
 
 ![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230906183157.png)
 

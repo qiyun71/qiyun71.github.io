@@ -1,11 +1,12 @@
 ---
-title: 基于Instant-nsr-pl创建一个项目
+title: 基于Instant-nsr-pl创建项目
 date: 2023-07-06 21:17:54
 tags:
   - NeRF
   - Neus
 categories: NeRF
 ---
+
 
 基于Instant-nsr-pl(NSR,NGP,PytorchLightning)代码构建——[yq010105/NeRF-Mine (github.com)](https://github.com/yq010105/NeRF-Mine)
 - 保留omegaconf、nerfacc、Mip-nerf，类似文件结构
@@ -35,7 +36,7 @@ NeRF主要部分：
 
 Future：
 - 消除颜色or纹理与几何的歧义，Neus(X-->MLP-->SDF)的方法会将物体的纹理建模到物体的几何中
-- 
+- 只关注前景物体的建模，可以结合SAM将图片中的interest object分割出来
 
 <!-- more -->
 
@@ -253,6 +254,23 @@ data:
    device='cuda:0')}
 ```
 
+# Question2023.9.17
+
+- mesh精度
+- mesh颜色：
+    - neus方式逆变换采样训练出来的color，会分布在整个空间中，因此虽然render出来的视频效果很好，但是mesh表面点的颜色会被稀释
+
+[How to reconstruct texture after generating mesh ? · Issue #48 · Totoro97/NeuS (github.com)](https://github.com/Totoro97/NeuS/issues/48)
+[What can we do with our own trained model? · Issue #44 · bmild/nerf (github.com)](https://github.com/bmild/nerf/issues/44)
+
+![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230917192416.png)
+
+![00300000_88_158.gif](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/00300000_88_158.gif)
+
+如果采用更快速的NGP+Neus的方法，由于使用了占空网格的方式采样，因此不会将表面点的颜色散射到空间背景中，这样在extract mesh的时候，使用简单的法向量模拟方向向量，即可得到很好的效果
+![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230917192510.png)
+
+
 # 实验
 
 ## 环境配置
@@ -261,7 +279,15 @@ data:
 conda remove -n  需要删除的环境名 --all
 ```
 
+
 ## Dataset
+
+数据集：
+- [DTU Robot Image Data Sets | Data for Evaluating Computer Vision Methods etc.](http://roboimagedata.compute.dtu.dk/)
+    - 黑盒空间中，使用6轴工业机器人手部的结构光相机。可以得到精确的相机位姿和reference structured light scans
+- [YoYo000/BlendedMVS: BlendedMVS: A Large-scale Dataset for Generalized Multi-view Stereo Networks (github.com)](https://github.com/YoYo000/BlendedMVS)
+- [Tanks and Temples Benchmark](https://www.tanksandtemples.org/)
+    - 工业激光扫描仪捕获
 
 | Paper      | Dataset                                          | Link                                                                                                                                      |
 | ---------- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------- |

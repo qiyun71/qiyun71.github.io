@@ -171,9 +171,6 @@ def wc():
 wc()
 ```
 
-**示例：av2**
-![图片示例](/img/bilibili/comment.png)
-
 # 3. 获取 bilibili 主页各个分区的视频封面和 av 号
 
 `https://www.bilibili.com/index/ding.json`_首页 api，每刷新一次，信息就会改变一次_
