@@ -150,7 +150,7 @@ $\mathcal{L}_{SDF}=\sum_{p_j\in\boldsymbol{P}_i}\frac{1}{N_i}|\hat{sd}f\left(\bo
 
 **Occlusion-aware implicit surface capture**
 
-我们使用曲面的隐式表示，并利用隐式函数的零水平集提取曲面。问题是，隐曲面在哪里? 根据式(3)，估计曲面为:
+我们使用曲面的隐式表示，并利用隐式函数的零水平集提取曲面。隐曲面根据式(3)，估计曲面为:
 $\hat{\partial\Omega}=\left\{\boldsymbol{p}|\hat{sdf}(\boldsymbol{p})=0\right\}.$Eq.16
 
 我们的目标是在不同视图之间使用几何一致的约束来优化$\partial\hat{\Omega}$。因为曲面上的点的数量是无限的，所以在实践中我们需要从$\partial\hat{\Omega}$中采样点。为了与使用视图光线的显色过程保持一致，我们对这些光线上的表面点进行采样。正如3.1中提到的，我们沿着视图射线离散采样，并使用黎曼和来获得渲染的颜色。在采样点的基础上，采用线性插值方法得到曲面点。

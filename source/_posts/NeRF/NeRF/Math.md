@@ -63,7 +63,11 @@ def srgb_to_linear(srgb):
 
 # 坐标变换
 
-## 相机内参矩阵intrinsic
+内参矩阵 = c2p
+外参矩阵 = w2c
+像素坐标 = `c2p * w2c * world_position`
+
+## 相机内参矩阵intrinsic_c2p
 
 ![image.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230703144039.png)
 

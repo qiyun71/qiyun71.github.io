@@ -241,3 +241,4 @@ python evaluation.py -g 0 --cfg configs/Color_NeuS_${DATASET}.yaml -obj ${OBJECT
 恢复训练，添加关机指令： && /usr/bin/shutdown
 `python train.py -g 0 --cfg ./config/Color_NeuS_dtu.yml -obj Miku --resume /root/autodl-tmp/Color-NeuS/exp/default_2023_0917_2027_15 && /usr/bin/shutdown`
 
+对自定义数据集的重建效果很差，无法实现很好的渲染，而且所需时间很长

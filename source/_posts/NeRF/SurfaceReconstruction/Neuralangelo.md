@@ -157,17 +157,19 @@ All network parameters, including MLPs and hash encoding, are trained jointly en
 
 # 实验
 
-## 数据集
+## paper
+
+### 数据集
 
 - DTU dataset
 - Tanks and Temples datase
 
-## 实现细节
+### 实现细节
 
 Our hash encoding **resolution spans 25 to 211 with 16 levels**. Each hash entry has a channel size of 8. The maximum number of hash entries of each resolution is 222. 
 **We activate 4 and 8 hash resolutions at the beginning of optimization for DTU dataset and Tanks and Temples respectively**, due to differences in scene scales. **We enable a new hash resolution every 5000 iterations when the step size ε equals its grid cell size.** For all experiments, we do not utilize auxiliary data such as segmentation(mask) or depth during the optimization process.
 
-## Evaluation criteria.
+### Evaluation criteria.
 
 - Chamfer distance and F1 score for surface evaluation
     - [Large Scale Multi-view Stereopsis Evaluation-论文阅读讨论-ReadPaper](https://readpaper.com/paper/2085905957)
@@ -176,3 +178,111 @@ Our hash encoding **resolution spans 25 to 211 with 16 levels**. Each hash entry
         - F1得分的取值范围在0和1之间，越接近1表示模型的性能越好
 - We use peak signal-tonoise ratio (PSNR) to report image synthesis qualities.
 
+## 环境配置
+
+## 数据集生成
+
+colmap数据生成
+
+```bash
+DATA_PATH=datasets/${SEQUENCE}_ds${DOWNSAMPLE_RATE}
+bash projects/neuralangelo/scripts/run_colmap.sh ${DATA_PATH}
+```
+or
+```
+colmap gui Automatic reconstruction
++
+BA: Bundle adjustment
++
+Undistortion
+```
+
+最后数据集：
+
+```
+DATA_PATH
+├─ database.db      (COLMAP database)
+├─ images           (undistorted input images)
+├─ images_raw       (raw input images)
+├─ sparse           (COLMAP data from SfM)
+│  ├─ cameras.bin   (camera parameters)
+│  ├─ images.bin    (images and camera poses)
+│  ├─ points3D.bin  (sparse point clouds)
+│  ├─ 0             (a directory containing individual SfM models. There could also be 1, 2... etc.)
+├─ run-colmap-geometric.sh 几何一致性稠密重建 example 脚本
+├─ run-colmap-photometric.sh 光度一致性稠密重建 example 脚本
+│  ...
+├─ stereo (COLMAP data for MVS, not used here)
+```
+
+```shell
+# {DATA_PATH}/transforms.json
+python3 projects/neuralangelo/scripts/convert_data_to_json.py --data_dir ${DATA_PATH} --scene_type ${SCENE_TYPE}
+
+## eg:
+python projects/neuralangelo/scripts/convert_data_to_json.py --data_dir ./inputs/Miku --scene_type object
+
+# Config files projects/neuralangelo/configs/custom/{SEQUENCE}.yaml
+python3 projects/neuralangelo/scripts/generate_config.py --sequence_name ${SEQUENCE} --data_dir ${DATA_PATH} --scene_type ${SCENE_TYPE}
+
+## eg：
+python projects/neuralangelo/scripts/generate_config.py --sequence_name Miku --data_dir ./inputs/Miku --scene_type object
+```
+
+- `SCENE_TYPE`: can be one of  `{outdoor,indoor,object}`.
+- `SEQUENCE`: your custom name for the video sequence.
+## run
+
+```bash
+EXPERIMENT=toy_example
+GROUP=example_group
+NAME=example_name
+CONFIG=projects/neuralangelo/configs/custom/${EXPERIMENT}.yaml
+GPUS=1  # use >1 for multi-GPU training!
+torchrun --nproc_per_node=${GPUS} train.py \
+    --logdir=logs/${GROUP}/${NAME} \
+    --config=${CONFIG} \
+    --show_pbar
+
+eg:
+EXPERIMENT=Miku
+GROUP=dtu
+NAME=Miku
+CONFIG=projects/neuralangelo/configs/custom/Miku.yaml
+GPUS=1
+torchrun --nproc_per_node=${GPUS} train.py --logdir=logs/${GROUP}/${NAME} --config=${CONFIG} --show_pbar 
+
+# shutdown after run
+&& /usr/bin/shutdown
+```
+
+## Isosurface extraction
+
+```bash
+CHECKPOINT=logs/${GROUP}/${NAME}/xxx.pt
+OUTPUT_MESH=xxx.ply
+CONFIG=logs/${GROUP}/${NAME}/config.yaml
+RESOLUTION=2048
+BLOCK_RES=128
+GPUS=1  # use >1 for multi-GPU mesh extraction
+torchrun --nproc_per_node=${GPUS} projects/neuralangelo/scripts/extract_mesh.py \
+    --config=${CONFIG} \
+    --checkpoint=${CHECKPOINT} \
+    --output_file=${OUTPUT_MESH} \
+    --resolution=${RESOLUTION} \
+    --block_res=${BLOCK_RES}
+
+eg:
+CHECKPOINT=logs/${GROUP}/${NAME}/xxx.pt
+OUTPUT_MESH=Miku.ply
+CONFIG=logs/${GROUP}/${NAME}/config.yaml
+RESOLUTION=2048
+BLOCK_RES=128
+GPUS=1  # use >1 for multi-GPU mesh extraction
+torchrun --nproc_per_node=${GPUS} projects/neuralangelo/scripts/extract_mesh.py --config=${CONFIG} --checkpoint=${CHECKPOINT} --output_file=${OUTPUT_MESH} --resolution=${RESOLUTION} --block_res=${BLOCK_RES} --textured
+```
+
+- Add `--textured` to extract meshes with textures.
+- Add `--keep_lcc` to remove noises. May also remove thin structures.
+- Lower `BLOCK_RES` to reduce GPU memory usage.
+- Lower `RESOLUTION` to reduce mesh size.

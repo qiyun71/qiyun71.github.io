@@ -212,7 +212,7 @@ data:
 - image: torch.Size([960, 544, 3])
 - mask: torch.Size([960, 544])
 
-```
+```python
 {'pose': tensor([[[-0.0898,  0.8295, -0.5512,  1.3804],
          [ 0.0600,  0.5570,  0.8284, -2.0745],
          [ 0.9941,  0.0413, -0.0998,  0.0576],
@@ -256,19 +256,28 @@ data:
 
 # Question2023.9.17
 
-- mesh精度
+- mesh精度：
+    - 一个可以评价模型质量的指标，目前大部分方法都只能通过定性的观察来判断，而**定量的比较只能比较渲染图片，而不能比较模型**
+    - 改进
+        - x Method1，提高前景occupy grid 的分辨率，虽然细节颜色更加正确，**但同时带来eikonal项损失难收敛的问题**
+        - x Method2，将前景和背景的loss分开反向传播，loss_fg只反向传播到fg的MLP。由于无法准确预测光线/像素是背景还是前景，因此重建效果很差。
+            - x bg的loss只有L1_rgb的话，求出来的loss没有grad_fn，无法反向传播，添加条件if loss_bg.grad_fn is not None，效果不好
+        - Method3，先用之前方法训练得到一个深度mask
 - mesh颜色：
     - neus方式逆变换采样训练出来的color，会分布在整个空间中，因此虽然render出来的视频效果很好，但是mesh表面点的颜色会被稀释
 
-[How to reconstruct texture after generating mesh ? · Issue #48 · Totoro97/NeuS (github.com)](https://github.com/Totoro97/NeuS/issues/48)
-[What can we do with our own trained model? · Issue #44 · bmild/nerf (github.com)](https://github.com/bmild/nerf/issues/44)
+>[How to reconstruct texture after generating mesh ? · Issue #48 · Totoro97/NeuS (github.com)](https://github.com/Totoro97/NeuS/issues/48)
+>[What can we do with our own trained model? · Issue #44 · bmild/nerf (github.com)](https://github.com/bmild/nerf/issues/44)
 
-![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230917192416.png)
+Neus: 表面点的颜色
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230917192416.png)
 
 ![00300000_88_158.gif](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/00300000_88_158.gif)
 
 如果采用更快速的NGP+Neus的方法，由于使用了占空网格的方式采样，因此不会将表面点的颜色散射到空间背景中，这样在extract mesh的时候，使用简单的法向量模拟方向向量，即可得到很好的效果
-![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230917192510.png)
+
+Instant-nsr-pl表面点颜色：
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230917192510.png)
 
 
 # 实验
@@ -283,11 +292,7 @@ conda remove -n  需要删除的环境名 --all
 ## Dataset
 
 数据集：
-- [DTU Robot Image Data Sets | Data for Evaluating Computer Vision Methods etc.](http://roboimagedata.compute.dtu.dk/)
-    - 黑盒空间中，使用6轴工业机器人手部的结构光相机。可以得到精确的相机位姿和reference structured light scans
-- [YoYo000/BlendedMVS: BlendedMVS: A Large-scale Dataset for Generalized Multi-view Stereo Networks (github.com)](https://github.com/YoYo000/BlendedMVS)
-- [Tanks and Temples Benchmark](https://www.tanksandtemples.org/)
-    - 工业激光扫描仪捕获
+
 
 | Paper      | Dataset                                          | Link                                                                                                                                      |
 | ---------- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
@@ -319,13 +324,74 @@ conda remove -n  需要删除的环境名 --all
     ...
 ```
 
+neuralangelo提供了blender插件可以可视化colmap数据，但是会出现image plane 与 camera plane 不重合的情况
+
+```
+DATA_PATH
+├─ database.db      (COLMAP database)
+├─ images           (undistorted input images)
+├─ images_raw       (raw input images)
+├─ sparse           (COLMAP data from SfM)
+│  ├─ cameras.bin   (camera parameters)
+│  ├─ images.bin    (images and camera poses)
+│  ├─ points3D.bin  (sparse point clouds)
+│  ├─ 0             (a directory containing individual SfM models. There could also be 1, 2... etc.)
+│  ...
+├─ stereo (COLMAP data for MVS, not used here)
+...
+```
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231004155843.png)
+
+**需要对colmap数据做(BA and) Undistortion**
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231004160230.png)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231004160314.png)
+
 ## Loss
 
-### Eikonal
+### RGB Loss
+
+L2损失：`F.mse_loss(pred_rgb, gt_rgb)`
+L1损失：`F.l1_loss(pred_rgb, gt_rgb)`更稳定？
+
+### Eikonal Loss
 
 $\mathcal{L}_{r e g}=\frac{1}{n m}\sum_{k,i}(\|\nabla f(\hat{\mathbf{p}}_{k,i})\|_{2}-1)^{2}.$
 
+### Mask Loss
 
+$\mathcal{L}_{mask}=\mathrm{BCE}(M_k,\hat{O}_k)$
+- $\hat{O}_k=\sum_{i=1}^n T_{k,i}\alpha_{k,i}$
+- $M_{k} ∈ {0, 1}$
+
+BCE二值交叉熵损失：让输出$\hat{O}_k$去逼近label $M_{k}$
+
+>一种新的BCE loss[ECCV'22｜Spatial-BCE - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/593711934)
+
+### Opacity Loss
+
+`loss_opaque = -(opacity * torch.log(opacity) + (1 - opacity) * torch.log(1 - opacity)).mean()`
+$opaque = BCE(opaque,opaque) = -[opaque * ln(opaque) + (1-opaque) *ln(1-opaque)]$
+
+使得opacity更加接近0或者1
+
+### Sparsity Loss
+
+`loss_sparsity = torch.exp(-self.conf.loss.sparsity_scale * out['sdf_samples'].abs()).mean()`
+$sparsity = \frac{1}{N} \sum e^{-scale * sdf}$
+让sdf的平均值更小，前景物体更加稀疏，物体内的点往外发散
+
+### Geo-Neus
+- sdf loss
+    - `sdf_loss = F.l1_loss(pts2sdf, torch.zeros_like(pts2sdf), reduction='sum') / pts2sdf.shape[0]`
+    - $\mathcal{L}_{sdf} = \frac{1}{N} \sum |sdf(spoint) - 0|$
+- 
+
+### other loss
+
+![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230919194046.png)
 
 
 ## Metrics
@@ -385,6 +451,7 @@ $LPIPS(x,y)=\sum\limits_{l}^{L}\dfrac{1}{H_lW_l}\sum\limits_{h,w}^{H_l,W_l}||w_l
 
 ### CD↓
 Chamfer Distance倒角距离
+点云或mesh重建模型评估指标，它度量两个点集之间的距离，其中一个点集是参考点集，另一个点集是待评估点集
 
 $d_{\mathrm{CD}}(S_1,S_2)=\frac{1}{S_1}\sum_{x\in S_1}\min_{y\in S_2}\lVert x-y\rVert_2^2+\frac{1}{S_2}\sum_{y\in S_2}\min_{x\in S_1}\lVert y-x\rVert_2^2$
 

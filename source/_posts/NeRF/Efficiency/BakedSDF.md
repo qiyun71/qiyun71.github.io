@@ -156,3 +156,27 @@ $\mathbf{C}=\mathbf{c}_{d}+\sum_{i=1}^{N}\mathbf{c}_{i}\exp\left(\lambda_{i}\lef
 ## Appearance model ablation
 
 
+# 实验(非官方code)
+
+## 环境配置
+
+```bash
+pip install torch torchvision
+pip install git+https://github.com/NVlabs/tiny-cuda-nn/#subdirectory=bindings/torch
+pip install -r requirements.txt
+```
+
+## 运行
+
+colmap生成pose
+```bash
+python scripts/imgs2poses.py ./load/bmvs_dog # images are in ./load/bmvs_dog/images
+``` 
+
+run:
+```bash
+python launch.py --config configs/neus-colmap.yaml --gpu 0 --train dataset.root_dir=$1
+python launch.py --config configs/bakedsdf-colmap.yaml --gpu 0 --train dataset.root_dir=$1 --resume_weights_only --resume latest
+```
+
+

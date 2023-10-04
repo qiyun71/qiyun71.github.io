@@ -1,12 +1,156 @@
 {
   "recentFiles": [
     {
-      "basename": "Color-NeuS",
-      "path": "NeRF/SurfaceReconstruction/Color-NeuS.md"
+      "basename": "Neuralangelo",
+      "path": "NeRF/SurfaceReconstruction/Neuralangelo.md"
+    },
+    {
+      "basename": "Make-Py-Tools",
+      "path": "Python Practise/Make-Py-Tools.md"
+    },
+    {
+      "basename": "2023-09-22",
+      "path": "Reports/2023-09-22.md"
+    },
+    {
+      "basename": "2023-10-02",
+      "path": "Reports/2023-10-02.md"
+    },
+    {
+      "basename": "Other Paper Reconstruction",
+      "path": "NeRF/SurfaceReconstruction/Other/Other Paper Reconstruction.md"
+    },
+    {
+      "basename": "MVSNet",
+      "path": "NeRF/SurfaceReconstruction/Other/MVSNet.md"
+    },
+    {
+      "basename": "Note!!!",
+      "path": "Note!!!.md"
     },
     {
       "basename": "NeRF-Mine",
       "path": "NeRF/NeRF-Mine.md"
+    },
+    {
+      "basename": "Datasets",
+      "path": "NeRF/NeRF/Datasets.md"
+    },
+    {
+      "basename": "Neus-code",
+      "path": "NeRF/SurfaceReconstruction/Neus-code.md"
+    },
+    {
+      "basename": "NeRF-review",
+      "path": "NeRF/NeRF-review.md"
+    },
+    {
+      "basename": "Encoding",
+      "path": "NeRF/NeRF/Encoding.md"
+    },
+    {
+      "basename": "Math",
+      "path": "NeRF/NeRF/Math.md"
+    },
+    {
+      "basename": "Neus",
+      "path": "NeRF/SurfaceReconstruction/Neus.md"
+    },
+    {
+      "basename": "ECON",
+      "path": "NeRF/SurfaceReconstruction/Other/ECON.md"
+    },
+    {
+      "basename": "PIFuHD",
+      "path": "NeRF/SurfaceReconstruction/Other/PIFuHD.md"
+    },
+    {
+      "basename": "BakedSDF",
+      "path": "NeRF/Efficiency/BakedSDF.md"
+    },
+    {
+      "basename": "Vid2Avatar",
+      "path": "NeRF/SurfaceReconstruction/Other/Vid2Avatar.md"
+    },
+    {
+      "basename": "2023 Conf about NeRF",
+      "path": "NeRF/Review/2023 Conf about NeRF.md"
+    },
+    {
+      "basename": "ICON",
+      "path": "NeRF/SurfaceReconstruction/Other/ICON.md"
+    },
+    {
+      "basename": "2K2K",
+      "path": "NeRF/SurfaceReconstruction/Other/2K2K.md"
+    },
+    {
+      "basename": "HRN",
+      "path": "NeRF/SurfaceReconstruction/Other/HRN.md"
+    },
+    {
+      "basename": "PIFu",
+      "path": "NeRF/SurfaceReconstruction/Other/PIFu.md"
+    },
+    {
+      "basename": "D-NeuS",
+      "path": "NeRF/SurfaceReconstruction/Other/D-NeuS.md"
+    },
+    {
+      "basename": "NeuralLabeling",
+      "path": "NeRF/SurfaceReconstruction/Other/NeuralLabeling.md"
+    },
+    {
+      "basename": "NISR",
+      "path": "NeRF/SurfaceReconstruction/Other/NISR.md"
+    },
+    {
+      "basename": "Geo-Neus",
+      "path": "NeRF/SurfaceReconstruction/Geo-Neus.md"
+    },
+    {
+      "basename": "NeRF",
+      "path": "NeRF/NeRF.canvas"
+    },
+    {
+      "basename": "git",
+      "path": "Reports/git.md"
+    },
+    {
+      "basename": "A Review of Deep Learning-Powered Mesh Reconstruction Methods",
+      "path": "NeRF/Review/A Review of Deep Learning-Powered Mesh Reconstruction Methods.md"
+    },
+    {
+      "basename": "NeRF-InstantNGP",
+      "path": "NeRF/Efficiency/NeRF-InstantNGP.md"
+    },
+    {
+      "basename": "2023-09-02",
+      "path": "Reports/2023-09-02.md"
+    },
+    {
+      "basename": "Color-NeuS",
+      "path": "NeRF/SurfaceReconstruction/Color-NeuS.md"
+    },
+    {
+      "basename": "Neus-Instant-nsr-pl",
+      "path": "NeRF/SurfaceReconstruction/Neus-Instant-nsr-pl.md"
+    },
+    {
+      "basename": "Learn-PyTorch",
+      "path": "Learn/Learn-PyTorch.md"
+    },
+    {
+      "basename": "A Critical Analysis of NeRF-Based 3D Reconstruction",
+      "path": "NeRF/Review/A Critical Analysis of NeRF-Based 3D Reconstruction.md"
+    },
+    {
+      "basename": "IDR",
+      "path": "NeRF/SurfaceReconstruction/IDR.md"
+    },
+    {
+      "basename": "Neus-Instant-nsr-pl-code",
+      "path": "NeRF/SurfaceReconstruction/Neus-Instant-nsr-pl-code.md"
     },
     {
       "basename": "Other notes for obsidian",
@@ -17,40 +161,12 @@
       "path": "Templates/Front-matter.md.md"
     },
     {
-      "basename": "NeRF-review",
-      "path": "NeRF/NeRF-review.md"
-    },
-    {
       "basename": "2023-06-19",
       "path": "Reports/2023-06-19.md"
     },
     {
-      "basename": "git",
-      "path": "Reports/git.md"
-    },
-    {
       "basename": "Ref-NeuS",
       "path": "NeRF/SurfaceReconstruction/Shadow&Highlight/Ref-NeuS.md"
-    },
-    {
-      "basename": "2023 Conf about NeRF",
-      "path": "NeRF/Review/2023 Conf about NeRF.md"
-    },
-    {
-      "basename": "Encoding",
-      "path": "NeRF/NeRF/Encoding.md"
-    },
-    {
-      "basename": "BakedSDF",
-      "path": "NeRF/Efficiency/BakedSDF.md"
-    },
-    {
-      "basename": "2023-09-02",
-      "path": "Reports/2023-09-02.md"
-    },
-    {
-      "basename": "Note!!!",
-      "path": "Note!!!.md"
     },
     {
       "basename": "FlexiCubes",
@@ -81,124 +197,8 @@
       "path": "Learn/Learn-Markdown.md"
     },
     {
-      "basename": "A Critical Analysis of NeRF-Based 3D Reconstruction",
-      "path": "NeRF/Review/A Critical Analysis of NeRF-Based 3D Reconstruction.md"
-    },
-    {
-      "basename": "IDR",
-      "path": "NeRF/SurfaceReconstruction/IDR.md"
-    },
-    {
-      "basename": "Geo-Neus",
-      "path": "NeRF/SurfaceReconstruction/Geo-Neus.md"
-    },
-    {
       "basename": "HF-NeuS",
       "path": "NeRF/SurfaceReconstruction/HF-NeuS.md"
-    },
-    {
-      "basename": "Make-Py-Tools",
-      "path": "Python Practise/Make-Py-Tools.md"
-    },
-    {
-      "basename": "Neus",
-      "path": "NeRF/SurfaceReconstruction/Neus.md"
-    },
-    {
-      "basename": "NeRO",
-      "path": "NeRF/SurfaceReconstruction/Shadow&Highlight/NeRO.md"
-    },
-    {
-      "basename": "NeRF-InstantNGP",
-      "path": "NeRF/Efficiency/NeRF-InstantNGP.md"
-    },
-    {
-      "basename": "3D Gaussian Splatting",
-      "path": "NeRF/PointCloud/3D Gaussian Splatting.md"
-    },
-    {
-      "basename": "Neus-Instant-nsr-pl",
-      "path": "NeRF/SurfaceReconstruction/Neus-Instant-nsr-pl.md"
-    },
-    {
-      "basename": "NeuDA",
-      "path": "NeRF/SurfaceReconstruction/NeuDA.md"
-    },
-    {
-      "basename": "NeUDF",
-      "path": "NeRF/SurfaceReconstruction/NeUDF.md"
-    },
-    {
-      "basename": "Mip-NeRF",
-      "path": "NeRF/Sampling/Mip-NeRF.md"
-    },
-    {
-      "basename": "Floaters No More",
-      "path": "NeRF/Sampling/Floaters No More.md"
-    },
-    {
-      "basename": "NerfAcc",
-      "path": "NeRF/Sampling/NerfAcc.md"
-    },
-    {
-      "basename": "Mip-NeRF 360",
-      "path": "NeRF/LargeScaleScene/Mip-NeRF 360.md"
-    },
-    {
-      "basename": "NeRF-Principle",
-      "path": "NeRF/NeRF-Principle.md"
-    },
-    {
-      "basename": "UNISURF",
-      "path": "NeRF/SurfaceReconstruction/UNISURF.md"
-    },
-    {
-      "basename": "PlankAssembly",
-      "path": "NeRF/SurfaceReconstruction/PlankAssembly.md"
-    },
-    {
-      "basename": "Ref-NeRF",
-      "path": "NeRF/SurfaceReconstruction/Shadow&Highlight/Ref-NeRF.md"
-    },
-    {
-      "basename": "ShadowNeuS",
-      "path": "NeRF/SurfaceReconstruction/Shadow&Highlight/ShadowNeuS.md"
-    },
-    {
-      "basename": "Learn-PyTorch",
-      "path": "Learn/Learn-PyTorch.md"
-    },
-    {
-      "basename": "NeRFactor",
-      "path": "NeRF/SurfaceReconstruction/Shadow&Highlight/NeRFactor.md"
-    },
-    {
-      "basename": "Strivec",
-      "path": "NeRF/Efficiency/Strivec.md"
-    },
-    {
-      "basename": "Neus-Instant-nsr-pl-code",
-      "path": "NeRF/SurfaceReconstruction/Neus-Instant-nsr-pl-code.md"
-    },
-    {
-      "basename": "NeRF-Studio",
-      "path": "NeRF/NeRF-Studio.md"
-    },
-    {
-      "basename": "NeRF-code",
-      "path": "NeRF/NeRF-code.md"
-    },
-    {
-      "basename": "Neuralangelo",
-      "path": "NeRF/SurfaceReconstruction/Neuralangelo.md"
-    },
-    {
-      "basename": "SparseNeuS",
-      "path": "NeRF/Sparse/SparseNeuS.md"
-    },
-    {
-      "basename": "NeRO-code",
-      "path": "NeRF/SurfaceReconstruction/Shadow&Highlight/NeRO-code.md"
     }
   ],
   "omittedPaths": [],

@@ -44,5 +44,8 @@
   "minimal-style@@window-title-off": false,
   "CodeMirror Options@@cm5-minimal-embeds": true,
   "CodeMirror Options@@cm-theme-selection": "cm-theme-material-palenight",
-  "blue-topaz-theme@@transparent-setting-panel": false
+  "blue-topaz-theme@@transparent-setting-panel": false,
+  "minimal-mobile@@mobile-toolbar-off": false,
+  "minimal-advanced@@styled-scrollbars": false,
+  "minimal-advanced@@cursor": "default"
 }

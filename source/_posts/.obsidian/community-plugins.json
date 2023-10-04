@@ -15,5 +15,6 @@
   "obsidian-minimal-settings",
   "templater-obsidian",
   "obsidian-image-auto-upload-plugin",
-  "convert-url-to-iframe"
+  "convert-url-to-iframe",
+  "obsidian-excel-to-markdown-table"
 ]

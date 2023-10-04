@@ -94,7 +94,11 @@ net = net.to(device=try_gpu())
 
 ==只要所有的数据和参数都在同一个设备上， 我们就可以有效地学习模型==
 
-# 优化器
+# Autograd
+
+[PyTorch 的 Autograd - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/69294347)
+
+# Optimizer
 
 ## Adam多个model参数，然后更新lr
 
@@ -136,7 +140,7 @@ Adam_in_Neus: params_to_train is a list
             g['lr'] = self.learning_rate * learning_factor
 ```
 
-## lr
+## lr学习率
 
 > [lr scheduler介绍和可视化 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/611364321)
 

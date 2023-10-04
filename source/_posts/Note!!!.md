@@ -18,10 +18,11 @@ date updated: 2023-08-09T22:24:16.000Z
 | [NeRO](/NeRF/SurfaceReconstruction/Shadow&Highlight/NeRO) + [Code](/NeRF/SurfaceReconstruction/Shadow&Highlight/NeRO-code)       | 考虑镜面和漫反射的体渲染函数        | In Processing   |
 | [NeRF-Mine](/NeRF/NeRF-Mine)                                                                                                                       | 基于Instant-nsr-pl创建的项目 | Completed       |
 
-| My post                                      | Brief description  | status                                                                                                       |
-| -------------------------------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------ |
-| [Nerfstudio](/NeRF/NeRF-Studio)  | 一个更加方便训练和查看训练过程的框架 | Completed in AutoDL                                                                                          |
-| [NeRF Review](/NeRF/NeRF-review) | 追踪一些NeRF的进展和笔记link | Following [Jason陪你练绝技 in Bilibili](https://space.bilibili.com/455056488/channel/collectiondetail?sid=910368) |
+| My post                                                        | Brief description                    | status                                                                                                            |
+| -------------------------------------------------------------- | ------------------------------------ | ----------------------------------------------------------------------------------------------------------------- |
+| [Nerfstudio](/NeRF/NeRF-Studio)                                | 一个更加方便训练和查看训练过程的框架 | Completed in AutoDL                                                                                               |
+| [NeRF Review](/NeRF/NeRF-review)                               | 追踪一些NeRF的进展和笔记link         | Following [Jason陪你练绝技 in Bilibili](https://space.bilibili.com/455056488/channel/collectiondetail?sid=910368) |
+| [Other Paper Reconstruction](Other%20Paper%20Reconstruction.md) | Other Paper about Reconstruction     | CVPR/ICCV/ECCV/NIPS/ICML/ICLR/SIGGRAPH                                                                                                                  |
 
 Related link :  [3D Reconstruction](https://paperswithcode.com/task/3d-reconstruction) | [awesome-NeRF-papers](https://github.com/lif314/awesome-NeRF-papers)
 

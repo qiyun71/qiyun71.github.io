@@ -14,15 +14,17 @@ NeRF相关的论文 at CVPR/ICCV/ECCV/NIPS/ICML/ICLR/SIGGRAPH
 
 # Dalao
 
-| PhD.School              |                                                     Homepage                                                    |                  Paper                 |
-| ----------------------- | :-------------------------------------------------------------------------------------------------------------: | :------------------------------------: |
-| HKU                     |                 [刘缘Yuan Liu - Homepage (liuyuan-pal.github.io)](https://liuyuan-pal.github.io/)                 |                Neus,NeRO               |
-| CUHK                    |                       [胡文博HU, Wenbo's Homepage (wbhu.github.io)](https://wbhu.github.io/)                       |                Tri-MipRF               |
-| HKU                     | [Peng Wang (王鹏) (notion.site)](https://quartz-khaan-c6f.notion.site/Peng-Wang-0ab0a2521ecf40f5836581770c14219c) |                  Neus                  |
-| UC Berkeley             |                                      [Jon Barron](https://jonbarron.info/)                                      | Mip-NeRF,Mip-NeRF360,Zip-NeRF,Ref-NeRF |
-| UC Berkeley             |                                 [Matthew Tancik](https://www.matthewtancik.com/)                                | NerfStudio,NerfAcc,Plenoxels,Mip-NeRF, |
-| UC Berkeley             |                           [Ben Mildenhall (bmild.github.io)](https://bmild.github.io/)                          |                  NeRF                  |
-| ShanghaiTech University |                       [陈安沛Anpei Chen (apchenstu.github.io)](https://apchenstu.github.io/)                       |                 TensoRF                |
+| PhD.School                 |                                                     Homepage                                                      |                        Paper                         |
+| -------------------------- |:-----------------------------------------------------------------------------------------------------------------:|:----------------------------------------------------:|
+| Zhejiang University        |                        [Zhaopeng Cui (zju.edu.cn)](http://www.cad.zju.edu.cn/home/zhpcui/)                        | Global Structure-from-Motion by Similarity Averaging |
+| HKU                        |                 [刘缘Yuan Liu - Homepage (liuyuan-pal.github.io)](https://liuyuan-pal.github.io/)                 |                      Neus,NeRO                       |
+| CUHK                       |                      [胡文博HU, Wenbo's Homepage (wbhu.github.io)](https://wbhu.github.io/)                       |                      Tri-MipRF                       |
+| HKU                        | [Peng Wang (王鹏) (notion.site)](https://quartz-khaan-c6f.notion.site/Peng-Wang-0ab0a2521ecf40f5836581770c14219c) |                         Neus                         |
+| UC Berkeley                |                                       [Jon Barron](https://jonbarron.info/)                                       |        Mip-NeRF,Mip-NeRF360,Zip-NeRF,Ref-NeRF        |
+| UC Berkeley                |                                 [Matthew Tancik](https://www.matthewtancik.com/)                                  |        NerfStudio,NerfAcc,Plenoxels,Mip-NeRF,        |
+| UC Berkeley                |                           [Ben Mildenhall (bmild.github.io)](https://bmild.github.io/)                            |                         NeRF                         |
+| ShanghaiTech University    |                      [陈安沛Anpei Chen (apchenstu.github.io)](https://apchenstu.github.io/)                       |                       TensoRF                        |
+| University of Pennsylvania |                       [Lingjie Liu (lingjie0206.github.io)](https://lingjie0206.github.io/)                       | NeuS,NeuS2,NeuralUDF,Drag Your GAN                                                     |
 
 
 # NeRF
@@ -71,11 +73,12 @@ ECCV 2020 Oral - Best Paper Honorable Mention
 
 ## Review
 
-| Year                                                                                 |                                        Title&Project Page                                        |                         Brief Description                         |      Conf/Jour      |
-| ------------------------------------------------------------------------------------ |:------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------:|:-------------------:|
-| [2023](/NeRF/Review/A%20Critical%20Analysis%20of%20NeRF-Based%203D%20Reconstruction) | [A Critical Analysis of NeRF-Based 3D Reconstruction](https://www.mdpi.com/2072-4292/15/14/3585) | 对比了Colmap摄影测量法和NeRF-based方法在3D Reconstruction中的优劣 | MDPI remote sensing |
-| [2023](/NeRF/Review/NeRF%20in%20the%20industrial%20and%20robotics%20domain)          |                 [Maftej/iisnerf (github.com)](https://github.com/Maftej/iisnerf)                 |                探索了NeRF在工业和机器人领域的应用                 |        None         |
-| [2023](/NeRF/Review/2023%20Conf%20about%20NeRF)                                      |                                               None                                               |                   2023年NeRF Review ref others                    |        None         |
+| Year                                                                                             |                                        Title&Project Page                                        |                         Brief Description                         |      Conf/Jour      |
+| ------------------------------------------------------------------------------------------------ |:------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------:|:-------------------:|
+| [2023](/NeRF/Review/A%20Critical%20Analysis%20of%20NeRF-Based%203D%20Reconstruction)             | [A Critical Analysis of NeRF-Based 3D Reconstruction](https://www.mdpi.com/2072-4292/15/14/3585) | 对比了Colmap摄影测量法和NeRF-based方法在3D Reconstruction中的优劣 | MDPI remote sensing |
+| [2023](/NeRF/Review/NeRF%20in%20the%20industrial%20and%20robotics%20domain)                      |                 [Maftej/iisnerf (github.com)](https://github.com/Maftej/iisnerf)                 |                探索了NeRF在工业和机器人领域的应用                 |        None         |
+| [2023](/NeRF/Review/2023%20Conf%20about%20NeRF)                                                  |                                               None                                               |                   2023年NeRF Review ref others                    |        None         |
+| [2023](/NeRF/Review/A%20Review%20of%20Deep%20Learning-Powered%20Mesh%20Reconstruction%20Methods) |                  A Review of Deep Learning-Powered Mesh Reconstruction Methods                   |       介绍了几种3D模型表示方法+回顾了将DL应用到Mesh重建中的方法       |        None         |
 
 ## Sampling
 
