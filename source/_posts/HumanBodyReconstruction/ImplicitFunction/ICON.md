@@ -3,7 +3,7 @@ title: ICON
 date: 2023-09-30 16:28:20
 tags:
   - ClothedHumans
-categories: NeRF/SurfaceReconstruction/Other
+categories: HumanBodyReconstruction/ImplicitFunction
 ---
 
 | Title     | ICON: Implicit Clothed humans Obtained from Normals                                                                                       |

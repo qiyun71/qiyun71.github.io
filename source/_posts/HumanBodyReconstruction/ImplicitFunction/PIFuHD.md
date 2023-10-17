@@ -3,7 +3,7 @@ title: PIFuHD
 date: 2023-09-28 17:47:28
 tags:
   - PIFu
-categories: NeRF/SurfaceReconstruction/Other
+categories: HumanBodyReconstruction/ImplicitFunction
 ---
 
 | Title     | PIFuHD: Multi-Level Pixel-Aligned Implicit Function for High-Resolution 3D Human Digitization                                                                                                                |

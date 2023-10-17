@@ -1,9 +1,10 @@
 ---
-title: 未命名
+title: NISR
 date: 2023-09-26 14:20:04
 tags:
   - Loss
-categories: NeRF/SurfaceReconstruction/Other
+  - SurfaceReconstruction
+categories: NeRF/SurfaceReconstruction/
 ---
 
 | Title     | Improving Neural Indoor Surface Reconstruction with Mask-Guided Adaptive Consistency Constraints                                                                                                                 |

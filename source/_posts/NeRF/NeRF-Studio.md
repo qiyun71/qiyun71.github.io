@@ -89,10 +89,9 @@ sudo apt-get install \
 
 `ns-download-data nerfstudio --capture-name=poster`
 
-```ad-error
-AutoDL连接不了google drive，只能使用自己的数据集or：
-    使用google的colab下载数据集并将其打包成zip，然后再上传到autodl
-```
+> [!error]
+> AutoDL连接不了google drive，只能使用自己的数据集or：
+>     使用google的colab下载数据集并将其打包成zip，然后再上传到autodl
 ### Use Own Data 
 
 {% note primary %} 配好环境后，可以在任意地址创建文件夹，放入需要训练的数据集 {% endnote %}
@@ -175,9 +174,8 @@ CPU生成mesh的速度很慢 大约用了1个小时多，效果也不是很好�
 ### autodl
 本地运行：`ssh -CNg -L 6006:127.0.0.1:6006 root@123.125.240.150 -p 42151`
 
-```ad-important
-本地端口:localhost:远程端口
-```
+> [!important]
+> 本地端口:localhost:远程端口
 
 一般本地进入服务器（ssh）
 `ssh -p 23394 root@connect.beijinga.seetacloud.com`

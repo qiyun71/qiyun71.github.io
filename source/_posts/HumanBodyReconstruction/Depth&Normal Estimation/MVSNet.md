@@ -3,7 +3,7 @@ title: MVSNet
 date: 2023-10-02 10:58:04
 tags:
   - MVS
-categories: NeRF/SurfaceReconstruction/Other
+categories: HumanBodyReconstruction/Depth&Normal Estimation
 ---
 
 | Title     | MVSNet: Depth Inference for Unstructured Multi-view Stereo                                                                                                                 |

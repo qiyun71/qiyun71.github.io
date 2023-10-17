@@ -4,19 +4,19 @@
       "id": "editor:toggle-code",
       "icon": "code-glyph",
       "name": "代码块",
-      "showButtons": "both"
+      "showButtons": "mobile"
     },
     {
       "id": "editor:insert-link",
       "icon": "link-glyph",
       "name": "插入链接",
-      "showButtons": "both"
+      "showButtons": "mobile"
     },
     {
       "id": "editor:toggle-blockquote",
       "icon": "quote-glyph",
       "name": "引用",
-      "showButtons": "both"
+      "showButtons": "mobile"
     }
   ],
   "desktop": true,

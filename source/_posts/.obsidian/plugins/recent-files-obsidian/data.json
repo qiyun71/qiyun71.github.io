@@ -1,40 +1,160 @@
 {
   "recentFiles": [
     {
-      "basename": "Neuralangelo",
-      "path": "NeRF/SurfaceReconstruction/Neuralangelo.md"
+      "basename": "Muti-view Human Body Reconstruction",
+      "path": "HumanBodyReconstruction/Muti-view Human Body Reconstruction.md"
     },
     {
-      "basename": "Make-Py-Tools",
-      "path": "Python Practise/Make-Py-Tools.md"
+      "basename": "2K2K",
+      "path": "HumanBodyReconstruction/Depth&Normal Estimation/2K2K.md"
     },
     {
-      "basename": "2023-09-22",
-      "path": "Reports/2023-09-22.md"
+      "basename": "SGHR",
+      "path": "HumanBodyReconstruction/PointCloud/SGHR.md"
     },
     {
-      "basename": "2023-10-02",
-      "path": "Reports/2023-10-02.md"
-    },
-    {
-      "basename": "Other Paper Reconstruction",
-      "path": "NeRF/SurfaceReconstruction/Other/Other Paper Reconstruction.md"
+      "basename": "ECON",
+      "path": "HumanBodyReconstruction/Depth&Normal Estimation/ECON.md"
     },
     {
       "basename": "MVSNet",
-      "path": "NeRF/SurfaceReconstruction/Other/MVSNet.md"
+      "path": "HumanBodyReconstruction/Depth&Normal Estimation/MVSNet.md"
     },
     {
-      "basename": "Note!!!",
-      "path": "Note!!!.md"
+      "basename": "GeoMVSNet",
+      "path": "HumanBodyReconstruction/Depth&Normal Estimation/GeoMVSNet.md"
+    },
+    {
+      "basename": "ICON",
+      "path": "HumanBodyReconstruction/ImplicitFunction/ICON.md"
+    },
+    {
+      "basename": "PIFuHD",
+      "path": "HumanBodyReconstruction/ImplicitFunction/PIFuHD.md"
+    },
+    {
+      "basename": "PIFu",
+      "path": "HumanBodyReconstruction/ImplicitFunction/PIFu.md"
+    },
+    {
+      "basename": "D-NeuS",
+      "path": "HumanBodyReconstruction/ImplicitFunction/D-NeuS.md"
+    },
+    {
+      "basename": "Vid2Avatar",
+      "path": "HumanBodyReconstruction/ImplicitFunction/Vid2Avatar.md"
+    },
+    {
+      "basename": "Math",
+      "path": "HumanBodyReconstruction/Math.md"
+    },
+    {
+      "basename": "Other Paper Reconstruction",
+      "path": "HumanBodyReconstruction/Other Paper Reconstruction.md"
+    },
+    {
+      "basename": "Point-NeRF",
+      "path": "NeRF/PointCloud/Point-NeRF.md"
+    },
+    {
+      "basename": "HRN",
+      "path": "HumanBodyReconstruction/BodyOtherPart/HRN.md"
+    },
+    {
+      "basename": "Metrics",
+      "path": "NeRF/NeRF/Metrics.md"
+    },
+    {
+      "basename": "Datasets",
+      "path": "NeRF/NeRF/Datasets.md"
+    },
+    {
+      "basename": "NISR",
+      "path": "NeRF/SurfaceReconstruction/NISR.md"
+    },
+    {
+      "basename": "FlexiCubes",
+      "path": "NeRF/SurfaceReconstruction/FlexiCubes.md"
+    },
+    {
+      "basename": "Math",
+      "path": "NeRF/NeRF/Math.md"
+    },
+    {
+      "basename": "2023-10",
+      "path": "Reports/2023-10.md"
+    },
+    {
+      "basename": "装机",
+      "path": "Reports/装机.md"
+    },
+    {
+      "basename": "2023-06-19",
+      "path": "Reports/2023-06-19.md"
+    },
+    {
+      "basename": "new",
+      "path": "Reports/new.md"
     },
     {
       "basename": "NeRF-Mine",
       "path": "NeRF/NeRF-Mine.md"
     },
     {
-      "basename": "Datasets",
-      "path": "NeRF/NeRF/Datasets.md"
+      "basename": "Sampling",
+      "path": "NeRF/NeRF/Sampling.md"
+    },
+    {
+      "basename": "Encoding",
+      "path": "NeRF/NeRF/Encoding.md"
+    },
+    {
+      "basename": "Note!!!",
+      "path": "Note!!!.md"
+    },
+    {
+      "basename": "Neuralangelo",
+      "path": "NeRF/SurfaceReconstruction/Neuralangelo.md"
+    },
+    {
+      "basename": "Other notes for obsidian",
+      "path": "Reports/Other notes for obsidian.md"
+    },
+    {
+      "basename": "Learn-Colmap",
+      "path": "Learn/Learn-Colmap.md"
+    },
+    {
+      "basename": "Neus",
+      "path": "NeRF/SurfaceReconstruction/Neus.md"
+    },
+    {
+      "basename": "ShadowNeuS",
+      "path": "NeRF/SurfaceReconstruction/Shadow&Highlight/ShadowNeuS.md"
+    },
+    {
+      "basename": "Ref-NeRF",
+      "path": "NeRF/SurfaceReconstruction/Shadow&Highlight/Ref-NeRF.md"
+    },
+    {
+      "basename": "Neus-Instant-nsr-pl",
+      "path": "NeRF/SurfaceReconstruction/Neus-Instant-nsr-pl.md"
+    },
+    {
+      "basename": "Learn-Hexo2",
+      "path": "Learn/Learn-Hexo2.md"
+    },
+    {
+      "basename": "Front-matter.md",
+      "path": "Templates/Front-matter.md.md"
+    },
+    {
+      "basename": "2023-09-22",
+      "path": "Reports/2023-09-22.md"
+    },
+    {
+      "basename": "Make-Py-Tools",
+      "path": "Python Practise/Make-Py-Tools.md"
     },
     {
       "basename": "Neus-code",
@@ -45,64 +165,12 @@
       "path": "NeRF/NeRF-review.md"
     },
     {
-      "basename": "Encoding",
-      "path": "NeRF/NeRF/Encoding.md"
-    },
-    {
-      "basename": "Math",
-      "path": "NeRF/NeRF/Math.md"
-    },
-    {
-      "basename": "Neus",
-      "path": "NeRF/SurfaceReconstruction/Neus.md"
-    },
-    {
-      "basename": "ECON",
-      "path": "NeRF/SurfaceReconstruction/Other/ECON.md"
-    },
-    {
-      "basename": "PIFuHD",
-      "path": "NeRF/SurfaceReconstruction/Other/PIFuHD.md"
-    },
-    {
       "basename": "BakedSDF",
       "path": "NeRF/Efficiency/BakedSDF.md"
     },
     {
-      "basename": "Vid2Avatar",
-      "path": "NeRF/SurfaceReconstruction/Other/Vid2Avatar.md"
-    },
-    {
       "basename": "2023 Conf about NeRF",
       "path": "NeRF/Review/2023 Conf about NeRF.md"
-    },
-    {
-      "basename": "ICON",
-      "path": "NeRF/SurfaceReconstruction/Other/ICON.md"
-    },
-    {
-      "basename": "2K2K",
-      "path": "NeRF/SurfaceReconstruction/Other/2K2K.md"
-    },
-    {
-      "basename": "HRN",
-      "path": "NeRF/SurfaceReconstruction/Other/HRN.md"
-    },
-    {
-      "basename": "PIFu",
-      "path": "NeRF/SurfaceReconstruction/Other/PIFu.md"
-    },
-    {
-      "basename": "D-NeuS",
-      "path": "NeRF/SurfaceReconstruction/Other/D-NeuS.md"
-    },
-    {
-      "basename": "NeuralLabeling",
-      "path": "NeRF/SurfaceReconstruction/Other/NeuralLabeling.md"
-    },
-    {
-      "basename": "NISR",
-      "path": "NeRF/SurfaceReconstruction/Other/NISR.md"
     },
     {
       "basename": "Geo-Neus",
@@ -131,74 +199,6 @@
     {
       "basename": "Color-NeuS",
       "path": "NeRF/SurfaceReconstruction/Color-NeuS.md"
-    },
-    {
-      "basename": "Neus-Instant-nsr-pl",
-      "path": "NeRF/SurfaceReconstruction/Neus-Instant-nsr-pl.md"
-    },
-    {
-      "basename": "Learn-PyTorch",
-      "path": "Learn/Learn-PyTorch.md"
-    },
-    {
-      "basename": "A Critical Analysis of NeRF-Based 3D Reconstruction",
-      "path": "NeRF/Review/A Critical Analysis of NeRF-Based 3D Reconstruction.md"
-    },
-    {
-      "basename": "IDR",
-      "path": "NeRF/SurfaceReconstruction/IDR.md"
-    },
-    {
-      "basename": "Neus-Instant-nsr-pl-code",
-      "path": "NeRF/SurfaceReconstruction/Neus-Instant-nsr-pl-code.md"
-    },
-    {
-      "basename": "Other notes for obsidian",
-      "path": "Reports/Other notes for obsidian.md"
-    },
-    {
-      "basename": "Front-matter.md",
-      "path": "Templates/Front-matter.md.md"
-    },
-    {
-      "basename": "2023-06-19",
-      "path": "Reports/2023-06-19.md"
-    },
-    {
-      "basename": "Ref-NeuS",
-      "path": "NeRF/SurfaceReconstruction/Shadow&Highlight/Ref-NeuS.md"
-    },
-    {
-      "basename": "FlexiCubes",
-      "path": "NeRF/SurfaceReconstruction/FlexiCubes.md"
-    },
-    {
-      "basename": "Learn-Colmap",
-      "path": "Learn/Learn-Colmap.md"
-    },
-    {
-      "basename": "new",
-      "path": "Reports/new.md"
-    },
-    {
-      "basename": "Learn-HCJ前端",
-      "path": "Learn/Learn-HCJ前端.md"
-    },
-    {
-      "basename": "NeuS2",
-      "path": "NeRF/SurfaceReconstruction/NeuS2.md"
-    },
-    {
-      "basename": "Make-Python_bilibili",
-      "path": "Python Practise/Make-Python_bilibili.md"
-    },
-    {
-      "basename": "Learn-Markdown",
-      "path": "Learn/Learn-Markdown.md"
-    },
-    {
-      "basename": "HF-NeuS",
-      "path": "NeRF/SurfaceReconstruction/HF-NeuS.md"
     }
   ],
   "omittedPaths": [],

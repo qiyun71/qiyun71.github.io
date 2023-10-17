@@ -3,7 +3,8 @@ title: ECON
 date: 2023-09-30 17:27:17
 tags:
   - ClothedHumans
-categories: NeRF/SurfaceReconstruction/Other
+  - DepthEstimation
+categories: HumanBodyReconstruction/Depth&Normal Estimation
 ---
 
 | Title     | ECON: Explicit Clothed humans Obtained from Normals                                                                                                                 |

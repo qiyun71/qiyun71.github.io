@@ -3,7 +3,8 @@ title: Vid2Avatar
 date: 2023-09-26 14:12:38
 tags:
   - Loss
-categories: NeRF/SurfaceReconstruction/Other
+  - NeRF
+categories: HumanBodyReconstruction/ImplicitFunction
 ---
 
 | Title     | Vid2Avatar: 3D Avatar Reconstruction from Videos in the Wild via Self-supervised Scene Decomposition                                                                                                                 |

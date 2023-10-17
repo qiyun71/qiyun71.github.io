@@ -16,5 +16,8 @@
   "templater-obsidian",
   "obsidian-image-auto-upload-plugin",
   "convert-url-to-iframe",
-  "obsidian-excel-to-markdown-table"
+  "obsidian-excel-to-markdown-table",
+  "quick-latex",
+  "obsidian-pangu",
+  "url-into-selection"
 ]

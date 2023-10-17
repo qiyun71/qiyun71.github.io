@@ -3,7 +3,7 @@ title: PIFu
 date: 2023-09-28 17:44:42
 tags:
   - PIFu
-categories: NeRF/SurfaceReconstruction/Other
+categories: HumanBodyReconstruction/ImplicitFunction
 ---
 
 | Title     | PIFu: Pixel-Aligned Implicit Function for High-Resolution Clothed Human Digitization                                                                                                                 |

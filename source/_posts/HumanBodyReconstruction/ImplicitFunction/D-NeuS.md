@@ -3,7 +3,8 @@ title: D-NeuS
 date: 2023-09-27 20:19:42
 tags:
   - Loss
-categories: NeRF/SurfaceReconstruction/Other
+  - NeRF
+categories: HumanBodyReconstruction/ImplicitFunction
 ---
 
 | Title     | Recovering Fine Details for Neural Implicit Surface Reconstruction                                                                                                                 |

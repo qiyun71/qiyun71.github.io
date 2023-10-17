@@ -11,11 +11,11 @@
     "downscalePercent": 100
   },
   "showLineNumber": true,
-  "foldIndent": false,
+  "foldIndent": true,
   "readableLineLength": false,
   "trashOption": "system",
   "alwaysUpdateLinks": true,
-  "attachmentFolderPath": "",
+  "attachmentFolderPath": "/",
   "showFrontmatter": true,
   "useTab": false,
   "communityThemeSortOrder": "download",
@@ -28,5 +28,6 @@
   "useMarkdownLinks": true,
   "spellcheckLanguages": null,
   "foldHeading": true,
-  "vimMode": false
+  "vimMode": false,
+  "strictLineBreaks": false
 }

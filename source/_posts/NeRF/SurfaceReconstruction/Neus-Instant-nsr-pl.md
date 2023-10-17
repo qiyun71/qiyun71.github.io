@@ -139,9 +139,8 @@ python launch.py --config configs/neus-dtu.yaml --gpu 0 --train
 python launch.py --config configs/neus-dtu.yaml --gpu 0 --train system.loss.lambda_mask=0.1
 ```
 
-```ad-note
-作者只提供了DTU数据集的加载方式，但是DTU和Bmvs相差不大，因此只需要作微小修改即可完成bmvs数据集的处理：
-```
+> [!note]
+> 作者只提供了DTU数据集的加载方式，但是DTU和Bmvs相差不大，因此只需要作微小修改即可完成bmvs数据集的处理：
 
 修改config/neus-dtu.yaml文件，dtu保持不变(需要用到dtu.py数据集加载文件)，修改数据集的文件路径（dtu与bmvs数据集差别不大，都是由image、mask和cameras_sphere.npz组成
 

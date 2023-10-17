@@ -173,6 +173,8 @@ $\mathbf{C} = - \mathbf{R}^{\top} t$
 
 # 反射Reflection
 
+![BRDF.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/BRDF.png)
+
 
 >[基于物理着色：BRDF - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/21376124)
 

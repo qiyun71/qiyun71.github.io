@@ -9,19 +9,7 @@ layout: "about"
 
 <!-- 关于我 -->
 
-<p style="color: #414141; text-align: center; font-size: 25px;"><i class="fa fa-user" aria-hidden="true"></i>About me</p>
-
-
-<!-- <hr style="border-top: 1px solid #DDDDDD;"> 分割线 -->
-
-<!-- <img src="https://raw.githubusercontent.com/yq010105/Blog_images/master/img/avatar.jpeg" style="display: inline-block; witdh: 150px; height: 150px;"> -->
-
-<!-- <div style="float: right; padding-right: 180px; padding-top: 80px; font-size: 17px;"><p style="display: inline;background-color:pink;">English本当🔨の<b>机械生</b> <br> 19歳、学生です、でぶです</p></div> -->
-
-
-
-
-
+<p style="color: #414141; text-align: center; font-size: 25px;"><i class="fa fa-user" aria-hidden="true"></i> About Me </p>
 
 <div style="display: flex; align-items: center;">
     <div style="width: 40%; text-align: center;">
@@ -30,7 +18,7 @@ layout: "about"
     <!-- border-left:25px solid #000; -->
     <div style="width: 60%; padding: 40px;">
         <div style="text-align: left; font-weight: bold;">Yun Qi</div>
-        <div style="text-align: left;">Master Student at <a href="https://www.ustb.edu.cn/" onmouseover="this.style.color='#6F7276'" onmouseout="this.style.color='#252A2F'">USTB</a>(2022~2025)</div>
+        <div style="text-align: left;">A Master Student at <a href="https://www.ustb.edu.cn/" onmouseover="this.style.color='#6F7276'" onmouseout="this.style.color='#252A2F'">USTB</a>(2022~2025)</div>
         <!-- <div><b>Research direction</b>: NeRF & 3D Reconstruction</div>
         <div><b>Interest</b>: 3D Printing; DIY; Robot; Modeling</div>
         <div><b>Language</b>: Python; C++; C#; VB; Arduino</div>

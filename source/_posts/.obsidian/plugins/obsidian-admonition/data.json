@@ -11,14 +11,14 @@
   "hideEmpty": false,
   "open": {
     "admonitions": true,
-    "icons": false,
-    "other": false,
+    "icons": true,
+    "other": true,
     "advanced": true
   },
   "icons": [],
   "useFontAwesome": true,
   "rpgDownloadedOnce": false,
-  "msDocConverted": false,
+  "msDocConverted": true,
   "useSnippet": true,
   "snippetPath": "custom-admonitions.838117",
   "syncLinks": true,

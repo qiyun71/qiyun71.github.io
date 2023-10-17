@@ -76,21 +76,18 @@ basedir = args.basedir
 
 输入：
 - basedir，数据集路径'E:\\3\\Work\dataset\\nerf_synthetic\\chair'
-```ad-info 
-title: chair 文件夹
-collapse: True
-- chair：
-    - test
-        - 200张png 800x800x4
-    - train
-        - 100张png
-    - val
-        - 100张png
-    - .DS_Store
-    - transforms_test.json
-    - transforms_train.json
-    - transforms_val.json
-```
+> [!info]- chair 文件夹
+> - chair：
+>     - test
+>         - 200张png 800x800x4
+>     - train
+>         - 100张png
+>     - val
+>         - 100张png
+>     - .DS_Store
+>     - transforms_test.json
+>     - transforms_train.json
+>     - transforms_val.json
 - half_res，是否将图像缩小一倍 （下采样）
 - testskip，测试集跳着读取图像
 输出： 

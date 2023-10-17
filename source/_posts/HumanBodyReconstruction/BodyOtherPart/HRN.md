@@ -3,7 +3,8 @@ title: HRN
 date: 2023-09-26 14:18:02
 tags:
   - Face
-categories: NeRF/SurfaceReconstruction/Other
+  - 3DReconstruction
+categories: HumanBodyReconstruction
 ---
 
 | Title     | A Hierarchical Representation Network for Accurate and Detailed Face Reconstruction from In-The-Wild Images                                                                                                                 |

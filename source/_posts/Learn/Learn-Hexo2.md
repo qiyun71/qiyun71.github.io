@@ -28,8 +28,10 @@ Hexo博客搭建教程，参考[CodeSheep](https://space.bilibili.com/384068749)
 # 3.安装hexo博客框架
 `cnpm install -g hexo-cli`
 
-{% note default %}-g 全局安装
--v 查看版本{% endnote %}
+{% note default %}
+-g 全局安装
+-v 查看版本
+{% endnote %}
 
 
 # 4.新建一个hexo博客
@@ -94,7 +96,8 @@ deploy:
 
 
 # Other
-## Next主题内置标签
+## Next主题内置标签 Callout
+
 `{% note class_name %} Content (md partial supported) {% endnote %}`
 其中，class_name 可以是以下列表中的一个值：
 - default
@@ -106,4 +109,27 @@ deploy:
 
 ![20220609172943.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/blogs/pictures/20220609172943.png "内置标签预览")
 
-## 图片
+
+{% note default %}
+default
+{% endnote %}
+
+{% note primary %}
+primary
+{% endnote %}
+
+{% note success %}
+success
+{% endnote %}
+
+{% note info %}
+info
+{% endnote %}
+
+{% note warning %}
+warning
+{% endnote %}
+
+{% note danger %}
+danger
+{% endnote %}
