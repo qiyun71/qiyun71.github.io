@@ -139,7 +139,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "HumanBodyReconstruction/Generative approach/Generative approach Review.md"
+                "file": "HumanBodyReconstruction/Generative approach/RODIN.md"
               }
             }
           },
@@ -193,7 +193,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "HumanBodyReconstruction/Generative approach/Generative approach Review.md",
+                "file": "HumanBodyReconstruction/Generative approach/RODIN.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -217,7 +217,7 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "HumanBodyReconstruction/Generative approach/Generative approach Review.md",
+                "file": "HumanBodyReconstruction/Generative approach/RODIN.md",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -307,13 +307,14 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "2c1b55f2bc73ed77",
+  "active": "71a6c9b303cb3d84",
   "lastOpenFiles": [
+    "HumanBodyReconstruction/Generative approach/Generative approach Review.md",
+    "Reports/2023-10-30.md",
     "HumanBodyReconstruction/Generative approach/Generative approach Review.md.baiduyun.uploading.cfg",
     "HumanBodyReconstruction/Generative approach/SG-GAN.md",
     "HumanBodyReconstruction/Generative approach/SG-GAN.md.baiduyun.uploading.cfg",
     "Learn/Learn-Hexo2.md",
-    "Reports/2023-10-30.md",
     "Reports/2023-10-30.md.baiduyun.uploading.cfg",
     "HumanBodyReconstruction/Generative approach/RODIN.md.baiduyun.uploading.cfg",
     "HumanBodyReconstruction/Generative approach/RODIN.md",
@@ -324,7 +325,6 @@
     "Reports/2023-10-30_冲突文件_Qiyun_20231030164538.md",
     "HumanBodyReconstruction/Generative approach/Diffusion Models.md",
     "HumanBodyReconstruction/Generative approach/BuilDiff.md.baiduyun.uploading.cfg",
-    "HumanBodyReconstruction/Generative approach/Generative approach Review.md",
     "Other/Mine/Tools.md",
     "Other/Mine/Git command.md",
     "HumanBodyReconstruction/Muti-view Human Body Reconstruction.md",
@@ -333,7 +333,6 @@
     "HumanBodyReconstruction/Generative approach/DiT-3D.md",
     "电脑配置.xlsx - 快捷方式.lnk.baiduyun.uploading.cfg",
     "电脑配置.xlsx - 快捷方式 1.lnk.baiduyun.uploading.cfg",
-    "Templates/Front-matter.md.md.baiduyun.uploading.cfg",
     "Other/Mine/Stable Diffusion.md",
     "HumanBodyReconstruction/Generative approach/FlowGAN.md",
     "Note!!!.md",

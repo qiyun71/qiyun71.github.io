@@ -35,6 +35,7 @@ skip_render:
   - '_posts/Scripts/**'
   - '_posts/Templates/**'
   - '_posts/Reports/**'
+  - '_posts/Other/**'
 
 
 # Writing
