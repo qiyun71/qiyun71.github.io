@@ -1,12 +1,180 @@
 {
   "recentFiles": [
     {
+      "basename": "Generative approach Review",
+      "path": "HumanBodyReconstruction/Generative approach/Generative approach Review.md"
+    },
+    {
+      "basename": "SG-GAN",
+      "path": "HumanBodyReconstruction/Generative approach/SG-GAN.md"
+    },
+    {
+      "basename": "Learn-Hexo2",
+      "path": "Learn/Learn-Hexo2.md"
+    },
+    {
+      "basename": "2023-10-30",
+      "path": "Reports/2023-10-30.md"
+    },
+    {
+      "basename": "RODIN",
+      "path": "HumanBodyReconstruction/Generative approach/RODIN.md"
+    },
+    {
+      "basename": "BuilDiff",
+      "path": "HumanBodyReconstruction/Generative approach/BuilDiff.md"
+    },
+    {
+      "basename": "Diffusion Models",
+      "path": "HumanBodyReconstruction/Generative approach/Diffusion Models.md"
+    },
+    {
+      "basename": "Tools",
+      "path": "Other/Mine/Tools.md"
+    },
+    {
+      "basename": "Git command",
+      "path": "Other/Mine/Git command.md"
+    },
+    {
       "basename": "Muti-view Human Body Reconstruction",
       "path": "HumanBodyReconstruction/Muti-view Human Body Reconstruction.md"
     },
     {
+      "basename": "Other Paper Reconstruction",
+      "path": "HumanBodyReconstruction/Other Paper Reconstruction.md"
+    },
+    {
+      "basename": "TransHuman",
+      "path": "HumanBodyReconstruction/ImplicitFunction/TransHuman.md"
+    },
+    {
+      "basename": "DiT-3D",
+      "path": "HumanBodyReconstruction/Generative approach/DiT-3D.md"
+    },
+    {
+      "basename": "Stable Diffusion",
+      "path": "Other/Mine/Stable Diffusion.md"
+    },
+    {
+      "basename": "FlowGAN",
+      "path": "HumanBodyReconstruction/Generative approach/FlowGAN.md"
+    },
+    {
+      "basename": "Note!!!",
+      "path": "Note!!!.md"
+    },
+    {
+      "basename": "2023-10-20-Report",
+      "path": "Reports/2023-10-20-Report.md"
+    },
+    {
       "basename": "2K2K",
       "path": "HumanBodyReconstruction/Depth&Normal Estimation/2K2K.md"
+    },
+    {
+      "basename": "Neus",
+      "path": "NeRF/SurfaceReconstruction/Neus.md"
+    },
+    {
+      "basename": "NeuS2",
+      "path": "NeRF/SurfaceReconstruction/NeuS2.md"
+    },
+    {
+      "basename": "Math",
+      "path": "HumanBodyReconstruction/Math.md"
+    },
+    {
+      "basename": "Color-NeuS",
+      "path": "NeRF/SurfaceReconstruction/Color-NeuS.md"
+    },
+    {
+      "basename": "PointCloud Review",
+      "path": "HumanBodyReconstruction/PointCloud/PointCloud Review.md"
+    },
+    {
+      "basename": "Pose Estimation Review",
+      "path": "NeRF/CameraPose/Pose Estimation Review.md"
+    },
+    {
+      "basename": "PIFu",
+      "path": "HumanBodyReconstruction/ImplicitFunction/PIFu.md"
+    },
+    {
+      "basename": "Datasets",
+      "path": "NeRF/NeRF/Datasets.md"
+    },
+    {
+      "basename": "NeRF-review",
+      "path": "NeRF/NeRF-review.md"
+    },
+    {
+      "basename": "Metrics",
+      "path": "NeRF/NeRF/Metrics.md"
+    },
+    {
+      "basename": "PermutoSDF",
+      "path": "NeRF/SurfaceReconstruction/PermutoSDF.md"
+    },
+    {
+      "basename": "通俗形象地分析比较生成模型",
+      "path": "Other/通俗形象地分析比较生成模型.md"
+    },
+    {
+      "basename": "2023-10",
+      "path": "Reports/2023-10.md"
+    },
+    {
+      "basename": "2023-09-22",
+      "path": "Reports/2023-09-22.md"
+    },
+    {
+      "basename": "Other notes for obsidian",
+      "path": "Reports/Other notes for obsidian.md"
+    },
+    {
+      "basename": "2023-09-02",
+      "path": "Reports/2023-09-02.md"
+    },
+    {
+      "basename": "new",
+      "path": "Reports/new.md"
+    },
+    {
+      "basename": "2023-08-14",
+      "path": "Reports/2023-08-14.md"
+    },
+    {
+      "basename": "2023-08-07",
+      "path": "Reports/2023-08-07.md"
+    },
+    {
+      "basename": "从感知机到Transformer，一文概述深度学习简史",
+      "path": "Other/从感知机到Transformer，一文概述深度学习简史.md"
+    },
+    {
+      "basename": "Sampling",
+      "path": "NeRF/NeRF/Sampling.md"
+    },
+    {
+      "basename": "Encoding",
+      "path": "NeRF/NeRF/Encoding.md"
+    },
+    {
+      "basename": "Math",
+      "path": "NeRF/NeRF/Math.md"
+    },
+    {
+      "basename": "PlankAssembly",
+      "path": "NeRF/SurfaceReconstruction/PlankAssembly.md"
+    },
+    {
+      "basename": "GeoTransformer",
+      "path": "HumanBodyReconstruction/PointCloud/GeoTransformer.md"
+    },
+    {
+      "basename": "Greedy Grid Search",
+      "path": "HumanBodyReconstruction/PointCloud/Greedy Grid Search.md"
     },
     {
       "basename": "SGHR",
@@ -31,174 +199,6 @@
     {
       "basename": "PIFuHD",
       "path": "HumanBodyReconstruction/ImplicitFunction/PIFuHD.md"
-    },
-    {
-      "basename": "PIFu",
-      "path": "HumanBodyReconstruction/ImplicitFunction/PIFu.md"
-    },
-    {
-      "basename": "D-NeuS",
-      "path": "HumanBodyReconstruction/ImplicitFunction/D-NeuS.md"
-    },
-    {
-      "basename": "Vid2Avatar",
-      "path": "HumanBodyReconstruction/ImplicitFunction/Vid2Avatar.md"
-    },
-    {
-      "basename": "Math",
-      "path": "HumanBodyReconstruction/Math.md"
-    },
-    {
-      "basename": "Other Paper Reconstruction",
-      "path": "HumanBodyReconstruction/Other Paper Reconstruction.md"
-    },
-    {
-      "basename": "Point-NeRF",
-      "path": "NeRF/PointCloud/Point-NeRF.md"
-    },
-    {
-      "basename": "HRN",
-      "path": "HumanBodyReconstruction/BodyOtherPart/HRN.md"
-    },
-    {
-      "basename": "Metrics",
-      "path": "NeRF/NeRF/Metrics.md"
-    },
-    {
-      "basename": "Datasets",
-      "path": "NeRF/NeRF/Datasets.md"
-    },
-    {
-      "basename": "NISR",
-      "path": "NeRF/SurfaceReconstruction/NISR.md"
-    },
-    {
-      "basename": "FlexiCubes",
-      "path": "NeRF/SurfaceReconstruction/FlexiCubes.md"
-    },
-    {
-      "basename": "Math",
-      "path": "NeRF/NeRF/Math.md"
-    },
-    {
-      "basename": "2023-10",
-      "path": "Reports/2023-10.md"
-    },
-    {
-      "basename": "装机",
-      "path": "Reports/装机.md"
-    },
-    {
-      "basename": "2023-06-19",
-      "path": "Reports/2023-06-19.md"
-    },
-    {
-      "basename": "new",
-      "path": "Reports/new.md"
-    },
-    {
-      "basename": "NeRF-Mine",
-      "path": "NeRF/NeRF-Mine.md"
-    },
-    {
-      "basename": "Sampling",
-      "path": "NeRF/NeRF/Sampling.md"
-    },
-    {
-      "basename": "Encoding",
-      "path": "NeRF/NeRF/Encoding.md"
-    },
-    {
-      "basename": "Note!!!",
-      "path": "Note!!!.md"
-    },
-    {
-      "basename": "Neuralangelo",
-      "path": "NeRF/SurfaceReconstruction/Neuralangelo.md"
-    },
-    {
-      "basename": "Other notes for obsidian",
-      "path": "Reports/Other notes for obsidian.md"
-    },
-    {
-      "basename": "Learn-Colmap",
-      "path": "Learn/Learn-Colmap.md"
-    },
-    {
-      "basename": "Neus",
-      "path": "NeRF/SurfaceReconstruction/Neus.md"
-    },
-    {
-      "basename": "ShadowNeuS",
-      "path": "NeRF/SurfaceReconstruction/Shadow&Highlight/ShadowNeuS.md"
-    },
-    {
-      "basename": "Ref-NeRF",
-      "path": "NeRF/SurfaceReconstruction/Shadow&Highlight/Ref-NeRF.md"
-    },
-    {
-      "basename": "Neus-Instant-nsr-pl",
-      "path": "NeRF/SurfaceReconstruction/Neus-Instant-nsr-pl.md"
-    },
-    {
-      "basename": "Learn-Hexo2",
-      "path": "Learn/Learn-Hexo2.md"
-    },
-    {
-      "basename": "Front-matter.md",
-      "path": "Templates/Front-matter.md.md"
-    },
-    {
-      "basename": "2023-09-22",
-      "path": "Reports/2023-09-22.md"
-    },
-    {
-      "basename": "Make-Py-Tools",
-      "path": "Python Practise/Make-Py-Tools.md"
-    },
-    {
-      "basename": "Neus-code",
-      "path": "NeRF/SurfaceReconstruction/Neus-code.md"
-    },
-    {
-      "basename": "NeRF-review",
-      "path": "NeRF/NeRF-review.md"
-    },
-    {
-      "basename": "BakedSDF",
-      "path": "NeRF/Efficiency/BakedSDF.md"
-    },
-    {
-      "basename": "2023 Conf about NeRF",
-      "path": "NeRF/Review/2023 Conf about NeRF.md"
-    },
-    {
-      "basename": "Geo-Neus",
-      "path": "NeRF/SurfaceReconstruction/Geo-Neus.md"
-    },
-    {
-      "basename": "NeRF",
-      "path": "NeRF/NeRF.canvas"
-    },
-    {
-      "basename": "git",
-      "path": "Reports/git.md"
-    },
-    {
-      "basename": "A Review of Deep Learning-Powered Mesh Reconstruction Methods",
-      "path": "NeRF/Review/A Review of Deep Learning-Powered Mesh Reconstruction Methods.md"
-    },
-    {
-      "basename": "NeRF-InstantNGP",
-      "path": "NeRF/Efficiency/NeRF-InstantNGP.md"
-    },
-    {
-      "basename": "2023-09-02",
-      "path": "Reports/2023-09-02.md"
-    },
-    {
-      "basename": "Color-NeuS",
-      "path": "NeRF/SurfaceReconstruction/Color-NeuS.md"
     }
   ],
   "omittedPaths": [],

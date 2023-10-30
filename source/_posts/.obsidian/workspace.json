@@ -8,33 +8,7 @@
         "type": "tabs",
         "children": [
           {
-            "id": "685e554632e06c68",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "HumanBodyReconstruction/Other Paper Reconstruction.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "a74ee5d76ef4e4c8",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "HumanBodyReconstruction/Depth&Normal Estimation/2K2K.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "22b9f9092660e4ff",
+            "id": "e283e336a3183bc8",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -47,12 +21,64 @@
             }
           },
           {
-            "id": "a1d7ba9a5c22b380",
+            "id": "38bb1673e31c7727",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "HumanBodyReconstruction/PointCloud/SGHR.md",
+                "file": "HumanBodyReconstruction/Generative approach/Generative approach Review.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "a3f2134a93118d9f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "HumanBodyReconstruction/Generative approach/Diffusion Models.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "18c7f7dc3ac4800a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "HumanBodyReconstruction/Generative approach/BuilDiff.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "71a6c9b303cb3d84",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "HumanBodyReconstruction/Generative approach/RODIN.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "de8eae9979174aab",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "HumanBodyReconstruction/Generative approach/DiT-3D.md",
                 "mode": "source",
                 "backlinks": false,
                 "source": false
@@ -60,7 +86,40 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 4
+      },
+      {
+        "id": "1e01903290992015",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "e3448a090d11e7ba",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Reports/2023-10-30.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "2c1b55f2bc73ed77",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "HumanBodyReconstruction/Generative approach/Generative approach Review.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              }
+            }
+          }
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -72,14 +131,15 @@
       {
         "id": "4b1070af652f8263",
         "type": "tabs",
+        "dimension": 72.14484679665738,
         "children": [
           {
-            "id": "8e8a871735863769",
+            "id": "086707e82c339e3f",
             "type": "leaf",
             "state": {
-              "type": "file-explorer",
+              "type": "outline",
               "state": {
-                "sortOrder": "byCreatedTime"
+                "file": "HumanBodyReconstruction/Generative approach/Generative approach Review.md"
               }
             }
           },
@@ -133,7 +193,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "HumanBodyReconstruction/Muti-view Human Body Reconstruction.md",
+                "file": "HumanBodyReconstruction/Generative approach/Generative approach Review.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -145,43 +205,19 @@
             }
           }
         ]
-      }
-    ],
-    "direction": "horizontal",
-    "width": 200
-  },
-  "right": {
-    "id": "030ccac2adcfb23a",
-    "type": "split",
-    "children": [
+      },
       {
-        "id": "43edafb5d29f89ff",
+        "id": "b772503bc315a713",
         "type": "tabs",
         "dimension": 27.85515320334262,
         "children": [
-          {
-            "id": "36c6b5181a5ec9eb",
-            "type": "leaf",
-            "state": {
-              "type": "bookmarks",
-              "state": {}
-            }
-          },
-          {
-            "id": "02d0d2220a9ac3cc",
-            "type": "leaf",
-            "state": {
-              "type": "recent-files",
-              "state": {}
-            }
-          },
           {
             "id": "39287e9bb20932ab",
             "type": "leaf",
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "HumanBodyReconstruction/Muti-view Human Body Reconstruction.md",
+                "file": "HumanBodyReconstruction/Generative approach/Generative approach Review.md",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -204,26 +240,9 @@
                   "repelStrength": 10,
                   "linkStrength": 1,
                   "linkDistance": 250,
-                  "scale": 0.49021692325724664,
+                  "scale": 0.490216923257247,
                   "close": true
                 }
-              }
-            }
-          }
-        ]
-      },
-      {
-        "id": "5f8f865e483cbdea",
-        "type": "tabs",
-        "dimension": 72.14484679665738,
-        "children": [
-          {
-            "id": "086707e82c339e3f",
-            "type": "leaf",
-            "state": {
-              "type": "outline",
-              "state": {
-                "file": "HumanBodyReconstruction/Muti-view Human Body Reconstruction.md"
               }
             }
           }
@@ -233,61 +252,101 @@
     "direction": "horizontal",
     "width": 200
   },
+  "right": {
+    "id": "030ccac2adcfb23a",
+    "type": "split",
+    "children": [
+      {
+        "id": "43edafb5d29f89ff",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "8e8a871735863769",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "byCreatedTime"
+              }
+            }
+          },
+          {
+            "id": "36c6b5181a5ec9eb",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          },
+          {
+            "id": "02d0d2220a9ac3cc",
+            "type": "leaf",
+            "state": {
+              "type": "recent-files",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 216.5
+  },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:打开快速切换": true,
-      "command-palette:打开命令面板": true,
-      "templates:插入模板": true,
-      "graph:查看关系图谱": true,
-      "markdown-importer:打开 Markdown 格式转换器": true,
-      "audio-recorder:开始/结束录音": true,
-      "workspaces:管理工作区布局": true,
-      "daily-notes:打开/创建今天的日记": false,
-      "canvas:新建白板": true,
+      "switcher:Open quick switcher": true,
+      "graph:Open graph view": true,
+      "canvas:Create new canvas": true,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": true,
+      "command-palette:Open command palette": true,
+      "markdown-importer:Open format converter": true,
+      "audio-recorder:Start/stop recording": true,
+      "workspaces:Manage workspace layouts": true,
       "table-editor-obsidian:Advanced Tables Toolbar": false,
       "templater-obsidian:Templater": false
     }
   },
-  "active": "22b9f9092660e4ff",
+  "active": "2c1b55f2bc73ed77",
   "lastOpenFiles": [
-    "HumanBodyReconstruction/Depth&Normal Estimation/2K2K.md",
-    "HumanBodyReconstruction/PointCloud/SGHR.md",
-    "HumanBodyReconstruction/Depth&Normal Estimation/ECON.md",
-    "HumanBodyReconstruction/Depth&Normal Estimation/MVSNet.md",
-    "HumanBodyReconstruction/Depth&Normal Estimation/GeoMVSNet.md",
-    "HumanBodyReconstruction/ImplicitFunction/ICON.md",
-    "HumanBodyReconstruction/ImplicitFunction/PIFuHD.md",
-    "HumanBodyReconstruction/ImplicitFunction/PIFu.md",
-    "HumanBodyReconstruction/ImplicitFunction/D-NeuS.md",
-    "HumanBodyReconstruction/ImplicitFunction/Vid2Avatar.md",
-    "HumanBodyReconstruction/Math.md",
-    "HumanBodyReconstruction/Other Paper Reconstruction.md",
+    "HumanBodyReconstruction/Generative approach/Generative approach Review.md.baiduyun.uploading.cfg",
+    "HumanBodyReconstruction/Generative approach/SG-GAN.md",
+    "HumanBodyReconstruction/Generative approach/SG-GAN.md.baiduyun.uploading.cfg",
+    "Learn/Learn-Hexo2.md",
+    "Reports/2023-10-30.md",
+    "Reports/2023-10-30.md.baiduyun.uploading.cfg",
+    "HumanBodyReconstruction/Generative approach/RODIN.md.baiduyun.uploading.cfg",
+    "HumanBodyReconstruction/Generative approach/RODIN.md",
+    "HumanBodyReconstruction/Generative approach/BuilDiff.md",
+    "Reports/2023-10-30_冲突文件_Qiyun_20231030164538.md.baiduyun.uploading.cfg",
+    "Reports/2023-10-30(1).md.baiduyun.downloading.cfg",
+    "Reports/2023-10-30(1).md.baiduyun.downloading",
+    "Reports/2023-10-30_冲突文件_Qiyun_20231030164538.md",
+    "HumanBodyReconstruction/Generative approach/Diffusion Models.md",
+    "HumanBodyReconstruction/Generative approach/BuilDiff.md.baiduyun.uploading.cfg",
+    "HumanBodyReconstruction/Generative approach/Generative approach Review.md",
+    "Other/Mine/Tools.md",
+    "Other/Mine/Git command.md",
     "HumanBodyReconstruction/Muti-view Human Body Reconstruction.md",
-    "NeRF/PointCloud/Point-NeRF.md",
-    "HumanBodyReconstruction/BodyOtherPart/HRN.md",
-    "HumanBodyReconstruction/PointCloud",
-    "NeRF/NeRF/Metrics.md",
-    "NeRF/NeRF/Datasets.md",
-    "HumanBodyReconstruction/NeuralLabeling.md",
-    "HumanBodyReconstruction/BodyOtherPart",
-    "NeRF/SurfaceReconstruction/NISR.md",
-    "NeRF/SurfaceReconstruction/FlexiCubes.md",
-    "HumanBodyReconstruction/ImplicitFunction",
-    "HumanBodyReconstruction/Depth&Normal Estimation",
-    "NeRF/NeRF/Math.md",
-    "HumanBodyReconstruction/ImplicitFunction/Reconstruction",
-    "Reports/2023-10.md",
-    "Reports/装机.md",
-    "Reports/2023-06-19.md",
-    "Reports/new.md",
-    "NeRF/NeRF-Mine.md",
+    "HumanBodyReconstruction/Other Paper Reconstruction.md",
+    "HumanBodyReconstruction/ImplicitFunction/TransHuman.md",
+    "HumanBodyReconstruction/Generative approach/DiT-3D.md",
+    "电脑配置.xlsx - 快捷方式.lnk.baiduyun.uploading.cfg",
+    "电脑配置.xlsx - 快捷方式 1.lnk.baiduyun.uploading.cfg",
+    "Templates/Front-matter.md.md.baiduyun.uploading.cfg",
+    "Other/Mine/Stable Diffusion.md",
+    "HumanBodyReconstruction/Generative approach/FlowGAN.md",
+    "Note!!!.md",
+    "Reports/2023-10-20-Report.md",
+    "HumanBodyReconstruction/Generative approach/CCD-3DR.md",
+    "HumanBodyReconstruction/Depth&Normal Estimation/2K2K.md",
+    "NeRF/SurfaceReconstruction/Neus.md",
+    "NeRF/SurfaceReconstruction/NeuS2.md",
+    "HumanBodyReconstruction/Math.md",
+    "NeRF/SurfaceReconstruction/Color-NeuS.md",
+    "HumanBodyReconstruction/PointCloud/PointCloud Review.md",
     "NeRF/NeRF.canvas",
-    "HumanBodyReconstruction",
-    "img/bilibili",
-    "img",
     "未命名.canvas",
-    "NeRF/PointCloud",
-    "Review",
     "Pasted image 20230718132040.png",
     "NeRF/Surface Reconstruction/1.canvas",
     "附件/Pasted image 20230612205212.png",

@@ -103,8 +103,14 @@ DepthEstimation
 
 ## EVA3D 2022
 Compositional Human body
+质量很低
+Idea：
+- 将人体分为几个部分分别训练
+- 将NeRF融合进GAN的生成器中，并与一个判别器进行联合训练
 
-> 质量很低，Idea：将人体分为几个部分分别训练
+cost：
+- 8 NVIDIA V100 Gpus for 5 days
+
 > [EVA3D - Project Page (hongfz16.github.io)](https://hongfz16.github.io/projects/EVA3D.html)
 > [EVA3D: Compositional 3D Human Generation from 2D Image Collections (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4677480793493209089&noteId=1985412009585125888)
 
@@ -145,6 +151,13 @@ Im4D: High-Fidelity and Real-Time Novel View Synthesis for Dynamic Scenes
 [Learning Neural Volumetric Representations of Dynamic Humans in Minutes (zju3dv.github.io)](https://zju3dv.github.io/instant_nvr/)
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231001172828.png)
+
+### 4K4D
+
+[4K4D (zju3dv.github.io)](https://zju3dv.github.io/4k4d/)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023154027.png)
+
 
 ## Human-Object Interactions
 
@@ -217,9 +230,15 @@ x,3d fea,2d fea --> transformer --> sdf, albedo
 ## GTA
 
 [Global-correlated 3D-decoupling Transformer for Clothed Avatar Reconstruction (river-zhang.github.io)](https://river-zhang.github.io/GTA-projectpage/)
+[Global-correlated 3D-decoupling Transformer for Clothed Avatar Reconstruction (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4804636732393783297&noteId=2021327250504312576)
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231016094412.png)
 
+## Get3DHuman
+
+[Get3DHuman: Lifting StyleGAN-Human into a 3D Generative Model using Pixel-aligned Reconstruction Priors. (x-zhangyang.github.io)](https://x-zhangyang.github.io/2023_Get3DHuman/)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023160121.png)
 
 # NeRF
 
@@ -237,6 +256,26 @@ x,3d fea,2d fea --> transformer --> sdf, albedo
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230927202731.png)
 
 ![15fcd4e5b38213b428a4fe32a140bf88_.jpg|333](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/15fcd4e5b38213b428a4fe32a140bf88_.jpg)
+
+## Voxurf
+
+[wutong16/Voxurf: [ ICLR 2023 Spotlight ] Pytorch implementation for "Voxurf: Voxel-based Efficient and Accurate Neural Surface Reconstruction" (github.com)]( https://github.com/wutong16/Voxurf )
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023163503.png)
+
+## AutoRecon
+
+[AutoRecon: Automated 3D Object Discovery and Reconstruction (zju3dv.github.io)](https://zju3dv.github.io/autorecon/)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023164638.png)
+
+
+## G-Shell 
+
+重建水密物体+衣服等非水密物体——通用
+[G-Shell (gshell3d.github.io)](https://gshell3d.github.io/)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231024094322.png)
 
 # Incomplete Image
 

@@ -1,5 +1,5 @@
 ---
-title: Math
+title: Math about 3D Reconstruction
 date: 2023-10-12 21:09:01
 tags:
   - Math
@@ -29,3 +29,12 @@ categories: HumanBodyReconstruction
 - 如下图，face part 脖子上方中心处 O 值做完高斯模糊后依然近似 1(假设 1)，而 body part 上部分脖子中心处做完高斯模糊后 O 值<1(假设 1/2)，这会导致对于脖子这部分多 part 融合时，face part normal 的权重相对于 body part normal 的权重会更大一点(2/3 > 1/3)
 
 ![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230921163941.png)
+
+
+# 卷积 Pytorch
+图像卷积后的大小计算公式： $N=\left\lfloor\frac{W-F+2P}{Step}\right\rfloor+1$
+- 输入图片大小 `W * W`
+- Filter（卷积核）大小 `F * F`
+- 步长 Step
+- padding（填充）的像素数 P
+- 输出图片的大小为`N * N`

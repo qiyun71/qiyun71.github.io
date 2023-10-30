@@ -80,15 +80,33 @@ H ×W = 1536 × 2048
 | MVPHuman          | [MVP-Human](https://github.com/TingtingLiao/MVPHuman)                                                                                             |
 | **HuMMan**        | [caizhongang/humman_toolbox: Toolbox for HuMMan Dataset (github.com)](https://github.com/caizhongang/humman_toolbox)                              |
 | CLOTH4D           | [AemikaChow/CLOTH4D (github.com)](https://github.com/AemikaChow/CLOTH4D)                                                                          |
+| DNA-Rendering                  | [DNA-Rendering : A Diverse Neural Actor Repository for High-Fidelity Human-centric Rendering](https://dna-rendering.github.io/)                   |
 
 - UltraStage：多视角和多光照条件下捕获的高质量的人体资源
-    - [Relightable Neural Human Assets from Multi-view Gradient Illuminations (miaoing.github.io)](https://miaoing.github.io/RNHA/)
-    - [IHe-KaiI/RNHA_Dataset: The dataset of the paper "Relightable Neural Human Assets from Multi-view Gradient Illuminations". (github.com)](https://github.com/IHe-KaiI/RNHA_Dataset)
 
+  - [Relightable Neural Human Assets from Multi-view Gradient Illuminations (miaoing.github.io)](https://miaoing.github.io/RNHA/)
+  - [IHe-KaiI/RNHA_Dataset: The dataset of the paper "Relightable Neural Human Assets from Multi-view Gradient Illuminations". (github.com)](https://github.com/IHe-KaiI/RNHA_Dataset)
+
+- SMPL
+  - [SMPL-X (mpg.de)](https://smpl-x.is.tue.mpg.de/index.html)
 
 ## Human-Art
 
 [Human-Art: A Versatile Human-Centric Dataset Bridging Natural and Artificial Scenes (idea-research.github.io)](https://idea-research.github.io/HumanArt/)
+
+# MVImgNet
+A Large-scale Dataset of Multi-view Images
+
+[MVImgNet (cuhk.edu.cn)](https://gaplab.cuhk.edu.cn/projects/MVImgNet/)
+
+![](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231021203414.png)
+
+# Objaverse-XL
+Objaverse-XL is an open dataset of over 10 million 3D objects!
+
+[allenai/objaverse-xl: 🪐 Objaverse-XL is a Universe of 10M+ 3D Objects. Contains API Scripts for Downloading and Processing! (github.com)](https://github.com/allenai/objaverse-xl)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023161713.png)
 
 # NeuralLabeling 工具箱
 

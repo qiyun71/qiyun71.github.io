@@ -5,7 +5,7 @@
   "fileSortOrder": "byCreatedTimeReverse",
   "pdfExportSettings": {
     "includeName": true,
-    "pageSize": "A4",
+    "pageSize": "Tabloid",
     "landscape": false,
     "margin": "0",
     "downscalePercent": 100
@@ -29,5 +29,6 @@
   "spellcheckLanguages": null,
   "foldHeading": true,
   "vimMode": false,
-  "strictLineBreaks": false
+  "strictLineBreaks": false,
+  "tabSize": 2
 }

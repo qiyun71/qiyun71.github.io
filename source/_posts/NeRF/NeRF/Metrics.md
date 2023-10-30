@@ -80,6 +80,8 @@ $d_{\mathrm{CD}}(S_1,S_2)=\frac{1}{S_1}\sum_{x\in S_1}\min_{y\in S_2}\lVert x-y\
 S1 和 S2 分别表示两组 3D 点云，第一项代表 S1 中任意一点 x 到 S2 的最小距离之和，第二项则表示 S2 中任意一点 y 到 S1 的最小距离之和。
 如果该距离较大，则说明两组点云区别较大；如果距离较小，则说明重建效果较好。
 
+$\begin{aligned}\mathcal{L}_{CD}&=\sum_{y'\in Y'}min_{y\in Y}||y'-y||_2^2+\sum_{y\in Y}min_{y'\in Y'}||y-y'||_2^2,\end{aligned}$
+
 ## P2S↓
 
 average point-to-surface(P2S) distance平均点到面距离
@@ -102,6 +104,14 @@ Intersection over Union(IoU)交并比
 - B: Predicted bounding box
 
 ![image.png|333](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231010101549.png)
+
+## EMD↓
+
+Earth Mover's distance 推土距离,度量两个分布之间的距离
+[EMD(earth mover's distances)距离 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/145739750) 
+
+$\mathcal{L}_{EMD}=min_{\phi:Y\rightarrow Y^{\prime}}\sum_{x\in Y}||x-\phi(x)||_{2}$ , φ indicates a parameter of bijection.
+
 
 # Loss
 
@@ -146,6 +156,14 @@ $sparsity = \frac{1}{N} \sum e^{-scale * sdf}$
 -
 
 ## other loss
+
+### S3IM Loss
+
+[S3IM (madaoer.github.io)](https://madaoer.github.io/s3im_nerf/)
+
+$\begin{aligned}L_{\mathrm{S3IM}}(\Theta,\mathcal{R})=&1-\mathrm{S3IM}(\hat{\mathcal{R}},\mathcal{R})=1-\frac{1}{M}\sum_{m=1}^{M}\mathrm{SSIM}(\mathcal{P}^{(m)}(\hat{\mathcal{C}}),\mathcal{P}^{(m)}(\mathcal{C})).\end{aligned}$
+
+### Smoothness Loss
 
 ![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230919194046.png)
 

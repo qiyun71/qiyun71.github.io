@@ -90,6 +90,8 @@ ECCV 2020 Oral - Best Paper Honorable Mention
 | [2021](/NeRF/Sampling/Mip-NeRF)             | [mip-NeRF ](https://jonbarron.info/mipnerf/)                                                                                    | 截头圆锥体采样方法+IPEncoding                              |             ICCV             |
 | [2023](/NeRF/Sampling/Floaters%20No%20More) | [Floaters No More: Radiance Field Gradient Scaling for Improved Near-Camera Training](https://gradient-scaling.github.io/#Code) | 通过梯度缩放，解决基于NeRF重建场景中的背景塌陷和镜前漂浮物 | The Eurographics Association |
 
+- [Improving Neural Radiance Fields Using Near-Surface Sampling With Point Cloud Generation (arxiv.org)](https://arxiv.org/pdf/2310.04152.pdf)
+
 ## Sparse images/Generalization
 
 | Year                            | Title&Project Page                                                                                                    | Brief Description                                             |    Conf/Jour     |
