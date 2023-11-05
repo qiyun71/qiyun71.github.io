@@ -5,7 +5,7 @@ tags:
   - Diffusion
 categories: HumanBodyReconstruction/Generative approach
 ---
-Diffusion Models原理
+Diffusion Models 原理
 
 <!-- more -->
 
@@ -35,11 +35,11 @@ Maximize ： Lower bound of $logP(x)$
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231022210535.png)
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231022210617.png)
 
-## DDPM
+## DDPM(Denoising Diffusion Probabilistic Models)
 
 $\text{Maximize E}_{q(x_1:x_T|x_0)}[log\left(\frac{P(x_0;x_T)}{q(x_1:x_T|x_0)}\right)]$
 
-$q(x_t|x_0)$ 可以只做一次 sample(给定一系列$\beta$)
+$q(x_t|x_0)$ 可以只做一次 sample(给定一系列 $\beta$)
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023100329.png)
 
@@ -52,11 +52,77 @@ $logP(x) \geq \operatorname{E}_{q(x_1|x_0)}[logP(x_0|x_1)]-KL\big(q(x_T|x_0)||P(
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023102747.png)
 
+## DDPM Code
+
+[mikonvergence/DiffusionFastForward: DiffusionFastForward: a free course and experimental framework for diffusion-based generative models (github.com)](https://github.com/mikonvergence/DiffusionFastForward)
+
+### Schedule
+
+* `betas`: $\beta_t$ , `betas=torch.linspace(1e-4,2e-2,num_timesteps)`
+* `alphas`: $\alpha_t=1-\beta_t$ 
+* `alphas_sqrt`:  $\sqrt{\alpha_t}$
+* `alphas_prod`: $\bar{\alpha}_t=\prod_{i=0}^{t}\alpha_i$
+* `alphas_prod_sqrt`: $\sqrt{\bar{\alpha}_t}$
+
+### Forward Process
+
+forward step:
+$$q(x_t|x_{t−1}) := \mathcal{N}(x_t; \sqrt{1 − \beta_t}x_{t−1}, \beta_tI) \tag{1}$$
+forward jump:
+$$q(x_t|x_0) = \mathcal{N}(x_t;\sqrt{\bar{\alpha_t}}x_0, (1 − \bar{\alpha_t})I) \tag{2}$$
+
+```python
+def forward_step(t, condition_img, return_noise=False):
+    """
+        forward step: t-1 -> t
+    """
+    assert t >= 0
+
+    mean=alphas_sqrt[t]*condition_img
+    std=betas[t].sqrt()
+
+    # sampling from N
+    if not return_noise:
+        return mean+std*torch.randn_like(img)
+    else:
+        noise=torch.randn_like(img)
+        return mean+std*noise, noise
+
+def forward_jump(t, condition_img, condition_idx=0, return_noise=False):
+    """
+        forward jump: 0 -> t
+    """
+    assert t >= 0
+
+    mean=alphas_cumprod_sqrt[t]*condition_img
+    std=(1-alphas_cumprod[t]).sqrt()
+
+    # sampling from N
+    if not return_noise:
+        return mean+std*torch.randn_like(img)
+    else:
+        noise=torch.randn_like(img)
+        return mean+std*noise, noise
+```
+
+### Reverse Process
+至少三种逆向过程的求法，从$x_{t}$到$x_{0}$
+There are **at least 3 ways of parameterizing the mean** of the reverse step distribution $p_\theta(x_{t-1}|x_t)$:
+* Directly (a neural network will estimate $\mu_\theta$)直接用网络预测$\mu_\theta$
+* Via $x_0$ (a neural network will estimate $x_0$)用网络预测$x_0$
+$$\tilde{\mu}_\theta = \frac{\sqrt{\bar{\alpha}_{t-1}}\beta_t}{1-\bar{\alpha}_t}x_0 + \frac{\sqrt{\alpha_t}(1-\bar{\alpha}_{t-1})}{1-\bar{\alpha}_t}x_t\tag{4}$$
+* Via noise $\epsilon$ subtraction from $x_0$ (a neural network will estimate $\epsilon$)用网络预测噪声$\epsilon$
+$$x_0=\frac{1}{\sqrt{\bar{\alpha}_t}}(x_t-\sqrt{1-\bar{\alpha}_t}\epsilon)\tag{5}$$
+
+### test to
 
 # 其他概念
 
+## KL散度
+
 [KL 散度（相对熵） - 小时百科 (wuli.wiki)](https://wuli.wiki/online/KLD.html)
-**KL 散度**（Kullback–Leibler divergence，缩写 KLD）是一种统计学度量，表示的是一个概率分布相对于另一个概率分布的差异程度，在信息论中又称为**相对熵**（Relative entropy）。
+
+**KL 散度**（Kullback–Leibler divergence，缩写 KLD）是一种统计学度量，**表示的是一个概率分布相对于另一个概率分布的差异程度**，在信息论中又称为**相对熵**（Relative entropy）。
 $$\begin{equation}
 D_{KL}(P||Q)=\sum_{x\in X}P(x)ln(\frac{P(x)}{Q(x)})=\sum_{x\in X}P(x)(ln(P(x))-ln(Q(x)))~.
 \end{equation}$$
@@ -67,3 +133,21 @@ D_{KL}(P||Q)=\int_{-\infty}^{+\infty}p(x)ln(\frac{p(x)}{q(x)})dx~.
 \end{equation}$$
 
  显然，当 P=Q 时，$D_{KL}=0$
+
+两个一维高斯分布的KL散度公式：
+> [KL散度(Kullback-Leibler Divergence)介绍及详细公式推导 | HsinJhao's Blogs](https://hsinjhao.github.io/2019/05/22/KL-DivergenceIntroduction/)
+
+$$\begin{aligned}
+KL(p,q)& =\int[\left.p(x)\log(p(x))-p(x)\log(q(x))\right]dx  \\
+&=-\frac12\left[1+\log(2\pi\sigma_1^2)\right]-\left[-\frac12\log(2\pi\sigma_2^2)-\frac{\sigma_1^2+(\mu_1-\mu_2)^2}{2\sigma_2^2}\right] \\
+&=\log\frac{\sigma_2}{\sigma_1}+\frac{\sigma_1^2+(\mu_1-\mu_2)^2}{2\sigma_2^2}-\frac12
+\end{aligned}$$
+
+## 参数重整化
+
+[DDPMb站视频](https://www.bilibili.com/video/BV1b541197HX/)公式推导
+
+从高斯分布中直接采样一个值出来是不可导的，无法进行梯度传递，需要进行参数重整化：
+从$\mathcal{N}(0,1)$中随机采样出来z，然后对z做$\mu + z * \sigma$ 相当于从高斯分布$\mathcal{N}(\mu,\sigma)$中采样
+
+

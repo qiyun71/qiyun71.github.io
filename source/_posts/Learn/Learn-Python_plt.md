@@ -12,7 +12,15 @@ tags:
 
 <!--more-->
 
-# 0. plt 打开 opencv 图像
+# 其他
+
+## 布局
+plt.tight_layout()
+通常在绘制多个子图时使用，用于自动调整图形中的子图布局，以避免子图之间的重叠或太过拥挤
+
+
+
+# 0.plt 打开 opencv 图像
 
 **BGR 用 RGB 打开**
 
@@ -40,7 +48,7 @@ plt.imshow(img4)
 plt.show()
 ```
 
-# 1. plt.plot(x,y)
+# 1.plt.plot(x,y)
 
 `format_string的内容`
 
@@ -72,7 +80,7 @@ plt.show()
 ![plot4.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/plot4.png)
 
 
-# 2. plt.figure()用来画图，自定义画布大小
+# 2.plt.figure()用来画图，自定义画布大小
 
 定义画布大小，然后用 plot 画图
 
@@ -88,7 +96,7 @@ plt.close()
 ![figure1.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/figure1.png)
 
 
-# 3、plt.subplot(222)
+# 3.plt.subplot(222)
 
 将 figure 设置的画布大小分成几个部分，参数‘221’表示 2(row)x2(colu),即将画布分成 2x2，两行两列的 4 块区域，1 表示选择图形输出的区域在第一块，图形输出区域参数必须在“行 x 列”范围，此处必须在 1 和 2 之间选择——如果参数设置为 subplot(111)，则表示画布整个输出，不分割成小块区域，图形直接输出在整块画布上
 
@@ -106,14 +114,14 @@ plt.add_subplot(221)
 plt.add_subplot(222)
 ```
 
-# 4、plt.xlim 设置 x 轴或者 y 轴刻度范围
+# 4.plt.xlim 设置 x 轴或者 y 轴刻度范围
 
 ```py
 plt.xlim(0,1000)  #  设置x轴刻度范围，从0~1000         #lim为极限，范围
 plt.ylim(0,20)   # 设置y轴刻度的范围，从0~20
 ```
 
-# 5、plt.xticks()：设置 x 轴刻度的表现方式
+# 5.plt.xticks()：设置 x 轴刻度的表现方式
 
 ```py
 fig2 = plt.figure(num='fig222222', figsize=(6, 3), dpi=75, facecolor='#FFFFFF', edgecolor='#FF0000')
@@ -131,7 +139,7 @@ plt.close()
 ![xticks.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/xticks.png)
 
 
-# 6. plt.scatter()--散点图
+# 6.plt.scatter()--散点图
 
 `matplotlib.pyplot.scatter(x, y, s=None, c=None, marker=None, cmap=None, norm=None, vmin=None, vmax=None,alpha=None, linewidths=None, verts=None, edgecolors=None, *, data=None, **kwargs)`
 
@@ -147,7 +155,7 @@ plt.close()
 
 > [参考教程](https://blog.csdn.net/m0_37393514/article/details/81298503)
 
-# 7、ax2.set_title('xxx')设置标题，画图
+# 7.ax2.set_title('xxx')设置标题，画图
 
 `plt.xlabel()` `plt.ylabel()`xy 轴标签
 
@@ -183,7 +191,7 @@ plt.show()
 ![title1.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/title1.png)
 
 
-# 8. plt.hist（）绘制直方图
+# 8.plt.hist（）绘制直方图
 
 _可以将高斯函数这些画出来_
 

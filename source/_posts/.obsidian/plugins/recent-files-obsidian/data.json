@@ -1,16 +1,84 @@
 {
   "recentFiles": [
     {
-      "basename": "RODIN",
-      "path": "HumanBodyReconstruction/Generative approach/RODIN.md"
+      "basename": "Muti-view Human Body Reconstruction",
+      "path": "HumanBodyReconstruction/Muti-view Human Body Reconstruction.md"
     },
     {
       "basename": "Generative approach Review",
       "path": "HumanBodyReconstruction/Generative approach/Generative approach Review.md"
     },
     {
+      "basename": "Other Paper Reconstruction",
+      "path": "HumanBodyReconstruction/Other Paper Reconstruction.md"
+    },
+    {
+      "basename": "HRN",
+      "path": "HumanBodyReconstruction/BodyOtherPart/HRN.md"
+    },
+    {
+      "basename": "Tools",
+      "path": "Other/Mine/Tools.md"
+    },
+    {
+      "basename": "Diffusion Models",
+      "path": "HumanBodyReconstruction/Generative approach/Diffusion Models.md"
+    },
+    {
+      "basename": "RODIN",
+      "path": "HumanBodyReconstruction/Generative approach/RODIN.md"
+    },
+    {
+      "basename": "BuilDiff",
+      "path": "HumanBodyReconstruction/Generative approach/BuilDiff.md"
+    },
+    {
+      "basename": "NeRF-review",
+      "path": "NeRF/NeRF-review.md"
+    },
+    {
+      "basename": "A Review of Deep Learning-Powered Mesh Reconstruction Methods",
+      "path": "NeRF/Review/A Review of Deep Learning-Powered Mesh Reconstruction Methods.md"
+    },
+    {
+      "basename": "Learn-Python_plt",
+      "path": "Learn/Learn-Python_plt.md"
+    },
+    {
+      "basename": "Learn-Python_OPEN_CV",
+      "path": "Learn/Learn-Python_OPEN_CV.md"
+    },
+    {
+      "basename": "PointCloud Review",
+      "path": "HumanBodyReconstruction/PointCloud/PointCloud Review.md"
+    },
+    {
       "basename": "2023-10-30",
       "path": "Reports/2023-10-30.md"
+    },
+    {
+      "basename": "MVSNet",
+      "path": "HumanBodyReconstruction/Depth&Normal Estimation/MVSNet.md"
+    },
+    {
+      "basename": "DiT-3D",
+      "path": "HumanBodyReconstruction/Generative approach/DiT-3D.md"
+    },
+    {
+      "basename": "TransHuman",
+      "path": "HumanBodyReconstruction/ImplicitFunction/TransHuman.md"
+    },
+    {
+      "basename": "PIFu",
+      "path": "HumanBodyReconstruction/ImplicitFunction/PIFu.md"
+    },
+    {
+      "basename": "2K2K",
+      "path": "HumanBodyReconstruction/Depth&Normal Estimation/2K2K.md"
+    },
+    {
+      "basename": "Math",
+      "path": "HumanBodyReconstruction/Math.md"
     },
     {
       "basename": "SG-GAN",
@@ -21,36 +89,8 @@
       "path": "Learn/Learn-Hexo2.md"
     },
     {
-      "basename": "BuilDiff",
-      "path": "HumanBodyReconstruction/Generative approach/BuilDiff.md"
-    },
-    {
-      "basename": "Diffusion Models",
-      "path": "HumanBodyReconstruction/Generative approach/Diffusion Models.md"
-    },
-    {
-      "basename": "Tools",
-      "path": "Other/Mine/Tools.md"
-    },
-    {
       "basename": "Git command",
       "path": "Other/Mine/Git command.md"
-    },
-    {
-      "basename": "Muti-view Human Body Reconstruction",
-      "path": "HumanBodyReconstruction/Muti-view Human Body Reconstruction.md"
-    },
-    {
-      "basename": "Other Paper Reconstruction",
-      "path": "HumanBodyReconstruction/Other Paper Reconstruction.md"
-    },
-    {
-      "basename": "TransHuman",
-      "path": "HumanBodyReconstruction/ImplicitFunction/TransHuman.md"
-    },
-    {
-      "basename": "DiT-3D",
-      "path": "HumanBodyReconstruction/Generative approach/DiT-3D.md"
     },
     {
       "basename": "Stable Diffusion",
@@ -69,10 +109,6 @@
       "path": "Reports/2023-10-20-Report.md"
     },
     {
-      "basename": "2K2K",
-      "path": "HumanBodyReconstruction/Depth&Normal Estimation/2K2K.md"
-    },
-    {
       "basename": "Neus",
       "path": "NeRF/SurfaceReconstruction/Neus.md"
     },
@@ -81,32 +117,16 @@
       "path": "NeRF/SurfaceReconstruction/NeuS2.md"
     },
     {
-      "basename": "Math",
-      "path": "HumanBodyReconstruction/Math.md"
-    },
-    {
       "basename": "Color-NeuS",
       "path": "NeRF/SurfaceReconstruction/Color-NeuS.md"
-    },
-    {
-      "basename": "PointCloud Review",
-      "path": "HumanBodyReconstruction/PointCloud/PointCloud Review.md"
     },
     {
       "basename": "Pose Estimation Review",
       "path": "NeRF/CameraPose/Pose Estimation Review.md"
     },
     {
-      "basename": "PIFu",
-      "path": "HumanBodyReconstruction/ImplicitFunction/PIFu.md"
-    },
-    {
       "basename": "Datasets",
       "path": "NeRF/NeRF/Datasets.md"
-    },
-    {
-      "basename": "NeRF-review",
-      "path": "NeRF/NeRF-review.md"
     },
     {
       "basename": "Metrics",
@@ -179,26 +199,6 @@
     {
       "basename": "SGHR",
       "path": "HumanBodyReconstruction/PointCloud/SGHR.md"
-    },
-    {
-      "basename": "ECON",
-      "path": "HumanBodyReconstruction/Depth&Normal Estimation/ECON.md"
-    },
-    {
-      "basename": "MVSNet",
-      "path": "HumanBodyReconstruction/Depth&Normal Estimation/MVSNet.md"
-    },
-    {
-      "basename": "GeoMVSNet",
-      "path": "HumanBodyReconstruction/Depth&Normal Estimation/GeoMVSNet.md"
-    },
-    {
-      "basename": "ICON",
-      "path": "HumanBodyReconstruction/ImplicitFunction/ICON.md"
-    },
-    {
-      "basename": "PIFuHD",
-      "path": "HumanBodyReconstruction/ImplicitFunction/PIFuHD.md"
     }
   ],
   "omittedPaths": [],

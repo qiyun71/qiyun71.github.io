@@ -12,21 +12,6 @@ NeRF相关的论文 at CVPR/ICCV/ECCV/NIPS/ICML/ICLR/SIGGRAPH
 
 <!-- more -->
 
-# Dalao
-
-| PhD.School                 |                                                     Homepage                                                      |                        Paper                         |
-| -------------------------- |:-----------------------------------------------------------------------------------------------------------------:|:----------------------------------------------------:|
-| Zhejiang University        |                        [Zhaopeng Cui (zju.edu.cn)](http://www.cad.zju.edu.cn/home/zhpcui/)                        | Global Structure-from-Motion by Similarity Averaging |
-| HKU                        |                 [刘缘Yuan Liu - Homepage (liuyuan-pal.github.io)](https://liuyuan-pal.github.io/)                 |                      Neus,NeRO                       |
-| CUHK                       |                      [胡文博HU, Wenbo's Homepage (wbhu.github.io)](https://wbhu.github.io/)                       |                      Tri-MipRF                       |
-| HKU                        | [Peng Wang (王鹏) (notion.site)](https://quartz-khaan-c6f.notion.site/Peng-Wang-0ab0a2521ecf40f5836581770c14219c) |                         Neus                         |
-| UC Berkeley                |                                       [Jon Barron](https://jonbarron.info/)                                       |        Mip-NeRF,Mip-NeRF360,Zip-NeRF,Ref-NeRF        |
-| UC Berkeley                |                                 [Matthew Tancik](https://www.matthewtancik.com/)                                  |        NerfStudio,NerfAcc,Plenoxels,Mip-NeRF,        |
-| UC Berkeley                |                           [Ben Mildenhall (bmild.github.io)](https://bmild.github.io/)                            |                         NeRF                         |
-| ShanghaiTech University    |                      [陈安沛Anpei Chen (apchenstu.github.io)](https://apchenstu.github.io/)                       |                       TensoRF                        |
-| University of Pennsylvania |                       [Lingjie Liu (lingjie0206.github.io)](https://lingjie0206.github.io/)                       | NeuS,NeuS2,NeuralUDF,Drag Your GAN                                                     |
-
-
 # NeRF
 
 ECCV 2020 Oral - Best Paper Honorable Mention
@@ -35,6 +20,14 @@ ECCV 2020 Oral - Best Paper Honorable Mention
 | ---------------------------------------- | :---------------------------------------------------------------------------------------------------------: | :---------------: | :-------: |
 | [2020](/NeRF/NeRF-Principle) | [NeRF:Representing Scenes as Neural Radiance Fields for View Synthesis](https://www.matthewtancik.com/nerf) |        初始文        |    ECCV   |
 
+
+## Volume Rendering Function
+
+### PL-NeRF
+[mikacuy/PL-NeRF: NeRF Revisited: Fixing Quadrature Instability in Volume Rendering, Neurips 2023 (github.com)](https://github.com/mikacuy/PL-NeRF)
+
+NeRF 分段常数积分 --> PL-NeRF 分段线性积分
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231101151141.png)
 
 ## Efficiency
 
@@ -143,10 +136,25 @@ ECCV 2020 Oral - Best Paper Honorable Mention
 | [2023](/NeRF/NeRF-Studio) | [nerfstudio](https://docs.nerf.studio/en/latest/)          | 集成现有的NeRF方法       | ACM SIGGRAPH |
 | 2022                                  | [SDFStudio](https://autonomousvision.github.io/sdfstudio/) | 集成基于SDF的NeRF方法    |     None     |
 
+# Dalao
+
+| PhD.School                 |                                                     Homepage                                                      |                        Paper                         |
+| -------------------------- |:-----------------------------------------------------------------------------------------------------------------:|:----------------------------------------------------:|
+| Zhejiang University        |                        [Zhaopeng Cui (zju.edu.cn)](http://www.cad.zju.edu.cn/home/zhpcui/)                        | Global Structure-from-Motion by Similarity Averaging |
+| HKU                        |                 [刘缘Yuan Liu - Homepage (liuyuan-pal.github.io)](https://liuyuan-pal.github.io/)                 |                      Neus,NeRO                       |
+| CUHK                       |                      [胡文博HU, Wenbo's Homepage (wbhu.github.io)](https://wbhu.github.io/)                       |                      Tri-MipRF                       |
+| HKU                        | [Peng Wang (王鹏) (notion.site)](https://quartz-khaan-c6f.notion.site/Peng-Wang-0ab0a2521ecf40f5836581770c14219c) |                         Neus                         |
+| UC Berkeley                |                                       [Jon Barron](https://jonbarron.info/)                                       |        Mip-NeRF,Mip-NeRF360,Zip-NeRF,Ref-NeRF        |
+| UC Berkeley                |                                 [Matthew Tancik](https://www.matthewtancik.com/)                                  |        NerfStudio,NerfAcc,Plenoxels,Mip-NeRF,        |
+| UC Berkeley                |                           [Ben Mildenhall (bmild.github.io)](https://bmild.github.io/)                            |                         NeRF                         |
+| ShanghaiTech University    |                      [陈安沛Anpei Chen (apchenstu.github.io)](https://apchenstu.github.io/)                       |                       TensoRF                        |
+| University of Pennsylvania |                       [Lingjie Liu (lingjie0206.github.io)](https://lingjie0206.github.io/)                       | NeuS,NeuS2,NeuralUDF,Drag Your GAN                                                     |
+
+
 ## 有趣的应用
 
-| Year |                                                                 Title&Project Page                                                                | Brief Description | Conf/Jour |
-| ---- | :-----------------------------------------------------------------------------------------------------------------------------------------------: | :---------------: | --------- |
-| 2023 |                                      [Seeing the World through Your Eyes](https://world-from-eyes.github.io/)                                     |    从人眼的倒影中重建物体    | None      |
-| [2023](/NeRF/Interesting/PAniC-3D) | [PAniC-3D Stylized Single-view 3D Reconstruction from Portraits of Anime Characters](https://github.com/shuhongchen/panic3d-anime-reconstruction) |   从插画风格角色肖像中重建3D  | CVPR      |
-|      |                                                                                                                                                   |                   |           |
+| Year                               |                                                                Title&Project Page                                                                 |          Brief Description           | Conf/Jour        |
+| ---------------------------------- |:-------------------------------------------------------------------------------------------------------------------------------------------------:|:------------------------------------:| ---------------- |
+| 2023                               |                                     [Seeing the World through Your Eyes](https://world-from-eyes.github.io/)                                      |        从人眼的倒影中重建物体        | None             |
+| [2023](/NeRF/Interesting/PAniC-3D) | [PAniC-3D Stylized Single-view 3D Reconstruction from Portraits of Anime Characters](https://github.com/shuhongchen/panic3d-anime-reconstruction) |      从插画风格角色肖像中重建3D      | CVPR             |
+| 2023                               |                                          [LERF: Language Embedded Radiance Fields](https://www.lerf.io/)                                          | 用语言查询空间中的3D物体，并高亮显示 | ICCV 2023 (Oral) |

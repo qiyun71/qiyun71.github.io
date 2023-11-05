@@ -20,13 +20,9 @@ top: true
 | SG-GAN    | SG-GAN                 | Single Image |                |             |
 |           |                        |              |                |             |
 
-[GET3D: A Generative Model of High Quality 3D Textured Shapes Learned from Images (nv-tlabs.github.io)](https://nv-tlabs.github.io/GET3D/)
-[NVlabs/nvdiffrec: Official code for the CVPR 2022 (oral) paper "Extracting Triangular 3D Models, Materials, and Lighting From Images". (github.com)](https://github.com/NVlabs/nvdiffrec)
-[pix2pix3D: 3D-aware Conditional Image Synthesis (cmu.edu)](http://www.cs.cmu.edu/~pix2pix3D/)
-
 <!-- more -->
 
-# Generative approach
+# Generative approach(Img2PC)
 
 ## Network Framework
 
@@ -34,7 +30,7 @@ top: true
 
 - GAN(generative adversarial networks)
 - VAE(variational auto-encoders)
-- auto-regressive models
+- Auto-regressive models
 - Normalized flows(flow-based models), PointFlow
   - 相当于多个生成器，并且可逆
   - [Flow-based Generative Model - YouTube](https://www.youtube.com/watch?v=uXY18nzdSsM&list=PLJV_el3uVTsOK_ZK5L0Iv_EQoL1JefRL4&index=60)
@@ -95,11 +91,55 @@ $\mathcal{L}_{EMD}=min_{\phi:Y\rightarrow Y^{\prime}}\sum_{x\in Y}||x-\phi(x)||_
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231019170328.png)
 
+### Make-It-3D
+
+[Make-It-3D: High-Fidelity 3D Creation from A Single Image with Diffusion Prior](https://make-it-3d.github.io/)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023154817.png)
+
+### DreamGaussian
+
+[DreamGaussian](https://dreamgaussian.github.io/)
+
+Gaussian Splatting + Diffusion
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231024164334.png)
+
+### Wonder3D
+
+[Wonder3D: Single Image to 3D using Cross-Domain Diffusion (xxlong.site)](https://www.xxlong.site/Wonder3D/)
+
+Diffusion 一致性出图 + Geometry Fusion (novel geometric-aware optimization scheme)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231024205005.png)
+
+#### CLIP
+
+[openai/CLIP: CLIP (Contrastive Language-Image Pretraining), Predict the most relevant text snippet given an image (github.com)](https://github.com/openai/CLIP)
+
+对比语言-图片预训练模型
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231025093839.png)
+
+### GenNeRF
+
+[Generative Neural Fields by Mixtures of Neural Implicit Functions (arxiv.org)](https://arxiv.org/abs/2310.19464)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231031184253.png)
+
 ### Etc
 
 Colored PC [3D Colored Shape Reconstruction from a Single RGB Image through Diffusion (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4723055356805120001&noteId=2014681937165010176)
 
 ## GAN
+
+### SE-MD
+
+[SE-MD: A Single-encoder multiple-decoder deep network for point cloud generation from 2D images. (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4546363961368010753&noteId=2015501024673795072)
+单编码器-->多解码器
+每个解码器生成某些固定视点，然后融合所有视点来生成密集的点云
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231022105308.png)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231031152551.png)
 
 ### FlowGAN
 
@@ -121,6 +161,40 @@ Colored PC [3D Colored Shape Reconstruction from a Single RGB Image through Diff
 [3D Brain Reconstruction by Hierarchical Shape-Perception Network from a Single Incomplete Image. (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4552080679232348161&noteId=2015496104888593408)
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231022101838.png)
+
+
+### Deep3DSketch+
+
+[Deep3DSketch+: Rapid 3D Modeling from Single Free-Hand Sketches (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4803935841323843585&noteId=2028490687877420544)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231031092339.png)
+
+### Reality3DSketch
+
+[[2310.18148] Reality3DSketch: Rapid 3D Modeling of Objects from Single Freehand Sketches (arxiv.Org)]( https://arxiv.org/abs/2310.18148 )
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231031092703.png)
+
+### Deep3DSketch+\\+
+
+[[2310.18178] Deep3DSketch+\+: High-Fidelity 3D Modeling from Single Free-hand Sketches (arxiv.Org)]( https://arxiv.org/abs/2310.18178 )
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231031093421.png)
+
+### GET3D
+
+[nv-tlabs/GET3D (github.com)](https://github.com/nv-tlabs/GET3D)
+[GET3D: A Generative Model of High Quality 3D Textured Shapes Learned from Images (nv-tlabs.github.io)](https://nv-tlabs.github.io/GET3D/)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023154445.png)
+
+
+### AG3D
+
+[AG3D: Learning to Generate 3D Avatars from 2D Image Collections (zj-dong.github.io)](https://zj-dong.github.io/AG3D/)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023160511.png)
+
 
 ## NFs (Normalizing Flows)
 
@@ -166,37 +240,13 @@ MmWave Radar + GAN
 ImplicitFunction(NeRF)
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231022103225.png)
 
-### SE-MD
 
-[SE-MD: A Single-encoder multiple-decoder deep network for point cloud generation from 2D images. (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4546363961368010753&noteId=2015501024673795072)
-
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231022105308.png)
-
-### Fusion of cross-view images
-
-[3D Reconstruction through Fusion of Cross-View Images (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4546340788354310145&noteId=2015534437671973888)
-
-多张卫星图片配准
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231022110219.png)
-
-### GET3D
-
-[nv-tlabs/GET3D (github.com)](https://github.com/nv-tlabs/GET3D)
-
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023154445.png)
-
-
-### nvdiffrec
+### Nvdiffrec
 
 [NVlabs/nvdiffrec: Official code for the CVPR 2022 (oral) paper "Extracting Triangular 3D Models, Materials, and Lighting From Images". (github.com)](https://github.com/NVlabs/nvdiffrec)
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023154513.png)
 
-### Make-It-3D
-
-[Make-It-3D: High-Fidelity 3D Creation from A Single Image with Diffusion Prior](https://make-it-3d.github.io/)
-
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023154817.png)
 
 ### HyperHuman
 
@@ -205,17 +255,11 @@ ImplicitFunction(NeRF)
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023155025.png)
 
-### AG3D
-
-[AG3D: Learning to Generate 3D Avatars from 2D Image Collections (zj-dong.github.io)](https://zj-dong.github.io/AG3D/)
-
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023160511.png)
-
-
 ### SyncDreamer
 
 [SyncDreamer: Generating Multiview-consistent Images from a Single-view Image (liuyuan-pal.github.io)](https://liuyuan-pal.github.io/SyncDreamer/)
 
+多视图一致的图片生成
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023165400.png)
 
 ### One-2-3-45
@@ -229,24 +273,15 @@ MVS+NeRF
 
 [Zero-1-to-3: Zero-shot One Image to 3D Object (columbia.edu)](https://zero123.cs.columbia.edu/)
 
+多视图一致 Diffusion Model + NeRF
+
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023171814.png)
 
-### DreamGaussian
 
-[DreamGaussian](https://dreamgaussian.github.io/)
+### Pix2pix3D
 
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231024164334.png)
+[pix2pix3D: 3D-aware Conditional Image Synthesis (cmu.edu)](http://www.cs.cmu.edu/~pix2pix3D/)
 
-### Wonder3D
+一致性图像生成+NeRF
 
-[Wonder3D: Single Image to 3D using Cross-Domain Diffusion (xxlong.site)](https://www.xxlong.site/Wonder3D/)
-
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231024205005.png)
-
-#### CLIP
-
-[openai/CLIP: CLIP (Contrastive Language-Image Pretraining), Predict the most relevant text snippet given an image (github.com)](https://github.com/openai/CLIP)
-
-对比语言-图片预训练模型
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231025093839.png)
-
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231105173051.png)
