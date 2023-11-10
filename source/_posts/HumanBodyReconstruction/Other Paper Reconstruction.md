@@ -15,14 +15,14 @@ Awesome Human Body Reconstruction
 1. **Depth&Normal Estimation**(2K2K)
 2. **Implicit Function**(PIFu or NeRF)
 
-| Method | 泛化   | 数据集监督                              | 提取mesh方式                   | 获得纹理方式            |
+| Method | 泛化   | 数据集监督                              | 提取 mesh 方式                   | 获得纹理方式            |
 | ------ | ------ | --------------------------------------- | ------------------------------ | ----------------------- |
-| 2k2k   | 比较好 | (mesh+texture:)depth、normal、mask、rgb | 高质量深度图 --> 点云 --> mesh | 图片rgb贴图 |
+| 2k2k   | 比较好 | (mesh+texture:)depth、normal、mask、rgb | 高质量深度图 --> 点云 --> mesh | 图片 rgb 贴图 |
 | PIFu   | 比较好 | 点云(obj)、rgb(uv)、mask、camera        | 占用场 --> MC --> 点云,mesh    | 表面颜色场              |
 | NeRF   | 差     | rgb、camera                             | 密度场 --> MC --> 点云,mesh    | 体积颜色场              |
 | NeuS   | 差     | rgb、camera                             | SDF --> MC --> 点云,mesh       | 体积颜色场              |
-| ICON   | 非常好 | rgb+mask、SMPL、法向量估计器DR          | 占用场 --> MC --> 点云,mesh    | 图片rgb贴图             |
-| ECON   | 非常好 | rgb+mask、SMPL、法向量估计器DR          | d-BiNI + SC(shape completion)  | 图片rgb贴图             |
+| ICON   | 非常好 | rgb+mask、SMPL、法向量估计器 DR          | 占用场 --> MC --> 点云,mesh    | 图片 rgb 贴图             |
+| ECON   | 非常好 | rgb+mask、SMPL、法向量估计器 DR          | d-BiNI + SC(shape completion)  | 图片 rgb 贴图             |
 
 <!-- more -->
 
@@ -62,7 +62,21 @@ DepthEstimation
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231002110228.png)
 
 
+## GC-MVSNet
+
+多尺度+多视图几何一致性
+[GC-MVSNet: Multi-View, Multi-Scale, Geometrically-Consistent Multi-View Stereo (arxiv.org)](https://arxiv.org/abs/2310.19583)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231031172920.png)
+
 # NeRF Human Body
+
+## DoubleField
+
+[DoubleField Project Page (liuyebin.com)](http://www.liuyebin.com/dbfield/dbfield.html)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231110163602.png)
+
 
 ## Learning Visibility Field for Detailed 3D Human Reconstruction and Relighting
 
@@ -106,9 +120,9 @@ Compositional Human body
 质量很低
 Idea：
 - 将人体分为几个部分分别训练
-- 将NeRF融合进GAN的生成器中，并与一个判别器进行联合训练
+- 将 NeRF 融合进 GAN 的生成器中，并与一个判别器进行联合训练
 
-cost：
+Cost：
 - 8 NVIDIA V100 Gpus for 5 days
 
 > [EVA3D - Project Page (hongfz16.github.io)](https://hongfz16.github.io/projects/EVA3D.html)
@@ -224,7 +238,7 @@ Reconstructing **Relightable** and **Animatable** Avatars
 [Enric Corona](https://enriccorona.github.io/s3f/)
 [Structured 3D Features for Reconstructing Relightable and Animatable Avatars (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4700589883291336705&noteId=1996756493166029056)
 
-x,3d fea,2d fea --> transformer --> sdf, albedo
+X,3d fea,2d fea --> transformer --> sdf, albedo
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231008174219.png)
 
 ## GTA
@@ -238,9 +252,105 @@ x,3d fea,2d fea --> transformer --> sdf, albedo
 
 [Get3DHuman: Lifting StyleGAN-Human into a 3D Generative Model using Pixel-aligned Reconstruction Priors. (x-zhangyang.github.io)](https://x-zhangyang.github.io/2023_Get3DHuman/)
 
+GAN + PIFus
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023160121.png)
 
-# NeRF
+# Other Implicit Function Method
+
+## IPVNet
+
+[robotic-vision-lab/Implicit-Point-Voxel-Features-Network: Implicit deep neural network for 3D surface reconstruction. (github.com)](https://github.com/robotic-vision-lab/Implicit-Point-Voxel-Features-Network)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231108222654.png)
+
+# Explicit Template Decomposition
+
+## TeCH
+
+[TeCH: Text-guided Reconstruction of Lifelike Clothed Humans (huangyangyi.github.io)](https://huangyangyi.github.io/TeCH/)
+
+DMTet 表示：consists of an explicit body shape grid and an implicit distance field
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231102112309.png)
+
+## CloSET
+
+[CloSET CVPR 2023 (liuyebin.com)](https://www.liuyebin.com/closet/)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231008110803.png)
+
+## Chupa
+
+[Chupa (snuvclab.github.io)](https://snuvclab.github.io/chupa/)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231008164813.png)
+
+# Other
+
+## New NetWork FeatER
+
+[FeatER: An Efficient Network for Human Reconstruction via Feature Map-Based TransformER (zczcwh.github.io)](https://zczcwh.github.io/feater_page/)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231008160659.png)
+
+
+## HF-Avatar
+
+[hzhao1997/HF-Avatar (github.com)](https://github.com/hzhao1997/HF-Avatar?tab=readme-ov-file)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231017182026.png)
+
+
+## 多模态数字人生成(数字人视频)
+
+[An Implementation of Multimodal Fusion System for Intelligent Digital Human Generation](https://arxiv.org/pdf/2310.20251.pdf)
+
+输入：文本、音频、图片
+输出：自定义人物视频(图片/+修改/+风格化)+音频(文本合成+音频音色参考)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231101153147.png)
+
+## Other paper about camera pose
+
+- **USB-NeRF: Unrolling Shutter Bundle Adjusted Neural Radiance Fields** https://arxiv.org/abs/2310.02687
+- How to turn your camera into a perfect pinhole model
+
+# Human Face
+
+## HRN
+
+> [A Hierarchical Representation Network for Accurate and Detailed Face Reconstruction from In-The-Wild Images](HRN.md)
+> [HRN (younglbw.github.io)](https://younglbw.github.io/HRN-homepage/)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230921173632.png)
+
+## 单目 3D 人脸重建
+
+[A Perceptual Shape Loss for Monocular 3D Face Reconstruction](https://arxiv.org/abs/2310.19580)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231031181210.png)
+
+
+## BakedAvatar
+
+[BakedAvatar: Baking Neural Fields for Real-Time Head Avatar Synthesis (arxiv.org)](https://arxiv.org/pdf/2311.05521.pdf)
+
+头部实时新视图生成
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231110155612.png)
+
+## Video
+
+- **3D-Aware Talking-Head Video Motion Transfer** https://arxiv.org/abs/2311.02549
+
+# NeRF OtherObject Reconstruction
+
+## ReTR
+
+[Rethinking Rendering in Generalizable Neural Surface Reconstruction: A Learning-based Solution (yixunliang.github.io)](https://yixunliang.github.io/ReTR/)
+修改论文title：ReTR: Modeling Rendering via Transformer for Generalizable Neural Surface Reconstruction
+
+CNN + 3D Decoder + Transformer + NeRF用深度图监督
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231109094904.png)
 
 ## NISR
 
@@ -259,7 +369,7 @@ x,3d fea,2d fea --> transformer --> sdf, albedo
 
 ## Voxurf
 
-[wutong16/Voxurf: [ ICLR 2023 Spotlight ] Pytorch implementation for "Voxurf: Voxel-based Efficient and Accurate Neural Surface Reconstruction" (github.com)]( https://github.com/wutong16/Voxurf )
+[wutong16/Voxurf: [ ICLR 2023 Spotlight ] Pytorch implementation for "Voxurf: Voxel-based Efficient and Accurate Neural Surface Reconstruction" (github.Com)]( https://github.com/wutong16/Voxurf )
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023163503.png)
 
@@ -277,27 +387,14 @@ x,3d fea,2d fea --> transformer --> sdf, albedo
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231024094322.png)
 
-# Incomplete Image
+## PonderV2
 
-Complete 3D Human Reconstruction from a Single Incomplete Image
+[OpenGVLab/PonderV2: PonderV2: Pave the Way for 3D Foundation Model with A Universal Pre-training Paradigm (github.com)](https://github.com/OpenGVLab/PonderV2)
 
-[Complete 3D Human Reconstruction from a Single Incomplete Image (junyingw.github.io)](https://junyingw.github.io/paper/3d_inpainting/)
+PointCloud 提取特征(点云编码器) + NeRF 渲染图片 + 图片损失优化点云编码器
 
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231008114841.png)
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231107153921.png)
 
-# Explicit Template Decomposition
-
-## CloSET
-
-[CloSET CVPR 2023 (liuyebin.com)](https://www.liuyebin.com/closet/)
-
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231008110803.png)
-
-## Chupa
-
-[Chupa (snuvclab.github.io)](https://snuvclab.github.io/chupa/)
-
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231008164813.png)
 
 # Human Body Shape Completion
 
@@ -305,32 +402,11 @@ Complete 3D Human Reconstruction from a Single Incomplete Image
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231008160354.png)
 
-# New NetWork FeatER
+# Incomplete Image
 
-[FeatER: An Efficient Network for Human Reconstruction via Feature Map-Based TransformER (zczcwh.github.io)](https://zczcwh.github.io/feater_page/)
+Complete 3D Human Reconstruction from a Single Incomplete Image
 
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231008160659.png)
+[Complete 3D Human Reconstruction from a Single Incomplete Image (junyingw.github.io)](https://junyingw.github.io/paper/3d_inpainting/)
 
-
-# Other
-## HF-Avatar
-
-[hzhao1997/HF-Avatar (github.com)](https://github.com/hzhao1997/HF-Avatar?tab=readme-ov-file)
-
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231017182026.png)
-
-
-## other paper about camera pose
-
-- **USB-NeRF: Unrolling Shutter Bundle Adjusted Neural Radiance Fields**https://arxiv.org/abs/2310.02687
-- How to turn your camera into a perfect pinhole model
-
-# Human Face
-
-## HRN
-
-> [A Hierarchical Representation Network for Accurate and Detailed Face Reconstruction from In-The-Wild Images](HRN.md)
-> [HRN (younglbw.github.io)](https://younglbw.github.io/HRN-homepage/)
-
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230921173632.png)
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231008114841.png)
 

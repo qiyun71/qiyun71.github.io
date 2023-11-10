@@ -52,6 +52,15 @@ Follow
 [qinzheng93/GeoTransformer: [CVPR2022] Geometric Transformer for Fast and Robust Point Cloud Registration (github.com)](https://github.com/qinzheng93/GeoTransformer?tab=readme-ov-file)
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231018113631.png)
 
+
+## Fusion of cross-view images
+
+[3D Reconstruction through Fusion of Cross-View Images (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4546340788354310145&noteId=2015534437671973888)
+
+多张卫星图片配准
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231022110219.png)
+
+
 # PointCloud Surface Reconstruction
 
 [MeshSet — PyMeshLab documentation](https://pymeshlab.readthedocs.io/en/2022.2/classes/meshset.html)
@@ -67,3 +76,7 @@ Use pymeshlab to **screened Poisson surface construction**
 [Flexible Isosurface Extraction for Gradient-Based Mesh Optimization (FlexiCubes) (nvidia.com)](https://research.nvidia.com/labs/toronto-ai/flexicubes/)
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023164911.png)
+
+## DualMesh-UDF
+
+[Surface Extraction from Neural Unsigned Distance Fields (cong-yi.github.io)](https://cong-yi.github.io/projects/dualmeshudf/)

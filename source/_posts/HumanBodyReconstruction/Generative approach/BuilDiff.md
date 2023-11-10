@@ -43,7 +43,7 @@ categories: HumanBodyReconstruction/Generative approach
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023200406.png)
 
 - 输入 HxW 图像，图像自编码器：ResNet-34
-- 编码后大小为 H/32 x W/32，然后馈送到 stacked dilated convolution layers ($D^{*}$)
+- 编码后大小为 H/32 x W/32，然后馈送到 [stacked dilated convolution layers](https://readpaper.com/pdf-annotate/note?pdfId=4500174562083364865&noteId=2027677837097375232) ($D^{*}$)
   - $D^{*}$ 有四个 dilated convolution layers，膨胀率分别为 1、2、4、8
 - 在解码阶段有两种处理方式
   - 通过转置卷积层，可以将特征映射上采样到与输入图像 i 大小相同的 i
