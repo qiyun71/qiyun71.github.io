@@ -8,6 +8,32 @@
         "type": "tabs",
         "children": [
           {
+            "id": "f4beb177fb699df8",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "HumanBodyReconstruction/Other Paper Reconstruction.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "79401b0b3730fe76",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "HumanBodyReconstruction/Generative approach/Generative approach Review.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              }
+            }
+          },
+          {
             "id": "d1728530743eb5d3",
             "type": "leaf",
             "state": {
@@ -21,12 +47,12 @@
             }
           },
           {
-            "id": "ea5d8b6dd3bbb766",
+            "id": "012c51b56531d280",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "HumanBodyReconstruction/Other Paper Reconstruction.md",
+                "file": "HumanBodyReconstruction/ImplicitFunction/DoubleField.md",
                 "mode": "source",
                 "backlinks": false,
                 "source": false
@@ -34,19 +60,33 @@
             }
           },
           {
-            "id": "6c94948db74da26c",
+            "id": "cd90de63db4ce1a2",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "HumanBodyReconstruction/Generative approach/Generative approach Review.md",
+                "file": "HumanBodyReconstruction/Generative approach/HaP.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "7ed09708ab2fd89c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "HumanBodyReconstruction/Generative approach/BuilDiff.md",
                 "mode": "source",
                 "backlinks": false,
                 "source": false
               }
             }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -66,7 +106,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "HumanBodyReconstruction/Muti-view Human Body Reconstruction.md"
+                "file": "HumanBodyReconstruction/ImplicitFunction/DoubleField.md"
               }
             }
           },
@@ -100,27 +140,12 @@
             }
           },
           {
-            "id": "15b0ca6b5a59a5e6",
-            "type": "leaf",
-            "state": {
-              "type": "search",
-              "state": {
-                "query": "",
-                "matchingCase": true,
-                "explainSearch": false,
-                "collapseAll": false,
-                "extraContext": false,
-                "sortOrder": "alphabetical"
-              }
-            }
-          },
-          {
             "id": "d6cc3bfe65089281",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "HumanBodyReconstruction/Muti-view Human Body Reconstruction.md",
+                "file": "HumanBodyReconstruction/ImplicitFunction/DoubleField.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -137,7 +162,7 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "HumanBodyReconstruction/Muti-view Human Body Reconstruction.md",
+                "file": "HumanBodyReconstruction/ImplicitFunction/DoubleField.md",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -180,8 +205,24 @@
               "type": "recent-files",
               "state": {}
             }
+          },
+          {
+            "id": "15b0ca6b5a59a5e6",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "Get3D",
+                "matchingCase": true,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -234,43 +275,43 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "d1728530743eb5d3",
+  "active": "012c51b56531d280",
   "lastOpenFiles": [
+    "HumanBodyReconstruction/ImplicitFunction/DoubleField.md.baiduyun.uploading.cfg",
+    "HumanBodyReconstruction/Muti-view Human Body Reconstruction.md",
     "HumanBodyReconstruction/Muti-view Human Body Reconstruction.md.baiduyun.uploading.cfg",
+    "HumanBodyReconstruction/ImplicitFunction/DoubleField.md",
+    "HumanBodyReconstruction/Generative approach/HaP.md",
+    "HumanBodyReconstruction/Other Paper Reconstruction.md",
+    "HumanBodyReconstruction/ImplicitFunction/未命名.md.baiduyun.uploading.cfg",
+    "HumanBodyReconstruction/Other Paper Reconstruction.md.baiduyun.uploading.cfg",
     "HumanBodyReconstruction/Generative approach/Generative approach Review.md",
     "HumanBodyReconstruction/Generative approach/Generative approach Review.md.baiduyun.uploading.cfg",
-    "HumanBodyReconstruction/Other Paper Reconstruction.md",
-    "HumanBodyReconstruction/Muti-view Human Body Reconstruction.md",
-    "HumanBodyReconstruction/BodyOtherPart/HRN.md",
-    "HumanBodyReconstruction/Other Paper Reconstruction.md.baiduyun.uploading.cfg",
+    "HumanBodyReconstruction/Generative approach/BuilDiff.md",
     "Other/Mine/Tools.md",
     "Other/Mine/Tools.md.baiduyun.uploading.cfg",
+    "Learn/Learn-PyTorch.md",
+    "NeRF/NeRF/Datasets.md",
+    "NeRF/NeRF/Datasets.md.baiduyun.uploading.cfg",
+    "HumanBodyReconstruction/Generative approach/HaP.md.baiduyun.uploading.cfg",
+    "HumanBodyReconstruction/Generative approach/DMTet.md",
     "HumanBodyReconstruction/Generative approach/Diffusion Models.md",
+    "HumanBodyReconstruction/Generative approach/未命名.md.baiduyun.uploading.cfg",
+    "HumanBodyReconstruction/Generative approach/CCD-3DR.md",
+    "HumanBodyReconstruction/Generative approach/CCD-3DR.md.baiduyun.uploading.cfg",
+    "Learn/Learn-Algo.md",
+    "HumanBodyReconstruction/BodyOtherPart/HRN.md",
     "HumanBodyReconstruction/Generative approach/RODIN.md",
-    "HumanBodyReconstruction/Generative approach/BuilDiff.md",
-    "HumanBodyReconstruction/Generative approach/Diffusion Models.md.baiduyun.uploading.cfg",
     "NeRF/NeRF-review.md",
-    "NeRF/NeRF-review.md.baiduyun.uploading.cfg",
     "NeRF/Review/A Review of Deep Learning-Powered Mesh Reconstruction Methods.md",
     "Learn/Learn-Python_plt.md",
-    "Learn/Learn-Python_plt.md.baiduyun.uploading.cfg",
     "Learn/Learn-Python_OPEN_CV.md",
     "HumanBodyReconstruction/PointCloud/PointCloud Review.md",
     "Reports/2023-10-30.md",
     "HumanBodyReconstruction/Depth&Normal Estimation/MVSNet.md",
     "HumanBodyReconstruction/Generative approach/DiT-3D.md",
     "HumanBodyReconstruction/ImplicitFunction/TransHuman.md",
-    "HumanBodyReconstruction/PointCloud/PointCloud Review.md.baiduyun.uploading.cfg",
-    "HumanBodyReconstruction/Depth&Normal Estimation/2K2K.md.baiduyun.uploading.cfg",
     "HumanBodyReconstruction/ImplicitFunction/PIFu.md",
-    "HumanBodyReconstruction/Depth&Normal Estimation/2K2K.md",
-    "HumanBodyReconstruction/Math.md",
-    "HumanBodyReconstruction/Generative approach/BuilDiff.md.baiduyun.uploading.cfg",
-    "HumanBodyReconstruction/Generative approach/SG-GAN.md",
-    "Learn/Learn-Hexo2.md",
-    "Reports/2023-10-30_冲突文件_Qiyun_20231030164538.md",
-    "Other/Mine/Git command.md",
-    "Other/Mine/Stable Diffusion.md",
     "NeRF/NeRF.canvas",
     "未命名.canvas",
     "Pasted image 20230718132040.png",

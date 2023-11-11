@@ -108,8 +108,23 @@ Objaverse-XL is an open dataset of over 10 million 3D objects!
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023161713.png)
 
+# ABC Dataset
+
+A Big CAD Model Dataset
+[News | ABC Dataset (deep-geometry.github.io)](https://deep-geometry.github.io/abc-dataset/)
+一百万个计算机辅助设计 (CAD) 模型的集合，用于研究几何深度学习方法和应用。每个模型都是显式参数化曲线和曲面的集合，为微分量、面片分割、几何特征检测和形状重建提供基本事实。对曲面和曲线的参数化描述进行采样可以生成不同格式和分辨率的数据，从而能够对各种几何学习算法进行公平比较
+
+![img.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231109094128.png)
+
+
 # NeuralLabeling 工具箱
 
 > [NeuralLabeling: A versatile toolset for labeling vision datasets using Neural Radiance Fields](NeuralLabeling.md) > [NeuralLabeling: A versatile toolset for labeling vision datasets using Neural Radiance Fields (florise.github.io)](https://florise.github.io/neural_labeling_web/)
 
 ![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230925144627.png)
+
+# MuSHRoom
+
+[MuSHRoom: Multi-Sensor Hybrid Room Dataset for Joint 3D Reconstruction and Novel View Synthesis](https://arxiv.org/abs/2311.02778)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231108222956.png)

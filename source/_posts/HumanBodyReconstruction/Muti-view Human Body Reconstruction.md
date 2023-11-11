@@ -16,7 +16,7 @@ Terminology/Jargon
 
 Application
 
-- 三维重建设备：手持扫描仪或360 度相机矩阵（成本高）
+- 三维重建设备：手持扫描仪或 360 度相机矩阵（成本高）
 - [复刻一个迷你版的自己](https://www.yangtse.com/content/1604507html)
 
 Method
@@ -29,10 +29,11 @@ Method
 
 # 人体三维重建方法综述
 
-**方法0**：训练隐式函数表示
+**方法 0**：训练隐式函数表示
 (NeRF、PIFu、ICON)
+**DoubleField**(多视图)
 
-**方法 1**：深度估计+多视图深度图融合or多视图点云配准
+**方法 1**：深度估计+多视图深度图融合 or 多视图点云配准
 (2K2K-based i.e.Depth&Normal Estimation)
 
 深度估计: 2K2K
@@ -49,7 +50,7 @@ Generative approach(Muti-view image、pose (keypoints)... --> PointCloud)
 1. 扩散模型
   1. 直接生成点云 *BuilDiff*
   2. 生成三平面特征+NeRF *RODIN*
-2. GAN网络生成点云 *SG-GAN*
+2. GAN 网络生成点云 *SG-GAN*
 3. 生成一致性图片+NeRF
 
 - 参考 [BuilDiff](https://github.com/weiyao1996/BuilDiff)，构建网络([PVCNNs](https://readpaper.com/pdf-annotate/note?pdfId=4544669809538392065&noteId=2018413897297176576) 单类训练)
@@ -57,6 +58,9 @@ Generative approach(Muti-view image、pose (keypoints)... --> PointCloud)
   - 是否依靠 SMPL，根据 LBS(Linear Blending Skinning)将人体 mesh 变形到规范化空间
     - [Video2Avatar](https://moygcc.github.io/vid2avatar/) (NeRF-based)将整个人体规范化后采样
     - [EVA3D](https://hongfz16.github.io/projects/EVA3D) 将 NeRF 融入 GAN 生成图片，并与真实图片一同训练判别器(人体规范化后分块 NeRF)
+
+**方法 3**：组合深度估计 + 生成式方法
+[HaP](/HumanBodyReconstruction/Generative%20approach/HaP)：深度估计+SMPL 估计+Diffusion Model 精细化
 
 # 三维重建方法流程对比
 
@@ -78,9 +82,9 @@ $\hat{C}=\sum_{i=1}^n T_i\alpha_i c_i$， $T_i=\prod_{j=1}^{i-1}(1-\alpha_j)$ �
 
 ### PIFu
 
-![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230928170950.png)
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230928170950.png)
 
-将输入图像中每个像素的特征通过MLP映射为占用场
+将输入图像中每个像素的特征通过 MLP 映射为占用场
 
 ## Depth&Normal Estimation
 
@@ -116,6 +120,6 @@ $\mathbf{D}^h=\hat{\mathbf{D}}^h\odot\hat{\mathbf{M}}^h$，$\hat{\mathbf{D}}^h,\
 
 ### GAN
 
-## Paper
+# Paper
 
 姿势估计可能有多种解决方案，但不准确的姿势可能会导致低分辨率的几何形状

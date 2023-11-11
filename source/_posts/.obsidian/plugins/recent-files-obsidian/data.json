@@ -1,36 +1,64 @@
 {
   "recentFiles": [
     {
+      "basename": "DoubleField",
+      "path": "HumanBodyReconstruction/ImplicitFunction/DoubleField.md"
+    },
+    {
       "basename": "Muti-view Human Body Reconstruction",
       "path": "HumanBodyReconstruction/Muti-view Human Body Reconstruction.md"
     },
     {
-      "basename": "Generative approach Review",
-      "path": "HumanBodyReconstruction/Generative approach/Generative approach Review.md"
+      "basename": "HaP",
+      "path": "HumanBodyReconstruction/Generative approach/HaP.md"
     },
     {
       "basename": "Other Paper Reconstruction",
       "path": "HumanBodyReconstruction/Other Paper Reconstruction.md"
     },
     {
-      "basename": "HRN",
-      "path": "HumanBodyReconstruction/BodyOtherPart/HRN.md"
+      "basename": "Generative approach Review",
+      "path": "HumanBodyReconstruction/Generative approach/Generative approach Review.md"
+    },
+    {
+      "basename": "BuilDiff",
+      "path": "HumanBodyReconstruction/Generative approach/BuilDiff.md"
     },
     {
       "basename": "Tools",
       "path": "Other/Mine/Tools.md"
     },
     {
+      "basename": "Learn-PyTorch",
+      "path": "Learn/Learn-PyTorch.md"
+    },
+    {
+      "basename": "Datasets",
+      "path": "NeRF/NeRF/Datasets.md"
+    },
+    {
+      "basename": "DMTet",
+      "path": "HumanBodyReconstruction/Generative approach/DMTet.md"
+    },
+    {
       "basename": "Diffusion Models",
       "path": "HumanBodyReconstruction/Generative approach/Diffusion Models.md"
     },
     {
-      "basename": "RODIN",
-      "path": "HumanBodyReconstruction/Generative approach/RODIN.md"
+      "basename": "CCD-3DR",
+      "path": "HumanBodyReconstruction/Generative approach/CCD-3DR.md"
     },
     {
-      "basename": "BuilDiff",
-      "path": "HumanBodyReconstruction/Generative approach/BuilDiff.md"
+      "basename": "Learn-Algo",
+      "path": "Learn/Learn-Algo.md"
+    },
+    {
+      "basename": "HRN",
+      "path": "HumanBodyReconstruction/BodyOtherPart/HRN.md"
+    },
+    {
+      "basename": "RODIN",
+      "path": "HumanBodyReconstruction/Generative approach/RODIN.md"
     },
     {
       "basename": "NeRF-review",
@@ -125,10 +153,6 @@
       "path": "NeRF/CameraPose/Pose Estimation Review.md"
     },
     {
-      "basename": "Datasets",
-      "path": "NeRF/NeRF/Datasets.md"
-    },
-    {
       "basename": "Metrics",
       "path": "NeRF/NeRF/Metrics.md"
     },
@@ -175,30 +199,6 @@
     {
       "basename": "Sampling",
       "path": "NeRF/NeRF/Sampling.md"
-    },
-    {
-      "basename": "Encoding",
-      "path": "NeRF/NeRF/Encoding.md"
-    },
-    {
-      "basename": "Math",
-      "path": "NeRF/NeRF/Math.md"
-    },
-    {
-      "basename": "PlankAssembly",
-      "path": "NeRF/SurfaceReconstruction/PlankAssembly.md"
-    },
-    {
-      "basename": "GeoTransformer",
-      "path": "HumanBodyReconstruction/PointCloud/GeoTransformer.md"
-    },
-    {
-      "basename": "Greedy Grid Search",
-      "path": "HumanBodyReconstruction/PointCloud/Greedy Grid Search.md"
-    },
-    {
-      "basename": "SGHR",
-      "path": "HumanBodyReconstruction/PointCloud/SGHR.md"
     }
   ],
   "omittedPaths": [],

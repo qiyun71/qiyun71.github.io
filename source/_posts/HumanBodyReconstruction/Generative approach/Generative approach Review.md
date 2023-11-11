@@ -1,6 +1,6 @@
 ---
 title: Generative approach Review
-date: 2023-10-24 11:56:04
+date: 2023-10-24T11:56:04.000Z
 tags:
   - Diffusion
   - GAN
@@ -8,17 +8,18 @@ tags:
   - Review
 categories: HumanBodyReconstruction/Generative approach
 top: true
+date updated: 2023-11-10T16:32:59.000Z
 ---
 
-| Paper     | Model                  | Input        | Parameter/Pnum | GPU         |
-| --------- | ---------------------- | ------------ | -------------- | ----------- |
-| DiT-3D    | Diffusion Transformers | Voxelized PC |                |             |
-| PointFlow | AE flow-based          | PointCloud   | 1.61M          |             |
-| FlowGAN   | GAN flow-based         | Single Image | N = 2500       | A40 45GB    |
-| BuilDiff  | Diffusion models       | Single Image | 1024 to 4096   | A40 45GB    |
-| CCD-3DR   | CDPM                   | Single Image | 8192           | 3090Ti 24GB |
-| SG-GAN    | SG-GAN                 | Single Image |                |             |
-|           |                        |              |                |             |
+| Paper     | Model                          | Input        | Parameter/Pnum | GPU         |
+| --------- | ------------------------------ | ------------ | -------------- | ----------- |
+| DiT-3D    | Diffusion Transformers         | Voxelized PC |                |             |
+| PointFlow | AE flow-based                  | PointCloud   | 1.61M          |             |
+| FlowGAN   | GAN flow-based                 | Single Image | N = 2500       | A40 45GB    |
+| BuilDiff  | Diffusion models               | Single Image | 1024 to 4096   | A40 45GB    |
+| CCD-3DR   | CDPM                           | Single Image | 8192           | 3090Ti 24GB |
+| SG-GAN    | SG-GAN                         | Single Image |                |             |
+| **HaP**   | Diffusion+SMPL+DepthEstimation | Single Image | 10000          | 4x3090Ti    |
 
 <!-- more -->
 
@@ -50,8 +51,17 @@ $\begin{aligned}\mathcal{L}_{CD}&=\sum_{y'\in Y'}min_{y\in Y}||y'-y||_2^2+\sum_{
 推土距离 EMD (Earth Mover's distance)↓
 $\mathcal{L}_{EMD}=min_{\phi:Y\rightarrow Y^{\prime}}\sum_{x\in Y}||x-\phi(x)||_{2}$ , φ indicates a parameter of bijection.
 
-
 ## Diffusion Models
+
+### Human as Points(HaP)
+
+[yztang4/HaP (github.com)](https://github.com/yztang4/HaP)
+[Human as Points: Explicit Point-based 3D Human Reconstruction from Single-view RGB Images(arxiv.org)](https://arxiv.org/pdf/2311.02892.pdf)
+[Human as Points—— Explicit Point-based 3D Human Reconstruction from Single-view RGB Images.pdf (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=2039003253707810304&noteId=2039256760006808832)
+
+深度估计+SMPL 估计得到两个稀疏点云，输入进 Diffusion Model 进行精细化生成
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231107193647.png)
 
 ### BuilDiff
 
@@ -67,6 +77,7 @@ $\mathcal{L}_{EMD}=min_{\phi:Y\rightarrow Y^{\prime}}\sum_{x\in Y}||x-\phi(x)||_
 [RODIN Diffusion (microsoft.com)](https://3d-avatar-diffusion.microsoft.com/)
 [Rodin: A Generative Model for Sculpting 3D Digital Avatars Using Diffusion (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4700249091733454849&noteId=2024885528733762560)
 
+微软大数据集 + Diffusion + NeRF Tri-plane
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231028214552.png)
 
 ### CCD-3DR
@@ -125,6 +136,22 @@ Diffusion 一致性出图 + Geometry Fusion (novel geometric-aware optimization 
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231031184253.png)
 
+### LDM3D-VR
+
+[LDM3D-VR: Latent Diffusion Model for 3D VR (arxiv.org)](https://arxiv.org/abs/2311.03226)
+[视频演示T.LY URL Shortener](https://t.ly/tdi2)
+
+从给定的文本提示生成图像和深度图数据，此外开发了一个 DepthFusion 的应用程序，它使用生成的 RGB 图像和深度图来使用 TouchDesigner 创建身临其境的交互式 360°视图体验
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231108223206.png)
+
+### Control3D
+
+[Control3D: Towards Controllable Text-to-3D Generation](https://arxiv.org/pdf/2311.05461.pdf)
+
+草图+文本条件生成 3D
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231110160231.png)
+
 ### Etc
 
 Colored PC [3D Colored Shape Reconstruction from a Single RGB Image through Diffusion (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4723055356805120001&noteId=2014681937165010176)
@@ -162,7 +189,6 @@ Colored PC [3D Colored Shape Reconstruction from a Single RGB Image through Diff
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231022101838.png)
 
-
 ### Deep3DSketch+
 
 [Deep3DSketch+: Rapid 3D Modeling from Single Free-Hand Sketches (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4803935841323843585&noteId=2028490687877420544)
@@ -171,13 +197,13 @@ Colored PC [3D Colored Shape Reconstruction from a Single RGB Image through Diff
 
 ### Reality3DSketch
 
-[[2310.18148] Reality3DSketch: Rapid 3D Modeling of Objects from Single Freehand Sketches (arxiv.Org)]( https://arxiv.org/abs/2310.18148 )
+[[2310.18148] Reality3DSketch: Rapid 3D Modeling of Objects from Single Freehand Sketches (arxiv.Org)](https://arxiv.org/abs/2310.18148)
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231031092703.png)
 
 ### Deep3DSketch+\\+
 
-[[2310.18178] Deep3DSketch+\+: High-Fidelity 3D Modeling from Single Free-hand Sketches (arxiv.Org)]( https://arxiv.org/abs/2310.18178 )
+[[2310.18178] Deep3DSketch++: High-Fidelity 3D Modeling from Single Free-hand Sketches (arxiv.Org)](https://arxiv.org/abs/2310.18178)
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231031093421.png)
 
@@ -188,13 +214,11 @@ Colored PC [3D Colored Shape Reconstruction from a Single RGB Image through Diff
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023154445.png)
 
-
 ### AG3D
 
 [AG3D: Learning to Generate 3D Avatars from 2D Image Collections (zj-dong.github.io)](https://zj-dong.github.io/AG3D/)
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023160511.png)
-
 
 ## NFs (Normalizing Flows)
 
@@ -221,7 +245,7 @@ Colored PC [3D Colored Shape Reconstruction from a Single RGB Image through Diff
 
 ### SimIPU
 
-[zhyever/SimIPU: [AAAI 2021] Official Implementation of "SimIPU: Simple 2D Image and 3D Point Cloud Unsupervised Pre-Training for Spatial-Aware Visual Representations" (github. Com)]( https://github.com/zhyever/SimIPU )
+[zhyever/SimIPU: [AAAI 2021] Official Implementation of "SimIPU: Simple 2D Image and 3D Point Cloud Unsupervised Pre-Training for Spatial-Aware Visual Representations" (github. Com)](https://github.com/zhyever/SimIPU)
 
 雷达点云+图片
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231022103332.png)
@@ -240,13 +264,16 @@ MmWave Radar + GAN
 ImplicitFunction(NeRF)
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231022103225.png)
 
-
 ### Nvdiffrec
+
+网格优化比 mlp 优化难，速度慢 from NeRF wechat
+
+- 还有一个 nvdiffrcmc，效果可能好一些 Shape, Light, and Material Decomposition from Images using Monte Carlo Rendering and Denoising
+- 后续还有个 NeuManifold: Neural Watertight Manifold Reconstruction with Efficient and High-Quality Rendering Support，应该比 nvdiffrec 要好
 
 [NVlabs/nvdiffrec: Official code for the CVPR 2022 (oral) paper "Extracting Triangular 3D Models, Materials, and Lighting From Images". (github.com)](https://github.com/NVlabs/nvdiffrec)
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023154513.png)
-
 
 ### HyperHuman
 
@@ -277,7 +304,6 @@ MVS+NeRF
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023171814.png)
 
-
 ### Pix2pix3D
 
 [pix2pix3D: 3D-aware Conditional Image Synthesis (cmu.edu)](http://www.cs.cmu.edu/~pix2pix3D/)
@@ -285,3 +311,26 @@ MVS+NeRF
 一致性图像生成+NeRF
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231105173051.png)
+
+### Consistent4D
+
+[Consistent4D (consistent4d.github.io)](https://consistent4d.github.io/)
+
+单目视频生成 4D 动态物体，Diffusion Model 生成多视图(时空)一致性的图像
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231107192857.png)
+
+### ConRad
+
+[ConRad: Image Constrained Radiance Fields for 3D Generation from a Single Image](https://arxiv.org/pdf/2311.05230.pdf)
+[ConRad: Image Constrained Radiance Fields for 3D Generation from a Single Image (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=2043334481936337152&noteId=2043393675895077376)
+
+多视图一致
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231110160631.png)
+
+### LRM
+
+[LRM: Large Reconstruction Model for Single Image to 3D (scalei3d.github.io)](https://scalei3d.github.io/LRM/)
+
+大模型 Transformer(5 亿个可学习参数) + 5s 单视图生成 3D
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231110162856.png)
