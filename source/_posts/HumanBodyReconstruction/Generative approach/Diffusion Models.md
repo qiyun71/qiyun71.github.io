@@ -151,3 +151,12 @@ KL(p,q)& =\int[\left.p(x)\log(p(x))-p(x)\log(q(x))\right]dx  \\
 从$\mathcal{N}(0,1)$中随机采样出来z，然后对z做$\mu + z * \sigma$ 相当于从高斯分布$\mathcal{N}(\mu,\sigma)$中采样
 
 
+# Stable Diffusion
+
+## 采样器
+
+[Stable diffusion采样器全解析，30种采样算法教程](https://www.bilibili.com/video/BV1FN411i7sB/)
+DPM++2M Karras，收敛+速度快+质量 OK
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231022195103.png)
+

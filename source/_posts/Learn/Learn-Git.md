@@ -97,7 +97,22 @@ git push
 # 新建仓库
 
 
-
 使用token链接仓库信息
 `git remote set-url origin https://<your_token>@github.com/<USERNAME>/<REPO>.git`
 
+
+# 用token克隆私有仓库
+git clone from token:
+
+```
+git clone https://NeRF-Mine:xxxtokenxxx@github.com/qiyun71/NeRF-Mine.git
+
+tensorboard --port 6007 --logdir /root/tf-logs
+```
+
+git remote remove origin
+git remote add origin path_repo
+
+配置全局账户
+- git config --global user.name ...
+- git config --global user.email ...

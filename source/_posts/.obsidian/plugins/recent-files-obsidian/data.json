@@ -1,8 +1,20 @@
 {
   "recentFiles": [
     {
+      "basename": "Muti-view Human Body Reconstruction",
+      "path": "HumanBodyReconstruction/Muti-view Human Body Reconstruction.md"
+    },
+    {
+      "basename": "Diffusion Models",
+      "path": "HumanBodyReconstruction/Generative approach/Diffusion Models.md"
+    },
+    {
       "basename": "Tools",
       "path": "Other/Mine/Tools.md"
+    },
+    {
+      "basename": "Learn-Git",
+      "path": "Learn/Learn-Git.md"
     },
     {
       "basename": "2023-10-30",
@@ -61,20 +73,12 @@
       "path": "HumanBodyReconstruction/ImplicitFunction/DoubleField.md"
     },
     {
-      "basename": "Muti-view Human Body Reconstruction",
-      "path": "HumanBodyReconstruction/Muti-view Human Body Reconstruction.md"
-    },
-    {
       "basename": "Other Paper Reconstruction",
       "path": "HumanBodyReconstruction/Other Paper Reconstruction.md"
     },
     {
       "basename": "Generative approach Review",
       "path": "HumanBodyReconstruction/Generative approach Review.md"
-    },
-    {
-      "basename": "Diffusion Models",
-      "path": "HumanBodyReconstruction/Generative approach/Diffusion Models.md"
     },
     {
       "basename": "HaP",
@@ -165,14 +169,6 @@
       "path": "Learn/Learn-Hexo2.md"
     },
     {
-      "basename": "Git command",
-      "path": "Other/Mine/Git command.md"
-    },
-    {
-      "basename": "Stable Diffusion",
-      "path": "Other/Mine/Stable Diffusion.md"
-    },
-    {
       "basename": "FlowGAN",
       "path": "HumanBodyReconstruction/Generative approach/FlowGAN.md"
     },
@@ -195,10 +191,6 @@
     {
       "basename": "Pose Estimation Review",
       "path": "NeRF/CameraPose/Pose Estimation Review.md"
-    },
-    {
-      "basename": "Metrics",
-      "path": "NeRF/NeRF/Metrics.md"
     }
   ],
   "omittedPaths": [],
