@@ -23,7 +23,7 @@ Method
 
 1. **Depth&Normal Estimation**(2K2K) [Other Paper Reconstruction](/HumanBodyReconstruction/Other%20Paper%20Reconstruction)
 2. ~~**Implicit Function**(PIFu or NeRF)~~ [Other Paper Reconstruction](/HumanBodyReconstruction/Other%20Paper%20Reconstruction)
-3. **Generative approach**  [Generative approach](/HumanBodyReconstruction/Generative%20approach/Generative%20approach%20Review)
+3. **Generative approach**  [Generative approach](Generative%20approach%20Review.md)
 
 <!-- more -->
 
@@ -50,6 +50,7 @@ Generative approach(Muti-view image、pose (keypoints)... --> PointCloud)
 1. 扩散模型
   1. 直接生成点云 *BuilDiff*
   2. 生成三平面特征+NeRF *RODIN*
+  3. 多视图Diffusion [DiffuStereo](https://liuyebin.com/diffustereo/diffustereo.html)
 2. GAN 网络生成点云 *SG-GAN*
 3. 生成一致性图片+NeRF
 
@@ -60,7 +61,7 @@ Generative approach(Muti-view image、pose (keypoints)... --> PointCloud)
     - [EVA3D](https://hongfz16.github.io/projects/EVA3D) 将 NeRF 融入 GAN 生成图片，并与真实图片一同训练判别器(人体规范化后分块 NeRF)
 
 **方法 3**：组合深度估计 + 生成式方法
-[HaP](/HumanBodyReconstruction/Generative%20approach/HaP)：深度估计+SMPL 估计+Diffusion Model 精细化
+[HaP](https://github.com/yztang4/HaP)：深度估计+SMPL 估计+Diffusion Model 精细化
 
 # 三维重建方法流程对比
 

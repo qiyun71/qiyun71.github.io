@@ -6,7 +6,7 @@ tags:
   - GAN
   - Flow
   - Review
-categories: HumanBodyReconstruction/Generative approach
+categories: HumanBodyReconstruction
 top: true
 date updated: 2023-11-10T16:32:59.000Z
 ---
@@ -62,6 +62,12 @@ $\mathcal{L}_{EMD}=min_{\phi:Y\rightarrow Y^{\prime}}\sum_{x\in Y}||x-\phi(x)||_
 深度估计+SMPL 估计得到两个稀疏点云，输入进 Diffusion Model 进行精细化生成
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231107193647.png)
+
+### DiffuStereo
+
+[DiffuStereo Project Page (liuyebin.com)](https://liuyebin.com/diffustereo/diffustereo.html)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231111120652.png)
 
 ### BuilDiff
 
