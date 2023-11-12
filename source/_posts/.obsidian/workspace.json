@@ -58,9 +58,22 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "e916da0c69f6a77c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "HumanBodyReconstruction/Generative approach Review.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -80,7 +93,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "HumanBodyReconstruction/Muti-view Human Body Reconstruction.md"
+                "file": "HumanBodyReconstruction/Generative approach/DiffuStereo.md"
               }
             }
           },
@@ -119,7 +132,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "HumanBodyReconstruction/Muti-view Human Body Reconstruction.md",
+                "file": "HumanBodyReconstruction/Generative approach/DiffuStereo.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -136,7 +149,7 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "HumanBodyReconstruction/Muti-view Human Body Reconstruction.md",
+                "file": "HumanBodyReconstruction/Generative approach/DiffuStereo.md",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -186,7 +199,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "Get3D",
+                "query": "Wonder3D",
                 "matchingCase": true,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -200,7 +213,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 206.5
+    "width": 200
   },
   "right": {
     "id": "030ccac2adcfb23a",
@@ -249,15 +262,21 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "0896411c534cdabd",
+  "active": "284c4c521bf4c1db",
   "lastOpenFiles": [
-    "HumanBodyReconstruction/Generative approach/Diffusion Models.md",
-    "Other/Mine/Tools.md",
+    "HumanBodyReconstruction/Generative approach Review.md",
     "HumanBodyReconstruction/Muti-view Human Body Reconstruction.md",
+    "HumanBodyReconstruction/Generative approach/DiffuStereo.md",
+    "HumanBodyReconstruction/Generative approach/HaP.md",
+    "HumanBodyReconstruction/ImplicitFunction/DoubleField.md",
+    "HumanBodyReconstruction/Generative approach/Diffusion Models.md",
+    "Other/Mine/Tools.md.baiduyun.uploading.cfg",
+    "Learn/Learn-Git.md.baiduyun.uploading.cfg",
+    "HumanBodyReconstruction/Generative approach/Diffusion Models.md.baiduyun.uploading.cfg",
+    "Other/Mine/Tools.md",
     "Other/Mine/Stable Diffusion.md",
     "Learn/Learn-Git.md",
     "Other/Mine/Git command.md",
-    "Other/Mine/Tools.md.baiduyun.uploading.cfg",
     "Reports/2023-10-30.md",
     "Reports/2023-10-20-Report.md",
     "Reports/2023-10.md",
@@ -271,23 +290,16 @@
     "Reports/2023-07-04.md",
     "Reports/2023-06-19.md",
     "Reports/2023-10-30_冲突文件_Qiyun_20231030164538.md",
-    "HumanBodyReconstruction/Generative approach/DiffuStereo.md",
     "NeRF/NeRF.canvas.baiduyun.uploading.cfg",
     "NeRF/NeRF.canvas",
     "HumanBodyReconstruction/Generative approach/DiffuStereo.md.baiduyun.uploading.cfg",
-    "HumanBodyReconstruction/ImplicitFunction/DoubleField.md",
     "HumanBodyReconstruction/Other Paper Reconstruction.md.baiduyun.uploading.cfg",
     "HumanBodyReconstruction/Other Paper Reconstruction.md",
-    "HumanBodyReconstruction/Generative approach Review.md",
     "HumanBodyReconstruction/Generative approach/未命名.md.baiduyun.uploading.cfg",
     "HumanBodyReconstruction/Generative approach Review.md.baiduyun.uploading.cfg",
     "HumanBodyReconstruction/Muti-view Human Body Reconstruction.md.baiduyun.uploading.cfg",
-    "HumanBodyReconstruction/Generative approach/HaP.md",
     "HumanBodyReconstruction/ImplicitFunction/DoubleField.md.baiduyun.uploading.cfg",
     "HumanBodyReconstruction/Generative approach/RODIN.md",
-    "HumanBodyReconstruction/Generative approach/BuilDiff.md",
-    "HumanBodyReconstruction/Generative approach/SG-GAN.md.baiduyun.uploading.cfg",
-    "HumanBodyReconstruction/Generative approach/Diffusion Models.md.baiduyun.uploading.cfg",
     "未命名.canvas",
     "Pasted image 20230718132040.png",
     "NeRF/Surface Reconstruction/1.canvas",

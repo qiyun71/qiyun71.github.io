@@ -53,6 +53,15 @@ $\mathcal{L}_{EMD}=min_{\phi:Y\rightarrow Y^{\prime}}\sum_{x\in Y}||x-\phi(x)||_
 
 ## Diffusion Models
 
+### DiffuStereo
+
+[DiffuStereo Project Page (liuyebin.com)](https://liuyebin.com/diffustereo/diffustereo.html)
+
+多视图
+DoubleField粗网格估计 + Diffusion生成高质量Disparity Flow和Depth + ICP配准（点云融合）
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231111120652.png)
+
 ### Human as Points(HaP)
 
 [yztang4/HaP (github.com)](https://github.com/yztang4/HaP)
@@ -63,11 +72,11 @@ $\mathcal{L}_{EMD}=min_{\phi:Y\rightarrow Y^{\prime}}\sum_{x\in Y}||x-\phi(x)||_
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231107193647.png)
 
-### DiffuStereo
+### HumanNorm
 
-[DiffuStereo Project Page (liuyebin.com)](https://liuyebin.com/diffustereo/diffustereo.html)
+[HumanNorm](https://humannorm.github.io/)
 
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231111120652.png)
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231111214245.png)
 
 ### BuilDiff
 

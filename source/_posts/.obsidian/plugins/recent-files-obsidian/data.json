@@ -1,8 +1,24 @@
 {
   "recentFiles": [
     {
+      "basename": "DiffuStereo",
+      "path": "HumanBodyReconstruction/Generative approach/DiffuStereo.md"
+    },
+    {
+      "basename": "Generative approach Review",
+      "path": "HumanBodyReconstruction/Generative approach Review.md"
+    },
+    {
       "basename": "Muti-view Human Body Reconstruction",
       "path": "HumanBodyReconstruction/Muti-view Human Body Reconstruction.md"
+    },
+    {
+      "basename": "HaP",
+      "path": "HumanBodyReconstruction/Generative approach/HaP.md"
+    },
+    {
+      "basename": "DoubleField",
+      "path": "HumanBodyReconstruction/ImplicitFunction/DoubleField.md"
     },
     {
       "basename": "Diffusion Models",
@@ -65,24 +81,8 @@
       "path": "Reports/2023-06-19.md"
     },
     {
-      "basename": "DiffuStereo",
-      "path": "HumanBodyReconstruction/Generative approach/DiffuStereo.md"
-    },
-    {
-      "basename": "DoubleField",
-      "path": "HumanBodyReconstruction/ImplicitFunction/DoubleField.md"
-    },
-    {
       "basename": "Other Paper Reconstruction",
       "path": "HumanBodyReconstruction/Other Paper Reconstruction.md"
-    },
-    {
-      "basename": "Generative approach Review",
-      "path": "HumanBodyReconstruction/Generative approach Review.md"
-    },
-    {
-      "basename": "HaP",
-      "path": "HumanBodyReconstruction/Generative approach/HaP.md"
     },
     {
       "basename": "RODIN",
