@@ -114,7 +114,7 @@ hexo-asset-folder: true
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: 'git'
-  repo: 'https://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@github.com/qiyun71/qiyun71.github.io.git'
+  repo: 'https://github.com/qiyun71/qiyun71.github.io.git'
   branch: 'master'
 
 search:
