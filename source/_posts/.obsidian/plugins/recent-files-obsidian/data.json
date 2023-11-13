@@ -9,12 +9,12 @@
       "path": "Learn/Learn-Hexo2.md"
     },
     {
-      "basename": "Learn-Hexo",
-      "path": "Learn/Learn-Hexo.md"
-    },
-    {
       "basename": "DiffuStereo",
       "path": "HumanBodyReconstruction/Generative approach/DiffuStereo.md"
+    },
+    {
+      "basename": "Learn-Hexo",
+      "path": "Learn/Learn-Hexo.md"
     },
     {
       "basename": "Tools",
