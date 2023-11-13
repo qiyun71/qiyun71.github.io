@@ -20,9 +20,9 @@
       
         <tags>
             
-            <tag> 3DReconstruction </tag>
-            
             <tag> Diffusion </tag>
+            
+            <tag> 3DReconstruction </tag>
             
         </tags>
       
@@ -272,13 +272,13 @@
       
         <tags>
             
+            <tag> Review </tag>
+            
             <tag> Diffusion </tag>
             
             <tag> GAN </tag>
             
             <tag> Flow </tag>
-            
-            <tag> Review </tag>
             
         </tags>
       
@@ -1203,9 +1203,9 @@
       
         <tags>
             
-            <tag> Tools </tag>
-            
             <tag> Sparse </tag>
+            
+            <tag> Tools </tag>
             
         </tags>
       
@@ -1479,9 +1479,9 @@
             
             <tag> NeRF </tag>
             
-            <tag> 3DReconstruction </tag>
-            
             <tag> Review </tag>
+            
+            <tag> 3DReconstruction </tag>
             
         </tags>
       
@@ -1720,11 +1720,11 @@
       
         <tags>
             
+            <tag> Neus </tag>
+            
             <tag> Code </tag>
             
             <tag> Python </tag>
-            
-            <tag> Neus </tag>
             
             <tag> Shadow&amp;Highlight </tag>
             
@@ -1805,11 +1805,11 @@
       
         <tags>
             
+            <tag> Efficiency </tag>
+            
             <tag> Encoding </tag>
             
             <tag> Sampling </tag>
-            
-            <tag> Efficiency </tag>
             
         </tags>
       
@@ -1863,11 +1863,11 @@
       
         <tags>
             
-            <tag> Sampling </tag>
-            
             <tag> Efficiency </tag>
             
             <tag> TensorDecomposition </tag>
+            
+            <tag> Sampling </tag>
             
         </tags>
       
@@ -2006,9 +2006,9 @@
             
             <tag> SurfaceReconstruction </tag>
             
-            <tag> Encoding </tag>
-            
             <tag> Efficiency </tag>
+            
+            <tag> Encoding </tag>
             
         </tags>
       
@@ -2066,9 +2066,9 @@
             
             <tag> SurfaceReconstruction </tag>
             
-            <tag> Encoding </tag>
-            
             <tag> Efficiency </tag>
+            
+            <tag> Encoding </tag>
             
         </tags>
       
@@ -2097,9 +2097,9 @@
             
             <tag> SurfaceReconstruction </tag>
             
-            <tag> Encoding </tag>
-            
             <tag> Efficiency </tag>
+            
+            <tag> Encoding </tag>
             
         </tags>
       
@@ -2151,13 +2151,13 @@
       
         <tags>
             
-            <tag> Code </tag>
-            
-            <tag> Python </tag>
-            
             <tag> Neus </tag>
             
             <tag> SurfaceReconstruction </tag>
+            
+            <tag> Code </tag>
+            
+            <tag> Python </tag>
             
             <tag> Efficiency </tag>
             
@@ -2244,13 +2244,13 @@
             
             <tag> NeRF </tag>
             
-            <tag> Code </tag>
-            
             <tag> InstantNGP </tag>
             
-            <tag> Encoding </tag>
+            <tag> Code </tag>
             
             <tag> Efficiency </tag>
+            
+            <tag> Encoding </tag>
             
         </tags>
       
@@ -2275,11 +2275,11 @@
       
         <tags>
             
+            <tag> Neus </tag>
+            
             <tag> Code </tag>
             
             <tag> Python </tag>
-            
-            <tag> Neus </tag>
             
             <tag> Efficiency </tag>
             
@@ -2331,13 +2331,13 @@
       
         <tags>
             
-            <tag> Code </tag>
-            
-            <tag> Python </tag>
-            
             <tag> Neus </tag>
             
             <tag> SurfaceReconstruction </tag>
+            
+            <tag> Code </tag>
+            
+            <tag> Python </tag>
             
         </tags>
       
@@ -2366,9 +2366,9 @@
             
             <tag> InstantNGP </tag>
             
-            <tag> Encoding </tag>
-            
             <tag> Efficiency </tag>
+            
+            <tag> Encoding </tag>
             
         </tags>
       
@@ -2406,7 +2406,7 @@
       <link href="/Learn/Learn-Git/"/>
       <url>/Learn/Learn-Git/</url>
       
-        <content type="html"><![CDATA[<p>不要乱用 git reset —hard commit_id 回退 git commit 版本</p><span id="more"></span><h1 id="Clone"><a href="#Clone" class="headerlink" title="Clone"></a>Clone</h1><h2 id="克隆子目录"><a href="#克隆子目录" class="headerlink" title="克隆子目录"></a>克隆子目录</h2><ol><li>初始化：</li></ol><p>Git init</p><ol><li>连接远端库：</li></ol><p>Git remote add origin url</p><ol><li>启用”Sparse Checkout”功能：</li></ol><p>Git config core.Sparsecheckout true</p><ol><li>添加想要 clone 的目录：</li></ol><p>Echo “子目录路径” &gt;&gt; .git/info/sparse-checkout<br>注意：子目录路径不包含 clone 的一级文件夹名称：<br>例如库路径是：<br><a href="https://A/B/C/example.git">https://A/B/C/example.git</a><br>我们想 clone example 下的 D/E/F 目录，则：<br><code>echo “D/E/F” &gt;&gt; .git/info/sparse-checkout</code></p><ol><li>Pull 代码：</li></ol><p>Git pull origin master<br>或者不包含历史版本的 clone：<br>Git pull —depth 1 origin master</p><blockquote><p>版权声明：本文为 CSDN 博主「luo870604851」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接： <a href="https://blog.csdn.net/luo870604851/article/details/119748749">https://blog.csdn.net/luo870604851/article/details/119748749</a></p></blockquote><h2 id="克隆私有仓库"><a href="#克隆私有仓库" class="headerlink" title="克隆私有仓库"></a>克隆私有仓库</h2><blockquote><p><a href="https://blog.csdn.net/weixin_45508265/article/details/124340158">(21条消息) Git clone 克隆私有项目_git clone 项目_风信子的猫Redamancy的博客-CSDN博客</a><br><a href="https://collabnix.com/how-to-fix-support-for-password-authentication-was-removed-error-in-github/">How to Fix “Support for password authentication was removed” error in GitHub – Collabnix</a></p></blockquote><p><code>git clone http://tokens-name:tokens@github.com/YOUR-USERNAME/YOUR-REPOSITORY</code></p><h1 id="Git-教程"><a href="#Git-教程" class="headerlink" title="Git 教程"></a>Git 教程</h1><p>平时使用：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m shuoming</span><br><span class="line">git push</span><br></pre></td></tr></table></figure><blockquote><p><a href="https://www.liaoxuefeng.com/wiki/896043488029600/897271968352576">工作区和暂存区 - 廖雪峰的官方网站 (liaoxuefeng.com)</a></p></blockquote><p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230626160832.png" alt="image.png"></p><p><code>git status</code> 查看暂存区 stage 状态</p><p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230626161153.png" alt="image.png"></p><h1 id="Git-reset-—hard-commit-id-导致本地文件丢失"><a href="#Git-reset-—hard-commit-id-导致本地文件丢失" class="headerlink" title="Git reset —hard commit_id 导致本地文件丢失"></a>Git reset —hard commit_id 导致本地文件丢失</h1><blockquote><p><a href="https://blog.csdn.net/qq_56098414/article/details/121291539">(19条消息) 恢复因git reset —hard 但未提交全部文件到仓库导致的文件丢失问题_git reset —hard 把未提交的文件搞丢了_数祖的博客-CSDN博客</a><br><a href="https://blog.csdn.net/chailihua0826/article/details/94619904?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-1-94619904-blog-121291539.235^v38^pc_relevant_anti_vip_base&amp;spm=1001.2101.3001.4242.2&amp;utm_relevant_index=4">(19条消息) git add 后git reset —hard xxx的代码丢失，代码如何找回_小小花111111的博客-CSDN博客</a></p></blockquote><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">git fsck --lost-found</span><br><span class="line"></span><br><span class="line">git show hash_id</span><br><span class="line">git ls-tree 文件名</span><br><span class="line"></span><br><span class="line">git read-tree --prefix=lib 726d5644919729dd97b7dd23f4a733e2daabab85</span><br><span class="line"></span><br><span class="line">git restore lib</span><br><span class="line"></span><br></pre></td></tr></table></figure><h1 id="删除远程仓库文件，保留本地文件："><a href="#删除远程仓库文件，保留本地文件：" class="headerlink" title="删除远程仓库文件，保留本地文件："></a>删除远程仓库文件，保留本地文件：</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git rm --cached 文件 //本地中该文件不会被删除</span><br><span class="line"></span><br><span class="line">git rm -r --cached 文件夹 //删除文件夹</span><br><span class="line"></span><br><span class="line">git commit -m &#x27;删除某个文件&#x27;</span><br><span class="line"></span><br><span class="line">git push</span><br></pre></td></tr></table></figure><h1 id="新建仓库"><a href="#新建仓库" class="headerlink" title="新建仓库"></a>新建仓库</h1><p>使用 token 链接仓库信息<br><code>git remote set-url origin https://&lt;your_token&gt;@github.com/&lt;USERNAME&gt;/&lt;REPO&gt;.git</code></p><h1 id="用-token-克隆私有仓库"><a href="#用-token-克隆私有仓库" class="headerlink" title="用 token 克隆私有仓库"></a>用 token 克隆私有仓库</h1><p>Git clone from token:</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git clone https://NeRF-Mine:xxxtokenxxx@github.com/qiyun71/NeRF-Mine.git</span><br><span class="line">tensorboard --port 6007 --logdir /root/tf-logs</span><br></pre></td></tr></table></figure><p>Git remote remove origin<br>Git remote add origin path_repo</p><p>配置全局账户</p><ul><li>Git config —global user.Name …</li><li>Git config —global user.Email …</li></ul><p>Git push 需要配置 token(2023.11.13)</p><ul><li>生成之后，如果之前执行了下面的命令，设置了存储登录凭据（默认存储在~/.Git-credentials）<ul><li>Git config —global credential.Helper store</li><li>Git config —global —unset credential.Helper 清理之前保存的账密信息</li></ul></li><li>Git config —global credential.Helper store</li></ul>]]></content>
+        <content type="html"><![CDATA[<p>不要乱用 git reset —hard commit_id 回退 git commit 版本</p><span id="more"></span><h1 id="Clone"><a href="#Clone" class="headerlink" title="Clone"></a>Clone</h1><h2 id="克隆子目录"><a href="#克隆子目录" class="headerlink" title="克隆子目录"></a>克隆子目录</h2><ol><li>初始化：</li></ol><p>Git init</p><ol><li>连接远端库：</li></ol><p>Git remote add origin url</p><ol><li>启用”Sparse Checkout”功能：</li></ol><p>Git config core.Sparsecheckout true</p><ol><li>添加想要 clone 的目录：</li></ol><p>Echo “子目录路径” &gt;&gt; .git/info/sparse-checkout<br>注意：子目录路径不包含 clone 的一级文件夹名称：<br>例如库路径是：<br><a href="https://A/B/C/example.git">https://A/B/C/example.git</a><br>我们想 clone example 下的 D/E/F 目录，则：<br><code>echo “D/E/F” &gt;&gt; .git/info/sparse-checkout</code></p><ol><li>Pull 代码：</li></ol><p>Git pull origin master<br>或者不包含历史版本的 clone：<br>Git pull —depth 1 origin master</p><blockquote><p>版权声明：本文为 CSDN 博主「luo870604851」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接： <a href="https://blog.csdn.net/luo870604851/article/details/119748749">https://blog.csdn.net/luo870604851/article/details/119748749</a></p></blockquote><h2 id="克隆私有仓库"><a href="#克隆私有仓库" class="headerlink" title="克隆私有仓库"></a>克隆私有仓库</h2><blockquote><p><a href="https://blog.csdn.net/weixin_45508265/article/details/124340158">(21条消息) Git clone 克隆私有项目_git clone 项目_风信子的猫Redamancy的博客-CSDN博客</a><br><a href="https://collabnix.com/how-to-fix-support-for-password-authentication-was-removed-error-in-github/">How to Fix “Support for password authentication was removed” error in GitHub – Collabnix</a></p></blockquote><p><code>git clone http://tokens-name:tokens@github.com/YOUR-USERNAME/YOUR-REPOSITORY</code></p><h1 id="Git-教程"><a href="#Git-教程" class="headerlink" title="Git 教程"></a>Git 教程</h1><p>平时使用：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m shuoming</span><br><span class="line">git push</span><br></pre></td></tr></table></figure><blockquote><p><a href="https://www.liaoxuefeng.com/wiki/896043488029600/897271968352576">工作区和暂存区 - 廖雪峰的官方网站 (liaoxuefeng.com)</a></p></blockquote><p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230626160832.png" alt="image.png"></p><p><code>git status</code> 查看暂存区 stage 状态</p><p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230626161153.png" alt="image.png"></p><h1 id="Git-reset-—hard-commit-id-导致本地文件丢失"><a href="#Git-reset-—hard-commit-id-导致本地文件丢失" class="headerlink" title="Git reset —hard commit_id 导致本地文件丢失"></a>Git reset —hard commit_id 导致本地文件丢失</h1><blockquote><p><a href="https://blog.csdn.net/qq_56098414/article/details/121291539">(19条消息) 恢复因git reset —hard 但未提交全部文件到仓库导致的文件丢失问题_git reset —hard 把未提交的文件搞丢了_数祖的博客-CSDN博客</a><br><a href="https://blog.csdn.net/chailihua0826/article/details/94619904?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-1-94619904-blog-121291539.235^v38^pc_relevant_anti_vip_base&amp;spm=1001.2101.3001.4242.2&amp;utm_relevant_index=4">(19条消息) git add 后git reset —hard xxx的代码丢失，代码如何找回_小小花111111的博客-CSDN博客</a></p></blockquote><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">git fsck --lost-found</span><br><span class="line"></span><br><span class="line">git show hash_id</span><br><span class="line">git ls-tree 文件名</span><br><span class="line"></span><br><span class="line">git read-tree --prefix=lib 726d5644919729dd97b7dd23f4a733e2daabab85</span><br><span class="line"></span><br><span class="line">git restore lib</span><br><span class="line"></span><br></pre></td></tr></table></figure><h1 id="删除远程仓库文件，保留本地文件："><a href="#删除远程仓库文件，保留本地文件：" class="headerlink" title="删除远程仓库文件，保留本地文件："></a>删除远程仓库文件，保留本地文件：</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git rm --cached 文件 //本地中该文件不会被删除</span><br><span class="line"></span><br><span class="line">git rm -r --cached 文件夹 //删除文件夹</span><br><span class="line"></span><br><span class="line">git commit -m &#x27;删除某个文件&#x27;</span><br><span class="line"></span><br><span class="line">git push</span><br></pre></td></tr></table></figure><h1 id="新建仓库"><a href="#新建仓库" class="headerlink" title="新建仓库"></a>新建仓库</h1><p>使用 token 链接仓库信息<br><code>git remote set-url origin https://&lt;your_token&gt;@github.com/&lt;USERNAME&gt;/&lt;REPO&gt;.git</code></p><h1 id="用-token-克隆私有仓库"><a href="#用-token-克隆私有仓库" class="headerlink" title="用 token 克隆私有仓库"></a>用 token 克隆私有仓库</h1><p>Git clone from token:</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git clone https://NeRF-Mine:xxxtokenxxx@github.com/qiyun71/NeRF-Mine.git</span><br><span class="line">tensorboard --port 6007 --logdir /root/tf-logs</span><br></pre></td></tr></table></figure><p>Git remote remove origin<br>Git remote add origin path_repo</p><p>配置全局账户</p><ul><li>Git config —global user.Name …</li><li>Git config —global user.Email …</li></ul><p>Git push 需要配置 token(2023.11.13)</p><ul><li>生成之后，如果之前执行了下面的命令，设置了存储登录凭据（默认存储在~/.Git-credentials）<ul><li>Git config —global credential.Helper store</li><li>Git config —global —unset credential.Helper 清理之前保存的账密信息</li></ul></li><li>Git config —global credential.Helper store</li></ul><p>测试没有百度网盘同步方法</p>]]></content>
       
       
       <categories>
