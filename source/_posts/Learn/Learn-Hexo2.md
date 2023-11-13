@@ -26,7 +26,7 @@ Hexo博客搭建教程，参考[CodeSheep](https://space.bilibili.com/384068749)
 `cnpm -v`
 
 # 3.安装hexo博客框架
-`cnpm install -g hexo-cli`
+`cnpm install -g hexo-cli` 最好不要用，替换为`npm install`来根据package-lock.json中的配置来安装环境
 
 {% note default %}
 -g 全局安装
