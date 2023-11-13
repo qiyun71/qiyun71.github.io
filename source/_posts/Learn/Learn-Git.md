@@ -116,3 +116,9 @@ git remote add origin path_repo
 配置全局账户
 - git config --global user.name ...
 - git config --global user.email ...
+
+git push需要配置token(2023.11.13)
+- 生成之后，如果之前执行了下面的命令，设置了存储登录凭据（默认存储在~/.git-credentials）
+  - git config --global credential.helper store
+  - git config --global --unset credential.helper 清理之前保存的账密信息
+- git config --global credential.helper store

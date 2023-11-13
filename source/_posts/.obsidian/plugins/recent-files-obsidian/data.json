@@ -1,6 +1,10 @@
 {
   "recentFiles": [
     {
+      "basename": "Learn-Git",
+      "path": "Learn/Learn-Git.md"
+    },
+    {
       "basename": "Learn-Hexo2",
       "path": "Learn/Learn-Hexo2.md"
     },
@@ -35,10 +39,6 @@
     {
       "basename": "Diffusion Models",
       "path": "HumanBodyReconstruction/Generative approach/Diffusion Models.md"
-    },
-    {
-      "basename": "Learn-Git",
-      "path": "Learn/Learn-Git.md"
     },
     {
       "basename": "2023-10-30",
