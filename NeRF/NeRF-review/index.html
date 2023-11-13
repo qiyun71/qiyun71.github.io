@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/yqq/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="NeRF相关的论文 at CVPR&#x2F;ICCV&#x2F;ECCV&#x2F;NIPS&#x2F;ICML&#x2F;ICLR&#x2F;SIGGRAPH">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NeRF目前进展">
+<meta property="og:url" content="http://example.com/NeRF/NeRF-review/index.html">
+<meta property="og:site_name" content="YunQi">
+<meta property="og:description" content="NeRF相关的论文 at CVPR&#x2F;ICCV&#x2F;ECCV&#x2F;NIPS&#x2F;ICML&#x2F;ICLR&#x2F;SIGGRAPH">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231101151141.png">
+<meta property="article:published_time" content="2023-06-25T05:01:00.000Z">
+<meta property="article:modified_time" content="2023-11-13T05:03:48.871Z">
+<meta property="article:author" content="Qi Yun">
+<meta property="article:tag" content="NeRF">
+<meta property="article:tag" content="Review">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231101151141.png">
+
+<link rel="canonical" href="http://example.com/NeRF/NeRF-review/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>NeRF目前进展 | YunQi</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">YunQi</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Note</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/NeRF/NeRF-review/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YunQi">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          NeRF目前进展
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-06-25 13:01:00" itemprop="dateCreated datePublished" datetime="2023-06-25T13:01:00+08:00">2023-06-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-11-13 13:03:48" itemprop="dateModified" datetime="2023-11-13T13:03:48+08:00">2023-11-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NeRF/" itemprop="url" rel="index"><span itemprop="name">NeRF</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>1.9k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>7 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>NeRF相关的论文 at CVPR/ICCV/ECCV/NIPS/ICML/ICLR/SIGGRAPH</p>
+<span id="more"></span>
+<h1 id="NeRF"><a href="#NeRF" class="headerlink" title="NeRF"></a>NeRF</h1><p>ECCV 2020 Oral - Best Paper Honorable Mention</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Year</th>
+<th style="text-align:center">Title&amp;Project Page</th>
+<th style="text-align:center">Brief Description</th>
+<th style="text-align:center">Conf/Jour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/NeRF/NeRF-Principle">2020</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://www.matthewtancik.com/nerf">NeRF:Representing Scenes as Neural Radiance Fields for View Synthesis</a></td>
+<td style="text-align:center">初始文</td>
+<td style="text-align:center">ECCV</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="Volume-Rendering-Function"><a href="#Volume-Rendering-Function" class="headerlink" title="Volume Rendering Function"></a>Volume Rendering Function</h2><h3 id="PL-NeRF"><a href="#PL-NeRF" class="headerlink" title="PL-NeRF"></a>PL-NeRF</h3><p><a target="_blank" rel="noopener" href="https://github.com/mikacuy/PL-NeRF">mikacuy/PL-NeRF: NeRF Revisited: Fixing Quadrature Instability in Volume Rendering, Neurips 2023 (github.com)</a></p>
+<p>NeRF 分段常数积分 —&gt; PL-NeRF 分段线性积分<br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231101151141.png" alt="image.png|666"></p>
+<h2 id="Efficiency"><a href="#Efficiency" class="headerlink" title="Efficiency"></a>Efficiency</h2><h3 id="Encoding"><a href="#Encoding" class="headerlink" title="Encoding"></a>Encoding</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Year</th>
+<th style="text-align:center">Title&amp;Project Page</th>
+<th style="text-align:center">Brief Description</th>
+<th style="text-align:center">Conf/Jour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/NeRF/Efficiency/NeRF-InstantNGP">2022</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://nvlabs.github.io/instant-ngp/">Instant Neural Graphics Primitives with a Multiresolution Hash Encoding</a></td>
+<td style="text-align:center">多分辨率哈希编码</td>
+<td style="text-align:center">ACM Transactions on Graphics (SIGGRAPH)</td>
+</tr>
+<tr>
+<td><a href="/NeRF/SurfaceReconstruction/Neus-Instant-nsr-pl">2023</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://github.com/bennyguo/instant-nsr-pl">bennyguo/instant-nsr-pl</a></td>
+<td style="text-align:center">Neus+NeRF+Nerfacc+tcnn</td>
+<td style="text-align:center">None</td>
+</tr>
+<tr>
+<td><a href="/NeRF/SurfaceReconstruction/Neuralangelo">2023</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://research.nvidia.com/labs/dir/neuralangelo/">Neuralangelo: High-Fidelity Neural Surface Reconstruction</a></td>
+<td style="text-align:center">NGP_but数值梯度+Neus_SDF</td>
+<td style="text-align:center">IEEE Conference on Computer Vision and Pattern Recognition (<strong>CVPR</strong>)</td>
+</tr>
+<tr>
+<td><a href="/NeRF/SurfaceReconstruction/PermutoSDF">2023</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://radualexandru.github.io/permuto_sdf/">PermutoSDF</a></td>
+<td style="text-align:center">NGP_butPermutohedral lattice + Neus_SDF，曲率损失和颜色MLP正则解决镜面+无纹理区域，更光滑</td>
+<td style="text-align:center">IEEE/CVF Conference on CVPR</td>
+</tr>
+<tr>
+<td><a href="/NeRF/SurfaceReconstruction/NeuDA">2023</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://3d-front-future.github.io/neuda/">NeuDA</a></td>
+<td style="text-align:center">NGP_butDeformable Anchors+HPE + Neus</td>
+<td style="text-align:center">CVPR</td>
+</tr>
+<tr>
+<td><a href="/NeRF/Efficiency/Zip-NeRF">2023</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://jonbarron.info/zipnerf/">Zip-NeRF (jonbarron.info)</a></td>
+<td style="text-align:center">NGP + Mip-NeRF360</td>
+<td style="text-align:center">ICCV</td>
+</tr>
+<tr>
+<td><a href="/NeRF/Efficiency/Tri-MipRF">2023</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://wbhu.github.io/projects/Tri-MipRF/">Tri-MipRF: Tri-Mip Representation for Efficient Anti-Aliasing Neural Radiance Fields (wbhu.github.io)</a></td>
+<td style="text-align:center">Tri-MipRF encoding(TensoRF + NGP)+ Cone Sampling(Mip-NeRF)</td>
+<td style="text-align:center">ICCV</td>
+</tr>
+<tr>
+<td><a href="/NeRF/Efficiency/TensoRF">2022</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://apchenstu.github.io/TensoRF/">TensoRF: Tensorial Radiance Fields (apchenstu.github.io)</a></td>
+<td style="text-align:center">TensoRF引入VM分解，提高重建的质量和速度，并减小了内存占用</td>
+<td style="text-align:center">ECCV</td>
+</tr>
+<tr>
+<td><a href="/NeRF/Efficiency/Strivec">2023</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://github.com/Zerg-Overmind/Strivec">Zerg-Overmind/Strivec (github.com)</a></td>
+<td style="text-align:center">局部张量CP分解为三向量+多尺度网格+占用网格采样方式</td>
+<td style="text-align:center">ICCV</td>
+</tr>
+<tr>
+<td><a href="/NeRF/PointCloud/3D%20Gaussian%20Splatting.md">2023</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/">3D Gaussian Splatting for Real-Time Radiance Field Rendering (inria.fr)</a></td>
+<td style="text-align:center">优化3D高斯点云，并使用splatting渲染方式，实现实时高分辨率训练+渲染</td>
+<td style="text-align:center">SIGGRAPH</td>
+</tr>
+<tr>
+<td><a href="/NeRF/Efficiency/BakedSDF">2023</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://bakedsdf.github.io/">BakedSDF</a></td>
+<td style="text-align:center">VolSDF+MarchingCube得到mesh，漫反射+高斯叶来渲染颜色</td>
+<td style="text-align:center">SIGGRAPH</td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="Large-Scale-Scene"><a href="#Large-Scale-Scene" class="headerlink" title="Large Scale Scene"></a>Large Scale Scene</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Year</th>
+<th>Title&amp;Project Page</th>
+<th>Brief Description</th>
+<th style="text-align:center">Conf/Jour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/NeRF/LargeScaleScene/NeRF++">2020</a></td>
+<td><a target="_blank" rel="noopener" href="https://github.com/Kai-46/nerfplusplus">nerfplusplus: improves over nerf in 360 capture of unbounded scenes</a></td>
+<td>将背景的采样点表示为四维向量，与前景分别使用不同的MLP进行训练</td>
+<td style="text-align:center">arXiv</td>
+</tr>
+<tr>
+<td><a href="/NeRF/LargeScaleScene/Mip-NeRF%20360">2022</a></td>
+<td><a target="_blank" rel="noopener" href="https://jonbarron.info/mipnerf360/">mip-NeRF 360</a></td>
+<td>将单位球外的背景参数化，小型提议网络进行精采样，正则化dist消除小区域云雾</td>
+<td style="text-align:center">CVPR</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="PointCloud"><a href="#PointCloud" class="headerlink" title="PointCloud"></a>PointCloud</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Year</th>
+<th>Title&amp;Project Page</th>
+<th>Brief Description</th>
+<th style="text-align:center">Conf/Jour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/NeRF/PointCloud/3D%20Gaussian%20Splatting.md">2023</a></td>
+<td><a target="_blank" rel="noopener" href="https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/">3D Gaussian Splatting for Real-Time Radiance Field Rendering (inria.fr)</a></td>
+<td>优化3D高斯点云，并使用splatting渲染方式，实现实时高分辨率训练+渲染</td>
+<td style="text-align:center">SIGGRAPH</td>
+</tr>
+<tr>
+<td>2023</td>
+<td><a target="_blank" rel="noopener" href="https://xrvitd.github.io/Projects/GCNO/index.html">Globally Consistent Normal Orientation for Point Clouds by Regularizing the Winding-Number Field</a></td>
+<td>使得稀疏点云和薄壁点云法向量一致</td>
+<td style="text-align:center">ACM Transactions on Graphics(SIGGRAPH)</td>
+</tr>
+<tr>
+<td>2023</td>
+<td><a target="_blank" rel="noopener" href="https://research.nvidia.com/labs/toronto-ai/NKSR/">Neural Kernel Surface Reconstruction</a></td>
+<td>从点云中进行表面重建</td>
+<td style="text-align:center">CVPR 2023 Highlight</td>
+</tr>
+<tr>
+<td><a href="/NeRF/PointCloud/Point-NeRF">2022</a></td>
+<td><a target="_blank" rel="noopener" href="https://xharlie.github.io/projects/project_sites/pointnerf/">Point-NeRF: Point-based Neural Radiance Fields</a></td>
+<td>生成初始化点云，基于点云进行增删和体渲染</td>
+<td style="text-align:center">CVPR 2022 Oral</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="Review"><a href="#Review" class="headerlink" title="Review"></a>Review</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Year</th>
+<th style="text-align:center">Title&amp;Project Page</th>
+<th style="text-align:center">Brief Description</th>
+<th style="text-align:center">Conf/Jour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/NeRF/Review/A%20Critical%20Analysis%20of%20NeRF-Based%203D%20Reconstruction">2023</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://www.mdpi.com/2072-4292/15/14/3585">A Critical Analysis of NeRF-Based 3D Reconstruction</a></td>
+<td style="text-align:center">对比了Colmap摄影测量法和NeRF-based方法在3D Reconstruction中的优劣</td>
+<td style="text-align:center">MDPI remote sensing</td>
+</tr>
+<tr>
+<td><a href="/NeRF/Review/NeRF%20in%20the%20industrial%20and%20robotics%20domain">2023</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://github.com/Maftej/iisnerf">Maftej/iisnerf (github.com)</a></td>
+<td style="text-align:center">探索了NeRF在工业和机器人领域的应用</td>
+<td style="text-align:center">None</td>
+</tr>
+<tr>
+<td><a href="/NeRF/Review/2023%20Conf%20about%20NeRF">2023</a></td>
+<td style="text-align:center">None</td>
+<td style="text-align:center">2023年NeRF Review ref others</td>
+<td style="text-align:center">None</td>
+</tr>
+<tr>
+<td><a href="/NeRF/Review/A%20Review%20of%20Deep%20Learning-Powered%20Mesh%20Reconstruction%20Methods">2023</a></td>
+<td style="text-align:center">A Review of Deep Learning-Powered Mesh Reconstruction Methods</td>
+<td style="text-align:center">介绍了几种3D模型表示方法+回顾了将DL应用到Mesh重建中的方法</td>
+<td style="text-align:center">None</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="Sampling"><a href="#Sampling" class="headerlink" title="Sampling"></a>Sampling</h2><p>加速训练和渲染过程、提高新视图质量</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Year</th>
+<th>Title&amp;Project Page</th>
+<th>Brief Description</th>
+<th style="text-align:center">Conf/Jour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/NeRF/Sampling/NerfAcc">2023</a></td>
+<td><a target="_blank" rel="noopener" href="https://www.nerfacc.com/en/latest/">NerfAcc Documentation — nerfacc 0.5.3</a></td>
+<td>一种新的采样方法可以加速NeRF</td>
+<td style="text-align:center">arXiv</td>
+</tr>
+<tr>
+<td><a href="/NeRF/Sampling/Mip-NeRF">2021</a></td>
+<td><a target="_blank" rel="noopener" href="https://jonbarron.info/mipnerf/">mip-NeRF </a></td>
+<td>截头圆锥体采样方法+IPEncoding</td>
+<td style="text-align:center">ICCV</td>
+</tr>
+<tr>
+<td><a href="/NeRF/Sampling/Floaters%20No%20More">2023</a></td>
+<td><a target="_blank" rel="noopener" href="https://gradient-scaling.github.io/#Code">Floaters No More: Radiance Field Gradient Scaling for Improved Near-Camera Training</a></td>
+<td>通过梯度缩放，解决基于NeRF重建场景中的背景塌陷和镜前漂浮物</td>
+<td style="text-align:center">The Eurographics Association</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2310.04152.pdf">Improving Neural Radiance Fields Using Near-Surface Sampling With Point Cloud Generation (arxiv.org)</a></li>
+</ul>
+<h2 id="Sparse-images-Generalization"><a href="#Sparse-images-Generalization" class="headerlink" title="Sparse images/Generalization"></a>Sparse images/Generalization</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Year</th>
+<th>Title&amp;Project Page</th>
+<th>Brief Description</th>
+<th style="text-align:center">Conf/Jour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/NeRF/Sparse/SparseNeuS">2022</a></td>
+<td><a target="_blank" rel="noopener" href="https://www.xxlong.site/SparseNeuS/">SparseNeuS: Fast Generalizable Neural Surface Reconstruction from Sparse Views</a></td>
+<td>多层几何推理框架+多尺度颜色混合+一致性感知的微调</td>
+<td style="text-align:center">ECCV</td>
+</tr>
+<tr>
+<td>2023</td>
+<td><a target="_blank" rel="noopener" href="https://sparsenerf.github.io/">SparseNeRF</a></td>
+<td>利用来自现实世界不准确观测的深度先验知识</td>
+<td style="text-align:center">Technical Report</td>
+</tr>
+<tr>
+<td>2021</td>
+<td><a target="_blank" rel="noopener" href="https://alexyu.net/pixelnerf/">pixelNeRF: Neural Radiance Fields from One or Few Images (alexyu.net)</a></td>
+<td></td>
+<td style="text-align:center">CVPR</td>
+</tr>
+<tr>
+<td><a href="/NeRF/Sparse/FORGE">2022</a></td>
+<td><a target="_blank" rel="noopener" href="https://ut-austin-rpl.github.io/FORGE/">FORGE (ut-austin-rpl.github.io)</a></td>
+<td>voxel特征提取2D—&gt;3D+相机姿态估计+特征共享和融合+神经隐式重建</td>
+<td style="text-align:center">ArXiv</td>
+</tr>
+<tr>
+<td><a href="/NeRF/Sparse/FreeNeRF">2023</a></td>
+<td><a target="_blank" rel="noopener" href="https://jiawei-yang.github.io/FreeNeRF/">FreeNeRF: Frequency-regularized NeRF (jiawei-yang.github.io)</a></td>
+<td>稀疏视图训练时，逐步开放高频分量可以获得更好的效果，遮挡正则消除floaters</td>
+<td style="text-align:center">CVPR</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="Surface-Reconstruction"><a href="#Surface-Reconstruction" class="headerlink" title="Surface Reconstruction"></a>Surface Reconstruction</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Year</th>
+<th style="text-align:center">Title&amp;Project Page</th>
+<th style="text-align:center">Brief Description</th>
+<th style="text-align:center">Conf/Jour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/NeRF/SurfaceReconstruction/Neus">2021</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://lingjie0206.github.io/papers/NeuS/">NeuS: Learning Neural Implicit Surfaces by Volume Rendering for Multi-view Reconstruction</a></td>
+<td style="text-align:center">Neus: SDF表面重建方法</td>
+<td style="text-align:center">NeurIPS</td>
+</tr>
+<tr>
+<td><a href="/NeRF/SurfaceReconstruction/Instant-NSR">2022</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://zhaofuq.github.io/NeuralAM/">Human Performance Modeling and Rendering via Neural Animated Mesh</a></td>
+<td style="text-align:center">NSR: Neus_TSDF + NGP，但是依赖mask</td>
+<td style="text-align:center">SIGGRAPH Asia</td>
+</tr>
+<tr>
+<td><a href="/NeRF/SurfaceReconstruction/Neus-Instant-nsr-pl">2023</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://github.com/bennyguo/instant-nsr-pl">bennyguo/instant-nsr-pl</a></td>
+<td style="text-align:center">Neus+NeRF+Nerfacc+tcnn</td>
+<td style="text-align:center">None</td>
+</tr>
+<tr>
+<td><a href="/NeRF/SurfaceReconstruction/Neuralangelo">2023</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://research.nvidia.com/labs/dir/neuralangelo/">Neuralangelo: High-Fidelity Neural Surface Reconstruction</a></td>
+<td style="text-align:center">NGP_but数值梯度+Neus_SDF</td>
+<td style="text-align:center">IEEE Conference on Computer Vision and Pattern Recognition (<strong>CVPR</strong>)</td>
+</tr>
+<tr>
+<td><a href="/NeRF/SurfaceReconstruction/PermutoSDF">2023</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://radualexandru.github.io/permuto_sdf/">PermutoSDF</a></td>
+<td style="text-align:center">NGP_butPermutohedral lattice + Neus_SDF，曲率损失和颜色MLP正则解决镜面+无纹理区域，更光滑</td>
+<td style="text-align:center">IEEE/CVF Conference on CVPR</td>
+</tr>
+<tr>
+<td><a href="/NeRF/SurfaceReconstruction/NeuDA">2023</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://3d-front-future.github.io/neuda/">NeuDA</a></td>
+<td style="text-align:center">NGP_butDeformable Anchors+HPE + Neus</td>
+<td style="text-align:center">CVPR</td>
+</tr>
+<tr>
+<td><a href="/NeRF/SurfaceReconstruction/Shadow&amp;Highlight/NeRO">2023</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://liuyuan-pal.github.io/NeRO/">NeRO: Neural Geometry and BRDF Reconstruction of Reflective Objects from Multiview Images</a></td>
+<td style="text-align:center">Neus_SDF 新的光表示方法可以重建准确的几何和BRDF，但是细节处由于太光滑而忽略，反射颜色也依赖准确的法线</td>
+<td style="text-align:center">SIGGRAPH (ACM TOG)</td>
+</tr>
+<tr>
+<td><a href="/NeRF/SurfaceReconstruction/UNISURF">2021</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://moechsle.github.io/unisurf/">UNISURF: Unifying Neural Implicit Surfaces and Radiance Fields for Multi-View Reconstruction </a></td>
+<td style="text-align:center">UNISURF用占用值来表示表面，代替NeRF中的$\alpha$</td>
+<td style="text-align:center">ICCV (oral)</td>
+</tr>
+<tr>
+<td><a href="/NeRF/SurfaceReconstruction/PlankAssembly">2023</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://manycore-research.github.io/PlankAssembly/">PlankAssembly: Robust 3D Reconstruction from Three Orthographic Views with Learnt Shape Programs</a></td>
+<td style="text-align:center">基于Transform的自注意力提出模型,将2D三视图转化成3D模型的代码形式DSL</td>
+<td style="text-align:center">ICCV</td>
+</tr>
+<tr>
+<td><a href="/NeRF/SurfaceReconstruction/NeUDF">2023</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="http://geometrylearning.com/neudf/">NeUDF</a></td>
+<td style="text-align:center">使用UDF，可以重建具有任意拓扑的表面，例如非水密表面</td>
+<td style="text-align:center">CVPR</td>
+</tr>
+<tr>
+<td><a href="/NeRF/SurfaceReconstruction/NeuS2">2023</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://vcai.mpi-inf.mpg.de/projects/NeuS2/">NeuS2: Fast Learning of Neural Implicit Surfaces for Multi-view Reconstruction</a></td>
+<td style="text-align:center">基于Neus、NGP和NSR，实现高质量快速的静态和动态建模</td>
+<td style="text-align:center">ICCV</td>
+</tr>
+<tr>
+<td><a href="/NeRF/SurfaceReconstruction/Color-NeuS">2023</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://colmar-zlicheng.github.io/color_neus/">Color-NeuS (colmar-zlicheng.github.io)</a></td>
+<td style="text-align:center">解决了类Neus方法推理时表面颜色提取困难和不正确的问题</td>
+<td style="text-align:center">arXiv</td>
+</tr>
+<tr>
+<td><a href="/NeRF/SurfaceReconstruction/HF-NeuS">2022</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://github.com/yiqun-wang/HFS">HF-NeuS: Improved Surface Reconstruction Using High-Frequency Details</a></td>
+<td style="text-align:center">新的SDF与透明度$\alpha$关系函数,将SDF分解为基和位移两个独立隐函数的组合</td>
+<td style="text-align:center">NeurIPS</td>
+</tr>
+<tr>
+<td><a href="/NeRF/SurfaceReconstruction/Geo-Neus">2022</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://github.com/GhiXu/Geo-Neus">Geo-Neus: Geometry-Consistent Neural Implicit Surfaces Learning for Multi-view Reconstruction</a></td>
+<td style="text-align:center">使用COLMAP产生的稀疏点来作为SDF的显示监督,具有多视图立体约束的隐式曲面上的几何一致监督</td>
+<td style="text-align:center">NeurIPS</td>
+</tr>
+<tr>
+<td><a href="/NeRF/SurfaceReconstruction/IDR">2020</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://lioryariv.github.io/idr/">Multiview Neural Surface Reconstruction by Disentangling Geometry and Appearance (lioryariv.github.io)</a></td>
+<td style="text-align:center">端到端的IDR：可以从masked的2D图像中学习3D几何、外观，<em>允许粗略的相机估计</em></td>
+<td style="text-align:center">NeurIPS</td>
+</tr>
+<tr>
+<td><a href="/NeRF/SurfaceReconstruction/FlexiCubes">2023</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://research.nvidia.com/labs/toronto-ai/flexicubes/">Flexible Isosurface Extraction for Gradient-Based Mesh Optimization (FlexiCubes) (nvidia.com)</a></td>
+<td style="text-align:center">一种新的Marching Cube的方法</td>
+<td style="text-align:center">ACM Trans. on Graph. (SIGGRAPH 2023)</td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="Shadow-amp-Highlight"><a href="#Shadow-amp-Highlight" class="headerlink" title="Shadow&amp;Highlight"></a>Shadow&amp;Highlight</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Year</th>
+<th>Title&amp;Project Page</th>
+<th>Brief Description</th>
+<th style="text-align:center">Conf/Jour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2023</td>
+<td><a target="_blank" rel="noopener" href="https://nrhints.github.io/">Relighting Neural Radiance Fields with Shadow and Highlight Hints</a></td>
+<td>数据集使用相机位姿和灯源位姿,训练集大约500张,Shadow and Highlight hints</td>
+<td style="text-align:center">SIGGRAPH</td>
+</tr>
+<tr>
+<td><a href="/NeRF/SurfaceReconstruction/Shadow&amp;Highlight/NeRO">2023</a></td>
+<td><a target="_blank" rel="noopener" href="https://liuyuan-pal.github.io/NeRO/">NeRO: Neural Geometry and BRDF Reconstruction of Reflective Objects from Multiview Images</a></td>
+<td>Neus_SDF 新的光表示方法可以重建准确的几何和BRDF，但是细节处由于太光滑而忽略，反射颜色也依赖准确的法线</td>
+<td style="text-align:center">SIGGRAPH (ACM TOG)</td>
+</tr>
+<tr>
+<td><a href="/NeRF/SurfaceReconstruction/Shadow&amp;Highlight/ShadowNeuS">2023</a></td>
+<td><a target="_blank" rel="noopener" href="https://gerwang.github.io/shadowneus/">ShadowNeuS (gerwang.github.io)</a></td>
+<td>多光照下单视图重建SDF+RGB图像重建外观+BRDF</td>
+<td style="text-align:center">CVPR</td>
+</tr>
+<tr>
+<td><a href="/NeRF/SurfaceReconstruction/Shadow&amp;Highlight/Ref-NeRF">2022</a></td>
+<td><a target="_blank" rel="noopener" href="https://dorverbin.github.io/refnerf/">Ref-NeRF (dorverbin.github.io)</a></td>
+<td>基于球面谐波的IDE编码+预测表面法向+BRDF</td>
+<td style="text-align:center">CVPR</td>
+</tr>
+<tr>
+<td><a href="/NeRF/SurfaceReconstruction/Shadow&amp;Highlight/NeRFactor">2021</a></td>
+<td><a target="_blank" rel="noopener" href="https://xiuming.info/projects/nerfactor/">NeRFactor (xiuming.info)</a></td>
+<td>NeRFactor在未知光照条件下从图像中恢复物体形状和反射率</td>
+<td style="text-align:center">SIGGRAPH</td>
+</tr>
+<tr>
+<td><a href="/NeRF/SurfaceReconstruction/Shadow&amp;Highlight/Ref-NeuS">2023</a></td>
+<td><a target="_blank" rel="noopener" href="https://g3956.github.io/">Ref-NeuS (g3956.github.io)</a></td>
+<td>Anomaly Detection for Reflection Score + Visibility Identification for Reflection Score+反射感知的光度损失</td>
+<td style="text-align:center">ICCV Oral</td>
+</tr>
+<tr>
+<td><a href="/NeRF/SurfaceReconstruction/Shadow&amp;Highlight/NeuFace">2023</a></td>
+<td><a target="_blank" rel="noopener" href="https://github.com/aejion/NeuFace">NeuFace: Realistic 3D Neural Face Rendering from Multi-view Images</a></td>
+<td><strong>BRDF+SDF+PBR</strong>框架，端到端训练，重建人脸的几何+外观</td>
+<td style="text-align:center">CVPR</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="Framework"><a href="#Framework" class="headerlink" title="Framework"></a>Framework</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Year</th>
+<th>Title&amp;Project Page</th>
+<th>Brief Description</th>
+<th style="text-align:center">Conf/Jour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/NeRF/NeRF-Studio">2023</a></td>
+<td><a target="_blank" rel="noopener" href="https://docs.nerf.studio/en/latest/">nerfstudio</a></td>
+<td>集成现有的NeRF方法</td>
+<td style="text-align:center">ACM SIGGRAPH</td>
+</tr>
+<tr>
+<td>2022</td>
+<td><a target="_blank" rel="noopener" href="https://autonomousvision.github.io/sdfstudio/">SDFStudio</a></td>
+<td>集成基于SDF的NeRF方法</td>
+<td style="text-align:center">None</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h1 id="Dalao"><a href="#Dalao" class="headerlink" title="Dalao"></a>Dalao</h1><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>PhD.School</th>
+<th style="text-align:center">Homepage</th>
+<th style="text-align:center">Paper</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Zhejiang University</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="http://www.cad.zju.edu.cn/home/zhpcui/">Zhaopeng Cui (zju.edu.cn)</a></td>
+<td style="text-align:center">Global Structure-from-Motion by Similarity Averaging</td>
+</tr>
+<tr>
+<td>HKU</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://liuyuan-pal.github.io/">刘缘Yuan Liu - Homepage (liuyuan-pal.github.io)</a></td>
+<td style="text-align:center">Neus,NeRO</td>
+</tr>
+<tr>
+<td>CUHK</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://wbhu.github.io/">胡文博HU, Wenbo’s Homepage (wbhu.github.io)</a></td>
+<td style="text-align:center">Tri-MipRF</td>
+</tr>
+<tr>
+<td>HKU</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://quartz-khaan-c6f.notion.site/Peng-Wang-0ab0a2521ecf40f5836581770c14219c">Peng Wang (王鹏) (notion.site)</a></td>
+<td style="text-align:center">Neus</td>
+</tr>
+<tr>
+<td>UC Berkeley</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://jonbarron.info/">Jon Barron</a></td>
+<td style="text-align:center">Mip-NeRF,Mip-NeRF360,Zip-NeRF,Ref-NeRF</td>
+</tr>
+<tr>
+<td>UC Berkeley</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://www.matthewtancik.com/">Matthew Tancik</a></td>
+<td style="text-align:center">NerfStudio,NerfAcc,Plenoxels,Mip-NeRF,</td>
+</tr>
+<tr>
+<td>UC Berkeley</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://bmild.github.io/">Ben Mildenhall (bmild.github.io)</a></td>
+<td style="text-align:center">NeRF</td>
+</tr>
+<tr>
+<td>ShanghaiTech University</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://apchenstu.github.io/">陈安沛Anpei Chen (apchenstu.github.io)</a></td>
+<td style="text-align:center">TensoRF</td>
+</tr>
+<tr>
+<td>University of Pennsylvania</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://lingjie0206.github.io/">Lingjie Liu (lingjie0206.github.io)</a></td>
+<td style="text-align:center">NeuS,NeuS2,NeuralUDF,Drag Your GAN</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="有趣的应用"><a href="#有趣的应用" class="headerlink" title="有趣的应用"></a>有趣的应用</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Year</th>
+<th style="text-align:center">Title&amp;Project Page</th>
+<th style="text-align:center">Brief Description</th>
+<th>Conf/Jour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2023</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://world-from-eyes.github.io/">Seeing the World through Your Eyes</a></td>
+<td style="text-align:center">从人眼的倒影中重建物体</td>
+<td>None</td>
+</tr>
+<tr>
+<td><a href="/NeRF/Interesting/PAniC-3D">2023</a></td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://github.com/shuhongchen/panic3d-anime-reconstruction">PAniC-3D Stylized Single-view 3D Reconstruction from Portraits of Anime Characters</a></td>
+<td style="text-align:center">从插画风格角色肖像中重建3D</td>
+<td>CVPR</td>
+</tr>
+<tr>
+<td>2023</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://www.lerf.io/">LERF: Language Embedded Radiance Fields</a></td>
+<td style="text-align:center">用语言查询空间中的3D物体，并高亮显示</td>
+<td>ICCV 2023 (Oral)</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+1ZnNxFWnEbk5YzRl">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/NeRF/" rel="tag"><i class="fa fa-tag"></i> NeRF</a>
+              <a href="/tags/Review/" rel="tag"><i class="fa fa-tag"></i> Review</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/Learn/Learn-PyTorch/" rel="prev" title="PyTorch代码学习笔记">
+      <i class="fa fa-chevron-left"></i> PyTorch代码学习笔记
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/Learn/Learn-Git/" rel="next" title="Git学习">
+      Git学习 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#NeRF"><span class="nav-text">NeRF</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Volume-Rendering-Function"><span class="nav-text">Volume Rendering Function</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PL-NeRF"><span class="nav-text">PL-NeRF</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Efficiency"><span class="nav-text">Efficiency</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Encoding"><span class="nav-text">Encoding</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Large-Scale-Scene"><span class="nav-text">Large Scale Scene</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PointCloud"><span class="nav-text">PointCloud</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Review"><span class="nav-text">Review</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sampling"><span class="nav-text">Sampling</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sparse-images-Generalization"><span class="nav-text">Sparse images&#x2F;Generalization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Surface-Reconstruction"><span class="nav-text">Surface Reconstruction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shadow-amp-Highlight"><span class="nav-text">Shadow&amp;Highlight</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Framework"><span class="nav-text">Framework</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Dalao"><span class="nav-text">Dalao</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%89%E8%B6%A3%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-text">有趣的应用</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qi Yun"
+      src="/images/avatar.jpeg">
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">112</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">58</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/qiyun71" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;qiyun71" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/29010355" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;29010355" rel="noopener" target="_blank"><i class="fa fa-star fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qi Yun</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">423k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">25:38</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/yqq/anime.min.js"></script>
+  <script src="/yqq/velocity/velocity.min.js"></script>
+  <script src="/yqq/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

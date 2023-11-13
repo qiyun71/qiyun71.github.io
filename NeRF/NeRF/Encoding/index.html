@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/yqq/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="对输入x进行编码的方式Field Encoders - nerfstudio">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Encoding">
+<meta property="og:url" content="http://example.com/NeRF/NeRF/Encoding/index.html">
+<meta property="og:site_name" content="YunQi">
+<meta property="og:description" content="对输入x进行编码的方式Field Encoders - nerfstudio">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/ipe_anim_horiz.gif">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230721153610.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230703160333.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230810145848.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230810150600.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230810152303.png">
+<meta property="article:published_time" content="2023-07-20T06:22:42.000Z">
+<meta property="article:modified_time" content="2023-11-13T05:03:48.872Z">
+<meta property="article:author" content="Qi Yun">
+<meta property="article:tag" content="NeRF">
+<meta property="article:tag" content="Encoding">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/ipe_anim_horiz.gif">
+
+<link rel="canonical" href="http://example.com/NeRF/NeRF/Encoding/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Encoding | YunQi</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">YunQi</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Note</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/NeRF/NeRF/Encoding/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YunQi">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Encoding
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-07-20 14:22:42" itemprop="dateCreated datePublished" datetime="2023-07-20T14:22:42+08:00">2023-07-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-11-13 13:03:48" itemprop="dateModified" datetime="2023-11-13T13:03:48+08:00">2023-11-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NeRF-NeRF/" itemprop="url" rel="index"><span itemprop="name">NeRF/NeRF</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>1.5k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>5 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>对输入x进行编码的方式<br><a target="_blank" rel="noopener" href="https://docs.nerf.studio/en/latest/nerfology/model_components/visualize_encoders.html">Field Encoders - nerfstudio</a></p>
+<span id="more"></span>
+<h1 id="频率编码"><a href="#频率编码" class="headerlink" title="频率编码"></a>频率编码</h1><h2 id="NeRF"><a href="#NeRF" class="headerlink" title="NeRF"></a>NeRF</h2><script type="math/tex; mode=display">\gamma(p)=\left(\sin \left(2^{0} \pi p\right), \cos \left(2^{0} \pi p\right), \cdots, \sin \left(2^{L-1} \pi p\right), \cos \left(2^{L-1} \pi p\right)\right)</script><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Embedder</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, **kwargs</span>):</span><br><span class="line">        self.kwargs = kwargs</span><br><span class="line">        self.create_embedding_fn()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">create_embedding_fn</span>(<span class="params">self</span>):</span><br><span class="line">        embed_fns = []</span><br><span class="line">        d = self.kwargs[<span class="string">&#x27;input_dims&#x27;</span>]</span><br><span class="line">        out_dim = <span class="number">0</span></span><br><span class="line">        <span class="keyword">if</span> self.kwargs[<span class="string">&#x27;include_input&#x27;</span>]:</span><br><span class="line">            embed_fns.append(<span class="keyword">lambda</span> x: x)</span><br><span class="line">            out_dim += d</span><br><span class="line"></span><br><span class="line">        max_freq = self.kwargs[<span class="string">&#x27;max_freq_log2&#x27;</span>]</span><br><span class="line">        N_freqs = self.kwargs[<span class="string">&#x27;num_freqs&#x27;</span>]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> self.kwargs[<span class="string">&#x27;log_sampling&#x27;</span>]:</span><br><span class="line">            freq_bands = <span class="number">2.</span> ** torch.linspace(<span class="number">0.</span>, max_freq, N_freqs)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            freq_bands = torch.linspace(<span class="number">2.</span>**<span class="number">0.</span>, <span class="number">2.</span>**max_freq, N_freqs)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> freq <span class="keyword">in</span> freq_bands:</span><br><span class="line">            <span class="keyword">for</span> p_fn <span class="keyword">in</span> self.kwargs[<span class="string">&#x27;periodic_fns&#x27;</span>]:</span><br><span class="line">                embed_fns.append(<span class="keyword">lambda</span> x, p_fn=p_fn, freq=freq: p_fn(x * freq))</span><br><span class="line">                out_dim += d</span><br><span class="line"></span><br><span class="line">        self.embed_fns = embed_fns</span><br><span class="line">        self.out_dim = out_dim</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">embed</span>(<span class="params">self, inputs</span>):</span><br><span class="line">        <span class="keyword">return</span> torch.cat([fn(inputs) <span class="keyword">for</span> fn <span class="keyword">in</span> self.embed_fns], -<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_embedder</span>(<span class="params">multires, input_dims=<span class="number">3</span></span>):</span><br><span class="line">    embed_kwargs = &#123;</span><br><span class="line">        <span class="string">&#x27;include_input&#x27;</span>: <span class="literal">True</span>,</span><br><span class="line">        <span class="string">&#x27;input_dims&#x27;</span>: input_dims,</span><br><span class="line">        <span class="string">&#x27;max_freq_log2&#x27;</span>: multires-<span class="number">1</span>,</span><br><span class="line">        <span class="string">&#x27;num_freqs&#x27;</span>: multires,</span><br><span class="line">        <span class="string">&#x27;log_sampling&#x27;</span>: <span class="literal">True</span>,</span><br><span class="line">        <span class="string">&#x27;periodic_fns&#x27;</span>: [torch.sin, torch.cos],</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    embedder_obj = Embedder(**embed_kwargs)</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">embed</span>(<span class="params">x, eo=embedder_obj</span>): <span class="keyword">return</span> eo.embed(x)</span><br><span class="line">    <span class="keyword">return</span> embed, embedder_obj.out_dim</span><br><span class="line"></span><br><span class="line"><span class="comment"># multires &lt;=&gt; L</span></span><br><span class="line"><span class="comment"># use: get_embedder(args.multires, args.i_embed)</span></span><br></pre></td></tr></table></figure>
+<h2 id="Instant-nsr-pl"><a href="#Instant-nsr-pl" class="headerlink" title="Instant-nsr-pl"></a>Instant-nsr-pl</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">get_encoding.py:</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CompositeEncoding</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, encoding, include_xyz=<span class="literal">False</span>, xyz_scale=<span class="number">1.</span>, xyz_offset=<span class="number">0.</span></span>):</span><br><span class="line">        <span class="built_in">super</span>(CompositeEncoding, self).__init__()</span><br><span class="line">        self.encoding = encoding</span><br><span class="line">        self.include_xyz, self.xyz_scale, self.xyz_offset = include_xyz, xyz_scale, xyz_offset</span><br><span class="line">        self.n_output_dims = <span class="built_in">int</span>(self.include_xyz) * self.encoding.n_input_dims + self.encoding.n_output_dims</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x, *args</span>):</span><br><span class="line">        <span class="keyword">return</span> self.encoding(x, *args) <span class="keyword">if</span> <span class="keyword">not</span> self.include_xyz <span class="keyword">else</span> torch.cat([x * self.xyz_scale + self.xyz_offset, self.encoding(x, *args)], dim=-<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_encoding</span>(<span class="params">n_input_dims,conf</span>):</span><br><span class="line">    <span class="keyword">if</span> conf.otype == <span class="string">&#x27;HashGrid&#x27;</span>:</span><br><span class="line">        encoding = HashGrid(n_input_dims, conf)</span><br><span class="line">    <span class="keyword">elif</span> conf.otype == <span class="string">&#x27;ProgressiveBandHashGrid&#x27;</span>:</span><br><span class="line">        encoding = ProgressiveBandHashGrid(n_input_dims, conf)</span><br><span class="line">    <span class="keyword">elif</span> conf.otype == <span class="string">&#x27;VanillaFrequency&#x27;</span>:</span><br><span class="line">        encoding = VanillaFrequency(n_input_dims, conf)</span><br><span class="line">    <span class="keyword">elif</span> conf.otype == <span class="string">&#x27;SphericalHarmonics&#x27;</span>:</span><br><span class="line">        encoding = SphericalHarmonics(n_input_dims, conf)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">raise</span> NotImplementedError</span><br><span class="line">    encoding = CompositeEncoding(encoding, include_xyz = conf.get(<span class="string">&#x27;include_xyz&#x27;</span>,<span class="literal">False</span>), xyz_scale =<span class="number">2</span>, xyz_offset = -<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> encoding</span><br><span class="line"></span><br><span class="line">frequency.py：</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">VanillaFrequency</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, in_channels, config</span>):</span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        self.N_freqs = config[<span class="string">&#x27;n_frequencies&#x27;</span>]</span><br><span class="line">        self.in_channels, self.n_input_dims = in_channels, in_channels</span><br><span class="line">        self.funcs = [torch.sin, torch.cos]</span><br><span class="line">        self.freq_bands = <span class="number">2</span>**torch.linspace(<span class="number">0</span>, self.N_freqs-<span class="number">1</span>, self.N_freqs)</span><br><span class="line">        self.n_output_dims = self.in_channels * (<span class="built_in">len</span>(self.funcs) * self.N_freqs)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        out = []</span><br><span class="line">        <span class="keyword">for</span> freq <span class="keyword">in</span> <span class="built_in">zip</span>(self.freq_bands):</span><br><span class="line">            <span class="keyword">for</span> func <span class="keyword">in</span> self.funcs:</span><br><span class="line">                out += [func(freq*x)]</span><br><span class="line">        <span class="keyword">return</span> torch.cat(out, -<span class="number">1</span>)     </span><br><span class="line"></span><br><span class="line">models/neus.py：</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">N</span>(nn.Module):</span><br><span class="line">    __init__:</span><br><span class="line">    self.encoding = get_encoding(n_input_dims = <span class="number">3</span>, config)</span><br><span class="line">    forward:</span><br><span class="line">    h = self.encoding(x)</span><br><span class="line"></span><br><span class="line">yaml:</span><br><span class="line">    xyz_encoding: </span><br><span class="line">      otype: HashGrid</span><br><span class="line">      include_xyz: true</span><br><span class="line">      n_frequencies: <span class="number">10</span></span><br></pre></td></tr></table></figure>
+<h2 id="IPE"><a href="#IPE" class="headerlink" title="IPE"></a>IPE</h2><p>Mip-NeRF集成位置编码</p>
+<p>对多元高斯近似截锥体的均值和协方差进行编码</p>
+<script type="math/tex; mode=display">\begin{aligned}
+\gamma(\mathbf{\mu},\mathbf{\Sigma})& =\mathrm{E}_{\mathbf{x}\sim\mathcal{N}(\mathbf{\mu}_\gamma,\mathbf{\Sigma}_\gamma)}[\gamma(\mathbf{x})]  \\
+&=\begin{bmatrix}\sin(\mathbf{\mu}_\gamma)\circ\exp(-(1/2)\mathrm{diag}(\mathbf{\Sigma}_\gamma))\\\cos(\mathbf{\mu}_\gamma)\circ\exp(-(1/2)\mathrm{diag}(\mathbf{\Sigma}_\gamma))\end{bmatrix}
+\end{aligned}</script><p>IPE可以将大区域的高频编码求和为0<br><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/ipe_anim_horiz.gif" alt="ipe_anim_horiz.gif"></p>
+<p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230721153610.png" alt="image.png"></p>
+<h1 id="HashGrid"><a href="#HashGrid" class="headerlink" title="HashGrid"></a>HashGrid</h1><p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230703160333.png" alt="image.png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">hashgrid.py:</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">HashGrid</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, n_input_dims, config</span>):</span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        self.n_input_dims = n_input_dims</span><br><span class="line">        <span class="keyword">with</span> torch.cuda.device(get_rank()):</span><br><span class="line">            self.encoding = tcnn.Encoding(self.n_input_dims, config_to_primitive(config))</span><br><span class="line">        self.n_output_dims = self.encoding.n_output_dims</span><br><span class="line">        self.n_level = config[<span class="string">&#x27;n_levels&#x27;</span>]</span><br><span class="line">        self.n_features_per_level = config[<span class="string">&#x27;n_features_per_level&#x27;</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        enc = self.encoding(x)</span><br><span class="line">        <span class="keyword">return</span> enc</span><br><span class="line"></span><br><span class="line">models/neus.py：</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">N</span>(nn.Module):</span><br><span class="line">    __init__:</span><br><span class="line">    self.encoding = get_encoding(n_input_dims = <span class="number">3</span>, config)</span><br><span class="line">    forward:</span><br><span class="line">    h = self.encoding(x)</span><br><span class="line"></span><br><span class="line">yaml:</span><br><span class="line">    xyz_encoding: </span><br><span class="line">      otype: HashGrid</span><br><span class="line">      n_levels: <span class="number">16</span></span><br><span class="line">      n_features_per_level: <span class="number">2</span></span><br><span class="line">      log2_hashmap_size: <span class="number">19</span></span><br><span class="line">      base_resolution: <span class="number">16</span></span><br><span class="line">      per_level_scale: <span class="number">1.447269237440378</span></span><br><span class="line">      include_xyz: true</span><br></pre></td></tr></table></figure>
+<h1 id="球面谐波编码"><a href="#球面谐波编码" class="headerlink" title="球面谐波编码"></a>球面谐波编码</h1><p>球面基函数——球谐函数</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/351289217">球谐函数介绍（Spherical Harmonics） - 知乎 (zhihu.com)</a></p>
+</blockquote>
+<p>$\{Y_\ell^m\}.$ 与二维的三角函数基类似，球面谐波为三维上的一组基函数，用来描述其他更加复杂的函数</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230810145848.png" alt="image.png"><br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230810150600.png" alt="image.png"></p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+y_l^m(\theta,\varphi)=\begin{cases}\sqrt{2}K_l^m\cos(m\varphi)P_l^m\big(\cos\theta\big),&m>0\\[2ex]\sqrt{2}K_l^m\sin(-m\varphi)P_l^{-m}\big(\cos\theta\big),&m<0\\[2ex]K_l^0P_l^0\big(\cos\theta\big),&m=0\end{cases} \\
+P_n(x)=\frac1{2^n\cdot n!}\frac{d^n}{dx^n}[(x^2-1)^n] \\
+P_l^m(x)=(-1)^m(1-x^2)^{m/2}\frac{d^m}{dx^m}(P_l(x)) \\
+K_{l}^{m}=\sqrt{\frac{\left(2l+1\right)}{4\pi}\frac{\left(l-\left|m\right|\right)!}{\left(l+\left|m\right|\right)!}}
+\end{aligned}</script><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">spherical.py:</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SphericalHarmonics</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, n_input_dims, config</span>):</span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        self.n_input_dims = n_input_dims</span><br><span class="line">        <span class="keyword">with</span> torch.cuda.device(get_rank()):</span><br><span class="line">            self.encoding = tcnn.Encoding(self.n_input_dims, config_to_primitive(config))</span><br><span class="line">        self.n_output_dims = self.encoding.n_output_dims</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        enc = self.encoding(x)</span><br><span class="line">        <span class="keyword">return</span> enc</span><br><span class="line"></span><br><span class="line">models/neus.py：</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">N</span>(nn.Module):</span><br><span class="line">    __init__:</span><br><span class="line">    self.encoding = get_encoding(n_input_dims = <span class="number">3</span>, config)</span><br><span class="line">    forward:</span><br><span class="line">    h = self.encoding(x)</span><br><span class="line"></span><br><span class="line">yaml:</span><br><span class="line">    dir_encoding: </span><br><span class="line">      otype: SphericalHarmonics</span><br><span class="line">      degree: <span class="number">4</span></span><br></pre></td></tr></table></figure>
+<h2 id="IDE"><a href="#IDE" class="headerlink" title="IDE"></a>IDE</h2><p>在Ref-NeRF中，借鉴Mip-NeR中的IPE，提出了IDE，基于球面谐波，将高频部分的编码输出置为0</p>
+<p>$\mathrm{IDE}(\hat{\boldsymbol{\omega}}_r,\kappa)=\left\{\mathbb{E}_{\hat{\boldsymbol{\omega}}\sim\mathrm{vMF}(\hat{\boldsymbol{\omega}}_r,\kappa)}[Y_\ell^m(\hat{\boldsymbol{\omega}})]\colon(\ell,m)\in\mathcal{M}_L\right\},$<br>$\mathcal{M}_{L}=\{(\ell,m):\ell=1,…,2^{L},m=0,…,\ell\}.$</p>
+<p>$\mathbb{E}_{\hat{\boldsymbol{\omega}}\sim\mathrm{vMF}(\hat{\boldsymbol{\omega}}_r,\kappa)}[Y_\ell^m(\hat{\boldsymbol{\omega}})]=A_\ell(\kappa)Y_\ell^m(\hat{\boldsymbol{\omega}}_r),$<br>$A_{\ell}(\kappa)\approx\exp\left(-\frac{\ell(\ell+1)}{2\kappa}\right).$</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230810152303.png" alt="image.png"></p>
+<p>use:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">self.sph_enc = generate_ide_fn(<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">dir_enc = self.sph_enc(reflections, <span class="number">0</span>)</span><br><span class="line"><span class="comment"># 将reflections编码，粗糙度为0</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">generalized_binomial_coeff</span>(<span class="params">a, k</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Compute generalized binomial coefficients.&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> np.prod(a - np.arange(k)) / np.math.factorial(k)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">assoc_legendre_coeff</span>(<span class="params">l, m, k</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Compute associated Legendre polynomial coefficients.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">      Returns the coefficient of the cos^k(theta)*sin^m(theta) term in the</span></span><br><span class="line"><span class="string">      (l, m)th associated Legendre polynomial, P_l^m(cos(theta)).</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">      Args:</span></span><br><span class="line"><span class="string">        l: associated Legendre polynomial degree.</span></span><br><span class="line"><span class="string">        m: associated Legendre polynomial order.</span></span><br><span class="line"><span class="string">        k: power of cos(theta).</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">      Returns:</span></span><br><span class="line"><span class="string">        A float, the coefficient of the term corresponding to the inputs.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> ((-<span class="number">1</span>)**m * <span class="number">2</span>**l * np.math.factorial(l) / np.math.factorial(k) /</span><br><span class="line">          np.math.factorial(l - k - m) *</span><br><span class="line">          generalized_binomial_coeff(<span class="number">0.5</span> * (l + k + m - <span class="number">1.0</span>), l))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">sph_harm_coeff</span>(<span class="params">l, m, k</span>):</span><br><span class="line">  <span class="string">&quot;&quot;&quot;Compute spherical harmonic coefficients.&quot;&quot;&quot;</span></span><br><span class="line">  <span class="keyword">return</span> (np.sqrt(</span><br><span class="line">      (<span class="number">2.0</span> * l + <span class="number">1.0</span>) * np.math.factorial(l - m) /</span><br><span class="line">      (<span class="number">4.0</span> * np.pi * np.math.factorial(l + m))) * assoc_legendre_coeff(l, m, k))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_ml_array</span>(<span class="params">deg_view</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Create a list with all pairs of (l, m) values to use in the encoding.&quot;&quot;&quot;</span></span><br><span class="line">    ml_list = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(deg_view):</span><br><span class="line">        l = <span class="number">2</span>**i</span><br><span class="line">        <span class="comment"># Only use nonnegative m values, later splitting real and imaginary parts.</span></span><br><span class="line">        <span class="keyword">for</span> m <span class="keyword">in</span> <span class="built_in">range</span>(l + <span class="number">1</span>):</span><br><span class="line">            ml_list.append((m, l))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Convert list into a numpy array.</span></span><br><span class="line">    ml_array = np.array(ml_list).T</span><br><span class="line">    <span class="keyword">return</span> ml_array</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">generate_ide_fn</span>(<span class="params">deg_view</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Generate integrated directional encoding (IDE) function.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">      This function returns a function that computes the integrated directional</span></span><br><span class="line"><span class="string">      encoding from Equations 6-8 of arxiv.org/abs/2112.03907.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">      Args:</span></span><br><span class="line"><span class="string">        deg_view: number of spherical harmonics degrees to use.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">      Returns:</span></span><br><span class="line"><span class="string">        A function for evaluating integrated directional encoding.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">      Raises:</span></span><br><span class="line"><span class="string">        ValueError: if deg_view is larger than 5.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">if</span> deg_view &gt; <span class="number">5</span>:</span><br><span class="line">        <span class="keyword">raise</span> ValueError(<span class="string">&#x27;Only deg_view of at most 5 is numerically stable.&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    ml_array = get_ml_array(deg_view)</span><br><span class="line">    l_max = <span class="number">2</span>**(deg_view - <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Create a matrix corresponding to ml_array holding all coefficients, which,</span></span><br><span class="line">    <span class="comment"># when multiplied (from the right) by the z coordinate Vandermonde matrix,</span></span><br><span class="line">    <span class="comment"># results in the z component of the encoding.</span></span><br><span class="line">    mat = np.zeros((l_max + <span class="number">1</span>, ml_array.shape[<span class="number">1</span>]))</span><br><span class="line">    <span class="keyword">for</span> i, (m, l) <span class="keyword">in</span> <span class="built_in">enumerate</span>(ml_array.T):</span><br><span class="line">        <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(l - m + <span class="number">1</span>):</span><br><span class="line">            mat[k, i] = sph_harm_coeff(l, m, k)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># mat = torch.from_numpy(mat.astype(np.float32)).cuda()</span></span><br><span class="line">    mat = torch.from_numpy(mat.astype(np.float32)).cpu()</span><br><span class="line">    ml_array = torch.from_numpy(ml_array.astype(np.float32)).cpu()</span><br><span class="line">    <span class="comment"># ml_array = torch.from_numpy(ml_array.astype(np.float32)).cuda()</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">integrated_dir_enc_fn</span>(<span class="params">xyz, kappa_inv</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;Function returning integrated directional encoding (IDE).</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        Args:</span></span><br><span class="line"><span class="string">          xyz: [..., 3] array of Cartesian coordinates of directions to evaluate at.</span></span><br><span class="line"><span class="string">          kappa_inv: [..., 1] reciprocal of the concentration parameter of the von</span></span><br><span class="line"><span class="string">            Mises-Fisher distribution.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        Returns:</span></span><br><span class="line"><span class="string">          An array with the resulting IDE.</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        x = xyz[..., <span class="number">0</span>:<span class="number">1</span>]</span><br><span class="line">        y = xyz[..., <span class="number">1</span>:<span class="number">2</span>]</span><br><span class="line">        z = xyz[..., <span class="number">2</span>:<span class="number">3</span>]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Compute z Vandermonde matrix.</span></span><br><span class="line">        vmz = torch.concat([z**i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(mat.shape[<span class="number">0</span>])], dim=-<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Compute x+iy Vandermonde matrix.</span></span><br><span class="line">        vmxy = torch.concat([(x + <span class="number">1j</span> * y)**m <span class="keyword">for</span> m <span class="keyword">in</span> ml_array[<span class="number">0</span>, :]], dim=-<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Get spherical harmonics.</span></span><br><span class="line">        sph_harms = vmxy * torch.matmul(vmz, mat)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Apply attenuation function using the von Mises-Fisher distribution</span></span><br><span class="line">        <span class="comment"># concentration parameter, kappa.</span></span><br><span class="line">        sigma = <span class="number">0.5</span> * ml_array[<span class="number">1</span>, :] * (ml_array[<span class="number">1</span>, :] + <span class="number">1</span>)</span><br><span class="line">        ide = sph_harms * torch.exp(-sigma * kappa_inv)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Split into real and imaginary parts and return</span></span><br><span class="line">        <span class="keyword">return</span> torch.concat([torch.real(ide), torch.imag(ide)], dim=-<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> integrated_dir_enc_fn</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_lat_long</span>():</span><br><span class="line">    res = (<span class="number">1080</span>, <span class="number">1080</span>*<span class="number">3</span>)</span><br><span class="line">    gy, gx = torch.meshgrid(torch.linspace(<span class="number">0.0</span> + <span class="number">1.0</span> / res[<span class="number">0</span>], <span class="number">1.0</span> - <span class="number">1.0</span> / res[<span class="number">0</span>], res[<span class="number">0</span>], device=<span class="string">&#x27;cuda&#x27;</span>),</span><br><span class="line">                            torch.linspace(-<span class="number">1.0</span> + <span class="number">1.0</span> / res[<span class="number">1</span>], <span class="number">1.0</span> - <span class="number">1.0</span> / res[<span class="number">1</span>], res[<span class="number">1</span>], device=<span class="string">&#x27;cuda&#x27;</span>),</span><br><span class="line">                            indexing=<span class="string">&#x27;ij&#x27;</span>) <span class="comment"># [h,w]</span></span><br><span class="line"></span><br><span class="line">    sintheta, costheta = torch.sin(gy * np.pi), torch.cos(gy * np.pi)</span><br><span class="line">    sinphi, cosphi = torch.sin(gx * np.pi), torch.cos(gx * np.pi)</span><br><span class="line">    reflvec = torch.stack((sintheta * sinphi, costheta, -sintheta * cosphi), dim=-<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> reflvec</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+1ZnNxFWnEbk5YzRl">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/NeRF/" rel="tag"><i class="fa fa-tag"></i> NeRF</a>
+              <a href="/tags/Encoding/" rel="tag"><i class="fa fa-tag"></i> Encoding</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/NeRF/LargeScaleScene/NeRF++/" rel="prev" title="NeRF++">
+      <i class="fa fa-chevron-left"></i> NeRF++
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/NeRF/Sampling/Mip-NeRF/" rel="next" title="Mip-NeRF">
+      Mip-NeRF <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A2%91%E7%8E%87%E7%BC%96%E7%A0%81"><span class="nav-text">频率编码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#NeRF"><span class="nav-text">NeRF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Instant-nsr-pl"><span class="nav-text">Instant-nsr-pl</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IPE"><span class="nav-text">IPE</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HashGrid"><span class="nav-text">HashGrid</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%90%83%E9%9D%A2%E8%B0%90%E6%B3%A2%E7%BC%96%E7%A0%81"><span class="nav-text">球面谐波编码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IDE"><span class="nav-text">IDE</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qi Yun"
+      src="/images/avatar.jpeg">
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">112</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">58</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/qiyun71" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;qiyun71" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/29010355" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;29010355" rel="noopener" target="_blank"><i class="fa fa-star fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qi Yun</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">423k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">25:38</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/yqq/anime.min.js"></script>
+  <script src="/yqq/velocity/velocity.min.js"></script>
+  <script src="/yqq/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

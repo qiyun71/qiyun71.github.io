@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/yqq/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="数据集">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Datasets">
+<meta property="og:url" content="http://example.com/NeRF/NeRF/Datasets/index.html">
+<meta property="og:site_name" content="YunQi">
+<meta property="og:description" content="数据集">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230923112720.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230923112501.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230923112539.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230923112650.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230923143752.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230923111934.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230923112434.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230923112838.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230923113119.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231021203414.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023161713.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231109094128.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230925144627.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231108222956.png">
+<meta property="article:published_time" content="2023-09-23T03:16:00.000Z">
+<meta property="article:modified_time" content="2023-11-13T05:03:48.871Z">
+<meta property="article:author" content="Qi Yun">
+<meta property="article:tag" content="Datasets">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230923112720.png">
+
+<link rel="canonical" href="http://example.com/NeRF/NeRF/Datasets/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Datasets | YunQi</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">YunQi</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Note</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/NeRF/NeRF/Datasets/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YunQi">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Datasets
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-09-23 11:16:00" itemprop="dateCreated datePublished" datetime="2023-09-23T11:16:00+08:00">2023-09-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-11-13 13:03:48" itemprop="dateModified" datetime="2023-11-13T13:03:48+08:00">2023-11-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NeRF-NeRF/" itemprop="url" rel="index"><span itemprop="name">NeRF/NeRF</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>1k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>4 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>数据集</p>
+<span id="more"></span>
+<h1 id="Custom-Datasets"><a href="#Custom-Datasets" class="headerlink" title="Custom Datasets"></a>Custom Datasets</h1><p>COLMAP + Blender(neuralangelo)</p>
+<h2 id="COLMAP"><a href="#COLMAP" class="headerlink" title="COLMAP"></a>COLMAP</h2><blockquote>
+<p><a href="/Learn/Learn-Colmap">Learn-Colmap</a></p>
+</blockquote>
+<h1 id="DTU"><a href="#DTU" class="headerlink" title="DTU"></a>DTU</h1><p><a target="_blank" rel="noopener" href="http://roboimagedata.compute.dtu.dk/">DTU Robot Image Data Sets | Data for Evaluating Computer Vision Methods etc.</a><br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230923112720.png" alt="image.png"><br>1600x1200</p>
+<p>在黑盒空间中，使用 6 轴工业机器人手部的结构光相机，structured light scanner 可以捕获所观察场景/对象的参考 3D 表面几何形状</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230923112501.png" alt="image.png|555"></p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230923112539.png" alt="image.png"></p>
+<p>我们的机器人的<strong>定位精度难以控制</strong>，但重复性非常高，随机性很小。这意味着多次运行相同的定位脚本，每次定位几乎都是相同的。为了解决这个定位问题，我们不直接使用（或报告）发送给机器人的相机位置，而是确定并报告我们<strong>获取的相对相机位置</strong>。这是通过 MatLab 的相机校准工具箱完成的。<br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230923112650.png" alt="image.png|555"></p>
+<h1 id="BlenderMVS"><a href="#BlenderMVS" class="headerlink" title="BlenderMVS"></a>BlenderMVS</h1><p><a target="_blank" rel="noopener" href="https://github.com/YoYo000/BlendedMVS">YoYo000/BlendedMVS: BlendedMVS: A Large-scale Dataset for Generalized Multi-view Stereo Networks (github.com)</a><br><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4545062112983670785&amp;noteId=1973517268736296192">BlendedMVS: A Large-scale Dataset for Generalized Multi-view Stereo Networks (readpaper.com)</a><br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230923143752.png" alt="image.png"><br>H ×W = 1536 × 2048</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230923111934.png" alt="image.png"></p>
+<p>应用 3D 重建管道从精心选择的场景图像中恢复高质量的纹理网格。然后，我们将这些网格模型渲染为彩色图像和深度图。为了在训练期间引入环境照明信息，将渲染的彩色图像与输入图像进一步混合以生成训练输入</p>
+<ul>
+<li>Altizure 平台进行纹理网格重建，该软件将执行完整的 3D 重建管道并返回纹理网格和相机姿势作为最终输出</li>
+<li>然后<strong>将网格模型渲染到每个相机视图点</strong>以生成渲染图像和渲染的深度图，<strong>渲染的深度图</strong>将用作 GT 深度图</li>
+<li>由于渲染图像不包含与视图相关的照明，使用高通滤波器用于从渲染图像中提取图像视觉线索，而低通滤波器用于从输入中提取环境照明。最后线性混合生成混合图，<strong>混合图</strong>用作 GT 监督</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230923112434.png" alt="image.png|333"></p>
+<p>混合图像与输入图像具有相似的背景照明，同时继承了渲染图像的纹理细节。<br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230923112838.png" alt="image.png|555"><br>与 DTU 数据集[2]不同的是，所有场景都由固定的机械臂捕获，BlendedMVS 中的场景包含各种不同的摄像机轨迹。非结构化摄像机轨迹可以更好地模拟不同的图像捕获风格，并能够使网络更一般化到真实世界的重建</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230923113119.png" alt="image.png"></p>
+<h1 id="Tanks-and-Temples"><a href="#Tanks-and-Temples" class="headerlink" title="Tanks and Temples"></a>Tanks and Temples</h1><p><a target="_blank" rel="noopener" href="https://www.tanksandtemples.org/">Tanks and Temples Benchmark</a></p>
+<ul>
+<li>工业激光扫描仪(industrial laser scanner.)捕获</li>
+</ul>
+<h1 id="Human-Body"><a href="#Human-Body" class="headerlink" title="Human Body"></a>Human Body</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/rlczddl/awesome-3d-human-reconstruction#body-1">rlczddl/awesome-3d-human-reconstruction (github.com)</a></p>
+</blockquote>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2K2K</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/ketiVision/2K2K">ketiVision/2K2K (github.com)</a></td>
+</tr>
+<tr>
+<td>ZJU-Mocap</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/zju3dv/neuralbody/blob/master/INSTALL.md#zju-mocap-dataset">neuralbody/INSTALL.md at master · zju3dv/neuralbody (github.com)</a></td>
+</tr>
+<tr>
+<td>_People-Snapshot_</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/zju3dv/neuralbody/blob/master/INSTALL.md#people-snapshot-dataset">People-Snapshot</a></td>
+</tr>
+<tr>
+<td>THUman</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/ZhengZerong/DeepHuman/tree/master/THUmanDataset">THUmanDataset</a></td>
+</tr>
+<tr>
+<td>THuman2.0</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/ytrock/THuman2.0-Dataset">ytrock/THuman2.0-Dataset (github.com)</a></td>
+</tr>
+<tr>
+<td>THuman3.0</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/fwbx529/THuman3.0-Dataset">fwbx529/THuman3.0-Dataset (github.com)</a></td>
+</tr>
+<tr>
+<td><strong>THUman4.0</strong></td>
+<td><a target="_blank" rel="noopener" href="https://github.com/ZhengZerong/THUman4.0-Dataset">ZhengZerong/THUman4.0-Dataset (github.com)</a></td>
+</tr>
+<tr>
+<td>THUman 来源</td>
+<td><a target="_blank" rel="noopener" href="http://liuyebin.com/dataset.html">Yebin Liu (刘烨斌) (liuyebin.com)</a></td>
+</tr>
+<tr>
+<td>renderpeople</td>
+<td><a target="_blank" rel="noopener" href="https://renderpeople.com/">https://renderpeople.com/</a></td>
+</tr>
+<tr>
+<td>MVPHuman</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/TingtingLiao/MVPHuman">MVP-Human</a></td>
+</tr>
+<tr>
+<td><strong>HuMMan</strong></td>
+<td><a target="_blank" rel="noopener" href="https://github.com/caizhongang/humman_toolbox">caizhongang/humman_toolbox: Toolbox for HuMMan Dataset (github.com)</a></td>
+</tr>
+<tr>
+<td>CLOTH4D</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/AemikaChow/CLOTH4D">AemikaChow/CLOTH4D (github.com)</a></td>
+</tr>
+<tr>
+<td>DNA-Rendering</td>
+<td><a target="_blank" rel="noopener" href="https://dna-rendering.github.io/">DNA-Rendering : A Diverse Neural Actor Repository for High-Fidelity Human-centric Rendering</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li><p>UltraStage：多视角和多光照条件下捕获的高质量的人体资源</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://miaoing.github.io/RNHA/">Relightable Neural Human Assets from Multi-view Gradient Illuminations (miaoing.github.io)</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/IHe-KaiI/RNHA_Dataset">IHe-KaiI/RNHA_Dataset: The dataset of the paper “Relightable Neural Human Assets from Multi-view Gradient Illuminations”. (github.com)</a></li>
+</ul>
+</li>
+<li><p>SMPL</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://smpl-x.is.tue.mpg.de/index.html">SMPL-X (mpg.de)</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="Human-Art"><a href="#Human-Art" class="headerlink" title="Human-Art"></a>Human-Art</h2><p><a target="_blank" rel="noopener" href="https://idea-research.github.io/HumanArt/">Human-Art: A Versatile Human-Centric Dataset Bridging Natural and Artificial Scenes (idea-research.github.io)</a></p>
+<h1 id="MVImgNet"><a href="#MVImgNet" class="headerlink" title="MVImgNet"></a>MVImgNet</h1><p>A Large-scale Dataset of Multi-view Images</p>
+<p><a target="_blank" rel="noopener" href="https://gaplab.cuhk.edu.cn/projects/MVImgNet/">MVImgNet (cuhk.edu.cn)</a></p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231021203414.png" alt=""></p>
+<h1 id="Objaverse-XL"><a href="#Objaverse-XL" class="headerlink" title="Objaverse-XL"></a>Objaverse-XL</h1><p>Objaverse-XL is an open dataset of over 10 million 3D objects!</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/allenai/objaverse-xl">allenai/objaverse-xl: 🪐 Objaverse-XL is a Universe of 10M+ 3D Objects. Contains API Scripts for Downloading and Processing! (github.com)</a></p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023161713.png" alt="image.png|666"></p>
+<h1 id="ABC-Dataset"><a href="#ABC-Dataset" class="headerlink" title="ABC Dataset"></a>ABC Dataset</h1><p>A Big CAD Model Dataset<br><a target="_blank" rel="noopener" href="https://deep-geometry.github.io/abc-dataset/">News | ABC Dataset (deep-geometry.github.io)</a><br>一百万个计算机辅助设计 (CAD) 模型的集合，用于研究几何深度学习方法和应用。每个模型都是显式参数化曲线和曲面的集合，为微分量、面片分割、几何特征检测和形状重建提供基本事实。对曲面和曲线的参数化描述进行采样可以生成不同格式和分辨率的数据，从而能够对各种几何学习算法进行公平比较</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231109094128.png" alt="img.png|666"></p>
+<h1 id="NeuralLabeling-工具箱"><a href="#NeuralLabeling-工具箱" class="headerlink" title="NeuralLabeling 工具箱"></a>NeuralLabeling 工具箱</h1><blockquote>
+<p><a href="NeuralLabeling.md">NeuralLabeling: A versatile toolset for labeling vision datasets using Neural Radiance Fields</a> &gt; <a target="_blank" rel="noopener" href="https://florise.github.io/neural_labeling_web/">NeuralLabeling: A versatile toolset for labeling vision datasets using Neural Radiance Fields (florise.github.io)</a></p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230925144627.png" alt="image.png"></p>
+<h1 id="MuSHRoom"><a href="#MuSHRoom" class="headerlink" title="MuSHRoom"></a>MuSHRoom</h1><p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2311.02778">MuSHRoom: Multi-Sensor Hybrid Room Dataset for Joint 3D Reconstruction and Novel View Synthesis</a></p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231108222956.png" alt="image.png|666"></p>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+1ZnNxFWnEbk5YzRl">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Datasets/" rel="tag"><i class="fa fa-tag"></i> Datasets</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/HumanBodyReconstruction/Other%20Paper%20Reconstruction/" rel="prev" title="Other Paper">
+      <i class="fa fa-chevron-left"></i> Other Paper
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/HumanBodyReconstruction/Depth&Normal%20Estimation/2K2K/" rel="next" title="2K2K">
+      2K2K <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Custom-Datasets"><span class="nav-text">Custom Datasets</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#COLMAP"><span class="nav-text">COLMAP</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DTU"><span class="nav-text">DTU</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BlenderMVS"><span class="nav-text">BlenderMVS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Tanks-and-Temples"><span class="nav-text">Tanks and Temples</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Human-Body"><span class="nav-text">Human Body</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Human-Art"><span class="nav-text">Human-Art</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MVImgNet"><span class="nav-text">MVImgNet</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Objaverse-XL"><span class="nav-text">Objaverse-XL</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ABC-Dataset"><span class="nav-text">ABC Dataset</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NeuralLabeling-%E5%B7%A5%E5%85%B7%E7%AE%B1"><span class="nav-text">NeuralLabeling 工具箱</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MuSHRoom"><span class="nav-text">MuSHRoom</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qi Yun"
+      src="/images/avatar.jpeg">
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">112</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">58</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/qiyun71" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;qiyun71" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/29010355" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;29010355" rel="noopener" target="_blank"><i class="fa fa-star fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qi Yun</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">423k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">25:38</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/yqq/anime.min.js"></script>
+  <script src="/yqq/velocity/velocity.min.js"></script>
+  <script src="/yqq/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

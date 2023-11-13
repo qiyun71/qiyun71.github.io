@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/yqq/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Title HF-NeuS: Improved Surface Reconstruction Using High-Frequency Details     Author _Yiqun Wang, Ivan Skorokhodov, Peter Wonka_   Conf&#x2F;Jour NeurIPS   Year 2022   Project yiqun-wang&#x2F;HFS: HF-NeuS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HF-NeuS">
+<meta property="og:url" content="http://example.com/NeRF/SurfaceReconstruction/HF-NeuS/index.html">
+<meta property="og:site_name" content="YunQi">
+<meta property="og:description" content="Title HF-NeuS: Improved Surface Reconstruction Using High-Frequency Details     Author _Yiqun Wang, Ivan Skorokhodov, Peter Wonka_   Conf&#x2F;Jour NeurIPS   Year 2022   Project yiqun-wang&#x2F;HFS: HF-NeuS">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230904154600.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230904145337.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230904145342.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230904145240.png">
+<meta property="article:published_time" content="2023-09-02T06:37:20.000Z">
+<meta property="article:modified_time" content="2023-11-13T05:03:48.877Z">
+<meta property="article:author" content="Qi Yun">
+<meta property="article:tag" content="Neus">
+<meta property="article:tag" content="SurfaceReconstruction">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230904154600.png">
+
+<link rel="canonical" href="http://example.com/NeRF/SurfaceReconstruction/HF-NeuS/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>HF-NeuS | YunQi</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">YunQi</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Note</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/NeRF/SurfaceReconstruction/HF-NeuS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YunQi">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          HF-NeuS
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-09-02 14:37:20" itemprop="dateCreated datePublished" datetime="2023-09-02T14:37:20+08:00">2023-09-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-11-13 13:03:48" itemprop="dateModified" datetime="2023-11-13T13:03:48+08:00">2023-11-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NeRF-SurfaceReconstruction/" itemprop="url" rel="index"><span itemprop="name">NeRF/SurfaceReconstruction</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>3.8k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>14 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Title</th>
+<th>HF-NeuS: Improved Surface Reconstruction Using High-Frequency Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Author</td>
+<td>_Yiqun Wang, Ivan Skorokhodov, Peter Wonka_</td>
+</tr>
+<tr>
+<td>Conf/Jour</td>
+<td>NeurIPS</td>
+</tr>
+<tr>
+<td>Year</td>
+<td>2022</td>
+</tr>
+<tr>
+<td>Project</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/yiqun-wang/HFS">yiqun-wang/HFS: HF-NeuS: Improved Surface Reconstruction Using High-Frequency Details (NeurIPS 2022) (github.com)</a></td>
+</tr>
+<tr>
+<td>Paper</td>
+<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4670872824890540033&amp;noteId=1943282597784032256">Improved surface reconstruction using high-frequency details (readpaper.com)</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>贡献：</p>
+<ul>
+<li>新的SDF与透明度$\alpha$关系函数，相较于NeuS更简单</li>
+<li>将SDF分解为两个独立隐函数的组合：基和位移。并利用自适应尺度约束对隐函数分布不理想的区域进行重点优化，可以重构出比以往工作更精细的曲面</li>
+</ul>
+<span id="more"></span>
+<h1 id="Limitation"><a href="#Limitation" class="headerlink" title="Limitation"></a>Limitation</h1><p>如图5所示，我们的方法仍然存在挑战。我们给出了参考地面真值图像、相应的重建图像和重建表面。对于船舶的绳索网格，仍然观察到对地面真实辐射的一些过拟合。<strong>具体来说，绳子的网格在图像中是可见的，但表面没有精确地重建</strong>。另一个限制是缺少单根细绳。我们还可视化了表1的一个坏情况，其中误差大于其他方法的误差，如补充材料中的图14 DTU Bunny所示。在这种情况下，这个模型的光线变化，纹理不那么明显，因此很难重建腹部的细节。</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230904154600.png" alt="image.png"></p>
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>介绍了一种基于高频细节的多视点表面重建新方法HF-NeuS。<strong>我们提出了一个新的推导来解释符号距离和透明度之间的关系</strong>，并提出了一类可以使用的函数。<strong>通过将符号距离场分解为两个独立隐函数的组合，并利用自适应尺度约束对隐函数分布不理想的区域进行重点优化，可以重构出比以往工作更精细的曲面</strong>。<br>实验结果表明，该方法在定量重建质量和视觉检测方面都优于目前的技术水平。目前的一个限制是，HF-NeuS需要优化一个额外的隐式函数，因此它需要更多的计算资源，并产生额外的编码复杂性。此外，由于缺乏3D监督，我们仍然在一定程度上观察到对地面真实度的过拟合。<br>未来工作的一个有趣的方向是探索不同照明方式下场景的重建。<em>最后，我们不期望与我们的研究直接相关的负面社会影响。不过，一般来说，地表重建可能产生负面的社会影响</em></p>
+<h1 id="AIR"><a href="#AIR" class="headerlink" title="AIR"></a>AIR</h1><p>神经渲染可以在没有三维监督的情况下重建形状的隐式表示。然而，目前的神经表面重建方法难以学习高频几何细节，因此重建的形状往往过于光滑。本文提出了一种提高神经绘制中表面重建质量的新方法HF-NeuS。我们遵循最近的工作，将曲面建模为有符号距离函数(sdf)。<br><strong>首先，我们推导了SDF、体积密度、透明度函数和体积渲染方程中使用的加权函数之间的关系，并提出了将透明度建模为转换后的SDF</strong>。<br>其次，我们观察到，试<strong>图在单个SDF中联合编码高频和低频分量会导致不稳定的优化</strong>。<br>我们提出将SDF分解为基函数和位移函数，采用由粗到精的策略，逐步增加高频细节。最后，我们设计了一种自适应优化策略，使训练过程专注于改进那些靠近表面的sdf有伪像的区域。我们的定性和定量结果表明，我们的方法可以重建细粒度的表面细节，并获得比现有技术更好的表面重建质量</p>
+<p>NeRF —&gt; Neus、VolSDF表面重建 —&gt; HF-Neus</p>
+<ul>
+<li>首先，我们分析了符号距离函数与体积密度、透明度和权重函数之间的关系。我们从我们的推导中得出结论，最好是建模一个将有符号距离映射到透明度的函数，并提出一类满足理论要求的函数</li>
+<li>其次，我们观察到，如图2所示，单符号距离函数很难直接学习高频细节。因此，我们建议在相关工作之后将SDF分解为基函数和位移函数。我们将这一思想应用于可微分的NeRF渲染框架和NeRF训练方案。</li>
+<li>第三，可以选择将距离转换为透明度的函数有一个参数，我们称之为尺度s，它控制函数的斜率(或导数的偏差)。参数s控制表面被定位的精确程度，以及远离表面的颜色对结果的影响程度。<ul>
+<li>在之前的工作中，这个参数s是全局设置的，但它是可训练的，因此它可以在迭代之间改变。<strong>我们提出了一种新的空间自适应加权方案来影响该参数，使优化更加关注距离场中的问题区域</strong></li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230904145337.png" alt="image.png"></p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230904145342.png" alt="image.png"></p>
+<p>RW:</p>
+<ul>
+<li>Multi-view 3D reconstruction.</li>
+<li>Neural implicit surfaces.<ul>
+<li>DVR、IDR、NeRF++、UNISURF、<strong>VolSDF、Neus</strong>、NeuralPatch</li>
+</ul>
+</li>
+<li>High-frequency detail reconstruction.<ul>
+<li>SIREN、MipNeRF、</li>
+</ul>
+</li>
+</ul>
+<h1 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h1><p>输入N张图片$I=\{I_1,I_2…I_N\}$及对应相机内外参$\Pi=\{\pi_1,\pi_2…\pi_N\}.$</p>
+<p>1)首先，我们展示了<strong>如何将带符号的距离函数嵌入到体绘制的公式中</strong>，并讨论了<strong>如何建模距离和透明度之间的关系</strong>。<br>2)然后，我们提出<strong>利用额外的位移符号距离函数将高频细节添加到基本符号距离函数中</strong>。<br>3)最后，我们观察到将带符号距离映射到透明度的函数由一个参数s控制，<strong>该参数s决定了函数的斜率</strong>。我们提出了一种方案，根据距离场的梯度范数以空间变化的方式设置该参数s，而不是在单个训练迭代中对整个体积保持恒定。</p>
+<h2 id="Modeling-transparency-as-transformed-SDF"><a href="#Modeling-transparency-as-transformed-SDF" class="headerlink" title="Modeling transparency as transformed SDF"></a>Modeling transparency as transformed SDF</h2><p>NeRF<br>光线$\mathbf{r}(t)=\mathbf{o}+\mathbf{t}\mathbf{d},$<br>对应像素的颜色$C(\mathbf{r})=\int_{t_n}^{t_f}T(t)\sigma(\mathbf{r}(t))\mathbf{c}(\mathbf{r}(t),\mathbf{d})dt$<br>透明度$T(t)=\exp\left(-\int_{t_{n}}^{t}\sigma(\mathbf{r}(s))ds\right),$是一个单调递减函数</p>
+<p>为了将SDF转换为密度，需要找到一个函数</p>
+<ul>
+<li>VolSDF中提出的密度函数：$\sigma(\mathbf{r}(t))=\Psi\left(f\left(\mathbf{r}(t)\right)\right)$ </li>
+<li>Neus中提出的权重函数：$w((t))=\Psi\left(f\left(\mathbf{r}(t)\right)\right)$</li>
+<li>本文给出了密度函数σ表达式的一个复杂推导<ul>
+<li>$T(t)=\Psi\left(f\left(\mathbf{r}(t)\right)\right),$</li>
+<li>$\sigma(\mathbf{r}(t_{i}))=s\left(\Psi\left(f\left(\mathbf{r}(t_{i})\right)\right)-1\right)\nabla f\left(\mathbf{r}(t_{i})\right)\cdot\mathbf{d}$</li>
+<li>$\alpha_i=1-exp\left(-\sigma_i\left(t_{i+1}-t_i\right)\right)$，并将$\alpha$clamp在0,1之间</li>
+</ul>
+</li>
+</ul>
+<p>与NeuS相比，我们得到了更简单的密度σ的离散化计算公式，减少了NeuS中除法带来的数值问题。此外，我们的方法不需要涉及两个不同的采样点，即截面点和中点，这使得它更容易满足无偏加权函数。由于不需要为两个不同的点集分别计算SDF和颜色，因此与NeuS相比，颜色和几何形状更加一致。与VolSDF[32]相比，由于透明度函数是显式的，因此我们的方法可以使用逆CDF计算的逆分布抽样来满足近似质量。因此不需要像VolSDF那样复杂的采样方案。图3显示了一个直观的比较。</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230904145240.png" alt="image.png"></p>
+<h2 id="Implicit-displacement-field-without-3D-supervision"><a href="#Implicit-displacement-field-without-3D-supervision" class="headerlink" title="Implicit displacement field without 3D supervision"></a>Implicit displacement field without 3D supervision</h2><p>为了实现多尺度拟合框架，我们建议将SDF建模为<strong>基距离函数</strong>和<strong>沿基距离函数法线的位移函数</strong>的组合。隐式位移函数是一个附加的隐式函数。这样设计的原因是单个隐式函数很难同时学习低频和高频信息。隐式位移函数可以补充基本隐式函数，从而更容易学习高频信息。<br>与从点云中学习隐式函数的任务相比，从多幅图像中重建三维形状使得高频内容的学习更加困难。<strong>我们建议使用神经网络在多个尺度上学习频率，并以由粗到细的方式逐步增加频率内容</strong>。</p>
+<p>基面的隐式函数$f_{b}$<br>位移隐式函数$f_{d’}$：将基面上点$x_{b}$沿着法向$n_{b}$，映射到表面点x<br>$f_d$将基面上点x沿着法向$n_{b}$映射到表面点$x_{b}$，因此$\mathop{:}f_{d^{\prime}}(\mathbf{x}_{b})=f_{d}(\mathbf{x}).$<br>由于隐函数的性质，这两个函数之间的关系可以表示为:$f_b(\mathbf{x}_b)=f(\mathbf{x}_b+f_{d^{\prime}}\left(\mathbf{x}_b\right)\mathbf{n}_b)=0$</p>
+<p>$\mathbf{n}_b=\frac{\nabla f_b(\mathbf{x}_b)}{|\nabla f_b(\mathbf{x}_b)|},$ 是$x_{b}$在基面上的法线。为了计算隐函数f的表达式，引入$\mathbf{x}_b=\mathbf{x}-f_{d^{\prime}}\left(\mathbf{x}_b\right)\mathbf{n}_b$并得到组合隐函数的表达式：$f(\mathbf{x})=f_b(\mathbf{x}-f_d\left(\mathbf{x}\right)\mathbf{n}_b)$</p>
+<p>因此，我们可以用基隐函数和位移隐函数来表示组合隐函数。<br>然而，出现了两个挑战</p>
+<ul>
+<li>首先，只有当点x在表面上时，才满足式10。</li>
+<li>其次，当只知道位置x时，很难估计点$x_{b}$处的法线。</li>
+</ul>
+<p>我们依靠两个假设来解决问题</p>
+<ul>
+<li>一个假设是，这种变形可以应用于所有等面，即$f_b(\mathbf{x}_b)=f(\mathbf{x}_b+f_{d^{\prime}}\left(\mathbf{x}_b\right)\mathbf{n}_b)\stackrel{\cdot}{=}c.$。这样，假设方程对体积中的所有点都有效，而不仅仅是在表面上。</li>
+<li>另一假设是$x_{b}$和x距离不太远，则可以将式(10)中x点上的$\mathbf{n}_b$替换为法向$\mathbf{n}$。我们使用位移约束$4\Psi_{s}^{\prime}(f_{b})$来控制隐式位移函数的大小。</li>
+</ul>
+<p>$f(\mathbf{x})=f_b(\mathbf{x}-4\Psi_{(0.01s)}^{\prime}(f_b)f_d\left(\mathbf{x}\right)\mathbf{n})$</p>
+<p>为了精确控制频率，我们采用位置编码对基隐函数和位移隐函数分别进行编码。频率可以通过一种从粗到精的策略来明确控制，而不是简单地使用两个具有两个不同频率级别的Siren网络</p>
+<p>$\gamma(\mathbf{x})=[\gamma_0(\mathbf{x}),\gamma_1(\mathbf{x}),…,\gamma_{L-1}(\mathbf{x})]$<br>每个分量由不同频率的sin和cos函数组成$\gamma_j(\mathbf{x})=\left[\sin\left(2^j\pi\mathbf{x}\right),\cos\left(2^j\pi\mathbf{x}\right)\right]$</p>
+<p>直接学习高频位置编码会使网络容易受到噪声的影响，因为错误学习的高频会阻碍低频的学习。如果有三维监控，这个问题就不那么明显了，但是图像的高频信息很容易以噪声的形式引入到表面生成中。我们使用Park等人Nerfies[24]提出的从粗到精的策略，逐步增加位置编码的频率。</p>
+<p>$\gamma_{j}(\mathbf{x},\mathbf{\alpha})=\omega_{j}\left(\mathbf{\alpha}\right)\gamma_{j}(\mathbf{x})=\frac{\left(1-\cos\left(clamp\left(\alpha L-j,0,1\right)\pi\right)\right)}2\gamma_{j}(\mathbf{x})$<br>$\alpha\in[0,1]$是控制所涉及频率信息的参数。在每次迭代中，α增加$1/n_{max}$，直到它接近1，其中$n_{max}$是最大迭代次数。<br>我们利用两种不同参数$\alpha_b.$和$\alpha_d.$的位置编码$\gamma(\mathbf{x},\alpha_b),\gamma(\mathbf{x},\alpha_d)$。为简单起见，我们设$\alpha_{b}=0.5\alpha_{d}$，只控制$\alpha_d$。我们还使用了两个MLP函数$MLP_{b},MLP_{d}$来拟合基函数和位移函数。</p>
+<p>$f(\mathbf{x})=MLP_{b}(\gamma(\mathbf{x},\alpha_{b})-4\Psi_{s}^{\prime}(f_{b})MLP_{d}\left(\gamma(\mathbf{x},\alpha_{d})\right)\mathbf{n}),$</p>
+<p>$\begin{array}{rcl}\mathbf{n}&amp;=&amp;\frac{\nabla f_b(\mathbf{x})}{|\nabla f_b(\mathbf{x})|}\end{array}$ 可以通过MLP b的梯度来计算<br>$\Psi_s^{\prime}(f_b)\quad=\Psi_s^{\prime}(MLP_b(\gamma(\mathbf{x},\alpha_b))).$<br>训练时应clamp位移约束的s。</p>
+<p>我们将这个隐式函数带入Eq.(6)来计算透明度，这样图像的亮度(颜色)$\hat{C}_{s}$就可以通过体积渲染方程来计算。</p>
+<p>为了训练网络，我们使用了损失函数$\mathcal{L}=\mathcal{L}_{rad}+\mathcal{L}_{reg}.$，它包含了带符号距离函数的辐射损失和Eikonal正则化损失。对于正则化损失，我们同时约束了基本隐函数和详细隐函数。$\mathcal{L}=\frac{1}{M}\sum_{s}\left|\hat{C}_{s}-C_{s}\right|_{1}+\frac{1}{N}\sum_{k}\left[\left(|\nabla f_{b}(\mathbf{x}_{k})|_{2}-1\right)^{2}+\left(|\nabla f(\mathbf{x}_{k})|_{2}-1\right)^{2}\right]$</p>
+<h2 id="Modeling-an-adaptivate-transparency-function"><a href="#Modeling-an-adaptivate-transparency-function" class="headerlink" title="Modeling an adaptivate transparency function"></a>Modeling an adaptivate transparency function</h2><p>在前面的小节中，透明度函数被定义为sigmoid函数，由一个标度s控制。该参数控制着sigmoid函数的斜率，同时也是导数的标准差。我们也可以说它控制着函数的平滑度。当s较大时，随着位置远离表面，s型函数的值急剧下降。相反，当s较小时，该值平稳减小。然而，每次迭代选择单个参数会在体块的所有空间位置产生相同的行为。<br>由于需要重构两个带符号的距离函数，特别是在高频叠加之后，<strong>很容易出现Eikonal方程不满足的情况</strong>，即SDF的梯度范数在某些位置不为1。即使有正则化损失，也不可能避免这个问题。<br>我们建议<strong>使用带符号距离场的梯度范数以空间变化的方式对参数s进行加权</strong>。当沿射线方向的梯度范数大于1时，我们增加s。这意味着当梯度的范数大于1时，隐函数的变化更剧烈，这表明了一个需要改进的区域。在某些区域使距离函数更大，需要更精确的距离函数，并且由于不正确的距离函数而放大误差，特别是在表面附近。为了自适应地修改量表s，我们提出如下公式:</p>
+<p>$T(t)=\left(1+e^{-s\exp\left(\sum_{i=1}^{K}\omega_i|\nabla f_i|-1\right)f(\mathbf{r}(t))}\right)^{-1},$<br>其中∇f为带符号距离函数的梯度，K为采样点个数<br>$ω_i$ 为归一化后的$\Psi_s^{\prime}(f_i)$作为权值，$\sum_{i=1}^{K}\omega_{i}=1.$</p>
+<p>该方法既可用于控制透明度函数，也可用于标准NeRF提出的分层采样阶段。通过局部增大s，<strong>在距离值变化较快的表面附近会产生更多的样本</strong>。这种机制也有助于优化集中在这些区域的体积。</p>
+<h1 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h1><p>Baselines：Neus、VolSDF、NeRF</p>
+<p>Datasets：DTU、BlendedMVS</p>
+<p>Evaluation metrics：CD(chamfer distance)、PSNR</p>
+<p>Implementation details:</p>
+<ul>
+<li>GPU A100 40GB</li>
+<li>lr = 5e-4</li>
+<li>首先64个均匀采样点，计算点的SDF和梯度，然后计算s参数增益，根据增益自适应更新权重</li>
+<li>然后根据权重额外采样64个点</li>
+<li>当$\alpha^{0}_{d}=0$时产生光滑的结果，本文使用$\alpha^{0}_{d}=0.5$ ,$\alpha^{0}_{b}=0.5 \alpha^{0}_{d}=0.25$</li>
+<li>位置编码L=16</li>
+</ul>
+<p>Comparison：</p>
+<ul>
+<li>定性+定量</li>
+</ul>
+<p>Ablation study.</p>
+<ul>
+<li>Coarse2Fine module</li>
+<li>Implicit displacement function module</li>
+<li>Position-adaptive s module</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+1ZnNxFWnEbk5YzRl">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Neus/" rel="tag"><i class="fa fa-tag"></i> Neus</a>
+              <a href="/tags/SurfaceReconstruction/" rel="tag"><i class="fa fa-tag"></i> SurfaceReconstruction</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/NeRF/SurfaceReconstruction/Color-NeuS/" rel="prev" title="Color-NeuS">
+      <i class="fa fa-chevron-left"></i> Color-NeuS
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/NeRF/SurfaceReconstruction/Geo-Neus/" rel="next" title="Geo-Neus">
+      Geo-Neus <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Limitation"><span class="nav-text">Limitation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Conclusion"><span class="nav-text">Conclusion</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AIR"><span class="nav-text">AIR</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Method"><span class="nav-text">Method</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Modeling-transparency-as-transformed-SDF"><span class="nav-text">Modeling transparency as transformed SDF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Implicit-displacement-field-without-3D-supervision"><span class="nav-text">Implicit displacement field without 3D supervision</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Modeling-an-adaptivate-transparency-function"><span class="nav-text">Modeling an adaptivate transparency function</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Experiments"><span class="nav-text">Experiments</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qi Yun"
+      src="/images/avatar.jpeg">
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">112</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">58</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/qiyun71" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;qiyun71" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/29010355" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;29010355" rel="noopener" target="_blank"><i class="fa fa-star fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qi Yun</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">423k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">25:38</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/yqq/anime.min.js"></script>
+  <script src="/yqq/velocity/velocity.min.js"></script>
+  <script src="/yqq/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

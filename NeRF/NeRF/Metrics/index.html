@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/yqq/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="NeRF、Depth Estimation、Object Detection  评价指标 Loss损失">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Metrics">
+<meta property="og:url" content="http://example.com/NeRF/NeRF/Metrics/index.html">
+<meta property="og:site_name" content="YunQi">
+<meta property="og:description" content="NeRF、Depth Estimation、Object Detection  评价指标 Loss损失">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230801170138.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231010101549.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230919194046.png">
+<meta property="article:published_time" content="2023-10-10T02:23:09.000Z">
+<meta property="article:modified_time" content="2023-11-13T05:03:48.872Z">
+<meta property="article:author" content="Qi Yun">
+<meta property="article:tag" content="Metrics">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230801170138.png">
+
+<link rel="canonical" href="http://example.com/NeRF/NeRF/Metrics/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Metrics | YunQi</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">YunQi</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Note</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/NeRF/NeRF/Metrics/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YunQi">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Metrics
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-10-10 10:23:09" itemprop="dateCreated datePublished" datetime="2023-10-10T10:23:09+08:00">2023-10-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-11-13 13:03:48" itemprop="dateModified" datetime="2023-11-13T13:03:48+08:00">2023-11-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NeRF-NeRF/" itemprop="url" rel="index"><span itemprop="name">NeRF/NeRF</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>1.5k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>5 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>NeRF、Depth Estimation、Object Detection</p>
+<ul>
+<li>评价指标</li>
+<li>Loss损失</li>
+</ul>
+<span id="more"></span>
+<h1 id="Metrics"><a href="#Metrics" class="headerlink" title="Metrics"></a>Metrics</h1><p>L1<em>loss : $loss(x,y)=\frac{1}{n}\sum</em>{i=1}^{n}|y<em>i-f(x_i)|$<br>L2_loss: $loss(x,y)=\frac{1}{n}\sum</em>{i=1}^{n}(y_i-f(x_i))^2$</p>
+<p>在标准设置中通过 NeRF 进行的新颖视图合成使用了视觉质量评估指标作为基准。这些指标试图评估单个图像的质量，要么有(完全参考)，要么没有(无参考)地面真相图像。峰值信噪比(PSNR)，结构相似指数度量(SSIM)[32]，学习感知图像补丁相似性(LPIPS)[33]是目前为止在 NeRF 文献中最常用的。</p>
+<h2 id="PSNR↑"><a href="#PSNR↑" class="headerlink" title="PSNR↑"></a>PSNR↑</h2><p>峰值信噪比 Peak Signal to Noise Ratio<br>PSNR 是一个无参考的质量评估指标<br>$PSNR(I)=10\cdot\log_{10}(\dfrac{MAX(I)^2}{MSE(I)})$<br>$MSE=\frac1{mn}\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}[I(i,j)-K(i,j)]^2$<br>$MAX(I)^{2}$（动态范围可能的最大像素值，b 位：$2^{b}-1$），eg: 8 位图像则$MAX(I)^{2} = 255$</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Neus</span></span><br><span class="line">psnr = <span class="number">20.0</span> * torch.log10(<span class="number">1.0</span> / (((color_fine - true_rgb)**<span class="number">2</span> * mask).<span class="built_in">sum</span>() / (mask_sum * <span class="number">3.0</span>)).sqrt())</span><br><span class="line"></span><br><span class="line"><span class="comment"># instant-nsr-pl</span></span><br><span class="line">psnr = -<span class="number">10.</span> * torch.log10(torch.mean((pred_rgb.to(gt_rgb)-gt_rgb)**<span class="number">2</span>))</span><br></pre></td></tr></table></figure>
+<h2 id="SSIM↑"><a href="#SSIM↑" class="headerlink" title="SSIM↑"></a>SSIM↑</h2><p>结构相似性 Structural Similarity Index Measure<br>SSIM 是一个完整的参考质量评估指标。<br>$SSIM(x,y)=\dfrac{(2\mu_x\mu_y+C_1)(2\sigma_{xy}+C_2)}{(\mu_x^2+\mu_y^2+C_1)(\sigma_x^2+\sigma_y^2+C_2)}$<br>衡量了两张图片之间相似度：($C_1,C_2$为常数防止除以 0)</p>
+<p>$S(x,y)=l(x,y)^{\alpha}\cdot c(x,y)^{\beta}\cdot s(x,y)^{\gamma}$</p>
+<p>$C_1=(K_1L)^2,C_2=(K_2L)^2,C_3=C_2/2$<br>$K_{1}= 0.01 , K_{2} = 0.03 , L = 2^{b}-1$</p>
+<ul>
+<li>亮度，图像 x 与图像 y 亮度 $l(x,y) =\frac{2\mu_x\mu_y+C_1}{\mu_x^2+\mu_y^2+C_1}$<ul>
+<li>$\mu_{x} =\frac1N\sum_{i=1}^Nx_i$像素均值<ul>
+<li>$x_i$像素值，N 总像素数</li>
+</ul>
+</li>
+<li>当 x 与 y 相同时，$l(x,y) = 1$</li>
+</ul>
+</li>
+<li>对比度，$c(x,y)=\frac{2\sigma_x\sigma_y+C_2}{\sigma_x^2+\sigma_y^2+C_2}$<ul>
+<li>图像标准差$\sigma_x=(\frac1{N-1}\sum_{i=1}^N(x_i-\mu_x)^2)^{\frac12}$</li>
+</ul>
+</li>
+<li>结构对比，$s(x,y)=\frac{\sigma_{xy}+C_3}{\sigma_x\sigma_y+C_3}$ - 图像的协方差$\sigma_{xy}=\frac1{N-1}\sum_{i=1}^N(x_i-\mu_x)(y_i-\mu_y)$<br>实际使用中(圆对称高斯加权公式)，使用一个高斯核对局部像素求 SSIM，最后对所有的局部 SSIM 求平均得到 MSSIM</li>
+</ul>
+<p>使用高斯核，均值、标准差和协方差变为：<br>$\mu_{x}=\sum_{i}w_{i}x_{i}$<br>$\sigma_{x}=(\sum_{i}w_{i}(x_{i}-\mu_{x})^{2})^{1/2}$<br>$\sigma_{xy}=\sum_{i}w_{i}(x_{i}-\mu_{x})(y_{i}-\mu_{y})$</p>
+<h2 id="LPIPS↓"><a href="#LPIPS↓" class="headerlink" title="LPIPS↓"></a>LPIPS↓</h2><p>学习感知图像块相似度 Learned Perceptual Image Patch Similarity<br><strong>LPIPS 比传统方法（比如 L2/PSNR, SSIM, FSIM）更符合人类的感知情况</strong>。<strong>LPIPS 的值越低表示两张图像越相似，反之，则差异越大。</strong><br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230801170138.png" alt="image.png"></p>
+<p>LPIPS 是一个完整的参考质量评估指标，它使用了学习的卷积特征。分数是由多层特征映射的加权像素级 MSE 给出的。<br>$LPIPS(x,y)=\sum\limits_{l}^{L}\dfrac{1}{H_lW_l}\sum\limits_{h,w}^{H_l,W_l}||w_l\odot(x^l_{hw}-y^l_{hw})||^2_2$</p>
+<h2 id="CD↓"><a href="#CD↓" class="headerlink" title="CD↓"></a>CD↓</h2><p>Chamfer Distance 倒角距离<br>点云或 mesh 重建模型评估指标，它度量两个点集之间的距离，其中一个点集是参考点集，另一个点集是待评估点集</p>
+<p>$d_{\mathrm{CD}}(S_1,S_2)=\frac{1}{S_1}\sum_{x\in S_1}\min_{y\in S_2}\lVert x-y\rVert_2^2+\frac{1}{S_2}\sum_{y\in S_2}\min_{x\in S_1}\lVert y-x\rVert_2^2$</p>
+<p>S1 和 S2 分别表示两组 3D 点云，第一项代表 S1 中任意一点 x 到 S2 的最小距离之和，第二项则表示 S2 中任意一点 y 到 S1 的最小距离之和。<br>如果该距离较大，则说明两组点云区别较大；如果距离较小，则说明重建效果较好。</p>
+<p>$\begin{aligned}\mathcal{L}_{CD}&amp;=\sum_{y’\in Y’}min_{y\in Y}||y’-y||_2^2+\sum_{y\in Y}min_{y’\in Y’}||y-y’||_2^2,\end{aligned}$</p>
+<h2 id="P2S↓"><a href="#P2S↓" class="headerlink" title="P2S↓"></a>P2S↓</h2><p>average point-to-surface(P2S) distance平均点到面距离</p>
+<p><strong>P2S距离：</strong> CAPE数据集scan包含大的空洞，为了排除孔洞影响，我们记录scan点到最近重构表面点之间距离，为Chamfer距离的单向版本；measure the average point-to-surface Euclidean distance (P2S) in cm <strong>from the vertices on the reconstructed surface to the ground truth</strong></p>
+<h2 id="Normal↓"><a href="#Normal↓" class="headerlink" title="Normal↓"></a>Normal↓</h2><p>average surface normal error平均表面法向损失</p>
+<p><strong>Normal difference:</strong> 表示使用重构的及真值surface分别进行渲染normal图片，计算两者之间L2距离，用于捕获高频几何细节误差。<br>For both reconstructed and ground truth surfaces, we <strong>render their normal maps</strong> in the image space from the input viewpoint respectively. We then <strong>calculate the L2 error</strong> between these two normal maps.</p>
+<h2 id="IoU↑"><a href="#IoU↑" class="headerlink" title="IoU↑"></a>IoU↑</h2><p>Intersection over Union(IoU)交并比<br>在目标检测中用到的指标$IOU = \frac{A \cap B}{A \cup B}$<br>一般来说，这个比值 ＞ 0.5 就可以认为是一个不错的结果了。</p>
+<ul>
+<li>A: GT bounding box</li>
+<li>B: Predicted bounding box</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231010101549.png" alt="image.png|333"></p>
+<h2 id="EMD↓"><a href="#EMD↓" class="headerlink" title="EMD↓"></a>EMD↓</h2><p>Earth Mover’s distance 推土距离,度量两个分布之间的距离<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/145739750">EMD(earth mover’s distances)距离 - 知乎 (zhihu.com)</a> </p>
+<p>$\mathcal{L}_{EMD}=min_{\phi:Y\rightarrow Y^{\prime}}\sum_{x\in Y}||x-\phi(x)||_{2}$ , φ indicates a parameter of bijection.</p>
+<h1 id="Loss"><a href="#Loss" class="headerlink" title="Loss"></a>Loss</h1><h2 id="RGB-Loss"><a href="#RGB-Loss" class="headerlink" title="RGB Loss"></a>RGB Loss</h2><p>L2 损失：<code>F.mse_loss(pred_rgb, gt_rgb)</code><br>L1 损失：<code>F.l1_loss(pred_rgb, gt_rgb)</code>更稳定？</p>
+<h2 id="Eikonal-Loss"><a href="#Eikonal-Loss" class="headerlink" title="Eikonal Loss"></a>Eikonal Loss</h2><p>$\mathcal{L}_{r e g}=\frac{1}{n m}\sum_{k,i}(|\nabla f(\hat{\mathbf{p}}_{k,i})|_{2}-1)^{2}.$</p>
+<h2 id="Mask-Loss"><a href="#Mask-Loss" class="headerlink" title="Mask Loss"></a>Mask Loss</h2><p>$\mathcal{L}_{mask}=\mathrm{BCE}(M_k,\hat{O}_k)$</p>
+<ul>
+<li>$\hat{O}_k=\sum_{i=1}^n T_{k,i}\alpha_{k,i}$</li>
+<li>$M_{k} ∈ {0, 1}$</li>
+</ul>
+<p>BCE 二值交叉熵损失：让输出$\hat{O}_k$去逼近 label $M_{k}$</p>
+<blockquote>
+<p>一种新的 BCE loss<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/593711934">ECCV’22 ｜ Spatial-BCE - 知乎 (zhihu.com)</a></p>
+</blockquote>
+<h2 id="Opacity-Loss"><a href="#Opacity-Loss" class="headerlink" title="Opacity Loss"></a>Opacity Loss</h2><p><code>loss_opaque = -(opacity * torch.log(opacity) + (1 - opacity) * torch.log(1 - opacity)).mean()</code><br>$opaque = BCE(opaque,opaque) = -[opaque <em> ln(opaque) + (1-opaque) </em>ln(1-opaque)]$</p>
+<p>使得 opacity 更加接近 0 或者 1</p>
+<h2 id="Sparsity-Loss"><a href="#Sparsity-Loss" class="headerlink" title="Sparsity Loss"></a>Sparsity Loss</h2><p><code>loss_sparsity = torch.exp(-self.conf.loss.sparsity_scale * out[&#39;sdf_samples&#39;].abs()).mean()</code><br>$sparsity = \frac{1}{N} \sum e^{-scale * sdf}$<br>让 sdf 的平均值更小，前景物体更加稀疏，物体内的点往外发散</p>
+<h2 id="Geo-Neus"><a href="#Geo-Neus" class="headerlink" title="Geo-Neus"></a>Geo-Neus</h2><ul>
+<li>sdf loss<ul>
+<li><code>sdf_loss = F.l1_loss(pts2sdf, torch.zeros_like(pts2sdf), reduction=&#39;sum&#39;) / pts2sdf.shape[0]</code></li>
+<li>$\mathcal{L}_{sdf} = \frac{1}{N} \sum |sdf(spoint) - 0|$<br>-</li>
+</ul>
+</li>
+</ul>
+<h2 id="other-loss"><a href="#other-loss" class="headerlink" title="other loss"></a>other loss</h2><h3 id="S3IM-Loss"><a href="#S3IM-Loss" class="headerlink" title="S3IM Loss"></a>S3IM Loss</h3><p><a target="_blank" rel="noopener" href="https://madaoer.github.io/s3im_nerf/">S3IM (madaoer.github.io)</a></p>
+<p>$\begin{aligned}L_{\mathrm{S3IM}}(\Theta,\mathcal{R})=&amp;1-\mathrm{S3IM}(\hat{\mathcal{R}},\mathcal{R})=1-\frac{1}{M}\sum_{m=1}^{M}\mathrm{SSIM}(\mathcal{P}^{(m)}(\hat{\mathcal{C}}),\mathcal{P}^{(m)}(\mathcal{C})).\end{aligned}$</p>
+<h3 id="Smoothness-Loss"><a href="#Smoothness-Loss" class="headerlink" title="Smoothness Loss"></a>Smoothness Loss</h3><p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230919194046.png" alt="image.png"></p>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+1ZnNxFWnEbk5YzRl">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Metrics/" rel="tag"><i class="fa fa-tag"></i> Metrics</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/HumanBodyReconstruction/Muti-view%20Human%20Body%20Reconstruction/" rel="prev" title="Muti-view Human Body Reconstruction">
+      <i class="fa fa-chevron-left"></i> Muti-view Human Body Reconstruction
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/HumanBodyReconstruction/Math/" rel="next" title="Math about 3D Reconstruction">
+      Math about 3D Reconstruction <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Metrics"><span class="nav-text">Metrics</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#PSNR%E2%86%91"><span class="nav-text">PSNR↑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSIM%E2%86%91"><span class="nav-text">SSIM↑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LPIPS%E2%86%93"><span class="nav-text">LPIPS↓</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CD%E2%86%93"><span class="nav-text">CD↓</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P2S%E2%86%93"><span class="nav-text">P2S↓</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Normal%E2%86%93"><span class="nav-text">Normal↓</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IoU%E2%86%91"><span class="nav-text">IoU↑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EMD%E2%86%93"><span class="nav-text">EMD↓</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Loss"><span class="nav-text">Loss</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#RGB-Loss"><span class="nav-text">RGB Loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Eikonal-Loss"><span class="nav-text">Eikonal Loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mask-Loss"><span class="nav-text">Mask Loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Opacity-Loss"><span class="nav-text">Opacity Loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sparsity-Loss"><span class="nav-text">Sparsity Loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Geo-Neus"><span class="nav-text">Geo-Neus</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#other-loss"><span class="nav-text">other loss</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#S3IM-Loss"><span class="nav-text">S3IM Loss</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Smoothness-Loss"><span class="nav-text">Smoothness Loss</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qi Yun"
+      src="/images/avatar.jpeg">
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">112</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">58</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/qiyun71" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;qiyun71" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/29010355" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;29010355" rel="noopener" target="_blank"><i class="fa fa-star fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qi Yun</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">423k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">25:38</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/yqq/anime.min.js"></script>
+  <script src="/yqq/velocity/velocity.min.js"></script>
+  <script src="/yqq/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

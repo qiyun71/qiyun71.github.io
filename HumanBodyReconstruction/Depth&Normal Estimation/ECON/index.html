@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/yqq/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Title ECON: Explicit Clothed humans Obtained from Normals     Author Yuliang Xiu1 Jinlong Yang1 Xu Cao2 Dimitrios Tzionas3 Michael J. Black1   Conf&#x2F;Jour CVPR   Year 2023   Project ECON: Explicit C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ECON">
+<meta property="og:url" content="http://example.com/HumanBodyReconstruction/Depth&Normal%20Estimation/ECON/index.html">
+<meta property="og:site_name" content="YunQi">
+<meta property="og:description" content="Title ECON: Explicit Clothed humans Obtained from Normals     Author Yuliang Xiu1 Jinlong Yang1 Xu Cao2 Dimitrios Tzionas3 Michael J. Black1   Conf&#x2F;Jour CVPR   Year 2023   Project ECON: Explicit C">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230930173026.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230930204752.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230930184708.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230930203744.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231001100118.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230930204752.png">
+<meta property="article:published_time" content="2023-09-30T09:27:17.000Z">
+<meta property="article:modified_time" content="2023-11-13T05:03:48.858Z">
+<meta property="article:author" content="Qi Yun">
+<meta property="article:tag" content="ClothedHumans">
+<meta property="article:tag" content="DepthEstimation">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230930173026.png">
+
+<link rel="canonical" href="http://example.com/HumanBodyReconstruction/Depth&Normal%20Estimation/ECON/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>ECON | YunQi</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">YunQi</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Note</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/HumanBodyReconstruction/Depth&Normal%20Estimation/ECON/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YunQi">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ECON
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-09-30 17:27:17" itemprop="dateCreated datePublished" datetime="2023-09-30T17:27:17+08:00">2023-09-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-11-13 13:03:48" itemprop="dateModified" datetime="2023-11-13T13:03:48+08:00">2023-11-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/HumanBodyReconstruction-Depth-Normal-Estimation/" itemprop="url" rel="index"><span itemprop="name">HumanBodyReconstruction/Depth&Normal Estimation</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>1.7k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>6 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Title</th>
+<th>ECON: Explicit Clothed humans Obtained from Normals</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Author</td>
+<td>Yuliang Xiu1 Jinlong Yang1 Xu Cao2 Dimitrios Tzionas3 Michael J. Black1</td>
+</tr>
+<tr>
+<td>Conf/Jour</td>
+<td>CVPR</td>
+</tr>
+<tr>
+<td>Year</td>
+<td>2023</td>
+</tr>
+<tr>
+<td>Project</td>
+<td><a target="_blank" rel="noopener" href="https://xiuyuliang.cn/econ/">ECON: Explicit Clothed humans Optimized via Normal integration (xiuyuliang.cn)</a></td>
+</tr>
+<tr>
+<td>Paper</td>
+<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4700954831381069826&amp;noteId=1983981033620573952">ECON: Explicit Clothed humans Obtained from Normals (readpaper.com)</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230930173026.png" alt="image.png"></p>
+<p>姿态稳定(<strong>ICON在难的姿势下较好地重建</strong>)+灵活拓扑(<strong>ECON还可以较好地重建宽松的衣服</strong>)</p>
+<p>缺陷：<br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230930204752.png" alt="image.png"></p>
+<span id="more"></span>
+<h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>艺术家策展的扫描与深层隐式函数（IF）的结合，使得可以从图像中创建详细的、穿着衣物的3D人物成为可能。然而，现有方法远非完美。基于IF的方法可以恢复自由形式的几何形状，但在看不见的姿势或服装下会产生脱离身体的肢体或退化的形状。为了增加这些情况的稳健性，现有的工作使用显式参数化身体模型来限制表面重建，但这限制了自由形式表面（如与身体不符的宽松服装）的恢复。我们想要的是一种结合了隐式和显式方法的最佳特性的方法。为此，我们提出了两个关键观察点：（1）当前的网络在推断详细的2D maps方面表现更好，而不是完整的3D表面，以及（2）参数化模型可以被看作是将详细的表面片段拼接在一起的“画布”。ECON即使在宽松的服装和具有挑战性的姿势下也可以推断出高保真度的3D人物，同时具有逼真的面部和手指。这超越了以前的方法。对CAPE和Renderpeople数据集的定量评估表明，ECON比现有技术更精确。感知研究还表明，ECON的感知逼真度明显更高。</p>
+<h1 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h1><h2 id="Detailed-normal-map-prediction"><a href="#Detailed-normal-map-prediction" class="headerlink" title="Detailed normal map prediction"></a>Detailed normal map prediction</h2><p>$\mathcal{L}_{\mathrm{SMPL-X}}=\mathcal{L}_{\mathrm{N.diff}}+\mathcal{L}_{\mathrm{S.diff}}+\mathcal{L}_{\mathrm{J.diff}},$ </p>
+<ul>
+<li>在ICON基础上添加了(2D body landmarks)二维地标间的关节损失(L2): $\mathcal{L}_\mathrm{J_diff}=\lambda_\mathrm{J_diff}|\mathcal{J}^\mathrm{b}-\widehat{\mathcal{J}^\mathrm{c}}|,$</li>
+</ul>
+<h2 id="Front-and-back-surface-reconstruction"><a href="#Front-and-back-surface-reconstruction" class="headerlink" title="Front and back surface reconstruction"></a>Front and back surface reconstruction</h2><p>将覆盖的法线贴图提升到2.5D表面。我们期望这些2.5D表面满足三个条件:<br>(1)高频表面细节与预测的覆盖法线图一致;<br>(2)低频表面变化(包括不连续面)与SMPL-X的一致;<br>(3)前后轮廓的深度彼此接近。</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/xucao-42/bilateral_normal_integration">xucao-42/bilateral_normal_integration: Official implementation of “Bilateral Normal Integration” (BiNI), ECCV 2022. (github.com)</a></p>
+</blockquote>
+<p>利用bilateral normal integration (BiNI)方法，利用<strong>粗糙先验、深度图和轮廓一致性</strong>进行全身网格重建。<br>本文提出了一种深度感知轮廓一致的双边法向积分(d-BiNI)方法<br>$\mathrm{d-BiNI}(\widehat{\mathcal{N}}_{\mathrm{F}}^{\mathrm{c}},\widehat{\mathcal{N}}_{\mathrm{B}}^{\mathrm{c}},\mathcal{Z}_{\mathrm{F}}^{\mathrm{b}},\mathcal{Z}_{\mathrm{B}}^{\mathrm{b}})\to\widehat{\mathcal{Z}}_{\mathrm{F}}^{\mathrm{c}},\widehat{\mathcal{Z}}_{\mathrm{B}}^{\mathrm{c}}.$</p>
+<p>优化方法：<br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230930184708.png" alt="image.png"></p>
+<ul>
+<li>$\mathcal{L}_{\mathrm{n}}$ 由BiNI引入的前后BiNI项</li>
+<li>$\mathcal{L}_{\mathrm{d}}$ 前后深度prior项 ，$\mathcal{L}_{\mathrm{d}}(\widehat{\cal Z}_{i}^{\mathrm{c}};\mathcal{Z}_{i}^{\mathrm{b}})=|\widehat{\cal Z}_{i}^{\mathrm{c}}-\mathcal{Z}_{i}^{\mathrm{b}}|\quad i\in\{F,B\}.$</li>
+<li>$\mathcal{L}_{\mathrm{s}}$ 前后轮廓一致性项，$\mathcal{L}_{\mathrm{s}}(\widehat{\mathcal{Z}_{\mathrm{F}}^{\mathrm{c}}},\widehat{\mathcal{Z}_{\mathrm{B}}^{\mathrm{c}}})=|\widehat{\mathcal{Z}_{\mathrm{F}}^{\mathrm{c}}}-\widehat{\mathcal{Z}_{\mathrm{B}}^{\mathrm{c}}}|_{\mathrm{silhouette}}.$</li>
+</ul>
+<h2 id="Human-shape-completion"><a href="#Human-shape-completion" class="headerlink" title="Human shape completion"></a>Human shape completion</h2><p>sPSR(Screened poisson surface reconstruction) completion with SMPL-X (ECONEX).<br>在SMPL-X的mesh中将前后摄像头可以看到的三角形网格移除，留下的三角形soup包括侧面和遮挡区域，将sPSR应用到soup和d-BiNI曲面$\{\mathcal{M}_{\mathrm{F}},\mathcal{M}_{\mathrm{B}}\}$的并集，得到一个水密重建。<em>(这种方法称为ECONEX。虽然ECONEX避免了四肢或侧面的缺失，但由于SMPL-X与实际的衣服或头发之间的差异，它不能为原来缺失的衣服和头发表面产生连贯的表面;见图4中的ECONEX)</em></p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230930203744.png" alt="image.png"></p>
+<p>Inpainting with IF-Nets+ (RIF)<br>为了提高重建一致性，我们使用学习的隐式函数(IF)模型来“补绘”给定的前后d-BiNI表面缺失的几何形状<br>IF-Nets+以体素化的前、后地真深度图$\{\mathcal{Z}_{\mathrm{F}}^{\mathfrak{c}},\mathcal{Z}_{\mathrm{B}}^{\mathfrak{c}}\}$和体素化(估计)的身体网格$\mathcal{M}^{\mathrm{b}}$作为输入进行训练，并以地真3D形状进行监督</p>
+<p>sPSR completion with SMPL-X and RIF (ECONIF).<br>为了获得最终的网格R，我们应用sPSR来缝合<br>(1)d-BiNI表面，<br>(2)来自Rif的侧面和闭塞的三角形汤纹，<br>(3)从估计的SMPL-X体裁剪的脸或手</p>
+<ul>
+<li>虽然RIF已经是一个完整的人体网格，但我们只使用它的侧面和遮挡部分，因为与d-BiNI表面相比，它的正面和背面区域缺乏清晰的细节</li>
+<li>此外，我们使用从$\mathcal{M}^{\mathrm{b}}$裁剪的脸部或手，因为这些部分在RIF中通常重建得很差</li>
+</ul>
+<p>IF-Nets+ ：<br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231001100118.png" alt="image.png"></p>
+<h1 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h1><p>Training on THuman2.0. and 我们使用 THuman2.0 来训练 ICON 变体，IF-Nets+、IF-Nets、PIFu 和 PaMIR。</p>
+<h1 id="Discussion"><a href="#Discussion" class="headerlink" title="Discussion"></a>Discussion</h1><p>Limitations<br>ECON 将 RGB 图像和估计的 SMPL-X 身体作为输入。然而，从单个图像中恢复 SMPL-X 身体（或类似的模型）仍然是一个悬而未决的问题，不能完全解决。这中的任何故障都会导致 ECON 故障，如图 10-A 和图 10-B 所示。ECON的重建质量主要依赖于预测法线图的准确性。如图 10-C 和图 10-D 所示，糟糕的法线贴图可能会导致过于接近甚至相交的前表面和后表面。<br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230930204752.png" alt="image.png"></p>
+<p>Future work.<br>除了解决上述限制之外，其他几个方向对于实际应用很有用。目前，ECON只重建3D几何图形。还可以恢复底层骨架和蒙皮权重，例如，使用SSDR[40]，以获得完全动画的化身。此外，推断反向视图纹理将导致完全纹理的化身。从恢复的几何图形中解开服装、头发或配件将使这些样式的合成、编辑和转移成为可能。最后，ECON 的重建可用作训练神经化身的伪地面实况 [16, 19, 30]。</p>
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>我们提出了 ECON，一种从彩色图像重建详细的穿着衣服 3D 人体的方法。ECON结合了显式参数模型和深度隐函数的优点;它估计人体和服装的详细3D表面，而不局限于特定的拓扑，同时对具有挑战性的看不见的姿势和服装具有鲁棒性。为此，它采用了<strong>变分正态积分</strong>和<strong>形状补全</strong>的最新进展，并有效地将这些扩展到从彩色图像重建人体的任务。我们相信这项工作可以导致 3D 视觉社区的实际应用和有用的数据增强，因此，我们发布了我们的模型和代码</p>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+1ZnNxFWnEbk5YzRl">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/ClothedHumans/" rel="tag"><i class="fa fa-tag"></i> ClothedHumans</a>
+              <a href="/tags/DepthEstimation/" rel="tag"><i class="fa fa-tag"></i> DepthEstimation</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/HumanBodyReconstruction/ImplicitFunction/ICON/" rel="prev" title="ICON">
+      <i class="fa fa-chevron-left"></i> ICON
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/HumanBodyReconstruction/Depth&Normal%20Estimation/MVSNet/" rel="next" title="MVSNet">
+      MVSNet <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract"><span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Method"><span class="nav-text">Method</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Detailed-normal-map-prediction"><span class="nav-text">Detailed normal map prediction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Front-and-back-surface-reconstruction"><span class="nav-text">Front and back surface reconstruction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Human-shape-completion"><span class="nav-text">Human shape completion</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Experiments"><span class="nav-text">Experiments</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Discussion"><span class="nav-text">Discussion</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Conclusion"><span class="nav-text">Conclusion</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qi Yun"
+      src="/images/avatar.jpeg">
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">112</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">58</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/qiyun71" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;qiyun71" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/29010355" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;29010355" rel="noopener" target="_blank"><i class="fa fa-star fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qi Yun</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">423k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">25:38</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/yqq/anime.min.js"></script>
+  <script src="/yqq/velocity/velocity.min.js"></script>
+  <script src="/yqq/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

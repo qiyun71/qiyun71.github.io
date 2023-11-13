@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/yqq/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Title Deep Marching Tetrahedra: a Hybrid Representation for High-Resolution 3D Shape Synthesis     Author Tianchang Shen and Jun Gao and Kangxue Yin and Ming-Yu Liu and Sanja Fidler   Conf&#x2F;Jour Ne">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DMTet">
+<meta property="og:url" content="http://example.com/HumanBodyReconstruction/Generative%20approach/DMTet/index.html">
+<meta property="og:site_name" content="YunQi">
+<meta property="og:description" content="Title Deep Marching Tetrahedra: a Hybrid Representation for High-Resolution 3D Shape Synthesis     Author Tianchang Shen and Jun Gao and Kangxue Yin and Ming-Yu Liu and Sanja Fidler   Conf&#x2F;Jour Ne">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231106171053.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231106171053.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231107094332.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231107095201.png">
+<meta property="article:published_time" content="2023-11-06T08:53:52.000Z">
+<meta property="article:modified_time" content="2023-11-13T05:03:48.859Z">
+<meta property="article:author" content="Qi Yun">
+<meta property="article:tag" content="3DReconstruction">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231106171053.png">
+
+<link rel="canonical" href="http://example.com/HumanBodyReconstruction/Generative%20approach/DMTet/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>DMTet | YunQi</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">YunQi</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Note</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/HumanBodyReconstruction/Generative%20approach/DMTet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YunQi">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          DMTet
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-11-06 16:53:52" itemprop="dateCreated datePublished" datetime="2023-11-06T16:53:52+08:00">2023-11-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-11-13 13:03:48" itemprop="dateModified" datetime="2023-11-13T13:03:48+08:00">2023-11-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/HumanBodyReconstruction-Generative-approach/" itemprop="url" rel="index"><span itemprop="name">HumanBodyReconstruction/Generative approach</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>2.8k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>10 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Title</th>
+<th>Deep Marching Tetrahedra: a Hybrid Representation for High-Resolution 3D Shape Synthesis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Author</td>
+<td>Tianchang Shen and Jun Gao and Kangxue Yin and Ming-Yu Liu and Sanja Fidler</td>
+</tr>
+<tr>
+<td>Conf/Jour</td>
+<td>NeurIPS</td>
+</tr>
+<tr>
+<td>Year</td>
+<td>2021</td>
+</tr>
+<tr>
+<td>Project</td>
+<td><a target="_blank" rel="noopener" href="https://research.nvidia.com/labs/toronto-ai/DMTet/">Deep Marching Tetrahedra: a Hybrid Representation for High-Resolution 3D Shape Synthesis (nvidia.com)</a></td>
+</tr>
+<tr>
+<td>Paper</td>
+<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4556109173671075841&amp;noteId=2037631312002498560">Deep Marching Tetrahedra: a Hybrid Representation for High-Resolution 3D Shape Synthesis (readpaper.com)</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231106171053.png" alt="image.png|666"></p>
+<p>输入点云或低分辨率体素，提取特征后利用GAN网络，生成每个顶点的位置和SDF偏移值，得到优化后顶点的位置和SDF<br>结合显式与隐式表达的表示方法，利用MT，从隐式SDF中重建出显式mesh </p>
+<span id="more"></span>
+<h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>我们介绍了 DMTET，一个深度3D 条件生成模型，可以使用简单的用户指南(如粗体素)合成高分辨率3D 形状。它通过利用一种新的混合3D 表示结合了隐式和显式3D 表示的优点。与目前的隐式方法相比，<strong>DMTET 直接针对重建表面进行优化</strong>，使我们能够以更少的人工合成更精细的几何细节。与直接生成显式表示(如网格)的深度3D 生成模型不同，我们的模型可以合成具有任意拓扑结构的形状。DMTET 的核心包括一个可变形的四面体网格，它编码一个离散的符号距离函数和一个可微的移动四面体层，它将隐式的符号距离表示转换为显式的表面网格表示。这种组合允许表面几何和拓扑结构的联合优化，以及使用重建和在表面网格上明确定义的对抗损失来生成细分层次。我们的方法明显优于现有的粗糙体素输入条件形状合成的工作，这些工作是在复杂的3D 动物形状数据集上训练的。项目页面: <a target="_blank" rel="noopener" href="https://nv-tlabs.github.io/DMTet/">https://nv-tlabs.github.io/DMTet/</a></p>
+<p>贡献：</p>
+<ul>
+<li>我们表明，与之前的研究[31,45]的分析相比，使用行进四面体(MT)作为可微的等面层允许隐式场表示的底层形状的拓扑变化。</li>
+<li>我们将 MT 合并到深度学习框架中，并引入 DMTET，这是一种结合隐式和显式表面表示的混合表示。我们证明了直接在从隐场提取的表面上定义的额外监督(例如倒角距离，对抗损失)提高了形状合成质量。</li>
+<li>我们引入了一种从粗到精的优化策略，在训练期间将 DMTET 扩展到高分辨率。因此，在具有挑战性的三维形状合成任务中，我们比最先进的方法获得了更好的重建质量，同时需要更低的计算成本。</li>
+</ul>
+<h1 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h1><h2 id="3D-Representation"><a href="#3D-Representation" class="headerlink" title="3D Representation"></a>3D Representation</h2><p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231106171053.png" alt="image.png|666"></p>
+<ul>
+<li>采用 DefTet：不同于 DefTet 用占用值表示, 本文用 SDF 表示 shape, SDF 由可变形的四面体网格编码</li>
+<li>与八叉树思想类似，围绕预测表面细分四面体</li>
+<li>使用 Marching Tetrahedra layer 将从 SDF 的隐式表示中提取三角形 mesh</li>
+</ul>
+<h3 id="Deformable-Tetrahedral-Mesh-as-an-Approximation-of-an-Implicit-Function"><a href="#Deformable-Tetrahedral-Mesh-as-an-Approximation-of-an-Implicit-Function" class="headerlink" title="Deformable Tetrahedral Mesh as an Approximation of an Implicit Function"></a>Deformable Tetrahedral Mesh as an Approximation of an Implicit Function</h3><p>将四面体表示为 $(V_T,T)$，$V_{T}$ 表示 4 个顶点 $\{v_{ak} , v_{bk} , v_{ck} , v_{dk}\}$，共有 T 个四面体<br>通过插值定义在网格顶点上的 SDF 值来表示符号距离域</p>
+<h3 id="Volume-Subdivision"><a href="#Volume-Subdivision" class="headerlink" title="Volume Subdivision"></a>Volume Subdivision</h3><p>为了提高效率，我们用从粗到细的方式来表示形状。我们通过检查四面体是否具有不同 SDF 符号的顶点来确定表面四面体 $T_{surf}$ -表明它与 SDF 编码的表面相交。我们将 $T_{surf}$ 及其近邻进行细分，并通过向每个边缘添加中点来提高分辨率。我们通过平均边缘上的 SDF 值来计算新顶点的 SDF 值(图 2)。<br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231107094332.png" alt="image.png|333"></p>
+<h3 id="Marching-Tetrahedra-for-converting-between-an-Implicit-and-Explicit-Representation"><a href="#Marching-Tetrahedra-for-converting-between-an-Implicit-and-Explicit-Representation" class="headerlink" title="Marching Tetrahedra for converting between an Implicit and Explicit Representation"></a>Marching Tetrahedra for converting between an Implicit and Explicit Representation</h3><p>我们使用 Marching Tetrahedra[15]算法将编码的 SDF 转换为显式三角形网格。<br>给定四面体顶点的 SDF 值 $\{s(v_a),s(v_b),s(v_c),s(v_d)\}$， MT 根据 s(v)的符号确定四面体内部的表面类型，如图3所示。构型的总数为 $2^4 = 16$，在考虑旋转对称性后可分为 3 种独特的情况。一旦确定了四面体内部的曲面类型，在沿四面体边缘的线性插值的零交点处计算等距曲面的顶点位置，如图 3 所示。</p>
+<h3 id="Surface-Subdivision"><a href="#Surface-Subdivision" class="headerlink" title="Surface Subdivision"></a>Surface Subdivision</h3><p>有一个表面网格作为输出允许我们进一步增加表示能力和形状的视觉质量与一个可微分的表面细分模块。我们遵循循环细分方法[35]的方案，但不是使用一组固定的参数进行细分，而是使这些参数在 DMTET 中可学习。具体来说，可学习的参数包括每个网格顶点 $v_{i}^{\prime}$ 的位置，以及 $\alpha_{i}$， $\alpha_{i}$ 通过加权相邻顶点的平滑度来控制生成的表面。注意，与 Liu et al.[33]不同，我们只在开始时预测每个顶点参数，并将其带入后续的细分迭代，以获得更低的计算成本。</p>
+<h2 id="DMTET-3D-Deep-Conditional-Generative-Model"><a href="#DMTET-3D-Deep-Conditional-Generative-Model" class="headerlink" title="DMTET: 3D Deep Conditional Generative Model"></a>DMTET: 3D Deep Conditional Generative Model</h2><p>目的：从输入 x(点云或粗体素化形状)输出高分辨率 3D 网格 M</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231107095201.png" alt="image.png|666"></p>
+<h3 id="3D-Generator"><a href="#3D-Generator" class="headerlink" title="3D Generator"></a>3D Generator</h3><p><strong>Input Encoder</strong><br>点云：使用<strong>PVCNN</strong>[34]作为输入编码器，从点云中提取3D 特征体 $F_{vol}(x)$。<br>粗体素：我们在其表面采样点。我们通过三线性插值计算网格顶点 $v\in\mathbb{R}^3$ 的特征向量 $F_{vol}(v,x)$。</p>
+<p><strong>Initial Prediction of SDF</strong><br>通过 MLP 预测每个顶点的 SDF：$s(v)=\boldsymbol{MLP}(F_{\boldsymbol{vol}}(v,x),v).$ 全连接网络还输出一个特征向量 f (v)，用于体细分阶段的表面细化</p>
+<p><strong>Surface Refinement with Volume Subdivision</strong></p>
+<p>Surface Refinement<br>在获得初始 SDF 后，迭代细化曲面并细分四面体网格。我们首先根据当前 s(v)值识别表面四面体 $T_{surf}$。然后我们建立一个图 $G=(V_{surf},E_{surf}),$，其中 $V_{surf},E_{surf}$ 对应于 $T_{surf}$ 中的顶点和边。然后，我们使用图形卷积网络 GCN[32]预测 $V_{surf}$ 中每个顶点 i 的位置偏移量 $\Delta v_{i}$ 和 SDF 残差值 $\Delta s(v_i)$</p>
+<p>$\begin{array}{rcl}f_{v_i}^{\prime}&amp;=&amp;\operatorname{concat}(v_i,s(v_i),F_{vol}(v_i,x),f(v_i)),\end{array}$<br>$(\Delta v_i,\Delta s(v_i),\overline{f(v_i)})_{i=1,\cdots N_{surf}}\quad=\quad\mathrm{GCN}\big((f_{v_i}^{\prime})_{i=1,\cdots N_{surf}},G\big),$</p>
+<p>通过 GCN，更新:</p>
+<ul>
+<li>$v’_i=v_i+\Delta v_i$</li>
+<li>$s(v’_i)=s(v_i)+\Delta s(v_i).$</li>
+<li>$f_{v_i}^{\prime} \to \overline{f(v_i)}$</li>
+</ul>
+<p>Volume Subdivision<br>在表面细化之后，我们执行体积细分步骤，然后执行附加的表面细化步骤。特别是，我们重新识别了 $T_{surf}$，并细分了 $T_{surf}$ 及其近邻。在这两个步骤中，我们都从完整的四面体网格中删除了未细分的四面体，这节省了内存和计算，因为 $T_{surf}$ 的大小与对象的表面积成正比，并且随着网格分辨率的增加呈二次而不是三次缩放。</p>
+<p>注意，SDF 值和顶点的位置是从细分前的水平继承的，因此，在最终表面计算的损失可以反向传播到所有水平的所有顶点。因此，我们的 DMTET 自动学习细分四面体，并且不需要在中间步骤中添加额外的损失项来监督八叉树层次结构的学习，就像之前的工作 <a target="_blank" rel="noopener" href="https://readpaper.com/paper/2949394278">Octree Generating Networks</a> 一样</p>
+<p><strong>Learnable Surface Subdivision</strong><br>在 MT 提取表面网格后，我们可以进一步进行可学习的表面细分。具体来说，我们在提取的网格上构建一个新的图，并使用 GCN 来预测每个顶点的更新位置 $v_{i}^{\prime}$， $\alpha_{i}$ 用于循环细分。该步骤消除了量化误差，并通过调整 $\alpha_{i}$ 减轻了经典环路细分方法中固定的近似误差。</p>
+<h3 id="3D-Discriminator"><a href="#3D-Discriminator" class="headerlink" title="3D Discriminator"></a>3D Discriminator</h3><p>我们在生成器预测的最终表面上应用三维鉴别器 D。我们的经验发现，使用 DECOR-GAN[6]的3D CNN 作为从预测网格计算的带符号距离域的判别器可以有效地捕获局部细节。具体来说，我们首先从目标网格中随机选择一个高曲率顶点 v，在 v 周围的体素化区域计算地面真符号距离场 $S_{real}\in\mathbb{R}^{N\times N\times N}$。同样，我们在同一位置计算预测表面网格 M 的符号距离场，得到 $S_{pred}\in\mathbb{R}^{N\times N\times N}$。请注意，$S_{pred}$ 是网格 M 的解析函数，因此 $S_{pred}$ 的梯度可以反向传播到 M 中的顶点位置。我们将 $S_{real}$ 或 $S_{pred}$ 输入鉴别器，以及位置 v 中的特征向量 $F_{vol}(\bar{v},x)$，鉴别器然后预测指示输入是来自真实形状还是生成形状的概率。</p>
+<h2 id="Loss-Function"><a href="#Loss-Function" class="headerlink" title="Loss Function"></a>Loss Function</h2><ul>
+<li><strong>a surface alignment loss</strong> to encourage the alignment with ground truth surface, <ul>
+<li>$L_{\mathrm{cd}}=\sum\limits_{p\in P_{pred}}\min\limits_{q\in P_{gt}}||p-q||_2+\sum\limits_{q\in P_{gt}}\min\limits_{p\in P_{pred}}||q-p||_2,L_{\mathrm{normal}}=\sum\limits_{p\in P_{pred}}(1-|\vec{\mathbf{n}}_p\cdot\vec{\mathbf{n}}_{\hat{q}}|),$</li>
+<li>从 GT 和 Pred 中分别采样一系列点 $P_{gt}$ 和 $P_{pred}$，计算两者之间的 L2 Chamfer Distance 和 normal consistency loss</li>
+</ul>
+</li>
+<li><strong>an adversarial loss</strong> to improve realism of the generated shape, <a target="_blank" rel="noopener" href="https://readpaper.com/paper/2949496494">LSGAN</a> 中提出<ul>
+<li>$L_{\mathbf{D}}=\frac{1}{2}[(D(M_{gt})-1)^{2}+D(M_{pred})^{2}],L_{\mathbf{G}}=\frac{1}{2}[(D(M_{pred})-1)^{2}].$</li>
+</ul>
+</li>
+<li><strong>regularizations</strong> to regularize the behavior of SDF and vertex deformations.<ul>
+<li>上述损失函数作用于提取的曲面上，因此，在四面体网格中，只有靠近等面的顶点接收梯度，而其他顶点不接收梯度。此外，表面损失不能提供内部/外部的信息，因为翻转四面体中所有顶点的 SDF 符号将导致 MT 提取相同的表面。这可能导致训练过程中分离的组件。为了缓解这个问题，我们增加了一个 SDF 损失来正则化 SDF 值</li>
+<li>$L_{\mathrm{SDF}}=\sum_{v_i\in V_T}|s(v_i)-SDF(v_i,M_{gt})|^2,$</li>
+<li>$SDF(v_i,M_{gt})$ 表示点 $v_i$ 到 GT mesh 的 SDF 值</li>
+<li>此外，预测顶点变形的正则化损失，避免伪影 $L_{\mathsf{def}}=\sum_{v_i\in V_T}||\Delta v_i||_2.$</li>
+</ul>
+</li>
+</ul>
+<p>最终的总损失：$L=\lambda_\mathrm{cd}L_\mathrm{cd}+\lambda_\mathrm{normal}L_\mathrm{normal}+\lambda_\mathrm{G}L_\mathrm{G}+\lambda_\mathrm{SDF}L_\mathrm{SDF}+\lambda_\mathrm{def}L_\mathrm{def},$</p>
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>在本文中，我们介绍了一种深度 3D 条件生成模型，该模型可以使用简单的用户 guides（例如粗体素）来合成高分辨率 3D 形状。我们的 DMTET 具有一种新颖的 3D 表示，通过利用两者的优势来汇集隐式和显式表示。我们通过实验表明，我们的方法合成的质量形状明显更高，几何细节比现有方法更好，由定量指标和广泛的用户研究证实。通过展示提升粗体素（如 Minecraft 形状）的能力，我们希望我们一步更接近民主化 3D 内容创建。</p>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+1ZnNxFWnEbk5YzRl">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/3DReconstruction/" rel="tag"><i class="fa fa-tag"></i> 3DReconstruction</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/HumanBodyReconstruction/Generative%20approach/RODIN/" rel="prev" title="RODIN">
+      <i class="fa fa-chevron-left"></i> RODIN
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/Learn/Learn-Algo/" rel="next" title="Learn-Algo">
+      Learn-Algo <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract"><span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Method"><span class="nav-text">Method</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3D-Representation"><span class="nav-text">3D Representation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Deformable-Tetrahedral-Mesh-as-an-Approximation-of-an-Implicit-Function"><span class="nav-text">Deformable Tetrahedral Mesh as an Approximation of an Implicit Function</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Volume-Subdivision"><span class="nav-text">Volume Subdivision</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Marching-Tetrahedra-for-converting-between-an-Implicit-and-Explicit-Representation"><span class="nav-text">Marching Tetrahedra for converting between an Implicit and Explicit Representation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Surface-Subdivision"><span class="nav-text">Surface Subdivision</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DMTET-3D-Deep-Conditional-Generative-Model"><span class="nav-text">DMTET: 3D Deep Conditional Generative Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3D-Generator"><span class="nav-text">3D Generator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3D-Discriminator"><span class="nav-text">3D Discriminator</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Loss-Function"><span class="nav-text">Loss Function</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Conclusion"><span class="nav-text">Conclusion</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qi Yun"
+      src="/images/avatar.jpeg">
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">112</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">58</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/qiyun71" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;qiyun71" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/29010355" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;29010355" rel="noopener" target="_blank"><i class="fa fa-star fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qi Yun</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">423k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">25:38</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/yqq/anime.min.js"></script>
+  <script src="/yqq/velocity/velocity.min.js"></script>
+  <script src="/yqq/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
