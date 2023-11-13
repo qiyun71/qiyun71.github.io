@@ -5,6 +5,10 @@
       "path": "Learn/Learn-Git.md"
     },
     {
+      "basename": "DoubleField",
+      "path": "HumanBodyReconstruction/ImplicitFunction/DoubleField.md"
+    },
+    {
       "basename": "Learn-Hexo2",
       "path": "Learn/Learn-Hexo2.md"
     },
@@ -31,10 +35,6 @@
     {
       "basename": "HaP",
       "path": "HumanBodyReconstruction/Generative approach/HaP.md"
-    },
-    {
-      "basename": "DoubleField",
-      "path": "HumanBodyReconstruction/ImplicitFunction/DoubleField.md"
     },
     {
       "basename": "Diffusion Models",

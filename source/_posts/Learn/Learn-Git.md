@@ -125,3 +125,5 @@ Git push 需要配置 token(2023.11.13)
   - Git config --global credential.Helper store
   - Git config --global --unset credential.Helper 清理之前保存的账密信息
 - Git config --global credential.Helper store
+
+测试没有百度网盘同步方法
