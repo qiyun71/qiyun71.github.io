@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-11-13 13:03:48" itemprop="dateModified" datetime="2023-11-13T13:03:48+08:00">2023-11-13</time>
+                <time title="Modified: 2023-11-17 09:58:50" itemprop="dateModified" datetime="2023-11-17T09:58:50+08:00">2023-11-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -242,13 +242,13 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>1.4k</span>
+              <span>1.6k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span>5 mins.</span>
+              <span>6 mins.</span>
             </span>
 
         </div>
@@ -386,7 +386,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-11-13 13:03:48" itemprop="dateModified" datetime="2023-11-13T13:03:48+08:00">2023-11-13</time>
+                <time title="Modified: 2023-11-16 11:29:40" itemprop="dateModified" datetime="2023-11-16T11:29:40+08:00">2023-11-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -525,6 +525,380 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/HumanBodyReconstruction/Generative%20approach/DMV3D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YunQi">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/HumanBodyReconstruction/Generative%20approach/DMV3D/" class="post-title-link" itemprop="url">DMV3D</a>
+        </h2>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-11-16 16:20:04 / Modified: 17:03:51" itemprop="dateCreated datePublished" datetime="2023-11-16T16:20:04+08:00">2023-11-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/HumanBodyReconstruction-Generative-approach/" itemprop="url" rel="index"><span itemprop="name">HumanBodyReconstruction/Generative approach</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>2.5k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>9 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Title</th>
+<th>DMV3D: Denoising Multi-View Diffusion using 3D Large Reconstruction Model</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Author</td>
+<td>Xu, Yinghao and Tan, Hao and Luan, Fujun and Bi, Sai and Wang Peng and Li, Jihao and Shi, Zifan and Sunkavalli, Kaylan and Wetzstein Gordon and Xu, Zexiang and Zhang Kai}</td>
+</tr>
+<tr>
+<td>Conf/Jour</td>
+<td>arxiv</td>
+</tr>
+<tr>
+<td>Year</td>
+<td>2023</td>
+</tr>
+<tr>
+<td>Project</td>
+<td><a target="_blank" rel="noopener" href="https://justimyhxu.github.io/projects/dmv3d/">DMV3D: Denoising Multi-View Diffusion Using 3D Large Reconstruction Mode (justimyhxu.github.io)</a></td>
+</tr>
+<tr>
+<td>Paper</td>
+<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=2051819500442962176&amp;noteId=2052104116852710656">DMV3D: DENOISING MULTI-VIEW DIFFUSION USING 3D LARGE RECONSTRUCTION MODEL (readpaper.com)</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>需要相机位姿</strong> + 多视图 + Diffusion Model + NeRF Triplane2MLP</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231116161909.png" alt="image.png|666"></p>
+<p>不足：</p>
+<ul>
+<li>对未见视图的重建质量不高</li>
+<li>只支持低分辨率图像和三平面</li>
+<li>只支持输入没有背景的物体图像</li>
+<li>没用到任何先验知识</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/HumanBodyReconstruction/Generative%20approach/DMV3D/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/HumanBodyReconstruction/Muti-view%203D%20Reconstruction/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YunQi">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/HumanBodyReconstruction/Muti-view%203D%20Reconstruction/" class="post-title-link" itemprop="url">Muti-view 3D Reconstruction</a>
+        </h2>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-11-16 10:08:43" itemprop="dateCreated datePublished" datetime="2023-11-16T10:08:43+08:00">2023-11-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-11-17 09:48:31" itemprop="dateModified" datetime="2023-11-17T09:48:31+08:00">2023-11-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/" itemprop="url" rel="index"><span itemprop="name">/</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>308</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>1 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>3D Reconstruction</p>
+<ul>
+<li>Single Image ==简单但信息不足==<ul>
+<li>深度估计(2K2K,ECON)</li>
+<li>生成式(BuilDIff, SG-GAN): GAN 或 DIffusion Model</li>
+<li>隐式函数(PIFu,ICON)</li>
+<li>组合方法<ul>
+<li>HaP: 深度估计 + SMPL 估计 + 生成式 DM</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Muti-view ==多视图信息互补但一致性很难保证==<ul>
+<li>传统方法(MVS,MVSNet-based)</li>
+<li>隐式函数(NeRF-based: NeuS,DoubleField)</li>
+<li>组合方法<ul>
+<li>DiffuStereo: NeRF + 生成式 DM</li>
+</ul>
+</li>
+<li>多视图融合<ul>
+<li>多个视图通过深度估计得到每个视图的深度图(or点云)，然后采用多视图深度图融合(or点云配准) ==需要深度估计得到的图片具有多视图一致性==</li>
+<li></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/HumanBodyReconstruction/Muti-view%203D%20Reconstruction/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/HumanBodyReconstruction/ImplicitFunction/RayDF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YunQi">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/HumanBodyReconstruction/ImplicitFunction/RayDF/" class="post-title-link" itemprop="url">RayDF</a>
+        </h2>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-11-13 16:44:16" itemprop="dateCreated datePublished" datetime="2023-11-13T16:44:16+08:00">2023-11-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-11-16 21:15:28" itemprop="dateModified" datetime="2023-11-16T21:15:28+08:00">2023-11-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/HumanBodyReconstruction-ImplicitFunction/" itemprop="url" rel="index"><span itemprop="name">HumanBodyReconstruction/ImplicitFunction</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>2.9k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>11 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Title</th>
+<th>RayDF: Neural Ray-surface Distance Fields with Multi-view Consistency</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Author</td>
+<td>Zhuoman Liu, Bo Yang</td>
+</tr>
+<tr>
+<td>Conf/Jour</td>
+<td>NeurIPS</td>
+</tr>
+<tr>
+<td>Year</td>
+<td>2023</td>
+</tr>
+<tr>
+<td>Project</td>
+<td><a target="_blank" rel="noopener" href="https://vlar-group.github.io/RayDF.html">RayDF: Neural Ray-surface Distance Fields with Multi-view Consistency (vlar-group.github.io)</a></td>
+</tr>
+<tr>
+<td>Paper</td>
+<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=2037229054391691776&amp;noteId=2047746094923644416">RayDF: Neural Ray-surface Distance Fields with Multi-view Consistency (readpaper.com)</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231113155552.png" alt="image.png|666"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/HumanBodyReconstruction/ImplicitFunction/RayDF/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/HumanBodyReconstruction/Generative%20approach/DiffuStereo/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -557,7 +931,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-11-13 13:03:48" itemprop="dateModified" datetime="2023-11-13T13:03:48+08:00">2023-11-13</time>
+                <time title="Modified: 2023-11-14 10:16:57" itemprop="dateModified" datetime="2023-11-14T10:16:57+08:00">2023-11-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -625,6 +999,7 @@
 </table>
 </div>
 <p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231111120652.png" alt="image.png|666"></p>
+<p>THUman2.0数据集demo结果好(除手、脸和脚)，训练代码还未开源<br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231113161728.png" alt="image.png|666"></p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/HumanBodyReconstruction/Generative%20approach/DiffuStereo/#more" rel="contents">
@@ -683,7 +1058,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-11-13 13:03:48" itemprop="dateModified" datetime="2023-11-13T13:03:48+08:00">2023-11-13</time>
+                <time title="Modified: 2023-11-14 10:27:00" itemprop="dateModified" datetime="2023-11-14T10:27:00+08:00">2023-11-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -809,7 +1184,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-11-13 13:03:48" itemprop="dateModified" datetime="2023-11-13T13:03:48+08:00">2023-11-13</time>
+                <time title="Modified: 2023-11-16 10:18:43" itemprop="dateModified" datetime="2023-11-16T10:18:43+08:00">2023-11-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1123,385 +1498,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/HumanBodyReconstruction/Generative%20approach/DMTet/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-      <meta itemprop="name" content="Qi Yun">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YunQi">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/HumanBodyReconstruction/Generative%20approach/DMTet/" class="post-title-link" itemprop="url">DMTet</a>
-        </h2>
-
-        <div class="post-meta">
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-11-06 16:53:52" itemprop="dateCreated datePublished" datetime="2023-11-06T16:53:52+08:00">2023-11-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-11-13 13:03:48" itemprop="dateModified" datetime="2023-11-13T13:03:48+08:00">2023-11-13</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/HumanBodyReconstruction-Generative-approach/" itemprop="url" rel="index"><span itemprop="name">HumanBodyReconstruction/Generative approach</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>2.8k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span>10 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <div class="table-container">
-<table>
-<thead>
-<tr>
-<th>Title</th>
-<th>Deep Marching Tetrahedra: a Hybrid Representation for High-Resolution 3D Shape Synthesis</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Author</td>
-<td>Tianchang Shen and Jun Gao and Kangxue Yin and Ming-Yu Liu and Sanja Fidler</td>
-</tr>
-<tr>
-<td>Conf/Jour</td>
-<td>NeurIPS</td>
-</tr>
-<tr>
-<td>Year</td>
-<td>2021</td>
-</tr>
-<tr>
-<td>Project</td>
-<td><a target="_blank" rel="noopener" href="https://research.nvidia.com/labs/toronto-ai/DMTet/">Deep Marching Tetrahedra: a Hybrid Representation for High-Resolution 3D Shape Synthesis (nvidia.com)</a></td>
-</tr>
-<tr>
-<td>Paper</td>
-<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4556109173671075841&amp;noteId=2037631312002498560">Deep Marching Tetrahedra: a Hybrid Representation for High-Resolution 3D Shape Synthesis (readpaper.com)</a></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231106171053.png" alt="image.png|666"></p>
-<p>输入点云或低分辨率体素，提取特征后利用GAN网络，生成每个顶点的位置和SDF偏移值，得到优化后顶点的位置和SDF<br>结合显式与隐式表达的表示方法，利用MT，从隐式SDF中重建出显式mesh </p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/HumanBodyReconstruction/Generative%20approach/DMTet/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/HumanBodyReconstruction/Generative%20approach/RODIN/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-      <meta itemprop="name" content="Qi Yun">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YunQi">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/HumanBodyReconstruction/Generative%20approach/RODIN/" class="post-title-link" itemprop="url">RODIN</a>
-        </h2>
-
-        <div class="post-meta">
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-10-28 21:47:58" itemprop="dateCreated datePublished" datetime="2023-10-28T21:47:58+08:00">2023-10-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-11-13 13:03:48" itemprop="dateModified" datetime="2023-11-13T13:03:48+08:00">2023-11-13</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/HumanBodyReconstruction-Generative-approach/" itemprop="url" rel="index"><span itemprop="name">HumanBodyReconstruction/Generative approach</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>4.4k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span>16 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <div class="table-container">
-<table>
-<thead>
-<tr>
-<th>Title</th>
-<th>Rodin: A Generative Model for Sculpting 3D Digital Avatars Using Diffusion</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Author</td>
-<td>Tengfei Wang1†<em> Bo Zhang2</em> Ting Zhang2 Shuyang Gu2 Jianmin Bao2</td>
-</tr>
-<tr>
-<td>Conf/Jour</td>
-<td>arXiv preprint</td>
-</tr>
-<tr>
-<td>Year</td>
-<td>2022</td>
-</tr>
-<tr>
-<td>Project</td>
-<td><a target="_blank" rel="noopener" href="https://3d-avatar-diffusion.microsoft.com/">RODIN Diffusion (microsoft.com)</a></td>
-</tr>
-<tr>
-<td>Paper</td>
-<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4700249091733454849&amp;noteId=2024885528733762560">Rodin: A Generative Model for Sculpting 3D Digital Avatars Using Diffusion (readpaper.com)</a></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231028214552.png" alt="image.png|666"></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/HumanBodyReconstruction/Generative%20approach/RODIN/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/HumanBodyReconstruction/ImplicitFunction/TransHuman/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-      <meta itemprop="name" content="Qi Yun">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YunQi">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/HumanBodyReconstruction/ImplicitFunction/TransHuman/" class="post-title-link" itemprop="url">TransHuman</a>
-        </h2>
-
-        <div class="post-meta">
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-10-25 20:46:02" itemprop="dateCreated datePublished" datetime="2023-10-25T20:46:02+08:00">2023-10-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-11-13 13:03:48" itemprop="dateModified" datetime="2023-11-13T13:03:48+08:00">2023-11-13</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/HumanBodyReconstruction-ImplicitFunction/" itemprop="url" rel="index"><span itemprop="name">HumanBodyReconstruction/ImplicitFunction</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>841</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span>3 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <div class="table-container">
-<table>
-<thead>
-<tr>
-<th>Title</th>
-<th>TransHuman: A Transformer-based Human Representation for Generalizable Neural Human Rendering</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Author</td>
-<td>Xiao Pan1,2,∗, Zongxin Yang1, Jianxin Ma2, Chang Zhou2, Yi Yang1,†</td>
-</tr>
-<tr>
-<td>Conf/Jour</td>
-<td>ICCV</td>
-</tr>
-<tr>
-<td>Year</td>
-<td>2023</td>
-</tr>
-<tr>
-<td>Project</td>
-<td><a target="_blank" rel="noopener" href="https://pansanity666.github.io/TransHuman/">TransHuman: A Transformer-based Human Representation for Generalizable Neural Human Rendering (pansanity666.github.io)</a></td>
-</tr>
-<tr>
-<td>Paper</td>
-<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4781388859208368129&amp;noteId=2020479109538002688">TransHuman: A Transformer-based Human Representation for Generalizable Neural Human Rendering (readpaper.com)</a></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231022103225.png" alt="image.png|666"></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/HumanBodyReconstruction/ImplicitFunction/TransHuman/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1572,14 +1568,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">112</span>
+          <span class="site-state-item-count">115</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -1633,12 +1629,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">423k</span>
+    <span title="Symbols count total">429k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">25:38</span>
+    <span title="Reading time total">26:01</span>
 </div>
 
         

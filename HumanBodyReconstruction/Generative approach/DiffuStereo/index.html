@@ -28,11 +28,12 @@
 <meta property="og:description" content="Title DiffuStereo: High Quality Human Reconstruction via Diffusion-based Stereo Using Sparse Cameras     Author Ruizhi Shao, Zerong Zheng, Hongwen Zhang, Jingxiang Sun, Yebin Liu   Conf&#x2F;Jour ECCV">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231111120652.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231113161728.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231111120652.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231111184852.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231111211733.png">
 <meta property="article:published_time" content="2023-11-11T04:07:22.000Z">
-<meta property="article:modified_time" content="2023-11-13T05:03:48.860Z">
+<meta property="article:modified_time" content="2023-11-14T02:16:57.901Z">
 <meta property="article:author" content="Qi Yun">
 <meta property="article:tag" content="Diffusion">
 <meta property="article:tag" content="3DReconstruction">
@@ -232,7 +233,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-11-13 13:03:48" itemprop="dateModified" datetime="2023-11-13T13:03:48+08:00">2023-11-13</time>
+                <time title="Modified: 2023-11-14 10:16:57" itemprop="dateModified" datetime="2023-11-14T10:16:57+08:00">2023-11-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -300,6 +301,7 @@
 </table>
 </div>
 <p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231111120652.png" alt="image.png|666"></p>
+<p>THUman2.0数据集demo结果好(除手、脸和脚)，训练代码还未开源<br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231113161728.png" alt="image.png|666"></p>
 <span id="more"></span>
 <h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>我们提出了 DiffuStereo，这是一种仅使用稀疏相机(本工作中有 8 个)进行高质量 3D 人体重建的新系统。其核心是一种新型的基于扩散的立体模型，将扩散模型这一功能强大的生成模型引入到迭代立体匹配网络中。为此，我们设计了一个新的扩散核和附加的立体约束来促进网络中的立体匹配和深度估计。我们进一步提出了一个多级立体网络架构来处理高分辨率(高达 4k)的输入，而不需要负担得起的内存占用。给定一组稀疏视图彩色人体图像，基于多层次扩散的立体网络可以生成高精度的深度图，然后通过高效的多视图融合策略将深度图转换为高质量的三维人体模型。总的来说，我们的方法可以自动重建人体模型，其质量与高端密集视角相机平台相当，这是使用更轻的硬件设置实现的。实验表明，我们的方法在定性和定量上都大大优于最先进的方法。</p>
 <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>贡献:<br>1)我们提出了 DiffuStereo，这是一个轻量级和高质量的系统，用于稀疏多视图相机下的人体体积重建。<br>2)据我们所知，我们提出了第一个将扩散模型引入立体和人体重建的方法。我们通过精心设计一个新的扩散核并在扩散条件中引入额外的立体约束来扩展香草扩散模型。<br>3)我们提出了一种新的多层次扩散立体网络，以实现准确和高质量的人体深度估计。我们的网络可以优雅地处理高分辨率(高达 4k)图像，而不会遭受内存过载的困扰。</p>
@@ -400,7 +402,10 @@
     <a href="/HumanBodyReconstruction/ImplicitFunction/DoubleField/" rel="prev" title="DoubleField">
       <i class="fa fa-chevron-left"></i> DoubleField
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/HumanBodyReconstruction/ImplicitFunction/RayDF/" rel="next" title="RayDF">
+      RayDF <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -474,14 +479,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">112</span>
+          <span class="site-state-item-count">115</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -535,12 +540,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">423k</span>
+    <span title="Symbols count total">429k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">25:38</span>
+    <span title="Reading time total">26:01</span>
 </div>
 
         

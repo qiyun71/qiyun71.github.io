@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231021114740.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231024111221.png">
 <meta property="article:published_time" content="2023-10-09T08:33:31.000Z">
-<meta property="article:modified_time" content="2023-11-13T05:03:48.862Z">
+<meta property="article:modified_time" content="2023-11-14T02:26:53.871Z">
 <meta property="article:author" content="Qi Yun">
 <meta property="article:tag" content="3DReconstruction">
 <meta property="article:tag" content="ClothedHumans">
@@ -234,7 +234,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-11-13 13:03:48" itemprop="dateModified" datetime="2023-11-13T13:03:48+08:00">2023-11-13</time>
+                <time title="Modified: 2023-11-14 10:26:53" itemprop="dateModified" datetime="2023-11-14T10:26:53+08:00">2023-11-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -251,13 +251,13 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>826</span>
+              <span>965</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span>3 mins.</span>
+              <span>4 mins.</span>
             </span>
 
         </div>
@@ -286,9 +286,10 @@
 <li><strong>Generative approach</strong>  <a href="Generative%20approach%20Review.md">Generative approach</a></li>
 </ol>
 <span id="more"></span>
-<h1 id="人体三维重建方法综述"><a href="#人体三维重建方法综述" class="headerlink" title="人体三维重建方法综述"></a>人体三维重建方法综述</h1><p><strong>方法 0</strong>：训练隐式函数表示<br>(NeRF、PIFu、ICON)<br><strong>DoubleField</strong>(多视图)</p>
-<p><strong>方法 1</strong>：深度估计+多视图深度图融合 or 多视图点云配准<br>(2K2K-based i.e.Depth&amp;Normal Estimation)</p>
-<p>深度估计: 2K2K</p>
+<h1 id="人体三维重建方法综述"><a href="#人体三维重建方法综述" class="headerlink" title="人体三维重建方法综述"></a>人体三维重建方法综述</h1><h2 id="Implicit-Function"><a href="#Implicit-Function" class="headerlink" title="Implicit Function"></a>Implicit Function</h2><p><strong>方法 0</strong>：训练隐式函数表示<br>(eg: NeRF、PIFu、ICON)<br><strong>DoubleField</strong>(多视图)</p>
+<p>==问题：需要估计相机位姿，估计方法有一定的误差，视图少时误差更大==</p>
+<h2 id="Depth-amp-Normal-Estimation"><a href="#Depth-amp-Normal-Estimation" class="headerlink" title="Depth&amp;Normal Estimation"></a>Depth&amp;Normal Estimation</h2><p><strong>方法 1</strong>：深度估计+多视图深度图融合 or 多视图点云配准<br>(2K2K-based)</p>
+<p>深度估计: 2K2K、MVSNet、ECON…</p>
 <ul>
 <li><p>多视图深度图融合：<a target="_blank" rel="noopener" href="https://github.com/touristCheng/DepthFusion">DepthFusion: Fuse multiple depth frames into a point cloud</a></p>
 <ul>
@@ -302,12 +303,13 @@
 </ul>
 </li>
 </ul>
-<p><strong>方法 2</strong>：生成式方法由图片生成点云<br>Generative approach(Muti-view image、pose (keypoints)… —&gt; PointCloud)</p>
+<p>==问题：无法保证生成的多视角深度图具有多视图一致性==</p>
+<h2 id="Generative-approach"><a href="#Generative-approach" class="headerlink" title="Generative approach"></a>Generative approach</h2><p><strong>方法 2</strong>：生成式方法由图片生成点云<br>Generative approach(Muti-view image、pose (keypoints)… —&gt; PointCloud)</p>
 <ol>
 <li>扩散模型<ol>
 <li>直接生成点云 <em>BuilDiff</em></li>
 <li>生成三平面特征+NeRF <em>RODIN</em></li>
-<li>多视图Diffusion <a target="_blank" rel="noopener" href="https://liuyebin.com/diffustereo/diffustereo.html">DiffuStereo</a></li>
+<li>多视图 Diffusion <a target="_blank" rel="noopener" href="https://liuyebin.com/diffustereo/diffustereo.html">DiffuStereo</a></li>
 </ol>
 </li>
 <li>GAN 网络生成点云 <em>SG-GAN</em></li>
@@ -324,20 +326,23 @@
 </ul>
 </li>
 </ul>
-<p><strong>方法 3</strong>：组合深度估计 + 生成式方法<br><a target="_blank" rel="noopener" href="https://github.com/yztang4/HaP">HaP</a>：深度估计+SMPL 估计+Diffusion Model 精细化</p>
-<h1 id="三维重建方法流程对比"><a href="#三维重建方法流程对比" class="headerlink" title="三维重建方法流程对比"></a>三维重建方法流程对比</h1><h2 id="Implicit-Function"><a href="#Implicit-Function" class="headerlink" title="Implicit Function"></a>Implicit Function</h2><h3 id="NeRF"><a href="#NeRF" class="headerlink" title="NeRF"></a>NeRF</h3><p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231024153406.png" alt="NeuS2.png|666"><br>预测每个采样点 sdf 和 feature 向量<br>$(sdf,\mathbf{feature})=f_\Theta(\mathbf{e}),\quad\mathbf{e}=(\mathbf{x},h_\Omega(\mathbf{x})).$</p>
+<p>==问题：直接生成点云或者对点云进行扩散优化，会花费大量的内存==</p>
+<h2 id="混合方法"><a href="#混合方法" class="headerlink" title="混合方法"></a>混合方法</h2><p><strong>方法 3</strong>：组合深度估计 + 生成式方法（缝合多个方法）<br><a target="_blank" rel="noopener" href="https://github.com/yztang4/HaP">HaP</a>：深度估计+SMPL 估计+Diffusion Model 精细化</p>
+<p>==问题：依赖深度估计和 SMPL 估计得到的结果==</p>
+<p><strong>方法 4</strong>：隐函数 + 生成式方法 + 非刚ICP配准<br><a target="_blank" rel="noopener" href="https://liuyebin.com/diffustereo/diffustereo.html">DiffuStereo</a>：NeRF(DoubleField) + Diffusion Model + non-rigid ICP （==不开源==）</p>
+<h1 id="三维重建方法流程对比"><a href="#三维重建方法流程对比" class="headerlink" title="三维重建方法流程对比"></a>三维重建方法流程对比</h1><h2 id="Implicit-Function-1"><a href="#Implicit-Function-1" class="headerlink" title="Implicit Function"></a>Implicit Function</h2><h3 id="NeRF"><a href="#NeRF" class="headerlink" title="NeRF"></a>NeRF</h3><p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231024153406.png" alt="NeuS2.png|666"><br>预测每个采样点 sdf 和 feature 向量<br>$(sdf,\mathbf{feature})=f_\Theta(\mathbf{e}),\quad\mathbf{e}=(\mathbf{x},h_\Omega(\mathbf{x})).$</p>
 <p>预测每个采样点颜色值<br>$\mathbf c=c_{\Upsilon}(\mathbf x,\mathbf n,\mathbf v,sdf,\mathbf{feature})$，$\mathbf n=\nabla_\mathbf x sdf.$</p>
 <p>体渲染像素颜色<br>$\hat{C}=\sum_{i=1}^n T_i\alpha_i c_i$， $T_i=\prod_{j=1}^{i-1}(1-\alpha_j)$ ，$\alpha_i=\max\left(\frac{\Phi_s(f(\mathbf{p}(t_i))))-\Phi_s(f(\mathbf{p}(t_{i+1})))}{\Phi_s(f(\mathbf{p}(t_i)))},0\right)$</p>
 <p>训练得到 MLP，根据 MarchingCube 得到点云</p>
 <h3 id="PIFu"><a href="#PIFu" class="headerlink" title="PIFu"></a>PIFu</h3><p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230928170950.png" alt="image.png|666"></p>
 <p>将输入图像中每个像素的特征通过 MLP 映射为占用场</p>
-<h2 id="Depth-amp-Normal-Estimation"><a href="#Depth-amp-Normal-Estimation" class="headerlink" title="Depth&amp;Normal Estimation"></a>Depth&amp;Normal Estimation</h2><p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230921160120.png" alt="2K2K.png|666"></p>
+<h2 id="Depth-amp-Normal-Estimation-1"><a href="#Depth-amp-Normal-Estimation-1" class="headerlink" title="Depth&amp;Normal Estimation"></a>Depth&amp;Normal Estimation</h2><p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230921160120.png" alt="2K2K.png|666"></p>
 <p>预测低分辨率法向量图和深度图，$\hat M$ 为预测出的 mask<br>$\mathbf{D}^l=\hat{\mathbf{D}}^l\odot\hat{\mathbf{M}}^l$， $\hat{\mathbf{D}}^l,\hat{\mathbf{M}}^l,\mathbf{N}^l=G^l_{\mathbf{D}}(I^l)$</p>
 <p>预测高分辨率 part 法向量图，M 为变换矩阵<br>$\bar{\mathbf{n}}_i=G_{\mathbf{N},i}(\bar{\mathbf{p}}_i,\mathbf{M}_i^{-1}\mathbf{N}^l)$， $\bar{\mathbf{p}}_i=\mathbf{M}_i\mathbf{p}_i,$</p>
 <p>拼接为高分辨率整体法向量图<br>$\mathbf{N}^h=\sum\limits_{i=1}^K\left(\mathbf{W}_i\odot\mathbf{n}_i\right)$ ，$\mathbf{n}_i=\mathbf{M}_i^{-1}\bar{\mathbf{n}}_i$</p>
 <p>预测高分辨率深度图<br>$\mathbf{D}^h=\hat{\mathbf{D}}^h\odot\hat{\mathbf{M}}^h$，$\hat{\mathbf{D}}^h,\hat{\mathbf{M}}^h=G^h_{\mathbf{D}}(\mathbf{N}^h,\mathbf{D}^l)$</p>
 <p>深度图转点云</p>
-<h2 id="Generative-approach"><a href="#Generative-approach" class="headerlink" title="Generative approach"></a>Generative approach</h2><h3 id="Diffusion-Model-Network"><a href="#Diffusion-Model-Network" class="headerlink" title="Diffusion Model Network"></a>Diffusion Model Network</h3><p><a href="/HumanBodyReconstruction/Generative%20approach/Diffusion%20Models">Diffusion Model Network学习笔记</a></p>
+<h2 id="Generative-approach-1"><a href="#Generative-approach-1" class="headerlink" title="Generative approach"></a>Generative approach</h2><h3 id="Diffusion-Model-Network"><a href="#Diffusion-Model-Network" class="headerlink" title="Diffusion Model Network"></a>Diffusion Model Network</h3><p><a href="/HumanBodyReconstruction/Generative%20approach/Diffusion%20Models">Diffusion Model Network学习笔记</a></p>
 <p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231021114740.png" alt="image.png|666"></p>
 <p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231024111221.png" alt="image.png|444"></p>
 <p><strong>3D CNN</strong>: PVCNN、PointNet、PointNet++</p>
@@ -448,7 +453,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%BA%E4%BD%93%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA%E6%96%B9%E6%B3%95%E7%BB%BC%E8%BF%B0"><span class="nav-text">人体三维重建方法综述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA%E6%96%B9%E6%B3%95%E6%B5%81%E7%A8%8B%E5%AF%B9%E6%AF%94"><span class="nav-text">三维重建方法流程对比</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Implicit-Function"><span class="nav-text">Implicit Function</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NeRF"><span class="nav-text">NeRF</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PIFu"><span class="nav-text">PIFu</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Depth-amp-Normal-Estimation"><span class="nav-text">Depth&amp;Normal Estimation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Generative-approach"><span class="nav-text">Generative approach</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Diffusion-Model-Network"><span class="nav-text">Diffusion Model Network</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GAN"><span class="nav-text">GAN</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Paper"><span class="nav-text">Paper</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%BA%E4%BD%93%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA%E6%96%B9%E6%B3%95%E7%BB%BC%E8%BF%B0"><span class="nav-text">人体三维重建方法综述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Implicit-Function"><span class="nav-text">Implicit Function</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Depth-amp-Normal-Estimation"><span class="nav-text">Depth&amp;Normal Estimation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Generative-approach"><span class="nav-text">Generative approach</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%B7%E5%90%88%E6%96%B9%E6%B3%95"><span class="nav-text">混合方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA%E6%96%B9%E6%B3%95%E6%B5%81%E7%A8%8B%E5%AF%B9%E6%AF%94"><span class="nav-text">三维重建方法流程对比</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Implicit-Function-1"><span class="nav-text">Implicit Function</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NeRF"><span class="nav-text">NeRF</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PIFu"><span class="nav-text">PIFu</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Depth-amp-Normal-Estimation-1"><span class="nav-text">Depth&amp;Normal Estimation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Generative-approach-1"><span class="nav-text">Generative approach</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Diffusion-Model-Network"><span class="nav-text">Diffusion Model Network</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GAN"><span class="nav-text">GAN</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Paper"><span class="nav-text">Paper</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -463,14 +468,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">112</span>
+          <span class="site-state-item-count">115</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -524,12 +529,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">423k</span>
+    <span title="Symbols count total">429k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">25:38</span>
+    <span title="Reading time total">26:01</span>
 </div>
 
         

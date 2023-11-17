@@ -189,6 +189,395 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/HumanBodyReconstruction/ImplicitFunction/PIFuHD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YunQi">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/HumanBodyReconstruction/ImplicitFunction/PIFuHD/" class="post-title-link" itemprop="url">PIFuHD</a>
+        </h2>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-09-28 17:47:28" itemprop="dateCreated datePublished" datetime="2023-09-28T17:47:28+08:00">2023-09-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-11-13 13:03:48" itemprop="dateModified" datetime="2023-11-13T13:03:48+08:00">2023-11-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/HumanBodyReconstruction-ImplicitFunction/" itemprop="url" rel="index"><span itemprop="name">HumanBodyReconstruction/ImplicitFunction</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>1.9k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>7 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Title</th>
+<th>PIFuHD: Multi-Level Pixel-Aligned Implicit Function for High-Resolution 3D Human Digitization</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Author</td>
+<td>Shunsuke Saito1,3 Tomas Simon2 Jason Saragih2 Hanbyul Joo3</td>
+</tr>
+<tr>
+<td>Conf/Jour</td>
+<td>CVPR</td>
+</tr>
+<tr>
+<td>Year</td>
+<td>2020</td>
+</tr>
+<tr>
+<td>Project</td>
+<td><a target="_blank" rel="noopener" href="https://shunsukesaito.github.io/PIFuHD/">PIFuHD: Multi-Level Pixel-Aligned Implicit Function for High-Resolution 3D Human Digitization (shunsukesaito.github.io)</a></td>
+</tr>
+<tr>
+<td>Paper</td>
+<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=542688756272230400&amp;noteId=1981107888522777856">PIFuHD: Multi-Level Pixel-Aligned Implicit Function for High-Resolution 3D Human Digitization (readpaper.com)</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230928175323.png" alt="image.png"></p>
+<p>Encoder: stacked hourglass network<br>MLP</p>
+<ul>
+<li>Coarse L：(257, 1024, 512, 256, 128, 1)</li>
+<li>Fine H：(272, 512, 256, 128, 1)，将Coarse MLP的第四层输出$\Omega \in \mathbb{R}^{256}$作为输入<br>表面法线网络：由9个残差块和4个下采样层组成</li>
+<li>$\mathcal{L}_{N}=\mathcal{L}_{VGG}+\lambda_{l1}\mathcal{L}_{l1},$ 其中$L_{VGG}$为Johnson等人[17]提出的感知损失，$L_{l1}$为预测与真值法向之间的l1距离</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/HumanBodyReconstruction/ImplicitFunction/PIFuHD/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/HumanBodyReconstruction/ImplicitFunction/PIFu/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YunQi">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/HumanBodyReconstruction/ImplicitFunction/PIFu/" class="post-title-link" itemprop="url">PIFu</a>
+        </h2>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-09-28 17:44:42" itemprop="dateCreated datePublished" datetime="2023-09-28T17:44:42+08:00">2023-09-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-11-13 13:03:48" itemprop="dateModified" datetime="2023-11-13T13:03:48+08:00">2023-11-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/HumanBodyReconstruction-ImplicitFunction/" itemprop="url" rel="index"><span itemprop="name">HumanBodyReconstruction/ImplicitFunction</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>1.4k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>5 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Title</th>
+<th>PIFu: Pixel-Aligned Implicit Function for High-Resolution Clothed Human Digitization</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Author</td>
+<td>Shunsuke Saito1,2 <em> Zeng Huang1,2 </em> Ryota Natsume3 * Shigeo Morishima3 Angjoo Kanazawa4Hao Li1,2,5</td>
+</tr>
+<tr>
+<td>Conf/Jour</td>
+<td>ICCV</td>
+</tr>
+<tr>
+<td>Year</td>
+<td>2019</td>
+</tr>
+<tr>
+<td>Project</td>
+<td><a target="_blank" rel="noopener" href="https://shunsukesaito.github.io/PIFu/">PIFu: Pixel-Aligned Implicit Function for High-Resolution Clothed Human Digitization (shunsukesaito.github.io)</a></td>
+</tr>
+<tr>
+<td>Paper</td>
+<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4518249702759227393&amp;noteId=1981090816765700608">PIFu: Pixel-Aligned Implicit Function for High-Resolution Clothed Human Digitization (readpaper.com)</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230928170950.png" alt="image.png"><br>表面重建网络：stacked hourglass<br>纹理推断网络：由残差块组成的architecture of CycleGAN<br>隐函数网络：MLP</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/HumanBodyReconstruction/ImplicitFunction/PIFu/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/HumanBodyReconstruction/ImplicitFunction/D-NeuS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YunQi">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/HumanBodyReconstruction/ImplicitFunction/D-NeuS/" class="post-title-link" itemprop="url">D-NeuS</a>
+        </h2>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-09-27 20:19:42" itemprop="dateCreated datePublished" datetime="2023-09-27T20:19:42+08:00">2023-09-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-11-13 13:03:48" itemprop="dateModified" datetime="2023-11-13T13:03:48+08:00">2023-11-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/HumanBodyReconstruction-ImplicitFunction/" itemprop="url" rel="index"><span itemprop="name">HumanBodyReconstruction/ImplicitFunction</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>867</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>3 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Title</th>
+<th>Recovering Fine Details for Neural Implicit Surface Reconstruction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Author</td>
+<td>Decai Chen1, Peng Zhang1,2, Ingo Feldmann1, Oliver Schreer1, and Peter Eisert1,3</td>
+</tr>
+<tr>
+<td>Conf/Jour</td>
+<td>WACV</td>
+</tr>
+<tr>
+<td>Year</td>
+<td>2023</td>
+</tr>
+<tr>
+<td>Project</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/fraunhoferhhi/D-NeuS">fraunhoferhhi/D-NeuS: Recovering Fine Details for Neural Implicit Surface Reconstruction (WACV2023) (github.com)</a></td>
+</tr>
+<tr>
+<td>Paper</td>
+<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4692614734365589505&amp;noteId=1979864647240445952">Recovering Fine Details for Neural Implicit Surface Reconstruction (readpaper.com)</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230927202731.png" alt="image.png"></p>
+<p>Idea：两个额外的损失函数</p>
+<ul>
+<li>几何偏差损失：鼓励隐式SDF场和体渲染的亮度场之间的几何一致性</li>
+<li>多视图特征一致性损失：多个观察视图在表面点处的特征一致</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/HumanBodyReconstruction/ImplicitFunction/D-NeuS/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/NeRF/SurfaceReconstruction/NISR/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -840,7 +1229,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-11-13 13:03:48" itemprop="dateModified" datetime="2023-11-13T13:03:48+08:00">2023-11-13</time>
+                <time title="Modified: 2023-11-17 10:45:23" itemprop="dateModified" datetime="2023-11-17T10:45:23+08:00">2023-11-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -857,13 +1246,13 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>1.3k</span>
+              <span>1.6k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span>5 mins.</span>
+              <span>6 mins.</span>
             </span>
 
         </div>
@@ -1085,360 +1474,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/NeRF/Review/2023%20Conf%20about%20NeRF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-      <meta itemprop="name" content="Qi Yun">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YunQi">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/NeRF/Review/2023%20Conf%20about%20NeRF/" class="post-title-link" itemprop="url">CVPR 2023</a>
-        </h2>
-
-        <div class="post-meta">
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-09-16 09:48:45" itemprop="dateCreated datePublished" datetime="2023-09-16T09:48:45+08:00">2023-09-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-11-13 13:03:48" itemprop="dateModified" datetime="2023-11-13T13:03:48+08:00">2023-11-13</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/NeRF-Review/" itemprop="url" rel="index"><span itemprop="name">NeRF/Review</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>1.8k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span>6 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>ref:<br><a target="_blank" rel="noopener" href="https://github.com/lif314/awesome-NeRF-papers/blob/main/NeRFs-CVPR2023.md">awesome-NeRF-papers/NeRFs-CVPR2023.md at main · lif314/awesome-NeRF-papers (github.com)</a><br><a target="_blank" rel="noopener" href="https://github.com/lif314/awesome-NeRF-papers/blob/main/NeRFs-ICCV2023.md">awesome-NeRF-papers/NeRFs-ICCV2023.md at main · lif314/awesome-NeRF-papers (github.com)</a><br><a target="_blank" rel="noopener" href="https://public.tableau.com/views/CVPR2023SubjectAreasbyTeamSize/Dashboard2a?:showVizHome=no">工作簿: CVPR 2023 Subject Areas by Team Size (tableau.com)</a><br><a target="_blank" rel="noopener" href="https://github.com/yangjiheng/nerf_and_beyond_docs">yangjiheng/nerf_and_beyond_docs (github.com)</a></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/NeRF/Review/2023%20Conf%20about%20NeRF/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/NeRF/SurfaceReconstruction/FlexiCubes/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-      <meta itemprop="name" content="Qi Yun">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YunQi">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/NeRF/SurfaceReconstruction/FlexiCubes/" class="post-title-link" itemprop="url">FlexiCubes</a>
-        </h2>
-
-        <div class="post-meta">
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-09-15 14:54:10" itemprop="dateCreated datePublished" datetime="2023-09-15T14:54:10+08:00">2023-09-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-11-13 13:03:48" itemprop="dateModified" datetime="2023-11-13T13:03:48+08:00">2023-11-13</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/NeRF-SurfaceReconstruction/" itemprop="url" rel="index"><span itemprop="name">NeRF/SurfaceReconstruction</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>5.8k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span>21 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <div class="table-container">
-<table>
-<thead>
-<tr>
-<th>Title</th>
-<th>Flexible Isosurface Extraction for Gradient-Based Mesh Optimization</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Author</td>
-<td>Shen, Tianchang and Munkberg, Jacob and Hasselgren, Jon and Yin, Kangxue and Wang, Zian and Chen, Wenzheng and Gojcic, Zan and Fidler, Sanja and Sharp, Nicholas and Gao, Jun</td>
-</tr>
-<tr>
-<td>Conf/Jour</td>
-<td>ACM Trans. on Graph. (SIGGRAPH 2023)</td>
-</tr>
-<tr>
-<td>Year</td>
-<td>2023</td>
-</tr>
-<tr>
-<td>Project</td>
-<td><a target="_blank" rel="noopener" href="https://research.nvidia.com/labs/toronto-ai/flexicubes/">Flexible Isosurface Extraction for Gradient-Based Mesh Optimization (FlexiCubes) (nvidia.com)</a></td>
-</tr>
-<tr>
-<td>Paper</td>
-<td><a target="_blank" rel="noopener" href="https://nv-tlabs.github.io/flexicubes_website/FlexiCubes_paper.pdf">Flexible Isosurface Extraction for Gradient-Based Mesh Optimization (nv-tlabs.github.io)</a></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>一种新的Marching Cube的方法<br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230917211425.png" alt="image.png"></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/NeRF/SurfaceReconstruction/FlexiCubes/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/NeRF/Efficiency/BakedSDF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-      <meta itemprop="name" content="Qi Yun">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YunQi">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/NeRF/Efficiency/BakedSDF/" class="post-title-link" itemprop="url">BakedSDF</a>
-        </h2>
-
-        <div class="post-meta">
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-09-13 15:44:04" itemprop="dateCreated datePublished" datetime="2023-09-13T15:44:04+08:00">2023-09-13</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-11-13 13:03:48" itemprop="dateModified" datetime="2023-11-13T13:03:48+08:00">2023-11-13</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/NeRF-Efficiency/" itemprop="url" rel="index"><span itemprop="name">NeRF/Efficiency</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>6.3k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span>23 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <div class="table-container">
-<table>
-<thead>
-<tr>
-<th>Title</th>
-<th>BakedSDF: Meshing Neural SDFs for Real-Time View Synthesis</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Author</td>
-<td>Lior Yariv and Peter Hedman and Christian Reiser and Dor Verbin and Pratul P. Srinivasan and Richard Szeliski and    Jonathan T. Barron and Ben Mildenhall</td>
-</tr>
-<tr>
-<td>Conf/Jour</td>
-<td>SIGGRAPH</td>
-</tr>
-<tr>
-<td>Year</td>
-<td>2023</td>
-</tr>
-<tr>
-<td>Project</td>
-<td><a target="_blank" rel="noopener" href="https://bakedsdf.github.io/">BakedSDF</a></td>
-</tr>
-<tr>
-<td>Paper</td>
-<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4762044324229677057&amp;noteId=1959289127671095296">BakedSDF: Meshing Neural SDFs for Real-Time View Synthesis (readpaper.com)</a></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230913154905.png" alt="image.png"></p>
-<ul>
-<li>对前景物体采用类似VolSDF的方法训练<em>Modeling density with an SDF</em></li>
-<li>使用Marching Cube 的方法来提取高分辨率网格<em>Baking a high-resolution mesh</em></li>
-<li><em>Modeling view-dependent appearance</em>，对baked后的高分辨率网格上顶点：采用漫反射颜色和球形高斯叶（前景3个波瓣，远处背景使用1个波瓣）<ul>
-<li>$\mathbf{C}=\mathbf{c}_{d}+\sum_{i=1}^{N}\mathbf{c}_{i}\exp\left(\lambda_{i}\left(\mu_{i}\cdot\mathbf{d}-1\right)\right).$ </li>
-</ul>
-</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/NeRF/Efficiency/BakedSDF/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1509,14 +1544,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">112</span>
+          <span class="site-state-item-count">115</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -1570,12 +1605,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">423k</span>
+    <span title="Symbols count total">429k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">25:38</span>
+    <span title="Reading time total">26:01</span>
 </div>
 
         
