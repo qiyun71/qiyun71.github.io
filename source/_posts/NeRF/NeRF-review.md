@@ -84,6 +84,9 @@ NeRF 分段常数积分 --> PL-NeRF 分段线性积分
 | [2023](/NeRF/Sampling/Floaters%20No%20More) | [Floaters No More: Radiance Field Gradient Scaling for Improved Near-Camera Training](https://gradient-scaling.github.io/#Code) | 通过梯度缩放，解决基于NeRF重建场景中的背景塌陷和镜前漂浮物 | The Eurographics Association |
 
 - [Improving Neural Radiance Fields Using Near-Surface Sampling With Point Cloud Generation (arxiv.org)](https://arxiv.org/pdf/2310.04152.pdf)
+- [L0-Sampler: An L0 Model Guided Volume Sampling for NeRF](https://arxiv.org/abs/2311.07044) 分段常数采样改为分段指数采样
+
+
 
 ## Sparse images/Generalization
 

@@ -1,6 +1,6 @@
 ---
 title: Other Paper
-date: 2023-09-21 16:00:14
+date: 2023-09-21T16:00:14.000Z
 tags:
   - SurfaceReconstruction
   - 3DReconstruction
@@ -8,6 +8,7 @@ tags:
   - MVS
   - PIFu
 categories: HumanBodyReconstruction
+date updated: 2023-11-17T10:42:38.000Z
 ---
 
 Awesome Human Body Reconstruction
@@ -15,14 +16,14 @@ Awesome Human Body Reconstruction
 1. **Depth&Normal Estimation**(2K2K)
 2. **Implicit Function**(PIFu or NeRF)
 
-| Method | 泛化   | 数据集监督                              | 提取 mesh 方式                   | 获得纹理方式            |
-| ------ | ------ | --------------------------------------- | ------------------------------ | ----------------------- |
-| 2k2k   | 比较好 | (mesh+texture:)depth、normal、mask、rgb | 高质量深度图 --> 点云 --> mesh | 图片 rgb 贴图 |
-| PIFu   | 比较好 | 点云(obj)、rgb(uv)、mask、camera        | 占用场 --> MC --> 点云,mesh    | 表面颜色场              |
-| NeRF   | 差     | rgb、camera                             | 密度场 --> MC --> 点云,mesh    | 体积颜色场              |
-| NeuS   | 差     | rgb、camera                             | SDF --> MC --> 点云,mesh       | 体积颜色场              |
-| ICON   | 非常好 | rgb+mask、SMPL、法向量估计器 DR          | 占用场 --> MC --> 点云,mesh    | 图片 rgb 贴图             |
-| ECON   | 非常好 | rgb+mask、SMPL、法向量估计器 DR          | d-BiNI + SC(shape completion)  | 图片 rgb 贴图             |
+| Method | 泛化  | 数据集监督                                | 提取 mesh 方式                    | 获得纹理方式    |
+| ------ | --- | ------------------------------------ | ----------------------------- | --------- |
+| 2k2k   | 比较好 | (mesh+texture:)depth、normal、mask、rgb | 高质量深度图 --> 点云 --> mesh        | 图片 rgb 贴图 |
+| PIFu   | 比较好 | 点云(obj)、rgb(uv)、mask、camera          | 占用场 --> MC --> 点云,mesh        | 表面颜色场     |
+| NeRF   | 差   | rgb、camera                           | 密度场 --> MC --> 点云,mesh        | 体积颜色场     |
+| NeuS   | 差   | rgb、camera                           | SDF --> MC --> 点云,mesh        | 体积颜色场     |
+| ICON   | 非常好 | rgb+mask、SMPL、法向量估计器 DR              | 占用场 --> MC --> 点云,mesh        | 图片 rgb 贴图 |
+| ECON   | 非常好 | rgb+mask、SMPL、法向量估计器 DR              | d-BiNI + SC(shape completion) | 图片 rgb 贴图 |
 
 <!-- more -->
 
@@ -47,20 +48,22 @@ Awesome Human Body Reconstruction
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230930173026.png)
 
 ## 2K2K
+
 DepthEstimation
+
 > [2K2K：High-fidelity 3D Human Digitization from Single 2K Resolution Images](2K2K.md)
 > [High-fidelity 3D Human Digitization from Single 2K Resolution Images Project Page (sanghunhan92.github.io)](https://sanghunhan92.github.io/conference/2K2K/)
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230921160120.png)
 
 ## MVSNet
+
 DepthEstimation
+
 > [MVSNet: Depth Inference for Unstructured Multi-view Stereo](MVSNet.md)
 > [YoYo000/MVSNet: MVSNet (ECCV2018) & R-MVSNet (CVPR2019) (github.com)](https://github.com/YoYo000/MVSNet)
 
-
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231002110228.png)
-
 
 ## GC-MVSNet
 
@@ -68,6 +71,20 @@ DepthEstimation
 [GC-MVSNet: Multi-View, Multi-Scale, Geometrically-Consistent Multi-View Stereo (arxiv.org)](https://arxiv.org/abs/2310.19583)
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231031172920.png)
+
+## MonoDiffusion
+
+[MonoDiffusion: Self-Supervised Monocular Depth Estimation Using Diffusion Model](https://arxiv.org/abs/2311.07198)
+
+用 Diffusion Model 进行深度估计(自动驾驶)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231116153515.png)
+
+## NDDepth
+
+[NDDepth: Normal-Distance Assisted Monocular Depth Estimation and Completion](https://arxiv.org/abs/2311.07166)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231116153659.png)
 
 # NeRF Human Body
 
@@ -77,7 +94,6 @@ DepthEstimation
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231110163602.png)
 
-
 ## Learning Visibility Field for Detailed 3D Human Reconstruction and Relighting
 
 [Learning Visibility Field for Detailed 3D Human Reconstruction and Relighting (thecvf.com)](https://openaccess.thecvf.com/content/CVPR2023/papers/Zheng_Learning_Visibility_Field_for_Detailed_3D_Human_Reconstruction_and_Relighting_CVPR_2023_paper.pdf)
@@ -85,6 +101,7 @@ DepthEstimation
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231008104907.png)
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231008105237.png)
+
 ## HumanGen
 
 > [HumanGen: Generating Human Radiance Fields with Explicit Priors (suezjiang.github.io)](https://suezjiang.github.io/humangen/)
@@ -114,15 +131,17 @@ DepthEstimation
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231008193531.png)
 
-
 ## EVA3D 2022
+
 Compositional Human body
 质量很低
 Idea：
+
 - 将人体分为几个部分分别训练
 - 将 NeRF 融合进 GAN 的生成器中，并与一个判别器进行联合训练
 
 Cost：
+
 - 8 NVIDIA V100 Gpus for 5 days
 
 > [EVA3D - Project Page (hongfz16.github.io)](https://hongfz16.github.io/projects/EVA3D.html)
@@ -151,7 +170,7 @@ Im4D: High-Fidelity and Real-Time Novel View Synthesis for Dynamic Scenes
 ### HumanRF
 
 > [HumanRF: High-Fidelity Neural Radiance Fields for Humans in Motion (synthesiaresearch.github.io)](https://synthesiaresearch.github.io/humanrf/)
- 
+
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231001165622.png)
 
 ### Neural Body
@@ -172,10 +191,17 @@ Im4D: High-Fidelity and Real-Time Novel View Synthesis for Dynamic Scenes
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023154027.png)
 
+### D3GA
+
+[D3GA - Drivable 3D Gaussian Avatars - Wojciech Zielonka](https://zielon.github.io/d3ga/)
+
+多视图视频作为输入 + 3DGS + 笼形变形
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231117103528.png)
 
 ## Human-Object Interactions
 
-### Instant-NVR 
+### Instant-NVR
 
 [Instant-NVR: Instant Neural Volumetric Rendering for Human-object Interactions from Monocular RGBD Stream](https://nowheretrix.github.io/Instant-NVR/)
 
@@ -186,8 +212,6 @@ Im4D: High-Fidelity and Real-Time Novel View Synthesis for Dynamic Scenes
 [NeuralDome (juzezhang.github.io)](https://juzezhang.github.io/NeuralDome/)
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231008120011.png)
-
-
 
 # PIFu Occupancy Field
 
@@ -202,7 +226,6 @@ Im4D: High-Fidelity and Real-Time Novel View Synthesis for Dynamic Scenes
 > [PIFuHD: Multi-Level Pixel-Aligned Implicit Function for High-Resolution 3D Human Digitization (shunsukesaito.github.io)](https://shunsukesaito.github.io/PIFuHD/)
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230928175323.png)
-
 
 ## PIFu for the Real World
 
@@ -255,14 +278,6 @@ X,3d fea,2d fea --> transformer --> sdf, albedo
 GAN + PIFus
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023160121.png)
 
-# Other Implicit Function Method
-
-## IPVNet
-
-[robotic-vision-lab/Implicit-Point-Voxel-Features-Network: Implicit deep neural network for 3D surface reconstruction. (github.com)](https://github.com/robotic-vision-lab/Implicit-Point-Voxel-Features-Network)
-
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231108222654.png)
-
 # Explicit Template Decomposition
 
 ## TeCH
@@ -292,13 +307,11 @@ DMTet 表示：consists of an explicit body shape grid and an implicit distance 
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231008160659.png)
 
-
 ## HF-Avatar
 
 [hzhao1997/HF-Avatar (github.com)](https://github.com/hzhao1997/HF-Avatar?tab=readme-ov-file)
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231017182026.png)
-
 
 ## 多模态数字人生成(数字人视频)
 
@@ -309,12 +322,15 @@ DMTet 表示：consists of an explicit body shape grid and an implicit distance 
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231101153147.png)
 
-## Other paper about camera pose
-
-- **USB-NeRF: Unrolling Shutter Bundle Adjusted Neural Radiance Fields** https://arxiv.org/abs/2310.02687
-- How to turn your camera into a perfect pinhole model
-
 # Human Face
+
+## FLARE
+
+[FLARE (mpg.de)](https://flare.is.tue.mpg.de/)
+
+FLARE: Fast Learning of Animatable and Relightable Mesh Avatars
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231114093649.png)
 
 ## HRN
 
@@ -329,7 +345,6 @@ DMTet 表示：consists of an explicit body shape grid and an implicit distance 
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231031181210.png)
 
-
 ## BakedAvatar
 
 [BakedAvatar: Baking Neural Fields for Real-Time Head Avatar Synthesis (arxiv.org)](https://arxiv.org/pdf/2311.05521.pdf)
@@ -339,16 +354,30 @@ DMTet 表示：consists of an explicit body shape grid and an implicit distance 
 
 ## Video
 
-- **3D-Aware Talking-Head Video Motion Transfer** https://arxiv.org/abs/2311.02549
+- **3D-Aware Talking-Head Video Motion Transfer** <https://arxiv.org/abs/2311.02549>
 
 # NeRF OtherObject Reconstruction
+
+## Other paper about camera pose
+
+改进COLMAP估计相机位姿参数有误差的问题
+
+- **USB-NeRF: Unrolling Shutter Bundle Adjusted Neural Radiance Fields** <https://arxiv.org/abs/2310.02687>
+- How to turn your camera into a perfect pinhole model
+
+## RayDF
+
+[RayDF: Neural Ray-surface Distance Fields with Multi-view Consistency (vlar-group.github.io)](https://vlar-group.github.io/RayDF.html)
+[RayDF: Neural Ray-surface Distance Fields with Multi-view Consistency (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=2037229054391691776&noteId=2047746094923644416)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231113155552.png)
 
 ## ReTR
 
 [Rethinking Rendering in Generalizable Neural Surface Reconstruction: A Learning-based Solution (yixunliang.github.io)](https://yixunliang.github.io/ReTR/)
-修改论文title：ReTR: Modeling Rendering via Transformer for Generalizable Neural Surface Reconstruction
+修改论文 title：ReTR: Modeling Rendering via Transformer for Generalizable Neural Surface Reconstruction
 
-CNN + 3D Decoder + Transformer + NeRF用深度图监督
+CNN + 3D Decoder + Transformer + NeRF 用深度图监督
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231109094904.png)
 
@@ -369,7 +398,7 @@ CNN + 3D Decoder + Transformer + NeRF用深度图监督
 
 ## Voxurf
 
-[wutong16/Voxurf: [ ICLR 2023 Spotlight ] Pytorch implementation for "Voxurf: Voxel-based Efficient and Accurate Neural Surface Reconstruction" (github.Com)]( https://github.com/wutong16/Voxurf )
+[wutong16/Voxurf: [ ICLR 2023 Spotlight ] Pytorch implementation for "Voxurf: Voxel-based Efficient and Accurate Neural Surface Reconstruction" (github.Com)](https://github.com/wutong16/Voxurf)
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023163503.png)
 
@@ -379,8 +408,7 @@ CNN + 3D Decoder + Transformer + NeRF用深度图监督
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023164638.png)
 
-
-## G-Shell 
+## G-Shell
 
 重建水密物体+衣服等非水密物体——通用
 [G-Shell (gshell3d.github.io)](https://gshell3d.github.io/)
@@ -395,18 +423,58 @@ PointCloud 提取特征(点云编码器) + NeRF 渲染图片 + 图片损失优�
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231107153921.png)
 
+## Spiking NeRF
 
-# Human Body Shape Completion
+Spiking NeRF: Representing the Real-World Geometry by a Discontinuous Representation
+
+MLP 是连续函数，对 NeRF 网络结构的改进来生成不连续的密度场
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231116155214.png)
+
+## DynamicSurf
+
+[DynamicSurf: Dynamic Neural RGB-D Surface Reconstruction with an Optimizable Feature Grid](https://arxiv.org/abs/2311.08159)
+
+单目 RGBD 视频重建 3D
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231116154921.png)
+
+# Other
+
+## Segmented Instance/Object
+
+### Registered and Segmented Deformable Object Reconstruction from a Single View Point Cloud
+
+[Registered and Segmented Deformable Object Reconstruction from a Single View Point Cloud](https://arxiv.org/abs/2311.07357)
+
+配准 + 分割物体重建
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231116153203.png)
+
+### 3DFusion, A real-time 3D object reconstruction pipeline based on streamed instance segmented data
+
+[3DFusion, A real-time 3D object reconstruction pipeline based on streamed instance segmented data](https://arxiv.org/abs/2311.06659)
+
+![image.png|555](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231116153353.png)
+
+## Human Body Shape Completion
 
 [Human Body Shape Completion With Implicit Shape and Flow Learning (thecvf.com)](https://openaccess.thecvf.com/content/CVPR2023/papers/Zhou_Human_Body_Shape_Completion_With_Implicit_Shape_and_Flow_Learning_CVPR_2023_paper.pdf)
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231008160354.png)
 
-# Incomplete Image
+## Incomplete Image
 
 Complete 3D Human Reconstruction from a Single Incomplete Image
 
 [Complete 3D Human Reconstruction from a Single Incomplete Image (junyingw.github.io)](https://junyingw.github.io/paper/3d_inpainting/)
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231008114841.png)
+
+## Other Implicit Function Method
+
+### IPVNet
+
+[robotic-vision-lab/Implicit-Point-Voxel-Features-Network: Implicit deep neural network for 3D surface reconstruction. (github.com)](https://github.com/robotic-vision-lab/Implicit-Point-Voxel-Features-Network)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231108222654.png)
 

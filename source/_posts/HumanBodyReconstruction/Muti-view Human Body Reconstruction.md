@@ -29,14 +29,20 @@ Method
 
 # 人体三维重建方法综述
 
+## Implicit Function
+
 **方法 0**：训练隐式函数表示
-(NeRF、PIFu、ICON)
+(eg: NeRF、PIFu、ICON)
 **DoubleField**(多视图)
 
-**方法 1**：深度估计+多视图深度图融合 or 多视图点云配准
-(2K2K-based i.e.Depth&Normal Estimation)
+==问题：需要估计相机位姿，估计方法有一定的误差，视图少时误差更大==
 
-深度估计: 2K2K
+## Depth&Normal Estimation
+
+**方法 1**：深度估计+多视图深度图融合 or 多视图点云配准
+(2K2K-based)
+
+深度估计: 2K2K、MVSNet、ECON...
 
 - 多视图深度图融合：[DepthFusion: Fuse multiple depth frames into a point cloud](https://github.com/touristCheng/DepthFusion)
   - 需要相机位姿，位姿估计有误差
@@ -45,12 +51,16 @@ Method
 - 多视图点云配准：[Point Cloud Registration](/HumanBodyReconstruction/PointCloud/PointCloud%20Review)
   - **点云配准**(Point Cloud Registration) 2K 生成的多角度点云形状不统一
 
+==问题：无法保证生成的多视角深度图具有多视图一致性==
+
+## Generative approach
+
 **方法 2**：生成式方法由图片生成点云
 Generative approach(Muti-view image、pose (keypoints)... --> PointCloud)
 1. 扩散模型
   1. 直接生成点云 *BuilDiff*
   2. 生成三平面特征+NeRF *RODIN*
-  3. 多视图Diffusion [DiffuStereo](https://liuyebin.com/diffustereo/diffustereo.html)
+  3. 多视图 Diffusion [DiffuStereo](https://liuyebin.com/diffustereo/diffustereo.html)
 2. GAN 网络生成点云 *SG-GAN*
 3. 生成一致性图片+NeRF
 
@@ -60,8 +70,17 @@ Generative approach(Muti-view image、pose (keypoints)... --> PointCloud)
     - [Video2Avatar](https://moygcc.github.io/vid2avatar/) (NeRF-based)将整个人体规范化后采样
     - [EVA3D](https://hongfz16.github.io/projects/EVA3D) 将 NeRF 融入 GAN 生成图片，并与真实图片一同训练判别器(人体规范化后分块 NeRF)
 
-**方法 3**：组合深度估计 + 生成式方法
+==问题：直接生成点云或者对点云进行扩散优化，会花费大量的内存==
+
+## 混合方法
+
+**方法 3**：组合深度估计 + 生成式方法（缝合多个方法）
 [HaP](https://github.com/yztang4/HaP)：深度估计+SMPL 估计+Diffusion Model 精细化
+
+==问题：依赖深度估计和 SMPL 估计得到的结果==
+
+**方法 4**：隐函数 + 生成式方法 + 非刚ICP配准
+[DiffuStereo](https://liuyebin.com/diffustereo/diffustereo.html)：NeRF(DoubleField) + Diffusion Model + non-rigid ICP （==不开源==）
 
 # 三维重建方法流程对比
 

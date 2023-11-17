@@ -23,6 +23,10 @@ date updated: 2023-11-10T16:32:59.000Z
 
 <!-- more -->
 
+# Review
+
+- [Explainability of Vision Transformers: A Comprehensive Review and New Perspectives](https://arxiv.org/abs/2311.06786) 关于视觉中使用 Transformer 的 Review
+
 # Generative approach(Img2PC)
 
 ## Network Framework
@@ -53,12 +57,19 @@ $\mathcal{L}_{EMD}=min_{\phi:Y\rightarrow Y^{\prime}}\sum_{x\in Y}||x-\phi(x)||_
 
 ## Diffusion Models
 
+### DMV3D
+
+[DMV3D: Denoising Multi-View Diffusion Using 3D Large Reconstruction Mode (justimyhxu.github.io)](https://justimyhxu.github.io/projects/dmv3d/)
+
+Diffusion Model + Triplane NeRF + Muti-view Image input
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231116161909.png)
+
 ### DiffuStereo
 
 [DiffuStereo Project Page (liuyebin.com)](https://liuyebin.com/diffustereo/diffustereo.html)
 
 多视图
-DoubleField粗网格估计 + Diffusion生成高质量Disparity Flow和Depth + ICP配准（点云融合）
+DoubleField 粗网格估计 + Diffusion 生成高质量 Disparity Flow 和 Depth + ICP 配准（点云融合）
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231111120652.png)
 
@@ -94,6 +105,15 @@ DoubleField粗网格估计 + Diffusion生成高质量Disparity Flow和Depth + IC
 
 微软大数据集 + Diffusion + NeRF Tri-plane
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231028214552.png)
+
+
+### Single-Image 3D Human Digitization with Shape-Guided Diffusion
+
+[Single-Image 3D Human Digitization with Shape-Guided Diffusion](https://arxiv.org/abs/2311.09221)
+
+利用针对一般图像合成任务**预先训练的高容量二维扩散模型**作为穿着人类的外观先验
+通过以轮廓和表面法线为条件的形状引导扩散来修复缺失区域
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231116160820.png)
 
 ### CCD-3DR
 
@@ -212,13 +232,13 @@ Colored PC [3D Colored Shape Reconstruction from a Single RGB Image through Diff
 
 ### Reality3DSketch
 
-[[2310.18148] Reality3DSketch: Rapid 3D Modeling of Objects from Single Freehand Sketches (arxiv.Org)](https://arxiv.org/abs/2310.18148)
+[[2310.18148] Reality3DSketch: Rapid 3D Modeling of Objects from Single Freehand Sketches (arxiv.Org)]( https://arxiv.org/abs/2310.18148 )
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231031092703.png)
 
 ### Deep3DSketch+\\+
 
-[[2310.18178] Deep3DSketch++: High-Fidelity 3D Modeling from Single Free-hand Sketches (arxiv.Org)](https://arxiv.org/abs/2310.18178)
+[[2310.18178] Deep3DSketch++: High-Fidelity 3D Modeling from Single Free-hand Sketches (arxiv.Org)]( https://arxiv.org/abs/2310.18178 )
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231031093421.png)
 
@@ -260,7 +280,7 @@ Colored PC [3D Colored Shape Reconstruction from a Single RGB Image through Diff
 
 ### SimIPU
 
-[zhyever/SimIPU: [AAAI 2021] Official Implementation of "SimIPU: Simple 2D Image and 3D Point Cloud Unsupervised Pre-Training for Spatial-Aware Visual Representations" (github. Com)](https://github.com/zhyever/SimIPU)
+[zhyever/SimIPU: [AAAI 2021] Official Implementation of "SimIPU: Simple 2D Image and 3D Point Cloud Unsupervised Pre-Training for Spatial-Aware Visual Representations" (github. Com)]( https://github.com/zhyever/SimIPU )
 
 雷达点云+图片
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231022103332.png)
@@ -311,6 +331,17 @@ ImplicitFunction(NeRF)
 MVS+NeRF
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023165804.png)
 
+### One-2-3-45++
+
+[One-2-3-45++ (sudo-ai-3d.github.io)](https://sudo-ai-3d.github.io/One2345plus_page/)
+
+==提供了一个可以图片生成3D资产的demo== [sudoAI](https://www.sudo.ai/3dgen)
+
+一致性图像生成 + CLIP + 3D Diffusion Model
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231117094931.png)
+
+
 ### Zero-1-to-3
 
 [Zero-1-to-3: Zero-shot One Image to 3D Object (columbia.edu)](https://zero123.cs.columbia.edu/)
@@ -349,3 +380,12 @@ MVS+NeRF
 大模型 Transformer(5 亿个可学习参数) + 5s 单视图生成 3D
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231110162856.png)
+
+### Instant3D
+
+[Instant3D: Instant Text-to-3D Generation (ming1993li.github.io)](https://ming1993li.github.io/Instant3DProj/)
+
+文本生成 3D
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231116154716.png)
+
+

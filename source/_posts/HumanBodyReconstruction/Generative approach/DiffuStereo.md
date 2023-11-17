@@ -7,15 +7,20 @@ tags:
 categories: HumanBodyReconstruction/Generative approach
 ---
 
-| Title     | DiffuStereo: High Quality Human Reconstruction via Diffusion-based Stereo Using Sparse Cameras |
-| --------- | ---------------------------------------------------------------------------------------------- |
-| Author    | Ruizhi Shao, Zerong Zheng, Hongwen Zhang, Jingxiang Sun, Yebin Liu                             |
-| Conf/Jour | ECCV 2022 Oral                                                                                 |
-| Year      | 2022                                                                                           |
-| Project   | [DiffuStereo Project Page (liuyebin.com)](https://liuyebin.com/diffustereo/diffustereo.html)   |
-| Paper     | [DiffuStereo: High Quality Human Reconstruction via Diffusion-based Stereo Using Sparse Cameras (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4648031844416110593&noteId=2044584813117342208)                                                                                               |
+| Title     | DiffuStereo: High Quality Human Reconstruction via Diffusion-based Stereo Using Sparse Cameras                                                                                                                 |
+| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Author    | Ruizhi Shao, Zerong Zheng, Hongwen Zhang, Jingxiang Sun, Yebin Liu                                                                                                                                             |
+| Conf/Jour | ECCV 2022 Oral                                                                                                                                                                                                 |
+| Year      | 2022                                                                                                                                                                                                           |
+| Project   | [DiffuStereo Project Page (liuyebin.com)](https://liuyebin.com/diffustereo/diffustereo.html)                                                                                                                   |
+| Paper     | [DiffuStereo: High Quality Human Reconstruction via Diffusion-based Stereo Using Sparse Cameras (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4648031844416110593&noteId=2044584813117342208) |
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231111120652.png)
+
+
+THUman2.0数据集demo结果好(除手、脸和脚)，训练代码还未开源
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231113161728.png)
+
 
 <!-- more -->
 
