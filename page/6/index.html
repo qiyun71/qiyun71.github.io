@@ -189,6 +189,149 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/NeRF/Sparse/FreeNeRF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YunQi">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/NeRF/Sparse/FreeNeRF/" class="post-title-link" itemprop="url">FreeNeRF</a>
+        </h2>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-08-29 13:58:59" itemprop="dateCreated datePublished" datetime="2023-08-29T13:58:59+08:00">2023-08-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-11-13 13:03:48" itemprop="dateModified" datetime="2023-11-13T13:03:48+08:00">2023-11-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NeRF-Sparse/" itemprop="url" rel="index"><span itemprop="name">NeRF/Sparse</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>4.4k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>16 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Title</th>
+<th>FreeNeRF: Improving Few-shot Neural Rendering with Free Frequency Regularization</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Author</td>
+<td><a target="_blank" rel="noopener" href="https://jiawei-yang.github.io/">Jiawei Yang</a> <a target="_blank" rel="noopener" href="https://web.stanford.edu/~pavone/index.html">Marco Pavone</a> <a target="_blank" rel="noopener" href="https://yuewang.xyz/">Yue Wang</a></td>
+</tr>
+<tr>
+<td>Conf/Jour</td>
+<td>CVPR</td>
+</tr>
+<tr>
+<td>Year</td>
+<td>2023</td>
+</tr>
+<tr>
+<td>Project</td>
+<td><a target="_blank" rel="noopener" href="https://jiawei-yang.github.io/FreeNeRF/">FreeNeRF: Frequency-regularized NeRF (jiawei-yang.github.io)</a></td>
+</tr>
+<tr>
+<td>Paper</td>
+<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4733566158242856961&amp;noteId=1937442832522335232">FreeNeRF: Improving Few-shot Neural Rendering with Free Frequency Regularization (readpaper.com)</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Fre</strong>qu<strong>e</strong>ncy regularized <strong>NeRF</strong> (FreeNeRF)<br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230829140344.png" alt="image.png"><br>T为正则化持续时间，t为当前训练迭代，L为输入位置编码的长度</p>
+<p>How：</p>
+<ul>
+<li>High-frequency inputs cause the catastrophic failure in few-shot neural rendering.<ul>
+<li>位置编码中高频信号可以使高频分量更快收敛，但是过快收敛将导致少样本神经渲染中灾难性的过拟合</li>
+<li>测试：将高频位置编码位设置为0，<code>pos_enc[int(L * x%): ] = 0,</code> ， L为位置编码的长度，x是可见比率</li>
+</ul>
+</li>
+<li>Frequency regularization enjoys the benefits of both high-frequency and low-frequency signals.<ul>
+<li>频率正则化：根据训练时间steps，线性增加的频率mask，来正则化可见频谱。<strong>即刚开始使用低频，逐步增加高频信号的可见性</strong></li>
+<li>频率正则化有助于降低在开始时导致灾难性故障的过度拟合风险，并避免在最终导致过度平滑的欠拟合</li>
+</ul>
+</li>
+<li>Occlusion regularization addresses the near-camera floaters.<ul>
+<li>遮挡正则化，对相机附近密集场进行乘法</li>
+</ul>
+</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/NeRF/Sparse/FreeNeRF/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/NeRF/Sampling/Floaters%20No%20More/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1355,149 +1498,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/NeRF/Review/A%20Critical%20Analysis%20of%20NeRF-Based%203D%20Reconstruction/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-      <meta itemprop="name" content="Qi Yun">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YunQi">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/NeRF/Review/A%20Critical%20Analysis%20of%20NeRF-Based%203D%20Reconstruction/" class="post-title-link" itemprop="url">A Critical Analysis of NeRF-Based 3D Reconstruction</a>
-        </h2>
-
-        <div class="post-meta">
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-08-12 15:32:14" itemprop="dateCreated datePublished" datetime="2023-08-12T15:32:14+08:00">2023-08-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-11-13 13:03:48" itemprop="dateModified" datetime="2023-11-13T13:03:48+08:00">2023-11-13</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/NeRF-Review/" itemprop="url" rel="index"><span itemprop="name">NeRF/Review</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>9.1k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span>33 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <div class="table-container">
-<table>
-<thead>
-<tr>
-<th>Title</th>
-<th>A Critical Analysis of NeRF-Based 3D Reconstruction</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Author</td>
-<td>Fabio Remondino , Ali Karami  , Ziyang Yan, Gabriele Mazzacca , Simone Rigon and Rongjun Qin</td>
-</tr>
-<tr>
-<td>Conf/Jour</td>
-<td>MDPI remote sensing</td>
-</tr>
-<tr>
-<td>Year</td>
-<td>2023</td>
-</tr>
-<tr>
-<td>Project</td>
-<td><a target="_blank" rel="noopener" href="https://www.mdpi.com/2072-4292/15/14/3585">A Critical Analysis of NeRF-Based 3D Reconstruction</a></td>
-</tr>
-<tr>
-<td>Paper</td>
-<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4787981282168537089&amp;noteId=1912892973790366720">A Critical Analysis of NeRF-Based 3D Reconstruction (readpaper.com)</a></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230812171053.png" alt="image.png"></p>
-<p>对比photogrammetry与NeRF在3D Reconstruction中的表现，提供数据集<a target="_blank" rel="noopener" href="https://github.com/3DOM-FBK/NeRFBK">Github_NeRFBK</a></p>
-<ul>
-<li>photogrammetry(Colmap)<ul>
-<li>对无纹理物体重建效果很差(non-collaborative surfaces的3D测量)，例如镜面反射物体<ul>
-<li>非协作表面: 反射、无纹理等</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>NeRF(InstantNGP | NerfStudio | SDFstudio)</li>
-</ul>
-<p>结论：</p>
-<ul>
-<li>在传统摄影测量方法失败或产生嘈杂结果的情况下，例如无纹理、金属、高反射和透明物体，NeRF优于摄影测量</li>
-<li>对于纹理良好和部分纹理的物体，摄影测量仍然表现更好</li>
-</ul>
-<p>该研究为NeRF在不同现实场景中的适用性提供了有价值的见解，特别是在遗产和工业场景中，这些场景的表面可能特别具有挑战性，未来的研究可以探索NeRF和摄影测量的结合，以提高具有挑战性场景下三维重建的质量和效率</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/NeRF/Review/A%20Critical%20Analysis%20of%20NeRF-Based%203D%20Reconstruction/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1568,7 +1568,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">115</span>
+          <span class="site-state-item-count">116</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1629,12 +1629,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">429k</span>
+    <span title="Symbols count total">432k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">26:01</span>
+    <span title="Reading time total">26:12</span>
 </div>
 
         

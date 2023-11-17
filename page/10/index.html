@@ -189,6 +189,122 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/NeRF/SurfaceReconstruction/Neus-code/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YunQi">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/NeRF/SurfaceReconstruction/Neus-code/" class="post-title-link" itemprop="url">Neus代码理解</a>
+        </h2>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-06-30 13:45:48" itemprop="dateCreated datePublished" datetime="2023-06-30T13:45:48+08:00">2023-06-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-11-13 13:03:48" itemprop="dateModified" datetime="2023-11-13T13:03:48+08:00">2023-11-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NeRF-SurfaceReconstruction/" itemprop="url" rel="index"><span itemprop="name">NeRF/SurfaceReconstruction</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>9.3k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>34 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://github.com/Totoro97/NeuS">Neus代码</a>的理解</p>
+<p>NeRF与Neus相机坐标系的对比：</p>
+<p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230703144039.png" alt="image.png"></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Pixel to Camera coordinate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NeRF</td>
+<td>$\vec d = \begin{pmatrix} \frac{i-\frac{W}{2}}{f} \\ -\frac{j-\frac{H}{2}}{f} \\ -1 \\ \end{pmatrix}$ , $intrinsics = K = \begin{bmatrix} f &amp; 0 &amp; \frac{W}{2}  \\ 0 &amp; f &amp; \frac{H}{2}  \\ 0 &amp; 0 &amp; 1 \\ \end{bmatrix}$</td>
+</tr>
+<tr>
+<td>Neus</td>
+<td>$\vec d = intrinsics^{-1} \times  pixel = \begin{bmatrix} \frac{1}{f} &amp; 0 &amp; -\frac{W}{2 \cdot f}  \\ 0 &amp; \frac{1}{f} &amp; -\frac{H}{2 \cdot f} \\ 0 &amp; 0 &amp; 1 \\ \end{bmatrix} \begin{pmatrix} i \\ j \\ 1 \\ \end{pmatrix} = \begin{pmatrix} \frac{i-\frac{W}{2}}{f} \\ \frac{j-\frac{H}{2}}{f} \\ 1 \\ \end{pmatrix}$</td>
+</tr>
+</tbody>
+</table>
+</div>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/NeRF/SurfaceReconstruction/Neus-code/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/NeRF/Efficiency/NeRF-InstantNGP/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1145,132 +1261,6 @@ N_{l} & :=\left\lfloor N_{\mathrm{min}}\cdot b^{l}\right\rfloor,  \\
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/NeRF/NeRF-Principle/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-      <meta itemprop="name" content="Qi Yun">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YunQi">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/NeRF/NeRF-Principle/" class="post-title-link" itemprop="url">NeRF原理</a>
-        </h2>
-
-        <div class="post-meta">
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-06-14 20:35:31" itemprop="dateCreated datePublished" datetime="2023-06-14T20:35:31+08:00">2023-06-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-11-13 13:03:48" itemprop="dateModified" datetime="2023-11-13T13:03:48+08:00">2023-11-13</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/NeRF/" itemprop="url" rel="index"><span itemprop="name">NeRF</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>3.4k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span>12 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <div class="table-container">
-<table>
-<thead>
-<tr>
-<th>Title</th>
-<th>NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Author</td>
-<td><a target="_blank" rel="noopener" href="https://bmild.github.io/">Ben Mildenhall*</a><a target="_blank" rel="noopener" href="https://pratulsrinivasan.github.io/">Pratul P. Srinivasan*</a><a target="_blank" rel="noopener" href="https://www.matthewtancik.com/">Matthew Tancik*</a><a target="_blank" rel="noopener" href="https://jonbarron.info/">Jonathan T. Barron</a><a target="_blank" rel="noopener" href="http://cseweb.ucsd.edu/~ravir/">Ravi Ramamoorthi</a><a target="_blank" rel="noopener" href="https://www2.eecs.berkeley.edu/Faculty/Homepages/yirenng.html">Ren Ng</a></td>
-</tr>
-<tr>
-<td>Conf/Jour</td>
-<td>ECCV 2020 Oral - Best Paper Honorable Mention</td>
-</tr>
-<tr>
-<td>Year</td>
-<td>2020</td>
-</tr>
-<tr>
-<td>Project</td>
-<td><a target="_blank" rel="noopener" href="https://www.matthewtancik.com/nerf">NeRF: Neural Radiance Fields (matthewtancik.com)</a></td>
-</tr>
-<tr>
-<td>Paper</td>
-<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4544709973778259969&amp;noteId=752432474097127424">NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis (readpaper.com)</a></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>NeRF（Neural Radiance Fields）是一种用于生成逼真三维场景的计算机图形学方法。通过神经网络对场景中的每个空间点进行建模，NeRF可以估计每个点的颜色和密度信息。利用渲染方程，NeRF能够合成高质量的逼真图像。相较于传统的渲染方法，NeRF能够处理复杂的光照和反射效果，广泛应用于虚拟现实、增强现实、电影制作和游戏开发等领域。然而，NeRF方法仍面临一些挑战，如计算复杂度和对训练数据的依赖性。研究人员正在不断改进NeRF，以提高其效率和扩展性。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/NeRF/NeRF-Principle/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1341,7 +1331,7 @@ N_{l} & :=\left\lfloor N_{\mathrm{min}}\cdot b^{l}\right\rfloor,  \\
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">115</span>
+          <span class="site-state-item-count">116</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1402,12 +1392,12 @@ N_{l} & :=\left\lfloor N_{\mathrm{min}}\cdot b^{l}\right\rfloor,  \\
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">429k</span>
+    <span title="Symbols count total">432k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">26:01</span>
+    <span title="Reading time total">26:12</span>
 </div>
 
         
