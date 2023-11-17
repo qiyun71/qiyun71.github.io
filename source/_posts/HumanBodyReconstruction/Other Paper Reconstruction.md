@@ -365,6 +365,13 @@ FLARE: Fast Learning of Animatable and Relightable Mesh Avatars
 - **USB-NeRF: Unrolling Shutter Bundle Adjusted Neural Radiance Fields** <https://arxiv.org/abs/2310.02687>
 - How to turn your camera into a perfect pinhole model
 
+## Adaptive Shells
+
+[Adaptive Shells for Efficient Neural Radiance Field Rendering (nvidia.com)](https://research.nvidia.com/labs/toronto-ai/adaptive-shells/)
+
+自适应使用基于体积的渲染和基于表面的渲染
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231117150239.png)
+
 ## RayDF
 
 [RayDF: Neural Ray-surface Distance Fields with Multi-view Consistency (vlar-group.github.io)](https://vlar-group.github.io/RayDF.html)

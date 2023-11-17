@@ -1,16 +1,28 @@
 {
   "recentFiles": [
     {
+      "basename": "Adaptive Shells",
+      "path": "HumanBodyReconstruction/ImplicitFunction/Adaptive Shells.md"
+    },
+    {
+      "basename": "Neus",
+      "path": "NeRF/SurfaceReconstruction/Neus.md"
+    },
+    {
       "basename": "DMV3D",
       "path": "HumanBodyReconstruction/Generative approach/DMV3D.md"
     },
     {
-      "basename": "IPV6",
-      "path": "Other/Mine/IPV6.md"
-    },
-    {
       "basename": "Other Paper Reconstruction",
       "path": "HumanBodyReconstruction/Other Paper Reconstruction.md"
+    },
+    {
+      "basename": "Generative approach Review",
+      "path": "HumanBodyReconstruction/Generative approach Review.md"
+    },
+    {
+      "basename": "IPV6",
+      "path": "Other/Mine/IPV6.md"
     },
     {
       "basename": "Muti-view Human Body Reconstruction",
@@ -23,10 +35,6 @@
     {
       "basename": "Math",
       "path": "HumanBodyReconstruction/Math.md"
-    },
-    {
-      "basename": "Generative approach Review",
-      "path": "HumanBodyReconstruction/Generative approach Review.md"
     },
     {
       "basename": "2023-11-16",
@@ -191,14 +199,6 @@
     {
       "basename": "PIFu",
       "path": "HumanBodyReconstruction/ImplicitFunction/PIFu.md"
-    },
-    {
-      "basename": "2K2K",
-      "path": "HumanBodyReconstruction/Depth&Normal Estimation/2K2K.md"
-    },
-    {
-      "basename": "FlowGAN",
-      "path": "HumanBodyReconstruction/Generative approach/FlowGAN.md"
     }
   ],
   "omittedPaths": [],

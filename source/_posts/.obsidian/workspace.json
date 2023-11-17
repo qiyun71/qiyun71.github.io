@@ -34,6 +34,19 @@
             }
           },
           {
+            "id": "c3967bca9433d10b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "HumanBodyReconstruction/ImplicitFunction/Adaptive Shells.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              }
+            }
+          },
+          {
             "id": "b2fd54b94c0523a7",
             "type": "leaf",
             "state": {
@@ -58,9 +71,22 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "90732c3496c90f61",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "NeRF/SurfaceReconstruction/Neus.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -80,7 +106,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "HumanBodyReconstruction/Generative approach/DMV3D.md"
+                "file": "HumanBodyReconstruction/ImplicitFunction/Adaptive Shells.md"
               }
             }
           },
@@ -119,7 +145,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "HumanBodyReconstruction/Generative approach/DMV3D.md",
+                "file": "HumanBodyReconstruction/ImplicitFunction/Adaptive Shells.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -136,7 +162,7 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "HumanBodyReconstruction/Generative approach/DMV3D.md",
+                "file": "HumanBodyReconstruction/ImplicitFunction/Adaptive Shells.md",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -249,15 +275,17 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "dfed8cd18e685c42",
+  "active": "c3967bca9433d10b",
   "lastOpenFiles": [
-    "Other/Mine/IPV6.md",
+    "NeRF/SurfaceReconstruction/Neus.md",
+    "HumanBodyReconstruction/Generative approach/DMV3D.md",
+    "HumanBodyReconstruction/ImplicitFunction/Adaptive Shells.md",
     "HumanBodyReconstruction/Other Paper Reconstruction.md",
+    "HumanBodyReconstruction/Generative approach Review.md",
+    "Other/Mine/IPV6.md",
     "HumanBodyReconstruction/Muti-view Human Body Reconstruction.md",
     "HumanBodyReconstruction/Muti-view 3D Reconstruction.md",
     "HumanBodyReconstruction/Math.md",
-    "HumanBodyReconstruction/Generative approach Review.md",
-    "HumanBodyReconstruction/Generative approach/DMV3D.md",
     "Reports/2023-11-16.md",
     "Other/Mine/Tools.md",
     "HumanBodyReconstruction/ImplicitFunction/RayDF.md",
@@ -282,8 +310,6 @@
     "HumanBodyReconstruction/Generative approach/Diffusion Models.md",
     "Other/Mine/Tools.md.baiduyun.uploading.cfg",
     "HumanBodyReconstruction/Generative approach/Diffusion Models.md.baiduyun.uploading.cfg",
-    "Other/Mine/Stable Diffusion.md",
-    "Other/Mine/Git command.md",
     "NeRF/NeRF.canvas.baiduyun.uploading.cfg",
     "NeRF/NeRF.canvas",
     "HumanBodyReconstruction/Other Paper Reconstruction.md.baiduyun.uploading.cfg",
