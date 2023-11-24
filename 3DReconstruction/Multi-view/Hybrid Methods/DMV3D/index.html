@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/yqq/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Title DMV3D: Denoising Multi-View Diffusion using 3D Large Reconstruction Model     Author Xu, Yinghao and Tan, Hao and Luan, Fujun and Bi, Sai and Wang Peng and Li, Jihao and Shi, Zifan and Sunka">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DMV3D">
+<meta property="og:url" content="http://example.com/3DReconstruction/Multi-view/Hybrid%20Methods/DMV3D/index.html">
+<meta property="og:site_name" content="YunQi">
+<meta property="og:description" content="Title DMV3D: Denoising Multi-View Diffusion using 3D Large Reconstruction Model     Author Xu, Yinghao and Tan, Hao and Luan, Fujun and Bi, Sai and Wang Peng and Li, Jihao and Shi, Zifan and Sunka">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231116161909.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231116161909.png">
+<meta property="article:published_time" content="2023-11-16T08:20:04.000Z">
+<meta property="article:modified_time" content="2023-11-24T06:41:46.648Z">
+<meta property="article:author" content="Qi Yun">
+<meta property="article:tag" content="Diffusion">
+<meta property="article:tag" content="3DReconstruction">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231116161909.png">
+
+<link rel="canonical" href="http://example.com/3DReconstruction/Multi-view/Hybrid%20Methods/DMV3D/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>DMV3D | YunQi</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">YunQi</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Note</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/3DReconstruction/Multi-view/Hybrid%20Methods/DMV3D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YunQi">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          DMV3D
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-11-16 16:20:04" itemprop="dateCreated datePublished" datetime="2023-11-16T16:20:04+08:00">2023-11-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-11-24 14:41:46" itemprop="dateModified" datetime="2023-11-24T14:41:46+08:00">2023-11-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/3DReconstruction-Multi-view-Hybrid-Methods/" itemprop="url" rel="index"><span itemprop="name">3DReconstruction/Multi-view/Hybrid Methods</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>2.5k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>9 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Title</th>
+<th>DMV3D: Denoising Multi-View Diffusion using 3D Large Reconstruction Model</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Author</td>
+<td>Xu, Yinghao and Tan, Hao and Luan, Fujun and Bi, Sai and Wang Peng and Li, Jihao and Shi, Zifan and Sunkavalli, Kaylan and Wetzstein Gordon and Xu, Zexiang and Zhang Kai}</td>
+</tr>
+<tr>
+<td>Conf/Jour</td>
+<td>arxiv</td>
+</tr>
+<tr>
+<td>Year</td>
+<td>2023</td>
+</tr>
+<tr>
+<td>Project</td>
+<td><a target="_blank" rel="noopener" href="https://justimyhxu.github.io/projects/dmv3d/">DMV3D: Denoising Multi-View Diffusion Using 3D Large Reconstruction Mode (justimyhxu.github.io)</a></td>
+</tr>
+<tr>
+<td>Paper</td>
+<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=2051819500442962176&amp;noteId=2052104116852710656">DMV3D: DENOISING MULTI-VIEW DIFFUSION USING 3D LARGE RECONSTRUCTION MODEL (readpaper.com)</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>需要相机位姿</strong> + 多视图 + Diffusion Model + NeRF Triplane2MLP</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231116161909.png" alt="image.png|666"></p>
+<p>不足：</p>
+<ul>
+<li>对未见视图的重建质量不高</li>
+<li>只支持低分辨率图像和三平面</li>
+<li>只支持输入没有背景的物体图像</li>
+<li>没用到任何先验知识</li>
+</ul>
+<span id="more"></span>
+<h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>我们提出了一种新的三维生成方法 DMV3D，它使用基于 transformer 的三维大重建模型来去噪多视图扩散。我们的重建模型采用三平面 NeRF 表示，可以通过 NeRF 重建和渲染去噪多视图图像，在单个 A100 GPU 上实现 30 秒内的单阶段 3D 生成。我们<strong>只使用图像重建损失</strong>，而不访问 3D 资产，在<strong>高度多样化对象的大规模多视图图像数据集</strong>上训练 DMV3D。我们展示了最先进的单图像重建问题的结果，其中需要对未见物体部分进行概率建模，以生成具有尖锐纹理的多种重建。我们还展示了高质量的文本到 3D 生成结果，优于以前的 3D 扩散模型。</p>
+<h1 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h1><p>我们现在展示我们的单阶段 3D 扩散模型。特别是，我们引入了一种新的扩散框架，该框架使用基于重建的去噪器来去噪 3D 生成的多视图图像(第 3.1 节)。在此基础上，我们提出了一种新的基于 lrm 的(Hong et al.， 2023)基于扩散时间步长的多视点去噪器，通过 3D NeRF 重建和渲染逐步去噪多视点图像(第 3.2 节)。我们进一步扩展我们的模型以支持文本和图像调节，从而实现可控生成(第 3.3 节)。</p>
+<h2 id="MULTI-VIEW-DIFFUSION-AND-DENOISING"><a href="#MULTI-VIEW-DIFFUSION-AND-DENOISING" class="headerlink" title="MULTI-VIEW DIFFUSION AND DENOISING"></a>MULTI-VIEW DIFFUSION AND DENOISING</h2><p>Diffusion. Denoising Diffusion Probabilistic Models (DDPM)在正向扩散过程中使用高斯噪声调度对数据分布 $x_{0} \sim q(x)$ 进行变换。生成过程是图像逐渐去噪的反向过程。</p>
+<p>Multi-view diffusion.</p>
+<p>Reconstruction-based denoising.<br>$\mathbf{I}_{r,t}=\mathrm{R}(\mathrm{S}_t,\boldsymbol{c}),\quad\mathrm{S}_t=\mathrm{E}(\mathcal{I}_t,t,\mathcal{C})$</p>
+<ul>
+<li>使用重建模块 E(·) 从有噪声的多视图图像中重建三维表示 S<ul>
+<li>基于 lrm 的重构器 E(·)</li>
+</ul>
+</li>
+<li>使用可微渲染模块 R(·)渲染去噪图像</li>
+</ul>
+<p>仅在输入视点监督 $\mathcal{I}_0$ 预测并不能保证高质量的3D 生成, 也监督来自3D 模型 $S_{t}$ 的新颖视图渲染<br>$\mathrm{L}_{recon}(t)=\mathbb{E}_{\mathbf{I},\boldsymbol{c}\sim\mathcal{I}_{full},\mathcal{C}_{full}}\ell\big(\mathbf{I},\mathrm{R}(\mathrm{E}(\mathcal{I}_t,t,\mathcal{C}),\boldsymbol{c})\big)$ , $\mathcal{I}_{full}\mathrm{~and~}\mathcal{C}_{full}$ 表示图像和姿态的完整集合(来自随机选择的输入和新视图)</p>
+<h2 id="RECONSTRUCTOR-BASED-MULTI-VIEW-DENOISER"><a href="#RECONSTRUCTOR-BASED-MULTI-VIEW-DENOISER" class="headerlink" title="RECONSTRUCTOR-BASED MULTI-VIEW DENOISER"></a>RECONSTRUCTOR-BASED MULTI-VIEW DENOISER</h2><p>我们在 LRM (Hong et al.， 2023)上构建了我们的多视图去噪器，并使用大型 transformer 模型从嘈杂的稀疏视图图像中重建干净的三平面 NeRF (Chan et al.， 2022)。然后将重建的三平面 NeRF 的渲染图用作去噪输出。</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231116161909.png" alt="image.png|666"></p>
+<p>Reconstruction and Rendering.</p>
+<p>与 LRM 工作一样，transformer 变压器模型由一系列三平面到图像的交叉注意层和三平面到三平面的自注意层组成</p>
+<p>Time Conditioning.</p>
+<p>与基于 cnn 的 DDPM 相比，我们基于变压器的模型<strong>需要不同的时间调节设计</strong>(Ho et al.， 2020)。受 DiT (Peebles &amp; Xie, 2022)的启发，我们通过将 adaLN-Zero 块(Ho et al.， 2020)注入模型的自注意层和交叉注意层来对时间进行调节，以有效处理不同噪声水平的输入。</p>
+<p>Camera Conditioning.</p>
+<p><em>在具有高度多样化的相机特性和外部特性的数据集上训练我们的模型，例如 MVImgNet (Yu et al.， 2023)，需要有效地设计输入相机调节，以促进模型对用于 3D 推理的相机的理解</em> 。<br>一种基本策略是，在时间调节的情况下，对相机参数使用 adaLN-Zero 块(Peebles &amp; Xie, 2022)(如 Hong 等人(2023)所做的那样);Li et al.(2023)。<strong>然而，我们发现，同时使用相同的策略对相机和时间进行调节往往会削弱这两个条件的效果，并且往往导致训练过程不稳定和收敛缓慢</strong>。<br>相反，我们提出了一种新的方法——用像素对齐的射线集参数化相机。特别是继 Sitzmann et al. (2021);Chen et al. (2023a)，我们使用 Plucker 坐标 r = (o × d, d)参数化射线，其中 o 和 d 是由相机参数计算的像素射线的原点和方向，x 表示叉积。我们将 Plucker 坐标与图像像素连接，并将其发送到 ViT 转换器进行二维图像标记化，实现有效的相机调理</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://banbao991.github.io/2021/10/07/Math/Pl%C3%BCcker-Coordinates/">普吕克坐标(Plücker Coordinates) 简介 | Banbao (banbao991.github.io)</a></li>
+</ul>
+<h2 id="CONDITIONING-ON-SINGLE-IMAGE-OR-TEXT"><a href="#CONDITIONING-ON-SINGLE-IMAGE-OR-TEXT" class="headerlink" title="CONDITIONING ON SINGLE IMAGE OR TEXT"></a>CONDITIONING ON SINGLE IMAGE OR TEXT</h2><p>迄今为止所描述的方法使我们的模型能够作为无条件生成模型运行。我们现在介绍如何用条件去噪器 $\operatorname{E}(\mathcal{I}_t,t,\mathcal{C},y),$ 对条件概率分布建模，其中 y 是文本或图像，从而实现可控的 3D 生成。</p>
+<p>Image Conditioning.<br>不改变模型结构，我们保持第一个视图 I1(在去噪器输入中)无噪声作为条件图像，同时对其他视图应用扩散和去噪。在这种情况下，去噪器本质上是学习使用从第一个输入视图中提取的线索来填充嘈杂的未见视图中缺失的像素，类似于 2D dm 可寻址的图像绘制任务(Rombach et al.， 2022a)。此外，为了提高我们的图像条件模型的可泛化性，我们在与条件视图对齐的坐标框架中生成三平面，并使用相对于条件视图的姿态渲染其他图像。我们在训练过程中以与 LRM (Hong et al.， 2023)相同的方式规范化输入视图的姿态，并在推理过程中以相同的方式指定输入视图的姿态</p>
+<p>Text Conditioning.<br>CLIP 文本编码器</p>
+<h2 id="TRAINING-AND-INFERENCE"><a href="#TRAINING-AND-INFERENCE" class="headerlink" title="TRAINING AND INFERENCE"></a>TRAINING AND INFERENCE</h2><p>Training：<br>$\mathrm{L}=\mathbb{E}_{t\sim U[1,T],(\mathbf{I},\boldsymbol{c})\sim(\mathcal{I}_{full},\mathcal{C}_{fuu)}}\ell\big(\mathbf{I},\mathrm{R}(\mathrm{E}(\mathcal{I}_t,t,\mathcal{D},y),c)\big)$</p>
+<p>Inference：</p>
+<p>为了进行推断，我们选择了四个视点，它们均匀地围绕在一个圆圈中，以确保生成的 3D 资产的良好覆盖。我们将相机的视角设置为 50 度，用于四个视图。由于我们预测三平面 NeRF 与条件反射图像的相机帧对齐，因此我们也将条件反射图像的相机外饰件固定为具有相同的方向和(0，−2,0)位置，遵循 LRM 的实践(Hong et al.， 2023)。我们从最后的去噪步骤输出三平面 NeRF 作为生成的 3D 模型。我们利用 DDIM (Song et al.， 2020a)算法来提高推理速度。</p>
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>我们提出了一种新的单阶段扩散模型，该模型通过去噪多视图图像扩散来生成 3D 资产。我们的多视图去噪器基于大型 transformer模型(Hong et al.， 2023)，该模型采用带噪的多视图图像来重建干净的三平面 NeRF，并通过体渲染输出去噪图像。我们的框架支持文本和图像调节输入，通过直接扩散推理实现快速3D 生成，而无需进行资产优化。我们的方法在文本到3D 生成方面优于以前的3D 扩散模型，并在各种测试数据集上实现了最先进的单视图重建质量。</p>
+<p><strong>Limitations</strong><br>尽管我们在这项工作中展示了高质量的图像或文本条件下的3D生成结果，但未来的工作仍有一些限制可以探索:<br>1)首先，<strong>我们为物体未见部分生成的纹理似乎缺乏高频细节</strong>，颜色略有褪色。这将是有趣的进一步提高纹理保真度;<br>2)我们的输入图像和三平面目前是<strong>低分辨率</strong>的。将我们的方法扩展到从高分辨率输入图像生成高分辨率NeRF也是非常可取的;<br>3)<strong>我们的方法只支持输入没有背景的物体图像</strong>;直接生成具有3D背景的对象NeRF (Zhang et al.， 2020;Barron et al.， 2022)在许多应用中也非常有价值;<br>4)我们的图像和文本条件模型都是从头开始训练的，而不需要利用2D基础模型(如Stable diffusion)中的强图像先验(Rombach et al.， 2022b)。考虑如何<strong>在我们的框架中利用这些强大的2D图像先验</strong>可能会有所帮助</p>
+<p>道德声明。我们的生成模型是在Objaverse数据和MVImgNet数据上训练的。该数据集(1M左右)小于训练2D扩散模型的数据集(100M ~ 1000M左右)。数据的缺乏会引起两方面的考虑。首先，它可能会偏向训练数据的分布。其次，它可能不够强大，无法涵盖测试图像和测试文本的所有巨大多样性。我们的模型具有一定的泛化能力，但可能不能像二维扩散模型那样覆盖那么多的模式。鉴于我们的模型不具备识别超出其知识范围的内容的能力，它可能会引入不令人满意的用户体验。此外，如果文本提示或图像输入与某些数据样本高度一致，我们的模型可能会泄漏训练数据。这种潜在的泄漏引起了法律和安全方面的考虑，并在所有生成模型(如LLM和2D扩散模型)中共享。</p>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+1ZnNxFWnEbk5YzRl">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Diffusion/" rel="tag"><i class="fa fa-tag"></i> Diffusion</a>
+              <a href="/tags/3DReconstruction/" rel="tag"><i class="fa fa-tag"></i> 3DReconstruction</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/RayDF/" rel="prev" title="RayDF">
+      <i class="fa fa-chevron-left"></i> RayDF
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/3DReconstruction/Single-view/Implicit%20Function/Adaptive%20Shells/" rel="next" title="Adaptive Shells">
+      Adaptive Shells <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract"><span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Method"><span class="nav-text">Method</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#MULTI-VIEW-DIFFUSION-AND-DENOISING"><span class="nav-text">MULTI-VIEW DIFFUSION AND DENOISING</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RECONSTRUCTOR-BASED-MULTI-VIEW-DENOISER"><span class="nav-text">RECONSTRUCTOR-BASED MULTI-VIEW DENOISER</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CONDITIONING-ON-SINGLE-IMAGE-OR-TEXT"><span class="nav-text">CONDITIONING ON SINGLE IMAGE OR TEXT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TRAINING-AND-INFERENCE"><span class="nav-text">TRAINING AND INFERENCE</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Conclusion"><span class="nav-text">Conclusion</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qi Yun"
+      src="/images/avatar.jpeg">
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">117</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/qiyun71" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;qiyun71" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/29010355" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;29010355" rel="noopener" target="_blank"><i class="fa fa-star fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qi Yun</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">438k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">26:33</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/yqq/anime.min.js"></script>
+  <script src="/yqq/velocity/velocity.min.js"></script>
+  <script src="/yqq/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

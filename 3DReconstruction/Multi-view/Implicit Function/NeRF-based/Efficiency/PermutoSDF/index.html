@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/yqq/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Title PermutoSDF: Fast Multi-View Reconstruction with Implicit Surfaces using Permutohedral Lattices     Author Radu Alexandru Rosu, Sven Behnke   Conf&#x2F;Jour CVPR   Year 2023   Project PermutoSDF (">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PermutoSDF">
+<meta property="og:url" content="http://example.com/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/Efficiency/PermutoSDF/index.html">
+<meta property="og:site_name" content="YunQi">
+<meta property="og:description" content="Title PermutoSDF: Fast Multi-View Reconstruction with Implicit Surfaces using Permutohedral Lattices     Author Radu Alexandru Rosu, Sven Behnke   Conf&#x2F;Jour CVPR   Year 2023   Project PermutoSDF (">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230716172220.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230717135035.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230716172220.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230717135035.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230717141818.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230717154630.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230717145036.png">
+<meta property="article:published_time" content="2023-07-16T09:21:17.000Z">
+<meta property="article:modified_time" content="2023-11-24T06:43:26.660Z">
+<meta property="article:author" content="Qi Yun">
+<meta property="article:tag" content="SurfaceReconstruction">
+<meta property="article:tag" content="Neus">
+<meta property="article:tag" content="Efficiency">
+<meta property="article:tag" content="Encoding">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230716172220.png">
+
+<link rel="canonical" href="http://example.com/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/Efficiency/PermutoSDF/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>PermutoSDF | YunQi</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">YunQi</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Note</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/Efficiency/PermutoSDF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YunQi">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          PermutoSDF
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-07-16 17:21:17" itemprop="dateCreated datePublished" datetime="2023-07-16T17:21:17+08:00">2023-07-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-11-24 14:43:26" itemprop="dateModified" datetime="2023-11-24T14:43:26+08:00">2023-11-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/3DReconstruction-Multi-view-Implicit-Function-NeRF-based-Efficiency/" itemprop="url" rel="index"><span itemprop="name">3DReconstruction/Multi-view/Implicit Function/NeRF-based/Efficiency</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>4.2k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>15 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Title</th>
+<th>PermutoSDF: Fast Multi-View Reconstruction with Implicit Surfaces using Permutohedral Lattices</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Author</td>
+<td><a target="_blank" rel="noopener" href="https://radualexandru.github.io/">Radu Alexandru Rosu</a>, <a target="_blank" rel="noopener" href="http://www.ais.uni-bonn.de/behnke/">Sven Behnke</a></td>
+</tr>
+<tr>
+<td>Conf/Jour</td>
+<td>CVPR</td>
+</tr>
+<tr>
+<td>Year</td>
+<td>2023</td>
+</tr>
+<tr>
+<td>Project</td>
+<td><a target="_blank" rel="noopener" href="https://radualexandru.github.io/permuto_sdf/">PermutoSDF (radualexandru.github.io)</a></td>
+</tr>
+<tr>
+<td>Paper</td>
+<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4738634003066650625&amp;noteId=1873869258829705728">PermutoSDF: Fast Multi-View Reconstruction with Implicit Surfaces using Permutohedral Lattices (readpaper.com)</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230716172220.png" alt="image.png"></p>
+<p>创新：用permutohedral lattice替换voxel hash encoding </p>
+<ul>
+<li><p>simplex,3D中的单纯形就是正四面体</p>
+</li>
+<li><p>几何细节光滑，通过曲率损失来实现</p>
+</li>
+<li>带Lipschitz常数的颜色MLP来训练，使得高频颜色与高频几何特征相匹配<ul>
+<li>ref : <a target="_blank" rel="noopener" href="https://readpaper.com/paper/4592561893885878273">[PDF] Learning Smooth Neural Functions via Lipschitz Regularization-论文阅读讨论-ReadPaper</a></li>
+<li>$y=\sigma(\widehat{W}_ix+b_i),\quad\widehat{W}_i=m\left(W_i,\text{softplus}\left(k_i\right)\right)$</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230717135035.png" alt="image.png"></p>
+<span id="more"></span>
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>We proposed a combination of <strong>implicit surface representations and hash-based encoding methods</strong> for the task of reconstructing accurate geometry and appearance from unmasked posed color images. </p>
+<p>We improved upon the voxel-based hash encoding by using a <strong>permutohedral lattice</strong> which is always faster in training and faster for inference in three and higher dimensions. Additionally, we proposed <strong>a simple regularization scheme</strong> that allows to recover fine geometrical detail at the level of pores毛孔 and wrinkles. Our full system can train in ≈ 30 min on an RTX 3090 GPU and <strong>render in real-time using sphere tracing</strong>. We believe this work together with the code release will help the community in a multitude of other tasks that require modeling signals using fast local features.</p>
+<h1 id="AIR"><a href="#AIR" class="headerlink" title="AIR"></a>AIR</h1><p>To NGP_MHE and Neus_SDF<br>We propose improvements to the two areas by replacing the voxel hash encoding with <strong>a permutohedral lattice置换面体晶格</strong> which optimizes faster, especially for higher dimensions.</p>
+<p>Accurate reconstruction geometry and appearance of scenes is an important component of many computer vision tasks. Recent Neural Radiance Field (NeRF)-like models represent the scene as a density and radiance field and, when supervised with enough input images, can render photorealistic novel views.</p>
+<p>Speed：Works like INGP [18] further improve on NeRF by using a hash-based positional encoding which results in fast training and visually pleasing results. However, despite the photorealistic renderings, <strong>the reconstructed scene geometry can deviate severally from the ground-truth重建场景的几何表现不是很好</strong> For example, objects with high specularity高镜面 or view-dependent effects视觉相关影响 are often reconstructed as a cloud of low density; untextured regions can have arbitrary density in the reconstruction. </p>
+<ul>
+<li>无法处理高镜面、视觉相关的影响造成的低密度点云</li>
+<li>无纹理区域在重建中密度随机</li>
+</ul>
+<p>SDF：Another line of recent methods tackles the issue of incorrect geometry by representing the surfaces of objects as binary occupancy or Signed Distance Function (SDF). This representation can also be optimized with volumetric rendering techniques that are supervised with RGB images. However, parametrization of the SDF as a single fully-connected Multi-Layer Perceptron (MLP) often leads to overly smooth geometry and color.</p>
+<ul>
+<li>SDF参数化为单个全连接MLP通常导致几何和颜色过于平滑</li>
+</ul>
+<p>In this work, we propose PermutoSDF, a method that combines the strengths of hash-based encodings and implicit surfaces. We represent the scene as an SDF and a color field, which we render using unbiased volumetric integration(Neus中提出的体积积分方法). A naive combination of these two methods would fail to reconstruct accurate surfaces however, <strong>since it lacks any inductive bias for the ambiguous cases like specular or untextured surfaces</strong>. 简单叠加NGP和Neus，依然对无纹理和镜面等模糊情况，缺乏任何归纳偏差<br>Attempting to regularize the SDF with a <strong>total variation loss</strong> or a <strong>curvature loss</strong> will produce a smoother geometry at the expense of losing smaller details. 如果使用总变异损失和曲率损失，几何更光滑，但是代价是丢失更小的细节</p>
+<h2 id="In-this-work"><a href="#In-this-work" class="headerlink" title="In this work:"></a>In this work:</h2><p>In this work, we propose a regularization scheme that ensures both smooth geometry where needed and also reconstruction of fine details like pores and wrinkles 本文正则化方案，确保所需的平滑几何形状及可以重建毛孔、皱纹等细节<br>Furthermore, we improve upon the voxel hashing method of INGP by <strong>proposing permutohedral lattice hashing</strong>. The number of vertices per simplex (triangle, tetrahedron, . . . ) in this data structure scales linearly with dimensionality instead of exponentially as in the hyper-cubical voxel case 每个simplex的定点数随着维度数线性缩放，而不是指数缩放，We show that the <strong>permutohedral lattice</strong> performs better than voxels for 3D reconstruction and 4D background estimation.<br>Main contribution：</p>
+<ul>
+<li>a novel framework for optimizing neural implicit surfaces based on hash-encoding,</li>
+<li>an extension of hash encoding to a permutohedral lattice which scales linearly with the input dimensions and allows for faster optimization, and</li>
+<li>a regularization scheme that allows to recover accurate SDF geometry with a level of detail at the scale of pores and wrinkles.</li>
+</ul>
+<p>Related Work</p>
+<ul>
+<li>Classical Multi-View Reconstruction<ul>
+<li>Multi-view 3D reconstruction has been studied for decades. The classical methods can be categorized as either <strong>depth map-based</strong> or <strong>volume-based</strong><ul>
+<li>Depth map methods like COLMAP [25] reconstruct a depth map for each input view by matching photometrically consistent patches. The depth maps are fused to a global 3D point cloud and a watertight水密 surface is recovered using Poisson泊松 Reconstruction [12]. While COLMAP can give good results in most scenarios, it yields suboptimal次优 results on non-Lambertian surfaces. </li>
+<li>Volume-based approaches fuse the depth maps into a volumetric structure (usually a Truncated Signed Distance Function) from which an explicit surface can be recovered via the marching cubes algorithm [15]. Volumetric methods work well when fusing multiple noisy depth maps but <strong>struggle with reconstructing thin surfaces and fine details</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>NeRF Models<ul>
+<li>A recent paradigm shift in 3D scene reconstruction has been the introduction of NeRF  </li>
+<li>NeRFs represent the scene as density and radiance fields, parameterized by a MLP. Volumetric rendering is used to train them to match posed RGB images. This yields highly photorealistic renderings with view-dependent effects. However, <strong>the long training time of the original NeRF</strong> prompted a series of subsequent works to address this issue.</li>
+</ul>
+</li>
+<li>Accelerating NeRF<ul>
+<li>Two main areas were identified as problematic: <strong>the large number of ray samples that traverse empty space</strong> and <strong>the requirement to query a large MLP for each individual sample.</strong></li>
+<li><a target="_blank" rel="noopener" href="https://readpaper.com/paper/3044538714">[PDF] Neural Sparse Voxel Fields</a>  uses an octree to model only the occupied space and restricts samples to be generated only inside the occupied voxels. Features from the voxels are interpolated and a <strong>shallow MLP predicts color and density</strong>. This achieves significant speedups <strong>but requires complicated pruning剪枝 and updating of the octree structure</strong>.</li>
+<li>DVGO  similarly models the scene with <strong>local features which are stored in a dense grid</strong> that is decoded by an MLP into view-dependent color. </li>
+<li>Plenoxels completely removes any MLP and instead <strong>stores opacity and spherical harmonics (SH) coefficients at sparse voxel positions.</strong></li>
+<li>Instant Neural Graphics Primitives proposes a hash-based encoding in which ray samples trilinearly interpolate features between eight positions from a hash map. A shallow MLP implemented as a fully fused CUDA kernel predicts color and density. Using a hash map for encoding has <strong>the advantage of not requiring complicated mechanisms for pruning or updating like in the case of octrees.</strong></li>
+<li>In our work, we improve upon INGP by proposing <strong>a novel permutohedral lattice-based hash encoding</strong>, which is better suited for interpolating in high-dimensional spaces. We use our new encoding to reconstruct accurate 3D surfaces and model background as a 4D space.</li>
+</ul>
+</li>
+<li>Implicit Representation<ul>
+<li>Other works have focused on reconstructing the scene geometry using implicit surfaces. </li>
+<li>SDFDiff discretizes离散化 SDF values on a dense grid and by defining a differentiable shading function can optimize the underlying geometry. However, their approach can neither recover arbitrary color values nor can it scale to higher-resolution geometry.</li>
+<li>IDR and DVR represent the scene as SDF and occupancy map, respectively分别, and by using differentiable rendering can recover high-frequency geometry and color. However, both methods <strong>require 2D mask supervision</strong> for training which is not easy to obtain in practice.</li>
+<li>In order to remove the requirement of mask supervision<ul>
+<li>UNISURF optimizes an binary occupancy function through volumetric rendering. </li>
+<li>VolSDF extends this idea to SDFs. </li>
+<li>NeuS analyzes the biases caused by using volumetric rendering for optimizing SDFs and introduces an unbiased and occlusion-aware <strong>weighting scheme无偏碰撞的权重方案</strong> which allows to recover more accurate surfaces.</li>
+</ul>
+</li>
+<li>In this work, we reconstruct a scene as SDF and color field without using any mask supervision. We model the scene <strong>using locally hashed features</strong> in order to recover finer detail than previous works. We also <strong>propose several regularizations</strong> which help to recover geometric detail at the level of pores and wrinkles.</li>
+</ul>
+</li>
+</ul>
+<h1 id="Method-Overview"><a href="#Method-Overview" class="headerlink" title="Method Overview"></a>Method Overview</h1><p>Given a series of images with poses $\{\mathcal{I}_{k}\}$, our task is to recover both surface S and appearance of the objects within.<br>We define the surface S as the zero level set of an SDF:$\mathcal{S}=\{\mathrm{x}\in\mathbb{R}^3|g(\mathrm{x})=0\}.$</p>
+<p>$SDF,\chi = g(\operatorname{enc}(\mathbf{x};\theta_g);\Phi_g)$</p>
+<ul>
+<li>输入坐标x<br>$Color = c(\mathbf{h}_c,\mathbf{v},\mathbf{n},\chi;\Phi_c)$</li>
+<li>$\mathbf{h}_c=\operatorname{enc}(\mathbf{x};\theta_c)$</li>
+<li>$\mathbf{v}$为观察方向</li>
+<li>$\mathbf{n}$为法向方向，sdf梯度</li>
+<li>a learnable geometric feature $\chi$ which is output by the sdf network</li>
+</ul>
+<p>Note, that using two separate networks is crucial as we want to regularize each one individually in order to recover high-quality geometry.</p>
+<p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230716172220.png" alt="image.png"></p>
+<h1 id="Permutohedral-Lattice-SDF-Rendering"><a href="#Permutohedral-Lattice-SDF-Rendering" class="headerlink" title="Permutohedral Lattice SDF Rendering"></a>Permutohedral Lattice SDF Rendering</h1><p>We now detail each network, the permutohedral lattice, and our training methodology.</p>
+<h2 id="Volumetric-Rendering"><a href="#Volumetric-Rendering" class="headerlink" title="Volumetric Rendering"></a>Volumetric Rendering</h2><p>$\hat{C}(\mathbf{p})=\int_{t=0}^{+\infty}w(t)c(\mathbf{p}(t),\mathbf{v},\mathbf{n},\chi;\Phi_c),$</p>
+<p>$\rho(t)=\max\left(\frac{-\frac{\mathrm{d}\psi_s}{\mathrm{d}t}(g(\mathbf{p}(t);\Phi_g))}{\psi_s(g(\mathbf{p}(t);\Phi_g))},0\right),$$\psi_s(x)=\frac{1}{1+e^{-ax}}$</p>
+<p>$w(t)=T(t)\rho(t),\mathrm{~where~}T(t)=\exp\left(-\int_0^t\rho(u)\mathrm{d}u\right)$</p>
+<h2 id="Hash-Encoding-with-Permutohedral-Lattice"><a href="#Hash-Encoding-with-Permutohedral-Lattice" class="headerlink" title="Hash Encoding with Permutohedral Lattice"></a>Hash Encoding with Permutohedral Lattice</h2><p>In order to facilitate learning of high-frequency details, INGP [18] proposed a hash-based encoding which maps a 3D spatial coordinate to a higher-dimensional space. The encoding maps a spatial position x into a cubical grid and linearly interpolates features from the hashed eight corners of the containing cube. A fast CUDA implementation interpolates over various multi-resolutional grids in parallel. The hash map is stored as a tensor of L levels, each containing up to T feature vectors with dimensionality F .</p>
+<p>The speed of the encoding function is mostly determined by the number of accesses to the hash map as the operations to determine the eight hash indices are fast. Hence, it is of interest to reduce the memory accesses required to linearly interpolate features for position x. By using a <strong>tetrahedral lattice</strong> instead of a cubical one, <strong>memory accesses can be reduced</strong> by a factor of two as each simplex <strong>has only four vertices instead of eight</strong>. This advantage grows for higher dimensions when using a permutohedral lattice [1].<a target="_blank" rel="noopener" href="https://readpaper.com/paper/1964772475">[PDF] Fast High‐Dimensional Filtering Using the Permutohedral Lattice-论文阅读讨论-ReadPaper</a></p>
+<p>The permutohedral lattice divides the space into uniform simplices均匀单纯形 which form triangles and tetrahedra in 2D and 3D, respectively. The main advantage of this lattice is that <strong>given dimensionality d the number of vertices per simplex is d+1</strong>, which scales linearly instead of the exponential growth $2^{d}$ for hyper-cubical voxels. <strong>This ensures a low number of memory accesses to the hashmap and therefore fast optimization.</strong></p>
+<p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230717135035.png" alt="image.png"><br>Given a position x, the containing simplex can be obtained in $O(d^{2})$. Within the simplex, barycentric coordinates are calculated and d-linear interpolation is performed similar to INGP.<br>Similarly to INGP, we slice from lattices at multiple resolutions and concatenate the results. The final output is a high-dimensional encoding $h = enc(x; θ)$ of the input x <strong>given lattice features θ</strong>.</p>
+<h2 id="4D-Background-Estimation"><a href="#4D-Background-Estimation" class="headerlink" title="4D Background Estimation"></a>4D Background Estimation</h2><p>For modeling the background, we follow the formulation of <strong>NeRF++</strong> which represents foreground volume as a unit sphere and background volume by an inverted sphere.</p>
+<p>Points in the outer volume are represented using 4D positions (x′, y′, z′, 1/r) where (x′, y′, z′) is a unit-length directional vector and 1/r is the inverse distance.<br>对4D的背景进行编码时，a cubical voxel（NGP）需要查询16个顶点的特征值，而permutohedral lattice只需要查询5个顶点的特征值<br>We directly use this 4D coordinate to slice from a 4-dimensional lattice and obtain multi-resolutional features. A small MLP outputs the radiance and density which are volumetrically rendered and blended with the foreground. <strong>Please note that in 4D</strong>, the permutohedral lattice only needs to access five vertices(4d+1) for each simplex while a cubical voxel would need 16($2^{4}$). Our linear scaling with dimensionality is of significant advantage in this use case.</p>
+<h1 id="PermutoSDF-Training-and-Regularization"><a href="#PermutoSDF-Training-and-Regularization" class="headerlink" title="PermutoSDF Training and Regularization"></a>PermutoSDF Training and Regularization</h1><p>简单融合使用loss：</p>
+<ul>
+<li>$\mathcal{L}_{\mathrm{rgb}}=\sum_p\lVert\hat{C}(\mathbf{p})-C(\mathbf{p})\rVert_2^2$</li>
+<li>$\mathcal{L}_{\mathrm{eik}}=\sum_{x}\left(|\nabla g(\mathrm{enc}(\mathrm{x}))|-1\right)^2,$</li>
+</ul>
+<p>A naive combination of hash-based encoding and implicit surfaces can yield undesirable surfaces, though. While the model is regularized by the Eikonal loss, there are many surfaces that satisfy the Eikonal constraint.<br>For <strong>specular or untextured areas</strong>, the Eikonal regularization doesn’t provide enough information to properly recover the surface. To address this issue, we propose <strong>several regularizations</strong> that serve to both recover smoother surfaces and more detail.</p>
+<h2 id="SDF-Regularization—-gt-smoother-surfaces"><a href="#SDF-Regularization—-gt-smoother-surfaces" class="headerlink" title="SDF Regularization—&gt;smoother surfaces"></a>SDF Regularization—&gt;smoother surfaces</h2><p>In order to aid the network in recovering smoother surfaces in reflective or untextured areas, we add a curvature loss on the SDF<br>Calculating the full 3×3 Hessian matrix can be expensive; so we approximate curvature as local deviation of the normal vector. Recall that we already have the normal $n = ∇g(enc(x))$ at each ray sample since it was required for the Eikonal loss. With this normal, we define a tangent vector切向量 $η$ by cross product with a random unit vector τ such that $η = n × τ$.Given this random vector in the tangent plane, we slightly perturb our sample x to obtain $\mathrm{x}_\epsilon=\mathrm{x}+\epsilon\eta.$. We obtain the normal at the new perturbed point as $\mathbf{n}_\epsilon=\nabla g(\mathrm{enc}(\mathbf{x}_\epsilon))$ and define a curvature loss based on the dot product between the normals at the original and perturbed points:<br>curvature loss: $\mathcal{L}_\mathrm{curv}=\sum_x(\mathbf{n}\cdot\mathbf{n}_\epsilon-1)^2.$<br>物理含义：<strong>表面上相邻两点的法向量应该是平行的</strong></p>
+<h2 id="Color-Regularization详细解析深度学习中的-Lipschitz-条件-知乎-zhihu-com"><a href="#Color-Regularization详细解析深度学习中的-Lipschitz-条件-知乎-zhihu-com" class="headerlink" title="Color Regularization详细解析深度学习中的 Lipschitz 条件 - 知乎 (zhihu.com)"></a>Color Regularization<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/389024283">详细解析深度学习中的 Lipschitz 条件 - 知乎 (zhihu.com)</a></h2><p>While the curvature regularization helps in recovering smooth surfaces, we observe that the network converges to an undesirable state where the geometry gets increasingly smoother while the color network learns to model all the high-frequency detail in order to drive the $\mathcal{L}_{rgb}$ to zero. Despite lowering $\mathcal{L}_{curv}$ during optimization, <strong>the SDF doesn’t regain back the lost detail</strong>. We show this behavior in Fig. 8. Recall that the color network is defined as $Color = c(\mathbf{h}_c,\mathbf{v},\mathbf{n},\chi;\Phi_c)$, with an input encoding of $h = enc(x; θ_{c})$. We observe that all the high-frequency detail learned by the color network has to be present in the weights of the MLP $Φ_{c}$ or the hashmap table $θ_{c}$ as all the other inputs are smooth. 颜色网络学习到的高频细节都在MLP的权重$Φ_{c}$或哈希表$θ_{c}$中，因为其他所有输入$\mathbf{v},\mathbf{n},\chi$都是平滑的</p>
+<p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230717141818.png" alt="image.png"></p>
+<p>In order to recover fine geometric detail, we propose to learn a color mapping network that is itself smooth w.r.t. to its input such <strong>that large changes in color are matched with large changes in surfaces normal</strong>. Function smoothness can be studied in the context of Lipschitz continuous networks. A function f is <strong>k-Lipschitz continuous</strong> if it satisfies: $\underbrace{|f(d)-f(e)|}_{\text{change in the output}}\leq k\underbrace{|d-e|}_{\text{change in the input}}$<br>Intuitively, it sets k as an upper bound上限 for the rate of change of the function. We are interested in the color network being a smooth function (small k) such that high-frequency color is also reflected in high-detailed geometry. <em>There are several ways to enforce Lipschitz smoothness on a function . Most of them impose a hard 1-Lipschitz requirement or ignore effects such as network depth which makes them difficult to tune for our use case</em></p>
+<h3 id="修改后的颜色MLP网络"><a href="#修改后的颜色MLP网络" class="headerlink" title="修改后的颜色MLP网络"></a>修改后的颜色MLP网络</h3><p>The recent work of Liu et al. <a target="_blank" rel="noopener" href="https://readpaper.com/paper/4592561893885878273">[PDF] Learning Smooth Neural Functions via Lipschitz Regularization-论文阅读讨论-ReadPaper</a> provides a simple and interpretable framework for softly regularizing the Lipschitz constant of a network. Given an MLP layer $y =σ(W_{i}x+b_{i})$and a trainable Lipschitz bound $k_{i}$ for the layer, they replace the weight matrix $W_{i}$with:<br>$y=\sigma(\widehat{W}_ix+b_i),\quad\widehat{W}_i=m\left(W_i,\text{softplus}\left(k_i\right)\right)$</p>
+<ul>
+<li>$\text{softplus }(k_i)=\ln(1+e^{k_i})$</li>
+<li>the function m(.) <strong>normalizes</strong> the weight matrix by rescaling each row of $W_{i}$ such that <strong>the absolute value of the row-sum</strong> is less than or equal to softplus (ki).</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> jax.numpy <span class="keyword">as</span> jnp </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">normalization</span>(<span class="params">Wi, softplus_ci</span>): <span class="comment"># L-inf norm</span></span><br><span class="line">    absrowsum = jnp.<span class="built_in">sum</span>(jnp.<span class="built_in">abs</span>(Wi), axis=<span class="number">1</span>) </span><br><span class="line">    scale = jnp.minimum(<span class="number">1.0</span>, softplus_ci/absrowsum) </span><br><span class="line"><span class="keyword">return</span> Wi * scale[:,<span class="literal">None</span>]</span><br><span class="line"></span><br><span class="line">y = sigma(normalization(Wi, softplus(ci))*x + bi)</span><br></pre></td></tr></table></figure>
+<p>Since the product of per-layer Lipschitz constants $k_{i}$ is the Lipschitz bound for the whole network, we can regularize it using:</p>
+<p>$\mathcal{L}_{\mathrm{Lipschitz}}=\prod_{l}^{i=1}\text{softplus}\left(k_{i}\right).$</p>
+<p>In addition to regularizing the color MLP, we also apply weight decay of 0.01 to the color hashmap $θ_{c}$.</p>
+<h2 id="Lipschitz-in-DL"><a href="#Lipschitz-in-DL" class="headerlink" title="Lipschitz in DL"></a>Lipschitz in DL</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/389024283">详细解析深度学习中的 Lipschitz 条件 - 知乎 (zhihu.com)</a></p>
+</blockquote>
+<p>$\underbrace{|f(d)-f(e)|}_{\text{change in the output}}\leq k\underbrace{|d-e|}_{\text{change in the input}}$<br>$||f(x,y_1)-f(x,y_2)||\leq L||y_1-y_2||,$</p>
+<p>Lipschitz continuous含义：存在一个实数 L ，使得对于函数f(x) 上的每对点，连接它们的线的斜率的绝对值不大于这个实数L。最小的 L 称为该函数的 Lipschitz 常数，意味着函数被一次函数上下夹逼。</p>
+<p>eg：$f:[-3,7]\to\mathbb{R},f(x)=x^2:$ 符合利普希茨连续条件, L=14</p>
+<p>(Bi-Lipschitz continuous $\begin{aligned}\frac{1}{L}||y_1-y_2||\leq||f(x,y_1)-f(x,y_2)||\leq L||y_1-y_2||,\end{aligned}$)</p>
+<p>$\left\{\begin{array}{c}f(y)\leq f(x)+L||y-x||\\f(y)\geq f(x)-L||y-x||\end{array}\right.$<br>可以看出，x确定后，f(y) 被一个一次函数bound在一定的范围内</p>
+<p> <a target="_blank" rel="noopener" href="https://readpaper.com/paper/4592561893885878273">[PDF] Learning Smooth Neural Functions via Lipschitz Regularization-论文阅读讨论-ReadPaper</a></p>
+<h2 id="Training-Schedule"><a href="#Training-Schedule" class="headerlink" title="Training Schedule"></a>Training Schedule</h2><p>Several scheduling considerations must be observed for our method. In Eq. 3, the sigmoid function $ψ_{s}(.)$ is parametrized with 1/a which is the standard deviation that controls the range of influence of the SDF towards the volume rendering. <strong>In NeuS</strong> 1/a is considered a learnable parameter which <strong>starts at a high value and decays towards zero as the network converges</strong></p>
+<p>However, we found out that considering it as a learnable parameter can lead to the network missing thin object features due to the fact that large objects in the scene dominate the gradient towards a. <strong>Instead, we use a scheduled linear decay 1/a over 30 k iterations which we found to be robust for all the objects we tested.</strong></p>
+<p>30k iteration前，1/a不变，30k以后，对1/a做线性衰减<br>100k前，loss：</p>
+<p>In order to recover smooth surfaces, we train the first 100 k iterations using curvature loss:<br>$\mathcal{L}=\mathcal{L}_{\mathrm{rgb}}+\lambda_{1}\mathcal{L}_{\mathrm{eik}}+\lambda_{2}\mathcal{L}_{\mathrm{curv}}.$</p>
+<p>后100k，loss：<br>For further 100 k iterations, we recover detail by <strong>removing the curvature loss and adding the regularization of the color network</strong> $λ_3 \cdot \mathcal{L}_{\mathrm{Lipschitz}}$ </p>
+<p>初始10k，从粗到精，退火哈希map的水平L(多分辨率)<br>In addition, we initialize our network with the SDF of a sphere at the beginning of the optimization and anneal the levels L of the hash map in a coarse-to-fine manner over the course of the initial 10 k iterations. </p>
+<h1 id="Acceleration"><a href="#Acceleration" class="headerlink" title="Acceleration"></a>Acceleration</h1><p>Similar to other volumetric rendering methods, a major bottleneck for the speed is the number of position samples considered for each ray. We use several methods to accelerate both training and inference.</p>
+<h2 id="Occupancy-Grid"><a href="#Occupancy-Grid" class="headerlink" title="Occupancy Grid"></a>Occupancy Grid</h2><p>In order to concentrate more samples near the surface of the SDF and have fewer in empty space, we use an occupancy grid modeled as a dense grid of resolution $128^{3}.$ We maintain two versions of the grid, <strong>one with full precision</strong>, storing the SDF value at each voxel, and <strong>another containing only a binary occupancy bit</strong>. The grids are laid out in Morton order to ensure fast traversal. Note that differently from INGP, we store signed distance and not density in our grid. <strong>This allows us to use the SDF volume rendering equations to determine if a certain voxel has enough weight</strong> that it would meaningfully contribute to the integral Eq. 2 and therefore should be marked as occupied space.</p>
+<p>Morton order: </p>
+<ul>
+<li>ref : <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/468542418">Morton code理解 - 知乎 (zhihu.com)</a><br><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230717154630.png" alt="image.png"></li>
+</ul>
+<h2 id="Sphere-Tracing"><a href="#Sphere-Tracing" class="headerlink" title="Sphere Tracing"></a>Sphere Tracing</h2><p>Having an SDF opens up a possibility for accelerating rendering at inference time by using sphere tracing. This can be significantly faster than volume rendering as most rays converge in 2-3 iterations towards the surface.<br>We create a ray sample at the first voxel along the ray that is marked as occupied. We run sphere tracing for a predefined number of iterations and march not-yet-converged samples towards the surface (indicated by their SDF being above a certain threshold). Once <strong>all samples have converged or we reached a maximum number of sphere traces</strong>, we <strong>sample the color network once and render</strong>. </p>
+<p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230717145036.png" alt="image.png"></p>
+<h2 id="Implementation-Details"><a href="#Implementation-Details" class="headerlink" title="Implementation Details"></a>Implementation Details</h2><p>在CUDA kernel中实现：</p>
+<ul>
+<li>permutohedral lattices，slices in parallel from all resolutions</li>
+<li>The backward pass for updating the hashmap $\frac{∂h}{∂θ}$<ul>
+<li>We use the chain rule to backpropagate the upstream gradients as:$\frac{\partial\mathcal{L}}{\partial\mathbf{h}}\frac{\partial\mathbf{h}}{\partial\theta}.$</li>
+</ul>
+</li>
+<li>the partial derivative of encoding $h = enc(x; θ_{g})$ w.r.t. to spatial position x<ul>
+<li>$\mathbf{n}=\nabla g(\mathrm{enc}(\mathbf{x}))$</li>
+<li>Again, the chain rule is applied with the autograd partial derivative of g(.) as: $\frac{\partial g}{\partial\mathbf{h}}\frac{\partial\mathbf{h}}{\partial\mathbf{x}}$ to obtain the normal.</li>
+</ul>
+</li>
+<li>Furthermore, since we use this normal as part of our loss function Leik, we support also double backward operations, i.e., we also implement CUDA kernels for $\partial(\frac{\partial\tilde{\mathcal{L}}}{\partial\mathbf{x}})/\partial\theta$ and $\partial(\frac{\partial\mathcal{L}}{\partial\mathbf{x}})\big/\partial(\frac{\partial\mathcal{L}}{\partial\mathbf{h}})$ Hence, we can run our optimization entirely within PyTorch’s autograd engine, without requiring any finite differences.<br>将梯度计算和反向传播在CUDA kernel中部署，可以在Pytorch中使用autograd实现反向传播，而不需要进行有限差分获得梯度</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+1ZnNxFWnEbk5YzRl">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/SurfaceReconstruction/" rel="tag"><i class="fa fa-tag"></i> SurfaceReconstruction</a>
+              <a href="/tags/Neus/" rel="tag"><i class="fa fa-tag"></i> Neus</a>
+              <a href="/tags/Efficiency/" rel="tag"><i class="fa fa-tag"></i> Efficiency</a>
+              <a href="/tags/Encoding/" rel="tag"><i class="fa fa-tag"></i> Encoding</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/Efficiency/Neuralangelo/" rel="prev" title="Neuralangelo">
+      <i class="fa fa-chevron-left"></i> Neuralangelo
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/3DReconstruction/Basic%20Knowledge/NeRF/Sparse/SparseNeuS/" rel="next" title="SparseNeuS">
+      SparseNeuS <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Conclusion"><span class="nav-text">Conclusion</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AIR"><span class="nav-text">AIR</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#In-this-work"><span class="nav-text">In this work:</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Method-Overview"><span class="nav-text">Method Overview</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Permutohedral-Lattice-SDF-Rendering"><span class="nav-text">Permutohedral Lattice SDF Rendering</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Volumetric-Rendering"><span class="nav-text">Volumetric Rendering</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hash-Encoding-with-Permutohedral-Lattice"><span class="nav-text">Hash Encoding with Permutohedral Lattice</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4D-Background-Estimation"><span class="nav-text">4D Background Estimation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PermutoSDF-Training-and-Regularization"><span class="nav-text">PermutoSDF Training and Regularization</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SDF-Regularization%E2%80%94-gt-smoother-surfaces"><span class="nav-text">SDF Regularization—&gt;smoother surfaces</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Color-Regularization%E8%AF%A6%E7%BB%86%E8%A7%A3%E6%9E%90%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84-Lipschitz-%E6%9D%A1%E4%BB%B6-%E7%9F%A5%E4%B9%8E-zhihu-com"><span class="nav-text">Color Regularization详细解析深度学习中的 Lipschitz 条件 - 知乎 (zhihu.com)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%90%8E%E7%9A%84%E9%A2%9C%E8%89%B2MLP%E7%BD%91%E7%BB%9C"><span class="nav-text">修改后的颜色MLP网络</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lipschitz-in-DL"><span class="nav-text">Lipschitz in DL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Training-Schedule"><span class="nav-text">Training Schedule</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Acceleration"><span class="nav-text">Acceleration</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Occupancy-Grid"><span class="nav-text">Occupancy Grid</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sphere-Tracing"><span class="nav-text">Sphere Tracing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Implementation-Details"><span class="nav-text">Implementation Details</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qi Yun"
+      src="/images/avatar.jpeg">
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">117</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/qiyun71" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;qiyun71" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/29010355" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;29010355" rel="noopener" target="_blank"><i class="fa fa-star fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qi Yun</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">438k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">26:33</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/yqq/anime.min.js"></script>
+  <script src="/yqq/velocity/velocity.min.js"></script>
+  <script src="/yqq/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

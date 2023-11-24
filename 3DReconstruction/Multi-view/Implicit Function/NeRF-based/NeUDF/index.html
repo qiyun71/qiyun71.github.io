@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/yqq/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Title NeUDF: Leaning Neural Unsigned Distance Fields with Volume Rendering     Author Yu-Tao Liu1,2          Li Wang1,2          Jie Yang1,2          Weikai Chen3          Xiaoxu Meng3          Bo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NeUDF">
+<meta property="og:url" content="http://example.com/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeUDF/index.html">
+<meta property="og:site_name" content="YunQi">
+<meta property="og:description" content="Title NeUDF: Leaning Neural Unsigned Distance Fields with Volume Rendering     Author Yu-Tao Liu1,2          Li Wang1,2          Jie Yang1,2          Weikai Chen3          Xiaoxu Meng3          Bo">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230825151238.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230826144949.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230825153332.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230825160227.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230826150109.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230826150617.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230825153332.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230826143805.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230826144049.png">
+<meta property="article:published_time" content="2023-08-25T07:10:32.000Z">
+<meta property="article:modified_time" content="2023-11-24T06:42:43.689Z">
+<meta property="article:author" content="Qi Yun">
+<meta property="article:tag" content="SurfaceReconstruction">
+<meta property="article:tag" content="Neus">
+<meta property="article:tag" content="UDF">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230825151238.png">
+
+<link rel="canonical" href="http://example.com/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeUDF/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>NeUDF | YunQi</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">YunQi</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Note</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeUDF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YunQi">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          NeUDF
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-08-25 15:10:32" itemprop="dateCreated datePublished" datetime="2023-08-25T15:10:32+08:00">2023-08-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-11-24 14:42:43" itemprop="dateModified" datetime="2023-11-24T14:42:43+08:00">2023-11-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/3DReconstruction-Multi-view-Implicit-Function-NeRF-based/" itemprop="url" rel="index"><span itemprop="name">3DReconstruction/Multi-view/Implicit Function/NeRF-based</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>4.1k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>15 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Title</th>
+<th>NeUDF: Leaning Neural Unsigned Distance Fields with Volume Rendering</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Author</td>
+<td>Yu-Tao Liu1,2          Li Wang1,2          Jie Yang1,2          Weikai Chen3          Xiaoxu Meng3          Bo Yang3          Lin Gao1,2*</td>
+</tr>
+<tr>
+<td>Conf/Jour</td>
+<td>CVPR</td>
+</tr>
+<tr>
+<td>Year</td>
+<td>2023</td>
+</tr>
+<tr>
+<td>Project</td>
+<td><a target="_blank" rel="noopener" href="http://geometrylearning.com/neudf/">NeUDF (CVPR 2023) (geometrylearning.com)</a></td>
+</tr>
+<tr>
+<td>Paper</td>
+<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4746971745559265281&amp;noteId=1931719993718658048">NeUDF: Leaning Neural Unsigned Distance Fields with Volume Rendering (readpaper.com)</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230825151238.png" alt="image.png"></p>
+<p>解决了Neus中SDF的一个限制：仅限于封闭表面的重建，无法重建包含开放表面结构的广泛的现实世界对象<br>NeUDF使用UDF：仅从多视图监督中<strong>重建具有任意拓扑的表面</strong></p>
+<ul>
+<li>提出了两个专门为基于UDF的体渲染量身定制的权重函数的新公式<ul>
+<li>$w_r(t)=\tau_r(t)e^{-\int_0^t\tau_r(u)du}$ Eq.4</li>
+<li>$\tau_r(t)=\left|\frac{\frac{\partial(\varsigma_r\circ\Psi\circ p)}{\partial t}(t)}{\varsigma_r\circ\Psi\circ p(t)}\right|$ Eq.5<ul>
+<li>$\varsigma_{r}(d) = \frac x{1+x}$</li>
+<li>UDF: $d=\Psi_{\mathcal{O}}(x)$</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>为了应对开放表面渲染，当输入/输出测试不再有效时，我们提出了一种专用的<strong>法向正则化策略</strong>来解决表面方向模糊问题<ul>
+<li>用邻近的插值法向替换原始采样的表面法向</li>
+</ul>
+</li>
+</ul>
+<p>局限：</p>
+<ul>
+<li>无法重建透明表面</li>
+<li>平滑度和高频细节无法同时拥有</li>
+<li>需要额外的网格划分工具，导致重构误差</li>
+<li>展望：透明表面、稀疏视图</li>
+</ul>
+<span id="more"></span>
+<h1 id="Discussions-amp-Conclusions"><a href="#Discussions-amp-Conclusions" class="headerlink" title="Discussions&amp;Conclusions"></a>Discussions&amp;Conclusions</h1><p><strong>局限性</strong></p>
+<ul>
+<li>首先，<strong>很难</strong>用我们的公式来<strong>模拟透明表面</strong>。当输入图像中没有足够的可见信息(例如视点稀疏或严重遮挡)时，重建质量会下降，图11给出了一个失败案例的例子。</li>
+<li>由于正态正则化会累积附近信息以减轻表面法向模糊，<strong>因此在平滑度和高频细节之间也存在权衡</strong>。</li>
+<li>此外，由于我们引入UDF是为了更好的表示能力，我们<strong>需要额外的网格划分工具</strong>，如MeshUDF[19]或SPSR[23]，这<strong>可能会引入更多的重构误差</strong>。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230826144949.png" alt="image.png"></p>
+<p>我们提出了NeUDF，这是一种新的基于UDF的体绘制方法，用于<strong>从有或没有掩码的2D图像中</strong>实现任意形状的<strong>高保真多视图重建</strong>。NeUDF 在定性和定量上都优于最先进的方法，<strong>尤其是在具有开放边界的复杂表面上</strong>。因此，我们的 NeUDF 可以在真实世界的 3D 应用程序中发挥关键作用。<br>在未来的工作中，我们可以扩展我们的公式以更好地<strong>重建透明表面</strong>。增强我们的 NeUDF 以支持<strong>稀疏输入图像</strong>也是一个有趣的未来方向。</p>
+<h1 id="AIR"><a href="#AIR" class="headerlink" title="AIR"></a>AIR</h1><p>由于神经隐式表面绘制的最新进展，多视图形状重建取得了令人印象深刻的进展。然而，现有的基于符号距离函数(SDF)的方法<strong>仅限于封闭表面</strong>，无法重建包含开放表面结构的广泛的现实世界对象。在这项工作中，我们引入了一个新的神经渲染框架，编码为NeUDF，它可以仅从多视图监督中重建具有任意拓扑的表面。为了获得表示任意曲面的灵活性，NeUDF利用无符号距离函数(unsigned distance function, UDF)作为曲面表示。虽然基于sdf的神经渲染器的简单扩展不能扩展到UDF，但我们提出了两个专门为基于UDF的体渲染量身定制的权重函数的新公式。此外，为了应对开放表面渲染，当输入/输出测试不再有效时，我们提出了一种专用的正态正则化策略来解决表面方向模糊问题。我们在许多具有挑战性的数据集上广泛评估了我们的方法，包括DTU [21]， MGN[5]和Deep Fashion 3D[61]。实验结果表明，在多视图曲面重建任务中，特别是对于具有开放边界的复杂形状，NeUDF可以显著优于最先进的方法。</p>
+<p>NeUDF建立在无符号距离函数(unsigned distance function, UDF)的基础上，UDF是一个简单的隐式函数，它返回从查询点到目标曲面的绝对距离。尽管它很简单，但我们表明，<strong>将基于sdf的神经渲染机制天真地扩展到无符号距离场并不能确保非水密表面的无偏渲染</strong>。特别是，如图2所示，基于sdf的加权函数会生成虚假曲面，其中渲染权重会在空洞区域触发不希望的局部最大值。为了解决这个问题，我们提出了一个新的无偏加权范式，专门为UDF量身定制，同时意识到表面遮挡。为了适应所提出的加权函数，我们进一步提出了一种定制的重要性采样策略，以确保非水密表面的高质量重建。此外，为了解决零等值面附近udf梯度不一致的问题，我们引入了一种正态正则化方法，利用曲面邻域的正态信息来增强梯度一致性。</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230825153332.png" alt="image.png"></p>
+<p>我们的贡献总结如下:</p>
+<ul>
+<li>第一个基于udf的神经体绘制框架，称为NeUDF，可用于具有任意拓扑的形状的多视图重建，包括具有开放边界的复杂形状。</li>
+<li>针对UDF渲染提出了一种<strong>新的无偏加权函数和重要采样策略</strong>。</li>
+<li>在具有<strong>非水密3D形状</strong>(带有孔洞)的许多具有挑战性的数据集上进行多视图表面重建的最新性能</li>
+</ul>
+<p>RW</p>
+<ul>
+<li>Neural Implicit Representation</li>
+<li>Neural Rendering</li>
+<li>Multi-view Reconstruction<ul>
+<li>SDF+NR = Neus</li>
+</ul>
+</li>
+</ul>
+<h1 id="Methodology"><a href="#Methodology" class="headerlink" title="Methodology"></a>Methodology</h1><p>给定一组物体或场景的<strong>校准图像</strong>$\{\mathcal{I}_k|1\leq k\leq n\}$，我们的目标是仅使用二维图像监督来重建任意表面，包括封闭和开放结构。在本文中，曲面被表示为无符号距离函数(udf)的零水平集。为了学习对象或场景的UDF表示，我们引入了一种新的神经渲染架构，该架构包含用于渲染的无偏权重公式。</p>
+<ul>
+<li>首先定义基于UDF的场景表示(第3.1节)。</li>
+<li>然后，我们介绍了NeUDF，并为基于udf的体绘制专门定制了两个关键的权重函数公式(第3.2节)</li>
+<li>最后，我们说明了用于减轻2D图像歧义的正常正则化(第3.3节)和我们的loss配置(第3.4节)。</li>
+</ul>
+<h2 id="Scene-Representation"><a href="#Scene-Representation" class="headerlink" title="Scene Representation"></a>Scene Representation</h2><p>与有符号距离函数(SDF)不同，无符号距离函数(UDF)是无符号的，能够表示任意拓扑的开放表面，除了水密表面。<br>给定一个三维物体$\mathcal{O}=\{V,F\}$，其中V和F是顶点和面的集合，物体$\mathcal{O}$的UDF可以表示为一个函数$d=\Psi_{\mathcal{O}}(x):\mathbb{R}^3\mapsto\mathbb{R}^+,$，它将一个点坐标映射到表面的欧几里得距离d。我们定义$\mathrm{UDF}_{\mathcal{O}}=\{\Psi_{\mathcal{O}}(x)|d&lt;\epsilon,d=\mathrm{argmin}_{f\in F}(|x-f|_2)\},$，其中ε是一个小阈值，目标表面可以被UDFO的零水平集调制。<br>我们引入了一个可微体绘制框架来从输入图像中预测UDF。该框架由神经网络ψ近似，该网络<strong>根据</strong>沿采样射线v的<strong>空间位置x预测UDF值d和渲染颜色c</strong>:<br>$(d,c)=\psi(v,x):\mathbb{S}^2\times\mathbb{R}^3\mapsto(\mathbb{R}^+,[0,1]^3)$ Eq.1</p>
+<p>在体绘制的帮助下，权重通过最小化预测图像$\mathcal{I}_{k}^{\prime}$和真实图像$\mathcal{I}_{k}$之间的距离来优化<br>学习到的表面$\mathcal{S}_{\mathcal{O}}$可以用预测UDF的零水平集表示:$\mathcal{S}_{\mathcal{O}}=\{x\in\mathbb{R}^{3}|d=0,(d,c)=\psi(v,x)\}$ Eq.2</p>
+<h2 id="NeUDF-Rendering"><a href="#NeUDF-Rendering" class="headerlink" title="NeUDF Rendering"></a>NeUDF Rendering</h2><p>渲染过程是学习准确UDF的关键，因为它通过沿射线v的积分将输出颜色和UDF值连接起来<br>$C(o,v)=\int_{0}^{+\infty}w(t)c(p(t),v)dt,$ Eq.3</p>
+<p>其中C(o, v)为从相机原点0开始沿视点方向v的输出像素颜色，w(t)为点p(t)的权值函数，C(p(t)， v)为点p(t)沿视点方向v的颜色。<br>为了通过体绘制重建UDF，我们首先引入一个概率密度函数$\varsigma_r^{\prime}(\Psi(x)),$，称为<strong>U-density</strong>，其中Ψ(x)是x的无符号距离。密度函数$\varsigma_r^{\prime}(\Psi(x))$将UDF场映射到概率密度分布，该分布在表面附近具有显著的高值，以便准确重建。受Neus[53]的启发，我们推导了一个无偏和闭塞的权函数$w_{r}(t)$及其不透明密度$\tau_r(t)$</p>
+<ul>
+<li>$w_r(t)=\tau_r(t)e^{-\int_0^t\tau_r(u)du}$ Eq.4</li>
+<li>$\tau_r(t)=\left|\frac{\frac{\partial(\varsigma_r\circ\Psi\circ p)}{\partial t}(t)}{\varsigma_r\circ\Psi\circ p(t)}\right|$ Eq.5</li>
+</ul>
+<p>其中◦是函数组合操作符，并且为了有效的UDF重建，必须满足以下规则:</p>
+<ul>
+<li>$\varsigma_r(0)=0,\lim_{d\to+\infty}\varsigma_r(d)=1$ Eq.6<ul>
+<li>在d=0，即表面处，权重大，概率密度函数值为1</li>
+</ul>
+</li>
+<li>$\varsigma_r’(d)&gt;0;\varsigma_r’’(d)<0,\forall d>0$ Eq.7</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230825160227.png" alt="image.png"><br>变量$\varsigma_r(d)$可以是图所示的任意函数。由于$\varsigma_{r}(d)$是u密度的累积分布函数，所以$\varsigma_r(0)=0$保证了负距离的点没有累积密度。此外，$\varsigma_r^{\prime}(d)&gt;0$和$\varsigma_{r}^{\prime\prime}(d)<0$确保靠近表面的点的u密度值为正且显著高。$\varsigma_r(d)$中参数r是可学习的，控制着密度的分布。该函数结构解决了体绘制和表面重建之间的体面差距，保证了整体无偏性。详细讨论请参考我们的补充
+我们认为，基于sdf的神经渲染器的幼稚扩展将违反上述一些规则。例如，**Neus**[53]中**u密度的累积分布函数**为$Φ_s$(Sigmoid function)， $Φ_s(0) > 0$<strong>违反式6</strong>。这种违背会导致权重渲染的偏差，从而<strong>导致多余的浮面和不规则的噪声</strong>，如图2所示。注意，Neus中提出的局部最大约束不能解决UDF中的这种呈现偏差。请查看我们补充资料中关于无偏性和全局/局部极大约束的详细讨论。和全局/局部最大约束的详细讨论。</p>
+<p>在广泛评估了消融研究中不同形式的$\varsigma_{r}(d)$后(第4.3节)，我们最终选择$\varsigma_{r}(d) = \frac{rd}{1+rd}$, r初始化为0.05。进一步，我们采用α-合成对权函数进行离散化，对沿射线方向的点进行采样，并根据权积分对颜色进行累加。关于Eqn. 4和Eqn. 5的无偏和闭塞感知特性的详细离散化和证明，请参考我们的补充材料。</p>
+<p>The choice of $\varsigma_{r}$ in $\tau_{r}$</p>
+<p>尽管我们已经给出了 $\varsigma_{r}$ 应该满足的规则（Eq.6、Eq.7)，有一系列满足规则的函数。In the family, 所有函数都适用于UDF体绘制，因此我们对几种不同的候选函数进行验证，以检查每个函数的收敛能力进行网络优化，即在给定训练迭代中，网络收敛到最佳结果的函数。</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230826150109.png" alt="image.png"><br>图 9 显示了遵循规则的三个候选函数$(1-e^{-x},\frac{2arctan(x)}\pi\text{ and }\frac x{1+x})$ 的视觉结果。在给定迭代(300k)之后，使用函数$\frac x{1+x}$的网络在定性和定量上都收敛到最佳结果，而其他函数不是完全收敛的，导致表面不完整，倒角距离略高。对不同形状的评估还表明，所有函数都运行良好，并且所选函数 $\frac x{1+x}$在我们的设置中效果最好（我们的：1.11 对 candidates：1.13/1.18）。</p>
+<ul>
+<li>红色：$\varsigma_{r}(d) = \frac x{1+x}$</li>
+<li>蓝色：$\varsigma_r^{\prime}(d) = \frac{1}{(1+x)^{2}}$<br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230826150617.png" alt="image.png"></li>
+</ul>
+<p><strong>Importance points sampling.</strong></p>
+<p>适应渲染权重的点采样是体绘制的重要步骤。与SDF不同，为了实现UDF的无偏渲染，渲染函数应该在交点前分配更多的权重(图2(c))。因此，如果渲染和采样函数都使用相同的权重，则UDF梯度的正则化(Eikonal损失)将导致表面两侧的梯度幅度高度不平衡。这可能会严重影响重建UDF field的质量。因此，我们提出了一个专门定制的采样权函数(图2(c))，以实现整个空间的良好平衡正则化。重要性抽样$w_{s}(t)$的公式为:$w_s(t)=\tau_s(t)e^{-\int_0^t\tau_s(u)du},\tau_s(t)=\zeta_s\circ\Psi\circ p(t),$ Eq.8</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230825153332.png" alt="image.png"></p>
+<p>其中，$\zeta_{s}(\cdot)$满足以下规则:$\zeta_s(d)&gt;0$且$\zeta_s^{\prime}(d) &lt; 0$，$∀d &gt; 0$。直观地说，$\zeta_{s}(\cdot)$在第一象限是一个单调递减的函数。在本文中，我们使用$\zeta_s(d)=\frac{se^{-sd}}{(1+e^{-sd})^2}$，其中$\zeta_{s}(d)$中的参数b控制x = 0处的强度。S从0.05开始，以$2^{z−1}$的速率改变每个采样步长z。任何可以与渲染函数实现平衡正则化的采样函数都与我们的框架兼容。有关上述规则的详细说明，请参阅我们的补充文件。此外，我们定性和定量地评估了在烧蚀研究中使用$\zeta_s(d)$的必要性(第4.3节)。</p>
+<p>总体而言，在体绘制过程中，权重函数在渲染(Eqn. 4)和采样(Eqn. 8)中协同使用，实现了具有可微体绘制的高保真开放表面重建。</p>
+<h2 id="Normal-Regularization"><a href="#Normal-Regularization" class="headerlink" title="Normal Regularization"></a>Normal Regularization</h2><p>由于UDF的零水平集中的点不是一阶可微的顶点，因此在学习表面附近的采样点的<strong>梯度在数值上不是稳定的</strong>(抖动的)。由于绘制权函数以UDF梯度为输入，不可靠的梯度会导致曲面重建不准确。为了缓解这一问题，我们引入了正态正则化来执行空间插值。<strong>法向正则化用邻近的插值法向替换原始采样的表面法向</strong>。图4给出了一个详细的说明。</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230826143805.png" alt="image.png"><br><em>法向正则化图。我们使用与表面偏移的点的梯度(蓝色)来近似UDF表示的不稳定表面法线(绿色)。</em></p>
+<p>由于不稳定法线只存在于曲面附近，我们使用与曲面有偏移的点法线来近似不稳定法线。我们在$p(t_i)$点离散地表示为:</p>
+<p>$\mathbf{n}(p(t_i))=\frac{\sum_{k=1}^Kw_{i-k}\Psi^{\prime}(p(t_{i-k}))}{\sum_{k=1}^Kw_{i-k}}$ Eq.9</p>
+<p>其中，$\begin{aligned}w_{i-k}=|p(i)-p(i-k)|_2^2\end{aligned}$是$p(i)$到$p(i-k)$的距离。$\Psi^{\prime}(\cdot)$是UDF $\Psi(\cdot)$的导数，返回UDF的梯度。<strong>通过利用法向正则化，我们的框架从2D图像中实现了更平滑的开放表面重建</strong>。我们可以调整法向正则化权值以获得更详细的几何形状。实验表明，法向正则化可以防止二维图像中高亮和高暗区域的高质量重建，如图10所示。</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230826144049.png" alt="image.png"></p>
+<h2 id="Training"><a href="#Training" class="headerlink" title="Training"></a>Training</h2><p>为了学习高保真开放表面重建，我们在没有任何3D监督的情况下，通过最小化渲染图像和已知相机姿势的ground truth图像之间的差异来优化网络。继Neus[53]之后，我们还应用了SDF体绘制中使用的三个损失术语: 颜色损失$\mathcal{L}_{c}$, Eikonal损失[58]$\mathcal{L}_{e}$和Mask损失$\mathcal{L}_{m}$。</p>
+<ul>
+<li>颜色损失衡量的是L1损失下渲染图像与输入图像之间的差异。</li>
+<li>Eikonal损失对采样点上的UDF梯度进行了数值正则化。</li>
+<li>如果提供了掩模，掩模损失也会促使预测掩模接近BCE测量下的真值掩模。</li>
+</ul>
+<p>总的来说，我们使用的损失由三部分组成:</p>
+<p>$\mathcal{L}=\mathcal{L}_{c}+\alpha\mathcal{L}_{e}+\beta\mathcal{L}_{m}$ Eq.10</p>
+<h1 id="实验和评估"><a href="#实验和评估" class="headerlink" title="实验和评估"></a>实验和评估</h1><h2 id="Experimental-Setup"><a href="#Experimental-Setup" class="headerlink" title="Experimental Setup"></a>Experimental Setup</h2><p>Datasets</p>
+<ul>
+<li>Multi-Garment Net数据集(MGN)[4]</li>
+<li>Deep Fashion3D数据集(DF3D)[61]</li>
+<li>DTU MVS数据集(DTU)[21]<ul>
+<li>每个场景包含49或64张1600 × 1200分辨率的图像，蒙版来自IDR[58]。</li>
+</ul>
+</li>
+</ul>
+<p>Baselines</p>
+<ul>
+<li>Colmap</li>
+<li>IDR</li>
+<li>Neus</li>
+<li>NeuralWarp</li>
+<li>HF-Neus</li>
+</ul>
+<p>Metrics</p>
+<ul>
+<li>Chamfer Distance (CD) to quantitative</li>
+</ul>
+<h2 id="Comparisons-on-Multi-view-Reconstruction"><a href="#Comparisons-on-Multi-view-Reconstruction" class="headerlink" title="Comparisons on Multi-view Reconstruction"></a>Comparisons on Multi-view Reconstruction</h2><ul>
+<li>Quantitative Results</li>
+<li>Qualitative Results.</li>
+<li>Captured Real Scenes</li>
+</ul>
+<h2 id="Further-Discussions-and-Analysis"><a href="#Further-Discussions-and-Analysis" class="headerlink" title="Further Discussions and Analysis"></a>Further Discussions and Analysis</h2><ul>
+<li>The choice of $\varsigma_{r}$ in $\tau_{r}$</li>
+<li>Necessity of Importance Points Sampling</li>
+<li>Necessity of Normal Regularization.</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+1ZnNxFWnEbk5YzRl">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/SurfaceReconstruction/" rel="tag"><i class="fa fa-tag"></i> SurfaceReconstruction</a>
+              <a href="/tags/Neus/" rel="tag"><i class="fa fa-tag"></i> Neus</a>
+              <a href="/tags/UDF/" rel="tag"><i class="fa fa-tag"></i> UDF</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/3DReconstruction/Basic%20Knowledge/NeRF/PointCloud/Point-NeRF/" rel="prev" title="Point-NeRF">
+      <i class="fa fa-chevron-left"></i> Point-NeRF
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/Efficiency/NeuS2/" rel="next" title="NeuS2">
+      NeuS2 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Discussions-amp-Conclusions"><span class="nav-text">Discussions&amp;Conclusions</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AIR"><span class="nav-text">AIR</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Methodology"><span class="nav-text">Methodology</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Scene-Representation"><span class="nav-text">Scene Representation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NeUDF-Rendering"><span class="nav-text">NeUDF Rendering</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Normal-Regularization"><span class="nav-text">Normal Regularization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Training"><span class="nav-text">Training</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E5%92%8C%E8%AF%84%E4%BC%B0"><span class="nav-text">实验和评估</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Experimental-Setup"><span class="nav-text">Experimental Setup</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Comparisons-on-Multi-view-Reconstruction"><span class="nav-text">Comparisons on Multi-view Reconstruction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Further-Discussions-and-Analysis"><span class="nav-text">Further Discussions and Analysis</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qi Yun"
+      src="/images/avatar.jpeg">
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">117</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/qiyun71" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;qiyun71" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/29010355" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;29010355" rel="noopener" target="_blank"><i class="fa fa-star fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qi Yun</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">438k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">26:33</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/yqq/anime.min.js"></script>
+  <script src="/yqq/velocity/velocity.min.js"></script>
+  <script src="/yqq/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

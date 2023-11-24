@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/yqq/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Title High-fidelity 3D Human Digitization from Single 2K Resolution Images     Author Sang-Hun Han1, Min-Gyu Park2, Ju Hong Yoon2,Ju-Mi Kang2, Young-Jae Park1, and Hae-Gon Jeon1   Conf&#x2F;Jour CVPR 2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2K2K">
+<meta property="og:url" content="http://example.com/3DReconstruction/Single-view/Depth%20Estimation/2K2K/index.html">
+<meta property="og:site_name" content="YunQi">
+<meta property="og:description" content="Title High-fidelity 3D Human Digitization from Single 2K Resolution Images     Author Sang-Hun Han1, Min-Gyu Park2, Ju Hong Yoon2,Ju-Mi Kang2, Young-Jae Park1, and Hae-Gon Jeon1   Conf&#x2F;Jour CVPR 2">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230921160120.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230921163941.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230921164612.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230921162402.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230921162858.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230921163941.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231011103025.png">
+<meta property="article:published_time" content="2023-09-26T06:06:09.000Z">
+<meta property="article:modified_time" content="2023-11-24T06:44:45.614Z">
+<meta property="article:author" content="Qi Yun">
+<meta property="article:tag" content="ClothedHumans">
+<meta property="article:tag" content="DepthEstimation">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230921160120.png">
+
+<link rel="canonical" href="http://example.com/3DReconstruction/Single-view/Depth%20Estimation/2K2K/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>2K2K | YunQi</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">YunQi</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Note</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/3DReconstruction/Single-view/Depth%20Estimation/2K2K/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YunQi">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          2K2K
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-09-26 14:06:09" itemprop="dateCreated datePublished" datetime="2023-09-26T14:06:09+08:00">2023-09-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-11-24 14:44:45" itemprop="dateModified" datetime="2023-11-24T14:44:45+08:00">2023-11-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/3DReconstruction-Single-view-Depth-Estimation/" itemprop="url" rel="index"><span itemprop="name">3DReconstruction/Single-view/Depth Estimation</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>2.4k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>9 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Title</th>
+<th>High-fidelity 3D Human Digitization from Single 2K Resolution Images</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Author</td>
+<td>Sang-Hun Han1, Min-Gyu Park2, Ju Hong Yoon2,Ju-Mi Kang2, Young-Jae Park1, and Hae-Gon Jeon1</td>
+</tr>
+<tr>
+<td>Conf/Jour</td>
+<td>CVPR 2023 Highlight</td>
+</tr>
+<tr>
+<td>Year</td>
+<td>2023</td>
+</tr>
+<tr>
+<td>Project</td>
+<td><a target="_blank" rel="noopener" href="https://sanghunhan92.github.io/conference/2K2K/">High-fidelity 3D Human Digitization from Single 2K Resolution Images Project Page (sanghunhan92.github.io)</a></td>
+</tr>
+<tr>
+<td>Paper</td>
+<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4738290373604950017&amp;noteId=1970916692663980032">High-fidelity 3D Human Digitization from Single 2K Resolution Images (readpaper.com)</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230921160120.png" alt="image.png"></p>
+<p><strong>可以看成一种估计深度图的方法</strong><br>缺点：需要好的数据集</p>
+<ul>
+<li>需要提供法线图、mask、深度图(低分辨率+高分辨率)</li>
+<li>需要人体模型的关节点信息</li>
+<li>无法预测自遮挡部位</li>
+<li>对低分辨率重建效果不好</li>
+</ul>
+<span id="more"></span>
+<h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>高质量的3D 人体重建需要高保真度和大规模的训练数据，以及有效利用<strong>高分辨率输入图像</strong>的适当网络设计。为了解决这些问题，我们提出了一种简单而有效的3D 人体数字化方法，称为2K2K，它构建了一个大规模的2K 人体数据集，并从2K 分辨率图像推断3D 人体模型。所提出的方法分别恢复了人体的全局形状和细节。低分辨率深度网络从低分辨率图像中预测全局结构，而部分图像到法线网络则预测3D 人体结构的细节。高分辨率深度网络合并全局3D 形状和详细结构，以推断高分辨率的前后侧深度图。最后，一个现成的网格生成器重建完整的3D 人体模型，可在获得。此外，我们还提供了2,050个3D 人体模型，包括纹理地图、3D 关节和 SMPL 参数，供研究目的使用。在实验中，我们展示了在各种数据集上与最新工作相比的竞争性性能。<a target="_blank" rel="noopener" href="https://github.com/SangHunHan92/2K2K">https://github.com/SangHunHan92/2K2K</a></p>
+<h1 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h1><p>分为两个阶段：</p>
+<ul>
+<li>Stage1 Loss：<ul>
+<li>使用 L1 损失和 LSSIMloss 来优化图像到法线网络<ul>
+<li>GT：低分辨率法线图，高分辨率法线图</li>
+</ul>
+</li>
+<li>通过最小化平滑 L1 损失 Ls1 和二元交叉熵损失 LBCE 的线性组合来训练深度网络<ul>
+<li>GT：低分辨率深度图，低分辨率法线图，低分辨率 Mask</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Stage2 Loss：冻结阶段 1 训练的网络，并训练高分辨率深度生成器<ul>
+<li>使用 Lsl1 和 LBCE 来优化高分辨率深度网络<ul>
+<li>GT：高分辨率深度图，高分辨率法线图，高分辨率 Mask</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong><em>最终得到的是双面的高分辨率深度图，通过深度图获取点云，然后预测法线，最后通过 a screened Poisson surface construction 来得到 mesh</em></strong></p>
+<p>具体流程：<br>预测低分辨率法向量图和深度图，$\hat M$ 为预测出的 mask<br>$\mathbf{D}^l=\hat{\mathbf{D}}^l\odot\hat{\mathbf{M}}^l$， $\hat{\mathbf{D}}^l,\hat{\mathbf{M}}^l,\mathbf{N}^l=G^l_{\mathbf{D}}(I^l)$</p>
+<p>预测高分辨率 part 法向量图，M 为变换矩阵<br>$\bar{\mathbf{n}}_i=G_{\mathbf{N},i}(\bar{\mathbf{p}}_i,\mathbf{M}_i^{-1}\mathbf{N}^l)$， $\bar{\mathbf{p}}_i=\mathbf{M}_i\mathbf{p}_i,$</p>
+<p>拼接为高分辨率整体法向量图<br>$\mathbf{N}^h=\sum\limits_{i=1}^K\left(\mathbf{W}_i\odot\mathbf{n}_i\right)$ ，$\mathbf{n}_i=\mathbf{M}_i^{-1}\bar{\mathbf{n}}_i$</p>
+<p>预测高分辨率深度图<br>$\mathbf{D}^h=\hat{\mathbf{D}}^h\odot\hat{\mathbf{M}}^h$，$\hat{\mathbf{D}}^h,\hat{\mathbf{M}}^h=G^h_{\mathbf{D}}(\mathbf{N}^h,\mathbf{D}^l)$</p>
+<p>深度图转点云</p>
+<h2 id="低分辨率深度网络"><a href="#低分辨率深度网络" class="headerlink" title="低分辨率深度网络"></a>低分辨率深度网络</h2><p><strong>低分辨率深度网络</strong>分别预测低分辨率深度和法向图，使用 dual-encoder AU-Net (D-AU-Net)网络, ref: <a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4624854467519463425&amp;noteId=1997087774731159296">Monocular Human Digitization via Implicit Re-projection Networks (readpaper.com)</a></p>
+<h2 id="Body-part-extraction和Part-wise-normal-prediction"><a href="#Body-part-extraction和Part-wise-normal-prediction" class="headerlink" title="Body part extraction和Part-wise normal prediction"></a>Body part extraction和Part-wise normal prediction</h2><p><strong>Body part extraction 和 Part-wise normal prediction</strong>预测高分辨率双面法向 map<br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230921163941.png" alt="image.png"></p>
+<ul>
+<li>将人体按照 keypoint 关节分成 patches，每个 patches 和 low 分辨率法线图来预测 high 分辨率双面法线 map<ul>
+<li>只需训练头、躯干、手臂、腿和脚这 5 个法线预测网络 AU-Net，然后即可预测每个 patch</li>
+<li><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4500191380932026369&amp;noteId=1997072200139556608">Attention U-Net: Learning Where to Look for the Pancreas (readpaper.com)</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="高分辨率深度预测网络"><a href="#高分辨率深度预测网络" class="headerlink" title="高分辨率深度预测网络"></a>高分辨率深度预测网络</h2><p><strong>高分辨率深度预测网络</strong><br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230921164612.png" alt="image.png"><br>    <strong>网格生成</strong>：从深度图生成 3D 模型有多种方法。在这项工作中。我们采用与[13]类似的方法。我们将深度图转换为 3D 点云，然后从相邻点计算每个点的表面法线。之后，我们运行一个筛选的泊松曲面构造[22]来获得平滑的人体网格 V。</p>
+<h1 id="Datasets"><a href="#Datasets" class="headerlink" title="Datasets"></a>Datasets</h1><ul>
+<li>新的数据集：我们的数据集提供了高保真的 3D 人体模型，由 80 个 DSLR 相机、纹理贴图、3D 姿势（openpifpafw 全身）和 SMPL 模型参数捕获。<ul>
+<li>2,050 个 scan 3D 模型</li>
+<li>Skinned Multi-Person Linear (SMPL)</li>
+</ul>
+</li>
+</ul>
+<p>Booth 中一共 80 个 DSLR：每个条上 5 个相机，从上到下依次对齐：人头、上身、中部、下身、膝盖。</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230921162402.png" alt="image.png"></p>
+<p>使用商业化软件 RealityCapture 生成初始粗糙的人体模型，然后专家手动对模型进行后处理(填充孔洞、头发几何细节)。已发布模型的顶点数约为 1M，其示例如图 2 (b) 所示。扫描模型正确地保留了手指和皱纹等几何细节，主要是因为在受控环境中捕获的高质量图像。</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230921162858.png" alt="image.png"></p>
+<p>合成的 Rendered Image(使用 Unity、Unreal 等软件)</p>
+<h1 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h1><p>在四个 RTX A6000 GPU 上训练3天</p>
+<p>Ubuntu 20.04 with Python 3.8, PyTorch 1.9.1 and CUDA 11.1<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">apt-get install -y freeglut3-dev libglib2.0-0 libsm6 libxrender1 libxext6 openexr libopenexr-dev libjpeg-dev zlib1g-dev</span><br><span class="line">apt install -y libgl1-mesa-dri libegl1-mesa libgbm1 libgl1-mesa-glx libglib2.0-0</span><br><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure></p>
+<h2 id="Fast-test"><a href="#Fast-test" class="headerlink" title="Fast test"></a>Fast test</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> checkpoints &amp;&amp; wget https://github.com/SangHunHan92/2K2K/releases/download/Checkpoint/ckpt_bg_mask.pth.tar &amp;&amp; <span class="built_in">cd</span> ..</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">python test_02_model.py --load_ckpt ckpt_bg_mask.pth.tar --save_path ./exp</span><br><span class="line"></span><br><span class="line">terminal output：</span><br><span class="line">u2net.onnx model下载&#x27;https://github.com/danielgatis/rembg/releases/download/v0.0.0/u2net  </span><br><span class="line">.onnx&#x27;</span><br><span class="line"></span><br><span class="line">python test_03_poisson.py --save_path ./exp</span><br></pre></td></tr></table></figure>
+<p>Custom test<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">bin\OpenPoseDemo.exe --image_dir test_folder --write_json test_folder --hand --write_images test_folder\test --write_images_format jpg</span><br><span class="line"></span><br><span class="line">python test_02_model.py --load_ckpt ckpt_bg_mask.pth.tar --save_path ./exp --data_path ./test_folder --save_name ???</span><br><span class="line">python test_03_poisson.py --save_path ./exp --save_name ???</span><br><span class="line"></span><br><span class="line">bin\OpenPoseDemo.exe --image_dir test_2 --write_json test_2 --hand --write_images test_2\test --write_images_format jpg</span><br><span class="line"></span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<h2 id="Render"><a href="#Render" class="headerlink" title="Render"></a>Render</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">data</span><br><span class="line">├ IndoorCVPR09</span><br><span class="line">│  ├ airport_inside</span><br><span class="line">│  └ ⋮</span><br><span class="line">├ Joint3D</span><br><span class="line">│  ├ RP</span><br><span class="line">│  └ THuman2</span><br><span class="line">├ list</span><br><span class="line">├ obj</span><br><span class="line">│  ├ RP</span><br><span class="line">│  │  ├ rp_aaron_posed_013_OBJ</span><br><span class="line">│  │  └ ⋮</span><br><span class="line">│  └ THuman2</span><br><span class="line">│     ├ data</span><br><span class="line">│     └ smplx</span><br><span class="line">│  ├ 2K2K</span><br><span class="line">│  │  ├ 00003</span><br><span class="line">│  │  └ ⋮</span><br><span class="line">├ PERS</span><br><span class="line">│  ├ COLOR</span><br><span class="line">│  ├ DEPTH</span><br><span class="line">│  └ keypoint</span><br><span class="line">└ (ORTH)</span><br></pre></td></tr></table></figure>
+<h3 id="Data-folder"><a href="#Data-folder" class="headerlink" title="Data folder"></a>Data folder</h3><ul>
+<li>Obj<ul>
+<li>2K2K<ul>
+<li>00003<ul>
+<li>00003.Ply</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>PERS<ul>
+<li>COLOR<ul>
+<li>NOSHADING<ul>
+<li><code>2K2K_0_y_-30_x</code><ul>
+<li>00003_front.Png</li>
+<li>00003_back.Png</li>
+</ul>
+</li>
+<li><code>2K2K*0_y*-20_x</code></li>
+<li>…</li>
+<li><code>2K2K_0_y_30_x</code></li>
+</ul>
+</li>
+<li>SHADED<ul>
+<li><code>2K2K_0_y_-30_x</code><ul>
+<li>00003_front.Png</li>
+</ul>
+</li>
+<li>…</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>DEPTH<ul>
+<li><code>2K2K_0_y_-30_x</code><ul>
+<li>00003_front.Png</li>
+<li>00003_back.Png</li>
+</ul>
+</li>
+<li>…</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>ORTH<ul>
+<li>COLOR<ul>
+<li>NOSHADING</li>
+<li>SHADED</li>
+</ul>
+</li>
+<li>DEPTH</li>
+</ul>
+</li>
+</ul>
+<p>如果不算 ORTH：共 21+14=35 张图片</p>
+<h3 id="Render-image"><a href="#Render-image" class="headerlink" title="Render image"></a>Render image</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">pers2pc(image_front, front_depth.astype(np.float64) / <span class="number">32.0</span>, <span class="number">2048</span>, <span class="number">50</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">pers2pc</span>(<span class="params">pers_color, pers_depth, res, fov</span>):</span><br><span class="line">    focal = res / (<span class="number">2</span> * np.tan(np.radians(fov) / <span class="number">2.0</span>))</span><br><span class="line"></span><br><span class="line">res = <span class="number">2048</span></span><br><span class="line">fov = <span class="number">50</span></span><br><span class="line">focal = <span class="number">2195.975086601788</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">python render/render.py --data_path ./data --data_name 2K2K</span><br><span class="line"></span><br><span class="line">python render/render.py --data_path ./data --data_name RP</span><br><span class="line">python render/render.py --data_path ./data --data_name THuman2 --smpl_model_path &#123;smpl_model_path&#125;</span><br></pre></td></tr></table></figure>
+<p>Get ： PERS/COLOR and PERS/DEPTH</p>
+<h3 id="Render-keypoint"><a href="#Render-keypoint" class="headerlink" title="Render keypoint"></a>Render keypoint</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">unzip data/Joint3D.zip -d data/Joint3D/</span><br><span class="line">python render/render_keypoint.py --data_path ./data --data_name RP</span><br><span class="line">python render/render_keypoint.py --data_path ./data --data_name THuman2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># openpose</span></span><br><span class="line"><span class="comment">## input image</span></span><br><span class="line">bin\OpenPoseDemo.exe --image_dir G:/2K2K_Datasets/230831/train/data/PERS/COLOR/FOR_POSE/2K2K_0_y_0_x --write_json G:/2K2K_Datasets/230831/train/data/PERS/keypoint_json/2K2K_0_y_0_x --face --hand --write_images_format png</span><br><span class="line"></span><br><span class="line">G:/2K2K_Datasets/230831/train/data/PERS/COLOR/FOR_POSE/2K2K_0_y_0_x</span><br><span class="line">    2K2K_0_y_10_x</span><br><span class="line">    2K2K_0_y_20_x</span><br><span class="line">    2K2K_0_y_30_x</span><br><span class="line">    2K2K_0_y_-10_x</span><br><span class="line">    2K2K_0_y_-20_x</span><br><span class="line">    2K2K_0_y_-30_x</span><br><span class="line"></span><br><span class="line"><span class="comment">## output keypoint_json</span></span><br><span class="line">G:/2K2K_Datasets/230831/train/data/PERS/keypoint_json/2K2K_0_y_0_x ...</span><br><span class="line"></span><br><span class="line"><span class="comment">## output keypoint_npy</span></span><br><span class="line">python render_keypoint_2k.py <span class="comment"># use json2npy function</span></span><br><span class="line"></span><br><span class="line">G:/2K2K_Datasets/230831/train/data/PERS/keypoint/2K2K_0_y_0_x ...</span><br></pre></td></tr></table></figure>
+<p>Get ： PERS/keypoint</p>
+<h2 id="Train"><a href="#Train" class="headerlink" title="Train"></a>Train</h2><p>Phase1 大概需要 7 天, (单张 3090)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python train.py --data_path ./data --phase 1 --batch_size 1</span><br><span class="line">python train.py --data_path ./data --phase 2 --batch_size 1 --load_ckpt &#123;checkpoint_file_name&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Limitations"><a href="#Limitations" class="headerlink" title="Limitations"></a>Limitations</h1><p>由于我们明确地预测每个身体部位的法线贴图，我们的方法没有考虑严重的自遮挡，例如，when a lower arm is behind the back。我们声称这种现象本质上是模棱两可的，可能的补救措施要么是预测遮挡像素的语义，要么是在[34]之前使用人体来指导深度预测。由于空间限制，我们在补充材料中提供了几个失败案例。 </p>
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>我们提出了 2K2K，这是一个从高分辨率单幅图像中数字化人类的有效框架。为此，我们首先通过扫描 2,050 个人体模型构建了一个大规模的人体模型数据集，并使用它们来训练我们的网络，由部分正态预测、低分辨率和高分辨率深度预测网络组成。为了有效地处理高分辨率输入，我们裁剪和弱对齐每个身体部位不仅可以处理姿势变化，还可以更好地恢复人体的精细细节，如面部表情。我们证明了所提出的方法适用于各种数据集的高分辨率图像有效工作。</p>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><h2 id="Human-Body-Part-2K2K"><a href="#Human-Body-Part-2K2K" class="headerlink" title="Human Body Part(2K2K)"></a>Human Body Part(2K2K)</h2><p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230921163941.png" alt="image.png"></p>
+<p>将人体分为 12 个部分，可以只用头、躯干、手臂(4 part)、腿(4 part)和脚(2 part) 五个网络来预测</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/CMU-Perceptual-Computing-Lab/openpose">CMU-Perceptual-Computing-Lab/openpose: OpenPose: Real-time multi-person keypoint detection library for body, face, hands, and foot estimation (github.com)</a></p>
+<ul>
+<li><strong>openpose</strong> … To get keypoint(json) ,then convert json to npy (shape: 31,3)</li>
+<li>输入原图 image，根据 pose(.Npy)得到仿射变换矩阵(init_affine_2048)，仿射变换矩阵将目标部位移动到相机中心，然后通过 centercrop 得到 part image<ul>
+<li>原图 image 下采样后通过网络得到低分辨率法向量图，low normal 插值到 2k 后同样变换得到 part low normal</li>
+<li>Part image 和 part low normal 通过 5 个 part network 得到每个部分的 part high normal</li>
+<li>Part high normal 通过 occupy 方式得到的权重，求和拼接成 high normal</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231011103025.png" alt="image.png|222"></p>
+<p>Note：pose 中脸部只有 2eye、2ear 和 1nose，手部为 4 个 finger</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>] = [nose, L eye, R eye, L ear, R ear]</span><br><span class="line">[<span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>] = [L shoudler, R shoudler, L elbow, R elbow, L wrist, R wrist]</span><br><span class="line">[<span class="number">11</span>, <span class="number">12</span>, <span class="number">13</span>, <span class="number">14</span>, <span class="number">15</span>, <span class="number">16</span>] = [L hip, R hip, L knee, R knee, L ankle, R ankle]</span><br><span class="line">[<span class="number">17</span>, <span class="number">18</span>, <span class="number">19</span>, <span class="number">20</span>, <span class="number">21</span>, <span class="number">22</span>] = [L big toe, L little toe, L sole, R big toe, R little toe, R sole]</span><br><span class="line">[<span class="number">23</span>, <span class="number">24</span>, <span class="number">25</span>, <span class="number">26</span>, <span class="number">27</span>, <span class="number">28</span>, <span class="number">29</span>, <span class="number">30</span>] = [L finger <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, R finger <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br></pre></td></tr></table></figure>
+<p>根据 pose 将人体分为 12 个部分用 5 个网络预测:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Face[<span class="number">4</span>, <span class="number">3</span>]</span><br><span class="line">Body[<span class="number">6</span>, <span class="number">5</span>, <span class="number">12</span>, <span class="number">11</span>]</span><br><span class="line">Arm[<span class="number">5</span>, <span class="number">7</span>], [<span class="number">7</span>, <span class="number">9</span>, <span class="number">23</span>, <span class="number">24</span>, <span class="number">25</span>, <span class="number">26</span>], [<span class="number">6</span>, <span class="number">8</span>], [<span class="number">8</span>, <span class="number">10</span>, <span class="number">27</span>, <span class="number">28</span>, <span class="number">29</span>, <span class="number">30</span>]</span><br><span class="line">Leg[<span class="number">11</span>, <span class="number">13</span>], [<span class="number">13</span>, <span class="number">15</span>], [<span class="number">12</span>, <span class="number">14</span>], [<span class="number">14</span>, <span class="number">16</span>]</span><br><span class="line">Foot[<span class="number">17</span>, <span class="number">18</span>, <span class="number">19</span>, <span class="number">15</span>], [<span class="number">20</span>, <span class="number">21</span>, <span class="number">22</span>, <span class="number">16</span>]</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+1ZnNxFWnEbk5YzRl">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/ClothedHumans/" rel="tag"><i class="fa fa-tag"></i> ClothedHumans</a>
+              <a href="/tags/DepthEstimation/" rel="tag"><i class="fa fa-tag"></i> DepthEstimation</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/3DReconstruction/Basic%20Knowledge/NeRF/NeRF/Datasets/" rel="prev" title="Datasets">
+      <i class="fa fa-chevron-left"></i> Datasets
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/3DReconstruction/Single-view/Implicit%20Function/Vid2Avatar/" rel="next" title="Vid2Avatar">
+      Vid2Avatar <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract"><span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Method"><span class="nav-text">Method</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%8E%E5%88%86%E8%BE%A8%E7%8E%87%E6%B7%B1%E5%BA%A6%E7%BD%91%E7%BB%9C"><span class="nav-text">低分辨率深度网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Body-part-extraction%E5%92%8CPart-wise-normal-prediction"><span class="nav-text">Body part extraction和Part-wise normal prediction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AB%98%E5%88%86%E8%BE%A8%E7%8E%87%E6%B7%B1%E5%BA%A6%E9%A2%84%E6%B5%8B%E7%BD%91%E7%BB%9C"><span class="nav-text">高分辨率深度预测网络</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Datasets"><span class="nav-text">Datasets</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Experiments"><span class="nav-text">Experiments</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Fast-test"><span class="nav-text">Fast test</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Render"><span class="nav-text">Render</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Data-folder"><span class="nav-text">Data folder</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Render-image"><span class="nav-text">Render image</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Render-keypoint"><span class="nav-text">Render keypoint</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Train"><span class="nav-text">Train</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Limitations"><span class="nav-text">Limitations</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Conclusion"><span class="nav-text">Conclusion</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code"><span class="nav-text">Code</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Human-Body-Part-2K2K"><span class="nav-text">Human Body Part(2K2K)</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qi Yun"
+      src="/images/avatar.jpeg">
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">117</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/qiyun71" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;qiyun71" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/29010355" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;29010355" rel="noopener" target="_blank"><i class="fa fa-star fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qi Yun</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">438k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">26:33</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/yqq/anime.min.js"></script>
+  <script src="/yqq/velocity/velocity.min.js"></script>
+  <script src="/yqq/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

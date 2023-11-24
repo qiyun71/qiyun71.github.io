@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/yqq/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Neus代码的理解 NeRF与Neus相机坐标系的对比：      Method Pixel to Camera coordinate     NeRF $\vec d &#x3D; \begin{pmatrix} \frac{i-\frac{W}{2}}{f} \\ -\frac{j-\frac{H}{2}}{f} \\ -1 \\ \end{pmatrix}$ , $intrinsics &#x3D; K &#x3D; \">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Neus代码理解">
+<meta property="og:url" content="http://example.com/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/Neus-code/index.html">
+<meta property="og:site_name" content="YunQi">
+<meta property="og:description" content="Neus代码的理解 NeRF与Neus相机坐标系的对比：      Method Pixel to Camera coordinate     NeRF $\vec d &#x3D; \begin{pmatrix} \frac{i-\frac{W}{2}}{f} \\ -\frac{j-\frac{H}{2}}{f} \\ -1 \\ \end{pmatrix}$ , $intrinsics &#x3D; K &#x3D; \">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230703144039.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230803193755.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/Pasted%20image%2020221206180113.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/SDFNetwork_modify.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/RenderingNetwork.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230630181909.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230630132744.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230630174602.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230630174609.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/00282500_0_22.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/00282500_0_22%20(1).png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230630210635.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230702145000.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/00300000_0_38.gif">
+<meta property="article:published_time" content="2023-06-30T05:45:48.000Z">
+<meta property="article:modified_time" content="2023-11-24T06:42:47.764Z">
+<meta property="article:author" content="Qi Yun">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="SurfaceReconstruction">
+<meta property="article:tag" content="Neus">
+<meta property="article:tag" content="Code">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230703144039.png">
+
+<link rel="canonical" href="http://example.com/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/Neus-code/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Neus代码理解 | YunQi</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">YunQi</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Note</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/Neus-code/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YunQi">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Neus代码理解
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-06-30 13:45:48" itemprop="dateCreated datePublished" datetime="2023-06-30T13:45:48+08:00">2023-06-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-11-24 14:42:47" itemprop="dateModified" datetime="2023-11-24T14:42:47+08:00">2023-11-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/3DReconstruction-Multi-view-Implicit-Function-NeRF-based/" itemprop="url" rel="index"><span itemprop="name">3DReconstruction/Multi-view/Implicit Function/NeRF-based</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>9.3k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>34 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><a target="_blank" rel="noopener" href="https://github.com/Totoro97/NeuS">Neus代码</a>的理解</p>
+<p>NeRF与Neus相机坐标系的对比：</p>
+<p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230703144039.png" alt="image.png"></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Pixel to Camera coordinate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NeRF</td>
+<td>$\vec d = \begin{pmatrix} \frac{i-\frac{W}{2}}{f} \\ -\frac{j-\frac{H}{2}}{f} \\ -1 \\ \end{pmatrix}$ , $intrinsics = K = \begin{bmatrix} f &amp; 0 &amp; \frac{W}{2}  \\ 0 &amp; f &amp; \frac{H}{2}  \\ 0 &amp; 0 &amp; 1 \\ \end{bmatrix}$</td>
+</tr>
+<tr>
+<td>Neus</td>
+<td>$\vec d = intrinsics^{-1} \times  pixel = \begin{bmatrix} \frac{1}{f} &amp; 0 &amp; -\frac{W}{2 \cdot f}  \\ 0 &amp; \frac{1}{f} &amp; -\frac{H}{2 \cdot f} \\ 0 &amp; 0 &amp; 1 \\ \end{bmatrix} \begin{pmatrix} i \\ j \\ 1 \\ \end{pmatrix} = \begin{pmatrix} \frac{i-\frac{W}{2}}{f} \\ \frac{j-\frac{H}{2}}{f} \\ 1 \\ \end{pmatrix}$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<span id="more"></span>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><h2 id="Runner-train流程图"><a href="#Runner-train流程图" class="headerlink" title="Runner().train流程图"></a>Runner().train流程图</h2><iframe frameborder="0" style="width:100%;height:1153px;" src="https://viewer.diagrams.net/?highlight=0000ff&edit=_blank&layers=1&nav=1&title=Runner.drawio#R7V1Zk6M4Ev41RFd1RBPcx6Ndx8zG7vTudE3s7DwRlC3bTBlwA66jf%2F1KQtiA0gbbXG57ImraiEtk6stM5SEJ6p3%2F%2Fkvkrha%2FhVO0FBRp%2Bi6o94KiaJZq4H9Iy0faohiWlrbMI2%2BatsnbhifvB2KNEmtde1MUFy5MwnCZeKti4yQMAjRJCm1uFIVvxctm4bL41pU7R1zD08Rd8q1%2FetNkkbZairlt%2FxV580X2Ztmw0zO%2Bm13MviReuNPwLdekPgjqXRSGSfrLf79DS0K9jC7pfY87zm46FqEgqXPDaKV9cxdf3e9%2F%2BN%2FXc%2FlpFKhfvrCnvLrLNftgQTGW%2BHnjWYgfi3udfDBSGN%2FXYXbiS0wZNcIXyMbqfXsS%2F5qTf7%2BtMTui7Fm4U%2Bnj0pOMHpsnK1G4DqaI9FPGp98WXoKeVu6EnH3D4wq3LRJ%2FyU6TJ7FxIhubp%2BXpkH0UihL0nmtidPkFhT5Kog98SXY2YxobpXLGs7cty2WJtS1y7NZYm8tG2Xzz6C0j8A%2FGiwP4YnA0QlM8LtlhGCWLcB4G7vJh2zreUlHCR9tr%2FhWGK0a7v1GSfDDiueskLFIWvXvJ%2F8jtos6O%2FsqduX9nT6YHH9lBgD83dxM5%2FCt%2FbnsbPcruq83FOFxHE7SHVAqTCm40R8me65jcIXTcOyYitHQT77WI%2F8YZrHDAW0XhBMVxKstm3pxIKw8zdjdYpH7AosuY1Xm4KDoAF1Xn4aK3BRfzCpe6cNFqwkUfFFw0Di73buLGKLm5PQOAqJA%2BgQDSmj6RrStC6iJEr4kQ2RwURHQOIl9R8hZGL%2FE5IMTqW4VYAPm%2BPd58%2Fhyj5UwkKlnQx598MsMRsWk7%2ByTo98OTPapctGRVmaerqnZpyWYdyBH26f6RDU2YvPF05gTpBWdCZaN3KvMTuScvmC%2FRf93Ic4MJ2kvwV3bReVFdA8a2ZnRKdd6K%2F4YwjSJM%2Br0Ej7KrzoziwDjXuh3nKkdxjmrxwl2Rn5N1tPwYR%2B7khajxKvIVfRAtEFOxlbLSk3WOnApATdlqi5wb39TVLKw0CzNzr9ouZKAZiF2Y9TsHmSSMJgsxXCWeL46mrj84wcMbiJrOY6VbAxGQNFesVECgEivZE4eCFZvDyle0fkqVOorOwtmgq31PpZSrO66%2B9zoLalUiZWD%2Ba37CsQzdKW6ZLNDkZRV6NN5Dwz%2FPURb5IQ5t5xlbZOvVGSDJkHpHEm%2FueoGXcLRLyPxtTnHUPeG0UvDMNEVAV0sb67dAOb0lyqlXy7a%2BDKobE1CGZdkqfFQgonFnMYlcLzgLbW2YvcuYa6y5PlLqxgaUYQGFjw1ELEFDoodSmq9xFoiRew8VKHysgAqcQatlwzD7V8rXKXR9UVN3Cq0Oawqt8FPop7Xvu9HHnxGGwHnIGFPrW8ZkL7tCpRoqat05tKoOCioqP4der6ZugpwlcqOAhIcifDRExKiKmIViGGQsKMfFVEWzU9TYV9TURo1aFzXWsFDD%2B0Rw%2Fx3Pd%2BfIWaHIHyJeiIaRC3ixe3cuadecsPpgqesi0YaVFKbyLpI5CrBaCaahj%2F%2F5iB13kDmUmmaIuilt%2FlNKygZyMVqGaJldaht%2BHthM9YRPJ5MSm1RKS4Kt8ymlEKWSpIMm7J1WU2QPvjIqjzBbKrAJyKbqmEsKzyV9%2FOwmk4VDGaHcEUZIgn5P%2FVaELfgCKsRCcbJaEzlGLqEtr%2FmWSbgMo%2FSn78Yv%2BC56%2B136HJk8Ub%2FnWIQpmRT5ECdR%2BILu6NPU%2ByAMiEqcectlqcldevMAH04wfxBuHxO%2BeBN3OWInfG863ekXKgrfVkCqlXgPGO9gAqPSGvOBSJc%2Fd7zpO%2BER5VR%2BJFwMp3S9yCkD1HxQ1mN7rDJ4nD7Ygj0SrEfhwRDsO2E8Ii1Y7lu28KCTdtsQHjRhbJFG3DK%2BE0b0hz0Wxg%2FCg0muxMr74ZGcsu7oNbYwNvY%2B2RCssTCy6cBgjx%2BN6AtVeocpjDX6HlOwNcGmz7AswaZvtnT6DJM8cvx4QUNKMYtDyqw9pMy2hpR%2BdQzXL%2BCqm4eYTTgHMhXR%2BDzEALmRMyN%2FEZ6NxKsFigbp7aKTEaOoMWHUdD0F0Xhve2oP5Syh6QXJtrK6lHWQTXKX%2BlLnZx9k4KccmpEfF8MeQ1VFreg3ViSIQ9YWcJ3wyJA5LlwVUIVeqVRAmQnRvQKyvv%2FD%2BLf3I%2FDff3%2F%2BcL%2BPvX8%2BhH2npeY4vOV3szxulqcwEY1BGRVZv%2FP6jyZrD9KMMFUxyx3ZrIcD6iciJrUOzQidTxDK%2FFhT7zXzYW0si8ysuGN6bMa0WXpHvHKD7BaS6zunhHei%2BXPON5a%2FKNecexvQAegNkzB23AB3ZEmCpV544DsuRvXqWbR5s2gHNPK6dfoY1ySH%2BhLaqKt1h1UooPPeolx9N6n1vlkl8RCltaGLVtFW1TQwtV2zxE4DtzoQdyo6yqXP%2BC9wYtdfLVG88aBSR7di4FZMo%2BA5Xl2WCDRkTZSL%2BlcDixWwAhbVLqcfOj%2BNr%2BAoYad6YUELgH0qyD5pa2d1o8eu7svaeiybFFa7L4c10zB4Lw5d2CFwPH%2BFuUfWz6CClolXZl9mEdS8ZluE%2FvM67kmr6bqoFJNdVRBEJJCfza7yIGptLQKDjwB%2BIH7top9XvulS0XepyRBftE4N9Gs%2BZX3BVjdFzBhWPqXBp4itV8zQGKQXhdjlSgEpuqodYJdrbZW3GEBgPO%2FEALKMiDT7wgQTyWdZolnCpxnlQjq8A6Rs0G%2BcMxWekHzbDwf3OT7snvJ78Uyu%2BgFHuXhgPftIXkHObEarEydodeBXkNFPbWvl82fv6jvaYXlLhmiWIKdAykm1YMdlewqKDyrPSKaX5JE%2FkpMXucEc3UAD5ZZC7mKYqBiaqBR9gLoETp8MzG27HSaCMYUzjL0VTIytxdF4XCazFQbs9YNZeoY87SrWBvEUJOLA7ETe6zhxEyc1HQZrKBYduAaYbNC5oWjyvoRymnPR3CG2DmfmXIzmAhx%2FugGaH9p2atCJ5lJaMvj3BV8hK7Yrmz9Ab84x97U3N1i6MWHyjUfnBMThJgvpohaE6hJs9x3Tj8s1%2FhVNNIvJj7AYxc2i3pLbHUQftBZsI%2Bjjq06KsbQxJ6DZfBT%2FKItpEqKhdSZNP7S8ttp1oAIDFQzYEsNAaWmWCg5UYJ0qmqTkTMIIOeE6ib3pIH1thlF0SZsqFCjYauemrSdY6fYabct%2BH5bH18J8EaQNUBsA07C32oB93W7LcUqvSKuEyNgmkfO9dhR0%2FbGmy9F9T%2B0sZ4YQ0KGc6kj1BhMibXaIaaCphy0umHypoxZFs6sjFZanllqSp2CIT1UUEYi8Gm2pp16DfMOWp3VdNQPzvml9cnQw3reTOCr3tlbUvm7z2ScbwX8eqSdaDfnXZuoJzGveH3dZqSeAh80EA3xtZZ%2FARupPv0DR8WJMBlbv6qhgh946irCtnLuALvge5578n3QF%2BG12U2nJCXsTe3zcdctmIdJdt%2BAfaT%2B2Y2zzQSdIA96vlJuuD3GaDqTEWAelqrc2Vwc2nwnCCxKs5VFvdZrTB7MEqB540IXRozC2M1fU8%2FyWrqdxT1bGSFfPGFlkP0S6Xsa9YMv0x5isyPFgkHU3xgpdoONRsNW3kK6xczlMNnRee4KZFbuWB2hPg%2FY6ERj21C4jerUGHdZMQOGN1X6Cjk0kHvLVSN3mLIIureb7fXzaY65WrjPK0hdP0atH6mmDTl5%2FPIHo0m6dk6hU16zelwudh0arXP%2Fc5WrhFrucNg250ylSp86EmQY7T52eZsBVlGPLY3eR%2BTVVIG8IlaxdOElYB2Ygcns2EL9ERGv6EhrEn%2Bi4%2FJQ%2BqeYYLbapQnHxw7vTIlKsWwXYsO4BUNoF8io0Q52GEh42%2FsvyV1V0n4os1u2c%2BCp19%2BBe1H39Gx27MesAO6LPb%2FSVlypKtrv87PUUa9BCXq3FyYDd%2BFqTJDukhlQtDapgP51lYGdJecAzoWpzuf47iD2dQYP%2B3tf33GvqPn8euVMPD67sHZtjMUJ09%2B%2BbPS%2Bh9LotyuAqmpGpBnuXLEoCy8ySvODV2fltJ9IQ44%2BlWrIXbxsapuZuUVb9DokW27QiYSebgTqpZuttSyPMQVG0gWGxMf%2FGA%2FjqBYQMbLFL9uBC26mfcbEqQyqpDAusa9fgFY5ay1HtdR%2FSgXvggCWN4Asb33f0yBhWKR1SlljDzhAWd4csdxDBygi7fzm31MRwZl6A8nYGbWjK2MgpTvp733MPEKJYN%2BT7HaEk7bXO1MYm6bpZHenEa7%2BoJklLQ9%2FEXuG77%2BwVSRhNFiI%2Bvino5KnnY5aSokly9ILQKm35I1qjW0wBqeLrD%2BjSTjurJnUPHC0DNURAWyA%2F5MoXFOl%2Fom2Qf1HpfLoPxnFDfGcI%2B4jdSDLDgE5uGtHldklsbo5zily321Lk79LMeP8hza3o7e7Xl%2FHfz787Tr9Fyt3p8ZKKPVKxA3uXwtZRv5E0ftU10l2yj0%2FMZ3%2F1nuWhW2XrwwaXzpZEG0ieayLFAwSGegVGbWBAO5WCRFX6xAWwLymgrWj0LVwlno%2BZFIn4L3SIJry5ra3wCM5EEsl5c6ND7iu9mtTE7b57aDA2uH23cruk5pNFbAmsUtvufdc4lHtdjne4UN6N0BpI1jpC8r5O7gcyRkBE60qZkUyu2221Ng8nDjsAQ3bDyZbLcLIsEE6Q30dvD0u9bjYwLCxVYsQ4ESOw80WRTc75Im8Wv8yekwKd3Vri%2BWGumN3wr0JggoI4jJ5DrAXFeOIuyXL6Z4E%2Bzue6E31QimuL6LuQkrZGNBnghQWvs%2FrUZLU8mrH7ipzJAk1eqCu3S5vwNBgp5f04BwKjfpfxOjMcAZWFMFGlPoG0e8%2FqHELwWW%2FqJsjxfHeOzgdH2kCNQblXJ0mxkk2qiaNiJZvcHY4yHlYDqSsvyd5u1kSSj%2BLF%2BQBJN4uld4MB0oB2DBo%2BkOr6KORenRRZN%2FcDab2iMFoiNwq8YE7ysM9IMXH7kkoSH9Ha5Dx2BaZ%2BN0Q8Bkyy0Jd1l62pUbkSr9ovmGo5HPAXpKads0KRf0YwMkoV4QqAIr1bFPVbY9ndKgXNoKjuJCnNte4NRfwsaY4Ch1Y4ukk7SwCc6IgzVFEx7c1%2FZgEn%2BL%2BOtxmFmXohq4I3E2CqPQ3q1TG3pxw5rUsCqiIIAL7QZKU0pd5YvfNFEXt8EMWCp51QrJHK1Aj0ymEGDQSbAqilJkpVYK5U2NRNbEUjZQXf6XN%2FqpVoTxsR5eIlxaw9Ipoog4RHxICM%2FeHLXmB1JfjCU0OXp%2FGUL0gjO3I7M%2FIXhT7LFB2kvaLJoqFu7RW7ABgV3qfB3G5D1I29UrEt%2BtFSNN2jiMrPbFVXulnRD291Q1pvr0KVT%2FQorZ26WQ6wsPNrpyL1p98dsUmRWjfMrPRqzvZbr9XdZlQd8%2FTU2Ty99dB6rW10gomMrPZvV7mWImV287E3qMzMaqq8ay%2FZuQUKB6nordJuw%2BDOPVAtR2tqXVXOD%2BP9ye26HrvOajn2djOHiXCdkLWYWD1j2Z4iZ4Mw8t0lu2BwwNE3QMmkkQZlBAGL6bSHnLOZRDaIgNpFG2ojWg5QY6XsMEMu8TftGZfDerK%2BzCqOdqo%2FWd97QzvqDyhP8fz5DpgziOMLBojwXOFHRkAZnPhuW7uBedsL3eQduJ7%2FFmHS09uOXo%2BPOYu9MIjZQJDcYIr%2Fn%2FI%2FrnjUnoqjRr%2F1i0CK7IOJm6CA5C9sxy3xp85JUHZ%2B3PZ07fQ1j56DOnUOUMtiZHn%2FgQnYoWZbMNOu4bADtHBtO9Tu0w5Vd%2BfXNhQO4xIJhxUNU7loGJCi0WksTBtQ8u3wYQaU7sNU7TWLPetmDmZY0UXuJHGydwzRGaLqumjJB2ZpkD0bjA6tP21AObaDx0sm3arx0mtaoN6vDMxxtH4hz%2FB5qveyDJmiZuIgc6mydLWd0%2FTyDXqVW1srOwLUDub1Gdl%2FLpkOrtHSvUy%2FhioPwD%2BQ6g1f2GuoUuNTvTO8zDy0nMbnhxY4ONQ9WiqqjY%2F2szzTDQt8kutBHD7s0H1n%2BXQoDpdr4sRKj7%2BvUfThzNbB5JoOwpcClEo9VRUUtFBCiNVWKYCuXKVsfSlb16FzspV1mizgHTprfJiinG2SZqtkO7SRSTZRIy2WMB7lwKw%2F0PP2SLA0sksavsrKLhyNyClLEcb25hqyMPuDLliSML4bqARXCtjTwJWWd4ltozX4XSeu9eGXbbBbDb9%2BJ658sC9VRCgWHh4JQOzRV%2BeVjs%2FcYrNbRZlEnhvMl4XLk9zlpYjTGaBNx7g6wEiy2uLMdYWrA9BWd0qh95pQrvNTCowfEnEQ%2F0j%2FHSJC8MDfOaMwVBleSEeF0SK3t7giP6mghEXvK4yD4dFVV6RalIS24DmKjPgwCsl0aetUwh%2B6%2BC2cInLF%2FwE%3D"></iframe>
+
+<p><a href="#数据集自定义">数据集自定义</a>：根据imgs2poses.py生成sparse_points.ply和poses.npy文件，若先前没有经过colmap，则会生成<code>sparse\0\*.bin</code><a href="#cameras文件">文件</a>,(cameras.bin, images.bin , points3D.bin)。然后根据gen_cameras.py文件，通过pose.npy读取第一个相机的c2w矩阵将第一个相机的单位坐标系保存为pose.ply文件，通过pose.npy和sparse_points_interest.ply文件生成preprocessed文件夹下的cameras_sphere.npz，并复制images生成image和mask文件夹下图片。</p>
+<ul>
+<li>imgs2poses.py<ul>
+<li>sparse_points.ply：读取points3D文件中的所有点，生成的稀疏点云文件</li>
+<li>poses.npy：通过cameras.bin和images.bin文件计算出的<a href="#images文件">pose数据</a>：大小num_images x 3 x 5，包括num_images x 3 x 4的c2w矩阵和num_images x 3的hwf数据</li>
+</ul>
+</li>
+<li>gen_cameras.py<ul>
+<li><a href="#pose文件">pose.ply</a>：读取第一个相机的pose，将该相机坐标系下的原点、xyz轴单位坐标转换到世界坐标系下，然后生成点云保存为pose.ply文件</li>
+<li><a href="#两个矩阵">cameras_sphere.npz</a><ul>
+<li>world_mat：通过pose.npz读取pose矩阵，分解为c2w和hwf，并将c2w求逆得到w2c，将hwf转化为intrinsic相机内参矩阵，最后得到<code>world_mat=intrinsic @ w2c</code></li>
+<li>scale_mat：通过sparse_points_interest.ply文件，将其中的感兴趣区域，在世界坐标系下计算出scale_mat，<strong>该矩阵用于将世界坐标系原点缩放并平移到感兴趣区域的中心处，使得世界坐标系下的单位圆即为感兴趣的区域</strong>，这也是不需要mask的原因</li>
+<li>image和mask：将images数据集文件夹下图片复制到preprocessed文件夹下的image下和并根据数据集图片生成同样大小的白色图片，放入mask文件夹</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><a href="#dataset">数据处理</a>：</p>
+<ul>
+<li>读取cameras_sphere.npz文件、image和mask文件，获得相机的内外参矩阵intrinsics, pose，并对intrinsics求逆得到intrinsics_inv，在<a href="#光线生成">生成光线</a>时用于将图片像素的坐标转换为光线在世界坐标系下的原点o和方向向量d。</li>
+<li>通过o和d，生成场景中的near和far，即在每条光线上采样时，采样点的最近坐标和最远坐标</li>
+</ul>
+<p><a href="#render">渲染</a>：</p>
+<ul>
+<li>根据o、d、near和far，以及其他参数，经过MLP网络，得到颜色值、sdf对输入pts_xyz的梯度等信息，然后计算loss，最后通过反向传播不断更新网络的参数，训练出最终的4个MLP网络</li>
+<li>根据训练好的MLP网络，通过一个新相机点的位置，生成一系列光线，在光线上进行采样获得点云的坐标，然后将坐标输入MLP网络，获得三维空间中每个点云的颜色、SDF和梯度等信息。<ul>
+<li>颜色跟观察方向有关、SDF与方向无关、梯度与方向无关，颜色可以用来生成新视点的图片、视频，SDF可以用来根据threshold选取零水平集来生成mesh模型表面，梯度可以做法向量图。</li>
+</ul>
+</li>
+</ul>
+<h2 id="dataset"><a href="#dataset" class="headerlink" title="dataset"></a>dataset</h2><p><code>self.dataset = Dataset(self.conf[&#39;dataset&#39;])</code></p>
+<ul>
+<li>相机内外参数矩阵</li>
+<li>光线的生成以及坐标变换</li>
+</ul>
+<p>BlendedMVS/bmvs_bear/cameras_sphere</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&quot;&quot;&quot;</span><br><span class="line">in gen_cameras : </span><br><span class="line">w2c = np.linalg.inv(pose)</span><br><span class="line"></span><br><span class="line">世界坐标系到像素坐标系转换矩阵</span><br><span class="line">(4, 4) world_mats_np0 = intrinsic @ w2c =w2pixel</span><br><span class="line">[[-1.0889766e+02  3.2340955e+02  6.2724188e+02 -1.6156446e+04] </span><br><span class="line">[-4.8021997e+02 -3.6971255e+02  2.8318774e+02 -8.9503633e+03]</span><br><span class="line">[ 2.4123600e-01 -4.2752099e-01  8.7122399e-01 -2.1731400e+01]</span><br><span class="line">[ 0.0000000e+00  0.0000000e+00  0.0000000e+00  1.0000000e+00]]</span><br><span class="line"></span><br><span class="line">将世界坐标系平移缩放到感兴趣物体的中心</span><br><span class="line">(4, 4) scale_mats_np0 : sparse_points_interest中，以中心点为圆心，最远距离为半径的一个区域</span><br><span class="line">    scale_mat = np.diag([radius, radius, radius, 1.0]).astype(np.float32)</span><br><span class="line">    scale_mat[:3, 3] = center</span><br><span class="line">[[ 1.6737139  0.         0.        -2.702419 ]</span><br><span class="line">[ 0.         1.6737139  0.        -1.3968586]</span><br><span class="line">[ 0.         0.         1.6737139 27.347609 ]</span><br><span class="line">[ 0.         0.         0.         1.       ]]</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">P = world_mat @ scale_mat</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">[[-1.8226353e+02  5.4129504e+02  1.0498235e+03  8.3964941e+02]</span><br><span class="line"> [-8.0375085e+02 -6.1879303e+02  4.7397528e+02  6.0833594e+02]</span><br><span class="line"> [ 4.0376005e-01 -7.1554786e-01  1.4581797e+00  2.0397587e+00]</span><br><span class="line"> [ 0.0000000e+00  0.0000000e+00  0.0000000e+00  1.0000000e+00]]</span><br><span class="line"></span><br><span class="line">[[-1.8226353e+02  5.4129504e+02  1.0498235e+03  8.3964941e+02]</span><br><span class="line"> [-8.0375085e+02 -6.1879303e+02  4.7397528e+02  6.0833594e+02]</span><br><span class="line"> [ 4.0376005e-01 -7.1554786e-01  1.4581797e+00  2.0397587e+00]]</span><br><span class="line"> &quot;&quot;&quot;</span><br><span class="line">P = P[:3, :4]</span><br></pre></td></tr></table></figure>
+<p>将P分解为相机内参和外参矩阵，in dataset.py</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">out = cv.decomposeProjectionMatrix(P)</span><br><span class="line">K = out[0] # 3x3</span><br><span class="line">[[1.00980786e+03 1.61999036e-04 6.39247803e+02]</span><br><span class="line"> [0.00000000e+00 1.00980774e+03 4.83591949e+02]</span><br><span class="line"> [0.00000000e+00 0.00000000e+00 1.67371416e+00]]</span><br><span class="line"> </span><br><span class="line">R = out[1] # 3x3</span><br><span class="line">[[-0.33320493  0.8066752   0.48810825]</span><br><span class="line"> [-0.9114712  -0.40804535  0.05214698]</span><br><span class="line"> [ 0.24123597 -0.42752096  0.87122387]]</span><br><span class="line"></span><br><span class="line">t = out[2] # 4x1</span><br><span class="line">[[-0.16280915]</span><br><span class="line"> [ 0.30441687]</span><br><span class="line"> [-0.69216055]</span><br><span class="line"> [ 0.6338275 ]]</span><br><span class="line"> </span><br><span class="line">K = K / K[2, 2]</span><br><span class="line">[[6.0333350e+02 9.6790143e-05 3.8193369e+02]</span><br><span class="line"> [0.0000000e+00 6.0333344e+02 2.8893341e+02]</span><br><span class="line"> [0.0000000e+00 0.0000000e+00 1.0000000e+00]]</span><br><span class="line"></span><br><span class="line">intrinsics = np.eye(4)</span><br><span class="line">intrinsics[:3, :3] = K # intrinsics: 4x4 为相机内参矩阵</span><br><span class="line">[[6.03333496e+02 9.67901433e-05 3.81933685e+02 0.00000000e+00]</span><br><span class="line"> [0.00000000e+00 6.03333435e+02 2.88933411e+02 0.00000000e+00]</span><br><span class="line"> [0.00000000e+00 0.00000000e+00 1.00000000e+00 0.00000000e+00]</span><br><span class="line"> [0.00000000e+00 0.00000000e+00 0.00000000e+00 1.00000000e+00]]</span><br><span class="line"></span><br><span class="line">pose = np.eye(4, dtype=np.float32)</span><br><span class="line">pose[:3, :3] = R.transpose() # 正交矩阵 其转置等于逆 w2c --&gt; c2w</span><br><span class="line">pose[:3, 3] = (t[:3] / t[3])[:, 0] # pose: 4x4 为相机外参矩阵的逆</span><br><span class="line">[[-0.33320493 -0.9114712   0.24123597 -0.25686666]</span><br><span class="line"> [ 0.8066752  -0.40804535 -0.42752096  0.48028347]</span><br><span class="line"> [ 0.48810825  0.05214698  0.87122387 -1.092033  ]</span><br><span class="line"> [ 0.          0.          0.          1.        ]]</span><br><span class="line"> 单位向量经过pose变换到世界坐标系后仍然为单位向量</span><br><span class="line"></span><br><span class="line">世界坐标系下，光线的原点：</span><br><span class="line">[[-0.25686666]</span><br><span class="line"> [ 0.48028347]</span><br><span class="line"> [-1.092033  ]</span><br><span class="line"> [ 1.        ]]</span><br></pre></td></tr></table></figure>
+<h3 id="光线生成"><a href="#光线生成" class="headerlink" title="光线生成"></a>光线生成</h3><p>gen_random_rays_at()随机生成光线<br>然后生成光线，in <code>dataset.py/gen_random_rays_at()</code> by img_idx ，batch_size, 并将rays的像素坐标转换到世界坐标系下</p>
+<p>p_pixel —&gt; p_camera —&gt; p_world (or rays_d)</p>
+<p><code>p_camera = intrinsics_inv @ p_pixel</code>:  <code>3x3 @ 3x1</code></p>
+<p>$\begin{bmatrix} \frac{1}{f} &amp; 0 &amp; -\frac{W}{2 \cdot f}  \\ 0 &amp; \frac{1}{f} &amp; -\frac{H}{2 \cdot f} \\ 0 &amp; 0 &amp; 1 \\ \end{bmatrix} \begin{pmatrix} i \\ j \\ 1 \\ \end{pmatrix} = \begin{pmatrix} \frac{i-\frac{W}{2}}{f} \\ \frac{j-\frac{H}{2}}{f} \\ 1 \\ \end{pmatrix}$</p>
+<p><code>p_world = pose @ p_camera</code>:  <code>3x3 @ 3x1</code></p>
+<p>$\begin{bmatrix} r_{11}&amp;r_{12}&amp;r_{13}\\ r_{21}&amp;r_{22}&amp;r_{23}\\ r_{31}&amp;r_{32}&amp;r_{33} \end{bmatrix} \begin{pmatrix} x_{c} \\ y_{c} \\ z_{c} \\ \end{pmatrix} = \begin{pmatrix} x_{w} \\ y_{w} \\ z_{w} \\ \end{pmatrix} = rays_d$</p>
+<p><code>rays_o = pose[:3, 3]</code> $= \begin{bmatrix} t_{x} \\ t_{y} \\ t_{z} \end{bmatrix}$，为相机坐标系原点在世界坐标系下位置</p>
+<p>$pose = \begin{bmatrix}r_{11}&amp;r_{12}&amp;r_{13}&amp;t_x\\ r_{21}&amp;r_{22}&amp;r_{23}&amp;t_y\\ r_{31}&amp;r_{32}&amp;r_{33}&amp;t_z\\ 0&amp;0&amp;0&amp;1\end{bmatrix}$</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">def gen_random_rays_at(self, img_idx, batch_size):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    Generate random rays at world space from one camera.</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    pixels_x = torch.randint(low=0, high=self.W, size=[batch_size]) </span><br><span class="line">    pixels_y = torch.randint(low=0, high=self.H, size=[batch_size])</span><br><span class="line">    color = self.images[img_idx][(pixels_y, pixels_x)]    # batch_size, 3</span><br><span class="line">    mask = self.masks[img_idx][(pixels_y, pixels_x)]      # batch_size, 3</span><br><span class="line">    # p : 像素坐标系下的坐标</span><br><span class="line">    p = torch.stack([pixels_x, pixels_y, torch.ones_like(pixels_y)], dim=-1).float()  # batch_size, 3</span><br><span class="line">    # 将p转换到相机坐标系下</span><br><span class="line">    # matmul : [1, 3, 3] x [batch_size, 3, 1] -&gt; [batch_size, 3, 1] -&gt; [batch_size, 3]</span><br><span class="line">    p = torch.matmul(self.intrinsics_all_inv[img_idx, None, :3, :3], p[:, :, None]).squeeze() # batch_size, 3</span><br><span class="line">    # rays_v ：将p归一化</span><br><span class="line">    rays_v = p / torch.linalg.norm(p, ord=2, dim=-1, keepdim=True)    # batch_size, 3</span><br><span class="line">    # rays_v ：将p转换到世界坐标系下</span><br><span class="line">    # matmul : [1, 3, 3] x [batch_size, 3, 1] -&gt; [batch_size, 3, 1] -&gt; [batch_size, 3]</span><br><span class="line">    rays_v = torch.matmul(self.pose_all[img_idx, None, :3, :3], rays_v[:, :, None]).squeeze()  # batch_size, 3</span><br><span class="line">    # [1,3].expand([batch_size, 3])</span><br><span class="line">    rays_o = self.pose_all[img_idx, None, :3, 3].expand(rays_v.shape) # batch_size, 3</span><br><span class="line">    return torch.cat([rays_o.cpu(), rays_v.cpu(), color, mask[:, :1]], dim=-1).cuda()    # batch_size, 10</span><br></pre></td></tr></table></figure>
+<h3 id="计算near和far-from-o-d"><a href="#计算near和far-from-o-d" class="headerlink" title="计算near和far(from o,d)"></a>计算near和far(from o,d)</h3><p>根据rays_o 和rays_d 计算出near和far两个平面</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230803193755.png" alt="image.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">def near_far_from_sphere(self, rays_o, rays_d):</span><br><span class="line">    a = torch.sum(rays_d**2, dim=-1, keepdim=True)</span><br><span class="line">    b = 2.0 * torch.sum(rays_o * rays_d, dim=-1, keepdim=True)</span><br><span class="line">    mid = 0.5 * (-b) / a</span><br><span class="line">    # rays_o 在 rays_d 方向上的投影 / rays_d 在 rays_d 方向上的投影</span><br><span class="line">    near = mid - 1.0</span><br><span class="line">    far = mid + 1.0</span><br><span class="line">    return near, far</span><br></pre></td></tr></table></figure>
+<h3 id="box的min和max-to生成mesh模型"><a href="#box的min和max-to生成mesh模型" class="headerlink" title="box的min和max(to生成mesh模型)"></a>box的min和max(to生成mesh模型)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&#x27;&#x27;&#x27;</span><br><span class="line">(4, 4) scale_mats_np0</span><br><span class="line">[[ 1.6737139  0.         0.        -2.702419 ]</span><br><span class="line">[ 0.         1.6737139  0.        -1.3968586]</span><br><span class="line">[ 0.         0.         1.6737139 27.347609 ]</span><br><span class="line">[ 0.         0.         0.         1.       ]]</span><br><span class="line">&#x27;&#x27;&#x27;</span><br><span class="line">object_bbox_min = np.array([-1.01, -1.01, -1.01, 1.0])</span><br><span class="line">object_bbox_max = np.array([ 1.01,  1.01,  1.01, 1.0])</span><br><span class="line"># Object scale mat: region of interest to **extract mesh**</span><br><span class="line">object_scale_mat = np.load(os.path.join(self.data_dir, self.object_cameras_name))[&#x27;scale_mat_0&#x27;] # 4x4</span><br><span class="line"></span><br><span class="line"># object_bbox_? &gt; object_scale_mat缩放+平移 &gt; scale_mat缩放+平移</span><br><span class="line">object_bbox_min = np.linalg.inv(self.scale_mats_np[0]) @ object_scale_mat @ object_bbox_min[:, None] # 4x1</span><br><span class="line">object_bbox_max = np.linalg.inv(self.scale_mats_np[0]) @ object_scale_mat @ object_bbox_max[:, None] # 4x1</span><br><span class="line">self.object_bbox_min = object_bbox_min[:3, 0] # 3</span><br><span class="line">self.object_bbox_max = object_bbox_max[:3, 0] # 3</span><br><span class="line">如果</span><br><span class="line">render_cameras_name = cameras_sphere.npz</span><br><span class="line">object_cameras_name = cameras_sphere.npz</span><br><span class="line">两文件相同，则 </span><br><span class="line">np.linalg.inv(self.scale_mats_np[0]) @ object_scale_mat = </span><br><span class="line">[[ 1.0000000e+00  0.0000000e+00  0.0000000e+00  0.0000000e+00]</span><br><span class="line"> [ 0.0000000e+00  1.0000000e+00  0.0000000e+00 -5.9604645e-08]</span><br><span class="line"> [ 0.0000000e+00  0.0000000e+00  1.0000000e+00  0.0000000e+00]</span><br><span class="line"> [ 0.0000000e+00  0.0000000e+00  0.0000000e+00  1.0000000e+00]]</span><br><span class="line">object_bbox_min , object_bbox_max 只平移，不缩放</span><br></pre></td></tr></table></figure>
+<h2 id="神经网络结构Network"><a href="#神经网络结构Network" class="headerlink" title="神经网络结构Network"></a>神经网络结构Network</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># Networks</span><br><span class="line">params_to_train = []</span><br><span class="line">self.nerf_outside = NeRF(**self.conf[&#x27;model.nerf&#x27;]).to(self.device) # 创建一个NeRF网络</span><br><span class="line">self.sdf_network = SDFNetwork(**self.conf[&#x27;model.sdf_network&#x27;]).to(self.device) # 创建一个SDF网络</span><br><span class="line">self.deviation_network = SingleVarianceNetwork(**self.conf[&#x27;model.variance_network&#x27;]).to(self.device)</span><br><span class="line">self.color_network = RenderingNetwork(**self.conf[&#x27;model.rendering_network&#x27;]).to(self.device)</span><br><span class="line">params_to_train += list(self.nerf_outside.parameters())</span><br><span class="line">params_to_train += list(self.sdf_network.parameters())</span><br><span class="line">params_to_train += list(self.deviation_network.parameters())</span><br><span class="line">params_to_train += list(self.color_network.parameters())</span><br><span class="line"></span><br><span class="line">self.optimizer = torch.optim.Adam(params_to_train, lr=self.learning_rate)</span><br><span class="line"></span><br><span class="line">self.renderer = NeuSRenderer(self.nerf_outside,</span><br><span class="line">                             self.sdf_network,</span><br><span class="line">                             self.deviation_network,</span><br><span class="line">                             self.color_network,</span><br><span class="line">                             **self.conf[&#x27;model.neus_renderer&#x27;])</span><br></pre></td></tr></table></figure>
+<p>Neus中共构建了4个network：</p>
+<ul>
+<li>NeRF：训练物体outside即背景的颜色</li>
+<li>SDFNetwork：训练点云中的sdf值</li>
+<li>RenderingNetwork：训练点云的RGB</li>
+<li>SingleVarianceNetwork：训练一个单变量invs，用于计算$cdf = sigmoid(estimated.sdf  \cdot inv.s)$</li>
+</ul>
+<h3 id="NeRF"><a href="#NeRF" class="headerlink" title="NeRF"></a>NeRF</h3><p>同NeRF网络<br><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/Pasted%20image%2020221206180113.png" alt="Pasted image 20221206180113.png|600"></p>
+<ul>
+<li>84—&gt;256—&gt;256—&gt;256—&gt;256—&gt;256+84—&gt;256—&gt;256—&gt;256+27—&gt;128—&gt;3</li>
+<li>84—&gt;256—&gt;256—&gt;256—&gt;256—&gt;256+84—&gt;256—&gt;256—&gt;256—&gt;1</li>
+</ul>
+<h3 id="SDFNetwork"><a href="#SDFNetwork" class="headerlink" title="SDFNetwork"></a>SDFNetwork</h3><p>激活函数 $\text{Softplus}(x) = \frac{\log(1 + e^{\beta x})}{\beta}$</p>
+<p>网络结构：<br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/SDFNetwork_modify.png" alt="SDFNetwork"></p>
+<ul>
+<li>39—&gt;256—&gt;256—&gt;256—&gt;217—&gt;256—&gt;256—&gt;256—&gt;256—&gt;257<br>input: pts, 采样点的三维坐标 batch_size <em> n_samples x 3<br>output: 257个数 batch_size </em> n_samples x 257</li>
+</ul>
+<p><code>sdf(pts) = output[:, :1]</code>:  batch_size * n_samples x 1，采样点的sdf值</p>
+<h3 id="RenderingNetwork"><a href="#RenderingNetwork" class="headerlink" title="RenderingNetwork"></a>RenderingNetwork</h3><p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/RenderingNetwork.png" alt="RenderingNetwork.png"></p>
+<p>input: rendering_input :<code>[batch_size * n_samples ,  3 + 27 + 3+ 256 = 289]</code><br><code>rendering_input = torch.cat([points, view_dirs, normals, feature_vectors], dim=-1)</code></p>
+<ul>
+<li>pts: batch_size * n_samples, 3</li>
+<li>gradients: batch_size * n_samples, 3</li>
+<li>dirs: batch_size * n_samples, 3<ul>
+<li>位置编码 to view_dirs: batch_size * n_samples , 27</li>
+</ul>
+</li>
+<li>feature_vector: batch_size * n_samples, 256</li>
+</ul>
+<p>output: sampled_color采样点的RGB颜色 batch_size * n_samples , 3</p>
+<h3 id="SingleVarianceNetwork"><a href="#SingleVarianceNetwork" class="headerlink" title="SingleVarianceNetwork"></a>SingleVarianceNetwork</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class SingleVarianceNetwork(nn.Module):</span><br><span class="line">    def __init__(self, init_val):</span><br><span class="line">        super(SingleVarianceNetwork, self).__init__()</span><br><span class="line">        # variance 模型可以跟踪和优化这个参数，使其在训练过程中进行更新</span><br><span class="line">        self.register_parameter(&#x27;variance&#x27;, nn.Parameter(torch.tensor(init_val)))</span><br><span class="line"></span><br><span class="line">    def forward(self, x):</span><br><span class="line">        # torch.zeros([1, 3])</span><br><span class="line">        # 大小为 [len(x), 1] 的张量，每个元素都是 exp(variance * 10.0)</span><br><span class="line">        return torch.ones([len(x), 1]) * torch.exp(self.variance * 10.0)</span><br><span class="line"></span><br><span class="line">in Runner:</span><br><span class="line">self.deviation_network = SingleVarianceNetwork(**self.conf[&#x27;model.variance_network&#x27;]).to(self.device)</span><br></pre></td></tr></table></figure>
+<p>render中<br><code>inv_s = deviation_network(torch.zeros([1, 3]))[:, :1].clip(1e-6, 1e6)</code></p>
+<h2 id="render"><a href="#render" class="headerlink" title="render"></a>render</h2><p>input: </p>
+<ul>
+<li>rays_o, </li>
+<li>rays_d, 单位向量</li>
+<li>near, far : batch_sizex1,batch_sizex1</li>
+<li>background_rgb=background_rgb,</li>
+<li>cos_anneal_ratio=self.get_cos_anneal_ratio()</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">image_perm = self.get_image_perm()</span><br><span class="line">res_step = self.end_iter - self.iter_step</span><br><span class="line"></span><br><span class="line">for iter_i in tqdm(range(res_step)):</span><br><span class="line">    data = self.dataset.gen_random_rays_at(image_perm[self.iter_step % len(image_perm)], self.batch_size)</span><br><span class="line">    # data : [batch_size, 10] : [rays_o.cpu(), rays_v.cpu(), color, mask[:, :1]]</span><br><span class="line">    rays_o, rays_d, true_rgb, mask = data[:, :3], data[:, 3: 6], data[:, 6: 9], data[:, 9: 10]</span><br><span class="line">    </span><br><span class="line">    near, far = self.dataset.near_far_from_sphere(rays_o, rays_d)</span><br><span class="line">    </span><br><span class="line">    background_rgb = None</span><br><span class="line">    if self.use_white_bkgd:</span><br><span class="line">        background_rgb = torch.ones([1, 3])</span><br><span class="line"></span><br><span class="line">    render_out = self.renderer.render(rays_o, rays_d, near, far,</span><br><span class="line">                                      background_rgb=background_rgb,</span><br><span class="line">                                      cos_anneal_ratio=self.get_cos_anneal_ratio())</span><br></pre></td></tr></table></figure>
+<p>output: render_out字典</p>
+<ul>
+<li>color_fine: render出来图片的RGB颜色值</li>
+<li>s_val: $= \sum_{i}^{n.samples}(\frac{1.0}{invs_{i}})$<ul>
+<li>inv_s: 一个可以更新的变量 $1 \times e^{10.0 \cdot var}$ ，并将其限制在$1 \times 10^{-6}$ ~ $1 \times 10^{6}$之间</li>
+<li><code>ret_fine[&#39;s_val&#39;] = 1.0 / inv_s</code> # batch_size * n_samples, 1</li>
+<li><code>s_val = ret_fine[&#39;s_val&#39;].reshape(batch_size, n_samples).mean(dim=-1, keepdim=True)</code> # batch_size, 1</li>
+</ul>
+</li>
+<li>cdf_fine: $pre.cdf = {\Phi_s(f(\mathbf{p}(t_i)))}$<ul>
+<li>batch_size, n_samples</li>
+</ul>
+</li>
+<li>weight_sum: 一条光线上的权重之和(包括背景outside)<ul>
+<li>batch_size, 1</li>
+<li><code>weights_sum = weights.sum(dim=-1, keepdim=True)</code></li>
+</ul>
+</li>
+<li>weight_max: 一条光线上权重的最大值<ul>
+<li>batch_size, 1</li>
+<li><code>torch.max(weights, dim=-1, keepdim=True)[0]</code></li>
+</ul>
+</li>
+<li>gradients: 梯度,sdf对输入pts_xyz的梯度，与法向量的计算有关<ul>
+<li>batch_size, n_samples, 3</li>
+</ul>
+</li>
+<li>weights: 权重，每个采样点<ul>
+<li>batch_size, n_samples or batch_size, n_samples + n_outside</li>
+</ul>
+</li>
+<li>gradient_error: Eikonal损失值$\mathcal{L}_{r e g}=\frac{1}{n m}\sum_{k,i}(|\nabla f(\hat{\mathbf{p}}_{k,i})|_{2}-1)^{2}.$ 只计算在relax半径为1.2的圆内的采样点sdf的梯度<ul>
+<li>$|\nabla f(\hat{\mathbf{p}}_{k,i})|_{2} = \sqrt{gx^{2}+gy^{2}+gz^{2}}$</li>
+</ul>
+</li>
+<li>inside_sphere: 采样点是否在单位圆空间内<ul>
+<li>batch_size, n_samples</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &#x27;color_fine&#x27;: color_fine, # batch_size, 3</span><br><span class="line">    &#x27;s_val&#x27;: s_val, # batch_size, 1</span><br><span class="line">    &#x27;cdf_fine&#x27;: ret_fine[&#x27;cdf&#x27;], # batch_size, n_samples</span><br><span class="line">    &#x27;weight_sum&#x27;: weights_sum, # batch_size, 1</span><br><span class="line">    &#x27;weight_max&#x27;: torch.max(weights, dim=-1, keepdim=True)[0], # batch_size, 1</span><br><span class="line">    &#x27;gradients&#x27;: gradients, # batch_size, n_samples, 3</span><br><span class="line">    &#x27;weights&#x27;: weights, # batch_size, n_samples or batch_size, n_samples + n_outside</span><br><span class="line">    &#x27;gradient_error&#x27;: ret_fine[&#x27;gradient_error&#x27;], # 1</span><br><span class="line">    &#x27;inside_sphere&#x27;: ret_fine[&#x27;inside_sphere&#x27;] # batch_size, n_samples</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">ret_fine = self.render_core(rays_o,</span><br><span class="line">                            rays_d,</span><br><span class="line">                            z_vals,</span><br><span class="line">                            sample_dist,</span><br><span class="line">                            self.sdf_network,</span><br><span class="line">                            self.deviation_network,</span><br><span class="line">                            self.color_network,</span><br><span class="line">                            background_rgb=background_rgb,</span><br><span class="line">                            background_alpha=background_alpha,</span><br><span class="line">                            background_sampled_color=background_sampled_color,</span><br><span class="line">                            cos_anneal_ratio=cos_anneal_ratio)</span><br><span class="line">                            </span><br><span class="line"># ret_fine:</span><br><span class="line">    # &#x27;color&#x27;: color, # batch_size, 3</span><br><span class="line">    # &#x27;sdf&#x27;: sdf, # batch_size * n_samples, 1</span><br><span class="line">    # &#x27;dists&#x27;: dists, # batch_size, n_samples</span><br><span class="line">    # &#x27;gradients&#x27;: gradients.reshape(batch_size, n_samples, 3),</span><br><span class="line">    # &#x27;s_val&#x27;: 1.0 / inv_s, # batch_size * n_samples, 1</span><br><span class="line">    # &#x27;mid_z_vals&#x27;: mid_z_vals, # batch_size, n_samples</span><br><span class="line">    # &#x27;weights&#x27;: weights, # batch_size, n_samples or batch_size, n_samples + n_outside</span><br><span class="line">    # &#x27;cdf&#x27;: c.reshape(batch_size, n_samples), # batch_size, n_samples</span><br><span class="line">    # &#x27;gradient_error&#x27;: gradient_error, # 1</span><br><span class="line">    # &#x27;inside_sphere&#x27;: inside_sphere # batch_size, n_samples</span><br><span class="line">color_fine = ret_fine[&#x27;color&#x27;]</span><br><span class="line">weights = ret_fine[&#x27;weights&#x27;]</span><br><span class="line">weights_sum = weights.sum(dim=-1, keepdim=True)</span><br><span class="line">gradients = ret_fine[&#x27;gradients&#x27;]</span><br><span class="line">s_val = ret_fine[&#x27;s_val&#x27;].reshape(batch_size, n_samples).mean(dim=-1, keepdim=True) # [batch_size, 1]</span><br></pre></td></tr></table></figure>
+<p>function:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">render:</span><br><span class="line"></span><br><span class="line">batch_size = len(rays_o)</span><br><span class="line">sample_dist = 2.0 / self.n_samples   # Assuming the region of interest is a unit sphere </span><br><span class="line">z_vals = torch.linspace(0.0, 1.0, self.n_samples) # [n_samples]</span><br><span class="line">z_vals = near + (far - near) * z_vals[None, :]  # [batch_size, n_samples]</span><br><span class="line">拍照物体的采样点z方向坐标</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">物体外的z坐标(背景)</span><br><span class="line">z_vals_outside = None</span><br><span class="line">if self.n_outside &gt; 0:</span><br><span class="line">    z_vals_outside = torch.linspace(1e-3, 1.0 - 1.0 / (self.n_outside + 1.0), self.n_outside) # [n_outside]</span><br><span class="line"></span><br><span class="line">n_samples = self.n_samples</span><br><span class="line">perturb = self.perturb</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">添加扰动：</span><br><span class="line">if perturb_overwrite &gt;= 0:</span><br><span class="line">    perturb = perturb_overwrite</span><br><span class="line">if perturb &gt; 0:</span><br><span class="line">    t_rand = (torch.rand([batch_size, 1]) - 0.5) # [batch_size, 1]</span><br><span class="line">    z_vals = z_vals + t_rand * 2.0 / self.n_samples # [batch_size, n_samples]</span><br><span class="line"></span><br><span class="line">    if self.n_outside &gt; 0:</span><br><span class="line">        mids = .5 * (z_vals_outside[..., 1:] + z_vals_outside[..., :-1]) # [n_outside - 1]</span><br><span class="line">        upper = torch.cat([mids, z_vals_outside[..., -1:]], -1)     # [n_outside]</span><br><span class="line">        lower = torch.cat([z_vals_outside[..., :1], mids], -1)      # [n_outside]</span><br><span class="line">        t_rand = torch.rand([batch_size, z_vals_outside.shape[-1]]) # [batch_size, n_outside]</span><br><span class="line">        z_vals_outside = lower[None, :] + (upper - lower)[None, :] * t_rand</span><br><span class="line">        # Z_vals_outside:  1Xn_outside + 1Xn_outside * batch_sizeXn_outside = batch_sizeXn_outside</span><br><span class="line"></span><br><span class="line">if self.n_outside &gt; 0:</span><br><span class="line">    z_vals_outside = far / torch.flip(z_vals_outside, dims=[-1]) + 1.0 / self.n_samples # [batch_size, n_outside]</span><br><span class="line">    # filp: 将tensor的维度进行翻转，如[1,2,3] -&gt; [3,2,1] ，倒序排列</span><br><span class="line"></span><br><span class="line">背景outside:</span><br><span class="line">background_alpha = None</span><br><span class="line">background_sampled_color = None</span><br></pre></td></tr></table></figure>
+<h3 id="get-cos-anneal-ratio"><a href="#get-cos-anneal-ratio" class="headerlink" title="get_cos_anneal_ratio"></a>get_cos_anneal_ratio</h3><p>output: </p>
+<ul>
+<li>数1或者比一小的数$\frac{iterstep}{anneal}, anneal=50000$</li>
+<li>or 1 when anneal_end = 0</li>
+</ul>
+<h3 id="精采样n-importance"><a href="#精采样n-importance" class="headerlink" title="精采样n_importance"></a>精采样n_importance</h3><p>if self.n_importance &gt; 0: 精采样</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">with torch.no_grad(): # 不需要计算梯度</span><br><span class="line">    # pts : [batch_size, 1, 3] + [batch_size, 1, 3] * [batch_size, n_samples, 1] = [batch_size, n_samples, 3]</span><br><span class="line">    pts = rays_o[:, None, :] + rays_d[:, None, :] * z_vals[..., :, None] # [batch_size, n_samples, 3]</span><br><span class="line">    sdf = self.sdf_network.sdf(pts.reshape(-1, 3)).reshape(batch_size, self.n_samples)</span><br><span class="line">    # pts.reshape(-1, 3) : [batch_size * n_samples, 3]</span><br><span class="line">    # sdf : [batch_size * n_samples , 1] -&gt; [batch_size, n_samples]</span><br><span class="line"></span><br><span class="line">    for i in range(self.up_sample_steps):</span><br><span class="line">        # [batch_size, n_importance // up_sample_steps] per step</span><br><span class="line">        new_z_vals = self.up_sample(rays_o,</span><br><span class="line">                                    rays_d,</span><br><span class="line">                                    z_vals,</span><br><span class="line">                                    sdf,</span><br><span class="line">                                    self.n_importance // self.up_sample_steps,</span><br><span class="line">                                    64 * 2**i)</span><br><span class="line">        # # [batch_size, n_samples + n_importance // up_sample_steps], [batch_size, n_samples + n_importance // up_sample_steps]</span><br><span class="line">        z_vals, sdf = self.cat_z_vals(rays_o,</span><br><span class="line">                                    rays_d,</span><br><span class="line">                                    z_vals,</span><br><span class="line">                                    new_z_vals,</span><br><span class="line">                                    sdf,</span><br><span class="line">                                    last=(i + 1 == self.up_sample_steps))</span><br><span class="line">    # new_z_vals : [batch_size, n_importance]</span><br><span class="line">    # z_vals : [batch_size, n_samples + n_importance]</span><br><span class="line"></span><br><span class="line">n_samples = self.n_samples + self.n_importance</span><br></pre></td></tr></table></figure>
+<h4 id="up-sample-self-rays-o-rays-d-z-vals-sdf-n-importance-inv-s"><a href="#up-sample-self-rays-o-rays-d-z-vals-sdf-n-importance-inv-s" class="headerlink" title="up_sample(self, rays_o, rays_d, z_vals, sdf, n_importance, inv_s):"></a>up_sample(self, rays_o, rays_d, z_vals, sdf, n_importance, inv_s):</h4><p>input:</p>
+<ul>
+<li>rays_o,</li>
+<li>rays_d,</li>
+<li>z_vals, batch_size X n_samples</li>
+<li>sdf, batch_size X n_samples</li>
+<li>self.n_importance // self.up_sample_steps, 每步处理$\frac{importance}{sampls.steps}$</li>
+<li><code>64 * 2**i</code> , $64  \cdot  2^{i}$</li>
+</ul>
+<p>output:</p>
+<ul>
+<li>new_z_vals: batch_size X n_importance // up_sample_steps * steps_i</li>
+</ul>
+<p>function:</p>
+<ul>
+<li>pts: batch_size,n_samples,3</li>
+<li>radius: pts的2-范数norm(ord=2)<ul>
+<li>batch_size, n_samples</li>
+</ul>
+</li>
+<li>inside_sphere: <code>inside_sphere = (radius[:, :-1] &lt; 1.0) | (radius[:, 1:] &lt; 1.0)</code><ul>
+<li>point是否在单位圆的空间内</li>
+<li>batch_size, n_samples - 1</li>
+</ul>
+</li>
+<li>prev_sdf, next_sdf: 光线上sdf的前后 <code>prev_sdf[1] = next_sdf[0] = sdf[1]</code> <ul>
+<li>batch_size, n_samples - 1</li>
+</ul>
+</li>
+<li>prev_z_vals, next_z_vals:  光线上z坐标的前后 <code>prev_z_vals[1] = next_z_vals[0] = z_vals[1]</code> <ul>
+<li>batch_size, n_samples - 1</li>
+</ul>
+</li>
+<li>mid.sdf:  $mid.sdf = \frac{prev.sdf + next.sdf}{2} = \frac{f(p_{i})+f(p_{i+1})}{2}$<ul>
+<li>batch_size, n_samples - 1</li>
+</ul>
+</li>
+<li><p>cos_val: $cos.val = \frac{next.sdf - prev.sdf}{next.z.vals - prev.z.vals + 1e-5} = \frac{f(p_{i})-f(p_{i+1})}{z_{i}-z_{i+1}}$</p>
+<ul>
+<li>batch_size, n_samples - 1 </li>
+</ul>
+</li>
+<li><p>prev_cos_val： 将cos_val堆叠，且最后一个删除，第一个插入0 <code>prev_cos_val[0] = 0, prev_cos_val[1] = cos_val[0]</code></p>
+<ul>
+<li>batch_size, n_samples - 1</li>
+</ul>
+</li>
+<li>cos_val: stack prev_cos_val and cos_val<ul>
+<li>batch_size, n_samples - 1, 2 </li>
+</ul>
+</li>
+<li>cos_val: 在prev_cos_val和cos_val之间选择最小值，这一步的目的是当发生一条光线穿过物体两次时，具有更好的鲁棒性<ul>
+<li>batch_size, n_samples - 1</li>
+</ul>
+</li>
+<li>cos_val: 将cos_val限制在$-1 \times 10^{3}$和0之间，并将在单位圆空间外的值置False <code>cos_val.clip(-1e3, 0.0) * inside_sphere</code><ul>
+<li>batch_size, n_samples - 1</li>
+</ul>
+</li>
+<li>dist:  两点之间的距离 $dist = next.z.vals- prev.z.vals= z_{i+1}-z_{i}$<ul>
+<li>batch_size, n_samples - 1 </li>
+</ul>
+</li>
+</ul>
+<p>batch_size, n_samples - 1: </p>
+<ul>
+<li>prev_esti_sdf: $\frac{mid.sdf - cos.val * dist}{2} \approx f(p_{i})$</li>
+<li>next_esti_sdf: $\frac{mid.sdf + cos.val * dist}{2} \approx f(p_{i+1})$</li>
+<li>prev_cdf: $prev.cdf = sigmoid(prev.esti.sdf \times inv.s) = sigmoid(\approx f(p_{i})\times 64  \cdot  2^{i})$</li>
+<li>next_cdf: $next.cdf = sigmoid(next.esti.sdf \times inv.s) = sigmoid(\approx f(p_{i+1})\times 64  \cdot  2^{i})$</li>
+<li>alpha: $\alpha = \frac{prev.cdf - next.cdf + 1 \times 10^{-5}}{prev.cdf + 1 \times 10^{-5}}$ is  $\alpha_i=\max\left(\frac{\Phi_s(f(\mathbf{p}(t_i))))-\Phi_s(f(\mathbf{p}(t_{i+1})))}{\Phi_s(f(\mathbf{p}(t_i)))},0\right).$</li>
+<li>weights: $w_{i} = \alpha_{i} \cdot T_{i} =\alpha_{i} \cdot \prod_{j=1}^{i-1}(1-\alpha_j)$<ul>
+<li>in code : <code>weights = alpha * torch.cumprod(torch.cat([torch.ones([batch_size, 1]), 1. - alpha + 1e-7], -1), -1)[:, :-1]</code></li>
+</ul>
+</li>
+</ul>
+<p><code>z_samples = sample_pdf(z_vals, weights, n_importance, det=True).detach()</code></p>
+<h5 id="sample-pdf-z-vals-weights-n-importance-det-True"><a href="#sample-pdf-z-vals-weights-n-importance-det-True" class="headerlink" title="sample_pdf(z_vals, weights, n_importance, det=True)"></a>sample_pdf(z_vals, weights, n_importance, det=True)</h5><p>like NeRF</p>
+<p>input:</p>
+<ul>
+<li>z_vals, batch_size X n_samples</li>
+<li>weights, batch_size, n_samples - 1</li>
+<li>n_importance, </li>
+<li>det=True</li>
+</ul>
+<p>output:</p>
+<ul>
+<li>z_samples, batch_size X n_importance 经过逆变换采样得到的采样点的z坐标值</li>
+</ul>
+<h4 id="cat-z-vals-rays-o-rays-d-z-vals-new-z-vals-sdf-last-i-1-self-up-sample-steps"><a href="#cat-z-vals-rays-o-rays-d-z-vals-new-z-vals-sdf-last-i-1-self-up-sample-steps" class="headerlink" title="cat_z_vals(rays_o,rays_d,z_vals,new_z_vals,sdf,last=(i + 1 == self.up_sample_steps))"></a>cat_z_vals(rays_o,rays_d,z_vals,new_z_vals,sdf,last=(i + 1 == self.up_sample_steps))</h4><p>将原来的z_vals和经过逆变换采样得到的new_z_vals一起cat起来</p>
+<p>input:</p>
+<ul>
+<li>rays_o,</li>
+<li>rays_d,</li>
+<li>z_vals, batch_size X n_samples</li>
+<li>new_z_vals, <code>batch_size X n_importance // up_sample_steps * steps_i</code></li>
+<li>sdf, batch_size X n_samples</li>
+<li>last=(i + 1 == self.up_sample_steps): true(last step) or false</li>
+</ul>
+<p>output:</p>
+<ul>
+<li>z_vals, <code>batch_size X n_samples + n_importance // up_sample_steps * steps_i</code></li>
+<li>sdf,  <code>batch_size X n_samples + n_importance // up_sample_steps * steps_i</code> when not last</li>
+</ul>
+<p><strong>last:</strong><br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">z_vals : batch_size X n_samples + n_importance </span><br><span class="line">n_samples = self.n_samples + self.n_important</span><br></pre></td></tr></table></figure></p>
+<p><strong>then :</strong></p>
+<ul>
+<li>z_vals : batch_size X n_samples</li>
+</ul>
+<h3 id="render-core-outside-rays-o-rays-d-z-vals-feed-sample-dist-self-nerf"><a href="#render-core-outside-rays-o-rays-d-z-vals-feed-sample-dist-self-nerf" class="headerlink" title="render_core_outside(rays_o, rays_d, z_vals_feed, sample_dist, self.nerf)"></a>render_core_outside(rays_o, rays_d, z_vals_feed, sample_dist, self.nerf)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">in render()</span><br><span class="line"># Background model</span><br><span class="line">if self.n_outside &gt; 0:</span><br><span class="line">    z_vals_feed = torch.cat([z_vals, z_vals_outside], dim=-1) # [batch_size, n_samples + n_outside]</span><br><span class="line">    z_vals_feed, _ = torch.sort(z_vals_feed, dim=-1)</span><br><span class="line">    ret_outside = self.render_core_outside(rays_o, rays_d, z_vals_feed, sample_dist, self.nerf)</span><br><span class="line"></span><br><span class="line">    background_sampled_color = ret_outside[&#x27;sampled_color&#x27;]</span><br><span class="line">    background_alpha = ret_outside[&#x27;alpha&#x27;]</span><br></pre></td></tr></table></figure>
+<p>input: </p>
+<ul>
+<li>rays_o, <code>[batch_size,  3]</code></li>
+<li>rays_d, <code>[batch_size,  3]</code></li>
+<li>z_vals_feed, <code>batch_size, n_samples + n_outside</code> ,实际上此处为<code>[batch_size, n_samples + n_outside +n_importance]</code></li>
+<li>sample_dist, $sample.dist = \frac{2.0}{n.samples}$</li>
+<li>self.nerf, NeRF神经网络，使用nerf渲染函数进行color的计算<ul>
+<li>如果使用了白色背景，color还需累加白背景<ul>
+<li><code>background_rgb = torch.ones([1, 3])</code></li>
+<li><code>color = color + background_rgb * (1.0 - weights_sum)</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>output: ret_outside字典<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &#x27;color&#x27;: color, # batch_size, 3</span><br><span class="line">    &#x27;sampled_color&#x27;: sampled_color, # batch_size, n_samples + n_outside, 3</span><br><span class="line">    &#x27;alpha&#x27;: alpha, # batch_size, n_samples + n_outside</span><br><span class="line">    &#x27;weights&#x27;: weights, # batch_size, n_samples + n_outside</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>function: like NeRF</p>
+<ul>
+<li>dis_to_center: 坐标的2范数，并限制在$1$ ~ $1 \times 10^{10}$<ul>
+<li>batch_size, n_samples, 1 </li>
+</ul>
+</li>
+<li>pts: <code>torch.cat([pts / dis_to_center, 1.0 / dis_to_center], dim=-1)</code><ul>
+<li>batch_size, n_samples, 4</li>
+<li>归一化pts, $\frac{x}{\sqrt{x^{2}+y^{2}+z^{2}}},\frac{y}{\sqrt{x^{2}+y^{2}+z^{2}}},\frac{z}{\sqrt{x^{2}+y^{2}+z^{2}}},\frac{1}{\sqrt{x^{2}+y^{2}+z^{2}}}$</li>
+</ul>
+</li>
+</ul>
+<h3 id="render-core"><a href="#render-core" class="headerlink" title="render_core()"></a>render_core()</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">render continue</span><br><span class="line">    background_sampled_color = ret_outside[&#x27;sampled_color&#x27;]</span><br><span class="line">    background_alpha = ret_outside[&#x27;alpha&#x27;]</span><br><span class="line"></span><br><span class="line"># Render core</span><br><span class="line">ret_fine = self.render_core(rays_o,</span><br><span class="line">                            rays_d,</span><br><span class="line">                            z_vals,</span><br><span class="line">                            sample_dist,</span><br><span class="line">                            self.sdf_network,</span><br><span class="line">                            self.deviation_network,</span><br><span class="line">                            self.color_network,</span><br><span class="line">                            background_rgb=background_rgb,</span><br><span class="line">                            background_alpha=background_alpha,</span><br><span class="line">                            background_sampled_color=background_sampled_color,</span><br><span class="line">                            cos_anneal_ratio=cos_anneal_ratio)</span><br></pre></td></tr></table></figure>
+<p>input:</p>
+<ul>
+<li>rays_o, <code>[batch_size,  3]</code></li>
+<li>rays_d, <code>[batch_size,  3]</code></li>
+<li>z_vals, <code>batch_size, n_samples</code> ,实际上为<code>batch_size, n_samples + n_importance</code> </li>
+<li>sample_dist, $sample.dist = \frac{2.0}{n.samples}$</li>
+<li>self.sdf_network, sdf神经网络</li>
+<li>self.deviation_network, inv_s参数神经网络</li>
+<li>self.color_network, 采样点color神经网络</li>
+<li>background_rgb=background_rgb, <code>batch_size, 3</code></li>
+<li>background_alpha=background_alpha, <code>batch_size, n_samples + n_outside</code></li>
+<li>background_sampled_color=background_sampled_color, <code>batch_size, n_samples + n_outside, 3</code></li>
+<li>cos_anneal_ratio=cos_anneal_ratio ,数1或者比一小的数$\frac{iterstep}{anneal}, anneal=50000$</li>
+</ul>
+<p>output: ret_fine字典<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &#x27;color&#x27;: color, # batch_size, 3</span><br><span class="line">    &#x27;sdf&#x27;: sdf, # batch_size * n_samples, 1</span><br><span class="line">    &#x27;dists&#x27;: dists, # batch_size, n_samples</span><br><span class="line">    &#x27;gradients&#x27;: gradients.reshape(batch_size, n_samples, 3),</span><br><span class="line">    &#x27;s_val&#x27;: 1.0 / inv_s, # batch_size * n_samples, 1</span><br><span class="line">    &#x27;mid_z_vals&#x27;: mid_z_vals, # batch_size, n_samples</span><br><span class="line">    &#x27;weights&#x27;: weights, # batch_size, n_samples or batch_size, n_samples + n_outside</span><br><span class="line">    &#x27;cdf&#x27;: c.reshape(batch_size, n_samples), # batch_size, n_samples</span><br><span class="line">    &#x27;gradient_error&#x27;: gradient_error, # 1</span><br><span class="line">    &#x27;inside_sphere&#x27;: inside_sphere # batch_size, n_samples</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>function:</p>
+<ul>
+<li>dists: 采样点间距离,$dists = z_{i+1} - z_{i}$<ul>
+<li>batch_size, n_samples - 1 </li>
+</ul>
+</li>
+<li>dists: 最后一行添加固定的粗采样点间距: $sample.dist = \frac{2.0}{n.samples}$<ul>
+<li>batch_size, n_samples</li>
+</ul>
+</li>
+<li>mid_z_vals:  $mid = z_{i} + \frac{dist_{i}}{2}$<ul>
+<li>batch_size, n_samples</li>
+</ul>
+</li>
+<li>pts:  $pts = \vec o + \vec d \cdot mid$<ul>
+<li>batch_size, n_samples, 3 </li>
+</ul>
+</li>
+<li>dirs: 方向向量扩展得到 <code>rays_d[:, None, :].expand(batch_size, n_samples, 3)</code><ul>
+<li>batch_size, n_samples, 3 </li>
+</ul>
+</li>
+<li>pts: reshape to batch_size * n_samples, 3 </li>
+<li>dirs: reshape to batch_size * n_samples, 3 </li>
+<li>sdf_nn_output:  =  sdf_network(pts)<ul>
+<li>batch_size * n_samples, 257</li>
+</ul>
+</li>
+<li>sdf: <code>sdf = sdf_nn_output[:, :1]</code><ul>
+<li>batch_size * n_samples, 1</li>
+</ul>
+</li>
+<li>feature_vector:  <code>feature_vector = sdf_nn_output[:, 1:]</code><ul>
+<li>batch_size * n_samples, 256</li>
+</ul>
+</li>
+<li>gradients:  梯度,sdf对输入pts_xyz的梯度，与法向量有关<ul>
+<li>batch_size * n_samples, 3</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">def gradient(self, x):</span><br><span class="line">    # x : [batch_size * n_samples , 3]</span><br><span class="line">    x.requires_grad_(True) </span><br><span class="line">    y = self.sdf(x) # y : [batch_size * n_samples , 1]</span><br><span class="line">    d_output = torch.ones_like(y, requires_grad=False, device=y.device) # d_output : [batch_size * n_samples , 1]</span><br><span class="line">    # torch.autograd.grad : 计算梯度,返回一个元组，元组中的每个元素都是输入的梯度</span><br><span class="line">    gradients = torch.autograd.grad(</span><br><span class="line">        outputs=y,</span><br><span class="line">        inputs=x,</span><br><span class="line">        grad_outputs=d_output,</span><br><span class="line">        create_graph=True,</span><br><span class="line">        retain_graph=True,</span><br><span class="line">        only_inputs=True)[0]</span><br><span class="line">    return gradients.unsqueeze(1) # unsqueeze(1) : 在第1维增加一个维度</span><br><span class="line">    # return : [batch_size * n_samples , 1 , 3]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>sampled_color: batch_size, n_samples, 3<ul>
+<li><code>color_network(pts, gradients, dirs, feature_vector).reshape(batch_size, n_samples, 3)</code></li>
+</ul>
+</li>
+<li>inv_s: <code>deviation_network(torch.zeros([1, 3]))[:, :1].clip(1e-6, 1e6)</code><ul>
+<li>一个可以更新的变量 $1 \times e^{10.0 \cdot var}$ ，并将其限制在$1 \times 10^{-6}$ ~ $1 \times 10^{6}$之间</li>
+<li>这个变量是用于sigmoid函数的输入，使其乘以s</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230630181909.png" alt="image.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class SingleVarianceNetwork(nn.Module):</span><br><span class="line">    def __init__(self, init_val):</span><br><span class="line">        super(SingleVarianceNetwork, self).__init__()</span><br><span class="line">        # variance 模型可以跟踪和优化这个参数，使其在训练过程中进行更新</span><br><span class="line">        self.register_parameter(&#x27;variance&#x27;, nn.Parameter(torch.tensor(init_val)))</span><br><span class="line"></span><br><span class="line">    def forward(self, x):</span><br><span class="line">        # torch.zeros([1, 3])</span><br><span class="line">        # 大小为 [len(x), 1] 的张量，每个元素都是 exp(variance * 10.0)</span><br><span class="line">        return torch.ones([len(x), 1]) * torch.exp(self.variance * 10.0)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://zh-v2.d2l.ai/chapter_multilayer-perceptrons/mlp.html">4.1. 多层感知机 — 动手学深度学习 2.0.0 documentation (d2l.ai)</a></p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230630132744.png" alt="image.png"></p>
+<div style="display:flex; justify-content:space-between;"> <img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230630174602.png" alt="Image 1" style="width:50%;"><div style="width:10px;"></div> <img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230630174609.png" alt="Image 2" style="width:50%;"> </div>
+
+<p>可以看出sigmoid函数的导数是一个偶函数，即$\phi(-x) = \phi(x)$</p>
+<ul>
+<li>inv_s: expand a num to <code>batch_size * n_samples, 1</code></li>
+<li>true_cos: $true.cos = \frac{dx \cdot gx + dy \cdot gy + dz \cdot gz}{\sqrt{dx^{2}+dy^{2}+dz^{2}} \cdot \sqrt{gx^{2}+gy^{2}+gz^{2}}}$ 为sdf梯度方向，即物体表面的法线方向向量$\vec g$与光线方向向量$\vec d$的夹角<ul>
+<li>batch_size * n_samples, 1 </li>
+<li><code>true_cos = (dirs * gradients).sum(-1, keepdim=True)</code></li>
+</ul>
+</li>
+</ul>
+<div class="note info">
+            <p>why <code>true_cos = (dirs * gradients).sum(-1, keepdim=True)</code></p><ul><li>cdf对t的导数：$\frac{\mathrm{d}\Phi_s}{\mathrm{d}t}(f(\mathbf{p}(t)))= \nabla f(\mathbf{p}(t))\cdot\mathbf{v} \cdot \phi_s(f(\mathbf{p}(t)))$</li><li>sdf对t的导数：$\frac{\mathrm{d}f(\mathbf{p}(t))}{\mathrm{d}t}= \nabla f(\mathbf{p}(t))\cdot\mathbf{v}$，即为true_cos</li></ul>
+          </div>
+<ul>
+<li>iter_cos: $= -[relu(\frac{-true.cos+1}{2}) \cdot (1.0 - cos.anneal.ratio)+  relu(-true.cos) \cdot cos.anneal.ratio]$<ul>
+<li>batch_size * n_samples, 1 </li>
+<li>iter_cos 总是非正数</li>
+<li>cos_anneal_ratio 数1或者比一小的数$\frac{iterstep}{anneal}, anneal=50000$ in womask cos_anneal_ratio is from 0 to 1, and always 1 after anneal steps<ul>
+<li>anneal = 0 in wmask, then cos_anneal_ratio is always 1</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>batch_size * n_samples, 1: </p>
+<ul>
+<li>estimated_next_sdf: $est.next.sdf = sdf + iter.cos \times dist \times 0.5$<ul>
+<li><code>estimated_next_sdf = sdf + iter_cos * dists.reshape(-1, 1) * 0.5</code></li>
+</ul>
+</li>
+<li>estimated_prev_sdf: $est.prev.sdf = sdf - iter.cos \times dist \times 0.5$<ul>
+<li><code>estimated_prev_sdf = sdf - iter_cos * dists.reshape(-1, 1) * 0.5</code></li>
+</ul>
+</li>
+<li>prev_cdf: $prev.cdf = sigmoid(est.prev.sdf \cdot inv.s)$<ul>
+<li><code>prev_cdf = torch.sigmoid(estimated_prev_sdf * inv_s)</code></li>
+</ul>
+</li>
+<li>next_cdf: $next.cdf = sigmoid(est.next.sdf \cdot inv.s)$<ul>
+<li><code>next_cdf = torch.sigmoid(estimated_next_sdf * inv_s)</code></li>
+</ul>
+</li>
+<li><p><code>p = prev_cdf - next_cdf ,  c = prev_cdf</code></p>
+</li>
+<li><p>alpha: $\alpha = \frac{p + 10^{-5}}{c + 10^{-5}} = \frac{prev.cdf - next.cdf}{prev.cdf}$ and in (0.0,1.0)</p>
+<ul>
+<li><script type="math/tex; mode=display">\alpha_i=\max\left(\frac{\Phi_s(f(\mathbf{p}(t_i))))-\Phi_s(f(\mathbf{p}(t_{i+1})))}{\Phi_s(f(\mathbf{p}(t_i)))},0\right).</script></li>
+<li>batch_size, n_samples</li>
+<li><code>alpha = ((p + 1e-5) / (c + 1e-5)).reshape(batch_size, n_samples).clip(0.0, 1.0)</code></li>
+</ul>
+</li>
+<li>pts_norm: $\sqrt{x^{2}+y^{2}+z^{2}}$<ul>
+<li>batch_size, n_samples</li>
+<li><code>pts_norm = torch.linalg.norm(pts, ord=2, dim=-1, keepdim=True).reshape(batch_size, n_samples)</code></li>
+</ul>
+</li>
+<li>inside_sphere, 在单位圆内的点置位 True，在外的为False<ul>
+<li>batch_size, n_samples</li>
+<li><code>inside_sphere = (pts_norm &lt; 1.0).float().detach()</code></li>
+</ul>
+</li>
+<li>relax_inside_sphere，更放松一点的限制：在半径1.2的圆内的点<ul>
+<li>batch_size, n_samples</li>
+<li><code>relax_inside_sphere = (pts_norm &lt; 1.2).float().detach()</code></li>
+</ul>
+</li>
+</ul>
+<p>if background_alpha 不是 None，计算过背景的alpha值，将背景与物体前景的alpha和采样点颜色值cat起来</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if background_alpha is not None:</span><br><span class="line">    alpha = alpha * inside_sphere + background_alpha[:, :n_samples] * (1.0 - inside_sphere) # batch_size, n_samples</span><br><span class="line">    alpha = torch.cat([alpha, background_alpha[:, n_samples:]], dim=-1) # batch_size, n_samples + n_outside</span><br><span class="line">    sampled_color = sampled_color * inside_sphere[:, :, None] +\</span><br><span class="line">                    background_sampled_color[:, :n_samples] * (1.0 - inside_sphere)[:, :, None] # batch_size, n_samples, 3</span><br><span class="line">    sampled_color = torch.cat([sampled_color, background_sampled_color[:, n_samples:]], dim=1) # batch_size, n_samples + n_outside, 3</span><br></pre></td></tr></table></figure>
+<ul>
+<li>weights，计算每个采样点的权重 $w_{i} = \alpha_{i} \cdot T_{i} =\alpha_{i} \cdot \prod_{j=1}^{i-1}(1-\alpha_j)$<ul>
+<li>batch_size, n_samples <strong>or</strong> batch_size, n_samples + n_outside</li>
+<li><code>weights = alpha * torch.cumprod(torch.cat([torch.ones([batch_size, 1]), 1. - alpha + 1e-7], -1), -1)[:, :-1]</code></li>
+</ul>
+</li>
+<li>weights_sum：权重的和，方便前景颜色与背景的颜色进行累加<ul>
+<li>batch_size, 1</li>
+<li><code>weights_sum = weights.sum(dim=-1, keepdim=True)</code></li>
+</ul>
+</li>
+<li>color：$\hat{C}=\sum_{i=1}^n T_i\alpha_i c_i,$<ul>
+<li>batch_size, 3</li>
+<li>`color = (sampled_color * weights[:, :, None]).sum(dim=1)</li>
+</ul>
+</li>
+</ul>
+<p>累加背景的颜色值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">if background_rgb is not None:    # Fixed background, usually black</span><br><span class="line">    color = color + background_rgb * (1.0 - weights_sum) # batch_size, 3</span><br></pre></td></tr></table></figure>
+<p>计算loss<br>$\mathcal{L}_{r e g}=\frac{1}{n m}\sum_{k,i}(|\nabla f(\hat{\mathbf{p}}_{k,i})|_{2}-1)^{2}.$ 只计算在relax半径为1.2的圆内的采样点sdf的梯度</p>
+<p>$|\nabla f(\hat{\mathbf{p}}_{k,i})|_{2} = \sqrt{gx^{2}+gy^{2}+gz^{2}}$</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># Eikonal loss</span><br><span class="line">gradient_error = (torch.linalg.norm(gradients.reshape(batch_size, n_samples, 3), ord=2,</span><br><span class="line">                                    dim=-1) - 1.0) ** 2</span><br><span class="line"># gradient_error : batch_size, n_samples</span><br><span class="line"></span><br><span class="line">gradient_error = (relax_inside_sphere * gradient_error).sum() / (relax_inside_sphere.sum() + 1e-5)</span><br><span class="line"># gradient_error : 1</span><br></pre></td></tr></table></figure>
+<h2 id="render后"><a href="#render后" class="headerlink" title="render后"></a>render后</h2><h3 id="get-loss"><a href="#get-loss" class="headerlink" title="get loss"></a>get loss</h3><ul>
+<li>color_fine_loss: $\mathcal{L}_{color}=\frac{1}{m}\sum_k\mathcal{R}(\hat{C}_k,C_k).$</li>
+<li>eikonal_loss: $\mathcal{L}_{r e g}=\frac{1}{n m}\sum_{k,i}(|\nabla f(\hat{\mathbf{p}}_{k,i})|_{2}-1)^{2}.$</li>
+<li>mask_loss: $\mathcal{L}_{mask}=\mathrm{BCE}(M_k,\hat{O}_k)$</li>
+</ul>
+<p>total loss: $\mathcal L=\mathcal L_{color}+\lambda\mathcal L_{reg}+\beta\mathcal L_{mask}.$</p>
+<ul>
+<li>igr_weight = 0.1</li>
+<li>mask_weight = 0.1 or 0.0 if womask</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">color_error = (color_fine - true_rgb) * mask</span><br><span class="line">color_fine_loss = F.l1_loss(color_error, torch.zeros_like(color_error), reduction=&#x27;sum&#x27;) / mask_sum</span><br><span class="line">psnr = 20.0 * torch.log10(1.0 / (((color_fine - true_rgb)**2 * mask).sum() / (mask_sum * 3.0)).sqrt())</span><br><span class="line"></span><br><span class="line">eikonal_loss = gradient_error</span><br><span class="line"></span><br><span class="line">mask_loss = F.binary_cross_entropy(weight_sum.clip(1e-3, 1.0 - 1e-3), mask)</span><br><span class="line"></span><br><span class="line">loss = color_fine_loss +\</span><br><span class="line">       eikonal_loss * self.igr_weight +\</span><br><span class="line">       mask_loss * self.mask_weight</span><br></pre></td></tr></table></figure>
+<h3 id="backward"><a href="#backward" class="headerlink" title="backward"></a>backward</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">self.optimizer.zero_grad()</span><br><span class="line">loss.backward()</span><br><span class="line">self.optimizer.step()</span><br><span class="line"></span><br><span class="line">self.iter_step += 1</span><br></pre></td></tr></table></figure>
+<h3 id="log-tensorboard-scalar"><a href="#log-tensorboard-scalar" class="headerlink" title="log(tensorboard.scalar)"></a>log(tensorboard.scalar)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">from torch.utils.tensorboard import SummaryWriter</span><br><span class="line">self.writer = SummaryWriter(log_dir=os.path.join(self.base_exp_dir, &#x27;logs&#x27;))</span><br><span class="line"># if in autodl server , use: </span><br><span class="line"># self.writer = SummaryWriter(log_dir=os.path.join(&#x27;/root/tf-logs&#x27;))</span><br><span class="line"></span><br><span class="line">self.writer.add_scalar(&#x27;Loss/loss&#x27;, loss, self.iter_step)</span><br><span class="line">self.writer.add_scalar(&#x27;Loss/color_loss&#x27;, color_fine_loss, self.iter_step)</span><br><span class="line">self.writer.add_scalar(&#x27;Loss/eikonal_loss&#x27;, eikonal_loss, self.iter_step)</span><br><span class="line">self.writer.add_scalar(&#x27;Statistics/s_val&#x27;, s_val.mean(), self.iter_step)</span><br><span class="line">self.writer.add_scalar(&#x27;Statistics/cdf&#x27;, (cdf_fine[:, :1] * mask).sum() / mask_sum, self.iter_step)</span><br><span class="line">self.writer.add_scalar(&#x27;Statistics/weight_max&#x27;, (weight_max * mask).sum() / mask_sum, self.iter_step)</span><br><span class="line">self.writer.add_scalar(&#x27;Statistics/psnr&#x27;, psnr, self.iter_step)</span><br></pre></td></tr></table></figure>
+<h3 id="other-per-step"><a href="#other-per-step" class="headerlink" title="other per step"></a>other per step</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">if self.iter_step % self.report_freq == 0:</span><br><span class="line">    print(self.base_exp_dir)</span><br><span class="line">    print(&#x27;iter:&#123;:8&gt;d&#125; loss = &#123;&#125; lr=&#123;&#125;&#x27;.format(self.iter_step, loss, self.optimizer.param_groups[0][&#x27;lr&#x27;]))</span><br><span class="line"></span><br><span class="line">if self.iter_step % self.save_freq == 0:</span><br><span class="line">    self.save_checkpoint()</span><br><span class="line"></span><br><span class="line">if self.iter_step % self.val_freq == 0:</span><br><span class="line">    self.validate_image()</span><br><span class="line"></span><br><span class="line"># 每经过一定的迭代次数，就验证一次mesh， 5000步val一次，默认mesh的resolution=64</span><br><span class="line">if self.iter_step % self.val_mesh_freq == 0:</span><br><span class="line">    self.validate_mesh()</span><br><span class="line"></span><br><span class="line">self.update_learning_rate()</span><br><span class="line"></span><br><span class="line">if self.iter_step % len(image_perm) == 0:</span><br><span class="line">    image_perm = self.get_image_perm() # 重新随机一下image</span><br></pre></td></tr></table></figure>
+<h4 id="validate-image"><a href="#validate-image" class="headerlink" title="validate_image"></a>validate_image</h4><p>将图片缩小resolution_level倍进行光线生成，然后分批次进行渲染，每批大小为batch_size</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">def validate_image(self, idx=-1, resolution_level=-1):</span><br><span class="line">    if idx &lt; 0:</span><br><span class="line">        idx = np.random.randint(self.dataset.n_images)</span><br><span class="line"></span><br><span class="line">    print(&#x27;Validate: iter: &#123;&#125;, camera: &#123;&#125;&#x27;.format(self.iter_step, idx))</span><br><span class="line"></span><br><span class="line">    if resolution_level &lt; 0:</span><br><span class="line">        resolution_level = self.validate_resolution_level</span><br><span class="line">    rays_o, rays_d = self.dataset.gen_rays_at(idx, resolution_level=resolution_level)</span><br><span class="line">    H, W, _ = rays_o.shape</span><br><span class="line">    rays_o = rays_o.reshape(-1, 3).split(self.batch_size) # H*W / batch_size 个元组，每个元组中有batch_size个ray: (batch_size, 3)</span><br><span class="line">    rays_d = rays_d.reshape(-1, 3).split(self.batch_size) </span><br></pre></td></tr></table></figure>
+<p>最终得到该图片每个像素的颜色值out_rgb_fine，以及inside_sphere内的法向量值out_normal_fine</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">for rays_o_batch, rays_d_batch in zip(rays_o, rays_d):</span><br><span class="line">    # rays_o_batch: (batch_size, 3) rays_d_batch: (batch_size, 3)</span><br><span class="line">    near, far = self.dataset.near_far_from_sphere(rays_o_batch, rays_d_batch)</span><br><span class="line">    background_rgb = torch.ones([1, 3]) if self.use_white_bkgd else None</span><br><span class="line"></span><br><span class="line">    render_out = self.renderer.render(rays_o_batch,</span><br><span class="line">                                      rays_d_batch,</span><br><span class="line">                                      near,</span><br><span class="line">                                      far,</span><br><span class="line">                                      cos_anneal_ratio=self.get_cos_anneal_ratio(),</span><br><span class="line">                                      background_rgb=background_rgb)</span><br><span class="line"></span><br><span class="line">    def feasible(key): return (key in render_out) and (render_out[key] is not None)</span><br><span class="line">    </span><br><span class="line">    if feasible(&#x27;color_fine&#x27;):</span><br><span class="line">        out_rgb_fine.append(render_out[&#x27;color_fine&#x27;].detach().cpu().numpy())</span><br><span class="line">    if feasible(&#x27;gradients&#x27;) and feasible(&#x27;weights&#x27;):</span><br><span class="line">        n_samples = self.renderer.n_samples + self.renderer.n_importance</span><br><span class="line">        # (batch_size, n_samples, 3) * (batch_size, n_samples, 1) -&gt; (batch_size, n_samples, 3)</span><br><span class="line">        normals = render_out[&#x27;gradients&#x27;] * render_out[&#x27;weights&#x27;][:, :n_samples, None] </span><br><span class="line">        if feasible(&#x27;inside_sphere&#x27;):</span><br><span class="line">            normals = normals * render_out[&#x27;inside_sphere&#x27;][..., None]</span><br><span class="line">        normals = normals.sum(dim=1).detach().cpu().numpy()</span><br><span class="line">        out_normal_fine.append(normals)</span><br><span class="line">    del render_out</span><br></pre></td></tr></table></figure>
+<p>然后进行图片的拼接和保存</p>
+<div style="display:flex; justify-content:space-between;"> <img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/00282500_0_22.png" alt="Image 1" style="width:10%;"><div style="width:10px;"></div> <img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/00282500_0_22%20(1).png" alt="Image 2" style="width:20%;"> </div>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">img_fine = None</span><br><span class="line">if len(out_rgb_fine) &gt; 0:</span><br><span class="line">    img_fine = (np.concatenate(out_rgb_fine, axis=0).reshape([H, W, 3, -1]) * 256).clip(0, 255)</span><br><span class="line"></span><br><span class="line">normal_img = None</span><br><span class="line">if len(out_normal_fine) &gt; 0:</span><br><span class="line">    normal_img = np.concatenate(out_normal_fine, axis=0)</span><br><span class="line">    # pose: c2w </span><br><span class="line">    # rot: w2c</span><br><span class="line">    rot = np.linalg.inv(self.dataset.pose_all[idx, :3, :3].detach().cpu().numpy())</span><br><span class="line">    normal_img = (np.matmul(rot[None, :, :], normal_img[:, :, None])</span><br><span class="line">                  .reshape([H, W, 3, -1]) * 128 + 128).clip(0, 255)</span><br><span class="line"></span><br><span class="line">os.makedirs(os.path.join(self.base_exp_dir, &#x27;validations_fine&#x27;), exist_ok=True)</span><br><span class="line">os.makedirs(os.path.join(self.base_exp_dir, &#x27;normals&#x27;), exist_ok=True)</span><br><span class="line"></span><br><span class="line">for i in range(img_fine.shape[-1]):  # img_fine.shape[-1] = 1</span><br><span class="line">    if len(out_rgb_fine) &gt; 0:</span><br><span class="line">        cv.imwrite(os.path.join(self.base_exp_dir,</span><br><span class="line">                                &#x27;validations_fine&#x27;,</span><br><span class="line">                                &#x27;&#123;:0&gt;8d&#125;_&#123;&#125;_&#123;&#125;.png&#x27;.format(self.iter_step, i, idx)),</span><br><span class="line">                   np.concatenate([img_fine[..., i],</span><br><span class="line">                                   self.dataset.image_at(idx, resolution_level=resolution_level)]))</span><br><span class="line">    if len(out_normal_fine) &gt; 0:</span><br><span class="line">        cv.imwrite(os.path.join(self.base_exp_dir,</span><br><span class="line">                                &#x27;normals&#x27;,</span><br><span class="line">                                &#x27;&#123;:0&gt;8d&#125;_&#123;&#125;_&#123;&#125;.png&#x27;.format(self.iter_step, i, idx)),</span><br><span class="line">                   normal_img[..., i])</span><br></pre></td></tr></table></figure>
+<h4 id="validate-mesh生成mesh模型"><a href="#validate-mesh生成mesh模型" class="headerlink" title="validate_mesh生成mesh模型"></a>validate_mesh生成mesh模型</h4><p>根据一个$resolution^3$ 的sdf场，将阈值为0的点使用marching_cubes方法生成vertices和triangles，然后生成mesh的ply文件</p>
+<h5 id="extract-geometry"><a href="#extract-geometry" class="headerlink" title="extract_geometry"></a>extract_geometry</h5><p><strong>extract_fields</strong><br>input:</p>
+<ul>
+<li>bound_min : 3 ; bound_max : 3 ; resolution : 64 </li>
+<li>query_func : pts -&gt; sdf</li>
+</ul>
+<p>output: u<br>u : resolution x resolution x resolution, 为box 中每个点的sdf值</p>
+<p><strong>extract_geometry</strong></p>
+<p>根据体积数据和阈值重建出表面</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/pmneila/PyMCubes">pmneila/PyMCubes: Marching cubes (and related tools) for Python (github.com)</a></p>
+</blockquote>
+<p>input:</p>
+<ul>
+<li>bound_min, bound_max, resolution, </li>
+<li>threshold, 用于<code>vertices, triangles = mcubes.marching_cubes(u, threshold)</code>，在等threshold面上，生成mesh的v和t</li>
+<li>query_func，根据位置pts利用network计算出sdf<ul>
+<li>query_func=lambda pts: -self.sdf_network.sdf(pts)<br>output:</li>
+</ul>
+</li>
+<li>vertices：三角形网格点<ul>
+<li>N_v , 3: 3为点的三维坐标</li>
+</ul>
+</li>
+<li>triangles：三角形网格<ul>
+<li>N_t , 3: 3为三角形网格顶点的索引index</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230630210635.png" alt="images.png"></p>
+<p>根据v和t，<code>mesh = trimesh.Trimesh(vertices, triangles)</code>生成mesh，并导出ply：<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mesh.export(os.path.join(self.base_exp_dir, &#x27;meshes&#x27;, &#x27;&#123;:0&gt;8d&#125;.ply&#x27;.format(self.iter_step)))</span><br></pre></td></tr></table></figure></p>
+<h2 id="数据集自定义"><a href="#数据集自定义" class="headerlink" title="数据集自定义"></a>数据集自定义</h2><h3 id="custom-data流程图"><a href="#custom-data流程图" class="headerlink" title="custom_data流程图"></a>custom_data流程图</h3><p><iframe frameborder="0" style="width:100%;height:833px;" src="https://viewer.diagrams.net/?highlight=0000ff&edit=_blank&layers=1&nav=1&title=custom_data.drawio#R7Vxdc5s4FP01nmw7Ew%2BID5vHOIm7D7udzmRn2j55FCPbpICokB3TX78SiE8pMc0aQ9bOQ4IuEhb36BxdXSkeGbfB%2FhOB0eZv7CJ%2FBDR3PzLuRgDopq2zP9ySZBZ7AjLDmniuqFQaHrxfSBg1Yd16LoprFSnGPvWiunGJwxAtac0GCcHP9Wor7Nc%2FNYJrJBkeltCXrV89l27EWzhaaf8TeeuN%2BGRnKm4EMK8rDPEGuvi5YjLuR8YtwZhmV8H%2BFvncd7lbsnbzF%2B4W%2FSIopG0aOFMUff30z%2FWX%2B8l8PwnJLJnvrgUWMU3y90Uue31RxIRu8BqH0L8vrTOCt6GL%2BFM1Virr%2FIVxxIw6Mz4hShOBJdxSzEwbGvjiLtp79BtvPrZE6Xvlzt1ePDktJHkhpCSpNOLF79V7ZbO0lLfL3o%2B%2F1ItuE6YYb8lS1Hp6Mr651F2Es59m8FlPrPvJ7joffZCsEX2lHijAZaRAOECsP6wdQT6k3q7eDyhG57qoVyLILgSIakBf6%2BQO%2BlvxSV6wjkGEYxSPo0SCuwST%2B%2F9541H0EMHUD8%2BM0HXgVjikAlXdLpyr8OUOEYr2FZPsDnHXsrIWQh10W7DlueSanjNoU%2BGZpXXkQOv%2FzojWIB4kBGhJCFNJwr4YAiSGrFG4SAnyx4dX%2BKENgR%2FA7Jsf%2BbzcD0H0Cj1KshwiSI0eJVs6J4jZkiDOsAjSK8LvSwLbIjwZFMKmJIErz2dBNmvGfzEfxzQthdwHzC8xYp8jDwuywcHjNu5FGHMdEsJoAFkYizpVYZx2JYy25NSEu7ThMvZ2tO6bmBL8A91iHxNmCXHI6cTw8Bsm6HvrkBWXzGeI2WfcVx5bqNyIG4HnuikXVWDU%2BdkBHmZ9ojIVeJgKOEBXcIBLINdaxSYtVQwMK5KbSIzzMXQXS%2BwHMFq4kMIBBnTGZNxgylQR0uVh30lCuqnkxxCfj3AVEpTPJIbVr3I5EhxkG4pRPcABDSbWQf%2BdeIkiL%2FEeYYxcj4zAbQDpcrOgSYTOaIhPGxDpCoiMU45xfXqZnVvnHY2W07NuD2p6zvtdoWEmYsy2QpBuCVowxhG4pIxLwPY5%2BR751ZpfFXWrjH2lUhQx5h1VHHNW%2B2hFjxQkGw0igiIaqK5bNAUVbasrmCwJJv47uzgPfTScBixW34sXXXL%2BKeXxTUm23uTRbimPR8%2FBpE1vCIFJpUKEvZDGlSd%2F4YZK3kJvhP9i4VwOl%2ByJ5eApuvYfOC4nJ7iv6smd%2BcfxI8%2F42DDgrAsf4ygFpqm5I2t2tYQBIjC%2BYgEVe8qVF8A1KkqZC4y7q5Eli8jQFFmX1mOqTJJxyvUYeCV%2BPRdJ1p3Dq2RbAUp3kixHM%2BmeUTbmIzbeXXGJSHBOONVXz5aCPcpsRmdAGXKe%2BrK0OJDQO5z5G9gWlbyDEcMdGu4urj0GdT2zHAVPyrnoNPOMHBWUeRL%2Byhd9A3oju2Up5iHlPlN3E5Gc9s5jNNfb1WCxf2756bIZR%2BdaOPqG1UjDp%2BJuEdeJp7CYMMxtaB8xMSwCxUUW2o0jP8lrs3eoNqiY097UrcfvIKd9M2TNDjuF%2FLSTNrqfj2a3I%2BdmIP3NOMUbqcPsF7pXtYXbYJEF3OkwBZoh%2Flq%2F%2BY7nw2Fj3KCxbahorBcqfRL9NcAlUmkdqTgtIxVDH1akIu%2FmeCtWXqVZz%2BLIRYi5yH5O6VRIVbnkdtEKbv2iihTeDOcchq2Ia057DiMfABWPB17orZIBxoW2NraBU%2Fmpq9RUUwSJ2rQQs6o%2FzSP4U3lEfNKnSJ3ivJ9SL96mUoZiPaV0aq%2BaZMirJ34EVuT0hnhKXHdAI0unWj6pdjCPMXkrERzQ8SKtJS3qc7feCS1eHu0tWGGeiBXKD3cuOnd0QKd9AirHAQRBV%2BQ1suXh8cMBSdMUDn55H9JqI3NdnaVRO9HsVefeQgu9N1ooDmqonWr0yQt5I0PwopbjWXh8LY9imiV7BsYUEzSZovrPMeVBis6oIkdVRfYsVZwh%2BlFWHL13xek1K%2FKmibg%2FxZm2VJxeBUc%2BX%2FyMie8uAkjlVAcDBmhsKbJwvSUdHF8svc0Mrcp3dMcX%2B93N0D0Grq2naKvX0FWeo2P%2BlQTvkTKgcUJA%2BS%2Fep2WMfOIxIigieInimHkKzNPtFe5UnG4i5bst84%2By8xstAxj%2FOFhJZFoWcbRhIRZbivySt4OOiaLy2NRRQQWq%2FRRbAar9%2B6CyYvktGdmJuPKrRoz7fwE%3D"></iframe></p>
+<h3 id="imgs2poses-py"><a href="#imgs2poses-py" class="headerlink" title="imgs2poses.py"></a>imgs2poses.py</h3><p>是否使用过colmap：</p>
+<ul>
+<li>如果已经使用colmap生成了<code>sparse/0/</code>下的<code>[&#39;cameras&#39;, &#39;images&#39;, &#39;points3D&#39;]</code>文件，将获得sparse_points.ply</li>
+<li>若没有，则使用<code>run_colmap()</code>，即可生成sparse/0/下文件</li>
+</ul>
+<h4 id="run-colmap"><a href="#run-colmap" class="headerlink" title="run_colmap()"></a>run_colmap()</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">def run_colmap(basedir, match_type):</span><br><span class="line">    </span><br><span class="line">    logfile_name = os.path.join(basedir, &#x27;colmap_output.txt&#x27;)</span><br><span class="line">    logfile = open(logfile_name, &#x27;w&#x27;)</span><br><span class="line">    </span><br><span class="line">    feature_extractor_args = [</span><br><span class="line">        &#x27;colmap&#x27;, &#x27;feature_extractor&#x27;, </span><br><span class="line">            &#x27;--database_path&#x27;, os.path.join(basedir, &#x27;database.db&#x27;), </span><br><span class="line">            &#x27;--image_path&#x27;, os.path.join(basedir, &#x27;images&#x27;),</span><br><span class="line">            &#x27;--ImageReader.single_camera&#x27;, &#x27;1&#x27;,</span><br><span class="line">            # &#x27;--SiftExtraction.use_gpu&#x27;, &#x27;0&#x27;,</span><br><span class="line">    ]</span><br><span class="line">    # subprocess.check_output: 运行命令行程序，等待程序运行完成，然后返回输出结果</span><br><span class="line">    feat_output = ( subprocess.check_output(feature_extractor_args, universal_newlines=True) )</span><br><span class="line">    logfile.write(feat_output)</span><br><span class="line">    print(&#x27;Features extracted&#x27;)</span><br><span class="line"></span><br><span class="line">    exhaustive_matcher_args = [</span><br><span class="line">        &#x27;colmap&#x27;, match_type, </span><br><span class="line">            &#x27;--database_path&#x27;, os.path.join(basedir, &#x27;database.db&#x27;), </span><br><span class="line">    ]</span><br><span class="line"></span><br><span class="line">    match_output = ( subprocess.check_output(exhaustive_matcher_args, universal_newlines=True) )</span><br><span class="line">    logfile.write(match_output)</span><br><span class="line">    print(&#x27;Features matched&#x27;)</span><br><span class="line">    </span><br><span class="line">    p = os.path.join(basedir, &#x27;sparse&#x27;)</span><br><span class="line">    if not os.path.exists(p):</span><br><span class="line">        os.makedirs(p)</span><br><span class="line"></span><br><span class="line">    # mapper_args = [</span><br><span class="line">    #     &#x27;colmap&#x27;, &#x27;mapper&#x27;, </span><br><span class="line">    #         &#x27;--database_path&#x27;, os.path.join(basedir, &#x27;database.db&#x27;), </span><br><span class="line">    #         &#x27;--image_path&#x27;, os.path.join(basedir, &#x27;images&#x27;),</span><br><span class="line">    #         &#x27;--output_path&#x27;, os.path.join(basedir, &#x27;sparse&#x27;),</span><br><span class="line">    #         &#x27;--Mapper.num_threads&#x27;, &#x27;16&#x27;,</span><br><span class="line">    #         &#x27;--Mapper.init_min_tri_angle&#x27;, &#x27;4&#x27;,</span><br><span class="line">    # ]</span><br><span class="line">    mapper_args = [</span><br><span class="line">        &#x27;colmap&#x27;, &#x27;mapper&#x27;,</span><br><span class="line">            &#x27;--database_path&#x27;, os.path.join(basedir, &#x27;database.db&#x27;),</span><br><span class="line">            &#x27;--image_path&#x27;, os.path.join(basedir, &#x27;images&#x27;),</span><br><span class="line">            &#x27;--output_path&#x27;, os.path.join(basedir, &#x27;sparse&#x27;), # --export_path changed to --output_path in colmap 3.6</span><br><span class="line">            &#x27;--Mapper.num_threads&#x27;, &#x27;16&#x27;,</span><br><span class="line">            &#x27;--Mapper.init_min_tri_angle&#x27;, &#x27;4&#x27;,</span><br><span class="line">            &#x27;--Mapper.multiple_models&#x27;, &#x27;0&#x27;,</span><br><span class="line">            &#x27;--Mapper.extract_colors&#x27;, &#x27;0&#x27;,</span><br><span class="line">    ]</span><br><span class="line"></span><br><span class="line">    map_output = ( subprocess.check_output(mapper_args, universal_newlines=True) )</span><br><span class="line">    logfile.write(map_output)</span><br><span class="line">    logfile.close()</span><br><span class="line">    print(&#x27;Sparse map created&#x27;)</span><br><span class="line">    </span><br><span class="line">    print( &#x27;Finished running COLMAP, see &#123;&#125; for logs&#x27;.format(logfile_name) )</span><br></pre></td></tr></table></figure>
+<p>上述代码相当于分别运行:<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">colmap feature_extractor --database_path os.path.join(basedir, &#x27;database.db&#x27;) --image_path os.path.join(basedir, &#x27;images&#x27;) --ImageReader.single_camera 1</span><br><span class="line">colmap match_type --database_path os.path.join(basedir, &#x27;database.db&#x27;)</span><br><span class="line">match_type : exhaustive_matcher Or sequential_matcher</span><br><span class="line">colmap mapper --database_path os.path.join(basedir, &#x27;database.db&#x27;) --image_path os.path.join(basedir, &#x27;images&#x27;) --output_path os.path.join(basedir, &#x27;sparse&#x27;) --Mapper.num_threads 16 --Mapper.init_min_tri_angle 4 --Mapper.multiple_models 0 --Mapper.extract_colors 0</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>feature_extractor: Perform <strong>feature extraction or import features</strong> for a set of images.</li>
+<li>exhaustive_matcher: Perform <strong>feature matching</strong> after performing feature extraction.</li>
+<li>mapper: <strong>Sparse 3D reconstruction / mapping of the dataset</strong> using SfM after performing feature extraction and matching.</li>
+</ul>
+<p>然后将命令行的输出结果保存到logfile即<code>basedir/colmap_output.txt</code>中</p>
+<blockquote>
+<p>colmap命令行：<a target="_blank" rel="noopener" href="https://colmap.github.io/cli.html">Command-line Interface — COLMAP 3.8-dev documentation</a><br>dense中深度图转换：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/584386128">COLMAP简明教程 导入指定参数 命令行 导出深度图 - 知乎 (zhihu.com)</a></p>
+</blockquote>
+<h4 id="load-colmap-data-to-colmap-read-model-py"><a href="#load-colmap-data-to-colmap-read-model-py" class="headerlink" title="load_colmap_data() to colmap_read_model.py"></a>load_colmap_data() to colmap_read_model.py</h4><p><code>python .\colmap_read_model.py E:\BaiduSyncdisk\NeRF_Proj\NeuS\video2bmvs\M590\sparse\0 .bin</code></p>
+<p>读取<code>[&#39;cameras&#39;, &#39;images&#39;, &#39;points3D&#39;]</code>文件的数据</p>
+<p>input:</p>
+<ul>
+<li>basedir</li>
+</ul>
+<p>output: </p>
+<ul>
+<li>poses, shape: 3 x 5 x num_images<ul>
+<li>c2w: 3x4xn </li>
+<li>hwf: 3x1xn</li>
+</ul>
+</li>
+<li>pts3d, 一个长度为num_points字典，key为point3D_id，value为Point3D对象</li>
+<li>perm, # 按照name排序，返回排序后的索引的列表：<code>[from 0 to num_images-1]</code></li>
+</ul>
+<h5 id="cameras-images-and-pts3d-be-like"><a href="#cameras-images-and-pts3d-be-like" class="headerlink" title="cameras images and pts3d be like:"></a>cameras images and pts3d be like:</h5><blockquote>
+<p><a target="_blank" rel="noopener" href="https://colmap.github.io/format.html#cameras-txt">Output Format — COLMAP 3.8-dev documentation</a></p>
+</blockquote>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>var</th>
+<th>example</th>
+<th>info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cameras</td>
+<td><code>&#123;1: Camera(id=1, model=&#39;SIMPLE_RADIAL&#39;, width=960, height=544, params=array([ 5.07683492e+02,  4.80000000e+02,  2.72000000e+02, -5.37403479e-03])), ...&#125;</code></td>
+<td>f, cx, cy, k=params</td>
+</tr>
+<tr>
+<td>images</td>
+<td><code>&#123;1: Image(id=1, qvec=array([ 0.8999159 , -0.29030237,  0.07162026,  0.31740581]), tvec=array([ 0.29762954, -2.81576928,  1.41888716]), camera_id=1, name=&#39;000.png&#39;, xys=xys, point3D_ids=point3D_ids, ...&#125;</code></td>
+<td>perm = np.argsort(names),qvec,tvec to m=w2c_mats:4x4,</td>
+</tr>
+<tr>
+<td>pts3D</td>
+<td><code>&#123;1054: Point3D(id=1054, xyz=array([1.03491375, 1.65809594, 3.83718124]), rgb=array([147, 146, 137]), error=array(0.57352093), image_ids=array([115, 116, 117, 114, 113, 112]), point2D_idxs=array([998, 822, 912, 977, 889, 817])), ...&#125;</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>xys and point3D_ids in images be like:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">xys=array([[ 83.70032501,   2.57579875],</span><br><span class="line">       [ 83.70032501,   2.57579875],</span><br><span class="line">       [469.29092407,   2.57086968],</span><br><span class="line">       ...,</span><br><span class="line">       [759.08764648, 164.65560913],</span><br><span class="line">       [533.28503418, 297.13980103],</span><br><span class="line">       [837.11437988, 342.07727051]]), </span><br><span class="line">point3D_ids=array([  -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,       </span><br><span class="line"> -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,</span><br><span class="line"> -1,   -1,   -1,   -1, 9109,   -1,   -1,   -1,   -1,   -1,   -1,</span><br><span class="line"> -1,   -1,   -1,   -1,   -1, 8781,   -1,   -1, 8628,   -1,   -1,</span><br><span class="line"> -1, 2059,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,</span><br><span class="line"> -1,   -1,   -1,   -1, 8791,   -1,   -1, 8683,   -1, 8387,   -1,</span><br><span class="line"> -1,   -1,   -1,   -1,   -1, 9008, 9007,   -1, 9161, 8786,   -1,</span><br><span class="line"> -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,</span><br><span class="line"> -1,   -1,   -1,   -1,   -1,   -1,   -1, 9175,   -1,   -1,   -1,</span><br><span class="line">9053,   -1,   -1,   -1,   -1, 8756,   -1,   -1,   -1,   -1,   -1,</span><br><span class="line"> -1, 9024,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, 9111,</span><br><span class="line"> -1,   -1, 9018,   -1, 9004,   -1,   -1,   -1,   -1,   -1,   -1,</span><br><span class="line"> -1,   -1,   -1,   -1,   -1, 8992,   -1,   -1,   -1,   -1,   -1,</span><br><span class="line">4701,   -1, 9067,   -1, 9166, 3880,   -1,   -1,   -1,   -1,   -1,</span><br><span class="line"> -1,   -1,   -1,   -1,   -1,   -1,   -1, 8725,   -1, 9112,   -1,</span><br><span class="line"> -1,   -1,   -1, 8990,   -1, 8793, 9118, 8847, 9009, 9140, 9012,</span><br><span class="line"> -1,   -1,   -1, 7743, 9065, 8604, 3935,   -1,   -1,   -1,   -1,</span><br><span class="line">9075,   -1,   -1, 8966,   -1,   -1,   -1,   -1,   -1,   -1,   -1,</span><br><span class="line"> -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,</span><br><span class="line"> -1,   -1,   -1,   -1,   -1,   19,   -1,   -1,   -1,   -1,   -1,</span><br><span class="line">9017,   -1,   -1,   -1, 9020,   -1, 9005,   -1,   -1,   -1,   -1,</span><br><span class="line"> -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, 8696,</span><br><span class="line"> -1,   -1, 8930,   -1,   -1, 8970,   -1,   -1,   -1,   -1, 9076,</span><br><span class="line"> -1, 9114, 8925,   -1, 8915,   -1, 9077, 8851, 8655, 5885, 4073,</span><br><span class="line"> -1, 3839,   -1,   -1,   -1,   -1, 9165, 9078,   -1,   -1,   -1,</span><br><span class="line"> -1,   -1,   -1,   -1, 9055,   -1,   -1,   -1,   -1,   -1,   -1,</span><br><span class="line"> -1,   -1,   -1,   -1, 9017,   -1,   -1,   -1,   -1,   -1,   -1,</span><br><span class="line"> -1, 8682,   -1,   -1, 9170,   -1, 7562, 7556,   -1,   -1,   -1,</span><br><span class="line"> -1,   -1,   -1,   -1,   -1, 8962, 9079,   -1,   -1,   -1, 8586,</span><br><span class="line">8224,   -1,   -1,   -1,   -1, 1399, 9168, 6439, 9121, 8255, 9169,</span><br><span class="line"> -1, 9151, 8971, 4698, 9171, 9172,   -1,   -1, 8898, 3916,   -1,</span><br><span class="line"> -1,   -1, 1788,   -1,   -1,   -1, 9080,   -1,   -1,   -1,   -1,</span><br><span class="line"> -1,   -1, 2097,   -1, 4103,   -1,   -1,   -1,   -1, 2073,   -1,</span><br><span class="line"> -1, 1771,   -1,   -1,   -1,   -1,   -1,   -1, 8813,   -1, 9030,</span><br><span class="line"> -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, 8841, 9081,</span><br><span class="line"> -1,   -1,   -1, 8977,   -1, 8372, 9057, 6807, 9082, 5941, 4181,</span><br><span class="line">1675,   -1, 1683,   -1,   -1, 1503, 9083, 1973, 9071, 2679, 2412,</span><br><span class="line">3238,   -1, 9164, 1796, 9174,   -1,   -1,   -1,   -1,   -1,   -1,</span><br><span class="line">9042, 9084,   -1,   -1,   -1,   -1,   -1, 9051, 9050,   -1, 9085,</span><br><span class="line"> -1, 9158, 9086,  853, 7671, 9128,   -1,   -1, 9058,   -1, 9087,</span><br><span class="line"> -1, 8502, 9102,   -1, 9106,   -1, 9039,   -1,   -1,   -1, 9069,</span><br><span class="line"> -1, 2261,   -1, 1793, 2643,   -1,   -1, 8810, 8945,   -1,   -1,</span><br><span class="line"> -1,   -1,   -1, 9043,   -1,   -1,   -1,   -1,   -1,   -1,   -1,</span><br><span class="line">9142,   -1,   -1, 9122, 9089, 9090, 8863, 9103, 2161, 2446,   -1,</span><br><span class="line"> -1,   -1,   -1,   -1, 9104,   -1, 9060, 9131,   -1,   -1,   -1,</span><br><span class="line"> -1, 8980, 8706,   -1, 9105, 9091, 9173,   -1,   -1, 2996,   -1,</span><br><span class="line"> -1, 9092,   -1,   -1,   -1,   -1, 9094, 9095, 9096, 9097, 9156,</span><br><span class="line"> -1,   -1,   -1,   -1, 8772, 8818,   -1,   -1, 9162, 9062, 9098,</span><br><span class="line"> -1,   -1, 8907, 9099, 8985, 4624,   -1, 3746, 8951,   -1,   -1,</span><br><span class="line">8908,   -1, 9135, 8986, 9101,   -1,   -1,   -1, 9137,   -1]))&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="cameras文件"><a href="#cameras文件" class="headerlink" title="cameras文件"></a>cameras文件</h5><p>input:</p>
+<ul>
+<li>path_to_model_file, <code>camerasfile = os.path.join(realdir, &#39;sparse/0/cameras.bin&#39;)</code><br>output:</li>
+<li>cameras，一个长度为num_cameras字典，key为camera_id，value为Camera对象</li>
+</ul>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xiaohuidi/p/15767477.html">colmap 相机模型及参数 - 小小灰迪 - 博客园 (cnblogs.com)</a></p>
+</blockquote>
+<p>使用:<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">camerasfile = os.path.join(realdir, &#x27;sparse/0/cameras.bin&#x27;)</span><br><span class="line">camdata = read_model.read_cameras_binary(camerasfile)</span><br><span class="line"></span><br><span class="line">list_of_keys = list(camdata.keys()) # list from 1 to num_cameras</span><br><span class="line">cam = camdata[list_of_keys[0]] # Camera(id=1, model=&#x27;SIMPLE_RADIAL&#x27;, width=960, height=544, params=array([ 5.07683492e+02,  4.80000000e+02,  2.72000000e+02, -5.37403479e-03]))</span><br><span class="line">print( &#x27;Cameras&#x27;, len(cam)) # Cameras 5</span><br><span class="line"></span><br><span class="line">h, w, f = cam.height, cam.width, cam.params[0]</span><br><span class="line">hwf = np.array([h,w,f]).reshape([3,1])</span><br></pre></td></tr></table></figure></p>
+<h5 id="images文件"><a href="#images文件" class="headerlink" title="images文件"></a>images文件</h5><p>input:</p>
+<ul>
+<li>path_to_model_file,<code>imagesfile = os.path.join(realdir, &#39;sparse/0/images.bin&#39;)</code><br>output:</li>
+<li>images，一个长度为num_reg_images字典，key为image_id，value为Image对象</li>
+</ul>
+<p>使用:<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">imagesfile = os.path.join(realdir, &#x27;sparse/0/images.bin&#x27;)</span><br><span class="line">imdata = read_model.read_images_binary(imagesfile)</span><br><span class="line"></span><br><span class="line">w2c_mats = []</span><br><span class="line">bottom = np.array([0,0,0,1.]).reshape([1,4])</span><br><span class="line"></span><br><span class="line">names = [imdata[k].name for k in imdata] # 一个长度为num_images的list，每个元素为图片的名字</span><br><span class="line">print( &#x27;Images #&#x27;, len(names)) </span><br><span class="line">perm = np.argsort(names) # 按照name排序，返回排序后的索引的列表：[from 0 to num_images-1]</span><br><span class="line">for k in imdata:</span><br><span class="line">    im = imdata[k]</span><br><span class="line">    R = im.qvec2rotmat() # 将旋转向量转换成旋转矩阵 3x3</span><br><span class="line">    t = im.tvec.reshape([3,1]) # 平移向量 3x1</span><br><span class="line">    m = np.concatenate([np.concatenate([R, t], 1), bottom], 0) # 4x4</span><br><span class="line">    w2c_mats.append(m) # 一个长度为num_images的list，每个元素为4x4的矩阵</span><br><span class="line"></span><br><span class="line">w2c_mats = np.stack(w2c_mats, 0) # num_images x 4 x 4</span><br><span class="line">c2w_mats = np.linalg.inv(w2c_mats) # num_images x 4 x 4</span><br><span class="line"></span><br><span class="line">poses = c2w_mats[:, :3, :4].transpose([1,2,0]) # 3 x 4 x num_images</span><br><span class="line">poses = np.concatenate([poses, np.tile(hwf[..., np.newaxis], [1,1,poses.shape[-1]])], 1)</span><br><span class="line"># tile : 将hwf扩展成3 x 1 x 1 ，然后tile成3 x 1 x num_images，tile表示在某个维度上重复多少次</span><br><span class="line"># poses : 3 x 5 x num_images ，c2w：3 x 4 x num_images and hwf: 3 x 1 x num_images</span><br><span class="line"></span><br><span class="line"># must switch to [-u, r, -t] from [r, -u, t], NOT [r, u, -t]</span><br><span class="line">poses = np.concatenate([poses[:, 1:2, :], poses[:, 0:1, :], -poses[:, 2:3, :], poses[:, 3:4, :], poses[:, 4:5, :]], 1)</span><br></pre></td></tr></table></figure></p>
+<p>其中<code>R = im.qvec2rotmat()</code>将旋转向量转换成旋转矩阵:</p>
+<p>如果给定旋转向量为 [qw, qx, qy, qz]，其中 qw 是标量部分，qx, qy, qz 是向量部分，可以通过以下步骤将旋转向量转换为旋转矩阵：</p>
+<p>构造单位四元数 q：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">q</span> = qw + qx * <span class="selector-tag">i</span> + qy * j + qz * k  其中 <span class="selector-tag">i</span>, j, k 是虚部的基本单位向量。</span><br></pre></td></tr></table></figure></p>
+<p>计算旋转矩阵 R(w2c)：<br><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">R = | <span class="number">1</span> - <span class="number">2</span>*(qy^<span class="number">2</span> + qz^<span class="number">2</span>)   <span class="number">2</span>*(<span class="keyword">qx</span>*qy - <span class="keyword">qw</span>*qz)   <span class="number">2</span>*(<span class="keyword">qx</span>*qz + <span class="keyword">qw</span>*qy) |</span><br><span class="line">    | <span class="number">2</span>*(<span class="keyword">qx</span>*qy + <span class="keyword">qw</span>*qz)     <span class="number">1</span> - <span class="number">2</span>*(<span class="keyword">qx</span>^<span class="number">2</span> + qz^<span class="number">2</span>) <span class="number">2</span>*(qy*qz - <span class="keyword">qw</span>*<span class="keyword">qx</span>) |</span><br><span class="line">    | <span class="number">2</span>*(<span class="keyword">qx</span>*qz - <span class="keyword">qw</span>*qy)     <span class="number">2</span>*(qy*qz + <span class="keyword">qw</span>*<span class="keyword">qx</span>)   <span class="number">1</span> - <span class="number">2</span>*(<span class="keyword">qx</span>^<span class="number">2</span> + qy^<span class="number">2</span>) |</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">qvec2rotmat</span>(<span class="params">qvec</span>):</span><br><span class="line">    <span class="keyword">return</span> np.array([</span><br><span class="line">        [<span class="number">1</span> - <span class="number">2</span> * qvec[<span class="number">2</span>]**<span class="number">2</span> - <span class="number">2</span> * qvec[<span class="number">3</span>]**<span class="number">2</span>,</span><br><span class="line">         <span class="number">2</span> * qvec[<span class="number">1</span>] * qvec[<span class="number">2</span>] - <span class="number">2</span> * qvec[<span class="number">0</span>] * qvec[<span class="number">3</span>],</span><br><span class="line">         <span class="number">2</span> * qvec[<span class="number">3</span>] * qvec[<span class="number">1</span>] + <span class="number">2</span> * qvec[<span class="number">0</span>] * qvec[<span class="number">2</span>]],</span><br><span class="line">        [<span class="number">2</span> * qvec[<span class="number">1</span>] * qvec[<span class="number">2</span>] + <span class="number">2</span> * qvec[<span class="number">0</span>] * qvec[<span class="number">3</span>],</span><br><span class="line">         <span class="number">1</span> - <span class="number">2</span> * qvec[<span class="number">1</span>]**<span class="number">2</span> - <span class="number">2</span> * qvec[<span class="number">3</span>]**<span class="number">2</span>,</span><br><span class="line">         <span class="number">2</span> * qvec[<span class="number">2</span>] * qvec[<span class="number">3</span>] - <span class="number">2</span> * qvec[<span class="number">0</span>] * qvec[<span class="number">1</span>]],</span><br><span class="line">        [<span class="number">2</span> * qvec[<span class="number">3</span>] * qvec[<span class="number">1</span>] - <span class="number">2</span> * qvec[<span class="number">0</span>] * qvec[<span class="number">2</span>],</span><br><span class="line">         <span class="number">2</span> * qvec[<span class="number">2</span>] * qvec[<span class="number">3</span>] + <span class="number">2</span> * qvec[<span class="number">0</span>] * qvec[<span class="number">1</span>],</span><br><span class="line">         <span class="number">1</span> - <span class="number">2</span> * qvec[<span class="number">1</span>]**<span class="number">2</span> - <span class="number">2</span> * qvec[<span class="number">2</span>]**<span class="number">2</span>]])</span><br></pre></td></tr></table></figure>
+<h5 id="points3D文件"><a href="#points3D文件" class="headerlink" title="points3D文件"></a>points3D文件</h5><p>input:</p>
+<ul>
+<li>path_to_model_file: <code>points3dfile = os.path.join(realdir, &#39;sparse/0/points3D.bin&#39;)</code><br>output:</li>
+<li>pts3D, 一个长度为num_points字典，key为point3D_id，value为Point3D对象</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">points3dfile = os.path.join(realdir, &#x27;sparse/0/points3D.bin&#x27;)</span><br><span class="line">pts3d = read_model.read_points3d_binary(points3dfile)</span><br></pre></td></tr></table></figure>
+<h4 id="save-poses-py"><a href="#save-poses-py" class="headerlink" title="save_poses.py"></a>save_poses.py</h4><p>input:</p>
+<ul>
+<li>basedir, </li>
+<li>poses, shape: 3 x 5 x num_images<ul>
+<li>c2w: 3x4xn </li>
+<li>hwf: 3x1xn</li>
+</ul>
+</li>
+<li>pts3d, 一个长度为num_points字典，key为point3D_id，value为Point3D对象<ul>
+<li><code>&#123;1054: Point3D(id=1054, xyz=array([1.03491375, 1.65809594, 3.83718124]), rgb=array([147, 146, 137]), error=array(0.57352093), image_ids=array([115, 116, 117, 114, 113, 112]), point2D_idxs=array([998, 822, 912, 977, 889, 817])), ...&#125;</code></li>
+</ul>
+</li>
+<li>perm, # 按照name排序，返回排序后的索引的列表：<code>[from 0 to num_images-1]</code></li>
+</ul>
+<p>save:</p>
+<ul>
+<li>sparse_points.ply : <ul>
+<li>pcd = trimesh.PointCloud(pts) , pts: num_points x 3</li>
+</ul>
+</li>
+<li>poses.npy : num_images x 3 x 5</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">save_poses</span>(<span class="params">basedir, poses, pts3d, perm</span>):</span><br><span class="line">    pts_arr = []</span><br><span class="line">    vis_arr = []</span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> pts3d: <span class="comment"># k为空间点的id</span></span><br><span class="line">        pts_arr.append(pts3d[k].xyz) <span class="comment"># 每个空间点的三维坐标</span></span><br><span class="line">        cams = [<span class="number">0</span>] * poses.shape[-<span class="number">1</span>] <span class="comment"># 一个长度为num_images的list，每个元素为0</span></span><br><span class="line">        <span class="keyword">for</span> ind <span class="keyword">in</span> pts3d[k].image_ids: <span class="comment"># 每个空间点对应的图片index</span></span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(cams) &lt; ind - <span class="number">1</span>:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&#x27;ERROR: the correct camera poses for current points cannot be accessed&#x27;</span>)</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line">            cams[ind-<span class="number">1</span>] = <span class="number">1</span> <span class="comment"># 将第k个空间点对应图片的index 在cams列表中置为1</span></span><br><span class="line">        vis_arr.append(cams) </span><br><span class="line">    <span class="comment"># pts_arr shape： num_points x 3</span></span><br><span class="line">    <span class="comment">#vis_arr shape： num_points x num_images</span></span><br><span class="line"></span><br><span class="line">    pts = np.stack(pts_arr, axis=<span class="number">0</span>) <span class="comment"># num_points x 3</span></span><br><span class="line">    pcd = trimesh.PointCloud(pts)</span><br><span class="line">    pcd.export(os.path.join(basedir, <span class="string">&#x27;sparse_points.ply&#x27;</span>))</span><br><span class="line"></span><br><span class="line">    pts_arr = np.array(pts_arr)</span><br><span class="line">    vis_arr = np.array(vis_arr)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Points&#x27;</span>, pts_arr.shape, <span class="string">&#x27;Visibility&#x27;</span>, vis_arr.shape )</span><br><span class="line">    <span class="comment"># pose: 3 x 5 x num_images</span></span><br><span class="line">    poses = np.moveaxis(poses, -<span class="number">1</span>, <span class="number">0</span>) <span class="comment"># 将最后一个维度移动到第一个维度 num_images x 3 x 5</span></span><br><span class="line">    poses = poses[perm] <span class="comment"># 按照perm排序 num_images x 3 x 5</span></span><br><span class="line">    np.save(os.path.join(basedir, <span class="string">&#x27;poses.npy&#x27;</span>), poses) <span class="comment"># num_images x 3 x 5</span></span><br></pre></td></tr></table></figure>
+<h3 id="gen-cameras-py"><a href="#gen-cameras-py" class="headerlink" title="gen_cameras.py"></a>gen_cameras.py</h3><p>根据pose.npy文件和sparse_points_interest.ply文件来生成cameras_sphere.npz</p>
+<ul>
+<li>pose.npy主要保存每张图片的c2w矩阵和hwf</li>
+<li>sparse_points_interest.ply用来生成相机缩放矩阵，将感兴趣的部位保存下来</li>
+</ul>
+<h4 id="pose文件"><a href="#pose文件" class="headerlink" title="pose文件"></a>pose文件</h4><p>pose.ply in Miku<br><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230702145000.png" alt="image.png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">work_dir = sys.argv[<span class="number">1</span>]</span><br><span class="line">poses_hwf = np.load(os.path.join(work_dir, <span class="string">&#x27;poses.npy&#x27;</span>)) <span class="comment"># n_images, 3, 5</span></span><br><span class="line">poses_raw = poses_hwf[:, :, :<span class="number">4</span>] <span class="comment"># n_images, 3, 4</span></span><br><span class="line">hwf = poses_hwf[:, :, <span class="number">4</span>] <span class="comment"># n_images, 3</span></span><br><span class="line">pose = np.diag([<span class="number">1.0</span>, <span class="number">1.0</span>, <span class="number">1.0</span>, <span class="number">1.0</span>]) <span class="comment"># 4, 4 对角线为1，其余为0</span></span><br><span class="line">pose[:<span class="number">3</span>, :<span class="number">4</span>] = poses_raw[<span class="number">0</span>] <span class="comment"># 3, 4 ， pose: 4, 4</span></span><br><span class="line">pts = []</span><br><span class="line"><span class="comment"># 下面四句是将相机坐标系的四个点转换到世界坐标系</span></span><br><span class="line"><span class="comment"># 世界坐标系下 原点，x轴，y轴，z轴</span></span><br><span class="line">pts.append((pose @ np.array([<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>])[:, <span class="literal">None</span>]).squeeze()[:<span class="number">3</span>]) <span class="comment"># 4, 1 -&gt; 4 -&gt; 3</span></span><br><span class="line">pts.append((pose @ np.array([<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>])[:, <span class="literal">None</span>]).squeeze()[:<span class="number">3</span>])</span><br><span class="line">pts.append((pose @ np.array([<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>])[:, <span class="literal">None</span>]).squeeze()[:<span class="number">3</span>])</span><br><span class="line">pts.append((pose @ np.array([<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>])[:, <span class="literal">None</span>]).squeeze()[:<span class="number">3</span>])</span><br><span class="line">pts = np.stack(pts, axis=<span class="number">0</span>)</span><br><span class="line">pcd = trimesh.PointCloud(pts)</span><br><span class="line">pcd.export(os.path.join(work_dir, <span class="string">&#x27;pose.ply&#x27;</span>))</span><br></pre></td></tr></table></figure>
+<h4 id="两个矩阵"><a href="#两个矩阵" class="headerlink" title="两个矩阵"></a>两个矩阵</h4><p><strong>world_mat_{i}:</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">h, w, f = hwf[i, <span class="number">0</span>], hwf[i, <span class="number">1</span>], hwf[i, <span class="number">2</span>]</span><br><span class="line">intrinsic = np.diag([f, f, <span class="number">1.0</span>, <span class="number">1.0</span>]).astype(np.float32)</span><br><span class="line">intrinsic[<span class="number">0</span>, <span class="number">2</span>] = (w - <span class="number">1</span>) * <span class="number">0.5</span></span><br><span class="line">intrinsic[<span class="number">1</span>, <span class="number">2</span>] = (h - <span class="number">1</span>) * <span class="number">0.5</span></span><br><span class="line"></span><br><span class="line">intrinsic = </span><br><span class="line">[[ focal,  <span class="number">0.</span>       ,   (w-<span class="number">1</span>)/<span class="number">2</span>  , <span class="number">0</span> ]</span><br><span class="line">[ <span class="number">0.</span>  ,       focal ,   (h-<span class="number">1</span>)/<span class="number">2</span>   , <span class="number">0</span>]</span><br><span class="line">[ <span class="number">0.</span>  ,       <span class="number">0.</span>      ,   <span class="number">1.</span>            , <span class="number">0</span>]</span><br><span class="line">[ <span class="number">0.</span>  ,       <span class="number">0.</span>      ,   <span class="number">0.</span>            , <span class="number">1.</span> ]]</span><br><span class="line">np.float32</span><br><span class="line"></span><br><span class="line">convert_mat = np.zeros([<span class="number">4</span>, <span class="number">4</span>], dtype=np.float32)</span><br><span class="line">convert_mat[<span class="number">0</span>, <span class="number">1</span>] = <span class="number">1.0</span></span><br><span class="line">convert_mat[<span class="number">1</span>, <span class="number">0</span>] = <span class="number">1.0</span></span><br><span class="line">convert_mat[<span class="number">2</span>, <span class="number">2</span>] =-<span class="number">1.0</span></span><br><span class="line">convert_mat[<span class="number">3</span>, <span class="number">3</span>] = <span class="number">1.0</span></span><br><span class="line">pose = np.diag([<span class="number">1.0</span>, <span class="number">1.0</span>, <span class="number">1.0</span>, <span class="number">1.0</span>]).astype(np.float32)</span><br><span class="line">pose[:<span class="number">3</span>, :<span class="number">4</span>] = poses_raw[i]</span><br><span class="line"></span><br><span class="line">pose = </span><br><span class="line">[[r1,        r2       ,  r3            ,  tx]</span><br><span class="line">[ r1 ,       r2      ,   r3             , ty]</span><br><span class="line">[ r1 ,       r2      ,   r3             , tz]</span><br><span class="line">[ <span class="number">0.</span>  ,       <span class="number">0.</span>      ,   <span class="number">0.</span>            , <span class="number">1.</span> ]]</span><br><span class="line">convert_mat =</span><br><span class="line">[[<span class="number">0.</span>,      <span class="number">1.</span>      ,  <span class="number">0</span>           , <span class="number">0</span>]</span><br><span class="line">[<span class="number">1.</span>,       <span class="number">0.</span>       ,  <span class="number">0</span>            , <span class="number">0</span>]</span><br><span class="line">[<span class="number">0.</span>,       <span class="number">0.</span>       ,  -<span class="number">1.</span>          , <span class="number">0</span>]</span><br><span class="line">[<span class="number">0.</span>,       <span class="number">0.</span>       ,  <span class="number">0</span>            , <span class="number">1.</span>]]</span><br><span class="line">np.float32</span><br><span class="line"></span><br><span class="line">pose = pose @ convert_mat</span><br><span class="line"></span><br><span class="line">pose = </span><br><span class="line">[[r2,        r1       ,  -r3            ,  tx]</span><br><span class="line">[ r2 ,       r1      ,   -r3             , ty]</span><br><span class="line">[ r2 ,       r1      ,   -r3             , tz]</span><br><span class="line">[ <span class="number">0.</span>  ,       <span class="number">0.</span>      ,   <span class="number">0.</span>            , <span class="number">1.</span> ]]</span><br><span class="line"></span><br><span class="line">w2c = np.linalg.inv(pose)</span><br><span class="line"></span><br><span class="line"><span class="comment"># world_mat is w2pixel</span></span><br><span class="line">world_mat = intrinsic @ w2c</span><br><span class="line">world_mat = world_mat.astype(np.float32)</span><br></pre></td></tr></table></figure>
+<p>pose要乘以covert_mat是因为在load_colmap_data时对pose进行了翻转</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># must switch to [-u, r, -t] from [r, -u, t], NOT [r, u, -t]</span></span><br><span class="line">poses = np.concatenate([poses[:, <span class="number">1</span>:<span class="number">2</span>, :], poses[:, <span class="number">0</span>:<span class="number">1</span>, :], -poses[:, <span class="number">2</span>:<span class="number">3</span>, :], poses[:, <span class="number">3</span>:<span class="number">4</span>, :], poses[:, <span class="number">4</span>:<span class="number">5</span>, :]], <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>scale_mat_{i}:</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">pcd = trimesh.load(os.path.join(work_dir, <span class="string">&#x27;sparse_points_interest.ply&#x27;</span>))</span><br><span class="line">vertices = pcd.vertices</span><br><span class="line">bbox_max = np.<span class="built_in">max</span>(vertices, axis=<span class="number">0</span>) </span><br><span class="line">bbox_min = np.<span class="built_in">min</span>(vertices, axis=<span class="number">0</span>)</span><br><span class="line">center = (bbox_max + bbox_min) * <span class="number">0.5</span></span><br><span class="line">radius = np.linalg.norm(vertices - center, <span class="built_in">ord</span>=<span class="number">2</span>, axis=-<span class="number">1</span>).<span class="built_in">max</span>()</span><br><span class="line">scale_mat = np.diag([radius, radius, radius, <span class="number">1.0</span>]).astype(np.float32)</span><br><span class="line">scale_mat[:<span class="number">3</span>, <span class="number">3</span>] = center</span><br></pre></td></tr></table></figure>
+<h2 id="interpolate-view"><a href="#interpolate-view" class="headerlink" title="interpolate_view"></a>interpolate_view</h2><p>生成一个视频，从img_idx_0中间插值生成新视图的图片，过渡到img_idx_1，然后再回到img_idx_0，共2s，60frames</p>
+<p>eg: 0 to 38 render video</p>
+<p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/00300000_0_38.gif" alt="00300000_0_38.gif"></p>
+<p>插值：$ratio = \frac{\sin{\left(\frac{i}{frames}-0.5 \right)\cdot \pi}}{2}+\frac{1}{2} = 0.5 \rightarrow 1 \rightarrow 0.5$ </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">interpolate_view</span>(<span class="params">self, img_idx_0, img_idx_1</span>):</span><br><span class="line">    images = []</span><br><span class="line">    n_frames = <span class="number">60</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n_frames):</span><br><span class="line">        <span class="built_in">print</span>(i)</span><br><span class="line">        images.append(self.render_novel_image(img_idx_0,</span><br><span class="line">                                              img_idx_1,</span><br><span class="line">                                              np.sin(((i / n_frames) - <span class="number">0.5</span>) * np.pi) * <span class="number">0.5</span> + <span class="number">0.5</span>,</span><br><span class="line">                      resolution_level=<span class="number">4</span>))</span><br><span class="line">    <span class="comment"># 做出了视频像是循环的效果</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n_frames):</span><br><span class="line">        images.append(images[n_frames - i - <span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">    fourcc = cv.VideoWriter_fourcc(*<span class="string">&#x27;mp4v&#x27;</span>)</span><br><span class="line">    video_dir = os.path.join(self.base_exp_dir, <span class="string">&#x27;render&#x27;</span>)</span><br><span class="line">    os.makedirs(video_dir, exist_ok=<span class="literal">True</span>)</span><br><span class="line">    h, w, _ = images[<span class="number">0</span>].shape</span><br><span class="line">    writer = cv.VideoWriter(os.path.join(video_dir,</span><br><span class="line">                                         <span class="string">&#x27;&#123;:0&gt;8d&#125;_&#123;&#125;_&#123;&#125;.mp4&#x27;</span>.<span class="built_in">format</span>(self.iter_step, img_idx_0, img_idx_1)),</span><br><span class="line">                            fourcc, <span class="number">30</span>, (w, h))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> image <span class="keyword">in</span> images:</span><br><span class="line">        writer.write(image)</span><br><span class="line"></span><br><span class="line">    writer.release()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">render_novel_image</span>(<span class="params">self, idx_0, idx_1, ratio, resolution_level</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Interpolate view between two cameras.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    rays_o, rays_d = self.dataset.gen_rays_between(idx_0, idx_1, ratio, resolution_level=resolution_level)</span><br><span class="line">    H, W, _ = rays_o.shape</span><br><span class="line">    rays_o = rays_o.reshape(-<span class="number">1</span>, <span class="number">3</span>).split(self.batch_size)</span><br><span class="line">    rays_d = rays_d.reshape(-<span class="number">1</span>, <span class="number">3</span>).split(self.batch_size)</span><br><span class="line"></span><br><span class="line">    out_rgb_fine = []</span><br><span class="line">    <span class="keyword">for</span> rays_o_batch, rays_d_batch <span class="keyword">in</span> <span class="built_in">zip</span>(rays_o, rays_d):</span><br><span class="line">        near, far = self.dataset.near_far_from_sphere(rays_o_batch, rays_d_batch)</span><br><span class="line">        background_rgb = torch.ones([<span class="number">1</span>, <span class="number">3</span>]) <span class="keyword">if</span> self.use_white_bkgd <span class="keyword">else</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">        render_out = self.renderer.render(rays_o_batch,</span><br><span class="line">                                          rays_d_batch,</span><br><span class="line">                                          near,</span><br><span class="line">                                          far,</span><br><span class="line">                                          cos_anneal_ratio=self.get_cos_anneal_ratio(),</span><br><span class="line">                                          background_rgb=background_rgb)</span><br><span class="line"></span><br><span class="line">        out_rgb_fine.append(render_out[<span class="string">&#x27;color_fine&#x27;</span>].detach().cpu().numpy())</span><br><span class="line"></span><br><span class="line">        <span class="keyword">del</span> render_out</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">gen_rays_between</span>(<span class="params">self, idx_0, idx_1, ratio, resolution_level=<span class="number">1</span></span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Interpolate pose between two cameras.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    l = resolution_level <span class="comment"># 4</span></span><br><span class="line">    tx = torch.linspace(<span class="number">0</span>, self.W - <span class="number">1</span>, self.W // l)</span><br><span class="line">    ty = torch.linspace(<span class="number">0</span>, self.H - <span class="number">1</span>, self.H // l)</span><br><span class="line">    pixels_x, pixels_y = torch.meshgrid(tx, ty)</span><br><span class="line">    p = torch.stack([pixels_x, pixels_y, torch.ones_like(pixels_y)], dim=-<span class="number">1</span>)  <span class="comment"># W, H, 3</span></span><br><span class="line">    p = torch.matmul(self.intrinsics_all_inv[<span class="number">0</span>, <span class="literal">None</span>, <span class="literal">None</span>, :<span class="number">3</span>, :<span class="number">3</span>], p[:, :, :, <span class="literal">None</span>]).squeeze()  <span class="comment"># W, H, 3</span></span><br><span class="line">    rays_v = p / torch.linalg.norm(p, <span class="built_in">ord</span>=<span class="number">2</span>, dim=-<span class="number">1</span>, keepdim=<span class="literal">True</span>)  <span class="comment"># W, H, 3</span></span><br><span class="line">    trans = self.pose_all[idx_0, :<span class="number">3</span>, <span class="number">3</span>] * (<span class="number">1.0</span> - ratio) + self.pose_all[idx_1, :<span class="number">3</span>, <span class="number">3</span>] * ratio</span><br><span class="line">    pose_0 = self.pose_all[idx_0].detach().cpu().numpy()</span><br><span class="line">    pose_1 = self.pose_all[idx_1].detach().cpu().numpy()</span><br><span class="line">    pose_0 = np.linalg.inv(pose_0)</span><br><span class="line">    pose_1 = np.linalg.inv(pose_1)</span><br><span class="line">    rot_0 = pose_0[:<span class="number">3</span>, :<span class="number">3</span>]</span><br><span class="line">    rot_1 = pose_1[:<span class="number">3</span>, :<span class="number">3</span>]</span><br><span class="line">    rots = Rot.from_matrix(np.stack([rot_0, rot_1]))</span><br><span class="line">    key_times = [<span class="number">0</span>, <span class="number">1</span>]</span><br><span class="line">    slerp = Slerp(key_times, rots)</span><br><span class="line">    rot = slerp(ratio)</span><br><span class="line">    pose = np.diag([<span class="number">1.0</span>, <span class="number">1.0</span>, <span class="number">1.0</span>, <span class="number">1.0</span>])</span><br><span class="line">    pose = pose.astype(np.float32)</span><br><span class="line">    pose[:<span class="number">3</span>, :<span class="number">3</span>] = rot.as_matrix()</span><br><span class="line">    pose[:<span class="number">3</span>, <span class="number">3</span>] = ((<span class="number">1.0</span> - ratio) * pose_0 + ratio * pose_1)[:<span class="number">3</span>, <span class="number">3</span>]</span><br><span class="line">    pose = np.linalg.inv(pose)</span><br><span class="line">    rot = torch.from_numpy(pose[:<span class="number">3</span>, :<span class="number">3</span>]).cuda()</span><br><span class="line">    trans = torch.from_numpy(pose[:<span class="number">3</span>, <span class="number">3</span>]).cuda()</span><br><span class="line">    rays_v = torch.matmul(rot[<span class="literal">None</span>, <span class="literal">None</span>, :<span class="number">3</span>, :<span class="number">3</span>], rays_v[:, :, :, <span class="literal">None</span>]).squeeze()  <span class="comment"># W, H, 3</span></span><br><span class="line">    rays_o = trans[<span class="literal">None</span>, <span class="literal">None</span>, :<span class="number">3</span>].expand(rays_v.shape)  <span class="comment"># W, H, 3</span></span><br><span class="line">    <span class="keyword">return</span> rays_o.transpose(<span class="number">0</span>, <span class="number">1</span>), rays_v.transpose(<span class="number">0</span>, <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+1ZnNxFWnEbk5YzRl">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
+              <a href="/tags/SurfaceReconstruction/" rel="tag"><i class="fa fa-tag"></i> SurfaceReconstruction</a>
+              <a href="/tags/Neus/" rel="tag"><i class="fa fa-tag"></i> Neus</a>
+              <a href="/tags/Code/" rel="tag"><i class="fa fa-tag"></i> Code</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/3DReconstruction/Basic%20Knowledge/NeRF/Efficiency/NeRF-InstantNGP/" rel="prev" title="InstantNGP">
+      <i class="fa fa-chevron-left"></i> InstantNGP
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/Learn/Learn-DeepLearning/" rel="next" title="深度学习基础">
+      深度学习基础 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Code"><span class="nav-text">Code</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Runner-train%E6%B5%81%E7%A8%8B%E5%9B%BE"><span class="nav-text">Runner().train流程图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dataset"><span class="nav-text">dataset</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%89%E7%BA%BF%E7%94%9F%E6%88%90"><span class="nav-text">光线生成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97near%E5%92%8Cfar-from-o-d"><span class="nav-text">计算near和far(from o,d)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#box%E7%9A%84min%E5%92%8Cmax-to%E7%94%9F%E6%88%90mesh%E6%A8%A1%E5%9E%8B"><span class="nav-text">box的min和max(to生成mesh模型)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84Network"><span class="nav-text">神经网络结构Network</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NeRF"><span class="nav-text">NeRF</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SDFNetwork"><span class="nav-text">SDFNetwork</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RenderingNetwork"><span class="nav-text">RenderingNetwork</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SingleVarianceNetwork"><span class="nav-text">SingleVarianceNetwork</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#render"><span class="nav-text">render</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#get-cos-anneal-ratio"><span class="nav-text">get_cos_anneal_ratio</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B2%BE%E9%87%87%E6%A0%B7n-importance"><span class="nav-text">精采样n_importance</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#up-sample-self-rays-o-rays-d-z-vals-sdf-n-importance-inv-s"><span class="nav-text">up_sample(self, rays_o, rays_d, z_vals, sdf, n_importance, inv_s):</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#sample-pdf-z-vals-weights-n-importance-det-True"><span class="nav-text">sample_pdf(z_vals, weights, n_importance, det&#x3D;True)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cat-z-vals-rays-o-rays-d-z-vals-new-z-vals-sdf-last-i-1-self-up-sample-steps"><span class="nav-text">cat_z_vals(rays_o,rays_d,z_vals,new_z_vals,sdf,last&#x3D;(i + 1 &#x3D;&#x3D; self.up_sample_steps))</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#render-core-outside-rays-o-rays-d-z-vals-feed-sample-dist-self-nerf"><span class="nav-text">render_core_outside(rays_o, rays_d, z_vals_feed, sample_dist, self.nerf)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#render-core"><span class="nav-text">render_core()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#render%E5%90%8E"><span class="nav-text">render后</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#get-loss"><span class="nav-text">get loss</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#backward"><span class="nav-text">backward</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#log-tensorboard-scalar"><span class="nav-text">log(tensorboard.scalar)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#other-per-step"><span class="nav-text">other per step</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#validate-image"><span class="nav-text">validate_image</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#validate-mesh%E7%94%9F%E6%88%90mesh%E6%A8%A1%E5%9E%8B"><span class="nav-text">validate_mesh生成mesh模型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#extract-geometry"><span class="nav-text">extract_geometry</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E8%87%AA%E5%AE%9A%E4%B9%89"><span class="nav-text">数据集自定义</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#custom-data%E6%B5%81%E7%A8%8B%E5%9B%BE"><span class="nav-text">custom_data流程图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#imgs2poses-py"><span class="nav-text">imgs2poses.py</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#run-colmap"><span class="nav-text">run_colmap()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#load-colmap-data-to-colmap-read-model-py"><span class="nav-text">load_colmap_data() to colmap_read_model.py</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#cameras-images-and-pts3d-be-like"><span class="nav-text">cameras images and pts3d be like:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#cameras%E6%96%87%E4%BB%B6"><span class="nav-text">cameras文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#images%E6%96%87%E4%BB%B6"><span class="nav-text">images文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#points3D%E6%96%87%E4%BB%B6"><span class="nav-text">points3D文件</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#save-poses-py"><span class="nav-text">save_poses.py</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gen-cameras-py"><span class="nav-text">gen_cameras.py</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#pose%E6%96%87%E4%BB%B6"><span class="nav-text">pose文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%A4%E4%B8%AA%E7%9F%A9%E9%98%B5"><span class="nav-text">两个矩阵</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#interpolate-view"><span class="nav-text">interpolate_view</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qi Yun"
+      src="/images/avatar.jpeg">
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">117</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/qiyun71" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;qiyun71" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/29010355" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;29010355" rel="noopener" target="_blank"><i class="fa fa-star fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qi Yun</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">438k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">26:33</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/yqq/anime.min.js"></script>
+  <script src="/yqq/velocity/velocity.min.js"></script>
+  <script src="/yqq/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

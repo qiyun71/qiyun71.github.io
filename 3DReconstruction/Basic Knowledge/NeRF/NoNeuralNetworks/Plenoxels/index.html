@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/yqq/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Title Plenoxels: Radiance Fields without Neural Networks     Author Sara Fridovich-Keil and Alex Yu and Matthew Tancik and Qinhong Chen and Benjamin Recht and Angjoo Kanazawa   Conf&#x2F;Jour CVPR   Ye">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Plenoxels">
+<meta property="og:url" content="http://example.com/3DReconstruction/Basic%20Knowledge/NeRF/NoNeuralNetworks/Plenoxels/index.html">
+<meta property="og:site_name" content="YunQi">
+<meta property="og:description" content="Title Plenoxels: Radiance Fields without Neural Networks     Author Sara Fridovich-Keil and Alex Yu and Matthew Tancik and Qinhong Chen and Benjamin Recht and Angjoo Kanazawa   Conf&#x2F;Jour CVPR   Ye">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231120154626.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231120154626.png">
+<meta property="article:published_time" content="2023-11-20T07:44:48.000Z">
+<meta property="article:modified_time" content="2023-11-24T10:57:54.089Z">
+<meta property="article:author" content="Qi Yun">
+<meta property="article:tag" content="3DReconstruction">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231120154626.png">
+
+<link rel="canonical" href="http://example.com/3DReconstruction/Basic%20Knowledge/NeRF/NoNeuralNetworks/Plenoxels/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Plenoxels | YunQi</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">YunQi</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Note</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/3DReconstruction/Basic%20Knowledge/NeRF/NoNeuralNetworks/Plenoxels/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YunQi">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Plenoxels
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-11-20 15:44:48" itemprop="dateCreated datePublished" datetime="2023-11-20T15:44:48+08:00">2023-11-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-11-24 18:57:54" itemprop="dateModified" datetime="2023-11-24T18:57:54+08:00">2023-11-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/3DReconstruction-Basic-Knowledge-NeRF-NoNeuralNetworks/" itemprop="url" rel="index"><span itemprop="name">3DReconstruction/Basic Knowledge/NeRF/NoNeuralNetworks</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>2.9k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>11 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Title</th>
+<th>Plenoxels: Radiance Fields without Neural Networks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Author</td>
+<td>Sara Fridovich-Keil and Alex Yu and Matthew Tancik and Qinhong Chen and Benjamin Recht and Angjoo Kanazawa</td>
+</tr>
+<tr>
+<td>Conf/Jour</td>
+<td>CVPR</td>
+</tr>
+<tr>
+<td>Year</td>
+<td>2022</td>
+</tr>
+<tr>
+<td>Project</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/sxyu/svox2">sxyu/svox2: Plenoxels: Radiance Fields without Neural Networks (github.com)</a></td>
+</tr>
+<tr>
+<td>Paper</td>
+<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4567253676347891713&amp;noteId=2057865157560867840">Plenoxels: Radiance Fields without Neural Networks (readpaper.com)</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231120154626.png" alt="image.png|666"></p>
+<span id="more"></span>
+<h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>我们介绍了 Plenoxels(plenoptic voxels)，一个用于真实感视图合成的系统。Plenoxels 将场景表示为带有球面谐波的稀疏3D 网格。这种表示可以通过梯度方法和正则化从校准的图像中优化，而不需要任何神经成分。在标准的基准任务中，Plenoxels 的优化速度比 Neural Radiance Fields 快两个数量级，而视觉质量没有损失。有关视频和代码，请参阅 <a target="_blank" rel="noopener" href="https://alexyu.net/plenoxels">https://alexyu.net/plenoxels</a> 。</p>
+<p><strong>我们的实验表明，神经辐射场的关键元素不是神经网络，而是可微体积渲染器</strong></p>
+<p>Classical Volume Reconstruction<br>使用一个更比八叉树简单的稀疏数组结构。将这些基于网格的表示与某种形式的插值相结合，产生一个连续的表示，可以使用标准信号处理方法任意调整大小</p>
+<p>Neural Volume Reconstruction<br>Neural Volumes[20]与我们的方法最相似，因为它使用带有插值的体素网格，但通过卷积神经网络优化该网格，并应用学习的扭曲函数来提高(1283 网格)的有效分辨率。我们证明了体素网格可以直接优化，并且可以通过修剪和粗到细的优化来实现高分辨率，而不需要任何神经网络或扭曲函数。</p>
+<p>Accelerating NeRF.<br>我们的方法扩展了 PlenOctrees，对具有球面谐波的稀疏体素表示进行端到端优化，提供了更快的训练(与 NeRF 相比加速了两个数量级)。我们的 Plenoxel 模型是 PlenOctrees 的泛化，以支持任意分辨率(不需要 2 的幂)的稀疏全光学体素网格，并具有执行三线性插值的能力，使用这种稀疏体素结构更容易实现</p>
+<h1 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h1><p>我们的模型是一个稀疏体素网格，其中每个被占用的体素角存储一个标量不透明度σ和每个颜色通道的球谐系数向量。从这里开始，我们把这种表现称为 Plenoxel。在任意位置和观察方向上的不透明度和颜色是通过对相邻体素存储的值进行三线性插值，并在适当的观察方向上计算球面谐波来确定的。给定一组校准图像，我们直接使用训练光线的渲染损失来优化我们的模型。我们的模型如图 2 所示，并在下面进行详细描述。<br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231120154626.png" alt="image.png|666"></p>
+<ul>
+<li><strong>Volume Rendering</strong> 与 NeRF 相同</li>
+<li><strong>Voxel Grid with Spherical Harmonics</strong> 与 PlenOctrees 类似<ul>
+<li>我们不使用八叉树作为我们的数据结构。相反，我们将一个密集的 3D 索引数组与指针存储到一个单独的数据数组中，该数据数组仅包含已占用体素的值</li>
+<li>与 pleenoctrees 类似，每个占用的体素为每个颜色通道存储一个标量不透明度σ和一个球谐系数向量。球面谐波形成了在球面上定义的函数的正交基，低次谐波编码平滑(更朗伯)的颜色变化，高次谐波编码更高频率(更镜面)的效果</li>
+<li>样本 ci 的颜色简单地是每个颜色通道的这些谐波基函数的和，由相应的优化系数加权，并在适当的观看方向上进行评估。我们使用 2 degree 的球面谐波，每个颜色通道需要 9 个系数，每个体素总共需要 27 个谐波系数。我们使用 2 次谐波，因为 PlenOctrees 发现高次谐波只带来最小的好处。</li>
+<li>我们的 Plenoxel 网格使用三线性插值来定义整个体积的连续全光函数。这与 PlenOctrees 相反，PlenOctrees 假设不透明度和球谐系数在每个体素内保持恒定。这种差异是成功优化容量的一个重要因素，我们将在下面讨论。所有系数(不透明度和球面谐波)都是直接优化的，没有任何特殊的初始化或神经网络的预训练</li>
+</ul>
+</li>
+<li><strong>Interpolation</strong><ul>
+<li>通过存储在最近的 8 个体素处的不透明度和谐波系数的三线性插值计算每条射线上每个样本点的不透明度和颜色。我们发现三线性插值明显优于最近邻插值</li>
+<li>Plenoxel 在固定分辨率下缩小了最近邻和三线性插值之间的大部分差距，但由于优化不连续模型的困难，仍然存在一些差距。事实上，我们发现与最近邻插值相比，三线性插值在学习率变化方面更稳定</li>
+</ul>
+</li>
+<li><strong>Coarse to Fine</strong><ul>
+<li>我们通过一种从粗到细的策略来实现高分辨率，该策略从低分辨率的密集网格开始，优化修剪不必要的体素，通过在每个维度上将每个体素细分为两半来细化剩余的体素，并继续优化</li>
+<li>由于三线性插值，天真的修剪会对表面附近的颜色和密度产生不利影响，因为这些点的值会与直接外部的体素进行插值。为了解决这个问题，我们执行一个扩张操作，这样一个体素只有在它自己和它的邻居都被认为是未被占用时才会被修剪。</li>
+</ul>
+</li>
+<li><strong>Optimization</strong>：$\mathcal{L}=\mathcal{L}_{recon}+\lambda_{TV}\mathcal{L}_{TV}$ 根据渲染像素颜色的均方误差(MSE)优化了体素不透明度和球谐系数<ul>
+<li>$\mathcal{L}_{recon}=\frac1{|\mathcal{R}|}\sum_{\mathbf{r}\in\mathcal{R}}|C(\mathbf{r})-\hat{C}(\mathbf{r})|_2^2$</li>
+<li>total variation (TV) $\mathcal{L}_{TV}=\frac1{|\mathcal{V}|}\sum_{\underset{d\in[D]}{\operatorname*{v\in\mathcal{V}}}}\sqrt{\Delta_x^2(\mathbf{v},d)+\Delta_y^2(\mathbf{v},d)+\Delta_z^2(\mathbf{v},d)}$</li>
+<li>为了更快的迭代，我们在每个优化步骤中使用 raysR 的随机样本来评估 MSE 项，并使用体素 V 的随机样本来评估 TV 项</li>
+</ul>
+</li>
+<li><strong>Unbounded Scenes</strong><ul>
+<li>对于前向场景，我们使用与原始 NeRF 论文[26]中定义的归一化设备坐标相同的稀疏体素网格结构。</li>
+<li>对于 360 场景，我们用多球体图像(MSI)背景模型增强我们的稀疏体素网格前景表示，该模型还使用球体内部和球体之间的三线性插值来学习体素颜色和不透明度。注意，这实际上与我们的前景模型相同，除了使用简单的等矩形投影将体素扭曲成球体(体素指数超过球体角度θ和φ)。我们将 64 个球体线性地放置在从 1 到∞的逆半径上(我们预缩放内部场景以近似包含在单位球体中)。为了节省内存，我们只为颜色存储 rgb 通道(只有零阶 SH)，并通过使用不透明度阈值来稀疏存储所有图层，就像我们的主模型一样。这类似于 nerf++[57]中的背景模型。</li>
+</ul>
+</li>
+<li><strong>Regularization</strong> 对于某些类型的场景，我们还使用额外的正则化器<ul>
+<li>在真实的、正向的和360°的场景中，我们使用基于柯西损失的稀疏先验 $\mathcal{L}_s=\lambda_s\sum_{i,k}\log\left(1+2\sigma(\mathrm{r}_i(t_k))^2\right)$，类似于 PlenOctrees[56]中使用的稀疏度损失，并<strong>鼓励体素为空</strong>，这有助于节省内存并减少上采样时的质量损失</li>
+<li>在真实的 360 度场景中，我们还对每个 minibatch 中每条光线的累积前景透射率使用 beta 分布正则化器。这个损失项，在神经体积[20]之后，通过鼓励前景完全不透明或空来<strong>促进清晰的前景-背景分解</strong>。这个损失是: $\mathcal{L}_{\beta}=\lambda_{\beta}\sum_{\mathbf{r}}\left(\log(T_{FG}(\mathbf{r}))+\log(1-T_{FG}(\mathbf{r}))\right)$</li>
+</ul>
+</li>
+<li><strong>Implementation</strong><ul>
+<li>由于稀疏体素体渲染在现代自动 diff 库中不受很好的支持，我们创建了一个自定义 PyTorch CUDA[29]扩展库来实现快速可微体渲染;我们希望从业者会发现这个实现在他们的应用程序中很有用。我们还提供了一个更慢、更高级的 JAX[4]实现。这两个实现都将向公众发布</li>
+<li>我们实现的速度在很大程度上是可能的，因为我们的 Plenoxel 模型的梯度变得非常稀疏，非常快，如图 4 所示。在优化的前 1-2 分钟内，只有不到 10%的体素具有非零梯度。</li>
+</ul>
+</li>
+</ul>
+<h1 id="Discussion"><a href="#Discussion" class="headerlink" title="Discussion"></a>Discussion</h1><p>我们提出了一种用于逼真场景建模和新颖视点渲染的方法，该方法产生的结果具有与最新技术相当的保真度，同时减少了训练时间的数量级。我们的方法也非常简单，阐明了解决 3D 逆问题所需的核心要素:可微分正演模型，连续表示(在我们的情况下，通过三线性插值)和适当的正则化。我们承认，这种方法的成分已经存在了很长时间，但是具有数千万变量的非线性优化直到最近才被计算机视觉从业者所接受。</p>
+<p>Limitations and Future Work<br>与任何未确定的逆问题一样，我们的方法容易受到人为因素的影响。我们的方法显示了与神经方法不同的伪影，如图 9 所示，但两种方法在标准度量方面都达到了相似的质量(如第 4 节所示)。未来的工作可能能够通过研究不同的正则化先验和/或更精确的物理可微分渲染函数来调整或减轻这些剩余的伪影。<br>尽管我们用一组固定的超参数报告了每个数据集的所有结果，但没有权重 $λ_{TV}$ 的最佳先验设置。在实践中，<strong>通过在逐场景的基础上调整该参数可以获得更好的结果</strong>，这是可能的，因为我们的训练时间很快。这是意料之中的，因为不同场景的训练视图的规模、平滑度和数量是不同的。我们注意到 NeRF 也有超参数需要设置，如位置编码的长度、学习率和层数，并且调整这些也可以在逐场景的基础上提高性能。<br>我们的方法应该自然地扩展到支持多尺度渲染，并通过体素 cone tracing 提供适当的抗锯齿，类似于 Mip-NeRF[2]中的修改。另一个简单的补充是色调映射，以说明白平衡和曝光的变化，我们希望这将有助于特别是在真实的 360 度场景。与我们的稀疏数组实现相比，分层数据结构(如八叉树)可以提供额外的加速，前提是保留了可微分插值。<br>由于我们的方法比 NeRF 快两个数量级，我们相信它可能会使下游应用程序目前受到 NeRF 性能的瓶颈，例如，跨大型场景数据库的多重反弹照明和 3D 生成模型。通过将我们的方法与其他组件(如相机优化和大规模体素哈希)相结合，它可能为端到端逼真的 3D 重建提供实用的管道。</p>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+1ZnNxFWnEbk5YzRl">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/3DReconstruction/" rel="tag"><i class="fa fa-tag"></i> 3DReconstruction</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/3DReconstruction/Single-view/Implicit%20Function/Adaptive%20Shells/" rel="prev" title="Adaptive Shells">
+      <i class="fa fa-chevron-left"></i> Adaptive Shells
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract"><span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Method"><span class="nav-text">Method</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Discussion"><span class="nav-text">Discussion</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qi Yun"
+      src="/images/avatar.jpeg">
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">117</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/qiyun71" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;qiyun71" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/29010355" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;29010355" rel="noopener" target="_blank"><i class="fa fa-star fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qi Yun</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">438k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">26:33</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/yqq/anime.min.js"></script>
+  <script src="/yqq/velocity/velocity.min.js"></script>
+  <script src="/yqq/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

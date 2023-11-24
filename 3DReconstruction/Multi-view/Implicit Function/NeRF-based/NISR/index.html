@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/yqq/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Title Improving Neural Indoor Surface Reconstruction with Mask-Guided Adaptive Consistency Constraints     Author Xinyi Yu1, Liqin Lu1, Jintao Rong1, Guangkai Xu2,∗ and Linlin Ou1   Conf&#x2F;Jour    Y">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NISR">
+<meta property="og:url" content="http://example.com/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NISR/index.html">
+<meta property="og:site_name" content="YunQi">
+<meta property="og:description" content="Title Improving Neural Indoor Surface Reconstruction with Mask-Guided Adaptive Consistency Constraints     Author Xinyi Yu1, Liqin Lu1, Jintao Rong1, Guangkai Xu2,∗ and Linlin Ou1   Conf&#x2F;Jour    Y">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230925133140.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230925133716.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230925140953.png">
+<meta property="article:published_time" content="2023-09-26T06:20:04.000Z">
+<meta property="article:modified_time" content="2023-11-24T06:42:51.061Z">
+<meta property="article:author" content="Qi Yun">
+<meta property="article:tag" content="SurfaceReconstruction">
+<meta property="article:tag" content="Loss">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230925133140.png">
+
+<link rel="canonical" href="http://example.com/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NISR/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>NISR | YunQi</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">YunQi</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Note</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NISR/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YunQi">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          NISR
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-09-26 14:20:04" itemprop="dateCreated datePublished" datetime="2023-09-26T14:20:04+08:00">2023-09-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-11-24 14:42:51" itemprop="dateModified" datetime="2023-11-24T14:42:51+08:00">2023-11-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/3DReconstruction-Multi-view-Implicit-Function-NeRF-based/" itemprop="url" rel="index"><span itemprop="name">3DReconstruction/Multi-view/Implicit Function/NeRF-based</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>1.3k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>5 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Title</th>
+<th>Improving Neural Indoor Surface Reconstruction with Mask-Guided Adaptive Consistency Constraints</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Author</td>
+<td>Xinyi Yu1, Liqin Lu1, Jintao Rong1, Guangkai Xu2,∗ and Linlin Ou1</td>
+</tr>
+<tr>
+<td>Conf/Jour</td>
+<td></td>
+</tr>
+<tr>
+<td>Year</td>
+<td>2023</td>
+</tr>
+<tr>
+<td>Project</td>
+<td></td>
+</tr>
+<tr>
+<td>Paper</td>
+<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4801757208966594561&amp;noteId=1976543992973611776">Improving Neural Indoor Surface Reconstruction with Mask-Guided Adaptive Consistency Constraints (readpaper.com)</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230925133140.png" alt="image.png"></p>
+<p>Idea:</p>
+<ul>
+<li>法向预测网络，法向量约束</li>
+<li>一致性约束(几何一致性和颜色一致性)，通过虚拟视点实现</li>
+<li>mask的计算方法，只计算<strong>有价值</strong>的光线<span id="more"></span>
+</li>
+</ul>
+<h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>从2D图像中重建3D场景一直是一个长期存在的任务。最近的研究不是估计每帧深度图并在3D中融合它们，而是利用神经隐式表面作为3D重建的统一表示。配备数据驱动的预训练几何线索，这些方法已经证明了良好的性能。然而，不准确的先验估计通常是不可避免的，这可能导致重建质量次优，特别是在一些几何复杂的区域。在本文中，我们提出了一个两阶段的训练过程，解耦视图相关和视图无关的颜色，并利用<strong>两个新的一致性约束</strong>来增强细节重建性能，而<strong>不需要额外的先验</strong>。此外，我们引入了一个基本掩码方案来自适应地影响监督约束的选择，从而提高自监督范式的性能。在合成数据集和真实数据集上的实验表明，该方法能够减少先验估计误差的干扰，实现具有丰富几何细节的高质量场景重建。</p>
+<h1 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h1><p>穿过一张图片$I_{k}$采样光线，并随机生成对应的虚拟光线，然后NeRF MLP渲染颜色、视图独立颜色、深度和法向。通预训练的法向估计模型来估计光线对应像素的法向，然后最小化颜色损失来优化MLP，此外还添加了mask驱动的一致性约束和法向约束</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230925133716.png" alt="image.png"></p>
+<p>使用两个颜色网络来训练：与视图有关的颜色$\hat c^{vd}$和与视图无关的颜色$\hat c^{vi}$<br>深度图和法向量图的计算：$\hat{D}(r)=\sum_{i=1}^nT_i\alpha_it_i,\quad\hat{\mathbf{N}}(\mathbf{r})=\sum_{i=1}^nT_i\alpha_i\hat{\mathbf{n}}_i$</p>
+<p>监督约束：</p>
+<ul>
+<li>颜色：$\mathcal{L}_{rgb}=\sum_{\mathbf{r}\in\mathcal{R}}\left|\hat{\mathbf{C}}(\mathbf{r})-\mathbf{C}(\mathbf{r})\right|_1$</li>
+<li>法向量约束$\begin{aligned}\mathcal{L}_{normal}&amp;=\frac1{\left|\mathcal{M}_r\right|}\sum_{\text{r}\in\mathcal{M}_r}\left|\hat{\mathbf{N}}(\mathbf{r})-\bar{\mathbf{N}}(\mathbf{r})\right|_1\\&amp;+\left|1-\hat{\mathbf{N}}(\mathbf{r})^T\bar{\mathbf{N}}(\mathbf{r})\right|_1\end{aligned}$ ，其中$M_{r}$为射线掩模</li>
+<li>几何一致性约束<ul>
+<li>通过采样像素的射线生成深度图，根据深度图计算出目标3D点的位置。然后随机生成一个虚拟视点 ，根据3D目标点位置和虚拟视点可以计算出虚拟射线的方向$\mathbf{x}_t=\mathbf{o}+\hat{D}(\mathbf{r})\mathbf{v},\quad\mathbf{v}^v=\frac{\mathbf{x}_t-\mathbf{o}^v}{\left|\mathbf{x}_t-\mathbf{o}^v\right|_2}$</li>
+<li>根据虚拟射线的视点和方向，可以由渲染框架MLP得到虚拟射线的深度图$\hat{D}(\mathbf{r}_{v})$和法向量图$\hat{\mathrm{N}}(\mathbf{r}_v)$，由两光线深度的几何一致性$\mathcal{L}_{gc}=\frac{1}{2|\mathcal{M}_{v}|}\sum_{\mathbf{r}_{v}\in\mathcal{M}_{v}}|\hat{D}(\mathbf{r}_{v})-\bar{D}(\mathbf{r}_{v})|^{2}$，其中$\bar{D}(\mathbf{r}_v)=\left|\mathbf{x}_t-\mathbf{o}^v\right|_2$</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230925140953.png" alt="image.png"></p>
+<ul>
+<li>光度一致性约束<ul>
+<li>两光线渲染得到的像素颜色：$\mathcal{L}_{pc}=\frac{1}{|\mathcal{M}_{r}|}\sum_{\mathbf{r}\in\mathcal{M}_{r}}\left|\hat{\mathbf{C}}_{vi}(\mathbf{r})-\hat{\mathbf{C}}_{vi}(\mathbf{r}_{v})\right|_{1}$</li>
+</ul>
+</li>
+</ul>
+<p>$\mathcal{M}_{r}$与$\mathcal{M}_{v}$选择方法：</p>
+<ul>
+<li>Sample Mask：保证生成虚拟视点在物体外部<ul>
+<li>$\left.\mathcal{M}_s=\left\{\begin{array}{lr}1,&amp;\quad if\hat{s}(\mathbf{o}_v)&gt;0.\\0,&amp;\quad otherwise.\end{array}\right.\right.$</li>
+</ul>
+</li>
+<li>Occlusion Mask：解决由于两条光线的遮挡导致的深度一致性误差问题（两条光线都只穿过物体一次）<ul>
+<li>$\left.\mathcal{M}_o^s=\left\{\begin{array}{lr}1,&amp;if~|diff(sgn(\hat{\mathbf{s}}))|_1\leq2.\\0,&amp;otherwise.\end{array}\right.\right.$</li>
+<li>$\left.\mathcal{M}_o^v=\left\{\begin{array}{ccc}1,&amp;if&amp;|diff(sgn(\hat{\mathbf{s}}^v))|_1\leq2.\\0,&amp;&amp;otherwise.\end{array}\right.\right.$</li>
+<li>$\mathcal{M}_o=\mathcal{M}_o^s\&amp;\mathcal{M}_o^v$</li>
+</ul>
+</li>
+<li>Adaptive Check Mask<ul>
+<li>两个光线得到像素的法向量值夹角余弦，与某个阈值比较</li>
+<li>$cos(\hat{\mathbf{N}}(\mathbf{r}),\hat{\mathbf{N}}(\mathbf{r}_v))=\frac{\hat{\mathbf{N}}(\mathbf{r})\cdot\hat{\mathbf{N}}(\mathbf{r}_v)}{\left|\hat{\mathbf{N}}(\mathbf{r})\right|_2\left|\hat{\mathbf{N}}(\mathbf{r}_v)\right|_2}$</li>
+<li>$\left.\mathcal{M}_a=\left\{\begin{array}{lr}1,\quad&amp;ifcos(\hat{\mathbf{N}}(\mathbf{r}),\hat{\mathbf{N}}(\mathbf{r}_v))&lt;\epsilon.\\0,&amp;otherwise.\end{array}\right.\right.$</li>
+</ul>
+</li>
+<li>Mask integration<ul>
+<li>法向量约束中mask $\mathcal{M}_{r}$：$\mathcal{M}_r=\mathcal{M}_s\&amp;\mathcal{M}_o\&amp;(1-\mathcal{M}_a)$<ul>
+<li><strong>两个光线得到像素的法向量值夹角余弦</strong>大于某个阈值，无虚拟视点</li>
+</ul>
+</li>
+<li>几何一致性约束中mask $\mathcal{M}_{v}$：$\mathcal{M}_v=\mathcal{M}_s\&amp;\mathcal{M}_o\&amp;\mathcal{M}_a$<ul>
+<li><strong>两个光线得到像素的法向量值夹角余弦</strong>小于某个阈值，有虚拟视点</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h1><p>一个NVIDIA RTX 3090 GPU</p>
+<ul>
+<li>ScanNet数据集</li>
+<li>对比COLMAP、NeuralRecon、MonoSDF（MLP Version）、NeuRIS</li>
+<li>指标：Accuracy、Completeness、Chamfer Distance、Precision、Recall、F-score、Normal Consistency</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+1ZnNxFWnEbk5YzRl">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/SurfaceReconstruction/" rel="tag"><i class="fa fa-tag"></i> SurfaceReconstruction</a>
+              <a href="/tags/Loss/" rel="tag"><i class="fa fa-tag"></i> Loss</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/3DReconstruction/Single-view/Other/HumanBody/HRN/" rel="prev" title="HRN">
+      <i class="fa fa-chevron-left"></i> HRN
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/D-NeuS/" rel="next" title="D-NeuS">
+      D-NeuS <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract"><span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Method"><span class="nav-text">Method</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Experiments"><span class="nav-text">Experiments</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qi Yun"
+      src="/images/avatar.jpeg">
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">117</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/qiyun71" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;qiyun71" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/29010355" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;29010355" rel="noopener" target="_blank"><i class="fa fa-star fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qi Yun</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">438k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">26:33</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/yqq/anime.min.js"></script>
+  <script src="/yqq/velocity/velocity.min.js"></script>
+  <script src="/yqq/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

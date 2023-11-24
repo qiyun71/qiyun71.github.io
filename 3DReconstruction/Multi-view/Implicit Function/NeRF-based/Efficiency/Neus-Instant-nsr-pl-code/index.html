@@ -1,0 +1,2144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/yqq/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Instant Neus的代码理解参考了：  ngp_pl: Great Instant-NGP implementation in PyTorch-Lightning! Background model and GUI supported. Welcome to ⚡ PyTorch Lightning — PyTorch Lightning 1.9.5 documentation   Insta">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Instant-nsr-pl的代码理解">
+<meta property="og:url" content="http://example.com/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/Efficiency/Neus-Instant-nsr-pl-code/index.html">
+<meta property="og:site_name" content="YunQi">
+<meta property="og:description" content="Instant Neus的代码理解参考了：  ngp_pl: Great Instant-NGP implementation in PyTorch-Lightning! Background model and GUI supported. Welcome to ⚡ PyTorch Lightning — PyTorch Lightning 1.9.5 documentation   Insta">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230714161558.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230714161756.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230714162151.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230714212151.png">
+<meta property="article:published_time" content="2023-07-03T14:02:46.000Z">
+<meta property="article:modified_time" content="2023-11-24T06:43:19.308Z">
+<meta property="article:author" content="Qi Yun">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Neus">
+<meta property="article:tag" content="Code">
+<meta property="article:tag" content="Efficiency">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230714161558.png">
+
+<link rel="canonical" href="http://example.com/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/Efficiency/Neus-Instant-nsr-pl-code/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Instant-nsr-pl的代码理解 | YunQi</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">YunQi</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Note</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/Efficiency/Neus-Instant-nsr-pl-code/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YunQi">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Instant-nsr-pl的代码理解
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-07-03 22:02:46" itemprop="dateCreated datePublished" datetime="2023-07-03T22:02:46+08:00">2023-07-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-11-24 14:43:19" itemprop="dateModified" datetime="2023-11-24T14:43:19+08:00">2023-11-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/3DReconstruction-Multi-view-Implicit-Function-NeRF-based-Efficiency/" itemprop="url" rel="index"><span itemprop="name">3DReconstruction/Multi-view/Implicit Function/NeRF-based/Efficiency</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>8.2k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>30 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Instant Neus的代码理解<br>参考了：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/kwea123/ngp_pl">ngp_pl</a>: Great Instant-NGP implementation in PyTorch-Lightning! Background model and GUI supported.<ul>
+<li><a target="_blank" rel="noopener" href="https://lightning.ai/docs/pytorch/1.9.5/">Welcome to ⚡ PyTorch Lightning — PyTorch Lightning 1.9.5 documentation</a></li>
+</ul>
+</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/zhaofuq/Instant-NSR">Instant-NSR</a>: NeuS implementation using multiresolution hash encoding.</li>
+</ul>
+<span id="more"></span>
+<iframe frameborder="0" style="width:100%;height:593px;" src="https://viewer.diagrams.net/?highlight=0000ff&edit=_blank&layers=1&nav=1&title=neus.drawio#R7Ztbj6M2FIB%2FTaTZhx2BMSR53Emm3YdWXWlUtfMUecEBdwhGxkyS%2FvraxA4QkyxNNzHZ5mE0%2BIC5nMN3fC5k5M1Wm58ZypNfaYTTEXCizcibjwAAkzEQ%2F6Rku5O4AQx2kpiRSMlqwQv5Gyuho6QliXDROpBTmnKSt4UhzTIc8pYMMUbX7cOWNG1fNUcxNgQvIUpN6R8k4slOOgHjWv4ZkzjRV3aD6W7PCumD1ZMUCYrouiHynkfejFHKd1urzQynUntaL7t5Px3Zu78xhjPeZ4Lz%2B5f5b1%2FYxzmcv7LPPA3nDH301b3xrX5gHInnV0PKeEJjmqH0uZY%2BMVpmEZZndcSoPuYXSnMhdIXwL8z5VhkTlZwKUcJXqdqLN4T%2FKac%2F%2Bmr02tgz36gzV4OtHmScbRuT5PC1ua%2BeVo30vCXNuLoRNxDj3fPKhzyqRiUqaMlCfEJ3%2BnVELMb8xHFgb2yBCaYrLO5PzGM4RZy8t%2B8Dqdc13h9XW1RsKKP%2BCwOr876jtFRX4gyRDLPHJeGG8WvTSmusE8LxS44qLawF4G0zdqv2HTOON6eVaypDT4DqhVTuwlfsrGv0XEfJkgZ20LmQ%2BoI7H2fzAXry4dnkAxh8iJVkSeKS4QXNOVkJ3bDi4cMJVBw7qOgVUq%2BsoIOV8TVZmd5ZOZsVrycrY5useAYrNFtUy8kC5zRMFoW4%2F1OLyjBI2ceW1kiBhiKXlMlXSWpRTs70oDC0KfTA2yorOKNveEZTcQ5vntFMgrUkaXogQimJMzEMhd6wkD9JrRIR6n5SO1Ykiioqu2zUtuIFzAQO%2FNm0w0p%2Bh5XApazkgrtDO9uhjXs6NNfpfimu49HGxz3aV8RvxqN5jm2PNjni0Sotao%2B2U2yEOEopioQL%2BvF9m15yxh0GCq7qzLy7Mzs%2F03f6erMjr8GVcn3HoLDA6fJRElfgG3BjgW035t7rYf%2BBkr4FMRdapcQsiVWU5AznjIa4KKolavC0QOsJvzu503I%2BLbAvLVZzftfMVctc8IEXKxqVKRYRMs6Hz8rEOiuBoUdDa0WCcrkZlizdPjEUvskX41vqa9fsL6DMSbsm37VKgw5V7uPb71%2BzhXe%2Fc77f6Z2ZT636HTM1r9JHksWVy7mBirwPbTsdz2rS5zYwqaH5FigtTGpqLIAy7QkKsFrC0rfZrGHpvtVC%2FNFFzFB0A7gE1otYntV15cZxAX1rJMdeiyv1e80ayVcRaK0RGyIj%2B8LucBgZUIXE6clIO%2FZyLTLS%2B5Mh3yojZoWkXlIGGnzB6dBI0b3KOynnkOL3JAVazVL0bbYbiGJEInF1OuzvIvZFEZ2veB3ITK%2BJDDRrIndkeiPTN7H3rBYUQUfPvRRwONW202CnWmlUA3m2a8eTaDPApcc%2FKJB1NHv3zFyFI2DmhI12vNSi0OjooDuPs3KFGeL4QUxrdOkfPpgq%2F%2FEa9TrgDto%2BEXZ9heR12PJijXs4oMb9zflEr7dPtBpGQKtJ1VmFB7dpYauFh942BnY%2FnjXXPelnxdpXPKI8x1n0ILYHuLodRImd35pdN0oc35xHHBAtfavadmExAxgjqZLEaIIGiM1BUAg6kqvrBoXQ%2FEaTLCulyQZ%2BFX7rCHwRJjh8WxAZoonh%2Fyf8C%2FyDlHjsWw7%2FfNfQ%2FtCd3XDCP9i7hWfV20HT27WrSEP%2BFv0wPoBdXe%2FvFB%2BIYf176Wpf42fn3vM%2F"></iframe>
+
+
+<p>使用了PyTorch Lightning库</p>
+<h1 id="文件结构："><a href="#文件结构：" class="headerlink" title="文件结构："></a>文件结构：</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">├───configs  # 配置文件</span><br><span class="line">│ nerf-blender.yaml  </span><br><span class="line">│ nerf-colmap.yaml  </span><br><span class="line">│ neus-blender.yaml  </span><br><span class="line">│ neus-bmvs.yaml  </span><br><span class="line">│ neus-colmap.yaml  </span><br><span class="line">│ neus-dtu.yaml  </span><br><span class="line">│  </span><br><span class="line">├───datasets  # 数据集加载</span><br><span class="line">│ blender.py  </span><br><span class="line">│ colmap.py  </span><br><span class="line">│  colmap_utils.py  </span><br><span class="line">│  dtu.py  </span><br><span class="line">│  utils.py  </span><br><span class="line">│  __init__.py  </span><br><span class="line">│  </span><br><span class="line">├───models  # model的神经网络结构和model的运算</span><br><span class="line">│  base.py  </span><br><span class="line">│  geometry.py  </span><br><span class="line">│  nerf.py  </span><br><span class="line">│  network_utils.py  </span><br><span class="line">│  neus.py  </span><br><span class="line">│  ray_utils.py  </span><br><span class="line">│  texture.py  </span><br><span class="line">│  utils.py  </span><br><span class="line">│  __init__.py  </span><br><span class="line">│  </span><br><span class="line">├───scripts  # 自定义数据集时gen_poses+run_colmap生成三个bin文件[&#x27;cameras&#x27;, &#x27;images&#x27;, &#x27;points3D&#x27;]</span><br><span class="line">│ imgs2poses.py  </span><br><span class="line">│  </span><br><span class="line">├───systems  # model模型加载和训练时每步的操作</span><br><span class="line">│  base.py  </span><br><span class="line">│  criterions.py  </span><br><span class="line">│  nerf.py  </span><br><span class="line">│  neus.py  </span><br><span class="line">│  utils.py  </span><br><span class="line">│  __init__.py  </span><br><span class="line">│  </span><br><span class="line">└───utils  </span><br><span class="line">│ callbacks.py  </span><br><span class="line">│ loggers.py  </span><br><span class="line">│ misc.py  </span><br><span class="line">│ mixins.py  </span><br><span class="line">│ obj.py  </span><br><span class="line">│ __init__.py  </span><br></pre></td></tr></table></figure>
+<h1 id="fit流程伪代码"><a href="#fit流程伪代码" class="headerlink" title="fit流程伪代码"></a>fit流程伪代码</h1><p>train.fit()结构的伪代码</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://lightning.ai/docs/pytorch/1.9.5/common/lightning_module.html#hooks">LightningModule — PyTorch Lightning 1.9.5 documentation</a></p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line">def fit(self):</span><br><span class="line">    if global_rank == 0:</span><br><span class="line">        # prepare data is called on GLOBAL_ZERO only</span><br><span class="line">        prepare_data()</span><br><span class="line"></span><br><span class="line">    configure_callbacks()</span><br><span class="line"></span><br><span class="line">    with parallel(devices):</span><br><span class="line">        # devices can be GPUs, TPUs, ...</span><br><span class="line">        train_on_device(model)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def train_on_device(model):</span><br><span class="line">    # called PER DEVICE</span><br><span class="line">    setup(&quot;fit&quot;)</span><br><span class="line">    configure_optimizers()</span><br><span class="line">    on_fit_start()</span><br><span class="line"></span><br><span class="line">    # the sanity check runs here</span><br><span class="line"></span><br><span class="line">    on_train_start()</span><br><span class="line">    for epoch in epochs:</span><br><span class="line">        fit_loop()</span><br><span class="line">    on_train_end()</span><br><span class="line"></span><br><span class="line">    on_fit_end()</span><br><span class="line">    teardown(&quot;fit&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def fit_loop():</span><br><span class="line">    on_train_epoch_start()</span><br><span class="line"></span><br><span class="line">    for batch in train_dataloader():</span><br><span class="line">        on_train_batch_start()</span><br><span class="line"></span><br><span class="line">        on_before_batch_transfer()</span><br><span class="line">        transfer_batch_to_device()</span><br><span class="line">        on_after_batch_transfer()</span><br><span class="line"></span><br><span class="line">        training_step()</span><br><span class="line"></span><br><span class="line">        on_before_zero_grad()</span><br><span class="line">        optimizer_zero_grad()</span><br><span class="line"></span><br><span class="line">        on_before_backward()</span><br><span class="line">        backward()</span><br><span class="line">        on_after_backward()</span><br><span class="line"></span><br><span class="line">        on_before_optimizer_step()</span><br><span class="line">        configure_gradient_clipping()</span><br><span class="line">        optimizer_step()</span><br><span class="line"></span><br><span class="line">        on_train_batch_end()</span><br><span class="line"></span><br><span class="line">        if should_check_val:</span><br><span class="line">            val_loop()</span><br><span class="line">    # end training epoch</span><br><span class="line">    training_epoch_end()</span><br><span class="line"></span><br><span class="line">    on_train_epoch_end()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def val_loop():</span><br><span class="line">    on_validation_model_eval()  # calls `model.eval()`</span><br><span class="line">    torch.set_grad_enabled(False)</span><br><span class="line"></span><br><span class="line">    on_validation_start()</span><br><span class="line">    on_validation_epoch_start()</span><br><span class="line"></span><br><span class="line">    val_outs = []</span><br><span class="line">    for batch_idx, batch in enumerate(val_dataloader()):</span><br><span class="line">        on_validation_batch_start(batch, batch_idx)</span><br><span class="line"></span><br><span class="line">        batch = on_before_batch_transfer(batch)</span><br><span class="line">        batch = transfer_batch_to_device(batch)</span><br><span class="line">        batch = on_after_batch_transfer(batch)</span><br><span class="line"></span><br><span class="line">        out = validation_step(batch, batch_idx)</span><br><span class="line"></span><br><span class="line">        on_validation_batch_end(batch, batch_idx)</span><br><span class="line">        val_outs.append(out)</span><br><span class="line"></span><br><span class="line">    validation_epoch_end(val_outs)</span><br><span class="line"></span><br><span class="line">    on_validation_epoch_end()</span><br><span class="line">    on_validation_end()</span><br><span class="line"></span><br><span class="line">    # set up for train</span><br><span class="line">    on_validation_model_train()  # calls `model.train()`</span><br><span class="line">    torch.set_grad_enabled(True)</span><br></pre></td></tr></table></figure>
+<h1 id="datasets"><a href="#datasets" class="headerlink" title="datasets"></a>datasets</h1><h2 id="init"><a href="#init" class="headerlink" title="init"></a>init</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">datasets = &#123;&#125;</span><br><span class="line"></span><br><span class="line">def register(name):</span><br><span class="line">    def decorator(cls):</span><br><span class="line">        datasets[name] = cls</span><br><span class="line">        return cls</span><br><span class="line">    return decorator</span><br><span class="line"></span><br><span class="line">def make(name, config): # dtu ,config.datasets</span><br><span class="line">    dataset = datasets[name](config) # dataset = datasets[&#x27;dtu&#x27;](config)</span><br><span class="line">    return dataset</span><br><span class="line"></span><br><span class="line">from . import blender, colmap, dtu</span><br></pre></td></tr></table></figure>
+<h2 id="dtu"><a href="#dtu" class="headerlink" title="dtu"></a>dtu</h2><p>数据集加载操作，返回一个DataLoader</p>
+<ul>
+<li>load_K_Rt_from_P，从P矩阵中恢复K、R和T</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">load_K_Rt_from_P</span>(<span class="params">P=<span class="literal">None</span></span>):</span><br><span class="line">    out = cv2.decomposeProjectionMatrix(P)</span><br><span class="line">    K = out[<span class="number">0</span>]</span><br><span class="line">    R = out[<span class="number">1</span>]</span><br><span class="line">    t = out[<span class="number">2</span>]</span><br><span class="line"></span><br><span class="line">    K = K / K[<span class="number">2</span>, <span class="number">2</span>]</span><br><span class="line">    intrinsics = np.eye(<span class="number">4</span>)</span><br><span class="line">    intrinsics[:<span class="number">3</span>, :<span class="number">3</span>] = K</span><br><span class="line"></span><br><span class="line">    pose = np.eye(<span class="number">4</span>, dtype=np.float32)</span><br><span class="line">    pose[:<span class="number">3</span>, :<span class="number">3</span>] = R.transpose()</span><br><span class="line">    pose[:<span class="number">3</span>, <span class="number">3</span>] = (t[:<span class="number">3</span>] / t[<span class="number">3</span>])[:, <span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> intrinsics, pose</span><br></pre></td></tr></table></figure>
+<ul>
+<li>create_spheric_poses，创建一个球形的相机位姿，用于测试时的位姿和输出视频</li>
+</ul>
+<p>ref: torch.cross: <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8F%89%E7%A7%AF#%E7%9F%A9%E9%98%B5%E8%A1%A8%E7%A4%BA">叉积 - 维基百科，自由的百科全书 (wikipedia.org)</a></p>
+<div class="note warning">
+            <p>理解特征值和特征向量是什么？torch.linalg.eig</p>
+          </div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成球形相机姿态, 测试使用</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">create_spheric_poses</span>(<span class="params">cameras, n_steps=<span class="number">120</span></span>): <span class="comment"># camears: (n_images,3) , n_steps: 60</span></span><br><span class="line">    center = torch.as_tensor([<span class="number">0.</span>,<span class="number">0.</span>,<span class="number">0.</span>], dtype=cameras.dtype, device=cameras.device)</span><br><span class="line">    cam_center = F.normalize(cameras.mean(<span class="number">0</span>), p=<span class="number">2</span>, dim=-<span class="number">1</span>) * cameras.mean(<span class="number">0</span>).norm(<span class="number">2</span>) <span class="comment"># normalize: 将输入张量归一化为单位范数</span></span><br><span class="line">    <span class="comment"># cam_center: torch.Size([3])</span></span><br><span class="line">    eigvecs = torch.linalg.eig(cameras.T @ cameras).eigenvectors  <span class="comment"># eig: 计算方阵的特征值和特征向量, .eigenvectors: 返回特征向量</span></span><br><span class="line">    <span class="comment"># eigvecs: torch.Size([3, 3])</span></span><br><span class="line">    rot_axis = F.normalize(eigvecs[:,<span class="number">1</span>].real.<span class="built_in">float</span>(), p=<span class="number">2</span>, dim=-<span class="number">1</span>) <span class="comment"># torch.Size([3]) 中间一列绕y轴旋转</span></span><br><span class="line">    up = rot_axis   <span class="comment"># torch.Size([3])</span></span><br><span class="line">    rot_dir = torch.cross(rot_axis, cam_center) <span class="comment"># cross: 计算两个向量的叉积, (3,)x(3,)=(3,)</span></span><br><span class="line">    max_angle = (F.normalize(cameras, p=<span class="number">2</span>, dim=-<span class="number">1</span>) * F.normalize(cam_center, p=<span class="number">2</span>, dim=-<span class="number">1</span>)).<span class="built_in">sum</span>(-<span class="number">1</span>).acos().<span class="built_in">max</span>()</span><br><span class="line">    <span class="comment"># max_angle: torch.Size([]) ,一个标量</span></span><br><span class="line">    <span class="comment"># 相机位置每个点与相机中心的夹角</span></span><br><span class="line">    all_c2w = []</span><br><span class="line">    <span class="keyword">for</span> theta <span class="keyword">in</span> torch.linspace(-max_angle, max_angle, n_steps):</span><br><span class="line">        cam_pos = cam_center * math.cos(theta) + rot_dir * math.sin(theta) <span class="comment"># torch.Size([3])</span></span><br><span class="line">        l = F.normalize(center - cam_pos, p=<span class="number">2</span>, dim=<span class="number">0</span>) <span class="comment"># torch.Size([3])</span></span><br><span class="line">        s = F.normalize(l.cross(up), p=<span class="number">2</span>, dim=<span class="number">0</span>)    <span class="comment"># torch.Size([3])</span></span><br><span class="line">        u = F.normalize(s.cross(l), p=<span class="number">2</span>, dim=<span class="number">0</span>)   <span class="comment"># torch.Size([3])</span></span><br><span class="line">        c2w = torch.cat([torch.stack([s, u, -l], dim=<span class="number">1</span>), cam_pos[:,<span class="literal">None</span>]], axis=<span class="number">1</span>) <span class="comment"># (3,4)</span></span><br><span class="line">        all_c2w.append(c2w) <span class="comment"># (n_steps, 3, 4)</span></span><br><span class="line"></span><br><span class="line">    all_c2w = torch.stack(all_c2w, dim=<span class="number">0</span>)   <span class="comment"># (n_steps, 3, 4)</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>DTUDatasetBase, <code>setup(self,config,split)</code><ul>
+<li><strong>load</strong> cameras_file and <code>imread(/root_dir/image/*.png)</code> <ul>
+<li><code>cv2.imread : shape[0] is H , shape[1] is W</code> is different frome PIL image</li>
+</ul>
+</li>
+<li>img_downscale or img_wh <strong>to downscale</strong></li>
+<li>n_images(数据集图片数量) <code>max([int(k.split(&#39;_&#39;)[-1]) for k in cams.keys()]) + 1</code></li>
+<li>for i in range(n_images): <ul>
+<li><code>P = (world_mat @ scale_mat)[:3,:4]</code></li>
+<li><code>K, c2w = load_K_Rt_from_P(P)</code></li>
+<li><code>fx, fy, cx, cy = K[0,0] * self.factor, K[1,1] * self.factor, K[0,2] * self.factor, K[1,2] * self.factor</code><ul>
+<li><code>self.factor = w / W</code></li>
+</ul>
+</li>
+<li><code>directions = get_ray_directions(w, h, fx, fy, cx, cy)</code> 得到的光线方向i.e. rays_d为类似NeRF的计算方式，y与j反向，z远离物体的方向<ul>
+<li>self.directions append directions</li>
+</ul>
+</li>
+<li>c2w  to tensor float and for c2w, flip the sign of input camera coordinate yz<ul>
+<li>c2w_ = c2w.clone</li>
+<li><code>c2w_[:3,1:3] *= -1.</code> because Neus DTU data is different from blender or blender</li>
+<li>all_c2w append c2w_</li>
+</ul>
+</li>
+<li>if train or val<ul>
+<li>open i:06d.png image (PIL image) (size : w,h)</li>
+<li>resize to w,h by Image.BICUBIC</li>
+<li>TF(torchvision.transforms.functional).to_tensor() : CHW<ul>
+<li><code>CHW.permute(1, 2, 0)[...,:3]</code> : HWC</li>
+</ul>
+</li>
+<li>open mask and covert(‘L’) , resize , to_tensor</li>
+<li>all_fg_mask append mask</li>
+<li>all_images append img</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>all_c2w : stack all_c2w</li>
+<li>if test<ul>
+<li>all_c2w = 创建一个球形相机位姿create_spheric_poses</li>
+<li>all_images = zeros(n_test_traj_steps,h,w,3) dtype = torch.float32</li>
+<li>all_fg_masks = zeros(n_test_traj_steps,h,w) dtype = torch.float32</li>
+<li><code>directions = directions[0]</code></li>
+</ul>
+</li>
+<li>else <ul>
+<li>all_images = stack all_images</li>
+<li>all_fg_masks = stack al_images</li>
+<li>directions = stack self.directions</li>
+</ul>
+</li>
+<li>.float().to(self.rank) <ul>
+<li>self.rank = get_rank()  = 0 ,1 ,2 … gpu序号</li>
+</ul>
+</li>
+<li></li>
+</ul>
+</li>
+<li>DTUDataset 继承Dataset和DTUDatasetBase<ul>
+<li><code>__init__ , __len__ , __getitem__</code></li>
+</ul>
+</li>
+<li>DTUIterableDataset 继承IterableDataset 和 DTUDatasetBase<ul>
+<li><code>__init__ , __iter__</code></li>
+</ul>
+</li>
+<li>DTUDataModule 继承pl.LightningDataModule<ul>
+<li>@datasets.register(‘dtu’)</li>
+<li><code>__init__(self,config)</code></li>
+<li>setup(self,stage)<ul>
+<li><code>stage in [None , &#39;fit&#39;]</code> : train_dataset = DTUIterableDataset(self.config,’train’)</li>
+<li><code>stage in [None , &#39;fit&#39; , &#39;validate&#39;]</code> : val_dataset = DTUDataset(self.config, self.config.get(‘val_split’,’train’))</li>
+<li><code>stage in [None , &#39;test&#39;]</code> : test_dataset = DTUDataset(self.config , self.config.get(‘test_split’,’test’))</li>
+<li><code>stage in [None , &#39;predict&#39;]</code> : predict_dataset = DTUDataset(self.config, ‘train’)</li>
+</ul>
+</li>
+<li>prepare_data</li>
+<li>general_loader(self,dataset,batch_size)<ul>
+<li>return DataLoader(dataset,num_workers=os.cpu_count(),batch_size,pin_memory=True,sampler=None)</li>
+</ul>
+</li>
+<li>train_dataloader(self)<ul>
+<li>return self.general_loader(self.train_dataset,batch_size=1)</li>
+</ul>
+</li>
+<li>val_dataloader(self)<ul>
+<li>return self.general_loader(self.val_dataset,batch_size=1)</li>
+</ul>
+</li>
+<li>test_dataloader(self)<ul>
+<li>return self.general_loader(self.test_dataset,batch_size=1)</li>
+</ul>
+</li>
+<li>predict_dataloader(self)<ul>
+<li>return self.general_loader(self.predict_dataset,batch_size=1)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="models"><a href="#models" class="headerlink" title="models"></a>models</h1><h2 id="init-1"><a href="#init-1" class="headerlink" title="init"></a>init</h2><p><code>@models.register(&#39;neus&#39;)</code> 修饰器的作用：</p>
+<ul>
+<li>主要是为了实例化NeuSModel()的同时，在models字典中同时存入一个NeuSModel()值，对应的key为’neus’</li>
+</ul>
+<p>当运行 <code>neus_model = NeuSModel()</code> 时，即例如运行<code>self.texture = models.make(self.config.texture.name, self.config.texture)</code>时 ，会运行<code>neus_model = register(&#39;neus&#39;)(NeusModel)</code><br>返回给neus_model的值为decorator(cls) 函数的返回值，即NeusModel</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">models = &#123;&#125;</span><br><span class="line"></span><br><span class="line">def register(name):</span><br><span class="line">    def decorator(cls):</span><br><span class="line">        models[name] = cls</span><br><span class="line">        return cls</span><br><span class="line">    return decorator</span><br><span class="line"></span><br><span class="line">def make(name, config):</span><br><span class="line">    model = models[name](config)</span><br><span class="line">    return model</span><br><span class="line"></span><br><span class="line">from . import nerf, neus, geometry, texture</span><br></pre></td></tr></table></figure>
+<h2 id="base"><a href="#base" class="headerlink" title="base"></a>base</h2><p>BaseModel ， 继承nn.Module</p>
+<ul>
+<li><code>__init__(self,config)</code><ul>
+<li>self.confg = config , self.rank = get(rank)</li>
+<li>self.setup()<ul>
+<li>如果有config.weights，则load_state_dict(torch.load(config.weights))</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>setup()</li>
+<li>update_step(self,epoch,global_step)</li>
+<li>train(self,mode=True)<ul>
+<li>return super().train(mode=mode)</li>
+</ul>
+</li>
+<li>eval(self)<ul>
+<li>return super().eval()</li>
+</ul>
+</li>
+<li>regularizations(self,out)<ul>
+<li>return {}</li>
+</ul>
+</li>
+<li>@torch.no_gard() export(self,export_config)<ul>
+<li>return {}</li>
+</ul>
+</li>
+</ul>
+<p>其他model需要继承于BaseModel</p>
+<h2 id="neus"><a href="#neus" class="headerlink" title="neus"></a>neus</h2><p>Neus中的两个网络</p>
+<h3 id="VarianceNetwork-继承nn-Module"><a href="#VarianceNetwork-继承nn-Module" class="headerlink" title="VarianceNetwork 继承nn.Module"></a>VarianceNetwork 继承nn.Module</h3><p>sigmoid函数的s参数在训练中变化</p>
+<ul>
+<li><code>__init__(self,config)</code><ul>
+<li>self.config, self.init_val</li>
+<li>self.register_parameter来自nn.Module注册一个参数</li>
+<li>if self.modulate<ul>
+<li>True: mod_start_steps, reach_max_steps, max_inv_s</li>
+<li>False: none</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>@property 将该函数变为类的属性: inv_s()<ul>
+<li>$val = e^{variance * 10.0}$</li>
+<li>if self.modulate and do_mod<ul>
+<li>val = val.clamp_max(mod_val)</li>
+</ul>
+</li>
+<li>return val</li>
+</ul>
+</li>
+<li>forward(self,x)<ul>
+<li><code>return torch.ones([len(x), 1], device=self.variance.device) * self.inv_s</code> <ul>
+<li>输入长度x1大小的inv_s</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>update_step(self,epoch,global_step)<ul>
+<li>if self.modulate<ul>
+<li>…</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="NeuSModel-继承BaseModel"><a href="#NeuSModel-继承BaseModel" class="headerlink" title="NeuSModel 继承BaseModel"></a>NeuSModel 继承BaseModel</h3><p>@models.register(‘neus’)<br><div class="note info">
+            <p>得到经过网络渲染后的一系列参数:<br>position: n_samples x 3</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">forward_:</span><br><span class="line">&#123;**out,</span><br><span class="line">**&#123;k + &#x27;_bg&#x27;: v for k, v in out_bg.items()&#125;,</span><br><span class="line">**&#123;k + &#x27;_full&#x27;: v for k, v in out_full.items()&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">forward:</span><br><span class="line">**&#123;**out,</span><br><span class="line">**&#123;k + &#x27;_bg&#x27;: v for k, v in out_bg.items()&#125;,</span><br><span class="line">**&#123;k + &#x27;_full&#x27;: v for k, v in out_full.items()&#125;</span><br><span class="line">&#125;</span><br><span class="line">+ inv_s</span><br></pre></td></tr></table></figure><ul><li>out: <ul><li>rgb, normal : n_rays x 3</li><li>opacity=权重累加, depth , rays_valid: opacity&gt;0 : n_rays x 1</li><li><code>num_samples: torch.as_tensor([len(t_starts)],dtype = torch.int32,device=rays.device)</code></li><li>if self.training:<ul><li>update: <ul><li>sdf, : n_samples x 1 </li><li>sdf_grad,  : n_samples x 3 </li><li>(weights, midpoints, dists, ray_indices).view(-1) : n_samples x 1</li></ul></li></ul></li></ul></li></ul><p>and</p><ul><li>if learned_background:<ul><li>out_bg:<ul><li>rgb, opacity, depth, rays_valid, num_samples</li><li>if self.training:<ul><li>update: (weights, midpoints, intervals, ray_indices).view(-1)</li></ul></li></ul></li></ul></li><li>else: rgb = None, num_samples = 0, rays_valid = 0</li></ul><p>and</p><ul><li>out_full <ul><li>rgb: <code>out_rgb + out_bg_rgb * (1.0 - out_opacity)</code> , n_rays x 1 </li><li>num_samples: out_num + out_bg_num , n_samples + n_samples_bg</li><li>rays_valid: out_valid + out_bg_valid , n_rays x 1</li></ul></li></ul>
+          </div></p>
+<ul>
+<li>setup<ul>
+<li>self.geometry</li>
+<li>self.texture</li>
+<li>self.geometry.contraction_type</li>
+<li>if self.config.learned_background<ul>
+<li>self.geometry_bg</li>
+<li>self.texture_bg</li>
+<li>self.geometry_bg.contraction_type</li>
+<li>self.near_plane_bg, self.far_plane_bg</li>
+<li>self.cone_angle_bg = $10^{\frac{log_{10}(far.plane.bg)}{num.samples.per.ray.bg}}-1 = 10^{\frac{log_{10}(10^{3})}{64}}-1$</li>
+</ul>
+</li>
+<li>self.variace = VarianceNetwork(self.config.variance)</li>
+<li>self.register_buffer(‘scene_aabb’)<ul>
+<li>即将 self.scene_aabb放在模型缓冲区，可以与参数一起保存，对这个变量进行优化</li>
+</ul>
+</li>
+<li>if self.config.grid_prune 使用nerfacc中整合的InstantNGP中的占据网格，跳过空间中空白的部分<ul>
+<li>self.occupancy_grid = OccupancyGrid(roi_aabb, resolution=128 , contraction_type=AABB)</li>
+<li>if self.learned_background：<ul>
+<li>self.occupancy_grid_bg = OccupancyGrid(roi_aabb, resolution=256 , contraction_type=UN_BOUNDED_SPHERE)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>self.randomized = true</li>
+<li>self.background_color = None</li>
+<li>self.render_step_size = $1.732 \times 2 \times \frac{radius}{num.samples.per.ray}$</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>update_step(self,epoch,global_step)<ul>
+<li>update_module_step(m,epoch,global_step)<ul>
+<li>m: self.geometry, self.texture,self.variance<ul>
+<li>if learned_background self.geometry_bg, self_texture_bg</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>cos_anneal_end = config.cos_anneal_end = 20000</li>
+<li>if cos_anneal_end == 0: self.cos_anneal_end = 1.0<ul>
+<li>else :min(1.0, global_step / cos_anneal_end)</li>
+</ul>
+</li>
+<li>occ_eval_fn(x)  <code>x: Nx3</code><ul>
+<li>sdf = self.geometry(x,…)</li>
+<li><code>inv_s = self.variance(torch.zeros([1,3]))[:,:1].clip(1e-6,1e6)</code></li>
+<li><code>inv_s = inv_s.expand(sdf.shape[0],1)</code></li>
+<li><code>estimated_next_sdf = sdf[...,None] - self.render_step_size * 0.5</code><ul>
+<li>$next = sdf - 1.732 \times 2 \times \frac{radius}{n.samples.perray} \cdot 0.5 = sdf - cos \cdot dist \cdot 0.5$<ul>
+<li>$cos = 2 \cdot \sqrt{3}$</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>estimated_prev_sdf = sdf[...,None] + self.render_step_size * 0.5</code></li>
+<li><code>prev_cdf = torch.sigmoid(estimated_prev_sdf * inv_s)</code></li>
+<li><code>next_cdf = torch.sigmoid(estimated_prev_sdf * inv_s)</code></li>
+<li><code>p = prev_cdf - next_cdf , c = prev_cdf</code></li>
+<li><code>alpha = ((p + 1e-5) / (c + 1e-5)).view(-1, 1).clip(0.0, 1.0)</code>  Nx1</li>
+<li>return alpha</li>
+</ul>
+</li>
+<li>occ_eval_fn_bg(x)<ul>
+<li><code>density, _ = self.geometry_bg(x)</code></li>
+<li><code>return density[...,None] * self.render_step_size_bg</code></li>
+</ul>
+</li>
+<li>if self.training(在nn.Module中可以这样判断是否为训练模式) and self.grid_prune<ul>
+<li>self.occupancy_grid.every_n_step ：nerfacc的占据网格每n步更新一次</li>
+<li>if learned_background: self.occupancy_grid_bg.every_n_step</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>isosurface：判断是否等值面<ul>
+<li>mesh = self.geometry.isosurface()</li>
+<li>return mesh</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>get_alpha：获取$\alpha$值<ul>
+<li><code>inv_s = self.variance(torch.zeros([1,3]))[:,:1].clip(1e-6,1e6)</code></li>
+<li><code>inv_s = inv_s.expand(sdf.shape[0],1)</code></li>
+<li><code>true_cos = (dirs * normal).sum(-1, keepdim=True)</code></li>
+<li><code>iter_cos = -(F.relu(-true_cos * 0.5 + 0.5) * (1.0 - self.cos_anneal_ratio)+F.relu(-true_cos) * self.cos_anneal_ratio)</code></li>
+<li><code>estimated_next_sdf = sdf[...,None] + iter_cos * dists.reshape(-1, 1) * 0.5</code></li>
+<li><code>estimated_prev_sdf = sdf[...,None] - iter_cos * dists.reshape(-1, 1) * 0.5</code></li>
+<li><code>prev_cdf = torch.sigmoid(estimated_prev_sdf * inv_s)</code></li>
+<li><code>next_cdf = torch.sigmoid(estimated_next_sdf * inv_s)</code></li>
+<li><code>p = prev_cdf - next_cdf</code></li>
+<li><code>c = prev_cdf</code></li>
+<li><code>alpha = ((p + 1e-5) / (c + 1e-5)).view(-1).clip(0.0, 1.0)</code> N,</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>forward_bg_：背景的输出<ul>
+<li><code>n_rays = rays.shape[0]</code>, <code>rays_o, rays_d = rays[:, 0:3], rays[:, 3:6]</code></li>
+<li>sigma_fn(t_starts, t_ends, ray_indices) <ul>
+<li>ref: <a target="_blank" rel="noopener" href="https://www.nerfacc.com/en/v0.3.5/apis/rendering.html">Volumetric Rendering — nerfacc 0.3.5 documentation</a></li>
+<li><code>density, _ = self.geometry_bg(positions)</code></li>
+<li>return <code>density[...,None]</code></li>
+</ul>
+</li>
+<li><code>_, t_max = ray_aabb_intersect(rays_o, rays_d, self.scene_aabb)</code></li>
+<li><code>near_plane = torch.where(t_max &gt; 1e9, self.near_plane_bg, t_max)</code><ul>
+<li>if t_max &gt; 1e9, near_plane = self.near_plane_bg, else near_plane = t_max</li>
+</ul>
+</li>
+<li>with torch.no_grad():<ul>
+<li>ray_indices, t_starts, t_ends = ray_marching()</li>
+<li>ref:<a target="_blank" rel="noopener" href="https://www.nerfacc.com/en/v0.3.5/apis/rendering.html">Volumetric Rendering — nerfacc 0.3.5 documentation</a></li>
+</ul>
+</li>
+<li>ray_indices = ray_indices.long() 为<code>N_rays</code></li>
+<li>t_origins = rays_o[ray_indices] <code>N_rays x 3</code></li>
+<li>t_dirs = rays_d[ray_indices] <code>N_rays x 3</code></li>
+<li>midpoints = (t_starts + t_ends) / 2.<code>n_samples x 1</code></li>
+<li>positions = t_origins + t_dirs * midpoints  <code>n_samples x 3</code></li>
+<li>intervals = t_ends - t_starts 为<code>n_samples x 1</code><ul>
+<li><strong><em>n_samples = N_rays1 </em> n_samples_ray1 + N_rays2 <em> n_samples_ray2 + …</em></strong></li>
+</ul>
+</li>
+<li>density, feature = self.geometry_bg(positions)<ul>
+<li>density : n_samples x 1</li>
+<li>feature : n_samples x feature_dim</li>
+</ul>
+</li>
+<li>rgb = self.texture_bg(feature, t_dirs)<ul>
+<li>rgb: n_samples x 3</li>
+</ul>
+</li>
+<li>weights = render_weight_from_density(t_starts, t_ends, density[…,None], ray_indices=ray_indices, n_rays=n_rays)<ul>
+<li>从密度中得到权重: $w_i = T_i(1 - exp(-\sigma_i\delta_i)), \quad\textrm{where}\quad T_i = exp(-\sum_{j=1}^{i-1}\sigma_j\delta_j)$</li>
+<li>ref: <a target="_blank" rel="noopener" href="https://www.nerfacc.com/en/v0.3.5/apis/generated/nerfacc.render_weight_from_density.html#nerfacc.render_weight_from_density">nerfacc.render_weight_from_density — nerfacc 0.3.5 documentation</a></li>
+<li>n_samples x 1</li>
+</ul>
+</li>
+<li>opacity = accumulate_along_rays(weights, ray_indices, values=None, n_rays=n_rays)<ul>
+<li>ref: <a target="_blank" rel="noopener" href="https://www.nerfacc.com/en/v0.3.5/apis/generated/nerfacc.accumulate_along_rays.html#nerfacc.accumulate_along_rays">nerfacc.accumulate_along_rays — nerfacc 0.3.5 documentation</a></li>
+<li>n_rays, 1</li>
+</ul>
+</li>
+<li>depth = accumulate_along_rays(weights, ray_indices, values=midpoints, n_rays=n_rays)<ul>
+<li>n_rays, 1</li>
+</ul>
+</li>
+<li>comp_rgb = accumulate_along_rays(weights, ray_indices, values=rgb, n_rays=n_rays)<ul>
+<li>n_rays , 3</li>
+</ul>
+</li>
+<li>comp_rgb = comp_rgb + self.background_color * (1.0 - opacity)<ul>
+<li>n_rays , 3</li>
+</ul>
+</li>
+<li>return out </li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">out = &#123;</span><br><span class="line">    <span class="string">&#x27;comp_rgb&#x27;</span>: comp_rgb, <span class="comment"># n_rays, 1</span></span><br><span class="line">    <span class="string">&#x27;opacity&#x27;</span>: opacity, <span class="comment"># n_rays, 1</span></span><br><span class="line">    <span class="string">&#x27;depth&#x27;</span>: depth, <span class="comment"># n_rays, 1</span></span><br><span class="line">    <span class="string">&#x27;rays_valid&#x27;</span>: opacity &gt; <span class="number">0</span>, <span class="comment"># n_rays, 1</span></span><br><span class="line">    <span class="string">&#x27;num_samples&#x27;</span>: torch.as_tensor([<span class="built_in">len</span>(t_starts)], dtype=torch.int32,device=rays.device) <span class="comment"># n_samples</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> self.training:</span><br><span class="line">    out.update(&#123;</span><br><span class="line">        <span class="string">&#x27;weights&#x27;</span>: weights.view(-<span class="number">1</span>), <span class="comment">#  n_samples x 1</span></span><br><span class="line">        <span class="string">&#x27;points&#x27;</span>: midpoints.view(-<span class="number">1</span>), <span class="comment"># n_samples x 1</span></span><br><span class="line">        <span class="string">&#x27;intervals&#x27;</span>: intervals.view(-<span class="number">1</span>), <span class="comment"># n_samples x 1</span></span><br><span class="line">        <span class="string">&#x27;ray_indices&#x27;</span>: ray_indices.view(-<span class="number">1</span>) <span class="comment"># n_samples</span></span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
+<hr>
+<ul>
+<li>forward_：前景输出<ul>
+<li><code>n_rays = rays.shape[0]</code>, <code>rays_o, rays_d = rays[:, 0:3], rays[:, 3:6]</code></li>
+<li>with torch.no_grad():<ul>
+<li>ray_indices, t_starts, t_ends = ray_marching(…)</li>
+<li>ref:<a target="_blank" rel="noopener" href="https://www.nerfacc.com/en/v0.3.5/apis/rendering.html">Volumetric Rendering — nerfacc 0.3.5 documentation</a></li>
+</ul>
+</li>
+<li>ray_indices = ray_indices.long()</li>
+<li>t_origins = rays_o[ray_indices]</li>
+<li>t_dirs = rays_d[ray_indices]</li>
+<li>midpoints = (t_starts + t_ends) / 2.</li>
+<li>positions = t_origins + t_dirs * midpoints</li>
+<li>dists = t_ends - t_starts</li>
+<li>sdf, sdf_grad, feature = self.geometry(positions, with_grad=True, with_feature=True)<ul>
+<li>sdf : n_samples x 1 </li>
+<li>sdf_grad: n_samples x 3</li>
+<li>feature: n_samples x feature_dim</li>
+</ul>
+</li>
+<li>normal = F.normalize(sdf_grad, p=2, dim=-1) 法向量：将sdf的梯度归一化<ul>
+<li>normal: n_samples x 3</li>
+</ul>
+</li>
+<li>alpha = self.get_alpha(sdf, normal, t_dirs, dists)[…,None]<ul>
+<li>n_samples x 1</li>
+</ul>
+</li>
+<li>rgb = self.texture(feature, t_dirs, normal)<ul>
+<li>n_samples x 3</li>
+</ul>
+</li>
+<li>weights = render_weight_from_alpha(alpha, ray_indices=ray_indices, n_rays=n_rays)<ul>
+<li>从$\alpha$中得到权重：$w_i = T_i\alpha_i, \quad\textrm{where}\quad T_i = \prod_{j=1}^{i-1}(1-\alpha_j)$</li>
+<li>ref: <a target="_blank" rel="noopener" href="https://www.nerfacc.com/en/v0.3.5/apis/generated/nerfacc.render_weight_from_alpha.html#nerfacc.render_weight_from_alpha">nerfacc.render_weight_from_alpha — nerfacc 0.3.5 documentation</a></li>
+<li>n_samples x 1</li>
+</ul>
+</li>
+<li>opacity = accumulate_along_rays(weights, ray_indices, values=None, n_rays=n_rays)<ul>
+<li>n_rays, 1</li>
+</ul>
+</li>
+<li>depth = accumulate_along_rays(weights, ray_indices, values=midpoints, n_rays=n_rays)<ul>
+<li>n_rays, 1</li>
+</ul>
+</li>
+<li>comp_rgb = accumulate_along_rays(weights, ray_indices, values=rgb, n_rays=n_rays)<ul>
+<li>n_rays, 3</li>
+</ul>
+</li>
+<li>comp_normal = accumulate_along_rays(weights, ray_indices, values=normal, n_rays=n_rays)<ul>
+<li>n_rays, 3</li>
+</ul>
+</li>
+<li>comp_normal = F.normalize(comp_normal, p=2, dim=-1)<ul>
+<li>n_rays, 3</li>
+</ul>
+</li>
+<li>return <code>&#123;**out, **&#123;k + &#39;_bg&#39;: v for k, v in out_bg.items()&#125;, **&#123;k + &#39;_full&#39;: v for k, v in ut_full.items()&#125;&#125;</code></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">out = &#123;</span><br><span class="line">    <span class="string">&#x27;comp_rgb&#x27;</span>: comp_rgb, <span class="comment"># n_rays, 3</span></span><br><span class="line">    <span class="string">&#x27;comp_normal&#x27;</span>: comp_normal, <span class="comment"># n_rays, 3</span></span><br><span class="line">    <span class="string">&#x27;opacity&#x27;</span>: opacity, <span class="comment"># n_rays, 1</span></span><br><span class="line">    <span class="string">&#x27;depth&#x27;</span>: depth, <span class="comment"># n_rays, 1</span></span><br><span class="line">    <span class="string">&#x27;rays_valid&#x27;</span>: opacity &gt; <span class="number">0</span>, <span class="comment"># n_rays, 1</span></span><br><span class="line">    <span class="string">&#x27;num_samples&#x27;</span>: torch.as_tensor([<span class="built_in">len</span>(t_starts)], dtype=torch.int32, device=rays.device) <span class="comment">#n_samples</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> self.training:</span><br><span class="line">    out.update(&#123;</span><br><span class="line">        <span class="string">&#x27;sdf_samples&#x27;</span>: sdf, <span class="comment"># n_samples , 1</span></span><br><span class="line">        <span class="string">&#x27;sdf_grad_samples&#x27;</span>: sdf_grad, <span class="comment"># n_samples , 3</span></span><br><span class="line">        <span class="string">&#x27;weights&#x27;</span>: weights.view(-<span class="number">1</span>), <span class="comment"># n_samples , 1</span></span><br><span class="line">        <span class="string">&#x27;points&#x27;</span>: midpoints.view(-<span class="number">1</span>), <span class="comment"># n_samples , 1</span></span><br><span class="line">        <span class="string">&#x27;intervals&#x27;</span>: dists.view(-<span class="number">1</span>), <span class="comment"># n_samples , 1</span></span><br><span class="line">        <span class="string">&#x27;ray_indices&#x27;</span>: ray_indices.view(-<span class="number">1</span>)   <span class="comment"># n_samples             </span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> self.config.learned_background:</span><br><span class="line">    out_bg = self.forward_bg_(rays)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    out_bg = &#123;</span><br><span class="line">        <span class="string">&#x27;comp_rgb&#x27;</span>: self.background_color[<span class="literal">None</span>,:].expand(*comp_rgb.shape),</span><br><span class="line">        <span class="string">&#x27;num_samples&#x27;</span>: torch.zeros_like(out[<span class="string">&#x27;num_samples&#x27;</span>]),</span><br><span class="line">        <span class="string">&#x27;rays_valid&#x27;</span>: torch.zeros_like(out[<span class="string">&#x27;rays_valid&#x27;</span>])</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">out_full = &#123;</span><br><span class="line">    <span class="string">&#x27;comp_rgb&#x27;</span>: out[<span class="string">&#x27;comp_rgb&#x27;</span>] + out_bg[<span class="string">&#x27;comp_rgb&#x27;</span>] * (<span class="number">1.0</span> - out[<span class="string">&#x27;opacity&#x27;</span>]),</span><br><span class="line">    <span class="string">&#x27;num_samples&#x27;</span>: out[<span class="string">&#x27;num_samples&#x27;</span>] + out_bg[<span class="string">&#x27;num_samples&#x27;</span>],</span><br><span class="line">    <span class="string">&#x27;rays_valid&#x27;</span>: out[<span class="string">&#x27;rays_valid&#x27;</span>] | out_bg[<span class="string">&#x27;rays_valid&#x27;</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<ul>
+<li><p>forward(rays)</p>
+<ul>
+<li>if self.training <ul>
+<li>out = self.forward_(rays)</li>
+</ul>
+</li>
+<li>else<ul>
+<li>out = chunk_batch(self.forward_, self.config.ray_chunk, True, rays)</li>
+</ul>
+</li>
+<li>return <code>&#123;**out, &#39;inv_s&#39;: self.variance.inv_s&#125;</code></li>
+</ul>
+</li>
+<li><p>train(self, mode=True)</p>
+<ul>
+<li>self.randomized = <code>mode and self.config.randomized</code></li>
+<li>return super().train(mode=mode)</li>
+</ul>
+</li>
+<li><p>eval</p>
+<ul>
+<li>self.randomized = False</li>
+<li>return super().eval()</li>
+</ul>
+</li>
+<li><p>regularizations</p>
+<ul>
+<li>losses = {}</li>
+<li>losses.update(self.geometry.regularizations(out))</li>
+<li>losses.update(self.texture.regularizations(out))</li>
+<li>return losses</li>
+</ul>
+</li>
+</ul>
+<p>@torch.no_grad()</p>
+<ul>
+<li>export：导出带有texture的mesh</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@torch.no_grad()</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">export</span>(<span class="params">self, export_config</span>):</span><br><span class="line">    mesh = self.isosurface()</span><br><span class="line">    <span class="keyword">if</span> export_config.export_vertex_color:</span><br><span class="line">        _, sdf_grad, feature = chunk_batch(self.geometry, export_config.chunk_size, <span class="literal">False</span>, mesh[<span class="string">&#x27;v_pos&#x27;</span>].to(self.rank), with_grad=<span class="literal">True</span>, with_feature=<span class="literal">True</span>)</span><br><span class="line">        normal = F.normalize(sdf_grad, p=<span class="number">2</span>, dim=-<span class="number">1</span>)</span><br><span class="line">        rgb = self.texture(feature, -normal, normal) <span class="comment"># set the viewing directions to the normal to get &quot;albedo&quot;</span></span><br><span class="line">        mesh[<span class="string">&#x27;v_rgb&#x27;</span>] = rgb.cpu()</span><br><span class="line">    <span class="keyword">return</span> mesh</span><br></pre></td></tr></table></figure>
+<h2 id="network-utils"><a href="#network-utils" class="headerlink" title="network_utils"></a>network_utils</h2><div class="note info">
+            <p>各种编码方式和MLP网络</p><ul><li>VanillaFrequency, ProgressiveBandHashGrid, tcnn.Encoding</li><li>VanillaMLP, tcnn.Network<br>可以使用的方法：</li><li>get_encoding, get_mlp, get_encoding_with_network</li></ul>
+          </div>
+<ul>
+<li>VanillaFrequency 继承nn.Module<ul>
+<li><code>__init__(self, in_channels, config)</code><ul>
+<li>self.N_freqs 即L</li>
+<li>self.in_channels, self.n_input_dims = in_channels, in_channels</li>
+<li><code>self.funcs = [torch.sin, torch.cos]</code></li>
+<li><code>self.freq_bands = 2**torch.linspace(0, self.N_freqs-1, self.N_freqs)</code></li>
+<li>self.n_output_dims = self.in_channels <em> (len(self.funcs) </em> self.N_freqs) = 3x2xL</li>
+<li>self.n_masking_step = config.get(‘n_masking_step’, 0)</li>
+<li>self.update_step 每步开始前都需要更新出mask</li>
+</ul>
+</li>
+<li>forward(self,x)<ul>
+<li>out = []</li>
+<li>for freq , mask in zip(self.freq_bands, self.mask):<ul>
+<li>for func in self.funcs:<ul>
+<li><code>out += [func(freq*x) * mask]</code>    </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>return torch.cat(out, -1)   </li>
+</ul>
+</li>
+<li>update_step(self,epoch,global_step)<ul>
+<li>if self.n_masking_step &lt;= 0 or global_step is None:<ul>
+<li>self.mask = torch.ones(self.N_freqs, dtype=torch.float32) 与L相同形状的全1张量</li>
+</ul>
+</li>
+<li>else:<ul>
+<li>self.mask = (1. - torch.cos(math.pi <em> (global_step / self.n_masking_step </em> self.N_freqs - torch.arange(0, self.N_freqs)).clamp(0, 1))) / 2.<ul>
+<li>mask = $\left(1-cos\left(\pi \cdot \left(\frac{global.step \cdot L}{n.masking.step}-arrange\right).clamp\right)\right) \cdot 0.5$</li>
+</ul>
+</li>
+<li>rank_zero_debug(f’Update mask: {global_step}/{self.n_masking_step} {self.mask}’)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Vanilla：最初始的<br>即NeRF中的频率编码方式<br>$\gamma(p)=\left(\sin \left(2^{0} \pi p\right), \cos \left(2^{0} \pi p\right), \cdots, \sin \left(2^{L-1} \pi p\right), \cos \left(2^{L-1} \pi p\right)\right)$</p>
+<ul>
+<li><p>ProgressiveBandHashGrid，继承nn.Module</p>
+<ul>
+<li><code>__init__(self, in_channels,config)</code><ul>
+<li>self.n_input_dims = in_channels</li>
+<li>encoding_config = config.copy()</li>
+<li>encoding_config[‘otype’] = ‘HashGrid’</li>
+<li>with torch.cuda.device(get_rank()):<ul>
+<li>self.encoding = tcnn.Encoding(in_channels, encoding_config) 使用哈希编码</li>
+</ul>
+</li>
+<li>self.n_output_dims = self.encoding.n_output_dims</li>
+<li>self.n_level = config[‘n_levels’]，分辨率个数</li>
+<li>self.n_features_per_level = config[‘n_features_per_level’]，特征向量维数</li>
+<li>self.start_level, self.start_step, self.update_steps = config[‘start_level’], config[‘start_step’], config[‘update_steps’]</li>
+<li>self.current_level = self.start_level</li>
+<li>self.mask = torch.zeros(self.n_level * self.n_features_per_level, dtype=torch.float32, device=get_rank())</li>
+</ul>
+</li>
+<li>forward(self,x)<ul>
+<li>enc = self.encoding(x)</li>
+<li>enc = enc * self.mask ,第一个step，mask为0，之后每过update_steps，更新一次mask</li>
+<li>return enc</li>
+</ul>
+</li>
+<li>update_step(self,epoch,global_step)<ul>
+<li>current_level = min(self.start_level + max(global_step - self.start_step, 0) // self.update_steps, self.n_level)<ul>
+<li>min(1+max(global_step-0,0)//update_steps, 16)</li>
+</ul>
+</li>
+<li>if current_level &gt; self.current_level:<ul>
+<li>rank_zero_debug(f’Update current level to {current_level}’)</li>
+</ul>
+</li>
+<li>self.current_level = current_level</li>
+<li><code>self.mask[:self.current_level * self.n_features_per_level] = 1.</code><ul>
+<li>mask从0到(当前分辨率x特征向量维数) 置为1</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>CompositeEncoding，继承nn.Module</p>
+<ul>
+<li><code>__init__(self, encoding , include_xyz = True, xyz_scale=1 , xyz_offset=0)</code><ul>
+<li>self.encoding = encoding</li>
+<li>self.include_xyz, self.xyz_scale, self.xyz_offset = include_xyz, xyz_scale, xyz_offset</li>
+<li>self.n_output_dims = int(self.include_xyz) * self.encoding.n_input_dims + self.encoding.n_output_dims<ul>
+<li>$o.dim = int(TorF) \cdot n.idim +n.odim$</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>forward(self,x,*args)</code><ul>
+<li>return <code>self.encoding(x, *args) if not self.include_xyz else torch.cat([x * self.xyz_scale + self.xyz_offset, self.encoding(x, *args)], dim=-1)</code><ul>
+<li>if include_xyz: <code>torch.cat([x * self.xyz_scale + self.xyz_offset, self.encoding(x, *args)], dim=-1)</code> 将输入x变为2x-1，并与编码后的输入cat起来</li>
+<li>else : <code>self.encoding(x, *args)</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>update(self, epoch, global_step)<ul>
+<li>update_module_step(self.encoding, epoch, global_step)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="note info">
+            <p>config_to_primitive在utils/misc.py中，<code>return OmegaConf.to_container(config, resolve=resolve)</code><br>由于OmegaConf config objects很占用内存，因此使用to_container转化为原始的容器，如dict。如果resolve值设置为 True，则将在转换期间解析内插<code>${foo}</code>。</p>
+          </div>
+<ul>
+<li>get_encoding(n_input_dims, config)<ul>
+<li><code>if config.otype ==  &#39;VanillaFrequency&#39;:</code><ul>
+<li>encoding = VanillaFrequency(n_input_dims, config_to_primitive(config))</li>
+</ul>
+</li>
+<li><code>elif config.otype == &#39;ProgressiveBandHashGrid&#39;:</code><ul>
+<li>encoding = ProgressiveBandHashGrid(n_input_dims, config_to_primitive(config))</li>
+</ul>
+</li>
+<li>else:<ul>
+<li>with torch.cuda.device(get_rank()):<ul>
+<li>encoding = tcnn.Encoding(n_input_dims, config_to_primitive(config)) </li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>encoding = CompositeEncoding(encoding, include_xyz=config.get(&#39;include_xyz&#39;, False), xyz_scale=2., xyz_offset=-1.)</code></li>
+<li>return encoding</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>VanillaMLP , 继承nn.Module<ul>
+<li>NeRF中的MLP</li>
+<li><code>__init__(self,dim_in,dim_out,config)</code><ul>
+<li>一共n_hidden_layers个隐藏层，每个隐藏层有n_neurons个节点</li>
+<li><code>Sequential(*self.layers)</code>将每层都加入ModuleList中，并在内部实现forward，可以不写forward<ul>
+<li>ref: <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/75206669">详解PyTorch中的ModuleList和Sequential - 知乎 (zhihu.com)</a></li>
+</ul>
+</li>
+<li>get_activation：utils中的激活函数方法，根据不同的output_activation选择不同的激活函数</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">self.n_neurons, self.n_hidden_layers = config[<span class="string">&#x27;n_neurons&#x27;</span>], config[<span class="string">&#x27;n_hidden_layers&#x27;</span>]</span><br><span class="line">self.sphere_init, self.weight_norm = config.get(<span class="string">&#x27;sphere_init&#x27;</span>, <span class="literal">False</span>), config.get(<span class="string">&#x27;weight_norm&#x27;</span>, <span class="literal">False</span>)</span><br><span class="line">self.sphere_init_radius = config.get(<span class="string">&#x27;sphere_init_radius&#x27;</span>, <span class="number">0.5</span>)</span><br><span class="line">self.layers = [self.make_linear(dim_in, self.n_neurons, is_first=<span class="literal">True</span>, is_last=<span class="literal">False</span>), self.make_activation()]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(self.n_hidden_layers - <span class="number">1</span>):</span><br><span class="line">    self.layers += [self.make_linear(self.n_neurons, self.n_neurons, is_first=<span class="literal">False</span>, is_last=<span class="literal">False</span>), self.make_activation()]</span><br><span class="line">self.layers += [self.make_linear(self.n_neurons, dim_out, is_first=<span class="literal">False</span>, is_last=<span class="literal">True</span>)]</span><br><span class="line">self.layers = nn.Sequential(*self.layers)</span><br><span class="line">self.output_activation = get_activation(config[<span class="string">&#x27;output_activation&#x27;</span>])</span><br></pre></td></tr></table></figure>
+<ul>
+<li>VanillaMLP 接上<ul>
+<li>forward(self,x)，Sequential可以直接使用，而不需构建一个循环从ModuleList中依次执行<ul>
+<li>x = self.layers(x.float())</li>
+<li>x = self.output_activation(x)</li>
+<li>return x</li>
+</ul>
+</li>
+<li>make_linear(self,dim_in,dim_out,is_first,is_last)<ul>
+<li>layer = nn.Linear(dim_in, dim_out, bias=True) # network without bias will degrade quality</li>
+<li>if self.sphere_init: 初始化每层的权重和偏置(常数或者正态分布)<ul>
+<li>if is_last:<ul>
+<li>torch.nn.init.constant_(layer.bias, -self.sphere_init_radius)</li>
+<li>torch.nn.init.normal_(layer.weight, mean=math.sqrt(math.pi) / math.sqrt(dim_in), std=0.0001)</li>
+</ul>
+</li>
+<li>elif is_first:<ul>
+<li>torch.nn.init.constant_(layer.bias, 0.0)</li>
+<li>torch.nn.init.constant_(layer.weight[:, 3:], 0.0)</li>
+<li>torch.nn.init.normal_(layer.weight[:, :3], 0.0, math.sqrt(2) / math.sqrt(dim_out))</li>
+</ul>
+</li>
+<li>else:<ul>
+<li>torch.nn.init.constant_(layer.bias, 0.0)</li>
+<li>torch.nn.init.normal_(layer.weight, 0.0, math.sqrt(2) / math.sqrt(dim_out))</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>else:<ul>
+<li>torch.nn.init.constant_(layer.bias, 0.0)</li>
+<li>torch.nn.init.kaiming_uniform_(layer.weight, nonlinearity=’relu’)</li>
+</ul>
+</li>
+<li>if self.weight_norm: <ul>
+<li>layer = nn.utils.weight_normal(layer)</li>
+</ul>
+</li>
+<li>return layer</li>
+</ul>
+</li>
+<li>make_activation<ul>
+<li>if self.sphere_init:<ul>
+<li>return nn.Softplus(beta=100)</li>
+</ul>
+</li>
+<li>else:<ul>
+<li>return nn.ReLU(inplace=True)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>sphere_init_tcnn_network(n_input_dims, n_output_dims, config, network)<ul>
+<li>rank_zero_debug(‘Initialize tcnn MLP to approximately represent a sphere.’)</li>
+<li>padto = 16 if config.otype == ‘FullyFusedMLP’ else 8</li>
+<li>n_input_dims = n_input_dims + (padto - n_input_dims % padto) % padto<ul>
+<li>$ni = ni + (padto - ni \% padto) \% padto$ 取余数</li>
+</ul>
+</li>
+<li>n_output_dims = n_output_dims + (padto - n_output_dims % padto) % padto</li>
+<li><code>data = list(network.parameters())[0].data</code></li>
+<li><code>assert data.shape[0] == (n_input_dims + n_output_dims) * config.n_neurons + (config.n_hidden_layers - 1) * config.n_neurons**2</code>   </li>
+<li><code>new_data = []</code></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># first layer</span></span><br><span class="line">weight = torch.zeros((config.n_neurons, n_input_dims)).to(data)</span><br><span class="line">torch.nn.init.constant_(weight[:, <span class="number">3</span>:], <span class="number">0.0</span>)</span><br><span class="line">torch.nn.init.normal_(weight[:, :<span class="number">3</span>], <span class="number">0.0</span>, math.sqrt(<span class="number">2</span>) / math.sqrt(config.n_neurons))</span><br><span class="line">new_data.append(weight.flatten())</span><br><span class="line"><span class="comment"># hidden layers</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(config.n_hidden_layers - <span class="number">1</span>):</span><br><span class="line">    weight = torch.zeros((config.n_neurons, config.n_neurons)).to(data)</span><br><span class="line">    torch.nn.init.normal_(weight, <span class="number">0.0</span>, math.sqrt(<span class="number">2</span>) / math.sqrt(config.n_neurons))</span><br><span class="line">    new_data.append(weight.flatten())</span><br><span class="line"><span class="comment"># last layer</span></span><br><span class="line">weight = torch.zeros((n_output_dims, config.n_neurons)).to(data)</span><br><span class="line">torch.nn.init.normal_(weight, mean=math.sqrt(math.pi) / math.sqrt(config.n_neurons), std=<span class="number">0.0001</span>)</span><br><span class="line">new_data.append(weight.flatten())</span><br><span class="line">new_data = torch.cat(new_data)</span><br><span class="line">data.copy_(new_data)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>get_mlp(n_input_dims, n_output_dims, config)</p>
+<ul>
+<li><code>if config.otype == &#39;VanillaMLP&#39;:</code><ul>
+<li>network = VanillaMLP(n_input_dims, n_output_dims, config_to_primitive(config))</li>
+</ul>
+</li>
+<li><code>else:</code><ul>
+<li>with torch.cuda.device(get_rank()):<ul>
+<li>network = tcnn.Network(n_input_dims, n_output_dims, config_to_primitive(config))</li>
+<li>if config.get(‘sphere_init’, False):<ul>
+<li>sphere_init_tcnn_network(n_input_dims, n_output_dims, config, network)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>return network 返回一个model</li>
+</ul>
+</li>
+<li><p>EncodingWithNetwork，继承nn.Module</p>
+<ul>
+<li><code>__init__(self,encoding,network)</code><ul>
+<li>self.encoding, self.network = encoding, network</li>
+</ul>
+</li>
+<li>forward(self,x)<ul>
+<li>return self.network(self.encoding(x))</li>
+</ul>
+</li>
+<li>update_step(self, epoch, global_step)<ul>
+<li>update_module_step(self.encoding, epoch, global_step)</li>
+<li>update_module_step(self.network, epoch, global_step)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>get_encoding_with_network(n_input_dims, n_output_dims, encoding_config, network_config)</p>
+<ul>
+<li><code>if encoding_config.otype in [&#39;VanillaFrequency&#39;, &#39;ProgressiveBandHashGrid&#39;] or network_config.otype in [&#39;VanillaMLP&#39;]:</code><ul>
+<li>encoding = get_encoding(n_input_dims, encoding_config)</li>
+<li>network = get_mlp(encoding.n_output_dims, n_output_dims, network_config)</li>
+<li>encoding_with_network = EncodingWithNetwork(encoding, network)</li>
+</ul>
+</li>
+<li>else:<ul>
+<li>with torch.cuda.device(get_rank()):<ul>
+<li>encoding_with_network = tcnn.NetworkWithInputEncoding(n_input_dims,n_output_dims,encoding_config,network_config)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>return encoding_with_network</li>
+</ul>
+</li>
+</ul>
+<h2 id="geometry"><a href="#geometry" class="headerlink" title="geometry"></a>geometry</h2><div class="note info">
+            <p>输入点的位置position经过MLP网络得到背景density, feature或者前景物体sdf, sdf_grad, feature</p>
+          </div>
+<ul>
+<li>contract_to_unisphere，根据contraction_type，将位置x缩放到合适大小<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">contract_to_unisphere</span>(<span class="params">x, radius, contraction_type</span>):</span><br><span class="line">    <span class="keyword">if</span> contraction_type == ContractionType.AABB:</span><br><span class="line">        x = scale_anything(x, (-radius, radius), (<span class="number">0</span>, <span class="number">1</span>))</span><br><span class="line">    <span class="keyword">elif</span> contraction_type == ContractionType.UN_BOUNDED_SPHERE:</span><br><span class="line">        x = scale_anything(x, (-radius, radius), (<span class="number">0</span>, <span class="number">1</span>))</span><br><span class="line">        x = x * <span class="number">2</span> - <span class="number">1</span>  <span class="comment"># aabb is at [-1, 1]</span></span><br><span class="line">        mag = x.norm(dim=-<span class="number">1</span>, keepdim=<span class="literal">True</span>)</span><br><span class="line">        mask = mag.squeeze(-<span class="number">1</span>) &gt; <span class="number">1</span></span><br><span class="line">        x[mask] = (<span class="number">2</span> - <span class="number">1</span> / mag[mask]) * (x[mask] / mag[mask])</span><br><span class="line">        x = x / <span class="number">4</span> + <span class="number">0.5</span>  <span class="comment"># [-inf, inf] is at [0, 1]</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">raise</span> NotImplementedError</span><br><span class="line">    <span class="keyword">return</span> x</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>将等值面三角网格化</p>
+<ul>
+<li>MarchingCubeHelper 继承nn.Module<ul>
+<li><code>__init__(resolution, use_torch=True)</code><ul>
+<li>self.resolution = resolution</li>
+<li>self.use_torch = use_torch</li>
+<li>self.points_range = (0, 1)</li>
+<li>if self.use_torch:<ul>
+<li>import torchmcubes</li>
+<li>self.mc_func = torchmcubes.marching_cubes</li>
+</ul>
+</li>
+<li>else:<ul>
+<li>import mcubes</li>
+<li>self.mc_func = mcubes.marching_cubes</li>
+</ul>
+</li>
+<li>self.verts = None</li>
+</ul>
+</li>
+<li>grid_vertices()<ul>
+<li>if self.verts is None:<ul>
+<li><code>x, y, z = torch.linspace(*self.points_range, self.resolution), torch.linspace(*self.points_range, self.resolution), torch.linspace(*self.points_range, self.resolution)</code><ul>
+<li><code>x: torch.Size([resolution])</code></li>
+</ul>
+</li>
+<li>x, y, z = torch.meshgrid(x, y, z, indexing=’ij’)<ul>
+<li><code>x: torch.Size([resolution, resolution, resolution])</code></li>
+</ul>
+</li>
+<li><code>verts = torch.cat([x.reshape(-1, 1), y.reshape(-1, 1), z.reshape(-1, 1)], dim=-1).reshape(-1, 3)</code><ul>
+<li><code>verts: torch.Size([resolution ** 3, 3])</code></li>
+</ul>
+</li>
+<li>self.verts = verts</li>
+</ul>
+</li>
+<li>return self.verts</li>
+</ul>
+</li>
+<li>forward(self,level,threshold=0.)<ul>
+<li>level = level.float().view(self.resolution, self.resolution, self.resolution)</li>
+<li>if self.use_torch:<ul>
+<li><code>verts, faces = self.mc_func(level.to(get_rank()), threshold)</code></li>
+<li><code>verts, faces = verts.cpu(), faces.cpu().long()</code></li>
+</ul>
+</li>
+<li>else:<ul>
+<li><code>verts, faces = self.mc_func(-level.numpy(), threshold)</code> # transform to numpy</li>
+<li><code>verts, faces = torch.from_numpy(verts.astype(np.float32)), torch.from_numpy(faces.astype(np.int64))</code></li>
+</ul>
+</li>
+<li>verts = verts / (self.resolution - 1.)</li>
+<li>return {‘v_pos’: verts, ‘t_pos_idx’: faces}</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>获得等值面的mesh网格，包括vertices和faces</p>
+<ul>
+<li>BaseImplicitGeometry，继承BaseModel<ul>
+<li><code>__init__(self,config)</code><ul>
+<li><code>if self.config.isosurface is not None:</code><ul>
+<li><code>assert self.config.isosurface.method in [&#39;mc&#39;, &#39;mc-torch&#39;]</code></li>
+<li><code>if self.config.isosurface.method == &#39;mc-torch&#39;:</code><ul>
+<li><code>raise NotImplementedError(&quot;Please do not use mc-torch. It currently has some scaling issues I haven&#39;t fixed yet.&quot;)</code></li>
+</ul>
+</li>
+<li><code>self.helper = MarchingCubeHelper(self.config.isosurface.resolution, use_torch=self.config.isosurface.method==&#39;mc-torch&#39;)</code></li>
+</ul>
+</li>
+<li>self.contraction_type = None</li>
+<li>self.radius = self.config.radius</li>
+</ul>
+</li>
+<li>forward_level(self,points)<ul>
+<li>raise NotImplementedError</li>
+</ul>
+</li>
+<li>isosurface_(self,vmin,vmax): 返回mesh</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">batch_func</span>(<span class="params">x</span>):</span><br><span class="line">    x = torch.stack([</span><br><span class="line">        scale_anything(x[...,<span class="number">0</span>], (<span class="number">0</span>, <span class="number">1</span>), (vmin[<span class="number">0</span>], vmax[<span class="number">0</span>])),</span><br><span class="line">        scale_anything(x[...,<span class="number">1</span>], (<span class="number">0</span>, <span class="number">1</span>), (vmin[<span class="number">1</span>], vmax[<span class="number">1</span>])),</span><br><span class="line">        scale_anything(x[...,<span class="number">2</span>], (<span class="number">0</span>, <span class="number">1</span>), (vmin[<span class="number">2</span>], vmax[<span class="number">2</span>])),</span><br><span class="line">    ], dim=-<span class="number">1</span>).to(self.rank)</span><br><span class="line">    rv = self.forward_level(x).cpu() <span class="comment"># 为 -density</span></span><br><span class="line">    cleanup()</span><br><span class="line">    <span class="keyword">return</span> rv</span><br><span class="line"><span class="comment"># self.helper.grid_vertices(): torch.Size([resolution ** 3, 3])</span></span><br><span class="line">level = chunk_batch(batch_func, self.config.isosurface.chunk, <span class="literal">True</span>, self.helper.grid_vertices())</span><br><span class="line">mesh = self.helper(level, threshold=self.config.isosurface.threshold)</span><br><span class="line">mesh[<span class="string">&#x27;v_pos&#x27;</span>] = torch.stack([</span><br><span class="line">    scale_anything(mesh[<span class="string">&#x27;v_pos&#x27;</span>][...,<span class="number">0</span>], (<span class="number">0</span>, <span class="number">1</span>), (vmin[<span class="number">0</span>], vmax[<span class="number">0</span>])),</span><br><span class="line">    scale_anything(mesh[<span class="string">&#x27;v_pos&#x27;</span>][...,<span class="number">1</span>], (<span class="number">0</span>, <span class="number">1</span>), (vmin[<span class="number">1</span>], vmax[<span class="number">1</span>])),</span><br><span class="line">    scale_anything(mesh[<span class="string">&#x27;v_pos&#x27;</span>][...,<span class="number">2</span>], (<span class="number">0</span>, <span class="number">1</span>), (vmin[<span class="number">2</span>], vmax[<span class="number">2</span>]))</span><br><span class="line">], dim=-<span class="number">1</span>)</span><br><span class="line"><span class="keyword">return</span> mesh</span><br><span class="line"></span><br><span class="line"><span class="keyword">in</span> utils:</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">scale_anything</span>(<span class="params">dat, inp_scale, tgt_scale</span>):</span><br><span class="line">    <span class="keyword">if</span> inp_scale <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        inp_scale = [dat.<span class="built_in">min</span>(), dat.<span class="built_in">max</span>()]</span><br><span class="line">    dat = (dat  - inp_scale[<span class="number">0</span>]) / (inp_scale[<span class="number">1</span>] - inp_scale[<span class="number">0</span>])</span><br><span class="line">    dat = dat * (tgt_scale[<span class="number">1</span>] - tgt_scale[<span class="number">0</span>]) + tgt_scale[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">return</span> dat</span><br></pre></td></tr></table></figure>
+<ul>
+<li>BaseImplicitGeometry 接上<ul>
+<li>@torch.no_grad()</li>
+<li>isosurface(self) <ul>
+<li>if self.config.isosurface is None:<ul>
+<li>raise NotImplementedError</li>
+</ul>
+</li>
+<li>mesh_coarse = self.isosurface_((-self.radius, -self.radius, -self.radius), (self.radius, self.radius, self.radius))</li>
+<li>vmin, vmax = mesh_coarse[‘v_pos’].amin(dim=0), mesh_coarse[‘v_pos’].amax(dim=0)</li>
+<li>vmin_ = (vmin - (vmax - vmin) * 0.1).clamp(-self.radius, self.radius)</li>
+<li>vmax_ = (vmax + (vmax - vmin) * 0.1).clamp(-self.radius, self.radius)</li>
+<li>mesh_fine = self.isosurface_(vmin_, vmax_)</li>
+<li>return mesh_fine  返回vertices和faces</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>背景几何：density和feature<br>@models.register(‘volume-density’)</p>
+<ul>
+<li>VolumeDensity 继承BaseImplicitGeometry<ul>
+<li>setup()<ul>
+<li>self.n_input_dims = self.config.get(‘n_input_dims’, 3)</li>
+<li>self.n_output_dims = self.config.feature_dim</li>
+<li>self.encoding_with_network = get_encoding_with_network(self.n_input_dims, self.n_output_dims, self.config.xyz_encoding_config, self.config.mlp_network_config)</li>
+</ul>
+</li>
+<li>forward(self,points) 根据编码方式和网络，得到density和feature<ul>
+<li>points = contract_to_unisphere(points, self.radius, self.contraction_type)</li>
+<li><code>out = self.encoding_with_network(points.view(-1, self.n_input_dims)).view(*points.shape[:-1], self.n_output_dims).float()</code></li>
+<li>density, feature = out[…,0], out</li>
+<li>if ‘density_activation’ in self.config:<ul>
+<li>density = get_activation(self.config.density_activation)(density + float(self.config.density_bias))</li>
+</ul>
+</li>
+<li>if ‘feature_activation’ in self.config:<ul>
+<li>feature = get_activation(self.config.feature_activation)(feature)</li>
+</ul>
+</li>
+<li>return density, feature</li>
+</ul>
+</li>
+<li>forward_level(self,points) 根据编码方式和网络，得到-density，方便进行判断等值面isosurface<ul>
+<li>points = contract_to_unisphere(points, self.radius, self.contraction_type)</li>
+<li><code>density = self.encoding_with_network(points.reshape(-1, self.n_input_dims)).reshape(*points.shape[:-1], self.n_output_dims)[...,0]</code></li>
+<li>if ‘density_activation’ in self.config:<ul>
+<li>density = get_activation(self.config.density_activation)(density + float(self.config.density_bias))</li>
+</ul>
+</li>
+<li>return -density</li>
+</ul>
+</li>
+<li>update_step(self,epoch, global_step)<ul>
+<li>update_module_step(self.encoding_with_network, epoch, global_step)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>前景物体几何：sdf, sdf_grad, feature<br>@models.register(‘volume-sdf’)</p>
+<ul>
+<li>VolumeSDF<ul>
+<li>setup()<ul>
+<li>self.n_output_dims = self.config.feature_dim</li>
+<li>encoding = get_encoding(3, self.config.xyz_encoding_config)</li>
+<li>network = get_mlp(encoding.n_output_dims, self.n_output_dims, self.config.mlp_network_config)</li>
+<li>self.encoding, self.network = encoding, network</li>
+<li>self.grad_type = self.config.grad_type</li>
+</ul>
+</li>
+<li>forward(self, points, with_grad=True, with_feature=True)<ul>
+<li><code>with torch.inference_mode(torch.is_inference_mode_enabled() and not (with_grad and self.grad_type == &#39;analytic&#39;))</code>: 是否启用推理模式，当前为推理，并且没有grad，grad_type不是analytic<ul>
+<li><code>with torch.set_grad_enabled(self.training or (with_grad and self.grad_type == &#39;analytic&#39;)):</code><ul>
+<li>if with_grad and self.grad_type == ‘analytic’:</li>
+<li>if not self.training:<ul>
+<li>points = points.clone() # points may be in inference mode, get a copy to enable grad</li>
+</ul>
+</li>
+<li>points.requires_grad_(True)</li>
+</ul>
+</li>
+<li>points_ = points 初始位置</li>
+<li>points = contract_to_unisphere(points, self.radius, self.contraction_type) <strong>points normalized to (0, 1)</strong></li>
+<li><code>out = self.network(self.encoding(points.view(-1, 3))).view(*points.shape[:-1], self.n_output_dims).float()</code></li>
+<li><code>sdf, feature = out[...,0], out</code></li>
+<li>if ‘sdf_activation’ in self.config: sdf激活<ul>
+<li>sdf = get_activation(self.config.sdf_activation)(sdf + float(self.config.sdf_bias))</li>
+</ul>
+</li>
+<li>if ‘feature_activation’ in self.config:<ul>
+<li>feature = get_activation(self.config.feature_activation)(feature)       </li>
+</ul>
+</li>
+<li>if with_grad: 求梯度的两种方法：自动微分or有限差分法<ul>
+<li><code>if self.grad_type == &#39;analytic&#39;:</code> <ul>
+<li>grad = torch.autograd.grad(sdf, points_, grad_outputs=torch.ones_like(sdf),create_graph=True, retain_graph=True, only_inputs=True)[0]</li>
+</ul>
+</li>
+<li><code>elif self.grad_type == &#39;finite_difference&#39;:</code><ul>
+<li>有限差分得到$𝑓 ′ (𝑥) = (𝑓 (𝑥 + Δ𝑥) − (𝑓 𝑥 − Δ𝑥))/2Δ𝑥$，sdf对位置的梯度grad</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>rv = [sdf]</code></li>
+<li>if with_grad:<ul>
+<li>rv.append(grad)</li>
+</ul>
+</li>
+<li>if with_feature:<ul>
+<li>rv.append(feature)</li>
+</ul>
+</li>
+<li><code>rv = [v if self.training else v.detach() for v in rv]</code></li>
+<li><code>return rv[0] if len(rv) == 1 else rv</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">有限差分法</span><br><span class="line">eps = <span class="number">0.001</span></span><br><span class="line">points_d_ = torch.stack([</span><br><span class="line">    points_ + torch.as_tensor([eps, <span class="number">0.0</span>, <span class="number">0.0</span>]).to(points_), <span class="comment"># to(other): 返回一个与 Tensor other 具有相同 torch.dtype 和 torch.device 的 Tensor</span></span><br><span class="line">    points_ + torch.as_tensor([-eps, <span class="number">0.0</span>, <span class="number">0.0</span>]).to(points_),</span><br><span class="line">    points_ + torch.as_tensor([<span class="number">0.0</span>, eps, <span class="number">0.0</span>]).to(points_),</span><br><span class="line">    points_ + torch.as_tensor([<span class="number">0.0</span>, -eps, <span class="number">0.0</span>]).to(points_),</span><br><span class="line">    points_ + torch.as_tensor([<span class="number">0.0</span>, <span class="number">0.0</span>, eps]).to(points_),</span><br><span class="line">    points_ + torch.as_tensor([<span class="number">0.0</span>, <span class="number">0.0</span>, -eps]).to(points_)</span><br><span class="line">], dim=<span class="number">0</span>).clamp(<span class="number">0</span>, <span class="number">1</span>)</span><br><span class="line">points_d = scale_anything(points_d_, (-self.radius, self.radius), (<span class="number">0</span>, <span class="number">1</span>))</span><br><span class="line">points_d_sdf = self.network(self.encoding(points_d.view(-<span class="number">1</span>, <span class="number">3</span>)))[...,<span class="number">0</span>].view(<span class="number">6</span>, *points.shape[:-<span class="number">1</span>]).<span class="built_in">float</span>()</span><br><span class="line">grad = torch.stack([</span><br><span class="line">    <span class="number">0.5</span> * (points_d_sdf[<span class="number">0</span>] - points_d_sdf[<span class="number">1</span>]) / eps,</span><br><span class="line">    <span class="number">0.5</span> * (points_d_sdf[<span class="number">2</span>] - points_d_sdf[<span class="number">3</span>]) / eps,</span><br><span class="line">    <span class="number">0.5</span> * (points_d_sdf[<span class="number">4</span>] - points_d_sdf[<span class="number">5</span>]) / eps,</span><br><span class="line">], dim=-<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>VolumeSDF 接上<ul>
+<li>forward_level(self, points)<ul>
+<li>points = contract_to_unisphere(points, self.radius, self.contraction_type) # points normalized to (0, 1)</li>
+<li><code>sdf = self.network(self.encoding(points.view(-1, 3))).view(*points.shape[:-1], self.n_output_dims)[...,0]</code></li>
+<li>if ‘sdf_activation’ in self.config:<ul>
+<li>sdf = get_activation(self.config.sdf_activation)(sdf + float(self.config.sdf_bias))</li>
+</ul>
+</li>
+<li>return sdf</li>
+</ul>
+</li>
+<li>update_step(self, epoch , global_step)<ul>
+<li>update_module_step(self.encoding, epoch, global_step)</li>
+<li>update_module_step(self.network, epoch, global_step)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="texture"><a href="#texture" class="headerlink" title="texture"></a>texture</h2><div class="note info">
+            <p>根据feature、dirs得到背景颜色<br>根据feature、dirs，以及normal得到前景颜色</p>
+          </div>
+<p>前背景颜色值<br>@models.register(‘volume-radiance’)</p>
+<ul>
+<li>VolumeRadiance，继承nn.Module<ul>
+<li><code>__init__</code><ul>
+<li>self.config = config</li>
+<li>self.n_dir_dims = self.config.get(‘n_dir_dims’, 3)</li>
+<li>self.n_output_dims = 3</li>
+<li>encoding = get_encoding(self.n_dir_dims, self.config.dir_encoding_config)</li>
+<li>self.n_input_dims = self.config.input_feature_dim + encoding.n_output_dims</li>
+<li>network = get_mlp(self.n_input_dims, self.n_output_dims, self.config.mlp_network_config) </li>
+<li>self.encoding = encoding</li>
+<li>self.network = network</li>
+</ul>
+</li>
+<li><code>forward(self, features, dirs, *args)</code><ul>
+<li>dirs = (dirs + 1.) / 2. # (-1, 1) =&gt; (0, 1)</li>
+<li>dirs_embd = self.encoding(dirs.view(-1, self.n_dir_dims))</li>
+<li><code>network_inp = torch.cat([features.view(-1, features.shape[-1]), dirs_embd] + [arg.view(-1, arg.shape[-1]) for arg in args], dim=-1)</code></li>
+<li><code>color = self.network(network_inp).view(*features.shape[:-1], self.n_output_dims).float()</code></li>
+<li>if ‘color_activation’ in self.config:<ul>
+<li>color = get_activation(self.config.color_activation)(color)</li>
+</ul>
+</li>
+<li>return color</li>
+</ul>
+</li>
+<li>update_step(self, epoch, global_step)<ul>
+<li>update_module_step(self.encoding, epoch, global_step)</li>
+</ul>
+</li>
+<li>regularizations(self, out)<ul>
+<li>return {}</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>@models.register(‘volume-color’) </p>
+<ul>
+<li>VolumeColor，不使用编码方法<ul>
+<li><code>__init__</code><ul>
+<li>self.config = config</li>
+<li>self.n_output_dims = 3</li>
+<li>self.n_input_dims = self.config.input_feature_dim</li>
+<li>network = get_mlp(self.n_input_dims, self.n_output_dims, self.config.mlp_network_config)</li>
+<li>self.network = network</li>
+</ul>
+</li>
+<li><code>forward(self, features, *args)</code><ul>
+<li><code>network_inp = features.view(-1, features.shape[-1])</code></li>
+<li><code>color = self.network(network_inp).view(*features.shape[:-1], self.n_output_dims).float()</code></li>
+<li>if ‘color_activation’ in self.config:<ul>
+<li>color = get_activation(self.config.color_activation)(color)</li>
+</ul>
+</li>
+<li>return color</li>
+</ul>
+</li>
+<li>regularizations(self, out)<ul>
+<li>return {}</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="ray-utils"><a href="#ray-utils" class="headerlink" title="ray_utils"></a>ray_utils</h2><ul>
+<li>cast_rays</li>
+</ul>
+<p>获取光线的方向(相机坐标下)</p>
+<ul>
+<li>get_ray_directions(W, H, fx, fy, cx, cy, use_pixel_centers=True)</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_ray_directions</span>(<span class="params">W, H, fx, fy, cx, cy, use_pixel_centers=<span class="literal">True</span></span>):</span><br><span class="line">    pixel_center = <span class="number">0.5</span> <span class="keyword">if</span> use_pixel_centers <span class="keyword">else</span> <span class="number">0</span> <span class="comment"># 是否使用像素中心</span></span><br><span class="line">    i, j = np.meshgrid(</span><br><span class="line">        np.arange(W, dtype=np.float32) + pixel_center,</span><br><span class="line">        np.arange(H, dtype=np.float32) + pixel_center,</span><br><span class="line">        indexing=<span class="string">&#x27;xy&#x27;</span></span><br><span class="line">    )</span><br><span class="line">    i, j = torch.from_numpy(i), torch.from_numpy(j)</span><br><span class="line"></span><br><span class="line">    directions = torch.stack([(i - cx) / fx, -(j - cy) / fy, -torch.ones_like(i)], -<span class="number">1</span>) <span class="comment"># (H, W, 3)</span></span><br><span class="line">    <span class="comment"># 计算方式与NeRF相同</span></span><br><span class="line">    <span class="keyword">return</span> directions</span><br></pre></td></tr></table></figure>
+<p>获取光线</p>
+<ul>
+<li>get_rays(directions, c2w, keepdim=False):</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_rays</span>(<span class="params">directions, c2w, keepdim=<span class="literal">False</span></span>):</span><br><span class="line">    <span class="comment"># Rotate ray directions from camera coordinate to the world coordinate</span></span><br><span class="line">    <span class="comment"># rays_d = directions @ c2w[:, :3].T # (H, W, 3) # slow?</span></span><br><span class="line">    <span class="keyword">assert</span> directions.shape[-<span class="number">1</span>] == <span class="number">3</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> directions.ndim == <span class="number">2</span>: <span class="comment"># (N_rays, 3)</span></span><br><span class="line">        <span class="keyword">assert</span> c2w.ndim == <span class="number">3</span> <span class="comment"># (N_rays, 4, 4) / (1, 4, 4)</span></span><br><span class="line">        rays_d = (directions[:,<span class="literal">None</span>,:] * c2w[:,:<span class="number">3</span>,:<span class="number">3</span>]).<span class="built_in">sum</span>(-<span class="number">1</span>) <span class="comment"># (N_rays, 3)</span></span><br><span class="line">        rays_o = c2w[:,:,<span class="number">3</span>].expand(rays_d.shape)</span><br><span class="line">    <span class="keyword">elif</span> directions.ndim == <span class="number">3</span>: <span class="comment"># (H, W, 3)</span></span><br><span class="line">        <span class="keyword">if</span> c2w.ndim == <span class="number">2</span>: <span class="comment"># (4, 4)</span></span><br><span class="line">            rays_d = (directions[:,:,<span class="literal">None</span>,:] * c2w[<span class="literal">None</span>,<span class="literal">None</span>,:<span class="number">3</span>,:<span class="number">3</span>]).<span class="built_in">sum</span>(-<span class="number">1</span>) <span class="comment"># (H, W, 3)</span></span><br><span class="line">            rays_o = c2w[<span class="literal">None</span>,<span class="literal">None</span>,:,<span class="number">3</span>].expand(rays_d.shape)</span><br><span class="line">        <span class="keyword">elif</span> c2w.ndim == <span class="number">3</span>: <span class="comment"># (B, 4, 4)</span></span><br><span class="line">            rays_d = (directions[<span class="literal">None</span>,:,:,<span class="literal">None</span>,:] * c2w[:,<span class="literal">None</span>,<span class="literal">None</span>,:<span class="number">3</span>,:<span class="number">3</span>]).<span class="built_in">sum</span>(-<span class="number">1</span>) <span class="comment"># (B, H, W, 3)</span></span><br><span class="line">            rays_o = c2w[:,<span class="literal">None</span>,<span class="literal">None</span>,:,<span class="number">3</span>].expand(rays_d.shape)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> keepdim:</span><br><span class="line">        rays_o, rays_d = rays_o.reshape(-<span class="number">1</span>, <span class="number">3</span>), rays_d.reshape(-<span class="number">1</span>, <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> rays_o, rays_d</span><br></pre></td></tr></table></figure>
+<h2 id="utils"><a href="#utils" class="headerlink" title="utils"></a>utils</h2><p>分批使用func处理数据，并决定是否移动到cpu</p>
+<ul>
+<li><code>chunk_batch(func, chunk_size, move_to_cpu, *args, **kwargs)</code><ul>
+<li>B = None</li>
+<li>for arg in args<ul>
+<li>if isinstance(arg, torch.Tensor):<ul>
+<li><code>B = arg.shape[0]</code></li>
+<li>break</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>out = defaultdict(list)  将字典中同个key的多个value构成一个列表<ul>
+<li>ref: <a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_38145317/article/details/93175217">(21条消息) python 字典defaultdict(list)_wanghua609的博客-CSDN博客</a></li>
+</ul>
+</li>
+<li>out_type = None</li>
+<li>for i in range(0, B, chunk_size):<ul>
+<li><code>out_chunk = func(*[arg[i:i+chunk_size] if isinstance(arg, torch.Tensor) else arg for arg in args], **kwargs)</code><ul>
+<li>使用func函数得到一批输出</li>
+</ul>
+</li>
+<li>if out_chunk is None:<ul>
+<li>continue</li>
+</ul>
+</li>
+<li>out_type = type(out_chunk)</li>
+<li>if isinstance(out_chunk, torch.Tensor): 将out_chunk 变为字典<ul>
+<li>out_chunk = {0: out_chunk}</li>
+</ul>
+</li>
+<li>elif isinstance(out_chunk, tuple) or isinstance(out_chunk, list):<ul>
+<li>chunk_length = len(out_chunk)</li>
+<li>out_chunk = {i: chunk for i, chunk in enumerate(out_chunk)}</li>
+</ul>
+</li>
+<li>elif isinstance(out_chunk, dict):<ul>
+<li>pass</li>
+</ul>
+</li>
+<li>else:<ul>
+<li><code>print(f&#39;Return value of func must be in type [torch.Tensor, list, tuple, dict], get &#123;type(out_chunk)&#125;.&#39;)</code></li>
+<li>exit(1)</li>
+</ul>
+</li>
+<li>for k, v in out_chunk.items():<ul>
+<li>v = v if torch.is_grad_enabled() else v.detach()</li>
+<li>v = v.cpu() if move_to_cpu else v</li>
+<li><code>out[k].append(v)</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>if out_type is None:<ul>
+<li>return</li>
+</ul>
+</li>
+<li>out = {k: torch.cat(v, dim=0) for k, v in out.items()}</li>
+<li>if out_type is torch.Tensor:<ul>
+<li>return out[0]</li>
+</ul>
+</li>
+<li><code>elif out_type in [tuple, list]</code>:<ul>
+<li><code>return out_type([out[i] for i in range(chunk_length)])</code></li>
+</ul>
+</li>
+<li>elif out_type is dict:<ul>
+<li>return out</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>将dat从inp缩放到tgt</p>
+<ul>
+<li>scale_anything(dat, inp_scale, tgt_scale): <ul>
+<li>if inp_scale is None:<ul>
+<li><code>inp_scale = [dat.min(), dat.max()]</code></li>
+</ul>
+</li>
+<li><code>dat = (dat  - inp_scale[0]) / (inp_scale[1] - inp_scale[0])</code></li>
+<li><code>dat = dat * (tgt_scale[1] - tgt_scale[0]) + tgt_scale[0]</code></li>
+<li>return dat</li>
+</ul>
+</li>
+</ul>
+<p>激活函数</p>
+<ul>
+<li>get_activation(name)<ul>
+<li>if name is None:<ul>
+<li>return lambda x: x</li>
+</ul>
+</li>
+<li>name = name.lower() # lower： 将所有大写字符转换为小写</li>
+<li>if name == ‘none’:  return lambda x: x</li>
+<li>if name.startswith(‘scale’): <ul>
+<li>scale_factor = float(name[5:])</li>
+<li>return lambda x: x.clamp(0., scale_factor) / scale_factor</li>
+</ul>
+</li>
+<li>elif name.startswith(‘clamp’):<ul>
+<li>clamp_max = float(name[5:])</li>
+<li>return lambda x: x.clamp(0., clamp_max)</li>
+</ul>
+</li>
+<li>elif name.startswith(‘mul’):<ul>
+<li>mul_factor = float(name[3:])</li>
+<li>return lambda x: x * mul_factor</li>
+</ul>
+</li>
+<li>elif name == ‘lin2srgb’:<code>return lambda x: torch.where(x &gt; 0.0031308, torch.pow(torch.clamp(x, min=0.0031308), 1.0/2.4)*1.055 - 0.055, 12.92*x).clamp(0., 1.)</code></li>
+<li>elif name == ‘trunc_exp’: return trunc_exp</li>
+<li>elif name.startswith(‘+’) or name.startswith(‘-‘): return lambda x: x + float(name)</li>
+<li>elif name == ‘sigmoid’:return lambda x: torch.sigmoid(x)</li>
+<li>elif name == ‘tanh’: return lambda x: torch.tanh(x)</li>
+<li>else:  return getattr(F, name)</li>
+</ul>
+</li>
+</ul>
+<h1 id="systems"><a href="#systems" class="headerlink" title="systems"></a>systems</h1><h2 id="init-2"><a href="#init-2" class="headerlink" title="init"></a>init</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">systems = &#123;&#125;</span><br><span class="line"></span><br><span class="line">def register(name):</span><br><span class="line">    def decorator(cls):</span><br><span class="line">        systems[name] = cls</span><br><span class="line">        return cls</span><br><span class="line">    return decorator</span><br><span class="line"></span><br><span class="line">def make(name, config, load_from_checkpoint=None):</span><br><span class="line">    if load_from_checkpoint is None:</span><br><span class="line">        system = systems[name](config)</span><br><span class="line">    else:</span><br><span class="line">        system = systems[name].load_from_checkpoint(load_from_checkpoint, strict=False, config=config)</span><br><span class="line">    return system</span><br><span class="line"></span><br><span class="line">from . import nerf, neus</span><br></pre></td></tr></table></figure>
+<h2 id="base-1"><a href="#base-1" class="headerlink" title="base"></a>base</h2><ul>
+<li>BaseSystem，继承pl.LightningModule和SaverMixin<ul>
+<li><code>__init__</code><ul>
+<li>self.config = config</li>
+<li>self.rank = get_rank()</li>
+<li>self.prepare()</li>
+<li>self.model = models.make(self.config.model.name, self.config.model)</li>
+</ul>
+</li>
+<li>prepare<ul>
+<li>pass</li>
+</ul>
+</li>
+<li>forward(self, batch)<ul>
+<li>raise NotImplementedError</li>
+</ul>
+</li>
+<li>C(self, value)</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">C():</span><br><span class="line"><span class="keyword">if</span> <span class="built_in">isinstance</span>(value, <span class="built_in">int</span>) <span class="keyword">or</span> <span class="built_in">isinstance</span>(value, <span class="built_in">float</span>):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    value = config_to_primitive(value)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">isinstance</span>(value, <span class="built_in">list</span>):</span><br><span class="line">        <span class="keyword">raise</span> TypeError(<span class="string">&#x27;Scalar specification only supports list, got&#x27;</span>, <span class="built_in">type</span>(value))</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(value) == <span class="number">3</span>:</span><br><span class="line">        value = [<span class="number">0</span>] + value</span><br><span class="line">    <span class="keyword">assert</span> <span class="built_in">len</span>(value) == <span class="number">4</span></span><br><span class="line">    start_step, start_value, end_value, end_step = value</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">isinstance</span>(end_step, <span class="built_in">int</span>):</span><br><span class="line">        current_step = self.global_step</span><br><span class="line">        value = start_value + (end_value - start_value) * <span class="built_in">max</span>(<span class="built_in">min</span>(<span class="number">1.0</span>, (current_step - start_step) / (end_step - start_step)), <span class="number">0.0</span>)</span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">isinstance</span>(end_step, <span class="built_in">float</span>):</span><br><span class="line">        current_step = self.current_epoch</span><br><span class="line">        value = start_value + (end_value - start_value) * <span class="built_in">max</span>(<span class="built_in">min</span>(<span class="number">1.0</span>, (current_step - start_step) / (end_step - start_step)), <span class="number">0.0</span>)</span><br><span class="line"><span class="keyword">return</span> value</span><br></pre></td></tr></table></figure>
+<ul>
+<li>BaseSystem接上<ul>
+<li>preprocess_data(self, batch, stage)<ul>
+<li>pass</li>
+</ul>
+</li>
+<li>on_train_batch_start(self, batch, batch_idx, unused=0)等pl.LightningModule规定的方法</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">Implementing on_after_batch_transfer of DataModule does the same.</span></span><br><span class="line"><span class="string">But on_after_batch_transfer does not support DP.</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">on_train_batch_start</span>(<span class="params">self, batch, batch_idx, unused=<span class="number">0</span></span>):</span><br><span class="line">    self.dataset = self.trainer.datamodule.train_dataloader().dataset</span><br><span class="line">    self.preprocess_data(batch, <span class="string">&#x27;train&#x27;</span>)</span><br><span class="line">    update_module_step(self.model, self.current_epoch, self.global_step)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">on_validation_batch_start</span>(<span class="params">self, batch, batch_idx, dataloader_idx</span>):</span><br><span class="line">    self.dataset = self.trainer.datamodule.val_dataloader().dataset</span><br><span class="line">    self.preprocess_data(batch, <span class="string">&#x27;validation&#x27;</span>)</span><br><span class="line">    update_module_step(self.model, self.current_epoch, self.global_step)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">on_test_batch_start</span>(<span class="params">self, batch, batch_idx, dataloader_idx</span>):</span><br><span class="line">    self.dataset = self.trainer.datamodule.test_dataloader().dataset</span><br><span class="line">    self.preprocess_data(batch, <span class="string">&#x27;test&#x27;</span>)</span><br><span class="line">    update_module_step(self.model, self.current_epoch, self.global_step)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">on_predict_batch_start</span>(<span class="params">self, batch, batch_idx, dataloader_idx</span>):</span><br><span class="line">    self.dataset = self.trainer.datamodule.predict_dataloader().dataset</span><br><span class="line">    self.preprocess_data(batch, <span class="string">&#x27;predict&#x27;</span>)</span><br><span class="line">    update_module_step(self.model, self.current_epoch, self.global_step)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">training_step</span>(<span class="params">self, batch, batch_idx</span>):</span><br><span class="line">    <span class="keyword">raise</span> NotImplementedError</span><br><span class="line">    </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">validation_step</span>(<span class="params">self, batch, batch_idx</span>):</span><br><span class="line">    <span class="keyword">raise</span> NotImplementedError</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">validation_epoch_end</span>(<span class="params">self, out</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Gather metrics from all devices, compute mean.</span></span><br><span class="line"><span class="string">    Purge repeated results using data index.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">raise</span> NotImplementedError</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">test_step</span>(<span class="params">self, batch, batch_idx</span>):        </span><br><span class="line">    <span class="keyword">raise</span> NotImplementedError</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">test_epoch_end</span>(<span class="params">self, out</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Gather metrics from all devices, compute mean.</span></span><br><span class="line"><span class="string">    Purge repeated results using data index.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">raise</span> NotImplementedError</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">export</span>(<span class="params">self</span>):</span><br><span class="line">    <span class="keyword">raise</span> NotImplementedError</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">configure_optimizers</span>(<span class="params">self</span>):</span><br><span class="line">    optim = parse_optimizer(self.config.system.optimizer, self.model)</span><br><span class="line">    ret = &#123;</span><br><span class="line">        <span class="string">&#x27;optimizer&#x27;</span>: optim,</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&#x27;scheduler&#x27;</span> <span class="keyword">in</span> self.config.system:</span><br><span class="line">        ret.update(&#123;</span><br><span class="line">            <span class="string">&#x27;lr_scheduler&#x27;</span>: parse_scheduler(self.config.system.scheduler, optim),</span><br><span class="line">        &#125;)</span><br><span class="line">    <span class="keyword">return</span> ret</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">in</span> systems/utils.py</span><br><span class="line"></span><br><span class="line">得到优化器optim</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">parse_optimizer</span>(<span class="params">config, model</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">hasattr</span>(config, <span class="string">&#x27;params&#x27;</span>):</span><br><span class="line">        params = [&#123;<span class="string">&#x27;params&#x27;</span>: get_parameters(model, name), <span class="string">&#x27;name&#x27;</span>: name, **args&#125; <span class="keyword">for</span> name, args <span class="keyword">in</span> config.params.items()]</span><br><span class="line">        rank_zero_debug(<span class="string">&#x27;Specify optimizer params:&#x27;</span>, config.params)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        params = model.parameters()</span><br><span class="line">    <span class="keyword">if</span> config.name <span class="keyword">in</span> [<span class="string">&#x27;FusedAdam&#x27;</span>]:</span><br><span class="line">        <span class="keyword">import</span> apex</span><br><span class="line">        optim = <span class="built_in">getattr</span>(apex.optimizers, config.name)(params, **config.args)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        optim = <span class="built_in">getattr</span>(torch.optim, config.name)(params, **config.args)</span><br><span class="line">    <span class="keyword">return</span> optim</span><br></pre></td></tr></table></figure>
+<h2 id="neus-1"><a href="#neus-1" class="headerlink" title="neus"></a>neus</h2><p>有两种在console上输出信息的方式：</p>
+<ul>
+<li>self.print: correctly handle progress bar</li>
+<li>rank_zero_info: use the logging module</li>
+</ul>
+<p>@systems.register(‘neus-system’)</p>
+<ul>
+<li>NeuSSystem，继承BaseSystem<ul>
+<li>prepare<ul>
+<li>self.criterions = { ‘psnr’: PSNR()}</li>
+<li><code>self.train_num_samples = self.config.model.train_num_rays * (self.config.model.num_samples_per_ray + self.config.model.get(&#39;num_samples_per_ray_bg&#39;, 0))</code><ul>
+<li>训练采样数= 训练光线数x(每条光线上采样数+背景中每条光线采样数)</li>
+</ul>
+</li>
+<li>self.train_num_rays = self.config.model.train_num_rays<ul>
+<li>训练光线数 = config中训练光线数</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>forward(self, batch)<ul>
+<li><code>return self.model(batch[&#39;rays&#39;])</code></li>
+</ul>
+</li>
+<li>preprocess_data(self, batch, stage)<ul>
+<li>stage: train<ul>
+<li>if batch_image_sampling 随机抽train_num_rays张图片, 索引为index（随机多张图片中，每张图片随机选取一个像素生成光线）<ul>
+<li>directions :(n_images, H, W, 3) —&gt; (train_num_rays, 3)</li>
+<li>c2w：(n_images, 3, 4)  —&gt; (train_num_rays, 3, 4)</li>
+<li>rays_o, rays_d : (train_num_rays, 3)</li>
+<li>rgb: (n_images, H, W, 3) —&gt; (train_num_rays, 3)</li>
+<li>fg_mask: (n_images, H, W) —&gt; (train_num_rays,)</li>
+</ul>
+</li>
+<li>else 随机抽取一张图片，索引index长度为1（一张图片，随机选取多个像素生成光线）<ul>
+<li>directions :(n_images, H, W, 3) —&gt; (train_num_rays, 3)</li>
+<li>c2w：(n_images, 3, 4)  —&gt; (1, 3, 4)</li>
+<li>rays_o, rays_d : (train_num_rays, 3)</li>
+<li>rgb: (n_images, H, W, 3) —&gt; (train_num_rays, 3)</li>
+<li>fg_mask: (n_images, H, W) —&gt; (train_num_rays,)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>stage: val<ul>
+<li><code>index = batch[&#39;index&#39;]</code></li>
+<li>c2w: (n_images, 3, 4)  —&gt; (3, 4)</li>
+<li>directions: (n_images, H, W, 3) —&gt; ( H, W, 3)</li>
+<li>rays_o, rays_d : (H, W, 3)</li>
+<li>rgb: (n_images, H, W, 3) —&gt; (len(index)xHxW,3)</li>
+<li>fg_mask: (n_images, H, W, 3) —&gt; (len(index)xHxW)</li>
+</ul>
+</li>
+<li>stage: test<ul>
+<li><code>index = batch[&#39;index&#39;]</code></li>
+<li>c2w: (n_test_traj_steps ,3,4) —&gt; (3,4)</li>
+<li>directions: (H,W,3) —&gt; (H,W,3)</li>
+<li>rays_o, rays_d : (H,W,3)</li>
+<li>rgb: (n_test_traj_steps, H, W, 3) —&gt; (HxW , 3)</li>
+<li>fg_mask : (n_test_traj_steps, H, W) —&gt; (HxW)</li>
+</ul>
+</li>
+<li>rays将rays_o和归一化后的rays_d，cat起来</li>
+<li>stage: train<ul>
+<li>if bg_color: white<ul>
+<li>model.bg_color = torch.ones((3,))</li>
+</ul>
+</li>
+<li>if bg_color: random<ul>
+<li>model.bg_color = torch.rand((3,))</li>
+</ul>
+</li>
+<li>else: raise NotImplementedError</li>
+</ul>
+</li>
+<li>stage: val, test<ul>
+<li>model.bg_color = torch.ones((3,))</li>
+</ul>
+</li>
+<li>if apply_mask:<ul>
+<li><code>rgb = rgb * fg_mask[...,None] + model.bg_color * (1 - fg_mask[...,None])</code></li>
+</ul>
+</li>
+<li>batch.update({‘rays’: rays, ‘rgb’: rgb, ‘fg_mask’: fg_mask})</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">preprocess_data</span>(<span class="params">self, batch, stage</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&#x27;index&#x27;</span> <span class="keyword">in</span> batch: <span class="comment"># validation / testing</span></span><br><span class="line">        index = batch[<span class="string">&#x27;index&#x27;</span>]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">if</span> self.config.model.batch_image_sampling:</span><br><span class="line">            index = torch.randint(<span class="number">0</span>, <span class="built_in">len</span>(self.dataset.all_images), size=(self.train_num_rays,), device=self.dataset.all_images.device)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            index = torch.randint(<span class="number">0</span>, <span class="built_in">len</span>(self.dataset.all_images), size=(<span class="number">1</span>,), device=self.dataset.all_images.device)</span><br><span class="line">    <span class="keyword">if</span> stage <span class="keyword">in</span> [<span class="string">&#x27;train&#x27;</span>]:</span><br><span class="line">        c2w = self.dataset.all_c2w[index]</span><br><span class="line">        x = torch.randint(</span><br><span class="line">            <span class="number">0</span>, self.dataset.w, size=(self.train_num_rays,), device=self.dataset.all_images.device</span><br><span class="line">        )</span><br><span class="line">        y = torch.randint(</span><br><span class="line">            <span class="number">0</span>, self.dataset.h, size=(self.train_num_rays,), device=self.dataset.all_images.device</span><br><span class="line">        )</span><br><span class="line">        <span class="keyword">if</span> self.dataset.directions.ndim == <span class="number">3</span>: <span class="comment"># (H, W, 3)</span></span><br><span class="line">            directions = self.dataset.directions[y, x]</span><br><span class="line">        <span class="keyword">elif</span> self.dataset.directions.ndim == <span class="number">4</span>: <span class="comment"># (N, H, W, 3)</span></span><br><span class="line">            directions = self.dataset.directions[index, y, x]</span><br><span class="line">        rays_o, rays_d = get_rays(directions, c2w)</span><br><span class="line">        rgb = self.dataset.all_images[index, y, x].view(-<span class="number">1</span>, self.dataset.all_images.shape[-<span class="number">1</span>]).to(self.rank)</span><br><span class="line">        fg_mask = self.dataset.all_fg_masks[index, y, x].view(-<span class="number">1</span>).to(self.rank)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        c2w = self.dataset.all_c2w[index][<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">if</span> self.dataset.directions.ndim == <span class="number">3</span>: <span class="comment"># (H, W, 3)</span></span><br><span class="line">            directions = self.dataset.directions</span><br><span class="line">        <span class="keyword">elif</span> self.dataset.directions.ndim == <span class="number">4</span>: <span class="comment"># (N, H, W, 3)</span></span><br><span class="line">            directions = self.dataset.directions[index][<span class="number">0</span>] </span><br><span class="line">        rays_o, rays_d = get_rays(directions, c2w)</span><br><span class="line">        rgb = self.dataset.all_images[index].view(-<span class="number">1</span>, self.dataset.all_images.shape[-<span class="number">1</span>]).to(self.rank)</span><br><span class="line">        fg_mask = self.dataset.all_fg_masks[index].view(-<span class="number">1</span>).to(self.rank)</span><br><span class="line"></span><br><span class="line">    rays = torch.cat([rays_o, F.normalize(rays_d, p=<span class="number">2</span>, dim=-<span class="number">1</span>)], dim=-<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> stage <span class="keyword">in</span> [<span class="string">&#x27;train&#x27;</span>]:</span><br><span class="line">        <span class="keyword">if</span> self.config.model.background_color == <span class="string">&#x27;white&#x27;</span>:</span><br><span class="line">            self.model.background_color = torch.ones((<span class="number">3</span>,), dtype=torch.float32, device=self.rank)</span><br><span class="line">        <span class="keyword">elif</span> self.config.model.background_color == <span class="string">&#x27;random&#x27;</span>:</span><br><span class="line">            self.model.background_color = torch.rand((<span class="number">3</span>,), dtype=torch.float32, device=self.rank)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">raise</span> NotImplementedError</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        self.model.background_color = torch.ones((<span class="number">3</span>,), dtype=torch.float32, device=self.rank)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> self.dataset.apply_mask:</span><br><span class="line">        rgb = rgb * fg_mask[...,<span class="literal">None</span>] + self.model.background_color * (<span class="number">1</span> - fg_mask[...,<span class="literal">None</span>])</span><br><span class="line">    </span><br><span class="line">    batch.update(&#123;</span><br><span class="line">        <span class="string">&#x27;rays&#x27;</span>: rays,</span><br><span class="line">        <span class="string">&#x27;rgb&#x27;</span>: rgb,</span><br><span class="line">        <span class="string">&#x27;fg_mask&#x27;</span>: fg_mask</span><br><span class="line">    &#125;)      </span><br></pre></td></tr></table></figure>
+<ul>
+<li>NeuSSystem接上<ul>
+<li>training_step(self, batch, batch_idx)<ul>
+<li><code>out = self(batch) = self.model(batch[&#39;rays&#39;])</code>(self()相当于执行forward)</li>
+<li>loss = 0</li>
+<li>if dynamic_ray_sampling 动态更新训练光线数<ul>
+<li><code>train_num_rays = int(train_num_rays*(train_num_samples/out[&#39;num_samples_full&#39;].sum().item()))</code><ul>
+<li>如果采样得到的总点数多了，则减少光线数，如果总点数少了，则增加光线数</li>
+</ul>
+</li>
+<li><code>self.train_num_rays = min(int(self.train_num_rays * 0.9 + train_num_rays * 0.1), self.config.model.max_train_num_rays)</code><ul>
+<li>最后训练光线数为，两者取最小：<code>原来num*0.9 + 更新后num * 0.1</code>与config.model.max_train_num_rays</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>loss_rgb_mse = F.mse_loss，log(loss_rgb_mse)，<code>loss+= loss_rgb_mse *lambda_rgb_mse</code><ul>
+<li>render_color: <code>out[&#39;comp_rgb_full&#39;][out[&#39;rays_valid_full&#39;][...,0]]</code> </li>
+<li>gt_color: <code>batch[&#39;rgb&#39;][out[&#39;rays_valid_full&#39;][...,0]]</code></li>
+</ul>
+</li>
+<li>loss_rgb_l1 = F.l1_loss，log(loss_rgb_l1)，<code>loss+= loss_rgb_l1 *lambda_rgb_l1</code><ul>
+<li><code>out[&#39;comp_rgb_full&#39;][out[&#39;rays_valid_full&#39;][...,0]]</code></li>
+<li><code>batch[&#39;rgb&#39;][out[&#39;rays_valid_full&#39;][...,0]]</code></li>
+</ul>
+</li>
+<li>loss_eikonal，log(loss_eikonal)，<code>loss+= loss_eikonal *lambda_eikonal</code><ul>
+<li><code>((torch.linalg.norm(out[&#39;sdf_grad_samples&#39;], ord=2, dim=-1) - 1.)**2).mean()</code></li>
+</ul>
+</li>
+<li>loss_mask，log(loss_mask)，<code>loss+= loss_mask *lambda_mask</code><ul>
+<li>opacity.clamp(1.e-3, 1.-1.e-3)</li>
+<li><code>binary_cross_entropy(opacity, batch[&#39;fg_mask&#39;].float())</code></li>
+</ul>
+</li>
+<li>loss_opaque，log(loss_opaque)，<code>loss+= loss_opaque *lambda_opaque</code><ul>
+<li>binary_cross_entropy(opacity, opacity)</li>
+</ul>
+</li>
+<li>loss_sparsity，log(loss_sparsity)，<code>loss+= loss_sparsity *lambda_sparsity</code><ul>
+<li><code>torch.exp(-self.config.system.loss.sparsity_scale * out[&#39;sdf_samples&#39;].abs()).mean()</code></li>
+<li>$\frac{1}{n.samples} \sum e^{-sparsity.scle \cdot |sdf|}$</li>
+</ul>
+</li>
+<li>if lambda_distortion&gt;0<ul>
+<li>loss_distortion，log(loss_distortion)，<code>loss+= loss_distortion *lambda_distortion</code><ul>
+<li><code>flatten_eff_distloss(out[&#39;weights&#39;], out[&#39;points&#39;], out[&#39;intervals&#39;], out[&#39;ray_indices&#39;])</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>if learned_background and lambda_distortion_bg&gt;0<ul>
+<li>loss_distortion_bg，log(loss_distortion_bg)，<code>loss+= loss_distortion_bg *lambda_distortion_bg</code><ul>
+<li><code>flatten_eff_distloss(out[&#39;weights_bg&#39;], out[&#39;points_bg&#39;], out[&#39;intervals_bg&#39;], out[&#39;ray_indices_bg&#39;])</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>losses_model_reg = self.model.regularizations(out)</li>
+<li>for name, value in losses_model_reg.items():<ul>
+<li>self.log(f’train/loss_{name}’, value)</li>
+<li>loss_ = value * self.C(self.config.system.loss[f”lambda_{name}”])</li>
+<li>loss += loss_</li>
+</ul>
+</li>
+<li>self.log(‘train/inv_s’, out[‘inv_s’], prog_bar=True)</li>
+<li>for name, value in self.config.system.loss.items():</li>
+<li>if name.startswith(‘lambda’):<ul>
+<li>self.log(f’train_params/{name}’, self.C(value))</li>
+</ul>
+</li>
+<li>self.log(‘train/num_rays’, float(self.train_num_rays), prog_bar=True)</li>
+<li>return {‘loss’ : loss}</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>loggers:</p>
+<p><code>Epoch 0: : 29159it [30:20, 16.02it/s, loss=0.0265, train/inv_s=145.0, train/num_rays=1739.0, val/psnr=23.30]</code></p>
+<p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230714161558.png" alt="image.png"></p>
+<p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230714161756.png" alt="image.png"></p>
+<ul>
+<li>NeuSSystem接上<ul>
+<li>validation_step(self, batch, batch_idx)<ul>
+<li>out = self(batch)</li>
+<li><code>psnr = self.criterions[&#39;psnr&#39;](out[&#39;comp_rgb_full&#39;].to(batch[&#39;rgb&#39;]), batch[&#39;rgb&#39;])</code></li>
+<li>W, H = self.dataset.img_wh</li>
+<li>self.save_image_grid</li>
+<li>return {‘psnr’: psnr,’index’: batch[‘index’]}</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230714162151.png" alt="image.png"></p>
+<ul>
+<li>NeuSSystem接上<ul>
+<li>validation_epoch_end(self,out)<ul>
+<li>out = self.all_gather(out) 将所有数据类型的输出拼接起来<code>Union[Tensor, Dict, List, Tuple]</code></li>
+<li>if self.trainer.is_global_zero: <ul>
+<li>out_set = {}</li>
+<li>for step_out in out:<ul>
+<li>DP:<code>if step_out[&#39;index&#39;].ndim == 1: out_set[step_out[&#39;index&#39;].item()] = &#123;&#39;psnr&#39;: step_out[&#39;psnr&#39;]&#125;</code><ul>
+<li>ref: 单机vs多机<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/356967195">pytorch中的分布式训练之DP VS DDP - 知乎 (zhihu.com)</a></li>
+</ul>
+</li>
+<li>DDP: <code>for oi, index in enumerate(step_out[&#39;index&#39;]):</code><ul>
+<li><code>out_set[index[0].item()] = &#123;&#39;psnr&#39;: step_out[&#39;psnr&#39;][oi]&#125;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>psnr = $\frac{1}{len(index)}\sum psnr_{i}$</li>
+<li>self.log(psnr)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>test_step(self, batch, batch_idx)<ul>
+<li>out = self(batch)</li>
+<li><code>psnr = self.criterions[&#39;psnr&#39;](out[&#39;comp_rgb_full&#39;].to(batch[&#39;rgb&#39;]), batch[&#39;rgb&#39;])</code></li>
+<li>W, H = self.dataset.img_wh</li>
+<li>self.save_image_grid<ul>
+<li>由于测试时，采用的相机位姿是未知的新视点，因此在image生成时，<code>batch[&#39;rgb&#39;]</code>即gt图为zero(黑色)</li>
+</ul>
+</li>
+<li>return {‘psnr’: psnr,’index’: batch[‘index’]}</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230714212151.png" alt="image.png"></p>
+<ul>
+<li>NeuSSystem接上<ul>
+<li>test_epoch_end(self,out)<ul>
+<li>同validation<ul>
+<li>psnr = $\frac{1}{len(index)}\sum psnr_{i}$</li>
+<li>self.log(psnr)</li>
+</ul>
+</li>
+<li>self.save_img_sequence()</li>
+<li>self.export</li>
+</ul>
+</li>
+<li>export<ul>
+<li>mesh = self.model.export(self.config.export)</li>
+<li>self.save_mesh() </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="criterions"><a href="#criterions" class="headerlink" title="criterions"></a>criterions</h2><ul>
+<li>PSNR，继承nn.Module<ul>
+<li>forward(self, inputs , targets, valid_mask= None, reduction= ‘mean’)<ul>
+<li>assert reduction in [‘mean’, ‘none’]</li>
+<li><code>value = (inputs - targets)**2</code>，即$v = (inputs - targets)^{2}$</li>
+<li>if valid_mask is not None:<ul>
+<li>value = value[valid_mask]</li>
+</ul>
+</li>
+<li>if reduction == ‘mean’:<ul>
+<li>return -10 * torch.log10(torch.mean(value))</li>
+<li>$psnr = 10 \cdot log_{10}(\frac{1}{N} \sum v)$</li>
+</ul>
+</li>
+<li>elif reduction == ‘none’:<ul>
+<li>return -10 * torch.log10(torch.mean(value, dim=tuple(range(value.ndim)[1:])))</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="utils-1"><a href="#utils-1" class="headerlink" title="utils"></a>utils</h2><ul>
+<li>ChainedScheduler</li>
+<li>SequentialLR</li>
+<li>ConstantLR</li>
+<li>LinearLR</li>
+<li>get_scheduler</li>
+<li>getattr_recursive</li>
+<li>get_parameters</li>
+<li>parse_optimizer</li>
+<li>parse_scheduler</li>
+<li>update_module_step(m,epoch,global_step)<ul>
+<li>if hasattr(m,’update_step’) 如果m中有update_step这个属性or方法<ul>
+<li>m.update_step(epoch,global_step) 则执行m.update_step(epoch,global_step)</li>
+</ul>
+</li>
+<li>如果m中没有update_step，则不执行操作</li>
+</ul>
+</li>
+</ul>
+<h1 id="utils-2"><a href="#utils-2" class="headerlink" title="utils"></a>utils</h1><h2 id="mixins"><a href="#mixins" class="headerlink" title="mixins"></a>mixins</h2><p>class SaverMixin(): 被systems中的BaseSystem继承</p>
+<ul>
+<li>get_save_path(self,filename)</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_save_path</span>(<span class="params">self, filename</span>):</span><br><span class="line">    save_path = os.path.join(self.save_dir, filename)</span><br><span class="line">    os.makedirs(os.path.dirname(save_path), exist_ok=<span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">return</span> save_path</span><br></pre></td></tr></table></figure>
+<ul>
+<li>save_image_grid(self, filename, imgs)<ul>
+<li>img = self.get_image_grid_(imgs)</li>
+<li>cv2.imwrite(self.get_save_path(filename),img)</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">in</span> val step:</span><br><span class="line">self.save_image_grid(<span class="string">f&quot;it<span class="subst">&#123;self.global_step&#125;</span>-<span class="subst">&#123;batch[<span class="string">&#x27;index&#x27;</span>][<span class="number">0</span>].item()&#125;</span>.png&quot;</span>, [</span><br><span class="line">    &#123;<span class="string">&#x27;type&#x27;</span>: <span class="string">&#x27;rgb&#x27;</span>, <span class="string">&#x27;img&#x27;</span>: batch[<span class="string">&#x27;rgb&#x27;</span>].view(H, W, <span class="number">3</span>), <span class="string">&#x27;kwargs&#x27;</span>: &#123;<span class="string">&#x27;data_format&#x27;</span>: <span class="string">&#x27;HWC&#x27;</span>&#125;&#125;,</span><br><span class="line">    &#123;<span class="string">&#x27;type&#x27;</span>: <span class="string">&#x27;rgb&#x27;</span>, <span class="string">&#x27;img&#x27;</span>: out[<span class="string">&#x27;comp_rgb_full&#x27;</span>].view(H, W, <span class="number">3</span>), <span class="string">&#x27;kwargs&#x27;</span>: &#123;<span class="string">&#x27;data_format&#x27;</span>: <span class="string">&#x27;HWC&#x27;</span>&#125;&#125;</span><br><span class="line">] + ([</span><br><span class="line">    &#123;<span class="string">&#x27;type&#x27;</span>: <span class="string">&#x27;rgb&#x27;</span>, <span class="string">&#x27;img&#x27;</span>: out[<span class="string">&#x27;comp_rgb_bg&#x27;</span>].view(H, W, <span class="number">3</span>), <span class="string">&#x27;kwargs&#x27;</span>: &#123;<span class="string">&#x27;data_format&#x27;</span>: <span class="string">&#x27;HWC&#x27;</span>&#125;&#125;,</span><br><span class="line">    &#123;<span class="string">&#x27;type&#x27;</span>: <span class="string">&#x27;rgb&#x27;</span>, <span class="string">&#x27;img&#x27;</span>: out[<span class="string">&#x27;comp_rgb&#x27;</span>].view(H, W, <span class="number">3</span>), <span class="string">&#x27;kwargs&#x27;</span>: &#123;<span class="string">&#x27;data_format&#x27;</span>: <span class="string">&#x27;HWC&#x27;</span>&#125;&#125;,</span><br><span class="line">] <span class="keyword">if</span> self.config.model.learned_background <span class="keyword">else</span> []) + [</span><br><span class="line">    &#123;<span class="string">&#x27;type&#x27;</span>: <span class="string">&#x27;grayscale&#x27;</span>, <span class="string">&#x27;img&#x27;</span>: out[<span class="string">&#x27;depth&#x27;</span>].view(H, W), <span class="string">&#x27;kwargs&#x27;</span>: &#123;&#125;&#125;,</span><br><span class="line">    &#123;<span class="string">&#x27;type&#x27;</span>: <span class="string">&#x27;rgb&#x27;</span>, <span class="string">&#x27;img&#x27;</span>: out[<span class="string">&#x27;comp_normal&#x27;</span>].view(H, W, <span class="number">3</span>), <span class="string">&#x27;kwargs&#x27;</span>: &#123;<span class="string">&#x27;data_format&#x27;</span>: <span class="string">&#x27;HWC&#x27;</span>, <span class="string">&#x27;data_range&#x27;</span>: (-<span class="number">1</span>, <span class="number">1</span>)&#125;&#125;</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line"><span class="keyword">in</span> test_step:</span><br><span class="line">self.save_image_grid(<span class="string">f&quot;it<span class="subst">&#123;self.global_step&#125;</span>-test/<span class="subst">&#123;batch[<span class="string">&#x27;index&#x27;</span>][<span class="number">0</span>].item()&#125;</span>.png&quot;</span>, [</span><br><span class="line">    &#123;<span class="string">&#x27;type&#x27;</span>: <span class="string">&#x27;rgb&#x27;</span>, <span class="string">&#x27;img&#x27;</span>: batch[<span class="string">&#x27;rgb&#x27;</span>].view(H, W, <span class="number">3</span>), <span class="string">&#x27;kwargs&#x27;</span>: &#123;<span class="string">&#x27;data_format&#x27;</span>: <span class="string">&#x27;HWC&#x27;</span>&#125;&#125;,</span><br><span class="line">    &#123;<span class="string">&#x27;type&#x27;</span>: <span class="string">&#x27;rgb&#x27;</span>, <span class="string">&#x27;img&#x27;</span>: out[<span class="string">&#x27;comp_rgb_full&#x27;</span>].view(H, W, <span class="number">3</span>), <span class="string">&#x27;kwargs&#x27;</span>: &#123;<span class="string">&#x27;data_format&#x27;</span>: <span class="string">&#x27;HWC&#x27;</span>&#125;&#125;</span><br><span class="line">] + ([</span><br><span class="line">    &#123;<span class="string">&#x27;type&#x27;</span>: <span class="string">&#x27;rgb&#x27;</span>, <span class="string">&#x27;img&#x27;</span>: out[<span class="string">&#x27;comp_rgb_bg&#x27;</span>].view(H, W, <span class="number">3</span>), <span class="string">&#x27;kwargs&#x27;</span>: &#123;<span class="string">&#x27;data_format&#x27;</span>: <span class="string">&#x27;HWC&#x27;</span>&#125;&#125;,</span><br><span class="line">    &#123;<span class="string">&#x27;type&#x27;</span>: <span class="string">&#x27;rgb&#x27;</span>, <span class="string">&#x27;img&#x27;</span>: out[<span class="string">&#x27;comp_rgb&#x27;</span>].view(H, W, <span class="number">3</span>), <span class="string">&#x27;kwargs&#x27;</span>: &#123;<span class="string">&#x27;data_format&#x27;</span>: <span class="string">&#x27;HWC&#x27;</span>&#125;&#125;,</span><br><span class="line">] <span class="keyword">if</span> self.config.model.learned_background <span class="keyword">else</span> []) + [</span><br><span class="line">    &#123;<span class="string">&#x27;type&#x27;</span>: <span class="string">&#x27;grayscale&#x27;</span>, <span class="string">&#x27;img&#x27;</span>: out[<span class="string">&#x27;depth&#x27;</span>].view(H, W), <span class="string">&#x27;kwargs&#x27;</span>: &#123;&#125;&#125;,</span><br><span class="line">    &#123;<span class="string">&#x27;type&#x27;</span>: <span class="string">&#x27;rgb&#x27;</span>, <span class="string">&#x27;img&#x27;</span>: out[<span class="string">&#x27;comp_normal&#x27;</span>].view(H, W, <span class="number">3</span>), <span class="string">&#x27;kwargs&#x27;</span>: &#123;<span class="string">&#x27;data_format&#x27;</span>: <span class="string">&#x27;HWC&#x27;</span>, <span class="string">&#x27;data_range&#x27;</span>: (-<span class="number">1</span>, <span class="number">1</span>)&#125;&#125;</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+<ul>
+<li>get_image_grid_(self, imgs)</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_image_grid_</span>(<span class="params">self, imgs</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">isinstance</span>(imgs[<span class="number">0</span>], <span class="built_in">list</span>):</span><br><span class="line">        <span class="keyword">return</span> np.concatenate([self.get_image_grid_(row) <span class="keyword">for</span> row <span class="keyword">in</span> imgs], axis=<span class="number">0</span>)</span><br><span class="line">    cols = []</span><br><span class="line">    <span class="keyword">for</span> col <span class="keyword">in</span> imgs:</span><br><span class="line">        <span class="keyword">assert</span> col[<span class="string">&#x27;type&#x27;</span>] <span class="keyword">in</span> [<span class="string">&#x27;rgb&#x27;</span>, <span class="string">&#x27;uv&#x27;</span>, <span class="string">&#x27;grayscale&#x27;</span>]</span><br><span class="line">        <span class="keyword">if</span> col[<span class="string">&#x27;type&#x27;</span>] == <span class="string">&#x27;rgb&#x27;</span>:</span><br><span class="line">            rgb_kwargs = self.DEFAULT_RGB_KWARGS.copy()</span><br><span class="line">            rgb_kwargs.update(col[<span class="string">&#x27;kwargs&#x27;</span>])</span><br><span class="line">            cols.append(self.get_rgb_image_(col[<span class="string">&#x27;img&#x27;</span>], **rgb_kwargs))</span><br><span class="line">        <span class="keyword">elif</span> col[<span class="string">&#x27;type&#x27;</span>] == <span class="string">&#x27;uv&#x27;</span>:</span><br><span class="line">            uv_kwargs = self.DEFAULT_UV_KWARGS.copy()</span><br><span class="line">            uv_kwargs.update(col[<span class="string">&#x27;kwargs&#x27;</span>])</span><br><span class="line">            cols.append(self.get_uv_image_(col[<span class="string">&#x27;img&#x27;</span>], **uv_kwargs))</span><br><span class="line">        <span class="keyword">elif</span> col[<span class="string">&#x27;type&#x27;</span>] == <span class="string">&#x27;grayscale&#x27;</span>:</span><br><span class="line">            grayscale_kwargs = self.DEFAULT_GRAYSCALE_KWARGS.copy()</span><br><span class="line">            grayscale_kwargs.update(col[<span class="string">&#x27;kwargs&#x27;</span>])</span><br><span class="line">            cols.append(self.get_grayscale_image_(col[<span class="string">&#x27;img&#x27;</span>], **grayscale_kwargs))</span><br><span class="line">    <span class="keyword">return</span> np.concatenate(cols, axis=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">DEFAULT_RGB_KWARGS = &#123;<span class="string">&#x27;data_format&#x27;</span>: <span class="string">&#x27;CHW&#x27;</span>, <span class="string">&#x27;data_range&#x27;</span>: (<span class="number">0</span>, <span class="number">1</span>)&#125;</span><br><span class="line">DEFAULT_UV_KWARGS = &#123;<span class="string">&#x27;data_format&#x27;</span>: <span class="string">&#x27;CHW&#x27;</span>, <span class="string">&#x27;data_range&#x27;</span>: (<span class="number">0</span>, <span class="number">1</span>), <span class="string">&#x27;cmap&#x27;</span>: <span class="string">&#x27;checkerboard&#x27;</span>&#125;</span><br><span class="line">DEFAULT_GRAYSCALE_KWARGS = &#123;<span class="string">&#x27;data_range&#x27;</span>: <span class="literal">None</span>, <span class="string">&#x27;cmap&#x27;</span>: <span class="string">&#x27;jet&#x27;</span>&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>get_rgb_image_(self, img, data_format, data_range))</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_rgb_image_</span>(<span class="params">self, img, data_format, data_range</span>):</span><br><span class="line">    img = self.convert_data(img)</span><br><span class="line">    <span class="keyword">assert</span> data_format <span class="keyword">in</span> [<span class="string">&#x27;CHW&#x27;</span>, <span class="string">&#x27;HWC&#x27;</span>]</span><br><span class="line">    <span class="keyword">if</span> data_format == <span class="string">&#x27;CHW&#x27;</span>:</span><br><span class="line">        img = img.transpose(<span class="number">1</span>, <span class="number">2</span>, <span class="number">0</span>)</span><br><span class="line">    img = img.clip(<span class="built_in">min</span>=data_range[<span class="number">0</span>], <span class="built_in">max</span>=data_range[<span class="number">1</span>])</span><br><span class="line">    img = ((img - data_range[<span class="number">0</span>]) / (data_range[<span class="number">1</span>] - data_range[<span class="number">0</span>]) * <span class="number">255.</span>).astype(np.uint8)</span><br><span class="line">    imgs = [img[...,start:start+<span class="number">3</span>] <span class="keyword">for</span> start <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, img.shape[-<span class="number">1</span>], <span class="number">3</span>)]</span><br><span class="line">    imgs = [img_ <span class="keyword">if</span> img_.shape[-<span class="number">1</span>] == <span class="number">3</span> <span class="keyword">else</span> np.concatenate([img_, np.zeros((img_.shape[<span class="number">0</span>], img_.shape[<span class="number">1</span>], <span class="number">3</span> - img_.shape[<span class="number">2</span>]), dtype=img_.dtype)], axis=-<span class="number">1</span>) <span class="keyword">for</span> img_ <span class="keyword">in</span> imgs]</span><br><span class="line">    img = np.concatenate(imgs, axis=<span class="number">1</span>)</span><br><span class="line">    img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)</span><br><span class="line">    <span class="keyword">return</span> img</span><br></pre></td></tr></table></figure>
+<ul>
+<li>get_grayscale_image_(self, img, data_range , cmap)</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_grayscale_image_</span>(<span class="params">self, img, data_range, cmap</span>):</span><br><span class="line">    img = self.convert_data(img)</span><br><span class="line">    img = np.nan_to_num(img)</span><br><span class="line">    <span class="keyword">if</span> data_range <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        img = (img - img.<span class="built_in">min</span>()) / (img.<span class="built_in">max</span>() - img.<span class="built_in">min</span>())</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        img = img.clip(data_range[<span class="number">0</span>], data_range[<span class="number">1</span>])</span><br><span class="line">        img = (img - data_range[<span class="number">0</span>]) / (data_range[<span class="number">1</span>] - data_range[<span class="number">0</span>])</span><br><span class="line">    <span class="keyword">assert</span> cmap <span class="keyword">in</span> [<span class="literal">None</span>, <span class="string">&#x27;jet&#x27;</span>, <span class="string">&#x27;magma&#x27;</span>]</span><br><span class="line">    <span class="keyword">if</span> cmap == <span class="literal">None</span>:</span><br><span class="line">        img = (img * <span class="number">255.</span>).astype(np.uint8)</span><br><span class="line">        img = np.repeat(img[...,<span class="literal">None</span>], <span class="number">3</span>, axis=<span class="number">2</span>)</span><br><span class="line">    <span class="keyword">elif</span> cmap == <span class="string">&#x27;jet&#x27;</span>:</span><br><span class="line">        img = (img * <span class="number">255.</span>).astype(np.uint8)</span><br><span class="line">        img = cv2.applyColorMap(img, cv2.COLORMAP_JET)</span><br><span class="line">    <span class="keyword">elif</span> cmap == <span class="string">&#x27;magma&#x27;</span>:</span><br><span class="line">        img = <span class="number">1.</span> - img</span><br><span class="line">        base = cm.get_cmap(<span class="string">&#x27;magma&#x27;</span>)</span><br><span class="line">        num_bins = <span class="number">256</span></span><br><span class="line">        colormap = LinearSegmentedColormap.from_list(</span><br><span class="line">            <span class="string">f&quot;<span class="subst">&#123;base.name&#125;</span><span class="subst">&#123;num_bins&#125;</span>&quot;</span>,</span><br><span class="line">            base(np.linspace(<span class="number">0</span>, <span class="number">1</span>, num_bins)),</span><br><span class="line">            num_bins</span><br><span class="line">        )(np.linspace(<span class="number">0</span>, <span class="number">1</span>, num_bins))[:,:<span class="number">3</span>]</span><br><span class="line">        a = np.floor(img * <span class="number">255.</span>)</span><br><span class="line">        b = (a + <span class="number">1</span>).clip(<span class="built_in">max</span>=<span class="number">255.</span>)</span><br><span class="line">        f = img * <span class="number">255.</span> - a</span><br><span class="line">        a = a.astype(np.uint16).clip(<span class="number">0</span>, <span class="number">255</span>)</span><br><span class="line">        b = b.astype(np.uint16).clip(<span class="number">0</span>, <span class="number">255</span>)</span><br><span class="line">        img = colormap[a] + (colormap[b] - colormap[a]) * f[...,<span class="literal">None</span>]</span><br><span class="line">        img = (img * <span class="number">255.</span>).astype(np.uint8)</span><br><span class="line">    <span class="keyword">return</span> img</span><br></pre></td></tr></table></figure>
+<ul>
+<li>convert_data(self, data)，将输入的数据转化成ndarry类型</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">convert_data</span>(<span class="params">self, data</span>): <span class="comment"># isinstance 判断一个对象是否是一个已知的类型</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">isinstance</span>(data, np.ndarray):</span><br><span class="line">        <span class="keyword">return</span> data</span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">isinstance</span>(data, torch.Tensor):</span><br><span class="line">        <span class="keyword">return</span> data.cpu().numpy()</span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">isinstance</span>(data, <span class="built_in">list</span>):</span><br><span class="line">        <span class="keyword">return</span> [self.convert_data(d) <span class="keyword">for</span> d <span class="keyword">in</span> data]</span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">isinstance</span>(data, <span class="built_in">dict</span>):</span><br><span class="line">        <span class="keyword">return</span> &#123;k: self.convert_data(v) <span class="keyword">for</span> k, v <span class="keyword">in</span> data.items()&#125;</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">raise</span> TypeError(<span class="string">&#x27;Data must be in type numpy.ndarray, torch.Tensor, list or dict, getting&#x27;</span>, <span class="built_in">type</span>(data))</span><br></pre></td></tr></table></figure>
+<ul>
+<li>save_img_sequence(self, filename, img_dir, matcher, save_format=’gif’, fps=30)</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">in</span> test step</span><br><span class="line">self.save_img_sequence(</span><br><span class="line">    <span class="string">f&quot;it<span class="subst">&#123;self.global_step&#125;</span>-test&quot;</span>, <span class="comment"># mp4 or gif文件名</span></span><br><span class="line">    <span class="string">f&quot;it<span class="subst">&#123;self.global_step&#125;</span>-test&quot;</span>, <span class="comment"># test生成的图片保存目录</span></span><br><span class="line">    <span class="string">&#x27;(\d+)\.png&#x27;</span>,</span><br><span class="line">    save_format=<span class="string">&#x27;mp4&#x27;</span>,</span><br><span class="line">    fps=<span class="number">30</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">save_img_sequence</span>(<span class="params">self, filename, img_dir, matcher, save_format=<span class="string">&#x27;gif&#x27;</span>, fps=<span class="number">30</span></span>):</span><br><span class="line">    <span class="keyword">assert</span> save_format <span class="keyword">in</span> [<span class="string">&#x27;gif&#x27;</span>, <span class="string">&#x27;mp4&#x27;</span>]</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> filename.endswith(save_format):</span><br><span class="line">        filename += <span class="string">f&quot;.<span class="subst">&#123;save_format&#125;</span>&quot;</span></span><br><span class="line">    matcher = re.<span class="built_in">compile</span>(matcher)</span><br><span class="line">    img_dir = os.path.join(self.save_dir, img_dir)</span><br><span class="line">    imgs = []</span><br><span class="line">    <span class="keyword">for</span> f <span class="keyword">in</span> os.listdir(img_dir):</span><br><span class="line">        <span class="keyword">if</span> matcher.search(f):</span><br><span class="line">            imgs.append(f)</span><br><span class="line">    imgs = <span class="built_in">sorted</span>(imgs, key=<span class="keyword">lambda</span> f: <span class="built_in">int</span>(matcher.search(f).groups()[<span class="number">0</span>]))</span><br><span class="line">    imgs = [cv2.imread(os.path.join(img_dir, f)) <span class="keyword">for</span> f <span class="keyword">in</span> imgs]</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> save_format == <span class="string">&#x27;gif&#x27;</span>:</span><br><span class="line">        imgs = [cv2.cvtColor(i, cv2.COLOR_BGR2RGB) <span class="keyword">for</span> i <span class="keyword">in</span> imgs]</span><br><span class="line">        imageio.mimsave(self.get_save_path(filename), imgs, fps=fps, palettesize=<span class="number">256</span>)</span><br><span class="line">    <span class="keyword">elif</span> save_format == <span class="string">&#x27;mp4&#x27;</span>:</span><br><span class="line">        imgs = [cv2.cvtColor(i, cv2.COLOR_BGR2RGB) <span class="keyword">for</span> i <span class="keyword">in</span> imgs]</span><br><span class="line">        imageio.mimsave(self.get_save_path(filename), imgs, fps=fps)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>save_mesh()</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">in</span> export: </span><br><span class="line">self.save_mesh(</span><br><span class="line">    <span class="string">f&quot;it<span class="subst">&#123;self.global_step&#125;</span>-<span class="subst">&#123;self.config.model.geometry.isosurface.method&#125;</span><span class="subst">&#123;self.config.model.geometry.isosurface.resolution&#125;</span>.obj&quot;</span>,</span><br><span class="line">    **mesh</span><br><span class="line">)        </span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">save_mesh</span>(<span class="params">self, filename, v_pos, t_pos_idx, v_tex=<span class="literal">None</span>, t_tex_idx=<span class="literal">None</span>, v_rgb=<span class="literal">None</span></span>):</span><br><span class="line">    v_pos, t_pos_idx = self.convert_data(v_pos), self.convert_data(t_pos_idx)</span><br><span class="line">    <span class="keyword">if</span> v_rgb <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">        v_rgb = self.convert_data(v_rgb) <span class="comment"># 转为numpy</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">import</span> trimesh</span><br><span class="line">    mesh = trimesh.Trimesh(</span><br><span class="line">        vertices=v_pos,</span><br><span class="line">        faces=t_pos_idx,</span><br><span class="line">        vertex_colors=v_rgb</span><br><span class="line">    )</span><br><span class="line">    mesh.export(self.get_save_path(filename))</span><br></pre></td></tr></table></figure>
+<p>obj文件：</p>
+<div class="note info">
+            <p>可以看出最后生成的模型在一个半径为1的单位圆中</p>
+          </div>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 每个点的位置值和颜色值</span><br><span class="line">v -0.96953946 0.71037185 0.47863841 0.78431373 0.56470588 0.34117647</span><br><span class="line">v -0.96868885 0.70891666 0.47863841 0.97647059 0.86666667 0.66666667</span><br><span class="line">v -0.96868885 0.71037185 0.47713959 0.74901961 0.54509804 0.37647059</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"># 每个三角面的三个顶点的索引</span><br><span class="line">f 2370 2366 2270</span><br><span class="line">f 2366 2265 2270</span><br><span class="line">f 2374 2372 2373</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+1ZnNxFWnEbk5YzRl">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
+              <a href="/tags/Neus/" rel="tag"><i class="fa fa-tag"></i> Neus</a>
+              <a href="/tags/Code/" rel="tag"><i class="fa fa-tag"></i> Code</a>
+              <a href="/tags/Efficiency/" rel="tag"><i class="fa fa-tag"></i> Efficiency</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/Learn/Learn-DeepLearning/" rel="prev" title="深度学习基础">
+      <i class="fa fa-chevron-left"></i> 深度学习基础
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/3DReconstruction/Basic%20Knowledge/NeRF/Efficiency/NeRF-InstantNGP-code/" rel="next" title="InstantNGP环境配置和tiny-cuda-nn用法">
+      InstantNGP环境配置和tiny-cuda-nn用法 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%EF%BC%9A"><span class="nav-text">文件结构：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#fit%E6%B5%81%E7%A8%8B%E4%BC%AA%E4%BB%A3%E7%A0%81"><span class="nav-text">fit流程伪代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#datasets"><span class="nav-text">datasets</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#init"><span class="nav-text">init</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dtu"><span class="nav-text">dtu</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#models"><span class="nav-text">models</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#init-1"><span class="nav-text">init</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#base"><span class="nav-text">base</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#neus"><span class="nav-text">neus</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#VarianceNetwork-%E7%BB%A7%E6%89%BFnn-Module"><span class="nav-text">VarianceNetwork 继承nn.Module</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NeuSModel-%E7%BB%A7%E6%89%BFBaseModel"><span class="nav-text">NeuSModel 继承BaseModel</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#network-utils"><span class="nav-text">network_utils</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#geometry"><span class="nav-text">geometry</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#texture"><span class="nav-text">texture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ray-utils"><span class="nav-text">ray_utils</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#utils"><span class="nav-text">utils</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#systems"><span class="nav-text">systems</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#init-2"><span class="nav-text">init</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#base-1"><span class="nav-text">base</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#neus-1"><span class="nav-text">neus</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#criterions"><span class="nav-text">criterions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#utils-1"><span class="nav-text">utils</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#utils-2"><span class="nav-text">utils</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#mixins"><span class="nav-text">mixins</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qi Yun"
+      src="/images/avatar.jpeg">
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">117</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/qiyun71" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;qiyun71" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/29010355" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;29010355" rel="noopener" target="_blank"><i class="fa fa-star fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qi Yun</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">438k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">26:33</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/yqq/anime.min.js"></script>
+  <script src="/yqq/velocity/velocity.min.js"></script>
+  <script src="/yqq/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

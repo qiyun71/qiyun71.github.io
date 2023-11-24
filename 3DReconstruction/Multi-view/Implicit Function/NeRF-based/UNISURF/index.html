@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/yqq/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Title UNISURF: Unifying Neural Implicit Surfaces and Radiance Fields for Multi-View Reconstruction     Author Michael Oechsle Songyou Peng Andreas Geiger   Conf&#x2F;Jour ICCV 2021 (oral)   Year 2021">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UNISURF">
+<meta property="og:url" content="http://example.com/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/UNISURF/index.html">
+<meta property="og:site_name" content="YunQi">
+<meta property="og:description" content="Title UNISURF: Unifying Neural Implicit Surfaces and Radiance Fields for Multi-View Reconstruction     Author Michael Oechsle Songyou Peng Andreas Geiger   Conf&#x2F;Jour ICCV 2021 (oral)   Year 2021">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230806143334.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230806160553.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230807121145.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230807130717.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230807132130.png">
+<meta property="article:published_time" content="2023-08-06T06:32:58.000Z">
+<meta property="article:modified_time" content="2023-11-24T06:42:57.297Z">
+<meta property="article:author" content="Qi Yun">
+<meta property="article:tag" content="SurfaceReconstruction">
+<meta property="article:tag" content="UNISURF">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230806143334.png">
+
+<link rel="canonical" href="http://example.com/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/UNISURF/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>UNISURF | YunQi</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">YunQi</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Note</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/UNISURF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YunQi">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          UNISURF
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-08-06 14:32:58" itemprop="dateCreated datePublished" datetime="2023-08-06T14:32:58+08:00">2023-08-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-11-24 14:42:57" itemprop="dateModified" datetime="2023-11-24T14:42:57+08:00">2023-11-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/3DReconstruction-Multi-view-Implicit-Function-NeRF-based/" itemprop="url" rel="index"><span itemprop="name">3DReconstruction/Multi-view/Implicit Function/NeRF-based</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>5.4k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>20 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Title</th>
+<th>UNISURF: Unifying Neural Implicit Surfaces and Radiance Fields for Multi-View Reconstruction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Author</td>
+<td><a target="_blank" rel="noopener" href="https://moechsle.github.io/">Michael Oechsle</a> <a target="_blank" rel="noopener" href="https://pengsongyou.github.io/">Songyou Peng</a> <a target="_blank" rel="noopener" href="http://cvlibs.net/">Andreas Geiger</a></td>
+</tr>
+<tr>
+<td>Conf/Jour</td>
+<td>ICCV 2021 (oral)</td>
+</tr>
+<tr>
+<td>Year</td>
+<td>2021</td>
+</tr>
+<tr>
+<td>Project</td>
+<td><a target="_blank" rel="noopener" href="https://moechsle.github.io/unisurf/">UNISURF: Unifying Neural Implicit Surfaces and Radiance Fields for Multi-View Reconstruction (moechsle.github.io)</a></td>
+</tr>
+<tr>
+<td>Paper</td>
+<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4546355486135050241&amp;noteId=1791178045241021696">UNISURF: Unifying Neural Implicit Surfaces and Radiance Fields for Multi-View Reconstruction (readpaper.com)</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>使用$\hat{C}(\mathbf{r})=\sum_{i=1}^No(\mathbf{x}_i)\prod_{j&lt;i}\bigl(1-o(\mathbf{x}_j)\bigr)c(\mathbf{x}_i,\mathbf{d})$ 占据o来代替NeRF中的$\alpha$<br>将VR与SR结合起来，首先根据占据场获取表面的点$t_s$，然后在$t_s$的一个区间内均匀采样点来进行颜色场的优化(如果光线没有穿过物体，则使用分层采样)</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230806143334.png" alt="image.png|700"></p>
+<span id="more"></span>
+<h1 id="Discussion-and-Conclusion"><a href="#Discussion-and-Conclusion" class="headerlink" title="Discussion and Conclusion"></a>Discussion and Conclusion</h1><p>这项工作提出了UNISURF，一种统一的隐式表面和辐射场公式，用于在没有输入掩模的情况下从多视图图像中捕获高质量的隐式表面几何形状。我们相信神经隐式曲面和先进的可微分渲染程序在未来的3D重建方法中发挥关键作用。我们的统一公式显示了在比以前更一般的设置中优化隐式曲面的路径。<br>限制:通过设计，我们的模型仅限于<strong>表示固体</strong>，<strong>非透明表面</strong>。<strong>过度曝光和无纹理区域也是导致不准确和不光滑表面的限制因素</strong>。此外，在图像中很少可见的区域，重建的精度较低。在附录中更详细地讨论了限制。<br>在未来的工作中，为了从很少可见和无纹理的区域中解决歧义，<strong>先验是重建的必要条件</strong>。虽然我们在优化过程中加入了显式平滑先验，但学习捕获对象之间的规律性和不确定性的概率神经表面模型将有助于解决模糊性，从而实现更准确的重建。</p>
+<h1 id="AIR"><a href="#AIR" class="headerlink" title="AIR"></a>AIR</h1><p>神经隐式三维表示已经成为从多视图图像重建表面和合成新视图的强大范例。<strong>不幸的是，现有的方法，如DVR或IDR需要精确的过像素对象掩码Mask作为监督</strong>。<br>与此同时，神经辐射场已经彻底改变了新的视图合成。<strong>然而，NeRF的估计体积密度不允许精确的表面重建</strong>。<br>我们的关键见解是隐式表面模型和亮度场可以以统一的方式制定，使表面和体渲染使用相同的模型。这种统一的视角使新颖，更有效的采样程序和重建精确表面的能力无需输入掩模。我们在DTU、BlendedMVS和合成室内数据集上比较了我们的方法。我们的实验表明，我们在重建质量方面优于NeRF，同时<strong>在不需要掩模的情况下与IDR表现相当</strong>。</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>从一组图像中捕捉3D场景的几何形状和外观是计算机视觉的基础问题之一。为了实现这一目标，基于坐标的神经模型在过去几年中已经成为三维几何和外观重建的强大工具。<br>最近的许多方法使用连续隐式函数参数化神经网络作为几何图形的三维表示[3,8,12,31,32,37,41,43,47,57]或外观[34,38,39,40,47,52,61]。这些神经网络三维表示在多视图图像的几何重建和新视图合成方面显示出令人印象深刻的性能。神经隐式多视图重建除了选择三维表示形式(如占用场、无符号距离场或有符号距离场)外，渲染技术是实现多视图重建的关键。虽然其中一些作品将隐式表面表示为水平集，从而渲染表面的外观[38,52,61]，但其他作品通过沿着观察光线绘制样本来整合密度[22,34,49]。<br>在现有的工作中，表面渲染技术在三维重建中表现出了令人印象深刻的性能[38,61]。<strong>然而，它们需要逐像素对象掩码作为输入和适当的网络初始化，因为表面渲染技术只在表面与射线相交的局部提供梯度信息</strong>。直观地说，optimizing wrt. 局部梯度可以看作是应用于初始神经表面的迭代变形过程，初始神经表面通常被初始化为一个球体。为了收敛到一个有效的表面，需要额外的约束，如掩码监督，如图2所示。<br>==现有工作2021由于依赖mask，因此只能用于对象级重建，而无法重建大场景==</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230806160553.png" alt="image.png"></p>
+<p>相反，像NeRF[34]这样的体绘制方法在新视图合成方面也显示了令人印象深刻的结果，also对于更大的场景。<strong>然而，作为底层体积密度水平集提取的表面通常是非光滑的(NeRF用密度来提取零水平集表面是非光滑的)</strong>，并且由于辐射场表示的灵活性而包含伪影，这在存在歧义的情况下不能充分约束 3D 几何，见图 3。</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230807121145.png" alt="image.png"></p>
+<p>贡献：在本文中，我们提出了 UNISURF（统一UNIfied 神经Neural 隐式Implicit SUrface 和辐射场Radiance）隐式表面和辐射场的原则性统一框架，目标是从一组 RGB 图像重建实体（即不透明）对象。<strong>我们的框架结合了表面渲染的好处和体绘制的好处，从而能够从没有掩码的多视图图像重建准确的几何图形</strong>。通过恢复隐式曲面，我们能够在优化过程中逐渐降低采样区域进行体绘制。从大采样区域开始，可以在早期迭代期间捕获粗略的几何图形并解决歧义<br><strong>在后面的阶段，我们抽取更接近表面的样本，提高了重建精度</strong>。我们表明，我们的方法能够在DTU MVS数据集[1]上在没有掩码监督的情况下捕获精确的几何图形，获得了与最先进的隐式神经重建方法(如IDR[61])竞争的结果，这些方法使用强掩码监督。此外，我们还在BlendedMVS数据集[60]的场景以及来自SceneNet[29]的合成室内场景上展示了我们的方法。</p>
+<h2 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h2><ul>
+<li>3D Reconstruction from Multi-View Images<ul>
+<li>从多个图像重建三维几何结构一直是一个长期存在的计算机视觉问题[14]。在深度学习时代之前，经典的多视图立体(MVS)方法[2,4,5,7,20,20,20,48,50,51]要么<strong>关注跨视图匹配特征</strong>[4,48]，要么<strong>关注用体素网格表示形状</strong>[2,5,7,20,27,42,50,54,55]。前一种方法通常有一个复杂的管道，需要额外的步骤，如融合深度信息[9,30]和网格划分[18,19]，而后一种方法由于立方内存要求而限制在低分辨率。<strong>相比之下，用于3D重建的神经隐式表示</strong>不会受到离散伪影的影响，因为它们通过具有连续输出的神经网络的水平集表示表面。</li>
+<li>最近基于学习的MVS方法试图取代经典MVS管道的某些部分。例如，一些作品学习匹配2D特征[15,21,26,56,62]，融合深度图[11,46]，或者从多视图图像中推断深度图[16,58,59]。与这些基于学习的MVS方法相反，<strong>我们的方法在优化过程中只需要弱2D监督</strong>。此外，我们的方法产生了高质量的3D几何图形，并合成了逼真的、一致的新视图</li>
+</ul>
+</li>
+<li>Neural Implicit Representations<ul>
+<li>最近，神经隐式函数作为3D几何[3,8,12,31,32,37,41,43,47,57]和外观[22,24,34,38,39,40,47,49,52]的有效表示出现了，因为它们连续地表示3D内容，无需离散化，同时具有较小的内存占用。这些方法大多需要三维监控。然而，最近的一些工作[23,34,38,52,61]证明了直接从图像进行训练的可微分渲染[23,34,38,52,61]。我们将这些方法分为两组:<strong>表面渲染和体渲染</strong>。</li>
+<li>表面渲染方法，包括DVR[38]和IDR[61]，直接确定物体表面的亮度，并使用隐式梯度提供可微分的渲染公式。这允许从多视图图像优化神经隐式曲面。调节观看方向允许IDR捕捉高水平的细节，即使是非兰伯曲面的存在。<strong>然而，DVR和IDR都要求所有视图的像素精确对象掩码作为输入。相比之下，我们的方法可以在不需要掩模的情况下进行类似的重建</strong>。</li>
+<li>NeRF[34]和后续研究[6,28,35,36,44,45,49,53,63]通过学习沿光线的辐射场的alpha合成来使用体渲染。该方法在新视图合成上取得了令人印象深刻的效果，并且不需要掩模监督。然而，恢复的三维几何形状远不能令人满意，如图3所示。后续的一些作品(Neural Body [44] D-NeRF[45]和NeRD[6])使用NeRF的体积密度提取网格，但都没有考虑直接优化表面。<strong>与这些作品不同的是，我们的目标是捕获精确的几何形状，并提出一种可以证明接近极限表面渲染的体绘制公式</strong></li>
+</ul>
+</li>
+</ul>
+<h1 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h1><p>从多视图图像中学习神经隐式3D表示的两个主要组成部分是3D表示和连接3D表示和2D观察的渲染技术。本节提供了关于<strong>隐式表面和体积辐射</strong>表示的相关背景，我们在本文中统一了固体(非透明)物体和场景的情况。</p>
+<ul>
+<li>Implicit Surface Models<ul>
+<li>占用网络[31,38]将曲面表示为二元占用分类器的决策边界，并通过神经网络参数化<ul>
+<li>$o_\theta(\mathbf{x}):\mathbb{R}^3\to[0,1]$<ul>
+<li>其中$x∈ \mathbb{R}^3$为三维点，θ为模型参数。曲面定义为占据概率为二分之一的所有3D点的集合$\mathcal{S}=\{\mathbf{x}_s|o_\theta(\mathbf{x}_s)=0.5\}.$</li>
+</ul>
+</li>
+<li>为了将颜色与表面上的每个3D点xs相关联，可以将颜色场$c_\theta(\mathbf{x}_s)$与占用场$o_{\theta}(\mathbf{x}).$联合学习，从而预测特定像素/射线r的颜色:$\hat{C}(\mathbf{r})=c_\theta(\mathbf{x}_s)$</li>
+<li>其中$x_s$是通过沿着射线r进行根查找来检索的，具体参见[38]。占用场$o_θ$和颜色场$c_θ$的参数 θ由[24,38,61]中描述的通过梯度下降优化重建损失来确定。</li>
+<li>虽然表面渲染允许准确地估计几何形状和外观，但现有的方法强烈依赖于物体掩模的监督，因为表面渲染方法只能推断与表面相交的射线。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Volumetric Radiance Models<ul>
+<li>与隐式表面模型相比，NeRF[34]将场景表示为彩色体积密度，并通过alpha混合将辐射沿光线进行整合[25,34]。更具体地说，NeRF使用神经网络将3D位置$x∈R^3$和观看方向$d∈R^3$映射到体积密度$σ_{θ}(x)∈R^{+}$和颜色值$c_{θ}(x, d)∈R^{3}$</li>
+<li>对观察方向的调节允许建模与视图相关的效果，如镜面反射[34,40]，并在违反朗伯假设的情况下提高重建质量[61]。让我们表示相机中心的位置。给定沿射线$\mathbf{r}=\mathbf{o}+t\mathbf{d},$的N个样本$\{\mathbf{x}_i\}$， NeRF使用数值正交近似像素/射线r的颜色:</li>
+<li>$\hat{C}(\mathbf{r}) =\sum_{i=1}^NT_i\left(1-\exp\left(-\sigma_\theta(\mathbf{x}_i)\delta_i\right)\right)c_\theta(\mathbf{x}_i,\mathbf{d})  ,T_{i} =\exp\left(-\sum_{j&lt;i}\sigma_\theta(\mathbf{x}_j)\delta_j\right)$</li>
+<li>其中$T_{i}$为沿射线的累积透过率，$\delta_i=|\mathbf{x}_{i+1}-\mathbf{x}_i|$为相邻样品之间的距离。由于Eq.(3)是可微的，因此密度场$σ_θ$和颜色场$c_θ$的参数θ可以通过优化重构损失来估计。详见[34]。</li>
+<li>虽然由于NeRF的体积亮度表示，它不需要对象掩模进行训练，<strong>但从体积密度中提取场景几何图形需要仔细调整密度阈值，并由于密度场中存在的模糊性而导致伪影</strong>，如图3所示。</li>
+</ul>
+</li>
+</ul>
+<h1 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h1><p>与也适用于非固体场景(如雾、烟)的NeRF相反，我们将焦点限制在<strong>可以用3D表面和依赖于视图的表面颜色表示的固体物体</strong>上。我们的方法利用了这两者，体积辐射表示能力来学习粗糙的场景结构，而不需要掩模监督，以及表面渲染，作为一个感应偏差，通过一组精确的3D表面来表示对象，从而实现精确的重建。</p>
+<h2 id="Unifying-Surface-and-Volume-Rendering"><a href="#Unifying-Surface-and-Volume-Rendering" class="headerlink" title="Unifying Surface and Volume Rendering"></a>Unifying Surface and Volume Rendering</h2><p>$\hat{C}(\mathbf{r})=\sum_{i=1}^N\alpha_i(\mathbf{x}_i)\prod_{j&lt;i}\bigl(1-\alpha_j(\mathbf{x}_j)\bigr)c(\mathbf{x}_i,\mathbf{d})$</p>
+<p>将$\alpha$值替换为占据值o<br>α值：$\alpha_i(\mathbf{x})=1-\exp\left(-\sigma(\mathbf{x})\delta_i\right).$。假设物体为实体，则α为离散占用指标变量$o\in\{0,1\}$，其值为自由空间0 = 0，占用空间0 = 1:</p>
+<p>$\hat{C}(\mathbf{r})=\sum_{i=1}^No(\mathbf{x}_i)\prod_{j&lt;i}\bigl(1-o(\mathbf{x}_j)\bigr)c(\mathbf{x}_i,\mathbf{d})$</p>
+<p>我们将此表达式识别为固体物体的成像模型[55]，其中项$\begin{aligned}o(\mathbf{x}_i)\prod_{j&lt;i}\left(1-o(\mathbf{x}_j)\right)\end{aligned}$对于沿光线 r的第一个被占用的样本$x_i$求值为1，对于所有其他样本求值为0。$\prod_{j&lt;i}(1-o(\mathbf{x}_j))$是可见性指标，如果在样本$x_i$之前不存在j&lt;i的被占用样本xj，则可见性指标为1。因此，C(r)取沿射线r的第一个被占用样本的颜色$C(x_i, d)$。</p>
+<p>为了统一隐式表面和体积亮度模型，我们直接用连续占用场$o_{θ}(1)$来参数化o，而不是预测体积密度σ。按照[61]，我们在曲面法向量n和几何网络的特征向量h上对颜色场$c_{θ}$进行条件调整，这在经验上诱导了一个有用的偏差，这也在[61]中观察到对于隐式曲面的情况。重要的是，我们统一的配方允许体积和表面渲染</p>
+<script type="math/tex; mode=display">\begin{aligned}\hat{C}_v(\mathbf{r})&=\sum_{i=1}^No_\theta(\mathbf{x}_i)\prod_{j<i}\bigl(1-o_\theta(\mathbf{x}_j)\bigr)c_\theta(\mathbf{x}_i,\mathbf{n}_i,\mathbf{h}_i,\mathbf{d})\\\hat{C}_s(\mathbf{r})&=c_\theta(\mathbf{x}_s,\mathbf{n}_s,\mathbf{h}_s,\mathbf{d})\end{aligned}</script><p>$x_s$是沿着射线r得到的坐标，$n_s,h_s$分别是$x_s$出的法向量和几何特征。请注意，x依赖于占位场$o_θ$，但为了清晰起见，我们在这里去掉了这个依赖关系。<br>这种统一公式的优点是，它既可以直接在表面上渲染，也可以在整个体块上渲染，从而在优化过程中逐渐消除歧义。正如我们的实验所证明的那样，<strong>将两者结合起来对于在没有mask监督的情况下获得准确的重建确实至关重要</strong>。能够通过根查找快速恢复表面S使更有效的体渲染，先后聚焦和细化对象表面，我们将在4.3节中描述。此外，表面渲染可以实现更快的新视图合成，如图5所示。</p>
+<h2 id="Loss-Function"><a href="#Loss-Function" class="headerlink" title="Loss Function"></a>Loss Function</h2><p>$\mathcal{L}=\mathcal{L}_{rec}+\lambda\mathcal{L}_{reg}$</p>
+<ul>
+<li><strong>rec</strong>onstruction loss $\mathcal{L}_{rec}=\sum_{\mathbf{r}\in\mathcal{R}}|\hat{C}_{v}(\mathbf{r})-C(\mathbf{r})|_{1}$</li>
+<li>Surface <strong>reg</strong>ularization $\mathcal{L}_{reg}=\sum_{\mathbf{x}_s\in\mathcal{S}}|\mathbf{n}(\mathbf{x}_s)-\mathbf{n}(\mathbf{x}_s+\boldsymbol{\epsilon})|_2$</li>
+</ul>
+<p>其中，R为minibatch中所有像素/射线的集合，S为对应表面点的集合，C(R)为像素/射线R的观测颜色，ε为一个小的随机均匀三维扰动。<br>x处的法线$\mathbf{n}(\mathbf{x}_s)=\frac{\nabla_{\mathbf{x}_s}o_\theta(\mathbf{x}_s)}{|\nabla_{\mathbf{x}_s}o_\theta(\mathbf{x}_s)|_2}$可以用双反向传播来计算</p>
+<h2 id="Optimization"><a href="#Optimization" class="headerlink" title="Optimization"></a>Optimization</h2><p><strong>隐式曲面模型的关键假设</strong>[38,61]是，<strong>只有与曲面第一个交点处的区域对渲染方程有贡献</strong>。然而，这个假设在早期迭代中是不正确的，因为在早期迭代中曲面没有很好地定义。因此，现有的方法[38,61]需要强有力的mask监管。相反，在随后的迭代中，当评估Eq.(7)中的体绘制方程时，关于近似曲面的知识对于绘制信息样本是有价值的。因此，我们在体绘制过程中<strong>使用了一个采样间隔单调递减的训练计划来绘制样本</strong>，如图4所示</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230807130717.png" alt="image.png"><br><em>首先，我们在占用场oθ中寻找表面$x_s$(绿色)。其次，我们在表面周围定义一个间隔，以采样点$\{x_i\}$(红色)进行体渲染。</em></p>
+<p>换句话说，在早期的迭代中，样本{$x_i$}覆盖了整个优化体积，有效地引导了使用体绘制的重建过程。在以后的迭代中，样本{$x_i$}在估计的表面附近被拉近。由于可以通过寻根直接从占用场oθ估计表面[38]，这就消除了像NeRF那样需要分层两阶段采样的需要。我们的实验表明，这个过程对于估计精确的几何图形特别有效，同时它允许在早期迭代中解决歧义。</p>
+<p>More formally, let $\mathbf{x}_s=\mathbf{o}+t_s\mathbf{d}.$ We obtain samples $\mathbf{x}_i=\mathbf{o}+t_i\mathbf{d}.$ by drawing N depth values $t_i$ using stratified sampling within the interval $[ts − ∆, ts + ∆]$centered at $t_s$:<br>$t_i\sim\mathcal{U}\left[t_s+\left(\frac{2i-2}N-1\right)\Delta,t_s+\left(\frac{2i}N-1\right)\Delta\right]$</p>
+<p>在训练过程中，我们从较大的间隔∆max开始，并逐渐减少∆，以便使用以下衰减时间表对表面进行更准确的采样和优化$\Delta_k=\max(\Delta_{\max}\exp(-k\beta),\Delta_{\min})$<br>其中k为迭代次数，β为超参数。事实上，可以证明，当∆→0和n→∞时，体绘制(7)确实接近曲面绘制(8):$C_v (r)→C_s(r)$。补充材料中提供了这个极限的正式证明。</p>
+<p>正如我们的实验所证明的那样，(14)中的衰减调度对于捕获详细的几何图形至关重要，因为它将训练开始时的大型和不确定体积的体绘制与训练结束时的表面渲染结合起来。为了减少自由空间伪影，<strong>我们将这些样本与相机和表面之间随机采样的点结合起来</strong>。对于没有曲面相交的光线，我们对整个光线进行分层采样。</p>
+<h2 id="Implementation-Details"><a href="#Implementation-Details" class="headerlink" title="Implementation Details"></a>Implementation Details</h2><ul>
+<li>Architecture与Yariv等人[61]类似，我们使用带有Softplus激活函数的8层MLP，占用场$o_θ$的隐藏维数为256。我们初始化网络，使得决策边界是一个球体[13]。相比之下，辐射场$c_θ$被参数化为4层的ReLU MLP。我们使用傅里叶特征[34]在k倍频阶对3D位置x和观看方向d进行编码。根据经验，我们发现3D位置x的k = 6和观看方向d的k = 4效果最好。<ul>
+<li>占用场MLP：layer = 8 , neurons = 256 , activation = softplus, init_sphere</li>
+<li>颜色场MLP：layer = 4 , neurons = 256 , activation = ReLU</li>
+<li>编码采用频率编码，位置x的k=6，方向d的k=4</li>
+</ul>
+</li>
+<li>Optimization在所有的实验中，我们的模型适合单一场景的多视图图像。在模型参数优化过程中，我们首先对一个视图进行随机采样，然后根据相机的本征和外征对该视图进行M像素/射线R的采样。接下来，我们渲染所有射线来计算Eq.(9)中的损失函数。对于寻根，我们使用256个均匀采样点并应用割线方法，共8步[31]。对于我们的渲染过程，我们在区间内使用N = 64个查询点，在相机和区间下界之间的空闲空间中使用32个查询点。区间衰减参数为β = 1.5e−5，∆min = 0.05，∆max = 1.0。我们使用Adam，学习率为0.0001，每次迭代优化M = 1024像素，在200k和400k迭代后进行两个衰减步骤。总的来说，我们训练我们的模型进行了45万次迭代。</li>
+<li>Inference我们的方法允许推断三维形状以及合成新的视图图像。对于合成图像，我们可以用两种不同的方式渲染我们的表现，我们可以使用体渲染或表面渲染。在图5中，我们展示了两种渲染方法导致相似的结果。然而，我们观察到表面渲染比体渲染快。<ul>
+<li>为了提取网格，我们采用了[31]中的多分辨率等值面提取(MISE)算法。我们使用$64^{3}$作为初始分辨率，分3步对网格进行上采样，没有基于梯度的细化。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230807132130.png" alt="image.png"></p>
+<h1 id="Experimental-Evaluation"><a href="#Experimental-Evaluation" class="headerlink" title="Experimental Evaluation"></a>Experimental Evaluation</h1><p>我们在广泛使用的<strong>DTU MVS数据集</strong>[17]上，对我们的方法与现有方法(IDR [61]， NeRF [34]， COLMAP[48])进行了定性和定量比较。<br>其次，我们展示了来自<strong>blendedmvs dataset</strong>[60]的样本和来自the <strong>SceneNet dataset</strong>[29]的场景合成渲染的定性比较。<br>第三，我们分析了消融研究中的渲染程序和损失函数。在补充中，我们提供了LLFF数据集[33]上的结果。</p>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+1ZnNxFWnEbk5YzRl">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/SurfaceReconstruction/" rel="tag"><i class="fa fa-tag"></i> SurfaceReconstruction</a>
+              <a href="/tags/UNISURF/" rel="tag"><i class="fa fa-tag"></i> UNISURF</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/3DReconstruction/Basic%20Knowledge/NeRF/Interesting/PAniC-3D/" rel="prev" title="PAniC-3D">
+      <i class="fa fa-chevron-left"></i> PAniC-3D
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/3DReconstruction/Basic%20Knowledge/NeRF/Efficiency/TensoRF/" rel="next" title="TensoRF">
+      TensoRF <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Discussion-and-Conclusion"><span class="nav-text">Discussion and Conclusion</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AIR"><span class="nav-text">AIR</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Related-Work"><span class="nav-text">Related Work</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Background"><span class="nav-text">Background</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Method"><span class="nav-text">Method</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Unifying-Surface-and-Volume-Rendering"><span class="nav-text">Unifying Surface and Volume Rendering</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Loss-Function"><span class="nav-text">Loss Function</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Optimization"><span class="nav-text">Optimization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Implementation-Details"><span class="nav-text">Implementation Details</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Experimental-Evaluation"><span class="nav-text">Experimental Evaluation</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qi Yun"
+      src="/images/avatar.jpeg">
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">117</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/qiyun71" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;qiyun71" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/29010355" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;29010355" rel="noopener" target="_blank"><i class="fa fa-star fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qi Yun</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">438k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">26:33</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/yqq/anime.min.js"></script>
+  <script src="/yqq/velocity/velocity.min.js"></script>
+  <script src="/yqq/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

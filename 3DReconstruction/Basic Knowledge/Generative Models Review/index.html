@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/yqq/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Paper Model Input Parameter&#x2F;Pnum GPU     DiT-3D Diffusion Transformers Voxelized PC     PointFlow AE flow-based PointCloud 1.61M    FlowGAN GAN flow-based Single Image N &#x3D; 2500 A40 45GB   BuilDiff">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Generative Models Review about 3D Reconstruction">
+<meta property="og:url" content="http://example.com/3DReconstruction/Basic%20Knowledge/Generative%20Models%20Review/index.html">
+<meta property="og:site_name" content="YunQi">
+<meta property="og:description" content="Paper Model Input Parameter&#x2F;Pnum GPU     DiT-3D Diffusion Transformers Voxelized PC     PointFlow AE flow-based PointCloud 1.61M    FlowGAN GAN flow-based Single Image N &#x3D; 2500 A40 45GB   BuilDiff">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231021163349.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231021100952.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231021101055.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231116161909.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231111120652.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231107193647.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231111214245.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231021114740.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231028214552.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231116160820.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231021115606.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231021203845.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231019170328.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023154817.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231024164334.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231024205005.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231025093839.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231031184253.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231108223206.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231110160231.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231122161513.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231022105308.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231031152551.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231019162233.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231021193539.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231022101838.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231031092339.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231031092703.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231031093421.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023154445.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023160511.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231019154043.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231021160431.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231022103332.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231022102437.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231022103225.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023154513.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023155025.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023165400.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023165804.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231117094931.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023171814.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231105173051.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231107192857.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231110160631.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231110162856.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231116154716.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231122201401.png">
+<meta property="article:published_time" content="2023-10-24T03:56:04.000Z">
+<meta property="article:modified_time" content="2023-11-24T06:54:00.262Z">
+<meta property="article:author" content="Qi Yun">
+<meta property="article:tag" content="Diffusion">
+<meta property="article:tag" content="GAN">
+<meta property="article:tag" content="Flow">
+<meta property="article:tag" content="Review">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231021163349.png">
+
+<link rel="canonical" href="http://example.com/3DReconstruction/Basic%20Knowledge/Generative%20Models%20Review/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Generative Models Review about 3D Reconstruction | YunQi</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">YunQi</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Note</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/3DReconstruction/Basic%20Knowledge/Generative%20Models%20Review/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YunQi">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Generative Models Review about 3D Reconstruction
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-10-24 11:56:04" itemprop="dateCreated datePublished" datetime="2023-10-24T11:56:04+08:00">2023-10-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-11-24 14:54:00" itemprop="dateModified" datetime="2023-11-24T14:54:00+08:00">2023-11-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/3DReconstruction-Basic-Knowledge/" itemprop="url" rel="index"><span itemprop="name">3DReconstruction/Basic Knowledge</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>1.6k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>6 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Paper</th>
+<th>Model</th>
+<th>Input</th>
+<th>Parameter/Pnum</th>
+<th>GPU</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DiT-3D</td>
+<td>Diffusion Transformers</td>
+<td>Voxelized PC</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>PointFlow</td>
+<td>AE flow-based</td>
+<td>PointCloud</td>
+<td>1.61M</td>
+<td></td>
+</tr>
+<tr>
+<td>FlowGAN</td>
+<td>GAN flow-based</td>
+<td>Single Image</td>
+<td>N = 2500</td>
+<td>A40 45GB</td>
+</tr>
+<tr>
+<td>BuilDiff</td>
+<td>Diffusion models</td>
+<td>Single Image</td>
+<td>1024 to 4096</td>
+<td>A40 45GB</td>
+</tr>
+<tr>
+<td>CCD-3DR</td>
+<td>CDPM</td>
+<td>Single Image</td>
+<td>8192</td>
+<td>3090Ti 24GB</td>
+</tr>
+<tr>
+<td>SG-GAN</td>
+<td>SG-GAN</td>
+<td>Single Image</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>HaP</strong></td>
+<td>Diffusion+SMPL+DepthEstimation</td>
+<td>Single Image</td>
+<td>10000</td>
+<td>4x3090Ti</td>
+</tr>
+</tbody>
+</table>
+</div>
+<span id="more"></span>
+<h1 id="Review"><a href="#Review" class="headerlink" title="Review"></a>Review</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2311.06786">Explainability of Vision Transformers: A Comprehensive Review and New Perspectives</a> 关于视觉中使用 Transformer 的 Review</li>
+</ul>
+<h1 id="Generative-approach-Img2PC"><a href="#Generative-approach-Img2PC" class="headerlink" title="Generative approach(Img2PC)"></a>Generative approach(Img2PC)</h1><h2 id="Network-Framework"><a href="#Network-Framework" class="headerlink" title="Network Framework"></a>Network Framework</h2><p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231021163349.png" alt="Image.png|555"></p>
+<ul>
+<li>GAN(generative adversarial networks)</li>
+<li>VAE(variational auto-encoders)</li>
+<li>Auto-regressive models</li>
+<li>Normalized flows(flow-based models), PointFlow<ul>
+<li>相当于多个生成器，并且可逆</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=uXY18nzdSsM&amp;list=PLJV_el3uVTsOK_ZK5L0Iv_EQoL1JefRL4&amp;index=60">Flow-based Generative Model - YouTube</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/267305869">Flow-based Generative Model 笔记整理 - 知乎 (zhihu.com)</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/59615785">Normalization Flow (标准化流) 总结 - 知乎 (zhihu.com)</a></li>
+</ul>
+</li>
+<li>DiT(Diffusion Transformers), DiT-3D</li>
+</ul>
+<p>Flow-based：<br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231021100952.png" alt="image.png|333"><br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231021101055.png" alt="image.png|666"></p>
+<h2 id="Loss"><a href="#Loss" class="headerlink" title="Loss"></a>Loss</h2><p>点云倒角距离 CD ↓<br>$\begin{aligned}\mathcal{L}_{CD}&amp;=\sum_{y’\in Y’}min_{y\in Y}||y’-y||_2^2+\sum_{y\in Y}min_{y’\in Y’}||y-y’||_2^2,\end{aligned}$</p>
+<p>推土距离 EMD (Earth Mover’s distance)↓<br>$\mathcal{L}_{EMD}=min_{\phi:Y\rightarrow Y^{\prime}}\sum_{x\in Y}||x-\phi(x)||_{2}$ , φ indicates a parameter of bijection.</p>
+<h2 id="Diffusion-Models"><a href="#Diffusion-Models" class="headerlink" title="Diffusion Models"></a>Diffusion Models</h2><h3 id="DMV3D"><a href="#DMV3D" class="headerlink" title="DMV3D"></a>DMV3D</h3><p><a target="_blank" rel="noopener" href="https://justimyhxu.github.io/projects/dmv3d/">DMV3D: Denoising Multi-View Diffusion Using 3D Large Reconstruction Mode (justimyhxu.github.io)</a></p>
+<p>Diffusion Model + Triplane NeRF + Multi-view Image input<br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231116161909.png" alt="image.png|666"></p>
+<h3 id="DiffuStereo"><a href="#DiffuStereo" class="headerlink" title="DiffuStereo"></a>DiffuStereo</h3><p><a target="_blank" rel="noopener" href="https://liuyebin.com/diffustereo/diffustereo.html">DiffuStereo Project Page (liuyebin.com)</a></p>
+<p>多视图<br>DoubleField 粗网格估计 + Diffusion 生成高质量 Disparity Flow 和 Depth + ICP 配准（点云融合）</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231111120652.png" alt="image.png|666"></p>
+<h3 id="Human-as-Points-HaP"><a href="#Human-as-Points-HaP" class="headerlink" title="Human as Points(HaP)"></a>Human as Points(HaP)</h3><p><a target="_blank" rel="noopener" href="https://github.com/yztang4/HaP">yztang4/HaP (github.com)</a><br><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2311.02892.pdf">Human as Points: Explicit Point-based 3D Human Reconstruction from Single-view RGB Images(arxiv.org)</a><br><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=2039003253707810304&amp;noteId=2039256760006808832">Human as Points—— Explicit Point-based 3D Human Reconstruction from Single-view RGB Images.pdf (readpaper.com)</a></p>
+<p>深度估计+SMPL 估计得到两个稀疏点云，输入进 Diffusion Model 进行精细化生成</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231107193647.png" alt="image.png|666"></p>
+<h3 id="HumanNorm"><a href="#HumanNorm" class="headerlink" title="HumanNorm"></a>HumanNorm</h3><p><a target="_blank" rel="noopener" href="https://humannorm.github.io/">HumanNorm</a></p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231111214245.png" alt="image.png|666"></p>
+<h3 id="BuilDiff"><a href="#BuilDiff" class="headerlink" title="BuilDiff"></a>BuilDiff</h3><p>预计 2023.11 release<br><a href="BuilDiff.md">BuilDiff论文阅读笔记</a><br><a target="_blank" rel="noopener" href="https://github.com/weiyao1996/BuilDiff">weiyao1996/BuilDiff: BuilDiff: 3D Building Shape Generation using Single-Image Conditional Point Cloud Diffusion Models (github.com)</a><br><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4796303379219349505&amp;noteId=2014132586369911808">BuilDiff: 3D Building Shape Generation using Single-Image Conditional Point Cloud Diffusion Models (readpaper.com)</a></p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231021114740.png" alt="image.png|666"></p>
+<h3 id="RODIN"><a href="#RODIN" class="headerlink" title="RODIN"></a>RODIN</h3><p><a target="_blank" rel="noopener" href="https://3d-avatar-diffusion.microsoft.com/">RODIN Diffusion (microsoft.com)</a><br><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4700249091733454849&amp;noteId=2024885528733762560">Rodin: A Generative Model for Sculpting 3D Digital Avatars Using Diffusion (readpaper.com)</a></p>
+<p>微软大数据集 + Diffusion + NeRF Tri-plane<br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231028214552.png" alt="image.png|666"></p>
+<h3 id="Single-Image-3D-Human-Digitization-with-Shape-Guided-Diffusion"><a href="#Single-Image-3D-Human-Digitization-with-Shape-Guided-Diffusion" class="headerlink" title="Single-Image 3D Human Digitization with Shape-Guided Diffusion"></a>Single-Image 3D Human Digitization with Shape-Guided Diffusion</h3><p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2311.09221">Single-Image 3D Human Digitization with Shape-Guided Diffusion</a></p>
+<p>利用针对一般图像合成任务<strong>预先训练的高容量二维扩散模型</strong>作为穿着人类的外观先验<br>通过以轮廓和表面法线为条件的形状引导扩散来修复缺失区域<br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231116160820.png" alt="image.png|666"></p>
+<h3 id="CCD-3DR"><a href="#CCD-3DR" class="headerlink" title="CCD-3DR"></a>CCD-3DR</h3><p><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4789424767274844161&amp;noteId=2014146864821066240">CCD-3DR: Consistent Conditioning in Diffusion for Single-Image 3D Reconstruction (readpaper.com)</a></p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231021115606.png" alt="image.png|666"></p>
+<h3 id="PC-2"><a href="#PC-2" class="headerlink" title="PC^2"></a>PC^2</h3><p><a target="_blank" rel="noopener" href="https://lukemelas.github.io/projection-conditioned-point-cloud-diffusion/">PC2: Projection-Conditioned Point Cloud Diffusion for Single-Image 3D Reconstruction (lukemelas.github.io)</a><br><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4726675454702911489&amp;noteId=2014671879272477696">$PC^2$: Projection-Conditioned Point Cloud Diffusion for Single-Image 3D Reconstruction (readpaper.com)</a></p>
+<p>相机位姿???<br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231021203845.png" alt="image.png|666"></p>
+<h3 id="DiT-3D"><a href="#DiT-3D" class="headerlink" title="DiT-3D"></a>DiT-3D</h3><p><a href="DiT-3D.md">DiT-3D论文阅读笔记</a><br><a target="_blank" rel="noopener" href="https://dit-3d.github.io/">DiT-3D: Exploring Plain Diffusion Transformers for 3D Shape Generation</a><br><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4776143720479195137&amp;noteId=2011558450133224704">DiT-3D: Exploring Plain Diffusion Transformers for 3D Shape Generation (readpaper.com)</a></p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231019170328.png" alt="image.png|666"></p>
+<h3 id="Make-It-3D"><a href="#Make-It-3D" class="headerlink" title="Make-It-3D"></a>Make-It-3D</h3><p><a target="_blank" rel="noopener" href="https://make-it-3d.github.io/">Make-It-3D: High-Fidelity 3D Creation from A Single Image with Diffusion Prior</a></p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023154817.png" alt="image.png|666"></p>
+<h3 id="DreamGaussian"><a href="#DreamGaussian" class="headerlink" title="DreamGaussian"></a>DreamGaussian</h3><p><a target="_blank" rel="noopener" href="https://dreamgaussian.github.io/">DreamGaussian</a></p>
+<p>Gaussian Splatting + Diffusion<br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231024164334.png" alt="image.png|666"></p>
+<h3 id="Wonder3D"><a href="#Wonder3D" class="headerlink" title="Wonder3D"></a>Wonder3D</h3><p><a target="_blank" rel="noopener" href="https://www.xxlong.site/Wonder3D/">Wonder3D: Single Image to 3D using Cross-Domain Diffusion (xxlong.site)</a></p>
+<p>Diffusion 一致性出图 + Geometry Fusion (novel geometric-aware optimization scheme)</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231024205005.png" alt="image.png|666"></p>
+<h4 id="CLIP"><a href="#CLIP" class="headerlink" title="CLIP"></a>CLIP</h4><p><a target="_blank" rel="noopener" href="https://github.com/openai/CLIP">openai/CLIP: CLIP (Contrastive Language-Image Pretraining), Predict the most relevant text snippet given an image (github.com)</a></p>
+<p>对比语言-图片预训练模型<br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231025093839.png" alt="image.png|666"></p>
+<h3 id="GenNeRF"><a href="#GenNeRF" class="headerlink" title="GenNeRF"></a>GenNeRF</h3><p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2310.19464">Generative Neural Fields by Mixtures of Neural Implicit Functions (arxiv.org)</a></p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231031184253.png" alt="image.png|666"></p>
+<h3 id="LDM3D-VR"><a href="#LDM3D-VR" class="headerlink" title="LDM3D-VR"></a>LDM3D-VR</h3><p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2311.03226">LDM3D-VR: Latent Diffusion Model for 3D VR (arxiv.org)</a><br><a target="_blank" rel="noopener" href="https://t.ly/tdi2">视频演示T.LY URL Shortener</a></p>
+<p>从给定的文本提示生成图像和深度图数据，此外开发了一个 DepthFusion 的应用程序，它使用生成的 RGB 图像和深度图来使用 TouchDesigner 创建身临其境的交互式 360°视图体验<br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231108223206.png" alt="image.png|666"></p>
+<h3 id="Control3D"><a href="#Control3D" class="headerlink" title="Control3D"></a>Control3D</h3><p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2311.05461.pdf">Control3D: Towards Controllable Text-to-3D Generation</a></p>
+<p>草图+文本条件生成 3D</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231110160231.png" alt="image.png|666"></p>
+<h3 id="Etc"><a href="#Etc" class="headerlink" title="Etc"></a>Etc</h3><p>Colored PC <a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4723055356805120001&amp;noteId=2014681937165010176">3D Colored Shape Reconstruction from a Single RGB Image through Diffusion (readpaper.com)</a></p>
+<h2 id="GAN"><a href="#GAN" class="headerlink" title="GAN"></a>GAN</h2><h3 id="3DHumanGAN"><a href="#3DHumanGAN" class="headerlink" title="3DHumanGAN"></a>3DHumanGAN</h3><p><a target="_blank" rel="noopener" href="https://3dhumangan.github.io/">3DHumanGAN: 3D-Aware Human Image Generation with 3D Pose Mapping</a></p>
+<p>多视图一致的人体照片生成</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231122161513.png" alt="image.png|666"></p>
+<h3 id="SE-MD"><a href="#SE-MD" class="headerlink" title="SE-MD"></a>SE-MD</h3><p><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4546363961368010753&amp;noteId=2015501024673795072">SE-MD: A Single-encoder multiple-decoder deep network for point cloud generation from 2D images. (readpaper.com)</a><br>单编码器—&gt;多解码器<br>每个解码器生成某些固定视点，然后融合所有视点来生成密集的点云</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231022105308.png" alt="image.png|666"></p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231031152551.png" alt="image.png|666"></p>
+<h3 id="FlowGAN"><a href="#FlowGAN" class="headerlink" title="FlowGAN"></a>FlowGAN</h3><p><a href="FlowGAN.md">FlowGAN论文阅读笔记</a><br><a target="_blank" rel="noopener" href="https://bmvc2022.mpi-inf.mpg.de/569/">Flow-based GAN for 3D Point Cloud Generation from a Single Image (mpg.de)</a><br><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4677468038203719681&amp;noteId=2011515461854903552">Flow-based GAN for 3D Point Cloud Generation from a Single Image (readpaper.com)</a></p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231019162233.png" alt="image.png|555"></p>
+<h3 id="SG-GAN"><a href="#SG-GAN" class="headerlink" title="SG-GAN"></a>SG-GAN</h3><p><a href="SG-GAN.md">SG-GAN论文阅读笔记</a><br><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4762223320204574721&amp;noteId=2014610279544785920">SG-GAN: Fine Stereoscopic-Aware Generation for 3D Brain Point Cloud Up-sampling from a Single Image (readpaper.com)</a></p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231021193539.png" alt="image.png|666"></p>
+<h3 id="3D-Brain-Reconstruction-and-Complete"><a href="#3D-Brain-Reconstruction-and-Complete" class="headerlink" title="3D Brain Reconstruction and Complete"></a>3D Brain Reconstruction and Complete</h3><p><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4552080679232348161&amp;noteId=2015496104888593408">3D Brain Reconstruction by Hierarchical Shape-Perception Network from a Single Incomplete Image. (readpaper.com)</a></p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231022101838.png" alt="image.png|666"></p>
+<h3 id="Deep3DSketch"><a href="#Deep3DSketch" class="headerlink" title="Deep3DSketch+"></a>Deep3DSketch+</h3><p><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4803935841323843585&amp;noteId=2028490687877420544">Deep3DSketch+: Rapid 3D Modeling from Single Free-Hand Sketches (readpaper.com)</a></p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231031092339.png" alt="image.png|666"></p>
+<h3 id="Reality3DSketch"><a href="#Reality3DSketch" class="headerlink" title="Reality3DSketch"></a>Reality3DSketch</h3><p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2310.18148">[2310.18148] Reality3DSketch: Rapid 3D Modeling of Objects from Single Freehand Sketches (arxiv.Org)</a></p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231031092703.png" alt="image.png|666"></p>
+<h3 id="Deep3DSketch-1"><a href="#Deep3DSketch-1" class="headerlink" title="Deep3DSketch+\+"></a>Deep3DSketch+\+</h3><p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2310.18178">[2310.18178] Deep3DSketch++: High-Fidelity 3D Modeling from Single Free-hand Sketches (arxiv.Org)</a></p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231031093421.png" alt="image.png|666"></p>
+<h3 id="GET3D"><a href="#GET3D" class="headerlink" title="GET3D"></a>GET3D</h3><p><a target="_blank" rel="noopener" href="https://github.com/nv-tlabs/GET3D">nv-tlabs/GET3D (github.com)</a><br><a target="_blank" rel="noopener" href="https://nv-tlabs.github.io/GET3D/">GET3D: A Generative Model of High Quality 3D Textured Shapes Learned from Images (nv-tlabs.github.io)</a></p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023154445.png" alt="image.png|666"></p>
+<h3 id="AG3D"><a href="#AG3D" class="headerlink" title="AG3D"></a>AG3D</h3><p><a target="_blank" rel="noopener" href="https://zj-dong.github.io/AG3D/">AG3D: Learning to Generate 3D Avatars from 2D Image Collections (zj-dong.github.io)</a></p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023160511.png" alt="image.png|666"></p>
+<h2 id="NFs-Normalizing-Flows"><a href="#NFs-Normalizing-Flows" class="headerlink" title="NFs (Normalizing Flows)"></a>NFs (Normalizing Flows)</h2><h3 id="PointFlow"><a href="#PointFlow" class="headerlink" title="PointFlow"></a>PointFlow</h3><p><a target="_blank" rel="noopener" href="https://github.com/stevenygd/PointFlow?tab=readme-ov-file">stevenygd/PointFlow: PointFlow : 3D Point Cloud Generation with Continuous Normalizing Flows (github.com)</a><br><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4500221890681004033&amp;noteId=2011462053836873984">PointFlow: 3D Point Cloud Generation with Continuous Normalizing Flows (readpaper.com)</a></p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231019154043.png" alt="image.png|666"></p>
+<h2 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h2><h3 id="Automatic-Reverse-Engineering"><a href="#Automatic-Reverse-Engineering" class="headerlink" title="Automatic Reverse Engineering"></a>Automatic Reverse Engineering</h3><p><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4804297472033685505&amp;noteId=2014396749893884416">Automatic Reverse Engineering: Creating computer-aided design (CAD) models from multi-view images (readpaper.com)</a></p>
+<p>多视图图像生成 CAD 命令序列<br>局限性：</p>
+<ul>
+<li>CAD 序列的长度仍然局限于 60 个命令，因此只支持相对简单的对象</li>
+<li>表示仅限于平面和圆柱表面，而许多现实世界的对象可能包括更灵活的三角形网格或样条表示</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231021160431.png" alt="image.png|666"></p>
+<h3 id="SimIPU"><a href="#SimIPU" class="headerlink" title="SimIPU"></a>SimIPU</h3><p><a target="_blank" rel="noopener" href="https://github.com/zhyever/SimIPU">zhyever/SimIPU: [AAAI 2021] Official Implementation of “SimIPU: Simple 2D Image and 3D Point Cloud Unsupervised Pre-Training for Spatial-Aware Visual Representations” (github. Com)</a></p>
+<p>雷达点云+图片<br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231022103332.png" alt="image.png|666"></p>
+<h3 id="3DRIMR"><a href="#3DRIMR" class="headerlink" title="3DRIMR"></a>3DRIMR</h3><p><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4542232848617857025&amp;noteId=2015491146701999104">3DRIMR: 3D Reconstruction and Imaging via mmWave Radar based on Deep Learning. (readpaper.com)</a><br>MmWave Radar + GAN<br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231022102437.png" alt="image.png|666"></p>
+<h3 id="TransHuman"><a href="#TransHuman" class="headerlink" title="TransHuman"></a>TransHuman</h3><p><a href="TransHuman.md">TransHuman论文阅读笔记</a><br><a target="_blank" rel="noopener" href="https://pansanity666.github.io/TransHuman/">TransHuman: A Transformer-based Human Representation for Generalizable Neural Human Rendering (pansanity666.github.io)</a></p>
+<p>ImplicitFunction(NeRF)<br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231022103225.png" alt="image.png|666"></p>
+<h3 id="Nvdiffrec"><a href="#Nvdiffrec" class="headerlink" title="Nvdiffrec"></a>Nvdiffrec</h3><p>网格优化比 mlp 优化难，速度慢 from NeRF wechat</p>
+<ul>
+<li>还有一个 nvdiffrcmc，效果可能好一些 Shape, Light, and Material Decomposition from Images using Monte Carlo Rendering and Denoising</li>
+<li>后续还有个 NeuManifold: Neural Watertight Manifold Reconstruction with Efficient and High-Quality Rendering Support，应该比 nvdiffrec 要好</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://github.com/NVlabs/nvdiffrec">NVlabs/nvdiffrec: Official code for the CVPR 2022 (oral) paper “Extracting Triangular 3D Models, Materials, and Lighting From Images”. (github.com)</a></p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023154513.png" alt="image.png|666"></p>
+<h3 id="HyperHuman"><a href="#HyperHuman" class="headerlink" title="HyperHuman"></a>HyperHuman</h3><p>高质量人类图片<br><a target="_blank" rel="noopener" href="https://snap-research.github.io/HyperHuman/">HyperHuman: Hyper-Realistic Human Generation with Latent Structural Diffusion (snap-research.github.io)</a></p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023155025.png" alt="image.png|666"></p>
+<h3 id="SyncDreamer"><a href="#SyncDreamer" class="headerlink" title="SyncDreamer"></a>SyncDreamer</h3><p><a target="_blank" rel="noopener" href="https://liuyuan-pal.github.io/SyncDreamer/">SyncDreamer: Generating Multiview-consistent Images from a Single-view Image (liuyuan-pal.github.io)</a></p>
+<p>多视图一致的图片生成<br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023165400.png" alt="image.png|666"></p>
+<h3 id="One-2-3-45"><a href="#One-2-3-45" class="headerlink" title="One-2-3-45"></a>One-2-3-45</h3><p><a target="_blank" rel="noopener" href="https://one-2-3-45.github.io/">One-2-3-45</a></p>
+<p>MVS+NeRF<br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023165804.png" alt="image.png|666"></p>
+<h3 id="One-2-3-45-1"><a href="#One-2-3-45-1" class="headerlink" title="One-2-3-45++"></a>One-2-3-45++</h3><p><a target="_blank" rel="noopener" href="https://sudo-ai-3d.github.io/One2345plus_page/">One-2-3-45++ (sudo-ai-3d.github.io)</a></p>
+<p>==提供了一个可以图片生成3D 资产的 demo== <a target="_blank" rel="noopener" href="https://www.sudo.ai/3dgen">sudoAI</a></p>
+<p>一致性图像生成 + CLIP + 3D Diffusion Model</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231117094931.png" alt="image.png|666"></p>
+<h3 id="Zero-1-to-3"><a href="#Zero-1-to-3" class="headerlink" title="Zero-1-to-3"></a>Zero-1-to-3</h3><p><a target="_blank" rel="noopener" href="https://zero123.cs.columbia.edu/">Zero-1-to-3: Zero-shot One Image to 3D Object (columbia.edu)</a></p>
+<p>多视图一致 Diffusion Model + NeRF</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023171814.png" alt="image.png|666"></p>
+<h3 id="Pix2pix3D"><a href="#Pix2pix3D" class="headerlink" title="Pix2pix3D"></a>Pix2pix3D</h3><p><a target="_blank" rel="noopener" href="http://www.cs.cmu.edu/~pix2pix3D/">pix2pix3D: 3D-aware Conditional Image Synthesis (cmu.edu)</a></p>
+<p>一致性图像生成+NeRF</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231105173051.png" alt="image.png|666"></p>
+<h3 id="Consistent4D"><a href="#Consistent4D" class="headerlink" title="Consistent4D"></a>Consistent4D</h3><p><a target="_blank" rel="noopener" href="https://consistent4d.github.io/">Consistent4D (consistent4d.github.io)</a></p>
+<p>单目视频生成 4D 动态物体，Diffusion Model 生成多视图(时空)一致性的图像<br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231107192857.png" alt="image.png|666"></p>
+<h3 id="ConRad"><a href="#ConRad" class="headerlink" title="ConRad"></a>ConRad</h3><p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2311.05230.pdf">ConRad: Image Constrained Radiance Fields for 3D Generation from a Single Image</a><br><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=2043334481936337152&amp;noteId=2043393675895077376">ConRad: Image Constrained Radiance Fields for 3D Generation from a Single Image (readpaper.com)</a></p>
+<p>多视图一致<br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231110160631.png" alt="image.png|666"></p>
+<h3 id="LRM"><a href="#LRM" class="headerlink" title="LRM"></a>LRM</h3><p><a target="_blank" rel="noopener" href="https://scalei3d.github.io/LRM/">LRM: Large Reconstruction Model for Single Image to 3D (scalei3d.github.io)</a></p>
+<p>大模型 Transformer(5 亿个可学习参数) + 5s 单视图生成 3D</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231110162856.png" alt="image.png|666"></p>
+<h3 id="Instant3D"><a href="#Instant3D" class="headerlink" title="Instant3D"></a>Instant3D</h3><p><a target="_blank" rel="noopener" href="https://ming1993li.github.io/Instant3DProj/">Instant3D: Instant Text-to-3D Generation (ming1993li.github.io)</a></p>
+<p>文本生成 3D<br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231116154716.png" alt="image.png|666"></p>
+<h3 id="LucidDreamer"><a href="#LucidDreamer" class="headerlink" title="LucidDreamer"></a>LucidDreamer</h3><p><a target="_blank" rel="noopener" href="https://github.com/EnVision-Research/LucidDreamer">EnVision-Research/LucidDreamer: Official implementation of “LucidDreamer: Towards High-Fidelity Text-to-3D Generation via Interval Score Matching” (github.com)</a></p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231122201401.png" alt="image.png|666"></p>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+1ZnNxFWnEbk5YzRl">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Diffusion/" rel="tag"><i class="fa fa-tag"></i> Diffusion</a>
+              <a href="/tags/GAN/" rel="tag"><i class="fa fa-tag"></i> GAN</a>
+              <a href="/tags/Flow/" rel="tag"><i class="fa fa-tag"></i> Flow</a>
+              <a href="/tags/Review/" rel="tag"><i class="fa fa-tag"></i> Review</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/3DReconstruction/Basic%20Knowledge/Multi-view%203D%20Reconstruction/" rel="prev" title="Multi-view 3D Reconstruction">
+      <i class="fa fa-chevron-left"></i> Multi-view 3D Reconstruction
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/3DReconstruction/Multi-view/PointCloud/PointCloud%20Review/" rel="next" title="PointCloud Review">
+      PointCloud Review <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Review"><span class="nav-text">Review</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Generative-approach-Img2PC"><span class="nav-text">Generative approach(Img2PC)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Network-Framework"><span class="nav-text">Network Framework</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Loss"><span class="nav-text">Loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Diffusion-Models"><span class="nav-text">Diffusion Models</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DMV3D"><span class="nav-text">DMV3D</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DiffuStereo"><span class="nav-text">DiffuStereo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Human-as-Points-HaP"><span class="nav-text">Human as Points(HaP)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HumanNorm"><span class="nav-text">HumanNorm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BuilDiff"><span class="nav-text">BuilDiff</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RODIN"><span class="nav-text">RODIN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Single-Image-3D-Human-Digitization-with-Shape-Guided-Diffusion"><span class="nav-text">Single-Image 3D Human Digitization with Shape-Guided Diffusion</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CCD-3DR"><span class="nav-text">CCD-3DR</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PC-2"><span class="nav-text">PC^2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DiT-3D"><span class="nav-text">DiT-3D</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Make-It-3D"><span class="nav-text">Make-It-3D</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DreamGaussian"><span class="nav-text">DreamGaussian</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Wonder3D"><span class="nav-text">Wonder3D</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CLIP"><span class="nav-text">CLIP</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GenNeRF"><span class="nav-text">GenNeRF</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LDM3D-VR"><span class="nav-text">LDM3D-VR</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Control3D"><span class="nav-text">Control3D</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Etc"><span class="nav-text">Etc</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GAN"><span class="nav-text">GAN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3DHumanGAN"><span class="nav-text">3DHumanGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SE-MD"><span class="nav-text">SE-MD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FlowGAN"><span class="nav-text">FlowGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SG-GAN"><span class="nav-text">SG-GAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3D-Brain-Reconstruction-and-Complete"><span class="nav-text">3D Brain Reconstruction and Complete</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deep3DSketch"><span class="nav-text">Deep3DSketch+</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reality3DSketch"><span class="nav-text">Reality3DSketch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deep3DSketch-1"><span class="nav-text">Deep3DSketch+\+</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GET3D"><span class="nav-text">GET3D</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AG3D"><span class="nav-text">AG3D</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NFs-Normalizing-Flows"><span class="nav-text">NFs (Normalizing Flows)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PointFlow"><span class="nav-text">PointFlow</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Other"><span class="nav-text">Other</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Automatic-Reverse-Engineering"><span class="nav-text">Automatic Reverse Engineering</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SimIPU"><span class="nav-text">SimIPU</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3DRIMR"><span class="nav-text">3DRIMR</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TransHuman"><span class="nav-text">TransHuman</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nvdiffrec"><span class="nav-text">Nvdiffrec</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HyperHuman"><span class="nav-text">HyperHuman</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SyncDreamer"><span class="nav-text">SyncDreamer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#One-2-3-45"><span class="nav-text">One-2-3-45</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#One-2-3-45-1"><span class="nav-text">One-2-3-45++</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Zero-1-to-3"><span class="nav-text">Zero-1-to-3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pix2pix3D"><span class="nav-text">Pix2pix3D</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Consistent4D"><span class="nav-text">Consistent4D</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ConRad"><span class="nav-text">ConRad</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LRM"><span class="nav-text">LRM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Instant3D"><span class="nav-text">Instant3D</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LucidDreamer"><span class="nav-text">LucidDreamer</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qi Yun"
+      src="/images/avatar.jpeg">
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">117</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/qiyun71" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;qiyun71" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/29010355" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;29010355" rel="noopener" target="_blank"><i class="fa fa-star fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qi Yun</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">438k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">26:33</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/yqq/anime.min.js"></script>
+  <script src="/yqq/velocity/velocity.min.js"></script>
+  <script src="/yqq/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

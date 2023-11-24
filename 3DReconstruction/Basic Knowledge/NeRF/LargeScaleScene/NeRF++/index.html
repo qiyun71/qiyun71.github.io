@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/yqq/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Title NeRF++: Analyzing and Improving Neural Radiance Fields     Author Kai Zhang, Gernot Riegler, Noah Snavely, Vladlen Koltun   Conf&#x2F;Jour arXiv: Computer Vision and Pattern Recognition   Year 20">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NeRF++">
+<meta property="og:url" content="http://example.com/3DReconstruction/Basic%20Knowledge/NeRF/LargeScaleScene/NeRF++/index.html">
+<meta property="og:site_name" content="YunQi">
+<meta property="og:description" content="Title NeRF++: Analyzing and Improving Neural Radiance Fields     Author Kai Zhang, Gernot Riegler, Noah Snavely, Vladlen Koltun   Conf&#x2F;Jour arXiv: Computer Vision and Pattern Recognition   Year 20">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230718165249.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230718155708.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230718163229.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230718164536.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230718164556.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230718164906.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230718165249.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230718192632.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230719125758.png">
+<meta property="article:published_time" content="2023-07-18T07:46:05.000Z">
+<meta property="article:modified_time" content="2023-11-24T08:02:42.549Z">
+<meta property="article:author" content="Qi Yun">
+<meta property="article:tag" content="NeRF">
+<meta property="article:tag" content="LargeScaleScene">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230718165249.png">
+
+<link rel="canonical" href="http://example.com/3DReconstruction/Basic%20Knowledge/NeRF/LargeScaleScene/NeRF++/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>NeRF++ | YunQi</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">YunQi</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Note</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/3DReconstruction/Basic%20Knowledge/NeRF/LargeScaleScene/NeRF++/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YunQi">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          NeRF++
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-07-18 15:46:05" itemprop="dateCreated datePublished" datetime="2023-07-18T15:46:05+08:00">2023-07-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-11-24 16:02:42" itemprop="dateModified" datetime="2023-11-24T16:02:42+08:00">2023-11-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/3DReconstruction-Basic-Knowledge-NeRF-LargeScaleScene/" itemprop="url" rel="index"><span itemprop="name">3DReconstruction/Basic Knowledge/NeRF/LargeScaleScene</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>2.3k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>9 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Title</th>
+<th>NeRF++: Analyzing and Improving Neural Radiance Fields</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Author</td>
+<td>Kai Zhang, Gernot Riegler, Noah Snavely, Vladlen Koltun</td>
+</tr>
+<tr>
+<td>Conf/Jour</td>
+<td>arXiv: Computer Vision and Pattern Recognition</td>
+</tr>
+<tr>
+<td>Year</td>
+<td>2020</td>
+</tr>
+<tr>
+<td>Project</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/Kai-46/nerfplusplus">Kai-46/nerfplusplus: improves over nerf in 360 capture of unbounded scenes (github.com)</a></td>
+</tr>
+<tr>
+<td>Paper</td>
+<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4498415698728083457&amp;noteId=1798375069007427072">NeRF++: Analyzing and Improving Neural Radiance Fields. (readpaper.com)</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230718165249.png" alt="image.png"></p>
+<p>创新：一种前背景分离的方法<br>挑战：</p>
+<ul>
+<li>First, the training and testing of NeRF and NeRF++ on a single large-scale scene is quite <strong>time-consuming and memory-intensive</strong> —&gt; NGP解决了耗时</li>
+<li>Second, <strong>small camera calibration errors</strong> may impede阻碍 photorealistic synthesis. Robust loss functions, such as the contextual loss (Mechrez et al., 2018), could be applied.</li>
+<li>Third, photometric effects such as <strong>auto-exposure and vignetting渐晕</strong> can also be taken into account to increase image fidelity. This line of investigation is related to the lighting changes addressed in the orthogonal work of Martin-Brualla et al. (2020).</li>
+</ul>
+<span id="more"></span>
+<h1 id="AIR"><a href="#AIR" class="headerlink" title="AIR"></a>AIR</h1><p>We first remark on radiance fields and their potential ambiguities, namely <strong>the shape-radiance ambiguity</strong>, and analyze NeRF’s success in avoiding such ambiguities. Second, we <strong>address a parametrization issue</strong> involved in applying NeRF to 360◦ captures of objects within large-scale, unbounded 3D scenes</p>
+<ul>
+<li>inverted sphere parameterization<br>In this technical report, we first <strong>present an analysis of potential failure modes</strong> in NeRF, and an analysis of why NeRF avoids these failure modes in practice. Second, we present <strong>a novel spatial parameterization scheme</strong> that we call <strong>inverted sphere parameterization</strong> that allows NeRF to work on a new class of captures of unbounded scenes.</li>
+</ul>
+<p>Why NeRF success:  利用了亮度与观察方向相关的不对称MLP解决了shape-radiance ambiguity<br>In particular, we find that in theory, optimizing the 5D function from a set of training images can <strong>encounter critical degenerate solutions</strong> that fail to generalize to novel test views, in the absence of any regularization. Such phenomena are encapsulated封装 in the shape-radiance ambiguity (Figure 1, left), wherein one can fit a set of training images perfectly for an arbitrary incorrect geometry by a suitable choice of outgoing 2D radiance at each surface point. We empirically show that <strong>the specific MLP structure used in NeRF plays an important role in avoiding such ambiguities,</strong> yielding an impressive ability to synthesize novel views. Our analysis offers a new view into NeRF’s impressive success.</p>
+<p>a spatial parameterization issue: 对于360度拍摄的图片，可以有两种参数化的方法</p>
+<ul>
+<li>对整个空间参数化，前背景融合进行建模，但由于分辨率有限而缺乏细节</li>
+<li>只对前景物体即整个场景中的一个bound进行采样，这样会丢失掉背景元素</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230718155708.png" alt="image.png"></p>
+<ul>
+<li>Shape-radiance ambiguity (left) and parameterization of unbounded scenes (right). <ul>
+<li>Shaperadiance ambiguity: our theoretical analysis shows that, in the absence of explicit or implicit regularization, a set of training images can be fit independently of the recovered geometry (e.g., for incorrect scene geometry $\hat S$ rather than correct geometry $S^{∗}$) by exploiting view-dependent radiance to simulate the effect of the correct geometry. </li>
+<li>Parameterization of unbounded scenes:with standard parameterization schemes, either (1) only a portion of the scene is modeled (red outline), leading to significant artifacts in background elements, or (2) the full scene is modeled (orange outline), which leads to an overall loss of details due to finite sampling resolution</li>
+</ul>
+</li>
+</ul>
+<p>In summary, we present an analysis on how NeRF manages to resolve the shape-radiance ambiguity, as well as a remedy for the parameterization of unbounded scenes in the case of 360◦ captures.</p>
+<p>PRELIMINARIES: NeRF</p>
+<h1 id="SHAPE-RADIANCE-AMBIGUITY"><a href="#SHAPE-RADIANCE-AMBIGUITY" class="headerlink" title="SHAPE-RADIANCE AMBIGUITY"></a>SHAPE-RADIANCE AMBIGUITY</h1><p>The capacity of NeRF to model view-dependent appearance leads to <strong>an inherent ambiguity between 3D shape and radiance</strong> that can admit degenerate solutions, in the absence of regularization. For an arbitrary, incorrect shape, one can show that there exists a family of radiance fields that perfectly explains the training images, but that generalizes poorly to novel test views.</p>
+<ul>
+<li>对于一个特定的场景，可以找到一组辐射场，完美解释训练图像，但在测试视图上的泛化性很差<ul>
+<li>根据训练集训练出来的radiance field 可以看成一个球，形状与真实物体完全不同，但是在训练view上渲染出来的图像却与真实的图片相差很小，当改变很小的view时即使用一个不同于训练集的view时，图片发生很大的变化</li>
+</ul>
+</li>
+<li>对于一个简单的几何物体，需要很复杂的radiance field来进行表示。ref : <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/458166170">NeRF++论文部分解读 为何NeRF如此强大？ - 知乎 (zhihu.com)</a><ul>
+<li>想一想这个问题，NeRF会把一个镜子重建成一个平面还是一个有深度的几何（类似镜像的世界）？答案是会重建出几何，而不是一个镜子平面</li>
+</ul>
+</li>
+</ul>
+<p>将单位圆的opacity设置为1，其他设置为0，在训练集上训练得出的结果：<br><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230718163229.png" alt="image.png"></p>
+<p>Why does NeRF avoid such degenerate solutions? We hypothesize that two related factors come to NeRF’s rescue:<br>1) incorrect geometry forces the radiance field to have higher intrinsic complexity (i.e., much higher frequencies) while in contrast<br>2) NeRF’s specific MLP structure implicitly encodes a smooth BRDF prior on surface reflectance.</p>
+<ul>
+<li>As σ deviates from the correct shape, c must in general become a high-frequency function with respect to d to reconstruct the input images. For the correct shape, the surface light field will generally be much smoother (in fact, constant for Lambertian materials). The higher complexity required for incorrect shapes is more difficult to represent with a limited capacity MLP.<ul>
+<li>incorrect shape —&gt; complex c(surface light field)</li>
+<li>correct shape —&gt; smoother surface light field</li>
+</ul>
+</li>
+<li>In particular, NeRF’s specific MLP structure encodes an implicit prior favoring smooth surface reflectance functions where c is smooth with respect to d at any given surface point x. This MLP structure, shown in Figure 3, treats the scene position x and the viewing direction d asymmetrically不对称的: d is injected into the network close to the end of the MLP, meaning that there are fewer MLP parameters, as well as fewer non-linear activations, involved in the creation of view-dependent effects. In addition, the Fourier features used to encode the viewing direction consist only of low-frequency components, i.e，对于位置x，频率编码为$\gamma^{10}(\cdot)$, 而对于方向d，频率编码仅有$\gamma^{4}(\cdot)$。In other words, for a fixed x, the radiance c(x, d) has limited expressivity with respect to d.<ul>
+<li>NeRF的MLP采用了不对称结构，方向d在MLP中只有少量的参数</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230718164536.png" alt="image.png"></p>
+<p>验证实验：</p>
+<ul>
+<li>NeRF MLP</li>
+<li>vanilla MLP : 对x和d 都进行$\gamma^{10}(\cdot)$编码，并同时输入进MLP网络</li>
+</ul>
+<p>This result is consistent with our hypothesis that <strong>implicit regularization of reflectance</strong> in NeRF’s MLP model of radiance c <strong>helps recover correct solutions</strong></p>
+<p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230718164556.png" alt="image.png"></p>
+<h1 id="INVERTED-SPHERE-PARAMETRIZATION"><a href="#INVERTED-SPHERE-PARAMETRIZATION" class="headerlink" title="INVERTED SPHERE PARAMETRIZATION"></a>INVERTED SPHERE PARAMETRIZATION</h1><p>NeRF的NDC操作虽然解决了无限远的问题，但是对360度环绕拍摄的场景无法很好的处理远处背景</p>
+<ul>
+<li>如果bound前景物体，对背景的重建效果很差</li>
+<li>如果bound整个场景，对物体的重建效果就会下降</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230718164906.png" alt="image.png"></p>
+<p>将整个场景分成两个部分<br>partition the scene space into two volumes</p>
+<ul>
+<li>an inner unit sphere前景：处于一个单位圆中<ul>
+<li>The inner volume contains the foreground and all the cameras, while the outer volume contains the remainder of the environment.</li>
+</ul>
+</li>
+<li>an outer volume represented by an inverted sphere covering the complement of the inner volume 背景：位置坐标由一个四维的向量表示，inverted sphere parameterization<ul>
+<li>the outer volume contains the remainder of the environment.</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230718165249.png" alt="image.png"></p>
+<p>These two volumes are modelled with two separate NeRFs. To render the color for a ray, they are raycast individually, followed by a final compositition. </p>
+<ul>
+<li>No re-parameterization is needed for the inner NeRF, as that part of the scene is nicely bounded. </li>
+<li>For the outer NeRF, we apply an <strong>inverted sphere parametrization.</strong> </li>
+</ul>
+<p>内部：(x, y, z)<br>外部：(x, y, z)需要参数化为$(x’,y’,z’,1/r)$ ，其中$x’^{2}+ y’^{2}+z’^{2}= 1$ ，(x’,y’,z’)，为与(x,y,z)同一条光线的单位方向向量，representing a direction on the sphere.</p>
+<ul>
+<li>$r = \sqrt{x^2+y^2+z^2}&gt;1$，所以 0 &lt; 1/r &lt; 1</li>
+<li>i.e. 该点的坐标为 $r \cdot (x’,y’,z’) = (x,y,z)$</li>
+<li>重参数化后的参数都是有界的，0 &lt; 1/r &lt; 1，$x’,y’,z’ \in [-1,1]$</li>
+</ul>
+<p>在光线$ray = o + td$中，相当于t被单位球分为两部分：</p>
+<ul>
+<li>inside: $t \in [0,t’]$</li>
+<li>outside: $t \in [t’,\infty]$</li>
+</ul>
+<script type="math/tex; mode=display">\begin{aligned}
+\mathbf{C}(\mathbf{r})& =\underbrace{\int_{t=0}^{t^{\prime}}\sigma(\mathbf{o}+t\mathbf{d})\cdot\mathbf{c}(\mathbf{o}+t\mathbf{d},\mathbf{d})\cdot e^{-\int_{s=0}^{t}\sigma(\mathbf{o}+s\mathbf{d})ds}dt}_{\mathrm{(i)}}  \\
+&+\underbrace{e^{-\int_{s=0}^{t^{\prime}}\sigma(\mathbf{o}+s\mathbf{d})ds}}_{\mathrm{(ii)}}\cdot\underbrace{\int_{t=t^{\prime}}^{\infty}\sigma(\mathbf{o}+t\mathbf{d})\cdot\mathbf{c}(\mathbf{o}+t\mathbf{d},\mathbf{d})\cdot e^{-\int_{s=t^{\prime}}^{t}\sigma(\mathbf{o}+s\mathbf{d})ds}_{\mathrm{(iii)}}dt.}
+\end{aligned}</script><p>Terms (i) and (ii) are computed in Euclidean space, while term (iii) is computed in inverted sphere space with 1r as the integration variable.<br>In other words, we use $σ_{in}(o + td)$, $c_{in} (o + td, d)$ in terms (i) and (ii), and $σ_{out}(x′, y′, z′, 1/r)$, $c_{out} (x′, y′, z′, 1/r, d)$ in term (iii)</p>
+<p>In order to compute term (iii) for the ray $r = o + td$, we first need to be able to evaluate $σ_{out}$ , $c_{out}$ at any 1/r; in other words, we need a way to compute (x′, y′, z′) corresponding to a given 1/r, so that $σ_{out}$, $c_{out}$ can take (x′, y′, z′, 1/r) as input..</p>
+<div class="note success">
+            <p><a target="_blank" rel="noopener" href="https://github.com/Kai-46/nerfplusplus/issues/19">about inverted sphere parameterization · Issue #19 · Kai-46/nerfplusplus (github.com)</a><br>为什么不直接用xyz除以r得到x’y’z’:</p><ul><li>xyz有时太大，数值误差</li><li>在代码中，计算xyz需要使用o和d，一般xyz是未知的，而r很好求得，因此使用这种方法<ul><li><code>bg_depth = torch.linspace(0., 1., N_samples).view([1, ] * len(dots_sh) + [N_samples,]).expand(dots_sh + [N_samples,]).to(rank)</code></li><li>bg_depth 即 1/r</li></ul></li></ul>
+          </div>
+<p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230718192632.png" alt="image.png"><br>(x’,y’,z’)可由a和$\omega$得到<br>由$a = o + t_{a}d$得到$t_{a}$，a的位置</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">由： ||o+td|| = 1</span></span><br><span class="line"><span class="string">||d||^2*t^2 + 2*(o.d)*t + ||o||^2-1 = 0</span></span><br><span class="line"><span class="string">因此求ta的代码：</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">intersect_sphere</span>(<span class="params">rays_o, rays_d</span>):</span><br><span class="line">    odotd = torch.<span class="built_in">sum</span>(rays_o*rays_d, <span class="number">1</span>)</span><br><span class="line">    d_norm_sq = torch.<span class="built_in">sum</span>(rays_d**<span class="number">2</span>, <span class="number">1</span>)</span><br><span class="line">    o_norm_sq = torch.<span class="built_in">sum</span>(rays_o**<span class="number">2</span>, <span class="number">1</span>)</span><br><span class="line">    determinant = odotd**<span class="number">2</span>+(<span class="number">1</span>-o_norm_sq)*d_norm_sq</span><br><span class="line">    <span class="keyword">assert</span> torch.<span class="built_in">all</span>(determinant&gt;=<span class="number">0</span>), \</span><br><span class="line">        <span class="string">&#x27;Not all your cameras are bounded by the unit sphere; please make sure the cameras are normalized properly!&#x27;</span></span><br><span class="line">    <span class="keyword">return</span> (torch.sqrt(determinant)-odotd)/d_norm_sq</span><br></pre></td></tr></table></figure>
+<p>由$b = o + t_{b}d$得到b的位置，$\mathbf{d}^T(\mathbf{o}+t_b\mathbf{d})=0.$</p>
+<p>$\omega=\arcsin|\mathbf{b}|-\arcsin(|\mathbf{b}|\cdot\frac{1}{r}).$，根据a的位置和角度$\omega$即可求得x’y’z’<br>具体算法ref: <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%BD%97%E5%BE%B7%E9%87%8C%E6%A0%BC%E6%97%8B%E8%BD%AC%E5%85%AC%E5%BC%8F">罗德里格旋转公式 - 维基百科，自由的百科全书 (wikipedia.org)</a></p>
+<p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230719125758.png" alt="image.png|500"></p>
+<p>$\mathbf{v}_{\mathrm{rot}}=\mathbf{v}\cos\theta+(\mathbf{k}\times\mathbf{v})\sin\theta+\mathbf{k}(\mathbf{k}\cdot\mathbf{v})(1-\cos\theta).$</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">depth2pts_outside</span>(<span class="params">ray_o, ray_d, depth</span>):</span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">    ray_o, ray_d: [..., 3]</span></span><br><span class="line"><span class="string">    depth: [...]; inverse of distance to sphere origin</span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br><span class="line">    <span class="comment"># note: d1 becomes negative if this mid point is behind camera</span></span><br><span class="line">    d1 = -torch.<span class="built_in">sum</span>(ray_d * ray_o, dim=-<span class="number">1</span>) / torch.<span class="built_in">sum</span>(ray_d * ray_d, dim=-<span class="number">1</span>)</span><br><span class="line">    p_mid = ray_o + d1.unsqueeze(-<span class="number">1</span>) * ray_d</span><br><span class="line">    p_mid_norm = torch.norm(p_mid, dim=-<span class="number">1</span>)</span><br><span class="line">    ray_d_cos = <span class="number">1.</span> / torch.norm(ray_d, dim=-<span class="number">1</span>)</span><br><span class="line">    d2 = torch.sqrt(<span class="number">1.</span> - p_mid_norm * p_mid_norm) * ray_d_cos</span><br><span class="line">    p_sphere = ray_o + (d1 + d2).unsqueeze(-<span class="number">1</span>) * ray_d</span><br><span class="line"></span><br><span class="line">    rot_axis = torch.cross(ray_o, p_sphere, dim=-<span class="number">1</span>)</span><br><span class="line">    rot_axis = rot_axis / torch.norm(rot_axis, dim=-<span class="number">1</span>, keepdim=<span class="literal">True</span>)</span><br><span class="line">    phi = torch.asin(p_mid_norm)</span><br><span class="line">    theta = torch.asin(p_mid_norm * depth)  <span class="comment"># depth is inside [0, 1]</span></span><br><span class="line">    rot_angle = (phi - theta).unsqueeze(-<span class="number">1</span>)     <span class="comment"># [..., 1]</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># now rotate p_sphere</span></span><br><span class="line">    <span class="comment"># Rodrigues formula: https://en.wikipedia.org/wiki/Rodrigues%27_rotation_formula</span></span><br><span class="line">    p_sphere_new = p_sphere * torch.cos(rot_angle) + \</span><br><span class="line">                   torch.cross(rot_axis, p_sphere, dim=-<span class="number">1</span>) * torch.sin(rot_angle) + \</span><br><span class="line">                   rot_axis * torch.<span class="built_in">sum</span>(rot_axis*p_sphere, dim=-<span class="number">1</span>, keepdim=<span class="literal">True</span>) * (<span class="number">1.</span>-torch.cos(rot_angle))</span><br><span class="line">    p_sphere_new = p_sphere_new / torch.norm(p_sphere_new, dim=-<span class="number">1</span>, keepdim=<span class="literal">True</span>)</span><br><span class="line">    pts = torch.cat((p_sphere_new, depth.unsqueeze(-<span class="number">1</span>)), dim=-<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># now calculate conventional depth</span></span><br><span class="line">    depth_real = <span class="number">1.</span> / (depth + TINY_NUMBER) * torch.cos(theta) * ray_d_cos + d1</span><br><span class="line">    <span class="keyword">return</span> pts, depth_real</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+1ZnNxFWnEbk5YzRl">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/NeRF/" rel="tag"><i class="fa fa-tag"></i> NeRF</a>
+              <a href="/tags/LargeScaleScene/" rel="tag"><i class="fa fa-tag"></i> LargeScaleScene</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeuDA/" rel="prev" title="NeuDA">
+      <i class="fa fa-chevron-left"></i> NeuDA
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/3DReconstruction/Basic%20Knowledge/NeRF/NeRF/Encoding/" rel="next" title="Encoding">
+      Encoding <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#AIR"><span class="nav-text">AIR</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SHAPE-RADIANCE-AMBIGUITY"><span class="nav-text">SHAPE-RADIANCE AMBIGUITY</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#INVERTED-SPHERE-PARAMETRIZATION"><span class="nav-text">INVERTED SPHERE PARAMETRIZATION</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qi Yun"
+      src="/images/avatar.jpeg">
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">117</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/qiyun71" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;qiyun71" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/29010355" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;29010355" rel="noopener" target="_blank"><i class="fa fa-star fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qi Yun</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">438k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">26:33</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/yqq/anime.min.js"></script>
+  <script src="/yqq/velocity/velocity.min.js"></script>
+  <script src="/yqq/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

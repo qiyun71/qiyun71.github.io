@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/yqq/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Title Neuralangelo: High-Fidelity Neural Surface Reconstruction     Author Zhaoshuo LiThomas MüllerAlex EvansRussell H. TaylorMathias UnberathMing-Yu LiuChen-Hsuan Lin   Conf&#x2F;Jour IEEE Conference">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Neuralangelo">
+<meta property="og:url" content="http://example.com/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/Efficiency/Neuralangelo/index.html">
+<meta property="og:site_name" content="YunQi">
+<meta property="og:description" content="Title Neuralangelo: High-Fidelity Neural Surface Reconstruction     Author Zhaoshuo LiThomas MüllerAlex EvansRussell H. TaylorMathias UnberathMing-Yu LiuChen-Hsuan Lin   Conf&#x2F;Jour IEEE Conference">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230716140552.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231006095200.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230716140552.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230716140552.png">
+<meta property="article:published_time" content="2023-07-14T14:06:48.000Z">
+<meta property="article:modified_time" content="2023-11-24T06:43:14.725Z">
+<meta property="article:author" content="Qi Yun">
+<meta property="article:tag" content="SurfaceReconstruction">
+<meta property="article:tag" content="Neus">
+<meta property="article:tag" content="Efficiency">
+<meta property="article:tag" content="Encoding">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230716140552.png">
+
+<link rel="canonical" href="http://example.com/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/Efficiency/Neuralangelo/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Neuralangelo | YunQi</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">YunQi</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Note</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/Efficiency/Neuralangelo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YunQi">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Neuralangelo
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-07-14 22:06:48" itemprop="dateCreated datePublished" datetime="2023-07-14T22:06:48+08:00">2023-07-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-11-24 14:43:14" itemprop="dateModified" datetime="2023-11-24T14:43:14+08:00">2023-11-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/3DReconstruction-Multi-view-Implicit-Function-NeRF-based-Efficiency/" itemprop="url" rel="index"><span itemprop="name">3DReconstruction/Multi-view/Implicit Function/NeRF-based/Efficiency</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>3.9k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>14 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Title</th>
+<th>Neuralangelo: High-Fidelity Neural Surface Reconstruction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Author</td>
+<td><a target="_blank" rel="noopener" href="https://mli0603.github.io/">Zhaoshuo Li</a><a target="_blank" rel="noopener" href="https://tom94.net/">Thomas Müller</a><a target="_blank" rel="noopener" href="https://research.nvidia.com/person/alex-evans">Alex Evans</a><a target="_blank" rel="noopener" href="https://www.cs.jhu.edu/~rht/">Russell H. Taylor</a><a target="_blank" rel="noopener" href="https://mathiasunberath.github.io/">Mathias Unberath</a><a target="_blank" rel="noopener" href="https://mingyuliu.net/">Ming-Yu Liu</a><a target="_blank" rel="noopener" href="https://chenhsuanlin.bitbucket.io/">Chen-Hsuan Lin</a></td>
+</tr>
+<tr>
+<td>Conf/Jour</td>
+<td>IEEE Conference on Computer Vision and Pattern Recognition (CVPR)</td>
+</tr>
+<tr>
+<td>Year</td>
+<td>2023</td>
+</tr>
+<tr>
+<td>Project</td>
+<td><a target="_blank" rel="noopener" href="https://research.nvidia.com/labs/dir/neuralangelo/">Neuralangelo: High-Fidelity Neural Surface Reconstruction (nvidia.com)</a></td>
+</tr>
+<tr>
+<td>Paper</td>
+<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4766570421235482625&amp;noteId=1871247300347519744">Neuralangelo: High-Fidelity Neural Surface Reconstruction (readpaper.com)</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>创新：新的计算梯度的方法——数值梯度、粗到精地逐步优化——数值梯度的补偿$\epsilon$，粗网格先激活，当$\epsilon$减小到精网格的空间大小时，逐步激活精网格</strong><br>SR Issue: Current methods struggle to recover detailed structures of real-world scenes<br>To address : present Neuralangelo (combines the representation power of multi-resolution 3D hash grids with neural surface rendering)</p>
+<ul>
+<li>numerical gradients for computing higher-order derivatives as a smoothing operation<ul>
+<li><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230716140552.png" alt="image.png"></li>
+</ul>
+</li>
+<li>coarse-to-fine optimization on the hash grids controlling different levels of details<br>even wo auxiliary inputs such as depth , Neuralangelo can effectively recover dense 3D surface structures from multi-view images with fidelity 保真 significantly surpassing previous methods, enabling detailed large-scale scene reconstruction from RGB video captures.</li>
+</ul>
+<p><strong>our future work</strong> to explore a more efficient sampling strategy to accelerate the training process.</p>
+<span id="more"></span>
+<h1 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h1><h2 id="paper"><a href="#paper" class="headerlink" title="paper"></a>paper</h2><h3 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h3><ul>
+<li>DTU dataset</li>
+<li>Tanks and Temples datase</li>
+</ul>
+<h3 id="实现细节"><a href="#实现细节" class="headerlink" title="实现细节"></a>实现细节</h3><p>Our hash encoding <strong>resolution spans 25 to 211 with 16 levels</strong>. Each hash entry has a channel size of 8. The maximum number of hash entries of each resolution is 222.<br><strong>We activate 4 and 8 hash resolutions at the beginning of optimization for DTU dataset and Tanks and Temples respectively</strong>, due to differences in scene scales. <strong>We enable a new hash resolution every 5000 iterations when the step size ε equals its grid cell size.</strong> For all experiments, we do not utilize auxiliary data such as segmentation(mask) or depth during the optimization process.</p>
+<h3 id="Evaluation-criteria"><a href="#Evaluation-criteria" class="headerlink" title="Evaluation criteria."></a>Evaluation criteria.</h3><ul>
+<li>Chamfer distance and F1 score for surface evaluation<ul>
+<li><a target="_blank" rel="noopener" href="https://readpaper.com/paper/2085905957">Large Scale Multi-view Stereopsis Evaluation-论文阅读讨论-ReadPaper</a></li>
+<li><a target="_blank" rel="noopener" href="https://readpaper.com/paper/2738551266">Tanks and temples: benchmarking large-scale scene reconstruction-论文阅读讨论-ReadPaper</a><ul>
+<li>Chamfer 距离越小，表示预测分割与真实分割越接近</li>
+<li>F1 得分的取值范围在 0 和 1 之间，越接近 1 表示模型的性能越好</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>We use peak signal-tonoise ratio (PSNR) to report image synthesis qualities.</li>
+</ul>
+<h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><h2 id="数据集生成"><a href="#数据集生成" class="headerlink" title="数据集生成"></a>数据集生成</h2><p>colmap 数据生成</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DATA_PATH=datasets/<span class="variable">$&#123;SEQUENCE&#125;</span>_ds<span class="variable">$&#123;DOWNSAMPLE_RATE&#125;</span></span><br><span class="line">bash projects/neuralangelo/scripts/run_colmap.sh <span class="variable">$&#123;DATA_PATH&#125;</span></span><br></pre></td></tr></table></figure>
+<p>or</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">colmap gui Automatic reconstruction</span><br><span class="line">+</span><br><span class="line">BA: Bundle adjustment</span><br><span class="line">+</span><br><span class="line">Undistortion</span><br></pre></td></tr></table></figure>
+<p>最后数据集：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">DATA_PATH</span><br><span class="line">├─ database.db      (COLMAP database)</span><br><span class="line">├─ images           (undistorted input images)</span><br><span class="line">├─ images_raw       (raw input images)</span><br><span class="line">├─ sparse           (COLMAP data from SfM)</span><br><span class="line">│  ├─ cameras.bin   (camera parameters)</span><br><span class="line">│  ├─ images.bin    (images and camera poses)</span><br><span class="line">│  ├─ points3D.bin  (sparse point clouds)</span><br><span class="line">│  ├─ 0             (a directory containing individual SfM models. There could also be 1, 2... etc.)</span><br><span class="line">├─ run-colmap-geometric.sh 几何一致性稠密重建 example 脚本</span><br><span class="line">├─ run-colmap-photometric.sh 光度一致性稠密重建 example 脚本</span><br><span class="line">│  ...</span><br><span class="line">├─ stereo (COLMAP data for MVS, not used here)</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">&#123;DATA_PATH&#125;/transforms.json</span></span><br><span class="line">python3 projects/neuralangelo/scripts/convert_data_to_json.py --data_dir $&#123;DATA_PATH&#125; --scene_type $&#123;SCENE_TYPE&#125;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># eg:</span></span></span><br><span class="line">python projects/neuralangelo/scripts/convert_data_to_json.py --data_dir ./inputs/Miku --scene_type object</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Config files projects/neuralangelo/configs/custom/&#123;SEQUENCE&#125;.yaml</span></span><br><span class="line">python3 projects/neuralangelo/scripts/generate_config.py --sequence_name $&#123;SEQUENCE&#125; --data_dir $&#123;DATA_PATH&#125; --scene_type $&#123;SCENE_TYPE&#125;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># eg：</span></span></span><br><span class="line">python projects/neuralangelo/scripts/generate_config.py --sequence_name Miku --data_dir ./inputs/Miku --scene_type object</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>SCENE_TYPE</code>: can be one of  <code>&#123;outdoor,indoor,object&#125;</code>.</li>
+<li><code>SEQUENCE</code>: your custom name for the video sequence.</li>
+</ul>
+<h2 id="run"><a href="#run" class="headerlink" title="run"></a>run</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">EXPERIMENT=toy_example</span><br><span class="line">GROUP=example_group</span><br><span class="line">NAME=example_name</span><br><span class="line">CONFIG=projects/neuralangelo/configs/custom/<span class="variable">$&#123;EXPERIMENT&#125;</span>.yaml</span><br><span class="line">GPUS=1  <span class="comment"># use &gt;1 for multi-GPU training!</span></span><br><span class="line">torchrun --nproc_per_node=<span class="variable">$&#123;GPUS&#125;</span> train.py \</span><br><span class="line">    --logdir=logs/<span class="variable">$&#123;GROUP&#125;</span>/<span class="variable">$&#123;NAME&#125;</span> \</span><br><span class="line">    --config=<span class="variable">$&#123;CONFIG&#125;</span> \</span><br><span class="line">    --show_pbar</span><br><span class="line"></span><br><span class="line">eg:</span><br><span class="line">EXPERIMENT=Miku</span><br><span class="line">GROUP=dtu</span><br><span class="line">NAME=Miku</span><br><span class="line">CONFIG=projects/neuralangelo/configs/custom/<span class="variable">$&#123;EXPERIMENT&#125;</span>.yaml</span><br><span class="line">GPUS=1</span><br><span class="line">torchrun --nproc_per_node=<span class="variable">$&#123;GPUS&#125;</span> train.py --logdir=logs/<span class="variable">$&#123;GROUP&#125;</span>/<span class="variable">$&#123;NAME&#125;</span> --config=<span class="variable">$&#123;CONFIG&#125;</span> --show_pbar</span><br><span class="line">--data.readjust.scale=0.5 \</span><br><span class="line">--max_iter=20000 \</span><br><span class="line">--validation_iter=99999999 \</span><br><span class="line">--model.object.sdf.encoding.coarse2fine.step=200 \</span><br><span class="line">--model.object.sdf.encoding.hashgrid.dict_size=19 \</span><br><span class="line">--optim.sched.warm_up_end=200 \</span><br><span class="line">--optim.sched.two_steps=[12000,16000]</span><br><span class="line">--checkpoint <span class="variable">$&#123;CHECKPOINT&#125;</span> --resume</span><br><span class="line"></span><br><span class="line"><span class="comment"># shutdown after run</span></span><br><span class="line">&amp;&amp; /usr/bin/shutdown</span><br></pre></td></tr></table></figure>
+<h2 id="Isosurface-extraction"><a href="#Isosurface-extraction" class="headerlink" title="Isosurface extraction"></a>Isosurface extraction</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">CHECKPOINT=logs/<span class="variable">$&#123;GROUP&#125;</span>/<span class="variable">$&#123;NAME&#125;</span>/xxx.pt</span><br><span class="line">OUTPUT_MESH=xxx.ply</span><br><span class="line">CONFIG=logs/<span class="variable">$&#123;GROUP&#125;</span>/<span class="variable">$&#123;NAME&#125;</span>/config.yaml</span><br><span class="line">RESOLUTION=2048</span><br><span class="line">BLOCK_RES=128</span><br><span class="line">GPUS=1  <span class="comment"># use &gt;1 for multi-GPU mesh extraction</span></span><br><span class="line">torchrun --nproc_per_node=<span class="variable">$&#123;GPUS&#125;</span> projects/neuralangelo/scripts/extract_mesh.py \</span><br><span class="line">    --config=<span class="variable">$&#123;CONFIG&#125;</span> \</span><br><span class="line">    --checkpoint=<span class="variable">$&#123;CHECKPOINT&#125;</span> \</span><br><span class="line">    --output_file=<span class="variable">$&#123;OUTPUT_MESH&#125;</span> \</span><br><span class="line">    --resolution=<span class="variable">$&#123;RESOLUTION&#125;</span> \</span><br><span class="line">    --block_res=<span class="variable">$&#123;BLOCK_RES&#125;</span></span><br><span class="line"></span><br><span class="line">eg:</span><br><span class="line">CHECKPOINT=logs/<span class="variable">$&#123;GROUP&#125;</span>/<span class="variable">$&#123;NAME&#125;</span>/epoch_00224_iteration_000020000_checkpoint.pt</span><br><span class="line">OUTPUT_MESH=logs/<span class="variable">$&#123;GROUP&#125;</span>/<span class="variable">$&#123;NAME&#125;</span>/Miku.ply</span><br><span class="line">CONFIG=logs/<span class="variable">$&#123;GROUP&#125;</span>/<span class="variable">$&#123;NAME&#125;</span>/config.yaml</span><br><span class="line">RESOLUTION=2048</span><br><span class="line">BLOCK_RES=128</span><br><span class="line">GPUS=1</span><br><span class="line">torchrun --nproc_per_node=<span class="variable">$&#123;GPUS&#125;</span> projects/neuralangelo/scripts/extract_mesh.py --config=<span class="variable">$&#123;CONFIG&#125;</span> --checkpoint=<span class="variable">$&#123;CHECKPOINT&#125;</span> --output_file=<span class="variable">$&#123;OUTPUT_MESH&#125;</span> --resolution=<span class="variable">$&#123;RESOLUTION&#125;</span> --block_res=<span class="variable">$&#123;BLOCK_RES&#125;</span> --textured</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Add <code>--textured</code> to extract meshes with textures.</li>
+<li>Add <code>--keep_lcc</code> to remove noises. May also remove thin structures.</li>
+<li>Lower <code>BLOCK_RES</code> to reduce GPU memory usage.</li>
+<li>Lower <code>RESOLUTION</code> to reduce mesh size.</li>
+</ul>
+<h2 id="EXP"><a href="#EXP" class="headerlink" title="EXP"></a>EXP</h2><h3 id="exp1"><a href="#exp1" class="headerlink" title="exp1"></a>exp1</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># config gen</span></span><br><span class="line">python projects/neuralangelo/scripts/generate_config.py --sequence_name Miku_exp1 --data_dir ./inputs/Miku_exp1 --scene_type object</span><br><span class="line"></span><br><span class="line"><span class="comment"># train</span></span><br><span class="line">EXPERIMENT=Miku_exp1</span><br><span class="line">GROUP=exp</span><br><span class="line">NAME=Miku_exp1</span><br><span class="line">CONFIG=projects/neuralangelo/configs/custom/<span class="variable">$&#123;EXPERIMENT&#125;</span>.yaml</span><br><span class="line">GPUS=1</span><br><span class="line">torchrun --nproc_per_node=<span class="variable">$&#123;GPUS&#125;</span> train.py --logdir=logs/<span class="variable">$&#123;GROUP&#125;</span>/<span class="variable">$&#123;NAME&#125;</span> --config=<span class="variable">$&#123;CONFIG&#125;</span> --show_pbar --optim.sched.two_steps=[12000,16000]</span><br><span class="line"><span class="comment">## other optional</span></span><br><span class="line">--data.readjust.scale=0.5 --max_iter=20000</span><br><span class="line">--validation_iter=99999999 \</span><br><span class="line">--model.object.sdf.encoding.coarse2fine.step=200 \</span><br><span class="line">--model.object.sdf.encoding.hashgrid.dict_size=19 \</span><br><span class="line">--optim.sched.warm_up_end=200 \</span><br><span class="line">--optim.sched.two_steps=[12000,16000]</span><br><span class="line">--checkpoint <span class="variable">$&#123;CHECKPOINT&#125;</span> --resume</span><br><span class="line"></span><br><span class="line"><span class="comment"># extraction</span></span><br><span class="line">CHECKPOINT=logs/<span class="variable">$&#123;GROUP&#125;</span>/<span class="variable">$&#123;NAME&#125;</span>/epoch_01000_iteration_000020000_checkpoint.pt</span><br><span class="line">OUTPUT_MESH=logs/<span class="variable">$&#123;GROUP&#125;</span>/<span class="variable">$&#123;NAME&#125;</span>/Miku_exp1.ply</span><br><span class="line">CONFIG=logs/<span class="variable">$&#123;GROUP&#125;</span>/<span class="variable">$&#123;NAME&#125;</span>/config.yaml</span><br><span class="line">RESOLUTION=2048</span><br><span class="line">BLOCK_RES=128</span><br><span class="line">GPUS=1</span><br><span class="line">torchrun --nproc_per_node=<span class="variable">$&#123;GPUS&#125;</span> projects/neuralangelo/scripts/extract_mesh.py --config=<span class="variable">$&#123;CONFIG&#125;</span> --checkpoint=<span class="variable">$&#123;CHECKPOINT&#125;</span> --output_file=<span class="variable">$&#123;OUTPUT_MESH&#125;</span> --resolution=<span class="variable">$&#123;RESOLUTION&#125;</span> --block_res=<span class="variable">$&#123;BLOCK_RES&#125;</span> --textured</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231006095200.png" alt="image.png|666"></p>
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>We introduce Neuralangelo, an approach for photogrammetric neural surface reconstruction. The findings of Neuralangelo are simple yet effective: <strong>using numerical gradients for higher-order derivatives and a coarse-to-fine optimization strategy.</strong> Neuralangelo unlocks the representation power of multi-resolution hash encoding for neural surface reconstruction modeled as SDF. We show that Neuralangelo effectively <strong>recovers dense scene structures</strong> of both <strong>object-centric captures</strong> and <strong>large-scale indoor/outdoor scenes</strong> with extremely high fidelity, enabling detailed large-scale scene reconstruction from RGB videos. Our method currently samples pixels from images randomly without tracking their statistics and errors. <strong>Therefore, we use long training iterations to reduce the stochastics 随机指标 and ensure sufficient sampling of details</strong>. <strong>It is our future work to explore a more efficient sampling strategy to accelerate the training process.</strong></p>
+<h1 id="AIR"><a href="#AIR" class="headerlink" title="AIR"></a>AIR</h1><p>The recovered surfaces provide structural information useful for <strong>many downstream applications</strong>，eg：</p>
+<ul>
+<li>3D asset generation for augmented/virtual/mixed reality——AR/VR/MR 的 3D 资产生成</li>
+<li>environment mapping for autonomous navigation of robotics—— 机器人自主导航的环境映射</li>
+</ul>
+<p>Photogrammetric surface reconstruction using a monocular RGB camera is <strong>of particular interest</strong>, as it equips users with the capability of casually 随意地 creating digital twins of the real world using ubiquitous mobile devices.</p>
+<p><strong>Multi-view stereo algorithms</strong> had been the method of choice for sparse 3D reconstruction，<strong>but an inherent drawback</strong> of these algorithms is their inability to handle ambiguous observations</p>
+<ul>
+<li>regions with large areas of homogeneous colors</li>
+<li>repetitive texture patterns</li>
+<li>strong color variations<br>This would result in inaccurate reconstructions with noisy or missing surfaces.</li>
+</ul>
+<p>Recenty, <strong>neural surface reconstruction methods</strong> have shown great potential in addressing these limitations. Despite the superiority of neural surface reconstruction methods over classical approaches, the recovered fidelity of current methods does not scale well with the capacity of MLPs. 恢复的保真度不能很好地与 MLP 的容量进行 scale</p>
+<p><strong>Instant NGP</strong> introduces a hybrid 3D grid structure with a multi-resolution hash encoding and a lightweight MLP that is more expressive with a memory footprint loglinear to the resolution. NGP 的内存占用与分辨率 log 线性相关</p>
+<p>本文 Neuralangelo = InstantNGP + Neus<br>Neuralangelo adopts Instant NGP as a neural SDF representation of the underlying 3D scene, optimized from multi-view image observations via neural surface rendering<br>Step:</p>
+<ul>
+<li>First, using numerical gradients to compute higher-order derivatives, such as surface normals for the eikonal regularization, is critical to stabilizing the optimization.</li>
+<li>Second, a progressive optimization schedule plays an important role in recovering the structures at different levels of details</li>
+</ul>
+<p>We combine these two key ingredients and, via extensive experiments on standard benchmarks and real-world scenes, demonstrate significant improvements over image-based neural surface reconstruction methods inboth reconstruction accuracy 重建精度 and view synthesis quality 视图合成质量.</p>
+<p>In summary：</p>
+<ul>
+<li>We present the Neuralangelo framework to naturally incorporate the representation power of multi-resolution hash encoding into neural SDF representations.</li>
+<li>We present two simple techniques to improve the quality of hash-encoded surface reconstruction: <strong>higher-order derivatives with numerical gradients</strong> and <strong>coarse-to-fine optimization with a progressive level of details</strong>.</li>
+</ul>
+<p>RelatedWork：</p>
+<ul>
+<li>Multi-view surface reconstruction<ul>
+<li>volumetric occupancy grid to represent the scene: Each voxel is visited and marked occupied if strict color constancy between the corresponding projected image pixels is satisfied. The photometric consistency assumption 光度一致性假设 typically fails due to autoexposure 自动曝光 or non-Lambertian materials 非朗伯材料, which are ubiquitous in the real world. Relaxing such color constancy constraints across views is important for realistic 3D reconstruction</li>
+<li>Follow-up methods typically start with 3D point clouds from multi-view stereo techniques and then perform dense surface reconstruction. Reliance on the quality of the generated point clouds often leads to missing or noisy surfaces. <strong>Recent learning-based approaches</strong> augment the point cloud generation process with learned image features and cost volume construction(MVSnet, DeepMVS). <strong>_However, these approaches are inherently limited by 花费体积的分辨率 the resolution of the cost volume and fail to recover geometric details._</strong></li>
+</ul>
+</li>
+<li>NeRF<ul>
+<li>NeRF achieves remarkable photorealistic view synthesis with view-dependent effects. NeRF encodes 3D scenes with <strong>an MLP mapping 3D spatial locations to color and volume density</strong>. These predictions are composited into pixel colors using neural volume rendering. A problem of NeRF and its variants , however, is the question of how an isosurface of the volume density could be defined to represent the underlying 3D geometry. NeRF 的问题就是等值面不好找。Current practice often relies <strong>on heuristic thresholding 启发式阈值 on the density values</strong>; due to insufficient constraints on the level sets, however, such surfaces are often noisy and may not model the scene structures accurately. <strong>_Therefore, more direct modeling of surfaces is preferred for photogrammetric surface reconstruction problems._</strong></li>
+</ul>
+</li>
+<li>Neural surface reconstruction<ul>
+<li>For scene representations with better-defined 3D surfaces, implicit functions such as occupancy grids（UNISURF） or SDFs are preferred over simple volume density fields.To integrate with neural volume rendering [25], different techniques [41, 47] have been proposed to reparametrize the underlying representations back to volume density 将底层表征重新参数化回体密度.These designs of neural implicit functions enable more accurate surface prediction with view synthesis capabilities of unsacrificed quality.</li>
+<li>Follow-up works extend the above approaches to realtime at the cost of surface fidelity 有牺牲保真度来实现实时建模的研究(Vox-Surf, Neus2), while others use auxiliary information to enhance the reconstruction results 其他的使用辅助信息增强重建结果(with patch warping, Geo-Nues, MonoSDF).<ul>
+<li>Notably, NeuralWarp uses <strong>patch warping given co-visibility information from structure-frommotion (SfM)</strong> to guide surface optimization, but the patchwise planar assumption fails to capture highly-varying surfaces 补丁平面假设无法捕捉高度变化的表面.</li>
+<li>Other methods utilize <strong>sparse point clouds from SfM</strong> to supervise the SDF, but their performances are upper-bounded by the quality of the point clouds, as with classical approaches</li>
+<li>The use of <strong>depth and segmentation as auxiliary data</strong> has also been explored with unconstrained image collections or using scene representations with hash encodings.</li>
+</ul>
+</li>
+<li>In contrast, our work Neuralangelo builds upon hash encodings to recover surfaces but <strong>without the need for auxiliary inputs</strong> used in prior work，本文的方法不需要输入一些辅助数据</li>
+<li>Concurrent work also proposes coarse-to-fine optimization for improved surface details, where a displacement network corrects the shape predicted by a coarse network，并行的方法，使用位移网络来纠错粗网络预测的形状</li>
+<li>In contrast, we use hierarchical hash grids and control the level of details based on our analysis of higher-order derivatives. 通过基于对高阶导数的分析来控制细节的级别</li>
+</ul>
+</li>
+</ul>
+<h1 id="Approach"><a href="#Approach" class="headerlink" title="Approach"></a>Approach</h1><p>Neuralangelo reconstructs dense structures of the scene from multi-view images. Neuralangelo samples 3D locations along camera view directions and uses a multi-resolution hash encoding to encode the positions. The encoded features are input to an SDF MLP and a color MLP to composite images using SDF-based volume rendering.</p>
+<p>3D 位置—&gt;哈希编码后的位置信息—&gt;SDF/Color</p>
+<h2 id="Preliminaries"><a href="#Preliminaries" class="headerlink" title="Preliminaries"></a>Preliminaries</h2><ul>
+<li>Neural volume rendering.</li>
+<li>Volume rendering of SDF</li>
+<li>Multi-resolution hash encoding<ul>
+<li>也有一种方式是 sparse voxel 结构，但是由于内存随着分辨率的增加呈现立方增长，太费内存占用，Hash encoding instead assumes <strong>no spatial hierarchy 空间层次结构</strong> and resolves collision automatically based on gradient averaging 梯度平均</li>
+</ul>
+</li>
+</ul>
+<h2 id="Numerical-Gradient-Computation"><a href="#Numerical-Gradient-Computation" class="headerlink" title="Numerical Gradient Computation"></a>Numerical Gradient Computation</h2><p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230716140552.png" alt="image.png"></p>
+<p><strong>w.r.t. : with respect to 相对于，就…而言</strong></p>
+<p>We show in this section that the analytical gradient w.r.t. position of hash encoding suffers from localities. 相对于哈希编码位置，解析梯度受到局部性的影响 . Therefore, optimization updates only propagate to local hash grids, lacking non-local smoothness. <strong>We propose a simple fix</strong> to such a locality problem <strong>by using numerical gradients</strong>. ？？？差分类似</p>
+<p>A special property of SDF is its differentiability with a gradient of the unit norm. The gradient of SDF satisfies the eikonal equation $∥∇f (x)∥_{2} = 1$ (almost everywhere). To enforce the optimized neural representation to be a valid SDF, the eikonal loss is typically imposed on the SDF predictions:<br>由于 SDF 梯度在每处都满足二范数等于 1，因此构建 Eikonal loss 来优化 SDF 的预测：</p>
+<p>$\mathcal{L}_{\mathrm{eik}}=\frac{1}{N}\sum_{i=1}^{N}(|\nabla f(\mathbf{x}_i)|_2-1)^2,$N 是总采样点数</p>
+<p>To allow for end-to-end optimization, <strong>a double backward operation</strong> on the SDF prediction f (x) is required.</p>
+<h3 id="de-facto-先前的大部分方法"><a href="#de-facto-先前的大部分方法" class="headerlink" title="de-facto 先前的大部分方法"></a>de-facto 先前的大部分方法</h3><p>eikonal loss 反向传播到局部的哈希表项</p>
+<p>The $de facto$ method for computing surface normals of SDFs ∇f (x) is to use analytical gradients. Analytical gradients of hash encoding w.r.t. position, however, are not continuous across space under trilinear interpolation. 哈希编码三线性插值下，哈希编码的解析梯度相对于位置在空间上是不连续的。<br>To find the sampling location in a voxel grid, each 3D point $x_{i}$ would first be scaled by the grid resolution $V_{l}$, written as $x_{i,l} = x_{i} · V_{l}.$ Let the coefficient for (tri-)linear interpolation be $β = x_{i,l} − ⌊x_{i,l}⌋$. The resulting <strong>feature vectors</strong> are</p>
+<p>$\gamma_l(\mathbf{x}_{i,l})=\gamma_l(\lfloor\mathbf{x}_{i,l}\rfloor)\cdot(1-\beta)+\gamma_l(\lceil\mathbf{x}_{i,l}\rceil)\cdot\beta,$ where the rounded position$⌊x_{i,l⌋}, ⌈x_{i,l}⌉$correspond to the local grid cell corners. We note that rounding operations ⌊·⌋and ⌈·⌉ are non-differentiable, rounding 运算是不可微的，可以得到哈希编码相对于位置的微分：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\frac{\partial\gamma_{l}(\mathbf{x}_{i,l})}{\partial\mathbf{x}_{i}}& =\gamma_{l}(\lfloor\mathbf{x}_{i,l}\rfloor)\cdot(-\frac{\partial\beta}{\partial\mathbf{x}_{i}})+\gamma_{l}(\lceil\mathbf{x}_{i,l}\rceil)\cdot\frac{\partial\beta}{\partial\mathbf{x}_{i}}  \\
+&=\gamma_l(\lfloor\mathbf{x}_{i,l}\rfloor)\cdot(-V_l)+\gamma_l(\lceil\mathbf{x}_{i,l}\rceil)\cdot V_l.
+\end{aligned}</script><p>The derivative of hash encoding is local, i.e., when $x_{i}$ moves across grid cell borders, the corresponding hash entries will be different. Therefore, the eikonal loss defined in Eq. 5 only back-propagates to the locally sampled hash entries, i.e. $γl(⌊x_{i,l}⌋) and γl(⌈x_{i,l}⌉)$. When continuous surfaces (e.g. a flat wall) span multiple grid cells, these grid cells should produce coherent surface normals without sudden transitions. 当表面连续或者很大，跨过多个网格单元时，这些网格单元应该产生连贯的表面法线，而不会突然转变，为了确保表面表示的一致性，应对这些网格单元联合优化，但是分析梯度仅仅只局限于局部网格单元。To ensure consistency in surface representation, joint optimization of these grid cells is desirable. However, the analytical gradient is limited to local grid cells, unless all corresponding grid cells happen to be sampled and optimized simultaneously. Such sampling is not always guaranteed</p>
+<h3 id="our-method"><a href="#our-method" class="headerlink" title="our method"></a>our method</h3><p>To overcome the locality of the analytical gradient of hash encoding, we propose to compute the surface normals using numerical gradients.<br>If the step size of the numerical gradient is smaller than the grid size of hash encoding, the numerical gradient would be equivalent to the analytical gradient; otherwise, hash entries of multiple grid cells would participate in the surface normal computation.</p>
+<ul>
+<li>math 表达上面的描述 - step size &lt; grid size ：numerical gradient = analytical gradient - step size &gt; grid size ：多个网格的哈希表项都参与表面法向的计算<br>Backpropagating through the surface normals thus allows hash entries of multiple grids to receive optimization updates simultaneously. Intuitively, numerical gradients with carefully chosen step sizes can be interpreted as a smoothing operation on the analytical gradient expression. <strong>numerical gradients 通过选择 step size 可以解释为 analytical gradient 表示的平滑操作</strong><br>An alternative of normal supervision is a teacher-student curriculum(Ref-NeRF, NeRFactor), where the predicted noisy normals are driven towards MLP outputs to exploit the smoothness of MLPs 利用 MLP 的平滑性，将预测的嘈杂法线作为 MLP 的输出，然而 loss 的解析梯度也只能反向传播到局部的单元网格来进行哈希编码. However, analytical gradients from such teacher-student losses still only back-propagate to local grid cells for hash encoding. In contrast, numerical gradients solve the locality issue without the need of additional networks.</li>
+</ul>
+<p>To compute the surface normals using the numerical gradient, additional SDF samples are needed. Given a sampled point $x_{i} = (x_{i}, y_{i}, z_{i})$, we additionally sample two points along each axis of the canonical coordinate around xi within a vicinity 范围内 of a step size of ε. For example, the x-component of the surface normal can be found as：$\nabla_xf(\mathbf{x}_i)=\frac{f\left(\gamma(\mathbf{x}_i+\epsilon_x)\right)-f\left(\gamma(\mathbf{x}_i-\epsilon_x)\right)}{2\epsilon},$ $\epsilon_{x} = [\epsilon, 0, 0]$</p>
+<p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230716140552.png" alt="image.png"></p>
+<h2 id="Progressive-Levels-of-Details"><a href="#Progressive-Levels-of-Details" class="headerlink" title="Progressive Levels of Details"></a>Progressive Levels of Details</h2><p>Coarse-to-fine optimization can better shape the loss landscape to avoid falling into false local minima. Such a strategy has found many applications in computer vision, such as image-based registration .<br>Neuralangelo also adopts a coarse-to-fine optimization scheme to reconstruct the surfaces with progressive levels of details. Using numerical gradients for the higher-order derivatives naturally enables Neuralangelo to perform coarse-to-fine optimization from two perspectives.</p>
+<ul>
+<li>Step size ε. As previously discussed, numerical gradients can be interpreted as a smoothing operation where the step size ε controls the resolution and the amount of recovered details. Imposing $\mathcal{L}_{eik}$ with a larger ε for numerical surface normal computation ensures the surface normal is consistent at a larger scale, thus producing consistent and continuous surfaces. On the other hand, imposing $\mathcal{L}_{eik}$ with a smaller ε affects a smaller region and avoids smoothing details. In practice, we initialize the step size ε to the coarsest hash grid size and exponentially decrease it matching different hash grid sizes throughout the optimization process. 初始化$\epsilon$ 为最粗的哈希网格大小，并在整个优化过程中匹配不同的网格大小，以指数方式减小它</li>
+<li>Hash grid resolution V . If all hash grids are activated from the start of the optimization, to capture geometric details, fine hash grids must first “unlearn” from the coarse optimization with large step size ε and “relearn” with a smaller ε. If such a process is unsuccessful due to converged optimization, geometric details would be lost. <strong>Therefore, we only enable an initial set of coarse hash grids and progressively activate finer hash grids throughout optimization when ε decreases to their spatial size.</strong> 粗网格先激活，当$\epsilon$减小到精网格的空间大小时，逐步激活精网格，可以更好的捕捉到细节。The relearning process can thus be avoided to better capture the details. In practice, we also apply weight decay over all parameters to avoid single-resolution features dominating the final results.</li>
+</ul>
+<h2 id="Optimization"><a href="#Optimization" class="headerlink" title="Optimization"></a>Optimization</h2><p>To further encourage the smoothness of the reconstructed surfaces, we impose a prior by regularizing the mean curvature of SDF 通过正则化平均曲率施加先验<br>The mean curvature is computed from <strong>discrete Laplacian</strong> similar to the surface normal computation, otherwise, the second-order analytical gradients of hash encoding are zero everywhere when using trilinear interpolation. The curvature loss Lcurv is defined as:$\mathcal{L}_{\mathtt{curv}}=\frac{1}{N}\sum_{i=1}^{N}\left|\nabla^{2}f(\mathbf{x}_{i})\right|.$<br>We note that the samples used for the surface normal computation in Eq. 8：$\nabla_xf(\mathbf{x}_i)=\frac{f\left(\gamma(\mathbf{x}_i+\epsilon_x)\right)-f\left(\gamma(\mathbf{x}_i-\epsilon_x)\right)}{2\epsilon},$ are sufficient for curvature computation.<br>The total loss is defined as the weighted sum of losses:<br>$\mathcal{L}=\mathcal{L}_{\mathrm{RGB}}+w_{\mathrm{eik}}\mathcal{L}_{\mathrm{eik}}+w_{\mathrm{curv}}\mathcal{L}_{\mathrm{curv}}.$<br>All network parameters, including MLPs and hash encoding, are trained jointly end-to-end.所有网络参数，端到端的联合训练</p>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+1ZnNxFWnEbk5YzRl">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/SurfaceReconstruction/" rel="tag"><i class="fa fa-tag"></i> SurfaceReconstruction</a>
+              <a href="/tags/Neus/" rel="tag"><i class="fa fa-tag"></i> Neus</a>
+              <a href="/tags/Efficiency/" rel="tag"><i class="fa fa-tag"></i> Efficiency</a>
+              <a href="/tags/Encoding/" rel="tag"><i class="fa fa-tag"></i> Encoding</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/3DReconstruction/Basic%20Knowledge/NeRF/Sampling/NerfAcc/" rel="prev" title="NerfAcc">
+      <i class="fa fa-chevron-left"></i> NerfAcc
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/Efficiency/PermutoSDF/" rel="next" title="PermutoSDF">
+      PermutoSDF <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C"><span class="nav-text">实验</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#paper"><span class="nav-text">paper</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-text">数据集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82"><span class="nav-text">实现细节</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Evaluation-criteria"><span class="nav-text">Evaluation criteria.</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="nav-text">环境配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E7%94%9F%E6%88%90"><span class="nav-text">数据集生成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#run"><span class="nav-text">run</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Isosurface-extraction"><span class="nav-text">Isosurface extraction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EXP"><span class="nav-text">EXP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#exp1"><span class="nav-text">exp1</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Conclusion"><span class="nav-text">Conclusion</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AIR"><span class="nav-text">AIR</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Approach"><span class="nav-text">Approach</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Preliminaries"><span class="nav-text">Preliminaries</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Numerical-Gradient-Computation"><span class="nav-text">Numerical Gradient Computation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#de-facto-%E5%85%88%E5%89%8D%E7%9A%84%E5%A4%A7%E9%83%A8%E5%88%86%E6%96%B9%E6%B3%95"><span class="nav-text">de-facto 先前的大部分方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#our-method"><span class="nav-text">our method</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Progressive-Levels-of-Details"><span class="nav-text">Progressive Levels of Details</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Optimization"><span class="nav-text">Optimization</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qi Yun"
+      src="/images/avatar.jpeg">
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">117</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/qiyun71" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;qiyun71" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/29010355" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;29010355" rel="noopener" target="_blank"><i class="fa fa-star fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qi Yun</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">438k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">26:33</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/yqq/anime.min.js"></script>
+  <script src="/yqq/velocity/velocity.min.js"></script>
+  <script src="/yqq/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
