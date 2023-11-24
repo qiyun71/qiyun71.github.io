@@ -8,85 +8,19 @@
         "type": "tabs",
         "children": [
           {
-            "id": "63d73042169692e5",
+            "id": "1b23aaf49cf1ae7f",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "HumanBodyReconstruction/Muti-view 3D Reconstruction.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "0aece602d520b627",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "HumanBodyReconstruction/Other Paper Reconstruction.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "c3967bca9433d10b",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "HumanBodyReconstruction/ImplicitFunction/Adaptive Shells.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "b2fd54b94c0523a7",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "HumanBodyReconstruction/Generative approach Review.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "dfed8cd18e685c42",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "HumanBodyReconstruction/Generative approach/DMV3D.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "90732c3496c90f61",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "NeRF/SurfaceReconstruction/Neus.md",
+                "file": "3DReconstruction/Basic Knowledge/Multi-view 3D Reconstruction.md",
                 "mode": "source",
                 "backlinks": false,
                 "source": false
               }
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -106,7 +40,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "HumanBodyReconstruction/ImplicitFunction/Adaptive Shells.md"
+                "file": "3DReconstruction/Basic Knowledge/Multi-view 3D Reconstruction.md"
               }
             }
           },
@@ -145,7 +79,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "HumanBodyReconstruction/ImplicitFunction/Adaptive Shells.md",
+                "file": "3DReconstruction/Basic Knowledge/Multi-view 3D Reconstruction.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -162,7 +96,7 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "HumanBodyReconstruction/ImplicitFunction/Adaptive Shells.md",
+                "file": "3DReconstruction/Basic Knowledge/Multi-view 3D Reconstruction.md",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -212,7 +146,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "Instant3D",
+                "query": "",
                 "matchingCase": true,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -258,7 +192,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 211.5
+    "width": 256.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -275,45 +209,45 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "c3967bca9433d10b",
+  "active": "1b23aaf49cf1ae7f",
   "lastOpenFiles": [
-    "NeRF/SurfaceReconstruction/Neus.md",
-    "HumanBodyReconstruction/Generative approach/DMV3D.md",
-    "HumanBodyReconstruction/ImplicitFunction/Adaptive Shells.md",
-    "HumanBodyReconstruction/Other Paper Reconstruction.md",
-    "HumanBodyReconstruction/Generative approach Review.md",
-    "Other/Mine/IPV6.md",
-    "HumanBodyReconstruction/Muti-view Human Body Reconstruction.md",
-    "HumanBodyReconstruction/Muti-view 3D Reconstruction.md",
-    "HumanBodyReconstruction/Math.md",
-    "Reports/2023-11-16.md",
-    "Other/Mine/Tools.md",
-    "HumanBodyReconstruction/ImplicitFunction/RayDF.md",
-    "HumanBodyReconstruction/Generative approach/DiffuStereo.md",
-    "Reports/2023-10-30.md",
-    "NeRF/NeRF-review.md",
-    "HumanBodyReconstruction/PointCloud/PointCloud Review.md",
-    "Note!!!.md",
-    "Reports/Other notes for obsidian.md",
-    "Reports/new.md",
-    "HumanBodyReconstruction/ImplicitFunction/DoubleField.md",
-    "HumanBodyReconstruction/Generative approach/HaP.md",
-    "HumanBodyReconstruction/Generative approach/SG-GAN.md",
-    "未命名",
+    "3DReconstruction/Basic Knowledge/Multi-view Human Body Reconstruction.md",
+    "3DReconstruction/Basic Knowledge/NeRF/NoNeuralNetworks/Plenoxels.md",
+    "3DReconstruction/Multi-view/Hybrid Methods/DMV3D.md",
+    "3DReconstruction/Single-view/Generative Models/DMTet.md",
+    "3DReconstruction/Basic Knowledge/Multi-view 3D Reconstruction.md",
+    "3DReconstruction/Basic Knowledge/Math.md",
+    "3DReconstruction/Basic Knowledge/Generative Models Review.md",
+    "3DReconstruction/Basic Knowledge/Other Paper About Reconstruction.md",
     "Learn/Learn-Hexo2.md",
-    "Learn/Learn-Git.md",
-    "HumanBodyReconstruction/Generative approach/DiffuStereo.md.baiduyun.uploading.cfg",
-    "Learn/Learn-Git.md.baiduyun.uploading.cfg",
-    "Learn/Learn-Hexo2.md.baiduyun.uploading.cfg",
-    "Learn/Learn-Hexo.md.baiduyun.uploading.cfg",
-    "Learn/Learn-Hexo.md",
-    "HumanBodyReconstruction/Generative approach/Diffusion Models.md",
-    "Other/Mine/Tools.md.baiduyun.uploading.cfg",
-    "HumanBodyReconstruction/Generative approach/Diffusion Models.md.baiduyun.uploading.cfg",
-    "NeRF/NeRF.canvas.baiduyun.uploading.cfg",
-    "NeRF/NeRF.canvas",
-    "HumanBodyReconstruction/Other Paper Reconstruction.md.baiduyun.uploading.cfg",
-    "HumanBodyReconstruction/Generative approach/未命名.md.baiduyun.uploading.cfg",
+    "3DReconstruction/Basic Knowledge/Diffusion Models.md",
+    "3DReconstruction/Basic Knowledge/NeRF/NeRF-Studio.md",
+    "3DReconstruction/Basic Knowledge/NeRF/NeRF-review.md",
+    "3DReconstruction/Basic Knowledge/NeRF/NeRF-Principle.md",
+    "3DReconstruction/Basic Knowledge/NeRF/NeRF-Mine.md",
+    "3DReconstruction/Basic Knowledge/NeRF/NeRF-code.md",
+    "3DReconstruction/Basic Knowledge/NeRF/NeRF.md",
+    "3DReconstruction/Basic Knowledge/NeRF/Sparse/SparseNeuS.md",
+    "3DReconstruction/Basic Knowledge/NeRF/Sparse/FreeNeRF.md",
+    "3DReconstruction/Basic Knowledge/NeRF/Sparse/FORGE.md",
+    "3DReconstruction/Basic Knowledge/NeRF/Sampling/NerfAcc.md",
+    "3DReconstruction/Basic Knowledge/NeRF/Sampling/Mip-NeRF.md",
+    "3DReconstruction/Basic Knowledge/NeRF/Sampling/Floaters No More.md",
+    "3DReconstruction/Basic Knowledge/NeRF/Review/NeRF in the industrial and robotics domain.md",
+    "3DReconstruction/Basic Knowledge/NeRF/Review/A Review of Deep Learning-Powered Mesh Reconstruction Methods.md",
+    "3DReconstruction/Basic Knowledge/NeRF/Review/A Critical Analysis of NeRF-Based 3D Reconstruction.md",
+    "3DReconstruction/Basic Knowledge/NeRF/Review/2023 Conf about NeRF.md",
+    "3DReconstruction/Single-view/Other",
+    "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Efficiency",
+    "3DReconstruction/Basic Knowledge",
+    "3DReconstruction/Multi-view/Hybrid Methods",
+    "3DReconstruction/Multi-view/Implicit Function",
+    "3DReconstruction/Multi-view/Depth Estimation",
+    "3DReconstruction/Single-view/Hybrid Methods",
+    "3DReconstruction/Multi-view/Generative Models",
+    "3DReconstruction/Multi-view",
+    "3DReconstruction/Single-view",
+    "3DReconstruction/Basic Knowledge/NeRF/NeRF.canvas",
     "未命名.canvas",
     "Pasted image 20230718132040.png",
     "NeRF/Surface Reconstruction/1.canvas",
