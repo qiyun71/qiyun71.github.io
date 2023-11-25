@@ -284,6 +284,10 @@ Im4D: High-Fidelity and Real-Time Novel View Synthesis for Dynamic Scenes
 
 > [Neural Body: Implicit Neural Representations with Structured Latent Codes for Novel View Synthesis of Dynamic Humans (zju3dv.github.io)](https://zju3dv.github.io/neuralbody/)
 
+首先在SMPL6890个顶点上定义一组潜在代码，然后
+使用[Total Capture: A 3D Deformation Model for Tracking Faces, Hands, and Bodies (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4498402014756757505&noteId=2065156297063368192)
+从多视图图片中获取SMPL参数$S_{t}$
+
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231001170255.png)
 
 ### InstantNVR

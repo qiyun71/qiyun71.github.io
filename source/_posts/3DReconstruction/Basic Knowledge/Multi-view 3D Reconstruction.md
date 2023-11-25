@@ -25,7 +25,7 @@ top: true
 此外，一般的单视图生成式方法需要 3D 模型数据集作监督，这些模型数据需要花费大量的人工成本和时间成本，一般很难得到。
 
 Multi-view 3D Reconstruction 按照物体规模可分：
-- **Indoor** Scene Reconstruction
+- **Indoor** Scene Reconstructionhttps://pypi.tuna.tsinghua.edu.cn/simple
   - [Human Body](Multi-view%20Human%20Body%20Reconstruction.md)：DiffuStereo, DoubleField
   - Object：NeuS, Neuralangelo, Adaptive Shells
 - **Outdoor** Scene Reconstruction
