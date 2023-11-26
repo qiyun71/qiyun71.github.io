@@ -25,9 +25,14 @@ top: true
 此外，一般的单视图生成式方法需要 3D 模型数据集作监督，这些模型数据需要花费大量的人工成本和时间成本，一般很难得到。
 
 Multi-view 3D Reconstruction 按照物体规模可分：
-- **Indoor** Scene Reconstructionhttps://pypi.tuna.tsinghua.edu.cn/simple
+- **Indoor** Scene Reconstruction https://pypi.tuna.tsinghua.edu.cn/simple
   - [Human Body](Multi-view%20Human%20Body%20Reconstruction.md)：DiffuStereo, DoubleField
   - Object：NeuS, Neuralangelo, Adaptive Shells
 - **Outdoor** Scene Reconstruction
   - Large Scale Scene：Mip-NeRF 360
 
+基于 NeRF 进行三维重建的基本流程：
+图像拍摄 --> 估计相机位姿 --> 训练 NeRF 网络 --> Marching Cube 提取 mesh
+- 估计相机位姿: COLMAP *有误差*
+- 训练 NeRF 网络: 用图像作监督
+- MC 提取 mesh: Trimesh, PyMCubes, CuMCubes

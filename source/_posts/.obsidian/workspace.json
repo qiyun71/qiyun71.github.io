@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "3DReconstruction/Basic Knowledge/Multi-view 3D Reconstruction.md",
+                "file": "3DReconstruction/Single-view/Depth Estimation/2K2K.md",
                 "mode": "source",
                 "backlinks": false,
                 "source": false
@@ -39,15 +39,14 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "3DReconstruction/Multi-view/Generative Models/DiffuStereo.md",
+                "file": "3DReconstruction/Multi-view/Depth Estimation/MVSNet.md",
                 "mode": "source",
                 "backlinks": false,
                 "source": false
               }
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -67,7 +66,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "3DReconstruction/Basic Knowledge/Other Paper About Reconstruction.md"
+                "file": "3DReconstruction/Single-view/Depth Estimation/2K2K.md"
               }
             }
           },
@@ -106,7 +105,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "3DReconstruction/Basic Knowledge/Other Paper About Reconstruction.md",
+                "file": "3DReconstruction/Single-view/Depth Estimation/2K2K.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -123,7 +122,7 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "3DReconstruction/Basic Knowledge/Other Paper About Reconstruction.md",
+                "file": "3DReconstruction/Single-view/Depth Estimation/2K2K.md",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -236,11 +235,13 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "60943374f0c75833",
+  "active": "cd90de63db4ce1a2",
   "lastOpenFiles": [
     "3DReconstruction/Basic Knowledge/Multi-view 3D Reconstruction.md",
-    "3DReconstruction/Basic Knowledge/Multi-view Human Body Reconstruction.md",
+    "3DReconstruction/Multi-view/Depth Estimation/MVSNet.md",
     "3DReconstruction/Multi-view/Generative Models/DiffuStereo.md",
+    "3DReconstruction/Basic Knowledge/Other Paper About Reconstruction.md",
+    "3DReconstruction/Basic Knowledge/Multi-view Human Body Reconstruction.md",
     "3DReconstruction/Multi-view/Hybrid Methods/DMV3D.md",
     "3DReconstruction/Single-view/Generative Models/DMTet.md",
     "3DReconstruction/Basic Knowledge/NeRF/NoNeuralNetworks/Plenoxels.md",
@@ -262,8 +263,6 @@
     "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Efficiency/Instant-NSR.md",
     "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Efficiency/Instant-NSR-code.md",
     "3DReconstruction/Single-view/Other/HumanBody/HRN.md",
-    "3DReconstruction/Basic Knowledge/NeRF/Review/NeRF in the industrial and robotics domain.md",
-    "3DReconstruction/Basic Knowledge/NeRF/Review/A Review of Deep Learning-Powered Mesh Reconstruction Methods.md",
     "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Shadow&Highlight",
     "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Efficiency",
     "3DReconstruction/Single-view/Other/HumanBody",
