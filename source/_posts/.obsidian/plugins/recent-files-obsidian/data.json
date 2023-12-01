@@ -1,28 +1,160 @@
 {
   "recentFiles": [
     {
-      "basename": "2K2K",
-      "path": "3DReconstruction/Single-view/Depth Estimation/2K2K.md"
+      "basename": "Voxurf",
+      "path": "3DReconstruction/Multi-view/Explicit Volumetric/Voxurf.md"
+    },
+    {
+      "basename": "VolSDF",
+      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/VolSDF.md"
+    },
+    {
+      "basename": "Plenoxels",
+      "path": "3DReconstruction/Multi-view/Explicit Volumetric/Plenoxels.md"
+    },
+    {
+      "basename": "Point-NeRF",
+      "path": "3DReconstruction/Multi-view/Explicit Volumetric/Point-NeRF.md"
+    },
+    {
+      "basename": "3D Gaussian Splatting",
+      "path": "3DReconstruction/Multi-view/Explicit Volumetric/3D Gaussian Splatting.md"
     },
     {
       "basename": "Multi-view 3D Reconstruction",
       "path": "3DReconstruction/Basic Knowledge/Multi-view 3D Reconstruction.md"
     },
     {
-      "basename": "MVSNet",
-      "path": "3DReconstruction/Multi-view/Depth Estimation/MVSNet.md"
+      "basename": "A Review of Deep Learning-Powered Mesh Reconstruction Methods",
+      "path": "3DReconstruction/Basic Knowledge/NeRF/Review/A Review of Deep Learning-Powered Mesh Reconstruction Methods.md"
     },
     {
-      "basename": "DiffuStereo",
-      "path": "3DReconstruction/Multi-view/Generative Models/DiffuStereo.md"
+      "basename": "NeRF in the industrial and robotics domain",
+      "path": "3DReconstruction/Basic Knowledge/NeRF/Review/NeRF in the industrial and robotics domain.md"
+    },
+    {
+      "basename": "2023 Conf about NeRF",
+      "path": "3DReconstruction/Basic Knowledge/NeRF/Review/2023 Conf about NeRF.md"
+    },
+    {
+      "basename": "A Critical Analysis of NeRF-Based 3D Reconstruction",
+      "path": "3DReconstruction/Basic Knowledge/NeRF/Review/A Critical Analysis of NeRF-Based 3D Reconstruction.md"
+    },
+    {
+      "basename": "NeuS",
+      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/NeuS.md"
+    },
+    {
+      "basename": "Neus-code",
+      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Neus-code.md"
+    },
+    {
+      "basename": "PlankAssembly",
+      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/PlankAssembly.md"
+    },
+    {
+      "basename": "Pose Estimation Review",
+      "path": "3DReconstruction/Basic Knowledge/NeRF/CameraPose/Pose Estimation Review.md"
+    },
+    {
+      "basename": "UNISURF",
+      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/UNISURF.md"
+    },
+    {
+      "basename": "RayDF",
+      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/RayDF.md"
+    },
+    {
+      "basename": "IPV6",
+      "path": "Other/Mine/IPV6.md"
+    },
+    {
+      "basename": "Tools",
+      "path": "Other/Mine/Tools.md"
+    },
+    {
+      "basename": "通俗形象地分析比较生成模型",
+      "path": "Other/通俗形象地分析比较生成模型.md"
+    },
+    {
+      "basename": "从感知机到Transformer，一文概述深度学习简史",
+      "path": "Other/从感知机到Transformer，一文概述深度学习简史.md"
+    },
+    {
+      "basename": "NeRF-Mine",
+      "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF-Mine.md"
+    },
+    {
+      "basename": "Multi-view Human Body Reconstruction",
+      "path": "3DReconstruction/Basic Knowledge/Multi-view Human Body Reconstruction.md"
+    },
+    {
+      "basename": "Encoding",
+      "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF/Encoding.md"
+    },
+    {
+      "basename": "Sampling",
+      "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF/Sampling.md"
+    },
+    {
+      "basename": "Metrics",
+      "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF/Metrics.md"
+    },
+    {
+      "basename": "Generative Models Review",
+      "path": "3DReconstruction/Basic Knowledge/Generative Models Review.md"
+    },
+    {
+      "basename": "NeRF-review",
+      "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF-review.md"
     },
     {
       "basename": "Other Paper About Reconstruction",
       "path": "3DReconstruction/Basic Knowledge/Other Paper About Reconstruction.md"
     },
     {
-      "basename": "Multi-view Human Body Reconstruction",
-      "path": "3DReconstruction/Basic Knowledge/Multi-view Human Body Reconstruction.md"
+      "basename": "Neus-Instant-nsr-pl-code",
+      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Efficiency/Neus-Instant-nsr-pl-code.md"
+    },
+    {
+      "basename": "NeRF-code",
+      "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF-code.md"
+    },
+    {
+      "basename": "NeRF-Principle",
+      "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF-Principle.md"
+    },
+    {
+      "basename": "NeRF-Studio",
+      "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF-Studio.md"
+    },
+    {
+      "basename": "2K2K",
+      "path": "3DReconstruction/Single-view/Depth Estimation/2K2K.md"
+    },
+    {
+      "basename": "Diffusion Models",
+      "path": "3DReconstruction/Basic Knowledge/Diffusion Models.md"
+    },
+    {
+      "basename": "MVSNet",
+      "path": "3DReconstruction/Multi-view/Depth Estimation/MVSNet.md"
+    },
+    {
+      "basename": "Math",
+      "path": "3DReconstruction/Basic Knowledge/Math.md"
+    },
+    {
+      "basename": "Instant-NSR-code",
+      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Efficiency/Instant-NSR-code.md"
+    },
+    {
+      "basename": "Math",
+      "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF/Math.md"
+    },
+    {
+      "basename": "DiffuStereo",
+      "path": "3DReconstruction/Multi-view/Generative Models/DiffuStereo.md"
     },
     {
       "basename": "DMV3D",
@@ -31,18 +163,6 @@
     {
       "basename": "DMTet",
       "path": "3DReconstruction/Single-view/Generative Models/DMTet.md"
-    },
-    {
-      "basename": "Plenoxels",
-      "path": "3DReconstruction/Basic Knowledge/NeRF/NoNeuralNetworks/Plenoxels.md"
-    },
-    {
-      "basename": "Generative Models Review",
-      "path": "3DReconstruction/Basic Knowledge/Generative Models Review.md"
-    },
-    {
-      "basename": "Tools",
-      "path": "Other/Mine/Tools.md"
     },
     {
       "basename": "Learn-Git",
@@ -79,42 +199,6 @@
     {
       "basename": "2023-08-14",
       "path": "Reports/2023-08-14.md"
-    },
-    {
-      "basename": "2023-08-07",
-      "path": "Reports/2023-08-07.md"
-    },
-    {
-      "basename": "2023-08-05-Job",
-      "path": "Reports/2023-08-05-Job.md"
-    },
-    {
-      "basename": "2023-07-04",
-      "path": "Reports/2023-07-04.md"
-    },
-    {
-      "basename": "2023-06-19",
-      "path": "Reports/2023-06-19.md"
-    },
-    {
-      "basename": "Learn-PyTorch",
-      "path": "Learn/Learn-PyTorch.md"
-    },
-    {
-      "basename": "Learn-Algo",
-      "path": "Learn/Learn-Algo.md"
-    },
-    {
-      "basename": "Learn-Python_plt",
-      "path": "Learn/Learn-Python_plt.md"
-    },
-    {
-      "basename": "Learn-Python_OPEN_CV",
-      "path": "Learn/Learn-Python_OPEN_CV.md"
-    },
-    {
-      "basename": "Learn-Hexo2",
-      "path": "Learn/Learn-Hexo2.md"
     }
   ],
   "omittedPaths": [],

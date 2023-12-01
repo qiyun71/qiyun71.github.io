@@ -49,6 +49,10 @@ KW：3D shape, mesh, and representation; reconstruction from voxels, point cloud
 任何算法的基础都是数据表示。对于图像，像素是学术界和工业界都使用的表示。不幸的是，3D模型没有这样的统一表示。事实上，研究人员已经为3D生成任务提出了广泛的表示。
 在这个调查中，我们关注的是本质上是三角形网格的表示。我们还考虑了可以很容易地转换为三角形网格的表示，例如CSG(Constructive Solid Geometry)树和参数曲面。我们还将讨论隐式表示，如体素网格和神经隐式，因为它们是最流行的表示，尽管它们在转换为三角形网格时可能面临问题，例如创建过多的顶点和三角形。
 
+CSG模型 ： 
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231128153207.png)
+
+
 ![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230920133657.png)
 
 表2.1列出了深度学习网格重建方法中使用的表示的总结。请注意，虽然没有考虑输出点云的方法，但其中一些方法使用点来表示隐式字段，因此可以很容易地提取3D形状。例如，“Shape As Points”[117]提出了一个点到网格层，使用泊松曲面重构的可微公式[73,74]，将形状表示为一组具有法线的点的隐式场。另一方面，“Analytic Marching”[81]等作品可以从神经隐式表示中提取精确的多边形网格，未来神经隐式和显式网格之间的差距可能会缩小。

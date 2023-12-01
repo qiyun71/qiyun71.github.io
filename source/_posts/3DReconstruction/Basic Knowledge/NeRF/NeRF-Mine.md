@@ -17,9 +17,9 @@ NeRF 主要部分：
 
 - 神经网络结构 --> 训练出来模型，即 3D 模型的隐式表达
   - 网络类型一般为 MLP，相当于训练一个函数，输入采样点的位置，可以输出该点的信息(eg: density, sdf, color...)
-- [采样方式](Sampling.md)：沿着光线进行采样获取采样点
-- [位置编码](Encoding.md)：对采样点的位置 xyz 和方向 dir 进行编码，使得 MLP 的输入为高频的信息
-- [数学相关](3DReconstruction/Basic%20Knowledge/NeRF/NeRF/Math.md)：光线的生成、坐标变换、体渲染公式、BRDF……
+- [采样方式](/3DReconstruction/Basic%20Knowledge/NeRF/NeRF/Sampling)：沿着光线进行采样获取采样点
+- [位置编码](/3DReconstruction/Basic%20Knowledge/NeRF/NeRF/Encoding)：对采样点的位置 xyz 和方向 dir 进行编码，使得 MLP 的输入为高频的信息
+- [数学相关](/3DReconstruction/Basic%20Knowledge/NeRF/NeRF/Math)：光线的生成、坐标变换、体渲染公式、BRDF……
 - 体渲染函数：
   - NeRF：$\mathrm{C}(r)=\int_{\mathrm{t}_{\mathrm{n}}}^{\mathrm{t}_{\mathrm{f}}} \mathrm{T}(\mathrm{t}) \sigma(\mathrm{r}(\mathrm{t})) \mathrm{c}(\mathrm{r}(\mathrm{t}), \mathrm{d}) \mathrm{dt} =\sum_{i=1}^{N} T_{i}\left(1-\exp \left(-\sigma_{i} \delta_{i}\right)\right) \mathbf{c}_{i}$
     - 不透明度$\sigma$，累计透光率 --> 权重
@@ -178,7 +178,7 @@ python run.py --config confs/neus-dtu_like.yaml --test --resume ckpt_path
 | Point-NeRF | dtu,nerf_synthetic,ScanNet,Tanks and temple      | [Xharlie/pointnerf: Point-NeRF: Point-based Neural Radiance Fields (github.com)](https://github.com/Xharlie/pointnerf#data-preparation)   |
 
 自定义数据集：
-[NeuS/preprocess_custom_data at main · Totoro97/NeuS (github.com)](https://github.com/Totoro97/NeuS/tree/main/preprocess_custom_data) - [Neus_custom_data](Neus.md#Neus使用自制数据集) - [Neus-Instant-nsr-pl](Neus-Instant-nsr-pl.md#自定义数据集) - 大概需要的视图数量 20Simple/40Complex ref: https://arxiv.org/abs/2310.00684
+[NeuS/preprocess_custom_data at main · Totoro97/NeuS (github.com)](https://github.com/Totoro97/NeuS/tree/main/preprocess_custom_data) - [Neus_custom_data](NeuS.md#Neus使用自制数据集) - [Neus-Instant-nsr-pl](Neus-Instant-nsr-pl.md#自定义数据集) - 大概需要的视图数量 20Simple/40Complex ref: https://arxiv.org/abs/2310.00684
 
 ```
 <case_name>

@@ -1,7 +1,9 @@
 ---
 title: RayDF
 date: 2023-11-13 16:44:16
-tags: 
+tags:
+  - NeRF
+  - Consistency
 categories: 3DReconstruction/Multi-view/Implicit Function/NeRF-based
 ---
 

@@ -1,9 +1,10 @@
 ---
-title: Neus
+title: NeuS
 date: 2023-06-14 22:14:49
 tags:
-  - Neus
   - SurfaceReconstruction
+  - NeuS
+  - NeRF
 categories: 3DReconstruction/Multi-view/Implicit Function/NeRF-based
 ---
 

@@ -27,9 +27,17 @@ Awesome Human Body Reconstruction
 
 <!-- more -->
 
-![Human.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/Human.png)
+# Gaussian Splatting Method
 
-# NeRF OtherObject Reconstruction
+## SuGaR
+
+[SuGaR (enpc.fr)](https://imagine.enpc.fr/~guedona/sugar/)
+
+3D Gaussian Splatting 提取mesh
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231123142658.png)
+
+
+# NeRF Other Object Reconstruction
 
 ## Other paper about camera pose
 
@@ -45,14 +53,6 @@ Awesome Human Body Reconstruction
 多分辨率混合编码
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231123143210.png)
-
-
-## SuGaR
-
-[SuGaR (enpc.fr)](https://imagine.enpc.fr/~guedona/sugar/)
-
-3D Gaussian Splatting 提取mesh
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231123142658.png)
 
 
 ## Adaptive Shells
@@ -135,63 +135,6 @@ MLP 是连续函数，对 NeRF 网络结构的改进来生成不连续的密度�
 单目 RGBD 视频重建 3D
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231116154921.png)
-
-# Depth&Normal Estimation
-
-![image.png|444](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230930182135.png)
-
-## ICON
-
-> [ICON: Implicit Clothed humans Obtained from Normals](ICON.md)
-> [ICON (mpg.de)](https://icon.is.tue.mpg.de/)
-
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230930162915.png)
-
-## ECON
-
-> [ECON: Explicit Clothed humans Obtained from Normals](ECON.md)
-> [ECON: Explicit Clothed humans Optimized via Normal integration (xiuyuliang.cn)](https://xiuyuliang.cn/econ/)
-
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230930173026.png)
-
-## 2K2K
-
-DepthEstimation
-
-> [2K2K：High-fidelity 3D Human Digitization from Single 2K Resolution Images](2K2K.md)
-> [High-fidelity 3D Human Digitization from Single 2K Resolution Images Project Page (sanghunhan92.github.io)](https://sanghunhan92.github.io/conference/2K2K/)
-
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230921160120.png)
-
-## MVSNet
-
-DepthEstimation
-
-> [MVSNet: Depth Inference for Unstructured Multi-view Stereo](MVSNet.md)
-> [YoYo000/MVSNet: MVSNet (ECCV2018) & R-MVSNet (CVPR2019) (github.com)](https://github.com/YoYo000/MVSNet)
-
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231002110228.png)
-
-## GC-MVSNet
-
-多尺度+多视图几何一致性
-[GC-MVSNet: Multi-View, Multi-Scale, Geometrically-Consistent Multi-View Stereo (arxiv.org)](https://arxiv.org/abs/2310.19583)
-
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231031172920.png)
-
-## MonoDiffusion
-
-[MonoDiffusion: Self-Supervised Monocular Depth Estimation Using Diffusion Model](https://arxiv.org/abs/2311.07198)
-
-用 Diffusion Model 进行深度估计(自动驾驶)
-
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231116153515.png)
-
-## NDDepth
-
-[NDDepth: Normal-Distance Assisted Monocular Depth Estimation and Completion](https://arxiv.org/abs/2311.07166)
-
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231116153659.png)
 
 # NeRF Human Body Reconstruction
 
@@ -399,31 +342,90 @@ GAN + PIFus
 
 
 
-# Explicit Template Decomposition
+# Depth&Normal Estimation
 
-## TeCH
+![image.png|444](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230930182135.png)
+
+## ICON
+
+> [ICON: Implicit Clothed humans Obtained from Normals](ICON.md)
+> [ICON (mpg.de)](https://icon.is.tue.mpg.de/)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230930162915.png)
+
+## ECON
+
+> [ECON: Explicit Clothed humans Obtained from Normals](ECON.md)
+> [ECON: Explicit Clothed humans Optimized via Normal integration (xiuyuliang.cn)](https://xiuyuliang.cn/econ/)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230930173026.png)
+
+## 2K2K
+
+DepthEstimation
+
+> [2K2K：High-fidelity 3D Human Digitization from Single 2K Resolution Images](2K2K.md)
+> [High-fidelity 3D Human Digitization from Single 2K Resolution Images Project Page (sanghunhan92.github.io)](https://sanghunhan92.github.io/conference/2K2K/)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230921160120.png)
+
+## MVSNet
+
+DepthEstimation
+
+> [MVSNet: Depth Inference for Unstructured Multi-view Stereo](MVSNet.md)
+> [YoYo000/MVSNet: MVSNet (ECCV2018) & R-MVSNet (CVPR2019) (github.com)](https://github.com/YoYo000/MVSNet)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231002110228.png)
+
+## GC-MVSNet
+
+多尺度+多视图几何一致性
+[GC-MVSNet: Multi-View, Multi-Scale, Geometrically-Consistent Multi-View Stereo (arxiv.org)](https://arxiv.org/abs/2310.19583)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231031172920.png)
+
+## MonoDiffusion
+
+[MonoDiffusion: Self-Supervised Monocular Depth Estimation Using Diffusion Model](https://arxiv.org/abs/2311.07198)
+
+用 Diffusion Model 进行深度估计(自动驾驶)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231116153515.png)
+
+## NDDepth
+
+[NDDepth: Normal-Distance Assisted Monocular Depth Estimation and Completion](https://arxiv.org/abs/2311.07166)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231116153659.png)
+
+# Other
+
+## Explicit Template Decomposition
+
+### TeCH
 
 [TeCH: Text-guided Reconstruction of Lifelike Clothed Humans (huangyangyi.github.io)](https://huangyangyi.github.io/TeCH/)
 
 DMTet 表示：consists of an explicit body shape grid and an implicit distance field
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231102112309.png)
 
-## CloSET
+### CloSET
 
 [CloSET CVPR 2023 (liuyebin.com)](https://www.liuyebin.com/closet/)
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231008110803.png)
 
-## Chupa
+### Chupa
 
 [Chupa (snuvclab.github.io)](https://snuvclab.github.io/chupa/)
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231008164813.png)
 
-# Human Face
+##  Human Face
 
 
-## TRAvatar
+### TRAvatar
 
 [Towards Practical Capture of High-Fidelity Relightable Avatars (travatar-paper.github.io)](https://travatar-paper.github.io/)
 
@@ -431,7 +433,7 @@ DMTet 表示：consists of an explicit body shape grid and an implicit distance 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231121121931.png)
 
 
-## FLARE
+### FLARE
 
 [FLARE (mpg.de)](https://flare.is.tue.mpg.de/)
 
@@ -439,31 +441,29 @@ FLARE: Fast Learning of Animatable and Relightable Mesh Avatars
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231114093649.png)
 
-## HRN
+### HRN
 
 > [A Hierarchical Representation Network for Accurate and Detailed Face Reconstruction from In-The-Wild Images](HRN.md)
 > [HRN (younglbw.github.io)](https://younglbw.github.io/HRN-homepage/)
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230921173632.png)
 
-## 单目 3D 人脸重建
+### 单目 3D 人脸重建
 
 [A Perceptual Shape Loss for Monocular 3D Face Reconstruction](https://arxiv.org/abs/2310.19580)
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231031181210.png)
 
-## BakedAvatar
+### BakedAvatar
 
 [BakedAvatar: Baking Neural Fields for Real-Time Head Avatar Synthesis (arxiv.org)](https://arxiv.org/pdf/2311.05521.pdf)
 
 头部实时新视图生成
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231110155612.png)
 
-## Video
+### Video
 
 - **3D-Aware Talking-Head Video Motion Transfer** <https://arxiv.org/abs/2311.02549>
-
-# Other
 
 ## Segmented Instance/Object
 
