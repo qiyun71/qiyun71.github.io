@@ -24,7 +24,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="基于Instant-nsr-pl创建项目">
 <meta property="og:url" content="http://example.com/3DReconstruction/Basic%20Knowledge/NeRF/NeRF-Mine/index.html">
-<meta property="og:site_name" content="YunQi">
+<meta property="og:site_name" content="QiYun">
 <meta property="og:description" content="本项目yq010105&#x2F;NeRF-Mine (github.com)基于Instant-nsr-pl(NSR,NGP,PytorchLightning)代码构建  保留 omegaconf、nerfacc、Mip-nerf_loss，类似文件结构 去除 pytorch-lightning 框架，使用 pytorch  NeRF 主要部分：  神经网络结构 —&gt; 训练出来模型，即 3D 模型的">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230917192416.png">
@@ -36,7 +36,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231004160314.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230806160731.png">
 <meta property="article:published_time" content="2023-07-06T13:17:54.000Z">
-<meta property="article:modified_time" content="2023-11-24T08:03:47.606Z">
+<meta property="article:modified_time" content="2023-12-01T08:12:34.093Z">
 <meta property="article:author" content="Qi Yun">
 <meta property="article:tag" content="NeRF">
 <meta property="article:tag" content="Neus">
@@ -57,7 +57,7 @@
   };
 </script>
 
-  <title>基于Instant-nsr-pl创建项目 | YunQi</title>
+  <title>基于Instant-nsr-pl创建项目 | QiYun</title>
   
 
 
@@ -112,7 +112,7 @@
 
     <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">YunQi</h1>
+      <h1 class="site-title">QiYun</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
       <p class="site-subtitle" itemprop="description">Note</p>
@@ -215,7 +215,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YunQi">
+      <meta itemprop="name" content="QiYun">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -237,7 +237,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-11-24 16:03:47" itemprop="dateModified" datetime="2023-11-24T16:03:47+08:00">2023-11-24</time>
+                <time title="Modified: 2023-12-01 16:12:34" itemprop="dateModified" datetime="2023-12-01T16:12:34+08:00">2023-12-01</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -283,9 +283,9 @@
 <li>网络类型一般为 MLP，相当于训练一个函数，输入采样点的位置，可以输出该点的信息(eg: density, sdf, color…)</li>
 </ul>
 </li>
-<li><a href="Sampling.md">采样方式</a>：沿着光线进行采样获取采样点</li>
-<li><a href="Encoding.md">位置编码</a>：对采样点的位置 xyz 和方向 dir 进行编码，使得 MLP 的输入为高频的信息</li>
-<li><a href="3DReconstruction/Basic%20Knowledge/NeRF/NeRF/Math.md">数学相关</a>：光线的生成、坐标变换、体渲染公式、BRDF……</li>
+<li><a href="/3DReconstruction/Basic%20Knowledge/NeRF/NeRF/Sampling">采样方式</a>：沿着光线进行采样获取采样点</li>
+<li><a href="/3DReconstruction/Basic%20Knowledge/NeRF/NeRF/Encoding">位置编码</a>：对采样点的位置 xyz 和方向 dir 进行编码，使得 MLP 的输入为高频的信息</li>
+<li><a href="/3DReconstruction/Basic%20Knowledge/NeRF/NeRF/Math">数学相关</a>：光线的生成、坐标变换、体渲染公式、BRDF……</li>
 <li>体渲染函数：<ul>
 <li>NeRF：$\mathrm{C}(r)=\int_{\mathrm{t}_{\mathrm{n}}}^{\mathrm{t}_{\mathrm{f}}} \mathrm{T}(\mathrm{t}) \sigma(\mathrm{r}(\mathrm{t})) \mathrm{c}(\mathrm{r}(\mathrm{t}), \mathrm{d}) \mathrm{dt} =\sum_{i=1}^{N} T_{i}\left(1-\exp \left(-\sigma_{i} \delta_{i}\right)\right) \mathbf{c}_{i}$<ul>
 <li>不透明度$\sigma$，累计透光率 —&gt; 权重</li>
@@ -413,7 +413,7 @@
 </tbody>
 </table>
 </div>
-<p>自定义数据集：<br><a target="_blank" rel="noopener" href="https://github.com/Totoro97/NeuS/tree/main/preprocess_custom_data">NeuS/preprocess_custom_data at main · Totoro97/NeuS (github.com)</a> - <a href="Neus.md#Neus使用自制数据集">Neus_custom_data</a> - <a href="Neus-Instant-nsr-pl.md#自定义数据集">Neus-Instant-nsr-pl</a> - 大概需要的视图数量 20Simple/40Complex ref: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2310.00684">https://arxiv.org/abs/2310.00684</a></p>
+<p>自定义数据集：<br><a target="_blank" rel="noopener" href="https://github.com/Totoro97/NeuS/tree/main/preprocess_custom_data">NeuS/preprocess_custom_data at main · Totoro97/NeuS (github.com)</a> - <a href="NeuS.md#Neus使用自制数据集">Neus_custom_data</a> - <a href="Neus-Instant-nsr-pl.md#自定义数据集">Neus-Instant-nsr-pl</a> - 大概需要的视图数量 20Simple/40Complex ref: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2310.00684">https://arxiv.org/abs/2310.00684</a></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;case_name&gt;</span><br><span class="line">|-- cameras_xxx.npz    # camera parameters</span><br><span class="line">    |-- camera_mat_&#123;&#125;.npy，intrinsic</span><br><span class="line">    |-- camera_mat_inv_&#123;&#125;.npy</span><br><span class="line">    |-- world_mat_&#123;&#125;.npy，intrinsic @ w2c --&gt; world to pixel</span><br><span class="line">    |-- world_mat_inv_&#123;&#125;.npy</span><br><span class="line">    |-- scale_mat_&#123;&#125;.npy ，根据手动清除point得到的sparse_points_interest.ply</span><br><span class="line">    |-- scale_mat_inv_&#123;&#125;.npy</span><br><span class="line">|-- image</span><br><span class="line">    |-- 000.png        # target image for each view</span><br><span class="line">    |-- 001.png</span><br><span class="line">    ...</span><br><span class="line">|-- mask</span><br><span class="line">    |-- 000.png        # target mask each view (For unmasked setting, set all pixels as 255)</span><br><span class="line">    |-- 001.png</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
 <p>neuralangelo 提供了 blender 插件可以可视化 colmap 数据，但是会出现 image plane 与 camera plane 不重合的情况</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">DATA_PATH</span><br><span class="line">├─ database.db      (COLMAP database)</span><br><span class="line">├─ images           (undistorted input images)</span><br><span class="line">├─ images_raw       (raw input images)</span><br><span class="line">├─ sparse           (COLMAP data from SfM)</span><br><span class="line">│  ├─ cameras.bin   (camera parameters)</span><br><span class="line">│  ├─ images.bin    (images and camera poses)</span><br><span class="line">│  ├─ points3D.bin  (sparse point clouds)</span><br><span class="line">│  ├─ 0             (a directory containing individual SfM models. There could also be 1, 2... etc.)</span><br><span class="line">│  ...</span><br><span class="line">├─ stereo (COLMAP data for MVS, not used here)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
@@ -641,14 +641,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">117</span>
+          <span class="site-state-item-count">118</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -702,12 +702,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">438k</span>
+    <span title="Symbols count total">446k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">26:33</span>
+    <span title="Reading time total">27:01</span>
 </div>
 
         

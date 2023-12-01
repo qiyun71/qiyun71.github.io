@@ -24,14 +24,14 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Metrics">
 <meta property="og:url" content="http://example.com/3DReconstruction/Basic%20Knowledge/NeRF/NeRF/Metrics/index.html">
-<meta property="og:site_name" content="YunQi">
+<meta property="og:site_name" content="QiYun">
 <meta property="og:description" content="NeRF、Depth Estimation、Object Detection  评价指标 Loss损失">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230801170138.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231010101549.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230919194046.png">
 <meta property="article:published_time" content="2023-10-10T02:23:09.000Z">
-<meta property="article:modified_time" content="2023-11-24T08:02:53.252Z">
+<meta property="article:modified_time" content="2023-11-28T12:24:04.382Z">
 <meta property="article:author" content="Qi Yun">
 <meta property="article:tag" content="Metrics">
 <meta name="twitter:card" content="summary">
@@ -50,7 +50,7 @@
   };
 </script>
 
-  <title>Metrics | YunQi</title>
+  <title>Metrics | QiYun</title>
   
 
 
@@ -105,7 +105,7 @@
 
     <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">YunQi</h1>
+      <h1 class="site-title">QiYun</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
       <p class="site-subtitle" itemprop="description">Note</p>
@@ -208,7 +208,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YunQi">
+      <meta itemprop="name" content="QiYun">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -230,7 +230,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-11-24 16:02:53" itemprop="dateModified" datetime="2023-11-24T16:02:53+08:00">2023-11-24</time>
+                <time title="Modified: 2023-11-28 20:24:04" itemprop="dateModified" datetime="2023-11-28T20:24:04+08:00">2023-11-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -247,13 +247,13 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>1.5k</span>
+              <span>1.6k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span>5 mins.</span>
+              <span>6 mins.</span>
             </span>
 
         </div>
@@ -333,7 +333,9 @@
 </ul>
 </li>
 </ul>
-<h2 id="other-loss"><a href="#other-loss" class="headerlink" title="other loss"></a>other loss</h2><h3 id="S3IM-Loss"><a href="#S3IM-Loss" class="headerlink" title="S3IM Loss"></a>S3IM Loss</h3><p><a target="_blank" rel="noopener" href="https://madaoer.github.io/s3im_nerf/">S3IM (madaoer.github.io)</a></p>
+<h2 id="other-loss"><a href="#other-loss" class="headerlink" title="other loss"></a>other loss</h2><h3 id="加强Eikonal对SDF的优化"><a href="#加强Eikonal对SDF的优化" class="headerlink" title="加强Eikonal对SDF的优化"></a>加强Eikonal对SDF的优化</h3><p><a target="_blank" rel="noopener" href="https://github.com/sunyx523/StEik">sunyx523/StEik (github.com)</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/649921965">NeurIPS 2023 | 三维重建中的Neural SDF(Neural Implicit Surface) - 知乎 (zhihu.com)</a><br>一个好的SDF其实只需要其法线方向上的二阶导数为0，如果在切线方向上的二阶导数为0的话，得到的SDF轮廓会非常平滑，不利于学习到一些细节。</p>
+<p>$L_\text{L. n.}(u)=\int_{\Omega}|\nabla u(x)^TD^2u(x)\cdot\nabla u(x)|dx.$</p>
+<h3 id="S3IM-Loss"><a href="#S3IM-Loss" class="headerlink" title="S3IM Loss"></a>S3IM Loss</h3><p><a target="_blank" rel="noopener" href="https://madaoer.github.io/s3im_nerf/">S3IM (madaoer.github.io)</a></p>
 <p>$\begin{aligned}L_{\mathrm{S3IM}}(\Theta,\mathcal{R})=&amp;1-\mathrm{S3IM}(\hat{\mathcal{R}},\mathcal{R})=1-\frac{1}{M}\sum_{m=1}^{M}\mathrm{SSIM}(\mathcal{P}^{(m)}(\hat{\mathcal{C}}),\mathcal{P}^{(m)}(\mathcal{C})).\end{aligned}$</p>
 <h3 id="Smoothness-Loss"><a href="#Smoothness-Loss" class="headerlink" title="Smoothness Loss"></a>Smoothness Loss</h3><p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230919194046.png" alt="image.png"></p>
 
@@ -439,7 +441,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Metrics"><span class="nav-text">Metrics</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#PSNR%E2%86%91"><span class="nav-text">PSNR↑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSIM%E2%86%91"><span class="nav-text">SSIM↑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LPIPS%E2%86%93"><span class="nav-text">LPIPS↓</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CD%E2%86%93"><span class="nav-text">CD↓</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P2S%E2%86%93"><span class="nav-text">P2S↓</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Normal%E2%86%93"><span class="nav-text">Normal↓</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IoU%E2%86%91"><span class="nav-text">IoU↑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EMD%E2%86%93"><span class="nav-text">EMD↓</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Loss"><span class="nav-text">Loss</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#RGB-Loss"><span class="nav-text">RGB Loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Eikonal-Loss"><span class="nav-text">Eikonal Loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mask-Loss"><span class="nav-text">Mask Loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Opacity-Loss"><span class="nav-text">Opacity Loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sparsity-Loss"><span class="nav-text">Sparsity Loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Geo-Neus"><span class="nav-text">Geo-Neus</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#other-loss"><span class="nav-text">other loss</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#S3IM-Loss"><span class="nav-text">S3IM Loss</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Smoothness-Loss"><span class="nav-text">Smoothness Loss</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Metrics"><span class="nav-text">Metrics</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#PSNR%E2%86%91"><span class="nav-text">PSNR↑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSIM%E2%86%91"><span class="nav-text">SSIM↑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LPIPS%E2%86%93"><span class="nav-text">LPIPS↓</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CD%E2%86%93"><span class="nav-text">CD↓</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P2S%E2%86%93"><span class="nav-text">P2S↓</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Normal%E2%86%93"><span class="nav-text">Normal↓</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IoU%E2%86%91"><span class="nav-text">IoU↑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EMD%E2%86%93"><span class="nav-text">EMD↓</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Loss"><span class="nav-text">Loss</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#RGB-Loss"><span class="nav-text">RGB Loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Eikonal-Loss"><span class="nav-text">Eikonal Loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mask-Loss"><span class="nav-text">Mask Loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Opacity-Loss"><span class="nav-text">Opacity Loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sparsity-Loss"><span class="nav-text">Sparsity Loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Geo-Neus"><span class="nav-text">Geo-Neus</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#other-loss"><span class="nav-text">other loss</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E5%BC%BAEikonal%E5%AF%B9SDF%E7%9A%84%E4%BC%98%E5%8C%96"><span class="nav-text">加强Eikonal对SDF的优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#S3IM-Loss"><span class="nav-text">S3IM Loss</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Smoothness-Loss"><span class="nav-text">Smoothness Loss</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -454,14 +456,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">117</span>
+          <span class="site-state-item-count">118</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -515,12 +517,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">438k</span>
+    <span title="Symbols count total">446k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">26:33</span>
+    <span title="Reading time total">27:01</span>
 </div>
 
         

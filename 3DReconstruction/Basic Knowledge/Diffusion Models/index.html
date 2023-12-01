@@ -24,7 +24,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="What is Diffusion Models ?">
 <meta property="og:url" content="http://example.com/3DReconstruction/Basic%20Knowledge/Diffusion%20Models/index.html">
-<meta property="og:site_name" content="YunQi">
+<meta property="og:site_name" content="QiYun">
 <meta property="og:description" content="Diffusion Models 原理">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231022203426.png">
@@ -37,7 +37,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023102747.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231022195103.png">
 <meta property="article:published_time" content="2023-10-22T12:29:02.000Z">
-<meta property="article:modified_time" content="2023-11-24T06:39:04.342Z">
+<meta property="article:modified_time" content="2023-11-27T11:00:28.374Z">
 <meta property="article:author" content="Qi Yun">
 <meta property="article:tag" content="Diffusion">
 <meta name="twitter:card" content="summary">
@@ -56,7 +56,7 @@
   };
 </script>
 
-  <title>What is Diffusion Models ? | YunQi</title>
+  <title>What is Diffusion Models ? | QiYun</title>
   
 
 
@@ -111,7 +111,7 @@
 
     <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">YunQi</h1>
+      <h1 class="site-title">QiYun</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
       <p class="site-subtitle" itemprop="description">Note</p>
@@ -214,7 +214,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YunQi">
+      <meta itemprop="name" content="QiYun">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -236,7 +236,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-11-24 14:39:04" itemprop="dateModified" datetime="2023-11-24T14:39:04+08:00">2023-11-24</time>
+                <time title="Modified: 2023-11-27 19:00:28" itemprop="dateModified" datetime="2023-11-27T19:00:28+08:00">2023-11-27</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -253,7 +253,7 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>1k</span>
+              <span>1.1k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -299,16 +299,16 @@
 <li><code>alphas_prod</code>: $\bar{\alpha}_t=\prod_{i=0}^{t}\alpha_i$</li>
 <li><code>alphas_prod_sqrt</code>: $\sqrt{\bar{\alpha}_t}$</li>
 </ul>
-<h3 id="Forward-Process"><a href="#Forward-Process" class="headerlink" title="Forward Process"></a>Forward Process</h3><p>forward step:</p>
-<script type="math/tex; mode=display">q(x_t|x_{t−1}) := \mathcal{N}(x_t; \sqrt{1 − \beta_t}x_{t−1}, \beta_tI) \tag{1}</script><p>forward jump:</p>
+<h3 id="Forward-Process"><a href="#Forward-Process" class="headerlink" title="Forward Process"></a>Forward Process</h3><p>Forward step:</p>
+<script type="math/tex; mode=display">q(x_t|x_{t−1}) := \mathcal{N}(x_t; \sqrt{1 − \beta_t}x_{t−1}, \beta_tI) \tag{1}</script><p>Forward jump:</p>
 <script type="math/tex; mode=display">q(x_t|x_0) = \mathcal{N}(x_t;\sqrt{\bar{\alpha_t}}x_0, (1 − \bar{\alpha_t})I) \tag{2}</script><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">forward_step</span>(<span class="params">t, condition_img, return_noise=<span class="literal">False</span></span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        forward step: t-1 -&gt; t</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">assert</span> t &gt;= <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    mean=alphas_sqrt[t]*condition_img</span><br><span class="line">    std=betas[t].sqrt()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># sampling from N</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> return_noise:</span><br><span class="line">        <span class="keyword">return</span> mean+std*torch.randn_like(img)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        noise=torch.randn_like(img)</span><br><span class="line">        <span class="keyword">return</span> mean+std*noise, noise</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">forward_jump</span>(<span class="params">t, condition_img, condition_idx=<span class="number">0</span>, return_noise=<span class="literal">False</span></span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        forward jump: 0 -&gt; t</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">assert</span> t &gt;= <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    mean=alphas_cumprod_sqrt[t]*condition_img</span><br><span class="line">    std=(<span class="number">1</span>-alphas_cumprod[t]).sqrt()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># sampling from N</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> return_noise:</span><br><span class="line">        <span class="keyword">return</span> mean+std*torch.randn_like(img)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        noise=torch.randn_like(img)</span><br><span class="line">        <span class="keyword">return</span> mean+std*noise, noise</span><br></pre></td></tr></table></figure>
-<h3 id="Reverse-Process"><a href="#Reverse-Process" class="headerlink" title="Reverse Process"></a>Reverse Process</h3><p>至少三种逆向过程的求法，从$x_{t}$到$x_{0}$<br>There are <strong>at least 3 ways of parameterizing the mean</strong> of the reverse step distribution $p_\theta(x_{t-1}|x_t)$:</p>
+<h3 id="Reverse-Process"><a href="#Reverse-Process" class="headerlink" title="Reverse Process"></a>Reverse Process</h3><p>至少三种逆向过程的求法，从 $x_{t}$ 到 $x_{0}$<br>There are <strong>at least 3 ways of parameterizing the mean</strong> of the reverse step distribution $p_\theta(x_{t-1}|x_t)$:</p>
 <ul>
-<li>Directly (a neural network will estimate $\mu_\theta$)直接用网络预测$\mu_\theta$</li>
-<li>Via $x_0$ (a neural network will estimate $x_0$)用网络预测$x_0$<script type="math/tex; mode=display">\tilde{\mu}_\theta = \frac{\sqrt{\bar{\alpha}_{t-1}}\beta_t}{1-\bar{\alpha}_t}x_0 + \frac{\sqrt{\alpha_t}(1-\bar{\alpha}_{t-1})}{1-\bar{\alpha}_t}x_t\tag{4}</script></li>
-<li>Via noise $\epsilon$ subtraction from $x_0$ (a neural network will estimate $\epsilon$)用网络预测噪声$\epsilon$<script type="math/tex; mode=display">x_0=\frac{1}{\sqrt{\bar{\alpha}_t}}(x_t-\sqrt{1-\bar{\alpha}_t}\epsilon)\tag{5}</script></li>
+<li>Directly (a neural network will estimate $\mu_\theta$)直接用网络预测 $\mu_\theta$</li>
+<li>Via $x_0$ (a neural network will estimate $x_0$)用网络预测 $x_0$<script type="math/tex; mode=display">\tilde{\mu}_\theta = \frac{\sqrt{\bar{\alpha}_{t-1}}\beta_t}{1-\bar{\alpha}_t}x_0 + \frac{\sqrt{\alpha_t}(1-\bar{\alpha}_{t-1})}{1-\bar{\alpha}_t}x_t\tag{4}</script></li>
+<li>Via noise $\epsilon$ subtraction from $x_0$ (a neural network will estimate $\epsilon$)用网络预测噪声 $\epsilon$<script type="math/tex; mode=display">x_0=\frac{1}{\sqrt{\bar{\alpha}_t}}(x_t-\sqrt{1-\bar{\alpha}_t}\epsilon)\tag{5}</script></li>
 </ul>
-<h3 id="test-to"><a href="#test-to" class="headerlink" title="test to"></a>test to</h3><h1 id="其他概念"><a href="#其他概念" class="headerlink" title="其他概念"></a>其他概念</h1><h2 id="KL散度"><a href="#KL散度" class="headerlink" title="KL散度"></a>KL散度</h2><p><a target="_blank" rel="noopener" href="https://wuli.wiki/online/KLD.html">KL 散度（相对熵） - 小时百科 (wuli.wiki)</a></p>
+<h3 id="Test-to"><a href="#Test-to" class="headerlink" title="Test to"></a>Test to</h3><h1 id="其他概念"><a href="#其他概念" class="headerlink" title="其他概念"></a>其他概念</h1><h2 id="KL-散度"><a href="#KL-散度" class="headerlink" title="KL 散度"></a>KL 散度</h2><p><a target="_blank" rel="noopener" href="https://wuli.wiki/online/KLD.html">KL 散度（相对熵） - 小时百科 (wuli.wiki)</a></p>
 <p><strong>KL 散度</strong>（Kullback–Leibler divergence，缩写 KLD）是一种统计学度量，<strong>表示的是一个概率分布相对于另一个概率分布的差异程度</strong>，在信息论中又称为<strong>相对熵</strong>（Relative entropy）。</p>
 <script type="math/tex; mode=display">\begin{equation}
 D_{KL}(P||Q)=\sum_{x\in X}P(x)ln(\frac{P(x)}{Q(x)})=\sum_{x\in X}P(x)(ln(P(x))-ln(Q(x)))~.
@@ -316,7 +316,7 @@ D_{KL}(P||Q)=\sum_{x\in X}P(x)ln(\frac{P(x)}{Q(x)})=\sum_{x\in X}P(x)(ln(P(x))-l
 <script type="math/tex; mode=display">\begin{equation}
 D_{KL}(P||Q)=\int_{-\infty}^{+\infty}p(x)ln(\frac{p(x)}{q(x)})dx~.
 \end{equation}</script><p> 显然，当 P=Q 时，$D_{KL}=0$</p>
-<p>两个一维高斯分布的KL散度公式：</p>
+<p>两个一维高斯分布的 KL 散度公式：</p>
 <blockquote>
 <p><a target="_blank" rel="noopener" href="https://hsinjhao.github.io/2019/05/22/KL-DivergenceIntroduction/">KL散度(Kullback-Leibler Divergence)介绍及详细公式推导 | HsinJhao’s Blogs</a></p>
 </blockquote>
@@ -325,8 +325,24 @@ KL(p,q)& =\int[\left.p(x)\log(p(x))-p(x)\log(q(x))\right]dx  \\
 &=-\frac12\left[1+\log(2\pi\sigma_1^2)\right]-\left[-\frac12\log(2\pi\sigma_2^2)-\frac{\sigma_1^2+(\mu_1-\mu_2)^2}{2\sigma_2^2}\right] \\
 &=\log\frac{\sigma_2}{\sigma_1}+\frac{\sigma_1^2+(\mu_1-\mu_2)^2}{2\sigma_2^2}-\frac12
 \end{aligned}</script><h2 id="参数重整化"><a href="#参数重整化" class="headerlink" title="参数重整化"></a>参数重整化</h2><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1b541197HX/">DDPMb站视频</a>公式推导</p>
-<p>从高斯分布中直接采样一个值出来是不可导的，无法进行梯度传递，需要进行参数重整化：<br>从$\mathcal{N}(0,1)$中随机采样出来z，然后对z做$\mu + z * \sigma$ 相当于从高斯分布$\mathcal{N}(\mu,\sigma)$中采样</p>
-<h1 id="Stable-Diffusion"><a href="#Stable-Diffusion" class="headerlink" title="Stable Diffusion"></a>Stable Diffusion</h1><h2 id="采样器"><a href="#采样器" class="headerlink" title="采样器"></a>采样器</h2><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1FN411i7sB/">Stable diffusion采样器全解析，30种采样算法教程</a><br>DPM++2M Karras，收敛+速度快+质量 OK</p>
+<p>从高斯分布中直接采样一个值出来是不可导的，无法进行梯度传递，需要进行参数重整化：<br>从 $\mathcal{N}(0,1)$ 中随机采样出来 z，然后对 z 做 $\mu + z * \sigma$ 相当于从高斯分布 $\mathcal{N}(\mu,\sigma)$ 中采样</p>
+<h1 id="Stable-Diffusion"><a href="#Stable-Diffusion" class="headerlink" title="Stable Diffusion"></a>Stable Diffusion</h1><p>目前常见的 UI 有 WebUI 和 ComfyUI</p>
+<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p>模型格式：</p>
+<ul>
+<li>主模型 checkpoints：<em>ckpt, safetensors</em></li>
+<li>微调模型<ul>
+<li>LoRA 和 LyCORIS 控制画风和角色：<em>safetensors</em></li>
+<li>文本编码器模型：<em>pt,safetensors</em><ul>
+<li>Embedding 输入文本 prompt 进行编码 <em>pt</em></li>
+</ul>
+</li>
+<li>Hypernetworks 低配版的 lora <em>pt</em></li>
+<li>ControlNet</li>
+<li>VAE 图片与潜在空间 <em>pt</em></li>
+</ul>
+</li>
+</ul>
+<h2 id="采样器"><a href="#采样器" class="headerlink" title="采样器"></a>采样器</h2><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1FN411i7sB/">Stable diffusion采样器全解析，30种采样算法教程</a><br>DPM++2M Karras，收敛+速度快+质量 OK</p>
 <p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231022195103.png" alt="image.png|666"></p>
 
     </div>
@@ -431,7 +447,7 @@ KL(p,q)& =\int[\left.p(x)\log(p(x))-p(x)\log(q(x))\right]dx  \\
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#VAE"><span class="nav-text">VAE</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Diffusion-Model"><span class="nav-text">Diffusion Model</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DDPM-Denoising-Diffusion-Probabilistic-Models"><span class="nav-text">DDPM(Denoising Diffusion Probabilistic Models)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DDPM-Code"><span class="nav-text">DDPM Code</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Schedule"><span class="nav-text">Schedule</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Forward-Process"><span class="nav-text">Forward Process</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reverse-Process"><span class="nav-text">Reverse Process</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#test-to"><span class="nav-text">test to</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E6%A6%82%E5%BF%B5"><span class="nav-text">其他概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#KL%E6%95%A3%E5%BA%A6"><span class="nav-text">KL散度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E9%87%8D%E6%95%B4%E5%8C%96"><span class="nav-text">参数重整化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Stable-Diffusion"><span class="nav-text">Stable Diffusion</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%87%E6%A0%B7%E5%99%A8"><span class="nav-text">采样器</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#VAE"><span class="nav-text">VAE</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Diffusion-Model"><span class="nav-text">Diffusion Model</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DDPM-Denoising-Diffusion-Probabilistic-Models"><span class="nav-text">DDPM(Denoising Diffusion Probabilistic Models)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DDPM-Code"><span class="nav-text">DDPM Code</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Schedule"><span class="nav-text">Schedule</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Forward-Process"><span class="nav-text">Forward Process</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reverse-Process"><span class="nav-text">Reverse Process</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Test-to"><span class="nav-text">Test to</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E6%A6%82%E5%BF%B5"><span class="nav-text">其他概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#KL-%E6%95%A3%E5%BA%A6"><span class="nav-text">KL 散度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E9%87%8D%E6%95%B4%E5%8C%96"><span class="nav-text">参数重整化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Stable-Diffusion"><span class="nav-text">Stable Diffusion</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B"><span class="nav-text">模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%87%E6%A0%B7%E5%99%A8"><span class="nav-text">采样器</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -446,14 +462,14 @@ KL(p,q)& =\int[\left.p(x)\log(p(x))-p(x)\log(q(x))\right]dx  \\
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">117</span>
+          <span class="site-state-item-count">118</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -507,12 +523,12 @@ KL(p,q)& =\int[\left.p(x)\log(p(x))-p(x)\log(q(x))\right]dx  \\
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">438k</span>
+    <span title="Symbols count total">446k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">26:33</span>
+    <span title="Reading time total">27:01</span>
 </div>
 
         

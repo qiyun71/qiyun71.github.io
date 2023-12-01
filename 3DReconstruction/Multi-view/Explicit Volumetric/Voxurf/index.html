@@ -20,22 +20,23 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="My post Brief description status     NeRF + Code NeRF 原理 + 代码理解 Completed   Neus + Code 表面重建方法 SDFNetwork Completed   InstantNGP + Tiny-cuda-nn 加速 NeRF 的训练和推理 Completed（Tcnn）   Instant-nsr-pl + Co">
+  <meta name="description" content="Title Voxurf: Voxel-based Efficient and Accurate Neural Surface Reconstruction     Author Tong Wu and Jiaqi Wang and Xingang Pan and Xudong Xu and Christian Theobalt and Ziwei Liu and Dahua Lin">
 <meta property="og:type" content="article">
-<meta property="og:title" content="NeRF">
-<meta property="og:url" content="http://example.com/3DReconstruction/Basic%20Knowledge/NeRF/NeRF/index.html">
-<meta property="og:site_name" content="YunQi">
-<meta property="og:description" content="My post Brief description status     NeRF + Code NeRF 原理 + 代码理解 Completed   Neus + Code 表面重建方法 SDFNetwork Completed   InstantNGP + Tiny-cuda-nn 加速 NeRF 的训练和推理 Completed（Tcnn）   Instant-nsr-pl + Co">
+<meta property="og:title" content="Voxurf">
+<meta property="og:url" content="http://example.com/3DReconstruction/Multi-view/Explicit%20Volumetric/Voxurf/index.html">
+<meta property="og:site_name" content="QiYun">
+<meta property="og:description" content="Title Voxurf: Voxel-based Efficient and Accurate Neural Surface Reconstruction     Author Tong Wu and Jiaqi Wang and Xingang Pan and Xudong Xu and Christian Theobalt and Ziwei Liu and Dahua Lin">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230627160834.png">
-<meta property="article:published_time" content="2023-06-27T08:09:09.000Z">
-<meta property="article:modified_time" content="2023-11-24T08:03:43.136Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231201171502.png">
+<meta property="article:published_time" content="2023-12-01T09:13:07.000Z">
+<meta property="article:modified_time" content="2023-12-01T11:57:48.950Z">
 <meta property="article:author" content="Qi Yun">
-<meta property="article:tag" content="NeRF">
+<meta property="article:tag" content="3DReconstruction">
+<meta property="article:tag" content="Voxel">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230627160834.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231201171502.png">
 
-<link rel="canonical" href="http://example.com/3DReconstruction/Basic%20Knowledge/NeRF/NeRF/">
+<link rel="canonical" href="http://example.com/3DReconstruction/Multi-view/Explicit%20Volumetric/Voxurf/">
 
 
 <script id="page-configurations">
@@ -48,7 +49,7 @@
   };
 </script>
 
-  <title>NeRF | YunQi</title>
+  <title>Voxurf | QiYun</title>
   
 
 
@@ -103,7 +104,7 @@
 
     <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">YunQi</h1>
+      <h1 class="site-title">QiYun</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
       <p class="site-subtitle" itemprop="description">Note</p>
@@ -197,7 +198,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/3DReconstruction/Basic%20Knowledge/NeRF/NeRF/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/3DReconstruction/Multi-view/Explicit%20Volumetric/Voxurf/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpeg">
@@ -206,11 +207,11 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YunQi">
+      <meta itemprop="name" content="QiYun">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          NeRF
+          Voxurf
         </h1>
 
         <div class="post-meta">
@@ -220,23 +221,17 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2023-06-27 16:09:09" itemprop="dateCreated datePublished" datetime="2023-06-27T16:09:09+08:00">2023-06-27</time>
+              <time title="Created: 2023-12-01 17:13:07 / Modified: 19:57:48" itemprop="dateCreated datePublished" datetime="2023-12-01T17:13:07+08:00">2023-12-01</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-11-24 16:03:43" itemprop="dateModified" datetime="2023-11-24T16:03:43+08:00">2023-11-24</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/3DReconstruction-Basic-Knowledge-NeRF/" itemprop="url" rel="index"><span itemprop="name">3DReconstruction/Basic Knowledge/NeRF</span></a>
+                  <a href="/categories/3DReconstruction-Multi-view-Explicit-Volumetric/" itemprop="url" rel="index"><span itemprop="name">3DReconstruction/Multi-view/Explicit Volumetric</span></a>
                 </span>
             </span>
 
@@ -245,13 +240,13 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>260</span>
+              <span>2.4k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span>1 mins.</span>
+              <span>9 mins.</span>
             </span>
 
         </div>
@@ -267,89 +262,54 @@
 <table>
 <thead>
 <tr>
-<th>My post</th>
-<th>Brief description</th>
-<th>status</th>
+<th>Title</th>
+<th>Voxurf: Voxel-based Efficient and Accurate Neural Surface Reconstruction</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><a href="NeRF-Principle.md">NeRF</a> + <a href="NeRF-code.md">Code</a></td>
-<td>NeRF 原理 + 代码理解</td>
-<td>Completed</td>
+<td>Author</td>
+<td>Tong Wu and Jiaqi Wang and Xingang Pan and Xudong Xu and Christian Theobalt and Ziwei Liu and Dahua Lin</td>
 </tr>
 <tr>
-<td><a href="Neus.md">Neus</a> + <a href="Neus-code.md">Code</a></td>
-<td>表面重建方法 SDFNetwork</td>
-<td>Completed</td>
+<td>Conf/Jour</td>
+<td>ICLR</td>
 </tr>
 <tr>
-<td><a href="NeRF-InstantNGP.md">InstantNGP</a> + <a href="NeRF-InstantNGP-code.md">Tiny-cuda-nn</a></td>
-<td>加速 NeRF 的训练和推理</td>
-<td>Completed（Tcnn）</td>
+<td>Year</td>
+<td>2023</td>
 </tr>
 <tr>
-<td><a href="Neus-Instant-nsr-pl.md">Instant-nsr-pl</a> + <a href="Neus-Instant-nsr-pl-code.md">Code</a></td>
-<td>Neus+Tcnn+NSR+pl</td>
-<td>Completed</td>
+<td>Project</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/wutong16/Voxurf">wutong16/Voxurf: [ ICLR 2023 Spotlight ] Pytorch implementation for “Voxurf: Voxel-based Efficient and Accurate Neural Surface Reconstruction” (github.Com)</a></td>
 </tr>
 <tr>
-<td><a href="Instant-NSR.md">Instant-NSR</a> + <a href="Instant-NSR-code.md">Code</a></td>
-<td>快速表面重建</td>
-<td>Completed</td>
-</tr>
-<tr>
-<td><a href="NeRO.md">NeRO</a> + <a href="NeRO-code.md">Code</a></td>
-<td>考虑镜面和漫反射的体渲染函数</td>
-<td>In Processing</td>
-</tr>
-<tr>
-<td><a href="NeRF-Mine.md">NeRF-Mine</a></td>
-<td>基于 Instant-nsr-pl 创建的项目</td>
-<td>Completed</td>
+<td>Paper</td>
+<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4789011193549291521&amp;noteId=2073894198108795136">Voxurf: Voxel-based Efficient and Accurate Neural Surface Reconstruction (readpaper.com)</a></td>
 </tr>
 </tbody>
 </table>
 </div>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>My post</th>
-<th>Brief description</th>
-<th>status</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="NeRF-Studio.md">Nerfstudio</a></td>
-<td>一个更加方便训练和查看训练过程的框架</td>
-<td>Completed in AutoDL</td>
-</tr>
-<tr>
-<td><a href="NeRF-review.md">NeRF Review</a></td>
-<td>追踪一些 NeRF 的进展和笔记 link</td>
-<td>Following <a target="_blank" rel="noopener" href="https://space.bilibili.com/455056488/channel/collectiondetail?sid=910368">Jason 陪你练绝技 in Bilibili</a></td>
-</tr>
-<tr>
-<td><a href="Other%20Paper%20About%20Reconstruction.md">Other Paper About Reconstruction</a></td>
-<td>Other Paper about Reconstruction</td>
-<td>CVPR/ICCV/ECCV/NIPS/ICML/ICLR/SIGGRAPH</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>Related link : <a target="_blank" rel="noopener" href="https://paperswithcode.com/task/3d-reconstruction">3D Reconstruction</a> | <a target="_blank" rel="noopener" href="https://github.com/lif314/awesome-NeRF-papers">awesome-NeRF-papers</a></p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231201171502.png" alt="image.png|666"></p>
+<p>依赖mask即rembg技术</p>
 <span id="more"></span>
-<p><p style= "text-align: center;">流程图点击编辑，更方便观看</p></p>
-<div style="text-align:center">
-    <img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230627160834.png" alt="Image" />
-</div>
-
-<p>基于 Drawio 绘制的流程图，导出为嵌入的 Iframe</p>
-<iframe frameborder="0" style="width:100%;height:243px;" src="https://viewer.diagrams.net/?tags=%7B%7D&highlight=0000ff&edit=_blank&layers=1&nav=1#RnZTBbqMwEEC%2FZo6VwFCwj5hAq1WTQ3Poqjc2uIAEmLhOSfr1tY1JQBBpd6VIsd%2BMxzBvBHhxc34SWVduec5qQE5%2BBm8DCLme76s%2FTS4DCd1gAIWocpt0A%2Fvqm1noWHqqcvY5S5Sc17Lq5vDA25Yd5IxlQvB%2BnvbB6%2FmtXVawBdgfsnpJ36pclgPFKLzxZ1YV5XizG5Ah0mRjsn2TzzLLeT9BXgJeLDiXw6o5x6zWzRv7MpxL70SvDyZYK%2F%2FmwPvuuP%2Bmv5vt8aW7vL573OXPD7bKV1af7AtDQgA7QCJIMNAUcAhJCBgBJZA86i2lmtAYSGByEiAuJKkmODY5KUQpJL7OjB41UTkYQxLoI7qOr4kqrkIkBuqsFVQhZAqqU6mpE%2BpkTDWh6hZXkwgbopKpPjh0Wl5GfYKf2pzpDrjg0b6sJNt32UFHezWwipWyqW34g7fSTqCaUo8uOzy2iwnJzhNkO%2F7EeMOkuKgUG0WBtW%2FHf9z2t1m6snIyR9iyzI5vca18M6wWVvK68C%2F0uj2%2BBWLX5H9SVOyY%2F4s8oBXhvnZC0jV1ajE0WGnZ6J%2FOwcZYoG1E8cShmRdikiPXqPMNMaeiDRA8sboQfl%2Bd87%2FqFp5WbN5X58zVXfcTdx5ecec6%2Fy5PbW9fAhObfE%2B95Ac%3D"></iframe>
-
-
+<h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>神经表面重建的目的是基于多视图图像重建精确的三维表面。以前基于神经体绘制的方法大多是用 mlp 训练一个完全隐式的模型，这通常需要数小时的训练来处理单个场景。最近的研究探索了显式体积表示，通过记忆具有可学习体素网格的重要信息来加速优化。然而，现有的基于体素的方法往往难以重建细粒度的几何形状，即使与基于 sdf 的体绘制方案相结合也是如此。我们发现这是因为 1)体素网格倾向于打破有利于精细几何学习的颜色几何依赖;2)约束不足的体素网格缺乏空间一致性，容易受到局部极小值的影响。在这项工作中，我们提出了 Voxurf，一种基于体素的表面重建方法，既高效又准确。Voxurf 通过几个关键设计解决了上述问题，包括 1)一个两阶段的训练过程，获得连贯的粗形状并连续恢复精细细节，2)一个保持颜色几何依赖性的双色网络，以及 3)一个分层几何特征，以鼓励信息跨体素传播。大量的实验表明，Voxurf 同时实现了高效率和高质量。在 DTU 基准测试中，与之前的全隐式方法相比，Voxurf 以 20 倍的训练加速实现了更高的重建质量。</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p><strong>基于多视图图像的神经表面重建 + 完全隐式 MLP</strong><br>近年来，基于多视图图像的神经表面重建取得了巨大进展。受 Neural Radiance Fields (NeRF) (Mildenhall et al.， 2020)在 Novel View Synthesis (NVS)上的成功启发，最近的作品遵循神经体渲染方案，通过完全隐式模型(Oechsle et al.， 2021)使用有符号距离函数(SDF)或占用场表示 3D 几何形状。Yariv 等，2021;Wang 等人，2021)。这些方法训练了一个深度多层感知器(MLP)，它在每个相机光线上采集数百个采样点，并输出相应的颜色和几何信息。然后通过测量每条光线上累积的颜色与地面真实值之间的差异来应用逐像素监督。使用纯基于 mlp 的框架学习所有几何和颜色细节，这些方法需要对单个场景进行数小时的训练，这大大限制了它们在现实世界中的应用。</p>
+<p><strong>NeRF 显示体积方法</strong><br>NeRF 的最新进展借助显式体积表示加速了训练过程(Sun et al.， 2022a;Yu et al.， 2022a;Chen et al.， 2022)。这些作品通过显式体素网格直接存储和优化几何和颜色信息。例如，查询点的密度可以很容易地从八个相邻点中插值出来，并且与视图相关的颜色要么用球面谐波系数表示(Yu 等人，2022a)，要么用将可学习的网格特征作为辅助输入的浅 mlp 预测(Sun 等人，2022a)。这些方法以更低的训练成本(&lt; 20 分钟)获得具有竞争力的渲染性能。<strong>然而，它们的三维表面重建结果不能忠实地反映精确的几何形状，存在明显的噪声和孔洞</strong>(图 1 (a))。这是由于基于密度的体绘制方案固有的模糊性，而明确的体表示引入了额外的挑战。</p>
+<p><strong>本文Voxurf</strong><br>在这项工作中，我们的目标是利用显式体积表示进行有效的训练，并提出定制设计来获得高质量的表面重建。为此，一个简单的想法是嵌入基于sdf的体绘制方案(Wang et al.， 2021;Yariv等人，2021)将其转化为明确的体积表示框架(Sun等人，2022a)。然而，我们发现这个naive基线模型不能很好地工作，因为它丢失了大部分几何细节并产生了不希望的噪声(图1 (c))。我们揭示了这个框架的几个关键问题如下。</p>
+<ul>
+<li>首先，在完全隐式模型中，颜色网络将表面法线作为输入，有效地建立颜色几何依赖关系，促进精细几何学习。然而，在基线模型中，颜色网络倾向于更多地依赖于额外的欠约束体素特征网格输入，从而打破了颜色几何依赖性。</li>
+<li>其次，由于优化体素网格的自由度很高，如果没有额外的约束，很难保持全局一致的形状。每个体素点的单独优化阻碍了整个体素网格的信息共享，这损害了表面的平滑性并引入了局部最小值。</li>
+</ul>
+<p>为了应对挑战，我们引入了Voxurf，这是一种高效的基于体素的精确表面重建管道:<br>1)我们利用两阶段的训练过程，获得连贯的粗形状并连续恢复精细细节。<br>2)我们设计了一个双色网络，它能够通过体素网格表示复杂的颜色场，并与协同工作的两个子网络保持颜色几何依赖性。<br>3)我们还提出了基于SDF体素网格的分层几何特征，以促进更大区域的信息共享，从而实现稳定的优化。<br>4)我们引入了几个有效的正则化项来提高平滑性和降低噪声。</p>
+<p><strong>具体实施+更好的结果</strong><br>我们对DTU (Jensen et al.， 2014)和BlendedMVS (Yao et al.， 2020)数据集进行了实验，以进行定量和定性评估。实验结果表明，Voxurf在DTU (Jensen et al.， 2014)基准上实现了比竞争性全隐式方法news (Wang et al.， 2021)更低的倒角距离，加速速度约为20倍。在NVS的辅助任务上也取得了显著的效果。如图1所示，与之前的方法相比，我们的方法在几何重建和图像渲染中都具有保留高频细节的优势。综上所述，我们的贡献如下:</p>
+<ul>
+<li>与SOTA方法相比，我们的方法使训练速度提高了约20倍，在单个Nvidia A100 GPU上将训练时间从5个多小时减少到15分钟。</li>
+<li>我们的方法实现了更高的表面重建保真度和新颖的视图合成质量，与以前的方法相比，在表面恢复和图像渲染方面都具有更好的细节表现。</li>
+<li>我们的研究为表面重建的显式体表示框架的架构设计提供了深刻的观察和分析。</li>
+</ul>
+<h2 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h2><p>Multi-view 3D reconstruction<br>最近，通过神经网络编码3D场景的几何形状和外观的隐式表示引起了人们的关注(Park等人，2019;Chen &amp; Zhang, 2019;Lombardi等人，2019;Mescheder等人，2019;Sitzmann et al.， 2019b;Saito等人，2019;Atzmon等人，2019;Jiang et al.， 2020;Zhang et al.， 2021;Toussaint et al.， 2022)。<br>其中，大量的论文探讨了从多视图图像中重建神经表面。基于表面渲染的方法(Niemeyer et al.， 2020;Yariv等，2020;刘等，2020b;Kellnhofer et al.， 2021)将光线与表面交点的颜色作为最终渲染的颜色，同时要求精确的对象蒙版和仔细的权重初始化。<br>最近的研究方法(Wang et al.， 2021;Yariv等，2021;Oechsle等人，2021;Darmon et al.， 2022;Zhang et al.， 2022;刘等，2020a;Sitzmann et al.， 2019a)基于体绘制(Max, 1995)在统一模型中制定了辐射场和隐式表面表示，从而实现了两种技术的优点。<br><strong>然而，在纯MLP网络中对整个场景进行编码需要很长的训练时间</strong>。与这些作品不同，我们利用可学习的体素网格和浅颜色网络进行快速收敛，并在表面和渲染图像中追求精细细节。</p>
+<p>Explicit volumetric representation<br>尽管隐式神经表征在3D建模中取得了成功，但最近的进展已经集成了显式3D表征，例如点云、体素和MPIs (Mildenhall等人，2019)，并受到越来越多的关注(Wizadwongsa等人，2021;Xu et al.， 2022;Lombardi等人，2019;Wang et al.， 2022;Fang等人，2022)。<br>Instant-ngp使用多分辨率哈希进行高效编码，并实现了完全融合的CUDA内核。<br>Plenoxels (Yu et al.， 2022a)将场景表示为具有球面谐波的稀疏3D网格，其优化速度比NeRF (Mildenhall et al.， 2020)快两个数量级。<br>TensoRF (Chen et al.， 2022)将全体积场视为4D张量，并将其分解为多个紧凑的低秩张量分量以提高效率。<br>与我们最相关的方法是DVGO (Sun et al.， 2022a)，它采用混合架构设计，包括体素网格和浅MLP。尽管它们在新视图合成方面取得了显著的成果，<strong>但它们都不是为了忠实地重建场景的几何形状而设计的</strong>。相比之下，我们的目标不仅是从新颖的视点绘制逼真的图像，而且还重建具有精细细节的高质量表面。</p>
 
     </div>
 
@@ -379,7 +339,8 @@
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/NeRF/" rel="tag"><i class="fa fa-tag"></i> NeRF</a>
+              <a href="/tags/3DReconstruction/" rel="tag"><i class="fa fa-tag"></i> 3DReconstruction</a>
+              <a href="/tags/Voxel/" rel="tag"><i class="fa fa-tag"></i> Voxel</a>
           </div>
 
         
@@ -388,13 +349,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/Learn/Learn-Git/" rel="prev" title="Git学习">
-      <i class="fa fa-chevron-left"></i> Git学习
+    <a href="/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/VolSDF/" rel="prev" title="VolSDF">
+      <i class="fa fa-chevron-left"></i> VolSDF
     </a></div>
-      <div class="post-nav-item">
-    <a href="/3DReconstruction/Basic%20Knowledge/NeRF/Efficiency/NeRF-InstantNGP/" rel="next" title="InstantNGP">
-      InstantNGP <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -453,6 +411,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract"><span class="nav-text">Abstract</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Related-Work"><span class="nav-text">Related Work</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -467,14 +426,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">117</span>
+          <span class="site-state-item-count">118</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -528,12 +487,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">438k</span>
+    <span title="Symbols count total">446k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">26:33</span>
+    <span title="Reading time total">27:01</span>
 </div>
 
         
