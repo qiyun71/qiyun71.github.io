@@ -1,8 +1,8 @@
 {
   "recentFiles": [
     {
-      "basename": "2K2K",
-      "path": "3DReconstruction/Single-view/Depth Estimation/2K2K.md"
+      "basename": "Other Paper About Reconstruction",
+      "path": "3DReconstruction/Basic Knowledge/Other Paper About Reconstruction.md"
     },
     {
       "basename": "Multi-view 3D Reconstruction",
@@ -13,12 +13,28 @@
       "path": "3DReconstruction/Multi-view/Depth Estimation/MVSNet.md"
     },
     {
-      "basename": "DiffuStereo",
-      "path": "3DReconstruction/Multi-view/Generative Models/DiffuStereo.md"
+      "basename": "2K2K",
+      "path": "3DReconstruction/Single-view/Depth Estimation/2K2K.md"
     },
     {
-      "basename": "Other Paper About Reconstruction",
-      "path": "3DReconstruction/Basic Knowledge/Other Paper About Reconstruction.md"
+      "basename": "A Review of Deep Learning-Powered Mesh Reconstruction Methods",
+      "path": "3DReconstruction/Basic Knowledge/NeRF/Review/A Review of Deep Learning-Powered Mesh Reconstruction Methods.md"
+    },
+    {
+      "basename": "2023 Conf about NeRF",
+      "path": "3DReconstruction/Basic Knowledge/NeRF/Review/2023 Conf about NeRF.md"
+    },
+    {
+      "basename": "A Critical Analysis of NeRF-Based 3D Reconstruction",
+      "path": "3DReconstruction/Basic Knowledge/NeRF/Review/A Critical Analysis of NeRF-Based 3D Reconstruction.md"
+    },
+    {
+      "basename": "NeRF in the industrial and robotics domain",
+      "path": "3DReconstruction/Basic Knowledge/NeRF/Review/NeRF in the industrial and robotics domain.md"
+    },
+    {
+      "basename": "DiffuStereo",
+      "path": "3DReconstruction/Multi-view/Generative Models/DiffuStereo.md"
     },
     {
       "basename": "Multi-view Human Body Reconstruction",

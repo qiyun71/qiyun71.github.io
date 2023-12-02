@@ -8,38 +8,12 @@
         "type": "tabs",
         "children": [
           {
-            "id": "cd90de63db4ce1a2",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "3DReconstruction/Single-view/Depth Estimation/2K2K.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              }
-            }
-          },
-          {
             "id": "60943374f0c75833",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
                 "file": "3DReconstruction/Basic Knowledge/Other Paper About Reconstruction.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "e705e5af07c1a369",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "3DReconstruction/Multi-view/Depth Estimation/MVSNet.md",
                 "mode": "source",
                 "backlinks": false,
                 "source": false
@@ -66,7 +40,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "3DReconstruction/Single-view/Depth Estimation/2K2K.md"
+                "file": "3DReconstruction/Basic Knowledge/Other Paper About Reconstruction.md"
               }
             }
           },
@@ -105,7 +79,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "3DReconstruction/Single-view/Depth Estimation/2K2K.md",
+                "file": "3DReconstruction/Basic Knowledge/Other Paper About Reconstruction.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -122,7 +96,7 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "3DReconstruction/Single-view/Depth Estimation/2K2K.md",
+                "file": "3DReconstruction/Basic Knowledge/Other Paper About Reconstruction.md",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -218,7 +192,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 242.5
+    "width": 273.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -235,12 +209,17 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "cd90de63db4ce1a2",
+  "active": "60943374f0c75833",
   "lastOpenFiles": [
     "3DReconstruction/Basic Knowledge/Multi-view 3D Reconstruction.md",
-    "3DReconstruction/Multi-view/Depth Estimation/MVSNet.md",
-    "3DReconstruction/Multi-view/Generative Models/DiffuStereo.md",
     "3DReconstruction/Basic Knowledge/Other Paper About Reconstruction.md",
+    "3DReconstruction/Multi-view/Depth Estimation/MVSNet.md",
+    "3DReconstruction/Single-view/Depth Estimation/2K2K.md",
+    "3DReconstruction/Basic Knowledge/NeRF/Review/2023 Conf about NeRF.md",
+    "3DReconstruction/Basic Knowledge/NeRF/Review/A Review of Deep Learning-Powered Mesh Reconstruction Methods.md",
+    "3DReconstruction/Basic Knowledge/NeRF/Review/A Critical Analysis of NeRF-Based 3D Reconstruction.md",
+    "3DReconstruction/Basic Knowledge/NeRF/Review/NeRF in the industrial and robotics domain.md",
+    "3DReconstruction/Multi-view/Generative Models/DiffuStereo.md",
     "3DReconstruction/Basic Knowledge/Multi-view Human Body Reconstruction.md",
     "3DReconstruction/Multi-view/Hybrid Methods/DMV3D.md",
     "3DReconstruction/Single-view/Generative Models/DMTet.md",
@@ -258,11 +237,6 @@
     "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Efficiency/PermutoSDF.md",
     "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Efficiency/NeuS2.md",
     "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Efficiency/Neus-Instant-nsr-pl.md",
-    "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Efficiency/Neus-Instant-nsr-pl-code.md",
-    "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Efficiency/Neuralangelo.md",
-    "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Efficiency/Instant-NSR.md",
-    "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Efficiency/Instant-NSR-code.md",
-    "3DReconstruction/Single-view/Other/HumanBody/HRN.md",
     "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Shadow&Highlight",
     "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Efficiency",
     "3DReconstruction/Single-view/Other/HumanBody",
