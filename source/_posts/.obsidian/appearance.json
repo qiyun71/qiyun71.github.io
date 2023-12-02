@@ -3,9 +3,9 @@
   "theme": "moonstone",
   "translucency": false,
   "cssTheme": "Minimal",
-  "interfaceFontFamily": "霞鹜文楷,HarmonyOS Sans SC,朱雀仿宋（预览测试版）,HarmonyOS Sans TC,JetBrains Mono",
+  "interfaceFontFamily": "霞鹜文楷,Maple Mono,朱雀仿宋（预览测试版）,HarmonyOS Sans SC,HarmonyOS Sans TC,JetBrains Mono",
   "textFontFamily": "HarmonyOS Sans SC,霞鹜文楷,朱雀仿宋（预览测试版）,JetBrains Mono",
-  "monospaceFontFamily": "JetBrains Mono,HarmonyOS Sans SC",
+  "monospaceFontFamily": "Maple Mono,JetBrains Mono,HarmonyOS Sans SC",
   "accentColor": "#51a1cd",
   "nativeMenus": false,
   "enabledCssSnippets": [

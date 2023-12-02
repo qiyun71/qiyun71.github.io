@@ -4,16 +4,37 @@
     "type": "split",
     "children": [
       {
-        "id": "3279a6923621c58a",
+        "id": "9448a533a2fcbffe",
         "type": "tabs",
         "children": [
           {
+<<<<<<< HEAD
             "id": "60943374f0c75833",
+=======
+            "id": "60bee893799ed291",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
+                "file": "3DReconstruction/Multi-view/Explicit Volumetric/Voxurf.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "1621d200a014c5e4",
+>>>>>>> 919bc3bdf62bb8b43b98ea860305b6ebe43260c9
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+<<<<<<< HEAD
                 "file": "3DReconstruction/Basic Knowledge/Other Paper About Reconstruction.md",
+=======
+                "file": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/VolSDF.md",
+>>>>>>> 919bc3bdf62bb8b43b98ea860305b6ebe43260c9
                 "mode": "source",
                 "backlinks": false,
                 "source": false
@@ -40,7 +61,11 @@
             "state": {
               "type": "outline",
               "state": {
+<<<<<<< HEAD
                 "file": "3DReconstruction/Basic Knowledge/Other Paper About Reconstruction.md"
+=======
+                "file": "3DReconstruction/Multi-view/Explicit Volumetric/Voxurf.md"
+>>>>>>> 919bc3bdf62bb8b43b98ea860305b6ebe43260c9
               }
             }
           },
@@ -79,7 +104,11 @@
             "state": {
               "type": "backlink",
               "state": {
+<<<<<<< HEAD
                 "file": "3DReconstruction/Basic Knowledge/Other Paper About Reconstruction.md",
+=======
+                "file": "3DReconstruction/Multi-view/Explicit Volumetric/Voxurf.md",
+>>>>>>> 919bc3bdf62bb8b43b98ea860305b6ebe43260c9
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -96,7 +125,11 @@
             "state": {
               "type": "localgraph",
               "state": {
+<<<<<<< HEAD
                 "file": "3DReconstruction/Basic Knowledge/Other Paper About Reconstruction.md",
+=======
+                "file": "3DReconstruction/Multi-view/Explicit Volumetric/Voxurf.md",
+>>>>>>> 919bc3bdf62bb8b43b98ea860305b6ebe43260c9
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -146,7 +179,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "Wonder3D",
+                "query": "",
                 "matchingCase": true,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -209,9 +242,19 @@
       "templater-obsidian:Templater": false
     }
   },
+<<<<<<< HEAD
   "active": "60943374f0c75833",
+=======
+  "active": "60bee893799ed291",
+>>>>>>> 919bc3bdf62bb8b43b98ea860305b6ebe43260c9
   "lastOpenFiles": [
+    "3DReconstruction/Multi-view/Implicit Function/NeRF-based/VolSDF.md",
+    "3DReconstruction/Multi-view/Explicit Volumetric/Voxurf.md",
+    "3DReconstruction/Multi-view/Explicit Volumetric/Plenoxels.md",
+    "3DReconstruction/Multi-view/Explicit Volumetric/Point-NeRF.md",
+    "3DReconstruction/Multi-view/Explicit Volumetric/3D Gaussian Splatting.md",
     "3DReconstruction/Basic Knowledge/Multi-view 3D Reconstruction.md",
+<<<<<<< HEAD
     "3DReconstruction/Basic Knowledge/Other Paper About Reconstruction.md",
     "3DReconstruction/Multi-view/Depth Estimation/MVSNet.md",
     "3DReconstruction/Single-view/Depth Estimation/2K2K.md",
@@ -237,6 +280,29 @@
     "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Efficiency/PermutoSDF.md",
     "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Efficiency/NeuS2.md",
     "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Efficiency/Neus-Instant-nsr-pl.md",
+=======
+    "3DReconstruction/Multi-view/Explicit Volumetric",
+    "Other/Mine/Write.md",
+    "3DReconstruction/Basic Knowledge/NeRF/Review/A Review of Deep Learning-Powered Mesh Reconstruction Methods.md",
+    "3DReconstruction/Basic Knowledge/NeRF/Review/NeRF in the industrial and robotics domain.md",
+    "3DReconstruction/Basic Knowledge/NeRF/Review/2023 Conf about NeRF.md",
+    "3DReconstruction/Basic Knowledge/NeRF/Review/A Critical Analysis of NeRF-Based 3D Reconstruction.md",
+    "3DReconstruction/Multi-view/Implicit Function/NeRF-based/NeuS.md",
+    "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Neus-code.md",
+    "3DReconstruction/Multi-view/Implicit Function/NeRF-based/PlankAssembly.md",
+    "3DReconstruction/Basic Knowledge/NeRF/CameraPose/Pose Estimation Review.md",
+    "3DReconstruction/Multi-view/Implicit Function/NeRF-based/UNISURF.md",
+    "3DReconstruction/Multi-view/Implicit Function/NeRF-based/RayDF.md",
+    "Other/Mine/IPV6.md",
+    "Other/Mine/Tools.md",
+    "Other/通俗形象地分析比较生成模型.md",
+    "Other/从感知机到Transformer，一文概述深度学习简史.md",
+    "3DReconstruction/Basic Knowledge/NeRF/NeRF-Mine.md",
+    "3DReconstruction/Basic Knowledge/Multi-view Human Body Reconstruction.md",
+    "未命名.md",
+    "3DReconstruction/Basic Knowledge/NeRF/NeRF/Encoding.md",
+    "3DReconstruction/Basic Knowledge/NeRF/NeRF/Sampling.md",
+>>>>>>> 919bc3bdf62bb8b43b98ea860305b6ebe43260c9
     "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Shadow&Highlight",
     "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Efficiency",
     "3DReconstruction/Single-view/Other/HumanBody",
@@ -247,7 +313,6 @@
     "3DReconstruction/Basic Knowledge/NeRF/Review",
     "3DReconstruction/Basic Knowledge/NeRF/NeRF.canvas",
     "3DReconstruction/Basic Knowledge/NeRF/CameraPose",
-    "3DReconstruction/Basic Knowledge/NeRF/LargeScaleScene",
     "NeRF/NeRF.canvas",
     "未命名.canvas",
     "Pasted image 20230718132040.png",

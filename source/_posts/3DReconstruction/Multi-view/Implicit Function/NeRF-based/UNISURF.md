@@ -2,8 +2,8 @@
 title: UNISURF
 date: 2023-08-06 14:32:58
 tags:
-  - UNISURF
   - SurfaceReconstruction
+  - NeRF
 categories: 3DReconstruction/Multi-view/Implicit Function/NeRF-based
 ---
 

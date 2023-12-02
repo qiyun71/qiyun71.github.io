@@ -213,7 +213,7 @@ sudo make install
 
 ### 本地处理数据集(同neus类似BMVS数据集形式)
 
-同neus使用自定义数据集[Neus](Neus.md#Neus使用自制数据集)
+同neus使用自定义数据集[NeuS](NeuS.md#Neus使用自制数据集)
 
 #### eg: 使用neus自定义数据集对M590三维重建
 

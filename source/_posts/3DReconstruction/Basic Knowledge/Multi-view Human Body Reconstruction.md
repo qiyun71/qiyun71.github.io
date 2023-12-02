@@ -9,6 +9,8 @@ categories: 3DReconstruction/Basic Knowledge
 date updated: 2023-11-05T16:50:36.000Z
 ---
 
+![Human.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/Human.png)
+
 Terminology/Jargon
 
 - Human Radiance Fields

@@ -10,6 +10,18 @@ date updated: 2023-08-11T17:30:59.000Z
 
 NeRF相关的论文 at CVPR/ICCV/ECCV/NIPS/ICML/ICLR/SIGGRAPH
 
+| My post                                                                                                                          | Brief description              | status            |
+| -------------------------------------------------------------------------------------------------------------------------------- | ------------------------------ | ----------------- |
+| [NeRF](NeRF-Principle.md) + [Code](NeRF-code.md)                                                                           | NeRF 原理 + 代码理解           | Completed         |
+| [NeuS](NeuS.md) + [Code](Neus-code.md)                                         | 表面重建方法 SDFNetwork        | Completed         |
+| [InstantNGP](NeRF-InstantNGP.md) + [Tiny-cuda-nn](NeRF-InstantNGP-code.md)                           | 加速 NeRF 的训练和推理         | Completed（Tcnn） |
+| [Instant-nsr-pl](Neus-Instant-nsr-pl.md) + [Code](Neus-Instant-nsr-pl-code.md) | Neus+Tcnn+NSR+pl               | Completed         |
+| [Instant-NSR](Instant-NSR.md) + [Code](Instant-NSR-code.md)                    | 快速表面重建                   | Completed         |
+| [NeRO](NeRO.md) + [Code](NeRO-code.md)       | 考虑镜面和漫反射的体渲染函数   | In Processing     |
+| [NeRF-Mine](NeRF-Mine.md)                                                                                                     | 基于 Instant-nsr-pl 创建的项目 | Completed         |
+
+Related link : [3D Reconstruction](https://paperswithcode.com/task/3d-reconstruction) | [awesome-NeRF-papers](https://github.com/lif314/awesome-NeRF-papers)
+
 <!-- more -->
 
 # NeRF
@@ -21,13 +33,22 @@ ECCV 2020 Oral - Best Paper Honorable Mention
 | [2020](NeRF-Principle.md) | [NeRF:Representing Scenes as Neural Radiance Fields for View Synthesis](https://www.matthewtancik.com/nerf) |        初始文        |    ECCV   |
 
 
-## Volume Rendering Function
+## 原理改进
+
+Volume Rendering Function
 
 ### PL-NeRF
 [mikacuy/PL-NeRF: NeRF Revisited: Fixing Quadrature Instability in Volume Rendering, Neurips 2023 (github.com)](https://github.com/mikacuy/PL-NeRF)
 
 NeRF 分段常数积分 --> PL-NeRF 分段线性积分
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231101151141.png)
+
+
+- StEik：基于 SDF 的隐式场优化问题(Neural SDF)，提出一个新的约束项
+  - [NeurIPS 2023 | 三维重建中的Neural SDF(Neural Implicit Surface) - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/649921965)
+  - [sunyx523/StEik (github.com)](https://github.com/sunyx523/StEik)
+- Rethinking Directional Integration in Neural Radiance Fields，修改了 **NeRF 的渲染方程**
+  - [Rethinking Directional Integration in Neural Radiance Fields (arxiv.org)](https://arxiv.org/abs/2311.16504)
 
 ## Efficiency
 
@@ -102,7 +123,7 @@ NeRF 分段常数积分 --> PL-NeRF 分段线性积分
 
 | Year                                                      |                                                                    Title&Project Page                                                                    |                                           Brief Description                                           |                               Conf/Jour                               |
 | --------------------------------------------------------- |:--------------------------------------------------------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------:|
-| [2021](Neus.md)                  |         [NeuS: Learning Neural Implicit Surfaces by Volume Rendering for Multi-view Reconstruction](https://lingjie0206.github.io/papers/NeuS/)          |                                         Neus: SDF表面重建方法                                         |                                NeurIPS                                |
+| [2021](NeuS.md)                  |         [NeuS: Learning Neural Implicit Surfaces by Volume Rendering for Multi-view Reconstruction](https://lingjie0206.github.io/papers/NeuS/)          |                                         Neus: SDF表面重建方法                                         |                                NeurIPS                                |
 | [2022](Instant-NSR.md)           |                         [Human Performance Modeling and Rendering via Neural Animated Mesh](https://zhaofuq.github.io/NeuralAM/)                         |                                  NSR: Neus_TSDF + NGP，但是依赖mask                                   |                             SIGGRAPH Asia                             |
 | [2023](Neus-Instant-nsr-pl.md)   |                                          [bennyguo/instant-nsr-pl](https://github.com/bennyguo/instant-nsr-pl)                                           |                                        Neus+NeRF+Nerfacc+tcnn                                         |                                 None                                  |
 | [2023](Neuralangelo.md)          |                     [Neuralangelo: High-Fidelity Neural Surface Reconstruction](https://research.nvidia.com/labs/dir/neuralangelo/)                      |                                       NGP_but数值梯度+Neus_SDF                                        | IEEE Conference on Computer Vision and Pattern Recognition (**CVPR**) |

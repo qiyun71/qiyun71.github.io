@@ -3,9 +3,8 @@ title: 3D Gaussian Splatting
 date: 2023-08-17 19:43:10
 tags:
   - PointCloud
-  - Splatting
   - Real-time
-categories: 3DReconstruction/Basic Knowledge/NeRF/PointCloud
+categories: 3DReconstruction/Multi-view/Explicit Volumetric
 ---
 
 | Title     | 3D Gaussian Splatting  for Real-Time Radiance Field Rendering                                                                                                                                                                                                                                    |

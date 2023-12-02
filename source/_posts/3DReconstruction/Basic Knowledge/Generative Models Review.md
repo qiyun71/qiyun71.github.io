@@ -403,3 +403,37 @@ MVS+NeRF
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231122201401.png)
 
+### HumanGaussian
+
+[HumanGaussian: Text-Driven 3D Human Generation with Gaussian Splatting (alvinliu0.github.io)](https://alvinliu0.github.io/projects/HumanGaussian)
+
+Gaussian Splatting 文本生成3DHuman
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231129164200.png)
+
+
+### Surf-D
+
+[[2311.17050] Surf-D: High-Quality Surface Generation for Arbitrary Topologies using Diffusion Models (arxiv.Org)]( https://arxiv.org/abs/2311.17050 )
+
+高质量拓扑 3D 衣服生成
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231129164359.png)
+
+
+### HumanRef
+
+[[2311.16961] HumanRef: Single Image to 3D Human Generation via Reference-Guided Diffusion (arxiv.Org)]( https://arxiv.org/abs/2311.16961 )
+
+单视图 Diffusion 人体生成
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231129164832.png)
+
+
+
+### RichDreamer
+
+[RichDreamer: A Generalizable Normal-Depth Diffusion Model for Detail Richness in Text-to-3D (lingtengqiu.github.io)](https://lingtengqiu.github.io/RichDreamer/)
+
+文本生成3D
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231129165112.png)
+

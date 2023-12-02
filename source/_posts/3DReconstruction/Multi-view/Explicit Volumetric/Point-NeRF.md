@@ -3,8 +3,7 @@ title: Point-NeRF
 date: 2023-08-24 16:52:32
 tags:
   - PointCloud
-  - VolumeRendering
-categories: 3DReconstruction/Basic Knowledge/NeRF/PointCloud
+categories: 3DReconstruction/Multi-view/Explicit Volumetric
 ---
 
 | Title     | Point-NeRF: Point-based Neural Radiance Fields                                                                                                                 |

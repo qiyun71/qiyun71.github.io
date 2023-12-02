@@ -157,6 +157,15 @@ $sparsity = \frac{1}{N} \sum e^{-scale * sdf}$
 
 ## other loss
 
+### 加强Eikonal对SDF的优化
+
+[sunyx523/StEik (github.com)](https://github.com/sunyx523/StEik)
+[NeurIPS 2023 | 三维重建中的Neural SDF(Neural Implicit Surface) - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/649921965)
+一个好的SDF其实只需要其法线方向上的二阶导数为0，如果在切线方向上的二阶导数为0的话，得到的SDF轮廓会非常平滑，不利于学习到一些细节。
+
+$L_\text{L. n.}(u)=\int_{\Omega}|\nabla u(x)^TD^2u(x)\cdot\nabla u(x)|dx.$
+
+
 ### S3IM Loss
 
 [S3IM (madaoer.github.io)](https://madaoer.github.io/s3im_nerf/)
