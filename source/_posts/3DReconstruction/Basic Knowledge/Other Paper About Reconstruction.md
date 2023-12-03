@@ -39,35 +39,11 @@ Awesome Human Body Reconstruction
 
 # NeRF Other Object Reconstruction
 
-## Other paper about camera pose
+## Voxurf
 
-改进COLMAP估计相机位姿参数有误差的问题
+[wutong16/Voxurf: [ ICLR 2023 Spotlight ] Pytorch implementation for "Voxurf: Voxel-based Efficient and Accurate Neural Surface Reconstruction" (github.Com)](https://github.com/wutong16/Voxurf)
 
-- **USB-NeRF: Unrolling Shutter Bundle Adjusted Neural Radiance Fields** <https://arxiv.org/abs/2310.02687>
-- How to turn your camera into a perfect pinhole model
-
-## Hyb-NeRF
-
-[[2311.12490] Hyb-NeRF: A Multiresolution Hybrid Encoding for Neural Radiance Fields (arxiv.org)](https://arxiv.org/abs/2311.12490)
-
-多分辨率混合编码
-
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231123143210.png)
-
-
-## Adaptive Shells
-
-[Adaptive Shells for Efficient Neural Radiance Field Rendering (nvidia.com)](https://research.nvidia.com/labs/toronto-ai/adaptive-shells/)
-
-自适应使用基于体积的渲染和基于表面的渲染
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231117150239.png)
-
-## RayDF
-
-[RayDF: Neural Ray-surface Distance Fields with Multi-view Consistency (vlar-group.github.io)](https://vlar-group.github.io/RayDF.html)
-[RayDF: Neural Ray-surface Distance Fields with Multi-view Consistency (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=2037229054391691776&noteId=2047746094923644416)
-
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231113155552.png)
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023163503.png)
 
 ## ReTR
 
@@ -93,12 +69,6 @@ CNN + 3D Decoder + Transformer + NeRF 用深度图监督
 
 ![15fcd4e5b38213b428a4fe32a140bf88_.jpg|333](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/15fcd4e5b38213b428a4fe32a140bf88_.jpg)
 
-## Voxurf
-
-[wutong16/Voxurf: [ ICLR 2023 Spotlight ] Pytorch implementation for "Voxurf: Voxel-based Efficient and Accurate Neural Surface Reconstruction" (github.Com)](https://github.com/wutong16/Voxurf)
-
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023163503.png)
-
 ## AutoRecon
 
 [AutoRecon: Automated 3D Object Discovery and Reconstruction (zju3dv.github.io)](https://zju3dv.github.io/autorecon/)
@@ -111,6 +81,28 @@ CNN + 3D Decoder + Transformer + NeRF 用深度图监督
 [G-Shell (gshell3d.github.io)](https://gshell3d.github.io/)
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231024094322.png)
+
+## Adaptive Shells
+
+[Adaptive Shells for Efficient Neural Radiance Field Rendering (nvidia.com)](https://research.nvidia.com/labs/toronto-ai/adaptive-shells/)
+
+自适应使用基于体积的渲染和基于表面的渲染
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231117150239.png)
+
+## DynamicSurf
+
+[DynamicSurf: Dynamic Neural RGB-D Surface Reconstruction with an Optimizable Feature Grid](https://arxiv.org/abs/2311.08159)
+
+单目 RGBD 视频重建 3D
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231116154921.png)
+
+## RayDF
+
+[RayDF: Neural Ray-surface Distance Fields with Multi-view Consistency (vlar-group.github.io)](https://vlar-group.github.io/RayDF.html)
+[RayDF: Neural Ray-surface Distance Fields with Multi-view Consistency (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=2037229054391691776&noteId=2047746094923644416)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231113155552.png)
 
 ## PonderV2
 
@@ -128,13 +120,14 @@ MLP 是连续函数，对 NeRF 网络结构的改进来生成不连续的密度�
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231116155214.png)
 
-## DynamicSurf
+## Hyb-NeRF
 
-[DynamicSurf: Dynamic Neural RGB-D Surface Reconstruction with an Optimizable Feature Grid](https://arxiv.org/abs/2311.08159)
+[[2311.12490] Hyb-NeRF: A Multiresolution Hybrid Encoding for Neural Radiance Fields (arxiv.org)](https://arxiv.org/abs/2311.12490)
 
-单目 RGBD 视频重建 3D
+多分辨率混合编码
 
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231116154921.png)
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231123143210.png)
+
 
 # NeRF Human Body Reconstruction
 
@@ -464,6 +457,9 @@ FLARE: Fast Learning of Animatable and Relightable Mesh Avatars
 ### Video
 
 - **3D-Aware Talking-Head Video Motion Transfer** <https://arxiv.org/abs/2311.02549>
+- [Portrait4D: Learning One-Shot 4D Head Avatar Synthesis using Synthetic Data (yudeng.github.io)](https://yudeng.github.io/Portrait4D/)
+- [DiffusionAvatars: Deferred Diffusion for High-fidelity 3D Head Avatars (tobias-kirschstein.github.io)](https://tobias-kirschstein.github.io/diffusion-avatars/)
+- [CosAvatar (ustc3dv.github.io)](https://ustc3dv.github.io/CosAvatar/)
 
 ## Segmented Instance/Object
 

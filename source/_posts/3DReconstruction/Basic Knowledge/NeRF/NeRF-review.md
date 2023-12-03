@@ -50,6 +50,27 @@ NeRF 分段常数积分 --> PL-NeRF 分段线性积分
 - Rethinking Directional Integration in Neural Radiance Fields，修改了 **NeRF 的渲染方程**
   - [Rethinking Directional Integration in Neural Radiance Fields (arxiv.org)](https://arxiv.org/abs/2311.16504)
 
+## Camera Pose
+
+### Continuous Pose
+[[2311.17119] Continuous Pose for Monocular Cameras in Neural Implicit Representation (arxiv.org)](https://arxiv.org/abs/2311.17119)
+将单目相机姿势优化为时间连续函数
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231202162029.png)
+
+### PF-GRT
+
+[[2310.03704] Pose-Free Generalizable Rendering Transformer (arxiv.org)](https://arxiv.org/abs/2310.03704)
+[Pose-Free Generalizable Rendering Transformer (zhiwenfan.github.io)](https://zhiwenfan.github.io/PF-GRT/)
+新视图渲染
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231202162106.png)
+
+### Other paper about camera pose
+
+改进COLMAP估计相机位姿参数有误差的问题
+
+- **USB-NeRF: Unrolling Shutter Bundle Adjusted Neural Radiance Fields** <https://arxiv.org/abs/2310.02687>
+- How to turn your camera into a perfect pinhole model
+
 ## Efficiency
 
 ### Encoding
@@ -175,7 +196,7 @@ NeRF 分段常数积分 --> PL-NeRF 分段线性积分
 | University of Pennsylvania |                       [Lingjie Liu (lingjie0206.github.io)](https://lingjie0206.github.io/)                       | NeuS,NeuS2,NeuralUDF,Drag Your GAN                                                     |
 
 
-## 有趣的应用
+# 有趣的应用
 
 | Year                               |                                                                Title&Project Page                                                                 |          Brief Description           | Conf/Jour        |
 | ---------------------------------- |:-------------------------------------------------------------------------------------------------------------------------------------------------:|:------------------------------------:| ---------------- |

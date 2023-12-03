@@ -11,11 +11,30 @@
             "id": "b3012dd735617800",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "3DReconstruction/Multi-view/Structured Light/Structured Light Review.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "03a87961f4780a11",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "3DReconstruction/Basic Knowledge/Multi-view 3D Reconstruction.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -30,35 +49,12 @@
         "dimension": 59.5108695652174,
         "children": [
           {
-            "id": "8e8a871735863769",
+            "id": "086707e82c339e3f",
             "type": "leaf",
             "state": {
-              "type": "file-explorer",
+              "type": "outline",
               "state": {
-                "sortOrder": "byCreatedTimeReverse"
-              }
-            }
-          },
-          {
-            "id": "fe80941d99755e63",
-            "type": "leaf",
-            "state": {
-              "type": "calendar",
-              "state": {}
-            }
-          },
-          {
-            "id": "15b0ca6b5a59a5e6",
-            "type": "leaf",
-            "state": {
-              "type": "search",
-              "state": {
-                "query": "",
-                "matchingCase": false,
-                "explainSearch": false,
-                "collapseAll": false,
-                "extraContext": false,
-                "sortOrder": "alphabetical"
+                "file": "3DReconstruction/Basic Knowledge/Multi-view 3D Reconstruction.md"
               }
             }
           },
@@ -93,33 +89,6 @@
               "type": "bookmarks",
               "state": {}
             }
-          }
-        ],
-        "currentTab": 5
-      },
-      {
-        "id": "bc28ed75956b6d1b",
-        "type": "tabs",
-        "dimension": 40.48913043478261,
-        "children": [
-          {
-            "id": "086707e82c339e3f",
-            "type": "leaf",
-            "state": {
-              "type": "outline",
-              "state": {}
-            }
-          },
-          {
-            "id": "649ba9adaacda732",
-            "type": "leaf",
-            "state": {
-              "type": "tag",
-              "state": {
-                "sortOrder": "frequency",
-                "useHierarchy": false
-              }
-            }
           },
           {
             "id": "39287e9bb20932ab",
@@ -127,6 +96,7 @@
             "state": {
               "type": "localgraph",
               "state": {
+                "file": "3DReconstruction/Basic Knowledge/Multi-view 3D Reconstruction.md",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -162,13 +132,45 @@
                 }
               }
             }
+          },
+          {
+            "id": "649ba9adaacda732",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": false
+              }
+            }
+          }
+        ]
+      },
+      {
+        "id": "bc28ed75956b6d1b",
+        "type": "tabs",
+        "dimension": 40.48913043478261,
+        "children": [
+          {
+            "id": "15b0ca6b5a59a5e6",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
           }
         ]
       }
     ],
     "direction": "horizontal",
-    "width": 264,
-    "collapsed": true
+    "width": 200
   },
   "right": {
     "id": "030ccac2adcfb23a",
@@ -179,11 +181,22 @@
         "type": "tabs",
         "children": [
           {
+            "id": "8e8a871735863769",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "byCreatedTimeReverse"
+              }
+            }
+          },
+          {
             "id": "6a7d6fc338594f20",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
+                "file": "3DReconstruction/Basic Knowledge/Multi-view 3D Reconstruction.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -208,8 +221,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 266.6190490722656,
-    "collapsed": true
+    "width": 266.6190490722656
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -226,8 +238,16 @@
       "workspaces:管理工作区布局": false
     }
   },
-  "active": "b3012dd735617800",
+  "active": "03a87961f4780a11",
   "lastOpenFiles": [
+    "Other/Mine/IPV6.md",
+    "3DReconstruction/Multi-view/Structured Light/Structured Light Review.md",
+    "3DReconstruction/Basic Knowledge/Multi-view 3D Reconstruction.md",
+    "3DReconstruction/Multi-view/Explicit Volumetric/Voxurf.md",
+    "3DReconstruction/Multi-view/Structured Light",
+    "3DReconstruction/Basic Knowledge/NeRF/NeRF-review.md",
+    "3DReconstruction/Basic Knowledge/Other Paper About Reconstruction.md",
+    "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Efficiency/PermutoSDF.md",
     "研究生/深度学习/人工智能导论/人工智能导论.md",
     "研究生/深度学习/人工智能导论/AAAI-2022-Visual Sound Localization in the Wild by Cross-Modal Interference Erasing.md",
     "研究生/信号分析与处理/Matlab信号处理相关.md",
