@@ -4,11 +4,28 @@
     "type": "split",
     "children": [
       {
-        "id": "9448a533a2fcbffe",
+        "id": "56cdf894e6a3c085",
         "type": "tabs",
         "children": [
           {
-            "id": "60bee893799ed291",
+            "id": "b3012dd735617800",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+<<<<<<< HEAD
+                "file": "3DReconstruction/Basic Knowledge/Multi-view 3D Reconstruction.md",
+=======
+                "file": "3DReconstruction/Multi-view/Structured Light/Structured Light Review.md",
+>>>>>>> 46b3a05d7ffa9b4ce4176b8e8c475235a745c347
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "03a87961f4780a11",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -19,21 +36,9 @@
                 "source": false
               }
             }
-          },
-          {
-            "id": "1621d200a014c5e4",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/VolSDF.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              }
-            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -45,10 +50,10 @@
       {
         "id": "4b1070af652f8263",
         "type": "tabs",
-        "dimension": 70.54491899852725,
+        "dimension": 59.5108695652174,
         "children": [
           {
-            "id": "167d432b6853f036",
+            "id": "086707e82c339e3f",
             "type": "leaf",
             "state": {
               "type": "outline",
@@ -58,7 +63,15 @@
             }
           },
           {
-            "id": "f17e01ff8aefd21b",
+            "id": "b3a1783d0ecb065f",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          },
+          {
+            "id": "917cbf8f3752e4ec",
             "type": "leaf",
             "state": {
               "type": "advanced-tables-toolbar",
@@ -66,12 +79,61 @@
             }
           },
           {
-            "id": "2e6aa82c45a60795",
+            "id": "9993eba973326f69",
             "type": "leaf",
             "state": {
-              "type": "all-properties",
+              "type": "recent-files",
+              "state": {}
+            }
+          },
+          {
+            "id": "4e82f64a38eb9efb",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          },
+          {
+            "id": "39287e9bb20932ab",
+            "type": "leaf",
+            "state": {
+              "type": "localgraph",
               "state": {
-                "sortOrder": "frequency"
+                "file": "3DReconstruction/Basic Knowledge/Multi-view 3D Reconstruction.md",
+                "options": {
+                  "collapse-filter": true,
+                  "search": "",
+                  "localJumps": 4,
+                  "localBacklinks": true,
+                  "localForelinks": true,
+                  "localInterlinks": false,
+                  "showTags": false,
+                  "showAttachments": false,
+                  "hideUnresolved": false,
+                  "collapse-color-groups": true,
+                  "colorGroups": [
+                    {
+                      "query": "",
+                      "color": {
+                        "a": 1,
+                        "rgb": 14048348
+                      }
+                    }
+                  ],
+                  "collapse-display": false,
+                  "showArrow": true,
+                  "textFadeMultiplier": 0,
+                  "nodeSizeMultiplier": 1,
+                  "lineSizeMultiplier": 1,
+                  "collapse-forces": false,
+                  "centerStrength": 0.518713248970312,
+                  "repelStrength": 10,
+                  "linkStrength": 1,
+                  "linkDistance": 250,
+                  "scale": 0.701326409323112,
+                  "close": true
+                }
               }
             }
           },
@@ -85,9 +147,55 @@
                 "useHierarchy": false
               }
             }
+          }
+        ]
+      },
+      {
+        "id": "bc28ed75956b6d1b",
+        "type": "tabs",
+        "dimension": 40.48913043478261,
+        "children": [
+          {
+            "id": "15b0ca6b5a59a5e6",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 200
+  },
+  "right": {
+    "id": "030ccac2adcfb23a",
+    "type": "split",
+    "children": [
+      {
+        "id": "0594f038c765cc47",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "8e8a871735863769",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "byCreatedTimeReverse"
+              }
+            }
           },
           {
-            "id": "d6cc3bfe65089281",
+            "id": "6a7d6fc338594f20",
             "type": "leaf",
             "state": {
               "type": "backlink",
@@ -104,11 +212,12 @@
             }
           },
           {
-            "id": "39287e9bb20932ab",
+            "id": "c8049f731cd8ceb9",
             "type": "leaf",
             "state": {
-              "type": "localgraph",
+              "type": "all-properties",
               "state": {
+<<<<<<< HEAD
                 "file": "3DReconstruction/Basic Knowledge/Multi-view 3D Reconstruction.md",
                 "options": {
                   "collapse-filter": true,
@@ -135,95 +244,36 @@
                   "scale": 0.49021692325724836,
                   "close": true
                 }
+=======
+                "sortOrder": "frequency"
+>>>>>>> 46b3a05d7ffa9b4ce4176b8e8c475235a745c347
               }
-            }
-          }
-        ]
-      },
-      {
-        "id": "b772503bc315a713",
-        "type": "tabs",
-        "dimension": 29.455081001472752,
-        "children": [
-          {
-            "id": "02d0d2220a9ac3cc",
-            "type": "leaf",
-            "state": {
-              "type": "recent-files",
-              "state": {}
-            }
-          },
-          {
-            "id": "15b0ca6b5a59a5e6",
-            "type": "leaf",
-            "state": {
-              "type": "search",
-              "state": {
-                "query": "",
-                "matchingCase": true,
-                "explainSearch": false,
-                "collapseAll": false,
-                "extraContext": false,
-                "sortOrder": "alphabetical"
-              }
-            }
-          }
-        ],
-        "currentTab": 1
-      }
-    ],
-    "direction": "horizontal",
-    "width": 200
-  },
-  "right": {
-    "id": "030ccac2adcfb23a",
-    "type": "split",
-    "children": [
-      {
-        "id": "43edafb5d29f89ff",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "8e8a871735863769",
-            "type": "leaf",
-            "state": {
-              "type": "file-explorer",
-              "state": {
-                "sortOrder": "byCreatedTime"
-              }
-            }
-          },
-          {
-            "id": "36c6b5181a5ec9eb",
-            "type": "leaf",
-            "state": {
-              "type": "bookmarks",
-              "state": {}
             }
           }
         ]
       }
     ],
     "direction": "horizontal",
-    "width": 242.5
+    "width": 266.6190490722656
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:打开快速切换": true,
-      "graph:查看关系图谱": true,
-      "canvas:新建白板": true,
-      "daily-notes:打开/创建今天的日记": false,
-      "templates:插入模板": true,
-      "command-palette:打开命令面板": true,
-      "markdown-importer:打开 Markdown 格式转换器": true,
-      "audio-recorder:开始/结束录音": true,
-      "workspaces:管理工作区布局": true,
       "table-editor-obsidian:Advanced Tables Toolbar": false,
-      "templater-obsidian:Templater": false
+      "templater-obsidian:Templater": false,
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "markdown-importer:打开 Markdown 格式转换器": false,
+      "audio-recorder:开始/结束录音": false,
+      "workspaces:管理工作区布局": false
     }
   },
-  "active": "60bee893799ed291",
+  "active": "03a87961f4780a11",
   "lastOpenFiles": [
+<<<<<<< HEAD
     "3DReconstruction/Multi-view/Explicit Volumetric/Voxurf.md",
     "3DReconstruction/Multi-view/Implicit Function/NeRF-based/VolSDF.md",
     "3DReconstruction/Multi-view/Explicit Volumetric/Plenoxels.md",
@@ -242,38 +292,25 @@
     "3DReconstruction/Basic Knowledge/NeRF/CameraPose/Pose Estimation Review.md",
     "3DReconstruction/Multi-view/Implicit Function/NeRF-based/UNISURF.md",
     "3DReconstruction/Multi-view/Implicit Function/NeRF-based/RayDF.md",
+=======
+>>>>>>> 46b3a05d7ffa9b4ce4176b8e8c475235a745c347
     "Other/Mine/IPV6.md",
-    "Other/Mine/Tools.md",
-    "Other/通俗形象地分析比较生成模型.md",
-    "Other/从感知机到Transformer，一文概述深度学习简史.md",
-    "3DReconstruction/Basic Knowledge/NeRF/NeRF-Mine.md",
-    "3DReconstruction/Basic Knowledge/Multi-view Human Body Reconstruction.md",
-    "未命名.md",
-    "3DReconstruction/Basic Knowledge/NeRF/NeRF/Encoding.md",
-    "3DReconstruction/Basic Knowledge/NeRF/NeRF/Sampling.md",
-    "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Shadow&Highlight",
-    "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Efficiency",
-    "3DReconstruction/Single-view/Other/HumanBody",
-    "3DReconstruction/Basic Knowledge/NeRF/NoNeuralNetworks",
-    "3DReconstruction/Basic Knowledge/NeRF/Sampling",
-    "3DReconstruction/Basic Knowledge/NeRF/PointCloud",
-    "3DReconstruction/Basic Knowledge/NeRF/Sparse",
-    "3DReconstruction/Basic Knowledge/NeRF/Review",
-    "3DReconstruction/Basic Knowledge/NeRF/NeRF.canvas",
-    "3DReconstruction/Basic Knowledge/NeRF/CameraPose",
-    "NeRF/NeRF.canvas",
-    "未命名.canvas",
-    "Pasted image 20230718132040.png",
-    "NeRF/Surface Reconstruction/1.canvas",
-    "附件/Pasted image 20230612205212.png",
-    "附件/Pasted image 20230606154824.png",
-    "附件/Pasted image 20230606154405.png",
-    "附件/Pasted image 20230606154119.png",
-    "附件/Pasted image 20230602173443.png",
-    "附件/Pasted image 20230602173100.png",
-    "附件/Pasted image 20230602172819.png",
-    "附件/Pasted image 20230602172759.png",
-    "附件/Pasted image 20230602172630.png",
-    "Work/NeRF/NeRF.canvas"
+    "3DReconstruction/Multi-view/Structured Light/Structured Light Review.md",
+    "3DReconstruction/Basic Knowledge/Multi-view 3D Reconstruction.md",
+    "3DReconstruction/Multi-view/Explicit Volumetric/Voxurf.md",
+    "3DReconstruction/Multi-view/Structured Light",
+    "3DReconstruction/Basic Knowledge/NeRF/NeRF-review.md",
+    "3DReconstruction/Basic Knowledge/Other Paper About Reconstruction.md",
+    "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Efficiency/PermutoSDF.md",
+    "研究生/深度学习/人工智能导论/人工智能导论.md",
+    "研究生/深度学习/人工智能导论/AAAI-2022-Visual Sound Localization in the Wild by Cross-Modal Interference Erasing.md",
+    "研究生/信号分析与处理/Matlab信号处理相关.md",
+    "研究生/Matlab笔记.md",
+    "研究生/深度学习/人工智能导论/Python_AI.md",
+    "研究生/深度学习/动手学深度学习.md",
+    "研究生/LaTex笔记.md",
+    "研究生/信号分析与处理/实用数字信号处理：从原理到应用.md",
+    "研究生/信号分析与处理/信号分析与处理.md",
+    "研究生/研究生.md"
   ]
 }

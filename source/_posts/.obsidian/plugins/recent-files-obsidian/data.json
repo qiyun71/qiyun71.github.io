@@ -5,6 +5,7 @@
       "path": "3DReconstruction/Basic Knowledge/Multi-view 3D Reconstruction.md"
     },
     {
+<<<<<<< HEAD
       "basename": "Voxurf",
       "path": "3DReconstruction/Multi-view/Explicit Volumetric/Voxurf.md"
     },
@@ -65,44 +66,18 @@
       "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/RayDF.md"
     },
     {
+=======
+>>>>>>> 46b3a05d7ffa9b4ce4176b8e8c475235a745c347
       "basename": "IPV6",
       "path": "Other/Mine/IPV6.md"
     },
     {
-      "basename": "Tools",
-      "path": "Other/Mine/Tools.md"
+      "basename": "Structured Light Review",
+      "path": "3DReconstruction/Multi-view/Structured Light/Structured Light Review.md"
     },
     {
-      "basename": "通俗形象地分析比较生成模型",
-      "path": "Other/通俗形象地分析比较生成模型.md"
-    },
-    {
-      "basename": "从感知机到Transformer，一文概述深度学习简史",
-      "path": "Other/从感知机到Transformer，一文概述深度学习简史.md"
-    },
-    {
-      "basename": "NeRF-Mine",
-      "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF-Mine.md"
-    },
-    {
-      "basename": "Multi-view Human Body Reconstruction",
-      "path": "3DReconstruction/Basic Knowledge/Multi-view Human Body Reconstruction.md"
-    },
-    {
-      "basename": "Encoding",
-      "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF/Encoding.md"
-    },
-    {
-      "basename": "Sampling",
-      "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF/Sampling.md"
-    },
-    {
-      "basename": "Metrics",
-      "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF/Metrics.md"
-    },
-    {
-      "basename": "Generative Models Review",
-      "path": "3DReconstruction/Basic Knowledge/Generative Models Review.md"
+      "basename": "Voxurf",
+      "path": "3DReconstruction/Multi-view/Explicit Volumetric/Voxurf.md"
     },
     {
       "basename": "NeRF-review",
@@ -113,92 +88,8 @@
       "path": "3DReconstruction/Basic Knowledge/Other Paper About Reconstruction.md"
     },
     {
-      "basename": "Neus-Instant-nsr-pl-code",
-      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Efficiency/Neus-Instant-nsr-pl-code.md"
-    },
-    {
-      "basename": "NeRF-code",
-      "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF-code.md"
-    },
-    {
-      "basename": "NeRF-Principle",
-      "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF-Principle.md"
-    },
-    {
-      "basename": "NeRF-Studio",
-      "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF-Studio.md"
-    },
-    {
-      "basename": "2K2K",
-      "path": "3DReconstruction/Single-view/Depth Estimation/2K2K.md"
-    },
-    {
-      "basename": "Diffusion Models",
-      "path": "3DReconstruction/Basic Knowledge/Diffusion Models.md"
-    },
-    {
-      "basename": "MVSNet",
-      "path": "3DReconstruction/Multi-view/Depth Estimation/MVSNet.md"
-    },
-    {
-      "basename": "Math",
-      "path": "3DReconstruction/Basic Knowledge/Math.md"
-    },
-    {
-      "basename": "Instant-NSR-code",
-      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Efficiency/Instant-NSR-code.md"
-    },
-    {
-      "basename": "Math",
-      "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF/Math.md"
-    },
-    {
-      "basename": "DiffuStereo",
-      "path": "3DReconstruction/Multi-view/Generative Models/DiffuStereo.md"
-    },
-    {
-      "basename": "DMV3D",
-      "path": "3DReconstruction/Multi-view/Hybrid Methods/DMV3D.md"
-    },
-    {
-      "basename": "DMTet",
-      "path": "3DReconstruction/Single-view/Generative Models/DMTet.md"
-    },
-    {
-      "basename": "Learn-Git",
-      "path": "Learn/Learn-Git.md"
-    },
-    {
-      "basename": "2023-10-30",
-      "path": "Reports/2023-10-30.md"
-    },
-    {
-      "basename": "2023-10-20-Report",
-      "path": "Reports/2023-10-20-Report.md"
-    },
-    {
-      "basename": "2023-10",
-      "path": "Reports/2023-10.md"
-    },
-    {
-      "basename": "2023-09-22",
-      "path": "Reports/2023-09-22.md"
-    },
-    {
-      "basename": "Other notes for obsidian",
-      "path": "Reports/Other notes for obsidian.md"
-    },
-    {
-      "basename": "2023-09-02",
-      "path": "Reports/2023-09-02.md"
-    },
-    {
-      "basename": "new",
-      "path": "Reports/new.md"
-    },
-    {
-      "basename": "2023-08-14",
-      "path": "Reports/2023-08-14.md"
+      "basename": "PermutoSDF",
+      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Efficiency/PermutoSDF.md"
     }
   ],
   "omittedPaths": [],
