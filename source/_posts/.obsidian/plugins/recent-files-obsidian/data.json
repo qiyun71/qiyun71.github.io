@@ -1,6 +1,10 @@
 {
   "recentFiles": [
     {
+      "basename": "Multi-view 3D Reconstruction",
+      "path": "3DReconstruction/Basic Knowledge/Multi-view 3D Reconstruction.md"
+    },
+    {
       "basename": "Voxurf",
       "path": "3DReconstruction/Multi-view/Explicit Volumetric/Voxurf.md"
     },
@@ -19,10 +23,6 @@
     {
       "basename": "3D Gaussian Splatting",
       "path": "3DReconstruction/Multi-view/Explicit Volumetric/3D Gaussian Splatting.md"
-    },
-    {
-      "basename": "Multi-view 3D Reconstruction",
-      "path": "3DReconstruction/Basic Knowledge/Multi-view 3D Reconstruction.md"
     },
     {
       "basename": "A Review of Deep Learning-Powered Mesh Reconstruction Methods",

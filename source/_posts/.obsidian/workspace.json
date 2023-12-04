@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "3DReconstruction/Multi-view/Explicit Volumetric/Voxurf.md",
+                "file": "3DReconstruction/Basic Knowledge/Multi-view 3D Reconstruction.md",
                 "mode": "source",
                 "backlinks": false,
                 "source": false
@@ -53,7 +53,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "3DReconstruction/Multi-view/Explicit Volumetric/Voxurf.md"
+                "file": "3DReconstruction/Basic Knowledge/Multi-view 3D Reconstruction.md"
               }
             }
           },
@@ -92,7 +92,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "3DReconstruction/Multi-view/Explicit Volumetric/Voxurf.md",
+                "file": "3DReconstruction/Basic Knowledge/Multi-view 3D Reconstruction.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -109,7 +109,7 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "3DReconstruction/Multi-view/Explicit Volumetric/Voxurf.md",
+                "file": "3DReconstruction/Basic Knowledge/Multi-view 3D Reconstruction.md",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -224,8 +224,8 @@
   },
   "active": "60bee893799ed291",
   "lastOpenFiles": [
-    "3DReconstruction/Multi-view/Implicit Function/NeRF-based/VolSDF.md",
     "3DReconstruction/Multi-view/Explicit Volumetric/Voxurf.md",
+    "3DReconstruction/Multi-view/Implicit Function/NeRF-based/VolSDF.md",
     "3DReconstruction/Multi-view/Explicit Volumetric/Plenoxels.md",
     "3DReconstruction/Multi-view/Explicit Volumetric/Point-NeRF.md",
     "3DReconstruction/Multi-view/Explicit Volumetric/3D Gaussian Splatting.md",
