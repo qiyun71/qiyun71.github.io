@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/yqq/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="SDFStudio">
+<meta property="og:url" content="http://example.com/3DReconstruction/Multi-view/Implicit%20Function/SDFStudio/index.html">
+<meta property="og:site_name" content="QiYun">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231211203625.png">
+<meta property="article:published_time" content="2023-12-11T12:35:28.000Z">
+<meta property="article:modified_time" content="2023-12-12T03:06:11.295Z">
+<meta property="article:author" content="Qi Yun">
+<meta property="article:tag" content="3DReconstruction">
+<meta property="article:tag" content="SurfaceReconstruction">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231211203625.png">
+
+<link rel="canonical" href="http://example.com/3DReconstruction/Multi-view/Implicit%20Function/SDFStudio/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>SDFStudio | QiYun</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">QiYun</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Note</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/3DReconstruction/Multi-view/Implicit%20Function/SDFStudio/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiYun">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SDFStudio
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-12-11 20:35:28" itemprop="dateCreated datePublished" datetime="2023-12-11T20:35:28+08:00">2023-12-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-12-12 11:06:11" itemprop="dateModified" datetime="2023-12-12T11:06:11+08:00">2023-12-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/3DReconstruction-Multi-view-Implicit-Function/" itemprop="url" rel="index"><span itemprop="name">3DReconstruction/Multi-view/Implicit Function</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>1.3k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>5 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231211203625.png" alt="image.png|666"></p>
+<span id="more"></span>
+<h1 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h1><h3 id="Create-environment"><a href="#Create-environment" class="headerlink" title="Create environment"></a>Create environment</h3><p>SDFStudio requires <code>python &gt;= 3.7</code>. We recommend using conda to manage dependencies. Make sure to install <a target="_blank" rel="noopener" href="https://docs.conda.io/en/latest/miniconda.html">Conda</a> before proceeding.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda create --name sdfstudio -y python=3.8</span><br><span class="line">conda activate sdfstudio</span><br><span class="line">python -m pip install --upgrade pip</span><br></pre></td></tr></table></figure>
+<h3 id="Dependencies"><a href="#Dependencies" class="headerlink" title="Dependencies"></a>Dependencies</h3><p>Install pytorch with CUDA (this repo has been tested with CUDA 11.3) and <a target="_blank" rel="noopener" href="https://github.com/NVlabs/tiny-cuda-nn">tiny-cuda-nn</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pip install torch==1.12.1+cu113 torchvision==0.13.1+cu113 -f https://download.pytorch.org/whl/torch_stable.html</span><br><span class="line"><span class="comment"># 以下win10需要在vs的x64 Native Tools Command Prompt for VS 2019中进行编译和安装PyTorch extension</span></span><br><span class="line">pip install git+https://github.com/NVlabs/tiny-cuda-nn/<span class="comment">#subdirectory=bindings/torch</span></span><br></pre></td></tr></table></figure>
+<h3 id="Installing-SDFStudio"><a href="#Installing-SDFStudio" class="headerlink" title="Installing SDFStudio"></a>Installing SDFStudio</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/autonomousvision/sdfstudio.git</span><br><span class="line"><span class="built_in">cd</span> sdfstudio</span><br><span class="line">pip install --upgrade pip setuptools</span><br><span class="line">pip install -e .</span><br><span class="line"><span class="comment"># install tab completion</span></span><br><span class="line">ns-install-cli</span><br></pre></td></tr></table></figure>
+<h1 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h1><p><code>ns-download-data sdfstudio</code> 如果网络无法连接，直接使用amazonaws地址下载</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">ns-download-data sdfstudio --dataset-name DATASET_NAME</span><br><span class="line"></span><br><span class="line"><span class="comment"># pylint: disable=line-too-long</span></span><br><span class="line">sdfstudio_downloads = &#123;</span><br><span class="line">    <span class="string">&quot;sdfstudio-demo-data&quot;</span>: <span class="string">&quot;https://s3.eu-central-1.amazonaws.com/avg-projects/monosdf/data/sdfstudio-demo-data.tar&quot;</span>,</span><br><span class="line">    <span class="string">&quot;dtu&quot;</span>: <span class="string">&quot;https://s3.eu-central-1.amazonaws.com/avg-projects/monosdf/data/DTU.tar&quot;</span>,</span><br><span class="line">    <span class="string">&quot;replica&quot;</span>: <span class="string">&quot;https://s3.eu-central-1.amazonaws.com/avg-projects/monosdf/data/Replica.tar&quot;</span>,</span><br><span class="line">    <span class="string">&quot;scannet&quot;</span>: <span class="string">&quot;https://s3.eu-central-1.amazonaws.com/avg-projects/monosdf/data/scannet.tar&quot;</span>,</span><br><span class="line">    <span class="string">&quot;tanks-and-temple&quot;</span>: <span class="string">&quot;https://s3.eu-central-1.amazonaws.com/avg-projects/monosdf/data/tnt_advanced.tar&quot;</span>,</span><br><span class="line">    <span class="string">&quot;tanks-and-temple-highres&quot;</span>: <span class="string">&quot;https://s3.eu-central-1.amazonaws.com/avg-projects/monosdf/data/highresTNT.tar&quot;</span>,</span><br><span class="line">    <span class="string">&quot;heritage&quot;</span>: <span class="string">&quot;https://s3.eu-central-1.amazonaws.com/avg-projects/monosdf/data/Heritage-Recon.tar&quot;</span>,</span><br><span class="line">    <span class="string">&quot;neural-rgbd-data&quot;</span>: <span class="string">&quot;http://kaldir.vc.in.tum.de/neural_rgbd/neural_rgbd_data.zip&quot;</span>,</span><br><span class="line">    <span class="string">&quot;all&quot;</span>: <span class="literal">None</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中RGBD数据需要转换为SDFStudio数据格式<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># kitchen scene for example, replca the scene path to convert other scenes</span></span><br><span class="line">python scripts/datasets/process_neuralrgbd_to_sdfstudio.py --input_path data/neural-rgbd-data/kitchen/ --output_path data/neural_rgbd/kitchen_sensor_depth --<span class="built_in">type</span> sensor_depth</span><br></pre></td></tr></table></figure></p>
+<h2 id="格式"><a href="#格式" class="headerlink" title="格式"></a>格式</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">└── scan65</span><br><span class="line">  └── meta_data.json</span><br><span class="line">  ├── pairs.txt</span><br><span class="line">  ├── 000000_rgb.png</span><br><span class="line">  ├── 000000_normal.npy</span><br><span class="line">  ├── 000000_depth.npy</span><br><span class="line">  ├── .....</span><br></pre></td></tr></table></figure>
+<p><code>meta_data.json like:</code></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  &#x27;camera_model&#x27;<span class="punctuation">:</span> &#x27;OPENCV&#x27;<span class="punctuation">,</span> # camera model (currently only OpenCV is supported)</span><br><span class="line">  &#x27;height&#x27;<span class="punctuation">:</span> <span class="number">384</span><span class="punctuation">,</span> # height of the images</span><br><span class="line">  &#x27;width&#x27;<span class="punctuation">:</span> <span class="number">384</span><span class="punctuation">,</span> # width of the images</span><br><span class="line">  &#x27;has_mono_prior&#x27;<span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span> # use monocular cues or not</span><br><span class="line">  &#x27;pairs&#x27;<span class="punctuation">:</span> &#x27;pairs.txt&#x27;<span class="punctuation">,</span> # pairs file used for multi-view photometric consistency loss</span><br><span class="line">  &#x27;worldtogt&#x27;<span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">      <span class="punctuation">[</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">0</span><span class="punctuation">,</span> <span class="number">0</span><span class="punctuation">,</span> <span class="number">0</span><span class="punctuation">]</span><span class="punctuation">,</span> # world to gt transformation (useful for evauation)</span><br><span class="line">      <span class="punctuation">[</span><span class="number">0</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">,</span> <span class="number">0</span><span class="punctuation">,</span> <span class="number">0</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">      <span class="punctuation">[</span><span class="number">0</span><span class="punctuation">,</span> <span class="number">0</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">,</span> <span class="number">0</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">      <span class="punctuation">[</span><span class="number">0</span><span class="punctuation">,</span> <span class="number">0</span><span class="punctuation">,</span> <span class="number">0</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  &#x27;scene_box&#x27;<span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      &#x27;aabb&#x27;<span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">          <span class="punctuation">[</span><span class="number">-1</span><span class="punctuation">,</span> <span class="number">-1</span><span class="punctuation">,</span> <span class="number">-1</span><span class="punctuation">]</span><span class="punctuation">,</span> # aabb for the bbox</span><br><span class="line">          <span class="punctuation">[</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">        <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">      &#x27;near&#x27;<span class="punctuation">:</span> <span class="number">0.5</span><span class="punctuation">,</span> # near plane for each image</span><br><span class="line">      &#x27;far&#x27;<span class="punctuation">:</span> <span class="number">4.5</span><span class="punctuation">,</span> # far plane for each image</span><br><span class="line">      &#x27;radius&#x27;<span class="punctuation">:</span> <span class="number">1.0</span><span class="punctuation">,</span> # radius of ROI region in scene</span><br><span class="line">      &#x27;collider_type&#x27;<span class="punctuation">:</span> &#x27;near_far&#x27;<span class="punctuation">,</span></span><br><span class="line">      # collider_type can be <span class="string">&quot;near_far&quot;</span><span class="punctuation">,</span> <span class="string">&quot;box&quot;</span><span class="punctuation">,</span> <span class="string">&quot;sphere&quot;</span><span class="punctuation">,</span></span><br><span class="line">      # it indicates how do we determine the near and far for each ray</span><br><span class="line">      # <span class="number">1.</span> near_far means we use the same near and far value for each ray</span><br><span class="line">      # <span class="number">2.</span> box means we compute the intersection with the bounding box</span><br><span class="line">      # <span class="number">3.</span> sphere means we compute the intersection with the sphere</span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  &#x27;frames&#x27;<span class="punctuation">:</span> <span class="punctuation">[</span> # this contains information for each image</span><br><span class="line">      <span class="punctuation">&#123;</span></span><br><span class="line">        # note that all paths are relateive path</span><br><span class="line">        # path of rgb image</span><br><span class="line">        &#x27;rgb_path&#x27;<span class="punctuation">:</span> &#x27;<span class="number">000000</span>_rgb.png&#x27;<span class="punctuation">,</span></span><br><span class="line">        # camera to world transform</span><br><span class="line">        &#x27;camtoworld&#x27;<span class="punctuation">:</span></span><br><span class="line">          <span class="punctuation">[</span></span><br><span class="line">            <span class="punctuation">[</span></span><br><span class="line">              <span class="number">0.9702627062797546</span><span class="punctuation">,</span></span><br><span class="line">              <span class="number">-0.014742869883775711</span><span class="punctuation">,</span></span><br><span class="line">              <span class="number">-0.2416049987077713</span><span class="punctuation">,</span></span><br><span class="line">              <span class="number">0.6601868867874146</span><span class="punctuation">,</span></span><br><span class="line">            <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">            <span class="punctuation">[</span></span><br><span class="line">              <span class="number">0.007479910273104906</span><span class="punctuation">,</span></span><br><span class="line">              <span class="number">0.9994929432868958</span><span class="punctuation">,</span></span><br><span class="line">              <span class="number">-0.03095100075006485</span><span class="punctuation">,</span></span><br><span class="line">              <span class="number">0.07803472131490707</span><span class="punctuation">,</span></span><br><span class="line">            <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">            <span class="punctuation">[</span></span><br><span class="line">              <span class="number">0.2419387847185135</span><span class="punctuation">,</span></span><br><span class="line">              <span class="number">0.028223417699337006</span><span class="punctuation">,</span></span><br><span class="line">              <span class="number">0.9698809385299683</span><span class="punctuation">,</span></span><br><span class="line">              <span class="number">-2.6397712230682373</span><span class="punctuation">,</span></span><br><span class="line">            <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">            <span class="punctuation">[</span><span class="number">0.0</span><span class="punctuation">,</span> <span class="number">0.0</span><span class="punctuation">,</span> <span class="number">0.0</span><span class="punctuation">,</span> <span class="number">1.0</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">          <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">        # intrinsic of current image</span><br><span class="line">        &#x27;intrinsics&#x27;<span class="punctuation">:</span></span><br><span class="line">          <span class="punctuation">[</span></span><br><span class="line">            <span class="punctuation">[</span><span class="number">925.5457763671875</span><span class="punctuation">,</span> <span class="number">-7.8512319305446e-05</span><span class="punctuation">,</span> <span class="number">199.4256591796875</span><span class="punctuation">,</span> <span class="number">0.0</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">            <span class="punctuation">[</span><span class="number">0.0</span><span class="punctuation">,</span> <span class="number">922.6160278320312</span><span class="punctuation">,</span> <span class="number">198.10269165039062</span><span class="punctuation">,</span> <span class="number">0.0</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">            <span class="punctuation">[</span><span class="number">0.0</span><span class="punctuation">,</span> <span class="number">0.0</span><span class="punctuation">,</span> <span class="number">1.0</span><span class="punctuation">,</span> <span class="number">0.0</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">            <span class="punctuation">[</span><span class="number">0.0</span><span class="punctuation">,</span> <span class="number">0.0</span><span class="punctuation">,</span> <span class="number">0.0</span><span class="punctuation">,</span> <span class="number">1.0</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">          <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">        # path of monocular depth prior</span><br><span class="line">        &#x27;mono_depth_path&#x27;<span class="punctuation">:</span> &#x27;<span class="number">000000</span>_depth.npy&#x27;<span class="punctuation">,</span></span><br><span class="line">        # path of monocular normal prior</span><br><span class="line">        &#x27;mono_normal_path&#x27;<span class="punctuation">:</span> &#x27;<span class="number">000000</span>_normal.npy&#x27;<span class="punctuation">,</span></span><br><span class="line">      <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      ...<span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p><code>pairs.txt like:</code><br>for multi-view photometric consistency loss</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># ref image, source image 1, source image 2, ..., source image N, note source image are listed in ascending order, which means last image has largest score</span><br><span class="line">000000.png 000032.png 000023.png 000028.png 000031.png 000029.png 000030.png 000024.png 000002.png 000015.png 000025.png ...</span><br><span class="line">000001.png 000033.png 000003.png 000022.png 000016.png 000027.png 000023.png 000007.png 000011.png 000026.png 000024.png ...</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<h2 id="自定义数据集"><a href="#自定义数据集" class="headerlink" title="自定义数据集"></a>自定义数据集</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python scripts/datasets/process_scannet_to_sdfstudio.py --input_path /your_path/datasets/scannet/scene0050_00 --output_path data/custom/scannet_scene0050_00</span><br></pre></td></tr></table></figure>
+<p>如果需要，可以使用<a target="_blank" rel="noopener" href="https://github.com/EPFL-VILAB/omnidata">omnidata:</a>提取单目深度和法向用于监督<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">python scripts/datasets/extract_monocular_cues.py --task normal --img_path data/custom/scannet_scene0050_00/ --output_path data/custom/scannet_scene0050_00 --omnidata_path YOUR_OMNIDATA_PATH --pretrained_models PRETRAINED_MODELS</span><br><span class="line"></span><br><span class="line">python scripts/datasets/extract_monocular_cues.py --task depth --img_path data/custom/scannet_scene0050_00/ --output_path data/custom/scannet_scene0050_00 --omnidata_path YOUR_OMNIDATA_PATH --pretrained_models PRETRAINED_MODELS</span><br></pre></td></tr></table></figure></p>
+<h1 id="Train"><a href="#Train" class="headerlink" title="Train"></a>Train</h1><p>eg: sdfstudio-demo-data</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Train model on the dtu dataset scan65</span></span><br><span class="line">ns-train neus-facto --pipeline.model.sdf-field.inside-outside False --vis viewer --experiment-name neus-facto-dtu65 sdfstudio-data --data data/sdfstudio-demo-data/dtu-scan65</span><br><span class="line"></span><br><span class="line"><span class="comment"># Or you could also train model on the Replica dataset room0 with monocular priors</span></span><br><span class="line">ns-train neus-facto --pipeline.model.sdf-field.inside-outside True --pipeline.model.mono-depth-loss-mult 0.1 --pipeline.model.mono-normal-loss-mult 0.05 --vis viewer --experiment-name neus-facto-replica1 sdfstudio-data --data data/sdfstudio-demo-data/replica-room0 --include_mono_prior True</span><br><span class="line"></span><br><span class="line"><span class="comment"># resume checkpoint 根据模型参数恢复训练</span></span><br><span class="line">ns-train neus-facto --trainer.load-dir &#123;outputs/neus-facto-dtu65/neus-facto/XXX/sdfstudio_models&#125; sdfstudio-data --data data/sdfstudio-demo-data/dtu-scan65 </span><br></pre></td></tr></table></figure>
+<h2 id="图片-mask"><a href="#图片-mask" class="headerlink" title="图片(+mask)"></a>图片(+mask)</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ns-train unisurf --pipeline.model.sdf-field.inside-outside False sdfstudio-data --data data/sdfstudio-demo-data/dtu-scan65</span><br><span class="line"></span><br><span class="line">ns-train volsdf --pipeline.model.sdf-field.inside-outside False sdfstudio-data --data data/sdfstudio-demo-data/dtu-scan65</span><br><span class="line"></span><br><span class="line">ns-train neus --pipeline.model.sdf-field.inside-outside False sdfstudio-data --data data/sdfstudio-demo-data/dtu-scan65</span><br></pre></td></tr></table></figure>
+<h2 id="mono-prior"><a href="#mono-prior" class="headerlink" title="mono-prior"></a>mono-prior</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ns-train monosdf --pipeline.model.sdf-field.inside-outside True sdfstudio-data --data data/sdfstudio-demo-data/replica-room0 --include-mono-prior True</span><br><span class="line"></span><br><span class="line">ns-train mono-unisurf --pipeline.model.sdf-field.inside-outside True sdfstudio-data --data data/sdfstudio-demo-data/replica-room0 --include-mono-prior True</span><br><span class="line"></span><br><span class="line">ns-train mono-neus --pipeline.model.sdf-field.inside-outside True sdfstudio-data --data data/sdfstudio-demo-data/replica-room0 --include-mono-prior True</span><br></pre></td></tr></table></figure>
+<h2 id="Geo-Neus’s-pairs"><a href="#Geo-Neus’s-pairs" class="headerlink" title="Geo-Neus’s pairs"></a>Geo-Neus’s pairs</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ns-train geo-neus --pipeline.model.sdf-field.inside-outside False sdfstudio-data -data data/dtu/scan24 --load-pairs True</span><br><span class="line"></span><br><span class="line">ns-train geo-unisurf --pipeline.model.sdf-field.inside-outside False sdfstudio-data -data data/dtu/scan24 --load-pairs True</span><br><span class="line"></span><br><span class="line">ns-train geo-volsdf --pipeline.model.sdf-field.inside-outside False sdfstudio-data -data data/dtu/scan24 --load-pairs True</span><br></pre></td></tr></table></figure>
+<h2 id="Neus"><a href="#Neus" class="headerlink" title="Neus"></a>Neus</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ns-train neus-acc --pipeline.model.sdf-field.inside-outside False sdfstudio-data -data data/dtu/scan65</span><br><span class="line"></span><br><span class="line">ns-train neus-facto --pipeline.model.sdf-field.inside-outside False sdfstudio-data -data data/dtu/scan65</span><br></pre></td></tr></table></figure>
+<h2 id="NeuralReconW"><a href="#NeuralReconW" class="headerlink" title="NeuralReconW"></a>NeuralReconW</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ns-train neusW --pipeline.model.sdf-field.inside-outside False heritage-data --data data/heritage/brandenburg_gate</span><br></pre></td></tr></table></figure>
+<h2 id="其他命令"><a href="#其他命令" class="headerlink" title="其他命令"></a>其他命令</h2><h3 id="Representations"><a href="#Representations" class="headerlink" title="Representations"></a>Representations</h3><p>MLP、HashGrid、Tri-plane</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Representations</span></span><br><span class="line"><span class="comment">## MLPs</span></span><br><span class="line">ns-train volsdf --pipeline.model.sdf-field.use-grid-feature False sdfstudio-data --data YOUR_DATA</span><br><span class="line"></span><br><span class="line"><span class="comment">## Multi-res Feature Grids</span></span><br><span class="line">ns-train volsdf --pipeline.model.sdf-field.use-grid-feature True --pipeline.model.sdf-field.encoding-type <span class="built_in">hash</span> sdfstudio-data --data YOUR_DATA</span><br><span class="line"></span><br><span class="line"><span class="comment">## Tri-plane</span></span><br><span class="line">ns-train volsdf --pipeline.model.sdf-field.use-grid-feature True  --pipeline.model.sdf-field.encoding-type tri-plane sdfstudio-data --data YOUR_DATA</span><br><span class="line"></span><br><span class="line"><span class="comment">## Geometry Initialization</span></span><br><span class="line">ns-train volsdf  --pipeline.model.sdf-field.geometric-init True --pipeline.model.sdf-field.bias 0.5 --pipeline.model.sdf-field.inside-outside False</span><br><span class="line">ns-train volsdf --pipeline.model.sdf-field.geometric-init True --pipeline.model.sdf-field.bias 0.8 --pipeline.model.sdf-field.inside-outside True</span><br><span class="line"></span><br><span class="line"><span class="comment">## Color Network</span></span><br><span class="line">ns-train volsdf --pipeline.model.sdf-field.num-layers-color 2 --pipeline.model.sdf-field.hidden-dim-color 512</span><br></pre></td></tr></table></figure>
+<h3 id="Supervision"><a href="#Supervision" class="headerlink" title="Supervision"></a>Supervision</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## RGB Loss 默认使用L1损失</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## Mask Loss</span></span><br><span class="line">--pipeline.model.fg-mask-loss-mult 0.001</span><br><span class="line"></span><br><span class="line"><span class="comment">## Eikonal Loss</span></span><br><span class="line">--pipeline.model.eikonal-loss-mult 0.01</span><br><span class="line"></span><br><span class="line"><span class="comment">## Smoothness Loss</span></span><br><span class="line">--pipeline.model.smooth-loss-multi 0.01</span><br><span class="line"></span><br><span class="line"><span class="comment">## Monocular Depth Consistency</span></span><br><span class="line">--pipeline.model.mono-depth-loss-mult 0.1</span><br><span class="line"></span><br><span class="line"><span class="comment">## Monocular Normal Consistency</span></span><br><span class="line">--pipeline.model.mono-normal-loss-mult 0.05</span><br><span class="line"></span><br><span class="line"><span class="comment">## Multi-view Photometric Consistency（Geo-NeuS.）</span></span><br><span class="line">--pipeline.model.patch-size 11 --pipeline.model.patch-warp-loss-mult 0.1 --pipeline.model.topk 4</span><br><span class="line"></span><br><span class="line"><span class="comment">## Sensor Depth Loss（for RGBD data）</span></span><br><span class="line"><span class="comment"># truncation is set to 5cm with a rough scale value 0.3 (0.015 = 0.05 * 0.3)</span></span><br><span class="line">--pipeline.model.sensor-depth-truncation 0.015 --pipeline.model.sensor-depth-l1-loss-mult 0.1 --pipeline.model.sensor-depth-freespace-loss-mult 10.0 --pipeline.model.sensor-depth-sdf-loss-mult 6000.0</span><br></pre></td></tr></table></figure>
+<h3 id="vis可视化跟踪"><a href="#vis可视化跟踪" class="headerlink" title="vis可视化跟踪"></a>vis可视化跟踪</h3><p><code>--vis &#123;viewer, tensorboard, wandb&#125;</code></p>
+<h1 id="提取和渲染mesh"><a href="#提取和渲染mesh" class="headerlink" title="提取和渲染mesh"></a>提取和渲染mesh</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ns-extract-mesh --load-config outputs/neus-facto-dtu65/neus-facto/XXX/config.yml --output-path meshes/neus-facto-dtu65.ply</span><br><span class="line"></span><br><span class="line">ns-render-mesh --meshfile meshes/neus-facto-dtu65.ply --traj interpolate  --output-path renders/neus-facto-dtu65.mp4 sdfstudio-data --data data/sdfstudio-demo-data/dtu-scan65</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+1ZnNxFWnEbk5YzRl">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/3DReconstruction/" rel="tag"><i class="fa fa-tag"></i> 3DReconstruction</a>
+              <a href="/tags/SurfaceReconstruction/" rel="tag"><i class="fa fa-tag"></i> SurfaceReconstruction</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/DVR/" rel="prev" title="DVR">
+      <i class="fa fa-chevron-left"></i> DVR
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="nav-text">环境配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-environment"><span class="nav-text">Create environment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dependencies"><span class="nav-text">Dependencies</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Installing-SDFStudio"><span class="nav-text">Installing SDFStudio</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-text">数据集</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%BC%E5%BC%8F"><span class="nav-text">格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-text">自定义数据集</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Train"><span class="nav-text">Train</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E7%89%87-mask"><span class="nav-text">图片(+mask)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mono-prior"><span class="nav-text">mono-prior</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Geo-Neus%E2%80%99s-pairs"><span class="nav-text">Geo-Neus’s pairs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Neus"><span class="nav-text">Neus</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NeuralReconW"><span class="nav-text">NeuralReconW</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%91%BD%E4%BB%A4"><span class="nav-text">其他命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Representations"><span class="nav-text">Representations</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Supervision"><span class="nav-text">Supervision</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vis%E5%8F%AF%E8%A7%86%E5%8C%96%E8%B7%9F%E8%B8%AA"><span class="nav-text">vis可视化跟踪</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8F%90%E5%8F%96%E5%92%8C%E6%B8%B2%E6%9F%93mesh"><span class="nav-text">提取和渲染mesh</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qi Yun"
+      src="/images/avatar.jpeg">
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">122</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/qiyun71" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;qiyun71" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/29010355" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;29010355" rel="noopener" target="_blank"><i class="fa fa-star fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qi Yun</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">458k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">27:47</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/yqq/anime.min.js"></script>
+  <script src="/yqq/velocity/velocity.min.js"></script>
+  <script src="/yqq/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

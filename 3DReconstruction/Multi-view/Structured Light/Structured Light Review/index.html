@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/yqq/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="三维重建是计算机视觉和计算机图像图形学相结合的一个热门研究方向。根据测量时是否与被测物体接触，可分为接触式测量和非接触式测量。  接触式测量方法虽然测量精度高，但测量效率低，速度慢，操作不当很容易损坏被测物体表面，而且由于探头有一定表面积，对表面复杂的物体难以测量，不具备普遍性和通用性。 非接触式三维测量方式又可以分为两大类：主动式测量和被动式测量。非接触式测量方式以其无损坏、测量速度高、简单等优">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Structured Light Review">
+<meta property="og:url" content="http://example.com/3DReconstruction/Multi-view/Structured%20Light/Structured%20Light%20Review/index.html">
+<meta property="og:site_name" content="QiYun">
+<meta property="og:description" content="三维重建是计算机视觉和计算机图像图形学相结合的一个热门研究方向。根据测量时是否与被测物体接触，可分为接触式测量和非接触式测量。  接触式测量方法虽然测量精度高，但测量效率低，速度慢，操作不当很容易损坏被测物体表面，而且由于探头有一定表面积，对表面复杂的物体难以测量，不具备普遍性和通用性。 非接触式三维测量方式又可以分为两大类：主动式测量和被动式测量。非接触式测量方式以其无损坏、测量速度高、简单等优">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231202200426.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231202204148.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231202204800.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231202204925.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231203175408.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231203104443.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231203111427.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231203111447.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231203165120.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231203165131.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231203175500.png">
+<meta property="article:published_time" content="2023-12-02T11:35:17.000Z">
+<meta property="article:modified_time" content="2023-12-06T05:55:45.546Z">
+<meta property="article:author" content="Qi Yun">
+<meta property="article:tag" content="3DReconstruction">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231202200426.png">
+
+<link rel="canonical" href="http://example.com/3DReconstruction/Multi-view/Structured%20Light/Structured%20Light%20Review/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Structured Light Review | QiYun</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">QiYun</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Note</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/3DReconstruction/Multi-view/Structured%20Light/Structured%20Light%20Review/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiYun">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Structured Light Review
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-12-02 19:35:17" itemprop="dateCreated datePublished" datetime="2023-12-02T19:35:17+08:00">2023-12-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-12-06 13:55:45" itemprop="dateModified" datetime="2023-12-06T13:55:45+08:00">2023-12-06</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/3DReconstruction-Multi-view-Structured-Light/" itemprop="url" rel="index"><span itemprop="name">3DReconstruction/Multi-view/Structured Light</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>4.1k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>15 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>三维重建是计算机视觉和计算机图像图形学相结合的一个热门研究方向。根据测量时是否与被测物体接触，可分为接触式测量和非接触式测量。</p>
+<ul>
+<li>接触式测量方法虽然测量精度高，但测量效率低，速度慢，操作不当很容易损坏被测物体表面，而且由于探头有一定表面积，对表面复杂的物体难以测量，不具备普遍性和通用性。</li>
+<li>非接触式三维测量方式又可以分为两大类：主动式测量和被动式测量。非接触式测量方式以其无损坏、测量速度高、简单等优点已成为三维轮廓测量的研究趋势。<ul>
+<li>主动式测量是向目标物体表面投射设计好的图案，该图案由于物体的高度起伏引起一定的畸变，通过匹配畸变的图案获得目标物体的。<strong>TOF、结构光三维重建</strong></li>
+<li>被动式测量是通过周围环境光对目标物体进行照射，然后检测目标物体的特征点以得到其数据。<strong>双目视觉法、SFM、MVS、NeRF</strong></li>
+</ul>
+</li>
+</ul>
+<span id="more"></span>
+<p>参考：<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/54761392">结构光综述 - 知乎 (zhihu.com)</a></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://www.rtbasics.com/Downloads/IEEE_structured_light.pdf">http://www.rtbasics.com/Downloads/IEEE_structured_light.pdf</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.sci.utah.edu/~gerig/CS6320-S2015/CS6320_3D_Computer_Vision.html">CS6320 3D Computer Vision (utah.edu)</a></li>
+<li><a target="_blank" rel="noopener" href="http://mesh.brown.edu/byo3d/source.html">Build Your Own 3D Scanner: Optical Triangulation for Beginners (brown.edu)</a><br><a target="_blank" rel="noopener" href="https://www.oakchina.cn/2023/05/16/3_depth_cams/">双目、结构光、tof，三种深度相机的原理区别看这一篇就够了！ - (oakchina.cn)</a><br><a target="_blank" rel="noopener" href="https://github.com/jiayuzhang128/FourStepPhaseShifting/blob/master/support/%E7%BB%93%E6%9E%84%E5%85%89%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA.pdf">FourStepPhaseShifting/support/结构光三维重建.pdf</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/29971801">结构光简史 - 知乎 (zhihu.com)</a></li>
+</ul>
+<h1 id="结构光原理"><a href="#结构光原理" class="headerlink" title="结构光原理"></a>结构光原理</h1><p>结构光主要可以分为两类</p>
+<ol>
+<li>线扫描结构光；线扫描结构光较之面阵结构光较为简单，精度也比较高，在工业中广泛用于物体体积测量、三维成像等领域。</li>
+<li>面阵结构光；</li>
+</ol>
+<h2 id="线扫描结构光"><a href="#线扫描结构光" class="headerlink" title="线扫描结构光"></a>线扫描结构光</h2><p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231202200426.png" alt="image.png|666"></p>
+<p>由小孔成像模型有 $\frac Xx=\frac Zf=\frac Yy$<br>由三角测量原理又有 $\tan\alpha=\frac Z{b-X}$<br>两式联立则有<br>$\begin{aligned}&amp;Z=\frac Xx\cdot f=\tan\alpha\cdot(b-X)\\&amp;X\cdot(\frac fx+\tan\alpha)=\tan\alpha\cdot b\end{aligned}$</p>
+<p>可得，所测物体点的三维坐标与俯仰角 $\gamma$ 无关<br>$\begin{aligned}X&amp;=\frac{\tan\alpha\cdot b\cdot x}{f+x\cdot\tan\alpha}\\Y&amp;=\frac{\tan\alpha\cdot b\cdot y}{f+x\cdot\tan\alpha}\\Z&amp;=\frac{\tan\alpha\cdot b\cdot f}{f+x\cdot\tan\alpha}\end{aligned}$</p>
+<h2 id="面阵结构光"><a href="#面阵结构光" class="headerlink" title="面阵结构光"></a>面阵结构光</h2><p>面阵结构光大致可以分为两类：<strong>随机结构光</strong>和<strong>编码结构光</strong>。</p>
+<ul>
+<li>随机结构光较为简单，也更加常用。通过投影器向被测空间中投射<strong>亮度不均</strong>和<strong>随机分布</strong>的点状结构光，通过双目相机成像，所得的双目影像经过极线校正后再进行双目稠密匹配，即可重建出对应的深度图。如下图为某种面阵的红外结构光。(和普通双目算法很相似)</li>
+<li>编码结构光可分为：<ul>
+<li>时序编码：高精度，<strong>但只适用于静态场景且需要拍摄大量影像</strong></li>
+<li>空间编码：无需多张照片，只需要一对影像即可进行三维重建。可以满足实时处理，用在动态环境中，<strong>但易受噪声干扰</strong>：由于反光、照明等原因可能导致成像时部分区域等编码信息缺失；<strong>对于空间中的遮挡比较敏感</strong>；相较于时序编码结构光<strong>精度较低</strong></li>
+</ul>
+</li>
+</ul>
+<p><strong>时序编码结构光</strong><br>在一定时间范围内，通过投影器向被测空间投射<strong>一系列</strong>明暗不同的结构光，每次投影都通过相机进行成像。则通过查找具有相同编码值的像素，来进行双目匹配</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231202204148.png" alt="image.png|666"></p>
+<p><strong>空间编码结构光</strong><br>为满足动态场景的需要，可以采用空间编码结构光。空间编码结构光特指向被测空间中投影经过数学编码的、一定范围内的光斑不具备重复性的结构光。由此，某个点的编码值可以通过其临域获得。其中，包含一个完整的空间编码的像素数量（窗口大小）就决定了重建的精度</p>
+<p>De Bruijn sequence</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231202204800.png" alt="image.png|666"></p>
+<p>2D Spatial Grid Patterns<br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231202204925.png" alt="image.png|666"></p>
+<h1 id="结构光三维重建项目"><a href="#结构光三维重建项目" class="headerlink" title="结构光三维重建项目"></a>结构光三维重建项目</h1><p>几个 Github 项目：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/Tang1705/Happy-Reconstruction">Tang1705/Happy-Reconstruction</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/jiayuzhang128/FourStepPhaseShifting">jiayuzhang128/FourStepPhaseShifting</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/timbrist/structure-light">3D reconstruction with Structure Light</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/casparji1018921/-Structured-Light-3D-Reconstruction-">Structured-Light-3D-Reconstruction分享和交流</a></li>
+</ul>
+<h2 id="FourStepPhaseShifting"><a href="#FourStepPhaseShifting" class="headerlink" title="FourStepPhaseShifting"></a>FourStepPhaseShifting</h2><p><a target="_blank" rel="noopener" href="https://github.com/jiayuzhang128/FourStepPhaseShifting">jiayuzhang128/FourStepPhaseShifting</a></p>
+<p>使用”互补格雷码+相移码”方法获取被测物体的三维信息<br>相机标定获得相机内外参</p>
+<h3 id="硬件设备搭建"><a href="#硬件设备搭建" class="headerlink" title="硬件设备搭建"></a>硬件设备搭建</h3><ul>
+<li>DLP 投影仪：闻亭 PRO6500</li>
+<li>灰度相机：FLIR BFS-U3-50S5</li>
+<li>旋转平台</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231203175408.png" alt="image.png|666"></p>
+<h3 id="投影仪-相机系统标定"><a href="#投影仪-相机系统标定" class="headerlink" title="投影仪-相机系统标定"></a>投影仪-相机系统标定</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40918859/article/details/122503156">投影仪-相机系统标定方法_投影仪标定-CSDN博客</a><br><a target="_blank" rel="noopener" href="http://mesh.brown.edu/calibration/">Projector-Camera Calibration / 3D Scanning Software (brown.edu)</a></p>
+<h4 id="一般相机标定"><a href="#一般相机标定" class="headerlink" title="一般相机标定"></a>一般相机标定</h4><p>—&gt;得到精确的相机内外参和畸变参数<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/136827980">张正友标定法-完整学习笔记-从原理到实战 - 知乎 (zhihu.com)</a></p>
+<ul>
+<li>相机标定的目的是：<strong>建立相机成像几何模型并矫正透镜畸变</strong><ul>
+<li>建立物体从三维世界映射到相机成像平面这一过程中的几何模型非常重要，而这一过程最关键的部分就是要得到相机的内参和外参</li>
+<li>由于小孔成像只有小孔部分能透过光线就会导致物体的成像亮度很低，因此发明了透镜，但由于透镜的制造工艺，会使成像产生多种形式的畸变</li>
+</ul>
+</li>
+</ul>
+<p>透镜的畸变主要分为径向畸变和切向畸变，我们一共需要 5 个 3 个畸变参数（k1、k2、k3、p1 和 p2 ）来描述透镜畸变</p>
+<ul>
+<li>径向畸变是由于透镜形状的制造工艺导致。且越向透镜边缘移动径向畸变越严重</li>
+<li>切向畸变是由于透镜和 CMOS 或者 CCD 的安装位置误差导致。因此，如果存在切向畸变，一个矩形被投影到成像平面上时，很可能会变成一个梯形</li>
+</ul>
+<p>标定过程：固定相机，改变棋盘标定板的位姿，一般拍摄 20 组以上照片</p>
+<ul>
+<li>根据两张图片中棋盘特征点的世界坐标位置和像素坐标位置，可以得到单应性矩阵(特征点从一张图片变换到另一张图片的<strong>变换矩阵</strong>，单应性矩阵<strong>H 是内参矩阵和外参矩阵的混合体</strong>)</li>
+<li>先不考虑镜头畸变，根据旋转向量之间的两个约束关系和单应性矩阵，得到相机的内参<ul>
+<li>如果图片数量 n&gt;=3，就可以得到唯一解 b(相机内参)</li>
+</ul>
+</li>
+<li>上述只是理论过程，在实际标定过程中，一般使用最大似然估计进行优化</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231203104443.png" alt="image.png|666"></p>
+<p>标定实战<br>MATLAB 自带相机标定应用程序，有 camera calibrator 和 stereo camera calibrator 两类相机标定应用程序。其操作简单、直观，能够获得相机的内、外参数以及畸变参数等</p>
+<h4 id="投影仪-相机系统标定-1"><a href="#投影仪-相机系统标定-1" class="headerlink" title="投影仪-相机系统标定"></a>投影仪-相机系统标定</h4><p><a target="_blank" rel="noopener" href="http://mesh.brown.edu/calibration/">Projector-Camera Calibration / 3D Scanning Software (brown.edu)</a></p>
+<p>用带有径向和切向畸变的<strong>小孔模型</strong>描述相机和投影仪 <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40918859/article/details/122271381">相机模型</a></p>
+<h3 id="基于相移法的结构光三维重建"><a href="#基于相移法的结构光三维重建" class="headerlink" title="基于相移法的结构光三维重建"></a>基于相移法的结构光三维重建</h3><p>互补格雷码+相移码 <a target="_blank" rel="noopener" href="https://github.com/jiayuzhang128/FourStepPhaseShifting/blob/master/support/%E5%8E%9F%E7%90%86%E4%BB%8B%E7%BB%8D.pdf">FourStepPhaseShifting/support/原理介绍.pdf</a> or <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40918859/article/details/120575820">CSDN1</a> + <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40918859/article/details/127763190">CSDN2</a></p>
+<p>相移法的结构光通过投影仪投射一系列正弦编码的条纹图案到被测物体表面，然后通过相机采集发生形变的条纹图像，继而根据相移算法进行解码获得待测物体表面的深度信息</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231203111427.png" alt="image.png|666"></p>
+<h4 id="生成四步相移图像"><a href="#生成四步相移图像" class="headerlink" title="生成四步相移图像"></a>生成四步相移图像</h4><p>N 步相移码：首先相移码的原理是利用 N 幅正弦条纹图通过投影仪投射到物体表面再通过相机拍摄获取图像，通过所得图像计算每个位置的相位差，然后通过相位—深度的映射关系获取物体的深度信息。</p>
+<p>投影光栅的光强函数<br>$\begin{aligned}&amp;I_n(x,y)=A(x,y)+B(x,y)cos[\varphi(x,y)+\Delta\varphi_n]\\{}\\&amp;\Delta\varphi_n=2\pi(n-1)/N(n\in[1,N])\end{aligned}$</p>
+<ul>
+<li>A(x,y)表示背景光强，B(x,y)表示调制幅值</li>
+<li>$\varphi(x,y)$ 表示包裹相位（相对相位）</li>
+<li>$\Delta\varphi_n$ 表示平移相位</li>
+</ul>
+<p>由于选用 4 位格雷码+四步相移，编码区域可以分为 16，因此相移码的周期数，周期 $T=Width/f$<br>$\varphi(x,y)=\frac{2\pi fx}{Width}$ Width 表示图像宽度(单位:像素)</p>
+<p>相移条纹图(下)生成公式，$u_p,v_p$ 表示投影仪像素坐标；T 表示单根条纹在一个周期内的像素数量<br>$\begin{gathered}\begin{aligned}&amp;I_0(u_p,\nu_p)=0.5+0.5\cos(2\pi\frac{u_p}T) \\&amp;I_{1}(u_{p},\nu_{p})=0.5+0.5\cos(2\pi\frac{u_{p}}{T}+\frac{\pi}{2}) \\&amp;I_2(u_p,\nu_p)=0.5+0.5\cos(2\pi\frac{u_p}T+\pi) \\&amp;I_{3}(u_{p},\nu_{p})=0.5+0.5\cos(2\pi\frac{u_{p}}{T}+\frac{3\pi}{2})\end{aligned} \end{gathered}$</p>
+<p>代码生成：</p>
+<ul>
+<li>第一步：生成一个 1920 维的行向量； </li>
+<li>第二步：利用公式 $I(x,y)=128+127cos[2\pi(\frac{fx}{Width}+\frac{n-1}N)]$ 对每一个向量元素进行填充； </li>
+<li>第三步：利用 <code>np.Tile()</code> 函数生成 1080 行，得到 <code>1920*1080</code> 的矩阵； </li>
+<li>第四步：利用 <code>cv2.imshow()</code> 函数显示。</li>
+</ul>
+<h4 id="格雷码-中"><a href="#格雷码-中" class="headerlink" title="格雷码(中)"></a>格雷码(中)</h4><p>一种二进制码制，是一种无权码，它的特点是前后相邻码值只改变一位数，这样可以减小错位误差，因此又称为最小错位误差码。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>十进制数</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+<th>10</th>
+<th>11</th>
+<th>12</th>
+<th>13</th>
+<th>14</th>
+<th>15</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>格雷码</td>
+<td>0000</td>
+<td>0001</td>
+<td>0011</td>
+<td>0010</td>
+<td>0110</td>
+<td>0111</td>
+<td>0101</td>
+<td>0100</td>
+<td>1100</td>
+<td>1101</td>
+<td>1111</td>
+<td>1110</td>
+<td>1010</td>
+<td>1011</td>
+<td>1001</td>
+<td>1000</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>生成 n 位格雷码:</p>
+<ul>
+<li>传统方法<ul>
+<li>第一步，生成 n 位全零码 </li>
+<li>第二步，改变最右端的码值 </li>
+<li>第三步，改变自右起第一个“1”码元左边的码元 </li>
+<li>重复第二、三步直至得到 2^n 个格雷码</li>
+</ul>
+</li>
+<li>递归法：n 位格雷码可以由（n-1）位格雷码得到<ul>
+<li>第一步：（n-1）位格雷码正序排列最左侧（前缀）补 0 </li>
+<li>第二步：（n-1）位格雷码逆序排列最左侧（前缀）补 1 </li>
+<li>第三步：一、二步得到结果依次排列得到 n 位格雷码</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">递归法：</span><br><span class="line">1位：0 1 </span><br><span class="line">正序 00 01 </span><br><span class="line">逆序 11 10 </span><br><span class="line">2位：00 01 11 10 </span><br><span class="line">正序 000 001 011 010 </span><br><span class="line">逆序 110 111 101 100 </span><br><span class="line">3位：000 001 011 010 110 111 101 100</span><br><span class="line">正序 0000 0001 0011 0010 0110 0111 0101 0100</span><br><span class="line">逆序 1100 1101 1111 1110 1010 1011 1001 1000</span><br><span class="line">4位：0000 0001 0011 0010 0110 0111 0101 0100 1100 1101 1111 1110 1010 1011 1001 1000</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>格雷码与普通二进制码的转换</p>
+<ul>
+<li>传统方法：<ul>
+<li>二进制码—&gt;格雷码：二进制码与其右移一位高位补零后的数码异或后得到格雷码</li>
+<li>格雷码—&gt;二进制码：最左边的一位不变，从左边第二位起，将每位与左边一位解码后的值异或，作为该位解码后的值。依次异或，直到最低位。依次异或转换后的值（二进制数）就是格雷码转换后二进制码的值</li>
+</ul>
+</li>
+</ul>
+<p>在生成格雷码的同时，将每一位格雷码与其对应的十进制数组成键值对储存在字典中，这样在进行二进制码、格雷码、十进制相互转换时可以直接查询字典完成比较方便<br>本项目采用的互补格雷码，需要 4 位格雷码图和 5 位格雷码的最后一张，详细代码可以查看 python 版本代码。</p>
+<h4 id="投影获得图像"><a href="#投影获得图像" class="headerlink" title="投影获得图像"></a>投影获得图像</h4><p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231203111447.png" alt="image.png|666"></p>
+<h4 id="求解相对相位-包裹相位"><a href="#求解相对相位-包裹相位" class="headerlink" title="求解相对相位(包裹相位)"></a>求解相对相位(包裹相位)</h4><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44408326/article/details/114838649?spm=1001.2014.3001.5501">数字条纹投影~标准N步相移主值相位计算式推导过程_up六月上的博客-CSDN博客</a></p>
+<p>$\begin{aligned}I_2(u_c,\nu_c)-I_0(u_c,\nu_c)=&amp;0.5\left(\cos[\phi(u_c,\nu_c)+\pi]-\cos[\phi(u_c,\nu_c)]\right)=-\cos[\phi(u_c,\nu_c)]\\I_3(u_c,\nu_c)-I_1(u_c,\nu_c)=&amp;0.5\left\{\cos\left[\phi(u_c,\nu_c)+\frac{3\pi}2\right]-\cos\left[\phi(u_c,\nu_c)+\frac\pi2\right]\right\}=\sin[\phi(u_c,\nu_c)]\end{aligned}$</p>
+<p>$\phi(u_c,\nu_c)=-\arctan\frac{I_3(u_c,\nu_c)-I_1(u_c,\nu_c)}{I_2(u_c,v_c)-I_0(u_c,\nu_c)},\phi(u_c,\nu_c)\in\left[-\pi,\pi\right]$<br>$𝑢_𝑐$、$𝑣_𝑐$ 表示相机获取图像的像素标, $\phi(u_c, v_c)$ 表示该像素点的包裹相位</p>
+<p>将每一个像素利用上述方法求得包裹相位并储存在对应位置，可以得到所有对应位置的数值大小都在 $[0,2\pi]$,然后对其进行线性放缩到 $[0,255]$</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231203165120.png" alt="image.png|666"></p>
+<h4 id="求绝对相位"><a href="#求绝对相位" class="headerlink" title="求绝对相位"></a>求绝对相位</h4><p>相位展开获得绝对相位(得到了投影仪像素坐标与相机像素坐标的关系)<br><strong>GC 表示格雷码图，k1、k2 表示对应的编码值</strong><br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231203165131.png" alt="image.png|666"></p>
+<p>包裹相位ϕ如上图，要想将上面的包裹相位还原成连续的绝对相位，只要在每一个截断处加上2kπ(k 表示周期的级次),就可以恢复成连续的相位。($\phi(x,y) = \varphi(x,y) + 2 \pi k_1(x,y)$)因此我们用四幅格雷码图像将整个有效视区分成 16 份并分别编码，因此这里的<strong>周期级次 K 就等于格雷码的编码值（k1），但是由于实际过程中，由于投影仪和相机的畸变效应，所投的格雷码图像与相移码图像会产生错位：</strong><br>由于错位发生在包裹相位的<strong>截断处</strong>，为了解决错位问题，我们引入一张5位格雷码，与4位格雷码形成互补，k2的计算公式：$K2=INT[(V2+1)/2]$，INT:向下取整，V2：GC0-GC5 格雷码对应的十进制数。</p>
+<p>利用以下公式就可以避免截断处产生错位：<br>$\phi(x,y)=\begin{cases}\varphi(x,y)+2\pi k_2(x,y),~\varphi(x,y)\leq\frac\pi2\\\\\varphi(x,y)+2\pi k_1(x,y),~\frac\pi2&lt;\varphi(x,y)&lt;\frac{3\pi}2\\\\\varphi(x,y)+2\pi[k_2(x,y)-1],~\varphi(x,y)\geq\frac{3\pi}2&amp;\end{cases}$</p>
+<p>在相机实际拍摄的图片中由于环境光的影响，拍摄到的格雷码值并不是标准的二值图，需要二值化:</p>
+<ul>
+<li>首先要将格雷码图像进行二值化处理</li>
+<li>然后计算 k1、k2 的值</li>
+<li>最后带入公式求解绝对相位 $\phi(x,y)$</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231203175500.png" alt="image.png|666"></p>
+<p><strong>然后求解三维坐标</strong>，获得三维点云(根据各坐标系的关系以及相机和投影仪的参数)</p>
+<h4 id="获得相机-投影仪像素坐标之间的对应关系"><a href="#获得相机-投影仪像素坐标之间的对应关系" class="headerlink" title="获得相机-投影仪像素坐标之间的对应关系"></a>获得相机-投影仪像素坐标之间的对应关系</h4><p>由相机像素坐标 $u_c,v_c$，投影仪像素坐标 $(u_p,v_p)$<br>$\Phi(\operatorname{u_P},\operatorname{v_P})=\Phi(\operatorname{u_C},\operatorname{v_C})$<br>$\Phi(\operatorname{u_P},\operatorname{v_P})=\frac{2\pi\operatorname{u_p}}{\operatorname{T}}$<br>可得：$\mathrm{u_p~=~\frac{\Phi(u_p,v_p)<em>T}{2\pi}~=~\frac{\Phi(u_c,v_c)</em>T}{2\pi}}$</p>
+<h4 id="根据标定参数获得重建点云信息"><a href="#根据标定参数获得重建点云信息" class="headerlink" title="根据标定参数获得重建点云信息"></a>根据标定参数获得重建点云信息</h4><p>由相机内外参矩阵，可以得到像素坐标与世界坐标之间的关系：</p>
+<p>$\left.\left\{\begin{array}{c}\mathrm{X_c=x_c<em>Z_c}\\\mathrm{Y_c=y_c</em>Z_c}\\\mathrm{Z_c=Z_c}\end{array}\right.\right.$<br>$\left.\left\{\begin{array}{rl}\mathrm{x_c~=~(u_c~-u_{c0}~)/f_{cx}}\\\mathrm{y_c~=~(v_c~-v_{c0}~)/f_{cy}}\end{array}\right.\right.$<br>$x_c,y_c$ 为 $u_c,v_c$ 的相机坐标，世界坐标 $X_w,Y_w,Z_w$ 旋转平移得到 $X_c,Y_c,Z_c$</p>
+<p>同理投影仪：<br>$\left.\left\{\begin{array}{l}X_p=x_p<em>Z_p\\Y_p=y_p</em>Z_p\\Z_p=Z_p\end{array}\right.\right.$<br>$\left.\left\{\begin{array}{l}x_p=(u_p-u_{p0})/f_{px}\\y_p=(v_p-v_{p0})/f_{py}\end{array}\right.\right.$</p>
+<p>由相机和投影仪外参关系：<br>$\left.\left[\begin{array}{c}X_p\\Y_p\\Z_p\end{array}\right.\right]=R_{c\to p}\left[\begin{array}{c}X_c\\Y_c\\Z_c\end{array}\right]+t_{c\to p}$<br>可得：<br>$\left.\left\{\begin{array}{l}X_p=r_{11}X_c+r_{12}Y_c+r_{13}Z_c+t_x=(r_{11}x_c+r_{12}y_c+r_{13})Z_c+t_x\\Y_p=r_{21}X_c+r_{22}Y_c+r_{23}Z_c+t_y=(r_{21}x_c+r_{22}y_c+r_{23})Z_c+t_y\\Z_p=r_{31}X_c+r_{32}Y_c+r_{33}Z_c+t_z=(r_{31}x_c+r_{32}y_c+r_{33})Z_c+t_z\end{array}\right.\right.$</p>
+<p>由相机投影仪像素坐标关系：<br>$\left.\left\{\begin{array}{l}u_p=f_{px}<em>x_p+u_{p0}\\u_p=\frac{\Phi(u_c,v_c)</em>T}{2\pi}\end{array}\right.\right.\Rightarrow f_{px}<em>x_p+u_{p0}=\frac{\Phi(u_c,v_c)</em>T}{2\pi}$</p>
+<p>联立上述两式：<br>$\left.\left\{\begin{array}{l}x_p<em>Z_p=(r_{11}x_c+r_{12}y_c+r_{13})Z_c+t_x\\Z_p=(r_{31}x_c+r_{32}y_c+r_{33})Z_c+t_z\\f_{px}</em>x_p+u_{p0}=\frac{\Phi(u_c,v_c)<em>T}{2\pi}\end{array}\right.\right.$<br>可得：$Z_{c}=\frac{x_{p}t_{z}-t_{x}}{J_{x}-J_{z}x_{p}}$<br>其中<br>$\begin{aligned}&amp;\begin{aligned}J_x=(r_{11}x_c+r_{12}y_c+r_{13})\end{aligned}\text{;} \\&amp;\begin{aligned}J_z=(r_{31}x_c+r_{32}y_c+r_{33})\end{aligned}{;} \\&amp;x_{p}=(\frac{\Phi(u_{c},v_{c})</em>T}{2\pi}-u_{p0})/f_{px}。\end{aligned}$</p>
+<p>则相机坐标系下，每个像素的世界坐标为：<br>$\left.\left\{\begin{array}{l}X_c=x_c<em>Z_c\\Y_c=y_c</em>Zc\\Z_c=\frac{x_pt_z-t_x}{J_x-J_zx_p}\end{array}\right.\right.$</p>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+1ZnNxFWnEbk5YzRl">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/3DReconstruction/" rel="tag"><i class="fa fa-tag"></i> 3DReconstruction</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/3DReconstruction/Multi-view/Explicit%20Volumetric/Voxurf/" rel="prev" title="Voxurf">
+      <i class="fa fa-chevron-left"></i> Voxurf
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/3DReconstruction/Basic%20Knowledge/NeRF/Review/Image-Based%203D%20Object%20Reconstruction/" rel="next" title="Image-Based 3D Object Reconstruction">
+      Image-Based 3D Object Reconstruction <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E5%85%89%E5%8E%9F%E7%90%86"><span class="nav-text">结构光原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%89%AB%E6%8F%8F%E7%BB%93%E6%9E%84%E5%85%89"><span class="nav-text">线扫描结构光</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%A2%E9%98%B5%E7%BB%93%E6%9E%84%E5%85%89"><span class="nav-text">面阵结构光</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E5%85%89%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="nav-text">结构光三维重建项目</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#FourStepPhaseShifting"><span class="nav-text">FourStepPhaseShifting</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A1%AC%E4%BB%B6%E8%AE%BE%E5%A4%87%E6%90%AD%E5%BB%BA"><span class="nav-text">硬件设备搭建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%95%E5%BD%B1%E4%BB%AA-%E7%9B%B8%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A0%87%E5%AE%9A"><span class="nav-text">投影仪-相机系统标定</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E8%88%AC%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A"><span class="nav-text">一般相机标定</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%95%E5%BD%B1%E4%BB%AA-%E7%9B%B8%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A0%87%E5%AE%9A-1"><span class="nav-text">投影仪-相机系统标定</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E7%9B%B8%E7%A7%BB%E6%B3%95%E7%9A%84%E7%BB%93%E6%9E%84%E5%85%89%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA"><span class="nav-text">基于相移法的结构光三维重建</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E5%9B%9B%E6%AD%A5%E7%9B%B8%E7%A7%BB%E5%9B%BE%E5%83%8F"><span class="nav-text">生成四步相移图像</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%BC%E9%9B%B7%E7%A0%81-%E4%B8%AD"><span class="nav-text">格雷码(中)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%95%E5%BD%B1%E8%8E%B7%E5%BE%97%E5%9B%BE%E5%83%8F"><span class="nav-text">投影获得图像</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B1%82%E8%A7%A3%E7%9B%B8%E5%AF%B9%E7%9B%B8%E4%BD%8D-%E5%8C%85%E8%A3%B9%E7%9B%B8%E4%BD%8D"><span class="nav-text">求解相对相位(包裹相位)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B1%82%E7%BB%9D%E5%AF%B9%E7%9B%B8%E4%BD%8D"><span class="nav-text">求绝对相位</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%BE%97%E7%9B%B8%E6%9C%BA-%E6%8A%95%E5%BD%B1%E4%BB%AA%E5%83%8F%E7%B4%A0%E5%9D%90%E6%A0%87%E4%B9%8B%E9%97%B4%E7%9A%84%E5%AF%B9%E5%BA%94%E5%85%B3%E7%B3%BB"><span class="nav-text">获得相机-投影仪像素坐标之间的对应关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%B9%E6%8D%AE%E6%A0%87%E5%AE%9A%E5%8F%82%E6%95%B0%E8%8E%B7%E5%BE%97%E9%87%8D%E5%BB%BA%E7%82%B9%E4%BA%91%E4%BF%A1%E6%81%AF"><span class="nav-text">根据标定参数获得重建点云信息</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qi Yun"
+      src="/images/avatar.jpeg">
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">122</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/qiyun71" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;qiyun71" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/29010355" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;29010355" rel="noopener" target="_blank"><i class="fa fa-star fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qi Yun</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">458k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">27:47</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/yqq/anime.min.js"></script>
+  <script src="/yqq/velocity/velocity.min.js"></script>
+  <script src="/yqq/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
