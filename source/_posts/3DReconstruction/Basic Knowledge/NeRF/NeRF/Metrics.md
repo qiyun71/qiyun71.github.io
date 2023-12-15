@@ -12,6 +12,12 @@ NeRF、Depth Estimation、Object Detection
 
 <!-- more -->
 
+评价指标代码
+- [NeRF与三维重建专栏（一）领域背景、难点与数据集介绍 - 掘金 (juejin.cn)](https://juejin.cn/post/7232499180659458109)
+
+论文：(很少)
+- Towards a Robust Framework for NeRF Evaluation
+
 # Metrics
 
 L1*loss : $loss(x,y)=\frac{1}{n}\sum*{i=1}^{n}|y*i-f(x_i)|$
@@ -117,8 +123,8 @@ $\mathcal{L}_{EMD}=min_{\phi:Y\rightarrow Y^{\prime}}\sum_{x\in Y}||x-\phi(x)||_
 
 ## RGB Loss
 
-L2 损失：`F.mse_loss(pred_rgb, gt_rgb)`
-L1 损失：`F.l1_loss(pred_rgb, gt_rgb)`更稳定？
+L2 损失：`F.mse_loss(pred_rgb, gt_rgb)` $L=\sum_{i=1}^n(y_i-f(x_i))^2$
+L1 损失：`F.l1_loss(pred_rgb, gt_rgb)`更稳定？ $L=\sum_{i=1}^n|y_i-f(x_i)|$
 
 ## Eikonal Loss
 
@@ -153,7 +159,7 @@ $sparsity = \frac{1}{N} \sum e^{-scale * sdf}$
 - sdf loss
   - `sdf_loss = F.l1_loss(pts2sdf, torch.zeros_like(pts2sdf), reduction='sum') / pts2sdf.shape[0]`
   - $\mathcal{L}_{sdf} = \frac{1}{N} \sum |sdf(spoint) - 0|$
--
+
 
 ## other loss
 

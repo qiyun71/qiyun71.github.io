@@ -4,7 +4,7 @@ date: 2023-09-13 15:44:04
 tags:
   - Efficiency
   - Real-time
-categories: 3DReconstruction/Basic Knowledge/NeRF/Efficiency
+categories: 3DReconstruction/Multi-view/Implicit Function/NeRF-based
 ---
 
 | Title     | BakedSDF: Meshing Neural SDFs for Real-Time View Synthesis                                                                                                                 |

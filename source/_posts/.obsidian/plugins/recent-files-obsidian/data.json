@@ -1,95 +1,204 @@
 {
   "recentFiles": [
     {
-      "basename": "Multi-view 3D Reconstruction",
-      "path": "3DReconstruction/Basic Knowledge/Multi-view 3D Reconstruction.md"
+      "basename": "Tools",
+      "path": "Other/Mine/Tools.md"
     },
     {
-<<<<<<< HEAD
-      "basename": "Voxurf",
-      "path": "3DReconstruction/Multi-view/Explicit Volumetric/Voxurf.md"
-    },
-    {
-      "basename": "VolSDF",
-      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/VolSDF.md"
-    },
-    {
-      "basename": "Plenoxels",
-      "path": "3DReconstruction/Multi-view/Explicit Volumetric/Plenoxels.md"
-    },
-    {
-      "basename": "Point-NeRF",
-      "path": "3DReconstruction/Multi-view/Explicit Volumetric/Point-NeRF.md"
-    },
-    {
-      "basename": "3D Gaussian Splatting",
-      "path": "3DReconstruction/Multi-view/Explicit Volumetric/3D Gaussian Splatting.md"
-    },
-    {
-      "basename": "A Review of Deep Learning-Powered Mesh Reconstruction Methods",
-      "path": "3DReconstruction/Basic Knowledge/NeRF/Review/A Review of Deep Learning-Powered Mesh Reconstruction Methods.md"
-    },
-    {
-      "basename": "NeRF in the industrial and robotics domain",
-      "path": "3DReconstruction/Basic Knowledge/NeRF/Review/NeRF in the industrial and robotics domain.md"
-    },
-    {
-      "basename": "2023 Conf about NeRF",
-      "path": "3DReconstruction/Basic Knowledge/NeRF/Review/2023 Conf about NeRF.md"
-    },
-    {
-      "basename": "A Critical Analysis of NeRF-Based 3D Reconstruction",
-      "path": "3DReconstruction/Basic Knowledge/NeRF/Review/A Critical Analysis of NeRF-Based 3D Reconstruction.md"
+      "basename": "Neuralangelo",
+      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Efficiency/Neuralangelo.md"
     },
     {
       "basename": "NeuS",
       "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/NeuS.md"
     },
     {
-      "basename": "Neus-code",
-      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Neus-code.md"
+      "basename": "Make-Py-Tools",
+      "path": "Python Practise/Make-Py-Tools.md"
     },
     {
-      "basename": "PlankAssembly",
-      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/PlankAssembly.md"
+      "basename": "Learn-Python",
+      "path": "Learn/Learn-Python.md"
     },
     {
-      "basename": "Pose Estimation Review",
-      "path": "3DReconstruction/Basic Knowledge/NeRF/CameraPose/Pose Estimation Review.md"
+      "basename": "Metrics",
+      "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF/Metrics.md"
     },
     {
-      "basename": "UNISURF",
-      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/UNISURF.md"
+      "basename": "SG-GAN",
+      "path": "3DReconstruction/Single-view/Generative Models/SG-GAN.md"
     },
     {
-      "basename": "RayDF",
-      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/RayDF.md"
+      "basename": "Datasets",
+      "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF/Datasets.md"
     },
     {
-=======
->>>>>>> 46b3a05d7ffa9b4ce4176b8e8c475235a745c347
-      "basename": "IPV6",
-      "path": "Other/Mine/IPV6.md"
+      "basename": "Sampling",
+      "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF/Sampling.md"
     },
     {
-      "basename": "Structured Light Review",
-      "path": "3DReconstruction/Multi-view/Structured Light/Structured Light Review.md"
+      "basename": "SDFStudio",
+      "path": "3DReconstruction/Multi-view/Implicit Function/SDFStudio.md"
     },
     {
-      "basename": "Voxurf",
-      "path": "3DReconstruction/Multi-view/Explicit Volumetric/Voxurf.md"
+      "basename": "NeRF-Principle",
+      "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF-Principle.md"
+    },
+    {
+      "basename": "Math",
+      "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF/Math.md"
+    },
+    {
+      "basename": "Multi-view 3D Reconstruction",
+      "path": "3DReconstruction/Basic Knowledge/Multi-view 3D Reconstruction.md"
+    },
+    {
+      "basename": "Math",
+      "path": "3DReconstruction/Basic Knowledge/Math.md"
+    },
+    {
+      "basename": "PAniC-3D",
+      "path": "3DReconstruction/Basic Knowledge/NeRF/Interesting/PAniC-3D.md"
     },
     {
       "basename": "NeRF-review",
       "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF-review.md"
     },
     {
-      "basename": "Other Paper About Reconstruction",
-      "path": "3DReconstruction/Basic Knowledge/Other Paper About Reconstruction.md"
+      "basename": "NeRF-Mine",
+      "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF-Mine.md"
+    },
+    {
+      "basename": "NerfAcc",
+      "path": "3DReconstruction/Basic Knowledge/NeRF/Sampling/NerfAcc.md"
+    },
+    {
+      "basename": "Structured Light Review",
+      "path": "3DReconstruction/Multi-view/Structured Light/Structured Light Review.md"
+    },
+    {
+      "basename": "A Critical Analysis of NeRF-Based 3D Reconstruction",
+      "path": "3DReconstruction/Basic Knowledge/NeRF/Review/A Critical Analysis of NeRF-Based 3D Reconstruction.md"
+    },
+    {
+      "basename": "Color-NeuS",
+      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Color-NeuS.md"
+    },
+    {
+      "basename": "Ref-NeRF",
+      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Shadow&Highlight/Ref-NeRF.md"
+    },
+    {
+      "basename": "Mip-NeRF",
+      "path": "3DReconstruction/Basic Knowledge/NeRF/Sampling/Mip-NeRF.md"
+    },
+    {
+      "basename": "Pose Estimation Review",
+      "path": "3DReconstruction/Basic Knowledge/NeRF/CameraPose/Pose Estimation Review.md"
+    },
+    {
+      "basename": "SparseNeuS",
+      "path": "3DReconstruction/Basic Knowledge/NeRF/Sparse/SparseNeuS.md"
+    },
+    {
+      "basename": "FreeNeRF",
+      "path": "3DReconstruction/Basic Knowledge/NeRF/Sparse/FreeNeRF.md"
+    },
+    {
+      "basename": "FORGE",
+      "path": "3DReconstruction/Basic Knowledge/NeRF/Sparse/FORGE.md"
+    },
+    {
+      "basename": "Floaters No More",
+      "path": "3DReconstruction/Basic Knowledge/NeRF/Sampling/Floaters No More.md"
+    },
+    {
+      "basename": "Strivec",
+      "path": "3DReconstruction/Basic Knowledge/NeRF/Efficiency/Strivec.md"
+    },
+    {
+      "basename": "TensoRF",
+      "path": "3DReconstruction/Basic Knowledge/NeRF/Efficiency/TensoRF.md"
+    },
+    {
+      "basename": "Tri-MipRF",
+      "path": "3DReconstruction/Basic Knowledge/NeRF/Efficiency/Tri-MipRF.md"
+    },
+    {
+      "basename": "Zip-NeRF",
+      "path": "3DReconstruction/Basic Knowledge/NeRF/Efficiency/Zip-NeRF.md"
+    },
+    {
+      "basename": "BakedSDF",
+      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/BakedSDF.md"
+    },
+    {
+      "basename": "NeuFace",
+      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Shadow&Highlight/NeuFace.md"
+    },
+    {
+      "basename": "NeRFactor",
+      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Shadow&Highlight/NeRFactor.md"
+    },
+    {
+      "basename": "ShadowNeuS",
+      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Shadow&Highlight/ShadowNeuS.md"
+    },
+    {
+      "basename": "NeRO",
+      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Shadow&Highlight/NeRO.md"
+    },
+    {
+      "basename": "Ref-NeuS",
+      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Shadow&Highlight/Ref-NeuS.md"
+    },
+    {
+      "basename": "RayDF",
+      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/RayDF.md"
+    },
+    {
+      "basename": "NISR",
+      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/NISR.md"
+    },
+    {
+      "basename": "D-NeuS",
+      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/D-NeuS.md"
+    },
+    {
+      "basename": "IDR",
+      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/IDR.md"
+    },
+    {
+      "basename": "NeUDF",
+      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/NeUDF.md"
+    },
+    {
+      "basename": "NeuDA",
+      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/NeuDA.md"
     },
     {
       "basename": "PermutoSDF",
       "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Efficiency/PermutoSDF.md"
+    },
+    {
+      "basename": "DVR",
+      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/DVR.md"
+    },
+    {
+      "basename": "VolSDF",
+      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/VolSDF.md"
+    },
+    {
+      "basename": "Encoding",
+      "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF/Encoding.md"
+    },
+    {
+      "basename": "Mip-NeRF 360",
+      "path": "3DReconstruction/Basic Knowledge/NeRF/LargeScaleScene/Mip-NeRF 360.md"
+    },
+    {
+      "basename": "NeuS2",
+      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Efficiency/NeuS2.md"
     }
   ],
   "omittedPaths": [],

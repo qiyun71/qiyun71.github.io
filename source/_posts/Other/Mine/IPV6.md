@@ -88,4 +88,27 @@ index-url = https://mirrors6.tuna.tsinghua.edu.cn/pypi/web/simple/
 ```
 
 
+# WSL2配置代理
 
+[WSL2 中访问宿主机 Windows 的代理 - ZingLix Blog](https://zinglix.xyz/2020/04/18/wsl2-proxy/)
+
+V2rayN中需要开启允许局域网的连接
+
+# IPV6
+
+[实现校园网IPv6免流量上网与科学上网 | V2ray教程：X-ui与v2rayN ~ 极星网 (jixing.one)](https://www.jixing.one/vps/v2ray-xui-v2rayn/)
+
+## TUN模式
+
+win10查看路由表：`route print`
+
+修改IP CIDR后需要重启V2rayN
+```
+202.204.48.66/16,
+cipp.ustb.edu.cn,
+autodl.com,
+tjupt.org,
+byr.pt,
+dict.eudic.net,
+mirrors6.tuna.tsinghua.edu.cn,
+```

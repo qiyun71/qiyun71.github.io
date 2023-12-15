@@ -18,6 +18,11 @@ COLMAP + Blender(neuralangelo)
 
 > [Learn-Colmap](/Learn/Learn-Colmap)
 
+# Stable SFM
+
+[Carl Olsson (lth.se)](https://www.maths.lth.se/matematiklth/personal/calle/dataset/dataset.html)
+
+
 # DTU
 
 [DTU Robot Image Data Sets | Data for Evaluating Computer Vision Methods etc.](http://roboimagedata.compute.dtu.dk/)

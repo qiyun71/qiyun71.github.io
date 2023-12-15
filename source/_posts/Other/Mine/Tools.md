@@ -1,3 +1,33 @@
+# Vim
+
+## 光标跳转
+
+NORMAL模式
+gg跳到开头 
+G跳到结尾 
+^跳到行首非空字符
+
+查找字符
+f{char} 下个char
+F{char} 上个char
+t{char} 下个char前个char
+T{char} 上个char前个char
+; 继续下个查找
+,反向查找
+
+## 动作
+
+插入 i(inner) a(around) o
+
+# ffmpeg
+
+将多张图片合成视频output.mp4
+`ffmpeg -r 10 -f image2 -i %03d.png output.mp4`
+- -r在-i前：每秒输入10帧图片转为视频
+  - -r在-i后：每秒输入25帧图片转为视频，视频为每秒10帧
+- -f image2
+- -i 输入图片文件名
+
 # WSL2
 
 移动到其他盘[WSL2安装Ubuntu20.04 - 王谷雨 - 博客园 (cnblogs.com)](https://www.cnblogs.com/konghuanxi/p/14731846.html)

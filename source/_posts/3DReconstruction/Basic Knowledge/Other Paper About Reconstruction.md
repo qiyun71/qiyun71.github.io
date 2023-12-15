@@ -39,6 +39,14 @@ Awesome Human Body Reconstruction
 
 # NeRF Other Object Reconstruction
 
+## RNb-NeuS
+
+[bbrument/RNb-NeuS: Code release for RNb-NeuS. (github.com)](https://github.com/bbrument/RNb-NeuS)
+
+将**反射率**和**法线贴图**无缝集成为基于神经体积渲染的 3D 重建中的输入数据
+考虑高光和阴影：显著改善了高曲率或低可见度区域的详细 3D 重建
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231205152551.png)
+
 ## Voxurf
 
 [wutong16/Voxurf: [ ICLR 2023 Spotlight ] Pytorch implementation for "Voxurf: Voxel-based Efficient and Accurate Neural Surface Reconstruction" (github.Com)](https://github.com/wutong16/Voxurf)
@@ -128,6 +136,17 @@ MLP 是连续函数，对 NeRF 网络结构的改进来生成不连续的密度�
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231123143210.png)
 
+## Dynamic
+### MorpheuS
+
+[MorpheuS (hengyiwang.github.io)](https://hengyiwang.github.io/projects/morpheus)
+MorpheuS: Neural Dynamic 360° Surface Reconstruction from **Monocular RGB-D Video**
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231204133746.png)
+
+### NPGs
+
+[[2312.01196] Neural Parametric Gaussians for Monocular Non-Rigid Object Reconstruction (arxiv.org)](https://arxiv.org/abs/2312.01196)
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231205153011.png)
 
 # NeRF Human Body Reconstruction
 
@@ -195,6 +214,11 @@ Cost：
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230930154048.png)
 
 ## Dynamic
+
+### GaussianAvatar
+
+[Projectpage of GaussianAvatar (huliangxiao.github.io)](https://huliangxiao.github.io/GaussianAvatar)
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231205153138.png)
 
 ### Vid2Avatar
 
@@ -417,6 +441,16 @@ DMTet 表示：consists of an explicit body shape grid and an implicit distance 
 
 ##  Human Face
 
+### GaussianHead
+
+[[2312.01632] GaussianHead: Impressive 3D Gaussian-based Head Avatars with Dynamic Hybrid Neural Field (arxiv.org)](https://arxiv.org/abs/2312.01632)
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231205153845.png)
+
+### GaussianAvatars
+
+[GaussianAvatars: Photorealistic Head Avatars with Rigged 3D Gaussians | Shenhan Qian](https://shenhanqian.github.io/gaussian-avatars)
+
+![method.jpg|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/picturesmethod.jpg)
 
 ### TRAvatar
 
