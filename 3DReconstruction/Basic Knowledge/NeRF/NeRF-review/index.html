@@ -28,10 +28,8 @@
 <meta property="og:description" content="NeRF相关的论文 at CVPR&#x2F;ICCV&#x2F;ECCV&#x2F;NIPS&#x2F;ICML&#x2F;ICLR&#x2F;SIGGRAPH计算机视觉顶会2022截稿时间及会议时间_ijcai2024截稿日期-CSDN博客     My post Brief description status     NeRF + Code NeRF 原理 + 代码理解 Completed   NeuS + Code 表面重建方法 SDFNetwo">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231101151141.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231202162029.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231202162106.png">
 <meta property="article:published_time" content="2023-06-25T05:01:00.000Z">
-<meta property="article:modified_time" content="2023-12-08T09:05:44.155Z">
+<meta property="article:modified_time" content="2023-12-18T12:55:37.695Z">
 <meta property="article:author" content="Qi Yun">
 <meta property="article:tag" content="Review">
 <meta property="article:tag" content="NeRF">
@@ -231,7 +229,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-12-08 17:05:44" itemprop="dateModified" datetime="2023-12-08T17:05:44+08:00">2023-12-08</time>
+                <time title="Modified: 2023-12-18 20:55:37" itemprop="dateModified" datetime="2023-12-18T20:55:37+08:00">2023-12-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -248,7 +246,7 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>2.2k</span>
+              <span>2.3k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -352,11 +350,51 @@
 </ul>
 </li>
 </ul>
-<h2 id="Camera-Pose"><a href="#Camera-Pose" class="headerlink" title="Camera Pose"></a>Camera Pose</h2><h3 id="Continuous-Pose"><a href="#Continuous-Pose" class="headerlink" title="Continuous Pose"></a>Continuous Pose</h3><p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2311.17119">[2311.17119] Continuous Pose for Monocular Cameras in Neural Implicit Representation (arxiv.org)</a><br>将单目相机姿势优化为时间连续函数<br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231202162029.png" alt="image.png|666"></p>
-<h3 id="PF-GRT"><a href="#PF-GRT" class="headerlink" title="PF-GRT"></a>PF-GRT</h3><p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2310.03704">[2310.03704] Pose-Free Generalizable Rendering Transformer (arxiv.org)</a><br><a target="_blank" rel="noopener" href="https://zhiwenfan.github.io/PF-GRT/">Pose-Free Generalizable Rendering Transformer (zhiwenfan.github.io)</a><br>新视图渲染<br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231202162106.png" alt="image.png|666"></p>
-<h3 id="Other-paper-about-camera-pose"><a href="#Other-paper-about-camera-pose" class="headerlink" title="Other paper about camera pose"></a>Other paper about camera pose</h3><p>改进COLMAP估计相机位姿参数有误差的问题</p>
-<ul>
-<li><strong>USB-NeRF: Unrolling Shutter Bundle Adjusted Neural Radiance Fields</strong> <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2310.02687">https://arxiv.org/abs/2310.02687</a></li>
+<h2 id="Camera-Pose"><a href="#Camera-Pose" class="headerlink" title="Camera Pose"></a>Camera Pose</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Year</th>
+<th>Title&amp;Project Page</th>
+<th>Brief Description</th>
+<th style="text-align:center">Conf/Jour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2023</td>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2311.17119">[2311.17119] Continuous Pose for Monocular Cameras in Neural Implicit Representation (arxiv.org)</a></td>
+<td>将单目相机姿势优化为时间连续函数</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>2023</td>
+<td><a target="_blank" rel="noopener" href="https://zhiwenfan.github.io/PF-GRT/">Pose-Free Generalizable Rendering Transformer (zhiwenfan.github.io)</a></td>
+<td></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>2023</td>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2310.02687">[2310.02687] USB-NeRF: Unrolling Shutter Bundle Adjusted Neural Radiance Fields (arxiv.org)</a></td>
+<td></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>2023</td>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2309.11326">[2309.11326] How to turn your camera into a perfect pinhole model (arxiv.org)</a></td>
+<td></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>2023</td>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2312.08760">[2312.08760] CF-NeRF: Camera Parameter Free Neural Radiance Fields with Incremental Learning (arxiv.org)</a></td>
+<td></td>
+<td style="text-align:center">AAAI</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="Other-paper-about-camera-pose"><a href="#Other-paper-about-camera-pose" class="headerlink" title="Other paper about camera pose"></a>Other paper about camera pose</h3><ul>
 <li>How to turn your camera into a perfect pinhole model</li>
 </ul>
 <h2 id="Efficiency"><a href="#Efficiency" class="headerlink" title="Efficiency"></a>Efficiency</h2><h3 id="Encoding"><a href="#Encoding" class="headerlink" title="Encoding"></a>Encoding</h3><div class="table-container">
@@ -576,6 +614,11 @@
 <td>通过梯度缩放，解决基于NeRF重建场景中的背景塌陷和镜前漂浮物</td>
 <td style="text-align:center">The Eurographics Association</td>
 </tr>
+<tr>
+<td>2023</td>
+<td><a target="_blank" rel="noopener" href="https://kaist-viclab.github.io/pronerf-site/">ProNeRF: Learning Efficient Projection-Aware Ray Sampling for Fine-Grained Implicit Neural Radiance Fields (kaist-viclab.github.io)</a></td>
+<td>投影感知采样（PAS）</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -623,6 +666,18 @@
 <td><a target="_blank" rel="noopener" href="https://jiawei-yang.github.io/FreeNeRF/">FreeNeRF: Frequency-regularized NeRF (jiawei-yang.github.io)</a></td>
 <td>稀疏视图训练时，逐步开放高频分量可以获得更好的效果，遮挡正则消除floaters</td>
 <td style="text-align:center">CVPR</td>
+</tr>
+<tr>
+<td>2023</td>
+<td><a target="_blank" rel="noopener" href="https://sarahweiii.github.io/zerorf/">ZeroRF (sarahweiii.github.io)</a></td>
+<td></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>2023</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/eezkni/ColNeRF">eezkni/ColNeRF: [AAAI2024] Pytorch implementation of “ColNeRF: Collaboration for Generalizable Sparse Input Neural Radiance Field” (github.com)</a></td>
+<td></td>
+<td style="text-align:center">AAAI2024</td>
 </tr>
 </tbody>
 </table>
@@ -794,6 +849,17 @@
 <td><a target="_blank" rel="noopener" href="https://github.com/aejion/NeuFace">NeuFace: Realistic 3D Neural Face Rendering from Multi-view Images</a></td>
 <td><strong>BRDF+SDF+PBR</strong>框架，端到端训练，重建人脸的几何+外观</td>
 <td style="text-align:center">CVPR</td>
+</tr>
+<tr>
+<td>2024</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/cuiziteng/Aleth-NeRF">cuiziteng/Aleth-NeRF: [AAAI 2024] Aleth-NeRF: Illumination Adaptive NeRF with Concealing Field Assumption (github.com)</a></td>
+<td></td>
+<td style="text-align:center">AAAI</td>
+</tr>
+<tr>
+<td>2023</td>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2312.08118">[2312.08118] Neural Radiance Fields for Transparent Object Using Visual Hull (arxiv.org)</a></td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -1018,7 +1084,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#NeRF"><span class="nav-text">NeRF</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E7%90%86%E6%94%B9%E8%BF%9B"><span class="nav-text">原理改进</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PL-NeRF"><span class="nav-text">PL-NeRF</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Camera-Pose"><span class="nav-text">Camera Pose</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Continuous-Pose"><span class="nav-text">Continuous Pose</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PF-GRT"><span class="nav-text">PF-GRT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Other-paper-about-camera-pose"><span class="nav-text">Other paper about camera pose</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Efficiency"><span class="nav-text">Efficiency</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Encoding"><span class="nav-text">Encoding</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Large-Scale-Scene"><span class="nav-text">Large Scale Scene</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PointCloud"><span class="nav-text">PointCloud</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Review"><span class="nav-text">Review</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sampling"><span class="nav-text">Sampling</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sparse-images-Generalization"><span class="nav-text">Sparse images&#x2F;Generalization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Surface-Reconstruction"><span class="nav-text">Surface Reconstruction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shadow-amp-Highlight"><span class="nav-text">Shadow&amp;Highlight</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Framework"><span class="nav-text">Framework</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Dalao"><span class="nav-text">Dalao</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%89%E8%B6%A3%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-text">有趣的应用</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#NeRF"><span class="nav-text">NeRF</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E7%90%86%E6%94%B9%E8%BF%9B"><span class="nav-text">原理改进</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PL-NeRF"><span class="nav-text">PL-NeRF</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Camera-Pose"><span class="nav-text">Camera Pose</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Other-paper-about-camera-pose"><span class="nav-text">Other paper about camera pose</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Efficiency"><span class="nav-text">Efficiency</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Encoding"><span class="nav-text">Encoding</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Large-Scale-Scene"><span class="nav-text">Large Scale Scene</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PointCloud"><span class="nav-text">PointCloud</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Review"><span class="nav-text">Review</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sampling"><span class="nav-text">Sampling</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sparse-images-Generalization"><span class="nav-text">Sparse images&#x2F;Generalization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Surface-Reconstruction"><span class="nav-text">Surface Reconstruction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shadow-amp-Highlight"><span class="nav-text">Shadow&amp;Highlight</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Framework"><span class="nav-text">Framework</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Dalao"><span class="nav-text">Dalao</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%89%E8%B6%A3%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-text">有趣的应用</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -1033,14 +1099,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">122</span>
+          <span class="site-state-item-count">125</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-count">29</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -1094,12 +1160,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">458k</span>
+    <span title="Symbols count total">468k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">27:47</span>
+    <span title="Reading time total">28:23</span>
 </div>
 
         
