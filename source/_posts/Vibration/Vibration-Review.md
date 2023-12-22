@@ -1,4 +1,12 @@
-<!--more-->
+---
+title: Vibration-Review
+date: 2023-12-22 15:03:03
+tags:
+  - 
+categories: Vibration
+---
+
+<!-- more -->
 
 基本概念：
 - [什么是固有频率？ - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/23320350)

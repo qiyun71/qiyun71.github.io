@@ -78,7 +78,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Vibration/Vibration-Review.md",
+                "file": "3DReconstruction/Basic Knowledge/NeRF/LargeScaleScene/NeRF++.md",
                 "mode": "source",
                 "backlinks": false,
                 "source": false
@@ -106,7 +106,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Vibration/Vibration-Review.md"
+                "file": "3DReconstruction/Basic Knowledge/NeRF/LargeScaleScene/NeRF++.md"
               }
             }
           },
@@ -174,7 +174,7 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "Vibration/Vibration-Review.md",
+                "file": "3DReconstruction/Basic Knowledge/NeRF/LargeScaleScene/NeRF++.md",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -257,7 +257,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Vibration/Vibration-Review.md",
+                "file": "3DReconstruction/Basic Knowledge/NeRF/LargeScaleScene/NeRF++.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -301,8 +301,10 @@
   },
   "active": "f239b6b80a5361c3",
   "lastOpenFiles": [
-    "3DReconstruction/Basic Knowledge/NeRF/NeRF/Metrics.md",
+    "Other/Mine/IDEA.md",
+    "3DReconstruction/Basic Knowledge/NeRF/LargeScaleScene/NeRF++.md",
     "Vibration/Vibration-Review.md",
+    "3DReconstruction/Basic Knowledge/NeRF/NeRF/Metrics.md",
     "Vibration",
     "3DReconstruction/Basic Knowledge/Math.md",
     "3DReconstruction/Basic Knowledge/NeRF/NeRF/Encoding.md",
@@ -318,7 +320,6 @@
     "3DReconstruction/Basic Knowledge/NeRF/NeRF-Principle.md",
     "3DReconstruction/Basic Knowledge/Multi-view 3D Reconstruction.md",
     "3DReconstruction/Basic Knowledge/NeRF/NeRF-review.md",
-    "Other/Mine/IDEA.md",
     "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Geo-Neus.md",
     "3DReconstruction/Multi-view/Explicit Volumetric/3D Gaussian Splatting.md",
     "Reports/未命名.md",
@@ -328,7 +329,6 @@
     "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Loss/RegNeRF.md",
     "3DReconstruction/Multi-view/Explicit Volumetric/Voxurf.md",
     "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Loss",
-    "3DReconstruction/Basic Knowledge/Multi-view Human Body Reconstruction.md",
-    "Other/Mine/Tools.md"
+    "3DReconstruction/Basic Knowledge/Multi-view Human Body Reconstruction.md"
   ]
 }

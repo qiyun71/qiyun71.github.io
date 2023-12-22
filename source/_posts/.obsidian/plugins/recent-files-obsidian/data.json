@@ -1,6 +1,14 @@
 {
   "recentFiles": [
     {
+      "basename": "NeRF++",
+      "path": "3DReconstruction/Basic Knowledge/NeRF/LargeScaleScene/NeRF++.md"
+    },
+    {
+      "basename": "IDEA",
+      "path": "Other/Mine/IDEA.md"
+    },
+    {
       "basename": "Vibration-Review",
       "path": "Vibration/Vibration-Review.md"
     },
@@ -55,10 +63,6 @@
     {
       "basename": "NeRF-review",
       "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF-review.md"
-    },
-    {
-      "basename": "IDEA",
-      "path": "Other/Mine/IDEA.md"
     },
     {
       "basename": "Geo-Neus",
@@ -195,10 +199,6 @@
     {
       "basename": "ShadowNeuS",
       "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Shadow&Highlight/ShadowNeuS.md"
-    },
-    {
-      "basename": "NeRO",
-      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Shadow&Highlight/NeRO.md"
     }
   ],
   "omittedPaths": [],
