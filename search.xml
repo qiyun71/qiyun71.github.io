@@ -4,12 +4,18 @@
   
     
     <entry>
-      <title></title>
+      <title>Vibration-Review</title>
       <link href="/Vibration/Vibration-Review/"/>
       <url>/Vibration/Vibration-Review/</url>
       
         <content type="html"><![CDATA[<span id="more"></span><p>基本概念：</p><ul><li><a href="https://zhuanlan.zhihu.com/p/23320350">什么是固有频率？ - 知乎 (zhihu.com)</a><ul><li>通常一个结构有很多个<strong>固有频率</strong>。固有频率与外界激励没有关系，是结构的一种固有属性。<strong>只与材料的刚度k和质量m有关</strong>：$\omega_{n} =  \sqrt{\frac{k}{m}}$</li></ul></li><li>模态分析是一种处理过程：根据结构的固有特性，包括频率、阻尼和模态振型，这些动力学属性去描述结构。</li></ul>]]></content>
       
+      
+      <categories>
+          
+          <category> Vibration </category>
+          
+      </categories>
       
       
     </entry>
@@ -100,9 +106,9 @@
       
         <tags>
             
-            <tag> SurfaceReconstruction </tag>
-            
             <tag> 3DReconstruction </tag>
+            
+            <tag> SurfaceReconstruction </tag>
             
         </tags>
       
@@ -217,9 +223,9 @@
       
         <tags>
             
-            <tag> SurfaceReconstruction </tag>
-            
             <tag> 3DReconstruction </tag>
+            
+            <tag> SurfaceReconstruction </tag>
             
             <tag> NeRF </tag>
             
@@ -381,11 +387,11 @@
       
         <tags>
             
+            <tag> ClothedHumans </tag>
+            
             <tag> 3DReconstruction </tag>
             
             <tag> NeRF </tag>
-            
-            <tag> ClothedHumans </tag>
             
         </tags>
       
@@ -866,11 +872,11 @@
       
         <tags>
             
-            <tag> SurfaceReconstruction </tag>
-            
             <tag> 3DReconstruction </tag>
             
             <tag> Math </tag>
+            
+            <tag> SurfaceReconstruction </tag>
             
         </tags>
       
@@ -920,9 +926,9 @@
       
         <tags>
             
-            <tag> 3DReconstruction </tag>
-            
             <tag> ClothedHumans </tag>
+            
+            <tag> 3DReconstruction </tag>
             
             <tag> PointCloud </tag>
             
@@ -1261,9 +1267,9 @@
       
         <tags>
             
-            <tag> SurfaceReconstruction </tag>
-            
             <tag> 3DReconstruction </tag>
+            
+            <tag> SurfaceReconstruction </tag>
             
             <tag> NeRF </tag>
             
@@ -2133,11 +2139,11 @@
       
         <tags>
             
-            <tag> Sampling </tag>
+            <tag> Efficiency </tag>
             
             <tag> Encoding </tag>
             
-            <tag> Efficiency </tag>
+            <tag> Sampling </tag>
             
         </tags>
       
@@ -2191,11 +2197,11 @@
       
         <tags>
             
-            <tag> Sampling </tag>
-            
             <tag> Efficiency </tag>
             
             <tag> TensorDecomposition </tag>
+            
+            <tag> Sampling </tag>
             
         </tags>
       
@@ -2334,9 +2340,9 @@
             
             <tag> Neus </tag>
             
-            <tag> Encoding </tag>
-            
             <tag> Efficiency </tag>
+            
+            <tag> Encoding </tag>
             
         </tags>
       
@@ -2394,9 +2400,9 @@
             
             <tag> Neus </tag>
             
-            <tag> Encoding </tag>
-            
             <tag> Efficiency </tag>
+            
+            <tag> Encoding </tag>
             
         </tags>
       
@@ -2425,9 +2431,9 @@
             
             <tag> Neus </tag>
             
-            <tag> Encoding </tag>
-            
             <tag> Efficiency </tag>
+            
+            <tag> Encoding </tag>
             
         </tags>
       
@@ -2576,9 +2582,9 @@
             
             <tag> Code </tag>
             
-            <tag> Encoding </tag>
-            
             <tag> Efficiency </tag>
+            
+            <tag> Encoding </tag>
             
         </tags>
       
@@ -2694,9 +2700,9 @@
             
             <tag> InstantNGP </tag>
             
-            <tag> Encoding </tag>
-            
             <tag> Efficiency </tag>
+            
+            <tag> Encoding </tag>
             
         </tags>
       
