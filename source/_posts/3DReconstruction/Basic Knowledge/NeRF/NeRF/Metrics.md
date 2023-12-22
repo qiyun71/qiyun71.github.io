@@ -25,6 +25,8 @@ L2_loss: $loss(x,y)=\frac{1}{n}\sum*{i=1}^{n}(y_i-f(x_i))^2$
 
 在标准设置中通过 NeRF 进行的新颖视图合成使用了视觉质量评估指标作为基准。这些指标试图评估单个图像的质量，要么有(完全参考)，要么没有(无参考)地面真相图像。峰值信噪比(PSNR)，结构相似指数度量(SSIM)[32]，学习感知图像补丁相似性(LPIPS)[33]是目前为止在 NeRF 文献中最常用的。
 
+[有真实参照的图像质量的客观评估指标:SSIM、PSNR和LPIPS - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/309892873)
+
 ## PSNR↑
 
 峰值信噪比 Peak Signal to Noise Ratio
@@ -42,6 +44,8 @@ psnr = -10. * torch.log10(torch.mean((pred_rgb.to(gt_rgb)-gt_rgb)**2))
 ```
 
 ## SSIM↑
+
+[VainF/pytorch-msssim: Fast and differentiable MS-SSIM and SSIM for pytorch. (github.com)](https://github.com/VainF/pytorch-msssim)
 
 结构相似性 Structural Similarity Index Measure
 SSIM 是一个完整的参考质量评估指标。

@@ -53,23 +53,17 @@ NeRF 分段常数积分 --> PL-NeRF 分段线性积分
 
 ## Camera Pose
 
-### Continuous Pose
-[[2311.17119] Continuous Pose for Monocular Cameras in Neural Implicit Representation (arxiv.org)](https://arxiv.org/abs/2311.17119)
-将单目相机姿势优化为时间连续函数
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231202162029.png)
 
-### PF-GRT
-
-[[2310.03704] Pose-Free Generalizable Rendering Transformer (arxiv.org)](https://arxiv.org/abs/2310.03704)
-[Pose-Free Generalizable Rendering Transformer (zhiwenfan.github.io)](https://zhiwenfan.github.io/PF-GRT/)
-新视图渲染
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231202162106.png)
+| Year | Title&Project Page                                                                                                                           | Brief Description                | Conf/Jour |
+| ---- | -------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- |:---------:|
+| 2023 | [[2311.17119] Continuous Pose for Monocular Cameras in Neural Implicit Representation (arxiv.org)](https://arxiv.org/abs/2311.17119)         | 将单目相机姿势优化为时间连续函数 |           |
+| 2023 | [Pose-Free Generalizable Rendering Transformer (zhiwenfan.github.io)](https://zhiwenfan.github.io/PF-GRT/)                                   |                                  |           |
+| 2023 | [[2310.02687] USB-NeRF: Unrolling Shutter Bundle Adjusted Neural Radiance Fields (arxiv.org)](https://arxiv.org/abs/2310.02687)              |                                  |           |
+| 2023 | [[2309.11326] How to turn your camera into a perfect pinhole model (arxiv.org)](https://arxiv.org/abs/2309.11326)                            |                                  |           |
+| 2023 | [[2312.08760] CF-NeRF: Camera Parameter Free Neural Radiance Fields with Incremental Learning (arxiv.org)](https://arxiv.org/abs/2312.08760) |                                  |   AAAI    |
 
 ### Other paper about camera pose
 
-改进COLMAP估计相机位姿参数有误差的问题
-
-- **USB-NeRF: Unrolling Shutter Bundle Adjusted Neural Radiance Fields** <https://arxiv.org/abs/2310.02687>
 - How to turn your camera into a perfect pinhole model
 
 ## Efficiency
@@ -120,11 +114,12 @@ NeRF 分段常数积分 --> PL-NeRF 分段线性积分
 
 加速训练和渲染过程、提高新视图质量
 
-| Year                                        | Title&Project Page                                                                                                              | Brief Description                                          |          Conf/Jour           |
-| ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |:----------------------------:|
-| [2023](NerfAcc.md)              | [NerfAcc Documentation — nerfacc 0.5.3](https://www.nerfacc.com/en/latest/)                                                     | 一种新的采样方法可以加速NeRF                               |            arXiv             |
-| [2021](Mip-NeRF.md)             | [mip-NeRF ](https://jonbarron.info/mipnerf/)                                                                                    | 截头圆锥体采样方法+IPEncoding                              |             ICCV             |
-| [2023](Floaters%20No%20More.md) | [Floaters No More: Radiance Field Gradient Scaling for Improved Near-Camera Training](https://gradient-scaling.github.io/#Code) | 通过梯度缩放，解决基于NeRF重建场景中的背景塌陷和镜前漂浮物 | The Eurographics Association |
+| Year                            | Title&Project Page                                                                                                                                                                  | Brief Description                                          |          Conf/Jour           |
+| ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |:----------------------------:|
+| [2023](NerfAcc.md)              | [NerfAcc Documentation — nerfacc 0.5.3](https://www.nerfacc.com/en/latest/)                                                                                                         | 一种新的采样方法可以加速NeRF                               |            arXiv             |
+| [2021](Mip-NeRF.md)             | [mip-NeRF ](https://jonbarron.info/mipnerf/)                                                                                                                                        | 截头圆锥体采样方法+IPEncoding                              |             ICCV             |
+| [2023](Floaters%20No%20More.md) | [Floaters No More: Radiance Field Gradient Scaling for Improved Near-Camera Training](https://gradient-scaling.github.io/#Code)                                                     | 通过梯度缩放，解决基于NeRF重建场景中的背景塌陷和镜前漂浮物 | The Eurographics Association |
+| 2023                            | [ProNeRF: Learning Efficient Projection-Aware Ray Sampling for Fine-Grained Implicit Neural Radiance Fields (kaist-viclab.github.io)](https://kaist-viclab.github.io/pronerf-site/) | 投影感知采样（PAS）                                        |                              |
 
 - [Improving Neural Radiance Fields Using Near-Surface Sampling With Point Cloud Generation (arxiv.org)](https://arxiv.org/pdf/2310.04152.pdf)
 - [L0-Sampler: An L0 Model Guided Volume Sampling for NeRF](https://arxiv.org/abs/2311.07044) 分段常数采样改为分段指数采样
@@ -133,13 +128,16 @@ NeRF 分段常数积分 --> PL-NeRF 分段线性积分
 
 ## Sparse images/Generalization
 
-| Year                            | Title&Project Page                                                                                                    | Brief Description                                             |    Conf/Jour     |
-| ------------------------------- | --------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |:----------------:|
-| [2022](SparseNeuS.md) | [SparseNeuS: Fast Generalizable Neural Surface Reconstruction from Sparse Views](https://www.xxlong.site/SparseNeuS/) | 多层几何推理框架+多尺度颜色混合+一致性感知的微调              |       ECCV       |
-| 2023                            | [SparseNeRF](https://sparsenerf.github.io/)                                                                           | 利用来自现实世界不准确观测的深度先验知识                      | Technical Report |
-| 2021                            | [pixelNeRF: Neural Radiance Fields from One or Few Images (alexyu.net)](https://alexyu.net/pixelnerf/)                |                                                               |       CVPR       |
-| [2022](FORGE.md)      | [FORGE (ut-austin-rpl.github.io)](https://ut-austin-rpl.github.io/FORGE/)                                             | voxel特征提取2D-->3D+相机姿态估计+特征共享和融合+神经隐式重建 |      ArXiv       |
-| [2023](FreeNeRF.md)   | [FreeNeRF: Frequency-regularized NeRF (jiawei-yang.github.io)](https://jiawei-yang.github.io/FreeNeRF/)               | 稀疏视图训练时，逐步开放高频分量可以获得更好的效果，遮挡正则消除floaters                                                              |       CVPR       |
+| Year                  | Title&Project Page                                                                                                                                                                   | Brief Description                                                        |    Conf/Jour     |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------ |:----------------:|
+| [2022](SparseNeuS.md) | [SparseNeuS: Fast Generalizable Neural Surface Reconstruction from Sparse Views](https://www.xxlong.site/SparseNeuS/)                                                                | 多层几何推理框架+多尺度颜色混合+一致性感知的微调                         |       ECCV       |
+| 2023                  | [SparseNeRF](https://sparsenerf.github.io/)                                                                                                                                          | 利用来自现实世界不准确观测的深度先验知识                                 | Technical Report |
+| 2021                  | [pixelNeRF: Neural Radiance Fields from One or Few Images (alexyu.net)](https://alexyu.net/pixelnerf/)                                                                               |                                                                          |       CVPR       |
+| [2022](FORGE.md)      | [FORGE (ut-austin-rpl.github.io)](https://ut-austin-rpl.github.io/FORGE/)                                                                                                            | voxel特征提取2D-->3D+相机姿态估计+特征共享和融合+神经隐式重建            |      ArXiv       |
+| [2023](FreeNeRF.md)   | [FreeNeRF: Frequency-regularized NeRF (jiawei-yang.github.io)](https://jiawei-yang.github.io/FreeNeRF/)                                                                              | 稀疏视图训练时，逐步开放高频分量可以获得更好的效果，遮挡正则消除floaters |       CVPR       |
+| 2023                  | [ZeroRF (sarahweiii.github.io)](https://sarahweiii.github.io/zerorf/)                                                                                                                |                                                                          |                  |
+| 2023                  | [eezkni/ColNeRF: [AAAI2024] Pytorch implementation of "ColNeRF: Collaboration for Generalizable Sparse Input Neural Radiance Field" (github.com)](https://github.com/eezkni/ColNeRF) |                                                                          |     AAAI2024     |
+
 
 ## Surface Reconstruction
 
@@ -165,15 +163,17 @@ NeRF 分段常数积分 --> PL-NeRF 分段线性积分
 
 ## Shadow&Highlight
 
-| Year                                                            | Title&Project Page                                                                                                               | Brief Description                                                                                          |     Conf/Jour      |
-| --------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |:------------------:|
-| 2023                                                            | [Relighting Neural Radiance Fields with Shadow and Highlight Hints](https://nrhints.github.io/)                                  | 数据集使用相机位姿和灯源位姿,训练集大约500张,Shadow and Highlight hints                                    |      SIGGRAPH      |
-| [2023](NeRO.md)       | [NeRO: Neural Geometry and BRDF Reconstruction of Reflective Objects from Multiview Images](https://liuyuan-pal.github.io/NeRO/) | Neus_SDF 新的光表示方法可以重建准确的几何和BRDF，但是细节处由于太光滑而忽略，反射颜色也依赖准确的法线      | SIGGRAPH (ACM TOG) |
-| [2023](ShadowNeuS.md) | [ShadowNeuS (gerwang.github.io)](https://gerwang.github.io/shadowneus/)                                                          | 多光照下单视图重建SDF+RGB图像重建外观+BRDF                                                                 |        CVPR        |
-| [2022](Ref-NeRF.md)   | [Ref-NeRF (dorverbin.github.io)](https://dorverbin.github.io/refnerf/)                                                           | 基于球面谐波的IDE编码+预测表面法向+BRDF                                                                    |        CVPR        |
-| [2021](NeRFactor.md)  | [NeRFactor (xiuming.info)](https://xiuming.info/projects/nerfactor/)                                                             | NeRFactor在未知光照条件下从图像中恢复物体形状和反射率                                                      |      SIGGRAPH      |
-| [2023](Ref-NeuS.md)   | [Ref-NeuS (g3956.github.io)](https://g3956.github.io/)                                                                           | Anomaly Detection for Reflection Score + Visibility Identification for Reflection Score+反射感知的光度损失 |     ICCV Oral      |
-| [2023](NeuFace.md)    | [NeuFace: Realistic 3D Neural Face Rendering from Multi-view Images](https://github.com/aejion/NeuFace)                          | **BRDF+SDF+PBR**框架，端到端训练，重建人脸的几何+外观                                                      |        CVPR        |
+| Year                  | Title&Project Page                                                                                                                                                | Brief Description                                                                                          |     Conf/Jour      |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |:------------------:|
+| 2023                  | [Relighting Neural Radiance Fields with Shadow and Highlight Hints](https://nrhints.github.io/)                                                                   | 数据集使用相机位姿和灯源位姿,训练集大约500张,Shadow and Highlight hints                                    |      SIGGRAPH      |
+| [2023](NeRO.md)       | [NeRO: Neural Geometry and BRDF Reconstruction of Reflective Objects from Multiview Images](https://liuyuan-pal.github.io/NeRO/)                                  | Neus_SDF 新的光表示方法可以重建准确的几何和BRDF，但是细节处由于太光滑而忽略，反射颜色也依赖准确的法线      | SIGGRAPH (ACM TOG) |
+| [2023](ShadowNeuS.md) | [ShadowNeuS (gerwang.github.io)](https://gerwang.github.io/shadowneus/)                                                                                           | 多光照下单视图重建SDF+RGB图像重建外观+BRDF                                                                 |        CVPR        |
+| [2022](Ref-NeRF.md)   | [Ref-NeRF (dorverbin.github.io)](https://dorverbin.github.io/refnerf/)                                                                                            | 基于球面谐波的IDE编码+预测表面法向+BRDF                                                                    |        CVPR        |
+| [2021](NeRFactor.md)  | [NeRFactor (xiuming.info)](https://xiuming.info/projects/nerfactor/)                                                                                              | NeRFactor在未知光照条件下从图像中恢复物体形状和反射率                                                      |      SIGGRAPH      |
+| [2023](Ref-NeuS.md)   | [Ref-NeuS (g3956.github.io)](https://g3956.github.io/)                                                                                                            | Anomaly Detection for Reflection Score + Visibility Identification for Reflection Score+反射感知的光度损失 |     ICCV Oral      |
+| [2023](NeuFace.md)    | [NeuFace: Realistic 3D Neural Face Rendering from Multi-view Images](https://github.com/aejion/NeuFace)                                                           | **BRDF+SDF+PBR**框架，端到端训练，重建人脸的几何+外观                                                      |        CVPR        |
+| 2024                  | [cuiziteng/Aleth-NeRF: [AAAI 2024] Aleth-NeRF: Illumination Adaptive NeRF with Concealing Field Assumption (github.com)](https://github.com/cuiziteng/Aleth-NeRF) |                                                                                                            |        AAAI        |
+| 2023                  | [[2312.08118] Neural Radiance Fields for Transparent Object Using Visual Hull (arxiv.org)](https://arxiv.org/abs/2312.08118)                                      |                                                                                                            |                    |
 
 ## Framework
 

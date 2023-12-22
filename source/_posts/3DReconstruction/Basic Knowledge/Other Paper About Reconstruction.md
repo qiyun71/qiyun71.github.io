@@ -215,6 +215,12 @@ Cost：
 
 ## Dynamic
 
+### 3DGS-Avatar
+
+[3DGS-Avatar: Animatable Avatars via Deformable 3D Gaussian Splatting (neuralbodies.github.io)](https://neuralbodies.github.io/3DGS-Avatar/)
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231218201652.png)
+
+
 ### GaussianAvatar
 
 [Projectpage of GaussianAvatar (huliangxiao.github.io)](https://huliangxiao.github.io/GaussianAvatar)
@@ -357,7 +363,10 @@ GAN + PIFus
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231123151648.png)
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231123151707.png)
 
+### SIFU
 
+[SIFU Project Page (river-zhang.github.io)](https://river-zhang.github.io/SIFU-projectpage/)
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231218204004.png)
 
 # Depth&Normal Estimation
 
@@ -416,6 +425,13 @@ DepthEstimation
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231116153659.png)
 
+## OccNeRF
+
+[LinShan-Bin/OccNeRF: Code of "OccNeRF: Self-Supervised Multi-Camera Occupancy Prediction with Neural Radiance Fields". (github.com)](https://github.com/LinShan-Bin/OccNeRF)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231218200234.png)
+
+
 # Other
 
 ## Explicit Template Decomposition
@@ -440,6 +456,11 @@ DMTet 表示：consists of an explicit body shape grid and an implicit distance 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231008164813.png)
 
 ##  Human Face
+
+### HeadRecon
+
+[[2312.08863] HeadRecon: High-Fidelity 3D Head Reconstruction from Monocular Video (arxiv.org)](https://arxiv.org/abs/2312.08863)
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231218201501.png)
 
 ### GaussianHead
 

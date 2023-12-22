@@ -407,7 +407,7 @@ MVS+NeRF
 
 [HumanGaussian: Text-Driven 3D Human Generation with Gaussian Splatting (alvinliu0.github.io)](https://alvinliu0.github.io/projects/HumanGaussian)
 
-Gaussian Splatting 文本生成3DHuman
+Gaussian Splatting 文本生成 3DHuman
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231129164200.png)
 
@@ -428,12 +428,31 @@ Gaussian Splatting 文本生成3DHuman
 单视图 Diffusion 人体生成
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231129164832.png)
 
-
-
 ### RichDreamer
 
 [RichDreamer: A Generalizable Normal-Depth Diffusion Model for Detail Richness in Text-to-3D (lingtengqiu.github.io)](https://lingtengqiu.github.io/RichDreamer/)
 
-文本生成3D
+文本生成 3D
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231129165112.png)
 
+### TriplaneGaussian
+
+[Triplane Meets Gaussian Splatting: Fast and Generalizable Single-View 3D Reconstruction with Transformers (zouzx.github.io)](https://zouzx.github.io/TriplaneGaussian/)
+
+单视图生成3D
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231218202024.png)
+
+
+### Mosaic-SDF
+
+[Mosaic-SDF (lioryariv.github.io)](https://lioryariv.github.io/msdf/)
+
+一种新的三维模型的表示方法：M-SDF，基于Flow的生成式方法
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231218203722.png)
+
+### PI3D
+
+[[2312.09069] PI3D: Efficient Text-to-3D Generation with Pseudo-Image Diffusion (arxiv.org)](https://arxiv.org/abs/2312.09069)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231218203837.png)

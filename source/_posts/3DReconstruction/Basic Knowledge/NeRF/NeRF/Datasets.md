@@ -14,14 +14,7 @@ categories: 3DReconstruction/Basic Knowledge/NeRF/NeRF
 
 COLMAP + Blender(neuralangelo)
 
-## COLMAP
-
 > [Learn-Colmap](/Learn/Learn-Colmap)
-
-# Stable SFM
-
-[Carl Olsson (lth.se)](https://www.maths.lth.se/matematiklth/personal/calle/dataset/dataset.html)
-
 
 # DTU
 
@@ -88,16 +81,12 @@ H ×W = 1536 × 2048
 | DNA-Rendering                  | [DNA-Rendering : A Diverse Neural Actor Repository for High-Fidelity Human-centric Rendering](https://dna-rendering.github.io/)                   |
 
 - UltraStage：多视角和多光照条件下捕获的高质量的人体资源
-
   - [Relightable Neural Human Assets from Multi-view Gradient Illuminations (miaoing.github.io)](https://miaoing.github.io/RNHA/)
   - [IHe-KaiI/RNHA_Dataset: The dataset of the paper "Relightable Neural Human Assets from Multi-view Gradient Illuminations". (github.com)](https://github.com/IHe-KaiI/RNHA_Dataset)
 
-- SMPL
-  - [SMPL-X (mpg.de)](https://smpl-x.is.tue.mpg.de/index.html)
+- SMPL、[SMPL-X (mpg.de)](https://smpl-x.is.tue.mpg.de/index.html)
 
-## Human-Art
-
-[Human-Art: A Versatile Human-Centric Dataset Bridging Natural and Artificial Scenes (idea-research.github.io)](https://idea-research.github.io/HumanArt/)
+- [Human-Art: A Versatile Human-Centric Dataset Bridging Natural and Artificial Scenes (idea-research.github.io)](https://idea-research.github.io/HumanArt/)
 
 # MVImgNet
 A Large-scale Dataset of Multi-view Images
@@ -133,3 +122,10 @@ A Big CAD Model Dataset
 [MuSHRoom: Multi-Sensor Hybrid Room Dataset for Joint 3D Reconstruction and Novel View Synthesis](https://arxiv.org/abs/2311.02778)
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231108222956.png)
+
+# 室外场景
+
+## Stable SFM
+
+室外场景[Carl Olsson (lth.se)](https://www.maths.lth.se/matematiklth/personal/calle/dataset/dataset.html)
+
