@@ -434,6 +434,15 @@ DepthEstimation
 
 # Other
 
+## Texture
+
+### Paint3D
+
+[OpenTexture/Paint3D: Paint3D: Paint Anything 3D with Lighting-Less Texture Diffusion Models, a no lighting baked texture generative model (github.com)](https://github.com/OpenTexture/Paint3D)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231223172838.png)
+
+
 ## Explicit Template Decomposition
 
 ### TeCH

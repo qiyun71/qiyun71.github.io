@@ -3,14 +3,10 @@ title: Structured Light Review
 date: 2023-12-02 19:35:17
 tags:
   - 3DReconstruction
-categories: 3DReconstruction/Multi-view/Structured Light
+categories: 3DReconstruction/Other Methods/Structured Light
 ---
 
-三维重建是计算机视觉和计算机图像图形学相结合的一个热门研究方向。根据测量时是否与被测物体接触，可分为接触式测量和非接触式测量。
-- 接触式测量方法虽然测量精度高，但测量效率低，速度慢，操作不当很容易损坏被测物体表面，而且由于探头有一定表面积，对表面复杂的物体难以测量，不具备普遍性和通用性。
-- 非接触式三维测量方式又可以分为两大类：主动式测量和被动式测量。非接触式测量方式以其无损坏、测量速度高、简单等优点已成为三维轮廓测量的研究趋势。
-  - 主动式测量是向目标物体表面投射设计好的图案，该图案由于物体的高度起伏引起一定的畸变，通过匹配畸变的图案获得目标物体的。**TOF、结构光三维重建**
-  - 被动式测量是通过周围环境光对目标物体进行照射，然后检测目标物体的特征点以得到其数据。**双目视觉法、SFM、MVS、NeRF**
+结构光三维重建
 
 <!-- more -->
 
@@ -20,6 +16,7 @@ categories: 3DReconstruction/Multi-view/Structured Light
 - [CS6320 3D Computer Vision (utah.edu)](http://www.sci.utah.edu/~gerig/CS6320-S2015/CS6320_3D_Computer_Vision.html)
 - [Build Your Own 3D Scanner: Optical Triangulation for Beginners (brown.edu)](http://mesh.brown.edu/byo3d/source.html)
 [双目、结构光、tof，三种深度相机的原理区别看这一篇就够了！ - (oakchina.cn)](https://www.oakchina.cn/2023/05/16/3_depth_cams/)
+[三种主流深度相机介绍 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/103702759) 结构光相机代表公司有奥比中光，苹果(Prime Sense)，微软 Kinect-1，英特尔 RealSense, Mantis Vision 等。
 [FourStepPhaseShifting/support/结构光三维重建.pdf](https://github.com/jiayuzhang128/FourStepPhaseShifting/blob/master/support/%E7%BB%93%E6%9E%84%E5%85%89%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA.pdf)
 [结构光简史 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/29971801)
 

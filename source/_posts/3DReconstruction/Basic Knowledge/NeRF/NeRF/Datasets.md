@@ -58,7 +58,8 @@ H ×W = 1536 × 2048
 
 [Tanks and Temples Benchmark](https://www.tanksandtemples.org/)
 
-- 工业激光扫描仪(industrial laser scanner.)捕获
+- 工业激光扫描仪(industrial laser scanner.)捕获的模型
+- 高分辨率视频序列
 
 # Human Body
 

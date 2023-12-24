@@ -8,38 +8,12 @@
         "type": "tabs",
         "children": [
           {
-            "id": "97910397a2b86e10",
+            "id": "1a283464bac7d42f",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Reports/2023-12-20.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "4107a8f8f094789a",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/NeuS.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "059b686915c03663",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Other/Mine/IDEA.md",
+                "file": "Vibration/Vibration-Review.md",
                 "mode": "source",
                 "backlinks": false,
                 "source": false
@@ -52,7 +26,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "3DReconstruction/Basic Knowledge/Other Paper About Reconstruction.md",
+                "file": "3DReconstruction/Other Methods/Structured Light/Structured Light Review.md",
                 "mode": "source",
                 "backlinks": false,
                 "source": false
@@ -60,12 +34,12 @@
             }
           },
           {
-            "id": "321308d6fc510a2d",
+            "id": "6e687cb62585acb2",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "3DReconstruction/Basic Knowledge/Generative Models Review.md",
+                "file": "3DReconstruction/Other Methods/Stereo Matching/Stereo Matching Review.md",
                 "mode": "source",
                 "backlinks": false,
                 "source": false
@@ -73,20 +47,19 @@
             }
           },
           {
-            "id": "f239b6b80a5361c3",
+            "id": "5712f021776e5d3b",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "3DReconstruction/Basic Knowledge/NeRF/LargeScaleScene/NeRF++.md",
+                "file": "3DReconstruction/Basic Knowledge/Multi-view 3D Reconstruction.md",
                 "mode": "source",
                 "backlinks": false,
                 "source": false
               }
             }
           }
-        ],
-        "currentTab": 5
+        ]
       }
     ],
     "direction": "vertical"
@@ -106,7 +79,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "3DReconstruction/Basic Knowledge/NeRF/LargeScaleScene/NeRF++.md"
+                "file": "Vibration/Vibration-Review.md"
               }
             }
           },
@@ -174,7 +147,7 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "3DReconstruction/Basic Knowledge/NeRF/LargeScaleScene/NeRF++.md",
+                "file": "Vibration/Vibration-Review.md",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -257,7 +230,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "3DReconstruction/Basic Knowledge/NeRF/LargeScaleScene/NeRF++.md",
+                "file": "Vibration/Vibration-Review.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -299,36 +272,38 @@
       "workspaces:管理工作区布局": true
     }
   },
-  "active": "f239b6b80a5361c3",
+  "active": "1a283464bac7d42f",
   "lastOpenFiles": [
+    "3DReconstruction/Basic Knowledge/Multi-view 3D Reconstruction.md",
+    "Vibration/Vibration-Review.md",
+    "3DReconstruction/Other Methods/Structured Light/Structured Light Review.md",
+    "3DReconstruction/Basic Knowledge/Other Paper About Reconstruction.md",
+    "3DReconstruction/Other Methods/Stereo Matching/Stereo Matching Review.md",
+    "Reports/2023-12-20.md",
+    "3DReconstruction/Other Methods/Stereo Matching.md",
+    "3DReconstruction/Basic Knowledge/NeRF/Efficiency/NeRF-InstantNGP.md",
+    "3DReconstruction/Other Methods/Stereo Matching",
+    "3DReconstruction/Other Methods",
+    "3DReconstruction/Basic Knowledge/NeRF/NeRF/Datasets.md",
+    "3DReconstruction/Basic Knowledge/Generative Models Review.md",
     "Other/Mine/IDEA.md",
     "3DReconstruction/Basic Knowledge/NeRF/LargeScaleScene/NeRF++.md",
-    "Vibration/Vibration-Review.md",
     "3DReconstruction/Basic Knowledge/NeRF/NeRF/Metrics.md",
     "Vibration",
     "3DReconstruction/Basic Knowledge/Math.md",
     "3DReconstruction/Basic Knowledge/NeRF/NeRF/Encoding.md",
-    "3DReconstruction/Basic Knowledge/Other Paper About Reconstruction.md",
-    "3DReconstruction/Basic Knowledge/NeRF/NeRF/Datasets.md",
     "3DReconstruction/Basic Knowledge/NeRF/NeRF/Sampling.md",
-    "3DReconstruction/Basic Knowledge/Generative Models Review.md",
     "3DReconstruction/Basic Knowledge/NeRF/NeRF/Math.md",
     "3DReconstruction/Multi-view/Implicit Function/NeRF-based/NeuS.md",
-    "Reports/2023-12-20.md",
     "Reports/2023-12-21.md",
     "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Efficiency/NeuS2.md",
     "3DReconstruction/Basic Knowledge/NeRF/NeRF-Principle.md",
-    "3DReconstruction/Basic Knowledge/Multi-view 3D Reconstruction.md",
     "3DReconstruction/Basic Knowledge/NeRF/NeRF-review.md",
     "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Geo-Neus.md",
     "3DReconstruction/Multi-view/Explicit Volumetric/3D Gaussian Splatting.md",
     "Reports/未命名.md",
     "3DReconstruction/Multi-view/Implicit Function/GS-based/SuGaR.md",
-    "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Loss/MonoSDF.md",
     "3DReconstruction/Multi-view/Implicit Function/GS-based",
-    "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Loss/RegNeRF.md",
-    "3DReconstruction/Multi-view/Explicit Volumetric/Voxurf.md",
-    "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Loss",
-    "3DReconstruction/Basic Knowledge/Multi-view Human Body Reconstruction.md"
+    "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Loss"
   ]
 }
