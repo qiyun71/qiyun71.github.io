@@ -82,6 +82,8 @@ $LPIPS(x,y)=\sum\limits_{l}^{L}\dfrac{1}{H_lW_l}\sum\limits_{h,w}^{H_l,W_l}||w_l
 
 ## CD↓
 
+[jzhangbs/DTUeval-python: A fast python implementation of DTU MVS 2014 evaluation (github.com)](https://github.com/jzhangbs/DTUeval-python)
+
 Chamfer Distance 倒角距离
 点云或 mesh 重建模型评估指标，它度量两个点集之间的距离，其中一个点集是参考点集，另一个点集是待评估点集
 
@@ -186,3 +188,9 @@ $\begin{aligned}L_{\mathrm{S3IM}}(\Theta,\mathcal{R})=&1-\mathrm{S3IM}(\hat{\mat
 
 ![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230919194046.png)
 
+### LCN
+
+Learnable Chamfer Distance for Point Cloud Reconstruction
+我们提出了一种简单但有效的重建损失，称为可学习倒角距离（LCD），通过动态关注由一组可学习网络控制的不同权重分布的匹配距离
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20240104172937.png)

@@ -145,3 +145,10 @@ position embedding：随网络一起训练出来的位置向量，与前面说�
 position encoding：根据一定的编码规则计算出来位置表示，比如
 
 $$\gamma(p)=\left(\sin \left(2^{0} \pi p\right), \cos \left(2^{0} \pi p\right), \cdots, \sin \left(2^{L-1} \pi p\right), \cos \left(2^{L-1} \pi p\right)\right)$$
+
+
+# 迁移学习
+
+迁移学习通常会关注有一个源域 $D_{s}$ 和一个目标域$D_{t}$ 的情况，将源域中网络学习到的知识迁移到目标域的学习中
+
+[Transfer learning 【迁移学习综述_汇总】 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/443079853)

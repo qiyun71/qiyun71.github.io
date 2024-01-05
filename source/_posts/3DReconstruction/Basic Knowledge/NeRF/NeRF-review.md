@@ -34,7 +34,7 @@ ECCV 2020 Oral - Best Paper Honorable Mention
 | [2020](NeRF-Principle.md) | [NeRF:Representing Scenes as Neural Radiance Fields for View Synthesis](https://www.matthewtancik.com/nerf) |        初始文        |    ECCV   |
 
 
-## 原理改进
+# 原理改进
 
 Volume Rendering Function
 
@@ -54,17 +54,27 @@ NeRF 分段常数积分 --> PL-NeRF 分段线性积分
 ## Camera Pose
 
 
-| Year | Title&Project Page                                                                                                                           | Brief Description                | Conf/Jour |
-| ---- | -------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- |:---------:|
-| 2023 | [[2311.17119] Continuous Pose for Monocular Cameras in Neural Implicit Representation (arxiv.org)](https://arxiv.org/abs/2311.17119)         | 将单目相机姿势优化为时间连续函数 |           |
-| 2023 | [Pose-Free Generalizable Rendering Transformer (zhiwenfan.github.io)](https://zhiwenfan.github.io/PF-GRT/)                                   |                                  |           |
-| 2023 | [[2310.02687] USB-NeRF: Unrolling Shutter Bundle Adjusted Neural Radiance Fields (arxiv.org)](https://arxiv.org/abs/2310.02687)              |                                  |           |
-| 2023 | [[2309.11326] How to turn your camera into a perfect pinhole model (arxiv.org)](https://arxiv.org/abs/2309.11326)                            |                                  |           |
-| 2023 | [[2312.08760] CF-NeRF: Camera Parameter Free Neural Radiance Fields with Incremental Learning (arxiv.org)](https://arxiv.org/abs/2312.08760) |                                  |   AAAI    |
+| Year | Title&Project Page                                                                                                                                                    | Brief Description                | Conf/Jour |
+| ---- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- |:---------:|
+| 2023 | [[2311.17119] Continuous Pose for Monocular Cameras in Neural Implicit Representation (arxiv.org)](https://arxiv.org/abs/2311.17119)                                  | 将单目相机姿势优化为时间连续函数 |           |
+| 2023 | [Pose-Free Generalizable Rendering Transformer (zhiwenfan.github.io)](https://zhiwenfan.github.io/PF-GRT/)                                                            |                                  |           |
+| 2023 | [[2310.02687] USB-NeRF: Unrolling Shutter Bundle Adjusted Neural Radiance Fields (arxiv.org)](https://arxiv.org/abs/2310.02687)                                       |                                  |           |
+| 2023 | [[2309.11326] How to turn your camera into a perfect pinhole model (arxiv.org)](https://arxiv.org/abs/2309.11326)                                                     |                                  |           |
+| 2023 | [[2312.08760] CF-NeRF: Camera Parameter Free Neural Radiance Fields with Incremental Learning (arxiv.org)](https://arxiv.org/abs/2312.08760)                          |                                  |   AAAI    |
+| 2023 | [[2312.15238] NoPose-NeuS: Jointly Optimizing Camera Poses with Neural Implicit Surfaces for Multi-view Reconstruction (arxiv.org)](https://arxiv.org/abs/2312.15238) |                                  |           |
 
 ### Other paper about camera pose
 
 - How to turn your camera into a perfect pinhole model
+
+## Image问题
+
+| Year | Title&Project Page                                                                                                                               | Brief Description | Conf/Jour |
+| ---- | ------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------- |:---------:|
+| 2024 | [[2401.00825] Sharp-NeRF: Grid-based Fast Deblurring Neural Radiance Fields Using Sharpness Prior (arxiv.org)](https://arxiv.org/abs/2401.00825) |                   |   WACV    |
+| 2023     | [[2312.15942] Pano-NeRF: Synthesizing High Dynamic Range Novel Views with Geometry from Sparse Low Dynamic Range Panoramic Images (arxiv.org)](https://arxiv.org/abs/2312.15942)                                                                                                                                                 |                   |           |
+
+
 
 ## Efficiency
 
@@ -137,6 +147,7 @@ NeRF 分段常数积分 --> PL-NeRF 分段线性积分
 | [2023](FreeNeRF.md)   | [FreeNeRF: Frequency-regularized NeRF (jiawei-yang.github.io)](https://jiawei-yang.github.io/FreeNeRF/)                                                                              | 稀疏视图训练时，逐步开放高频分量可以获得更好的效果，遮挡正则消除floaters |       CVPR       |
 | 2023                  | [ZeroRF (sarahweiii.github.io)](https://sarahweiii.github.io/zerorf/)                                                                                                                |                                                                          |                  |
 | 2023                  | [eezkni/ColNeRF: [AAAI2024] Pytorch implementation of "ColNeRF: Collaboration for Generalizable Sparse Input Neural Radiance Field" (github.com)](https://github.com/eezkni/ColNeRF) |                                                                          |     AAAI2024     |
+| 2023                  | [NeuSurf - Project Page (alvin528.github.io)](https://alvin528.github.io/NeuSurf/)                                                                                                                                                                                     |                                                                          |                  |
 
 
 ## Surface Reconstruction

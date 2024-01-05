@@ -4,7 +4,7 @@ date: 2023-08-03 14:11:36
 tags:
   - Sparse
   - 3DReconstruction
-categories: 3DReconstruction/Basic Knowledge/NeRF/Sparse
+categories: 3DReconstruction/Multi-view/Implicit Function/NeRF-based/Sparse
 ---
 
 | Title     | Few-View Object Reconstruction with Unknown Categories and Camera Poses                                                                                                                                             |

@@ -19,6 +19,8 @@ COLMAP + Blender(neuralangelo)
 # DTU
 
 [DTU Robot Image Data Sets | Data for Evaluating Computer Vision Methods etc.](http://roboimagedata.compute.dtu.dk/)
+- NeuS提供[neus - Dropbox](https://www.dropbox.com/sh/w0y8bbdmxzik3uk/AAAaZffBiJevxQzRskoOYcyja?dl=0)
+
 ![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230923112720.png)
 1600x1200
 

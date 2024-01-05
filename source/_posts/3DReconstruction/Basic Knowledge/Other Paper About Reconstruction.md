@@ -136,7 +136,14 @@ MLP 是连续函数，对 NeRF 网络结构的改进来生成不连续的密度�
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231123143210.png)
 
+## In-Hand 3D Object Reconstruction from a Monocular RGB Video
+
+[In-Hand 3D Object Reconstruction from a Monocular RGB Video](https://arxiv.org/abs/2312.16425)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20240104173205.png)
+
 ## Dynamic
+
 ### MorpheuS
 
 [MorpheuS (hengyiwang.github.io)](https://hengyiwang.github.io/projects/morpheus)
@@ -149,6 +156,14 @@ MorpheuS: Neural Dynamic 360° Surface Reconstruction from **Monocular RGB-D Vid
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231205153011.png)
 
 # NeRF Human Body Reconstruction
+
+## HISR
+
+[[2312.17192] HISR: Hybrid Implicit Surface Representation for Photorealistic 3D Human Reconstruction (arxiv.org)](https://arxiv.org/abs/2312.17192)
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20240104172512.png)
+
+- 对不透明区域（例如身体、脸部、衣服）执行基于表面的渲染
+- 在半透明区域（例如头发）上执行体积渲染
 
 ## DoubleField
 

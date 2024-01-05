@@ -5,7 +5,7 @@ tags:
   - Sparse
   - 3DReconstruction
   - Neus
-categories: 3DReconstruction/Basic Knowledge/NeRF/Sparse
+categories: 3DReconstruction/Multi-view/Implicit Function/NeRF-based/Sparse
 ---
 
 | Title     | SparseNeuS: Fast Generalizable Neural Surface Reconstruction from Sparse Views                                                                                                                                                        |
