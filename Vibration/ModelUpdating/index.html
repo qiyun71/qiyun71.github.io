@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/yqq/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="模型修正Model Updating卫星(结构&lt;—&gt;振动)利用频率响应(FR)等数据进行有限元模型结构参数的更新">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Model Updating Review">
+<meta property="og:url" content="http://example.com/Vibration/ModelUpdating/index.html">
+<meta property="og:site_name" content="QiYun">
+<meta property="og:description" content="模型修正Model Updating卫星(结构&lt;—&gt;振动)利用频率响应(FR)等数据进行有限元模型结构参数的更新">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231226203922.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231225211854.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231225212852.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231227133859.png">
+<meta property="article:published_time" content="2023-12-22T07:03:03.000Z">
+<meta property="article:modified_time" content="2024-01-04T02:01:34.549Z">
+<meta property="article:author" content="Qi Yun">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231226203922.png">
+
+<link rel="canonical" href="http://example.com/Vibration/ModelUpdating/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Model Updating Review | QiYun</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">QiYun</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Note</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/Vibration/ModelUpdating/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiYun">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Model Updating Review
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-12-22 15:03:03" itemprop="dateCreated datePublished" datetime="2023-12-22T15:03:03+08:00">2023-12-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-01-04 10:01:34" itemprop="dateModified" datetime="2024-01-04T10:01:34+08:00">2024-01-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vibration/" itemprop="url" rel="index"><span itemprop="name">Vibration</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>2.2k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>8 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><strong>模型修正Model Updating</strong><br><em>卫星(结构&lt;—&gt;振动)利用频率响应(FR)等数据进行有限元模型结构参数的更新</em></p>
+<span id="more"></span>
+<h1 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h1><p>基本概念：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/23320350">什么是固有频率？ - 知乎 (zhihu.com)</a><ul>
+<li>通常一个结构有很多个<strong>固有频率</strong>。固有频率与外界激励没有关系，是结构的一种固有属性。<strong>只与材料的刚度k和质量m有关</strong>：$\omega_{n} =  \sqrt{\frac{k}{m}}$</li>
+</ul>
+</li>
+<li>模态分析是一种处理过程：根据结构的固有特性，包括固有频率、阻尼比和模态振型，这些动力学属性去描述结构。<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/69229246">结构动力学中的模态分析(1) —— 线性系统和频响函数 - 知乎 (zhihu.com)</a><ul>
+<li>每一个模态都对应一个<strong>固定的振动频率，阻尼比</strong>及<strong>振动形式</strong>。而<strong>固定的振动形式</strong>也被称为<strong>模态振型</strong><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/24578439/answer/837484786">模态是什么</a></li>
+<li>一个自由度为N的系统，包含N阶模态，通常将固有频率由小到大排列</li>
+<li>模态分析方法是通过坐标变换将多自由度系统解耦成为模态空间中的一系列单自由度系统，通过坐标变换可将模态空间中的坐标变换为实际物理坐标得到多自由度系统各个坐标的时域位移解。</li>
+<li>我们认为系统某点的响应及频响函数都是全部模态的叠加，即我们所采用的是完整的模态集。但实际上并非所有模态对响应的贡献都是相同的。对低频响应来说，高阶模态的影响较小。对实际结构而言，我们感兴趣的往往是它的前几阶或十几阶模态，更高阶的模态常常被抛弃。<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/82442784">机械振动理论(4)-实验实模态分析 - 知乎 (zhihu.com)</a></li>
+<li>模态参数识别:是指对振动系统进行激振（即输入），<strong>通过测量获得系统的输入、输出</strong>（或仅仅是输出）信号数据，经过对他们进行处理和分析，依据不同的识别模型和方法，<strong>识别出系统的结构模态参数</strong>（如频率、阻尼比、振型、模态刚度、模态质量等）。这类问题为结构动力学第一类逆问题<a target="_blank" rel="noopener" href="https://seugs.seu.edu.cn/_upload/article/files/e0/39/83ad9ffd4cc098c6a6a3f439177e/7cd241da-840e-437a-9bbd-3a0794d1584c.pdf">模态参数识别及有限元模型修正(seu.edu.cn)</a><ul>
+<li>模态参数识别是结构动力学中的反问题，它建立在实验的基础上，基于理论与实验相结合的原则，辨识出系统的模态参数，最终实现对系统的改进。通 过获取结构的动力学特性，对结构性能进行评价，从而判断结构的可靠性及安 全性是否符合要求。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>模型修正</li>
+</ul>
+<h1 id="论文"><a href="#论文" class="headerlink" title="论文"></a>论文</h1><h2 id="A-robust-stochastic-model-updating-method-with-resampling-processing"><a href="#A-robust-stochastic-model-updating-method-with-resampling-processing" class="headerlink" title="A robust stochastic model updating method with resampling processing"></a>A robust stochastic model updating method with resampling processing</h2><p>为了更好地估计参数的不确定性，提出了一种鲁棒随机模型更新框架。在该框架中，为了提高鲁棒性，重采样过程主要设计用于处理不良样本点，特别是有限样本量问题。其次，提出了基于巴塔查里亚距离和欧几里得距离的平均距离不确定度度量，以充分利用测量的可用信息。随后采用粒子群优化算法对结构的输入参数进行更新。最后以质量-弹簧系统和钢板结构为例说明了该方法的有效性和优越性。通过将测量样品加入不良样品，讨论了重采样过程的作用。</p>
+<ul>
+<li>有限元模型具有一定的不确定性，主要是由于模型的简化、近似以及模型参数的不确定性，如弹性模量、几何尺寸、边界条件、静、动载荷条件等。</li>
+<li>实验系统的测量都具有一定的不确定度。这种不确定性与难以控制的随机实验效应有关，如制造公差引入的偏差，随后信号处理期间的测量噪声或有限的测量数据。</li>
+</ul>
+<h2 id="FR-model-based-on-UCNN"><a href="#FR-model-based-on-UCNN" class="headerlink" title="FR model based on UCNN"></a>FR model based on UCNN</h2><p><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=2110304823896008192&amp;noteId=2110305055136380672">A frequency response model updating method based on unidirectional convolutional neural network (readpaper.com)</a><br>蓝色：Review | 红色：之前方法缺陷 | 绿色：理论知识/改进</p>
+<p>本文提出了一种基于单向卷积神经网络 (UCNN) 的方法，以利用频率响应 (FR) 数据进行有限元模型更新。UCNN 旨在在没有任何人工特征提取的情况下从 FR 数据获取高精度逆映射到更新参数。单向卷积分别应用于FR数据的频率和位置维度，以避免数据耦合。UCNN 在卫星模型更新实验中优于基于残差的模型更新方法和二维卷积神经网络。它在训练集中内外都实现了高精度的结果。</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231226203922.png" alt="image.png|666"></p>
+<p>评价指标：</p>
+<ul>
+<li>FR 保证准则(assurance criterion) $FRAC=\frac{|H_e^TH_s|^2}{(H_e^TH_e)(H_s^TH_s)}$ 用于描述试验数据与模拟FR数据的相似度</li>
+</ul>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="plate-UCNN-no-use"><a href="#plate-UCNN-no-use" class="headerlink" title="plate_UCNN(no use)"></a>plate_UCNN(no use)</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">\data\train\fre1000</span><br><span class="line"><span class="bullet">-</span> sita1.xlsx #1000x1 弹性模量</span><br><span class="line"><span class="bullet">-</span> sita2.xlsx #1000x1 钢板厚度</span><br><span class="line"><span class="bullet">-</span> xiangying.xlsx #198000x10 全是0 # 每99×2行一条</span><br><span class="line"></span><br><span class="line">\data\test\fre1000</span><br><span class="line"><span class="bullet">-</span> sita1.xlsx #1000x1</span><br><span class="line"><span class="bullet">-</span> sita2.xlsx #1000x1</span><br><span class="line"><span class="bullet">-</span> xiangying.xlsx #198000x10 全是0</span><br></pre></td></tr></table></figure>
+<h2 id="satellite-UCNN-code-and-images-not-by-author"><a href="#satellite-UCNN-code-and-images-not-by-author" class="headerlink" title="satellite_UCNN(code and images not by author)"></a>satellite_UCNN(code and images not by author)</h2><h3 id="数据集制作"><a href="#数据集制作" class="headerlink" title="数据集制作"></a>数据集制作</h3><p>主体结构6个参数为：只修正三个参数：$\theta_1$、$\theta_3$、$\theta_5$</p>
+<ul>
+<li><strong>主弹性模量</strong>$\theta_1$ 70Gpa，</li>
+<li>主密度$\theta_2$  ，密度2.7x$10^{3} kg/m^{3}$</li>
+<li><strong>中心筒厚度</strong>$\theta_3$ 2mm</li>
+<li>底板厚度$\theta_4$ 1mm</li>
+<li><strong>剪切板厚度</strong>$\theta_5$ 2mm</li>
+<li>顶板厚度$\theta_6$ 2mm<ul>
+<li>其中$\theta_{4}、\theta_6$为常数，其他为待修正参数，$\theta_2$训练效果很差，直接去掉了，可能造成影响</li>
+<li>其他参数：模型高1250mm，中心筒直径400mm，顶板边长600mm，剪切板长1000mm，宽400mm</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">/data/train 训练数据分为25组，每一组400条，共10000次仿真数据</span><br><span class="line"><span class="bullet">-</span> fre-400-1</span><br><span class="line"><span class="bullet">  -</span> sita1.xlsx #400x1</span><br><span class="line"><span class="bullet">  -</span> sita2.xlsx</span><br><span class="line"><span class="bullet">  -</span> ...</span><br><span class="line"><span class="bullet">  -</span> sita6.xlsx</span><br><span class="line"><span class="bullet">  -</span> xiangying.xlsx #80800x11 频响数据，每101×2行为一条，对应0-50Hz 101个频率点x、y两个方向的数据</span><br><span class="line"><span class="bullet">-</span> fre-400-2</span><br><span class="line"><span class="bullet">-</span> fre-400-3</span><br><span class="line"><span class="bullet">-</span> fre-400-4</span><br><span class="line"><span class="bullet">-</span> ...</span><br><span class="line"><span class="bullet">-</span> fre-400-25</span><br><span class="line"></span><br><span class="line">测量的卫星模型加速度频响数据，将有限元模型的加速度频响数据经预处理转化为对应的频响图像，然后输入进UCNN进行训练</span><br><span class="line">将选取的3个有限元模型参数sita1/3/5的值组成向量作为训练输出结果的GT对照标签</span><br><span class="line"></span><br><span class="line">/data/test</span><br><span class="line"><span class="bullet">-</span> fre-400</span><br><span class="line"><span class="bullet">  -</span> sita1.xlsx #400x1</span><br><span class="line"><span class="bullet">  -</span> sita2.xlsx </span><br><span class="line"><span class="bullet">  -</span> ...</span><br><span class="line"><span class="bullet">  -</span> sita6.xlsx</span><br><span class="line"><span class="bullet">  -</span> xiangying.xlsx #80800x11</span><br></pre></td></tr></table></figure>
+<p>选取了 11 个节点，并测量了水平X和竖直Y两个方向的加速度频响数据，频率范围为 ==0-30Hz==?，频率间隔为 0.5。得到最终输入网络的频响图像尺寸为 2×11×61，对应标签形状为 3×1</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231225211854.png" alt="image.png|666"></p>
+<p><strong>数据集生成</strong></p>
+<ul>
+<li>先在一定范围内生成大量随机数作为有限元模型的结构参数<ul>
+<li>弹性模量50.0~90.0GPa</li>
+<li>中心筒厚度1.00~3.00mm</li>
+<li>剪切板厚度1.00~3.00mm</li>
+</ul>
+</li>
+<li>将随机生成的结构参数输入有限元模型，得到水平X和竖直Y方向、11 个节点在61个频率下的加速度响应</li>
+</ul>
+<p>FR数据转图：<br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231225212852.png" alt="image.png|666"></p>
+<h3 id="网络结构"><a href="#网络结构" class="headerlink" title="网络结构"></a>网络结构</h3><p>UCNN单向卷积</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231227133859.png" alt="image.png|666"></p>
+<h3 id="评价指标"><a href="#评价指标" class="headerlink" title="评价指标"></a>评价指标</h3><p>测试集错误率：<br>$错误率 = \frac{预测值-标签GT}{标签GT}$</p>
+<h3 id="实验记录"><a href="#实验记录" class="headerlink" title="实验记录"></a>实验记录</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">20231227</span>-<span class="number">111217</span>: <span class="number">10</span>, <span class="number">0.9</span> UCNN</span><br><span class="line"><span class="number">20231227</span>-<span class="number">111738</span>: <span class="number">25</span>, <span class="number">0.99</span> UCNN</span><br><span class="line"><span class="number">20231227</span>-<span class="number">160116</span>: <span class="number">25</span>, <span class="number">0.99</span> MLP 4x128</span><br><span class="line"><span class="number">20231227</span>-<span class="number">160651</span>: <span class="number">25</span>, <span class="number">0.99</span> UCNN <span class="number">3.5</span><span class="built_in">min</span></span><br><span class="line"><span class="number">20231227</span>-<span class="number">162720</span>: <span class="number">25</span>, <span class="number">0.99</span> MLP 8x256</span><br><span class="line"><span class="number">20231227</span>-<span class="number">163116</span>: <span class="number">25</span>, <span class="number">0.99</span> MLP 8x256 **<span class="number">400</span>** epoch <span class="number">4.0</span><span class="built_in">min</span></span><br><span class="line"><span class="number">20240102</span>-<span class="number">164844</span>: <span class="number">25</span>, <span class="number">0.99</span> MLP_S <span class="number">14</span>个4x256的MLP <span class="number">200</span> epoch 9<span class="built_in">min</span></span><br><span class="line"><span class="number">20240102</span>-<span class="number">170301</span>: <span class="number">25</span>, <span class="number">0.99</span> MLP_S <span class="number">14</span>个2x256的MLP <span class="number">200</span> epoch <span class="number">5.6</span><span class="built_in">min</span></span><br><span class="line"><span class="number">20240102</span>-<span class="number">203115</span>: <span class="number">25</span>, <span class="number">0.99</span> MLP_S <span class="number">14</span>个2x256的MLP **<span class="number">400</span>** epoch <span class="number">15.1</span><span class="built_in">min</span></span><br><span class="line"><span class="number">20240102</span>-<span class="number">205253</span>: <span class="number">25</span>, <span class="number">0.99</span> MLP_S <span class="number">14</span>个4x256的MLP **<span class="number">400</span>** epoch <span class="number">23.27</span><span class="built_in">min</span></span><br><span class="line"><span class="number">20231227</span>-<span class="number">160651</span>: <span class="number">25</span>, <span class="number">0.99</span> UCNN **<span class="number">400</span>** epoch 7<span class="built_in">min</span></span><br></pre></td></tr></table></figure>
+<p>不论MLP还是UCNN，中间sita3预测的误差都很大</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">(satellite) <span class="built_in">PS</span> D:\<span class="number">0</span>Proj\ModelUpdating\satellite_UCNN&gt; python run.py <span class="literal">--test</span> <span class="literal">--resume</span> outputs\@<span class="number">20231227</span><span class="literal">-163116_mlp</span>\<span class="number">400</span>_mlp.pth <span class="literal">--net</span> mlp   </span><br><span class="line">error_rate=:<span class="number">0.05787282592434471</span>=(<span class="number">0.19222232587635518</span>/<span class="number">3.321460855007172</span>)</span><br><span class="line">=====================</span><br><span class="line">error_rate_each0=:<span class="number">0.04022682424495547</span>=(<span class="number">0.28112122416496277</span>/<span class="number">6.9884021282196045</span>)</span><br><span class="line">error_rate_each1=:<span class="number">0.12927590329299216</span>=(<span class="number">0.25523426607251165</span>/<span class="number">1.9743375182151794</span>)</span><br><span class="line">error_rate_each2=:<span class="number">0.04024536597068831</span>=(<span class="number">0.040311464481055735</span>/<span class="number">1.0016423881053924</span>)</span><br><span class="line">(satellite) <span class="built_in">PS</span> D:\<span class="number">0</span>Proj\ModelUpdating\satellite_UCNN&gt; python run.py <span class="literal">--test</span> <span class="literal">--resume</span> outputs\@<span class="number">20231227</span><span class="literal">-160651</span>\<span class="number">200</span>_ucnn.pth                </span><br><span class="line">error_rate=:<span class="number">0.052503906236386795</span>=(<span class="number">0.17438966929912567</span>/<span class="number">3.321460855007172</span>)</span><br><span class="line">=====================</span><br><span class="line">error_rate_each0=:<span class="number">0.04233310254636383</span>=(<span class="number">0.2958407439291477</span>/<span class="number">6.9884021282196045</span>)</span><br><span class="line">error_rate_each1=:<span class="number">0.09400647710819687</span>=(<span class="number">0.18560051470994948</span>/<span class="number">1.9743375182151794</span>)</span><br><span class="line">error_rate_each2=:<span class="number">0.041659300206934695</span>=(<span class="number">0.041727720946073535</span>/<span class="number">1.0016423881053924</span>)</span><br><span class="line"></span><br><span class="line">(satellite) <span class="built_in">PS</span> D:\<span class="number">0</span>Proj\ModelUpdating\SatelliteModelUpdating&gt; python .\run.py <span class="literal">--test</span> <span class="literal">--net</span> mlp_s <span class="literal">--resume</span> outputs\@<span class="number">20240102</span><span class="literal">-164844_mlp_s</span>\<span class="number">200</span>_mlp_s.pth</span><br><span class="line">error_rate=:<span class="number">0.039559290812617505</span>=(<span class="number">0.1313946358859539</span>/<span class="number">3.321460855007172</span>)</span><br><span class="line">=====================</span><br><span class="line">error_rate_each0=:<span class="number">0.023914700538394798</span>=(<span class="number">0.16712554413825273</span>/<span class="number">6.9884021282196045</span>)</span><br><span class="line">error_rate_each1=:<span class="number">0.09774333662894091</span>=(<span class="number">0.19297833666205405</span>/<span class="number">1.9743375182151794</span>)</span><br><span class="line">error_rate_each2=:<span class="number">0.03402412694405286</span>=(<span class="number">0.034080007765442136</span>/<span class="number">1.0016423881053924</span>)</span><br><span class="line">(satellite) <span class="built_in">PS</span> D:\<span class="number">0</span>Proj\ModelUpdating\SatelliteModelUpdating&gt; python .\run.py <span class="literal">--test</span> <span class="literal">--net</span> mlp_s <span class="literal">--resume</span> outputs\@<span class="number">20240102</span><span class="literal">-170301_mlp_s</span>\<span class="number">200</span>_mlp_s.pth</span><br><span class="line">error_rate=:<span class="number">0.04652494246365727</span>=(<span class="number">0.15453077517449856</span>/<span class="number">3.321460855007172</span>)</span><br><span class="line">=====================</span><br><span class="line">error_rate_each0=:<span class="number">0.03268164604636346</span>=(<span class="number">0.22839248478412627</span>/<span class="number">6.9884021282196045</span>)</span><br><span class="line">error_rate_each1=:<span class="number">0.10073567943581017</span>=(<span class="number">0.19888623133301736</span>/<span class="number">1.9743375182151794</span>)</span><br><span class="line">error_rate_each2=:<span class="number">0.036254065508463024</span>=(<span class="number">0.03631360875442624</span>/<span class="number">1.0016423881053924</span>)</span><br><span class="line">(satellite) <span class="built_in">PS</span> D:\<span class="number">0</span>Proj\ModelUpdating\SatelliteModelUpdating&gt; python run.py <span class="literal">--test</span> <span class="literal">--resume</span>  outputs\@<span class="number">20240102</span><span class="literal">-203115_mlp_s</span>\<span class="number">400</span>_mlp_s.pth <span class="literal">--net</span> mlp_s</span><br><span class="line">error_rate=:<span class="number">0.03934166444889552</span>=(<span class="number">0.13067179843783377</span>/<span class="number">3.321460855007172</span>)</span><br><span class="line">=====================</span><br><span class="line">error_rate_each0=:<span class="number">0.028448767469817206</span>=(<span class="number">0.1988114271312952</span>/<span class="number">6.9884021282196045</span>)</span><br><span class="line">error_rate_each1=:<span class="number">0.0800526909024898</span>=(<span class="number">0.15805103108286858</span>/<span class="number">1.9743375182151794</span>)</span><br><span class="line">error_rate_each2=:<span class="number">0.03509528007871003</span>=(<span class="number">0.03515292014926672</span>/<span class="number">1.0016423881053924</span>)</span><br><span class="line"></span><br><span class="line">(satellite) <span class="built_in">PS</span> D:\<span class="number">0</span>Proj\ModelUpdating\SatelliteModelUpdating&gt; python run.py <span class="literal">--test</span> <span class="literal">--resume</span>  outputs\@<span class="number">20240102</span><span class="literal">-205253_mlp_s</span>\<span class="number">400</span>_mlp_s.pth <span class="literal">--net</span> mlp_s <span class="comment"># 过拟合了，训练集上的损失比较小，但是测试集上的loss比较大</span></span><br><span class="line">error_rate=:<span class="number">0.03124857323569491</span>=(<span class="number">0.10379091277718544</span>/<span class="number">3.321460855007172</span>)</span><br><span class="line">=====================</span><br><span class="line">error_rate_each0=:<span class="number">0.01964181444371989</span>=(<span class="number">0.13726489786058665</span>/<span class="number">6.9884021282196045</span>)</span><br><span class="line">error_rate_each1=:<span class="number">0.07125288617244709</span>=(<span class="number">0.14067724645137786</span>/<span class="number">1.9743375182151794</span>)</span><br><span class="line">error_rate_each2=:<span class="number">0.03337576539351412</span>=(<span class="number">0.03343058135360479</span>/<span class="number">1.0016423881053924</span>)</span><br><span class="line">(satellite) <span class="built_in">PS</span> D:\<span class="number">0</span>Proj\ModelUpdating\SatelliteModelUpdating&gt; python .\run.py <span class="literal">--test</span> <span class="literal">--resume</span> outputs\@<span class="number">20240102</span><span class="literal">-211805_ucnn</span>\<span class="number">400</span>_ucnn.pth</span><br><span class="line">error_rate=:<span class="number">0.02647251309147154</span>=(<span class="number">0.08792741596698761</span>/<span class="number">3.321460855007172</span>)</span><br><span class="line">=====================</span><br><span class="line">error_rate_each0=:<span class="number">0.022187629130279763</span>=(<span class="number">0.15505607463419438</span>/<span class="number">6.9884021282196045</span>)</span><br><span class="line">error_rate_each1=:<span class="number">0.03919995023153533</span>=(<span class="number">0.07739393245428801</span>/<span class="number">1.9743375182151794</span>)</span><br><span class="line">error_rate_each2=:<span class="number">0.031280856565034834</span>=(<span class="number">0.03133223187178373</span>/<span class="number">1.0016423881053924</span>)</span><br></pre></td></tr></table></figure>
+<p>UCNN略好于MLP_S，改进的点在于如何用少量样本即可完成训练</p>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+1ZnNxFWnEbk5YzRl">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/3DReconstruction/Multi-view/Implicit%20Function/GS-based/SuGaR/" rel="prev" title="SuGaR">
+      <i class="fa fa-chevron-left"></i> SuGaR
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/3DReconstruction/Other%20Methods/Stereo%20Matching/Stereo%20Matching%20Review/" rel="next" title="Stereo Matching Review">
+      Stereo Matching Review <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="nav-text">基础知识</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%BA%E6%96%87"><span class="nav-text">论文</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#A-robust-stochastic-model-updating-method-with-resampling-processing"><span class="nav-text">A robust stochastic model updating method with resampling processing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FR-model-based-on-UCNN"><span class="nav-text">FR model based on UCNN</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-text">代码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#plate-UCNN-no-use"><span class="nav-text">plate_UCNN(no use)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#satellite-UCNN-code-and-images-not-by-author"><span class="nav-text">satellite_UCNN(code and images not by author)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E5%88%B6%E4%BD%9C"><span class="nav-text">数据集制作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84"><span class="nav-text">网络结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87"><span class="nav-text">评价指标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E8%AE%B0%E5%BD%95"><span class="nav-text">实验记录</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qi Yun"
+      src="/images/avatar.jpeg">
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">132</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">58</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/qiyun71" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;qiyun71" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/29010355" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;29010355" rel="noopener" target="_blank"><i class="fa fa-star fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qi Yun</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">461k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">27:55</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/yqq/anime.min.js"></script>
+  <script src="/yqq/velocity/velocity.min.js"></script>
+  <script src="/yqq/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
