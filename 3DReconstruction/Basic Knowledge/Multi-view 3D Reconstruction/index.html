@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231219125859.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/Network.png">
 <meta property="article:published_time" content="2023-10-23T11:54:54.000Z">
-<meta property="article:modified_time" content="2024-01-04T06:05:16.869Z">
+<meta property="article:modified_time" content="2024-01-08T08:04:55.942Z">
 <meta property="article:author" content="Qi Yun">
 <meta property="article:tag" content="3DReconstruction">
 <meta name="twitter:card" content="summary">
@@ -234,7 +234,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-01-04 14:05:16" itemprop="dateModified" datetime="2024-01-04T14:05:16+08:00">2024-01-04</time>
+                <time title="Modified: 2024-01-08 16:04:55" itemprop="dateModified" datetime="2024-01-08T16:04:55+08:00">2024-01-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -251,13 +251,13 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>1.6k</span>
+              <span>1.4k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span>6 mins.</span>
+              <span>5 mins.</span>
             </span>
 
         </div>
@@ -400,12 +400,43 @@
 <ul>
 <li>三维扫描仪<a target="_blank" rel="noopener" href="https://www.einscan.com/handheld-3d-scanner/einscan-pro-2x-2020/">EinScan Pro 2X - Shining3D Multifunctional Handheld Scanner | EinScan</a></li>
 </ul>
-<h2 id="2024-01-01"><a href="#2024-01-01" class="headerlink" title="2024-01-01"></a>2024-01-01</h2><p>重建项目的具体想法：</p>
+<h2 id="2024-0101-0113"><a href="#2024-0101-0113" class="headerlink" title="2024-0101 ~ 0113"></a>2024-0101 ~ 0113</h2><p>重建项目的具体想法：</p>
 <ul>
 <li>结构光相机的选型</li>
 <li>扫描仪选型</li>
 </ul>
-<h1 id="backup"><a href="#backup" class="headerlink" title="backup"></a>backup</h1><p>三维重建主要指通过计算机技术将现实中的物体和场景转化为数字三维模型。随着计算机视觉和计算机图形学等技术的飞速发展，人们对图像和三维模型的研究取得了巨大的进展。计算机视觉主要关注二维图像的处理，通过学习图像特征信息实现图像识别，图像分割以及目标检测等任务，与之不同的是，计算机图形学致力于在计算机中表示图形，通过几何变换、光线追踪以及纹理映射等技术将物体模型和场景渲染成图片，这些技术为三维重建提供了坚实的理论基础。</p>
+<h1 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h1><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>实验时间</th>
+<th>对象</th>
+<th>方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>@20240108-124117</td>
+<td>dtu114_mine</td>
+<td>neus</td>
+</tr>
+<tr>
+<td>@20240108-133914</td>
+<td>dtu114_mine</td>
+<td>+ ProgressiveBandHashGrid</td>
+</tr>
+<tr>
+<td>@20240108-151934</td>
+<td>dtu114_mine</td>
+<td>+ loss_curvature(sdf_grad_samples)</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
 
     </div>
 
@@ -509,7 +540,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Review"><span class="nav-text">Review</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Following"><span class="nav-text">Following</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%BB%BA%E6%96%B9%E6%B3%95%E5%88%86%E7%B1%BB"><span class="nav-text">重建方法分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NeRF%E5%9F%BA%E6%9C%AC%E6%B5%81%E7%A8%8B"><span class="nav-text">NeRF基本流程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract"><span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction-RelatedWork"><span class="nav-text">Introduction+RelatedWork</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%A0%E7%BB%9F%E7%9A%84%E5%A4%9A%E8%A7%86%E5%9B%BE%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA%E6%96%B9%E6%B3%95"><span class="nav-text">传统的多视图三维重建方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8ENeRF%E7%9A%84%E9%87%8D%E5%BB%BA%E6%96%B9%E6%B3%95"><span class="nav-text">基于NeRF的重建方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E9%9A%90%E5%BC%8F%E8%A1%A8%E7%A4%BA%E7%9A%84%E9%87%8D%E5%BB%BA%E6%96%B9%E6%B3%95"><span class="nav-text">基于隐式表示的重建方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E7%A5%9E%E7%BB%8F%E8%BE%90%E5%B0%84%E5%9C%BA%E9%87%8D%E5%BB%BA%E6%96%B9%E6%B3%95%E7%9A%84%E6%94%B9%E8%BF%9B"><span class="nav-text">基于神经辐射场重建方法的改进</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Method"><span class="nav-text">Method</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA"><span class="nav-text">数据采集平台搭建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2024-01-01"><span class="nav-text">2024-01-01</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#backup"><span class="nav-text">backup</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Review"><span class="nav-text">Review</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Following"><span class="nav-text">Following</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%BB%BA%E6%96%B9%E6%B3%95%E5%88%86%E7%B1%BB"><span class="nav-text">重建方法分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NeRF%E5%9F%BA%E6%9C%AC%E6%B5%81%E7%A8%8B"><span class="nav-text">NeRF基本流程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract"><span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction-RelatedWork"><span class="nav-text">Introduction+RelatedWork</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%A0%E7%BB%9F%E7%9A%84%E5%A4%9A%E8%A7%86%E5%9B%BE%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA%E6%96%B9%E6%B3%95"><span class="nav-text">传统的多视图三维重建方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8ENeRF%E7%9A%84%E9%87%8D%E5%BB%BA%E6%96%B9%E6%B3%95"><span class="nav-text">基于NeRF的重建方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E9%9A%90%E5%BC%8F%E8%A1%A8%E7%A4%BA%E7%9A%84%E9%87%8D%E5%BB%BA%E6%96%B9%E6%B3%95"><span class="nav-text">基于隐式表示的重建方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E7%A5%9E%E7%BB%8F%E8%BE%90%E5%B0%84%E5%9C%BA%E9%87%8D%E5%BB%BA%E6%96%B9%E6%B3%95%E7%9A%84%E6%94%B9%E8%BF%9B"><span class="nav-text">基于神经辐射场重建方法的改进</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Method"><span class="nav-text">Method</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA"><span class="nav-text">数据采集平台搭建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2024-0101-0113"><span class="nav-text">2024-0101 ~ 0113</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C"><span class="nav-text">实验</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -590,7 +621,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">27:55</span>
+    <span title="Reading time total">27:57</span>
 </div>
 
         
