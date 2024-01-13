@@ -25,6 +25,41 @@ categories: Learn
 
 # Model
 
+## CNN
+
+```text
+卷积神将网络的计算公式为：
+N=(W-F+2P)/S+1
+其中
+N：输出大小
+W：输入大小
+F：卷积核大小
+P：填充值的大小
+S：步长大小
+```
+
+### UCNN
+
+### VGG16
+
+[VGG16学习笔记 | 韩鼎の个人网站 (deanhan.com)](https://deanhan.com/2018/07/26/vgg16/)
+
+### ResNet
+
+[ResNet中的BasicBlock与bottleneck-CSDN博客](https://blog.csdn.net/sazass/article/details/116864275)
+
+## RNN
+
+相比一般的神经网络来说，他能够处理序列变化的数据
+
+### LSTM
+
+[人人都能看懂的LSTM - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/32085405)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20240112195022.png)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20240112194924.png)
+
 ## U-Net
 
 > [U-Net (labml.ai)](https://nn.labml.ai/unet/index.html)

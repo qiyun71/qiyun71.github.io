@@ -15,6 +15,7 @@ categories: Vibration
 基本概念：
 - [什么是固有频率？ - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/23320350)
   - 通常一个结构有很多个**固有频率**。固有频率与外界激励没有关系，是结构的一种固有属性。**只与材料的刚度k和质量m有关**：$\omega_{n} =  \sqrt{\frac{k}{m}}$
+  - [2.固有频率介绍_固有频率越大越好还是越小越好-CSDN博客](https://blog.csdn.net/qq_39200110/article/details/106057561)
 - 模态分析是一种处理过程：根据结构的固有特性，包括固有频率、阻尼比和模态振型，这些动力学属性去描述结构。[结构动力学中的模态分析(1) —— 线性系统和频响函数 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/69229246)
   - 每一个模态都对应一个**固定的振动频率，阻尼比**及**振动形式**。而**固定的振动形式**也被称为**模态振型**[模态是什么](https://www.zhihu.com/question/24578439/answer/837484786)
   - 一个自由度为N的系统，包含N阶模态，通常将固有频率由小到大排列
@@ -24,8 +25,19 @@ categories: Vibration
     - 模态参数识别是结构动力学中的反问题，它建立在实验的基础上，基于理论与实验相结合的原则，辨识出系统的模态参数，最终实现对系统的改进。通 过获取结构的动力学特性，对结构性能进行评价，从而判断结构的可靠性及安 全性是否符合要求。
 - 模型修正
 
+频谱分析：[从傅里叶变换，到短时傅里叶变换，再到小波分析（CWT），看这一篇就够了（附MATLAB傻瓜式实现代码） - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/589651368)
+
 # 论文
 
+## CNN是什么
+
+[7大类深度CNN架构创新综述 | 机器之心 (jiqizhixin.com)](https://www.jiqizhixin.com/articles/2019-01-25-6)
+
+[你应该知道的几种CNN网络与实现 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/176987177)
+
+
+other：
+[深度学习全连接与cnn区别 (volcengine.com)](https://www.volcengine.com/theme/1216339-S-7-1)
 ## A robust stochastic model updating method with resampling processing
 
 为了更好地估计参数的不确定性，提出了一种鲁棒随机模型更新框架。在该框架中，为了提高鲁棒性，重采样过程主要设计用于处理不良样本点，特别是有限样本量问题。其次，提出了基于巴塔查里亚距离和欧几里得距离的平均距离不确定度度量，以充分利用测量的可用信息。随后采用粒子群优化算法对结构的输入参数进行更新。最后以质量-弹簧系统和钢板结构为例说明了该方法的有效性和优越性。通过将测量样品加入不良样品，讨论了重采样过程的作用。
@@ -45,7 +57,27 @@ categories: Vibration
 评价指标：
 - FR 保证准则(assurance criterion) $FRAC=\frac{|H_e^TH_s|^2}{(H_e^TH_e)(H_s^TH_s)}$ 用于描述试验数据与模拟FR数据的相似度
 
-# 代码
+# 数据集
+
+[Download a Data File | Case School of Engineering | Case Western Reserve University](https://engineering.case.edu/bearingdatacenter/download-data-file)
+
+# 实验
+
+[模态-力锤法,激振器法 (FRF频率响应函数,传递函数,共振频率及阻尼系数,猝发随机激励,力窗/指数窗) - 北京美科环试MeK](https://www.mek.net.cn/DataPhysics_Software_FRF.html)
+
+## 软件
+
+[模态分析软件|模态测试系统|实验模态分析|模态测试软件|模态软件 (hzrad.com)](http://www.hzrad.com/edm-modal-analysis)
+
+# 传统方法Convention
+
+- 有限元方法获取数据集耗费时间长，使用一个代理模型来代替有限元计算模型。
+- 根据随机样本$X_{s}$通过代理模型得到模拟响应$Y_{s}$，动力学实验得到实验响应$Y_{e}(f_{1} ... f_{6})$
+- 用子区间相似度计算模拟样本$Y_{s}$和试验样本$Y_{e}$之间的值，并作为目标函数。
+- 用麻雀搜索算法将目标函数迭代寻优，得到修正后的均值$\mu$和标准差$\sigma$
+
+
+# 深度学习方法
 
 ## plate_UCNN(no use)
 
@@ -126,6 +158,17 @@ UCNN单向卷积
 测试集错误率：
 $错误率 = \frac{预测值-标签GT}{标签GT}$
 
+## Mine
+
+### 网络结构：
+
+| 网络 | 图片 |
+| :--: | ---- |
+| UCNN | ![image.png\|333](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231227133859.png) |
+| MLP | ![image.png\|333](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20240111150150.png)<br> |
+| MLP_S | ![image.png\|333](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20240111150239.png)<br> |
+| VGG16 | ![image.png\|333](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20240111145858.png) |
+
 
 ### 实验记录
 
@@ -140,7 +183,10 @@ $错误率 = \frac{预测值-标签GT}{标签GT}$
 20240102-170301: 25, 0.99 MLP_S 14个2x256的MLP 200 epoch 5.6min
 20240102-203115: 25, 0.99 MLP_S 14个2x256的MLP **400** epoch 15.1min
 20240102-205253: 25, 0.99 MLP_S 14个4x256的MLP **400** epoch 23.27min
-20231227-160651: 25, 0.99 UCNN **400** epoch 7min
+20240102-211805: 25, 0.99 UCNN **400** epoch 7min
+20240111-160514: 25, 0.99 VGG 200 epoch 
+20240111-162059: 25, 0.99 VGG 400 epoch 26.34 min
+20240113-190506: 25, 0.99 ResNet50 400 epoch 36.1 min
 ```
 
 不论MLP还是UCNN，中间sita3预测的误差都很大
@@ -152,25 +198,7 @@ error_rate=:0.05787282592434471=(0.19222232587635518/3.321460855007172)
 error_rate_each0=:0.04022682424495547=(0.28112122416496277/6.9884021282196045)
 error_rate_each1=:0.12927590329299216=(0.25523426607251165/1.9743375182151794)
 error_rate_each2=:0.04024536597068831=(0.040311464481055735/1.0016423881053924)
-(satellite) PS D:\0Proj\ModelUpdating\satellite_UCNN> python run.py --test --resume outputs\@20231227-160651\200_ucnn.pth                
-error_rate=:0.052503906236386795=(0.17438966929912567/3.321460855007172)
-=====================
-error_rate_each0=:0.04233310254636383=(0.2958407439291477/6.9884021282196045)
-error_rate_each1=:0.09400647710819687=(0.18560051470994948/1.9743375182151794)
-error_rate_each2=:0.041659300206934695=(0.041727720946073535/1.0016423881053924)
 
-(satellite) PS D:\0Proj\ModelUpdating\SatelliteModelUpdating> python .\run.py --test --net mlp_s --resume outputs\@20240102-164844_mlp_s\200_mlp_s.pth
-error_rate=:0.039559290812617505=(0.1313946358859539/3.321460855007172)
-=====================
-error_rate_each0=:0.023914700538394798=(0.16712554413825273/6.9884021282196045)
-error_rate_each1=:0.09774333662894091=(0.19297833666205405/1.9743375182151794)
-error_rate_each2=:0.03402412694405286=(0.034080007765442136/1.0016423881053924)
-(satellite) PS D:\0Proj\ModelUpdating\SatelliteModelUpdating> python .\run.py --test --net mlp_s --resume outputs\@20240102-170301_mlp_s\200_mlp_s.pth
-error_rate=:0.04652494246365727=(0.15453077517449856/3.321460855007172)
-=====================
-error_rate_each0=:0.03268164604636346=(0.22839248478412627/6.9884021282196045)
-error_rate_each1=:0.10073567943581017=(0.19888623133301736/1.9743375182151794)
-error_rate_each2=:0.036254065508463024=(0.03631360875442624/1.0016423881053924)
 (satellite) PS D:\0Proj\ModelUpdating\SatelliteModelUpdating> python run.py --test --resume  outputs\@20240102-203115_mlp_s\400_mlp_s.pth --net mlp_s
 error_rate=:0.03934166444889552=(0.13067179843783377/3.321460855007172)
 =====================
@@ -184,12 +212,27 @@ error_rate=:0.03124857323569491=(0.10379091277718544/3.321460855007172)
 error_rate_each0=:0.01964181444371989=(0.13726489786058665/6.9884021282196045)
 error_rate_each1=:0.07125288617244709=(0.14067724645137786/1.9743375182151794)
 error_rate_each2=:0.03337576539351412=(0.03343058135360479/1.0016423881053924)
+
 (satellite) PS D:\0Proj\ModelUpdating\SatelliteModelUpdating> python .\run.py --test --resume outputs\@20240102-211805_ucnn\400_ucnn.pth
 error_rate=:0.02647251309147154=(0.08792741596698761/3.321460855007172)
 =====================
 error_rate_each0=:0.022187629130279763=(0.15505607463419438/6.9884021282196045)
 error_rate_each1=:0.03919995023153533=(0.07739393245428801/1.9743375182151794)
 error_rate_each2=:0.031280856565034834=(0.03133223187178373/1.0016423881053924)
+
+(satellite) PS D:\0Proj\ModelUpdating\SatelliteModelUpdating> python .\run.py --net vgg --test --resume outputs\202401\@20240111-162059_vgg\400_vgg.pth
+error_rate=:0.02620232199857664=(0.0870299868285656/3.321460855007172)
+=====================
+error_rate_each0=:0.016490224581949674=(0.11524032056331635/6.9884021282196045)
+error_rate_each1=:0.05937809189634055=(0.11723239459097386/1.9743375182151794)
+error_rate_each2=:0.02857031368553574=(0.028617237228900194/1.0016423881053924)
+
+(satellite) PS D:\0Proj\ModelUpdating\SatelliteModelUpdating> python .\run.py --test --resume outputs\202401\@20240113-190506_resnet\400_resnet.pth --net resnet
+error_rate=:0.12867085358744207=(0.42737520337104795/3.321460855007172)
+=====================
+error_rate_each0=:0.1063032449177=(0.7428898230195046/6.9884021282196045)
+error_rate_each1=:0.22810707873746822=(0.4503603637218475/1.9743375182151794)
+error_rate_each2=:0.08872962392607951=(0.08887535240501165/1.0016423881053924)
 ```
 
 UCNN略好于MLP_S，改进的点在于如何用少量样本即可完成训练

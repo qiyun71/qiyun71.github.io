@@ -69,10 +69,11 @@ NeRF 分段常数积分 --> PL-NeRF 分段线性积分
 
 ## Image问题
 
-| Year | Title&Project Page                                                                                                                               | Brief Description | Conf/Jour |
-| ---- | ------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------- |:---------:|
-| 2024 | [[2401.00825] Sharp-NeRF: Grid-based Fast Deblurring Neural Radiance Fields Using Sharpness Prior (arxiv.org)](https://arxiv.org/abs/2401.00825) |                   |   WACV    |
-| 2023     | [[2312.15942] Pano-NeRF: Synthesizing High Dynamic Range Novel Views with Geometry from Sparse Low Dynamic Range Panoramic Images (arxiv.org)](https://arxiv.org/abs/2312.15942)                                                                                                                                                 |                   |           |
+| Year  | Title&Project Page                                                                                                                                                               | Brief Description | Conf/Jour |
+| ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |:---------:|
+| 2024  | [[2401.00825] Sharp-NeRF: Grid-based Fast Deblurring Neural Radiance Fields Using Sharpness Prior (arxiv.org)](https://arxiv.org/abs/2401.00825)                                 |                   |   WACV    |
+| 2023  | [[2312.15942] Pano-NeRF: Synthesizing High Dynamic Range Novel Views with Geometry from Sparse Low Dynamic Range Panoramic Images (arxiv.org)](https://arxiv.org/abs/2312.15942) |                   |           |
+| 2024 | [[2401.03257] RustNeRF: Robust Neural Radiance Field with Low-Quality Images (arxiv.org)](https://arxiv.org/abs/2401.03257)                                                      | 低质量图像                  |           |
 
 
 
@@ -152,25 +153,30 @@ NeRF 分段常数积分 --> PL-NeRF 分段线性积分
 
 ## Surface Reconstruction
 
-| Year                                                      |                                                                    Title&Project Page                                                                    |                                           Brief Description                                           |                               Conf/Jour                               |
-| --------------------------------------------------------- |:--------------------------------------------------------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------:|
-| [2021](NeuS.md)                  |         [NeuS: Learning Neural Implicit Surfaces by Volume Rendering for Multi-view Reconstruction](https://lingjie0206.github.io/papers/NeuS/)          |                                         Neus: SDF表面重建方法                                         |                                NeurIPS                                |
-| [2022](Instant-NSR.md)           |                         [Human Performance Modeling and Rendering via Neural Animated Mesh](https://zhaofuq.github.io/NeuralAM/)                         |                                  NSR: Neus_TSDF + NGP，但是依赖mask                                   |                             SIGGRAPH Asia                             |
-| [2023](Neus-Instant-nsr-pl.md)   |                                          [bennyguo/instant-nsr-pl](https://github.com/bennyguo/instant-nsr-pl)                                           |                                        Neus+NeRF+Nerfacc+tcnn                                         |                                 None                                  |
-| [2023](Neuralangelo.md)          |                     [Neuralangelo: High-Fidelity Neural Surface Reconstruction](https://research.nvidia.com/labs/dir/neuralangelo/)                      |                                       NGP_but数值梯度+Neus_SDF                                        | IEEE Conference on Computer Vision and Pattern Recognition (**CVPR**) |
-| [2023](PermutoSDF.md)            |                                                [PermutoSDF](https://radualexandru.github.io/permuto_sdf/)                                                |       NGP_butPermutohedral lattice + Neus_SDF，曲率损失和颜色MLP正则解决镜面+无纹理区域，更光滑       |                      IEEE/CVF Conference on CVPR                      |
-| [2023](NeuDA.md)                 |                                                    [NeuDA](https://3d-front-future.github.io/neuda/)                                                     |                                 NGP_butDeformable Anchors+HPE + Neus                                  |                                 CVPR                                  |
-| [2023](NeRO.md) |             [NeRO: Neural Geometry and BRDF Reconstruction of Reflective Objects from Multiview Images](https://liuyuan-pal.github.io/NeRO/)             | Neus_SDF 新的光表示方法可以重建准确的几何和BRDF，但是细节处由于太光滑而忽略，反射颜色也依赖准确的法线 |                          SIGGRAPH (ACM TOG)                           |
-| [2021](UNISURF.md)               |           [UNISURF: Unifying Neural Implicit Surfaces and Radiance Fields for Multi-View Reconstruction ](https://moechsle.github.io/unisurf/)           |                            UNISURF用占用值来表示表面，代替NeRF中的$\alpha$                            |                              ICCV (oral)                              |
-| [2023](PlankAssembly.md)         |  [PlankAssembly: Robust 3D Reconstruction from Three Orthographic Views with Learnt Shape Programs](https://manycore-research.github.io/PlankAssembly/)  |                  基于Transform的自注意力提出模型,将2D三视图转化成3D模型的代码形式DSL                  |                                 ICCV                                  |
-| [2023](NeUDF.md)                 |                                                       [NeUDF](http://geometrylearning.com/neudf/)                                                        |                          使用UDF，可以重建具有任意拓扑的表面，例如非水密表面                          |                                 CVPR                                  |
-| [2023](NeuS2.md)                 |              [NeuS2: Fast Learning of Neural Implicit Surfaces for Multi-view Reconstruction](https://vcai.mpi-inf.mpg.de/projects/NeuS2/)               |                          基于Neus、NGP和NSR，实现高质量快速的静态和动态建模                           |                                 ICCV                                  |
-| [2023](Color-NeuS.md)            |                                 [Color-NeuS (colmar-zlicheng.github.io)](https://colmar-zlicheng.github.io/color_neus/)                                  |                         解决了类Neus方法推理时表面颜色提取困难和不正确的问题                          |                                 arXiv                                 |
-| [2022](HF-NeuS.md)               |                        [HF-NeuS: Improved Surface Reconstruction Using High-Frequency Details](https://github.com/yiqun-wang/HFS)                        |                新的SDF与透明度$\alpha$关系函数,将SDF分解为基和位移两个独立隐函数的组合                |                                NeurIPS                                |
-| [2022](Geo-Neus.md)              |            [Geo-Neus: Geometry-Consistent Neural Implicit Surfaces Learning for Multi-view Reconstruction](https://github.com/GhiXu/Geo-Neus)            |        使用COLMAP产生的稀疏点来作为SDF的显示监督,具有多视图立体约束的隐式曲面上的几何一致监督         |                                NeurIPS                                |
-| [2020](IDR.md)                   |        [Multiview Neural Surface Reconstruction by Disentangling Geometry and Appearance (lioryariv.github.io)](https://lioryariv.github.io/idr/)        |               端到端的IDR：可以从masked的2D图像中学习3D几何、外观，*允许粗略的相机估计*               |                                NeurIPS                                |
-| [2023](FlexiCubes.md)            | [Flexible Isosurface Extraction for Gradient-Based Mesh Optimization (FlexiCubes) (nvidia.com)](https://research.nvidia.com/labs/toronto-ai/flexicubes/) |                                      一种新的Marching Cube的方法                                      |                 ACM Trans. on Graph. (SIGGRAPH 2023)                  |
-|                                                           |                                                                                                                                                          |                                                                                                       |                                                                       |
+| Year | Title&Project Page | Brief Description | Conf/Jour |
+| ---- | :--: | :--: | :--: |
+| [2021](NeuS.md) | [NeuS: Learning Neural Implicit Surfaces by Volume Rendering for Multi-view Reconstruction](https://lingjie0206.github.io/papers/NeuS/) | Neus: SDF表面重建方法 | NeurIPS |
+| [2022](Instant-NSR.md) | [Human Performance Modeling and Rendering via Neural Animated Mesh](https://zhaofuq.github.io/NeuralAM/) | NSR: Neus_TSDF + NGP，但是依赖mask | SIGGRAPH Asia |
+| [2023](Neus-Instant-nsr-pl.md) | [bennyguo/instant-nsr-pl](https://github.com/bennyguo/instant-nsr-pl) | Neus+NeRF+Nerfacc+tcnn | None |
+| [2023](Neuralangelo.md) | [Neuralangelo: High-Fidelity Neural Surface Reconstruction](https://research.nvidia.com/labs/dir/neuralangelo/) | NGP_but数值梯度+Neus_SDF | IEEE Conference on Computer Vision and Pattern Recognition (**CVPR**) |
+| [2023](PermutoSDF.md) | [PermutoSDF](https://radualexandru.github.io/permuto_sdf/) | NGP_butPermutohedral lattice + Neus_SDF，曲率损失和颜色MLP正则解决镜面+无纹理区域，更光滑 | IEEE/CVF Conference on CVPR |
+| [2023](NeuDA.md) | [NeuDA](https://3d-front-future.github.io/neuda/) | NGP_butDeformable Anchors+HPE + Neus | CVPR |
+| [2023](NeRO.md) | [NeRO: Neural Geometry and BRDF Reconstruction of Reflective Objects from Multiview Images](https://liuyuan-pal.github.io/NeRO/) | Neus_SDF 新的光表示方法可以重建准确的几何和BRDF，但是细节处由于太光滑而忽略，反射颜色也依赖准确的法线 | SIGGRAPH (ACM TOG) |
+| [2021](UNISURF.md) | [UNISURF: Unifying Neural Implicit Surfaces and Radiance Fields for Multi-View Reconstruction ](https://moechsle.github.io/unisurf/) | UNISURF用占用值来表示表面，代替NeRF中的$\alpha$ | ICCV (oral) |
+| [2023](PlankAssembly.md) | [PlankAssembly: Robust 3D Reconstruction from Three Orthographic Views with Learnt Shape Programs](https://manycore-research.github.io/PlankAssembly/) | 基于Transform的自注意力提出模型,将2D三视图转化成3D模型的代码形式DSL | ICCV |
+| [2023](NeUDF.md) | [NeUDF](http://geometrylearning.com/neudf/) | 使用UDF，可以重建具有任意拓扑的表面，例如非水密表面 | CVPR |
+| [2023](NeuS2.md) | [NeuS2: Fast Learning of Neural Implicit Surfaces for Multi-view Reconstruction](https://vcai.mpi-inf.mpg.de/projects/NeuS2/) | 基于Neus、NGP和NSR，实现高质量快速的静态和动态建模 | ICCV |
+| [2023](Color-NeuS.md) | [Color-NeuS (colmar-zlicheng.github.io)](https://colmar-zlicheng.github.io/color_neus/) | 解决了类Neus方法推理时表面颜色提取困难和不正确的问题 | arXiv |
+| [2022](HF-NeuS.md) | [HF-NeuS: Improved Surface Reconstruction Using High-Frequency Details](https://github.com/yiqun-wang/HFS) | 新的SDF与透明度$\alpha$关系函数,将SDF分解为基和位移两个独立隐函数的组合 | NeurIPS |
+| [2022](Geo-Neus.md) | [Geo-Neus: Geometry-Consistent Neural Implicit Surfaces Learning for Multi-view Reconstruction](https://github.com/GhiXu/Geo-Neus) | 使用COLMAP产生的稀疏点来作为SDF的显示监督,具有多视图立体约束的隐式曲面上的几何一致监督 | NeurIPS |
+| [2020](IDR.md) | [Multiview Neural Surface Reconstruction by Disentangling Geometry and Appearance (lioryariv.github.io)](https://lioryariv.github.io/idr/) | 端到端的IDR：可以从masked的2D图像中学习3D几何、外观，*允许粗略的相机估计* | NeurIPS |
+| [2023](FlexiCubes.md) | [Flexible Isosurface Extraction for Gradient-Based Mesh Optimization (FlexiCubes) (nvidia.com)](https://research.nvidia.com/labs/toronto-ai/flexicubes/) | 一种新的Marching Cube的方法 | ACM Trans. on Graph. (SIGGRAPH 2023) |
+
+## 额外监督
+
+| Year |                                                                         Title&Project Page                                                                          | Brief Description | Conf/Jour |
+| ---- |:-------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:-----------------:|:---------:|
+| 2024 | [[2401.03412] N$^{3}$-Mapping: Normal Guided Neural Non-Projective Signed Distance Fields for Large-scale 3D Mapping (arxiv.org)](https://arxiv.org/abs/2401.03412) |  不同的法向监督   |           |
 
 ## Shadow&Highlight
 

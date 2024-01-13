@@ -1,36 +1,68 @@
 {
   "recentFiles": [
     {
-      "basename": "2024-01-05",
-      "path": "Reports/2024-01-05.md"
-    },
-    {
       "basename": "ModelUpdating",
       "path": "Vibration/ModelUpdating.md"
     },
     {
-      "basename": "2023-12-31",
-      "path": "Reports/2023-12-31.md"
+      "basename": "2023-2024寒假",
+      "path": "Reports/2023-2024寒假.md"
     },
     {
-      "basename": "NeRF-review",
-      "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF-review.md"
+      "basename": "Learn-DeepLearning",
+      "path": "Learn/Learn-DeepLearning.md"
+    },
+    {
+      "basename": "2024-01-05",
+      "path": "Reports/2024-01-05.md"
+    },
+    {
+      "basename": "Multi-view 3D Reconstruction",
+      "path": "3DReconstruction/Basic Knowledge/Multi-view 3D Reconstruction.md"
+    },
+    {
+      "basename": "Learn-PyTorch",
+      "path": "Learn/Learn-PyTorch.md"
+    },
+    {
+      "basename": "IDEA",
+      "path": "Other/Mine/IDEA.md"
     },
     {
       "basename": "Other Paper About Reconstruction",
       "path": "3DReconstruction/Basic Knowledge/Other Paper About Reconstruction.md"
     },
     {
-      "basename": "Metrics",
-      "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF/Metrics.md"
+      "basename": "Generative Models Review",
+      "path": "3DReconstruction/Basic Knowledge/Generative Models Review.md"
+    },
+    {
+      "basename": "Diffusion Models",
+      "path": "3DReconstruction/Basic Knowledge/Diffusion Models.md"
     },
     {
       "basename": "Multi-view Human Body Reconstruction",
       "path": "3DReconstruction/Basic Knowledge/Multi-view Human Body Reconstruction.md"
     },
     {
-      "basename": "Multi-view 3D Reconstruction",
-      "path": "3DReconstruction/Basic Knowledge/Multi-view 3D Reconstruction.md"
+      "basename": "Datasets",
+      "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF/Datasets.md"
+    },
+    {
+      "basename": "Metrics",
+      "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF/Metrics.md"
+    },
+    {
+      "basename": "NeRF-review",
+      "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF-review.md"
+    },
+    {
+      "basename": "Neuralangelo",
+      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Efficiency/Neuralangelo.md"
+    },
+    {
+      "basename": "2023-12-31",
+      "path": "Reports/2023-12-31.md"
     },
     {
       "basename": "NeRF-Mine",
@@ -67,10 +99,6 @@
     {
       "basename": "Structured Light Review",
       "path": "3DReconstruction/Other Methods/Structured Light/Structured Light Review.md"
-    },
-    {
-      "basename": "Learn-DeepLearning",
-      "path": "Learn/Learn-DeepLearning.md"
     },
     {
       "basename": "VolSDF",
@@ -121,28 +149,12 @@
       "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/NoPose/NoPose-NeuS.md"
     },
     {
-      "basename": "Learn-PyTorch",
-      "path": "Learn/Learn-PyTorch.md"
-    },
-    {
-      "basename": "Datasets",
-      "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF/Datasets.md"
-    },
-    {
       "basename": "2023-12-20",
       "path": "Reports/2023-12-20.md"
     },
     {
       "basename": "NeRF-InstantNGP",
       "path": "3DReconstruction/Basic Knowledge/NeRF/Efficiency/NeRF-InstantNGP.md"
-    },
-    {
-      "basename": "Generative Models Review",
-      "path": "3DReconstruction/Basic Knowledge/Generative Models Review.md"
-    },
-    {
-      "basename": "IDEA",
-      "path": "Other/Mine/IDEA.md"
     },
     {
       "basename": "NeRF++",
@@ -187,18 +199,6 @@
     {
       "basename": "Voxurf",
       "path": "3DReconstruction/Multi-view/Explicit Volumetric/Voxurf.md"
-    },
-    {
-      "basename": "Tools",
-      "path": "Other/Mine/Tools.md"
-    },
-    {
-      "basename": "Neuralangelo",
-      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Efficiency/Neuralangelo.md"
-    },
-    {
-      "basename": "Make-Py-Tools",
-      "path": "Python Practise/Make-Py-Tools.md"
     }
   ],
   "omittedPaths": [],

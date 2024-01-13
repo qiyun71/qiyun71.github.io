@@ -29,6 +29,8 @@ Awesome Human Body Reconstruction
 
 # Gaussian Splatting Method
 
+[A Survey on 3D Gaussian Splatting](https://arxiv.org/pdf/2401.03890.pdf)
+
 ## SuGaR
 
 [SuGaR (enpc.fr)](https://imagine.enpc.fr/~guedona/sugar/)
