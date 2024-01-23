@@ -224,35 +224,43 @@ $\phi(x,y)=\begin{cases}\varphi(x,y)+2\pi k_2(x,y),~\varphi(x,y)\leq\frac\pi2\\\
 **然后求解三维坐标**，获得三维点云(根据各坐标系的关系以及相机和投影仪的参数)
 #### 获得相机-投影仪像素坐标之间的对应关系
 由相机像素坐标 $u_c,v_c$，投影仪像素坐标 $(u_p,v_p)$
+
 $\Phi(\operatorname{u_P},\operatorname{v_P})=\Phi(\operatorname{u_C},\operatorname{v_C})$
 $\Phi(\operatorname{u_P},\operatorname{v_P})=\frac{2\pi\operatorname{u_p}}{\operatorname{T}}$
-可得：$\mathrm{u_p~=~\frac{\Phi(u_p,v_p)*T}{2\pi}~=~\frac{\Phi(u_c,v_c)*T}{2\pi}}$
+
+可得：$$\mathrm{u_p~=~\frac{\Phi(u_p,v_p)*T}{2\pi}~=~\frac{\Phi(u_c,v_c)*T}{2\pi}}$$
 
 #### 根据标定参数获得重建点云信息
 
 由相机内外参矩阵，可以得到像素坐标与世界坐标之间的关系：
 
-$\left.\left\{\begin{array}{c}\mathrm{X_c=x_c*Z_c}\\\mathrm{Y_c=y_c*Z_c}\\\mathrm{Z_c=Z_c}\end{array}\right.\right.$
-$\left.\left\{\begin{array}{rl}\mathrm{x_c~=~(u_c~-u_{c0}~)/f_{cx}}\\\mathrm{y_c~=~(v_c~-v_{c0}~)/f_{cy}}\end{array}\right.\right.$
+$$\left.\left\{\begin{array}{c}\mathrm{X_c=x_c*Z_c}\\\mathrm{Y_c=y_c*Z_c}\\\mathrm{Z_c=Z_c}\end{array}\right.\right.$$
+
+$$\left.\left\{\begin{array}{rl}\mathrm{x_c~=~(u_c~-u_{c0}~)/f_{cx}}\\\mathrm{y_c~=~(v_c~-v_{c0}~)/f_{cy}}\end{array}\right.\right.$$
+
 $x_c,y_c$ 为 $u_c,v_c$ 的相机坐标，世界坐标 $X_w,Y_w,Z_w$ 旋转平移得到 $X_c,Y_c,Z_c$
 
 同理投影仪：
-$\left.\left\{\begin{array}{l}X_p=x_p*Z_p\\Y_p=y_p*Z_p\\Z_p=Z_p\end{array}\right.\right.$
-$\left.\left\{\begin{array}{l}x_p=(u_p-u_{p0})/f_{px}\\y_p=(v_p-v_{p0})/f_{py}\end{array}\right.\right.$
+$$\left.\left\{\begin{array}{l}X_p=x_p*Z_p\\Y_p=y_p*Z_p\\Z_p=Z_p\end{array}\right.\right.$$
+
+$$\left.\left\{\begin{array}{l}x_p=(u_p-u_{p0})/f_{px}\\y_p=(v_p-v_{p0})/f_{py}\end{array}\right.\right.$$
 
 由相机和投影仪外参关系：
-$\left.\left[\begin{array}{c}X_p\\Y_p\\Z_p\end{array}\right.\right]=R_{c\to p}\left[\begin{array}{c}X_c\\Y_c\\Z_c\end{array}\right]+t_{c\to p}$
+$$\left.\left[\begin{array}{c}X_p\\Y_p\\Z_p\end{array}\right.\right]=R_{c\to p}\left[\begin{array}{c}X_c\\Y_c\\Z_c\end{array}\right]+t_{c\to p}$$
+
 可得：
-$\left.\left\{\begin{array}{l}X_p=r_{11}X_c+r_{12}Y_c+r_{13}Z_c+t_x=(r_{11}x_c+r_{12}y_c+r_{13})Z_c+t_x\\Y_p=r_{21}X_c+r_{22}Y_c+r_{23}Z_c+t_y=(r_{21}x_c+r_{22}y_c+r_{23})Z_c+t_y\\Z_p=r_{31}X_c+r_{32}Y_c+r_{33}Z_c+t_z=(r_{31}x_c+r_{32}y_c+r_{33})Z_c+t_z\end{array}\right.\right.$
+$$\left.\left\{\begin{array}{l}X_p=r_{11}X_c+r_{12}Y_c+r_{13}Z_c+t_x=(r_{11}x_c+r_{12}y_c+r_{13})Z_c+t_x\\Y_p=r_{21}X_c+r_{22}Y_c+r_{23}Z_c+t_y=(r_{21}x_c+r_{22}y_c+r_{23})Z_c+t_y\\Z_p=r_{31}X_c+r_{32}Y_c+r_{33}Z_c+t_z=(r_{31}x_c+r_{32}y_c+r_{33})Z_c+t_z\end{array}\right.\right.$$
 
 由相机投影仪像素坐标关系：
-$\left.\left\{\begin{array}{l}u_p=f_{px}*x_p+u_{p0}\\u_p=\frac{\Phi(u_c,v_c)*T}{2\pi}\end{array}\right.\right.\Rightarrow f_{px}*x_p+u_{p0}=\frac{\Phi(u_c,v_c)*T}{2\pi}$
+$$\left.\left\{\begin{array}{l}u_p=f_{px}*x_p+u_{p0}\\u_p=\frac{\Phi(u_c,v_c)*T}{2\pi}\end{array}\right.\right.\Rightarrow f_{px}*x_p+u_{p0}=\frac{\Phi(u_c,v_c)*T}{2\pi}$$
 
 联立上述两式：
-$\left.\left\{\begin{array}{l}x_p*Z_p=(r_{11}x_c+r_{12}y_c+r_{13})Z_c+t_x\\Z_p=(r_{31}x_c+r_{32}y_c+r_{33})Z_c+t_z\\f_{px}*x_p+u_{p0}=\frac{\Phi(u_c,v_c)*T}{2\pi}\end{array}\right.\right.$
+$$\left.\left\{\begin{array}{l}x_p*Z_p=(r_{11}x_c+r_{12}y_c+r_{13})Z_c+t_x\\Z_p=(r_{31}x_c+r_{32}y_c+r_{33})Z_c+t_z\\f_{px}*x_p+u_{p0}=\frac{\Phi(u_c,v_c)*T}{2\pi}\end{array}\right.\right.$$
+
 可得：$Z_{c}=\frac{x_{p}t_{z}-t_{x}}{J_{x}-J_{z}x_{p}}$
+
 其中
-$\begin{aligned}&\begin{aligned}J_x=(r_{11}x_c+r_{12}y_c+r_{13})\end{aligned}\text{;} \\&\begin{aligned}J_z=(r_{31}x_c+r_{32}y_c+r_{33})\end{aligned}{;} \\&x_{p}=(\frac{\Phi(u_{c},v_{c})*T}{2\pi}-u_{p0})/f_{px}。\end{aligned}$
+$$\begin{aligned}&\begin{aligned}J_x=(r_{11}x_c+r_{12}y_c+r_{13})\end{aligned}\text{;} \\&\begin{aligned}J_z=(r_{31}x_c+r_{32}y_c+r_{33})\end{aligned}{;} \\&x_{p}=(\frac{\Phi(u_{c},v_{c})*T}{2\pi}-u_{p0})/f_{px}。\end{aligned}$$
 
 则相机坐标系下，每个像素的世界坐标为：
-$\left.\left\{\begin{array}{l}X_c=x_c*Z_c\\Y_c=y_c*Zc\\Z_c=\frac{x_pt_z-t_x}{J_x-J_zx_p}\end{array}\right.\right.$
+$$\left.\left\{\begin{array}{l}X_c=x_c*Z_c\\Y_c=y_c*Zc\\Z_c=\frac{x_pt_z-t_x}{J_x-J_zx_p}\end{array}\right.\right.$$

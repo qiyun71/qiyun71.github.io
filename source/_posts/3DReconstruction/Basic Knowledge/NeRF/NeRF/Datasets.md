@@ -126,7 +126,7 @@ A Big CAD Model Dataset
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231108222956.png)
 
-# 室外场景
+# 室外大场景
 
 ## Stable SFM
 

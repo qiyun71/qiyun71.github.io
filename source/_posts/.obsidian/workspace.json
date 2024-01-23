@@ -8,46 +8,7 @@
         "type": "tabs",
         "children": [
           {
-            "id": "1a283464bac7d42f",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Reports/2023-2024寒假.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "fb7b5fed08a159ca",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Vibration/ModelUpdating.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "dfd911eaf1f305f6",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Learn/Learn-DeepLearning.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "90504ba2df4740a3",
+            "id": "ce29e39b6205ea97",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -60,64 +21,12 @@
             }
           },
           {
-            "id": "9ecf0ba892346529",
+            "id": "62c52ae31fbff196",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Other/Mine/IDEA.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "9e263a140be5da59",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "3DReconstruction/Basic Knowledge/NeRF/NeRF-review.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "67f232903c9b8c4a",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "3DReconstruction/Basic Knowledge/Other Paper About Reconstruction.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "1fa76b5b2b551b82",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "3DReconstruction/Basic Knowledge/NeRF/NeRF-Mine.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "6e687cb62585acb2",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "3DReconstruction/Basic Knowledge/NeRF/NeRF/Datasets.md",
+                "file": "ModelUpdating/ModelUpdating.md",
                 "mode": "source",
                 "backlinks": false,
                 "source": false
@@ -145,7 +54,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Vibration/ModelUpdating.md"
+                "file": "ModelUpdating/ModelUpdating.md"
               }
             }
           },
@@ -213,7 +122,7 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "Vibration/ModelUpdating.md",
+                "file": "ModelUpdating/ModelUpdating.md",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -256,7 +165,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "SDF",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -296,7 +205,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Vibration/ModelUpdating.md",
+                "file": "ModelUpdating/ModelUpdating.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -340,38 +249,38 @@
       "workspaces:管理工作区布局": true
     }
   },
-  "active": "fb7b5fed08a159ca",
+  "active": "62c52ae31fbff196",
   "lastOpenFiles": [
-    "Reports/2023-2024寒假.md",
-    "Vibration/ModelUpdating.md",
-    "Learn/Learn-DeepLearning.md",
-    "Reports/2024-01-05.md",
     "3DReconstruction/Basic Knowledge/Multi-view 3D Reconstruction.md",
-    "Learn/Learn-PyTorch.md",
-    "Other/Mine/IDEA.md",
-    "3DReconstruction/Basic Knowledge/Other Paper About Reconstruction.md",
-    "3DReconstruction/Basic Knowledge/Generative Models Review.md",
-    "3DReconstruction/Basic Knowledge/Diffusion Models.md",
+    "3DReconstruction/Other Methods/Structured Light/Structured Light Review.md",
+    "ModelUpdating/ModelUpdating.md",
+    "3DReconstruction/Basic Knowledge/Math.md",
+    "3DReconstruction/Basic Knowledge/NeRF/NeRF-Mine.md",
+    "Reports/2023-2024寒假.md",
+    "3DReconstruction/Basic Knowledge/NeRF/NeRF/Math.md",
     "3DReconstruction/Basic Knowledge/Multi-view Human Body Reconstruction.md",
     "3DReconstruction/Basic Knowledge/NeRF/NeRF/Datasets.md",
     "3DReconstruction/Basic Knowledge/NeRF/NeRF/Metrics.md",
+    "3DReconstruction/Basic Knowledge/NeRF/NeRF/Encoding.md",
+    "3DReconstruction/Basic Knowledge/NeRF/NeRF/Sampling.md",
     "3DReconstruction/Basic Knowledge/NeRF/NeRF-review.md",
+    "3DReconstruction/Basic Knowledge/Other Paper About Reconstruction.md",
+    "Learn/Learn-DeepLearning.md",
+    "3DReconstruction/Basic Knowledge/Generative Models Review.md",
+    "Other/Mine/IDEA.md",
+    "3DReconstruction/Multi-view/Implicit Function/NeRF-based/LoD-NeuS.md",
+    "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Sparse/NeuSurf.md",
+    "Reports/2024-01-05.md",
+    "Learn/Learn-PyTorch.md",
+    "3DReconstruction/Basic Knowledge/Diffusion Models.md",
     "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Efficiency/Neuralangelo.md",
     "Reports/2023-12-31.md",
-    "3DReconstruction/Basic Knowledge/NeRF/NeRF-Mine.md",
     "3DReconstruction/Other Methods/Stereo Matching/Stereo Matching Review.md",
     "3DReconstruction/Multi-view/Implicit Function/Neural Implicit Surface Reconstruction.md",
-    "3DReconstruction/Multi-view/Implicit Function/SDFStudio.md",
-    "3DReconstruction/Multi-view/Implicit Function/NeRF-based/NeuS.md",
-    "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Color-NeuS.md",
-    "3DReconstruction/Multi-view/Implicit Function/NeRF-based/NISR.md",
-    "3DReconstruction/Multi-view/Implicit Function/NeRF-based/未命名.md",
-    "3DReconstruction/Multi-view/Implicit Function/NeRF-based/LoD-NeuS.md",
-    "3DReconstruction/Multi-view/Implicit Function/NeRF-based/DVR.md",
     "3DReconstruction/Multi-view/Implicit Function/NeRF-based/NoPose",
     "3DReconstruction/Other Methods/Stereo Matching",
     "3DReconstruction/Other Methods",
-    "Vibration",
+    "ModelUpdating",
     "3DReconstruction/Multi-view/Implicit Function/GS-based",
     "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Loss"
   ]

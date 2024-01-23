@@ -69,11 +69,12 @@ NeRF 分段常数积分 --> PL-NeRF 分段线性积分
 
 ## Image问题
 
-| Year  | Title&Project Page                                                                                                                                                               | Brief Description | Conf/Jour |
-| ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |:---------:|
-| 2024  | [[2401.00825] Sharp-NeRF: Grid-based Fast Deblurring Neural Radiance Fields Using Sharpness Prior (arxiv.org)](https://arxiv.org/abs/2401.00825)                                 |                   |   WACV    |
-| 2023  | [[2312.15942] Pano-NeRF: Synthesizing High Dynamic Range Novel Views with Geometry from Sparse Low Dynamic Range Panoramic Images (arxiv.org)](https://arxiv.org/abs/2312.15942) |                   |           |
-| 2024 | [[2401.03257] RustNeRF: Robust Neural Radiance Field with Low-Quality Images (arxiv.org)](https://arxiv.org/abs/2401.03257)                                                      | 低质量图像                  |           |
+| Year | Title&Project Page                                                                                                                                                               | Brief Description | Conf/Jour |
+| ---- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |:---------:|
+| 2024 | [[2401.00825] Sharp-NeRF: Grid-based Fast Deblurring Neural Radiance Fields Using Sharpness Prior (arxiv.org)](https://arxiv.org/abs/2401.00825)                                 |                   |   WACV    |
+| 2023 | [[2312.15942] Pano-NeRF: Synthesizing High Dynamic Range Novel Views with Geometry from Sparse Low Dynamic Range Panoramic Images (arxiv.org)](https://arxiv.org/abs/2312.15942) | HDR                  |           |
+| 2024 | [[2401.03257] RustNeRF: Robust Neural Radiance Field with Low-Quality Images (arxiv.org)](https://arxiv.org/abs/2401.03257)                                                      | 低质量图像        |           |
+| 2024     | [Fast High Dynamic Range Radiance Fields for Dynamic Scenes (guanjunwu.github.io)](https://guanjunwu.github.io/HDR-HexPlane/)                                                                                                                                                                                 | Fast HDR          |           |
 
 
 
@@ -192,6 +193,14 @@ NeRF 分段常数积分 --> PL-NeRF 分段线性积分
 | 2024                  | [cuiziteng/Aleth-NeRF: [AAAI 2024] Aleth-NeRF: Illumination Adaptive NeRF with Concealing Field Assumption (github.com)](https://github.com/cuiziteng/Aleth-NeRF) |                                                                                                            |        AAAI        |
 | 2023                  | [[2312.08118] Neural Radiance Fields for Transparent Object Using Visual Hull (arxiv.org)](https://arxiv.org/abs/2312.08118)                                      |                                                                                                            |                    |
 
+## 从隐式场中提取表面
+
+| Year | Title&Project Page | Brief Description | Conf/Jour |
+| ---- | ---- | ---- | :--: |
+| 2023 | [cong-yi/DualMesh-UDF (github.com)](https://github.com/cong-yi/DualMesh-UDF?tab=readme-ov-file) | Surface Extraction from Neural Unsigned Distance Fields | ICCV  |
+|  |  |  |  |
+
+
 ## Framework
 
 | Year                                  | Title&Project Page                                         | Brief Description |   Conf/Jour  |
@@ -221,3 +230,5 @@ NeRF 分段常数积分 --> PL-NeRF 分段线性积分
 | 2023                               |                                     [Seeing the World through Your Eyes](https://world-from-eyes.github.io/)                                      |        从人眼的倒影中重建物体        | None             |
 | [2023](PAniC-3D.md) | [PAniC-3D Stylized Single-view 3D Reconstruction from Portraits of Anime Characters](https://github.com/shuhongchen/panic3d-anime-reconstruction) |      从插画风格角色肖像中重建3D      | CVPR             |
 | 2023                               |                                          [LERF: Language Embedded Radiance Fields](https://www.lerf.io/)                                          | 用语言查询空间中的3D物体，并高亮显示 | ICCV 2023 (Oral) |
+
+

@@ -19,7 +19,7 @@ NeRF 主要部分：
   - 网络类型一般为 MLP，相当于训练一个函数，输入采样点的位置，可以输出该点的信息(eg: density, sdf, color...)
 - [采样方式](/3DReconstruction/Basic%20Knowledge/NeRF/NeRF/Sampling)：沿着光线进行采样获取采样点
 - [位置编码](/3DReconstruction/Basic%20Knowledge/NeRF/NeRF/Encoding)：对采样点的位置 xyz 和方向 dir 进行编码，使得 MLP 的输入为高频的信息
-- [数学相关](/3DReconstruction/Basic%20Knowledge/NeRF/NeRF/Math)：光线的生成、坐标变换、体渲染公式、BRDF……
+- [数学相关](/3DReconstruction/Basic%20Knowledge/Math)：光线的生成、坐标变换、体渲染公式、BRDF……
 - 体渲染函数：
   - NeRF：$\mathrm{C}(r)=\int_{\mathrm{t}_{\mathrm{n}}}^{\mathrm{t}_{\mathrm{f}}} \mathrm{T}(\mathrm{t}) \sigma(\mathrm{r}(\mathrm{t})) \mathrm{c}(\mathrm{r}(\mathrm{t}), \mathrm{d}) \mathrm{dt} =\sum_{i=1}^{N} T_{i}\left(1-\exp \left(-\sigma_{i} \delta_{i}\right)\right) \mathbf{c}_{i}$
     - 不透明度$\sigma$，累计透光率 --> 权重

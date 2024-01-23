@@ -483,6 +483,13 @@ DMTet 表示：consists of an explicit body shape grid and an implicit distance 
 
 ##  Human Face
 
+## GPAvatar
+
+[xg-chu/GPAvatar: [ICLR 2024] Generalizable and Precise Head Avatar from Image(s) (github.com)](https://github.com/xg-chu/GPAvatar)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20240122172842.png)
+
+
 ### HeadRecon
 
 [[2312.08863] HeadRecon: High-Fidelity 3D Head Reconstruction from Monocular Video (arxiv.org)](https://arxiv.org/abs/2312.08863)

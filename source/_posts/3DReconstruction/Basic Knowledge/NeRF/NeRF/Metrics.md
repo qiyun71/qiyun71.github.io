@@ -194,3 +194,10 @@ Learnable Chamfer Distance for Point Cloud Reconstruction
 我们提出了一种简单但有效的重建损失，称为可学习倒角距离（LCD），通过动态关注由一组可学习网络控制的不同权重分布的匹配距离
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20240104172937.png)
+
+### DirDist
+
+[[2401.09736] Measuring the Discrepancy between 3D Geometric Models using Directional Distance Fields (arxiv.org)](https://arxiv.org/abs/2401.09736)
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20240122183451.png)
+
+
