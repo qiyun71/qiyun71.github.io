@@ -1,6 +1,10 @@
 {
   "recentFiles": [
     {
+      "basename": "2023-2024寒假",
+      "path": "Reports/2023-2024寒假.md"
+    },
+    {
       "basename": "ModelUpdating",
       "path": "ModelUpdating/ModelUpdating.md"
     },
@@ -19,10 +23,6 @@
     {
       "basename": "NeRF-Mine",
       "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF-Mine.md"
-    },
-    {
-      "basename": "2023-2024寒假",
-      "path": "Reports/2023-2024寒假.md"
     },
     {
       "basename": "Multi-view Human Body Reconstruction",
