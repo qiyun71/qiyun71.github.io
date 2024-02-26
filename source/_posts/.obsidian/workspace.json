@@ -13,7 +13,33 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "3DReconstruction/Basic Knowledge/Multi-view 3D Reconstruction.md",
+                "file": "Learn/Learn-everyone-can-use-english.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "ef54053cabca0b8f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "3DReconstruction/Basic Knowledge/Multi-view 3D Object Reconstruction.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "f267d2ae47482da8",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "3DReconstruction/Basic Knowledge/NeRF/NeRF-review.md",
                 "mode": "source",
                 "backlinks": false,
                 "source": false
@@ -32,9 +58,58 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "26c20a3248caf23e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Reports/2023-2024寒假.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "417649dbe8246189",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "3DReconstruction/Basic Knowledge/Other Paper About Reconstruction.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "0dfade5200bdf6fe",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.5.8"
+              }
+            }
+          },
+          {
+            "id": "5e51856633df17b9",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Learn/Learn-Algo.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 6
       }
     ],
     "direction": "vertical"
@@ -54,24 +129,8 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "ModelUpdating/ModelUpdating.md"
+                "file": "3DReconstruction/Basic Knowledge/Other Paper About Reconstruction.md"
               }
-            }
-          },
-          {
-            "id": "fe80941d99755e63",
-            "type": "leaf",
-            "state": {
-              "type": "calendar",
-              "state": {}
-            }
-          },
-          {
-            "id": "b3a1783d0ecb065f",
-            "type": "leaf",
-            "state": {
-              "type": "starred",
-              "state": {}
             }
           },
           {
@@ -122,7 +181,7 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "ModelUpdating/ModelUpdating.md",
+                "file": "3DReconstruction/Basic Knowledge/Other Paper About Reconstruction.md",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -179,7 +238,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 264
+    "width": 200
   },
   "right": {
     "id": "030ccac2adcfb23a",
@@ -205,7 +264,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "ModelUpdating/ModelUpdating.md",
+                "file": "3DReconstruction/Basic Knowledge/Other Paper About Reconstruction.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -232,7 +291,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 236.5
+    "width": 229.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -249,39 +308,43 @@
       "workspaces:管理工作区布局": true
     }
   },
-  "active": "62c52ae31fbff196",
+  "active": "0dfade5200bdf6fe",
   "lastOpenFiles": [
-    "3DReconstruction/Basic Knowledge/Multi-view 3D Reconstruction.md",
-    "3DReconstruction/Other Methods/Structured Light/Structured Light Review.md",
-    "ModelUpdating/ModelUpdating.md",
-    "3DReconstruction/Basic Knowledge/Math.md",
-    "3DReconstruction/Basic Knowledge/NeRF/NeRF-Mine.md",
     "Reports/2023-2024寒假.md",
-    "3DReconstruction/Basic Knowledge/NeRF/NeRF/Math.md",
-    "3DReconstruction/Basic Knowledge/Multi-view Human Body Reconstruction.md",
-    "3DReconstruction/Basic Knowledge/NeRF/NeRF/Datasets.md",
-    "3DReconstruction/Basic Knowledge/NeRF/NeRF/Metrics.md",
-    "3DReconstruction/Basic Knowledge/NeRF/NeRF/Encoding.md",
-    "3DReconstruction/Basic Knowledge/NeRF/NeRF/Sampling.md",
+    "Learn/Learn-Algo.md",
+    "Other/Mine/Life.md",
+    "Learn/Learn-Python.md",
+    "Learn/Learn-everyone-can-use-english.md",
+    "3DReconstruction/Basic Knowledge/Generative Models Reconstruction.md",
+    "ModelUpdating/ModelUpdating.md",
+    "Reports/ZhengJingRen.md",
+    "3DReconstruction/Basic Knowledge/Explicit Represent Reconstruction.md",
+    "Book",
+    "Learn/Learn-.md",
+    "3DReconstruction/Basic Knowledge/Multi-view 3D Object Reconstruction.md",
     "3DReconstruction/Basic Knowledge/NeRF/NeRF-review.md",
     "3DReconstruction/Basic Knowledge/Other Paper About Reconstruction.md",
+    "Reports/file/单目深度估计与NeRF新视图生成算法的设计及油菜表型重构试验_张蒙召.pdf",
     "Learn/Learn-DeepLearning.md",
-    "3DReconstruction/Basic Knowledge/Generative Models Review.md",
-    "Other/Mine/IDEA.md",
-    "3DReconstruction/Multi-view/Implicit Function/NeRF-based/LoD-NeuS.md",
-    "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Sparse/NeuSurf.md",
+    "Reports/file/面向三维重建中隐式神经表示的采样策略研究_刘强.pdf",
+    "Reports/file/基于神经辐射场优化的三维建模方法_徐风帆.pdf",
+    "Reports/file/隐式神经表面重建的改进研究_于楚飞.pdf",
+    "Reports/file/基于多视角的动态人体自由视角合成_吕逊.pdf",
+    "Reports/file/基于神经图像渲染的虚拟视点合成技术研究_郭权.pdf",
+    "Reports/Reports/file/单目深度估计与NeRF新视图生成算法的设计及油菜表型重构试验_张蒙召.pdf",
+    "Reports/Reports/file",
+    "Reports/Reports",
     "Reports/2024-01-05.md",
-    "Learn/Learn-PyTorch.md",
+    "3DReconstruction/Basic Knowledge/Multi-view Human Body Reconstruction.md",
+    "3DReconstruction/Basic Knowledge/Math.md",
     "3DReconstruction/Basic Knowledge/Diffusion Models.md",
-    "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Efficiency/Neuralangelo.md",
-    "Reports/2023-12-31.md",
-    "3DReconstruction/Other Methods/Stereo Matching/Stereo Matching Review.md",
-    "3DReconstruction/Multi-view/Implicit Function/Neural Implicit Surface Reconstruction.md",
-    "3DReconstruction/Multi-view/Implicit Function/NeRF-based/NoPose",
-    "3DReconstruction/Other Methods/Stereo Matching",
-    "3DReconstruction/Other Methods",
-    "ModelUpdating",
-    "3DReconstruction/Multi-view/Implicit Function/GS-based",
-    "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Loss"
+    "3DReconstruction/Basic Knowledge/NeRF/NeRF-Mine.md",
+    "3DReconstruction/Basic Knowledge/NeRF/NeRF/Datasets.md",
+    "3DReconstruction/Basic Knowledge/NeRF/NeRF/Metrics.md",
+    "3DReconstruction/Other Methods/Structured Light/Structured Light Review.md",
+    "3DReconstruction/Basic Knowledge/NeRF/NeRF/Math.md",
+    "3DReconstruction/Basic Knowledge/NeRF/NeRF/Encoding.md",
+    "3DReconstruction/Basic Knowledge/NeRF/NeRF/Sampling.md",
+    "Other/Mine/IDEA.md"
   ]
 }

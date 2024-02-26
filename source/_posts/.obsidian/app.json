@@ -15,7 +15,7 @@
   "readableLineLength": false,
   "trashOption": "system",
   "alwaysUpdateLinks": true,
-  "attachmentFolderPath": "/",
+  "attachmentFolderPath": "./file",
   "showFrontmatter": true,
   "useTab": false,
   "communityThemeSortOrder": "download",
@@ -30,5 +30,6 @@
   "foldHeading": true,
   "vimMode": false,
   "strictLineBreaks": false,
-  "tabSize": 2
+  "tabSize": 2,
+  "smartIndentList": true
 }

@@ -6,7 +6,7 @@ categories: ModelUpdating
 ---
 
 **模型修正 Model Updating**
-*卫星(结构<-->振动)利用频率响应(FR)等数据进行有限元模型结构参数的更新*
+*(结构<-->振动)利用频率响应(FR)等数据对有限元模型结构参数进行更新*
 
 <!-- more -->
 
@@ -48,17 +48,23 @@ Other：
 
 # 论文
 
-## 有限元模型修正研究进展:从线性到非线性
+## Review: 有限元模型修正研究进展:从线性到非线性
+
 - 线性有限元模型修正
   - 传统有限元模型修正方法(基于动力的有限元模型修正仍为本领域研究的主流)，根据修正的对象可分为：
     - 矩阵型方法
     - **参数型方法** 
       - 基于灵敏度的有限元模型修正方法
+        - 基于灵敏度的参数法在实际工程中的应用最为广泛,理论研究也相对成熟. 但这类方法的缺点在于灵敏度矩阵的计算, 不仅计算量大, 且容易带来求解问题的病态导致方法失效; 另外, 在应用于大型结构时, 由于迭代运算需要反复调用有限元模型, 造成巨大的计算量, 也限制了其更广泛的应用
       - 采用缩聚模型或代理模型 (surrogate model) 的方法, 以及不基于灵敏度的参数型方法
         - CMCM：不基于灵敏度的参数型方法，交叉模型交叉模态法 (cross-model cross-mode method, CMCM) 不需要进行迭代运算, 且不需要计算灵敏度
-        - 神经网络法：
-        - 响应面法：
+        - 神经网络法：BP、CNN
+        - 响应面法：代理模型
+          - 响应面法得到了广泛关注, 特别是其中所包含的统计思想符合有限元模型确认的发展方向, 在大型结构的有限元模型修正过程中也体现出了修正多个参数的能力。但是, 神经网络法和响应面法的成功依赖于样本空间的选择, 不同的选择产生不同的修正结果, 选择不当也可能会造成代理模型泛化能力不足, 从而导致有限元模型修正结果外推不可靠。增加数据量能够增加模型的可靠性, 但又会带来较大的计算量. 所以, 通过响应面法得到的修正模型必须经过模型确认过程
+        - 结合模拟退火、遗传算法、粒子群算法等优化算法的方法
 - 非线性有限元模型修正发展现状
+
+**有限元模型确认**是传统有限元模型修正方法在统计理论上的发展, 从理论上具有更一般的意义, 且它能够从理论上探究复杂结构不确定性的传递, 量化评价修正后模型的不确定性, 给出指导工程应用的置信度, 对于修正后有限元模型进一步应用于结构损伤识别、状态评估、性能预测等具有重要实际意义.
 
 ## A robust stochastic model updating method with resampling processing
 
@@ -76,7 +82,7 @@ Other：
 评价指标：
 - FR 保证准则(assurance criterion) $FRAC=\frac{|H_e^TH_s|^2}{(H_e^TH_e)(H_s^TH_s)}$ 用于描述试验数据与模拟 FR 数据的相似度
 
-# 模型修正(卫星ex)
+# 模型修正(卫星 ex)
 ## 传统方法 Convention
 
 - 有限元方法获取数据集耗费时间长，使用一个代理模型来代替有限元计算模型。
@@ -126,19 +132,21 @@ Other：
 
 主体结构6个参数为：只修正三个参数：$\theta_1$、$\theta_3$、$\theta_5$
 - **主弹性模量**$\theta_1$ 70Gpa，
-- 主密度 $\theta_2$  ，密度2.7x $10^{3} kg/m^{3}$ (英文论文) or 适配器厚度(本1)
+- 主密度 $\theta_2$  ，密度2.7x $10^{3} kg/m^{3}$ (英文论文) or 适配器厚度 1mm(本 1)
 - **中心筒厚度**$\theta_3$ 2mm
 - 底板厚度 $\theta_4$ 1mm
 - **剪切板厚度**$\theta_5$ 2mm
-- 顶板厚度 $\theta_6$ 2mm
-  - 其中 $\theta_{4}、\theta_6$ 为常数，其他为待修正参数，$\theta_2$ 训练效果很差，直接去掉了，可能造成影响(本1)
+- 顶板厚度 $\theta_6$ 2.5mm
+  - 其中 $\theta_{4}、\theta_6$ 为常数，其他为待修正参数，$\theta_2$ 训练效果很差，直接去掉了，可能造成影响(本 1)
   - 其他参数：模型高 1250mm，中心筒直径 400mm，顶板边长 600mm，剪切板长 1000mm，宽 400mm
 
 **数据集生成**
-- 先在一定范围内生成均匀生成10000组待修正参数
+- 先在一定范围内生成均匀生成 10000 组待修正参数
   - 弹性模量 50.0~90.0GPa
-  - 中心筒厚度 1.00~3.00mm
-  - 剪切板厚度 1.00~3.00mm
+  - ~~适配器厚度 0.50~1.50mm~~
+  - ~~中心筒厚度 1.00~3.00mm~~
+  - ~~剪切板厚度 1.00~3.00mm # 本科生 1 数据集中生成的是 0.50~1.50mm~~
+  - 顶板厚度 1.50~3.50mm
 - 将随机生成的结构参数输入有限元模型，得到水平 X 和竖直 Y 方向、11 个节点在 0~50Hz 频率下的加速度响应
 
 FR 数据转图：
@@ -157,7 +165,7 @@ $错误率 = \frac{|预测值-标签GT|}{标签GT}$
 
 ### Mine
 
-#### 网络结构：
+#### 网络结构
 
 **UCNN**
 
@@ -175,7 +183,7 @@ $错误率 = \frac{|预测值-标签GT|}{标签GT}$
 
 **ResNet50**
 
-![resnet.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/picturesresnet.png)<br>                                                                                                              |
+![resnet.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/picturesresnet.png) <br>                                                                                                              |
 
 
 #### 实验记录
@@ -309,3 +317,36 @@ error_rate_each2=:0.08872962392607951=(0.08887535240501165/1.0016423881053924)
 
 [模态分析软件|模态测试系统|实验模态分析|模态测试软件|模态软件 (hzrad.com)](http://www.hzrad.com/edm-modal-analysis)
 
+# 有限元软件
+
+## Nastran
+
+[如何用matlab被nastran给整的明明白白 PART 1 KNOW YOUR ENEMY——.bdf文件 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/33538970)
+
+[Welcome to pyNastran’s documentation for v1.3! — pyNastran 1.3 1.3 documentation (pynastran-git.readthedocs.io)](https://pynastran-git.readthedocs.io/en/1.3/index.html)
+
+### 不同结构参数生成结构特征量
+
+```
+$ Elements and Element Properties for region : Shear_Panels
+PSHELL   1       1      .003     1               1
+
+- 36  行 .003 Shear_Panels 厚度 theta5
+- 429 行 .002 Central_Cylinder 厚度 theta3
+- 666 行 .001 Adapter 厚度 theta2 本来应该是密度2.7
+- 723 行 .002 Upper_platform 厚度 theta6
+- 864 行 .001 Lower_platform 厚度 theta4
+- 1020行 7.   mat_N 弹性模量  theta1  
+- 1023行 7.   mat_CC
+- 1026行 7.   mat_L
+- 1029行 7.   mat_SP
+- 1032行 7.   mat_U
+- 
+```
+
+- **主弹性模量**$\theta_1$ 70Gpa，
+- **主密度** $\theta_2$  ，密度2.7x $10^{3} kg/m^{3}$ (英文论文) or 适配器厚度 1mm(本 1)
+- **中心筒厚度**$\theta_3$ 2mm
+- 底板厚度 $\theta_4$ 1mm
+- **剪切板厚度**$\theta_5$ 2mm
+- 顶板厚度 $\theta_6$ 2.5mm

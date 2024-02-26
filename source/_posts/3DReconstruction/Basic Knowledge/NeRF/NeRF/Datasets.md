@@ -37,10 +37,10 @@ COLMAP + Blender(neuralangelo)
 
 [YoYo000/BlendedMVS: BlendedMVS: A Large-scale Dataset for Generalized Multi-view Stereo Networks (github.com)](https://github.com/YoYo000/BlendedMVS)
 [BlendedMVS: A Large-scale Dataset for Generalized Multi-view Stereo Networks (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4545062112983670785&noteId=1973517268736296192)
-![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230923143752.png)
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230923143752.png)
 H ×W = 1536 × 2048
 
-![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230923111934.png)
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230923111934.png)
 
 应用 3D 重建管道从精心选择的场景图像中恢复高质量的纹理网格。然后，我们将这些网格模型渲染为彩色图像和深度图。为了在训练期间引入环境照明信息，将渲染的彩色图像与输入图像进一步混合以生成训练输入
 
@@ -54,7 +54,7 @@ H ×W = 1536 × 2048
 ![image.png|555](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230923112838.png)
 与 DTU 数据集[2]不同的是，所有场景都由固定的机械臂捕获，BlendedMVS 中的场景包含各种不同的摄像机轨迹。非结构化摄像机轨迹可以更好地模拟不同的图像捕获风格，并能够使网络更一般化到真实世界的重建
 
-![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230923113119.png)
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230923113119.png)
 
 # Tanks and Temples
 
@@ -96,10 +96,11 @@ A Large-scale Dataset of Multi-view Images
 
 [MVImgNet (cuhk.edu.cn)](https://gaplab.cuhk.edu.cn/projects/MVImgNet/)
 
-![](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231021203414.png)
+![image|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231021203414.png)
 
 # Objaverse-XL
 Objaverse-XL is an open dataset of over 10 million 3D objects!
+Objaverse-XL 由来自多个来源的 3D 对象组成，包括 GitHub、Thingiverse、Sketchfab、Polycam 和 Smithsonian Institution。
 
 [allenai/objaverse-xl: 🪐 Objaverse-XL is a Universe of 10M+ 3D Objects. Contains API Scripts for Downloading and Processing! (github.com)](https://github.com/allenai/objaverse-xl)
 
@@ -118,7 +119,7 @@ A Big CAD Model Dataset
 
 > [NeuralLabeling: A versatile toolset for labeling vision datasets using Neural Radiance Fields](NeuralLabeling.md) > [NeuralLabeling: A versatile toolset for labeling vision datasets using Neural Radiance Fields (florise.github.io)](https://florise.github.io/neural_labeling_web/)
 
-![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230925144627.png)
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230925144627.png)
 
 # MuSHRoom
 

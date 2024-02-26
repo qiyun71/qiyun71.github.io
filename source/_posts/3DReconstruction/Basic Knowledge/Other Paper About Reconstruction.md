@@ -27,19 +27,9 @@ Awesome Human Body Reconstruction
 
 <!-- more -->
 
-# Gaussian Splatting Method
+# NeRF Object Reconstruction
 
-[A Survey on 3D Gaussian Splatting](https://arxiv.org/pdf/2401.03890.pdf)
-
-## SuGaR
-
-[SuGaR (enpc.fr)](https://imagine.enpc.fr/~guedona/sugar/)
-
-3D Gaussian Splatting 提取mesh
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231123142658.png)
-
-
-# NeRF Other Object Reconstruction
+![9x9.jpg|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/9x9.jpg)
 
 ## RNb-NeuS
 
@@ -306,6 +296,18 @@ Im4D: High-Fidelity and Real-Time Novel View Synthesis for Dynamic Scenes
 [NeuralDome (juzezhang.github.io)](https://juzezhang.github.io/NeuralDome/)
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231008120011.png)
+
+# Gaussian Splatting Method
+
+[A Survey on 3D Gaussian Splatting](https://arxiv.org/pdf/2401.03890.pdf)
+
+## SuGaR
+
+[SuGaR (enpc.fr)](https://imagine.enpc.fr/~guedona/sugar/)
+
+3D Gaussian Splatting 提取mesh
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231123142658.png)
+
 
 # PIFu Occupancy Field
 

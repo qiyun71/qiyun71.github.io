@@ -25,7 +25,7 @@ Method
 
 1. **Depth&Normal Estimation**(2K2K) [Other Paper About Reconstruction](Other%20Paper%20About%20Reconstruction.md)
 2. ~~**Implicit Function**(PIFu or NeRF)~~ [Other Paper About Reconstruction](Other%20Paper%20About%20Reconstruction.md)
-3. **Generative approach**  [Generative approach](Generative%20Models%20Review.md)
+3. **Generative approach**  [Generative approach](Generative%20Models%20Reconstruction.md)
 
 <!-- more -->
 

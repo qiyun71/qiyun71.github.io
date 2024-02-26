@@ -1,16 +1,84 @@
 {
   "recentFiles": [
     {
+      "basename": "Other Paper About Reconstruction",
+      "path": "3DReconstruction/Basic Knowledge/Other Paper About Reconstruction.md"
+    },
+    {
+      "basename": "2023-2024寒假",
+      "path": "Reports/2023-2024寒假.md"
+    },
+    {
+      "basename": "Learn-Algo",
+      "path": "Learn/Learn-Algo.md"
+    },
+    {
+      "basename": "Life",
+      "path": "Other/Mine/Life.md"
+    },
+    {
+      "basename": "Learn-Python",
+      "path": "Learn/Learn-Python.md"
+    },
+    {
+      "basename": "Learn-everyone-can-use-english",
+      "path": "Learn/Learn-everyone-can-use-english.md"
+    },
+    {
+      "basename": "Generative Models Reconstruction",
+      "path": "3DReconstruction/Basic Knowledge/Generative Models Reconstruction.md"
+    },
+    {
       "basename": "ModelUpdating",
       "path": "ModelUpdating/ModelUpdating.md"
     },
     {
-      "basename": "Multi-view 3D Reconstruction",
-      "path": "3DReconstruction/Basic Knowledge/Multi-view 3D Reconstruction.md"
+      "basename": "Explicit Represent Reconstruction",
+      "path": "3DReconstruction/Basic Knowledge/Explicit Represent Reconstruction.md"
     },
     {
-      "basename": "Structured Light Review",
-      "path": "3DReconstruction/Other Methods/Structured Light/Structured Light Review.md"
+      "basename": "Multi-view 3D Object Reconstruction",
+      "path": "3DReconstruction/Basic Knowledge/Multi-view 3D Object Reconstruction.md"
+    },
+    {
+      "basename": "NeRF-review",
+      "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF-review.md"
+    },
+    {
+      "basename": "单目深度估计与NeRF新视图生成算法的设计及油菜表型重构试验_张蒙召",
+      "path": "Reports/file/单目深度估计与NeRF新视图生成算法的设计及油菜表型重构试验_张蒙召.pdf"
+    },
+    {
+      "basename": "Learn-DeepLearning",
+      "path": "Learn/Learn-DeepLearning.md"
+    },
+    {
+      "basename": "面向三维重建中隐式神经表示的采样策略研究_刘强",
+      "path": "Reports/file/面向三维重建中隐式神经表示的采样策略研究_刘强.pdf"
+    },
+    {
+      "basename": "基于神经辐射场优化的三维建模方法_徐风帆",
+      "path": "Reports/file/基于神经辐射场优化的三维建模方法_徐风帆.pdf"
+    },
+    {
+      "basename": "隐式神经表面重建的改进研究_于楚飞",
+      "path": "Reports/file/隐式神经表面重建的改进研究_于楚飞.pdf"
+    },
+    {
+      "basename": "基于多视角的动态人体自由视角合成_吕逊",
+      "path": "Reports/file/基于多视角的动态人体自由视角合成_吕逊.pdf"
+    },
+    {
+      "basename": "基于神经图像渲染的虚拟视点合成技术研究_郭权",
+      "path": "Reports/file/基于神经图像渲染的虚拟视点合成技术研究_郭权.pdf"
+    },
+    {
+      "basename": "2024-01-05",
+      "path": "Reports/2024-01-05.md"
+    },
+    {
+      "basename": "Multi-view Human Body Reconstruction",
+      "path": "3DReconstruction/Basic Knowledge/Multi-view Human Body Reconstruction.md"
     },
     {
       "basename": "Math",
@@ -21,20 +89,16 @@
       "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF-Mine.md"
     },
     {
-      "basename": "2023-2024寒假",
-      "path": "Reports/2023-2024寒假.md"
-    },
-    {
-      "basename": "Multi-view Human Body Reconstruction",
-      "path": "3DReconstruction/Basic Knowledge/Multi-view Human Body Reconstruction.md"
-    },
-    {
       "basename": "Datasets",
       "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF/Datasets.md"
     },
     {
       "basename": "Metrics",
       "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF/Metrics.md"
+    },
+    {
+      "basename": "Structured Light Review",
+      "path": "3DReconstruction/Other Methods/Structured Light/Structured Light Review.md"
     },
     {
       "basename": "Encoding",
@@ -45,22 +109,6 @@
       "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF/Sampling.md"
     },
     {
-      "basename": "NeRF-review",
-      "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF-review.md"
-    },
-    {
-      "basename": "Other Paper About Reconstruction",
-      "path": "3DReconstruction/Basic Knowledge/Other Paper About Reconstruction.md"
-    },
-    {
-      "basename": "Learn-DeepLearning",
-      "path": "Learn/Learn-DeepLearning.md"
-    },
-    {
-      "basename": "Generative Models Review",
-      "path": "3DReconstruction/Basic Knowledge/Generative Models Review.md"
-    },
-    {
       "basename": "LoD-NeuS",
       "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/LoD-NeuS.md"
     },
@@ -69,16 +117,8 @@
       "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Sparse/NeuSurf.md"
     },
     {
-      "basename": "2024-01-05",
-      "path": "Reports/2024-01-05.md"
-    },
-    {
       "basename": "Learn-PyTorch",
       "path": "Learn/Learn-PyTorch.md"
-    },
-    {
-      "basename": "Diffusion Models",
-      "path": "3DReconstruction/Basic Knowledge/Diffusion Models.md"
     },
     {
       "basename": "Neuralangelo",
@@ -159,42 +199,6 @@
     {
       "basename": "2023-12-20",
       "path": "Reports/2023-12-20.md"
-    },
-    {
-      "basename": "NeRF-InstantNGP",
-      "path": "3DReconstruction/Basic Knowledge/NeRF/Efficiency/NeRF-InstantNGP.md"
-    },
-    {
-      "basename": "NeRF++",
-      "path": "3DReconstruction/Basic Knowledge/NeRF/LargeScaleScene/NeRF++.md"
-    },
-    {
-      "basename": "NeuS2",
-      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Efficiency/NeuS2.md"
-    },
-    {
-      "basename": "NeRF-Principle",
-      "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF-Principle.md"
-    },
-    {
-      "basename": "Geo-Neus",
-      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Geo-Neus.md"
-    },
-    {
-      "basename": "3D Gaussian Splatting",
-      "path": "3DReconstruction/Multi-view/Explicit Volumetric/3D Gaussian Splatting.md"
-    },
-    {
-      "basename": "SuGaR",
-      "path": "3DReconstruction/Multi-view/Implicit Function/GS-based/SuGaR.md"
-    },
-    {
-      "basename": "MonoSDF",
-      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Loss/MonoSDF.md"
-    },
-    {
-      "basename": "Voxurf",
-      "path": "3DReconstruction/Multi-view/Explicit Volumetric/Voxurf.md"
     }
   ],
   "omittedPaths": [],
