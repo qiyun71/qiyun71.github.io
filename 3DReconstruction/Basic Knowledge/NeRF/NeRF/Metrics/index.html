@@ -29,10 +29,12 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230801170138.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231010101549.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20240124100320.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230919194046.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20240104172937.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20240122183451.png">
 <meta property="article:published_time" content="2023-10-10T02:23:09.000Z">
-<meta property="article:modified_time" content="2024-01-04T09:29:42.342Z">
+<meta property="article:modified_time" content="2024-02-26T01:41:37.438Z">
 <meta property="article:author" content="Qi Yun">
 <meta property="article:tag" content="Metrics">
 <meta name="twitter:card" content="summary">
@@ -231,7 +233,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-01-04 17:29:42" itemprop="dateModified" datetime="2024-01-04T17:29:42+08:00">2024-01-04</time>
+                <time title="Modified: 2024-02-26 09:41:37" itemprop="dateModified" datetime="2024-02-26T09:41:37+08:00">2024-02-26</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -248,13 +250,13 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>1.7k</span>
+              <span>2k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span>6 mins.</span>
+              <span>7 mins.</span>
             </span>
 
         </div>
@@ -324,6 +326,13 @@
 <p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231010101549.png" alt="image.png|333"></p>
 <h2 id="EMD↓"><a href="#EMD↓" class="headerlink" title="EMD↓"></a>EMD↓</h2><p>Earth Mover’s distance 推土距离,度量两个分布之间的距离<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/145739750">EMD(earth mover’s distances)距离 - 知乎 (zhihu.com)</a> </p>
 <p>$\mathcal{L}_{EMD}=min_{\phi:Y\rightarrow Y^{\prime}}\sum_{x\in Y}||x-\phi(x)||_{2}$ , φ indicates a parameter of bijection.</p>
+<h2 id="Accuracy、Precision、Recall-amp-F-score"><a href="#Accuracy、Precision、Recall-amp-F-score" class="headerlink" title="Accuracy、Precision、Recall &amp; F-score"></a>Accuracy、Precision、Recall &amp; F-score</h2><p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/19645541/answer/379024071">如何解释召回率与精确率？ - 朝暾的回答 - 知乎</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/364253497">机器学习的评价指标（一）：Accuracy、Precision、Recall、F1 Score - 知乎 (zhihu.com)</a></p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20240124100320.png" alt="image.png|666"></p>
+<h3 id="Accuracy"><a href="#Accuracy" class="headerlink" title="Accuracy"></a>Accuracy</h3><p>预测正确的样本数÷样本数总数<br>$accuracy=\frac{TP+TN}{TP+TN+FP+FN}$</p>
+<h3 id="Precision"><a href="#Precision" class="headerlink" title="Precision"></a>Precision</h3><p>精确率是<strong>针对我们预测结果而言的</strong>，它表示的是<strong>预测为正的样本中有多少是真正的正样本</strong>。<br>$precision=\frac{TP}{TP+FP}$</p>
+<h3 id="Recall"><a href="#Recall" class="headerlink" title="Recall"></a>Recall</h3><p>召回率是<strong>针对我们原来的样本而言的</strong>，它表示的是<strong>原来样本中的正例有多少被预测正确</strong>了，也即 真实准确的正预测在原来样本的正例中所占的百分比。<br>$recall=sensitivity=\frac{TP}{TP+FN}$</p>
+<h3 id="F-score"><a href="#F-score" class="headerlink" title="F-score"></a>F-score</h3><p>F-Measure是Precision和Recall的加权调和平均<br>$F=\frac{(a^2+1)<em>precision</em>recall}{a^2*precision+recall}$</p>
+<p>当参数α=1时，就是最常见的F1，也即$F1=\frac{2<em>precision</em>recall}{precision+recall}$</p>
 <h1 id="Loss"><a href="#Loss" class="headerlink" title="Loss"></a>Loss</h1><h2 id="RGB-Loss"><a href="#RGB-Loss" class="headerlink" title="RGB Loss"></a>RGB Loss</h2><p>L2 损失：<code>F.mse_loss(pred_rgb, gt_rgb)</code> $L=\sum_{i=1}^n(y_i-f(x_i))^2$<br>L1 损失：<code>F.l1_loss(pred_rgb, gt_rgb)</code>更稳定？ $L=\sum_{i=1}^n|y_i-f(x_i)|$</p>
 <h2 id="Eikonal-Loss"><a href="#Eikonal-Loss" class="headerlink" title="Eikonal Loss"></a>Eikonal Loss</h2><p>$\mathcal{L}_{r e g}=\frac{1}{n m}\sum_{k,i}(|\nabla f(\hat{\mathbf{p}}_{k,i})|_{2}-1)^{2}.$</p>
 <h2 id="Mask-Loss"><a href="#Mask-Loss" class="headerlink" title="Mask Loss"></a>Mask Loss</h2><p>$\mathcal{L}_{mask}=\mathrm{BCE}(M_k,\hat{O}_k)$</p>
@@ -352,6 +361,7 @@
 <h3 id="Smoothness-Loss"><a href="#Smoothness-Loss" class="headerlink" title="Smoothness Loss"></a>Smoothness Loss</h3><p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230919194046.png" alt="image.png"></p>
 <h3 id="LCN"><a href="#LCN" class="headerlink" title="LCN"></a>LCN</h3><p>Learnable Chamfer Distance for Point Cloud Reconstruction<br>我们提出了一种简单但有效的重建损失，称为可学习倒角距离（LCD），通过动态关注由一组可学习网络控制的不同权重分布的匹配距离</p>
 <p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20240104172937.png" alt="image.png|666"></p>
+<h3 id="DirDist"><a href="#DirDist" class="headerlink" title="DirDist"></a>DirDist</h3><p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2401.09736">[2401.09736] Measuring the Discrepancy between 3D Geometric Models using Directional Distance Fields (arxiv.org)</a><br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20240122183451.png" alt="image.png|666"></p>
 
     </div>
 
@@ -455,7 +465,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Metrics"><span class="nav-text">Metrics</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#PSNR%E2%86%91"><span class="nav-text">PSNR↑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSIM%E2%86%91"><span class="nav-text">SSIM↑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LPIPS%E2%86%93"><span class="nav-text">LPIPS↓</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CD%E2%86%93"><span class="nav-text">CD↓</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P2S%E2%86%93"><span class="nav-text">P2S↓</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Normal%E2%86%93"><span class="nav-text">Normal↓</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IoU%E2%86%91"><span class="nav-text">IoU↑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EMD%E2%86%93"><span class="nav-text">EMD↓</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Loss"><span class="nav-text">Loss</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#RGB-Loss"><span class="nav-text">RGB Loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Eikonal-Loss"><span class="nav-text">Eikonal Loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mask-Loss"><span class="nav-text">Mask Loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Opacity-Loss"><span class="nav-text">Opacity Loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sparsity-Loss"><span class="nav-text">Sparsity Loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Geo-Neus"><span class="nav-text">Geo-Neus</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#other-loss"><span class="nav-text">other loss</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E5%BC%BAEikonal%E5%AF%B9SDF%E7%9A%84%E4%BC%98%E5%8C%96"><span class="nav-text">加强Eikonal对SDF的优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#S3IM-Loss"><span class="nav-text">S3IM Loss</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Smoothness-Loss"><span class="nav-text">Smoothness Loss</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LCN"><span class="nav-text">LCN</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Metrics"><span class="nav-text">Metrics</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#PSNR%E2%86%91"><span class="nav-text">PSNR↑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSIM%E2%86%91"><span class="nav-text">SSIM↑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LPIPS%E2%86%93"><span class="nav-text">LPIPS↓</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CD%E2%86%93"><span class="nav-text">CD↓</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P2S%E2%86%93"><span class="nav-text">P2S↓</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Normal%E2%86%93"><span class="nav-text">Normal↓</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IoU%E2%86%91"><span class="nav-text">IoU↑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EMD%E2%86%93"><span class="nav-text">EMD↓</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Accuracy%E3%80%81Precision%E3%80%81Recall-amp-F-score"><span class="nav-text">Accuracy、Precision、Recall &amp; F-score</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Accuracy"><span class="nav-text">Accuracy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Precision"><span class="nav-text">Precision</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Recall"><span class="nav-text">Recall</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#F-score"><span class="nav-text">F-score</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Loss"><span class="nav-text">Loss</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#RGB-Loss"><span class="nav-text">RGB Loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Eikonal-Loss"><span class="nav-text">Eikonal Loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mask-Loss"><span class="nav-text">Mask Loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Opacity-Loss"><span class="nav-text">Opacity Loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sparsity-Loss"><span class="nav-text">Sparsity Loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Geo-Neus"><span class="nav-text">Geo-Neus</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#other-loss"><span class="nav-text">other loss</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E5%BC%BAEikonal%E5%AF%B9SDF%E7%9A%84%E4%BC%98%E5%8C%96"><span class="nav-text">加强Eikonal对SDF的优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#S3IM-Loss"><span class="nav-text">S3IM Loss</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Smoothness-Loss"><span class="nav-text">Smoothness Loss</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LCN"><span class="nav-text">LCN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DirDist"><span class="nav-text">DirDist</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -470,7 +480,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">132</span>
+          <span class="site-state-item-count">134</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -531,12 +541,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">461k</span>
+    <span title="Symbols count total">473k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">27:57</span>
+    <span title="Reading time total">28:40</span>
 </div>
 
         

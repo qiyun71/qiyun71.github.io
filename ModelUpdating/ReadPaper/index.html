@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/yqq/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Paper about model updating">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ReadPaper">
+<meta property="og:url" content="http://example.com/ModelUpdating/ReadPaper/index.html">
+<meta property="og:site_name" content="QiYun">
+<meta property="og:description" content="Paper about model updating">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-02-27T09:06:54.000Z">
+<meta property="article:modified_time" content="2024-02-28T08:44:14.623Z">
+<meta property="article:author" content="Qi Yun">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/ModelUpdating/ReadPaper/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>ReadPaper | QiYun</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">QiYun</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Note</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/ModelUpdating/ReadPaper/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiYun">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ReadPaper
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2024-02-27 17:06:54" itemprop="dateCreated datePublished" datetime="2024-02-27T17:06:54+08:00">2024-02-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-02-28 16:44:14" itemprop="dateModified" datetime="2024-02-28T16:44:14+08:00">2024-02-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ModelUpdating/" itemprop="url" rel="index"><span itemprop="name">ModelUpdating</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>4.6k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>17 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Paper about model updating</p>
+<span id="more"></span>
+<h1 id="Review"><a href="#Review" class="headerlink" title="Review"></a>Review</h1><h2 id="有限元模型修正研究进展-从线性到非线性"><a href="#有限元模型修正研究进展-从线性到非线性" class="headerlink" title="有限元模型修正研究进展:从线性到非线性"></a>有限元模型修正研究进展:从线性到非线性</h2><p><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=2042966807754524672&amp;noteId=2150699945082996480">有限元模型修正研究进展:从线性到非线性</a> 张 皓 李东升 李宏男</p>
+<ul>
+<li>线性有限元模型修正<ul>
+<li>传统有限元模型修正方法(基于动力的有限元模型修正仍为本领域研究的主流)，根据修正的对象可分为：<ul>
+<li>矩阵型方法</li>
+<li><strong>参数型方法</strong> <ul>
+<li>基于灵敏度的有限元模型修正方法<ul>
+<li>基于灵敏度的参数法在实际工程中的应用最为广泛,理论研究也相对成熟. 但这类方法的缺点在于灵敏度矩阵的计算, 不仅计算量大, 且容易带来求解问题的病态导致方法失效; 另外, 在应用于大型结构时, 由于迭代运算需要反复调用有限元模型, 造成巨大的计算量, 也限制了其更广泛的应用</li>
+</ul>
+</li>
+<li>采用缩聚模型或代理模型 (surrogate model) 的方法, 以及不基于灵敏度的参数型方法<ul>
+<li>CMCM：不基于灵敏度的参数型方法，交叉模型交叉模态法 (cross-model cross-mode method, CMCM) 不需要进行迭代运算, 且不需要计算灵敏度</li>
+<li>神经网络法：BP、CNN</li>
+<li>响应面法：代理模型<ul>
+<li>响应面法得到了广泛关注, 特别是其中所包含的统计思想符合有限元模型确认的发展方向, 在大型结构的有限元模型修正过程中也体现出了修正多个参数的能力。但是, 神经网络法和响应面法的成功依赖于样本空间的选择, 不同的选择产生不同的修正结果, 选择不当也可能会造成代理模型泛化能力不足, 从而导致有限元模型修正结果外推不可靠。增加数据量能够增加模型的可靠性, 但又会带来较大的计算量. 所以, 通过响应面法得到的修正模型必须经过模型确认过程</li>
+</ul>
+</li>
+<li>结合模拟退火、遗传算法、粒子群算法等优化算法的方法</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>非线性有限元模型修正发展现状</li>
+</ul>
+<p><strong>有限元模型确认</strong>是传统有限元模型修正方法在统计理论上的发展, 从理论上具有更一般的意义, 且它能够从理论上探究复杂结构不确定性的传递, 量化评价修正后模型的不确定性, 给出指导工程应用的置信度, 对于修正后有限元模型进一步应用于结构损伤识别、状态评估、性能预测等具有重要实际意义.</p>
+<h2 id="Stochastic-Model-Updating-with-Uncertainty-Quantification-An-Overview-and-Tutorial"><a href="#Stochastic-Model-Updating-with-Uncertainty-Quantification-An-Overview-and-Tutorial" class="headerlink" title="Stochastic Model Updating with Uncertainty Quantification: An Overview and Tutorial"></a>Stochastic Model Updating with Uncertainty Quantification: An Overview and Tutorial</h2><p><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=2201469630320002560&amp;noteId=2201470551774580736">Stochastic Model Updating with Uncertainty Quantification: An Overview and Tutorial</a></p>
+<p>本文概述了随机模型更新的理论框架，包括模型参数化、敏感性分析、代理建模、试验分析相关性、参数校准等关键方面。<strong>特别关注不确定性分析，将模型更新从确定性域扩展到随机域</strong>。不确定性量化度量极大地促进了这种扩展，不再将模型参数描述为未知但固定的常数，而是具有不确定分布的随机变量，即不精确概率。因此，随机模型更新的目标不再是对单个实验进行最大保真度的单个模型预测，而是将多个实验数据的完全离散性包裹起来，减少模拟的不确定性空间。这种不精确概率的量化需要一个专门的不确定性传播过程来研究如何通过模型将输入的不确定性空间传播到输出的不确定性空间。本教程将详细<strong>介绍前向不确定性传播和反向参数校准这两个关键方面</strong>，以及p盒传播、基于距离的统计度量、马尔可夫链蒙特卡罗采样和贝叶斯更新等关键技术。通过解决2014年<strong>NASA多学科UQ挑战</strong>演示了整体技术框架，目的是鼓励读者在本教程之后复制结果。第二次实际演示是在一个新设计的基准测试台上进行的，在那里制造了<strong>一系列具有不同几何尺寸的实验室规模的飞机模型</strong>，遵循预先定义的概率分布，并根据其固有频率和模型形状进行测试。这样的测量数据库自然不仅包含测量误差，更重要的是包含来自结构几何预定义分布的可控不确定性。最后，讨论了开放性问题，以实现本教程的动机，为研究人员，特别是初学者，提供了从不确定性处理角度更新随机模型的进一步方向。</p>
+<p>算例：</p>
+<ul>
+<li>NASA UQ挑战</li>
+<li>飞机模型</li>
+</ul>
+<h1 id="随机模型修正"><a href="#随机模型修正" class="headerlink" title="随机模型修正"></a>随机模型修正</h1><h2 id="A-robust-stochastic-model-updating-method-with-resampling-processing"><a href="#A-robust-stochastic-model-updating-method-with-resampling-processing" class="headerlink" title="A robust stochastic model updating method with resampling processing"></a>A robust stochastic model updating method with resampling processing</h2><p><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=2121926335166128896&amp;noteId=2121926748338632704">A robust stochastic model updating method with resampling processing</a> Yanlin Zhao, Zhongmin Deng ⇑, Xinjie Zhang</p>
+<p>为了更好地估计参数的不确定性，提出了一种鲁棒随机模型更新框架。在该框架中，为了提高鲁棒性，重采样过程主要设计用于处理不良样本点，特别是<strong>有限样本量问题</strong>。其次，<strong>提出了基于巴塔查里亚距离和欧几里得距离的平均距离不确定度UQ度量</strong>，以充分利用测量的可用信息。随后<strong>采用粒子群优化算法</strong>对结构的输入参数进行更新。最后以<strong>质量-弹簧系统和钢板结构为例</strong>说明了该方法的有效性和优越性。通过将测量样品加入不良样品，讨论了重采样过程的作用。</p>
+<ul>
+<li>有限元模型具有一定的不确定性，主要是由于模型的简化、近似以及模型参数的不确定性，如弹性模量、几何尺寸、边界条件、静、动载荷条件等。</li>
+<li>实验系统的测量都具有一定的不确定度。这种不确定性与难以控制的随机实验效应有关，如制造公差引入的偏差，随后信号处理期间的测量噪声或有限的测量数据。</li>
+</ul>
+<p>算例：</p>
+<ul>
+<li>a mass-spring system</li>
+<li>steel plate structures</li>
+</ul>
+<h2 id="A-frequency-response-model-updating-method-based-on-unidirectional-convolutional-neural-network"><a href="#A-frequency-response-model-updating-method-based-on-unidirectional-convolutional-neural-network" class="headerlink" title="A frequency response model updating method based on unidirectional convolutional neural network"></a>A frequency response model updating method based on unidirectional convolutional neural network</h2><p><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=2110304823896008192&amp;noteId=2110305055136380672">A frequency response model updating method based on unidirectional convolutional neural network (readpaper.com)</a> Xinjie Zhang , Zhongmin Deng, and Yanlin Zhao </p>
+<p>本文提出了一种基于<strong>单向卷积神经网络</strong> (UCNN) 的方法，以利用频率响应 (FR) 数据进行有限元模型更新。UCNN 旨在在没有任何人工特征提取的情况下从 FR 数据获取高精度逆映射到更新参数。单向卷积分别应用于 FR 数据的频率和位置维度，以避免数据耦合。UCNN 在<strong>卫星模型更新</strong>实验中优于基于残差的模型更新方法和二维卷积神经网络。它在训练集中内外都实现了高精度的结果。</p>
+<p>评价指标：</p>
+<ul>
+<li>FR 保证准则(assurance criterion) $FRAC=\frac{|H_e^TH_s|^2}{(H_e^TH_e)(H_s^TH_s)}$ 用于描述试验数据与模拟 FR 数据的相似度</li>
+</ul>
+<p>算例：</p>
+<ul>
+<li>卫星算例1</li>
+</ul>
+<h2 id="Frequency-response-function-based-model-updating-using-Kriging-model"><a href="#Frequency-response-function-based-model-updating-using-Kriging-model" class="headerlink" title="Frequency response function-based model updating using Kriging model"></a>Frequency response function-based model updating using Kriging model</h2><p>提出了一种基于加速度频响函数(FRF)的模型更新方法，该方法<strong>将Kriging模型作为元模型引入到优化过程</strong>中，而不是直接迭代有限元分析。Kriging模型是一种快速运行的模型，可以减少求解时间，便于智能算法在模型更新中的应用。Kriging模型的训练样本由实验设计(DOE)生成，其响应对应于选定频率点上实验加速度频响与有限元模型对应频响的差值。考虑边界条件，<strong>提出了一种减少训练样本数量的两步DOE方法</strong>。第一步是从边界条件中选择设计变量，选择的变量将传递到第二步生成训练样本。将设计变量的优化结果作为设计变量的更新值对有限元进行标定，使解析频响与实验频响趋于一致。该方法在<strong>蜂窝夹层梁复合材料结构</strong>上进行了成功的实验，在模型更新后，分析加速度频域有了明显的改善，特别是在调整阻尼比后，分析加速度频域与实验数据吻合较好。</p>
+<p>算例：</p>
+<ul>
+<li>experimental honeycomb beam</li>
+</ul>
+<h1 id="区间模型修正"><a href="#区间模型修正" class="headerlink" title="区间模型修正"></a>区间模型修正</h1><h2 id="Interval-model-updating-using-perturbation-method-and-Radial-Basis-Function-neural-networks"><a href="#Interval-model-updating-using-perturbation-method-and-Radial-Basis-Function-neural-networks" class="headerlink" title="Interval model updating using perturbation method and Radial Basis Function neural networks"></a>Interval model updating using perturbation method and Radial Basis Function neural networks</h2><p><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=2202475379254937088&amp;noteId=2202475618179336192">Interval model updating using perturbation method and Radial Basis Function neural networks</a> Zhongmin Deng, Zhaopu Guo n, Xinjie Zhang 北航</p>
+<p>近年来，随机模型更新技术已被应用于实际工程结构中固有不确定性的量化。然而在工程实践中，由于结构系统的信息不足，往往无法得到结构参数的概率密度函数。在这种情况下，区间分析在处理不确定问题时显示出明显的优势，因为只定义了输入和输出的上界和下界。为此，<strong>提出了一种利用一阶摄动法和径向基函数神经网络进行结构参数区间辨识的新方法</strong>。通过摄动方法，将每个随机变量表示为每个参数区间均值周围的摄动，这些项可以在两步确定性更新意义上使用。然后在摄动技术的基础上建立了区间模型更新方程。采用两步法对结构参数的均值进行更新，进而对区间半径进行估计。实验和数值算例验证了该方法在结构参数区间识别中的应用。</p>
+<p>算例：</p>
+<ul>
+<li>Experimental case study: steel plate structures 钢板</li>
+<li>Numerical case study: Satellite structure</li>
+</ul>
+<h2 id="Interval-identification-of-structural-parameters-using-interval-overlap-ratio-and-Monte-Carlo-simulation"><a href="#Interval-identification-of-structural-parameters-using-interval-overlap-ratio-and-Monte-Carlo-simulation" class="headerlink" title="Interval identification of structural parameters using interval overlap ratio and Monte Carlo simulation"></a>Interval identification of structural parameters using interval overlap ratio and Monte Carlo simulation</h2><p><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=2201610607974204928&amp;noteId=2201611039416835840">Interval identification of structural parameters using interval overlap ratio and Monte Carlo simulation</a>Deng Zhongmin a , Guo Zhaopu a,b 北航</p>
+<p>从不确定性传播和不确定性量化的角度，<strong>提出了一种新的区间有限元模型更新策略</strong>，用于结构参数的区间识别。将蒙特卡罗仿真与surrogate模型相结合，可以有效地获得系统响应的精确区间估计。利用区间长度的概念，构造了一种新的定量指标——<strong>区间重叠率(IOR)</strong>，用来表征分析数据与实测数据区间分布的一致性。构造并解决了两个不确定结构参数标称值和区间半径估计的优化问题。最后，<strong>通过数值和实验</strong>验证了该方法在结构参数区间识别中的可行性。</p>
+<p>不确定性分析问题一般可分为两个方面:不确定性传播和不确定性量化</p>
+<ul>
+<li>不确定性传播的主要区间方法有区间算法[24]、摄动法[25]、顶点法[8]和MC模拟<ul>
+<li>各种方法的缺陷：由于忽略了操作数之间的相关性，包含一组操作的区间算法往往高估了系统响应的范围。顶点方法仅对输入和输出之间存在单调关系的特殊情况有效。摄动法虽然考虑了计算效率，但它依赖于区间变量的初值和不确定水平。MC仿真由于精度高、过程简单，被认为是求解输入/输出变量不确定性传播的一种合适的方法。然而，庞大的计算量阻碍了直接MC模拟的实现。</li>
+</ul>
+</li>
+<li>不确定度量化的目的是提供一种定量度量，以表征分析预测和测量观测之间的区间范围的一致性。到目前为止，常用的区间模型更新定量指标是基于区间界[8,22]、区间半径[23]或区间交集[26,27]来构建的</li>
+</ul>
+<p>算例：</p>
+<ul>
+<li>Numerical case studies: a mass-spring system具有良好分离和紧密模态的三自由度质量-弹簧系统<ul>
+<li>well-separated modes</li>
+<li>close modes</li>
+</ul>
+</li>
+<li>Experimental case study: steel plate structures</li>
+</ul>
+<h2 id="Interval-Identification-of-Structural-Parameters-Using-Interval-Deviation-Degree-and-Monte-Carlo-Simulation"><a href="#Interval-Identification-of-Structural-Parameters-Using-Interval-Deviation-Degree-and-Monte-Carlo-Simulation" class="headerlink" title="Interval Identification of Structural Parameters Using Interval Deviation Degree and Monte Carlo Simulation"></a>Interval Identification of Structural Parameters Using Interval Deviation Degree and Monte Carlo Simulation</h2><p><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=2202709185245307648&amp;noteId=2202709381471330048">Interval Identification of Structural Parameters Using Interval Deviation Degree and Monte Carlo Simulation</a> Zhaopu Guo and Zhongmin Deng∗ 北航</p>
+<p>本文从不确定性传播和不确定性量化两个方面研究了结构参数的区间辨识问题。将蒙特卡罗(MC)模拟与代理模型相结合，可以有效地获得结构响应的精确区间估计。利用区间长度的概念，<strong>构造了区间偏差度(IDD)来表征解析模态数据与实测模态数据间区间分布的不一致</strong>。通过求解两个优化问题，很好地估计了系统参数的标称值和区间半径。最后，通过数值和实验验证了该方法在结构参数区间识别中的可行性。</p>
+<p>算例：</p>
+<ul>
+<li>Numerical Case Studies: A Mass-Spring System</li>
+<li>Experimental Case Study: Steel Plate Structures</li>
+</ul>
+<h2 id="Bayesian-inversion-for-imprecise-probabilistic-models-using-a-novel-entropy-based-uncertainty-quantification-metric"><a href="#Bayesian-inversion-for-imprecise-probabilistic-models-using-a-novel-entropy-based-uncertainty-quantification-metric" class="headerlink" title="Bayesian inversion for imprecise probabilistic models using a novel entropy-based uncertainty quantification metric"></a>Bayesian inversion for imprecise probabilistic models using a novel entropy-based uncertainty quantification metric</h2><p><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=2201700148278027008&amp;noteId=2201703193291922688">Bayesian inversion for imprecise probabilistic models using a novel entropy-based uncertainty quantification metric</a> Lechang Yang a,b,⇑, Sifeng Bi c , Matthias G.R. Faes b,d , Matteo Broggi b , Michael Beer b,e,f<br>a北京科技大学机械工程学院，北京100083，中国<br>b莱布尼茨风险与可靠性研究所Universität汉诺威，德国汉诺威30167<br>c北京理工大学航天工程学院，北京100081<br>d鲁汶大学机械工程系，Jan De Nayerlaan 5，比利时<br>e利物浦大学风险与不确定性研究所，英国利物浦L69 7ZF<br>f同济大学工程可靠性与随机力学国际联合研究中心，上海200092</p>
+<p>不确定性量化度量在动态系统反问题中具有关键地位，因为它们量化了数值预测样本与收集到的观测值之间的差异。这种度量通过奖励这种差异规范较小的样本和惩罚其他样本来发挥其作用。在本文中，我们利用Jensen-Shannon散度提出了一个<strong>新的基于熵的度量</strong>。与其他现有的基于距离的度量相比，一些独特的性质使这种基于熵的度量成为解决混合不确定性(即，不确定性和认知不确定性的组合)存在的逆问题的有效工具，例如在不精确概率的背景下遇到的逆问题。在实现方面，<strong>开发了一种近似贝叶斯计算方法</strong>，其中所提议的度量被完全嵌入。为了减少计算量，采用离散化的分簇算法代替传统的多变量核密度估计。为了验证目的，首先演示了一个静态案例研究，其中与其他三种行之有效的方法进行了比较。为了突出其在复杂动态系统中的潜力，我们将我们的方法应用于<strong>2014年NASA LaRC不确定性量化挑战问题</strong>，并将所获得的结果与文献中其他6个研究小组的结果进行了比较。这些例子说明了我们的方法在静态和动态系统中的有效性，并显示了它在实际工程案例中的前景，如结构健康监测与动态分析相结合。</p>
+<p>算例：</p>
+<ul>
+<li>Simply supported beam简支梁</li>
+<li>Practical application example: NASA UQ challenge problem2014</li>
+</ul>
+<h2 id="A-novel-interval-model-updating-framework-based-on-correlation-propagation-and-matrix-similarity-method"><a href="#A-novel-interval-model-updating-framework-based-on-correlation-propagation-and-matrix-similarity-method" class="headerlink" title="A novel interval model updating framework based on correlation propagation and matrix-similarity method"></a>A novel interval model updating framework based on correlation propagation and matrix-similarity method</h2><p><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=2202716203238606336&amp;noteId=2202716355810672896">A novel interval model updating framework based on correlation propagation and matrix-similarity method</a> Baopeng Liao , Rui Zhao , Kaiping Yu , Chaoran Liu 哈工大</p>
+<p>模型更新技术在实际系统中具有不确定性的数值模型中得到了广泛的应用，而随机理论在知识不足的情况下是无效的。此外，面对相关的不确定性和复杂的数值模型，模型更新仍然是一个挑战。本文提出了一种新的区间模型更新框架，以解决极限样本的相关不确定性问题。这种框架的优点是，<strong>无论输入输出关系是线性的还是非线性的</strong>，都可以高精度地更新参数。为了实现这一优势，<strong>采用凸建模技术和Chebyshev代理模型</strong>分别进行不确定参数量化和数值模型逼近。随后，<strong>提出了考虑关联传播的矩阵相似法</strong>，构建了两步区间模型更新过程，将其转化为确定性模型更新问题。精神的结果。值得注意的是，三个例子验证了所提出的框架在线性和非线性关系中的有效性和优越性。结果表明，本文提出的区间模型更新框架适用于处理参数边界及其相关性的更新问题。</p>
+<p>算例：两个数值算例和一个实验算例验证</p>
+<ul>
+<li>a classical mass-spring system</li>
+<li>the composite beam structure</li>
+<li>the real physical system through the experiments of beam structure with sliding masses 带滑动质量的梁结构</li>
+</ul>
+<h2 id="Interval-model-updating-using-universal-grey-mathematics-and-Gaussian-process-regression-model"><a href="#Interval-model-updating-using-universal-grey-mathematics-and-Gaussian-process-regression-model" class="headerlink" title="Interval model updating using universal grey mathematics and Gaussian process regression model"></a>Interval model updating using universal grey mathematics and Gaussian process regression model</h2><p><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=2202727212984616448&amp;noteId=2202727326381885440">Interval model updating using universal grey mathematics and Gaussian process regression model</a> Bowen Zheng, Kaiping Yu ⇑, Shuaishuai Liu, Rui Zhao 哈工大</p>
+<p>本文提出了一种利用通用灰色数学和高斯过程回归模型(GPRM)处理区间模型更新问题的新方法。在区间模型更新问题中，通常存在输入与输出之间的非线性关系，目前的文献没有对此进行专门的讨论。为了更好地处理这一问题，<strong>提出了关注非线性单调关系的方法</strong>。利用通用灰色数学在确定性框架下处理区间模型的更新问题。采用GPRMs作为元模型，提高了计算效率。文中给出了两个数值算例和一个实验算例:第一个数值算例采用三自由度弹簧-质量系统对该方法进行了验证;在第二个数值算例中，以一组铝合金板为例验证了该方法处理非线性问题的能力;最后以一组铝合金板的实验为例说明了该方法，其中以铝合金板的厚度作为更新参数。</p>
+<p>算例：</p>
+<ul>
+<li>Numeric case studies 1: mass-spring system</li>
+<li>Numerical case study 2: aluminum alloy plate </li>
+<li>Experimental validation两块自由铝合金板 固有频率</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+1ZnNxFWnEbk5YzRl">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/Learn/Learn-everyone-can-use-english/" rel="prev" title="Learn-everyone-can-use-english">
+      <i class="fa fa-chevron-left"></i> Learn-everyone-can-use-english
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Review"><span class="nav-text">Review</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%89%E9%99%90%E5%85%83%E6%A8%A1%E5%9E%8B%E4%BF%AE%E6%AD%A3%E7%A0%94%E7%A9%B6%E8%BF%9B%E5%B1%95-%E4%BB%8E%E7%BA%BF%E6%80%A7%E5%88%B0%E9%9D%9E%E7%BA%BF%E6%80%A7"><span class="nav-text">有限元模型修正研究进展:从线性到非线性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stochastic-Model-Updating-with-Uncertainty-Quantification-An-Overview-and-Tutorial"><span class="nav-text">Stochastic Model Updating with Uncertainty Quantification: An Overview and Tutorial</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9A%8F%E6%9C%BA%E6%A8%A1%E5%9E%8B%E4%BF%AE%E6%AD%A3"><span class="nav-text">随机模型修正</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#A-robust-stochastic-model-updating-method-with-resampling-processing"><span class="nav-text">A robust stochastic model updating method with resampling processing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#A-frequency-response-model-updating-method-based-on-unidirectional-convolutional-neural-network"><span class="nav-text">A frequency response model updating method based on unidirectional convolutional neural network</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Frequency-response-function-based-model-updating-using-Kriging-model"><span class="nav-text">Frequency response function-based model updating using Kriging model</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8C%BA%E9%97%B4%E6%A8%A1%E5%9E%8B%E4%BF%AE%E6%AD%A3"><span class="nav-text">区间模型修正</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Interval-model-updating-using-perturbation-method-and-Radial-Basis-Function-neural-networks"><span class="nav-text">Interval model updating using perturbation method and Radial Basis Function neural networks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Interval-identification-of-structural-parameters-using-interval-overlap-ratio-and-Monte-Carlo-simulation"><span class="nav-text">Interval identification of structural parameters using interval overlap ratio and Monte Carlo simulation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Interval-Identification-of-Structural-Parameters-Using-Interval-Deviation-Degree-and-Monte-Carlo-Simulation"><span class="nav-text">Interval Identification of Structural Parameters Using Interval Deviation Degree and Monte Carlo Simulation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bayesian-inversion-for-imprecise-probabilistic-models-using-a-novel-entropy-based-uncertainty-quantification-metric"><span class="nav-text">Bayesian inversion for imprecise probabilistic models using a novel entropy-based uncertainty quantification metric</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#A-novel-interval-model-updating-framework-based-on-correlation-propagation-and-matrix-similarity-method"><span class="nav-text">A novel interval model updating framework based on correlation propagation and matrix-similarity method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Interval-model-updating-using-universal-grey-mathematics-and-Gaussian-process-regression-model"><span class="nav-text">Interval model updating using universal grey mathematics and Gaussian process regression model</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qi Yun"
+      src="/images/avatar.jpeg">
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">134</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">58</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/qiyun71" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;qiyun71" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/29010355" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;29010355" rel="noopener" target="_blank"><i class="fa fa-star fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qi Yun</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">473k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">28:40</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/yqq/anime.min.js"></script>
+  <script src="/yqq/velocity/velocity.min.js"></script>
+  <script src="/yqq/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

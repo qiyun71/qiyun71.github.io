@@ -20,17 +20,19 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Title NeuSurf     Author    Conf&#x2F;Jour    Year    Project    Paper">
+  <meta name="description" content="Title NeuSurf: On-Surface Priors for Neural Surface Reconstruction from Sparse Input Views     Author Han Huang1,2, Yulun Wu1,2, Junsheng Zhou1,2, Ge Gao1,2*, Ming Gu1,2, Yu-Shen Liu2   Conf&#x2F;Jour">
 <meta property="og:type" content="article">
 <meta property="og:title" content="NeuSurf">
 <meta property="og:url" content="http://example.com/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/Sparse/NeuSurf/index.html">
 <meta property="og:site_name" content="QiYun">
-<meta property="og:description" content="Title NeuSurf     Author    Conf&#x2F;Jour    Year    Project    Paper">
+<meta property="og:description" content="Title NeuSurf: On-Surface Priors for Neural Surface Reconstruction from Sparse Input Views     Author Han Huang1,2, Yulun Wu1,2, Junsheng Zhou1,2, Ge Gao1,2*, Ming Gu1,2, Yu-Shen Liu2   Conf&#x2F;Jour">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20240117182026.png">
 <meta property="article:published_time" content="2023-12-31T14:24:49.000Z">
-<meta property="article:modified_time" content="2023-12-31T14:24:49.722Z">
+<meta property="article:modified_time" content="2024-01-17T10:22:40.706Z">
 <meta property="article:author" content="Qi Yun">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20240117182026.png">
 
 <link rel="canonical" href="http://example.com/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/Sparse/NeuSurf/">
 
@@ -220,6 +222,13 @@
 
               <time title="Created: 2023-12-31 22:24:49" itemprop="dateCreated datePublished" datetime="2023-12-31T22:24:49+08:00">2023-12-31</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-01-17 18:22:40" itemprop="dateModified" datetime="2024-01-17T18:22:40+08:00">2024-01-17</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -235,7 +244,7 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>9</span>
+              <span>388</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -258,21 +267,21 @@
 <thead>
 <tr>
 <th>Title</th>
-<th>NeuSurf</th>
+<th>NeuSurf: On-Surface Priors for Neural Surface Reconstruction from Sparse Input Views</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Author</td>
-<td></td>
+<td>Han Huang1,2, Yulun Wu1,2, Junsheng Zhou1,2, Ge Gao1,2*, Ming Gu1,2, Yu-Shen Liu2</td>
 </tr>
 <tr>
 <td>Conf/Jour</td>
-<td></td>
+<td>arXiv</td>
 </tr>
 <tr>
 <td>Year</td>
-<td></td>
+<td>2023</td>
 </tr>
 <tr>
 <td>Project</td>
@@ -280,11 +289,14 @@
 </tr>
 <tr>
 <td>Paper</td>
+<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4839146633492955137&amp;noteId=2119047229104843264">NeuSurf: On-Surface Priors for Neural Surface Reconstruction from Sparse Input Views (readpaper.com)</a></td>
 </tr>
 </tbody>
 </table>
 </div>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20240117182026.png" alt="image.png|666"></p>
 <span id="more"></span>
+<h1 id="AIR"><a href="#AIR" class="headerlink" title="AIR"></a>AIR</h1><p>近年来，神经隐式函数在多视图重建领域取得了显著的成果。然而，大多数现有方法都是为密集视图量身定制的，在处理稀疏视图时表现出令人不满意的性能。为了解决稀疏视图重建问题，<strong>已经提出了几种最新的泛化隐式重建方法，但它们仍然存在训练成本高，并且仅在精心选择的视角下有效的问题</strong>。在本文中，我们提出了一种新的稀疏视图重建框架，利用表面先验来实现高度忠实的表面重建。具体来说，我们设计了几个全局几何对齐和局部几何细化约束，以共同优化粗形状和精细细节。为了实现这一点，我们训练了一个神经网络，从SfM获得的表面点中学习全局隐式域，然后将其作为粗几何约束。为了利用局部几何一致性，我们将表面上的点投影到可见和不可见的视图上，将投影特征的一致损失视为精细的几何约束。在两种流行的稀疏设置下，DTU和BlendedMVS数据集的实验结果表明，与最先进的方法相比，有显著的改进。</p>
 
     </div>
 
@@ -384,6 +396,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#AIR"><span class="nav-text">AIR</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -398,7 +411,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">132</span>
+          <span class="site-state-item-count">134</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -459,12 +472,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">461k</span>
+    <span title="Symbols count total">473k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">27:57</span>
+    <span title="Reading time total">28:40</span>
 </div>
 
         

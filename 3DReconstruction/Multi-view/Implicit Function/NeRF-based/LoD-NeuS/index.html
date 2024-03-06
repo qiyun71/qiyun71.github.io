@@ -29,7 +29,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20240104132053.png">
 <meta property="article:published_time" content="2024-01-04T05:19:16.000Z">
-<meta property="article:modified_time" content="2024-01-04T05:21:10.066Z">
+<meta property="article:modified_time" content="2024-01-17T10:18:36.631Z">
 <meta property="article:author" content="Qi Yun">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20240104132053.png">
@@ -219,10 +219,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2024-01-04 13:19:16 / Modified: 13:21:10" itemprop="dateCreated datePublished" datetime="2024-01-04T13:19:16+08:00">2024-01-04</time>
+              <time title="Created: 2024-01-04 13:19:16" itemprop="dateCreated datePublished" datetime="2024-01-04T13:19:16+08:00">2024-01-04</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-01-17 18:18:36" itemprop="dateModified" datetime="2024-01-17T18:18:36+08:00">2024-01-17</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -238,13 +244,13 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>58</span>
+              <span>1.4k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span>1 mins.</span>
+              <span>5 mins.</span>
             </span>
 
         </div>
@@ -283,14 +289,50 @@
 </tr>
 <tr>
 <td>Paper</td>
-<td><a target="_blank" rel="noopener" href="https://dl.acm.org/doi/pdf/10.1145/3610548.3618197">3610548.3618197 (acm.org)</a></td>
+<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4802119418473611265&amp;noteId=2141875483197729280">Anti-Aliased Neural Implicit Surfaces with Encoding Level of Detail (readpaper.com)</a></td>
 </tr>
 </tbody>
 </table>
 </div>
 <p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20240104132053.png" alt="image.png|666"></p>
 <span id="more"></span>
-<h1 id="AIR"><a href="#AIR" class="headerlink" title="AIR"></a>AIR</h1>
+<h1 id="AIR"><a href="#AIR" class="headerlink" title="AIR"></a>AIR</h1><p>我们提出了LoD-NeuS，一种用于高频几何细节恢复和抗锯齿新视图渲染的高效神经表示。从具有细节水平(LoD)的基于体素的表示中获得灵感，我们引入了一种基于<strong>多尺度三平面的场景表示</strong>，该场景表示能够捕获符号距离函数(SDF)的LoD和空间亮度。我们的表示从沿射线的截锥内的<strong>多卷积特征中聚集空间特征</strong>，并通过可微分渲染优化LoD特征体积。此外，我们提出了一种<strong>误差引导采样策略</strong>来指导优化过程中SDF的增长。定性和定量评估表明，与最先进的方法相比，我们的方法实现了更好的表面重建和逼真的视图合成。</p>
+<ul>
+<li>In particular, we firstly present a novel position encoding based on <strong>multi-scale tri-planes</strong> to enable continuous levels of details </li>
+<li>To alleviate aliasing, we consider the size of <strong>cast cone rays</strong> and specifically design <strong>multi-convolved features to approximate the cone sampling</strong></li>
+<li>Meanwhile, we observe that thin surface reconstruction using SDF is challenging, thus propose a refined solution involving an <strong>error-guided sampling strategy</strong> to facilitate SDF growth</li>
+</ul>
+<h1 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h1><h2 id="Multi-scale-Tri-plane-Encoding"><a href="#Multi-scale-Tri-plane-Encoding" class="headerlink" title="Multi-scale Tri-plane Encoding"></a>Multi-scale Tri-plane Encoding</h2><p>InstantNGP 哈希冲突、内存占用大</p>
+<p>TensoRF 三平面编码 在处理复杂几何和有效的空间正则化方面提供了更大的灵活性，本文将多尺度三平面表示合并到一个基于neus的框架中，用于复杂的表面重建和高质量的渲染。</p>
+<p>多分辨率三平面：$\{R_{l}\}_{l=1}^{L}$<br>级联特征与输入的x：$\mathbf{\vec{F}}=(\mathbf{x},\mathbf{F}_1,…,\mathbf{F}_L),$</p>
+<h2 id="Anti-aliasing-Rendering-of-Implicit-Surfaces"><a href="#Anti-aliasing-Rendering-of-Implicit-Surfaces" class="headerlink" title="Anti-aliasing Rendering of Implicit Surfaces"></a>Anti-aliasing Rendering of Implicit Surfaces</h2><p>NeuS没有考虑像素的形状，这种近似可能导致高频信息的欠采样或模糊表示，并导致混叠伪影。为了缓解这个问题，我们通过将射线定义为圆锥体来重新制定体渲染，同时考虑到像素大小。这样可以实现连续的LoD，并从欠采样图像中恢复高质量的SDF，从而更准确地捕获和重建场景的细节。</p>
+<ul>
+<li>超采样，将锥体光线离散成一批光线，计算成本和时间成本高</li>
+<li>Cone Discrete Sampling.锥采样：通过相机像素的投射锥射线被划分为一系列锥形截体<ul>
+<li>Mip-NeRF侧重于以不同分辨率渲染场景，而不是恢复场景细节</li>
+<li>利用我们基于三平面的表示，我们通过像素角投射了四条额外的光线，从而考虑了像素的大小和形状。然后，沿锥体的<strong>每个锥形截锥由八个顶点表示</strong>。给定任何三维采样位置x在一个锥形截体内，我们使用递减权值混合每个顶点$x_𝑣$的三平面特征，$W(\mathbf{x},\mathbf{x}_{\boldsymbol{\upsilon}})=\exp(-k|\mathbf{x}_{\boldsymbol{\upsilon}}-\mathbf{x}|),$ 它随着顶点x𝑣与采样点x之间的距离而减小。𝑘是一个可学习的参数，我们最初将其设置为80，并在训练期间与其他参数一起更新。重要的是要注意，递减函数应该意识到锥形截锥体的大小。锥台越小，函数衰减越快</li>
+</ul>
+</li>
+<li>Mulit-convolved Featurization.<ul>
+<li>虽然利用相邻顶点沿相邻射线的多尺度特征进行圆锥采样，但由于圆锥截体内的样本稀疏，这种近似可能不够。一种直接的方法是引入更多离散样本，但这会增加计算成本和内存负担。</li>
+<li>利用每个三平面的二维高斯函数来表示圆锥截锥体应该集成的区域。结合我们的锥形离散采样，我们提出了一个多重高斯卷积特征来表示邻近顶点的特征，这些顶点近似于采样点及其相应的锥形截锥体</li>
+<li>$\mathbf{G}_{\boldsymbol{\upsilon}}(\mathbf{x}_{\boldsymbol{\upsilon}})=G(\vec{\mathbf{F}}_{\boldsymbol{\upsilon}},\{\tau_{\boldsymbol{\upsilon}}\}_{\boldsymbol{l}=1}^{L})=\sqcup_{\boldsymbol{l}=1}^{L}\mathcal{G}\left(\mathbf{F}_{\boldsymbol{l}},\tau_{\boldsymbol{l}}\right),$</li>
+</ul>
+</li>
+<li>$\mathrm{Z}(\mathrm{x})=\sum_{v=1}^VW(\mathrm{x},\mathrm{x}_v)\mathrm{G}_v(\mathrm{x}_v),$ V=8为圆锥体的顶点数</li>
+</ul>
+<h2 id="Training-and-Loss"><a href="#Training-and-Loss" class="headerlink" title="Training and Loss"></a>Training and Loss</h2><p>$L_{rgb}=\frac{1}{n}\sum_{p}\left|\hat{C_{p}}-C_{p}\right|_{1}.$<br>$L_{eikonal}=\frac{1}{nm}\sum_{i}(|\nabla f(x_{i})|_{2}-1)^{2}.$<br>$L_{mask}=\frac{1}{n}\sum_{p}\mathrm{BCE}(M_{p},\hat{O}_{p}),$<br>其中opacity：$\hat{O}_k=\sum_j^mT_j(1-\exp(-\sigma_j\delta_j))$</p>
+<h2 id="SDF-Growth-Refinement"><a href="#SDF-Growth-Refinement" class="headerlink" title="SDF Growth Refinement"></a>SDF Growth Refinement</h2><ul>
+<li>表示一个薄物体需要在SDF中快速翻转，这对于神经网络来说是困难的</li>
+<li>与其他区域相比，薄物体对应的图像区域可能具有更少的样本，使其更难学习</li>
+</ul>
+<p>一个直接的解决方案可能是增加该区域周围的采样频率，但只有位于该区域周围的采样射线被证明有助于这种重建</p>
+<p>本文利用来自2D图像的信息，从缺失的细段与表面相遇的空间点引导SDF生长</p>
+<ul>
+<li>我们在每个训练视点呈现训练后的SDF，使用L1距离对输入计算误差图，顺序二值化该图并将其扩展到候选区域𝑀𝑒。为了找到我们的生长方法的起点，我们使用Zhou等人方法(End-to-End Wireframe Parsing)来检测线端点并将其扩展到我们选择的区域𝑀𝑠</li>
+</ul>
+<h1 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h1><p>Baseline：NeuS、HF-NeuS、NeRF<br>Metrics：PSNR、CD<br>Datasets：DTU(with mask)</p>
+
     </div>
 
     
@@ -327,7 +369,10 @@
     <a href="/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/Sparse/NeuSurf/" rel="prev" title="NeuSurf">
       <i class="fa fa-chevron-left"></i> NeuSurf
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/3DReconstruction/Basic%20Knowledge/Explicit%20Represent%20Reconstruction/" rel="next" title="Explicit Represent Reconstruction">
+      Explicit Represent Reconstruction <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -386,7 +431,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#AIR"><span class="nav-text">AIR</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#AIR"><span class="nav-text">AIR</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Method"><span class="nav-text">Method</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Multi-scale-Tri-plane-Encoding"><span class="nav-text">Multi-scale Tri-plane Encoding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Anti-aliasing-Rendering-of-Implicit-Surfaces"><span class="nav-text">Anti-aliasing Rendering of Implicit Surfaces</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Training-and-Loss"><span class="nav-text">Training and Loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SDF-Growth-Refinement"><span class="nav-text">SDF Growth Refinement</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Experiments"><span class="nav-text">Experiments</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -401,7 +446,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">132</span>
+          <span class="site-state-item-count">134</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -462,12 +507,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">461k</span>
+    <span title="Symbols count total">473k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">27:57</span>
+    <span title="Reading time total">28:40</span>
 </div>
 
         

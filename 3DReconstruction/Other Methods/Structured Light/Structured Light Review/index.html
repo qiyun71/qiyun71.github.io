@@ -39,7 +39,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231203165131.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231203175500.png">
 <meta property="article:published_time" content="2023-12-02T11:35:17.000Z">
-<meta property="article:modified_time" content="2023-12-25T12:09:16.624Z">
+<meta property="article:modified_time" content="2024-01-23T08:18:56.613Z">
 <meta property="article:author" content="Qi Yun">
 <meta property="article:tag" content="3DReconstruction">
 <meta name="twitter:card" content="summary">
@@ -238,7 +238,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-12-25 20:09:16" itemprop="dateModified" datetime="2023-12-25T20:09:16+08:00">2023-12-25</time>
+                <time title="Modified: 2024-01-23 16:18:56" itemprop="dateModified" datetime="2024-01-23T16:18:56+08:00">2024-01-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -455,15 +455,20 @@
 </ul>
 <p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231203175500.png" alt="image.png|666"></p>
 <p><strong>然后求解三维坐标</strong>，获得三维点云(根据各坐标系的关系以及相机和投影仪的参数)</p>
-<h4 id="获得相机-投影仪像素坐标之间的对应关系"><a href="#获得相机-投影仪像素坐标之间的对应关系" class="headerlink" title="获得相机-投影仪像素坐标之间的对应关系"></a>获得相机-投影仪像素坐标之间的对应关系</h4><p>由相机像素坐标 $u_c,v_c$，投影仪像素坐标 $(u_p,v_p)$<br>$\Phi(\operatorname{u_P},\operatorname{v_P})=\Phi(\operatorname{u_C},\operatorname{v_C})$<br>$\Phi(\operatorname{u_P},\operatorname{v_P})=\frac{2\pi\operatorname{u_p}}{\operatorname{T}}$<br>可得：$\mathrm{u_p~=~\frac{\Phi(u_p,v_p)<em>T}{2\pi}~=~\frac{\Phi(u_c,v_c)</em>T}{2\pi}}$</p>
+<h4 id="获得相机-投影仪像素坐标之间的对应关系"><a href="#获得相机-投影仪像素坐标之间的对应关系" class="headerlink" title="获得相机-投影仪像素坐标之间的对应关系"></a>获得相机-投影仪像素坐标之间的对应关系</h4><p>由相机像素坐标 $u_c,v_c$，投影仪像素坐标 $(u_p,v_p)$</p>
+<p>$\Phi(\operatorname{u_P},\operatorname{v_P})=\Phi(\operatorname{u_C},\operatorname{v_C})$<br>$\Phi(\operatorname{u_P},\operatorname{v_P})=\frac{2\pi\operatorname{u_p}}{\operatorname{T}}$</p>
+<p>可得：<script type="math/tex">\mathrm{u_p~=~\frac{\Phi(u_p,v_p)*T}{2\pi}~=~\frac{\Phi(u_c,v_c)*T}{2\pi}}</script></p>
 <h4 id="根据标定参数获得重建点云信息"><a href="#根据标定参数获得重建点云信息" class="headerlink" title="根据标定参数获得重建点云信息"></a>根据标定参数获得重建点云信息</h4><p>由相机内外参矩阵，可以得到像素坐标与世界坐标之间的关系：</p>
-<p>$\left.\left\{\begin{array}{c}\mathrm{X_c=x_c<em>Z_c}\\\mathrm{Y_c=y_c</em>Z_c}\\\mathrm{Z_c=Z_c}\end{array}\right.\right.$<br>$\left.\left\{\begin{array}{rl}\mathrm{x_c~=~(u_c~-u_{c0}~)/f_{cx}}\\\mathrm{y_c~=~(v_c~-v_{c0}~)/f_{cy}}\end{array}\right.\right.$<br>$x_c,y_c$ 为 $u_c,v_c$ 的相机坐标，世界坐标 $X_w,Y_w,Z_w$ 旋转平移得到 $X_c,Y_c,Z_c$</p>
-<p>同理投影仪：<br>$\left.\left\{\begin{array}{l}X_p=x_p<em>Z_p\\Y_p=y_p</em>Z_p\\Z_p=Z_p\end{array}\right.\right.$<br>$\left.\left\{\begin{array}{l}x_p=(u_p-u_{p0})/f_{px}\\y_p=(v_p-v_{p0})/f_{py}\end{array}\right.\right.$</p>
-<p>由相机和投影仪外参关系：<br>$\left.\left[\begin{array}{c}X_p\\Y_p\\Z_p\end{array}\right.\right]=R_{c\to p}\left[\begin{array}{c}X_c\\Y_c\\Z_c\end{array}\right]+t_{c\to p}$<br>可得：<br>$\left.\left\{\begin{array}{l}X_p=r_{11}X_c+r_{12}Y_c+r_{13}Z_c+t_x=(r_{11}x_c+r_{12}y_c+r_{13})Z_c+t_x\\Y_p=r_{21}X_c+r_{22}Y_c+r_{23}Z_c+t_y=(r_{21}x_c+r_{22}y_c+r_{23})Z_c+t_y\\Z_p=r_{31}X_c+r_{32}Y_c+r_{33}Z_c+t_z=(r_{31}x_c+r_{32}y_c+r_{33})Z_c+t_z\end{array}\right.\right.$</p>
-<p>由相机投影仪像素坐标关系：<br>$\left.\left\{\begin{array}{l}u_p=f_{px}<em>x_p+u_{p0}\\u_p=\frac{\Phi(u_c,v_c)</em>T}{2\pi}\end{array}\right.\right.\Rightarrow f_{px}<em>x_p+u_{p0}=\frac{\Phi(u_c,v_c)</em>T}{2\pi}$</p>
-<p>联立上述两式：<br>$\left.\left\{\begin{array}{l}x_p<em>Z_p=(r_{11}x_c+r_{12}y_c+r_{13})Z_c+t_x\\Z_p=(r_{31}x_c+r_{32}y_c+r_{33})Z_c+t_z\\f_{px}</em>x_p+u_{p0}=\frac{\Phi(u_c,v_c)<em>T}{2\pi}\end{array}\right.\right.$<br>可得：$Z_{c}=\frac{x_{p}t_{z}-t_{x}}{J_{x}-J_{z}x_{p}}$<br>其中<br>$\begin{aligned}&amp;\begin{aligned}J_x=(r_{11}x_c+r_{12}y_c+r_{13})\end{aligned}\text{;} \\&amp;\begin{aligned}J_z=(r_{31}x_c+r_{32}y_c+r_{33})\end{aligned}{;} \\&amp;x_{p}=(\frac{\Phi(u_{c},v_{c})</em>T}{2\pi}-u_{p0})/f_{px}。\end{aligned}$</p>
-<p>则相机坐标系下，每个像素的世界坐标为：<br>$\left.\left\{\begin{array}{l}X_c=x_c<em>Z_c\\Y_c=y_c</em>Zc\\Z_c=\frac{x_pt_z-t_x}{J_x-J_zx_p}\end{array}\right.\right.$</p>
-
+<script type="math/tex; mode=display">\left.\left\{\begin{array}{c}\mathrm{X_c=x_c*Z_c}\\\mathrm{Y_c=y_c*Z_c}\\\mathrm{Z_c=Z_c}\end{array}\right.\right.</script><script type="math/tex; mode=display">\left.\left\{\begin{array}{rl}\mathrm{x_c~=~(u_c~-u_{c0}~)/f_{cx}}\\\mathrm{y_c~=~(v_c~-v_{c0}~)/f_{cy}}\end{array}\right.\right.</script><p>$x_c,y_c$ 为 $u_c,v_c$ 的相机坐标，世界坐标 $X_w,Y_w,Z_w$ 旋转平移得到 $X_c,Y_c,Z_c$</p>
+<p>同理投影仪：</p>
+<script type="math/tex; mode=display">\left.\left\{\begin{array}{l}X_p=x_p*Z_p\\Y_p=y_p*Z_p\\Z_p=Z_p\end{array}\right.\right.</script><script type="math/tex; mode=display">\left.\left\{\begin{array}{l}x_p=(u_p-u_{p0})/f_{px}\\y_p=(v_p-v_{p0})/f_{py}\end{array}\right.\right.</script><p>由相机和投影仪外参关系：</p>
+<script type="math/tex; mode=display">\left.\left[\begin{array}{c}X_p\\Y_p\\Z_p\end{array}\right.\right]=R_{c\to p}\left[\begin{array}{c}X_c\\Y_c\\Z_c\end{array}\right]+t_{c\to p}</script><p>可得：</p>
+<script type="math/tex; mode=display">\left.\left\{\begin{array}{l}X_p=r_{11}X_c+r_{12}Y_c+r_{13}Z_c+t_x=(r_{11}x_c+r_{12}y_c+r_{13})Z_c+t_x\\Y_p=r_{21}X_c+r_{22}Y_c+r_{23}Z_c+t_y=(r_{21}x_c+r_{22}y_c+r_{23})Z_c+t_y\\Z_p=r_{31}X_c+r_{32}Y_c+r_{33}Z_c+t_z=(r_{31}x_c+r_{32}y_c+r_{33})Z_c+t_z\end{array}\right.\right.</script><p>由相机投影仪像素坐标关系：</p>
+<script type="math/tex; mode=display">\left.\left\{\begin{array}{l}u_p=f_{px}*x_p+u_{p0}\\u_p=\frac{\Phi(u_c,v_c)*T}{2\pi}\end{array}\right.\right.\Rightarrow f_{px}*x_p+u_{p0}=\frac{\Phi(u_c,v_c)*T}{2\pi}</script><p>联立上述两式：</p>
+<script type="math/tex; mode=display">\left.\left\{\begin{array}{l}x_p*Z_p=(r_{11}x_c+r_{12}y_c+r_{13})Z_c+t_x\\Z_p=(r_{31}x_c+r_{32}y_c+r_{33})Z_c+t_z\\f_{px}*x_p+u_{p0}=\frac{\Phi(u_c,v_c)*T}{2\pi}\end{array}\right.\right.</script><p>可得：$Z_{c}=\frac{x_{p}t_{z}-t_{x}}{J_{x}-J_{z}x_{p}}$</p>
+<p>其中</p>
+<script type="math/tex; mode=display">\begin{aligned}&\begin{aligned}J_x=(r_{11}x_c+r_{12}y_c+r_{13})\end{aligned}\text{;} \\&\begin{aligned}J_z=(r_{31}x_c+r_{32}y_c+r_{33})\end{aligned}{;} \\&x_{p}=(\frac{\Phi(u_{c},v_{c})*T}{2\pi}-u_{p0})/f_{px}。\end{aligned}</script><p>则相机坐标系下，每个像素的世界坐标为：</p>
+<script type="math/tex; mode=display">\left.\left\{\begin{array}{l}X_c=x_c*Z_c\\Y_c=y_c*Zc\\Z_c=\frac{x_pt_z-t_x}{J_x-J_zx_p}\end{array}\right.\right.</script>
     </div>
 
     
@@ -581,7 +586,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">132</span>
+          <span class="site-state-item-count">134</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -642,12 +647,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">461k</span>
+    <span title="Symbols count total">473k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">27:57</span>
+    <span title="Reading time total">28:40</span>
 </div>
 
         

@@ -22,8 +22,8 @@
 
   <meta name="description" content="3D Reconstruction Single-view Multi-view     特点 简单但信息不足，未见区域很难重建 多视图信息互补但一致性很难保证   深度估计 DE 2K2K,ECON MVS,MVSNet-based   隐式函数 IF PIFu,ICON NeuS,DoubleField,SuGaR   生成模型 GM BuilDIff, SG-GAN DiffuSte">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Multi-view 3D Reconstruction">
-<meta property="og:url" content="http://example.com/3DReconstruction/Basic%20Knowledge/Multi-view%203D%20Reconstruction/index.html">
+<meta property="og:title" content="Multi-view 3D Object Reconstruction">
+<meta property="og:url" content="http://example.com/3DReconstruction/Basic%20Knowledge/Multi-view%203D%20Object%20Reconstruction/index.html">
 <meta property="og:site_name" content="QiYun">
 <meta property="og:description" content="3D Reconstruction Single-view Multi-view     特点 简单但信息不足，未见区域很难重建 多视图信息互补但一致性很难保证   深度估计 DE 2K2K,ECON MVS,MVSNet-based   隐式函数 IF PIFu,ICON NeuS,DoubleField,SuGaR   生成模型 GM BuilDIff, SG-GAN DiffuSte">
 <meta property="og:locale" content="en_US">
@@ -31,13 +31,13 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231219125859.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/Network.png">
 <meta property="article:published_time" content="2023-10-23T11:54:54.000Z">
-<meta property="article:modified_time" content="2024-01-08T08:04:55.942Z">
+<meta property="article:modified_time" content="2024-02-26T03:43:18.944Z">
 <meta property="article:author" content="Qi Yun">
 <meta property="article:tag" content="3DReconstruction">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231219125844.png">
 
-<link rel="canonical" href="http://example.com/3DReconstruction/Basic%20Knowledge/Multi-view%203D%20Reconstruction/">
+<link rel="canonical" href="http://example.com/3DReconstruction/Basic%20Knowledge/Multi-view%203D%20Object%20Reconstruction/">
 
 
 <script id="page-configurations">
@@ -50,7 +50,7 @@
   };
 </script>
 
-  <title>Multi-view 3D Reconstruction | QiYun</title>
+  <title>Multi-view 3D Object Reconstruction | QiYun</title>
   
 
 
@@ -199,7 +199,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/3DReconstruction/Basic%20Knowledge/Multi-view%203D%20Reconstruction/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/3DReconstruction/Basic%20Knowledge/Multi-view%203D%20Object%20Reconstruction/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpeg">
@@ -212,7 +212,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Multi-view 3D Reconstruction
+          Multi-view 3D Object Reconstruction
         </h1>
 
         <div class="post-meta">
@@ -234,7 +234,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-01-08 16:04:55" itemprop="dateModified" datetime="2024-01-08T16:04:55+08:00">2024-01-08</time>
+                <time title="Modified: 2024-02-26 11:43:18" itemprop="dateModified" datetime="2024-02-26T11:43:18+08:00">2024-02-26</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -251,7 +251,7 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>1.4k</span>
+              <span>1.3k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -295,7 +295,7 @@
 <td style="text-align:center">NeuS,DoubleField,SuGaR</td>
 </tr>
 <tr>
-<td style="text-align:center">生成模型 <strong><a href="/3DReconstruction/Basic%20Knowledge/Generative%20Models%20Review">GM</a></strong></td>
+<td style="text-align:center">生成模型 <strong><a href="Generative%20Models%20Reconstruction.md">GM</a></strong></td>
 <td style="text-align:center">BuilDIff, SG-GAN</td>
 <td style="text-align:center">DiffuStereo</td>
 </tr>
@@ -304,54 +304,33 @@
 <td style="text-align:center">HaP</td>
 <td style="text-align:center">DMV3D</td>
 </tr>
+<tr>
+<td style="text-align:center">显式表示 ER</td>
+<td style="text-align:center">Pixel2Mesh++</td>
+<td style="text-align:center">Pixel2Mesh</td>
+</tr>
 </tbody>
 </table>
 </div>
 <p>NeRF：<a href="/3DReconstruction/Basic%20Knowledge/NeRF/NeRF-review">NeRF-review</a> | <a href="/3DReconstruction/Basic%20Knowledge/NeRF/NeRF-Mine">NeRF-Mine</a></p>
-<p>Follow: <a target="_blank" rel="noopener" href="https://www.zhihu.com/column/c_1710703836652716032">NeRF and Beyond日报</a> | <a target="_blank" rel="noopener" href="https://github.com/yangjiheng/nerf_and_beyond_docs">nerf and beyond docs</a> | <strong><a target="_blank" rel="noopener" href="https://github.com/ventusff/neurecon">ventusff/neurecon</a></strong> | <a target="_blank" rel="noopener" href="https://paperswithcode.com/task/surface-reconstruction">Surface Reconstruction</a> | <a target="_blank" rel="noopener" href="https://github.com/openMVG/awesome_3DReconstruction_list">传统3D Reconstruction</a><br>Blog: <a target="_blank" rel="noopener" href="https://longtimenohack.com/">Jianfei Guo</a> |<br>人体: <a href="/3DReconstruction/Basic%20Knowledge/Multi-view%20Human%20Body%20Reconstruction">Multi-view Human Body Reconstruction</a></p>
+<p>Follow: <a target="_blank" rel="noopener" href="https://www.zhihu.com/column/c_1710703836652716032">NeRF and Beyond日报</a> | <a target="_blank" rel="noopener" href="https://github.com/yangjiheng/nerf_and_beyond_docs">nerf and beyond docs</a> | <strong><a target="_blank" rel="noopener" href="https://github.com/ventusff/neurecon">ventusff/neurecon</a></strong> | <a target="_blank" rel="noopener" href="https://paperswithcode.com/task/surface-reconstruction">Surface Reconstruction</a> | <a target="_blank" rel="noopener" href="https://github.com/openMVG/awesome_3DReconstruction_list">传统3D Reconstruction</a><br>Blog: <a target="_blank" rel="noopener" href="https://longtimenohack.com/">Jianfei Guo</a> |<br>人体: <a href="/3DReconstruction/Basic%20Knowledge/Multi-view%20Human%20Body%20Reconstruction">Multi-view Human Body Reconstruction</a><br>评价指标/Loss: <a href="/3DReconstruction/Basic%20Knowledge/NeRF/NeRF/Metrics">Metrics</a><br>数据集: <a href="/3DReconstruction/Basic%20Knowledge/NeRF/NeRF/Datasets">Datasets</a></p>
 <span id="more"></span>
-<h1 id="Review"><a href="#Review" class="headerlink" title="Review"></a>Review</h1><h2 id="Following"><a href="#Following" class="headerlink" title="Following"></a>Following</h2><h2 id="重建方法分类"><a href="#重建方法分类" class="headerlink" title="重建方法分类"></a>重建方法分类</h2><p>三维重建是计算机视觉和计算机图像图形学相结合的一个热门研究方向。根据测量时是否与被测物体接触，可分为接触式测量和非接触式测量。</p>
-<ul>
-<li>接触式测量方法虽然测量精度高，但测量效率低，速度慢，操作不当很容易损坏被测物体表面，而且由于探头有一定表面积，对表面复杂的物体难以测量，不具备普遍性和通用性。</li>
-<li>非接触式三维测量方式又可以分为两大类：主动式测量和被动式测量。非接触式测量方式以其无损坏、测量速度高、简单等优点已成为三维轮廓测量的研究趋势。<ul>
-<li>主动式测量是向目标物体表面投射设计好的图案，该图案由于物体的高度起伏引起一定的畸变，通过匹配畸变的图案获得目标物体的。<strong>TOF、结构光三维重建</strong><ul>
-<li>结构光三维重建 <a href="/3DReconstruction/Other%20Methods/Structured%20Light/Structured%20Light%20Review">Structured Light Review</a></li>
-</ul>
-</li>
-<li>被动式测量是通过周围环境光对目标物体进行照射，然后检测目标物体的特征点以得到其数据。<strong>双目/多目视觉法、SFM、MVS、NeRF</strong><ul>
-<li>双目立体匹配 <a href="/3DReconstruction/Other%20Methods/Stereo%20Matching/Stereo%20Matching%20Review">Stereo Matching Review</a></li>
-<li>NeRF+RGBD<ul>
-<li>Neural RGB-D Surface Reconstruction</li>
-<li>BID-NeRF: RGB-D image pose estimation with inverted Neural Radiance Fields</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231219125844.png" alt="image.png|666"></p>
-<h2 id="NeRF基本流程"><a href="#NeRF基本流程" class="headerlink" title="NeRF基本流程"></a>NeRF基本流程</h2><p>被动式单目视觉的多视图三维重建，目前重建结果最好的是基于 <strong>NeRF</strong> 的多视图重建方法。NeRF基本流程为从相机位姿出发，得到多条从相机原点到图片像素的光线，在光线上进行采样得到一系列空间点，然后对采样点坐标进行编码，输入密度MLP网络进行计算，得到采样点位置的密度值，同时对该点的方向进行编码，输入颜色MLP网络计算得到该点的颜色值。然后根据体渲染函数沿着光线积分，得到像素预测的颜色值并与真实的颜色值作损失，优化MLP网络参数，最后得到一个用MLP参数隐式表达的三维模型。为了从隐式函数中提取显示模型，需要使用MarchingCube得到物体表面的点云和网格。</p>
+<h1 id="Review"><a href="#Review" class="headerlink" title="Review"></a>Review</h1><h2 id="三维重建分类"><a href="#三维重建分类" class="headerlink" title="三维重建分类"></a>三维重建分类</h2><p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231219125844.png" alt="image.png|666"></p>
+<h2 id="NeRF基本流程"><a href="#NeRF基本流程" class="headerlink" title="NeRF基本流程"></a>NeRF基本流程</h2><p>多视图三维重建，目前较好的方法是在NeuS和HashGrid方法基础上的改进。<br>NeRF基本流程为从相机位姿出发，得到多条从相机原点到图片像素的光线(<strong>像素选取方法</strong>)，在光线上进行采样得到一系列空间点(<strong>采样方式</strong>)，然后对采样点坐标进行编码(<strong>编码方式</strong>)，输入密度MLP网络进行计算(<strong>神经网络结构</strong>)，得到采样点位置的密度值，同时对该点的方向进行编码，输入颜色MLP网络计算得到该点的颜色值。然后根据体渲染函数沿着光线积分(<strong>体渲染函数</strong>)，得到像素预测的颜色值并与真实的颜色值作损失(<strong>损失函数</strong>)，优化MLP网络参数，最后得到一个用MLP参数隐式表达的三维模型。为了从隐式函数中提取显示模型，需要使用<strong>MarchingCube</strong>得到物体表面的点云和网格。</p>
 <p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231219125859.png" alt="image.png|666"></p>
 <p>应用：</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/-VU-OBpdmU0DLiEgtTFEeg">快手智能3D物体重建系统解析 (qq.com)</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/449185693">三维重建如今有什么很现实的应用吗？ - 知乎 (zhihu.com)</a></li>
+<li>LumaAI</li>
 </ul>
 <p>拓展阅读</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI0MTY1NTk1Nw==&amp;mid=2247495573&amp;idx=1&amp;sn=968b2d4fe20e1ab21e139f943b3cce71&amp;chksm=e90ae66fde7d6f79cc842d9cde6b928605e3d360d17e1fdf9bde7c854058f1649a1bc45e53a7&amp;scene=132&amp;exptype=timeline_recommend_article_extendread_samebiz#wechat_redirect">“三维AIGC与视觉大模型”十五问 (qq.com)</a></li>
 </ul>
 <hr>
-<p><strong><em>基于NeRF的多视图三维重建</em></strong></p>
 <p>研究任务与目的：设计一套快速高精度的低成本无接触三维重建系统，用以快速地在日常生活领域生成三维模型，然后进行3D打印，满足用户定制化模型的需求</p>
-<h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><h1 id="Introduction-RelatedWork"><a href="#Introduction-RelatedWork" class="headerlink" title="Introduction+RelatedWork"></a>Introduction+RelatedWork</h1><p>COLMAP：</p>
-<ul>
-<li>SFM(Structure from motion)，估计相机位姿，特征点的稀疏点云</li>
-<li>MVS(Multi-View Stereo)，估计深度图，深度图融合稠密点云</li>
-<li>泊松表面重建(Screened Poisson Surface Reconstruction)，稠密点云重建网格</li>
-</ul>
-<h2 id="传统的多视图三维重建方法"><a href="#传统的多视图三维重建方法" class="headerlink" title="传统的多视图三维重建方法"></a>传统的多视图三维重建方法</h2><ul>
+<h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><h1 id="Introduction-RelatedWork"><a href="#Introduction-RelatedWork" class="headerlink" title="Introduction+RelatedWork"></a>Introduction+RelatedWork</h1><h2 id="传统的多视图三维重建方法"><a href="#传统的多视图三维重建方法" class="headerlink" title="传统的多视图三维重建方法"></a>传统的多视图三维重建方法</h2><ul>
 <li>基于点云PointCloud <strong>SFM</strong></li>
 <li>基于网格Surface Grid</li>
 <li>基于体素Voxel</li>
@@ -367,17 +346,17 @@
 <li>优点是能够对场景进行显示建模从而合成照片级的虚拟视角</li>
 <li>缺点是这种离散表示因为不够精细化会造成重叠等伪影，而且最重要的，它们对内存的消耗限制了高分辨率场景的应用</li>
 </ul>
-<h2 id="基于NeRF的重建方法"><a href="#基于NeRF的重建方法" class="headerlink" title="基于NeRF的重建方法"></a>基于NeRF的重建方法</h2><h3 id="基于隐式表示的重建方法"><a href="#基于隐式表示的重建方法" class="headerlink" title="基于隐式表示的重建方法"></a>基于隐式表示的重建方法</h3><ul>
+<h2 id="基于NeRF的重建方法"><a href="#基于NeRF的重建方法" class="headerlink" title="基于NeRF的重建方法"></a>基于NeRF的重建方法</h2><h3 id="基于隐式表示的三维重建方法"><a href="#基于隐式表示的三维重建方法" class="headerlink" title="基于隐式表示的三维重建方法"></a>基于隐式表示的三维重建方法</h3><ul>
 <li><a target="_blank" rel="noopener" href="https://github.com/autonomousvision/occupancy_networks">occupancy_networks: This repository contains the code for the paper “Occupancy Networks - Learning 3D Reconstruction in Function Space” (github.com)</a></li>
 <li><a target="_blank" rel="noopener" href="https://github.com/facebookresearch/DeepSDF?tab=readme-ov-file">facebookresearch/DeepSDF: Learning Continuous Signed Distance Functions for Shape Representation (github.com)</a></li>
 </ul>
 <p>Occupancy Networks 与 DeepSDF 依然需要显示的三维模型作监督</p>
-<p><strong>NeRF被提出(2020 by UC Berkeley)</strong><a target="_blank" rel="noopener" href="https://www.matthewtancik.com/nerf">NeRF: Neural Radiance Fields (matthewtancik.com)</a><br><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/Network.png" alt="Network.png|666"></p>
+<h3 id="基于神经辐射场重建的三维重建方法"><a href="#基于神经辐射场重建的三维重建方法" class="headerlink" title="基于神经辐射场重建的三维重建方法"></a>基于神经辐射场重建的三维重建方法</h3><p><strong>NeRF被提出(2020 by UC Berkeley)</strong><a target="_blank" rel="noopener" href="https://www.matthewtancik.com/nerf">NeRF: Neural Radiance Fields (matthewtancik.com)</a><br><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/Network.png" alt="Network.png|666"></p>
 <ul>
 <li>优点：隐式表示低内存、自监督方法(成本低)、单个场景进行训练可以重建任意物体=(优点or缺点)=泛化性差</li>
 <li>缺点：重建速度慢、重建精度差、所需图像数量多、适用场景单一(限于有界场景、远处模糊，出现伪影)</li>
 </ul>
-<h3 id="基于神经辐射场重建方法的改进"><a href="#基于神经辐射场重建方法的改进" class="headerlink" title="基于神经辐射场重建方法的改进"></a>基于神经辐射场重建方法的改进</h3><p>重建速度+重建精度</p>
+<h3 id="NeRF的不足"><a href="#NeRF的不足" class="headerlink" title="NeRF的不足"></a>NeRF的不足</h3><p>重建速度+重建精度</p>
 <ul>
 <li>更快：Plenoxels、<strong>InstantNGP</strong></li>
 <li>更好：<a target="_blank" rel="noopener" href="https://github.com/autonomousvision/unisurf">UNISURF</a>、VolSDF、<strong>NeuS</strong></li>
@@ -387,52 +366,116 @@
 <ul>
 <li>SparseNeuS、NeuSurf、FORGE、FreeNeRF、ZeroRF、ColNeRF、SparseNeRF、pixelNeRF</li>
 </ul>
-<p>无界场景？</p>
-<p>远近细节比例不平衡</p>
+<p>远近细节比例不平衡（物体不在相机景深导致的模糊）</p>
 <ul>
 <li>Mip-NeRF、Mip-NeRF 360、Zip-NeRF</li>
 </ul>
-<h1 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h1><h2 id="数据采集平台搭建"><a href="#数据采集平台搭建" class="headerlink" title="数据采集平台搭建"></a>数据采集平台搭建</h2><p>研究角度：数据集RGB+Depth验证方法可行性与优越性</p>
-<ul>
-<li>数据集制作需要RGBD相机+三维扫描仪<br>工程角度：多角度RGBD相机重建高精度模型</li>
+<p>相机参数有误差</p>
+<p>照片质量不好（高光、阴影、HDR|LDR）</p>
+<h3 id="目前方法的不足"><a href="#目前方法的不足" class="headerlink" title="目前方法的不足"></a>目前方法的不足</h3><p>重建质量能否更好，重建速度能否更快</p>
+<h1 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h1><h2 id="大论文章节"><a href="#大论文章节" class="headerlink" title="大论文章节"></a>大论文章节</h2><ul>
+<li>基于神经隐式表面和体渲染的三维重建 NeuS<ul>
+<li>采样方式</li>
+<li>编码方式</li>
+<li>神经网络结构</li>
+<li>体渲染函数</li>
+<li>损失函数</li>
 </ul>
-<p>Color-NeuS: </p>
+</li>
+</ul>
+<p>两种结构：</p>
+<ul>
+<li>分步骤的(但是步骤之间关联要很小)</li>
+<li>分方法改进的</li>
+</ul>
+<h2 id="数据采集平台搭建"><a href="#数据采集平台搭建" class="headerlink" title="数据采集平台搭建"></a>数据采集平台搭建</h2><p>Color-NeuS: </p>
 <ul>
 <li>三维扫描仪<a target="_blank" rel="noopener" href="https://www.einscan.com/handheld-3d-scanner/einscan-pro-2x-2020/">EinScan Pro 2X - Shining3D Multifunctional Handheld Scanner | EinScan</a></li>
 </ul>
-<h2 id="2024-0101-0113"><a href="#2024-0101-0113" class="headerlink" title="2024-0101 ~ 0113"></a>2024-0101 ~ 0113</h2><p>重建项目的具体想法：</p>
+<p>DTU数据集：<a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=732026274103447552&amp;noteId=2151039906290343424">Large Scale Multi-view Stereopsis Evaluation (readpaper.com)</a></p>
 <ul>
-<li>结构光相机的选型</li>
-<li>扫描仪选型</li>
+<li>binary stripe encoding投影仪+相机（自制结构光相机） <a target="_blank" rel="noopener" href="http://roboimagedata.compute.dtu.dk/">DTU Robot Image Data Sets</a></li>
+<li>测量点云扫描精度：保龄球</li>
+</ul>
+<p>BlendedMVS数据集：<a target="_blank" rel="noopener" href="https://github.com/YoYo000/BlendedMVS">YoYo000/BlendedMVS</a></p>
+<ul>
+<li>Altizure.com online platform根据图片进行网格重建和位姿获取</li>
+<li>根据带纹理网格生成图像数据集，目前无法评估点云<a target="_blank" rel="noopener" href="https://github.com/YoYo000/BlendedMVS/issues/4">Point cloud evaluation · Issue #4</a></li>
+</ul>
+<p>Tanks and Temples：<a target="_blank" rel="noopener" href="https://www.tanksandtemples.org/">Tanks and Temples Benchmark</a></p>
+<ul>
+<li>工业激光扫描仪(FARO Focus 3D X330 HDR scanner <a target="_blank" rel="noopener" href="https://www.archiexpo.com/prod/faro/product-66338-1791336.html">Laser scanner</a>)捕获的模型</li>
+<li>评估precision、recall、F-score(重建模型与GT模型)</li>
 </ul>
 <h1 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h1><div class="table-container">
 <table>
 <thead>
 <tr>
-<th>实验时间</th>
-<th>对象</th>
+<th style="text-align:left">实验时间</th>
+<th style="text-align:center">对象</th>
 <th>方法</th>
+<th>重建时间</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>@20240108-124117</td>
-<td>dtu114_mine</td>
-<td>neus</td>
+<td style="text-align:left">@20240108-124117</td>
+<td style="text-align:center">dtu114_mine</td>
+<td>neus + HashGrid</td>
+<td></td>
 </tr>
 <tr>
-<td>@20240108-133914</td>
-<td>dtu114_mine</td>
+<td style="text-align:left">@20240108-133914</td>
+<td style="text-align:center">dtu114_mine</td>
 <td>+ ProgressiveBandHashGrid</td>
+<td></td>
 </tr>
 <tr>
-<td>@20240108-151934</td>
-<td>dtu114_mine</td>
+<td style="text-align:left">@20240108-151934</td>
+<td style="text-align:center">dtu114_mine</td>
 <td>+ loss_curvature(sdf_grad_samples)</td>
+<td></td>
 </tr>
 <tr>
+<td style="text-align:left"></td>
+<td style="text-align:center"></td>
 <td></td>
 <td></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:center">Miku_宿舍</td>
+<td>neus + HashGrid</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">@20240117-164156</td>
+<td style="text-align:center">Miku_宿舍</td>
+<td>+ ProgressiveBandHashGrid</td>
+<td>47min</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:center"></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">@20240124-165842</td>
+<td style="text-align:center">TAT_Truck</td>
+<td>ProgressiveBandHashGrid</td>
+<td>2h</td>
+</tr>
+<tr>
+<td style="text-align:left">@20240124-230245</td>
+<td style="text-align:center">TAT_Truck</td>
+<td>ProgressiveBandHashGrid</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">@20240125-113410</td>
+<td style="text-align:center">TAT_Truck</td>
+<td>ProgressiveBandHashGrid</td>
 </tr>
 </tbody>
 </table>
@@ -479,7 +522,7 @@
       <i class="fa fa-chevron-left"></i> BuilDiff
     </a></div>
       <div class="post-nav-item">
-    <a href="/3DReconstruction/Basic%20Knowledge/Generative%20Models%20Review/" rel="next" title="Generative Models Review about 3D Reconstruction">
+    <a href="/3DReconstruction/Basic%20Knowledge/Generative%20Models%20Reconstruction/" rel="next" title="Generative Models Review about 3D Reconstruction">
       Generative Models Review about 3D Reconstruction <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -540,7 +583,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Review"><span class="nav-text">Review</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Following"><span class="nav-text">Following</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%BB%BA%E6%96%B9%E6%B3%95%E5%88%86%E7%B1%BB"><span class="nav-text">重建方法分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NeRF%E5%9F%BA%E6%9C%AC%E6%B5%81%E7%A8%8B"><span class="nav-text">NeRF基本流程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract"><span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction-RelatedWork"><span class="nav-text">Introduction+RelatedWork</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%A0%E7%BB%9F%E7%9A%84%E5%A4%9A%E8%A7%86%E5%9B%BE%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA%E6%96%B9%E6%B3%95"><span class="nav-text">传统的多视图三维重建方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8ENeRF%E7%9A%84%E9%87%8D%E5%BB%BA%E6%96%B9%E6%B3%95"><span class="nav-text">基于NeRF的重建方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E9%9A%90%E5%BC%8F%E8%A1%A8%E7%A4%BA%E7%9A%84%E9%87%8D%E5%BB%BA%E6%96%B9%E6%B3%95"><span class="nav-text">基于隐式表示的重建方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E7%A5%9E%E7%BB%8F%E8%BE%90%E5%B0%84%E5%9C%BA%E9%87%8D%E5%BB%BA%E6%96%B9%E6%B3%95%E7%9A%84%E6%94%B9%E8%BF%9B"><span class="nav-text">基于神经辐射场重建方法的改进</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Method"><span class="nav-text">Method</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA"><span class="nav-text">数据采集平台搭建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2024-0101-0113"><span class="nav-text">2024-0101 ~ 0113</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C"><span class="nav-text">实验</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Review"><span class="nav-text">Review</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA%E5%88%86%E7%B1%BB"><span class="nav-text">三维重建分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NeRF%E5%9F%BA%E6%9C%AC%E6%B5%81%E7%A8%8B"><span class="nav-text">NeRF基本流程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract"><span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction-RelatedWork"><span class="nav-text">Introduction+RelatedWork</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%A0%E7%BB%9F%E7%9A%84%E5%A4%9A%E8%A7%86%E5%9B%BE%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA%E6%96%B9%E6%B3%95"><span class="nav-text">传统的多视图三维重建方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8ENeRF%E7%9A%84%E9%87%8D%E5%BB%BA%E6%96%B9%E6%B3%95"><span class="nav-text">基于NeRF的重建方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E9%9A%90%E5%BC%8F%E8%A1%A8%E7%A4%BA%E7%9A%84%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA%E6%96%B9%E6%B3%95"><span class="nav-text">基于隐式表示的三维重建方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E7%A5%9E%E7%BB%8F%E8%BE%90%E5%B0%84%E5%9C%BA%E9%87%8D%E5%BB%BA%E7%9A%84%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA%E6%96%B9%E6%B3%95"><span class="nav-text">基于神经辐射场重建的三维重建方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NeRF%E7%9A%84%E4%B8%8D%E8%B6%B3"><span class="nav-text">NeRF的不足</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E5%89%8D%E6%96%B9%E6%B3%95%E7%9A%84%E4%B8%8D%E8%B6%B3"><span class="nav-text">目前方法的不足</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Method"><span class="nav-text">Method</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%A7%E8%AE%BA%E6%96%87%E7%AB%A0%E8%8A%82"><span class="nav-text">大论文章节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA"><span class="nav-text">数据采集平台搭建</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C"><span class="nav-text">实验</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -555,7 +598,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">132</span>
+          <span class="site-state-item-count">134</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -616,12 +659,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">461k</span>
+    <span title="Symbols count total">473k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">27:57</span>
+    <span title="Reading time total">28:40</span>
 </div>
 
         
