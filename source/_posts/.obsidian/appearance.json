@@ -1,12 +1,12 @@
 {
-  "baseFontSize": 21,
+  "baseFontSize": 20,
   "theme": "system",
   "translucency": false,
-  "cssTheme": "Minimal",
+  "cssTheme": "Border",
   "interfaceFontFamily": "霞鹜文楷,Maple Mono,朱雀仿宋（预览测试版）,HarmonyOS Sans SC,HarmonyOS Sans TC,JetBrains Mono",
   "textFontFamily": "HarmonyOS Sans SC,霞鹜文楷,朱雀仿宋（预览测试版）,JetBrains Mono",
   "monospaceFontFamily": "Maple Mono,JetBrains Mono,HarmonyOS Sans SC",
-  "accentColor": "#ababab",
+  "accentColor": "",
   "nativeMenus": false,
   "enabledCssSnippets": [
     "custom-admonitions.838117"

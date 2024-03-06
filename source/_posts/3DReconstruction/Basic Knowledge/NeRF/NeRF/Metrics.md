@@ -125,6 +125,34 @@ Earth Mover's distance 推土距离,度量两个分布之间的距离
 $\mathcal{L}_{EMD}=min_{\phi:Y\rightarrow Y^{\prime}}\sum_{x\in Y}||x-\phi(x)||_{2}$ , φ indicates a parameter of bijection.
 
 
+## Accuracy、Precision、Recall & F-score
+
+[如何解释召回率与精确率？ - 朝暾的回答 - 知乎](https://www.zhihu.com/question/19645541/answer/379024071)
+[机器学习的评价指标（一）：Accuracy、Precision、Recall、F1 Score - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/364253497)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20240124100320.png)
+
+### Accuracy
+
+预测正确的样本数÷样本数总数
+$accuracy=\frac{TP+TN}{TP+TN+FP+FN}$
+
+### Precision
+
+精确率是**针对我们预测结果而言的**，它表示的是**预测为正的样本中有多少是真正的正样本**。
+$precision=\frac{TP}{TP+FP}$
+
+### Recall
+召回率是**针对我们原来的样本而言的**，它表示的是**原来样本中的正例有多少被预测正确**了，也即 真实准确的正预测在原来样本的正例中所占的百分比。
+$recall=sensitivity=\frac{TP}{TP+FN}$
+
+### F-score
+
+F-Measure是Precision和Recall的加权调和平均
+$F=\frac{(a^2+1)*precision*recall}{a^2*precision+recall}$
+
+当参数α=1时，就是最常见的F1，也即$F1=\frac{2*precision*recall}{precision+recall}$
+
 # Loss
 
 ## RGB Loss

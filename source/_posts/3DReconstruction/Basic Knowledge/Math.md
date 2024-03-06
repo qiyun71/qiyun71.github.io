@@ -12,6 +12,26 @@ categories: 3DReconstruction/Basic Knowledge
 
 <!-- more -->
 
+# 概率论
+
+## 贝叶斯
+
+全概率公式：$\mathsf{P(H)}=\mathsf{P(H|A)P(A)}+\mathsf{P(H|B)P(B)}$，结果H发生的概率
+
+贝叶斯公式：$\mathbf{P}(\mathbf{A}|\mathbf{H})=\frac{P(A)P(H|A)}{P(H)}$，H结果发生时，是由A导致的概率
+- 连续$p(y_0|x)=\frac{p(x|y_0)p(y_0)}{\int_{-\infty}^{+\infty}p(x|y)p(y)dy}$
+- 离散$p(y_j|x)=\frac{p(x|y_j)p(y_j)}{\sum_{i=0}^np(x|y_i)p(y_i)}$
+
+[走进贝叶斯统计（一）—— 先验分布与后验分布 - 知乎](https://zhuanlan.zhihu.com/p/401258319)
+在使用数据估计参数$\theta$之前，我们需要给这个参数设定一个分布，即先验分布$p(\theta)$（根据经验得到）
+
+$p(\theta|X)=\frac{p(\theta,X)}{p(X)}=\frac{p(X|\theta)p(\theta)}{\int_{-\infty}^{+\infty}p(X|\theta)p(\theta)d\theta}.$
+- $p(\theta|X)$是$\theta$的后验分布
+- $p(X|\theta)$是在给定$\theta$下关于数据样本的似然函数
+- $\int_{-\infty}^{+\infty}p(X|\theta)p(\theta)d\theta$ 为常数c，可以写为$p(\theta|X)\propto p(X|\theta)p(\theta).$
+
+[超详细讲解贝叶斯网络(Bayesian network) - USTC丶ZCC - 博客园](https://www.cnblogs.com/USTC-ZCC/p/12786860.html)
+
 # SDF计算与求导
 
 空间中的子集$\partial\Omega$，SDF值定义为：$\left.f(x)=\left\{\begin{array}{ll}d(x,\partial\Omega)&\mathrm{~if~}x\in\Omega\\-d(x,\partial\Omega)&\mathrm{~if~}x\in\Omega^c\end{array}\right.\right.$

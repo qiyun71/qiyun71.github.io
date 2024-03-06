@@ -1,48 +1,48 @@
 {
   "recentFiles": [
     {
-      "basename": "2023-2024寒假",
-      "path": "Reports/2023-2024寒假.md"
-    },
-    {
-      "basename": "ModelUpdating",
-      "path": "ModelUpdating/ModelUpdating.md"
-    },
-    {
-      "basename": "Multi-view 3D Reconstruction",
-      "path": "3DReconstruction/Basic Knowledge/Multi-view 3D Reconstruction.md"
-    },
-    {
-      "basename": "Structured Light Review",
-      "path": "3DReconstruction/Other Methods/Structured Light/Structured Light Review.md"
-    },
-    {
-      "basename": "Math",
-      "path": "3DReconstruction/Basic Knowledge/Math.md"
+      "basename": "NeRF-based 3D Reconstruction",
+      "path": "Reports/NeRF-based 3D Reconstruction.md"
     },
     {
       "basename": "NeRF-Mine",
       "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF-Mine.md"
     },
     {
-      "basename": "Multi-view Human Body Reconstruction",
-      "path": "3DReconstruction/Basic Knowledge/Multi-view Human Body Reconstruction.md"
+      "basename": "Multi-view 3D Object Reconstruction",
+      "path": "3DReconstruction/Basic Knowledge/Multi-view 3D Object Reconstruction.md"
     },
     {
-      "basename": "Datasets",
-      "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF/Datasets.md"
+      "basename": "MyGo",
+      "path": "Other/Mine/MyGo.md"
     },
     {
-      "basename": "Metrics",
-      "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF/Metrics.md"
+      "basename": "Learn-Algo",
+      "path": "Learn/Learn-Algo.md"
     },
     {
-      "basename": "Encoding",
-      "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF/Encoding.md"
+      "basename": "ModelUpdating",
+      "path": "ModelUpdating/ModelUpdating.md"
     },
     {
-      "basename": "Sampling",
-      "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF/Sampling.md"
+      "basename": "ReadPaper",
+      "path": "ModelUpdating/ReadPaper.md"
+    },
+    {
+      "basename": "核领域可靠性",
+      "path": "Other/核领域可靠性.md"
+    },
+    {
+      "basename": "Learn-DeepLearning",
+      "path": "Learn/Learn-DeepLearning.md"
+    },
+    {
+      "basename": "Math",
+      "path": "3DReconstruction/Basic Knowledge/Math.md"
+    },
+    {
+      "basename": "Color-NeuS",
+      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Color-NeuS.md"
     },
     {
       "basename": "NeRF-review",
@@ -53,148 +53,8 @@
       "path": "3DReconstruction/Basic Knowledge/Other Paper About Reconstruction.md"
     },
     {
-      "basename": "Learn-DeepLearning",
-      "path": "Learn/Learn-DeepLearning.md"
-    },
-    {
-      "basename": "Generative Models Review",
-      "path": "3DReconstruction/Basic Knowledge/Generative Models Review.md"
-    },
-    {
-      "basename": "LoD-NeuS",
-      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/LoD-NeuS.md"
-    },
-    {
-      "basename": "NeuSurf",
-      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Sparse/NeuSurf.md"
-    },
-    {
-      "basename": "2024-01-05",
-      "path": "Reports/2024-01-05.md"
-    },
-    {
-      "basename": "Learn-PyTorch",
-      "path": "Learn/Learn-PyTorch.md"
-    },
-    {
-      "basename": "Diffusion Models",
-      "path": "3DReconstruction/Basic Knowledge/Diffusion Models.md"
-    },
-    {
-      "basename": "Neuralangelo",
-      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Efficiency/Neuralangelo.md"
-    },
-    {
-      "basename": "2023-12-31",
-      "path": "Reports/2023-12-31.md"
-    },
-    {
-      "basename": "Stereo Matching Review",
-      "path": "3DReconstruction/Other Methods/Stereo Matching/Stereo Matching Review.md"
-    },
-    {
-      "basename": "SDFStudio",
-      "path": "3DReconstruction/Multi-view/Implicit Function/SDFStudio.md"
-    },
-    {
-      "basename": "NeuS",
-      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/NeuS.md"
-    },
-    {
-      "basename": "Color-NeuS",
-      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Color-NeuS.md"
-    },
-    {
-      "basename": "NISR",
-      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/NISR.md"
-    },
-    {
-      "basename": "DVR",
-      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/DVR.md"
-    },
-    {
-      "basename": "VolSDF",
-      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/VolSDF.md"
-    },
-    {
-      "basename": "FreeNeRF",
-      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Sparse/FreeNeRF.md"
-    },
-    {
-      "basename": "RegNeRF",
-      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Loss/RegNeRF.md"
-    },
-    {
-      "basename": "SparseNeuS",
-      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Sparse/SparseNeuS.md"
-    },
-    {
-      "basename": "FORGE",
-      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Sparse/FORGE.md"
-    },
-    {
-      "basename": "ColNeRF",
-      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Sparse/ColNeRF.md"
-    },
-    {
-      "basename": "ZeroRF",
-      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Sparse/ZeroRF.md"
-    },
-    {
-      "basename": "Neus-Instant-nsr-pl",
-      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Efficiency/Neus-Instant-nsr-pl.md"
-    },
-    {
-      "basename": "UniSDF",
-      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Shadow&Highlight/UniSDF.md"
-    },
-    {
-      "basename": "ShadowNeuS",
-      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Shadow&Highlight/ShadowNeuS.md"
-    },
-    {
-      "basename": "NoPose-NeuS",
-      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/NoPose/NoPose-NeuS.md"
-    },
-    {
-      "basename": "2023-12-20",
-      "path": "Reports/2023-12-20.md"
-    },
-    {
-      "basename": "NeRF-InstantNGP",
-      "path": "3DReconstruction/Basic Knowledge/NeRF/Efficiency/NeRF-InstantNGP.md"
-    },
-    {
-      "basename": "NeRF++",
-      "path": "3DReconstruction/Basic Knowledge/NeRF/LargeScaleScene/NeRF++.md"
-    },
-    {
-      "basename": "NeuS2",
-      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Efficiency/NeuS2.md"
-    },
-    {
-      "basename": "NeRF-Principle",
-      "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF-Principle.md"
-    },
-    {
-      "basename": "Geo-Neus",
-      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Geo-Neus.md"
-    },
-    {
-      "basename": "3D Gaussian Splatting",
-      "path": "3DReconstruction/Multi-view/Explicit Volumetric/3D Gaussian Splatting.md"
-    },
-    {
-      "basename": "SuGaR",
-      "path": "3DReconstruction/Multi-view/Implicit Function/GS-based/SuGaR.md"
-    },
-    {
-      "basename": "MonoSDF",
-      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Loss/MonoSDF.md"
-    },
-    {
-      "basename": "Voxurf",
-      "path": "3DReconstruction/Multi-view/Explicit Volumetric/Voxurf.md"
+      "basename": "Explicit Represent Reconstruction",
+      "path": "3DReconstruction/Basic Knowledge/Explicit Represent Reconstruction.md"
     }
   ],
   "omittedPaths": [],

@@ -6,7 +6,7 @@ categories: ModelUpdating
 ---
 
 **模型修正 Model Updating**
-*卫星(结构<-->振动)利用频率响应(FR)等数据进行有限元模型结构参数的更新*
+*(结构<-->振动)利用频率响应(FR)等数据对有限元模型结构参数进行更新*
 
 <!-- more -->
 
@@ -26,13 +26,22 @@ categories: ModelUpdating
   - 模态参数识别:是指对振动系统进行激振（即输入），**通过测量获得系统的输入、输出**（或仅仅是输出）信号数据，经过对他们进行处理和分析，依据不同的识别模型和方法，**识别出系统的结构模态参数**（如频率、阻尼比、振型、模态刚度、模态质量等）。这类问题为结构动力学第一类逆问题[模态参数识别及有限元模型修正(seu.edu.cn)](https://seugs.seu.edu.cn/_upload/article/files/e0/39/83ad9ffd4cc098c6a6a3f439177e/7cd241da-840e-437a-9bbd-3a0794d1584c.pdf)
     - 模态参数识别是结构动力学中的反问题，它建立在实验的基础上，基于理论与实验相结合的原则，辨识出系统的模态参数，最终实现对系统的改进。通过获取结构的动力学特性，对结构性能进行评价，从而判断结构的可靠性及安全性是否符合要求。
 
-## 模型修正
 
-[有限元模型修正方法 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/400178176)
-- 基于动力有限元模型修正：矩阵型修正方法、**设计参数型修正方法**
-  - 矩阵型有限元模型修正法是对有限元模型的刚度矩阵和质量矩阵进行直接修正
-  - 设计参数型模型修正是对结构的设计参数，如材料的弹性模量，质量密度，截面积，弯曲、扭转惯量等参数进行修正。
-- 基于静力有限元模型修正
+## 不确定性
+
+不确定性根据系统内的不确定性来源可以分为Aleatoric Uncertainty和Epistemic Uncertainty，Aleatoric Uncertainty通常指的是数据不确定性，往往来自于数据本身的randomness或variability，是数据固有的一种属性。Epistemic uncertainty通常指的是模型不确定性或认知不确定性，其不确定性通常来源于缺乏足量信息的支撑。这个挑战中。
+
+> https://zhuanlan.zhihu.com/p/656915794
+
+Uncertainty sources：Parameter uncertainty、Model form uncertainty、Experiment uncertainty
+根据参数是否存在认知epistemic和/或选择性aleatory不确定性，**将不确定性参数分为四类**：
+- 既不具有认知不确定性，也不具有选择性不确定性的参数被表示为具有完全确定值的常数。
+- 只有认知不确定性的参数被表示为一个未知但固定的常数，落在预定义的区间内。
+- 将仅具有aleatory不确定性的参数表示为具有完全确定的分布性质(如分布格式、均值、方差等)的随机变量。这种完全确定的分布称为“精确概率”。
+- 同时具有认知不确定性和选择性不确定性的参数被表示为一个分布性质不完全确定的随机变量，即“不精确概率”。这种不精确的概率由所谓的概率盒(P-box)来建模，其中无限数量的累积分布函数(CDF)曲线构成概率空间中的特定区域。
+
+不确定性模型：不确定性参数的分布/区间/P-box
+- BMM(Beta Mixture Model)
 
 ## CNN
 
@@ -44,39 +53,50 @@ Other：
 
 ## 信号分析
 
-频谱分析：[从傅里叶变换，到短时傅里叶变换，再到小波分析（CWT），看这一篇就够了（附MATLAB傻瓜式实现代码） - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/589651368)
+- 频谱分析：[从傅里叶变换，到短时傅里叶变换，再到小波分析（CWT），看这一篇就够了（附MATLAB傻瓜式实现代码） - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/589651368)
+- 经验模态分解EMD [这篇文章能让你明白经验模态分解（EMD）——基础理论篇 - 知乎](https://zhuanlan.zhihu.com/p/40005057)
+- 
 
-# 论文
+# 模型修正MU
 
-## 有限元模型修正研究进展:从线性到非线性
-- 线性有限元模型修正
-  - 传统有限元模型修正方法(基于动力的有限元模型修正仍为本领域研究的主流)，根据修正的对象可分为：
-    - 矩阵型方法
-    - **参数型方法** 
-      - 基于灵敏度的有限元模型修正方法
-      - 采用缩聚模型或代理模型 (surrogate model) 的方法, 以及不基于灵敏度的参数型方法
-        - CMCM：不基于灵敏度的参数型方法，交叉模型交叉模态法 (cross-model cross-mode method, CMCM) 不需要进行迭代运算, 且不需要计算灵敏度
-        - 神经网络法：
-        - 响应面法：
-- 非线性有限元模型修正发展现状
+## 基础知识
 
-## A robust stochastic model updating method with resampling processing
+[有限元模型修正方法 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/400178176)
+- 基于动力有限元模型修正：矩阵型修正方法、**设计参数型修正方法**
+  - 矩阵型有限元模型修正法是对有限元模型的刚度矩阵和质量矩阵进行直接修正
+  - 设计参数型模型修正是对结构的设计参数，如材料的弹性模量，质量密度，截面积，弯曲、扭转惯量等参数进行修正。
+- 基于静力有限元模型修正
 
-为了更好地估计参数的不确定性，提出了一种鲁棒随机模型更新框架。在该框架中，为了提高鲁棒性，重采样过程主要设计用于处理不良样本点，特别是有限样本量问题。其次，提出了基于巴塔查里亚距离和欧几里得距离的平均距离不确定度度量，以充分利用测量的可用信息。随后采用粒子群优化算法对结构的输入参数进行更新。最后以质量-弹簧系统和钢板结构为例说明了该方法的有效性和优越性。通过将测量样品加入不良样品，讨论了重采样过程的作用。
+按照样本数量多少(实验样本数据有时很难获得)
+- 随机模型修正(样本数量多)
+- 区间模型修正(样本数量少)：
+  - Interval model updating is typically performed when gathering data is expensive, time-consuming, or complex and only a limited amount of data is available to perform non-deterministic model updating.
+  - 随机模型修正的方法需要大量的实验数据，区间方法被引入，作为一种有用的替代方法来量化不确定参数。Deng等开发了用于更新不确定参数均值和区间半径的两步法。[Interval identification of structural parameters using interval overlap ratio and Monte Carlo simulation](https://readpaper.com/pdf-annotate/note?pdfId=2201610607974204928&noteId=2201611039416835840)
 
-- 有限元模型具有一定的不确定性，主要是由于模型的简化、近似以及模型参数的不确定性，如弹性模量、几何尺寸、边界条件、静、动载荷条件等。
-- 实验系统的测量都具有一定的不确定度。这种不确定性与难以控制的随机实验效应有关，如制造公差引入的偏差，随后信号处理期间的测量噪声或有限的测量数据。
+模型修正术语：Model updating、Model verification(计算模型是否准确地表示底层数学方程及其解的过程)、Model validation(从其预期用途的角度确定模型准确表示专用物理实验的程度)、Uncertainty quantification、Uncertainty propagation
 
-## UCNN-based Model updating 
 
-[A frequency response model updating method based on unidirectional convolutional neural network (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=2110304823896008192&noteId=2110305055136380672)
+## 组成结构
 
-本文提出了一种基于单向卷积神经网络 (UCNN) 的方法，以利用频率响应 (FR) 数据进行有限元模型更新。UCNN 旨在在没有任何人工特征提取的情况下从 FR 数据获取高精度逆映射到更新参数。单向卷积分别应用于 FR 数据的频率和位置维度，以避免数据耦合。UCNN 在卫星模型更新实验中优于基于残差的模型更新方法和二维卷积神经网络。它在训练集中内外都实现了高精度的结果。
+**不确定性参数/UQ**(待修正参数)
+- 设计参数型模型修正：材料参数(E、$\rho$)、结构参数()
+- 矩阵型有限元模型修正：有限元模型的质量和刚度矩阵
+**模型输出特征**(有限元计算输出)
+- 特征值、模态频率、FRF
+**有限元模型/Uncertainty propagation**(由于FE计算花费大，大多使用代理模型)
+- Surrogate Model
+**UQ指标**(计算仿真和实验输出特征之间的差异)
+- 特征is分布：
+  - 巴氏距离$BD(p(\boldsymbol{x}),q(\boldsymbol{x}))=-\log\int\sqrt{p(\boldsymbol{x})q(\boldsymbol{x})}d\boldsymbol{x}$ or $BD(p_1,p_2)=-\ln\sum_{x\in X}\sqrt{p_1(x)p_2(x)}$
+  - 
+- 特征is区间or单个定值：
+  - 欧式距离
+- 子区间相似度(随机和区间都可以使用)
+**优化算法**(修正算法)
+- SSA、Particle swarm粒子群 optimizer algorithm
+- CNN、RNN、MLP......
 
-评价指标：
-- FR 保证准则(assurance criterion) $FRAC=\frac{|H_e^TH_s|^2}{(H_e^TH_e)(H_s^TH_s)}$ 用于描述试验数据与模拟 FR 数据的相似度
-
-# 模型修正(卫星ex)
+# 模型修正(卫星 ex)
 ## 传统方法 Convention
 
 - 有限元方法获取数据集耗费时间长，使用一个代理模型来代替有限元计算模型。
@@ -126,19 +146,21 @@ Other：
 
 主体结构6个参数为：只修正三个参数：$\theta_1$、$\theta_3$、$\theta_5$
 - **主弹性模量**$\theta_1$ 70Gpa，
-- 主密度 $\theta_2$  ，密度2.7x $10^{3} kg/m^{3}$ (英文论文) or 适配器厚度(本1)
+- 主密度 $\theta_2$  ，密度2.7x $10^{3} kg/m^{3}$ (英文论文) or 适配器厚度 1mm(本 1)
 - **中心筒厚度**$\theta_3$ 2mm
 - 底板厚度 $\theta_4$ 1mm
 - **剪切板厚度**$\theta_5$ 2mm
-- 顶板厚度 $\theta_6$ 2mm
-  - 其中 $\theta_{4}、\theta_6$ 为常数，其他为待修正参数，$\theta_2$ 训练效果很差，直接去掉了，可能造成影响(本1)
+- 顶板厚度 $\theta_6$ 2.5mm
+  - 其中 $\theta_{4}、\theta_6$ 为常数，其他为待修正参数，$\theta_2$ 训练效果很差，直接去掉了，可能造成影响(本 1)
   - 其他参数：模型高 1250mm，中心筒直径 400mm，顶板边长 600mm，剪切板长 1000mm，宽 400mm
 
 **数据集生成**
-- 先在一定范围内生成均匀生成10000组待修正参数
+- 先在一定范围内生成均匀生成 10000 组待修正参数
   - 弹性模量 50.0~90.0GPa
-  - 中心筒厚度 1.00~3.00mm
-  - 剪切板厚度 1.00~3.00mm
+  - ~~适配器厚度 0.50~1.50mm~~
+  - ~~中心筒厚度 1.00~3.00mm~~
+  - ~~剪切板厚度 1.00~3.00mm # 本科生 1 数据集中生成的是 0.50~1.50mm~~
+  - 顶板厚度 1.50~3.50mm
 - 将随机生成的结构参数输入有限元模型，得到水平 X 和竖直 Y 方向、11 个节点在 0~50Hz 频率下的加速度响应
 
 FR 数据转图：
@@ -157,7 +179,21 @@ $错误率 = \frac{|预测值-标签GT|}{标签GT}$
 
 ### Mine
 
-#### 网络结构：
+
+#### 数据集
+
+data/
+- FE：生成数据集的matlab程序，需要调用nastran
+- test：测试网络精度数据集（均匀）
+- test_1：测试网络 修正结果的数据集（正态）
+- test_1_pred：根据test_1预测的参数结果，输入nastran得到的响应结果
+- train：训练网络数据集（均匀）
+- test_npy、test_1_npy、test_1_pred、train_npy：excel转为npy格式
+- train_npy copy：train转为npy时选取的频率范围为0~50Hz，其他为30Hz，用于绘制数据处理例子的流程图
+- train_npy_24_3theta、test_npy_24_3theta为本科生的修正3个参数的数据
+- train_npy_norm，
+
+#### 网络结构
 
 **UCNN**
 
@@ -175,7 +211,7 @@ $错误率 = \frac{|预测值-标签GT|}{标签GT}$
 
 **ResNet50**
 
-![resnet.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/picturesresnet.png)<br>                                                                                                              |
+![resnet.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/picturesresnet.png) <br>                                                                                                              |
 
 
 #### 实验记录
@@ -309,3 +345,36 @@ error_rate_each2=:0.08872962392607951=(0.08887535240501165/1.0016423881053924)
 
 [模态分析软件|模态测试系统|实验模态分析|模态测试软件|模态软件 (hzrad.com)](http://www.hzrad.com/edm-modal-analysis)
 
+# 有限元软件
+
+## Nastran
+
+[如何用matlab被nastran给整的明明白白 PART 1 KNOW YOUR ENEMY——.bdf文件 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/33538970)
+
+[Welcome to pyNastran’s documentation for v1.3! — pyNastran 1.3 1.3 documentation (pynastran-git.readthedocs.io)](https://pynastran-git.readthedocs.io/en/1.3/index.html)
+
+### 不同结构参数生成结构特征量
+
+```
+$ Elements and Element Properties for region : Shear_Panels
+PSHELL   1       1      .003     1               1
+
+- 36  行 .003 Shear_Panels 厚度 theta5
+- 429 行 .002 Central_Cylinder 厚度 theta3
+- 666 行 .001 Adapter 厚度 theta2 本来应该是密度2.7
+- 723 行 .002 Upper_platform 厚度 theta6
+- 864 行 .001 Lower_platform 厚度 theta4
+- 1020行 7.   mat_N 弹性模量  theta1  
+- 1023行 7.   mat_CC
+- 1026行 7.   mat_L
+- 1029行 7.   mat_SP
+- 1032行 7.   mat_U
+- 
+```
+
+- **主弹性模量**$\theta_1$ 70Gpa，
+- **主密度** $\theta_2$  ，密度2.7x $10^{3} kg/m^{3}$ (英文论文) or 适配器厚度 1mm(本 1)
+- **中心筒厚度**$\theta_3$ 2mm
+- 底板厚度 $\theta_4$ 1mm
+- **剪切板厚度**$\theta_5$ 2mm
+- 顶板厚度 $\theta_6$ 2.5mm
