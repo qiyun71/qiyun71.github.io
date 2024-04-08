@@ -22,12 +22,11 @@
 
   <meta name="description" content="3D Reconstruction 相关数学方法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Math about 3D Reconstruction">
-<meta property="og:url" content="http://example.com/3DReconstruction/Basic%20Knowledge/Math/index.html">
+<meta property="og:title" content="Math">
+<meta property="og:url" content="http://example.com/3DReconstruction/Basic%20Knowledge/Math%20about%203D%20Reconstruction/index.html">
 <meta property="og:site_name" content="QiYun">
 <meta property="og:description" content="3D Reconstruction 相关数学方法">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230921163941.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230703144039.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230804191552.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/BRDF.png">
@@ -37,22 +36,14 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230731210724.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230731210734.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230731212626.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/v2-eb0945aa2185df958f4568e58300e77a_1440w.gif">
-<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230801135729.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230801135800.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230801140044.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230801140645.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230810162118.png">
 <meta property="article:published_time" content="2023-10-12T13:09:01.000Z">
-<meta property="article:modified_time" content="2024-02-28T06:32:29.762Z">
+<meta property="article:modified_time" content="2024-03-30T13:42:43.825Z">
 <meta property="article:author" content="Qi Yun">
-<meta property="article:tag" content="3DReconstruction">
-<meta property="article:tag" content="SurfaceReconstruction">
 <meta property="article:tag" content="Math">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230921163941.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230703144039.png">
 
-<link rel="canonical" href="http://example.com/3DReconstruction/Basic%20Knowledge/Math/">
+<link rel="canonical" href="http://example.com/3DReconstruction/Basic%20Knowledge/Math%20about%203D%20Reconstruction/">
 
 
 <script id="page-configurations">
@@ -65,7 +56,7 @@
   };
 </script>
 
-  <title>Math about 3D Reconstruction | QiYun</title>
+  <title>Math | QiYun</title>
   
 
 
@@ -214,7 +205,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/3DReconstruction/Basic%20Knowledge/Math/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/3DReconstruction/Basic%20Knowledge/Math%20about%203D%20Reconstruction/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpeg">
@@ -227,7 +218,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Math about 3D Reconstruction
+          Math
         </h1>
 
         <div class="post-meta">
@@ -245,7 +236,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-02-28 14:32:29" itemprop="dateModified" datetime="2024-02-28T14:32:29+08:00">2024-02-28</time>
+                <time title="Modified: 2024-03-30 21:42:43" itemprop="dateModified" datetime="2024-03-30T21:42:43+08:00">2024-03-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -262,13 +253,13 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>6.3k</span>
+              <span>4.8k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span>23 mins.</span>
+              <span>17 mins.</span>
             </span>
 
         </div>
@@ -282,45 +273,31 @@
       
         <p>3D Reconstruction 相关数学方法</p>
 <span id="more"></span>
-<h1 id="概率论"><a href="#概率论" class="headerlink" title="概率论"></a>概率论</h1><h2 id="贝叶斯"><a href="#贝叶斯" class="headerlink" title="贝叶斯"></a>贝叶斯</h2><p>全概率公式：$\mathsf{P(H)}=\mathsf{P(H|A)P(A)}+\mathsf{P(H|B)P(B)}$，结果H发生的概率</p>
-<p>贝叶斯公式：$\mathbf{P}(\mathbf{A}|\mathbf{H})=\frac{P(A)P(H|A)}{P(H)}$，H结果发生时，是由A导致的概率</p>
+<h1 id="体渲染函数"><a href="#体渲染函数" class="headerlink" title="体渲染函数"></a>体渲染函数</h1><p>Ray: $\mathbf{r} = \mathbf{o} +t\mathbf{d}$</p>
+<p>NeRF:<br>$\mathrm{C}(r)=\int_{\mathrm{t}_{\mathrm{n}}}^{\mathrm{t}_{\mathrm{f}}} \mathrm{T}(\mathrm{t}) \sigma(\mathrm{r}(\mathrm{t})) \mathrm{c}(\mathrm{r}(\mathrm{t}), \mathrm{d}) \mathrm{dt}$</p>
 <ul>
-<li>连续$p(y_0|x)=\frac{p(x|y_0)p(y_0)}{\int_{-\infty}^{+\infty}p(x|y)p(y)dy}$</li>
-<li>离散$p(y_j|x)=\frac{p(x|y_j)p(y_j)}{\sum_{i=0}^np(x|y_i)p(y_i)}$</li>
+<li>$\mathrm{T}(\mathrm{t})=\exp \left(-\int_{\mathrm{t}_{\mathrm{n}}}^{\mathrm{t}} \sigma(\mathrm{r}(\mathrm{s})) \mathrm{ds}\right)$</li>
+<li>累计透射率$T(t)$可以保证离相机位置近的地方有更大的权重(一条光线前面的点遮挡后面的点)<br>离散化：$\hat{C}(\mathbf{r})=\sum_{i=1}^{N} T_{i}\alpha_{i}\mathbf{c}_{i}=\sum_{i=1}^{N} T_{i}\left(1-\exp \left(-\sigma_{i} \delta_{i}\right)\right) \mathbf{c}_{i}$  </li>
+<li>$T_{i}=\exp \left(-\sum_{j=1}^{i-1} \sigma_{j} \delta_{j}\right)=\prod_{j=1}^{i-1}(1-\alpha_j)$ </li>
 </ul>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/401258319">走进贝叶斯统计（一）—— 先验分布与后验分布 - 知乎</a><br>在使用数据估计参数$\theta$之前，我们需要给这个参数设定一个分布，即先验分布$p(\theta)$（根据经验得到）</p>
-<p>$p(\theta|X)=\frac{p(\theta,X)}{p(X)}=\frac{p(X|\theta)p(\theta)}{\int_{-\infty}^{+\infty}p(X|\theta)p(\theta)d\theta}.$</p>
+<p>NeuS<br>$C(\mathbf{o},\mathbf{v})=\int_{0}^{+\infty}w(t)c(\mathbf{p}(t),\mathbf{d})\mathrm{d}t$</p>
 <ul>
-<li>$p(\theta|X)$是$\theta$的后验分布</li>
-<li>$p(X|\theta)$是在给定$\theta$下关于数据样本的似然函数</li>
-<li>$\int_{-\infty}^{+\infty}p(X|\theta)p(\theta)d\theta$ 为常数c，可以写为$p(\theta|X)\propto p(X|\theta)p(\theta).$</li>
+<li>$\omega(t)=T(t)\rho(t),\text{where}T(t)=\exp\left(-\int_0^t\rho(u)\mathrm{d}u\right)$ </li>
+<li>$\rho(t)=\max\left(\frac{-\frac{\mathrm{d}\Phi_s}{\mathrm{d}t}(f(\mathbf{p}(t)))}{\Phi_s(f(\mathbf{p}(t)))},0\right)$<br>离散化：$\hat{C}=\sum_{i=1}^n T_i\alpha_i c_i$</li>
+<li>$T_i=\prod_{j=1}^{i-1}(1-\alpha_j)$</li>
+<li>$\alpha_i=\max\left(\frac{\Phi_s(f(\mathbf{p}(t_i))))-\Phi_s(f(\mathbf{p}(t_{i+1})))}{\Phi_s(f(\mathbf{p}(t_i)))},0\right)$</li>
 </ul>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/USTC-ZCC/p/12786860.html">超详细讲解贝叶斯网络(Bayesian network) - USTC丶ZCC - 博客园</a></p>
-<h1 id="SDF计算与求导"><a href="#SDF计算与求导" class="headerlink" title="SDF计算与求导"></a>SDF计算与求导</h1><p>空间中的子集$\partial\Omega$，SDF值定义为：$\left.f(x)=\left\{\begin{array}{ll}d(x,\partial\Omega)&amp;\mathrm{~if~}x\in\Omega\-d(x,\partial\Omega)&amp;\mathrm{~if~}x\in\Omega^c\end{array}\right.\right.$<br>其中$d(x,\partial\Omega):=\inf_{y\in\partial\Omega}d(x,y)$表示x到表面子集上一点的距离，inf表示infimum最大下界</p>
-<h1 id="权重计算"><a href="#权重计算" class="headerlink" title="权重计算"></a>权重计算</h1><h2 id="2K2K"><a href="#2K2K" class="headerlink" title="2K2K"></a>2K2K</h2><p>来源：<a target="_blank" rel="noopener" href="https://github.com/SangHunHan92/2K2K/blob/main/models/deep_human_models.py">2K2K Code</a><br>目的：part 法向量图 —&gt; 原图大小对应法向量图</p>
-<p>根据 part 法向量图逆仿射变换回原图空间 $\mathbf{n}_{i}=\mathbf{M}_{i}^{-1}\mathbf{\bar{n}}_{i}$<br>要将 part 法向量图融合为原图空间法向量图，每个法向量图有不同的权重$\mathbf{N}^h\quad=\sum\limits_{i=1}^K\left(\mathbf{W}_i\odot\mathbf{n}_i\right)$</p>
-<p>权重的<strong>计算方法</strong>：</p>
-<script type="math/tex; mode=display">\mathbf{W}_i(x,y)=\frac{G(x,y)*\phi_i(x,y)}{\sum_iG(x,y)*\phi_i(x,y)}</script><ul>
-<li>同时与 part 法向量图逆仿射变换的还有一个 Occupancy Grid Map O，表示在原图空间中每个 part 的占用值 0 或者 1，i.e. $\left.\phi_i(x,y)=\left\{\begin{array}{cc}1&amp;\text{if}&amp;\sum\mathbf{n}_i(x,y)\neq\mathbf{0}^\top\\0&amp;\text{otherwise}\end{array}\right.\right.$</li>
-<li>对 O 做高斯模糊 GaussianBlur，<strong>使得 O map 的值到边缘逐渐减小</strong></li>
-<li>如下图，face part 脖子上方中心处 O 值做完高斯模糊后依然近似 1(假设 1)，而 body part 上部分脖子中心处做完高斯模糊后 O 值<1(假设 1/2)，这会导致对于脖子这部分多 part 融合时，face part normal 的权重相对于 body part normal 的权重会更大一点(2/3 > 1/3)</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230921163941.png" alt="image.png"></p>
-<h1 id="卷积-Pytorch"><a href="#卷积-Pytorch" class="headerlink" title="卷积 Pytorch"></a>卷积 Pytorch</h1><p>图像卷积后的大小计算公式： $N=\left\lfloor\frac{W-F+2P}{Step}\right\rfloor+1$</p>
+<h1 id="Encoding"><a href="#Encoding" class="headerlink" title="Encoding"></a>Encoding</h1><p>Frequency Encoding<br>$\gamma(p)=\left(\sin \left(2^{0} \pi p\right), \cos \left(2^{0} \pi p\right), \cdots, \sin \left(2^{L-1} \pi p\right), \cos \left(2^{L-1} \pi p\right)\right)$</p>
 <ul>
-<li>输入图片大小 <code>W * W</code></li>
-<li>Filter（卷积核）大小 <code>F * F</code></li>
-<li>步长 Step</li>
-<li>padding（填充）的像素数 P</li>
-<li>输出图片的大小为<code>N * N</code></li>
+<li>$p=x|y|z$</li>
+<li>$L= constant$</li>
 </ul>
-<hr>
-<h1 id="NeRF相关的数学知识"><a href="#NeRF相关的数学知识" class="headerlink" title="NeRF相关的数学知识"></a>NeRF相关的数学知识</h1><h2 id="坐标变换"><a href="#坐标变换" class="headerlink" title="坐标变换"></a>坐标变换</h2><p>内参矩阵 = c2p<br>外参矩阵 = w2c<br>像素坐标 = <code>c2p * w2c * world_position</code></p>
-<h3 id="相机内参矩阵intrinsic-c2p"><a href="#相机内参矩阵intrinsic-c2p" class="headerlink" title="相机内参矩阵intrinsic_c2p"></a>相机内参矩阵intrinsic_c2p</h3><p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230703144039.png" alt="image.png"></p>
+<h1 id="NeRF相关的数学知识"><a href="#NeRF相关的数学知识" class="headerlink" title="NeRF相关的数学知识"></a>NeRF相关的数学知识</h1><h2 id="坐标变换"><a href="#坐标变换" class="headerlink" title="坐标变换"></a>坐标变换</h2><p>像素Pixel | 相机Camera | 世界World</p>
+<p>内参矩阵 = c2p<br>外参矩阵 = w2c<br>根据世界坐标计算像素坐标 = <code>c2p * w2c * world_position</code></p>
+<h3 id="相机内参矩阵intrinsic-c2p"><a href="#相机内参矩阵intrinsic-c2p" class="headerlink" title="相机内参矩阵intrinsic_c2p"></a>相机内参矩阵intrinsic_c2p</h3><p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230703144039.png" alt="image.png|444"></p>
 <blockquote>
 <p>理解与<a target="_blank" rel="noopener" href="https://blog.csdn.net/OrdinaryMatthew/article/details/126670351">NeRF OpenCV OpenGL COLMAP DeepVoxels坐标系朝向_nerf坐标系_培之的博客-CSDN博客</a>一致</p>
 </blockquote>
-<p>NeRF = OpenGL = Blender<br>Neus = Colmap</p>
 <div class="table-container">
 <table>
 <thead>
@@ -347,7 +324,8 @@
 <h3 id="相机外参矩阵w2c"><a href="#相机外参矩阵w2c" class="headerlink" title="相机外参矩阵w2c"></a>相机外参矩阵w2c</h3><blockquote>
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/642715876">相机位姿(camera pose)与外参矩阵 - 知乎 (zhihu.com)</a></p>
 </blockquote>
-<p>colmap处理得到的<code>/colmap/sparse/0</code>中文件cameras, images, points3D.bin or .txt<br>其中images.bin中：<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># IMAGE_ID, QW, QX, QY, QZ, TX, TY, TZ, CAMERA_ID, NAME</span><br><span class="line"># POINTS2D[] as (X, Y, POINT3D_ID)</span><br><span class="line"># Number of images: 2, mean observations per image: 2</span><br></pre></td></tr></table></figure></p>
+<p>colmap处理得到的<code>/colmap/sparse/0</code>中文件cameras, images, points3D.bin or .txt<br>其中images.bin中：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># IMAGE_ID, QW, QX, QY, QZ, TX, TY, TZ, CAMERA_ID, NAME</span><br><span class="line"># POINTS2D[] as (X, Y, POINT3D_ID)</span><br><span class="line"># Number of images: 2, mean observations per image: 2</span><br></pre></td></tr></table></figure>
 <p>pose: QW, QX, QY, QZ, TX, TY, TZ</p>
 <p>由QW、QX、QY、QZ得到旋转矩阵</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">R = | 1 - 2*(qy^2 + qz^2)   2*(qx*qy - qw*qz)   2*(qx*qz + qw*qy) |</span><br><span class="line">    | 2*(qx*qy + qw*qz)     1 - 2*(qx^2 + qz^2) 2*(qy*qz - qw*qx) |</span><br><span class="line">    | 2*(qx*qz - qw*qy)     2*(qy*qz + qw*qx)   1 - 2*(qx^2 + qy^2) |</span><br><span class="line"></span><br><span class="line">t = [[TX], </span><br><span class="line">    [TY], </span><br><span class="line">    [TZ]]</span><br></pre></td></tr></table></figure>
@@ -484,58 +462,6 @@
 <p><strong>镜面反射和漫反射是互相排斥的</strong>。这是因为，如果一个光线想要漫反射，它必须先透射进材质里，也就是说，没有被镜面反射。这在着色语言中被称为“Energy Conservation（能量守恒）”，意思是一束光线在射出表面以后绝对不会比射入表面时更亮。</p>
 <p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230731212626.png" alt="image.png"></p>
 <p>金属度相当于镜面反射，金属度越高，镜面反射越强</p>
-<h4 id="蒙特卡罗采样"><a href="#蒙特卡罗采样" class="headerlink" title="蒙特卡罗采样"></a>蒙特卡罗采样</h4><blockquote>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/338103692">一文看懂蒙特卡洛采样方法 - 知乎 (zhihu.com)</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/39628670">简明例析蒙特卡洛（Monte Carlo）抽样方法 - 知乎 (zhihu.com)</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/barwe/p/14140681.html">逆变换采样和拒绝采样 - barwe - 博客园 (cnblogs.com)</a><br><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Monte_Carlo_method">Monte Carlo method - Wikipedia</a></p>
-</blockquote>
-<p>如何在不知道目标概率密度函数的情况下，抽取所需数量的样本，使得这些样本符合目标概率密度函数。这个问题简称为抽样，是蒙特卡洛方法的基本操作步骤。<br><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/v2-eb0945aa2185df958f4568e58300e77a_1440w.gif" alt="v2-eb0945aa2185df958f4568e58300e77a_1440w.gif"></p>
-<p>MC sampling：</p>
-<ul>
-<li>Naive Method<ul>
-<li>根据概率分布进行采样。对一个已知概率密度函数与累积概率密度函数的概率分布，我们可以直接从累积分布函数（cdf）进行采样</li>
-<li>类似逆变换采样</li>
-</ul>
-</li>
-<li>Acceptance-Rejection Method<ul>
-<li>逆变换采样虽然简单有效，但是当累积分布函数或者反函数难求时却难以实施，可使用MC的接受拒绝采样</li>
-<li>对于累积分布函数未知的分布，我们可以采用接受-拒绝采样。如下图所示，p(z)是我们希望采样的分布，q(z)是我们提议的分布(proposal distribution)，令kq(z)&gt;p(z)，我们首先在kq(z)中按照直接采样的方法采样粒子，接下来判断这个粒子落在途中什么区域，对于落在灰色区域的粒子予以拒绝，落在红线下的粒子接受，最终得到符合p(z)的N个粒子</li>
-<li><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230801135729.png" alt="image.png"></li>
-</ul>
-</li>
-</ul>
-<p>数学推导：<br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230801135800.png" alt="image.png|500"></p>
-<ol>
-<li>从 $f_r(x)$ 进行一次采样 $x_i$</li>
-<li>计算 $x_i$ 的 <strong>接受概率</strong> $\alpha$（Acceptance Probability）:$\alpha=\frac{f\left(x_i\right)}{f_r\left(x_i\right)}$</li>
-<li>从 (0,1) 均匀分布中进行一次采样 u</li>
-<li>如果 $\alpha$≥u，接受 $x_i$ 作为一个来自 f(x) 的采样；否则，重复第1步</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">N=<span class="number">1000</span> <span class="comment">#number of samples needed</span></span><br><span class="line">i = <span class="number">1</span></span><br><span class="line">X = np.array([])</span><br><span class="line"><span class="keyword">while</span> i &lt; N:</span><br><span class="line">    u = np.random.rand()</span><br><span class="line">    x = (np.random.rand()-<span class="number">0.5</span>)*<span class="number">8</span></span><br><span class="line">    res = u &lt; <span class="built_in">eval</span>(x)/ref(x)</span><br><span class="line">    <span class="keyword">if</span> res:</span><br><span class="line">        X = np.hstack((X,x[res])) <span class="comment">#accept</span></span><br><span class="line">        ++i</span><br></pre></td></tr></table></figure>
-<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230801140044.png" alt="image.png"></p>
-<ul>
-<li><strong>Importance Sampling</strong><ul>
-<li>接受拒绝采样完美的解决了累积分布函数不可求时的采样问题。但是接受拒绝采样非常依赖于提议分布(proposal distribution)的选择，如果提议分布选择的不好，可能采样时间很长却获得很少满足分布的粒子。</li>
-<li>$E_{p(x)}[f(x)]=\int_a^bf(x)\frac{p(x)}{q(x)}q(x)dx=E_{q(x)}[f(x)\frac{p(x)}{q(x)}]$</li>
-<li>我们从提议分布q(x)中采样大量粒子$x_1,x_2,…,x_n$，每个粒子的权重是 $\frac{p(x_i)}{q(x_i)}$，通过加权平均的方式可以计算出期望:</li>
-<li>$E_{p(x)}[f(x)]=\frac{1}{N}\sum f(x_i)\frac{p(x_i)}{q(x_i)}$<ul>
-<li>q提议的分布，p希望的采样分布</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">N=<span class="number">100000</span></span><br><span class="line">M=<span class="number">5000</span></span><br><span class="line">x = (np.random.rand(N)-<span class="number">0.5</span>)*<span class="number">16</span></span><br><span class="line">w_x = <span class="built_in">eval</span>(x)/ref(x)</span><br><span class="line">w_x = w_x/<span class="built_in">sum</span>(w_x)</span><br><span class="line">w_xc = np.cumsum(w_x) <span class="comment">#accumulate</span></span><br><span class="line"></span><br><span class="line">X=np.array([])</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(M):</span><br><span class="line">    u = np.random.rand()</span><br><span class="line">    X = np.hstack((X,x[w_xc&gt;u][<span class="number">0</span>]))</span><br></pre></td></tr></table></figure>
-<p>其中，w_xc是对归一化后的权重计算的累计分布概率。每次取最终样本时，都会先随机一个(0,1)之间的随机数，并使用这个累计分布概率做选择。样本的权重越大，被选中的概率就越高。</p>
-<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230801140645.png" alt="image.png"></p>
-<h2 id="linearColor-2-sRGB"><a href="#linearColor-2-sRGB" class="headerlink" title="linearColor 2 sRGB"></a>linearColor 2 sRGB</h2><p>固定色调映射函数，将线性颜色转换为sRGB[1]，并将输出颜色剪辑为lie[0,1]。<br><a target="_blank" rel="noopener" href="https://readpaper.com/paper/35410341">Proposal for a Standard Default Color Space for the Internet - sRGB.-论文阅读讨论-ReadPaper - 轻松读论文 | 专业翻译 | 一键引文 | 图表同屏</a></p>
-<p>(Why)为什么要将线性RGB转换成sRGB</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.zhangxinxu.com/wordpress/2017/12/linear-rgb-srgb-js-convert/">小tip: 了解LinearRGB和sRGB以及使用JS相互转换 « 张鑫旭-鑫空间-鑫生活 (zhangxinxu.com)</a></p>
-</blockquote>
-<p>假设白板的光线反射率是100%，黑板的光线反射率是0%。则在线性RGB的世界中，50%灰色就是光线反射率为50%的灰色。</p>
-<p><strong>人这种动物，对于真实世界的颜色感受，并不是线性的，而是曲线的</strong></p>
-<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230810162118.png" alt="image.png"></p>
-<p>(How)线性RGB与sRGB相互转化</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">linear_to_srgb</span>(<span class="params">linear</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">isinstance</span>(linear, torch.Tensor):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;Assumes `linear` is in [0, 1], see https://en.wikipedia.org/wiki/SRGB.&quot;&quot;&quot;</span></span><br><span class="line">        eps = torch.finfo(torch.float32).eps</span><br><span class="line">        srgb0 = <span class="number">323</span> / <span class="number">25</span> * linear</span><br><span class="line">        srgb1 = (<span class="number">211</span> * torch.clamp(linear, <span class="built_in">min</span>=eps)**(<span class="number">5</span> / <span class="number">12</span>) - <span class="number">11</span>) / <span class="number">200</span></span><br><span class="line">        <span class="keyword">return</span> torch.where(linear &lt;= <span class="number">0.0031308</span>, srgb0, srgb1)</span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">isinstance</span>(linear, np.ndarray):</span><br><span class="line">        eps = np.finfo(np.float32).eps</span><br><span class="line">        srgb0 = <span class="number">323</span> / <span class="number">25</span> * linear</span><br><span class="line">        srgb1 = (<span class="number">211</span> * np.maximum(eps, linear) ** (<span class="number">5</span> / <span class="number">12</span>) - <span class="number">11</span>) / <span class="number">200</span></span><br><span class="line">        <span class="keyword">return</span> np.where(linear &lt;= <span class="number">0.0031308</span>, srgb0, srgb1)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">raise</span> NotImplementedError</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">srgb_to_linear</span>(<span class="params">srgb</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">isinstance</span>(srgb, torch.Tensor):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;Assumes `srgb` is in [0, 1], see https://en.wikipedia.org/wiki/SRGB.&quot;&quot;&quot;</span></span><br><span class="line">        eps = torch.finfo(torch.float32).eps</span><br><span class="line">        linear0 = <span class="number">25</span> / <span class="number">323</span> * srgb</span><br><span class="line">        linear1 = torch.clamp(((<span class="number">200</span> * srgb + <span class="number">11</span>) / (<span class="number">211</span>)), <span class="built_in">min</span>=eps)**(<span class="number">12</span> / <span class="number">5</span>)</span><br><span class="line">        <span class="keyword">return</span> torch.where(srgb &lt;= <span class="number">0.04045</span>, linear0, linear1)</span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">isinstance</span>(srgb, np.ndarray):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;Assumes `srgb` is in [0, 1], see https://en.wikipedia.org/wiki/SRGB.&quot;&quot;&quot;</span></span><br><span class="line">        eps = np.finfo(np.float32).eps</span><br><span class="line">        linear0 = <span class="number">25</span> / <span class="number">323</span> * srgb</span><br><span class="line">        linear1 = np.maximum(((<span class="number">200</span> * srgb + <span class="number">11</span>) / (<span class="number">211</span>)), eps)**(<span class="number">12</span> / <span class="number">5</span>)</span><br><span class="line">        <span class="keyword">return</span> np.where(srgb &lt;= <span class="number">0.04045</span>, linear0, linear1)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">raise</span> NotImplementedError</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -565,8 +491,6 @@
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/3DReconstruction/" rel="tag"><i class="fa fa-tag"></i> 3DReconstruction</a>
-              <a href="/tags/SurfaceReconstruction/" rel="tag"><i class="fa fa-tag"></i> SurfaceReconstruction</a>
               <a href="/tags/Math/" rel="tag"><i class="fa fa-tag"></i> Math</a>
           </div>
 
@@ -641,7 +565,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A6%82%E7%8E%87%E8%AE%BA"><span class="nav-text">概率论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF"><span class="nav-text">贝叶斯</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SDF%E8%AE%A1%E7%AE%97%E4%B8%8E%E6%B1%82%E5%AF%BC"><span class="nav-text">SDF计算与求导</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9D%83%E9%87%8D%E8%AE%A1%E7%AE%97"><span class="nav-text">权重计算</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2K2K"><span class="nav-text">2K2K</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%B7%E7%A7%AF-Pytorch"><span class="nav-text">卷积 Pytorch</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NeRF%E7%9B%B8%E5%85%B3%E7%9A%84%E6%95%B0%E5%AD%A6%E7%9F%A5%E8%AF%86"><span class="nav-text">NeRF相关的数学知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2"><span class="nav-text">坐标变换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E6%9C%BA%E5%86%85%E5%8F%82%E7%9F%A9%E9%98%B5intrinsic-c2p"><span class="nav-text">相机内参矩阵intrinsic_c2p</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E6%9C%BA%E5%A4%96%E5%8F%82%E7%9F%A9%E9%98%B5w2c"><span class="nav-text">相机外参矩阵w2c</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Neus"><span class="nav-text">Neus</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%85%89%E7%BA%BF%E7%94%9F%E6%88%90"><span class="nav-text">光线生成</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NeRO"><span class="nav-text">NeRO</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%85%89%E7%BA%BF%E7%94%9F%E6%88%90-1"><span class="nav-text">光线生成</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E5%B0%84Reflection"><span class="nav-text">反射Reflection</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Blinn-Phong-Reflection-Model"><span class="nav-text">Blinn-Phong Reflection Model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E7%89%A9%E7%90%86%E7%9A%84%E5%88%86%E6%9E%90%E6%A8%A1%E5%9E%8B"><span class="nav-text">基于物理的分析模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BRDF"><span class="nav-text">BRDF</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BRDF%EF%BC%88Microfacet-Theory%EF%BC%89"><span class="nav-text">BRDF（Microfacet Theory）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NeRO%E4%B8%AD%E7%9A%84BRDF"><span class="nav-text">NeRO中的BRDF</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Specular"><span class="nav-text">Specular</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Diffuse"><span class="nav-text">Diffuse</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%92%99%E7%89%B9%E5%8D%A1%E7%BD%97%E9%87%87%E6%A0%B7"><span class="nav-text">蒙特卡罗采样</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linearColor-2-sRGB"><span class="nav-text">linearColor 2 sRGB</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%93%E6%B8%B2%E6%9F%93%E5%87%BD%E6%95%B0"><span class="nav-text">体渲染函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Encoding"><span class="nav-text">Encoding</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NeRF%E7%9B%B8%E5%85%B3%E7%9A%84%E6%95%B0%E5%AD%A6%E7%9F%A5%E8%AF%86"><span class="nav-text">NeRF相关的数学知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2"><span class="nav-text">坐标变换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E6%9C%BA%E5%86%85%E5%8F%82%E7%9F%A9%E9%98%B5intrinsic-c2p"><span class="nav-text">相机内参矩阵intrinsic_c2p</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E6%9C%BA%E5%A4%96%E5%8F%82%E7%9F%A9%E9%98%B5w2c"><span class="nav-text">相机外参矩阵w2c</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Neus"><span class="nav-text">Neus</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%85%89%E7%BA%BF%E7%94%9F%E6%88%90"><span class="nav-text">光线生成</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NeRO"><span class="nav-text">NeRO</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%85%89%E7%BA%BF%E7%94%9F%E6%88%90-1"><span class="nav-text">光线生成</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E5%B0%84Reflection"><span class="nav-text">反射Reflection</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Blinn-Phong-Reflection-Model"><span class="nav-text">Blinn-Phong Reflection Model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E7%89%A9%E7%90%86%E7%9A%84%E5%88%86%E6%9E%90%E6%A8%A1%E5%9E%8B"><span class="nav-text">基于物理的分析模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BRDF"><span class="nav-text">BRDF</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BRDF%EF%BC%88Microfacet-Theory%EF%BC%89"><span class="nav-text">BRDF（Microfacet Theory）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NeRO%E4%B8%AD%E7%9A%84BRDF"><span class="nav-text">NeRO中的BRDF</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Specular"><span class="nav-text">Specular</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Diffuse"><span class="nav-text">Diffuse</span></a></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -656,20 +580,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">134</span>
+          <span class="site-state-item-count">137</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-count">31</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">58</span>
+        <span class="site-state-item-count">59</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -717,12 +641,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">473k</span>
+    <span title="Symbols count total">465k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">28:40</span>
+    <span title="Reading time total">28:13</span>
 </div>
 
         

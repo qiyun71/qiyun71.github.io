@@ -30,12 +30,13 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230921160120.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230921163941.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230921164612.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230921163941.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230921162402.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230921162858.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230921163941.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231011103025.png">
 <meta property="article:published_time" content="2023-09-26T06:06:09.000Z">
-<meta property="article:modified_time" content="2023-11-24T06:44:45.614Z">
+<meta property="article:modified_time" content="2024-03-29T14:00:39.308Z">
 <meta property="article:author" content="Qi Yun">
 <meta property="article:tag" content="ClothedHumans">
 <meta property="article:tag" content="DepthEstimation">
@@ -235,7 +236,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-11-24 14:44:45" itemprop="dateModified" datetime="2023-11-24T14:44:45+08:00">2023-11-24</time>
+                <time title="Modified: 2024-03-29 22:00:39" itemprop="dateModified" datetime="2024-03-29T22:00:39+08:00">2024-03-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -252,13 +253,13 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>2.4k</span>
+              <span>2.7k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span>9 mins.</span>
+              <span>10 mins.</span>
             </span>
 
         </div>
@@ -349,6 +350,15 @@
 </li>
 </ul>
 <h2 id="高分辨率深度预测网络"><a href="#高分辨率深度预测网络" class="headerlink" title="高分辨率深度预测网络"></a>高分辨率深度预测网络</h2><p><strong>高分辨率深度预测网络</strong><br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230921164612.png" alt="image.png"><br>    <strong>网格生成</strong>：从深度图生成 3D 模型有多种方法。在这项工作中。我们采用与[13]类似的方法。我们将深度图转换为 3D 点云，然后从相邻点计算每个点的表面法线。之后，我们运行一个筛选的泊松曲面构造[22]来获得平滑的人体网格 V。</p>
+<h2 id="权重计算方法"><a href="#权重计算方法" class="headerlink" title="权重计算方法"></a>权重计算方法</h2><p>来源：<a target="_blank" rel="noopener" href="https://github.com/SangHunHan92/2K2K/blob/main/models/deep_human_models.py">2K2K Code</a><br>目的：part 法向量图 —&gt; 原图大小对应法向量图</p>
+<p>根据 part 法向量图逆仿射变换回原图空间 $\mathbf{n}_{i}=\mathbf{M}_{i}^{-1}\mathbf{\bar{n}}_{i}$<br>要将 part 法向量图融合为原图空间法向量图，每个法向量图有不同的权重$\mathbf{N}^h\quad=\sum\limits_{i=1}^K\left(\mathbf{W}_i\odot\mathbf{n}_i\right)$</p>
+<p>权重的<strong>计算方法</strong>：</p>
+<script type="math/tex; mode=display">\mathbf{W}_i(x,y)=\frac{G(x,y)*\phi_i(x,y)}{\sum_iG(x,y)*\phi_i(x,y)}</script><ul>
+<li>同时与 part 法向量图逆仿射变换的还有一个 Occupancy Grid Map O，表示在原图空间中每个 part 的占用值 0 或者 1，i.e. $\left.\phi_i(x,y)=\left\{\begin{array}{cc}1&amp;\text{if}&amp;\sum\mathbf{n}_i(x,y)\neq\mathbf{0}^\top\\0&amp;\text{otherwise}\end{array}\right.\right.$</li>
+<li>对 O 做高斯模糊 GaussianBlur，<strong>使得 O map 的值到边缘逐渐减小</strong></li>
+<li>如下图，face part 脖子上方中心处 O 值做完高斯模糊后依然近似 1(假设 1)，而 body part 上部分脖子中心处做完高斯模糊后 O 值<1(假设 1/2)，这会导致对于脖子这部分多 part 融合时，face part normal 的权重相对于 body part normal 的权重会更大一点(2/3 > 1/3)</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230921163941.png" alt="image.png"></p>
 <h1 id="Datasets"><a href="#Datasets" class="headerlink" title="Datasets"></a>Datasets</h1><ul>
 <li>新的数据集：我们的数据集提供了高保真的 3D 人体模型，由 80 个 DSLR 相机、纹理贴图、3D 姿势（openpifpafw 全身）和 SMPL 模型参数捕获。<ul>
 <li>2,050 个 scan 3D 模型</li>
@@ -552,7 +562,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract"><span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Method"><span class="nav-text">Method</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%8E%E5%88%86%E8%BE%A8%E7%8E%87%E6%B7%B1%E5%BA%A6%E7%BD%91%E7%BB%9C"><span class="nav-text">低分辨率深度网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Body-part-extraction%E5%92%8CPart-wise-normal-prediction"><span class="nav-text">Body part extraction和Part-wise normal prediction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AB%98%E5%88%86%E8%BE%A8%E7%8E%87%E6%B7%B1%E5%BA%A6%E9%A2%84%E6%B5%8B%E7%BD%91%E7%BB%9C"><span class="nav-text">高分辨率深度预测网络</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Datasets"><span class="nav-text">Datasets</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Experiments"><span class="nav-text">Experiments</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Fast-test"><span class="nav-text">Fast test</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Render"><span class="nav-text">Render</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Data-folder"><span class="nav-text">Data folder</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Render-image"><span class="nav-text">Render image</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Render-keypoint"><span class="nav-text">Render keypoint</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Train"><span class="nav-text">Train</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Limitations"><span class="nav-text">Limitations</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Conclusion"><span class="nav-text">Conclusion</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code"><span class="nav-text">Code</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Human-Body-Part-2K2K"><span class="nav-text">Human Body Part(2K2K)</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract"><span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Method"><span class="nav-text">Method</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%8E%E5%88%86%E8%BE%A8%E7%8E%87%E6%B7%B1%E5%BA%A6%E7%BD%91%E7%BB%9C"><span class="nav-text">低分辨率深度网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Body-part-extraction%E5%92%8CPart-wise-normal-prediction"><span class="nav-text">Body part extraction和Part-wise normal prediction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AB%98%E5%88%86%E8%BE%A8%E7%8E%87%E6%B7%B1%E5%BA%A6%E9%A2%84%E6%B5%8B%E7%BD%91%E7%BB%9C"><span class="nav-text">高分辨率深度预测网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%83%E9%87%8D%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95"><span class="nav-text">权重计算方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Datasets"><span class="nav-text">Datasets</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Experiments"><span class="nav-text">Experiments</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Fast-test"><span class="nav-text">Fast test</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Render"><span class="nav-text">Render</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Data-folder"><span class="nav-text">Data folder</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Render-image"><span class="nav-text">Render image</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Render-keypoint"><span class="nav-text">Render keypoint</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Train"><span class="nav-text">Train</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Limitations"><span class="nav-text">Limitations</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Conclusion"><span class="nav-text">Conclusion</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code"><span class="nav-text">Code</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Human-Body-Part-2K2K"><span class="nav-text">Human Body Part(2K2K)</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -567,20 +577,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">134</span>
+          <span class="site-state-item-count">137</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-count">31</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">58</span>
+        <span class="site-state-item-count">59</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -628,12 +638,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">473k</span>
+    <span title="Symbols count total">465k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">28:40</span>
+    <span title="Reading time total">28:13</span>
 </div>
 
         

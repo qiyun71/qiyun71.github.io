@@ -28,14 +28,14 @@
 <meta property="og:description" content="Title NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis     Author Ben Mildenhall*Pratul P. Srinivasan*Matthew Tancik*Jonathan T. BarronRavi RamamoorthiRen Ng   Conf&#x2F;Jour ECCV">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/Network.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/Pasted%20image%2020221206180113.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230615134639.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/Pasted%20image%2020230531151815.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/v2-f5e8824a9163b874e71166425d3e654c_720w.webp">
 <meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230615160229.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/Pasted%20image%2020230612205212.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/Pasted%20image%2020221206180113.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230615134639.png">
 <meta property="article:published_time" content="2023-06-14T12:35:31.000Z">
-<meta property="article:modified_time" content="2023-11-24T08:03:49.928Z">
+<meta property="article:modified_time" content="2024-03-26T12:06:44.624Z">
 <meta property="article:author" content="Qi Yun">
 <meta property="article:tag" content="NeRF">
 <meta name="twitter:card" content="summary">
@@ -234,7 +234,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-11-24 16:03:49" itemprop="dateModified" datetime="2023-11-24T16:03:49+08:00">2023-11-24</time>
+                <time title="Modified: 2024-03-26 20:06:44" itemprop="dateModified" datetime="2024-03-26T20:06:44+08:00">2024-03-26</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -303,6 +303,7 @@
 </div>
 <p>NeRF（Neural Radiance Fields）是一种用于生成逼真三维场景的计算机图形学方法。通过神经网络对场景中的每个空间点进行建模，NeRF可以估计每个点的颜色和密度信息。利用渲染方程，NeRF能够合成高质量的逼真图像。相较于传统的渲染方法，NeRF能够处理复杂的光照和反射效果，广泛应用于虚拟现实、增强现实、电影制作和游戏开发等领域。然而，NeRF方法仍面临一些挑战，如计算复杂度和对训练数据的依赖性。研究人员正在不断改进NeRF，以提高其效率和扩展性。</p>
 <span id="more"></span>
+<h1 id="其他参考文献"><a href="#其他参考文献" class="headerlink" title="其他参考文献"></a>其他参考文献</h1><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/556048189">【NeRF】神经渲染 / 神经辐射场 综述 - 知乎</a></p>
 <blockquote>
 <p>大佬的公式推导+代码分析<a target="_blank" rel="noopener" href="https://yconquesty.github.io/blog/ml/nerf/nerf_rendering.html#prerequisites">NeRF: A Volume Rendering Perspective | Will (yconquesty.github.io)</a></p>
 </blockquote>
@@ -318,49 +319,6 @@
 <li>多张不同视角图片—&gt;MLP网络—&gt;隐式点云模型，确定的相机位姿—&gt;生成光线得到点云的坐标—&gt;隐式点云模型—&gt;点云的密度和颜色—&gt;新视角图片</li>
 </ol>
 <p>隐式表达模型：输入的是点云的位置坐标信息，输出时该点的不透明度和颜色值。根据某个确定的相机位姿以及图片的大小，每个像素生成一条光线，并在光线上进行采样得到点云，根据点云中每个点的位置坐标进行编码并输入进网络得到该点的密度值和颜色值，然后通过体渲染函数，计算出每个像素点处的颜色值，最终得到一张新视角出的图片。</p>
-<h1 id="光线生成"><a href="#光线生成" class="headerlink" title="光线生成"></a>光线生成</h1><p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/Pasted%20image%2020230531151815.png" alt="Pasted image 20230531151815.png|666"></p>
-<p>$r(t)=\textbf{o}+t\textbf{d}$  ，$\textbf{o}$是相机原点，$\textbf{d}$为方向向量</p>
-<p>t通过 $t_{i} \sim \mathcal{U}\left[t_{n}+\frac{i-1}{N}\left(t_{f}-t_{n}\right), t_{n}+\frac{i}{N}\left(t_{f}-t_{n}\right)\right]$ ，在 $t_{near}$  和 $t_{far}$ 之间，等间距获取N个点</p>
-<p>根据相机原点和图片上随机一点像素，生成一条光线，并将该光线的坐标转换到世界坐标系。</p>
-<p>已知：图片大小，所选图片上的像素位置，相机参数(焦距、相机位姿)。光线经过坐标变换：图片二维的像素坐标构建—&gt;相机三维坐标—&gt;世界坐标，得到光线在世界坐标系下的原点和方向向量, 然后对ray_o和ray_d进行NDC坐标变换，将锥形区域变换为一个2x2x2的正方体区域。(LLFF数据集)</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_38842821/article/details/125933604?spm=1001.2014.3001.5506">世界坐标系、相机坐标系和图像坐标系的转换_相机坐标系到图像坐标系_滴滴滴’cv的博客-CSDN博客</a></p>
-</blockquote>
-<p>从世界坐标系到相机坐标系的投影我们称为相机外参矩阵（反之为相机姿态矩阵），而从相机坐标系到像素坐标系的投影我们称为相机内参矩阵（用K来表示，由相机焦距与中心点决定）。<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/553665958">旷视3d CV master系列训练营三：NeRF在实际场景中的应用 - 知乎 (zhihu.com)</a></p>
-<h2 id="图片二维坐标—-gt-相机三维坐标-X-c-Y-c-Z-c"><a href="#图片二维坐标—-gt-相机三维坐标-X-c-Y-c-Z-c" class="headerlink" title="图片二维坐标—&gt;相机三维坐标 $X_{c}, Y_{c},Z_{c}$"></a>图片二维坐标—&gt;相机三维坐标 $X_{c}, Y_{c},Z_{c}$</h2><p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/v2-f5e8824a9163b874e71166425d3e654c_720w.webp" alt="v2-f5e8824a9163b874e71166425d3e654c_720w.webp"></p>
-<script type="math/tex; mode=display">\begin{bmatrix}X_c\\ Y_c\\ Z_c\end{bmatrix}=\mathbf{\begin{bmatrix}f_x&0&c_x\\ 0&f_y&c_y\\ 0&0&1\end{bmatrix}}^{-1} \begin{bmatrix}x\\ y\\ 1\end{bmatrix}</script><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">相机内参矩阵</span><br><span class="line">K = np.array([</span><br><span class="line">    [focal, <span class="number">0</span>, <span class="number">0.5</span>*W],</span><br><span class="line">    [<span class="number">0</span>, focal, <span class="number">0.5</span>*H],</span><br><span class="line">    [<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>]</span><br><span class="line">])</span><br><span class="line"><span class="comment"># focal为焦距</span></span><br><span class="line">focal = <span class="number">.5</span> * W / np.tan(<span class="number">.5</span> * camera_angle_x)</span><br><span class="line"><span class="comment">#camera_angle_x在数据集的json文件中</span></span><br></pre></td></tr></table></figure>
-<h2 id="相机三维坐标—-gt-世界三维坐标XYZ"><a href="#相机三维坐标—-gt-世界三维坐标XYZ" class="headerlink" title="相机三维坐标—&gt;世界三维坐标XYZ"></a>相机三维坐标—&gt;世界三维坐标XYZ</h2><script type="math/tex; mode=display">外参矩阵^{-1} = \begin{bmatrix}r_{11}&r_{12}&r_{13}&t_x\\ r_{21}&r_{22}&r_{23}&t_y\\ r_{31}&r_{32}&r_{33}&t_z\\ 0&0&0&1\end{bmatrix}</script><script type="math/tex; mode=display">
-\begin{bmatrix}X\\ Y\\ Z\\ 1\end{bmatrix}=\begin{bmatrix}r_{11}&r_{12}&r_{13}&t_x\\ r_{21}&r_{22}&r_{23}&t_y\\ r_{31}&r_{32}&r_{33}&t_z\\ 0&0&0&1\end{bmatrix}\begin{bmatrix}X_c\\ Y_c\\ Z_c\\ 1\end{bmatrix}</script><blockquote>
-<p><a target="_blank" rel="noopener" href="https://yconquesty.github.io/blog/ml/nerf/nerf_ndc.html#background">NeRF: How NDC Works | Will (yconquesty.github.io)</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/144329075">计算机图形学二：视图变换(坐标系转化，正交投影，透视投影，视口变换) - 知乎 (zhihu.com)</a></p>
-</blockquote>
-<h2 id="NDC-标准化设备坐标系"><a href="#NDC-标准化设备坐标系" class="headerlink" title="NDC  标准化设备坐标系"></a>NDC  标准化设备坐标系</h2><p>相机坐标系中坐标—&gt;投影变换—&gt;NDC中坐标</p>
-<div class="note info">
-            <p>NeRF中是直接从世界坐标系转换到的NDC中的坐标</p>
-          </div>
-<p>Projection transformation 分为 <strong>透视变换</strong>和<strong>正交变换</strong></p>
-<h3 id="透视投影变换"><a href="#透视投影变换" class="headerlink" title="透视投影变换"></a>透视投影变换</h3><p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230615160229.png" alt="image.png|555"></p>
-<p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/Pasted%20image%2020230612205212.png" alt="Pasted image 20230612205212.png|666"></p>
-<h3 id="正交投影变换"><a href="#正交投影变换" class="headerlink" title="正交投影变换"></a>正交投影变换</h3><p>光线平行，将原空间中物体，变换到一个2x2x2的立方体中</p>
-<h3 id="投影变换矩阵"><a href="#投影变换矩阵" class="headerlink" title="投影变换矩阵"></a>投影变换矩阵</h3><script type="math/tex; mode=display">\mathbf{M}_{\text{per}}=\begin{bmatrix}\frac{n}{r}&0&0&0\\ 0&\frac{n}{t}&0&0\\ 0&0&-\frac{f+n}{f-n}&-\frac{2nf}{f-n}\\ 0&0&-1&0\end{bmatrix}</script><p>将齐次坐标左乘投影矩阵，即可得到在NDC下的坐标：</p>
-<script type="math/tex; mode=display">\begin{aligned}\begin{pmatrix}\frac{n}{r}&0&0\\ 0&\frac{n}{t}&0&0\\ 0&0&\frac{-(f+n)}{f-n}&\frac{-2fn}{f-n}\\ 0&0&-1&0\end{pmatrix}\begin{pmatrix}x\\ y\\ z\\ 1\end{pmatrix}& =\begin{pmatrix}\frac{n}{r}x\\ \frac{n}{t}y\\ \frac{-(f+n)}{f-n}z-\frac{-2fn}{f-n}\\ -z\end{pmatrix} \\\mathrm{project}& \to\begin{pmatrix}\frac{n}{r}\frac{x}{-z}\\ \frac{n}{t}\frac{y}{-z}\\ \frac{(f+n)}{f-n}-\frac{2fn}{f-n}\frac{1}{-z}\end{pmatrix} \end{aligned}</script><p>因此对于光线：</p>
-<p>$\begin{pmatrix}a_x\frac{o_x+td_x}{o_z+td_z}\\ a_y\frac{o_y+td_y}{o_z+td_z}\\ a_z+\frac{b_z}{o_z+td_z}\end{pmatrix}=\begin{pmatrix}o_x’+t’d_x’\\ o_y’+t’d_y’\\ o_z’+t’d_z’\end{pmatrix}.$</p>
-<p>其中：<br>$\begin{aligned}&amp;a_{x} :=-\frac{n}{r}  \\&amp;a_y :=-\frac nt  \\&amp;a_z :=\frac{f+n}{f-n}  \\&amp;b_z :=\frac{2nf}{f-n}\end{aligned}$</p>
-<p>$\mathbf{o}’=\begin{pmatrix}o’_x\\ o’_y\\ o’_z\end{pmatrix}=\begin{pmatrix}a_x\frac{o_x}{o_z}\\ a_y\frac{o_y}{o_z}\\ a_z+\frac{b_z}{o_z}\end{pmatrix}=\pi(\mathbf{o}).$</p>
-<p>交换顺序：</p>
-<script type="math/tex; mode=display">\begin{aligned}
-\begin{pmatrix}t'd'_x\\ t'd'_y\\ t'd'_z\end{pmatrix}& =\begin{pmatrix}a_x\frac{o_x+t d_x}{o_z+t d_z}-a_x\frac{o_x}{o_z}\\ \\ a_y\frac{o_y+t d_y}{o_z+t d_z}-a_y\frac{o_y}{o_z}\\ \\ a_z+\frac{b_z}{o_z+t d_z}-a_z-\frac{b_z}{o_z}\end{pmatrix}  \\
-&=\begin{pmatrix}a_x\frac{o_z(o_x+td_x)-o_x(o_z+td_z)}{(o_z+td_z)o_z}\\ a_y\frac{o_z(o_y+td_y)-o_y(o_z+td_z)}{(o_z+td_z)o_z}\\ b_z\frac{o_z-(o_z+td_z)}{(o_z+td_z)o_z}\end{pmatrix} \\
-&=\begin{pmatrix}a_x\frac{td_z}{o_z+td_z}\left(\frac{d_x}{d_z}-\frac{o_x}{o_z}\right)\\ a_y\frac{td_z}{o_z+td_z}\left(\frac{d_y}{d_z}-\frac{o_y}{o_z}\right)\\ -b_z\frac{td_z}{o_z+td_z}\frac{1}{o_z}\end{pmatrix}
-\end{aligned}</script><p>可得：</p>
-<p>$\begin{aligned}&amp; t^{\prime}=\frac{t d_{z}}{o_{z}+t d_{z}}=1-\frac{o_{z}}{o_{z}+t d_{z}}  \\&amp; \mathbf{d}^{\prime}=\left(\begin{matrix}{a_{x}\left(\frac{d_{x}}{d_{z}}-\frac{o_{x}}{o_{z}}\right)}\\ {o_{y}\left(\frac{d_{y}}{d_{z}}-\frac{o_{y}}{o_{z}}\right)}\\ {-b_{z}\frac{1}{o_{z}}}\end{matrix}\right). \end{aligned}$</p>
-<p>又由：</p>
-<p>$\begin{aligned}a_{x}&amp; =-\frac{n}{r}=\frac{f_\mathrm{camera}}{\frac{W}{2}}  \\a_y&amp; =-\frac{n}{t}=\frac{f_{\mathrm{camera}}}{\frac{H}{2}}  \\\lim\limits_{f\to\infty}a_z&amp; =\lim\limits_{f\to\infty}\frac{f+n}{f-n}=1  \\\lim\limits_{f\to\infty}b_z&amp; =\lim\limits_{f\to\infty}-\frac{2nf}{n-f}=2n \end{aligned}$</p>
-<h3 id="结果："><a href="#结果：" class="headerlink" title="结果："></a>结果：</h3><script type="math/tex; mode=display">\begin{aligned}
-& \mathbf{o}^{\prime}=\left(\begin{matrix}{-\frac{f_{c a m}}{W/2}\frac{o_{x}}{o_{z}}}\\ {-\frac{f_{c a m}}{H/2}\frac{o_{y}}{o_{z}}}\\ {1+\frac{2n}{o_{z}}}\end{matrix}\right)  \\
-& \mathbf{d}^{\prime}=\left(\begin{matrix}{-\frac{f_{c a m}}{W/2}\left(\frac{d_{x}}{d_{z}}-\frac{o_{x}}{o_{z}}\right)}\\ {-\frac{f_{c a m}}{H/2}\left(\frac{d_{y}}{d_{z}}-\frac{o_{y}}{o_{z}}\right)}\\ {-2n\frac{1}{o_{z}}}\end{matrix}\right). 
-\end{aligned}</script><div class="note info">
-            <ul><li>in NeRF :<br>One final detail in our implementation: we shift o to the ray’s intersection with the near plane at z = −n (before this NDC conversion) by taking on = o + tndfor tn = −(n + oz )/dz . Once we convert to the NDC ray, this allows us to simply sample t′ linearly from 0 to 1 in order to get a linear sampling in disparity fromn to ∞ in the original space.</li><li>TL;DR: 在NDC变换之前，将o移动到近平面z=-n的地方，令near=0，因此可以简单的从0线性采样t’到1，以便在原始空间中从 n 到 ∞ 的视差中获得线性采样</li><li>对应代码中的ndc_rays函数</li></ul>
-          </div>
 <h1 id="体渲染函数"><a href="#体渲染函数" class="headerlink" title="体渲染函数"></a>体渲染函数</h1><script type="math/tex; mode=display">\mathrm{C}(r)=\int_{\mathrm{t}_{\mathrm{n}}}^{\mathrm{t}_{\mathrm{f}}} \mathrm{T}(\mathrm{t}) \sigma(\mathrm{r}(\mathrm{t})) \mathrm{c}(\mathrm{r}(\mathrm{t}), \mathrm{d}) \mathrm{dt}, \text { where } \mathrm{T}(\mathrm{t})=\exp \left(-\int_{\mathrm{t}_{\mathrm{n}}}^{\mathrm{t}} \sigma(\mathrm{r}(\mathrm{s})) \mathrm{ds}\right)</script><p>T(t)：$t_{n}$到t的透明度的累计</p>
 <ul>
 <li>光线距离越远 $\int_{t_n}^t\sigma(\mathbf{r}(s))ds$ 越大，T(t)就越小</li>
@@ -411,6 +369,49 @@
 <li>Blog:<br><a target="_blank" rel="noopener" href="https://dl.acm.org/doi/pdf/10.1145/3503250">NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/80726483">逆变换采样 - 知乎 (zhihu.com)</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/588902982">NeRF 的实现过程 - 知乎 (zhihu.com)</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/486686928">新视角合成 (Novel View Synthesis) - (4) NeRF 实现细节 - 知乎 (zhihu.com)</a><br><a target="_blank" rel="noopener" href="https://www.zhihu.com/column/c_1490274731060760576">计算机图形学 - 知乎 (zhihu.com)</a></li>
 </ul>
 </blockquote>
+<h1 id="光线生成"><a href="#光线生成" class="headerlink" title="光线生成"></a>光线生成</h1><p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/Pasted%20image%2020230531151815.png" alt="Pasted image 20230531151815.png|666"></p>
+<p>$r(t)=\textbf{o}+t\textbf{d}$  ，$\textbf{o}$是相机原点，$\textbf{d}$为方向向量</p>
+<p>t通过 $t_{i} \sim \mathcal{U}\left[t_{n}+\frac{i-1}{N}\left(t_{f}-t_{n}\right), t_{n}+\frac{i}{N}\left(t_{f}-t_{n}\right)\right]$ ，在 $t_{near}$  和 $t_{far}$ 之间，等间距获取N个点</p>
+<p>根据相机原点和图片上随机一点像素，生成一条光线，并将该光线的坐标转换到世界坐标系。</p>
+<p>已知：图片大小，所选图片上的像素位置，相机参数(焦距、相机位姿)。光线经过坐标变换：图片二维的像素坐标构建—&gt;相机三维坐标—&gt;世界坐标，得到光线在世界坐标系下的原点和方向向量, 然后对ray_o和ray_d进行NDC坐标变换，将锥形区域变换为一个2x2x2的正方体区域。(LLFF数据集)</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_38842821/article/details/125933604?spm=1001.2014.3001.5506">世界坐标系、相机坐标系和图像坐标系的转换_相机坐标系到图像坐标系_滴滴滴’cv的博客-CSDN博客</a></p>
+</blockquote>
+<p>从世界坐标系到相机坐标系的投影我们称为相机外参矩阵（反之为相机姿态矩阵），而从相机坐标系到像素坐标系的投影我们称为相机内参矩阵（用K来表示，由相机焦距与中心点决定）。<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/553665958">旷视3d CV master系列训练营三：NeRF在实际场景中的应用 - 知乎 (zhihu.com)</a></p>
+<h2 id="图片二维坐标—-gt-相机三维坐标-X-c-Y-c-Z-c"><a href="#图片二维坐标—-gt-相机三维坐标-X-c-Y-c-Z-c" class="headerlink" title="图片二维坐标—&gt;相机三维坐标 $X_{c}, Y_{c},Z_{c}$"></a>图片二维坐标—&gt;相机三维坐标 $X_{c}, Y_{c},Z_{c}$</h2><p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/v2-f5e8824a9163b874e71166425d3e654c_720w.webp" alt="v2-f5e8824a9163b874e71166425d3e654c_720w.webp"></p>
+<script type="math/tex; mode=display">\begin{bmatrix}X_c\\ Y_c\\ Z_c\end{bmatrix}=\mathbf{\begin{bmatrix}f_x&0&c_x\\ 0&f_y&c_y\\ 0&0&1\end{bmatrix}}^{-1} \begin{bmatrix}x\\ y\\ 1\end{bmatrix}</script><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">相机内参矩阵</span><br><span class="line">K = np.array([</span><br><span class="line">    [focal, <span class="number">0</span>, <span class="number">0.5</span>*W],</span><br><span class="line">    [<span class="number">0</span>, focal, <span class="number">0.5</span>*H],</span><br><span class="line">    [<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>]</span><br><span class="line">])</span><br><span class="line"><span class="comment"># focal为焦距</span></span><br><span class="line">focal = <span class="number">.5</span> * W / np.tan(<span class="number">.5</span> * camera_angle_x)</span><br><span class="line"><span class="comment">#camera_angle_x在数据集的json文件中</span></span><br></pre></td></tr></table></figure>
+<h2 id="相机三维坐标—-gt-世界三维坐标XYZ"><a href="#相机三维坐标—-gt-世界三维坐标XYZ" class="headerlink" title="相机三维坐标—&gt;世界三维坐标XYZ"></a>相机三维坐标—&gt;世界三维坐标XYZ</h2><script type="math/tex; mode=display">外参矩阵^{-1} = \begin{bmatrix}r_{11}&r_{12}&r_{13}&t_x\\ r_{21}&r_{22}&r_{23}&t_y\\ r_{31}&r_{32}&r_{33}&t_z\\ 0&0&0&1\end{bmatrix}</script><script type="math/tex; mode=display">
+\begin{bmatrix}X\\ Y\\ Z\\ 1\end{bmatrix}=\begin{bmatrix}r_{11}&r_{12}&r_{13}&t_x\\ r_{21}&r_{22}&r_{23}&t_y\\ r_{31}&r_{32}&r_{33}&t_z\\ 0&0&0&1\end{bmatrix}\begin{bmatrix}X_c\\ Y_c\\ Z_c\\ 1\end{bmatrix}</script><blockquote>
+<p><a target="_blank" rel="noopener" href="https://yconquesty.github.io/blog/ml/nerf/nerf_ndc.html#background">NeRF: How NDC Works | Will (yconquesty.github.io)</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/144329075">计算机图形学二：视图变换(坐标系转化，正交投影，透视投影，视口变换) - 知乎 (zhihu.com)</a></p>
+</blockquote>
+<h2 id="NDC-标准化设备坐标系"><a href="#NDC-标准化设备坐标系" class="headerlink" title="NDC  标准化设备坐标系"></a>NDC  标准化设备坐标系</h2><p>相机坐标系中坐标—&gt;投影变换—&gt;NDC中坐标</p>
+<div class="note info">
+            <p>NeRF中是直接从世界坐标系转换到的NDC中的坐标</p>
+          </div>
+<p>Projection transformation 分为 <strong>透视变换</strong>和<strong>正交变换</strong></p>
+<h3 id="透视投影变换"><a href="#透视投影变换" class="headerlink" title="透视投影变换"></a>透视投影变换</h3><p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230615160229.png" alt="image.png|555"></p>
+<p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/Pasted%20image%2020230612205212.png" alt="Pasted image 20230612205212.png|666"></p>
+<h3 id="正交投影变换"><a href="#正交投影变换" class="headerlink" title="正交投影变换"></a>正交投影变换</h3><p>光线平行，将原空间中物体，变换到一个2x2x2的立方体中</p>
+<h3 id="投影变换矩阵"><a href="#投影变换矩阵" class="headerlink" title="投影变换矩阵"></a>投影变换矩阵</h3><script type="math/tex; mode=display">\mathbf{M}_{\text{per}}=\begin{bmatrix}\frac{n}{r}&0&0&0\\ 0&\frac{n}{t}&0&0\\ 0&0&-\frac{f+n}{f-n}&-\frac{2nf}{f-n}\\ 0&0&-1&0\end{bmatrix}</script><p>将齐次坐标左乘投影矩阵，即可得到在NDC下的坐标：</p>
+<script type="math/tex; mode=display">\begin{aligned}\begin{pmatrix}\frac{n}{r}&0&0\\ 0&\frac{n}{t}&0&0\\ 0&0&\frac{-(f+n)}{f-n}&\frac{-2fn}{f-n}\\ 0&0&-1&0\end{pmatrix}\begin{pmatrix}x\\ y\\ z\\ 1\end{pmatrix}& =\begin{pmatrix}\frac{n}{r}x\\ \frac{n}{t}y\\ \frac{-(f+n)}{f-n}z-\frac{-2fn}{f-n}\\ -z\end{pmatrix} \\\mathrm{project}& \to\begin{pmatrix}\frac{n}{r}\frac{x}{-z}\\ \frac{n}{t}\frac{y}{-z}\\ \frac{(f+n)}{f-n}-\frac{2fn}{f-n}\frac{1}{-z}\end{pmatrix} \end{aligned}</script><p>因此对于光线：</p>
+<p>$\begin{pmatrix}a_x\frac{o_x+td_x}{o_z+td_z}\\ a_y\frac{o_y+td_y}{o_z+td_z}\\ a_z+\frac{b_z}{o_z+td_z}\end{pmatrix}=\begin{pmatrix}o_x’+t’d_x’\\ o_y’+t’d_y’\\ o_z’+t’d_z’\end{pmatrix}.$</p>
+<p>其中：<br>$\begin{aligned}&amp;a_{x} :=-\frac{n}{r}  \\&amp;a_y :=-\frac nt  \\&amp;a_z :=\frac{f+n}{f-n}  \\&amp;b_z :=\frac{2nf}{f-n}\end{aligned}$</p>
+<p>$\mathbf{o}’=\begin{pmatrix}o’_x\\ o’_y\\ o’_z\end{pmatrix}=\begin{pmatrix}a_x\frac{o_x}{o_z}\\ a_y\frac{o_y}{o_z}\\ a_z+\frac{b_z}{o_z}\end{pmatrix}=\pi(\mathbf{o}).$</p>
+<p>交换顺序：</p>
+<script type="math/tex; mode=display">\begin{aligned}
+\begin{pmatrix}t'd'_x\\ t'd'_y\\ t'd'_z\end{pmatrix}& =\begin{pmatrix}a_x\frac{o_x+t d_x}{o_z+t d_z}-a_x\frac{o_x}{o_z}\\ \\ a_y\frac{o_y+t d_y}{o_z+t d_z}-a_y\frac{o_y}{o_z}\\ \\ a_z+\frac{b_z}{o_z+t d_z}-a_z-\frac{b_z}{o_z}\end{pmatrix}  \\
+&=\begin{pmatrix}a_x\frac{o_z(o_x+td_x)-o_x(o_z+td_z)}{(o_z+td_z)o_z}\\ a_y\frac{o_z(o_y+td_y)-o_y(o_z+td_z)}{(o_z+td_z)o_z}\\ b_z\frac{o_z-(o_z+td_z)}{(o_z+td_z)o_z}\end{pmatrix} \\
+&=\begin{pmatrix}a_x\frac{td_z}{o_z+td_z}\left(\frac{d_x}{d_z}-\frac{o_x}{o_z}\right)\\ a_y\frac{td_z}{o_z+td_z}\left(\frac{d_y}{d_z}-\frac{o_y}{o_z}\right)\\ -b_z\frac{td_z}{o_z+td_z}\frac{1}{o_z}\end{pmatrix}
+\end{aligned}</script><p>可得：</p>
+<p>$\begin{aligned}&amp; t^{\prime}=\frac{t d_{z}}{o_{z}+t d_{z}}=1-\frac{o_{z}}{o_{z}+t d_{z}}  \\&amp; \mathbf{d}^{\prime}=\left(\begin{matrix}{a_{x}\left(\frac{d_{x}}{d_{z}}-\frac{o_{x}}{o_{z}}\right)}\\ {o_{y}\left(\frac{d_{y}}{d_{z}}-\frac{o_{y}}{o_{z}}\right)}\\ {-b_{z}\frac{1}{o_{z}}}\end{matrix}\right). \end{aligned}$</p>
+<p>又由：</p>
+<p>$\begin{aligned}a_{x}&amp; =-\frac{n}{r}=\frac{f_\mathrm{camera}}{\frac{W}{2}}  \\a_y&amp; =-\frac{n}{t}=\frac{f_{\mathrm{camera}}}{\frac{H}{2}}  \\\lim\limits_{f\to\infty}a_z&amp; =\lim\limits_{f\to\infty}\frac{f+n}{f-n}=1  \\\lim\limits_{f\to\infty}b_z&amp; =\lim\limits_{f\to\infty}-\frac{2nf}{n-f}=2n \end{aligned}$</p>
+<h3 id="结果："><a href="#结果：" class="headerlink" title="结果："></a>结果：</h3><script type="math/tex; mode=display">\begin{aligned}
+& \mathbf{o}^{\prime}=\left(\begin{matrix}{-\frac{f_{c a m}}{W/2}\frac{o_{x}}{o_{z}}}\\ {-\frac{f_{c a m}}{H/2}\frac{o_{y}}{o_{z}}}\\ {1+\frac{2n}{o_{z}}}\end{matrix}\right)  \\
+& \mathbf{d}^{\prime}=\left(\begin{matrix}{-\frac{f_{c a m}}{W/2}\left(\frac{d_{x}}{d_{z}}-\frac{o_{x}}{o_{z}}\right)}\\ {-\frac{f_{c a m}}{H/2}\left(\frac{d_{y}}{d_{z}}-\frac{o_{y}}{o_{z}}\right)}\\ {-2n\frac{1}{o_{z}}}\end{matrix}\right). 
+\end{aligned}</script><div class="note info">
+            <ul><li>in NeRF :<br>One final detail in our implementation: we shift o to the ray’s intersection with the near plane at z = −n (before this NDC conversion) by taking on = o + tndfor tn = −(n + oz )/dz . Once we convert to the NDC ray, this allows us to simply sample t′ linearly from 0 to 1 in order to get a linear sampling in disparity fromn to ∞ in the original space.</li><li>TL;DR: 在NDC变换之前，将o移动到近平面z=-n的地方，令near=0，因此可以简单的从0线性采样t’到1，以便在原始空间中从 n 到 ∞ 的视差中获得线性采样</li><li>对应代码中的ndc_rays函数</li></ul>
+          </div>
 
     </div>
 
@@ -514,7 +515,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%89%E7%BA%BF%E7%94%9F%E6%88%90"><span class="nav-text">光线生成</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E7%89%87%E4%BA%8C%E7%BB%B4%E5%9D%90%E6%A0%87%E2%80%94-gt-%E7%9B%B8%E6%9C%BA%E4%B8%89%E7%BB%B4%E5%9D%90%E6%A0%87-X-c-Y-c-Z-c"><span class="nav-text">图片二维坐标—&gt;相机三维坐标 $X_{c}, Y_{c},Z_{c}$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E6%9C%BA%E4%B8%89%E7%BB%B4%E5%9D%90%E6%A0%87%E2%80%94-gt-%E4%B8%96%E7%95%8C%E4%B8%89%E7%BB%B4%E5%9D%90%E6%A0%87XYZ"><span class="nav-text">相机三维坐标—&gt;世界三维坐标XYZ</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NDC-%E6%A0%87%E5%87%86%E5%8C%96%E8%AE%BE%E5%A4%87%E5%9D%90%E6%A0%87%E7%B3%BB"><span class="nav-text">NDC  标准化设备坐标系</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%8F%E8%A7%86%E6%8A%95%E5%BD%B1%E5%8F%98%E6%8D%A2"><span class="nav-text">透视投影变换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A3%E4%BA%A4%E6%8A%95%E5%BD%B1%E5%8F%98%E6%8D%A2"><span class="nav-text">正交投影变换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%95%E5%BD%B1%E5%8F%98%E6%8D%A2%E7%9F%A9%E9%98%B5"><span class="nav-text">投影变换矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C%EF%BC%9A"><span class="nav-text">结果：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%93%E6%B8%B2%E6%9F%93%E5%87%BD%E6%95%B0"><span class="nav-text">体渲染函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%8D%E7%BD%AE%E7%BC%96%E7%A0%81"><span class="nav-text">位置编码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="nav-text">神经网络</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E5%B1%82%E9%87%87%E6%A0%B7"><span class="nav-text">分层采样</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-text">其他参考文献</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%93%E6%B8%B2%E6%9F%93%E5%87%BD%E6%95%B0"><span class="nav-text">体渲染函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%8D%E7%BD%AE%E7%BC%96%E7%A0%81"><span class="nav-text">位置编码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="nav-text">神经网络</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E5%B1%82%E9%87%87%E6%A0%B7"><span class="nav-text">分层采样</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%89%E7%BA%BF%E7%94%9F%E6%88%90"><span class="nav-text">光线生成</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E7%89%87%E4%BA%8C%E7%BB%B4%E5%9D%90%E6%A0%87%E2%80%94-gt-%E7%9B%B8%E6%9C%BA%E4%B8%89%E7%BB%B4%E5%9D%90%E6%A0%87-X-c-Y-c-Z-c"><span class="nav-text">图片二维坐标—&gt;相机三维坐标 $X_{c}, Y_{c},Z_{c}$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E6%9C%BA%E4%B8%89%E7%BB%B4%E5%9D%90%E6%A0%87%E2%80%94-gt-%E4%B8%96%E7%95%8C%E4%B8%89%E7%BB%B4%E5%9D%90%E6%A0%87XYZ"><span class="nav-text">相机三维坐标—&gt;世界三维坐标XYZ</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NDC-%E6%A0%87%E5%87%86%E5%8C%96%E8%AE%BE%E5%A4%87%E5%9D%90%E6%A0%87%E7%B3%BB"><span class="nav-text">NDC  标准化设备坐标系</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%8F%E8%A7%86%E6%8A%95%E5%BD%B1%E5%8F%98%E6%8D%A2"><span class="nav-text">透视投影变换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A3%E4%BA%A4%E6%8A%95%E5%BD%B1%E5%8F%98%E6%8D%A2"><span class="nav-text">正交投影变换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%95%E5%BD%B1%E5%8F%98%E6%8D%A2%E7%9F%A9%E9%98%B5"><span class="nav-text">投影变换矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C%EF%BC%9A"><span class="nav-text">结果：</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -529,20 +530,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">134</span>
+          <span class="site-state-item-count">137</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-count">31</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">58</span>
+        <span class="site-state-item-count">59</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -590,12 +591,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">473k</span>
+    <span title="Symbols count total">465k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">28:40</span>
+    <span title="Reading time total">28:13</span>
 </div>
 
         

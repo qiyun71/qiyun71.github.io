@@ -35,7 +35,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230717154630.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230717145036.png">
 <meta property="article:published_time" content="2023-07-16T09:21:17.000Z">
-<meta property="article:modified_time" content="2023-11-24T06:43:26.660Z">
+<meta property="article:modified_time" content="2024-03-13T08:25:02.322Z">
 <meta property="article:author" content="Qi Yun">
 <meta property="article:tag" content="SurfaceReconstruction">
 <meta property="article:tag" content="Neus">
@@ -237,7 +237,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-11-24 14:43:26" itemprop="dateModified" datetime="2023-11-24T14:43:26+08:00">2023-11-24</time>
+                <time title="Modified: 2024-03-13 16:25:02" itemprop="dateModified" datetime="2024-03-13T16:25:02+08:00">2024-03-13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -404,7 +404,8 @@
 <li>$\mathcal{L}_{\mathrm{eik}}=\sum_{x}\left(|\nabla g(\mathrm{enc}(\mathrm{x}))|-1\right)^2,$</li>
 </ul>
 <p>A naive combination of hash-based encoding and implicit surfaces can yield undesirable surfaces, though. While the model is regularized by the Eikonal loss, there are many surfaces that satisfy the Eikonal constraint.<br>For <strong>specular or untextured areas</strong>, the Eikonal regularization doesn’t provide enough information to properly recover the surface. To address this issue, we propose <strong>several regularizations</strong> that serve to both recover smoother surfaces and more detail.</p>
-<h2 id="SDF-Regularization—-gt-smoother-surfaces"><a href="#SDF-Regularization—-gt-smoother-surfaces" class="headerlink" title="SDF Regularization—&gt;smoother surfaces"></a>SDF Regularization—&gt;smoother surfaces</h2><p>In order to aid the network in recovering smoother surfaces in reflective or untextured areas, we add a curvature loss on the SDF<br>Calculating the full 3×3 Hessian matrix can be expensive; so we approximate curvature as local deviation of the normal vector. Recall that we already have the normal $n = ∇g(enc(x))$ at each ray sample since it was required for the Eikonal loss. With this normal, we define a tangent vector切向量 $η$ by cross product with a random unit vector τ such that $η = n × τ$.Given this random vector in the tangent plane, we slightly perturb our sample x to obtain $\mathrm{x}_\epsilon=\mathrm{x}+\epsilon\eta.$. We obtain the normal at the new perturbed point as $\mathbf{n}_\epsilon=\nabla g(\mathrm{enc}(\mathbf{x}_\epsilon))$ and define a curvature loss based on the dot product between the normals at the original and perturbed points:<br>curvature loss: $\mathcal{L}_\mathrm{curv}=\sum_x(\mathbf{n}\cdot\mathbf{n}_\epsilon-1)^2.$<br>物理含义：<strong>表面上相邻两点的法向量应该是平行的</strong></p>
+<h2 id="SDF-Regularization—-gt-smoother-surfaces"><a href="#SDF-Regularization—-gt-smoother-surfaces" class="headerlink" title="SDF Regularization—&gt;smoother surfaces"></a>SDF Regularization—&gt;smoother surfaces</h2><p>In order to aid the network in recovering smoother surfaces in reflective or untextured areas, we add a curvature loss on the SDF<br>Calculating the full 3×3 Hessian matrix can be expensive; so we approximate curvature as local deviation of the normal vector. Recall that we already have the normal $n = ∇g(enc(x))$ at each ray sample since it was required for the Eikonal loss. With this normal, we define a tangent vector切向量 $η$ by cross product with a random unit vector τ such that $η = n × τ$.Given this random vector in the tangent plane, we slightly perturb our sample x to obtain $\mathrm{x}_\epsilon=\mathrm{x}+\epsilon\eta.$. We obtain the normal at the new perturbed point as $\mathbf{n}_\epsilon=\nabla g(\mathrm{enc}(\mathbf{x}_\epsilon))$ and define a curvature loss based on the dot product between the normals at the original and perturbed points:<br>curvature loss: $\mathcal{L}_\mathrm{curv}=\sum_x(\mathbf{n}\cdot\mathbf{n}_\epsilon-1)^2.$ </p>
+<p>物理含义：<strong>表面上相邻两点的法向量应该是平行的</strong></p>
 <h2 id="Color-Regularization详细解析深度学习中的-Lipschitz-条件-知乎-zhihu-com"><a href="#Color-Regularization详细解析深度学习中的-Lipschitz-条件-知乎-zhihu-com" class="headerlink" title="Color Regularization详细解析深度学习中的 Lipschitz 条件 - 知乎 (zhihu.com)"></a>Color Regularization<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/389024283">详细解析深度学习中的 Lipschitz 条件 - 知乎 (zhihu.com)</a></h2><p>While the curvature regularization helps in recovering smooth surfaces, we observe that the network converges to an undesirable state where the geometry gets increasingly smoother while the color network learns to model all the high-frequency detail in order to drive the $\mathcal{L}_{rgb}$ to zero. Despite lowering $\mathcal{L}_{curv}$ during optimization, <strong>the SDF doesn’t regain back the lost detail</strong>. We show this behavior in Fig. 8. Recall that the color network is defined as $Color = c(\mathbf{h}_c,\mathbf{v},\mathbf{n},\chi;\Phi_c)$, with an input encoding of $h = enc(x; θ_{c})$. We observe that all the high-frequency detail learned by the color network has to be present in the weights of the MLP $Φ_{c}$ or the hashmap table $θ_{c}$ as all the other inputs are smooth. 颜色网络学习到的高频细节都在MLP的权重$Φ_{c}$或哈希表$θ_{c}$中，因为其他所有输入$\mathbf{v},\mathbf{n},\chi$都是平滑的</p>
 <p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230717141818.png" alt="image.png"></p>
 <p>In order to recover fine geometric detail, we propose to learn a color mapping network that is itself smooth w.r.t. to its input such <strong>that large changes in color are matched with large changes in surfaces normal</strong>. Function smoothness can be studied in the context of Lipschitz continuous networks. A function f is <strong>k-Lipschitz continuous</strong> if it satisfies: $\underbrace{|f(d)-f(e)|}_{\text{change in the output}}\leq k\underbrace{|d-e|}_{\text{change in the input}}$<br>Intuitively, it sets k as an upper bound上限 for the rate of change of the function. We are interested in the color network being a smooth function (small k) such that high-frequency color is also reflected in high-detailed geometry. <em>There are several ways to enforce Lipschitz smoothness on a function . Most of them impose a hard 1-Lipschitz requirement or ignore effects such as network depth which makes them difficult to tune for our use case</em></p>
@@ -575,20 +576,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">134</span>
+          <span class="site-state-item-count">137</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-count">31</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">58</span>
+        <span class="site-state-item-count">59</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -636,12 +637,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">473k</span>
+    <span title="Symbols count total">465k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">28:40</span>
+    <span title="Reading time total">28:13</span>
 </div>
 
         
