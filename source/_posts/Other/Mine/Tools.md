@@ -251,6 +251,8 @@ Scrcpy 连接安卓和电脑
 
 [微PE辅助安装_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1DJ411D79y?p=2&vd_source=1dba7493016a36a32b27a14ed2891088)
 
+系统激活：[Microsoft Activation Scripts (MAS)](https://massgrave.dev/)
+
 ## 其他软件
 
 ### V2rayN

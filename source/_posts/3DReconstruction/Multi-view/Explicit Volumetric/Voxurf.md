@@ -7,13 +7,13 @@ tags:
 categories: 3DReconstruction/Multi-view/Explicit Volumetric
 ---
 
-| Title     | Voxurf: Voxel-based Efficient and Accurate Neural Surface Reconstruction                                                                                                                                                                                            |
-| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Author    | Tong Wu and Jiaqi Wang and Xingang Pan and Xudong Xu and Christian Theobalt and Ziwei Liu and Dahua Lin                                                                                                                                                                                                  |
-| Conf/Jour | ICLR                                                                                                                                                                                              |
-| Year      | 2023                                                                                                                                                                                              |
+| Title     | Voxurf: Voxel-based Efficient and Accurate Neural Surface Reconstruction                                                                                                                            |
+| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Author    | Tong Wu and Jiaqi Wang and Xingang Pan and Xudong Xu and Christian Theobalt and Ziwei Liu and Dahua Lin                                                                                             |
+| Conf/Jour | ICLR                                                                                                                                                                                                |
+| Year      | 2023                                                                                                                                                                                                |
 | Project   | [wutong16/Voxurf: [ ICLR 2023 Spotlight ] Pytorch implementation for "Voxurf: Voxel-based Efficient and Accurate Neural Surface Reconstruction" (github.Com)]( https://github.com/wutong16/Voxurf ) |
-| Paper     | [Voxurf: Voxel-based Efficient and Accurate Neural Surface Reconstruction (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4789011193549291521&noteId=2073894198108795136)          |
+| Paper     | [Voxurf: Voxel-based Efficient and Accurate Neural Surface Reconstruction (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=4789011193549291521&noteId=2073894198108795136)            |
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231201171502.png)
 

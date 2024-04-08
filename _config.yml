@@ -36,6 +36,7 @@ skip_render:
   - '_posts/Templates/**'
   - '_posts/Reports/**'
   - '_posts/Other/**'
+  - '_posts/ModelUpdating/**'
 
 
 # Writing

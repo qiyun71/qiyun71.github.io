@@ -1,81 +1,17 @@
 
-# A fast stochastic model updating technique based on an inverse FE surrogate model
+# 读博
 
-**随机模型修正** [Call for papers - Engineering Structures | ScienceDirect.com by Elsevier](https://www.sciencedirect.com/journal/engineering-structures/about/call-for-papers#computational-methods-for-stochastic-engineering-dynamics)
-- **提交截止日期为2024年4月15日**
-- 录取截止日期为2024年6月15日。
+## 学校
 
-方法：CNN+RNN
-算例：NASA挑战、卫星
-
-讨论分析：
-- NASA 修正精度高，与其他方法进行对比
-- 卫星可以实时修正，神经网络很适合做黑箱，训练时间长
-
-确定模型修正：$θ={θ_i,i=1,2,…,N_θ}$ and $y={y_j,j=1,…,N_y }$
-- 前向过程：$y=\mathbf{F}_M(\theta)$
-- 优化目标：$\widehat{\theta}=\arg\min\mathbf{G}\left(\mathbf{F}_M(\theta),\mathbf{\varepsilon}_M(\mathbf{y}_{sim},\mathbf{y}_{exp})\right)$
-随机模型修正：$\theta^R=\left\{\theta_i^R,i=1,2,...,N_\theta\right\},$ 
-$\boldsymbol{y}_{sim}^{\boldsymbol{R}}=\left\{\boldsymbol{y}_{j}^{R},j=1,\ldots,N_{y}\right\}_{sim}$ and $\mathbf{y}_{j}^{R}=\left\{y_{1},y_{2},\ldots,y_{n_{sim}}\right\}^{T}$
-$y_{exp}^{R}=\left\{y_{k}^{R},k=1,\ldots,N_{y}\right\}_{exp}$ and $y_k^R=\{y_1,y_2,…,y_{n_{exp}} \}^T$
-- 前向过程：
-- 优化目标：$\left.\widehat{\theta^R}\in\theta^R=\arg\min\mathbf{G}\left(\mathbf{F}_M(x,\theta^R),d(y_{sim}^R,y_{exp}^R)\right.\right)$
-
-过程：
-- sensitivity analysis得到the most critical parameters$θ={θ_i,i=1,2,…,N_θ}$
-- 生成训练数据：每一行输出y对应每一行的输入$\theta$
-$y_{sim}(\zeta)=\{y_{sim}^1,y_{sim}^2,...,y_{sim}^{Nmc}\}^T\to\theta=\{\theta^1,\theta^2,...,\theta^{Nmc}\}^T$
-
-$\boldsymbol{y}_{sim}(\zeta)=\begin{bmatrix}y_1^1(\zeta)&...&y_j^1(\zeta)&...&y_{Ny}^1(\zeta)\\y_1^2(\zeta)&...&y_j^2(\zeta)&...&y_{Ny}^2(\zeta)\\...&...&...&...&...\\y_1^{Nmc}(\zeta)&...&y_j^{Nmc}(\zeta)&...&y_{Ny}^{Nmc}(\zeta)\end{bmatrix}•\boldsymbol{\theta}=\begin{bmatrix}\theta_1^1&...&\theta_l^1&...&\theta_{N_\theta}^1\\\theta_1^2&...&\theta_l^2&...&\theta_{N_\theta}^2\\...&...&...&...&...&...\\\theta_1^{Nmc}&...&\theta_i^{Nmc}&...&\theta_{N_\theta}^{Nmc}\end{bmatrix}$
+|      | 学院                                             | 位置   | 专业  |
+| ---- | ---------------------------------------------- | ---- | --- |
+|      |                                                |      |     |
+|      |                                                |      |     |
+|      |                                                |      |     |
+| 华中科技 | [机械科学与工程学院](https://mse.hust.edu.cn/index.htm) | 湖北武汉 |     |
 
 
-# ISRERM EI 论文
-
- **区间模型修正**
- 
-方法：神经网络
-算例：三自由度弹簧、钢板
-- 查找一些区间模型修正的算例，sci国兆谱
-
-Title: A interval model updating method based on Deep Neural Network
-
-## Abstract
-
-~~近年来，区间模型修正在实际工程中得到了广泛应用，尤其是在对结构系统认知不足的情况下。传统的区间模型修正方法存在优化时间长、输出高维特征时很难找到有效的不确定性量化指标等问题。DNN理论上能拟合任意的函数，基于此，本文提出了一种基于DNN的快速区间模型修正框架，将传统方法的逆问题转换为正问题求解。该框架将构建了以模型特征为输入来预测相应结构参数的网络结构，只需要简单的量化指标就可以训练网络。此外，训练完成后DNN推理的速度非常快，可以用于实时模型修正任务。最后，通过对质量弹簧系统和钢板结构这两个经典数值算例的验证，证明了所提出方法的可行性和有效性。~~
-
-m202210465@xs.ustb.edu.cn
-zhaoyanlin@ustb.edu.cn
-ydb@ustb.edu.cn
-
-Interval model updating is widely used for the case of insufficient knowledge of the structural system. Traditionalinterval model updating methods rely on optimization algorithms to updated the interval bounds of uncertain parameters. However, this approach has limitations like long optimization times and the inability to identify suitable uncertainty quantifiers for high-dimensional output features. 
-~~MLP can theoretically fit arbitrary functions.~~
-Hence, an fast interval model updating framework based on MLP (Multi-Layer Perceptron) neural network is proposed, which takes known model features as inputs to predict the corresponding structural parameters. 
-本框架构建了基于MLP反向代理模型，将传统方法的反问题转换为正问题来求解。根据大量的模型特征和结构参数数据对，通过前向计算和反向传播，最终拟合出一个准确的反向代理模型。
-The network training only requires the construction of simple metrics, and the network correction is very fast after the training is completed. 
-
-
-## 会议流程
-
-International Symposium on Reliability Engineering and Risk Management(ISRERM)
-- October 18-21, 2024, Hefei, China
-- 注册费、会议流程
-
-| 时间                          | 事件                                                                          |
-| --------------------------- | --------------------------------------------------------------------------- |
-| Jan. 21 - **Feb. 29**, 2024 | **Submission of abstracts** for review                                      |
-| Mar. 1 - Mar. 20, 2024      | Review of all abstracts                                                     |
-| Mar. 21 - **May. 15**, 2024 | **Submission of full papers**                                               |
-| May. 1 - **Sept. 1**, 2024  | **Registration with payment** required to be scheduled for the presentation |
-| May. 1 - Oct.21, 2024       | Registration for ISRERM 2024                                                |
-| Oct. 18 - Oct. 21, 2024     | ISRERM2024                                                                  |
-|                             |                                                                             |
-|                             |                                                                             |
-
-# Doctor
-
-## 
-
-## 
+## 导师
 
 Uncertainty Qualification | Model Updating
 
@@ -85,11 +21,45 @@ Uncertainty Qualification | Model Updating
   - https://scholar.google.com/citations?hl=nl&user=kt29JpQAAAAJ&view_op=list_works&citft=1&citft=2&citft=3&email_for_op=yuanqi053%40gmail.com&sortby=pubdate
 - 
 
-CSC，English要求（会议、考试or其他）
+CSC，English 要求（会议、考试 or 其他）
 
 
-# 专利
+## 学习
 
-- 确定性模型修正
-- 区间模型修正+摄动法+椭球
+[科学网—How to Supervise Yourself (怎么自导博士论文) - 何毓琦的博文](https://blog.sciencenet.cn/blog-1565-242182.html)
+广域搜索+深度发掘
 
+# 工作
+
+## C++/Rust
+[被鸽了，寻求实习， 25 届， Rust / C++ Web 后端，其他语言或者前端岗位也可，附详细简历 - V2EX](https://www.v2ex.com/t/1008633)
+
+[现在转 C++还来得及吗？ - V2EX](https://www.v2ex.com/t/966614)
+🤖 1. 大多数人都劝误不要盲目转向 C++,强调需要明确选择 C++的方向和领域。
+🤖 2. 提到的热门 C++方向包括游戏开发、动画、音视频、编译器开发、嵌入式系统、网络等。
+🤖 3. C++需根据专业才找得到工作,语言技能不够仅靠 C++很难就业。同时 C++工作门槛高,需要很长时间深入学习掌握。
+🤖 4. C++工作支付较高但也要求深厚领域知识,不像其他语言可以做通用后端开发。
+🤖 5. 一线公司也越来越推荐新人学习 Rust 或 Go 等语言。
+🤖 6. 年龄不是重要因素,40 多岁的同行还在积极工作。
+🤖 7. 求职需要准备面试领域知识而不仅限于语法。
+
+[想学 C++,以后靠 C++吃饭，但我不清楚该选哪个方向？有推荐的吗？我该怎么样学习 C++? - V2EX](https://www.v2ex.com/t/1021269)
+C++ 不适合非科班，如果连数据结构和算法、操作系统编程、软件工程的知识都没学过，建议还是 java/go/C# 吧。
+C++ 的任何一个领域都不适合你，上面很多人已经列出了 C++ 领域，我整理一下
+C++ 领域
+计算机图形学，游戏引擎开发（ unreal ），游戏服务器开发 （本身是服务器网络编程），
+AI 领域
+非科班不要想了，数学不行算法论文是看不懂的，只能做调包的，c++ （边缘终端编程、opencv\libpytorch\tensorflow)
+音视频处理
+需要懂编解码如 hevc\h264\aac 图像和视频封装格式如 mpeg-4 这方面 ffmepg\ librtmp\ live555)
+数据库开发
+需要对操作系统以及并发编程有深入了解
+有 postgresql 二次开发、rocksdb redis 等
+虚拟机开发
+需要对操作系统有深入了解
+Qemu\ kvm 的开发
+容器开发
+需要对 linux 内核虚拟化有深入了解。
+HPC 高性能计算
+对 CPU 指令和高性能计算的技巧需要了解
+其他的如 GIS 地理信息系统等一堆由于太过小众，就不列举了。

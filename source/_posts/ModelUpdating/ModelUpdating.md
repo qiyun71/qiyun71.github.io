@@ -12,7 +12,7 @@ categories: ModelUpdating
 
 # 基础知识
 
-## 动力学基础
+## 动力学
 
 [动力学分析之模态分析 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/559497137)
 
@@ -34,14 +34,16 @@ categories: ModelUpdating
 > https://zhuanlan.zhihu.com/p/656915794
 
 Uncertainty sources：Parameter uncertainty、Model form uncertainty、Experiment uncertainty
-根据参数是否存在认知epistemic和/或选择性aleatory不确定性，**将不确定性参数分为四类**：
+根据参数是否存在认知epistemic和/或选择性(偶然)aleatory不确定性，**将不确定性参数分为四类**：
 - 既不具有认知不确定性，也不具有选择性不确定性的参数被表示为具有完全确定值的常数。
 - 只有认知不确定性的参数被表示为一个未知但固定的常数，落在预定义的区间内。
-- 将仅具有aleatory不确定性的参数表示为具有完全确定的分布性质(如分布格式、均值、方差等)的随机变量。这种完全确定的分布称为“精确概率”。
+- 将仅具有aleatory偶然不确定性的参数表示为具有完全确定的分布性质(如分布格式、均值、方差等)的随机变量。这种完全确定的分布称为“精确概率”。
 - 同时具有认知不确定性和选择性不确定性的参数被表示为一个分布性质不完全确定的随机变量，即“不精确概率”。这种不精确的概率由所谓的概率盒(P-box)来建模，其中无限数量的累积分布函数(CDF)曲线构成概率空间中的特定区域。
 
 不确定性模型：不确定性参数的分布/区间/P-box
 - BMM(Beta Mixture Model)
+
+[【实验笔记】深度学习中的两种不确定性（上） - 知乎](https://zhuanlan.zhihu.com/p/56986840)
 
 ## CNN
 
@@ -73,10 +75,12 @@ Other：
   - Interval model updating is typically performed when gathering data is expensive, time-consuming, or complex and only a limited amount of data is available to perform non-deterministic model updating.
   - 随机模型修正的方法需要大量的实验数据，区间方法被引入，作为一种有用的替代方法来量化不确定参数。Deng等开发了用于更新不确定参数均值和区间半径的两步法。[Interval identification of structural parameters using interval overlap ratio and Monte Carlo simulation](https://readpaper.com/pdf-annotate/note?pdfId=2201610607974204928&noteId=2201611039416835840)
 
-模型修正术语：Model updating、Model verification(计算模型是否准确地表示底层数学方程及其解的过程)、Model validation(从其预期用途的角度确定模型准确表示专用物理实验的程度)、Uncertainty quantification、Uncertainty propagation
+模型修正术语：
+- Model updating、Model verification(计算模型是否准确地表示底层数学方程及其解的过程)、Model validation(从其预期用途的角度确定模型准确表示专用物理实验的程度)、Uncertainty quantification、Uncertainty propagation
+- interval response surface model (IRSM)
 
 
-## 组成结构
+## 基本组成
 
 **不确定性参数/UQ**(待修正参数)
 - 设计参数型模型修正：材料参数(E、$\rho$)、结构参数()
@@ -96,254 +100,6 @@ Other：
 - SSA、Particle swarm粒子群 optimizer algorithm
 - CNN、RNN、MLP......
 
-# 模型修正(卫星 ex)
-## 传统方法 Convention
-
-- 有限元方法获取数据集耗费时间长，使用一个代理模型来代替有限元计算模型。
-- 根据随机样本 $X_{s}$ 通过代理模型得到模拟响应 $Y_{s}$，动力学实验得到实验响应 $Y_{e}(f_{1} ... f_{6})$
-- 用子区间相似度计算模拟样本 $Y_{s}$ 和试验样本 $Y_{e}$ 之间的值，并作为目标函数。
-- 用麻雀搜索算法将目标函数迭代寻优，得到修正后的均值 $\mu$ 和标准差 $\sigma$
-
-**目标函数：**
-- 子区间相似度
-- 标准差椭圆
-
-## 深度学习方法
-
-### Satellite_UCNN(code and images not by author)
-
-#### 数据集生成与预处理
-
-```markdown
-/data/train 训练数据分为25组，每一组400条，共10000次仿真数据
-- fre-400-1
-  - sita1.xlsx #400x1
-  - sita2.xlsx
-  - ...
-  - sita6.xlsx
-  - xiangying.xlsx #80800x11 频响数据，每101×2行为一条，对应0-50Hz 101个频率点x、y两个方向的数据
-- fre-400-2
-- fre-400-3
-- fre-400-4
-- ...
-- fre-400-25
-
-测量的卫星模型加速度频响数据，将有限元模型的加速度频响数据经预处理转化为对应的频响图像，然后输入进UCNN进行训练
-将选取的3个有限元模型参数sita1/3/5的值组成向量作为训练输出结果的GT对照标签
-
-/data/test
-- fre-400
-  - sita1.xlsx #400x1
-  - sita2.xlsx 
-  - ...
-  - sita6.xlsx
-  - xiangying.xlsx #80800x11
-```
-
-卫星模型选取了 11 个节点，并测量了水平 X 和竖直 Y 两个方向的加速度频响数据，频率范围为 ==0-50Hz==(选择前 30Hz 是因为后面变化不大)，频率间隔为 0.5。得到最终输入网络的频响图像尺寸为 2×11×61，对应标签形状为 3×1
-
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231225211854.png)
-
-主体结构6个参数为：只修正三个参数：$\theta_1$、$\theta_3$、$\theta_5$
-- **主弹性模量**$\theta_1$ 70Gpa，
-- 主密度 $\theta_2$  ，密度2.7x $10^{3} kg/m^{3}$ (英文论文) or 适配器厚度 1mm(本 1)
-- **中心筒厚度**$\theta_3$ 2mm
-- 底板厚度 $\theta_4$ 1mm
-- **剪切板厚度**$\theta_5$ 2mm
-- 顶板厚度 $\theta_6$ 2.5mm
-  - 其中 $\theta_{4}、\theta_6$ 为常数，其他为待修正参数，$\theta_2$ 训练效果很差，直接去掉了，可能造成影响(本 1)
-  - 其他参数：模型高 1250mm，中心筒直径 400mm，顶板边长 600mm，剪切板长 1000mm，宽 400mm
-
-**数据集生成**
-- 先在一定范围内生成均匀生成 10000 组待修正参数
-  - 弹性模量 50.0~90.0GPa
-  - ~~适配器厚度 0.50~1.50mm~~
-  - ~~中心筒厚度 1.00~3.00mm~~
-  - ~~剪切板厚度 1.00~3.00mm # 本科生 1 数据集中生成的是 0.50~1.50mm~~
-  - 顶板厚度 1.50~3.50mm
-- 将随机生成的结构参数输入有限元模型，得到水平 X 和竖直 Y 方向、11 个节点在 0~50Hz 频率下的加速度响应
-
-FR 数据转图：
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231225212852.png)
-
-#### 网络结构
-
-UCNN 单向卷积
-
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231227133859.png)
-
-#### 评价指标
-
-测试集错误率：
-$错误率 = \frac{|预测值-标签GT|}{标签GT}$
-
-### Mine
-
-
-#### 数据集
-
-data/
-- FE：生成数据集的matlab程序，需要调用nastran
-- test：测试网络精度数据集（均匀）
-- test_1：测试网络 修正结果的数据集（正态）
-- test_1_pred：根据test_1预测的参数结果，输入nastran得到的响应结果
-- train：训练网络数据集（均匀）
-- test_npy、test_1_npy、test_1_pred、train_npy：excel转为npy格式
-- train_npy copy：train转为npy时选取的频率范围为0~50Hz，其他为30Hz，用于绘制数据处理例子的流程图
-- train_npy_24_3theta、test_npy_24_3theta为本科生的修正3个参数的数据
-- train_npy_norm，
-
-#### 网络结构
-
-**UCNN**
-
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231227133859.png)
-
-**MLP**
-
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20240111150150.png) 
-
-**MLP_S**
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20240111150239.png) 
-
-**VGG16**
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20240111145858.png) 
-
-**ResNet50**
-
-![resnet.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/picturesresnet.png) <br>                                                                                                              |
-
-
-#### 实验记录
-
-```python
-20231227-111217: 10, 0.9 UCNN
-20231227-111738: 25, 0.99 UCNN
-20231227-160116: 25, 0.99 MLP 4x128
-20231227-160651: 25, 0.99 UCNN 3.5min
-20231227-162720: 25, 0.99 MLP 8x256
-20231227-163116: 25, 0.99 MLP 8x256 **400** epoch 4.0min
-# 20240102-164844: 25, 0.99 MLP_S 14个4x256的MLP 200 epoch 9min
-# 20240102-170301: 25, 0.99 MLP_S 14个2x256的MLP 200 epoch 5.6min
-20240102-203115: 25, 0.99 MLP_S 14个2x256的MLP **400** epoch 15.1min
-20240102-205253: 25, 0.99 MLP_S 14个4x256的MLP **400** epoch 23.27min
-20240102-211805: 25, 0.99 UCNN **400** epoch 7min
-# 20240111-160514: 25, 0.99 VGG11 200 epoch (由于图片太小使用VGG11)
-20240111-162059: 25, 0.99 VGG11 400 epoch 26.34 min
-20240113-190506: 25, 0.99 ResNet50 400 epoch 36.1 min
-
-# 测试两个是不是过拟合了，error rate随epoch变化趋势
-20240115-092119: 25, 0.99 UCNN 1000 epoch
-20240115-111929: 25, 0.99 VGG11 1000 epoch
-
-# 24x400 数据 --> theta1,3,5
-20240116-142116: 25, 0.99 VGG11 400 epoch
-20240116-153711: 25, 0.99 UCNN 400 epoch
-
-# 24x400 数据 --> theta1,2,3,5
-## 25, 0.99 | 400 epoch
-@20240116-164606_ucnn	
-@20240116-170957_vgg	
-@20240116-180846_resnet	
-@20240116-193319_mlp	
-@20240116-194754_mlp_s
-
-## 25, 0.99 | 1000 epoch
-@20240116-213751_mlp	
-@20240116-222413_ucnn	
-@20240116-231550_vgg	
-@20240117-014321_mlp_s	
-@20240117-065536_resnet
-
-## 25, 0.99 | 500 epoch
-@20240118-232440_ucnn
-@20240118-234300_vgg
-@20240119-005355_mlp
-@20240119-010645_mlp_s
-@20240119-021612_resnet
-
-## 50, 0.99 | 500 epoch
-@20240119-225843_ucnn
-@20240119-231920_vgg
-@20240120-003157_mlp
-@20240120-004544_mlp_s
-@20240120-015533_resnet
-
-## 100, 0.99 | 500 epoch
-@20240120-171537_ucnn
-@20240120-175110_mlp
-@20240120-180848_mlp_s
-@20240120-195338_vgg
-@20240120-220032_resnet
-
-## 200, 0.99 | 500 epoch
-@20240120-234329_ucnn
-@20240121-000302_mlp
-@20240121-001554_mlp_s
-@20240121-012709_vgg
-@20240121-023818_resnet
-
-## 300, 0.99 | 500 epoch
-@20240121-040844_ucnn
-@20240121-042747_mlp
-@20240121-044111_mlp_s
-@20240121-055239_vgg
-@20240121-070346_resnet
-``` 
-
-不论 MLP 还是 UCNN，中间 sita3 预测的误差都很大
-
-```powershell
-(satellite) PS D:\0Proj\ModelUpdating\satellite_UCNN> python run.py --test --resume outputs\@20231227-163116_mlp\400_mlp.pth --net mlp   
-error_rate=:0.05787282592434471=(0.19222232587635518/3.321460855007172)
-=====================
-error_rate_each0=:0.04022682424495547=(0.28112122416496277/6.9884021282196045)
-error_rate_each1=:0.12927590329299216=(0.25523426607251165/1.9743375182151794)
-error_rate_each2=:0.04024536597068831=(0.040311464481055735/1.0016423881053924)
-
-(satellite) PS D:\0Proj\ModelUpdating\SatelliteModelUpdating> python run.py --test --resume  outputs\@20240102-203115_mlp_s\400_mlp_s.pth --net mlp_s
-error_rate=:0.03934166444889552=(0.13067179843783377/3.321460855007172)
-=====================
-error_rate_each0=:0.028448767469817206=(0.1988114271312952/6.9884021282196045)
-error_rate_each1=:0.0800526909024898=(0.15805103108286858/1.9743375182151794)
-error_rate_each2=:0.03509528007871003=(0.03515292014926672/1.0016423881053924)
-
-(satellite) PS D:\0Proj\ModelUpdating\SatelliteModelUpdating> python run.py --test --resume  outputs\@20240102-205253_mlp_s\400_mlp_s.pth --net mlp_s # 过拟合了，训练集上的损失比较小，但是测试集上的loss比较大
-error_rate=:0.03124857323569491=(0.10379091277718544/3.321460855007172)
-=====================
-error_rate_each0=:0.01964181444371989=(0.13726489786058665/6.9884021282196045)
-error_rate_each1=:0.07125288617244709=(0.14067724645137786/1.9743375182151794)
-error_rate_each2=:0.03337576539351412=(0.03343058135360479/1.0016423881053924)
-
-(satellite) PS D:\0Proj\ModelUpdating\SatelliteModelUpdating> python .\run.py --test --resume outputs\@20240102-211805_ucnn\400_ucnn.pth
-error_rate=:0.02647251309147154=(0.08792741596698761/3.321460855007172)
-=====================
-error_rate_each0=:0.022187629130279763=(0.15505607463419438/6.9884021282196045)
-error_rate_each1=:0.03919995023153533=(0.07739393245428801/1.9743375182151794)
-error_rate_each2=:0.031280856565034834=(0.03133223187178373/1.0016423881053924)
-
-(satellite) PS D:\0Proj\ModelUpdating\SatelliteModelUpdating> python .\run.py --net vgg --test --resume outputs\202401\@20240111-162059_vgg\400_vgg.pth
-error_rate=:0.02620232199857664=(0.0870299868285656/3.321460855007172)
-=====================
-error_rate_each0=:0.016490224581949674=(0.11524032056331635/6.9884021282196045)
-error_rate_each1=:0.05937809189634055=(0.11723239459097386/1.9743375182151794)
-error_rate_each2=:0.02857031368553574=(0.028617237228900194/1.0016423881053924)
-
-(satellite) PS D:\0Proj\ModelUpdating\SatelliteModelUpdating> python .\run.py --test --resume outputs\202401\@20240113-190506_resnet\400_resnet.pth --net resnet
-error_rate=:0.12867085358744207=(0.42737520337104795/3.321460855007172)
-=====================
-error_rate_each0=:0.1063032449177=(0.7428898230195046/6.9884021282196045)
-error_rate_each1=:0.22810707873746822=(0.4503603637218475/1.9743375182151794)
-error_rate_each2=:0.08872962392607951=(0.08887535240501165/1.0016423881053924)
-```
-
-# 钢板实验
-
-[模态-力锤法,激振器法 (FRF频率响应函数,传递函数,共振频率及阻尼系数,猝发随机激励,力窗/指数窗) - 北京美科环试MeK](https://www.mek.net.cn/DataPhysics_Software_FRF.html)
-
-## 模态分析软件
-
-[模态分析软件|模态测试系统|实验模态分析|模态测试软件|模态软件 (hzrad.com)](http://www.hzrad.com/edm-modal-analysis)
 
 # 有限元软件
 
@@ -353,7 +109,9 @@ error_rate_each2=:0.08872962392607951=(0.08887535240501165/1.0016423881053924)
 
 [Welcome to pyNastran’s documentation for v1.3! — pyNastran 1.3 1.3 documentation (pynastran-git.readthedocs.io)](https://pynastran-git.readthedocs.io/en/1.3/index.html)
 
-### 不同结构参数生成结构特征量
+### 卫星算例.bdf
+
+不同结构参数生成结构特征量FR
 
 ```
 $ Elements and Element Properties for region : Shear_Panels

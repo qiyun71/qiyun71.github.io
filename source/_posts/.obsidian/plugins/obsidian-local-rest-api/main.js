@@ -47201,22 +47201,27 @@ var LocalRestApi = class extends import_obsidian2.Plugin {
     };
   }
   _refreshServerState() {
-    var _a, _b, _c, _d;
+    var _a, _b, _c, _d, _e;
     if (this.secureServer) {
       this.secureServer.close();
       this.secureServer = null;
     }
-    this.secureServer = https.createServer({ key: this.settings.crypto.privateKey, cert: this.settings.crypto.cert }, this.requestHandler.api);
-    this.secureServer.listen(this.settings.port, (_a = this.settings.bindingHost) != null ? _a : DefaultBindingHost);
-    console.log(`[REST API] Listening on https://${(_b = this.settings.bindingHost) != null ? _b : DefaultBindingHost}:${this.settings.port}/`);
+    if ((_a = this.settings.enableSecureServer) != null ? _a : true) {
+      this.secureServer = https.createServer({
+        key: this.settings.crypto.privateKey,
+        cert: this.settings.crypto.cert
+      }, this.requestHandler.api);
+      this.secureServer.listen(this.settings.port, (_b = this.settings.bindingHost) != null ? _b : DefaultBindingHost);
+      console.log(`[REST API] Listening on https://${(_c = this.settings.bindingHost) != null ? _c : DefaultBindingHost}:${this.settings.port}/`);
+    }
     if (this.insecureServer) {
       this.insecureServer.close();
       this.insecureServer = null;
     }
     if (this.settings.enableInsecureServer) {
       this.insecureServer = http2.createServer(this.requestHandler.api);
-      this.insecureServer.listen(this.settings.insecurePort, (_c = this.settings.bindingHost) != null ? _c : DefaultBindingHost);
-      console.log(`[REST API] Listening on http://${(_d = this.settings.bindingHost) != null ? _d : DefaultBindingHost}:${this.settings.insecurePort}/`);
+      this.insecureServer.listen(this.settings.insecurePort, (_d = this.settings.bindingHost) != null ? _d : DefaultBindingHost);
+      console.log(`[REST API] Listening on http://${(_e = this.settings.bindingHost) != null ? _e : DefaultBindingHost}:${this.settings.insecurePort}/`);
     }
   }
   onunload() {
@@ -47384,6 +47389,18 @@ var LocalRestApiSettingTab = class extends import_obsidian2.PluginSettingTab {
         text: LicenseUrl
       });
       noWarrantee.createEl("span", { text: "." });
+      new import_obsidian2.Setting(containerEl).setName("Enable Encrypted (HTTPs) Server").setDesc(`
+          This controls whether the HTTPs server is enabled.  You almost certainly want to leave this switch in its default state ('on'),
+          but may find it useful to turn this switch off for
+          troubleshooting.
+        `).addToggle((cb) => {
+        var _a2;
+        return cb.onChange((value) => {
+          this.plugin.settings.enableSecureServer = value;
+          this.plugin.saveSettings();
+          this.plugin.refreshServerState();
+        }).setValue((_a2 = this.plugin.settings.enableSecureServer) != null ? _a2 : true);
+      });
       new import_obsidian2.Setting(containerEl).setName("Encrypted (HTTPS) Server Port").setDesc("This configures the port on which your REST API will listen for HTTPS connections.  It is recommended that you leave this port with its default setting as tools integrating with this API may expect the default port to be in use.  Under no circumstances is it recommended that you expose this service directly to the internet.").addText((cb) => cb.onChange((value) => {
         this.plugin.settings.port = parseInt(value, 10);
         this.plugin.saveSettings();

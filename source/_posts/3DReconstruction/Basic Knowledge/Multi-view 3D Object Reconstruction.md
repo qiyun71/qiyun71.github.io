@@ -7,14 +7,14 @@ categories: 3DReconstruction/Basic Knowledge
 top: true
 ---
 
-|                                       3D Reconstruction                                       |             Single-view              |             Multi-view             |
-|:---------------------------------------------------------------------------------------------:|:------------------------------------:|:----------------------------------:|
-|                                             特点                                              | **简单但信息不足，未见区域很难重建** | **多视图信息互补但一致性很难保证** |
-| 深度估计 **[DE](/3DReconstruction/Basic%20Knowledge/Other%20Paper%20About%20Reconstruction)** |              2K2K,ECON               |          MVS,MVSNet-based          |
-| 隐式函数 **[IF](/3DReconstruction/Basic%20Knowledge/Other%20Paper%20About%20Reconstruction)** |              PIFu,ICON               |       NeuS,DoubleField,SuGaR       |
-|      生成模型 **[GM](Generative%20Models%20Reconstruction.md)**      |           BuilDIff, SG-GAN           |            DiffuStereo             |
-|                                        混合方法 **HM**                                        |                 HaP                  |               DMV3D                |
-| 显式表示 ER                                                                                              | Pixel2Mesh++                                     | Pixel2Mesh                                   |
+|                                     3D Reconstruction                                     |     Single-view      |       Multi-view       |
+| :---------------------------------------------------------------------------------------: | :------------------: | :--------------------: |
+|                                            特点                                             | **简单但信息不足，未见区域很难重建** |  **多视图信息互补但一致性很难保证**   |
+| 深度估计 **[DE](/3DReconstruction/Basic%20Knowledge/Other%20Paper%20About%20Reconstruction)** |      2K2K,ECON       |    MVS,MVSNet-based    |
+| 隐式函数 **[IF](/3DReconstruction/Basic%20Knowledge/Other%20Paper%20About%20Reconstruction)** |      PIFu,ICON       | NeuS,DoubleField,SuGaR |
+|                  生成模型 **[GM](Generative%20Models%20Reconstruction.md)**                   |   BuilDIff, SG-GAN   |      DiffuStereo       |
+|                                        混合方法 **HM**                                        |         HaP          |         DMV3D          |
+|                                          显式表示 ER                                          |     Pixel2Mesh++     |       Pixel2Mesh       |
 
 NeRF：[NeRF-review](/3DReconstruction/Basic%20Knowledge/NeRF/NeRF-review) | [NeRF-Mine](/3DReconstruction/Basic%20Knowledge/NeRF/NeRF-Mine)
 
@@ -138,17 +138,68 @@ Tanks and Temples：[Tanks and Temples Benchmark](https://www.tanksandtemples.or
 - 工业激光扫描仪(FARO Focus 3D X330 HDR scanner [Laser scanner](https://www.archiexpo.com/prod/faro/product-66338-1791336.html))捕获的模型
 - 评估precision、recall、F-score(重建模型与GT模型)
 
+### 方案对比
+
+| 方案  | 设备                                             | 场景(工况)  | 成本(预估)                                                                        |
+| --- | ---------------------------------------------- | ------- | ----------------------------------------------------------------------------- |
+| 方案1 | 结构光相机(4+1台)，三脚架和云台(4+1套)，同步集线器+线材(1套)          | 室内场景/物体 | 总计：¥12,360<br>¥1,999/台相机(共5台)<br>¥328/套三脚架和云台(共5套)<br>¥725/套同步设备(共1套)         |
+| 方案2 | 结构光相机(4+1台)，地面相机阵列支架(1套)，手持云台(1台)，同步集线器+线材(1套) | 室内场景/物体 | 总计：¥16,320<br>¥1,999/台相机<br>¥600/台手持云台<br>¥5,000/套地面相机阵列支架<br>¥725/套同步设备(共1套) |
+| 方案3 | 无人机(1架)，激光扫描仪(1台)                              | 室外大场景   | 总计：¥49,246<br>¥4,788/架无人机<br>¥44458/台激光扫描仪                                    |
+| 方案4 | 相机(4台)，手持扫描仪(1台)                               | 室内场景/物体 | 总计：¥57363<br>¥1,999/台相机<br>¥43,367/台手持扫描仪                                     |
+
+三维重建数据集的构建需要采集真实物体的照片和模型，使用结构光相机就可以同时拍摄RGB图片和深度图。但要想搭建完整的数据采集系统还需要其他的一些配套设备，如固定相机的云台和支架、计算机等设备。硬件设备准备完成后，还需要根据相机型号了解配套的软件以及数据的通讯等。
+
+方案1: 使用单个结构光相机进行单帧多视图拍摄，并使用4个结构光相机组成阵列进行多帧多视图拍摄，可以采集得到物体的照片和完整模型。该方案三脚架和云台组装简单，便捷性高且设备成本低，此外还可以在半室外的环境中进行数据采集工作。
+
+方案2: 与方案1相比区别在于将三脚架和云台，替换为手持云台和一整套地面相机阵列支架，手持云台用于方便移动单台相机进行单帧多视图拍摄，阵列支架用于固定多相机的多帧多视图拍摄。该方案的成本略高于方案1，且支架搬运困难，便携性差。
+
+方案3: 使用无人机拍摄室外的大场景(如建筑物)，采集照片数据，通过激光扫描仪获取大场景的模型。该方案成本高，且无人机受外部环境影响较大。
+
+方案4: 使用相机采集物体的照片，通过手持扫描仪得到物体的模型。该方案成本高，且手持扫描仪对体积大的物体扫描很困难。
+
+
+### 设备调研
+
+#### 相机 ¥3000左右
+
+[经典vs新锐！奥比中光Gemini2和RealSense D435i，直接采图对比！](https://www.bilibili.com/video/BV1iv4y1L7qQ?vd_source=4298530947f40edd06a04aa52d5f01d1)
+
+[奥比中光（ORBBEC） Gemini 2 3D双目结构光深度相机-淘宝网](https://item.taobao.com/item.htm?abbucket=18&id=701234419723&ns=1&spm=a21n57.1.0.0.1c62523c9PXosc)
+结构光相机：2000~5000/个，三脚架+云台200~500
+[三脚架+云台的投入应该占到你的相机+镜头总投入的10%-15%](https://forum.xitek.com/thread-535226-1-1.html)
+
+#### 三脚架+云台 ¥300左右
+三脚架主要参数：高度/节数、材料
+
+云台可分为：
+- 二维云台
+- 三维云台
+- 球形云台
+
+#### 同步设备
+
+[orbbec.com/staging/wp-content/uploads/2023/08/ORBBEC_Datasheet_Multi-Camera-Sync-Hub-0816-v01.pdf](https://www.orbbec.com/staging/wp-content/uploads/2023/08/ORBBEC_Datasheet_Multi-Camera-Sync-Hub-0816-v01.pdf)
+[Sync Solutions - ORBBEC - 3D Vision for a 3D World](https://www.orbbec.com/products/camera-accessories/sync-solutions/)
+
+#### 无人机
+
+#### 扫描仪
+- [FARO Focus 3D X 330 Laser Scanner](https://frugalindustry.com/products/FARO-Focus-3D-X-330-Laser-Scanner.html)
+- [Einscan Pro 2X 2020 Handheld 3D Scanner Shining3D: price in USA](https://top3dshop.com/product/shining-3d-einscan-pro-2x-3d-scanner)
+
 # 实验
 
-| 实验时间                                   |    对象     | 方法                               | 重建时间 |
-|:------------------------------------------ |:-----------:| ---------------------------------- | -------- |
-| @20240108-124117                           | dtu114_mine | neus + HashGrid                    |          |
-| @20240108-133914                           | dtu114_mine | + ProgressiveBandHashGrid          |          |
-| @20240108-151934                           | dtu114_mine | + loss_curvature(sdf_grad_samples) |          |
-|                                            |             |                                    |          |
-|                                            |  Miku_宿舍  | neus + HashGrid                    |          |
-| @20240117-164156                           |  Miku_宿舍  | + ProgressiveBandHashGrid          | 47min    |
-|                                            |             |                                    |          |
-| @20240124-165842	 | TAT_Truck            | ProgressiveBandHashGrid                                   | 2h         |
-| @20240124-230245                                           | TAT_Truck            | ProgressiveBandHashGrid                                   |          |
-| @20240125-113410                                           | TAT_Truck            | ProgressiveBandHashGrid                                   |          |
+| 实验时间             |     对象      | 方法                                 | 重建时间  |
+| :--------------- | :---------: | ---------------------------------- | ----- |
+| @20240108-124117 | dtu114_mine | neus + HashGrid                    |       |
+| @20240108-133914 | dtu114_mine | + ProgressiveBandHashGrid          |       |
+| @20240108-151934 | dtu114_mine | + loss_curvature(sdf_grad_samples) |       |
+|                  |             |                                    |       |
+|                  |   Miku_宿舍   | neus + HashGrid                    |       |
+| @20240117-164156 |   Miku_宿舍   | + ProgressiveBandHashGrid          | 47min |
+|                  |             |                                    |       |
+| @20240124-165842 |  TAT_Truck  | ProgressiveBandHashGrid            | 2h    |
+| @20240124-230245 |  TAT_Truck  | ProgressiveBandHashGrid            |       |
+| @20240125-113410 |  TAT_Truck  | ProgressiveBandHashGrid            |       |
+
+

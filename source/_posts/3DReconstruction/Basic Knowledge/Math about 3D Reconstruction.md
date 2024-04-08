@@ -1,10 +1,8 @@
 ---
-title: Math about 3D Reconstruction
+title: Math
 date: 2023-10-12 21:09:01
 tags:
   - Math
-  - 3DReconstruction
-  - SurfaceReconstruction
 categories: 3DReconstruction/Basic Knowledge
 ---
 
@@ -12,83 +10,53 @@ categories: 3DReconstruction/Basic Knowledge
 
 <!-- more -->
 
-# 概率论
+# 体渲染函数
 
-## 贝叶斯
+Ray: $\mathbf{r} = \mathbf{o} +t\mathbf{d}$
 
-全概率公式：$\mathsf{P(H)}=\mathsf{P(H|A)P(A)}+\mathsf{P(H|B)P(B)}$，结果H发生的概率
+NeRF:
+$\mathrm{C}(r)=\int_{\mathrm{t}_{\mathrm{n}}}^{\mathrm{t}_{\mathrm{f}}} \mathrm{T}(\mathrm{t}) \sigma(\mathrm{r}(\mathrm{t})) \mathrm{c}(\mathrm{r}(\mathrm{t}), \mathrm{d}) \mathrm{dt}$
+- $\mathrm{T}(\mathrm{t})=\exp \left(-\int_{\mathrm{t}_{\mathrm{n}}}^{\mathrm{t}} \sigma(\mathrm{r}(\mathrm{s})) \mathrm{ds}\right)$
+- 累计透射率$T(t)$可以保证离相机位置近的地方有更大的权重(一条光线前面的点遮挡后面的点)
+离散化：$\hat{C}(\mathbf{r})=\sum_{i=1}^{N} T_{i}\alpha_{i}\mathbf{c}_{i}=\sum_{i=1}^{N} T_{i}\left(1-\exp \left(-\sigma_{i} \delta_{i}\right)\right) \mathbf{c}_{i}$  
+-  $T_{i}=\exp \left(-\sum_{j=1}^{i-1} \sigma_{j} \delta_{j}\right)=\prod_{j=1}^{i-1}(1-\alpha_j)$ 
 
-贝叶斯公式：$\mathbf{P}(\mathbf{A}|\mathbf{H})=\frac{P(A)P(H|A)}{P(H)}$，H结果发生时，是由A导致的概率
-- 连续$p(y_0|x)=\frac{p(x|y_0)p(y_0)}{\int_{-\infty}^{+\infty}p(x|y)p(y)dy}$
-- 离散$p(y_j|x)=\frac{p(x|y_j)p(y_j)}{\sum_{i=0}^np(x|y_i)p(y_i)}$
+NeuS
+$C(\mathbf{o},\mathbf{v})=\int_{0}^{+\infty}w(t)c(\mathbf{p}(t),\mathbf{d})\mathrm{d}t$
+- $\omega(t)=T(t)\rho(t),\text{where}T(t)=\exp\left(-\int_0^t\rho(u)\mathrm{d}u\right)$ 
+- $\rho(t)=\max\left(\frac{-\frac{\mathrm{d}\Phi_s}{\mathrm{d}t}(f(\mathbf{p}(t)))}{\Phi_s(f(\mathbf{p}(t)))},0\right)$
+离散化：$\hat{C}=\sum_{i=1}^n T_i\alpha_i c_i$
+- $T_i=\prod_{j=1}^{i-1}(1-\alpha_j)$
+- $\alpha_i=\max\left(\frac{\Phi_s(f(\mathbf{p}(t_i))))-\Phi_s(f(\mathbf{p}(t_{i+1})))}{\Phi_s(f(\mathbf{p}(t_i)))},0\right)$
 
-[走进贝叶斯统计（一）—— 先验分布与后验分布 - 知乎](https://zhuanlan.zhihu.com/p/401258319)
-在使用数据估计参数$\theta$之前，我们需要给这个参数设定一个分布，即先验分布$p(\theta)$（根据经验得到）
+# Encoding
 
-$p(\theta|X)=\frac{p(\theta,X)}{p(X)}=\frac{p(X|\theta)p(\theta)}{\int_{-\infty}^{+\infty}p(X|\theta)p(\theta)d\theta}.$
-- $p(\theta|X)$是$\theta$的后验分布
-- $p(X|\theta)$是在给定$\theta$下关于数据样本的似然函数
-- $\int_{-\infty}^{+\infty}p(X|\theta)p(\theta)d\theta$ 为常数c，可以写为$p(\theta|X)\propto p(X|\theta)p(\theta).$
+Frequency Encoding
+$\gamma(p)=\left(\sin \left(2^{0} \pi p\right), \cos \left(2^{0} \pi p\right), \cdots, \sin \left(2^{L-1} \pi p\right), \cos \left(2^{L-1} \pi p\right)\right)$
+- $p=x|y|z$
+- $L= constant$
 
-[超详细讲解贝叶斯网络(Bayesian network) - USTC丶ZCC - 博客园](https://www.cnblogs.com/USTC-ZCC/p/12786860.html)
-
-# SDF计算与求导
-
-空间中的子集$\partial\Omega$，SDF值定义为：$\left.f(x)=\left\{\begin{array}{ll}d(x,\partial\Omega)&\mathrm{~if~}x\in\Omega\\-d(x,\partial\Omega)&\mathrm{~if~}x\in\Omega^c\end{array}\right.\right.$
-其中$d(x,\partial\Omega):=\inf_{y\in\partial\Omega}d(x,y)$表示x到表面子集上一点的距离，inf表示infimum最大下界
-
-
-# 权重计算
-
-## 2K2K
-
-来源：[2K2K Code](https://github.com/SangHunHan92/2K2K/blob/main/models/deep_human_models.py)
-目的：part 法向量图 --> 原图大小对应法向量图
-
-根据 part 法向量图逆仿射变换回原图空间 $\mathbf{n}_{i}=\mathbf{M}_{i}^{-1}\mathbf{\bar{n}}_{i}$
-要将 part 法向量图融合为原图空间法向量图，每个法向量图有不同的权重$\mathbf{N}^h\quad=\sum\limits_{i=1}^K\left(\mathbf{W}_i\odot\mathbf{n}_i\right)$
-
-权重的**计算方法**：
-$$\mathbf{W}_i(x,y)=\frac{G(x,y)*\phi_i(x,y)}{\sum_iG(x,y)*\phi_i(x,y)}$$
-
-- 同时与 part 法向量图逆仿射变换的还有一个 Occupancy Grid Map O，表示在原图空间中每个 part 的占用值 0 或者 1，i.e. $\left.\phi_i(x,y)=\left\{\begin{array}{cc}1&\text{if}&\sum\mathbf{n}_i(x,y)\neq\mathbf{0}^\top\\0&\text{otherwise}\end{array}\right.\right.$
-- 对 O 做高斯模糊 GaussianBlur，**使得 O map 的值到边缘逐渐减小**
-- 如下图，face part 脖子上方中心处 O 值做完高斯模糊后依然近似 1(假设 1)，而 body part 上部分脖子中心处做完高斯模糊后 O 值<1(假设 1/2)，这会导致对于脖子这部分多 part 融合时，face part normal 的权重相对于 body part normal 的权重会更大一点(2/3 > 1/3)
-
-![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230921163941.png)
-
-
-# 卷积 Pytorch
-图像卷积后的大小计算公式： $N=\left\lfloor\frac{W-F+2P}{Step}\right\rfloor+1$
-- 输入图片大小 `W * W`
-- Filter（卷积核）大小 `F * F`
-- 步长 Step
-- padding（填充）的像素数 P
-- 输出图片的大小为`N * N`
-
----
 
 # NeRF相关的数学知识
 
 ## 坐标变换
 
+像素Pixel | 相机Camera | 世界World
+
 内参矩阵 = c2p
 外参矩阵 = w2c
-像素坐标 = `c2p * w2c * world_position`
+根据世界坐标计算像素坐标 = `c2p * w2c * world_position`
 
 ### 相机内参矩阵intrinsic_c2p
 
-![image.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230703144039.png)
+![image.png|444](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230703144039.png)
 
 > 理解与[NeRF OpenCV OpenGL COLMAP DeepVoxels坐标系朝向_nerf坐标系_培之的博客-CSDN博客](https://blog.csdn.net/OrdinaryMatthew/article/details/126670351)一致
 
-NeRF = OpenGL = Blender
-Neus = Colmap
-
-| Method | Pixel to Camera coordinate                                                                                                                                                                                                                                                                                         | 
+| Method | Pixel to Camera coordinate                                                                                                                                                                                                                                                                                         |
 | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| NeRF   | $\vec d = \begin{pmatrix} \frac{i-\frac{W}{2}}{f} \\ -\frac{j-\frac{H}{2}}{f} \\ -1 \\ \end{pmatrix}$ , $intrinsics = K = \begin{bmatrix} f & 0 & \frac{W}{2}  \\ 0 & f & \frac{H}{2}  \\ 0 & 0 & 1 \\ \end{bmatrix}$                                                                                              | 
-| Neus   | $\vec d = intrinsics^{-1} \times  pixel = \begin{bmatrix} \frac{1}{f} & 0 & -\frac{W}{2 \cdot f}  \\ 0 & \frac{1}{f} & -\frac{H}{2 \cdot f} \\ 0 & 0 & 1 \\ \end{bmatrix} \begin{pmatrix} i \\ j \\ 1 \\ \end{pmatrix} = \begin{pmatrix} \frac{i-\frac{W}{2}}{f} \\ \frac{j-\frac{H}{2}}{f} \\ 1 \\ \end{pmatrix}$ |     
+| NeRF   | $\vec d = \begin{pmatrix} \frac{i-\frac{W}{2}}{f} \\ -\frac{j-\frac{H}{2}}{f} \\ -1 \\ \end{pmatrix}$ , $intrinsics = K = \begin{bmatrix} f & 0 & \frac{W}{2}  \\ 0 & f & \frac{H}{2}  \\ 0 & 0 & 1 \\ \end{bmatrix}$                                                                                              |
+| Neus   | $\vec d = intrinsics^{-1} \times  pixel = \begin{bmatrix} \frac{1}{f} & 0 & -\frac{W}{2 \cdot f}  \\ 0 & \frac{1}{f} & -\frac{H}{2 \cdot f} \\ 0 & 0 & 1 \\ \end{bmatrix} \begin{pmatrix} i \\ j \\ 1 \\ \end{pmatrix} = \begin{pmatrix} \frac{i-\frac{W}{2}}{f} \\ \frac{j-\frac{H}{2}}{f} \\ 1 \\ \end{pmatrix}$ |
 $\mathbf{p_c}=\begin{bmatrix}\dfrac{1}{f}&0&-\dfrac{W}{2\cdot f}\\0&\dfrac{1}{f}&-\dfrac{H}{2\cdot f}\\0&0&1\end{bmatrix}\begin{pmatrix}i\\j\\1\end{pmatrix}=\begin{pmatrix}\dfrac{i-\dfrac{W}{2}}{f}\\\dfrac{j-\dfrac{H}{2}}{f}\\1\end{pmatrix}$
 
 $\mathbf{d_{w}}= \begin{bmatrix}r_{11}&r_{12}&r_{13}&t_x\\ r_{21}&r_{22}&r_{23}&t_y\\ r_{31}&r_{32}&r_{33}&t_z\\ 0&0&0&1\end{bmatrix} \begin{bmatrix}X_w\\Y_w\\Z_w\\1\end{bmatrix} = \begin{bmatrix}X_c\\Y_c\\Z_c\\1\end{bmatrix}$
@@ -100,6 +68,7 @@ $\mathbf{o_w}=\begin{bmatrix}r_{11}&r_{12}&r_{13}&t_x\\ r_{21}&r_{22}&r_{23}&t_y
 
 colmap处理得到的`/colmap/sparse/0`中文件cameras, images, points3D.bin or .txt
 其中images.bin中：
+
 ```
 # IMAGE_ID, QW, QX, QY, QZ, TX, TY, TZ, CAMERA_ID, NAME
 # POINTS2D[] as (X, Y, POINT3D_ID)
@@ -310,121 +279,4 @@ specular用于描述光线击中物体表面后直接反射回去，使表面看
 ![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230731212626.png)
 
 金属度相当于镜面反射，金属度越高，镜面反射越强
-
-#### 蒙特卡罗采样
-
->[一文看懂蒙特卡洛采样方法 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/338103692)
->[简明例析蒙特卡洛（Monte Carlo）抽样方法 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/39628670)
->[逆变换采样和拒绝采样 - barwe - 博客园 (cnblogs.com)](https://www.cnblogs.com/barwe/p/14140681.html)
->[Monte Carlo method - Wikipedia](https://en.wikipedia.org/wiki/Monte_Carlo_method)
-
-如何在不知道目标概率密度函数的情况下，抽取所需数量的样本，使得这些样本符合目标概率密度函数。这个问题简称为抽样，是蒙特卡洛方法的基本操作步骤。
-![v2-eb0945aa2185df958f4568e58300e77a_1440w.gif](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/v2-eb0945aa2185df958f4568e58300e77a_1440w.gif)
-
-
-MC sampling：
-- Naive Method
-    - 根据概率分布进行采样。对一个已知概率密度函数与累积概率密度函数的概率分布，我们可以直接从累积分布函数（cdf）进行采样
-    - 类似逆变换采样
-- Acceptance-Rejection Method
-    - 逆变换采样虽然简单有效，但是当累积分布函数或者反函数难求时却难以实施，可使用MC的接受拒绝采样
-    - 对于累积分布函数未知的分布，我们可以采用接受-拒绝采样。如下图所示，p(z)是我们希望采样的分布，q(z)是我们提议的分布(proposal distribution)，令kq(z)>p(z)，我们首先在kq(z)中按照直接采样的方法采样粒子，接下来判断这个粒子落在途中什么区域，对于落在灰色区域的粒子予以拒绝，落在红线下的粒子接受，最终得到符合p(z)的N个粒子
-    - ![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230801135729.png)
-
-数学推导：
-![image.png|500](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230801135800.png)
-1. 从 $f_r(x)$ 进行一次采样 $x_i$
-2. 计算 $x_i$ 的 **接受概率** $\alpha$（Acceptance Probability）:$\alpha=\frac{f\left(x_i\right)}{f_r\left(x_i\right)}$
-3. 从 (0,1) 均匀分布中进行一次采样 u
-4. 如果 $\alpha$≥u，接受 $x_i$ 作为一个来自 f(x) 的采样；否则，重复第1步
-
-```python
-N=1000 #number of samples needed
-i = 1
-X = np.array([])
-while i < N:
-    u = np.random.rand()
-    x = (np.random.rand()-0.5)*8
-    res = u < eval(x)/ref(x)
-    if res:
-        X = np.hstack((X,x[res])) #accept
-        ++i
-```
-
-![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230801140044.png)
-
-
-- **Importance Sampling**
-    - 接受拒绝采样完美的解决了累积分布函数不可求时的采样问题。但是接受拒绝采样非常依赖于提议分布(proposal distribution)的选择，如果提议分布选择的不好，可能采样时间很长却获得很少满足分布的粒子。
-    - $E_{p(x)}[f(x)]=\int_a^bf(x)\frac{p(x)}{q(x)}q(x)dx=E_{q(x)}[f(x)\frac{p(x)}{q(x)}]$
-    - 我们从提议分布q(x)中采样大量粒子$x_1,x_2,...,x_n$，每个粒子的权重是 $\frac{p(x_i)}{q(x_i)}$，通过加权平均的方式可以计算出期望:
-    - $E_{p(x)}[f(x)]=\frac{1}{N}\sum f(x_i)\frac{p(x_i)}{q(x_i)}$
-        - q提议的分布，p希望的采样分布
-
-```python
-N=100000
-M=5000
-x = (np.random.rand(N)-0.5)*16
-w_x = eval(x)/ref(x)
-w_x = w_x/sum(w_x)
-w_xc = np.cumsum(w_x) #accumulate
-
-X=np.array([])
-for i in range(M):
-    u = np.random.rand()
-    X = np.hstack((X,x[w_xc>u][0]))
-```
-其中，w_xc是对归一化后的权重计算的累计分布概率。每次取最终样本时，都会先随机一个(0,1)之间的随机数，并使用这个累计分布概率做选择。样本的权重越大，被选中的概率就越高。
-
-![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230801140645.png)
-
-## linearColor 2 sRGB
-
-固定色调映射函数，将线性颜色转换为sRGB[1]，并将输出颜色剪辑为lie[0,1]。
-[Proposal for a Standard Default Color Space for the Internet - sRGB.-论文阅读讨论-ReadPaper - 轻松读论文 | 专业翻译 | 一键引文 | 图表同屏](https://readpaper.com/paper/35410341)
-
-(Why)为什么要将线性RGB转换成sRGB
-> [小tip: 了解LinearRGB和sRGB以及使用JS相互转换 « 张鑫旭-鑫空间-鑫生活 (zhangxinxu.com)](https://www.zhangxinxu.com/wordpress/2017/12/linear-rgb-srgb-js-convert/)
-
-假设白板的光线反射率是100%，黑板的光线反射率是0%。则在线性RGB的世界中，50%灰色就是光线反射率为50%的灰色。
-
-**人这种动物，对于真实世界的颜色感受，并不是线性的，而是曲线的**
-
-![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230810162118.png)
-
-(How)线性RGB与sRGB相互转化
-
-```python
-def linear_to_srgb(linear):
-    if isinstance(linear, torch.Tensor):
-        """Assumes `linear` is in [0, 1], see https://en.wikipedia.org/wiki/SRGB."""
-        eps = torch.finfo(torch.float32).eps
-        srgb0 = 323 / 25 * linear
-        srgb1 = (211 * torch.clamp(linear, min=eps)**(5 / 12) - 11) / 200
-        return torch.where(linear <= 0.0031308, srgb0, srgb1)
-    elif isinstance(linear, np.ndarray):
-        eps = np.finfo(np.float32).eps
-        srgb0 = 323 / 25 * linear
-        srgb1 = (211 * np.maximum(eps, linear) ** (5 / 12) - 11) / 200
-        return np.where(linear <= 0.0031308, srgb0, srgb1)
-    else:
-        raise NotImplementedError
-
-def srgb_to_linear(srgb):
-    if isinstance(srgb, torch.Tensor):
-        """Assumes `srgb` is in [0, 1], see https://en.wikipedia.org/wiki/SRGB."""
-        eps = torch.finfo(torch.float32).eps
-        linear0 = 25 / 323 * srgb
-        linear1 = torch.clamp(((200 * srgb + 11) / (211)), min=eps)**(12 / 5)
-        return torch.where(srgb <= 0.04045, linear0, linear1)
-    elif isinstance(srgb, np.ndarray):
-        """Assumes `srgb` is in [0, 1], see https://en.wikipedia.org/wiki/SRGB."""
-        eps = np.finfo(np.float32).eps
-        linear0 = 25 / 323 * srgb
-        linear1 = np.maximum(((200 * srgb + 11) / (211)), eps)**(12 / 5)
-        return np.where(srgb <= 0.04045, linear0, linear1)
-    else:
-        raise NotImplementedError
-```
-
 

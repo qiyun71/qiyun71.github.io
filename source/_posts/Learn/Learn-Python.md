@@ -12,6 +12,19 @@ Python查缺补漏
 
 <!-- more -->
 
+# Project
+
+| Project introduction                                                                                                                    | Link                                                                                                                                                                           |
+| --------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 许多 **Linux** 发行版都用 **systemd 来管理系统的服务**，比如开机启动、自动重启、守护进程等。该项目讲解了如何入门 systemd，并提供了一个 Python 脚本和 systemd unit 文件，可以在此基础上快速开发出 systemd 服务。 | [torfsen/python-systemd-tutorial: A tutorial for writing a systemd service in Python](https://github.com/torfsen/python-systemd-tutorial)                                      |
+| 基于 OpenCV 的拼接模块开发的用于**快速拼接图片的 Python 库**                                                                                                | [OpenStitching/stitching: A Python package for fast and robust Image Stitching](https://github.com/OpenStitching/stitching)                                                    |
+| 手写实现李航《统计学习方法》书中全部算法                                                                                                                    | [Dod-o/Statistical-Learning-Method_Code: 手写实现李航《统计学习方法》书中全部算法](https://github.com/Dod-o/Statistical-Learning-Method_Code)                                                      |
+| 使用 Python 和 Matplotlib 进行科学可视化的开源书籍                                                                                                     | [rougier/scientific-visualization-book: An open access book on scientific visualization using python and matplotlib](https://github.com/rougier/scientific-visualization-book) |
+| Python 写的人脸识别和面部属性分析框架，可根据人脸图像智能识别年龄、性别、情绪等信息                                                                                           | [serengil/deepface: A Lightweight Face Recognition and Facial Attribute Analysis (Age, Gender, Emotion and Race) Library for Python](https://github.com/serengil/deepface)     |
+
+
+
+
 # 积累编写技巧
 
 - 变量的交换`a,b = b,a`
