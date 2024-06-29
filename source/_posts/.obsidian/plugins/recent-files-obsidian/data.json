@@ -1,204 +1,204 @@
 {
   "recentFiles": [
     {
-      "basename": "Transitional Markov Chain Monte Carlo Method for Bayesian Model Updating, Model Class Selection, and Model Averaging",
-      "path": "ModelUpdating/Method/Transitional Markov Chain Monte Carlo Method for Bayesian Model Updating, Model Class Selection, and Model Averaging.md"
-    },
-    {
-      "basename": "飞机模型修正方案",
-      "path": "Reports/PDF导出/飞机模型修正方案.md"
-    },
-    {
-      "basename": "ModelUpdating",
-      "path": "ModelUpdating/ModelUpdating.md"
-    },
-    {
-      "basename": "Case about ModelUpdating",
-      "path": "ModelUpdating/Case about ModelUpdating.md"
-    },
-    {
-      "basename": "基于NN飞机算例修正思路",
-      "path": "Reports/PDF导出/基于NN飞机算例修正思路.md"
-    },
-    {
-      "basename": "飞机算例数据集生成",
-      "path": "Reports/PDF导出/飞机算例数据集生成.md"
-    },
-    {
-      "basename": "Tools",
-      "path": "Other/Mine/Tools.md"
-    },
-    {
       "basename": "Math",
-      "path": "Other/Mine/Math.md"
+      "path": "Mine/Note/Math.md"
     },
     {
-      "basename": "1_A fast interval model updating method based on MLP neural network",
-      "path": "ModelUpdating/Interval Model Updating/1_A fast interval model updating method based on MLP neural network.md"
+      "basename": "Book Lists",
+      "path": "Blog&Books/Read/Book Lists.md"
     },
     {
-      "basename": "Interval model updating using perturbation method and Radial Basis Function neural networks",
-      "path": "ModelUpdating/Interval Model Updating/Interval model updating using perturbation method and Radial Basis Function neural networks.md"
-    },
-    {
-      "basename": "Paper about ModelUpdating",
-      "path": "ModelUpdating/Paper about ModelUpdating.md"
-    },
-    {
-      "basename": "Interval Identification of Structural Parameters Using Interval Deviation Degree and Monte Carlo Simulation",
-      "path": "ModelUpdating/Interval Model Updating/Interval Identification of Structural Parameters Using Interval Deviation Degree and Monte Carlo Simulation.md"
-    },
-    {
-      "basename": "Learn-Python",
-      "path": "Learn/Learn-Python.md"
-    },
-    {
-      "basename": "Math about 3D Reconstruction",
-      "path": "3DReconstruction/Basic Knowledge/Math about 3D Reconstruction.md"
-    },
-    {
-      "basename": "2DGS",
-      "path": "3DReconstruction/Multi-view/Implicit Function/GS-based/2DGS.md"
+      "basename": "Learn-Algo",
+      "path": "Learn/Learn-Algo.md"
     },
     {
       "basename": "Learn-Matlab",
       "path": "Learn/Learn-Matlab.md"
     },
     {
-      "basename": "NeRF-Principle",
-      "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF-Principle.md"
+      "basename": "Learn-PyTorch",
+      "path": "Learn/Learn-PyTorch.md"
     },
     {
-      "basename": "NeuS",
-      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/NeuS.md"
+      "basename": "Learn-Spider",
+      "path": "Learn/Learn-Spider.md"
     },
     {
-      "basename": "Gaustudio",
-      "path": "3DReconstruction/Multi-view/Implicit Function/Gaustudio.md"
+      "basename": "Linux",
+      "path": "Mine/Note/Linux.md"
     },
     {
-      "basename": "NeuDA",
-      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/NeuDA.md"
+      "basename": "Writing Science",
+      "path": "Blog&Books/Read/Writing Science.md"
     },
     {
-      "basename": "SDFStudio",
-      "path": "3DReconstruction/Multi-view/Implicit Function/SDFStudio.md"
+      "basename": "Writing science",
+      "path": "Blog&Books/Read/file/Writing science.pdf"
     },
     {
-      "basename": "Multi-view 3D Object Reconstruction",
-      "path": "3DReconstruction/Basic Knowledge/Multi-view 3D Object Reconstruction.md"
+      "basename": "Everyone-can-use-English",
+      "path": "Blog&Books/Read/Everyone-can-use-English.md"
     },
     {
-      "basename": "Generative Models Reconstruction",
-      "path": "3DReconstruction/Basic Knowledge/Generative Models Reconstruction.md"
+      "basename": "Learn-FEA",
+      "path": "Learn/Learn-FEA.md"
     },
     {
-      "basename": "Explicit Represent Reconstruction",
-      "path": "3DReconstruction/Basic Knowledge/Explicit Represent Reconstruction.md"
+      "basename": "Learn-Git",
+      "path": "Learn/Learn-Git.md"
     },
     {
-      "basename": "Other Paper About Reconstruction",
-      "path": "3DReconstruction/Basic Knowledge/Other Paper About Reconstruction.md"
+      "basename": "Learn-HCJ前端",
+      "path": "Learn/Learn-HCJ前端.md"
     },
     {
-      "basename": "NeRF-review",
-      "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF-review.md"
+      "basename": "Learn-Hexo",
+      "path": "Learn/Learn-Hexo.md"
     },
     {
-      "basename": "IPV6",
-      "path": "Other/Mine/IPV6.md"
+      "basename": "Learn-Hexo2",
+      "path": "Learn/Learn-Hexo2.md"
+    },
+    {
+      "basename": "Learn-Markdown",
+      "path": "Learn/Learn-Markdown.md"
+    },
+    {
+      "basename": "Learn-Python",
+      "path": "Learn/Learn-Python.md"
+    },
+    {
+      "basename": "Learn-Python_OPEN_CV",
+      "path": "Learn/Learn-Python_OPEN_CV.md"
+    },
+    {
+      "basename": "Learn-Python_plt",
+      "path": "Learn/Learn-Python_plt.md"
+    },
+    {
+      "basename": "Learn-Python_Threading",
+      "path": "Learn/Learn-Python_Threading.md"
+    },
+    {
+      "basename": "Learn-Python-LCU",
+      "path": "Learn/Learn-Python-LCU.md"
+    },
+    {
+      "basename": "Loss Functions",
+      "path": "3DReconstruction/Loss Functions.md"
+    },
+    {
+      "basename": "NeuS-based 3D Reconstruction",
+      "path": "Mine/Write/3D Reconstruction/NeuS-based 3D Reconstruction.md"
+    },
+    {
+      "basename": "NeRF-Mine",
+      "path": "Mine/Project/NeRF-Mine.md"
+    },
+    {
+      "basename": "Journal",
+      "path": "Mine/Note/Journal.md"
     },
     {
       "basename": "MyGo",
-      "path": "Other/Mine/MyGo.md"
-    },
-    {
-      "basename": "Paper",
-      "path": "Other/Mine/Paper.md"
-    },
-    {
-      "basename": "An interval model updating strategy using interval response surface models",
-      "path": "ModelUpdating/Interval Model Updating/An interval model updating strategy using interval response surface models.md"
-    },
-    {
-      "basename": "2K2K",
-      "path": "3DReconstruction/Single-view/Depth Estimation/2K2K.md"
-    },
-    {
-      "basename": "Learn-Ubuntu",
-      "path": "Learn/Learn-Ubuntu.md"
-    },
-    {
-      "basename": "三维重建实验方案",
-      "path": "Reports/PDF导出/三维重建实验方案.md"
-    },
-    {
-      "basename": "Learn-DeepLearning",
-      "path": "Learn/Learn-DeepLearning.md"
-    },
-    {
-      "basename": "Interval identification of structural parameters using interval overlap ratio and Monte Carlo simulation",
-      "path": "ModelUpdating/Interval Model Updating/Interval identification of structural parameters using interval overlap ratio and Monte Carlo simulation.md"
-    },
-    {
-      "basename": "Learn-Colmap",
-      "path": "Learn/Learn-Colmap.md"
+      "path": "Mine/Note/MyGo.md"
     },
     {
       "basename": "Datasets",
-      "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF/Datasets.md"
+      "path": "3DReconstruction/Datasets.md"
     },
     {
-      "basename": "核领域可靠性",
-      "path": "Other/核领域可靠性.md"
+      "basename": "Paper About 3D Reconstruction",
+      "path": "3DReconstruction/Paper About 3D Reconstruction.md"
     },
     {
-      "basename": "结构动力学有限元模型修正的发展------模型确认",
-      "path": "ModelUpdating/Review/结构动力学有限元模型修正的发展------模型确认.md"
+      "basename": "Write tips",
+      "path": "Mine/Note/Write tips.md"
     },
     {
-      "basename": "Bayesian inversion for imprecise probabilistic models using a novel entropy-based uncertainty quantification metric",
-      "path": "ModelUpdating/Interval Model Updating/Bayesian inversion for imprecise probabilistic models using a novel entropy-based uncertainty quantification metric.md"
+      "basename": "How to Read a Paper",
+      "path": "Blog&Books/Read/How to Read a Paper.md"
     },
     {
-      "basename": "基于NN的卫星算例问题",
-      "path": "Reports/PDF导出/基于NN的卫星算例问题.md"
+      "basename": "Tools",
+      "path": "Mine/Note/Tools.md"
     },
     {
-      "basename": "Interval model updating with irreducible uncertainty using the Kriging predictor",
-      "path": "ModelUpdating/Interval Model Updating/Interval model updating with irreducible uncertainty using the Kriging predictor.md"
+      "basename": "A fast interval model updating method based on MLP neural network",
+      "path": "Mine/Write/Model Updating/A fast interval model updating method based on MLP neural network.md"
     },
     {
-      "basename": "Neuralangelo",
-      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Efficiency/Neuralangelo.md"
+      "basename": "Concrete spalling damage detection and seismic performance evaluation for RC shear walls via 3D reconstruction technique and numerical model updating",
+      "path": "Mine/Paper Cross/Concrete spalling damage detection and seismic performance evaluation for RC shear walls via 3D reconstruction technique and numerical model updating.md"
     },
     {
-      "basename": "PermutoSDF",
-      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Efficiency/PermutoSDF.md"
+      "basename": "Gaustudio",
+      "path": "3DReconstruction/Multi-view/Explicit Volumetric/GS-based/Gaustudio.md"
     },
     {
-      "basename": "Color-NeuS",
-      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Color-NeuS.md"
+      "basename": "Multi-view Human Body Reconstruction",
+      "path": "3DReconstruction/Multi-view/Multi-view Human Body Reconstruction.md"
     },
     {
-      "basename": "A novel interval model updating framework based on correlation propagation and matrix-similarity method",
-      "path": "ModelUpdating/Interval Model Updating/A novel interval model updating framework based on correlation propagation and matrix-similarity method.md"
+      "basename": "Master Paper(3DReconstruction)",
+      "path": "Mine/Write/3D Reconstruction/Master Paper(3DReconstruction).md"
+    },
+    {
+      "basename": "Basics about 3D Reconstruction",
+      "path": "3DReconstruction/Basics about 3D Reconstruction.md"
+    },
+    {
+      "basename": "Make-mengya",
+      "path": "Python Practise/Make-mengya.md"
+    },
+    {
+      "basename": "Make-Py-Tools",
+      "path": "Python Practise/Make-Py-Tools.md"
+    },
+    {
+      "basename": "Make-PyNastran",
+      "path": "Python Practise/Make-PyNastran.md"
+    },
+    {
+      "basename": "Make-Python_bilibili",
+      "path": "Python Practise/Make-Python_bilibili.md"
+    },
+    {
+      "basename": "Make-Python_爬虫",
+      "path": "Python Practise/Make-Python_爬虫.md"
+    },
+    {
+      "basename": "Case about ModelUpdating",
+      "path": "ModelUpdating/Case about ModelUpdating.md"
+    },
+    {
+      "basename": "NeRF-review",
+      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/NeRF Other Research/NeRF-review.md"
+    },
+    {
+      "basename": "MonoSDF",
+      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Loss/MonoSDF.md"
+    },
+    {
+      "basename": "RegNeRF",
+      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Loss/RegNeRF.md"
     },
     {
       "basename": "Instant-NSR",
       "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Efficiency/Instant-NSR.md"
     },
     {
-      "basename": "HF-NeuS",
-      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/HF-NeuS.md"
+      "basename": "Instant-NSR-code",
+      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Efficiency/Instant-NSR-code.md"
     },
     {
-      "basename": "Geo-Neus",
-      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Geo-Neus.md"
+      "basename": "Neuralangelo",
+      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Efficiency/Neuralangelo.md"
     },
     {
-      "basename": "NeuS2",
-      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Efficiency/NeuS2.md"
+      "basename": "Neus-Instant-nsr-pl",
+      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Efficiency/Neus-Instant-nsr-pl.md"
     }
   ],
   "omittedPaths": [],

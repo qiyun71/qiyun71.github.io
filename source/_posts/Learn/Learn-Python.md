@@ -456,7 +456,11 @@ print(os.path.abspath('.'))
 输出：E:\BaiduSyncdisk\NeRF_Proj\NeRO
 ```
 
-# 类class
+# 概念
+
+> [【Python】详解 collections.defaultdict-CSDN博客](https://blog.csdn.net/qq_39478403/article/details/105746952)
+
+**collections** 作为 Python 的内建集合模块，实现了许多十分高效的特殊容器数据类型，即除了 Python 通用内置容器： dict、list、set 和 tuple 等的替代方案
 
 # 装饰器
 
@@ -1009,3 +1013,25 @@ for x in (A,C,D):
 > * 在调用基类的方法时，需要加上基类的类名前缀，且需要带上self参数变量。而在类中调用普通函数时并不需要带上self参数
 > * Python总是首先查找对应类的方法，如果它不能在派生类中找到对应的方法，它才开始到基类中逐个查找。（先在本类中查找调用的方法，找不到才去基类中找）
 
+## 类的实例可调用
+
+[【python】特殊函数 __call__ - 知乎](https://zhuanlan.zhihu.com/p/609832956)
+
+可以模糊对象和函数的关系
+
+```python
+    def __init__(self,name):
+        self.name=name
+
+    def __call__(self):
+        print("hello "+self.name)
+
+
+def main():
+    a = People('abc!')
+    a.__call__()
+    a()
+
+if __name__ == '__main__':
+    main()
+```

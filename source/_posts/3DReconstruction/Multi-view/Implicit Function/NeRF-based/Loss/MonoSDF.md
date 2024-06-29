@@ -5,7 +5,7 @@ tags:
   - Loss
   - 3DReconstruction
   - NeRF
-categories: 3DReconstruction/Multi-view/Implicit Function/NeRF-based/Loss
+categories: 3DReconstruction/Multi-view/Implicit Function/Loss
 ---
 
 | Title     | MonoSDF: Exploring Monocular Geometric Cues for Neural Implicit Surface Reconstruction                                                                                                                                                                                                |

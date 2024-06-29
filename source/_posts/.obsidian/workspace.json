@@ -14,109 +14,15 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Other/Mine/Math.md",
+                "file": "Mine/Note/Math.md",
                 "mode": "source",
                 "backlinks": false,
                 "source": false
               },
               "pinned": true
-            }
-          },
-          {
-            "id": "e34487fa77b05580",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "3DReconstruction/Basic Knowledge/Math about 3D Reconstruction.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              },
-              "pinned": true
-            }
-          },
-          {
-            "id": "271e8c54191813a8",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "ModelUpdating/Method/Transitional Markov Chain Monte Carlo Method for Bayesian Model Updating, Model Class Selection, and Model Averaging.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "f4bd536898f2b44a",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "ModelUpdating/Interval Model Updating/1_A fast interval model updating method based on MLP neural network.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "f2dc75df6dee8c2d",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "ModelUpdating/ModelUpdating.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "1ad9c4071eb80429",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "ModelUpdating/Case about ModelUpdating.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "07a65f58fd852c08",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "ModelUpdating/ModelUpdating.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "5cca26a7fbc5cb57",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Reports/PDF导出/飞机模型修正方案.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              }
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -128,14 +34,15 @@
       {
         "id": "6711a83b129914d6",
         "type": "tabs",
+        "dimension": 66.5432098765432,
         "children": [
           {
-            "id": "e8963d50c0d54c21",
+            "id": "0d68bfa346c465d5",
             "type": "leaf",
             "state": {
-              "type": "outline",
+              "type": "file-explorer",
               "state": {
-                "file": "ModelUpdating/Method/Transitional Markov Chain Monte Carlo Method for Bayesian Model Updating, Model Class Selection, and Model Averaging.md"
+                "sortOrder": "alphabeticalReverse"
               }
             }
           },
@@ -161,7 +68,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "巴氏",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -171,10 +78,27 @@
             }
           }
         ]
+      },
+      {
+        "id": "915376d9a841dbb5",
+        "type": "tabs",
+        "dimension": 33.45679012345679,
+        "children": [
+          {
+            "id": "e8963d50c0d54c21",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Mine/Note/Math.md"
+              }
+            }
+          }
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 224.5104169845581
+    "width": 283.5
   },
   "right": {
     "id": "a4155c200cdf0433",
@@ -184,16 +108,6 @@
         "id": "d30c1c41ae28f9b7",
         "type": "tabs",
         "children": [
-          {
-            "id": "0d68bfa346c465d5",
-            "type": "leaf",
-            "state": {
-              "type": "file-explorer",
-              "state": {
-                "sortOrder": "alphabetical"
-              }
-            }
-          },
           {
             "id": "876683fcfbb9d249",
             "type": "leaf",
@@ -208,7 +122,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "ModelUpdating/Method/Transitional Markov Chain Monte Carlo Method for Bayesian Model Updating, Model Class Selection, and Model Averaging.md",
+                "file": "Mine/Note/Math.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -241,12 +155,21 @@
                 "searchQuery": ""
               }
             }
+          },
+          {
+            "id": "bbcd4af613d7ef7b",
+            "type": "leaf",
+            "state": {
+              "type": "Saved Queries View",
+              "state": {}
+            }
           }
         ]
       }
     ],
     "direction": "horizontal",
-    "width": 243.5
+    "width": 280.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -264,42 +187,45 @@
       "media-extended:Open media": false
     }
   },
-  "active": "271e8c54191813a8",
+  "active": "b1922386e752a561",
   "lastOpenFiles": [
-    "Reports/PDF导出/飞机模型修正方案.md",
-    "ModelUpdating/ModelUpdating.md",
-    "ModelUpdating/Case about ModelUpdating.md",
-    "Reports/PDF导出/基于NN飞机算例修正思路.md",
-    "Reports/PDF导出/飞机算例数据集生成.md",
-    "Other/Mine/Tools.md",
-    "Other/Mine/Math.md",
-    "ModelUpdating/Interval Model Updating/1_A fast interval model updating method based on MLP neural network.md",
-    "ModelUpdating/Method/Transitional Markov Chain Monte Carlo Method for Bayesian Model Updating, Model Class Selection, and Model Averaging.md",
-    "ModelUpdating/Interval Model Updating/Interval model updating using perturbation method and Radial Basis Function neural networks.md",
-    "ModelUpdating/Paper about ModelUpdating.md",
-    "ModelUpdating/Interval Model Updating/Interval Identification of Structural Parameters Using Interval Deviation Degree and Monte Carlo Simulation.md",
-    "Learn/Learn-Python.md",
-    "3DReconstruction/Basic Knowledge/Math about 3D Reconstruction.md",
-    "3DReconstruction/Multi-view/Implicit Function/GS-based/2DGS.md",
+    "Blog&Books/Read/Book Lists.md",
+    "Mine/Note/Math.md",
+    "Learn/Learn-Algo.md",
     "Learn/Learn-Matlab.md",
-    "3DReconstruction/Basic Knowledge/NeRF/NeRF-Principle.md",
-    "3DReconstruction/Multi-view/Implicit Function/NeRF-based/NeuS.md",
-    "3DReconstruction/Multi-view/Implicit Function/Gaustudio.md",
-    "3DReconstruction/Multi-view/Implicit Function/NeRF-based/NeuDA.md",
-    "3DReconstruction/Multi-view/Implicit Function/SDFStudio.md",
-    "3DReconstruction/Basic Knowledge/Multi-view 3D Object Reconstruction.md",
-    "3DReconstruction/Basic Knowledge/Generative Models Reconstruction.md",
-    "3DReconstruction/Basic Knowledge/Explicit Represent Reconstruction.md",
-    "3DReconstruction/Basic Knowledge/Other Paper About Reconstruction.md",
-    "3DReconstruction/Basic Knowledge/NeRF/NeRF-review.md",
-    "ModelUpdating/Method",
-    "3DReconstruction.zip",
-    "ModelUpdating/Review",
-    "ModelUpdating/Interval Model Updating",
-    "ModelUpdating/Stochastic Model Updating",
-    "Reports/PDF导出",
-    "Learn/file/Writing science.pdf",
-    "Learn/file",
+    "Learn/Learn-PyTorch.md",
+    "Learn/Learn-Spider.md",
+    "Mine/Note/Linux.md",
+    "Blog&Books/Read/Writing Science.md",
+    "Blog&Books/Read/file/Writing science.pdf",
+    "Blog&Books/Read/Everyone-can-use-English.md",
+    "Learn/Learn-FEA.md",
+    "Learn/Learn-Git.md",
+    "Learn/Learn-HCJ前端.md",
+    "Learn/Learn-Hexo.md",
+    "Learn/Learn-Hexo2.md",
+    "Learn/Learn-Markdown.md",
+    "Learn/Learn-Python.md",
+    "Learn/Learn-Python_OPEN_CV.md",
+    "Learn/Learn-Python_plt.md",
+    "Learn/Learn-Python_Threading.md",
+    "Learn/Learn-Python-LCU.md",
+    "3DReconstruction/Loss Functions.md",
+    "Mine/Write/3D Reconstruction/NeuS-based 3D Reconstruction.md",
+    "Mine/Project/NeRF-Mine.md",
+    "Mine/Note/Journal.md",
+    "Mine/Note/MyGo.md",
+    "Mine/Note",
+    "3DReconstruction/Datasets.md",
+    "Blog&Books/Tips",
+    "Mine",
+    "Mine/Write/Model Updating",
+    "Mine/Write/3D Reconstruction",
+    "3DReconstruction/Multi-view/Implicit Function/NeRF-based/NeRF Other Research",
+    "Blog&Books/Others",
+    "Mine/Project",
+    "3DReconstruction/Basic Knowledge/NeRF/NeRF.canvas",
+    "Other/Mine/Write/file/Ink/Writing/2024.5.12 - 18.11pm.writing",
     "未命名.canvas"
   ]
 }

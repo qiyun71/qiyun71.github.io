@@ -21,7 +21,7 @@ categories: Learn
 
 <!-- more -->
 
-# 易错
+# 技巧
 
 ## 归一化
 
@@ -45,7 +45,26 @@ S：步长大小
 
 ### UCNN
 
+单向卷积
+
+### BCNN
+
+> [kumar-shridhar/PyTorch-BayesianCNN: Bayesian Convolutional Neural Network with Variational Inference based on Bayes by Backprop in PyTorch.](https://github.com/kumar-shridhar/PyTorch-BayesianCNN)
+> [Bayesian neural network introduction - 知乎](https://zhuanlan.zhihu.com/p/79715409)
+> [重参数 (Reparameterization)-CSDN博客](https://blog.csdn.net/weixin_42437114/article/details/125671285) [漫谈重参数：从正态分布到Gumbel Softmax - 科学空间|Scientific Spaces](https://kexue.fm/archives/6705)
+
+
+初始化的权重参数用高斯先验分布表示：$p(w^{(i)})=\prod_i\mathcal{N}(w_i|0,\sigma_p^2)$，训练的过程就是根据权重先验和数据集来获得权重参数的后验分布：$p(w|\mathcal{D})=\frac{p(\mathcal{D}|w)p(w)}{p(\mathcal{D})}$
+
+![CNNwithdist.png|555](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/CNNwithdist.png)
+
+具体流程：对数据使用两个卷积核进行操作，得到**两个输出的feature map，分别作为真实输出的均值和标准差**。随后使用高斯分布从两个feature map中采样，得到该层feature map的激活值，作为下一层的输入。
+激活值$\begin{aligned}b_j=A_i*\mu_i+\epsilon_j\odot\sqrt{A_i^2*(\alpha_i\odot\mu_i^2)}\end{aligned}$ (**Reparameterization**)
+- 为了解决从分布中采样不可微的问题，使用基于重参数化(**Reparameterization**)的反向传播方法来估计梯度
+
+
 ### VGG16
+
 
 [VGG16学习笔记 | 韩鼎の个人网站 (deanhan.com)](https://deanhan.com/2018/07/26/vgg16/)
 
@@ -69,6 +88,10 @@ S：步长大小
 ## U-Net
 
 > [U-Net (labml.ai)](https://nn.labml.ai/unet/index.html)
+> [anxingle/UNet-pytorch: medical image semantic segmentation](https://github.com/anxingle/UNet-pytorch)
+
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240528101406.png)
 
 
 图像分割
@@ -96,6 +119,7 @@ Maximize ： Lower bound of $logP(x)$
 
 
 ## Diffusion Model
+
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231022210535.png)
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231022210617.png)
@@ -181,6 +205,8 @@ $$x_0=\frac{1}{\sqrt{\bar{\alpha}_t}}(x_t-\sqrt{1-\bar{\alpha}_t}\epsilon)\tag{5
 
 ## Stable Diffusion
 
+> [Stable Diffusion 图片生成原理简述 « bang’s blog](https://blog.cnbang.net/tech/3766/)
+
 目前常见的 UI 有 WebUI 和 ComfyUI
 
 ### 模型
@@ -213,6 +239,7 @@ DPM++2M Karras，收敛+速度快+质量 OK
 ### 反向传播
 
 >[神经网络之反向传播算法（BP）公式推导（超详细） - jsfantasy - 博客园 (cnblogs.com)](https://www.cnblogs.com/jsfantasy/p/12177275.html)
+>[ML Lecture 7: Backpropagation - YouTube](https://www.youtube.com/watch?v=ibJpTrp5mcE)
 
 假如激活函数为sigmoid函数：$\sigma(x) = \frac{1}{1+e^{-x}}$
 sigmoid的导数为：$\frac{d}{dx}\sigma(x) = \frac{d}{dx} \left(\frac{1}{1+e^{-x}} \right)= \sigma(1-\sigma)$
@@ -298,6 +325,12 @@ $$
 (鞍点 in 3D)saddle point be like: 
 ![image.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230702201813.png)
 
+
+## KAN
+
+[KindXiaoming/pykan: Kolmogorov Arnold Networks](https://github.com/KindXiaoming/pykan?tab=readme-ov-file)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240505163014.png)
 
 # Loss
 

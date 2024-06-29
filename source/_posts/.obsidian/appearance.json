@@ -1,12 +1,12 @@
 {
-  "baseFontSize": 18,
+  "baseFontSize": 19,
   "theme": "system",
   "translucency": false,
   "cssTheme": "Border",
   "interfaceFontFamily": "MiSans Semibold",
-  "textFontFamily": "MiSans,MiSans Semibold",
-  "monospaceFontFamily": "Consolas",
-  "accentColor": "#26348c",
+  "textFontFamily": "MiSans,MiSans Semibold,HarmonyOS Sans SC,HYRunYuan 55W",
+  "monospaceFontFamily": "Maple Mono",
+  "accentColor": "#1a3056",
   "nativeMenus": false,
   "enabledCssSnippets": [
     "custom-admonitions.838117"

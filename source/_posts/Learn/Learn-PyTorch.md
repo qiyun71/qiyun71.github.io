@@ -160,16 +160,25 @@ lr_scheduler.nameLR
 | LinearLR          | 从`init_lr * start_factor`开始线性增长total_iters步到 `init_lr * end_factor `                                                                  |
 | MultiplicativeLR  | 学习率从init_lr 根据`lr_lambda = lambda step: factor`非线性衰减：$lr = factor^{step}$                                                                                                                                               |
 
-
-
 连接多个lr
 
-| nameLR                        | Brief                                        |
-| ----------------------------- | -------------------------------------------- |
+| nameLR           | Brief                                   |
+| ---------------- | --------------------------------------- |
 | SequentialLR     | **milestones**前为scheduler1，后为scheduler2 |
-| ChainedScheduler | 多个scheduler叠加                            |
-|                               |                                              |
+| ChainedScheduler | 多个scheduler叠加                           |
+|                  |                                         |
 
+
+### Tips
+
+在使用SequentialLR将多个scheduler连接起来时，SequentialLR的每个milestones都会从每个scheduler的0处开始，因此Step_scheduler的milestones要设置成`milestones=[1]`，这样设置会导致当Exp_scheduler结束时，先跳一下到`ori_lr`，然后step到`ori_lr * 0.4`
+
+```python
+Con_scheduler = optim.lr_scheduler.ConstantLR(optimizer, factor=1.0, total_iters=total_iters)
+Exp_scheduler = optim.lr_scheduler.ExponentialLR(optimizer, gamma=gamma)
+Step_scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[1], gamma=0.4)
+scheduler = optim.lr_scheduler.SequentialLR(optimizer, schedulers=[Con_scheduler,Exp_scheduler, Step_scheduler], milestones=[total_iters,total_iters+exp_iters])
+```
 
 
 

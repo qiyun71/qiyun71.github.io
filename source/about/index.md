@@ -16,14 +16,15 @@ layout: "about"
         <img src="https://qiyun71.github.io/images/avatar.jpeg" style="width: 200px; border-radius: 50%;">
     </div>
     <!-- border-left:25px solid #000; -->
-    <div style="width: 60%; padding: 40px;">
-        <div style="text-align: left; font-weight: bold;">Yun Qi</div>
-        <div style="text-align: left;">A Master Student at <a href="https://www.ustb.edu.cn/" onmouseover="this.style.color='#6F7276'" onmouseout="this.style.color='#252A2F'">USTB</a>(2022~2025)</div>
+    <div style="width: 60%; padding: 40px; font-size: 18px">
+        <div style="text-align: left; font-weight: bold; font-size: 23px">Qi Yun  <i class="fa fa-cogs" aria-hidden="true"></i><i class="fa fa-bolt" aria-hidden="true"></i></div>
+        <div style="text-align: left;">(2022~2025) A master student in <a href="https://www.ustb.edu.cn/" onmouseover="this.style.color='#6F7276'" onmouseout="this.style.color='#252A2F'">USTB(University of Science and Technology Beijing)</a>
+        </div>
         <!-- <div><b>Research direction</b>: NeRF & 3D Reconstruction</div>
         <div><b>Interest</b>: 3D Printing; DIY; Robot; Modeling</div>
         <div><b>Language</b>: Python; C++; C#; VB; Arduino</div>
         <div><b>Tools</b>: Pytorch; Blender; Creo; Arduino IDE</div> -->
-        <div><b>Mail</b>
+        <div><b>Mail:</b>
         <a href="mailto:yunqi1771@gmail.com" style="text-decoration: none; color: #252A2F; font-size: 17px;" onmouseover="this.style.color='#6F7276'" onmouseout="this.style.color='#252A2F'">yunqi1771@gmail.com</a></div>
     </div>
 </div>

@@ -6,7 +6,7 @@ tags:
   - Code
   - Efficiency
   - Neus
-categories: 3DReconstruction/Multi-view/Implicit Function/NeRF-based/Efficiency
+categories: 3DReconstruction/Multi-view/Implicit Function/Efficiency
 ---
 
 Instant Neus的代码理解

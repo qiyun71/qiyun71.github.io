@@ -17,6 +17,7 @@ categories: 3DReconstruction/Multi-view/Implicit Function/NeRF-based
 
 几何先验：使用COLMAP产生的稀疏点来作为SDF的显示监督-->可以捕获强纹理的复杂几何细节
 具有多视图立体约束的隐式曲面上的几何一致监督-->大面积的光滑区域
+![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230911165550.png)
 
 <!-- more -->
 

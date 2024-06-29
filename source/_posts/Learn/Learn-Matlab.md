@@ -60,10 +60,10 @@ set(axx,"FontName","Times New Roman",'FontSize',16,'FontWeight','bold')
 
 # 编码方式
 
-低版本修改编码方式 (防止查看高版本matlab 脚本文件时出现乱码)
+~~低版本修改编码方式 (防止查看高版本matlab 脚本文件时出现乱码)~~ 还是会乱码
 [Matlab: 修改编码方式, 如GBK-＞UTF-8_matlab编码设置utf8-CSDN博客](https://blog.csdn.net/yu1581274988/article/details/127271923)
 
 
 # Parallel
 
-- [ ] 安装VMware后，Matlab2023b版本无法使用parallel，启动很慢 
+- [x] 安装VMware后，Matlab2023b版本无法使用parallel，启动很慢  win(win10的问题，升级win11系统后没出现过该问题)
