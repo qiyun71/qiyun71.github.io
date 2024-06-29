@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/yqq/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Title PAniC-3D: Stylized Single-view 3D Reconstruction from Portraits of Anime Characters     Author Chen, Shuhong and Zhang, Kevin and Shi, Yichun and Wang, Heng and Zhu, Yiheng and Song, Guoxian">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PAniC-3D">
+<meta property="og:url" content="http://example.com/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeRF%20Other%20Research/Interesting/PAniC-3D/index.html">
+<meta property="og:site_name" content="QiYun">
+<meta property="og:description" content="Title PAniC-3D: Stylized Single-view 3D Reconstruction from Portraits of Anime Characters     Author Chen, Shuhong and Zhang, Kevin and Shi, Yichun and Wang, Heng and Zhu, Yiheng and Song, Guoxian">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230806132746.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230806132746.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230806135527.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230806135919.png">
+<meta property="article:published_time" content="2023-08-06T05:27:19.000Z">
+<meta property="article:modified_time" content="2024-06-29T12:16:11.567Z">
+<meta property="article:author" content="Qi Yun">
+<meta property="article:tag" content="3DReconstruction">
+<meta property="article:tag" content="NeRF">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230806132746.png">
+
+<link rel="canonical" href="http://example.com/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeRF%20Other%20Research/Interesting/PAniC-3D/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>PAniC-3D | QiYun</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">QiYun</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Note</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeRF%20Other%20Research/Interesting/PAniC-3D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiYun">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          PAniC-3D
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-08-06 13:27:19" itemprop="dateCreated datePublished" datetime="2023-08-06T13:27:19+08:00">2023-08-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-06-29 20:16:11" itemprop="dateModified" datetime="2024-06-29T20:16:11+08:00">2024-06-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/3DReconstruction-Multi-view-Implicit-Function/" itemprop="url" rel="index"><span itemprop="name">3DReconstruction/Multi-view/Implicit Function</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>2.9k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>11 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Title</th>
+<th>PAniC-3D: Stylized Single-view 3D Reconstruction from Portraits of Anime Characters</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Author</td>
+<td>Chen, Shuhong and Zhang, Kevin and Shi, Yichun and Wang, Heng and Zhu, Yiheng and Song, Guoxian and An, Sizhe and Kristjansson, Janus and Yang, Xiao and Matthias Zwicker</td>
+</tr>
+<tr>
+<td>Conf/Jour</td>
+<td>CVPR</td>
+</tr>
+<tr>
+<td>Year</td>
+<td>2023</td>
+</tr>
+<tr>
+<td>Project</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/ShuhongChen/panic3d-anime-reconstruction">ShuhongChen/panic3d-anime-reconstruction: CVPR 2023: PAniC-3D Stylized Single-view 3D Reconstruction from Portraits of Anime Characters (github.com)</a></td>
+</tr>
+<tr>
+<td>Paper</td>
+<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4738337093785239553&amp;noteId=1903166679687203840">PAniC-3D: Stylized Single-view 3D Reconstruction from Portraits of Anime Characters (readpaper.com)</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>基于<strong>EG3D无条件生成模型</strong><br>PAniC-3D对比PixelNeRF、EG3D(+Img2stylegan or +PTI)、Pifu</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230806132746.png" alt="image.png"></p>
+<span id="more"></span>
+<h1 id="AIR"><a href="#AIR" class="headerlink" title="AIR"></a>AIR</h1><p>我们提出了PAniC-3D，这是一个能够直接从插画风格的（p）动漫（ani）角色（c）肖像中重建立体化的系统。与自然人头部的真实图像相比，动漫角色肖像插画具有更复杂和多样的发型、配饰几何，且呈现非照片般的轮廓线阴影，从而为单视角重建带来独特的挑战。此外，缺乏适用于训练和评估这一模糊化风格重建任务的3D模型和肖像插画数据。面对这些挑战，我们提出的PAniC-3D架构通过线条填充模型跨越了插画到3D领域的差距，并利用体积辐射场来表示复杂的几何形态。我们使用两个大型新数据集（11.2k个Vroid 3D模型，1k个Vtuber肖像插画）来训练我们的系统，并在新颖的AnimeRecon插画到3D对比基准上进行评估。PAniC-3D在很大程度上优于基线方法，并为确立从肖像插画中进行风格化重建的任务提供了数据支持。</p>
+<p>随着AR/VR应用的兴起，除了对高保真度human avatars的需求在增加，对虚拟形象如动漫3D角色的需求也在增加。大多数角色设计师通常首先创建概念插图，允许他们表达复杂和高度多样化的特征，如头发，配饰，眼睛，皮肤，头饰等。<strong>不幸的是</strong>，将插图概念艺术开发成AR/VR就绪的3D资产的过程是昂贵的，需要专业的3D艺术家训练使用专家建模软件。虽然基于模板的创作者在一定程度上民主化了3D化身，但它们通常仅限于与特定身体模型兼容的3D资产。</p>
+<p>我们提出了PAniC-3D，这是一个系统，可以直接从动漫角色的肖像插图自动重建风格化的3D角色头部。我们将问题分为两部分:<br>1)隐式单视图头部重建， implicit single-view head reconstruction<br>2)跨插图- 3d域间隙，from across an illustration-3D domain gap.<br><strong>主要贡献</strong>：</p>
+<ul>
+<li>PAniC-3D: a system to <strong>reconstruct the 3D radiance field</strong> of a stylized character head <strong>from a single linebased portrait illustration.单线基础的肖像插图</strong></li>
+<li>The Vroid 3D dataset of 11.2k character models and renders, <strong>the first such dataset in the anime-style domain</strong> to provide 3D assets with multiview renders.</li>
+<li>The Vtuber dataset of 1.0k reconstruction-friendly portraits (aligned, front-facing, neutral-expression) that <strong>bridges the illustration-render domain gap through the novel task of line removal from drawings</strong>.</li>
+<li><strong>The AnimeRecon benchmark</strong> with 68 pairs of aligned 3D models and corresponding illustrations, enabling quantitative evaluation of both <strong>image and geometry metrics</strong> for stylized reconstruction.</li>
+</ul>
+<h2 id="Implicit-3D-Reconstruction"><a href="#Implicit-3D-Reconstruction" class="headerlink" title="Implicit 3D Reconstruction"></a>Implicit 3D Reconstruction</h2><p>虽然已经有很多基于网格的图像重建工作[23]，<strong>但这些系统的表现力不足以捕捉3D字符拓扑的极端复杂性和多样性。</strong><br>受到最近在生成高质量3D辐射场方面取得成功的启发[4,5,25,39]，我们转而使用隐式表示。然而，为了获得高质量的结果，最近的隐式重建工作，如PixelNerf[40]，<strong>由于缺乏公开可用的高质量3D数据，往往只从2D图像进行操作。</strong><br>一些使用复杂3D资产的隐式重建系统，如Pifu[31]，在使用基于点的监督方面取得了一定的成功，<strong>但需要仔细的点采样技术和损失平衡。</strong><br>还有一组工作是基于草图的建模，其中3D表示是从轮廓图像中恢复的。例如，Rui等人[24]使用多视图解码器来预测草图到深度和法线，然后将其用于表面重建。Song等人[44]还尝试通过学习重新调整输入来补偿多视图绘制差异。虽然与我们的单视图肖像重建问题有关，<strong>但这些方法需要多视图草图，这对于角色艺术家来说很难一致地绘制，并且无法处理颜色输入</strong><br>对于复杂的高质量3D资产，我们证明了可微体绘制在重建中的优越性。我们建立在最近的无条件生成工作(EG3D[4])的基础上，将重建问题定义为条件生成，提出了一些架构改进，并应用由我们的3D数据集提供的直接2.5D监督信号。</p>
+<h2 id="Anime-style-3D-Avatars-and-Illustrations"><a href="#Anime-style-3D-Avatars-and-Illustrations" class="headerlink" title="Anime-style 3D Avatars and Illustrations"></a>Anime-style 3D Avatars and Illustrations</h2><p>对于3D角色艺术家来说，从肖像插图中制作3D模型是一项相当常见的任务;然而，从计算机图形学的角度来看，这种程式化的重建设置给已经不适定的问题增加了额外的模糊性。此外，虽然在流行的动漫/漫画领域有使用3D角色资产的工作(姿势估计[18]，重新定位[17,20]和休息[22]等)，但<strong>缺乏公开可用的多视图渲染3D角色资产</strong>，允许可扩展的训练(表1)。鉴于这些问题，我们提出AnimeRecon(图1d)通过配对的插图到3D基准来形式化风格化任务。并提供3D资产的Vroid数据集(图1c)，以实现大规模训练。<br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230806132746.png" alt="image.png"></p>
+<p>在程式化重建问题中，我们解决了从插图中去除轮廓的问题。在线条提取[21,38]、草图简化[33,34]、线条重建[11,24]、艺术图像的线条利用[6,41]和划线去除[8,27,29,32,35]方面有很多工作;<strong>然而，从基于线条的插图中删除线条却很少受到关注</strong>。我们在更有利于3D重建的渲染图像中调整图纸的背景下研究了这种轮廓删除任务;我们发现朴素的图像到图像翻译[19,45]不适合这项任务，并提出了一种简单而有效的带有面部特征感知的对抗性训练设置。最后，我们提供了一个Vtuber肖像数据集(图1b)来训练和评估用于3D重建的轮廓去除。</p>
+<h1 id="Methodology"><a href="#Methodology" class="headerlink" title="Methodology"></a>Methodology</h1><p>PAniC-3D由两个主要组件组成(图1a):一个直接监督的3D重建器，用于预测给定前端渲染的辐射场，以及一个将图像转换为重建器训练分布的插图-渲染模块。<strong>这两个部分是独立训练的，但在推理时是顺序使用的</strong>。</p>
+<h2 id="3D-Reconstruction-Module"><a href="#3D-Reconstruction-Module" class="headerlink" title="3D Reconstruction Module"></a>3D Reconstruction Module</h2><p>3D重建模块图3在直接监督下进行训练，将正面渲染转换为体积辐射场。我们以最近的无条件生成工作(EG3D[4])为基础，将重建问题表述为条件生成问题，提出了几种架构改进，并应用我们的3D数据集提供的直接2.5D监督信号。<br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230806135527.png" alt="image.png"></p>
+<ul>
+<li>Conditional inputinput条件输入:将给定的要重建的正面正交视图调整大小并附加到EG3D中使用的Stylegan2主干的中间特征图中[4]。此外，在最早的特征映射中，我们通过连接预训练的Resnet-50动画标注器的倒数第二个特征，为模型提供有关输入的高级领域特定语义信息。所述标注器提供适合调节所述生成器的高级语义特征;之前的工作[7]对1062个相关类别进行了预训练，如蓝头发、猫耳朵、双辫子等</li>
+<li>Feature pooling特征池化:由于空间特征映射将像EG3D[4]一样被重新塑造成三维三平面，我们发现沿着图像轴将每个特征映射的一部分通道池化是有益的(见图3左)。这种简单的技术有助于沿着公共三平面轴分发信息，从而提高几何度量的性能。</li>
+<li>Multi-layer triplane多层三平面:根据并行工作[1]中提出的，我们通过在每个平面上堆叠更多通道来改进EG3D三平面(见图3中心)。该方法可以解释为三平面和体素网格之间的混合(如果层数等于空间大小，它们是等效的)。当双线性采样时，每个平面设置三层可以更好地消除空间歧义，特别是有助于我们的模型生成更可信的头部背面(EG3D没有面临的挑战)。</li>
+<li>Loss损失:我们充分利用了我们可用的3D资产提供给我们的真实2.5D表示。我们的重建损失包括:RGB L1、LPIPS[42]、轮廓L1和深度L2;这些应用于前、后、右和左正射影视图，如图3所示。除了保持生成方向外，还采用了判别损失来提高细节质量。我们还保留了EG3D训练中的R1和密度正则化损失。我们的2.5D表示和对抗性设置使我们能够超越类似的单视图重构器，如PixelNerf[40]，它只适用于颜色损失</li>
+<li>Post-processing后处理:我们利用我们的假设，即正面视图作为输入，通过在推理时将给定的输入拼接到生成的亮度场。每个像素的交点在体内的坐标被用来采样作为一个uv纹理图的输入;我们从每个交叉点投射一些额外的光线来测试正面的可见性，并相应地应用纹理。这种简单而有效的方法以可忽略不计的成本提高了输入的细节保存。</li>
+</ul>
+<h2 id="Illustration-to-Render-Module"><a href="#Illustration-to-Render-Module" class="headerlink" title="Illustration-to-Render Module"></a>Illustration-to-Render Module</h2><p>为了去除输入插图中存在的不真实的等高线，但在漫射光照场中不存在，我们设计了一个插图-渲染模块(图4)。假设可以访问未配对的插图和渲染(分别是我们的Vtuber和Vroid数据集)，浅网络在绘制的线条附近重新生成像素颜色，以便对抗性地匹配渲染图像分布。<br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230806135919.png" alt="image.png"><br>与CycleGAN和UGATIT[19,45]等未配对的图像对图像模型类似，我们也施加了小的身份损失;虽然这对于我们的填充情况似乎适得其反，因为在非生成区域中保留了身份，但我们发现这可以稳定GAN训练。请注意，我们的设置也不同于其他填充模型，因为我们的着色是为了匹配与输入不同的分布。根据之前的工作，从基于线的动画中提取草图[6]，我们使用简单高斯差分(DoG)算子，以防止在每个笔画周围提取双线。<br>虽然图纸中出现的大多数线条应该被删除，但关键面部特征周围的某些线条必须保留，因为它们确实出现在效果图中(眼睛，嘴巴，鼻子等)。我们使用了一个现成的动漫面部地标检测器[16]，在关键结构周围创建凸壳，其中不允许填充。</p>
+<p>我们展示了这个线移除模块确实实现了一个更像渲染的外观;当在我们的AnimeRecon对上进行评估时，它比基线方法更准确地执行图像平移(表4)，并从最终的亮度场渲染中去除线伪影(图6)。</p>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+1ZnNxFWnEbk5YzRl">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/3DReconstruction/" rel="tag"><i class="fa fa-tag"></i> 3DReconstruction</a>
+              <a href="/tags/NeRF/" rel="tag"><i class="fa fa-tag"></i> NeRF</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/Sparse/FORGE/" rel="prev" title="FORGE">
+      <i class="fa fa-chevron-left"></i> FORGE
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/UNISURF/" rel="next" title="UNISURF">
+      UNISURF <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#AIR"><span class="nav-text">AIR</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Implicit-3D-Reconstruction"><span class="nav-text">Implicit 3D Reconstruction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Anime-style-3D-Avatars-and-Illustrations"><span class="nav-text">Anime-style 3D Avatars and Illustrations</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Methodology"><span class="nav-text">Methodology</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3D-Reconstruction-Module"><span class="nav-text">3D Reconstruction Module</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Illustration-to-Render-Module"><span class="nav-text">Illustration-to-Render Module</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qi Yun"
+      src="/images/avatar.jpeg">
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">130</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/qiyun71" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;qiyun71" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/29010355" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;29010355" rel="noopener" target="_blank"><i class="fa fa-star fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qi Yun</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">461k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">27:55</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/yqq/anime.min.js"></script>
+  <script src="/yqq/velocity/velocity.min.js"></script>
+  <script src="/yqq/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

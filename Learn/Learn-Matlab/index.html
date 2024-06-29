@@ -28,7 +28,7 @@
 <meta property="og:description" content="Matlab">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-03-31T05:38:47.000Z">
-<meta property="article:modified_time" content="2024-04-01T08:19:20.457Z">
+<meta property="article:modified_time" content="2024-04-18T04:59:25.972Z">
 <meta property="article:author" content="Qi Yun">
 <meta name="twitter:card" content="summary">
 
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-04-01 16:19:20" itemprop="dateModified" datetime="2024-04-01T16:19:20+08:00">2024-04-01</time>
+                <time title="Modified: 2024-04-18 12:59:25" itemprop="dateModified" datetime="2024-04-18T12:59:25+08:00">2024-04-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -242,7 +242,7 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>250</span>
+              <span>274</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -275,9 +275,9 @@
 </ul>
 <h2 id="plotmatrix"><a href="#plotmatrix" class="headerlink" title="plotmatrix"></a>plotmatrix</h2><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% samples_ftheta_BD(300,4) --&gt; ax(4,4)</span></span><br><span class="line">[~,ax] = plotmatrix(samples_ftheta_BD);</span><br><span class="line">ax(<span class="number">1</span>,<span class="number">1</span>).YLabel.String = <span class="string">&#x27;\mu_E&#x27;</span>;</span><br><span class="line">ax(<span class="number">2</span>,<span class="number">1</span>).YLabel.String = <span class="string">&#x27;\mu_\rho&#x27;</span>;</span><br><span class="line">ax(<span class="number">3</span>,<span class="number">1</span>).YLabel.String = <span class="string">&#x27;\sigma_E&#x27;</span>;</span><br><span class="line">ax(<span class="number">4</span>,<span class="number">1</span>).YLabel.String = <span class="string">&#x27;\sigma_\rho&#x27;</span>;</span><br><span class="line">ax(<span class="number">4</span>,<span class="number">1</span>).XLabel.String = <span class="string">&#x27;\mu_E&#x27;</span>;</span><br><span class="line">ax(<span class="number">4</span>,<span class="number">2</span>).XLabel.String = <span class="string">&#x27;\mu_\rho&#x27;</span>;</span><br><span class="line">ax(<span class="number">4</span>,<span class="number">3</span>).XLabel.String = <span class="string">&#x27;\sigma_E&#x27;</span>;</span><br><span class="line">ax(<span class="number">4</span>,<span class="number">4</span>).XLabel.String = <span class="string">&#x27;\sigma_\rho&#x27;</span>;</span><br><span class="line"></span><br><span class="line">set(ax,<span class="string">&quot;FontName&quot;</span>,<span class="string">&quot;Times New Roman&quot;</span>,<span class="string">&#x27;FontSize&#x27;</span>,<span class="number">16</span>,<span class="string">&#x27;FontWeight&#x27;</span>,<span class="string">&#x27;bold&#x27;</span>)</span><br></pre></td></tr></table></figure>
 <h2 id="gplotmatrix"><a href="#gplotmatrix" class="headerlink" title="gplotmatrix"></a>gplotmatrix</h2><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% Ysample_result(300,4), Ysample_exp(1000,4) --&gt; axx(4,4)</span></span><br><span class="line">[~,axx] = gplotmatrix([Ysample_result; Ysample_exp],[],[<span class="built_in">ones</span>(<span class="number">300</span>,<span class="number">1</span>); <span class="number">2</span>*<span class="built_in">ones</span>(<span class="number">1000</span>,<span class="number">1</span>)],[],[],<span class="number">10</span>);</span><br><span class="line">h = findobj(<span class="string">&#x27;Tag&#x27;</span>,<span class="string">&#x27;legend&#x27;</span>); <span class="comment">% set legend Text</span></span><br><span class="line">set(h, <span class="string">&#x27;String&#x27;</span>, &#123;<span class="string">&#x27;Updated&#x27;</span>, <span class="string">&#x27;Target&#x27;</span>&#125;)</span><br><span class="line"></span><br><span class="line">axx(<span class="number">1</span>,<span class="number">1</span>).YLabel.String = <span class="string">&#x27;f_1&#x27;</span>;</span><br><span class="line">axx(<span class="number">2</span>,<span class="number">1</span>).YLabel.String = <span class="string">&#x27;f_2&#x27;</span>;</span><br><span class="line">axx(<span class="number">3</span>,<span class="number">1</span>).YLabel.String = <span class="string">&#x27;f_3&#x27;</span>;</span><br><span class="line">axx(<span class="number">4</span>,<span class="number">1</span>).YLabel.String = <span class="string">&#x27;f_4&#x27;</span>;</span><br><span class="line">axx(<span class="number">4</span>,<span class="number">1</span>).XLabel.String = <span class="string">&#x27;f_1&#x27;</span>;</span><br><span class="line">axx(<span class="number">4</span>,<span class="number">2</span>).XLabel.String = <span class="string">&#x27;f_2&#x27;</span>;</span><br><span class="line">axx(<span class="number">4</span>,<span class="number">3</span>).XLabel.String = <span class="string">&#x27;f_3&#x27;</span>;</span><br><span class="line">axx(<span class="number">4</span>,<span class="number">4</span>).XLabel.String = <span class="string">&#x27;f_4&#x27;</span>;</span><br><span class="line">set(axx,<span class="string">&quot;FontName&quot;</span>,<span class="string">&quot;Times New Roman&quot;</span>,<span class="string">&#x27;FontSize&#x27;</span>,<span class="number">16</span>,<span class="string">&#x27;FontWeight&#x27;</span>,<span class="string">&#x27;bold&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<h1 id="编码方式"><a href="#编码方式" class="headerlink" title="编码方式"></a>编码方式</h1><p>低版本修改编码方式 (防止查看高版本matlab 脚本文件时出现乱码)<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/yu1581274988/article/details/127271923">Matlab: 修改编码方式, 如GBK-＞UTF-8_matlab编码设置utf8-CSDN博客</a></p>
+<h1 id="编码方式"><a href="#编码方式" class="headerlink" title="编码方式"></a>编码方式</h1><p><del>低版本修改编码方式 (防止查看高版本matlab 脚本文件时出现乱码)</del> 还是会乱码<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/yu1581274988/article/details/127271923">Matlab: 修改编码方式, 如GBK-＞UTF-8_matlab编码设置utf8-CSDN博客</a></p>
 <h1 id="Parallel"><a href="#Parallel" class="headerlink" title="Parallel"></a>Parallel</h1><ul>
-<li>[ ] 安装VMware后，Matlab2023b版本无法使用parallel，启动很慢 </li>
+<li>[x] 安装VMware后，Matlab2023b版本无法使用parallel，启动很慢  win(win10的问题，升级win11系统后没出现过该问题)</li>
 </ul>
 
     </div>
@@ -313,10 +313,13 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/3DReconstruction/Multi-view/Implicit%20Function/Gaustudio/" rel="prev" title="Gaustudio">
+    <a href="/3DReconstruction/Multi-view/Explicit%20Volumetric/GS-based/Gaustudio/" rel="prev" title="Gaustudio">
       <i class="fa fa-chevron-left"></i> Gaustudio
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/Python%20Practise/Make-PyNastran/" rel="next" title="Make-PyNastran">
+      Make-PyNastran <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -390,20 +393,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">137</span>
+          <span class="site-state-item-count">130</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-count">24</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-count">57</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -451,12 +454,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">465k</span>
+    <span title="Symbols count total">461k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">28:13</span>
+    <span title="Reading time total">27:55</span>
 </div>
 
         

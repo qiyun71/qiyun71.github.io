@@ -27,8 +27,10 @@
 <meta property="og:site_name" content="QiYun">
 <meta property="og:description" content="学习深度学习过程中的一些基础知识     DL 修仙.炼丹 example     框架 丹炉 PyTorch   网络 丹方.灵阵 CNN   数据集 灵材 MNIST   GPU 真火 NVIDIA   模型 成丹 .ckpt      深度学习·炼丹入门 - 知乎 (zhihu.com)">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/CNNwithdist.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20240112195022.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20240112194924.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240528101406.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231022203426.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231022203514.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231022204157.png">
@@ -44,12 +46,13 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230702201754.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230702202522.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230702201813.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240505163014.png">
 <meta property="article:published_time" content="2023-07-02T10:53:58.000Z">
-<meta property="article:modified_time" content="2024-03-26T07:23:57.268Z">
+<meta property="article:modified_time" content="2024-05-28T12:32:33.106Z">
 <meta property="article:author" content="Qi Yun">
 <meta property="article:tag" content="DeepLearning">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20240112195022.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/CNNwithdist.png">
 
 <link rel="canonical" href="http://example.com/Learn/Learn-DeepLearning/">
 
@@ -244,7 +247,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-03-26 15:23:57" itemprop="dateModified" datetime="2024-03-26T15:23:57+08:00">2024-03-26</time>
+                <time title="Modified: 2024-05-28 20:32:33" itemprop="dateModified" datetime="2024-05-28T20:32:33+08:00">2024-05-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -261,13 +264,13 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>2.4k</span>
+              <span>2.7k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span>9 mins.</span>
+              <span>10 mins.</span>
             </span>
 
         </div>
@@ -322,17 +325,28 @@
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/23781756">深度学习·炼丹入门 - 知乎 (zhihu.com)</a></p>
 </blockquote>
 <span id="more"></span>
-<h1 id="易错"><a href="#易错" class="headerlink" title="易错"></a>易错</h1><h2 id="归一化"><a href="#归一化" class="headerlink" title="归一化"></a>归一化</h2><p><strong>输入数据</strong>的归一化：<br>当输入的数据为多个变量时，如果某个变量的变化远大于其他变量的变化，则会出现大数吃小数问题，网络会按着变化大的变量(对其最为敏感)来预测。</p>
+<h1 id="技巧"><a href="#技巧" class="headerlink" title="技巧"></a>技巧</h1><h2 id="归一化"><a href="#归一化" class="headerlink" title="归一化"></a>归一化</h2><p><strong>输入数据</strong>的归一化：<br>当输入的数据为多个变量时，如果某个变量的变化远大于其他变量的变化，则会出现大数吃小数问题，网络会按着变化大的变量(对其最为敏感)来预测。</p>
 <h1 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h1><h2 id="CNN"><a href="#CNN" class="headerlink" title="CNN"></a>CNN</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">卷积神将网络的计算公式为：</span><br><span class="line">N=(W-F+2P)/S+1</span><br><span class="line">其中</span><br><span class="line">N：输出大小</span><br><span class="line">W：输入大小</span><br><span class="line">F：卷积核大小</span><br><span class="line">P：填充值的大小</span><br><span class="line">S：步长大小</span><br></pre></td></tr></table></figure>
-<h3 id="UCNN"><a href="#UCNN" class="headerlink" title="UCNN"></a>UCNN</h3><h3 id="VGG16"><a href="#VGG16" class="headerlink" title="VGG16"></a>VGG16</h3><p><a target="_blank" rel="noopener" href="https://deanhan.com/2018/07/26/vgg16/">VGG16学习笔记 | 韩鼎の个人网站 (deanhan.com)</a></p>
+<h3 id="UCNN"><a href="#UCNN" class="headerlink" title="UCNN"></a>UCNN</h3><p>单向卷积</p>
+<h3 id="BCNN"><a href="#BCNN" class="headerlink" title="BCNN"></a>BCNN</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/kumar-shridhar/PyTorch-BayesianCNN">kumar-shridhar/PyTorch-BayesianCNN: Bayesian Convolutional Neural Network with Variational Inference based on Bayes by Backprop in PyTorch.</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/79715409">Bayesian neural network introduction - 知乎</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42437114/article/details/125671285">重参数 (Reparameterization)-CSDN博客</a> <a target="_blank" rel="noopener" href="https://kexue.fm/archives/6705">漫谈重参数：从正态分布到Gumbel Softmax - 科学空间|Scientific Spaces</a></p>
+</blockquote>
+<p>初始化的权重参数用高斯先验分布表示：$p(w^{(i)})=\prod_i\mathcal{N}(w_i|0,\sigma_p^2)$，训练的过程就是根据权重先验和数据集来获得权重参数的后验分布：$p(w|\mathcal{D})=\frac{p(\mathcal{D}|w)p(w)}{p(\mathcal{D})}$</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/CNNwithdist.png" alt="CNNwithdist.png|555"></p>
+<p>具体流程：对数据使用两个卷积核进行操作，得到<strong>两个输出的feature map，分别作为真实输出的均值和标准差</strong>。随后使用高斯分布从两个feature map中采样，得到该层feature map的激活值，作为下一层的输入。<br>激活值$\begin{aligned}b_j=A_i<em>\mu_i+\epsilon_j\odot\sqrt{A_i^2</em>(\alpha_i\odot\mu_i^2)}\end{aligned}$ (<strong>Reparameterization</strong>)</p>
+<ul>
+<li>为了解决从分布中采样不可微的问题，使用基于重参数化(<strong>Reparameterization</strong>)的反向传播方法来估计梯度</li>
+</ul>
+<h3 id="VGG16"><a href="#VGG16" class="headerlink" title="VGG16"></a>VGG16</h3><p><a target="_blank" rel="noopener" href="https://deanhan.com/2018/07/26/vgg16/">VGG16学习笔记 | 韩鼎の个人网站 (deanhan.com)</a></p>
 <h3 id="ResNet"><a href="#ResNet" class="headerlink" title="ResNet"></a>ResNet</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/sazass/article/details/116864275">ResNet中的BasicBlock与bottleneck-CSDN博客</a></p>
 <h2 id="RNN"><a href="#RNN" class="headerlink" title="RNN"></a>RNN</h2><p>相比一般的神经网络来说，他能够处理序列变化的数据</p>
 <h3 id="LSTM"><a href="#LSTM" class="headerlink" title="LSTM"></a>LSTM</h3><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/32085405">人人都能看懂的LSTM - 知乎 (zhihu.com)</a><br>讲的很好：<a target="_blank" rel="noopener" href="https://www.zhihu.com/tardis/zm/art/86006495?source_id=1003">三分钟吃透RNN和LSTM神经网络</a></p>
 <p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20240112195022.png" alt="image.png|666"></p>
 <p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20240112194924.png" alt="image.png|666"></p>
 <h2 id="U-Net"><a href="#U-Net" class="headerlink" title="U-Net"></a>U-Net</h2><blockquote>
-<p><a target="_blank" rel="noopener" href="https://nn.labml.ai/unet/index.html">U-Net (labml.ai)</a></p>
+<p><a target="_blank" rel="noopener" href="https://nn.labml.ai/unet/index.html">U-Net (labml.ai)</a><br><a target="_blank" rel="noopener" href="https://github.com/anxingle/UNet-pytorch">anxingle/UNet-pytorch: medical image semantic segmentation</a></p>
 </blockquote>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240528101406.png" alt="image.png|666"></p>
 <p>图像分割</p>
 <h2 id="VAE"><a href="#VAE" class="headerlink" title="VAE"></a>VAE</h2><p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=73qwu77ZsTM">【生成式AI】Diffusion Model 原理剖析 (2/4) (optional) - YouTube</a></p>
 <p>生成模型共同目标：<br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231022203426.png" alt="image.png|666"><br>如何优化：<br><strong>Maximum Likelihood == Minimize KL Divergence</strong><br>最大化 $P_{\theta}(x)$ 分布中从 $P_{data}(x)$ 采样出来的 $x_{i},…, x_{m}$ 的概率，相当于最小化 $P_{\theta}(x)$ 与 $P_{data}(x)$ 之间的差异 </p>
@@ -369,7 +383,10 @@
 <li>Via $x_0$ (a neural network will estimate $x_0$)用网络预测 $x_0$<script type="math/tex; mode=display">\tilde{\mu}_\theta = \frac{\sqrt{\bar{\alpha}_{t-1}}\beta_t}{1-\bar{\alpha}_t}x_0 + \frac{\sqrt{\alpha_t}(1-\bar{\alpha}_{t-1})}{1-\bar{\alpha}_t}x_t\tag{4}</script></li>
 <li>Via noise $\epsilon$ subtraction from $x_0$ (a neural network will estimate $\epsilon$)用网络预测噪声 $\epsilon$<script type="math/tex; mode=display">x_0=\frac{1}{\sqrt{\bar{\alpha}_t}}(x_t-\sqrt{1-\bar{\alpha}_t}\epsilon)\tag{5}</script></li>
 </ul>
-<h2 id="Stable-Diffusion"><a href="#Stable-Diffusion" class="headerlink" title="Stable Diffusion"></a>Stable Diffusion</h2><p>目前常见的 UI 有 WebUI 和 ComfyUI</p>
+<h2 id="Stable-Diffusion"><a href="#Stable-Diffusion" class="headerlink" title="Stable Diffusion"></a>Stable Diffusion</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.cnbang.net/tech/3766/">Stable Diffusion 图片生成原理简述 « bang’s blog</a></p>
+</blockquote>
+<p>目前常见的 UI 有 WebUI 和 ComfyUI</p>
 <h3 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h3><p>模型格式：</p>
 <ul>
 <li>主模型 checkpoints：<em>ckpt, safetensors</em></li>
@@ -389,7 +406,7 @@
 <p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231022195103.png" alt="image.png|666"></p>
 <h2 id="MLP"><a href="#MLP" class="headerlink" title="MLP"></a>MLP</h2><h3 id="前向传播"><a href="#前向传播" class="headerlink" title="前向传播"></a>前向传播</h3><p>根据每层的输入、权重weight和偏置bias，求出该层的输出，然后经过激活函数。按此一层一层传递，最终获得输出层的输出。</p>
 <h3 id="反向传播"><a href="#反向传播" class="headerlink" title="反向传播"></a>反向传播</h3><blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/jsfantasy/p/12177275.html">神经网络之反向传播算法（BP）公式推导（超详细） - jsfantasy - 博客园 (cnblogs.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/jsfantasy/p/12177275.html">神经网络之反向传播算法（BP）公式推导（超详细） - jsfantasy - 博客园 (cnblogs.com)</a><br><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=ibJpTrp5mcE">ML Lecture 7: Backpropagation - YouTube</a></p>
 </blockquote>
 <p>假如激活函数为sigmoid函数：$\sigma(x) = \frac{1}{1+e^{-x}}$<br>sigmoid的导数为：$\frac{d}{dx}\sigma(x) = \frac{d}{dx} \left(\frac{1}{1+e^{-x}} \right)= \sigma(1-\sigma)$</p>
 <p>因此当损失函数对权重求导，其结果与sigmoid的输出相关</p>
@@ -455,6 +472,8 @@
 </table>
 
 <p>(鞍点 in 3D)saddle point be like:<br><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230702201813.png" alt="image.png"></p>
+<h2 id="KAN"><a href="#KAN" class="headerlink" title="KAN"></a>KAN</h2><p><a target="_blank" rel="noopener" href="https://github.com/KindXiaoming/pykan?tab=readme-ov-file">KindXiaoming/pykan: Kolmogorov Arnold Networks</a></p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240505163014.png" alt="image.png|666"></p>
 <h1 id="Loss"><a href="#Loss" class="headerlink" title="Loss"></a>Loss</h1><p>损失函数在训练过程中，突然变得很大或者nan<br>添加 torch.cuda.amp.GradScaler() 解决 loss为nan或inf的问题</p>
 <h1 id="其他概念"><a href="#其他概念" class="headerlink" title="其他概念"></a>其他概念</h1><h2 id="KL-散度"><a href="#KL-散度" class="headerlink" title="KL 散度"></a>KL 散度</h2><p><a target="_blank" rel="noopener" href="https://wuli.wiki/online/KLD.html">KL 散度（相对熵） - 小时百科 (wuli.wiki)</a></p>
 <p><strong>KL 散度</strong>（Kullback–Leibler divergence，缩写 KLD）是一种统计学度量，<strong>表示的是一个概率分布相对于另一个概率分布的差异程度</strong>，在信息论中又称为<strong>相对熵</strong>（Relative entropy）。</p>
@@ -586,7 +605,7 @@ KL(p,q)& =\int[\left.p(x)\log(p(x))-p(x)\log(q(x))\right]dx  \\
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%98%93%E9%94%99"><span class="nav-text">易错</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BD%92%E4%B8%80%E5%8C%96"><span class="nav-text">归一化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Model"><span class="nav-text">Model</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CNN"><span class="nav-text">CNN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#UCNN"><span class="nav-text">UCNN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VGG16"><span class="nav-text">VGG16</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ResNet"><span class="nav-text">ResNet</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RNN"><span class="nav-text">RNN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#LSTM"><span class="nav-text">LSTM</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#U-Net"><span class="nav-text">U-Net</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VAE"><span class="nav-text">VAE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Diffusion-Model"><span class="nav-text">Diffusion Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DDPM-Denoising-Diffusion-Probabilistic-Models"><span class="nav-text">DDPM(Denoising Diffusion Probabilistic Models)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DDPM-Code"><span class="nav-text">DDPM Code</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Schedule"><span class="nav-text">Schedule</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Forward-Process"><span class="nav-text">Forward Process</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Reverse-Process"><span class="nav-text">Reverse Process</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stable-Diffusion"><span class="nav-text">Stable Diffusion</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B"><span class="nav-text">模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%87%E6%A0%B7%E5%99%A8"><span class="nav-text">采样器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MLP"><span class="nav-text">MLP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E5%90%91%E4%BC%A0%E6%92%AD"><span class="nav-text">前向传播</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD"><span class="nav-text">反向传播</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95"><span class="nav-text">优化算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E7%9A%84%E7%9B%AE%E6%A0%87"><span class="nav-text">优化的目标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E7%9A%84%E6%8C%91%E6%88%98"><span class="nav-text">优化的挑战</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Loss"><span class="nav-text">Loss</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E6%A6%82%E5%BF%B5"><span class="nav-text">其他概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#KL-%E6%95%A3%E5%BA%A6"><span class="nav-text">KL 散度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E9%87%8D%E6%95%B4%E5%8C%96"><span class="nav-text">参数重整化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%8D%E7%BD%AE%E7%BC%96%E7%A0%81"><span class="nav-text">位置编码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0"><span class="nav-text">迁移学习</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0"><span class="nav-text">集成学习</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8A%80%E5%B7%A7"><span class="nav-text">技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BD%92%E4%B8%80%E5%8C%96"><span class="nav-text">归一化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Model"><span class="nav-text">Model</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CNN"><span class="nav-text">CNN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#UCNN"><span class="nav-text">UCNN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BCNN"><span class="nav-text">BCNN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VGG16"><span class="nav-text">VGG16</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ResNet"><span class="nav-text">ResNet</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RNN"><span class="nav-text">RNN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#LSTM"><span class="nav-text">LSTM</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#U-Net"><span class="nav-text">U-Net</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VAE"><span class="nav-text">VAE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Diffusion-Model"><span class="nav-text">Diffusion Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DDPM-Denoising-Diffusion-Probabilistic-Models"><span class="nav-text">DDPM(Denoising Diffusion Probabilistic Models)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DDPM-Code"><span class="nav-text">DDPM Code</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Schedule"><span class="nav-text">Schedule</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Forward-Process"><span class="nav-text">Forward Process</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Reverse-Process"><span class="nav-text">Reverse Process</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stable-Diffusion"><span class="nav-text">Stable Diffusion</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B"><span class="nav-text">模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%87%E6%A0%B7%E5%99%A8"><span class="nav-text">采样器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MLP"><span class="nav-text">MLP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E5%90%91%E4%BC%A0%E6%92%AD"><span class="nav-text">前向传播</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD"><span class="nav-text">反向传播</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95"><span class="nav-text">优化算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E7%9A%84%E7%9B%AE%E6%A0%87"><span class="nav-text">优化的目标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E7%9A%84%E6%8C%91%E6%88%98"><span class="nav-text">优化的挑战</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#KAN"><span class="nav-text">KAN</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Loss"><span class="nav-text">Loss</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E6%A6%82%E5%BF%B5"><span class="nav-text">其他概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#KL-%E6%95%A3%E5%BA%A6"><span class="nav-text">KL 散度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E9%87%8D%E6%95%B4%E5%8C%96"><span class="nav-text">参数重整化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%8D%E7%BD%AE%E7%BC%96%E7%A0%81"><span class="nav-text">位置编码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0"><span class="nav-text">迁移学习</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0"><span class="nav-text">集成学习</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -601,20 +620,20 @@ KL(p,q)& =\int[\left.p(x)\log(p(x))-p(x)\log(q(x))\right]dx  \\
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">137</span>
+          <span class="site-state-item-count">130</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-count">24</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-count">57</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -662,12 +681,12 @@ KL(p,q)& =\int[\left.p(x)\log(p(x))-p(x)\log(q(x))\right]dx  \\
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">465k</span>
+    <span title="Symbols count total">461k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">28:13</span>
+    <span title="Reading time total">27:55</span>
 </div>
 
         

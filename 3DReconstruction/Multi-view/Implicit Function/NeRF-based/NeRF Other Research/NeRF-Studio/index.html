@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/yqq/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Title Nerfstudio: A Modular Framework for Neural Radiance Field Development     Author Tancik, Matthew and Weber, Ethan and Ng, Evonne and Li, Ruilong and Yi, Brentand Kerr, Justin and Wang, Terra">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nerfstudio——简化NeRF流程">
+<meta property="og:url" content="http://example.com/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeRF%20Other%20Research/NeRF-Studio/index.html">
+<meta property="og:site_name" content="QiYun">
+<meta property="og:description" content="Title Nerfstudio: A Modular Framework for Neural Radiance Field Development     Author Tancik, Matthew and Weber, Ethan and Ng, Evonne and Li, Ruilong and Yi, Brentand Kerr, Justin and Wang, Terra">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230630161446.png">
+<meta property="article:published_time" content="2023-06-15T04:16:19.000Z">
+<meta property="article:modified_time" content="2024-06-29T12:16:33.868Z">
+<meta property="article:author" content="Qi Yun">
+<meta property="article:tag" content="NeRF">
+<meta property="article:tag" content="Framework">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230630161446.png">
+
+<link rel="canonical" href="http://example.com/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeRF%20Other%20Research/NeRF-Studio/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Nerfstudio——简化NeRF流程 | QiYun</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">QiYun</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Note</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeRF%20Other%20Research/NeRF-Studio/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiYun">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Nerfstudio——简化NeRF流程
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-06-15 12:16:19" itemprop="dateCreated datePublished" datetime="2023-06-15T12:16:19+08:00">2023-06-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-06-29 20:16:33" itemprop="dateModified" datetime="2024-06-29T20:16:33+08:00">2024-06-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/3DReconstruction-Multi-view-Implicit-Function/" itemprop="url" rel="index"><span itemprop="name">3DReconstruction/Multi-view/Implicit Function</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>1.2k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>4 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Title</th>
+<th>Nerfstudio: A Modular Framework for Neural Radiance Field Development</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Author</td>
+<td>Tancik, Matthew and Weber, Ethan and Ng, Evonne and Li, Ruilong and Yi, Brentand Kerr, Justin and Wang, Terrance and Kristoffersen, Alexander and Austin,Jake and Salahi, Kamyar and Ahuja, Abhik and McAllister, David and Kanazawa,Angjoo</td>
+</tr>
+<tr>
+<td>Conf/Jour</td>
+<td>ACM SIGGRAPH 2023 Conference Proceedings</td>
+</tr>
+<tr>
+<td>Year</td>
+<td>2023</td>
+</tr>
+<tr>
+<td>Project</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/nerfstudio-project/nerfstudio/">nerfstudio-project/nerfstudio: A collaboration friendly studio for NeRFs (github.com)</a></td>
+</tr>
+<tr>
+<td>Paper</td>
+<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4762351665164582913&amp;noteId=1908666225137730048">Nerfstudio: A Modular Framework for Neural Radiance Field Development (readpaper.com)</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><a target="_blank" rel="noopener" href="https://github.com/nerfstudio-project/nerfstudio/">Nerfstudio</a>提供了一个简单的API，可以简化创建、训练和测试NeRF的端到端过程。该库通过将每个组件模块化，支持更易于理解的NeRF实现。通过更模块化的NeRF，我们希望为探索这项技术提供更用户友好的体验。</p>
+<span id="more"></span>
+<h1 id="Autodl使用"><a href="#Autodl使用" class="headerlink" title="Autodl使用"></a>Autodl使用</h1><p>选择实例，pytorch2.0.0，python3.8，cuda11.8</p>
+<h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><p><a target="_blank" rel="noopener" href="https://docs.nerf.studio/en/latest/quickstart/installation.html">Installation - nerfstudio</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda create --name nerfstudio -y python=3.8</span><br><span class="line">conda activate nerfstudio</span><br><span class="line">python -m pip install --upgrade pip</span><br></pre></td></tr></table></figure>
+<p>for cuda11.8，需要很长时间<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip install torch==2.0.1+cu118 torchvision==0.15.2+cu118 --extra-index-url https://download.pytorch.org/whl/cu118</span><br><span class="line">pip install ninja git+https://github.com/NVlabs/tiny-cuda-nn/#subdirectory=bindings/torch</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pip install nerfstudio</span><br><span class="line"></span><br><span class="line">默认源不好用，使用清华源</span><br><span class="line">pip install nerfstudio -i https://pypi.tuna.tsinghua.edu.cn/simple</span><br></pre></td></tr></table></figure>
+<h3 id="安装FFmpeg"><a href="#安装FFmpeg" class="headerlink" title="安装FFmpeg"></a>安装FFmpeg</h3><p><a target="_blank" rel="noopener" href="https://www.onitroad.com/jc/linux/ubuntu/faq/how-to-install-ffmpeg-on-ubuntu-20-04.html">在Ubuntu 20.04 中安装FFMPEG-之路教程 (onitroad.com)</a><br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update </span><br><span class="line">sudo apt install ffmpeg</span><br><span class="line"></span><br><span class="line">ffmpeg -version</span><br></pre></td></tr></table></figure></p>
+<h3 id="安装Colmap"><a href="#安装Colmap" class="headerlink" title="安装Colmap"></a>安装Colmap</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt upgrade</span><br><span class="line">sudo apt-get install \</span><br><span class="line">    git \</span><br><span class="line">    cmake \</span><br><span class="line">    build-essential \</span><br><span class="line">    libboost-program-options-dev \</span><br><span class="line">    libboost-filesystem-dev \</span><br><span class="line">    libboost-graph-dev \</span><br><span class="line">    libboost-system-dev \</span><br><span class="line">    libboost-test-dev \</span><br><span class="line">    libeigen3-dev \</span><br><span class="line">    libsuitesparse-dev \</span><br><span class="line">    libfreeimage-dev \</span><br><span class="line">    libmetis-dev \</span><br><span class="line">    libgoogle-glog-dev \</span><br><span class="line">    libgflags-dev \</span><br><span class="line">    libglew-dev \</span><br><span class="line">    qtbase5-dev \</span><br><span class="line">    libqt5opengl5-dev \</span><br><span class="line">    libcgal-dev</span><br><span class="line">如果一次安装不上，可以继续下步，缺什么装什么</span><br></pre></td></tr></table></figure>
+<p><code>sudo apt install colmap</code></p>
+<h2 id="加载数据-amp-训练model"><a href="#加载数据-amp-训练model" class="headerlink" title="加载数据&amp;训练model"></a>加载数据&amp;训练model</h2><p><code>ns-train nerfacto --data data/nerfstudio/poster</code></p>
+<h3 id="Download-some-test-data"><a href="#Download-some-test-data" class="headerlink" title="Download some test data:"></a>Download some test data:</h3><p><code>ns-download-data nerfstudio --capture-name=poster</code></p>
+<blockquote>
+<p>[!error]<br>AutoDL连接不了google drive，只能使用自己的数据集or：<br>    使用google的colab下载数据集并将其打包成zip，然后再上传到autodl</p>
+<h3 id="Use-Own-Data"><a href="#Use-Own-Data" class="headerlink" title="Use Own Data"></a>Use Own Data</h3></blockquote>
+<div class="note primary">
+            <p>配好环境后，可以在任意地址创建文件夹，放入需要训练的数据集 </p>
+          </div>
+<p><code>ns-process-data &#123;video,images,polycam,record3d&#125; --data &#123;DATA_PATH&#125; --output-dir &#123;PROCESSED_DATA_DIR&#125;</code></p>
+<p><code>ns-process-data &#123;images, video&#125; --data &#123;DATA_PATH&#125; --output-dir &#123;PROCESSED_DATA_DIR&#125;</code></p>
+<h4 id="eg-Miku"><a href="#eg-Miku" class="headerlink" title="eg: Miku"></a>eg: Miku</h4><p>cd autodl-tmp<br><code>ns-process-data images --data data/images --output-dir data/nerfstudio/images_name</code></p>
+<p>跳过图像处理：复制和缩放<br><code>ns-process-data images --data data/Miku/image/ --output-dir data/nerfstudio/Miku --skip-image-processing</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">06.29:</span><br><span class="line">(nerfstudio) root@autodl-container-7092458c99-5f01fa1c:~/autodl-tmp# ns-process-data images  --data data/Miku/image/ --output-dir data/nerfstudio/Miku --skip-image-processing --skip-colmap  </span><br><span class="line">[15:37:47] Only single camera shared for all images is supported.</span><br><span class="line">数据集必须是单个相机去拍照物体？？？</span><br><span class="line">无所谓：无卡开机用cpu算</span><br><span class="line">ns-process-data images  --data data/Miku/image/ --output-dir data/nerfstudio/Miku --skip-image-processing --no-gpu</span><br><span class="line">依然不行</span><br><span class="line"></span><br><span class="line">问题&amp;原因：</span><br><span class="line">qt.qpa.xcb: could not connect to display qt.qpa.plugin: Could not load the Qt platform plugin &quot;xcb&quot; in &quot;&quot; even though it was found.  This application failed to start because no Qt platform plugin could be initialized. Reinstalling the application may fix this problem.</span><br><span class="line">最大的可能就是 --SiftExtraction.use_gpu 1  必须要求GPU带一个显示器</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">06.30:</span><br><span class="line">使用3090开机但是use no gpu</span><br><span class="line">ns-process-data images  --data data/Miku/image/ --output-dir data/nerfstudio/Miku --skip-image-processing --no-gpu</span><br><span class="line"></span><br><span class="line">[15:32:40] 🎉 Done extracting COLMAP features.                                                       colmap_utils.py:131</span><br><span class="line">[15:49:59] 🎉 Done matching COLMAP features.                                                         colmap_utils.py:145</span><br><span class="line">[15:53:28] 🎉 Done COLMAP bundle adjustment.                                                         colmap_utils.py:167</span><br><span class="line">[15:53:56] 🎉 Done refining intrinsics.                                                              colmap_utils.py:176</span><br><span class="line">           🎉 🎉 🎉 All DONE 🎉 🎉 🎉                                                images_to_nerfstudio_dataset.py:100</span><br><span class="line">           Starting with 178 images                                                  images_to_nerfstudio_dataset.py:103</span><br><span class="line">           Colmap matched 178 images                                                 images_to_nerfstudio_dataset.py:103</span><br><span class="line">           COLMAP found poses for all images, CONGRATS!                              images_to_nerfstudio_dataset.py:103</span><br><span class="line">train：</span><br><span class="line">ns-train nerfacto --data data/nerfstudio/Miku</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>in viewer:  it is easy to view results and process</p>
+<p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230630161446.png" alt="image.png"></p>
+<h3 id="Train-model"><a href="#Train-model" class="headerlink" title="Train model"></a>Train model</h3><p><code>ns-train nerfacto --data data/nerfstudio/poster</code></p>
+<h2 id="export"><a href="#export" class="headerlink" title="export"></a>export</h2><h3 id="mesh"><a href="#mesh" class="headerlink" title="mesh"></a>mesh</h3><p>手动调整参数得到命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">ns-export poisson --load-config outputs/Miku/nerfacto/2023-06-30_155708/config.yml --output-dir exports/mesh/ --target-num-faces 50000 --num-pixels-per-side 2048 --normal-method open3d --num-points 1000000 --remove-outliers True --use-bounding-box True --bounding-box-min -0.5 -0.5 -1 --bounding-box-max 0.5 0.5 0</span><br><span class="line"></span><br><span class="line">output: </span><br><span class="line">Loading latest checkpoint from load_dir  </span><br><span class="line">✅ Done loading checkpoint from outputs/Miku/nerfacto/2023-06-30_155708/nerfstudio_models/step-000029999.ckpt  </span><br><span class="line">☁ Computing Point Cloud ☁ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 00:05  </span><br><span class="line">✅ Cleaning Point Cloud  </span><br><span class="line">✅ Estimating Point Cloud Normals  </span><br><span class="line">✅ Generated PointCloud with 1008679 points.  </span><br><span class="line">Computing Mesh... this may take a while.</span><br><span class="line"></span><br><span class="line">CPU生成mesh的速度很慢 大约用了1个小时多，效果也不是很好，因为使用的是nerfacto的方法，零水平集有很多坑洞</span><br></pre></td></tr></table></figure>
+<h2 id="使用viewer"><a href="#使用viewer" class="headerlink" title="使用viewer"></a>使用viewer</h2><p><a target="_blank" rel="noopener" href="https://viewer.nerf.studio/">nerfstudio viewer</a></p>
+<h3 id="autodl"><a href="#autodl" class="headerlink" title="autodl"></a>autodl</h3><p>本地运行：<code>ssh -CNg -L 6006:127.0.0.1:6006 root@123.125.240.150 -p 42151</code></p>
+<blockquote>
+<p>[!important]<br>本地端口:localhost:远程端口</p>
+</blockquote>
+<p>一般本地进入服务器（ssh）<br><code>ssh -p 23394 root@connect.beijinga.seetacloud.com</code></p>
+<p>将服务器6006端口映射到本地的6006端口上<br><code>ssh -CNg -L 6006:127.0.0.1:6006 root@connect.beijinga.seetacloud.com -p 23394</code></p>
+<h3 id="viewer"><a href="#viewer" class="headerlink" title="viewer"></a>viewer</h3><p>一般nerfstudio的viewer运行在本地的7007端口上<br><code>ssh -L 7007:localhost:7007 &lt;username&gt;@&lt;remote-machine-ip&gt;</code></p>
+<p>需要在本地再开一个终端，并运行，将本地的6006端口与远程的7007进行绑定</p>
+<ul>
+<li>eg: <code>ssh -L 7007:localhost:7007 root@connect.beijinga.seetacloud.com -p 23394</code></li>
+<li>ssh -L 7007:localhost:7007 root@<remote-machine-ip> -p port</li>
+</ul>
+<p>此时打开<a target="_blank" rel="noopener" href="https://viewer.nerf.studio/">nerfstudio viewer</a>，在Getting started中输入ws://localhost:7007，即可在viewer中查看</p>
+<h4 id="更换服务器的端口"><a href="#更换服务器的端口" class="headerlink" title="更换服务器的端口"></a>更换服务器的端口</h4><ul>
+<li>当服务器的7007被占用时：<br>  默认为7007，修改端口7007为6006 并训练<br>  <code>ns-train nerfacto --data data/nerfstudio/poster --viewer.websocket-port 6006</code></li>
+<li>此时在本地需运行<br>  <code>ssh -L 7007:localhost:6006 root@connect.beijinga.seetacloud.com -p 23394</code></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+1ZnNxFWnEbk5YzRl">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/NeRF/" rel="tag"><i class="fa fa-tag"></i> NeRF</a>
+              <a href="/tags/Framework/" rel="tag"><i class="fa fa-tag"></i> Framework</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/Efficiency/Neus-Instant-nsr-pl/" rel="prev" title="Instant-nsr-pl">
+      <i class="fa fa-chevron-left"></i> Instant-nsr-pl
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeRF%20Other%20Research/NeRF-code/" rel="next" title="NeRF代码理解">
+      NeRF代码理解 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Autodl%E4%BD%BF%E7%94%A8"><span class="nav-text">Autodl使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="nav-text">环境配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85FFmpeg"><span class="nav-text">安装FFmpeg</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Colmap"><span class="nav-text">安装Colmap</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A0%E8%BD%BD%E6%95%B0%E6%8D%AE-amp-%E8%AE%AD%E7%BB%83model"><span class="nav-text">加载数据&amp;训练model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Download-some-test-data"><span class="nav-text">Download some test data:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Use-Own-Data"><span class="nav-text">Use Own Data</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#eg-Miku"><span class="nav-text">eg: Miku</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Train-model"><span class="nav-text">Train model</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#export"><span class="nav-text">export</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mesh"><span class="nav-text">mesh</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8viewer"><span class="nav-text">使用viewer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#autodl"><span class="nav-text">autodl</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#viewer"><span class="nav-text">viewer</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9B%B4%E6%8D%A2%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%AB%AF%E5%8F%A3"><span class="nav-text">更换服务器的端口</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qi Yun"
+      src="/images/avatar.jpeg">
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">130</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/qiyun71" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;qiyun71" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/29010355" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;29010355" rel="noopener" target="_blank"><i class="fa fa-star fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qi Yun</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">461k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">27:55</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/yqq/anime.min.js"></script>
+  <script src="/yqq/velocity/velocity.min.js"></script>
+  <script src="/yqq/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
