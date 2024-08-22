@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>Review</title>
+      <link href="/3DReconstruction/Single-view/Review/"/>
+      <url>/3DReconstruction/Single-view/Review/</url>
+      
+        <content type="html"><![CDATA[<p>The review about 3D Reconstruction from a single image.</p><span id="more"></span><p><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=9095839">3D Reconstruction from A Single Image</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 3DReconstruction/Single-view </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Anime 3D Reconstruction</title>
       <link href="/3DReconstruction/Anime%203D%20Reconstruction/"/>
       <url>/3DReconstruction/Anime%203D%20Reconstruction/</url>
@@ -23,19 +42,6 @@
             <tag> 3DReconstruction </tag>
             
         </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title></title>
-      <link href="/3DReconstruction/Single-view/Review/"/>
-      <url>/3DReconstruction/Single-view/Review/</url>
-      
-        <content type="html"><![CDATA[<p><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=9095839">3D Reconstruction from A Single Image</a></p>]]></content>
-      
-      
       
     </entry>
     
@@ -1555,9 +1561,9 @@
       
         <tags>
             
-            <tag> Efficiency </tag>
-            
             <tag> Real-time </tag>
+            
+            <tag> Efficiency </tag>
             
         </tags>
       
@@ -1804,9 +1810,9 @@
             
             <tag> SurfaceReconstruction </tag>
             
-            <tag> Neus </tag>
-            
             <tag> Efficiency </tag>
+            
+            <tag> Neus </tag>
             
         </tags>
       
@@ -2352,9 +2358,9 @@
             
             <tag> Efficiency </tag>
             
-            <tag> Sampling </tag>
-            
             <tag> TensorDecomposition </tag>
+            
+            <tag> Sampling </tag>
             
         </tags>
       
@@ -2464,9 +2470,9 @@
             
             <tag> SurfaceReconstruction </tag>
             
-            <tag> Neus </tag>
-            
             <tag> Efficiency </tag>
+            
+            <tag> Neus </tag>
             
             <tag> Encoding </tag>
             
@@ -2524,9 +2530,9 @@
             
             <tag> SurfaceReconstruction </tag>
             
-            <tag> Neus </tag>
-            
             <tag> Efficiency </tag>
+            
+            <tag> Neus </tag>
             
             <tag> Encoding </tag>
             
@@ -2555,9 +2561,9 @@
             
             <tag> SurfaceReconstruction </tag>
             
-            <tag> Neus </tag>
-            
             <tag> Efficiency </tag>
+            
+            <tag> Neus </tag>
             
             <tag> Encoding </tag>
             
@@ -2615,9 +2621,9 @@
             
             <tag> Python </tag>
             
-            <tag> Neus </tag>
-            
             <tag> Efficiency </tag>
+            
+            <tag> Neus </tag>
             
             <tag> Code </tag>
             
@@ -2646,9 +2652,9 @@
             
             <tag> SurfaceReconstruction </tag>
             
-            <tag> Neus </tag>
-            
             <tag> Efficiency </tag>
+            
+            <tag> Neus </tag>
             
         </tags>
       
@@ -2708,9 +2714,9 @@
             
             <tag> Python </tag>
             
-            <tag> Neus </tag>
-            
             <tag> Efficiency </tag>
+            
+            <tag> Neus </tag>
             
             <tag> Code </tag>
             
@@ -2986,9 +2992,9 @@
       
         <tags>
             
-            <tag> Neus </tag>
-            
             <tag> Efficiency </tag>
+            
+            <tag> Neus </tag>
             
         </tags>
       
