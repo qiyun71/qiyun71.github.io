@@ -1,60 +1,200 @@
 {
   "recentFiles": [
     {
-      "basename": "NeRF-based 3D Reconstruction",
-      "path": "Reports/NeRF-based 3D Reconstruction.md"
+      "basename": "Git",
+      "path": "Mine/Configuration of computer/Software/Git.md"
     },
     {
-      "basename": "NeRF-Mine",
-      "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF-Mine.md"
+      "basename": "Anime 3D Reconstruction",
+      "path": "3DReconstruction/Anime 3D Reconstruction.md"
     },
     {
-      "basename": "Multi-view 3D Object Reconstruction",
-      "path": "3DReconstruction/Basic Knowledge/Multi-view 3D Object Reconstruction.md"
+      "basename": "Basics about 3D Reconstruction",
+      "path": "3DReconstruction/Basics about 3D Reconstruction.md"
+    },
+    {
+      "basename": "Review",
+      "path": "3DReconstruction/Single-view/Review.md"
+    },
+    {
+      "basename": "Paper About 3D Reconstruction",
+      "path": "3DReconstruction/Paper About 3D Reconstruction.md"
+    },
+    {
+      "basename": "Paper about ModelUpdating",
+      "path": "ModelUpdating/Paper about ModelUpdating.md"
+    },
+    {
+      "basename": "IPV6",
+      "path": "Mine/Note/IPV6.md"
+    },
+    {
+      "basename": "PAniC-3D",
+      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/NeRF Other Research/Interesting/PAniC-3D.md"
+    },
+    {
+      "basename": "NeuS-based 3D Reconstruction",
+      "path": "Mine/Write/3D Reconstruction/NeuS-based 3D Reconstruction.md"
+    },
+    {
+      "basename": "NeRF-review",
+      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/NeRF Other Research/NeRF-review.md"
+    },
+    {
+      "basename": "Multi-view Human Body Reconstruction",
+      "path": "3DReconstruction/Multi-view/Multi-view Human Body Reconstruction.md"
+    },
+    {
+      "basename": "SDFStudio",
+      "path": "3DReconstruction/Multi-view/Implicit Function/SDFStudio.md"
+    },
+    {
+      "basename": "A fast interval model updating method based on MLP neural network",
+      "path": "Mine/Write/Model Updating/A fast interval model updating method based on MLP neural network.md"
+    },
+    {
+      "basename": "蛊真人",
+      "path": "Blog&Books/Read/蛊真人.md"
+    },
+    {
+      "basename": "Audio Visualization",
+      "path": "Mine/Project/Audio Visualization.md"
+    },
+    {
+      "basename": "Learn-FEA",
+      "path": "Learn/Learn-FEA.md"
+    },
+    {
+      "basename": "Datasets",
+      "path": "3DReconstruction/Datasets.md"
     },
     {
       "basename": "MyGo",
-      "path": "Other/Mine/MyGo.md"
+      "path": "Mine/Note/MyGo.md"
     },
     {
-      "basename": "Learn-Algo",
-      "path": "Learn/Learn-Algo.md"
+      "basename": "How to Read a Paper",
+      "path": "Blog&Books/Read/How to Read a Paper.md"
     },
     {
-      "basename": "ModelUpdating",
-      "path": "ModelUpdating/ModelUpdating.md"
+      "basename": "Everyone-can-use-English",
+      "path": "Blog&Books/Read/Everyone-can-use-English.md"
     },
     {
-      "basename": "ReadPaper",
-      "path": "ModelUpdating/ReadPaper.md"
+      "basename": "Writing Science",
+      "path": "Blog&Books/Read/Writing Science.md"
     },
     {
-      "basename": "核领域可靠性",
-      "path": "Other/核领域可靠性.md"
+      "basename": "人生七年",
+      "path": "Blog&Books/Read/人生七年.md"
+    },
+    {
+      "basename": "Write tips",
+      "path": "Mine/Note/Write tips.md"
+    },
+    {
+      "basename": "Learn-Matlab",
+      "path": "Learn/Learn-Matlab.md"
+    },
+    {
+      "basename": "Learn-Python_Matplotlib",
+      "path": "Learn/Learn-Python_Matplotlib.md"
+    },
+    {
+      "basename": "Stoachastic Model Updating with the Ellipse Similarity Metric",
+      "path": "Mine/Write/Model Updating/Stoachastic Model Updating with the Ellipse Similarity Metric.md"
+    },
+    {
+      "basename": "WSL2",
+      "path": "Mine/Configuration of computer/OS/WSL2.md"
+    },
+    {
+      "basename": "Linux",
+      "path": "Mine/Configuration of computer/OS/Linux.md"
+    },
+    {
+      "basename": "Writing science",
+      "path": "Blog&Books/Read/file/Writing science.pdf"
+    },
+    {
+      "basename": "Book Lists",
+      "path": "Blog&Books/Read/Book Lists.md"
+    },
+    {
+      "basename": "World",
+      "path": "Mine/Note/World.md"
+    },
+    {
+      "basename": "Math",
+      "path": "Mine/Note/Math.md"
+    },
+    {
+      "basename": "Master Paper(3DReconstruction)",
+      "path": "Mine/Write/3D Reconstruction/Master Paper(3DReconstruction).md"
     },
     {
       "basename": "Learn-DeepLearning",
       "path": "Learn/Learn-DeepLearning.md"
     },
     {
-      "basename": "Math",
-      "path": "3DReconstruction/Basic Knowledge/Math.md"
+      "basename": "2023-10-30",
+      "path": "Reports/2023-10-30.md"
     },
     {
-      "basename": "Color-NeuS",
-      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Color-NeuS.md"
+      "basename": "Tools",
+      "path": "Mine/Note/Tools.md"
     },
     {
-      "basename": "NeRF-review",
-      "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF-review.md"
+      "basename": "Computer",
+      "path": "Mine/Note/Computer.md"
     },
     {
-      "basename": "Other Paper About Reconstruction",
-      "path": "3DReconstruction/Basic Knowledge/Other Paper About Reconstruction.md"
+      "basename": "AllBug",
+      "path": "Mine/Note/AllBug.md"
     },
     {
-      "basename": "Explicit Represent Reconstruction",
-      "path": "3DReconstruction/Basic Knowledge/Explicit Represent Reconstruction.md"
+      "basename": "Journal",
+      "path": "Mine/Note/Journal.md"
+    },
+    {
+      "basename": "Case about ModelUpdating",
+      "path": "ModelUpdating/Case about ModelUpdating.md"
+    },
+    {
+      "basename": "Six Legged Spider Robot",
+      "path": "Mine/Project/Six Legged Spider Robot.md"
+    },
+    {
+      "basename": "V2rayN",
+      "path": "Mine/Configuration of computer/Software/V2rayN.md"
+    },
+    {
+      "basename": "Environment",
+      "path": "Mine/Configuration of computer/python/Environment.md"
+    },
+    {
+      "basename": "Terminal",
+      "path": "Mine/Configuration of computer/python/Terminal.md"
+    },
+    {
+      "basename": "蓝叠模拟器",
+      "path": "Mine/Configuration of computer/Software/蓝叠模拟器.md"
+    },
+    {
+      "basename": "FFmpeg",
+      "path": "Mine/Configuration of computer/Software/FFmpeg.md"
+    },
+    {
+      "basename": "Vim",
+      "path": "Mine/Configuration of computer/Software/Vim.md"
+    },
+    {
+      "basename": "Windows",
+      "path": "Mine/Configuration of computer/OS/Windows.md"
+    },
+    {
+      "basename": "Conda",
+      "path": "Mine/Configuration of computer/Software/Conda.md"
     }
   ],
   "omittedPaths": [],

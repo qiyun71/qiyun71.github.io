@@ -7,13 +7,13 @@
         {
           "type": "file",
           "ctime": 1692692788882,
-          "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF-code.md",
+          "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/NeRF Other Research/NeRF-code.md",
           "title": "NeRF"
         },
         {
           "type": "file",
           "ctime": 1692692774557,
-          "path": "3DReconstruction/Basic Knowledge/NeRF/NeRF-Mine.md"
+          "path": "Mine/Project/NeRF-Mine.md"
         },
         {
           "type": "file",
@@ -40,7 +40,7 @@
         {
           "type": "file",
           "ctime": 1696840191882,
-          "path": "3DReconstruction/Basic Knowledge/Multi-view Human Body Reconstruction.md"
+          "path": "3DReconstruction/Multi-view/Multi-view Human Body Reconstruction.md"
         }
       ],
       "title": "Human"
@@ -48,7 +48,7 @@
     {
       "type": "file",
       "ctime": 1700120593795,
-      "path": "3DReconstruction/Basic Knowledge/Multi-view 3D Object Reconstruction.md"
+      "path": "3DReconstruction/Multi-view 3D Object Reconstruction.md"
     }
   ]
 }

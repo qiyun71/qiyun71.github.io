@@ -5,7 +5,7 @@ tags:
   - SurfaceReconstruction
   - Efficiency
   - Neus
-categories: 3DReconstruction/Multi-view/Implicit Function/NeRF-based/Efficiency
+categories: 3DReconstruction/Multi-view/Implicit Function/Efficiency
 ---
 
 | Title     | Human Performance Modeling and Rendering via Neural Animated Mesh                                                                                                                                                                                                                                                                                                                                                                         |

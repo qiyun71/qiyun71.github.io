@@ -5,9 +5,9 @@
   "fileSortOrder": "byCreatedTimeReverse",
   "pdfExportSettings": {
     "includeName": true,
-    "pageSize": "Tabloid",
+    "pageSize": "A4",
     "landscape": false,
-    "margin": "0",
+    "margin": "1",
     "downscalePercent": 100
   },
   "showLineNumber": true,
@@ -32,5 +32,8 @@
   "strictLineBreaks": false,
   "tabSize": 2,
   "smartIndentList": true,
-  "autoPairBrackets": true
+  "autoPairBrackets": true,
+  "showIndentGuide": true,
+  "autoPairMarkdown": true,
+  "showRibbon": false
 }

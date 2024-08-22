@@ -1,9 +1,8 @@
 ---
 title: RegNeRF
 date: 2023-12-19 13:26:21
-tags:
-  - 
-categories: 3DReconstruction/Multi-view/Implicit Function/NeRF-based/Loss
+tags: 
+categories: 3DReconstruction/Multi-view/Implicit Function/Loss
 ---
 
 | Title     | RegNeRF                                                                 |

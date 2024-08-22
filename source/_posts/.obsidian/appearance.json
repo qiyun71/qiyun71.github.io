@@ -1,15 +1,16 @@
 {
-  "baseFontSize": 20,
-  "theme": "system",
+  "baseFontSize": 17,
+  "theme": "moonstone",
   "translucency": false,
   "cssTheme": "Border",
-  "interfaceFontFamily": "霞鹜文楷,Maple Mono,朱雀仿宋（预览测试版）,HarmonyOS Sans SC,HarmonyOS Sans TC,JetBrains Mono",
-  "textFontFamily": "HarmonyOS Sans SC,霞鹜文楷,朱雀仿宋（预览测试版）,JetBrains Mono",
-  "monospaceFontFamily": "Maple Mono,JetBrains Mono,HarmonyOS Sans SC",
-  "accentColor": "",
+  "interfaceFontFamily": "MiSans Semibold",
+  "textFontFamily": "MiSans,MiSans Semibold,HarmonyOS Sans SC,HYRunYuan 55W",
+  "monospaceFontFamily": "Maple Mono",
+  "accentColor": "#004ac2",
   "nativeMenus": false,
   "enabledCssSnippets": [
     "custom-admonitions.838117"
   ],
-  "showViewHeader": false
+  "showViewHeader": false,
+  "baseFontSizeAction": true
 }

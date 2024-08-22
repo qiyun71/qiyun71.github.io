@@ -2,8 +2,9 @@
 title: 基于Python的工具
 date: 2023-06-20 12:58:25
 tags:
-    - Python Practise
-categories: Python
+  - Python
+  - Practise
+categories: Python Practise
 ---
 
 Python写的一些小工具

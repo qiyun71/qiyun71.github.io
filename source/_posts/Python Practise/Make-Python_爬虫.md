@@ -5,11 +5,12 @@ top: false
 toc: true
 coverImg: /img/cover/spiderex1.jpg
 img: /img/cover/spiderex1.jpg
-categories: Python
+categories: Python Practise
 summary: 自己动手编写的几个python爬虫小栗子，很垃圾，很基础
 cover: false
 tags:
-  - Python Practise
+  - Python
+  - Practise
 ---
 
 > **自己动手做的 python 爬虫**&emsp;&emsp;&emsp;[GitHub 链接](https://github.com/yq010105/spider_learn "github")

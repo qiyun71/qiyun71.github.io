@@ -38,6 +38,7 @@ SFM:
 -   Correspondence Search. **输入图像** --> 一组经过几何验证的**图像对**，以及每个点的图像**投影图**
     -   Feature Extraction. SIFT 算子(可以是任何一种特异性较强的特征)
         -   SIFT 算法(Scale-invariant feature transform)是一种电脑视觉的算法用来侦测与描述影像中的局部性特征，它在空间尺度中寻找极值点，并提取出其位置、尺度、旋转不变量，此算法由  David Lowe 在 1999 年所发表，2004 年完善总结, ref: [非常详细的 sift 算法原理解析\_可时间倒数了的博客-CSDN 博客](https://blog.csdn.net/u010440456/article/details/81483145)
+        - 改进的SIFT算法，mickey: [Matching 2D Images in 3D: Metric Relative Pose from Metric Correspondences](https://nianticlabs.github.io/mickey/)
     -   Matching.
     -   Geometric Verification. 如果一个有效的变换在图像之间映射了足够数量的特征，它们就被认为是几何验证的
         - 单应性H描述了纯旋转或移动摄像机捕捉平面场景的变换
@@ -48,6 +49,6 @@ SFM:
     - Triangulation. 三角测量是SfM的关键步骤，因为它通过冗余增加了现有模型的稳定性
     - Bundle Adjustment. BA是摄像机参数Pc和点参数Xk的联合非线性细化，使重投影误差最小化
 
-# Multi-View Stereo(MVS)
+# Multi-View Stereo(MVS)
 
 > [Pixelwise View Selection for Unstructured Multi-View Stereo (readpaper.com)](https://readpaper.com/pdf-annotate/note?pdfId=709983199334641664&noteId=1991447797942823424)

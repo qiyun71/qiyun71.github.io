@@ -21,7 +21,12 @@ categories: Learn
 
 <!-- more -->
 
-学习顺序MLP-RNN-seq2seq/编码器解码器架构-注意力机制-自注意力-transformer。
+# 技巧
+
+## 归一化
+
+**输入数据**的归一化：
+当输入的数据为多个变量时，如果某个变量的变化远大于其他变量的变化，则会出现大数吃小数问题，网络会按着变化大的变量(对其最为敏感)来预测。
 
 # Model
 
@@ -40,7 +45,26 @@ S：步长大小
 
 ### UCNN
 
+单向卷积
+
+### BCNN
+
+> [kumar-shridhar/PyTorch-BayesianCNN: Bayesian Convolutional Neural Network with Variational Inference based on Bayes by Backprop in PyTorch.](https://github.com/kumar-shridhar/PyTorch-BayesianCNN)
+> [Bayesian neural network introduction - 知乎](https://zhuanlan.zhihu.com/p/79715409)
+> [重参数 (Reparameterization)-CSDN博客](https://blog.csdn.net/weixin_42437114/article/details/125671285) [漫谈重参数：从正态分布到Gumbel Softmax - 科学空间|Scientific Spaces](https://kexue.fm/archives/6705)
+
+
+初始化的权重参数用高斯先验分布表示：$p(w^{(i)})=\prod_i\mathcal{N}(w_i|0,\sigma_p^2)$，训练的过程就是根据权重先验和数据集来获得权重参数的后验分布：$p(w|\mathcal{D})=\frac{p(\mathcal{D}|w)p(w)}{p(\mathcal{D})}$
+
+![CNNwithdist.png|555](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/CNNwithdist.png)
+
+具体流程：对数据使用两个卷积核进行操作，得到**两个输出的feature map，分别作为真实输出的均值和标准差**。随后使用高斯分布从两个feature map中采样，得到该层feature map的激活值，作为下一层的输入。
+激活值$\begin{aligned}b_j=A_i*\mu_i+\epsilon_j\odot\sqrt{A_i^2*(\alpha_i\odot\mu_i^2)}\end{aligned}$ (**Reparameterization**)
+- 为了解决从分布中采样不可微的问题，使用基于重参数化(**Reparameterization**)的反向传播方法来估计梯度
+
+
 ### VGG16
+
 
 [VGG16学习笔记 | 韩鼎の个人网站 (deanhan.com)](https://deanhan.com/2018/07/26/vgg16/)
 
@@ -64,6 +88,10 @@ S：步长大小
 ## U-Net
 
 > [U-Net (labml.ai)](https://nn.labml.ai/unet/index.html)
+> [anxingle/UNet-pytorch: medical image semantic segmentation](https://github.com/anxingle/UNet-pytorch)
+
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240528101406.png)
 
 
 图像分割
@@ -91,6 +119,7 @@ Maximize ： Lower bound of $logP(x)$
 
 
 ## Diffusion Model
+
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231022210535.png)
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231022210617.png)
@@ -174,7 +203,30 @@ $$\tilde{\mu}_\theta = \frac{\sqrt{\bar{\alpha}_{t-1}}\beta_t}{1-\bar{\alpha}_t}
 * Via noise $\epsilon$ subtraction from $x_0$ (a neural network will estimate $\epsilon$)用网络预测噪声 $\epsilon$
 $$x_0=\frac{1}{\sqrt{\bar{\alpha}_t}}(x_t-\sqrt{1-\bar{\alpha}_t}\epsilon)\tag{5}$$
 
+### Why Does Diffusion Work Better than Auto-Regression?
+
+> [Why Does Diffusion Work Better than Auto-Regression? - YouTube](https://www.youtube.com/watch?v=zc5NTeJbk-k)
+
+- 分类任务：图片-->类别
+
+如何生成图片(Thinking)：
+- 从任意数据中预测整张图片(真实图片做标签)，这样训练集标签图片的mean value会变blurring(**blurry mess**)。(分类任务中训练集标签01的meaning value不会收到很大影响)
+- **Auto-Regressor**: 正向过程是不断擦除图像，网络被训练为undo这个过程，即不断预测图片的下一个像素是什么颜色(like ChatGPT)
+  - 考虑来预测图片中的单个像素，这样训练集标签的mean value是另一个颜色值(网络根据输入的图片来预测单个颜色值)。每个像素的颜色训练一个网络来进行预测，通过多个网络，依次预测每个像素值，最终得到整张图片。这样就能生成plausible(似乎是真的) image，out of nothing(凭空)。**然而每次生成的图片是相同的**
+  - 考虑添加随机，之前predicted pixel是概率分布中概率最大的那个颜色值，**不去这样选择而是随机选择某个概率的颜色作为本次的预测**
+  - 缺点是随着像素量的增大，计算量非常大，要生成一张大像素图像是非常耗时的。当然可以造数据集时一次remove多个像素，在训练中一次预测多个像素。**但是不能过多，这样依然会造成blurry mess** Trade-off：更快但是blurry mess，更慢但是更准确
+
+**Blurry mess**：
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240808183321.png)
+
+**Why predicting one pixel is work**： 
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240808183400.png)
+
+该问题只会出现在预测的值是互相关的情况(在图像中相近的像素通常是强相关的，这在按顺序remove时出现)，假设预测的值相互独立的情况(随机remove像素)。**remove像素可以从另一种角度进行实现，即给每个像素添加噪声**
+
 ## Stable Diffusion
+
+> [Stable Diffusion 图片生成原理简述 « bang’s blog](https://blog.cnbang.net/tech/3766/)
 
 目前常见的 UI 有 WebUI 和 ComfyUI
 
@@ -208,6 +260,7 @@ DPM++2M Karras，收敛+速度快+质量 OK
 ### 反向传播
 
 >[神经网络之反向传播算法（BP）公式推导（超详细） - jsfantasy - 博客园 (cnblogs.com)](https://www.cnblogs.com/jsfantasy/p/12177275.html)
+>[ML Lecture 7: Backpropagation - YouTube](https://www.youtube.com/watch?v=ibJpTrp5mcE)
 
 假如激活函数为sigmoid函数：$\sigma(x) = \frac{1}{1+e^{-x}}$
 sigmoid的导数为：$\frac{d}{dx}\sigma(x) = \frac{d}{dx} \left(\frac{1}{1+e^{-x}} \right)= \sigma(1-\sigma)$
@@ -293,6 +346,12 @@ $$
 (鞍点 in 3D)saddle point be like: 
 ![image.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230702201813.png)
 
+
+## KAN
+
+[KindXiaoming/pykan: Kolmogorov Arnold Networks](https://github.com/KindXiaoming/pykan?tab=readme-ov-file)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240505163014.png)
 
 # Loss
 

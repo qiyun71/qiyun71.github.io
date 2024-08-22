@@ -35,7 +35,10 @@ skip_render:
   - '_posts/Scripts/**'
   - '_posts/Templates/**'
   - '_posts/Reports/**'
-  - '_posts/Other/**'
+  - '_posts/Blog&Books/**'
+  - '_posts/Mine/**'
+  - '_posts/ModelUpdating/**'
+  - '_posts/BMO/**'
 
 
 # Writing

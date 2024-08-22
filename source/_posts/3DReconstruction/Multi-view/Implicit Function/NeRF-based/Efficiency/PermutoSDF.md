@@ -6,7 +6,7 @@ tags:
   - SurfaceReconstruction
   - Efficiency
   - Neus
-categories: 3DReconstruction/Multi-view/Implicit Function/NeRF-based/Efficiency
+categories: 3DReconstruction/Multi-view/Implicit Function/Efficiency
 ---
 
 | Title     | PermutoSDF: Fast Multi-View Reconstruction with Implicit Surfaces using Permutohedral Lattices                                                                                                                 |
@@ -154,6 +154,7 @@ For **specular or untextured areas**, the Eikonal regularization doesn't provide
 In order to aid the network in recovering smoother surfaces in reflective or untextured areas, we add a curvature loss on the SDF 
 Calculating the full 3×3 Hessian matrix can be expensive; so we approximate curvature as local deviation of the normal vector. Recall that we already have the normal $n = ∇g(enc(x))$ at each ray sample since it was required for the Eikonal loss. With this normal, we define a tangent vector切向量 $η$ by cross product with a random unit vector τ such that $η = n × τ$.Given this random vector in the tangent plane, we slightly perturb our sample x to obtain $\mathrm{x}_\epsilon=\mathrm{x}+\epsilon\eta.$. We obtain the normal at the new perturbed point as $\mathbf{n}_\epsilon=\nabla g(\mathrm{enc}(\mathbf{x}_\epsilon))$ and define a curvature loss based on the dot product between the normals at the original and perturbed points:
 curvature loss: $\mathcal{L}_\mathrm{curv}=\sum_x(\mathbf{n}\cdot\mathbf{n}_\epsilon-1)^2.$ 
+
 物理含义：**表面上相邻两点的法向量应该是平行的**
 
 ## Color Regularization[详细解析深度学习中的 Lipschitz 条件 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/389024283)

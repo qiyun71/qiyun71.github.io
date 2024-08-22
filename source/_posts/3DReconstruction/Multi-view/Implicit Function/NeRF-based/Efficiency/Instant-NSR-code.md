@@ -7,7 +7,7 @@ tags:
   - SurfaceReconstruction
   - Efficiency
   - Neus
-categories: 3DReconstruction/Multi-view/Implicit Function/NeRF-based/Efficiency
+categories: 3DReconstruction/Multi-view/Implicit Function/Efficiency
 ---
 
 对[Instant-NSR](https://github.com/zhaofuq/Instant-NSR)代码的理解
