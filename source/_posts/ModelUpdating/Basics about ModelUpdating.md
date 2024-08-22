@@ -161,7 +161,6 @@ Traditional Model Updating is a class of inverse problem, it continually find th
 **优化算法**(修正算法)
 - SSA、Particle swarm optimizer algorithm(粒子群)
 
-
 ### FE Surrogate Model
 
 - **data-fit** type：conventional response surface method, neural networks and Kriging models

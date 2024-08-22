@@ -2,7 +2,11 @@
   "userAdmonitions": {},
   "syntaxHighlight": true,
   "copyButton": true,
+<<<<<<< HEAD
   "version": "10.3.2",
+=======
+  "version": "10.3.1",
+>>>>>>> b8fe7456690b5448360555a5838b28c841e677e7
   "autoCollapse": true,
   "defaultCollapseType": "closed",
   "injectColor": true,

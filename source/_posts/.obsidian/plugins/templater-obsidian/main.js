@@ -1841,6 +1841,12 @@ var TemplaterSettingTab = class extends import_obsidian6.PluginSettingTab {
     this.add_user_system_command_functions_setting();
     this.add_donating_setting();
   }
+<<<<<<< HEAD
+=======
+  add_general_setting_header() {
+    this.containerEl.createEl("h2", { text: "General settings" });
+  }
+>>>>>>> b8fe7456690b5448360555a5838b28c841e677e7
   add_template_folder_setting() {
     new import_obsidian6.Setting(this.containerEl).setName("Template folder location").setDesc("Files in this folder will be available as templates.").addSearch((cb) => {
       new FolderSuggest(cb.inputEl);
@@ -1904,7 +1910,11 @@ var TemplaterSettingTab = class extends import_obsidian6.PluginSettingTab {
     });
   }
   add_templates_hotkeys_setting() {
+<<<<<<< HEAD
     new import_obsidian6.Setting(this.containerEl).setName("Template hotkeys").setHeading();
+=======
+    this.containerEl.createEl("h2", { text: "Template hotkeys" });
+>>>>>>> b8fe7456690b5448360555a5838b28c841e677e7
     const desc = document.createDocumentFragment();
     desc.append("Template hotkeys allows you to bind a template to a hotkey.");
     new import_obsidian6.Setting(this.containerEl).setDesc(desc);
@@ -2028,7 +2038,11 @@ var TemplaterSettingTab = class extends import_obsidian6.PluginSettingTab {
     });
   }
   add_startup_templates_setting() {
+<<<<<<< HEAD
     new import_obsidian6.Setting(this.containerEl).setName("Startup templates").setHeading();
+=======
+    this.containerEl.createEl("h2", { text: "Startup templates" });
+>>>>>>> b8fe7456690b5448360555a5838b28c841e677e7
     const desc = document.createDocumentFragment();
     desc.append("Startup templates are templates that will get executed once when Templater starts.", desc.createEl("br"), "These templates won't output anything.", desc.createEl("br"), "This can be useful to set up templates adding hooks to Obsidian events for example.");
     new import_obsidian6.Setting(this.containerEl).setDesc(desc);
@@ -2062,7 +2076,11 @@ var TemplaterSettingTab = class extends import_obsidian6.PluginSettingTab {
     });
   }
   add_user_script_functions_setting() {
+<<<<<<< HEAD
     new import_obsidian6.Setting(this.containerEl).setName("User script functions").setHeading();
+=======
+    this.containerEl.createEl("h2", { text: "User script functions" });
+>>>>>>> b8fe7456690b5448360555a5838b28c841e677e7
     let desc = document.createDocumentFragment();
     desc.append("All JavaScript files in this folder will be loaded as CommonJS modules, to import custom user functions.", desc.createEl("br"), "The folder needs to be accessible from the vault.", desc.createEl("br"), "Check the ", desc.createEl("a", {
       href: "https://silentvoid13.github.io/Templater/",
@@ -2108,7 +2126,13 @@ var TemplaterSettingTab = class extends import_obsidian6.PluginSettingTab {
     desc.append("Allows you to create user functions linked to system commands.", desc.createEl("br"), desc.createEl("b", {
       text: "Warning: "
     }), "It can be dangerous to execute arbitrary system commands from untrusted sources. Only run system commands that you understand, from trusted sources.");
+<<<<<<< HEAD
     new import_obsidian6.Setting(this.containerEl).setName("User system command functions").setHeading();
+=======
+    this.containerEl.createEl("h2", {
+      text: "User system command functions"
+    });
+>>>>>>> b8fe7456690b5448360555a5838b28c841e677e7
     new import_obsidian6.Setting(this.containerEl).setName("Enable user system command functions").setDesc(desc).addToggle((toggle) => {
       toggle.setValue(this.plugin.settings.enable_system_commands).onChange((enable_system_commands) => {
         this.plugin.settings.enable_system_commands = enable_system_commands;

@@ -1,6 +1,7 @@
 {
   "onboardingTips": {
     "welcomeTipRead": true,
+<<<<<<< HEAD
     "strokeLimitTipRead": false,
     "lastVersionTipRead": "0.2.4"
   },
@@ -9,6 +10,11 @@
   "notelessAttachmentFolderLocation": "obsidian",
   "writingSubfolder": "Ink/Writing",
   "drawingSubfolder": "Ink/Drawing",
+=======
+    "strokeLimitTipRead": false
+  },
+  "useDefaultAttachmentFolder": true,
+>>>>>>> b8fe7456690b5448360555a5838b28c841e677e7
   "writingEnabled": true,
   "writingStrokeLimit": 200,
   "writingDynamicStrokeThickness": true,
@@ -17,6 +23,10 @@
   "writingBackgroundWhenLocked": true,
   "drawingEnabled": false,
   "drawingFrameWhenLocked": false,
+<<<<<<< HEAD
   "drawingBackgroundWhenLocked": false,
   "useDefaultAttachmentFolder": true
+=======
+  "drawingBackgroundWhenLocked": false
+>>>>>>> b8fe7456690b5448360555a5838b28c841e677e7
 }

@@ -66,25 +66,12 @@
             }
           },
           {
-            "id": "993753c52ae5ab1f",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Mine/Note/IPV6.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              }
-            }
-          },
-          {
             "id": "c24d5c81f3f2e202",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Mine/Write/Model Updating/A fast interval model updating method based on MLP neural network.md",
+                "file": "Mine/Write/3D Reconstruction/NeuS-based 3D Reconstruction.md",
                 "mode": "source",
                 "backlinks": false,
                 "source": false
@@ -92,7 +79,7 @@
             }
           },
           {
-            "id": "c3bc8dba313b33eb",
+            "id": "31df83a580b4d6c3",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -103,35 +90,9 @@
                 "source": false
               }
             }
-          },
-          {
-            "id": "c2634e6346b5a234",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "3DReconstruction/Single-view/Review.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "f5f9ff1b9be1ca6f",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Mine/Configuration of computer/Software/Git.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              }
-            }
           }
         ],
-        "currentTab": 8
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -150,7 +111,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Mine/Configuration of computer/Software/Git.md"
+                "file": "ModelUpdating/Paper about ModelUpdating.md"
               }
             }
           },
@@ -260,7 +221,7 @@
             "state": {
               "type": "file-properties",
               "state": {
-                "file": "Mine/Configuration of computer/Software/Git.md"
+                "file": "ModelUpdating/Paper about ModelUpdating.md"
               }
             }
           }
@@ -288,22 +249,24 @@
       "media-extended:Open media": false
     }
   },
-  "active": "f5f9ff1b9be1ca6f",
+  "active": "31df83a580b4d6c3",
   "lastOpenFiles": [
-    "Mine/Configuration of computer/sources.md",
-    "Mine/Configuration of computer/Software/Git.md",
-    "3DReconstruction/Anime 3D Reconstruction.md",
-    "3DReconstruction/Basics about 3D Reconstruction.md",
-    "3DReconstruction/Single-view/Review.md",
-    "3DReconstruction/Paper About 3D Reconstruction.md",
-    "ModelUpdating/Paper about ModelUpdating.md",
-    "Mine/Note/IPV6.md",
-    "3DReconstruction/Multi-view/Implicit Function/NeRF-based/NeRF Other Research/Interesting/PAniC-3D.md",
     "Mine/Write/3D Reconstruction/NeuS-based 3D Reconstruction.md",
+    "Mine/Write/Model Updating/A fast interval model updating method based on MLP neural network.md",
+    "ModelUpdating/Paper about ModelUpdating.md",
+    "3DReconstruction/Anime 3D Reconstruction.md",
+    "Mine/Note/IPV6.md",
+    "3DReconstruction/Single-view/Review.md",
+    "Mine/Configuration of computer/Software/Git.md",
+    "Reports/先进检测与智能制造梯队队徽队旗设计理念错别字修改.md",
+    "Mine/Note/Linux.md",
+    "Mine/Configuration of computer/sources.md",
+    "3DReconstruction/Basics about 3D Reconstruction.md",
+    "3DReconstruction/Paper About 3D Reconstruction.md",
+    "3DReconstruction/Multi-view/Implicit Function/NeRF-based/NeRF Other Research/Interesting/PAniC-3D.md",
     "3DReconstruction/Multi-view/Implicit Function/NeRF-based/NeRF Other Research/NeRF-review.md",
     "3DReconstruction/Multi-view/Multi-view Human Body Reconstruction.md",
     "3DReconstruction/Multi-view/Implicit Function/SDFStudio.md",
-    "Mine/Write/Model Updating/A fast interval model updating method based on MLP neural network.md",
     "Blog&Books/Read/蛊真人.md",
     "Mine/Project/Audio Visualization.md",
     "Learn/Learn-FEA.md",
@@ -315,8 +278,6 @@
     "Blog&Books/Read/Writing Science.md",
     "Blog&Books/Read/人生七年.md",
     "Mine/Note/Write tips.md",
-    "Learn/Learn-Matlab.md",
-    "Learn/Learn-Python_Matplotlib.md",
     "Blog&Books/Read/file/Writing science.pdf",
     "Mine/Configuration of computer/OS",
     "Mine/Configuration of computer/OS/windows",

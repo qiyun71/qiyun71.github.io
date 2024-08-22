@@ -49754,6 +49754,7 @@ ${(_a = this.plugin.settings.authorizationHeaderName) != null ? _a : "Authorizat
         `).addToggle((cb) => {
         var _a2;
         return cb.onChange((value) => {
+<<<<<<< HEAD
           const originalValue = this.plugin.settings.enableSecureServer;
           this.plugin.settings.enableSecureServer = value;
           this.plugin.saveSettings();
@@ -49761,6 +49762,11 @@ ${(_a = this.plugin.settings.authorizationHeaderName) != null ? _a : "Authorizat
           if (value !== originalValue) {
             this.display();
           }
+=======
+          this.plugin.settings.enableSecureServer = value;
+          this.plugin.saveSettings();
+          this.plugin.refreshServerState();
+>>>>>>> b8fe7456690b5448360555a5838b28c841e677e7
         }).setValue((_a2 = this.plugin.settings.enableSecureServer) != null ? _a2 : true);
       });
       new import_obsidian2.Setting(containerEl).setName("Encrypted (HTTPS) Server Port").setDesc("This configures the port on which your REST API will listen for HTTPS connections.  It is recommended that you leave this port with its default setting as tools integrating with this API may expect the default port to be in use.  Under no circumstances is it recommended that you expose this service directly to the internet.").addText((cb) => cb.onChange((value) => {

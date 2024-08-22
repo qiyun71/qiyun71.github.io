@@ -8550,8 +8550,11 @@ body {
     padding-top: 6px;
 }
 
+<<<<<<< HEAD
 .clickable-icon.document-search-button,
 .clickable-icon.document-search-close-button,
+=======
+>>>>>>> b8fe7456690b5448360555a5838b28c841e677e7
 body:not(.is-mobile) .workspace-split.mod-left-split .workspace-sidedock-vault-profile .workspace-drawer-vault-actions .clickable-icon,
 .mod-left-split .workspace-tab-header .workspace-tab-header-inner,
 .mod-right-split .workspace-tab-header .workspace-tab-header-inner,

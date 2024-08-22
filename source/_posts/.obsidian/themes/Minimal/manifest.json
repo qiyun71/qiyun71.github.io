@@ -1,6 +1,10 @@
 {
 	"name": "Minimal",
+<<<<<<< HEAD
 	"version": "7.7.14",
+=======
+	"version": "7.6.11",
+>>>>>>> b8fe7456690b5448360555a5838b28c841e677e7
 	"minAppVersion": "1.6.1",
 	"author": "@kepano",
 	"authorUrl": "https://twitter.com/kepano",

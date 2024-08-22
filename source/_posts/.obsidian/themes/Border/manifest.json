@@ -1,6 +1,10 @@
 {
 	"name": "Border",
+<<<<<<< HEAD
 	"version": "1.9.9",
+=======
+	"version": "1.9.4",
+>>>>>>> b8fe7456690b5448360555a5838b28c841e677e7
 	"minAppVersion": "0.16.0",
 	"author": "Akifyss",
 	"authorUrl": "https://github.com/Akifyss"
