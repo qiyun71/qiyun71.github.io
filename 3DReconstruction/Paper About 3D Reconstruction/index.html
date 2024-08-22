@@ -27,7 +27,13 @@
 <meta property="og:site_name" content="QiYun">
 <meta property="og:description" content="NeRF-based重建方法之于前作监督的重建(新视图生成)方式，如MVS需要真实的深度图作监督，之前的包括生成式的方法需要三维模型的信息(PointCloud、Voxel、Mesh)作监督，NeRF-based方法构建了一种自监督的重建方式，从图像中重建物体只需要用图像作监督 NeRF将三维空间中所有点，通过MLP预测出对应的密度&#x2F;SDF，是一种连续的方法(理论上，实际上由于计算机精度还是离散的">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231005200141.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240617145211.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240731185452.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240808142917.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240717135401.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240717135412.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240717085053.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240508085101.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231205152551.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231109094904.png">
@@ -42,25 +48,28 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231204133746.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231205153011.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240617101305.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240801174738.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240618210910.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240618210549.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231123142658.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240430084907.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240419144938.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240808174254.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240805124810.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240617110057.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20240130141333.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20240204211248.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023163503.png">
 <meta property="article:published_time" content="2023-09-21T08:00:14.000Z">
-<meta property="article:modified_time" content="2024-06-28T02:47:52.183Z">
+<meta property="article:modified_time" content="2024-08-08T09:42:57.297Z">
 <meta property="article:author" content="Qi Yun">
-<meta property="article:tag" content="SurfaceReconstruction">
 <meta property="article:tag" content="3DReconstruction">
+<meta property="article:tag" content="SurfaceReconstruction">
 <meta property="article:tag" content="NeRF">
 <meta property="article:tag" content="MVS">
 <meta property="article:tag" content="3DGS">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240617145211.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231005200141.png">
 
 <link rel="canonical" href="http://example.com/3DReconstruction/Paper%20About%203D%20Reconstruction/">
 
@@ -255,7 +264,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-06-28 10:47:52" itemprop="dateModified" datetime="2024-06-28T10:47:52+08:00">2024-06-28</time>
+                <time title="Modified: 2024-08-08 17:42:57" itemprop="dateModified" datetime="2024-08-08T17:42:57+08:00">2024-08-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -272,13 +281,13 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>1.5k</span>
+              <span>2k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span>5 mins.</span>
+              <span>7 mins.</span>
             </span>
 
         </div>
@@ -302,8 +311,16 @@
 <li>PointCloud后处理，根据不同用途如3D打印、有限元仿真分析、游戏assets，有许多格式mesh/FEMode/AMs</li>
 </ol>
 <span id="more"></span>
-<h1 id="COLMAP"><a href="#COLMAP" class="headerlink" title="COLMAP"></a>COLMAP</h1><h2 id="VGGSfM"><a href="#VGGSfM" class="headerlink" title="VGGSfM"></a>VGGSfM</h2><p><a target="_blank" rel="noopener" href="https://vggsfm.github.io/">VGGSfM: Visual Geometry Grounded Deep Structure From Motion</a><br>We are highly inspired by <a target="_blank" rel="noopener" href="https://github.com/colmap/colmap">colmap</a>, <a target="_blank" rel="noopener" href="https://github.com/colmap/pycolmap">pycolmap</a>, <a target="_blank" rel="noopener" href="https://github.com/facebookresearch/PoseDiffusion">posediffusion</a>, <a target="_blank" rel="noopener" href="https://github.com/facebookresearch/co-tracker">cotracker</a>, and <a target="_blank" rel="noopener" href="https://github.com/kornia/kornia">kornia</a>.</p>
+<h1 id="COLMAP"><a href="#COLMAP" class="headerlink" title="COLMAP"></a>COLMAP</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://colmap.github.io/tutorial.html">colmap tutorial</a></p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231005200141.png" alt="image.png|666"></p>
+<h2 id="VGGSfM"><a href="#VGGSfM" class="headerlink" title="VGGSfM"></a>VGGSfM</h2><p><a target="_blank" rel="noopener" href="https://vggsfm.github.io/">VGGSfM: Visual Geometry Grounded Deep Structure From Motion</a><br>We are highly inspired by <a target="_blank" rel="noopener" href="https://github.com/colmap/colmap">colmap</a>, <a target="_blank" rel="noopener" href="https://github.com/colmap/pycolmap">pycolmap</a>, <a target="_blank" rel="noopener" href="https://github.com/facebookresearch/PoseDiffusion">posediffusion</a>, <a target="_blank" rel="noopener" href="https://github.com/facebookresearch/co-tracker">cotracker</a>, and <a target="_blank" rel="noopener" href="https://github.com/kornia/kornia">kornia</a>.</p>
 <p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240617145211.png" alt="image.png|666"></p>
+<h2 id="GLOMAP"><a href="#GLOMAP" class="headerlink" title="GLOMAP"></a>GLOMAP</h2><p><a target="_blank" rel="noopener" href="https://github.com/colmap/glomap?tab=readme-ov-file">colmap/glomap: GLOMAP - Global Structured-from-Motion Revisited</a></p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240731185452.png" alt="image.png|666"></p>
+<h2 id="ACE-Zero"><a href="#ACE-Zero" class="headerlink" title="ACE Zero"></a>ACE Zero</h2><p><a target="_blank" rel="noopener" href="https://nianticlabs.github.io/acezero/">ACE Zero</a></p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240808142917.png" alt="image.png|666"></p>
 <h1 id="NeRF"><a href="#NeRF" class="headerlink" title="NeRF"></a>NeRF</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">**形式中立+定义纯粹** NeRF阵营图</span><br><span class="line">![9x9.jpg|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/9x9.jpg)</span><br></pre></td></tr></table></figure>
 <div class="table-container">
 <table>
@@ -337,6 +354,7 @@
 </table>
 </div>
 <p><a href="NeRF-review.md">NeRF-review</a> | <a href="NeRF-Studio.md">NeRF-Studio (code)</a></p>
+<h2 id="Baseline"><a href="#Baseline" class="headerlink" title="Baseline"></a>Baseline</h2><p><a target="_blank" rel="noopener" href="https://jkulhanek.com/nerfbaselines/">NerfBaselines</a></p>
 <h2 id="Important-Papers"><a href="#Important-Papers" class="headerlink" title="Important Papers"></a>Important Papers</h2><div class="table-container">
 <table>
 <thead>
@@ -522,9 +540,10 @@
 <td></td>
 </tr>
 <tr>
-<td></td>
-<td></td>
-<td></td>
+<td>2023</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/ashawkey/nerf2mesh">ashawkey/nerf2mesh: [ICCV2023] Delicate Textured Mesh Recovery from NeRF via Adaptive Surface Refinement</a></td>
+<td>![image.png\</td>
+<td>666](<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240717101942.png">https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240717101942.png</a>)<br></td>
 <td></td>
 </tr>
 <tr>
@@ -535,13 +554,38 @@
 </tbody>
 </table>
 </div>
-<h2 id="ActiveNeuS"><a href="#ActiveNeuS" class="headerlink" title="ActiveNeuS"></a>ActiveNeuS</h2><p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2405.02568">[2405.02568] ActiveNeuS: Active 3D Reconstruction using Neural Implicit Surface Uncertainty</a></p>
-<p>考虑两种不确定性的情况下评估候选视图<br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240508085101.png" alt="image.png|444"></p>
+<h2 id="MIMO-NeRF"><a href="#MIMO-NeRF" class="headerlink" title="MIMO-NeRF"></a>MIMO-NeRF</h2><p><a target="_blank" rel="noopener" href="https://www.kecl.ntt.co.jp/people/kaneko.takuhiro/projects/mimo-nerf/">MIMO-NeRF</a></p>
+<p>多输入多输出的MLP(NeRF)，减少MLP评估次数，可以加速NeRF。但是每个点的颜色和体密度根据in a group所选的输入的坐标不同，而导致歧义。$\mathcal{L}_{pi xel}$不足以处理这种歧义，引入了self-supervised learning</p>
+<ul>
+<li><p>Group shift. 对每个点通过多个不同的group进行评估</p>
+<ul>
+<li><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240717135401.png" alt="image.png|222"></li>
+</ul>
+</li>
+<li><p>Variation reduction. 对每个点重复多给几次</p>
+<ul>
+<li><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240717135412.png" alt="image.png|222"></li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240717085053.png" alt="image.png|666"></p>
+<h2 id="ActiveNeuS"><a href="#ActiveNeuS" class="headerlink" title="ActiveNeuS"></a>ActiveNeuS</h2><p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2405.02568">Active Neural 3D Reconstruction with Colorized Surface Voxel-based View Selection</a></p>
+<p>active 3D reconstruction using uncertainty-guided view selection考虑两种不确定性的情况下评估候选视图, introduce <strong>Colorized Surface Voxel (CSV)-based view selection</strong>, a new next-best view (NBV) selection method exploiting surface voxel-based measurement of uncertainty in scene appearance</p>
+<ul>
+<li>相比主动选择Nest besh view，是不是image pixel of biggest error 更好一点</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240508085101.png" alt="image.png|444"></p>
 <h2 id="Binary-Opacity-Grids"><a href="#Binary-Opacity-Grids" class="headerlink" title="Binary Opacity Grids"></a>Binary Opacity Grids</h2><p>Binary Opacity Grids: Capturing Fine Geometric Detail for Mesh-Based View Synthesis<br><a target="_blank" rel="noopener" href="https://binary-opacity-grid.github.io/">https://binary-opacity-grid.github.io/</a></p>
 <p>推进BakedSDF的工作</p>
 <h2 id="RNb-NeuS"><a href="#RNb-NeuS" class="headerlink" title="RNb-NeuS"></a>RNb-NeuS</h2><p><a target="_blank" rel="noopener" href="https://github.com/bbrument/RNb-NeuS">bbrument/RNb-NeuS: Code release for RNb-NeuS. (github.com)</a></p>
 <p>将<strong>反射率</strong>和<strong>法线贴图</strong>无缝集成为基于神经体积渲染的 3D 重建中的输入数据<br>考虑高光和阴影：显著改善了高曲率或低可见度区域的详细 3D 重建<br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231205152551.png" alt="image.png|666"></p>
-<h2 id="ReTR"><a href="#ReTR" class="headerlink" title="ReTR"></a>ReTR</h2><p><a target="_blank" rel="noopener" href="https://yixunliang.github.io/ReTR/">Rethinking Rendering in Generalizable Neural Surface Reconstruction: A Learning-based Solution (yixunliang.github.io)</a><br>修改论文 title：ReTR: Modeling Rendering via Transformer for Generalizable Neural Surface Reconstruction</p>
+<h2 id="ReTR"><a href="#ReTR" class="headerlink" title="ReTR"></a>ReTR</h2><p><a target="_blank" rel="noopener" href="https://yixunliang.github.io/ReTR/">ReTR: Modeling Rendering via Transformer for Generalizable Neural Surface Reconstruction</a><br>(Generalized Rendering Function) <strong>使用Transformer 代替渲染过程，用了深度监督</strong></p>
+<p>It introduces a learnable meta-ray token and <strong>utilizes the cross-attention mechanism to simulate the interaction of rendering process with sampled points and render the observed color.</strong> </p>
+<ul>
+<li>使用Transformer 代替渲染过程，之前方法 only use the transformer to enhance feature aggregation, and the sampled point features are still decoded into colors and densities and <strong>aggregated using traditional volume rendering, leading to unconfident surface prediction</strong>。作者认为提渲染简化了光线传播的过程(吸收，激发，散射)，每种光子都代表一种非线性光子-粒子相互作用，入射光子的特性受其固有性质和介质特性的影响。<strong><em>体渲染公式将这些复杂性(非线性)压缩在单个密度值中，导致了入射光子建模的过度简化</em></strong>。<strong><em>此外颜色的权重混合忽视了复杂的物理影响，过度依赖输入视图的投影颜色</em></strong>。该模型需要更广泛地累积精确表面附近各点的投影颜色，从而造成 “浑浊 “的表面外观。</li>
+<li>depth loss的作用更大一点，预测出来的深度图更准确</li>
+<li>by operating <strong>within a high-dimensional feature space rather than the color space</strong>, ReTR mitigates sensitivity to projected colors in source views.</li>
+</ul>
 <p>CNN + 3D Decoder + <strong>Transformer</strong> + NeRF 用深度图监督</p>
 <p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231109094904.png" alt="image.png|666"></p>
 <h2 id="AutoRecon"><a href="#AutoRecon" class="headerlink" title="AutoRecon"></a>AutoRecon</h2><p><a target="_blank" rel="noopener" href="https://zju3dv.github.io/autorecon/">AutoRecon: Automated 3D Object Discovery and Reconstruction (zju3dv.github.io)</a></p>
@@ -574,6 +618,8 @@
 <li>局部优化思想</li>
 </ul>
 <p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240617101305.png" alt="image.png|666"></p>
+<h2 id="InstantSplat-Sparse-view"><a href="#InstantSplat-Sparse-view" class="headerlink" title="InstantSplat(Sparse-view)"></a>InstantSplat(Sparse-view)</h2><p><a target="_blank" rel="noopener" href="https://instantsplat.github.io/">InstantSplat: Sparse-view SfM-free Gaussian Splatting in Seconds</a></p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240801174738.png" alt="image.png|666"></p>
 <h2 id="VCR-GauS"><a href="#VCR-GauS" class="headerlink" title="VCR-GauS"></a>VCR-GauS</h2><p><a target="_blank" rel="noopener" href="https://hlinchen.github.io/projects/VCR-GauS/">VCR-GauS</a></p>
 <p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240618210910.png" alt="image.png|666"></p>
 <h2 id="PGSR"><a href="#PGSR" class="headerlink" title="PGSR"></a>PGSR</h2><p><a target="_blank" rel="noopener" href="https://zju3dv.github.io/pgsr/">PGSR: Planar-based Gaussian Splatting for Efficient and High-Fidelity Surface Reconstruction</a></p>
@@ -591,6 +637,10 @@
 <p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240430084907.png" alt="image.png|666"></p>
 <h2 id="GS2mesh"><a href="#GS2mesh" class="headerlink" title="GS2mesh"></a>GS2mesh</h2><p><a target="_blank" rel="noopener" href="https://gs2mesh.github.io/">Surface Reconstruction from Gaussian Splatting via Novel Stereo Views</a></p>
 <p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240419144938.png" alt="image.png|666"></p>
+<h1 id="Depth-based"><a href="#Depth-based" class="headerlink" title="Depth-based"></a>Depth-based</h1><h2 id="Shakes-on-a-Plane"><a href="#Shakes-on-a-Plane" class="headerlink" title="Shakes on a Plane"></a>Shakes on a Plane</h2><p><a target="_blank" rel="noopener" href="https://light.princeton.edu/publication/soap/">Shakes on a Plane: Unsupervised Depth Estimation from Unstabilized Photography – Princeton Computing Imaging Lab</a></p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240808174254.png" alt="image.png|666"></p>
+<h2 id="Mono-ViFI"><a href="#Mono-ViFI" class="headerlink" title="Mono-ViFI"></a>Mono-ViFI</h2><p><a target="_blank" rel="noopener" href="https://github.com/LiuJF1226/Mono-ViFI?tab=readme-ov-file">LiuJF1226/Mono-ViFI: [ECCV 2024] Mono-ViFI: A Unified Learning Framework for Self-supervised Single- and Multi-frame Monocular Depth Estimation</a></p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240805124810.png" alt="image.png|666"></p>
 <h1 id="Mesh-based"><a href="#Mesh-based" class="headerlink" title="Mesh-based"></a>Mesh-based</h1><h2 id="MeshAnything"><a href="#MeshAnything" class="headerlink" title="MeshAnything"></a>MeshAnything</h2><p><a target="_blank" rel="noopener" href="https://buaacyw.github.io/mesh-anything/">MeshAnything</a></p>
 <p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240617110057.png" alt="image.png|666"></p>
 <p>与 MeshGPT 等直接生成艺术家创建的网格Artist-Created Meshes (AMs)的方法相比，我们的方法<strong>避免了学习复杂的 3D 形状分布</strong>。相反，<strong>它专注于通过优化的拓扑有效地构建形状</strong>，从而显着减轻训练负担并增强可扩展性。</p>
@@ -630,8 +680,8 @@
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/SurfaceReconstruction/" rel="tag"><i class="fa fa-tag"></i> SurfaceReconstruction</a>
               <a href="/tags/3DReconstruction/" rel="tag"><i class="fa fa-tag"></i> 3DReconstruction</a>
+              <a href="/tags/SurfaceReconstruction/" rel="tag"><i class="fa fa-tag"></i> SurfaceReconstruction</a>
               <a href="/tags/NeRF/" rel="tag"><i class="fa fa-tag"></i> NeRF</a>
               <a href="/tags/MVS/" rel="tag"><i class="fa fa-tag"></i> MVS</a>
               <a href="/tags/3DGS/" rel="tag"><i class="fa fa-tag"></i> 3DGS</a>
@@ -708,7 +758,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#COLMAP"><span class="nav-text">COLMAP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#VGGSfM"><span class="nav-text">VGGSfM</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NeRF"><span class="nav-text">NeRF</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Important-Papers"><span class="nav-text">Important Papers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ActiveNeuS"><span class="nav-text">ActiveNeuS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Binary-Opacity-Grids"><span class="nav-text">Binary Opacity Grids</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RNb-NeuS"><span class="nav-text">RNb-NeuS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ReTR"><span class="nav-text">ReTR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AutoRecon"><span class="nav-text">AutoRecon</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#G-Shell"><span class="nav-text">G-Shell</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Adaptive-Shells"><span class="nav-text">Adaptive Shells</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PonderV2"><span class="nav-text">PonderV2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spiking-NeRF"><span class="nav-text">Spiking NeRF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hyb-NeRF-%E5%A4%9A%E5%88%86%E8%BE%A8%E7%8E%87%E6%B7%B7%E5%90%88%E7%BC%96%E7%A0%81"><span class="nav-text">Hyb-NeRF 多分辨率混合编码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dynamic"><span class="nav-text">Dynamic</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#In-Hand-3D-Object"><span class="nav-text">In-Hand 3D Object</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DynamicSurf"><span class="nav-text">DynamicSurf</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MorpheuS"><span class="nav-text">MorpheuS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NPGs"><span class="nav-text">NPGs</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3DGS-PointCloud-based"><span class="nav-text">3DGS(PointCloud-based)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Idea"><span class="nav-text">Idea</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Localized-Points-Management"><span class="nav-text">Localized Points Management</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VCR-GauS"><span class="nav-text">VCR-GauS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PGSR"><span class="nav-text">PGSR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TrimGS"><span class="nav-text">TrimGS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SuGaR"><span class="nav-text">SuGaR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2DGS"><span class="nav-text">2DGS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GS2mesh"><span class="nav-text">GS2mesh</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mesh-based"><span class="nav-text">Mesh-based</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#MeshAnything"><span class="nav-text">MeshAnything</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pixel2Mesh"><span class="nav-text">Pixel2Mesh</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pixel2Mesh-1"><span class="nav-text">Pixel2Mesh++</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Voxel-based"><span class="nav-text">Voxel-based</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Voxurf"><span class="nav-text">Voxurf</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#COLMAP"><span class="nav-text">COLMAP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#VGGSfM"><span class="nav-text">VGGSfM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GLOMAP"><span class="nav-text">GLOMAP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ACE-Zero"><span class="nav-text">ACE Zero</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NeRF"><span class="nav-text">NeRF</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Baseline"><span class="nav-text">Baseline</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Important-Papers"><span class="nav-text">Important Papers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MIMO-NeRF"><span class="nav-text">MIMO-NeRF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ActiveNeuS"><span class="nav-text">ActiveNeuS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Binary-Opacity-Grids"><span class="nav-text">Binary Opacity Grids</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RNb-NeuS"><span class="nav-text">RNb-NeuS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ReTR"><span class="nav-text">ReTR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AutoRecon"><span class="nav-text">AutoRecon</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#G-Shell"><span class="nav-text">G-Shell</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Adaptive-Shells"><span class="nav-text">Adaptive Shells</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PonderV2"><span class="nav-text">PonderV2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spiking-NeRF"><span class="nav-text">Spiking NeRF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hyb-NeRF-%E5%A4%9A%E5%88%86%E8%BE%A8%E7%8E%87%E6%B7%B7%E5%90%88%E7%BC%96%E7%A0%81"><span class="nav-text">Hyb-NeRF 多分辨率混合编码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dynamic"><span class="nav-text">Dynamic</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#In-Hand-3D-Object"><span class="nav-text">In-Hand 3D Object</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DynamicSurf"><span class="nav-text">DynamicSurf</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MorpheuS"><span class="nav-text">MorpheuS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NPGs"><span class="nav-text">NPGs</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3DGS-PointCloud-based"><span class="nav-text">3DGS(PointCloud-based)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Idea"><span class="nav-text">Idea</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Localized-Points-Management"><span class="nav-text">Localized Points Management</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#InstantSplat-Sparse-view"><span class="nav-text">InstantSplat(Sparse-view)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VCR-GauS"><span class="nav-text">VCR-GauS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PGSR"><span class="nav-text">PGSR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TrimGS"><span class="nav-text">TrimGS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SuGaR"><span class="nav-text">SuGaR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2DGS"><span class="nav-text">2DGS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GS2mesh"><span class="nav-text">GS2mesh</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Depth-based"><span class="nav-text">Depth-based</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Shakes-on-a-Plane"><span class="nav-text">Shakes on a Plane</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mono-ViFI"><span class="nav-text">Mono-ViFI</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mesh-based"><span class="nav-text">Mesh-based</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#MeshAnything"><span class="nav-text">MeshAnything</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pixel2Mesh"><span class="nav-text">Pixel2Mesh</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pixel2Mesh-1"><span class="nav-text">Pixel2Mesh++</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Voxel-based"><span class="nav-text">Voxel-based</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Voxurf"><span class="nav-text">Voxurf</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -723,7 +773,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">130</span>
+          <span class="site-state-item-count">132</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -784,12 +834,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">461k</span>
+    <span title="Symbols count total">463k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">27:55</span>
+    <span title="Reading time total">28:04</span>
 </div>
 
         

@@ -27,10 +27,12 @@
 <meta property="og:site_name" content="QiYun">
 <meta property="og:description" content="Basic of Finite Element Analysis">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240708153849.png">
 <meta property="article:published_time" content="2024-05-25T14:10:37.000Z">
-<meta property="article:modified_time" content="2024-06-29T11:18:31.602Z">
+<meta property="article:modified_time" content="2024-08-22T08:54:15.422Z">
 <meta property="article:author" content="Qi Yun">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240708153849.png">
 
 <link rel="canonical" href="http://example.com/Learn/Learn-FEA/">
 
@@ -225,7 +227,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-06-29 19:18:31" itemprop="dateModified" datetime="2024-06-29T19:18:31+08:00">2024-06-29</time>
+                <time title="Modified: 2024-08-22 16:54:15" itemprop="dateModified" datetime="2024-08-22T16:54:15+08:00">2024-08-22</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -242,13 +244,13 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>947</span>
+              <span>1.1k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span>3 mins.</span>
+              <span>4 mins.</span>
             </span>
 
         </div>
@@ -262,6 +264,14 @@
       
         <p>Basic of Finite Element Analysis</p>
 <span id="more"></span>
+<h1 id="Python-FEA"><a href="#Python-FEA" class="headerlink" title="Python + FEA"></a>Python + FEA</h1><p>Ansys: </p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.reddit.com/r/ANSYS/comments/14pak2j/ansys_with_python/">Ansys与Python：r/ANSYS —- Ansys with Python : r/ANSYS</a><br><a target="_blank" rel="noopener" href="https://docs.pyansys.com/version/stable/">PyAnsys — PyAnsys</a></p>
+</blockquote>
+<p>Nastran: </p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://pynastran-git.readthedocs.io/en/1.3/index.html">Welcome to pyNastran’s documentation for v1.3! — pyNastran 1.3 1.3 documentation (pynastran-git.readthedocs.io)</a></p>
+</blockquote>
 <h1 id="Finite-Element"><a href="#Finite-Element" class="headerlink" title="Finite Element"></a>Finite Element</h1><blockquote>
 <p><a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv15083732/?spm_id_from=333.788.0.0">有限元讨论班大纲 - 哔哩哔哩</a></p>
 </blockquote>
@@ -288,16 +298,29 @@
 <p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Fx0jX_7aJHM">How To Convert Solid To Surface Body In SolidWorks - YouTube</a></p>
 </blockquote>
 <h2 id="Patran"><a href="#Patran" class="headerlink" title="Patran"></a>Patran</h2><p>Preferences —&gt; Geometry 单位制 inches/m/mm，不同的单位设置材料特性时会有差异</p>
-<p>eg(钢板): E = 210GPa，$\rho = 2700Kg/m^{3}$<br>mm制：</p>
+<p>eg(钢板): E = 210GPa，$\rho = 7860 Kg/m^{3}$<br>mm制：</p>
 <ul>
-<li>Elastic Modulus/Shear Modulus ：(210000)MPa</li>
-<li>Poisson Ratio：注意设置了E和G后，Poisson Ratio会自动计算(根据钢板算例测试出来的)</li>
-<li>Density：(2.7E-9)$Kgf \cdot s^{2} /mm^{4} = (Kg/mm^{3},1Kgf = 9.8N)$  </li>
+<li>Elastic Modulus/Shear Modulus：(210000)MPa/(83000)MPa</li>
+<li>Poisson Ratio(0.25)：注意设置了E和G后，Poisson Ratio会自动计算(根据钢板算例测试出来的)</li>
+<li>Density：(7.8599998E-09)$Kgf \cdot s^{2} /mm^{4}$ $(Kg/m^{3} =kgf \cdot s^{2}/m^{4})$ $(1Kgf = 9.8N = 9.8 Kg \cdot m/s^{2})$</li>
 </ul>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://wenku.baidu.com/view/9f2572f37c1cfad6195fa7d6.html?fr=income1-doc-search&amp;_wkts_=1714641483975&amp;wkQuery=patran%E4%B8%AD%E6%95%B0%E6%8D%AE%E7%9A%84%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E5%8D%95%E4%BD%8D">patran中数据的输入输出单位 - 百度文库</a></p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240708153849.png" alt="image.png|666"></p>
+<h3 id="Mode-Frequency-—-gt-bdf"><a href="#Mode-Frequency-—-gt-bdf" class="headerlink" title="Mode Frequency —&gt; bdf"></a>Mode Frequency —&gt; <strong>bdf</strong></h3><ol>
+<li>File —&gt; New —&gt; <code>*.db</code></li>
+<li>Menu —&gt; Preferences —&gt; Geometry —&gt; 1000.0 (Millimeters) —&gt; <strong>Apply</strong></li>
+<li>File —&gt; Import —&gt; <code>*.x_t</code> —&gt; <strong>Apply</strong> (Display —&gt; Smooth Shade)</li>
+<li>Meshing —&gt;(RHS) Mesh —&gt; Solid —&gt;(Main window) select solid —&gt; Automatic Calculation  —&gt; <strong>Apply</strong></li>
+<li>Properties —&gt; Isotropic —&gt;(RHS) <em>Material Name</em> —&gt; Input properties (Elastic Modulus: 210000, Shear Modulus: 83000, Density: 7.86E-09) —&gt; <strong>Apply</strong></li>
+<li>Properties —&gt; Solid —&gt; Propert Set Name —&gt;(RHS) Input properties —&gt; Mat Prop Name select <em>gangban(Material Name)</em> —&gt;  Select Application Region —&gt;(Main window) select solid —&gt; Add —&gt; <strong>Apply</strong></li>
+<li>Analysis —&gt; Solution Type —&gt; NORMAL MODES —&gt; Solution Type —&gt; Solution Parameters —&gt; Results Output Format(XDB or OP2) —&gt; Subcase —&gt; Subcase Parameters —&gt; Number of Desired Roots : 20 —&gt; <strong>Apply</strong> Run nastran —&gt; Get .bdf</li>
+</ol>
 <h2 id="Nastran"><a href="#Nastran" class="headerlink" title="Nastran"></a>Nastran</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/33538970">如何用matlab被nastran给整的明明白白 PART 1 KNOW YOUR ENEMY——.bdf文件 - 知乎 (zhihu.com)</a></p>
 <p>Nastran的Python库：<a target="_blank" rel="noopener" href="https://pynastran-git.readthedocs.io/en/1.3/index.html">Welcome to pyNastran’s documentation for v1.3! — pyNastran 1.3 1.3 documentation (pynastran-git.readthedocs.io)</a></p>
 <p>Debug: <a target="_blank" rel="noopener" href="https://www.scribd.com/doc/70652924/Nastran-Error-List-1">Nastran Error List 1. | PDF</a></p>
+<p><code>D:\Software\Nastran\Nastran_install\bin\nastranw.exe *.bdf</code></p>
 <h3 id="卫星算例-bdf"><a href="#卫星算例-bdf" class="headerlink" title="卫星算例.bdf"></a>卫星算例.bdf</h3><p>不同结构参数生成结构特征量FR</p>
 <figure class="highlight plaintext"><figcaption><span>file</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ Elements and Element Properties for region : Shear_Panels</span><br><span class="line">PSHELL   1       1      .003     1               1</span><br><span class="line"></span><br><span class="line">- 36  行 .003 Shear_Panels 厚度 theta5</span><br><span class="line">- 429 行 .002 Central_Cylinder 厚度 theta3</span><br><span class="line">- 666 行 .001 Adapter 厚度 theta2 本来应该是密度2.7</span><br><span class="line">- 723 行 .002 Upper_platform 厚度 theta6</span><br><span class="line">- 864 行 .001 Lower_platform 厚度 theta4</span><br><span class="line">- 1020行 7.   mat_N 弹性模量  theta1  </span><br><span class="line">- 1023行 7.   mat_CC</span><br><span class="line">- 1026行 7.   mat_L</span><br><span class="line">- 1029行 7.   mat_SP</span><br><span class="line">- 1032行 7.   mat_U</span><br><span class="line">- </span><br></pre></td></tr></table></figure>
 <ul>
@@ -308,6 +331,8 @@
 <li><strong>剪切板厚度</strong>$\theta_5$ 2mm</li>
 <li>顶板厚度 $\theta_6$ 2.5mm</li>
 </ul>
+<h1 id="FE-amp-Blender"><a href="#FE-amp-Blender" class="headerlink" title="FE &amp; Blender"></a>FE &amp; Blender</h1><p>可否指教一下blender如何渲染abaqus求解文件odb？</p>
+<p>odb写个脚本导出obj文件，然后导进blender一张张渲染就好</p>
 
     </div>
 
@@ -407,7 +432,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Finite-Element"><span class="nav-text">Finite Element</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic"><span class="nav-text">Basic</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%89%E9%99%90%E5%85%83%E5%88%86%E6%9E%90%E8%BD%AF%E4%BB%B6"><span class="nav-text">有限元分析软件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Solidworks"><span class="nav-text">Solidworks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Patran"><span class="nav-text">Patran</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nastran"><span class="nav-text">Nastran</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%AB%E6%98%9F%E7%AE%97%E4%BE%8B-bdf"><span class="nav-text">卫星算例.bdf</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Python-FEA"><span class="nav-text">Python + FEA</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Finite-Element"><span class="nav-text">Finite Element</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic"><span class="nav-text">Basic</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%89%E9%99%90%E5%85%83%E5%88%86%E6%9E%90%E8%BD%AF%E4%BB%B6"><span class="nav-text">有限元分析软件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Solidworks"><span class="nav-text">Solidworks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Patran"><span class="nav-text">Patran</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mode-Frequency-%E2%80%94-gt-bdf"><span class="nav-text">Mode Frequency —&gt; bdf</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nastran"><span class="nav-text">Nastran</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%AB%E6%98%9F%E7%AE%97%E4%BE%8B-bdf"><span class="nav-text">卫星算例.bdf</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#FE-amp-Blender"><span class="nav-text">FE &amp; Blender</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -422,7 +447,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">130</span>
+          <span class="site-state-item-count">132</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -483,12 +508,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">461k</span>
+    <span title="Symbols count total">463k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">27:55</span>
+    <span title="Reading time total">28:04</span>
 </div>
 
         
