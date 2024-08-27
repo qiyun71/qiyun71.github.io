@@ -1,11 +1,7 @@
 {
 	"id": "obsidian-latex-suite",
 	"name": "Latex Suite",
-<<<<<<< HEAD
 	"version": "1.9.4",
-=======
-	"version": "1.9.3",
->>>>>>> b8fe7456690b5448360555a5838b28c841e677e7
 	"minAppVersion": "1.0.0",
 	"description": "Make typesetting LaTeX math as fast as handwriting through snippets, text expansion, and editor enhancements",
 	"author": "artisticat",

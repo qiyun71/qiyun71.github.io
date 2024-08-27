@@ -17,3 +17,4 @@ categories: 3DReconstruction/Multi-view/Explicit Volumetric/GS-based
 
 
 将3DGS转化为2DGS
+

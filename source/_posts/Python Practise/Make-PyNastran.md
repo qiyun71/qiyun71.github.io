@@ -8,9 +8,13 @@ categories: Python Practise
  
 > [Welcome to pyNastran’s documentation for v1.3! — pyNastran 1.3 1.3 documentation (pynastran-git.readthedocs.io)](https://pynastran-git.readthedocs.io/en/1.3/index.html)
 
+使用PyNastran库对 Patran&Nastran有限元分析软件进行二次开发，可以自动对目标模型进行有限元分析
+
 <!-- more -->
 
 # BDF
+
+BDF文件是使用Patran对模型进行前处理产生的，包括划网格、定义结构参数、添加约束等操作
 
 - xref：Cross-referencing，可以很方便地追踪对象，如果xref=False，只会返回数据对象的raw data，需要分别对bdf的element和node做索引
 
@@ -57,3 +61,4 @@ print("cd.cid = %s" % eid100.nodes_ref[0].cd_ref.cid)
 |1|2|3|4|5|6|7|8|9|
 |---|---|---|---|---|---|---|---|---|
 |GRID|NID|CP|X1|X2|X3|CD|PS|SEID|
+

@@ -134,6 +134,14 @@ InstantNGP 虽然训练速度(查询网格)很快，但是渲染的时候仍然�
 
 **(减少采样点数量 per ray)**
 
+> [HashPoint](https://jiahao-ma.github.io/hashpoint/)
+
+Primary surface point sampling
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240823163840.png)
+
+
+
 ## Pixel Sampling(Efficiency of Training)
 
 **(减少MLP计算次数)**
@@ -159,8 +167,6 @@ Monte Carlo采样无法得到复杂的分布(二维分布)，加入Markov Chain�
 --> MCMC方法(与拒绝-接受采样的思路类似，其通过拒绝-接受概率拟合一个复杂分布, MCMC方法则通过拒绝-接受概率得到一个满足细致平稳条件的转移矩阵.)
 - Metropolis-Hastings Sampling：需要计算接受率, 在高维时计算量大, 并且由于接受率的原因导致算法收敛时间变长. 对于高维数据, 往往数据的条件概率分布易得, 而联合概率分布不易得.
 - Gibbs Sampling：
-
-
 
 ### [Accelerating Neural Field Training via Soft Mining](https://arxiv.org/pdf/2312.00075)
 

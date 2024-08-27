@@ -1,32 +1,4 @@
 {
-  "Appearance-light@@theme-light-style-select": "theme-light-background-adapt",
-  "Components@@tab-autohide": false,
-  "Components@@status-bar-autohide": true,
-  "Components@@Ribbon-autohide": true,
-  "Components@@nav-header-autohide": true,
-  "Components@@tab-title-bar-autohide": false,
-  "Editor@@codeblock-style-select": "codeblock-style-customize",
-  "Components@@outline-enhanced": true,
-  "Components@@scrollbar-hide": false,
-  "Components@@restored-scrollbars": false,
-  "Components@@setting-item-title-icon-remove": false,
-  "Editor@@line-hover-indicator": false,
-  "Plugin@@Surfing-bookmark-bar-hide": false,
-  "Plugin@@colorful-checkbox": false,
-  "Editor@@border-focus-mode": false,
-<<<<<<< HEAD
-  "Appearance-dark@@theme-dark-style-select": "theme-dark-background-black",
-  "Appearance-light@@accent-light": "#D3E3FD",
   "Appearance-light@@card-layout-open-light": false,
-  "minimal-style@@bold-color@@dark": "#A20000",
-  "Appearance-dark@@card-layout-open-dark": false,
-  "Blue-Topaz-Codebox-Highlight@@code-theme-selection": "code-theme-bt-default",
-  "blue-topaz-theme@@color-scheme-options": "color-scheme-options-honey-milk-topaz",
-  "blue-topaz-theme@@disable-auto-hide-header": false
-=======
-  "Appearance-dark@@theme-dark-style-select": "theme-dark-background-brighter",
-  "Appearance-light@@accent-light": "#D3E3FD",
-  "Appearance-light@@card-layout-open-light": true,
-  "minimal-style@@bold-color@@dark": "#A20000"
->>>>>>> b8fe7456690b5448360555a5838b28c841e677e7
+  "Appearance-light@@theme-light-style-select": "theme-light-background-adapt"
 }

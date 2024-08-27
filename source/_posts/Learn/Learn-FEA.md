@@ -10,18 +10,7 @@ Basic of Finite Element Analysis
 
 <!-- more -->
 
-# Python + FEA
-
-Ansys: 
-> [Ansys与Python：r/ANSYS --- Ansys with Python : r/ANSYS](https://www.reddit.com/r/ANSYS/comments/14pak2j/ansys_with_python/)
-> [PyAnsys — PyAnsys](https://docs.pyansys.com/version/stable/)
-
-Nastran: 
-> [Welcome to pyNastran’s documentation for v1.3! — pyNastran 1.3 1.3 documentation (pynastran-git.readthedocs.io)](https://pynastran-git.readthedocs.io/en/1.3/index.html)
-
-
 # Finite Element
-
 
 > [有限元讨论班大纲 - 哔哩哔哩](https://www.bilibili.com/read/cv15083732/?spm_id_from=333.788.0.0)
 
@@ -43,10 +32,11 @@ Nastran:
 - 自由度：有限元网格中的每个节点都有一定数量的自由度，*在二维应力分析中，每个节点有3个自由度——在X轴和Y轴上平移，以及绕Z轴旋转。对于热分析，每个节点都有一个自由度，即节点温度。*
 
 
-
 # 有限元分析软件
 
 ## Solidworks
+
+建立好的模型导出为`.x_t`格式
 
 将Solid 转换成Surface：
 - **Delete Face**
@@ -68,7 +58,9 @@ mm制：
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240708153849.png)
 
-### Mode Frequency --> **bdf**
+### Mode Frequency
+
+-->生成 **bdf**
 
 1. File --> New --> `*.db`
 2. Menu --> Preferences --> Geometry --> 1000.0 (Millimeters) --> **Apply**
@@ -118,7 +110,18 @@ PSHELL   1       1      .003     1               1
 - 顶板厚度 $\theta_6$ 2.5mm
 
 
-# FE & Blender
+# FEA二次开发(Python)
+
+Ansys: 
+> [Ansys与Python：r/ANSYS --- Ansys with Python : r/ANSYS](https://www.reddit.com/r/ANSYS/comments/14pak2j/ansys_with_python/)
+> [PyAnsys — PyAnsys](https://docs.pyansys.com/version/stable/)
+
+Nastran: 
+> [Welcome to pyNastran’s documentation for v1.3! — pyNastran 1.3 1.3 documentation (pynastran-git.readthedocs.io)](https://pynastran-git.readthedocs.io/en/1.3/index.html)
+
+# Other
+
+## FE & Blender
 
 可否指教一下blender如何渲染abaqus求解文件odb？
 

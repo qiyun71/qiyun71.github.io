@@ -1,8 +1,7 @@
 ---
 title: Learn-Matlab
 date: 2024-03-31 13:38:47
-tags:
-  - 
+tags: 
 categories: Learn
 ---
 
@@ -10,7 +9,7 @@ Matlab
 
 <!-- more -->
 
-# Plot
+# Plot常用属性
 
 调整整体字体：`set(gca,'FontSize',16)`
 - FontSize

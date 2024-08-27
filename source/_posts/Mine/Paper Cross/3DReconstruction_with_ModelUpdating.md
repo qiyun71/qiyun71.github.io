@@ -1,3 +1,22 @@
+---
+title: 3DReconstruction_with_ModelUpdating
+date: 2024-08-27 21:32:35
+tags:
+  - 
+categories: Mine/Paper Cross
+---
+
+| Title       | 3DReconstruction_with_ModelUpdating |
+| ----------- | ------------------- |
+| Author      |                     |
+| Conf/Jour   |                     |
+| Year        |                     |
+| Project     |                     |
+| Paper       |                     |
+
+<!-- more -->
+
+
 # Idea
 
 直接能想到的结合(难)：三维重建出点云模型，然后根据点云得到有限元模型，并对有限元模型进行修正。难点在于：

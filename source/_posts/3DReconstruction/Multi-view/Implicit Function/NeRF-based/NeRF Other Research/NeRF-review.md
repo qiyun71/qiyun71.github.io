@@ -71,10 +71,14 @@ Other paper about camera pose
 
 ## 额外监督/先验
 
-| Year |                                                                         Title&Project Page                                                                          | Brief Description | Conf/Jour |
-| ---- |:-------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:-----------------:|:---------:|
-| 2024 | [[2401.03412] N$^{3}$-Mapping: Normal Guided Neural Non-Projective Signed Distance Fields for Large-scale 3D Mapping (arxiv.org)](https://arxiv.org/abs/2401.03412) |  不同的法向监督   |           |
-| 2024 | [[2401.12751] PSDF: Prior-Driven Neural Implicit Surface Learning for Multi-view Reconstruction (arxiv.org)](https://arxiv.org/abs/2401.12751)                                                                                                                                                                    |                   |           |
+| Year |                                                                         Title&Project Page                                                                          |       Brief Description        | Conf/Jour |
+| ---- | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------: | :-------: |
+| 2024 | [[2401.03412] N$^{3}$-Mapping: Normal Guided Neural Non-Projective Signed Distance Fields for Large-scale 3D Mapping (arxiv.org)](https://arxiv.org/abs/2401.03412) |            不同的法向监督             |           |
+| 2024 |           [[2401.12751] PSDF: Prior-Driven Neural Implicit Surface Learning for Multi-view Reconstruction (arxiv.org)](https://arxiv.org/abs/2401.12751)            |                                |           |
+| 2024 |                [maturk/dn-splatter: DN-Splatter: Depth and Normal Priors for Gaussian Splatting and Meshing](https://github.com/maturk/dn-splatter)                 | 3DGS + Depth and Normal Priors |           |
+
+- Normal Map
+  - [Stable-X/StableNormal: StableNormal: Reducing Diffusion Variance for Stable and Sharp Normal](https://github.com/Stable-X/StableNormal)
 
 ## 重建精度/速度
 

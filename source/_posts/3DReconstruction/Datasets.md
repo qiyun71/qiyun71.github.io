@@ -10,6 +10,10 @@ categories: 3DReconstruction
 
 <!-- more -->
 
+# 3D 打印模型
+
+[Thingiverse - Digital Designs for Physical Objects](https://www.thingiverse.com/)
+
 # Custom Datasets
 
 COLMAP + Blender(neuralangelo)
@@ -114,6 +118,16 @@ Objaverse-XL 由来自多个来源的 3D 对象组成，包括 GitHub、Thingive
 [allenai/objaverse-xl: 🪐 Objaverse-XL is a Universe of 10M+ 3D Objects. Contains API Scripts for Downloading and Processing! (github.com)](https://github.com/allenai/objaverse-xl)
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023161713.png)
+
+# G-buffer Objaverse
+
+> [G-buffer Objaverse](https://aigc3d.github.io/gobjaverse/)
+
+ 在 Objaverse 上使用 A10 的 TIDE 渲染器渲染了大约 2000 GPU 小时，产生了 30,000,000 张反照率、RGB、深度和法线贴图的图像。我们提出了一种用于高质量和高速数据集渲染的渲染框架。
+ 
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240823202655.png)
+
+
 
 # ABC Dataset
 

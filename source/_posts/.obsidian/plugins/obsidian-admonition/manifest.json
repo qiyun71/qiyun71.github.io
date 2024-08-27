@@ -1,11 +1,7 @@
 {
     "id": "obsidian-admonition",
     "name": "Admonition",
-<<<<<<< HEAD
     "version": "10.3.2",
-=======
-    "version": "10.3.1",
->>>>>>> b8fe7456690b5448360555a5838b28c841e677e7
     "minAppVersion": "1.1.0",
     "description": "Enhanced callouts for Obsidian.md",
     "author": "Jeremy Valentine",

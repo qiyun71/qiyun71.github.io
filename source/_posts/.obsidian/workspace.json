@@ -51,48 +51,9 @@
               },
               "pinned": true
             }
-          },
-          {
-            "id": "7cb11439bdd316df",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "3DReconstruction/Anime 3D Reconstruction.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "c24d5c81f3f2e202",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Mine/Write/3D Reconstruction/NeuS-based 3D Reconstruction.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "31df83a580b4d6c3",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "ModelUpdating/Paper about ModelUpdating.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              }
-            }
           }
         ],
-        "currentTab": 5
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -104,6 +65,7 @@
       {
         "id": "6711a83b129914d6",
         "type": "tabs",
+        "dimension": 53.551912568306015,
         "children": [
           {
             "id": "56b71c2811fd7340",
@@ -111,7 +73,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "ModelUpdating/Paper about ModelUpdating.md"
+                "file": "Mine/Configuration of computer/OS/Linux.md"
               }
             }
           },
@@ -137,7 +99,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "Diffusion",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -151,6 +113,7 @@
       {
         "id": "e23e39140febf341",
         "type": "tabs",
+        "dimension": 46.44808743169399,
         "children": [
           {
             "id": "0d68bfa346c465d5",
@@ -221,7 +184,7 @@
             "state": {
               "type": "file-properties",
               "state": {
-                "file": "ModelUpdating/Paper about ModelUpdating.md"
+                "file": "Mine/Configuration of computer/OS/Linux.md"
               }
             }
           }
@@ -245,39 +208,41 @@
       "audio-recorder:开始/结束录音": false,
       "workspaces:管理工作区布局": false,
       "table-editor-obsidian:Advanced Tables Toolbar": false,
-      "templater-obsidian:Templater": false,
-      "media-extended:Open media": false
+      "media-extended:Open media": false,
+      "templater-obsidian:Templater": false
     }
   },
-  "active": "31df83a580b4d6c3",
+  "active": "e89b56be3e26933a",
   "lastOpenFiles": [
-    "Mine/Write/3D Reconstruction/NeuS-based 3D Reconstruction.md",
-    "Mine/Write/Model Updating/A fast interval model updating method based on MLP neural network.md",
-    "ModelUpdating/Paper about ModelUpdating.md",
-    "3DReconstruction/Anime 3D Reconstruction.md",
-    "Mine/Note/IPV6.md",
-    "3DReconstruction/Single-view/Review.md",
-    "Mine/Configuration of computer/Software/Git.md",
-    "Reports/先进检测与智能制造梯队队徽队旗设计理念错别字修改.md",
-    "Mine/Note/Linux.md",
-    "Mine/Configuration of computer/sources.md",
-    "3DReconstruction/Basics about 3D Reconstruction.md",
-    "3DReconstruction/Paper About 3D Reconstruction.md",
-    "3DReconstruction/Multi-view/Implicit Function/NeRF-based/NeRF Other Research/Interesting/PAniC-3D.md",
-    "3DReconstruction/Multi-view/Implicit Function/NeRF-based/NeRF Other Research/NeRF-review.md",
-    "3DReconstruction/Multi-view/Multi-view Human Body Reconstruction.md",
-    "3DReconstruction/Multi-view/Implicit Function/SDFStudio.md",
-    "Blog&Books/Read/蛊真人.md",
-    "Mine/Project/Audio Visualization.md",
+    "Python Practise/Make-PyNastran.md",
+    "Learn/Learn-Matlab.md",
     "Learn/Learn-FEA.md",
-    "Blog&Books/Read/file/《蛊真人》精校版.txt",
-    "3DReconstruction/Datasets.md",
+    "Mine/Configuration of computer/OS/Linux.md",
+    "Mine/Paper Cross/3DReconstruction_with_ModelUpdating.md",
+    "Mine/Note/Linux.md",
     "Mine/Note/MyGo.md",
-    "Blog&Books/Read/How to Read a Paper.md",
-    "Blog&Books/Read/Everyone-can-use-English.md",
-    "Blog&Books/Read/Writing Science.md",
-    "Blog&Books/Read/人生七年.md",
+    "Mine/Note/Tools.md",
+    "Mine/Note/World.md",
     "Mine/Note/Write tips.md",
+    "Mine/Write/Model Updating/A fast interval model updating method based on MLP neural network.md",
+    "Mine/Write/Model Updating/A fast stochastic model updating technique based on an inverse FE surrogate model.md",
+    "Mine/Write/Model Updating/Stoachastic Model Updating with the Ellipse Similarity Metric.md",
+    "Learn/Learn-Arduino.md",
+    "Learn/Learn-Algo.md",
+    "Learn/Learn-Colmap.md",
+    "Learn/Learn-cs148.md",
+    "Learn/Learn-Csharp.md",
+    "Learn/Learn-DeepLearning.md",
+    "Learn/Learn-Git.md",
+    "Learn/Learn-HCJ前端.md",
+    "Learn/Learn-Hexo.md",
+    "Learn/Learn-Hexo2.md",
+    "Learn/Learn-Markdown.md",
+    "Learn/Learn-Python.md",
+    "Learn/Learn-Python_Matplotlib.md",
+    "Game",
+    "3DReconstruction/未命名",
+    "Blog&Books/Read/file/《蛊真人》精校版.txt",
     "Blog&Books/Read/file/Writing science.pdf",
     "Mine/Configuration of computer/OS",
     "Mine/Configuration of computer/OS/windows",
@@ -285,8 +250,6 @@
     "Mine/Configuration of computer/Software/VPN",
     "Mine/Configuration of computer/python",
     "Mine/Configuration of computer/gpt",
-    "Mine/Configuration of computer/game",
-    "Mine/Configuration of computer/Software/conda",
     "3DReconstruction/Basic Knowledge/NeRF/NeRF.canvas",
     "未命名.canvas"
   ]

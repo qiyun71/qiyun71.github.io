@@ -94,6 +94,9 @@ Paper2gui，一款 windows 应用，包含很多 AI 工具（with GUI）
 
 # 软件
 
+下载视频和音频
+[cobalt](https://cobalt.tools/)
+
 卸载 Windows 默认的应用程序
 [PyDebloatX](https://pydebloatx.com/)
 
@@ -122,7 +125,6 @@ Scrcpy 连接安卓和电脑
 
 手机应用去广告
 [gkd-kit/gkd: 基于 无障碍 + 高级选择器 + 订阅规则 的自定义屏幕点击 Android APP (github.com)](https://github.com/gkd-kit/gkd)
-
 一款开源的跨平台文件传送软件，不需要互联网连接，依靠共享 Wifi 分享文件
 [LocalSend](https://localsend.org/#/)
 

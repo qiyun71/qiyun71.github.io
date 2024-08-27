@@ -16,3 +16,7 @@ categories: 3DReconstruction/Multi-view/Explicit Volumetric/GS-based
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240330205610.png)
 
 <!-- more -->
+
+通过对多个3DGS的项目进行了综合，主要学习[hugoycj (YeChongjie)](https://github.com/hugoycj)大佬的代码
+
+# 
