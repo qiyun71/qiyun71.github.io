@@ -29,7 +29,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240708153849.png">
 <meta property="article:published_time" content="2024-05-25T14:10:37.000Z">
-<meta property="article:modified_time" content="2024-08-22T14:03:44.949Z">
+<meta property="article:modified_time" content="2024-08-27T13:34:37.622Z">
 <meta property="article:author" content="Qi Yun">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240708153849.png">
@@ -227,7 +227,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-08-22 22:03:44" itemprop="dateModified" datetime="2024-08-22T22:03:44+08:00">2024-08-22</time>
+                <time title="Modified: 2024-08-27 21:34:37" itemprop="dateModified" datetime="2024-08-27T21:34:37+08:00">2024-08-27</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -244,7 +244,7 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>1.1k</span>
+              <span>1.2k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -264,14 +264,6 @@
       
         <p>Basic of Finite Element Analysis</p>
 <span id="more"></span>
-<h1 id="Python-FEA"><a href="#Python-FEA" class="headerlink" title="Python + FEA"></a>Python + FEA</h1><p>Ansys: </p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.reddit.com/r/ANSYS/comments/14pak2j/ansys_with_python/">Ansys与Python：r/ANSYS —- Ansys with Python : r/ANSYS</a><br><a target="_blank" rel="noopener" href="https://docs.pyansys.com/version/stable/">PyAnsys — PyAnsys</a></p>
-</blockquote>
-<p>Nastran: </p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://pynastran-git.readthedocs.io/en/1.3/index.html">Welcome to pyNastran’s documentation for v1.3! — pyNastran 1.3 1.3 documentation (pynastran-git.readthedocs.io)</a></p>
-</blockquote>
 <h1 id="Finite-Element"><a href="#Finite-Element" class="headerlink" title="Finite Element"></a>Finite Element</h1><blockquote>
 <p><a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv15083732/?spm_id_from=333.788.0.0">有限元讨论班大纲 - 哔哩哔哩</a></p>
 </blockquote>
@@ -289,7 +281,8 @@
 </li>
 <li>自由度：有限元网格中的每个节点都有一定数量的自由度，<em>在二维应力分析中，每个节点有3个自由度——在X轴和Y轴上平移，以及绕Z轴旋转。对于热分析，每个节点都有一个自由度，即节点温度。</em></li>
 </ul>
-<h1 id="有限元分析软件"><a href="#有限元分析软件" class="headerlink" title="有限元分析软件"></a>有限元分析软件</h1><h2 id="Solidworks"><a href="#Solidworks" class="headerlink" title="Solidworks"></a>Solidworks</h2><p>将Solid 转换成Surface：</p>
+<h1 id="有限元分析软件"><a href="#有限元分析软件" class="headerlink" title="有限元分析软件"></a>有限元分析软件</h1><h2 id="Solidworks"><a href="#Solidworks" class="headerlink" title="Solidworks"></a>Solidworks</h2><p>建立好的模型导出为<code>.x_t</code>格式</p>
+<p>将Solid 转换成Surface：</p>
 <ul>
 <li><strong>Delete Face</strong></li>
 <li>Offset</li>
@@ -308,7 +301,8 @@
 <p><a target="_blank" rel="noopener" href="https://wenku.baidu.com/view/9f2572f37c1cfad6195fa7d6.html?fr=income1-doc-search&amp;_wkts_=1714641483975&amp;wkQuery=patran%E4%B8%AD%E6%95%B0%E6%8D%AE%E7%9A%84%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E5%8D%95%E4%BD%8D">patran中数据的输入输出单位 - 百度文库</a></p>
 </blockquote>
 <p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240708153849.png" alt="image.png|666"></p>
-<h3 id="Mode-Frequency-—-gt-bdf"><a href="#Mode-Frequency-—-gt-bdf" class="headerlink" title="Mode Frequency —&gt; bdf"></a>Mode Frequency —&gt; <strong>bdf</strong></h3><ol>
+<h3 id="Mode-Frequency"><a href="#Mode-Frequency" class="headerlink" title="Mode Frequency"></a>Mode Frequency</h3><p>—&gt;生成 <strong>bdf</strong></p>
+<ol>
 <li>File —&gt; New —&gt; <code>*.db</code></li>
 <li>Menu —&gt; Preferences —&gt; Geometry —&gt; 1000.0 (Millimeters) —&gt; <strong>Apply</strong></li>
 <li>File —&gt; Import —&gt; <code>*.x_t</code> —&gt; <strong>Apply</strong> (Display —&gt; Smooth Shade)</li>
@@ -331,7 +325,15 @@
 <li><strong>剪切板厚度</strong>$\theta_5$ 2mm</li>
 <li>顶板厚度 $\theta_6$ 2.5mm</li>
 </ul>
-<h1 id="FE-amp-Blender"><a href="#FE-amp-Blender" class="headerlink" title="FE &amp; Blender"></a>FE &amp; Blender</h1><p>可否指教一下blender如何渲染abaqus求解文件odb？</p>
+<h1 id="FEA二次开发-Python"><a href="#FEA二次开发-Python" class="headerlink" title="FEA二次开发(Python)"></a>FEA二次开发(Python)</h1><p>Ansys: </p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.reddit.com/r/ANSYS/comments/14pak2j/ansys_with_python/">Ansys与Python：r/ANSYS —- Ansys with Python : r/ANSYS</a><br><a target="_blank" rel="noopener" href="https://docs.pyansys.com/version/stable/">PyAnsys — PyAnsys</a></p>
+</blockquote>
+<p>Nastran: </p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://pynastran-git.readthedocs.io/en/1.3/index.html">Welcome to pyNastran’s documentation for v1.3! — pyNastran 1.3 1.3 documentation (pynastran-git.readthedocs.io)</a></p>
+</blockquote>
+<h1 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h1><h2 id="FE-amp-Blender"><a href="#FE-amp-Blender" class="headerlink" title="FE &amp; Blender"></a>FE &amp; Blender</h2><p>可否指教一下blender如何渲染abaqus求解文件odb？</p>
 <p>odb写个脚本导出obj文件，然后导进blender一张张渲染就好</p>
 
     </div>
@@ -432,7 +434,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Python-FEA"><span class="nav-text">Python + FEA</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Finite-Element"><span class="nav-text">Finite Element</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic"><span class="nav-text">Basic</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%89%E9%99%90%E5%85%83%E5%88%86%E6%9E%90%E8%BD%AF%E4%BB%B6"><span class="nav-text">有限元分析软件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Solidworks"><span class="nav-text">Solidworks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Patran"><span class="nav-text">Patran</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mode-Frequency-%E2%80%94-gt-bdf"><span class="nav-text">Mode Frequency —&gt; bdf</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nastran"><span class="nav-text">Nastran</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%AB%E6%98%9F%E7%AE%97%E4%BE%8B-bdf"><span class="nav-text">卫星算例.bdf</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#FE-amp-Blender"><span class="nav-text">FE &amp; Blender</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Finite-Element"><span class="nav-text">Finite Element</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic"><span class="nav-text">Basic</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%89%E9%99%90%E5%85%83%E5%88%86%E6%9E%90%E8%BD%AF%E4%BB%B6"><span class="nav-text">有限元分析软件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Solidworks"><span class="nav-text">Solidworks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Patran"><span class="nav-text">Patran</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mode-Frequency"><span class="nav-text">Mode Frequency</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nastran"><span class="nav-text">Nastran</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%AB%E6%98%9F%E7%AE%97%E4%BE%8B-bdf"><span class="nav-text">卫星算例.bdf</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#FEA%E4%BA%8C%E6%AC%A1%E5%BC%80%E5%8F%91-Python"><span class="nav-text">FEA二次开发(Python)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other"><span class="nav-text">Other</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#FE-amp-Blender"><span class="nav-text">FE &amp; Blender</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -447,14 +449,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">132</span>
+          <span class="site-state-item-count">133</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -508,12 +510,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">463k</span>
+    <span title="Symbols count total">466k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">28:04</span>
+    <span title="Reading time total">28:15</span>
 </div>
 
         

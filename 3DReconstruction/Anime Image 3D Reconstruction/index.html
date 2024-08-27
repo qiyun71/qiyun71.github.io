@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/yqq/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="重建动漫角色模型  CharacterGen: Efficient 3D Character Generation from Single Images">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Anime Image 3D Reconstruction">
+<meta property="og:url" content="http://example.com/3DReconstruction/Anime%20Image%203D%20Reconstruction/index.html">
+<meta property="og:site_name" content="QiYun">
+<meta property="og:description" content="重建动漫角色模型  CharacterGen: Efficient 3D Character Generation from Single Images">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240825220242.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240824144446.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240824201522.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240823152932.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240824160034.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240823202814.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230806132746.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240822174904.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240822202233.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240822202244.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240822195911.png">
+<meta property="article:published_time" content="2024-08-22T13:06:26.000Z">
+<meta property="article:modified_time" content="2024-08-25T14:03:20.678Z">
+<meta property="article:author" content="Qi Yun">
+<meta property="article:tag" content="3DReconstruction">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240825220242.png">
+
+<link rel="canonical" href="http://example.com/3DReconstruction/Anime%20Image%203D%20Reconstruction/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Anime Image 3D Reconstruction | QiYun</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">QiYun</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Note</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/3DReconstruction/Anime%20Image%203D%20Reconstruction/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiYun">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Anime Image 3D Reconstruction
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2024-08-22 21:06:26" itemprop="dateCreated datePublished" datetime="2024-08-22T21:06:26+08:00">2024-08-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-08-25 22:03:20" itemprop="dateModified" datetime="2024-08-25T22:03:20+08:00">2024-08-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/3DReconstruction/" itemprop="url" rel="index"><span itemprop="name">3DReconstruction</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>1.9k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>7 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>重建动漫角色模型</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://charactergen.github.io/">CharacterGen: Efficient 3D Character Generation from Single Images</a></p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240825220242.png" alt="image.png|666"></p>
+<span id="more"></span>
+<h1 id="目前的生产方式-手办-模型"><a href="#目前的生产方式-手办-模型" class="headerlink" title="目前的生产方式(手办/模型)"></a>目前的生产方式(手办/模型)</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1SJ411t7TK/?spm_id_from=333.999.0.0&amp;vd_source=1dba7493016a36a32b27a14ed2891088">女武神脉冲 葵来栖 建模过程</a></p>
+</blockquote>
+<p>建立数字化3D模型(mesh)—&gt;<strong>模型拆件</strong></p>
+<ul>
+<li>软件：Blender, ZBrush</li>
+</ul>
+<h2 id="3D打印-小批量，未来趋势"><a href="#3D打印-小批量，未来趋势" class="headerlink" title="3D打印(小批量，未来趋势)"></a>3D打印(小批量，未来趋势)</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1AJ411a7q4/?spm_id_from=333.788.recommend_more_video.4&amp;vd_source=1dba7493016a36a32b27a14ed2891088">如何把3d模型变成实物 葵来栖手办打磨篇_哔哩哔哩_bilibili</a></p>
+</blockquote>
+<p>使用3D打印工艺，进行模型拆件要除了便于组装外，还要有一定厚度(3D打印的模型必须要有足够的厚度)，可以融合使用一些其他的组装件如铜柱等，拆件完后，在3D打印机软件中做支撑，然后进行打印(光固化树脂)</p>
+<p><strong>整体流程</strong>：<br>建模—&gt;拆件—&gt;(做支撑)—&gt;3D打印—&gt;打磨—&gt;组装—&gt;上色(涂装)</p>
+<ol>
+<li>建模师根据2D图像进行建模(需要大量经验) ==&gt; 多视图三维重建，且根据2D虚拟图像进行重建才有意义，如stable diffusion等文生图AI生成出来的图像(可以做到多视图)，或者画师手工绘制的图像(单视图较为方便)。<em>需要保证做出来的模型具有一定的稳定性，不能一碰就倒，要找好重心</em></li>
+<li>拆件也需要一定的经验，哪里做凹陷，哪里连接用铜柱等等问题需要考虑</li>
+<li>做支撑可以防止零件被悬空打印</li>
+<li>3D打印有很多种方式<strong>FDM常见成本低</strong>、<strong>SLA成本高但精度高</strong>、SLS、SLM。未来趋势全彩3D打印机：<a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv25588645/">2023年5款最佳全彩3D打印机</a></li>
+</ol>
+<p>展望：</p>
+<ul>
+<li><strong>使用全彩3D打印机一体化地打印模型，省去了拆件、组装、上色等步骤</strong>，通过改进还可以省去做支撑(或者自动做支撑)</li>
+<li>使用<strong>三维重建</strong>算法可以更高效地获取三维模型，三维重建算法的最高形态是可以根据物体几张图片甚至一张图片，重建出高质量的模型。图片来源可以是画师手绘的一张图、随便拍的真实物体照片、网站上的各种物体图片等等</li>
+</ul>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.sailner.com/web/product/41/detail">赛纳三维 J402PLUS</a> SLA 立体光固化打印机<br><a target="_blank" rel="noopener" href="https://www.chitubox.com/zh-Hans/academy/advanced/a-complete-guide-about-adding-supports-in-sladlplcd-3d-printing">SLA/DLP/LCD 3D 打印支撑添加全解</a></p>
+</blockquote>
+<h2 id="钢模-注塑-大批量"><a href="#钢模-注塑-大批量" class="headerlink" title="钢模+注塑(大批量)"></a>钢模+注塑(大批量)</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1eJ411E7Et/?spm_id_from=333.337.search-card.all.click&amp;vd_source=1dba7493016a36a32b27a14ed2891088">手办制作工厂大揭秘!~来看自己的老婆是如何诞生的!!!</a></p>
+</blockquote>
+<p>使用钢模+注塑的话，拆件</p>
+<p><strong>整体流程</strong>：<br>建模—&gt;拆件—&gt;开模(做钢模)—&gt;批量注塑—&gt;筛选—&gt;打磨—&gt;上色(手工+喷涂)—&gt;分件分类+组装—&gt;除尘+打包</p>
+<h1 id="Theory"><a href="#Theory" class="headerlink" title="Theory"></a>Theory</h1><h2 id="手办图像生成"><a href="#手办图像生成" class="headerlink" title="手办图像生成"></a>手办图像生成</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://civitai.com/models/400329?modelVersionId=675843">[PVC Style Model]Movable figure model Pony - Pony1.60 | Stable Diffusion Checkpoint | Civitai</a> Stable Diffusion PVC model</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240824144446.png" alt="image.png|222"> </p>
+<p>选择PVC，外挂VAE选择None</p>
+<ul>
+<li>Prompt: <ul>
+<li>(score_9, score_8_up, score_7_up), source anime, figure</li>
+<li>surreal,amazing quality,masterpiece,best quality,awesome,inspiring,cinematic composition,soft shadows,Film grain,shallow depth of field,highly detailed,high budget,cinemascope,epic,color graded cinematic,atmospheric lighting,natural,figure,natural lighting,exqusite visual effect,delicate details</li>
+</ul>
+</li>
+<li>Negative: <ul>
+<li>engrish text, low quality, worst quality, score_4,score_3,score_2,score_1,ugly,bad feet, bad hands</li>
+<li>lowres,(bad),text,error,fewer,extra,missing,worst quality,jpeg artifacts,low quality,watermark,unfinished,displeasing,oldest,early,chromatic aberration,artistic error,username,english text,scan,[abstract],</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">1.更倾向于PVC的起始标签（Starting tags that lean more towards PVC）：</span><br><span class="line">figure,natural lighting,exqusite visual effect,delicate details,fully body</span><br><span class="line"></span><br><span class="line">Negative prompt: </span><br><span class="line">NSFW, cleavage, breasts, bad image, worst dquality</span><br><span class="line"></span><br><span class="line">2.更倾向于2.5d的标签（Tags that lean more towards 2.5d）：</span><br><span class="line"></span><br><span class="line">surreal,amazing quality,masterpiece,best quality,awesome,inspiring,cinematic composition,soft shadows,Film grain,shallow depth of field,highly detailed,high budget,cinemascope,epic,color graded cinematic,atmospheric lighting,natural,figure,natural lighting,exqusite visual effect,delicate details</span><br><span class="line"></span><br><span class="line">Negative prompt：</span><br><span class="line">lowres,(bad),text,error,fewer,extra,missing,worst quality,jpeg artifacts,low quality,watermark,unfinished,displeasing,oldest,early,chromatic aberration,artistic error,username,english text,scan,[abstract],</span><br><span class="line"></span><br><span class="line">Suggest drawing parameters</span><br><span class="line">sampler:</span><br><span class="line"></span><br><span class="line">Euler a: 30 steps</span><br><span class="line"></span><br><span class="line">hires.fix: 4x-ultrasharp ,</span><br><span class="line"></span><br><span class="line">High score iteration steps 10</span><br><span class="line"></span><br><span class="line">Redraw amplitude 0.3</span><br><span class="line"></span><br><span class="line">cfg scale: 7.0  </span><br><span class="line"></span><br><span class="line">Resolution of portrait characters： 768x1280 ，1024x1024</span><br><span class="line"></span><br><span class="line">clip skip: 2</span><br><span class="line"></span><br><span class="line">Local map generation can be enabled：ADetailer</span><br></pre></td></tr></table></figure>
+<p>ControlNet: </p>
+<ul>
+<li>Unit0 Canny， Pixel Perfect，Allow Preview，Canny，预处理器选canny，My prompt is more important</li>
+<li>Unit1 tilecolorfix， Pixel Perfect，Allow Preview，tilecolorfix，预处理器选tilecolorfix，My prompt is more important</li>
+</ul>
+<p>难点：</p>
+<ul>
+<li>现有的图生图模型无法根据手绘图片合理的(保留原始风格)生成手办(PVC)风格图片</li>
+<li>必须要有针对Full Body的强控制 </li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240824201522.png" alt="image.png|444"></p>
+<h2 id="背景移除"><a href="#背景移除" class="headerlink" title="背景移除"></a>背景移除</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2401.03407">Bilateral Reference for High-Resolution Dichotomous Image Segmentation | PDF</a></p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240823152932.png" alt="image.png|666"></p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/facebookresearch/segment-anything?tab=readme-ov-file">(SAM) facebookresearch/segment-anything: The repository provides code for running inference with the SegmentAnything Model</a><br><a target="_blank" rel="noopener" href="https://github.com/facebookresearch/segment-anything-2?tab=readme-ov-file">(SAM 2) facebookresearch/segment-anything-2: The repository provides code for running inference with the Meta Segment Anything Model 2</a></p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240824160034.png" alt="image.png|666"></p>
+<h2 id="额外先验估计"><a href="#额外先验估计" class="headerlink" title="额外先验估计"></a>额外先验估计</h2><h3 id="Normal-Image"><a href="#Normal-Image" class="headerlink" title="Normal Image"></a>Normal Image</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/Stable-X/StableNormal">Stable-X/StableNormal: StableNormal: Reducing Diffusion Variance for Stable and Sharp Normal</a></p>
+</blockquote>
+<h3 id="Depth-Image"><a href="#Depth-Image" class="headerlink" title="Depth Image"></a>Depth Image</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://light.princeton.edu/publication/soap/">Shakes on a Plane: Unsupervised Depth Estimation from Unstabilized Photography – Princeton Computing Imaging Lab</a> 手持微抖的图像序列</p>
+</blockquote>
+<h2 id="一致性多视图生成"><a href="#一致性多视图生成" class="headerlink" title="一致性多视图生成"></a>一致性多视图生成</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://aigc3d.github.io/VideoMV/">VideoMV</a></p>
+</blockquote>
+<p>与训练的视频生成模型+位姿(微调)生成多视图图像</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240823202814.png" alt="image.png|666"></p>
+<h2 id="多视图三维重建"><a href="#多视图三维重建" class="headerlink" title="多视图三维重建"></a>多视图三维重建</h2><p>NeRF-based 的 NeuS 系列<br>3DGS-based 的 显示高斯体优化</p>
+<h1 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h1><h2 id="PAniC-3D"><a href="#PAniC-3D" class="headerlink" title="PAniC-3D"></a>PAniC-3D</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/shuhongchen/panic3d-anime-reconstruction">ShuhongChen/panic3d-anime-reconstruction: CVPR 2023: PAniC-3D Stylized Single-view 3D Reconstruction from Portraits of Anime Characters</a></p>
+</blockquote>
+<p>用去除线条后的2D image进行建模，得到3D radiance field</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230806132746.png" alt="image.png"></p>
+<h2 id="NOVA-3D"><a href="#NOVA-3D" class="headerlink" title="NOVA-3D"></a>NOVA-3D</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://wanghongsheng01.github.io/NOVA-3D/">NOVA-3D: Non-overlapped Views for 3D Anime Character Reconstruction</a></p>
+</blockquote>
+<p>GAN网络，从Non-overlapped Views(Sparse-view)中重建模型</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240822174904.png" alt="image.png|666"></p>
+<h2 id="CharacterGen"><a href="#CharacterGen" class="headerlink" title="CharacterGen"></a>CharacterGen</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://charactergen.github.io/">CharacterGen: Efficient 3D Character Generation from Single Images</a></p>
+</blockquote>
+<ul>
+<li>多视图图像生成，由于特殊姿势的一致性多视图很难，本文提出了将输入的图像转换到canonical space中</li>
+<li>三维重建：基于NeRF和Transformer参考了<a target="_blank" rel="noopener" href="https://yiconghong.me/LRM/">LRM: Large Reconstruction Model for Single Image to 3D</a><ul>
+<li>在Objaverse dataset上pre-train，然后再本文数据集Anime3D上Fine-tune，为了引入更多的人体先验</li>
+<li>为了得到跟好的模型，使用 Triplane <strong>SDF</strong> 替换密度场</li>
+</ul>
+</li>
+<li>网络提取和UV map获取，参考了<a target="_blank" rel="noopener" href="https://research.nvidia.com/labs/toronto-ai/DMTet/">Deep Marching Tetrahedra: a Hybrid Representation for High-Resolution 3D Shape Synthesis</a>，但是DMTet的UV展开过程中会损失外观信息。此外，UV的分辨率比直接渲染的分辨率大，多个texels可能投影到相同的像素上，为了解决这一问题，本文将四个视图投影到UV map上(<em>通过depth test消除occluded texels</em>没理解)<ul>
+<li>单纯的叠加还不行(会导致角色身体轮廓出现噪声texels)，本文使用相机方向向量与normal texture map作内积，内积大于-0.2的texels抛弃掉</li>
+<li>对于overlapping的texels，选择back投影后RGB最接近coarse texture的值</li>
+<li>最后使用Poisson Blending将projected texels与原始texels混合，以减少seams</li>
+</ul>
+</li>
+<li>使用了<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2011.03277">Modular Primitives for High-Performance Differentiable Rendering | PDF</a> NvDiffRast渲染器进行高效光栅化</li>
+</ul>
+<p>texels(纹理元素，纹素)</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240822202233.png" alt="image.png|666"><br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240822202244.png" alt="image.png|666"></p>
+<h2 id="CoNR"><a href="#CoNR" class="headerlink" title="CoNR"></a>CoNR</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/565391665">CoNR：二次元视频生成AI背后的故事 - 知乎</a> <strong>不算Reconstruction，因为最终目标不是模型，而是用模型得到的新视图图像</strong><br><a target="_blank" rel="noopener" href="https://transpchan.github.io/live3d/">Collaborative Neural Rendering using Anime Character Sheets (CoNR)</a></p>
+</blockquote>
+<ul>
+<li>网络1是UDP Detector，相当于给一张手绘图，可以粗略估计3D模型 (UDP检测器后接泊松表面重建算法，可以得到一个粗略灰模)。<ul>
+<li>这样静态的“单张”3D灰模可以变成一个运动的“序列”。(比如，可以通过现有的自动化绑定技术（RigNet或基于模板的方法）或者其他网上的半自动绑定工具（比如Adobe Mixamo）得到一个可操作的模型，然后通过现有的基于物理的仿真技术或基于视觉的动作捕捉（如OpenPose，Posenet等）来套用各种真人视频中动作等等。)</li>
+</ul>
+</li>
+<li>网络2是CoNR，相当于从手绘人设图和3D模型上进行“转描”</li>
+</ul>
+<p>特色是可以处理张数较少的手绘的二次元人物（不像3D扫描、Nerf那样需要转台和上百个视角的图像），并且输出的结果是人物在A-Pose下的灰模</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240822195911.png" alt="image.png|666"></p>
+<h2 id="Toon3D"><a href="#Toon3D" class="headerlink" title="Toon3D"></a>Toon3D</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://toon3d.studio/">Toon3D</a></p>
+</blockquote>
+<p>动漫中的环境场景，动漫中的手绘图像没有3D一致性，本文致力解决这一问题</p>
+<p>数据集生成</p>
+<ul>
+<li>Marigold 进行深度估计</li>
+<li>SAM 进行mask获取</li>
+<li>自制的Toon3D Labeler进行</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+1ZnNxFWnEbk5YzRl">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/3DReconstruction/" rel="tag"><i class="fa fa-tag"></i> 3DReconstruction</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/3DReconstruction/Loss%20Functions/" rel="prev" title="Loss Functions">
+      <i class="fa fa-chevron-left"></i> Loss Functions
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/Game/%E5%B0%98%E7%99%BD%E7%A6%81%E5%8C%BA%E8%A7%A3%E5%8C%85/" rel="next" title="尘白禁区解包(PC)">
+      尘白禁区解包(PC) <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%AE%E5%89%8D%E7%9A%84%E7%94%9F%E4%BA%A7%E6%96%B9%E5%BC%8F-%E6%89%8B%E5%8A%9E-%E6%A8%A1%E5%9E%8B"><span class="nav-text">目前的生产方式(手办&#x2F;模型)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3D%E6%89%93%E5%8D%B0-%E5%B0%8F%E6%89%B9%E9%87%8F%EF%BC%8C%E6%9C%AA%E6%9D%A5%E8%B6%8B%E5%8A%BF"><span class="nav-text">3D打印(小批量，未来趋势)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%92%A2%E6%A8%A1-%E6%B3%A8%E5%A1%91-%E5%A4%A7%E6%89%B9%E9%87%8F"><span class="nav-text">钢模+注塑(大批量)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Theory"><span class="nav-text">Theory</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%8B%E5%8A%9E%E5%9B%BE%E5%83%8F%E7%94%9F%E6%88%90"><span class="nav-text">手办图像生成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%83%8C%E6%99%AF%E7%A7%BB%E9%99%A4"><span class="nav-text">背景移除</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%9D%E5%A4%96%E5%85%88%E9%AA%8C%E4%BC%B0%E8%AE%A1"><span class="nav-text">额外先验估计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Normal-Image"><span class="nav-text">Normal Image</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Depth-Image"><span class="nav-text">Depth Image</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E8%87%B4%E6%80%A7%E5%A4%9A%E8%A7%86%E5%9B%BE%E7%94%9F%E6%88%90"><span class="nav-text">一致性多视图生成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E8%A7%86%E5%9B%BE%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA"><span class="nav-text">多视图三维重建</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Related-Work"><span class="nav-text">Related Work</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#PAniC-3D"><span class="nav-text">PAniC-3D</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NOVA-3D"><span class="nav-text">NOVA-3D</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CharacterGen"><span class="nav-text">CharacterGen</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CoNR"><span class="nav-text">CoNR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Toon3D"><span class="nav-text">Toon3D</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qi Yun"
+      src="/images/avatar.jpeg">
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">133</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/qiyun71" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;qiyun71" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/29010355" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;29010355" rel="noopener" target="_blank"><i class="fa fa-star fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qi Yun</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">466k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">28:15</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/yqq/anime.min.js"></script>
+  <script src="/yqq/velocity/velocity.min.js"></script>
+  <script src="/yqq/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
