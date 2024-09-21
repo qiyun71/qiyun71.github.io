@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/yqq/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="基于Pytorch学习DL时，学习到的一些技巧&#x2F;code">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PyTorch学习笔记">
+<meta property="og:url" content="http://example.com/Learn/Neural%20Network/PyTorch/index.html">
+<meta property="og:site_name" content="QiYun">
+<meta property="og:description" content="基于Pytorch学习DL时，学习到的一些技巧&#x2F;code">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230702204507.png">
+<meta property="article:published_time" content="2023-06-21T04:26:14.000Z">
+<meta property="article:modified_time" content="2024-09-20T13:58:21.607Z">
+<meta property="article:author" content="Qi Yun">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Pytorch">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230702204507.png">
+
+<link rel="canonical" href="http://example.com/Learn/Neural%20Network/PyTorch/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>PyTorch学习笔记 | QiYun</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">QiYun</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Note</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/Learn/Neural%20Network/PyTorch/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiYun">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          PyTorch学习笔记
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-06-21 12:26:14" itemprop="dateCreated datePublished" datetime="2023-06-21T12:26:14+08:00">2023-06-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-09-20 21:58:21" itemprop="dateModified" datetime="2024-09-20T21:58:21+08:00">2024-09-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Learn/" itemprop="url" rel="index"><span itemprop="name">Learn</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>984</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>4 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>基于Pytorch学习DL时，学习到的一些技巧/code</p>
+<span id="more"></span>
+<h1 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h1><h2 id="Loss-NAN"><a href="#Loss-NAN" class="headerlink" title="Loss (NAN)"></a>Loss (NAN)</h2><p>损失函数在训练过程中，突然变得很大或者nan<br>添加 torch.cuda.amp.GradScaler() 解决 loss为nan或inf的问题</p>
+<h1 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h1><h2 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://dashen.wang/1283.html">关于国内conda安装cuda11.6+pytorch的那些事。 – 王大神 (dashen.wang)</a></p>
+</blockquote>
+<p>使用miniconda创建虚拟环境</p>
+<ul>
+<li>conda create -n mine python=3.8</li>
+<li>conda activate mine</li>
+</ul>
+<p>安装cuda</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">换源：</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/menpo/</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/bioconda/</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/msys2/</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge</span><br><span class="line">conda config --set show_channel_urls true</span><br><span class="line"></span><br><span class="line">安装：</span><br><span class="line">conda install pytorch torchvision torchaudio pytorch-cuda=11.6</span><br><span class="line"></span><br><span class="line">Found conflicts:</span><br><span class="line">Package pytorch conflicts for:  </span><br><span class="line">torchaudio -&gt; pytorch[version=&#x27;1.10.0|1.10.1|1.10.2|1.11.0|1.12.0|1.12.1|1.13.0|1.13.1|2.0  </span><br><span class="line">.0|2.0.1|1.9.1|1.9.0|1.8.1|1.8.0|1.7.1|1.7.0|1.6.0&#x27;]  </span><br><span class="line">torchvision -&gt; pytorch[version=&#x27;1.10.0|1.10.1|1.10.2|2.0.1|2.0.0|1.13.1|1.13.0|1.12.1|1.12  </span><br><span class="line">.0|1.11.0|1.9.1|1.9.0|1.8.1|1.8.0|1.7.1|1.7.0|1.6.0|1.5.1&#x27;]</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">使用以下命令安装</span><br><span class="line">&gt; conda install -c gpytorch gpytorch</span><br><span class="line"></span><br><span class="line">安装带cuda的torch</span><br><span class="line">pip install torch==2.0.0+cu118 torchvision==0.15.1+cu118 torchaudio==2.0.1 --index-url https://download.pytorch.org/whl/cu118 --user</span><br></pre></td></tr></table></figure>
+<h1 id="GPU"><a href="#GPU" class="headerlink" title="GPU"></a>GPU</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Neus: </span><br><span class="line">torch.set_default_tensor_type(&#x27;torch.cuda.FloatTensor&#x27;)</span><br><span class="line">parser.add_argument(&#x27;--gpu&#x27;, type=int, default=0)</span><br><span class="line">torch.cuda.set_device(args.gpu)</span><br><span class="line"></span><br><span class="line">self.device = torch.device(&#x27;cuda&#x27;)</span><br><span class="line">network = Network(**self.conf[&#x27;model.nerf&#x27;]).to(self.device)</span><br><span class="line"></span><br><span class="line">#################################################################</span><br><span class="line">NeRF:</span><br><span class="line">device = torch.device(&quot;cuda&quot; if torch.cuda.is_available() else &quot;cpu&quot;)</span><br><span class="line">model = NeRF().to(device)</span><br><span class="line">render_poses = torch.Tensor(render_poses).to(device)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">torch.device(&#x27;cpu&#x27;), torch.device(&#x27;cuda&#x27;), torch.device(&#x27;cuda:1&#x27;)</span><br><span class="line">如果有多个GPU，我们使用`torch.device(f&#x27;cuda:&#123;i&#125;&#x27;)` 来表示第i块GPU（i从0开始）。 另外，`cuda:0`和`cuda`是等价的。</span><br><span class="line"></span><br><span class="line">查询gpu数量</span><br><span class="line">torch.cuda.device_count()</span><br><span class="line"></span><br><span class="line">查询张量所在设备</span><br><span class="line">x = torch.tensor([1, 2, 3])</span><br><span class="line">x.device   #device(type=&#x27;cpu&#x27;) 默认为gpu，也可为cpu</span><br></pre></td></tr></table></figure>
+<p>两张量相互运算需要在同一台设备上<code>Z = X.cuda(1)</code></p>
+<p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230702204507.png" alt="image.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">给网络指定设备</span><br><span class="line">net = nn.Sequential(nn.Linear(3, 1))</span><br><span class="line">net = net.to(device=try_gpu())</span><br></pre></td></tr></table></figure>
+<p>==只要所有的数据和参数都在同一个设备上， 我们就可以有效地学习模型==</p>
+<h1 id="Autograd"><a href="#Autograd" class="headerlink" title="Autograd"></a>Autograd</h1><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/69294347">PyTorch 的 Autograd - 知乎 (zhihu.com)</a></p>
+<h1 id="Optimizer"><a href="#Optimizer" class="headerlink" title="Optimizer"></a>Optimizer</h1><h2 id="Adam多个model参数，然后更新lr"><a href="#Adam多个model参数，然后更新lr" class="headerlink" title="Adam多个model参数，然后更新lr"></a>Adam多个model参数，然后更新lr</h2><p>Adam_in_Neus: params_to_train is a list</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">params_to_train = []</span><br><span class="line">self.nerf_outside = NeRF(**self.conf[&#x27;model.nerf&#x27;]).to(self.device) # 创建一个NeRF网络</span><br><span class="line">self.sdf_network = SDFNetwork(**self.conf[&#x27;model.sdf_network&#x27;]).to(self.device) # 创建一个SDF网络</span><br><span class="line">self.deviation_network = SingleVarianceNetwork(**self.conf[&#x27;model.variance_network&#x27;]).to(self.device)</span><br><span class="line">self.color_network = RenderingNetwork(**self.conf[&#x27;model.rendering_network&#x27;]).to(self.device)</span><br><span class="line">params_to_train += list(self.nerf_outside.parameters())</span><br><span class="line">params_to_train += list(self.sdf_network.parameters())</span><br><span class="line">params_to_train += list(self.deviation_network.parameters())</span><br><span class="line">params_to_train += list(self.color_network.parameters())</span><br><span class="line"></span><br><span class="line">self.optimizer = torch.optim.Adam(params_to_train, lr=self.learning_rate)</span><br></pre></td></tr></table></figure>
+<p>然后更新学习率</p>
+<p><code>g = self.optimizer.param_groups[index]</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">for g in self.optimizer.param_groups:</span><br><span class="line">    g[&#x27;lr&#x27;] = self.learning_rate * learning_factor</span><br></pre></td></tr></table></figure>
+<p><strong>from</strong><br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">def update_learning_rate(self):</span><br><span class="line">    if self.iter_step &lt; self.warm_up_end:</span><br><span class="line">        learning_factor = self.iter_step / self.warm_up_end</span><br><span class="line">    else:</span><br><span class="line">        alpha = self.learning_rate_alpha</span><br><span class="line">        progress = (self.iter_step - self.warm_up_end) / (self.end_iter - self.warm_up_end)</span><br><span class="line">        learning_factor = (np.cos(np.pi * progress) + 1.0) * 0.5 * (1 - alpha) + alpha</span><br><span class="line"></span><br><span class="line">    for g in self.optimizer.param_groups:</span><br><span class="line">        g[&#x27;lr&#x27;] = self.learning_rate * learning_factor</span><br></pre></td></tr></table></figure></p>
+<h2 id="lr学习率"><a href="#lr学习率" class="headerlink" title="lr学习率"></a>lr学习率</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/611364321">lr scheduler介绍和可视化 - 知乎 (zhihu.com)</a></p>
+</blockquote>
+<p>lr_scheduler.nameLR</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>nameLR</th>
+<th>Brief</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ConstantLR</td>
+<td>init_lr乘以factor持续total_iters</td>
+</tr>
+<tr>
+<td>CosineAnnealingLR</td>
+<td>构造一个cos函数，周期为<code>2T_max</code>,学习率区间为<code>[init_lr,eta_min]</code>，cos向左平移last_epoch个iter</td>
+</tr>
+<tr>
+<td>CyclicLR</td>
+<td>三种mode：triangular三角波amplitude不变，triangular2每个cycle的amplitude减半，exp_range每个cycle iteration将amplitude缩放为$gamma^{iteration}$</td>
+</tr>
+<tr>
+<td>ExponentialLR</td>
+<td>指数减小lr：$gamma^{iter}$</td>
+</tr>
+<tr>
+<td>LambdaLR</td>
+<td>使用自定义的lambda来处理lr</td>
+</tr>
+<tr>
+<td>StepLR</td>
+<td>阶梯每step_size步将lr乘以gamma</td>
+</tr>
+<tr>
+<td>MultiStepLR</td>
+<td>在<code>milestones = [30,80]</code>处将lr乘以gamma</td>
+</tr>
+<tr>
+<td>OneCycleLR</td>
+<td>not chainable，lr先上升到max_lr,然后减小。最大值处的step为<code>total_step * pct_start = epochs * steps_per_epoch * pct_start</code></td>
+</tr>
+<tr>
+<td>ConstantLR</td>
+<td>前total_iters的lr为<code>init_lr * factor</code></td>
+</tr>
+<tr>
+<td>LinearLR</td>
+<td>从<code>init_lr * start_factor</code>开始线性增长total_iters步到 <code>init_lr * end_factor</code></td>
+</tr>
+<tr>
+<td>MultiplicativeLR</td>
+<td>学习率从init_lr 根据<code>lr_lambda = lambda step: factor</code>非线性衰减：$lr = factor^{step}$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>连接多个lr</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>nameLR</th>
+<th>Brief</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SequentialLR</td>
+<td><strong>milestones</strong>前为scheduler1，后为scheduler2</td>
+</tr>
+<tr>
+<td>ChainedScheduler</td>
+<td>多个scheduler叠加</td>
+</tr>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="Tips-1"><a href="#Tips-1" class="headerlink" title="Tips"></a>Tips</h3><p>在使用SequentialLR将多个scheduler连接起来时，SequentialLR的每个milestones都会从每个scheduler的0处开始，因此Step_scheduler的milestones要设置成<code>milestones=[1]</code>，这样设置会导致当Exp_scheduler结束时，先跳一下到<code>ori_lr</code>，然后step到<code>ori_lr * 0.4</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Con_scheduler = optim.lr_scheduler.ConstantLR(optimizer, factor=<span class="number">1.0</span>, total_iters=total_iters)</span><br><span class="line">Exp_scheduler = optim.lr_scheduler.ExponentialLR(optimizer, gamma=gamma)</span><br><span class="line">Step_scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[<span class="number">1</span>], gamma=<span class="number">0.4</span>)</span><br><span class="line">scheduler = optim.lr_scheduler.SequentialLR(optimizer, schedulers=[Con_scheduler,Exp_scheduler, Step_scheduler], milestones=[total_iters,total_iters+exp_iters])</span><br></pre></td></tr></table></figure>
+<h1 id="私有成员"><a href="#私有成员" class="headerlink" title="私有成员"></a>私有成员</h1><p>带双下划线函数</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>function</th>
+<th>brief description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>nn.module.__repr__</code></td>
+<td>当print(model)时会运行该函数</td>
+</tr>
+<tr>
+<td><code>__del__</code></td>
+<td>当<code>del object</code>时运行该函数</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h1 id="torch-cuda"><a href="#torch-cuda" class="headerlink" title="torch.cuda"></a>torch.cuda</h1><h2 id="cuda事件计算程序运行时间"><a href="#cuda事件计算程序运行时间" class="headerlink" title="cuda事件计算程序运行时间"></a>cuda事件计算程序运行时间</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">iter_start = torch.cuda.Event(enable_timing = <span class="literal">True</span>)</span><br><span class="line">iter_end = torch.cuda.Event(enable_timing = <span class="literal">True</span>)</span><br><span class="line">iter_start.record()</span><br><span class="line"><span class="comment"># iter 1 code</span></span><br><span class="line">iter_end.record()</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;iter time: <span class="subst">&#123;iter_start.elapsed_time(iter_end)&#125;</span>&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>eg:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line">iter_start = torch.cuda.Event(enable_timing = <span class="literal">True</span>)</span><br><span class="line">iter_end = torch.cuda.Event(enable_timing = <span class="literal">True</span>)</span><br><span class="line">iter_start.record()</span><br><span class="line"></span><br><span class="line">a = torch.tensor([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>]).cuda()</span><br><span class="line"></span><br><span class="line">iter_end.record()</span><br><span class="line"></span><br><span class="line">timestamp = iter_start.elapsed_time(iter_end)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;iter time: <span class="subst">&#123;timestamp:03f&#125;</span>&#x27;</span>)</span><br></pre></td></tr></table></figure></p>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+1ZnNxFWnEbk5YzRl">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
+              <a href="/tags/Pytorch/" rel="tag"><i class="fa fa-tag"></i> Pytorch</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/Project/Python%20Scripts/" rel="prev" title="Python Scripts">
+      <i class="fa fa-chevron-left"></i> Python Scripts
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeRF%20Other%20Research/NeRF-review/" rel="next" title="NeRF目前进展">
+      NeRF目前进展 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Tips"><span class="nav-text">Tips</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Loss-NAN"><span class="nav-text">Loss (NAN)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="nav-text">环境配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#windows"><span class="nav-text">windows</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GPU"><span class="nav-text">GPU</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Autograd"><span class="nav-text">Autograd</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Optimizer"><span class="nav-text">Optimizer</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Adam%E5%A4%9A%E4%B8%AAmodel%E5%8F%82%E6%95%B0%EF%BC%8C%E7%84%B6%E5%90%8E%E6%9B%B4%E6%96%B0lr"><span class="nav-text">Adam多个model参数，然后更新lr</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lr%E5%AD%A6%E4%B9%A0%E7%8E%87"><span class="nav-text">lr学习率</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Tips-1"><span class="nav-text">Tips</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A7%81%E6%9C%89%E6%88%90%E5%91%98"><span class="nav-text">私有成员</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#torch-cuda"><span class="nav-text">torch.cuda</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#cuda%E4%BA%8B%E4%BB%B6%E8%AE%A1%E7%AE%97%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C%E6%97%B6%E9%97%B4"><span class="nav-text">cuda事件计算程序运行时间</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qi Yun"
+      src="/images/avatar.jpeg">
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">140</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/qiyun71" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;qiyun71" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/29010355" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;29010355" rel="noopener" target="_blank"><i class="fa fa-star fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qi Yun</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">486k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">29:27</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/yqq/anime.min.js"></script>
+  <script src="/yqq/velocity/velocity.min.js"></script>
+  <script src="/yqq/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

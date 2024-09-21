@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/yqq/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Accuracy 重建的模型精度不好，影响因素： 数据集质量：照片拍摄质量(设备)、相机位姿估计精度(COLMAP) 照片质量问题：混叠、模糊、滚动快门 (RS) 效应、HDR&#x2F;LDR、运动模糊、低光照   NeuS方法的问题：Loss函数约束、体渲染的过度简化、缺少监督(深度or法向量) 网格提取方法(Marching Cube)   Efficiency 训练&#x2F;渲染的速度太慢，影响因素： M">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Multi-view 3D Reconstruction based on SDF and volume rendering">
+<meta property="og:url" content="http://example.com/3DReconstruction/Multi-view/NeuS-based%203D%20Reconstruction/index.html">
+<meta property="og:site_name" content="QiYun">
+<meta property="og:description" content="Accuracy 重建的模型精度不好，影响因素： 数据集质量：照片拍摄质量(设备)、相机位姿估计精度(COLMAP) 照片质量问题：混叠、模糊、滚动快门 (RS) 效应、HDR&#x2F;LDR、运动模糊、低光照   NeuS方法的问题：Loss函数约束、体渲染的过度简化、缺少监督(深度or法向量) 网格提取方法(Marching Cube)   Efficiency 训练&#x2F;渲染的速度太慢，影响因素： M">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240902141345.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240902132257.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231109094904.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240806202919.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240718142648.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240718142838.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240823163840.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240708102314.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240620160134.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240620170649.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240620151248.png">
+<meta property="article:published_time" content="2024-06-17T09:11:22.000Z">
+<meta property="article:modified_time" content="2024-09-21T01:25:57.574Z">
+<meta property="article:author" content="Qi Yun">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240902141345.png">
+
+<link rel="canonical" href="http://example.com/3DReconstruction/Multi-view/NeuS-based%203D%20Reconstruction/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Multi-view 3D Reconstruction based on SDF and volume rendering | QiYun</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">QiYun</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Note</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/3DReconstruction/Multi-view/NeuS-based%203D%20Reconstruction/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiYun">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Multi-view 3D Reconstruction based on SDF and volume rendering
+        </h1>
+
+        <div class="post-meta">
+          
+              <i class="fa fa-thumb-tack" aria-hidden="true"></i> 
+              <font color="GREEN">置顶</font>
+              <span class="post-meta-divider">|</span>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2024-06-17 17:11:22" itemprop="dateCreated datePublished" datetime="2024-06-17T17:11:22+08:00">2024-06-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-09-21 09:25:57" itemprop="dateModified" datetime="2024-09-21T09:25:57+08:00">2024-09-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/3DReconstruction-Multi-view/" itemprop="url" rel="index"><span itemprop="name">3DReconstruction/Multi-view</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>5.7k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>21 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <ul>
+<li><strong>Accuracy</strong> 重建的模型精度不好，影响因素：<ul>
+<li>数据集质量：照片拍摄质量(设备)、相机位姿估计精度(COLMAP)<ul>
+<li>照片质量问题：混叠、模糊、滚动快门 (RS) 效应、HDR/LDR、运动模糊、低光照</li>
+</ul>
+</li>
+<li>NeuS方法的问题：Loss函数约束、体渲染的过度简化、缺少监督(<em>深度or法向量</em>)</li>
+<li>网格提取方法(Marching Cube)</li>
+</ul>
+</li>
+<li><strong>Efficiency</strong> 训练/渲染的速度太慢，影响因素：<ul>
+<li>MLP计算次数多 —&gt; MIMO MLP、NGP-RT、</li>
+<li>MLP层数多计算慢—&gt; InstantNGP</li>
+</ul>
+</li>
+</ul>
+<span id="more"></span>
+<h1 id="IDEA"><a href="#IDEA" class="headerlink" title="IDEA"></a>IDEA</h1><ul>
+<li>监督深度图信息</li>
+</ul>
+<h1 id="Accuracy"><a href="#Accuracy" class="headerlink" title="Accuracy"></a>Accuracy</h1><h2 id="Camera-Pose-Estimation"><a href="#Camera-Pose-Estimation" class="headerlink" title="Camera Pose Estimation"></a>Camera Pose Estimation</h2><h2 id="3D-Point-Sampling"><a href="#3D-Point-Sampling" class="headerlink" title="3D Point Sampling"></a>3D Point Sampling</h2><h3 id="NerfAcc"><a href="#NerfAcc" class="headerlink" title="NerfAcc"></a>NerfAcc</h3><p>NerfAcc：占据+逆变换采样 混合采样方式<br>先使用占据网格确定哪些区域需要采样，再通过粗采样得到的权重使用逆变换采样进行精采样得到采样点</p>
+<h2 id="Loss-Function"><a href="#Loss-Function" class="headerlink" title="Loss Function"></a>Loss Function</h2><h3 id="S3IM"><a href="#S3IM" class="headerlink" title="S3IM"></a>S3IM</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2308.07032">S3IM: Stochastic Structural SIMilarity and Its Unreasonable Effectiveness for Neural Fields</a></p>
+</blockquote>
+<p>MSE loss 是 point-wise 的，没有考虑到一组pixel的结构特征，而SSIM通过一个KxK的核和stride扫过整个图像，最后求平均MSSIM，可以考虑图像的结构信息。</p>
+<ul>
+<li>$\mathrm{SSIM}(a,b)=l(\boldsymbol{a},\boldsymbol{b})c(\boldsymbol{a},\boldsymbol{b})s(\boldsymbol{a},\boldsymbol{b}).$  一个核覆盖的图像，$C_{1},C_{2},C_{3}$ 是小的常数<ul>
+<li>luminance亮度：$l(\boldsymbol{a},\boldsymbol{b})=\frac{2\mu_a\mu_b+C_1}{\mu_a^2+\mu_b^2+C_1},$</li>
+<li>contrast对比度：$c(\boldsymbol{a},\boldsymbol{b})=\frac{2\sigma_a\sigma_b+C_2}{\sigma_a^2+\sigma_b^2+C_2},$</li>
+<li>structure结构：$s(\boldsymbol{a},\boldsymbol{b})=\frac{\sigma_{ab}+C_3}{\sigma_a\sigma_b+C_3}.$<br><em>但是在NeRF训练过程中pixel在一个batch是随机的，丢失了局部patch的像素中位置相关的信息</em>，本文提出的S3IM，是SSIM的随机变体。每个minibatch有B个像素，核大小KxK，步长s=K(因为在minibatch中的随机patch是独立的，而且不需要重叠的情况)</li>
+</ul>
+</li>
+<li>将B个像素/光线构成一个rendered patch $\mathcal{P}(\hat{\mathcal{C}})$，同时有一个gt image patch $\mathcal{P}(\mathcal{C})$</li>
+<li>计算rendered和gt patch之间的$SSIM(\mathcal{P}(\hat{\mathcal{C}}),\mathcal{P}(\mathcal{C}))$ with kernel size KxK and stride size s =K</li>
+<li>由于patch是随机的，重复M次上述两步，并计算M次SSIM的平均值</li>
+</ul>
+<p>$\mathrm{S3IM}(\hat{\mathcal{R}},\mathcal{R})=\frac{1}{M}\sum_{m=1}^{M}\mathrm{SSIM}(\mathcal{P}^{(m)}(\hat{\mathcal{C}}),\mathcal{P}^{(m)}(\mathcal{C}))$</p>
+<p>$L_{\mathrm{S3IM}}(\Theta,\mathcal{R})=1-\mathrm{S3IM}(\hat{\mathcal{R}},\mathcal{R}) = =1-\frac1M\sum_{m=1}^M\mathrm{SSIM}(\mathcal{P}^{(m)}(\hat{\mathcal{C}}),\mathcal{P}^{(m)}(\mathcal{C}))$</p>
+<h2 id="Volume-Rendering"><a href="#Volume-Rendering" class="headerlink" title="Volume Rendering"></a>Volume Rendering</h2><h3 id="NeuS"><a href="#NeuS" class="headerlink" title="NeuS"></a>NeuS</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2106.10689">NeuS: Learning Neural Implicit Surfaces by Volume Rendering for Multi-view Reconstruction</a></p>
+</blockquote>
+<p>SDF内部-1，外部1，表面0<br>NeuS没有与NeRF一样直接使用MLP输出的不透明度$\sigma$作为$\rho$，而是使用预测的sdf进行相应计算得到$\rho$，以及权重</p>
+<ul>
+<li>$C(\mathbf{o},\mathbf{v})=\int_{0}^{+\infty}w(t)c(\mathbf{p}(t),\mathbf{v})\mathrm{d}t$  $\omega(t)=T(t)\rho(t),\text{where}T(t)=\exp\left(-\int_0^t\rho(u)\mathrm{d}u\right)$</li>
+<li>$\rho(t)=\max\left(\frac{-\frac{\mathrm{d}\Phi_s}{\mathrm{d}t}(f(\mathbf{p}(t)))}{\Phi_s(f(\mathbf{p}(t)))},0\right)$ , MLP预测的sdf即$f(\mathbf{p}(t))$ </li>
+<li>$\phi_s(x) =\frac{se^{-sx}}{(1+e^{-sx})^{2}}$, $\Phi_s(x)=(1+e^{-sx})^{-1},\text{i.e.,}\phi_s(x)=\Phi_s’(x)$</li>
+</ul>
+<p>离散化：</p>
+<ul>
+<li>$\hat{C}=\sum_{i=1}^nT_i\alpha_ic_i,$ $\alpha_i=1-\exp\left(-\int_{t_i}^{t_{i+1}}\rho(t)\mathrm{d}t\right),$ $T_i=\prod_{j=1}^{i-1}(1-\alpha_j)$</li>
+<li>$\alpha_i=\max\left(\frac{\Phi_s(f(\mathbf{p}(t_i)))-\Phi_s(f(\mathbf{p}(t_{i+1})))}{\Phi_s(f(\mathbf{p}(t_i)))},0\right).$</li>
+<li>$\alpha_{i}=max()$</li>
+</ul>
+<p>除了$\mathcal{L}1$和$\mathcal{L}_{mask}$损失之外还使用了$\mathcal{L}_{r e g}=\frac{1}{n m}\sum_{k,i}(|\nabla f(\hat{\mathbf{p}}_{k,i})|_{2}-1)^{2}.$ (Eikonal term)</p>
+<ul>
+<li>where m is batch size(ray scalar), n is the point sampling size</li>
+</ul>
+<h3 id="NeuRodin"><a href="#NeuRodin" class="headerlink" title="NeuRodin"></a>NeuRodin</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://open3dvlab.github.io/NeuRodin/">NeuRodin: A Two-stage Framework for High-Fidelity Neural Surface Reconstruction</a></p>
+</blockquote>
+<p>室内外大场景，之前方法存在的问题：</p>
+<ul>
+<li>过度几何正则化a); </li>
+<li>没有对几何拓扑约束b); </li>
+<li>本文Two-stage的想法：首先对SDF不进行约束(不用$\mathcal{L}_{eik}$，类似density进行训练)，然后使用几何正则化来refine光滑表面</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240902141345.png" alt="image.png|666"></p>
+<p>先前 SDF-based volume rendering 方法的不足：</p>
+<ul>
+<li>SDF到密度转换的不合适假设：$\sigma(\mathbf{r}(t))=\Psi_s(f(\mathbf{r}(t)))=\begin{cases}\frac{1}{2s}\exp\left(\frac{-f(\mathbf{r}(t))}{s}\right)&amp;\text{if }f(\mathbf{r}(t))\geq0,\\\frac{1}{s}\left(1-\frac{1}{2}\exp\left(\frac{f(\mathbf{r}(t))}{s}\right)\right)&amp;\text{if }f(\mathbf{r}(t))&lt;0.\end{cases}$<ul>
+<li>SDF值相同的区域密度值也是相同的，限制了密度场(derived from SDF)的表达能力。</li>
+<li>原先的密度场方法(NeRF)的密度值范围可以是$[0,+\infty]$，而SDF计算得到的密度范围在$\left(0,\frac{1}{s} \right]$ <a target="_blank" rel="noopener" href="https://www.desmos.com/calculator/u8gnwtp7jf?lang=zh-CN">Function Desmos</a></li>
+</ul>
+</li>
+<li>密度偏差(SDF to Density过程中)，虽有很多改进但是偏差仍存在，<strong>且几何正则化会产生一些不好影响</strong> (exacerbates this bias, complicating model convergence and resulting in the creation of inaccurate surfaces)，一些改进的方法：<ul>
+<li><a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content/CVPR2023/papers/Zhang_Towards_Unbiased_Volume_Rendering_of_Neural_Implicit_Surfaces_With_Geometry_CVPR_2023_paper.pdf">TUVR</a>: Towards Unbiased Volume Rendering of Neural Implicit Surfaces with Geometry Priors</li>
+<li>Debsdf: Delving into the details and bias of neural indoor scene reconstruction</li>
+<li>Recovering fine details for neural implicit surface reconstruction.</li>
+</ul>
+</li>
+<li>几何过度正则化，such as Eikonal loss or smoothness constraints，<strong>导致缺陷：</strong><ul>
+<li>在所有区域过度光滑, both flat and intricate, leading to a loss of fine details)。</li>
+<li>当优化Normal产生的颜色和通过几何正则化显式地约束SDF时，优化过程会阻碍拓扑结构的产生。</li>
+</ul>
+</li>
+</ul>
+<p>本文解决方法：</p>
+<ul>
+<li><strong>Uniform SDF, Diverse Densities</strong> <ul>
+<li>空间中每一点都有独自的缩放因子：使用非线性映射来根据三维空间中一点坐标获取独一无二的缩放因子s (local scale $s(t)$)  (类似Adaptive shells for efficient neural radiance field rendering.的工作，需要结合SDF和density的特性)</li>
+<li>$(f(\mathbf{r}(t)),s(\mathbf{r}(t)),\mathbf{z}(\mathbf{r}(t)))=\phi_\text{geo}(\mathbf{r}(t)),\quad\sigma(\mathbf{r}(t))=\Psi_{s(\mathbf{r}(t))}\left(f(\mathbf{r}(t))\right).$ 解释：<strong>(SDF, s, 几何特征)=非线性映射(点坐标)</strong> and <strong>密度=函数(SDF, s)</strong></li>
+</ul>
+</li>
+<li><strong>Explicit Bias Correction</strong> <ul>
+<li>存在的偏差 <img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240902132257.png" alt="image.png|333"><ul>
+<li>A: maximum probability distance$\hat{D}_{\text{prob}}(\mathbf{r})=\arg\max_{t\in(0,+\infty)}w(t)=\arg\max_{t\in(0,+\infty)}T(t)\sigma(\mathbf{r}(t)).$</li>
+<li>B: rendered distance $\hat{D}_{\text{rendered}}(\mathbf{r})=\int_0^{+\infty}T(t)\sigma(\mathbf{r}(t))t \mathrm{d}t.$ 相当于对权重求了均值</li>
+<li>C: SDF zero level set</li>
+</ul>
+</li>
+<li>本文解决方法:  <script type="math/tex">\mathcal{L}_{\mathrm{bias}}=\frac1m\sum_{\mathbf{r}\in\mathcal{R}}\max\left(f(\mathbf{r}(t^*+\epsilon_{\mathrm{bias}})),0\right),\quad t^{*}=\arg\max_{t\in(0,+\infty)}T(t)\sigma(\mathbf{r}(t))</script> <ul>
+<li>通过约束每条光线上A($t^*$ with bias correction factor $\epsilon_{\mathrm{bias}}$)与C的差异，且仅约束sdf为正(即模型外部)的部分 </li>
+<li><strong><em>为什么不约束模型内部呢？：鼓励SDF在A位置之后取负值，经验测试出来的(附录C)，且提供了<a target="_blank" rel="noopener" href="https://www.desmos.com/calculator/k1jklfvd5y?lang=zh-CN">数学解释</a>:</em></strong> 当A在C之前时，随着$\theta$的变化AC之间差异变化的更大；当A在C之后时，随着$\theta$的变化AC之间差异变化较小 </li>
+<li>$\epsilon_{\mathrm{bias}}$ 是由于选取maximum的方法导致的：直接使用采样点的最大权重来近似$t^*$</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Two-Stage Optimization to Tackle Geometry Over-Regularization</strong><ul>
+<li><strong>Stage 1</strong>——Geometry Over-Regularization (estimated gradients + local scale s(VolSDF SDF2Density) + $\mathcal{L}_{\mathrm{bias}}$)<ul>
+<li>直观解法：消除几何约束或者降低权重，且避免condition颜色(predicted normal)。 但是会产生非自然的SDF zero-level set</li>
+<li>简单高效的解法是：不直接使用梯度${\nabla f(\mathbf{r}(t))}$进行几何正则，而是使用估计梯度$\hat{\nabla}f(\mathbf{r}(t))$通过特殊设计来引入不确定性，<ul>
+<li>x分量的估计梯度为：$\hat{\nabla}_xf(\mathbf{r}(t))=\frac{f\left(\mathbf{r}(t)+\boldsymbol{\epsilon}_x\right)-f\left(\mathbf{r}(t)-\boldsymbol{\epsilon}_x\right)}{2\epsilon},\quad\text{where }\epsilon_x=(\epsilon,0,0)\text{ and }\epsilon\sim U(0,\epsilon_{\max}).$</li>
+<li>通过有限差分法估计梯度的step size $\epsilon$是一个随机采样的数，这样在更大的场景的estimated normal中有很小的variance，在fine details的normal中有更大的variance。<strong>这样的不确定性确保了更大特征的稳定性和复杂细节的灵活性</strong></li>
+</ul>
+</li>
+<li>总结:<ul>
+<li>$\mathcal{L}_{\mathrm{coarse}}=\mathcal{L}_{\mathrm{color}}+\lambda_{\mathrm{eik}}\mathcal{L}_{\mathrm{eik}}(\hat{\nabla}f)+\lambda_{\mathrm{bias}}\mathcal{L}_{\mathrm{bias}}.$</li>
+<li>VolSDF的SDF-to-density方法：<ul>
+<li>$\sigma(\mathbf{r}(t))=\Psi_s(f(\mathbf{r}(t)))=\begin{cases}\frac{1}{2s}\exp\left(\frac{-f(\mathbf{r}(t))}{s}\right)&amp;\text{if }f(\mathbf{r}(t))\geq0,\\\frac{1}{s}\left(1-\frac{1}{2}\exp\left(\frac{f(\mathbf{r}(t))}{s}\right)\right)&amp;\text{if }f(\mathbf{r}(t))&lt;0.\end{cases}$</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Stage 2</strong>——Refinement (estimated gradients + TUVR SDF2Density + $\mathcal{L}_{\mathrm{smooth}}$)<ul>
+<li>使用PermutoSDF的损失$\mathcal{L}_{\mathrm{smooth}}=\frac1{mn}\sum_{\mathbf{r},t}\left(\mathbf{n}\left(\mathbf{r}(t)\right)\cdot\mathbf{n}\left(\mathbf{r}(t)+\epsilon_s\boldsymbol{\eta}(\mathbf{r}(t))\right)-1\right)^2,$ 来增加局部光滑度，$\boldsymbol{\eta}(\mathbf{r}(t)) = \mathbf{n}(\mathbf{r}(t)) \times \boldsymbol{\tau}$ 其中$\tau$是随机单位向量</li>
+<li>总结:<ul>
+<li>采用TUVR的 SDF-to-density方法，保证最小化bias且保存fine的物体细节<ul>
+<li>$\sigma(t)=\begin{cases}\frac{1}{s(t)}\exp\left(\frac{-f(t)}{s(t)|f’(t)|}\right)&amp;\text{if}f(t)\geq0,\\\frac{2}{s(t)}\left(1-\frac{1}{2}\exp\left(\frac{f(t)}{s(t)|f’(t)|}\right)\right)&amp;\text{if}f(t)&lt;0.\end{cases}$</li>
+</ul>
+</li>
+<li>$\mathcal{L}_{\mathrm{fine}}=\mathcal{L}_{\mathrm{color}}+\lambda_{\mathrm{eik}}\mathcal{L}_{\mathrm{eik}}(\nabla f)+\lambda_{\mathrm{smooth}}\mathcal{L}_{\mathrm{smooth}}.$</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>附录的理论分析:</p>
+<ol>
+<li>根据权重最大的点$t^*=\arg\max_{t\in(0,+\infty)}T(t)\sigma(\mathbf{r}(t))$</li>
+<li>在该点应该满足$\frac{\partial w(t)}{\partial t}\Bigg|_{t=t^*}=0$</li>
+<li>可以推导出<script type="math/tex">\sigma^2(\mathbf{r}(t^*))=\left.\frac{\partial\sigma(\mathbf{r}(t))}{\partial t}\right|_{t=t^*}</script></li>
+</ol>
+<p>因此构建的SDF-to-density函数必须满足：</p>
+<ul>
+<li>条件1 <script type="math/tex">\sigma^2(\mathbf{r}(t^*))=\left.\frac{\partial\sigma(\mathbf{r}(t))}{\partial t}\right|_{t=t^*}</script></li>
+<li>条件2 (SDF=0的点，同时权重最大) <script type="math/tex">f(r(t^0))=0</script><br>然而：</li>
+<li>NeuS只有在沿着光线的SDF分布的一阶近似条件下才满足此条件</li>
+<li>TUVR扩展到了任意分布，但是仍有问题就是不一定$t^{0} \neq t^{*}$，(在优化过程中，沿着光线的权重分布是一个复杂的non-convex函数，只能担保$t^{0}$是在局部最大值上)</li>
+</ul>
+<h3 id="ReTR"><a href="#ReTR" class="headerlink" title="ReTR"></a>ReTR</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2305.18832">ReTR: Modeling Rendering Via Transformer for Generalizable Neural Surface Reconstruction</a></p>
+</blockquote>
+<p><strong>使用Transformer 代替渲染过程，并且添加了深度监督</strong></p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231109094904.png" alt="image.png|666"></p>
+<h2 id="Mixture-of-Experts-MoE"><a href="#Mixture-of-Experts-MoE" class="headerlink" title="Mixture of Experts (MoE)"></a>Mixture of Experts (MoE)</h2><h3 id="Boost-Your-NeRF"><a href="#Boost-Your-NeRF" class="headerlink" title="Boost Your NeRF"></a>Boost Your NeRF</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2407.10389#page=20.42">Boost Your NeRF: A Model-Agnostic Mixture of Experts Framework for High Quality and Efficient Rendering</a></p>
+<p><a target="_blank" rel="noopener" href="https://huggingface.co/blog/zh/moe#%E4%BB%80%E4%B9%88%E6%98%AF%E6%B7%B7%E5%90%88%E4%B8%93%E5%AE%B6%E6%A8%A1%E5%9E%8B">混合专家模型（MoE）详解</a> MoE 层由两个核心部分组成: 一个门控网络(用于决定哪些令牌 (token) 被发送到哪个专家)和若干数量的专家(每个专家本身是一个独立的神经网络)</p>
+</blockquote>
+<ul>
+<li>门控网络来决定采样点被输入哪 Top-K个专家网络(并且在filtering step抛弃low-density的点，密度值根据lowest resolution model 进行计算)</li>
+<li>每个专家网络以采样点位置和方向作为输入，输出颜色和密度</li>
+<li>根据该点到每个专家网络的权重(概率Probability Field)和颜色密度值，计算该点最终的颜色和密度值。最后通过体渲染得到pixel color，并联合优化resolution-weighted auxiliary loss(用于选取专家网络)</li>
+</ul>
+<p>主要思想是在训练了一批不同分辨率的NeRF models后，优先使用low-resolution models，减少high-resolution models 的使用</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240806202919.png" alt="image.png|666"></p>
+<h1 id="Efficiency"><a href="#Efficiency" class="headerlink" title="Efficiency"></a>Efficiency</h1><ol>
+<li>完全抛弃MLP，存储显示的颜色/密度</li>
+<li>加速渲染：对几何代理进行光栅化处理</li>
+<li>加速渲染：使用前一个视图的信息来减少渲染像素的数量</li>
+</ol>
+<h2 id="Explicit-Grids"><a href="#Explicit-Grids" class="headerlink" title="Explicit Grids"></a>Explicit Grids</h2><p><strong>Explicit Grids with features(Efficiency of T&amp;R)</strong></p>
+<p><strong>(减轻MLP架构)</strong></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Explicit Grids</th>
+<th>Related Works</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Feature grids</td>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2112.05131">Plenoxels</a>, <a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2111.11215">DirectVoxGo</a>, <a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2201.05989">InstantNGP</a></td>
+</tr>
+<tr>
+<td>Tri-planes</td>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2307.11335">Tri-MipRF</a></td>
+</tr>
+<tr>
+<td>Multi-plane images</td>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2310.00249">MMPI</a>, <a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2312.16109">fMPI</a></td>
+</tr>
+<tr>
+<td>Tensorial vectors</td>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2203.09517">TensoRF</a>, <a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2307.13226">Strivec</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="NGP-RT"><a href="#NGP-RT" class="headerlink" title="NGP-RT"></a>NGP-RT</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2407.10482">NGP-RT: Fusing Multi-Level Hash Features with Lightweight Attention for Real-Time Novel View Synthesis</a></p>
+</blockquote>
+<p>InstantNGP 虽然训练速度(查询网格)很快，但是渲染的时候仍然需要大量的3D Point查询MLP，耗费大量时间</p>
+<p>(<em>Deferred neural rendering</em>) SNeRG [12] 和 MERF [32] 通过将颜色和密度存在显示网格中，<strong>只对每条投射光线执行一次 MLP</strong>，从而大大加快了渲染过程。然而，他们对显式特征的处理显示出有限的表达能力，不适合 Instant-NGP 的多级特征。<strong>将这些特征构建方法直接应用于 Instant-NGP 中的多级特征可能会导致其表示能力受损，并导致渲染质量下降</strong>。</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240718142648.png" alt="image.png|666"></p>
+<p>提出了 NGP-RT，一种利用轻量级注意力机制高效渲染高保真新视图的新方法。NGP-RT 的注意力机制采用了简单而有效的加权和运算，可学习的注意力参数可自适应地优先处理显式多级哈希特征</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240718142838.png" alt="image.png|666"></p>
+<h2 id="MIMO-MLP"><a href="#MIMO-MLP" class="headerlink" title="MIMO MLP"></a>MIMO MLP</h2><p><strong>Multi input and Multi output MLP(Efficiency of T&amp;R)</strong></p>
+<p><strong>(减少MLP计算次数)</strong></p>
+<h3 id="MIMO-NeRF"><a href="#MIMO-NeRF" class="headerlink" title="MIMO-NeRF"></a>MIMO-NeRF</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2310.01821">MIMO-NeRF: Fast Neural Rendering with Multi-input Multi-output Neural Radiance Fields</a></p>
+</blockquote>
+<p>多输入多输出的MLP，同时输入多个三维点来进行计算</p>
+<h2 id="Points-Sampling"><a href="#Points-Sampling" class="headerlink" title="Points Sampling"></a>Points Sampling</h2><p><strong>Points Sampling(Efficiency of T&amp;R)</strong></p>
+<p><strong>(减少采样点数量 per ray)</strong></p>
+<h3 id="HashPoint"><a href="#HashPoint" class="headerlink" title="HashPoint"></a><a target="_blank" rel="noopener" href="https://jiahao-ma.github.io/hashpoint/">HashPoint</a></h3><p>Primary surface point sampling</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240823163840.png" alt="image.png|666"></p>
+<h2 id="Pixel-Sampling"><a href="#Pixel-Sampling" class="headerlink" title="Pixel Sampling"></a>Pixel Sampling</h2><p><strong>Pixel Sampling (Efficiency of Training)</strong></p>
+<p><strong>(减少MLP计算次数)</strong></p>
+<p>之前方法对train_data中所有的像素rgb三个值，进行预测+l1 loss+反向传播，训练速度很慢</p>
+<p>通过量化rendering image 与 g.t. image 之间的差异，来指导在图像上采样像素的位置/数量：根据error map between rendering image and g.t. image，消除loss比较小的区域，对loss大的区域进行更多的采样</p>
+<p><strong>idea</strong>：</p>
+<ul>
+<li>Other sampling method 如果要加速训练的话，就要使用更高效的采样方法<ul>
+<li>LHS (Latin hypercube sampling)</li>
+</ul>
+</li>
+<li>这种方法只能对Train过程进行加速</li>
+<li>由于优化的是MLP整体的参数，因此可能出现对误差大的像素优化时，降低误差小的像素的预测精度。</li>
+<li>可能会对error大但是非重要区域的像素进行多次采样</li>
+</ul>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/37121528">马尔可夫链蒙特卡罗算法（MCMC） - 知乎</a> Basic<br><a target="_blank" rel="noopener" href="https://coderlemon17.github.io/posts/2022/05-11-mcmc/">详解Markov Chain Monte Carlo (MCMC): 从拒绝-接受采样到Gibbs Sampling | Lemon’s Blog</a> <strong>更清楚一点</strong><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012290039/article/details/105696097">MCMC详解2——MCMC采样、M-H采样、Gibbs采样（附代码）</a><br><a target="_blank" rel="noopener" href="https://allenwind.github.io/blog/10466/">采样（三）：重要性采样与接受拒绝采样 | Erwin Feng Blog</a><br><a target="_blank" rel="noopener" href="https://chi-feng.github.io/mcmc-demo/">The Markov-chain Monte Carlo Interactive Gallery</a> <strong>多种MCMC采样方法</strong></p>
+</blockquote>
+<p>Monte Carlo采样无法得到复杂的分布(二维分布)，加入Markov Chain，马尔科夫链模型的状态转移矩阵收敛到的稳定概率分布与我们的初始状态概率分布无关$\pi(j)=\sum_{i=0}^\infty\pi(i)P_{ij}$(只与状态转移矩阵有关)，如果可以得到状态转移矩阵，就可以采样得到平稳分布的样本集。如何得到状态转移矩阵？<br>—&gt; MCMC方法(与拒绝-接受采样的思路类似，其通过拒绝-接受概率拟合一个复杂分布, MCMC方法则通过拒绝-接受概率得到一个满足细致平稳条件的转移矩阵.)</p>
+<ul>
+<li>Metropolis-Hastings Sampling：需要计算接受率, 在高维时计算量大, 并且由于接受率的原因导致算法收敛时间变长. 对于高维数据, 往往数据的条件概率分布易得, 而联合概率分布不易得.</li>
+<li>Gibbs Sampling：</li>
+</ul>
+<h3 id="Soft-Mining"><a href="#Soft-Mining" class="headerlink" title="Soft Mining"></a>Soft Mining</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2312.00075">Accelerating Neural Field Training via Soft Mining</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S0262885623000446">EGRA-NeRF: Edge-Guided Ray Allocation for Neural Radiance Fields</a> NeRF 的渲染显得过于模糊，并且在某些纹理或边缘中包含锯齿伪影，为此提出了边缘引导光线分配（EGRA-NeRF）模块，以<strong>在训练阶段将更多光线集中在场景的纹理和边缘上</strong> <strong>(没有加速)</strong></p>
+</blockquote>
+<p>To implement our idea we use Langevin Monte-Carlo sampling. We show that by doing so, regions with higher error are being selected more frequently, leading to more than 2x improvement in convergence speed.<br>$\mathcal{L}=\frac{1}{N}\sum_{n=1}^{N}\mathrm{err}(\mathbf{x}_{n})\approx\mathbb{E}_{\mathbf{x}\sim P(\mathbf{x})}\left[\mathrm{err}(\mathbf{x})\right]=\int\mathrm{err}(\mathbf{x})P(\mathbf{x})d\mathbf{x}$. P is the distribution of the sampled data points $x_{n}$. 之前方法大多是均匀分布<br>具体做法：</p>
+<ol>
+<li>Soft mining with <strong>importance sampling</strong>. 引入了 importance distribution$Q(x)$</li>
+</ol>
+<blockquote>
+<p>补充知识 <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1SV4y1i7bW/?spm_id_from=333.788&amp;vd_source=1dba7493016a36a32b27a14ed2891088">[蒙特卡洛方法] 02 重要性采样（importance sampling）及 python 实现_哔哩哔哩_bilibili</a> 可以从一个任意分布中进行采样</p>
+</blockquote>
+<p>误差可以重写为：$\int\operatorname{err}(\mathbf{x})P(\mathbf{x})d\mathbf{x} =\int\frac{\mathrm{err}(\mathbf{x})P(\mathbf{x})}{Q(\mathbf{x})}Q(\mathbf{x})d\mathbf{x}  =\mathbb{E}_{\mathbf{x}\sim Q(\mathbf{x})}\left[\frac{\mathrm{err}(\mathbf{x})P(\mathbf{x})}{Q(\mathbf{x})}\right].$ 由于均匀分布$P(x)$的PDF通常为常数，因此$\mathcal{L}=\frac{1}{N}\sum_{n=1}^{N}\frac{\mathrm{err}(\mathbf{x}_{n})}{Q(\mathbf{x}_{n})}$ $\mathrm{where} \quad\mathbf{x}_{n}\sim Q(\mathbf{x}).$<br>但是$\mathcal{L}$无法用于训练，采用<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1711.00937">stop gradient operator</a>(在正向计算时定义为同一值，且偏导数为零)<br>$\mathcal{L}\approx\mathbb{E}_{\mathbf{x}\sim\mathrm{sg}(Q(\mathbf{x}))}\left[\frac{\mathrm{err}(\mathbf{x})}{\mathrm{sg}(Q(\mathbf{x}))}\right].$<br>选择的$Q(x)$必须与$err(x)$成比例关系(消除error尺度的影响)：$\mathrm{err}(\mathbf{x})=|f_{\boldsymbol{\psi}}(\mathbf{x})-f_{\mathrm{gt}}(\mathbf{x})|_{2}^{2},\\Q(\mathbf{x})=|f_{\boldsymbol{\psi}}(\mathbf{x})-f_{\mathrm{gt}}(\mathbf{x})|_{1}.$<br><strong>根据</strong>$Q(x)$的定义，会在error大的地方多采样一些$x$即像素点<br>Soft mining. $\mathcal{L}=\frac1N\sum_{n=1}^N\left[\frac{\mathrm{err}(\mathbf{x}_n)}{\mathrm{sg}(Q(\mathbf{x}_n))^\alpha}\right],\quad\text{where }\alpha\in[0,1]$(在关注error大的区域的同时也要关注一下其他区域，不然可能会学歪)</p>
+<ul>
+<li>$\alpha = 0$：hard mining</li>
+<li>$\alpha = 1$：(pure) importance sampling</li>
+</ul>
+<ol>
+<li>Sampling via <strong>Langevin Monte Carlo</strong></li>
+</ol>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1811.10072">The promises and pitfalls of Stochastic Gradient Langevin Dynamics</a> 数学分析LMC, SGLD, SGLDFP and SGD<br><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1206.1901">MCMC using Hamiltonian dynamics</a> </p>
+</blockquote>
+<p>从任意分布$Q(x)$中采样，使用MCMC方法中的Langevin Monte Carlo (LMC)<br>$\mathbf{x}_{t+1}=\mathbf{x}_t+a\nabla\log Q(\mathbf{x}_t)+b\boldsymbol{\eta}_{t+1},$</p>
+<ul>
+<li>a&gt;0 is a hyperparameter defining the step size for the gradient-based walks</li>
+<li>b&gt;0 is a hyperparameter defining the step size for the random walk $\boldsymbol{\eta}_{t\boldsymbol{+}1}\boldsymbol{\sim}\mathcal{N}(0,\mathbf{1})$</li>
+<li>采样是局部的，因此采样的开销很小</li>
+<li>log的作用应该是把乘除转换成加减, eg: $w_i=\frac{p(x_i)}{q(x_i)}, \log w_i=\log p(x_i)-\log q(x_i)$</li>
+</ul>
+<p>Sample (re-)initialization.(采样的初始化很重要)：We first initialize the sampling distribution to be uniform over the domain of interest as $\mathbf{x}_{0}{\sim}\mathcal{U}(\mathcal{R})$. We further re-initialize samples that either move out of $\mathcal{R}$ or have too low error value causing samples to get ‘stuck’. We use uniform sampling as well as edge-based sampling for 2D workloads.<br>Warming up soft mining. Start with $\alpha=0$, i.e., no correction, then linearly increase it to the desired $\alpha$ value at 1k iterations.<br>Alternative: multinomial sampling. To use multinomial sampling, one needs to do a forward pass of all data points to build a probability density function, which is computationally expensive. Hence an alternative strategy, such as those based on Markov Chain Monte Carlo (MCMC) is required. 为了防止对所有像素点进行前向计算以计算PDF的高耗费，使用MCMC采样</p>
+<p>Ablation studies中: 即使LMC采样的精度比multinomial sampling低一点，但仍然比Uniform sampling更高，且更effective(效率与精度的折中(compromise/trade-off))</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240708102314.png" alt="image.png|666"></p>
+<h3 id="Shooting-Much-Fewer-Rays"><a href="#Shooting-Much-Fewer-Rays" class="headerlink" title="Shooting Much Fewer Rays"></a>Shooting Much Fewer Rays</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2208.06821">Fast Learning Radiance Fields by Shooting Much Fewer Rays</a></p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240620160134.png" alt="image.png|888"><br>之前的从图片中采样像素or光线的方法：$\mathbf{r}_i(u,v)\sim U(I_i),u\in[0,H_i],v\in[0,W_i],$ 按均匀分布随机采样</p>
+<ul>
+<li>trivial areas：对于背景(大部分颜色相同)，这样图片的像素就是非均匀的分布，均匀采样方式会导致采样到一些无意义的像素。 <strong>Therefore</strong>, we only need to shoot fewer rays in the trivial areas where the color changes slightly to perceive the radiance fields</li>
+<li>nontrivial areas：color changes greatly contain more information, so more rays are required to capture the detailed information and learn how to distinguish these pixels’ colors from its neighboring ones</li>
+</ul>
+<p>trivial areas会很快收敛，而nontrivial areas不容易收敛<br>Based on the above observation, we propose two strategies to optimize ray distribution on input images. </p>
+<ul>
+<li>The first one is to calculate a <strong>prior probability distribution based on the image context</strong> GT图片的先验分布</li>
+<li>the second one is to apply an <strong>adaptive quadtree subdivision algorithm</strong> to dynamically adjust ray distribution. 自适应的QSA</li>
+</ul>
+<p>具体做法：</p>
+<ol>
+<li>Context based Probability Distribution：we use the color variation of pixels relative to their surroundings to quantitatively identify the image context.</li>
+</ol>
+<p>计算每个像素点跟周围八个点的std：$g(u,v)=\operatorname{std}(\mathbf{c}(u,v))=\sqrt{\frac19\sum_{x,y}[\mathbf{c}(x,y)-\overline{\mathbf{c}}]^2},\\x\in\{u-1,u,u+1\},y\in\{v-1,v,v+1\}.$ g越高表示像素颜色/密度变化越剧烈，通常在3D物体的表面边界处。优势：our image context based probability distribution function naturally helps to estimate where surfaces are located.<br>为了平衡$g_{max}$与$g_{min}$之间的差异，clamp后进行归一化：$g^{\prime}(u,v)=\frac{\mathrm{clamp}(s,\max(g(u,v)))}{\mathrm{max}(g(u,v))}$，we typically define threshold $\begin{aligned}s=0.01\times\text{mean}(g(u,v))\end{aligned}$. Values less than s will be clamped to s to avoid sampling too few rays at the corresponding positions.<br><strong>Sampling strategy</strong>. In the lines of “Sampled Rays Distribution”, we sample 50% rays according to the context based probability distribution and randomly sample the other 50% rays, where each red point represents a sampled ray(<strong>为什么要设置成50%</strong>)</p>
+<ol>
+<li>Adaptive QuadTree Subdivision：对于rendering error，只在error大的地方细分，在error小的地方不在细分(根据pre-defined threshold a来判断大小)</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240620170649.png" alt="image.png|666"><br>图片$I_{i}(H_{i} \times W_{i})$上总的采样数量：$M_i^l=Q_1^l\times\frac{H_i}{2^l}\times\frac{W_i}{2^l}+Q_2^l\times n_0,$ $l$ denote the times of subdivision, $Q_1^l$ and $Q_2^l$ denote the number of unmarked leaf nodes (error&gt;a) and marked leaf nodes (error&lt;a) separately. $n_{0} = 10(constant)$</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2103.12352">iMAP: Implicit Mapping and Positioning in Real-Time</a></p>
+</blockquote>
+<p>同时<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2103.12352">iMap</a>也使用rendering error来引导采样，不同点：</p>
+<ul>
+<li>The applications of rendering loss are different. iMap uses the rendering loss distribution on image blocks to decide how many points should be sampled on each block, while we use the <strong>rendering loss</strong> on each leaf node to decide whether this node should be subdivided into 4 child nodes.</li>
+<li>The number of sampled points and image blocks are different. In our method, the number of sampled points in each leaf node is identical, but the number and area of the image blocks (i.e. leaf nodes) changes during training. In contrast, iMap samples different numbers of rays according to a render loss based distribution in each one of the same size blocks.</li>
+<li>The sampling strategies in image blocks are different. In each image block, iMap uniformly samples points for rendering, while we sample points according to the image context. More points are sampled in the nontrivial areas where color changes a lot, while fewer points are sampled in the trivial areas where color changes slightly. Our sampling strategy helps to capture the detailed information in the nontrivial areas and reduce the training burden in the trivial areas.</li>
+</ul>
+<ol>
+<li>Implementation Details</li>
+</ol>
+<ul>
+<li>在每个epoch结束后，也就是对数据集中所有图像的像素都进行一次rendering，然后与g.t.进行对比得到rendering error</li>
+<li>In practice, we initially subdivide the quadtrees into 2 or 3 depths at the begin of training. This helps our method to distinguish the trivial and nontrivial areas faster among the quadtree leaf nodes</li>
+</ul>
+<p>存在的问题：</p>
+<ul>
+<li>All-Pixel Sampling中，作者为了防止MLP对unmarked leaf nodes进行拟合的同时会改变已经拟合好的marked leaf nodes，在接近最后的epoch，使用了randomly sample rays from the whole image instead of using quadtrees for sampling, where the number of sampled rays is equal to the total number of pixels. <strong>如何freeze已经拟合好的marked leaf nodes???</strong></li>
+</ul>
+<h3 id="iNeRF"><a href="#iNeRF" class="headerlink" title="iNeRF"></a>iNeRF</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2012.05877">iNeRF: Inverting Neural Radiance Fields for Pose Estimation</a></p>
+</blockquote>
+<p>一种基于NeRF预训练模型的姿态估计的方法. 有了NeRF(MLP), 去refine位姿</p>
+<ul>
+<li>Sampling Rays: 计算所有pixel是非常耗时耗力的。目的是想要采样的点可以更好的包含在observed images和rendered images上。三种策略：<ul>
+<li>Random Sampling</li>
+<li>Interest Point Sampling: employ interest point detectors to localize a set of candidate pixel locations in the observed image, this strategy makes optimization converge faster since less stochasticity is introduced. <strong>But</strong> we found that it is prone to local minima as it only considers interest points on the observed image instead of interest points from both the observed and rendered images.</li>
+<li>Interest Region Sampling: After the interest point detector localizes the interest points, we apply a 5 × 5 <strong>morphological dilation</strong> for I iterations to enlarge the sampled region.</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240620151248.png" alt="image.png|666"></p>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+1ZnNxFWnEbk5YzRl">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/Learn/Finite%20Element/Learn-FEA/" rel="prev" title="Finite Element Learning Note">
+      <i class="fa fa-chevron-left"></i> Finite Element Learning Note
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/Learn/Neural%20Network/Loss%20Functions/" rel="next" title="Loss Functions">
+      Loss Functions <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#IDEA"><span class="nav-text">IDEA</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Accuracy"><span class="nav-text">Accuracy</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Camera-Pose-Estimation"><span class="nav-text">Camera Pose Estimation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3D-Point-Sampling"><span class="nav-text">3D Point Sampling</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NerfAcc"><span class="nav-text">NerfAcc</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Loss-Function"><span class="nav-text">Loss Function</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#S3IM"><span class="nav-text">S3IM</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Volume-Rendering"><span class="nav-text">Volume Rendering</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NeuS"><span class="nav-text">NeuS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NeuRodin"><span class="nav-text">NeuRodin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ReTR"><span class="nav-text">ReTR</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mixture-of-Experts-MoE"><span class="nav-text">Mixture of Experts (MoE)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Boost-Your-NeRF"><span class="nav-text">Boost Your NeRF</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Efficiency"><span class="nav-text">Efficiency</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Explicit-Grids"><span class="nav-text">Explicit Grids</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NGP-RT"><span class="nav-text">NGP-RT</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MIMO-MLP"><span class="nav-text">MIMO MLP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MIMO-NeRF"><span class="nav-text">MIMO-NeRF</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Points-Sampling"><span class="nav-text">Points Sampling</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HashPoint"><span class="nav-text">HashPoint</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pixel-Sampling"><span class="nav-text">Pixel Sampling</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Soft-Mining"><span class="nav-text">Soft Mining</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Shooting-Much-Fewer-Rays"><span class="nav-text">Shooting Much Fewer Rays</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iNeRF"><span class="nav-text">iNeRF</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qi Yun"
+      src="/images/avatar.jpeg">
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">140</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/qiyun71" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;qiyun71" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/29010355" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;29010355" rel="noopener" target="_blank"><i class="fa fa-star fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qi Yun</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">486k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">29:27</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/yqq/anime.min.js"></script>
+  <script src="/yqq/velocity/velocity.min.js"></script>
+  <script src="/yqq/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

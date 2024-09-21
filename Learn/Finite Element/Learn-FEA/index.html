@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/yqq/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Basic of Finite Element Analysis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Finite Element Learning Note">
+<meta property="og:url" content="http://example.com/Learn/Finite%20Element/Learn-FEA/index.html">
+<meta property="og:site_name" content="QiYun">
+<meta property="og:description" content="Basic of Finite Element Analysis">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240708153849.png">
+<meta property="article:published_time" content="2024-05-25T14:10:37.000Z">
+<meta property="article:modified_time" content="2024-09-20T13:59:17.139Z">
+<meta property="article:author" content="Qi Yun">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240708153849.png">
+
+<link rel="canonical" href="http://example.com/Learn/Finite%20Element/Learn-FEA/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Finite Element Learning Note | QiYun</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">QiYun</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Note</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/Learn/Finite%20Element/Learn-FEA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiYun">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Finite Element Learning Note
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2024-05-25 22:10:37" itemprop="dateCreated datePublished" datetime="2024-05-25T22:10:37+08:00">2024-05-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-09-20 21:59:17" itemprop="dateModified" datetime="2024-09-20T21:59:17+08:00">2024-09-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Learn/" itemprop="url" rel="index"><span itemprop="name">Learn</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>1.2k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>4 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Basic of Finite Element Analysis</p>
+<span id="more"></span>
+<h1 id="Finite-Element"><a href="#Finite-Element" class="headerlink" title="Finite Element"></a>Finite Element</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv15083732/?spm_id_from=333.788.0.0">有限元讨论班大纲 - 哔哩哔哩</a></p>
+</blockquote>
+<p>有限元分析（Finite Element Analysis，FEA）有时又被称作有限元方法（Finite Element Method，FEM），二者基本可以混用，微小的区别在于，FEM 侧重于整套理论而 FEA 侧重于应用 FEM 于具体工程问题。</p>
+<h2 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/681621600">有限元入门—Understanding the Finite Element Method | The Efficient Engineer的部分笔记 - 知乎</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/348729395">网格划分：六面体和四面体该怎么选择？ - 知乎</a> 六面体计算收敛速度快，四面体计算收敛慢。<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/56326567">有限元分析（FEA）是个什么东东 - 知乎</a> <strong>有限元法就是为了求解偏微分方程！</strong> <strong>获得微分方程的“弱形式”解</strong><br>    <a target="_blank" rel="noopener" href="https://cn.comsol.com/multiphysics/finite-element-method">有限元法（FEM）详解</a><br><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/523893840">(72 封私信 / 80 条消息) 数值pde与深度学习结合是未来发展方向吗？ - 知乎</a> PINN <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/468748367">​内嵌物理知识神经网络（PINN）是个坑吗？ - 知乎</a></p>
+</blockquote>
+<p>有限元模型：</p>
+<ul>
+<li>节点nodes和元素/单元elements的集合称为有限元网格(finite element mesh)<ul>
+<li>元素elements：线元素line elements用于建模杆等一维结构、表面元素surface elements用于模拟薄壳等薄表面、实体元素solid elements用于建模三维实体，如四面体Tet，六面体Hex</li>
+<li><strong>复杂的几何体通常只能使用tri三角形和tet四面体元素进行网格划分。四边形quad和六面体hex元素最适合规则几何图形，在规则几何图形中，它们优于三角形和三角形元素，因为它们效率更高且需要的节点更少</strong></li>
+<li>元素可以是线性的（也称为一阶元素，linear or first-order elements）或二次的（二阶元素，quadratic or second-order elements）。<strong>二次元素在元素的每一侧都有附加的中间节点</strong>。它们需要更多的计算能力，但通常比线性元素产生更准确的结果。线性四面体元素（例如<strong>TET4</strong>，一种4节点四面体元素）可能表现出过度僵硬的行为，应避免使用它们-通常应使用<strong>TET10</strong>二次四面体元素</li>
+</ul>
+</li>
+<li>自由度：有限元网格中的每个节点都有一定数量的自由度，<em>在二维应力分析中，每个节点有3个自由度——在X轴和Y轴上平移，以及绕Z轴旋转。对于热分析，每个节点都有一个自由度，即节点温度。</em></li>
+</ul>
+<h1 id="有限元分析软件"><a href="#有限元分析软件" class="headerlink" title="有限元分析软件"></a>有限元分析软件</h1><h2 id="Solidworks"><a href="#Solidworks" class="headerlink" title="Solidworks"></a>Solidworks</h2><p>建立好的模型导出为<code>.x_t</code>格式</p>
+<p>将Solid 转换成Surface：</p>
+<ul>
+<li><strong>Delete Face</strong></li>
+<li>Offset</li>
+</ul>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Fx0jX_7aJHM">How To Convert Solid To Surface Body In SolidWorks - YouTube</a></p>
+</blockquote>
+<h2 id="Patran"><a href="#Patran" class="headerlink" title="Patran"></a>Patran</h2><p>Preferences —&gt; Geometry 单位制 inches/m/mm，不同的单位设置材料特性时会有差异</p>
+<p>eg(钢板): E = 210GPa，$\rho = 7860 Kg/m^{3}$<br>mm制：</p>
+<ul>
+<li>Elastic Modulus/Shear Modulus：(210000)MPa/(83000)MPa</li>
+<li>Poisson Ratio(0.25)：注意设置了E和G后，Poisson Ratio会自动计算(根据钢板算例测试出来的)</li>
+<li>Density：(7.8599998E-09)$Kgf \cdot s^{2} /mm^{4}$ $(Kg/m^{3} =kgf \cdot s^{2}/m^{4})$ $(1Kgf = 9.8N = 9.8 Kg \cdot m/s^{2})$</li>
+</ul>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://wenku.baidu.com/view/9f2572f37c1cfad6195fa7d6.html?fr=income1-doc-search&amp;_wkts_=1714641483975&amp;wkQuery=patran%E4%B8%AD%E6%95%B0%E6%8D%AE%E7%9A%84%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E5%8D%95%E4%BD%8D">patran中数据的输入输出单位 - 百度文库</a></p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240708153849.png" alt="image.png|666"></p>
+<h3 id="Mode-Frequency"><a href="#Mode-Frequency" class="headerlink" title="Mode Frequency"></a>Mode Frequency</h3><p>—&gt;生成 <strong>bdf</strong></p>
+<ol>
+<li>File —&gt; New —&gt; <code>*.db</code></li>
+<li>Menu —&gt; Preferences —&gt; Geometry —&gt; 1000.0 (Millimeters) —&gt; <strong>Apply</strong></li>
+<li>File —&gt; Import —&gt; <code>*.x_t</code> —&gt; <strong>Apply</strong> (Display —&gt; Smooth Shade)</li>
+<li>Meshing —&gt;(RHS) Mesh —&gt; Solid —&gt;(Main window) select solid —&gt; Automatic Calculation  —&gt; <strong>Apply</strong></li>
+<li>Properties —&gt; Isotropic —&gt;(RHS) <em>Material Name</em> —&gt; Input properties (Elastic Modulus: 210000, Shear Modulus: 83000, Density: 7.86E-09) —&gt; <strong>Apply</strong></li>
+<li>Properties —&gt; Solid —&gt; Propert Set Name —&gt;(RHS) Input properties —&gt; Mat Prop Name select <em>gangban(Material Name)</em> —&gt;  Select Application Region —&gt;(Main window) select solid —&gt; Add —&gt; <strong>Apply</strong></li>
+<li>Analysis —&gt; Solution Type —&gt; NORMAL MODES —&gt; Solution Type —&gt; Solution Parameters —&gt; Results Output Format(XDB or OP2) —&gt; Subcase —&gt; Subcase Parameters —&gt; Number of Desired Roots : 20 —&gt; <strong>Apply</strong> Run nastran —&gt; Get .bdf</li>
+</ol>
+<h2 id="Nastran"><a href="#Nastran" class="headerlink" title="Nastran"></a>Nastran</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/33538970">如何用matlab被nastran给整的明明白白 PART 1 KNOW YOUR ENEMY——.bdf文件 - 知乎 (zhihu.com)</a></p>
+<p>Nastran的Python库：<a target="_blank" rel="noopener" href="https://pynastran-git.readthedocs.io/en/1.3/index.html">Welcome to pyNastran’s documentation for v1.3! — pyNastran 1.3 1.3 documentation (pynastran-git.readthedocs.io)</a></p>
+<p>Debug: <a target="_blank" rel="noopener" href="https://www.scribd.com/doc/70652924/Nastran-Error-List-1">Nastran Error List 1. | PDF</a></p>
+<p><code>D:\Software\Nastran\Nastran_install\bin\nastranw.exe *.bdf</code></p>
+<h3 id="卫星算例-bdf"><a href="#卫星算例-bdf" class="headerlink" title="卫星算例.bdf"></a>卫星算例.bdf</h3><p>不同结构参数生成结构特征量FR</p>
+<figure class="highlight plaintext"><figcaption><span>file</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ Elements and Element Properties for region : Shear_Panels</span><br><span class="line">PSHELL   1       1      .003     1               1</span><br><span class="line"></span><br><span class="line">- 36  行 .003 Shear_Panels 厚度 theta5</span><br><span class="line">- 429 行 .002 Central_Cylinder 厚度 theta3</span><br><span class="line">- 666 行 .001 Adapter 厚度 theta2 本来应该是密度2.7</span><br><span class="line">- 723 行 .002 Upper_platform 厚度 theta6</span><br><span class="line">- 864 行 .001 Lower_platform 厚度 theta4</span><br><span class="line">- 1020行 7.   mat_N 弹性模量  theta1  </span><br><span class="line">- 1023行 7.   mat_CC</span><br><span class="line">- 1026行 7.   mat_L</span><br><span class="line">- 1029行 7.   mat_SP</span><br><span class="line">- 1032行 7.   mat_U</span><br><span class="line">- </span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>主弹性模量</strong>$\theta_1$ 70Gpa，</li>
+<li><strong>主密度</strong> $\theta_2$  ，密度2.7x $10^{3} kg/m^{3}$ (英文论文) or 适配器厚度 1mm(本 1)</li>
+<li><strong>中心筒厚度</strong>$\theta_3$ 2mm</li>
+<li>底板厚度 $\theta_4$ 1mm</li>
+<li><strong>剪切板厚度</strong>$\theta_5$ 2mm</li>
+<li>顶板厚度 $\theta_6$ 2.5mm</li>
+</ul>
+<h1 id="FEA二次开发-Python"><a href="#FEA二次开发-Python" class="headerlink" title="FEA二次开发(Python)"></a>FEA二次开发(Python)</h1><p>Ansys: </p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.reddit.com/r/ANSYS/comments/14pak2j/ansys_with_python/">Ansys与Python：r/ANSYS —- Ansys with Python : r/ANSYS</a><br><a target="_blank" rel="noopener" href="https://docs.pyansys.com/version/stable/">PyAnsys — PyAnsys</a></p>
+</blockquote>
+<p>Nastran: </p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://pynastran-git.readthedocs.io/en/1.3/index.html">Welcome to pyNastran’s documentation for v1.3! — pyNastran 1.3 1.3 documentation (pynastran-git.readthedocs.io)</a></p>
+</blockquote>
+<h1 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h1><h2 id="FE-amp-Blender"><a href="#FE-amp-Blender" class="headerlink" title="FE &amp; Blender"></a>FE &amp; Blender</h2><p>可否指教一下blender如何渲染abaqus求解文件odb？</p>
+<p>odb写个脚本导出obj文件，然后导进blender一张张渲染就好</p>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+1ZnNxFWnEbk5YzRl">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/Project/PyNastran/" rel="prev" title="Nastran by python">
+      <i class="fa fa-chevron-left"></i> Nastran by python
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/3DReconstruction/Multi-view/NeuS-based%203D%20Reconstruction/" rel="next" title="Multi-view 3D Reconstruction based on SDF and volume rendering">
+      Multi-view 3D Reconstruction based on SDF and volume rendering <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Finite-Element"><span class="nav-text">Finite Element</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic"><span class="nav-text">Basic</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%89%E9%99%90%E5%85%83%E5%88%86%E6%9E%90%E8%BD%AF%E4%BB%B6"><span class="nav-text">有限元分析软件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Solidworks"><span class="nav-text">Solidworks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Patran"><span class="nav-text">Patran</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mode-Frequency"><span class="nav-text">Mode Frequency</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nastran"><span class="nav-text">Nastran</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%AB%E6%98%9F%E7%AE%97%E4%BE%8B-bdf"><span class="nav-text">卫星算例.bdf</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#FEA%E4%BA%8C%E6%AC%A1%E5%BC%80%E5%8F%91-Python"><span class="nav-text">FEA二次开发(Python)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other"><span class="nav-text">Other</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#FE-amp-Blender"><span class="nav-text">FE &amp; Blender</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qi Yun"
+      src="/images/avatar.jpeg">
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">140</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/qiyun71" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;qiyun71" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/29010355" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;29010355" rel="noopener" target="_blank"><i class="fa fa-star fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qi Yun</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">486k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">29:27</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/yqq/anime.min.js"></script>
+  <script src="/yqq/velocity/velocity.min.js"></script>
+  <script src="/yqq/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

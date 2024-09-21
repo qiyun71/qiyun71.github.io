@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/yqq/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="论文代码复现(Linux OS)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Code of Multi-view 3D Reconstruction based on SDF and volume rendering">
+<meta property="og:url" content="http://example.com/3DReconstruction/Multi-view/Code%20of%20Multi-view%203D%20Reconstruction%20based%20on%20SDF%20and%20volume%20rendering/index.html">
+<meta property="og:site_name" content="QiYun">
+<meta property="og:description" content="论文代码复现(Linux OS)">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-09-03T13:52:05.000Z">
+<meta property="article:modified_time" content="2024-09-20T11:35:28.496Z">
+<meta property="article:author" content="Qi Yun">
+<meta property="article:tag" content="3DReconstruction">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/3DReconstruction/Multi-view/Code%20of%20Multi-view%203D%20Reconstruction%20based%20on%20SDF%20and%20volume%20rendering/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Code of Multi-view 3D Reconstruction based on SDF and volume rendering | QiYun</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">QiYun</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Note</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/3DReconstruction/Multi-view/Code%20of%20Multi-view%203D%20Reconstruction%20based%20on%20SDF%20and%20volume%20rendering/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiYun">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Code of Multi-view 3D Reconstruction based on SDF and volume rendering
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2024-09-03 21:52:05" itemprop="dateCreated datePublished" datetime="2024-09-03T21:52:05+08:00">2024-09-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-09-20 19:35:28" itemprop="dateModified" datetime="2024-09-20T19:35:28+08:00">2024-09-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/3DReconstruction-Multi-view/" itemprop="url" rel="index"><span itemprop="name">3DReconstruction/Multi-view</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>1.9k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>7 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>论文代码复现(Linux OS)</p>
+<span id="more"></span>
+<h1 id="基本必备工具"><a href="#基本必备工具" class="headerlink" title="基本必备工具"></a>基本必备工具</h1><h2 id="tiny-cuda-nn"><a href="#tiny-cuda-nn" class="headerlink" title="tiny-cuda-nn"></a>tiny-cuda-nn</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/NVlabs/tiny-cuda-nn#requirements">NVlabs/tiny-cuda-nn: Lightning fast C++/CUDA neural network framework</a></p>
+</blockquote>
+<p>环境需求</p>
+<ul>
+<li>A <strong>C++14</strong> capable compiler. The following choices are recommended and have been tested:<ul>
+<li><strong>Windows:</strong> Visual Studio 2019 or 2022</li>
+<li><strong>Linux:</strong> GCC/G++ 8 or higher</li>
+</ul>
+</li>
+<li>A recent version of <strong><a target="_blank" rel="noopener" href="https://developer.nvidia.com/cuda-toolkit">CUDA</a></strong>. The following choices are recommended and have been tested:<ul>
+<li><strong>Windows:</strong> CUDA 11.5 or higher</li>
+<li><strong>Linux:</strong> CUDA 10.2 or higher</li>
+</ul>
+</li>
+<li><strong><a target="_blank" rel="noopener" href="https://cmake.org/">CMake</a> v3.21 or higher</strong>.</li>
+</ul>
+<p>如果gcc、cmake的版本正确，则直接安装：</p>
+<ol>
+<li><code>sudo apt-get install build-essential git</code></li>
+<li>然后对tiny-cuda-nn进行编译，此处需要用到cuda，因此需要带GPU模式开机</li>
+<li><code>git clone --recursive &quot;https://github.com/nvlabs/tiny-cuda-nn&quot;</code><ol>
+<li><code>cd tiny-cuda-nn</code></li>
+<li><code>cmake . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo</code></li>
+<li><code>cmake --build build --config RelWithDebInfo -j</code></li>
+</ol>
+</li>
+<li>最后运行setup.py，如果不在全局环境安装，亦可在conda虚拟环境中安装<ol>
+<li><code>cd bindings/torch</code></li>
+<li><code>python setup.py install</code></li>
+</ol>
+</li>
+</ol>
+<h3 id="gcc-install-update"><a href="#gcc-install-update" class="headerlink" title="gcc install/update"></a>gcc install/update</h3><ol>
+<li>下载 <a target="_blank" rel="noopener" href="https://ftp.gnu.org/gnu/gcc/gcc-9.4.0/">Index of /gnu/gcc/gcc-9.4.0</a> 的 gcc-9.4.0.tar.gz</li>
+<li>将文件解压到/usr/local目录下面 <code>tar -zvxf gcc-9.4.0.tar.gz --directory=/usr/local/</code></li>
+<li><code>vim /usr/local/gcc-9.4.0/contrib/download_prerequisites</code> 查看gcc所需依赖及其版本<ol>
+<li>gmp=’gmp-6.1.0.tar.bz2’</li>
+<li>mpfr=’mpfr-3.1.4.tar.bz2’</li>
+<li>mpc=’mpc-1.0.3.tar.gz’</li>
+<li>isl=’isl-0.18.tar.bz2’</li>
+</ol>
+</li>
+<li>下载所有依赖 <a target="_blank" rel="noopener" href="https://gcc.gnu.org/pub/gcc/infrastructure/">Index of /pub/gcc/infrastructure</a> </li>
+<li>解压依赖<ol>
+<li><code>tar -jvxf gmp-6.1.0.tar.bz2 --directory=/usr/local/gcc-9.4.0/</code></li>
+<li><code>tar -jvxf mpfr-3.1.4.tar.bz2 --directory=/usr/local/gcc-9.4.0/</code></li>
+<li><code>tar -zvxf mpc-1.0.3.tar.gz --directory=/usr/local/gcc-9.4.0/</code></li>
+<li><code>tar -jvxf isl-0.18.tar.bz2 --directory=/usr/local/gcc-9.4.0/</code></li>
+</ol>
+</li>
+<li>为新下载的依赖建立软链接 <strong>gcc-9.4.0目录下</strong><ol>
+<li><code>cd /usr/local/gcc-9.4.0/</code></li>
+<li>sudo ln -sf gmp-6.1.0 gmp</li>
+<li>sudo ln -sf isl-0.18 isl</li>
+<li>sudo ln -sf mpc-1.0.3 mpc</li>
+<li>sudo ln -sf mpfr-3.1.4 mpfr</li>
+<li>查看软连接<code>ls -l | grep ^l</code></li>
+</ol>
+</li>
+<li>编译并安装gcc <ol>
+<li><code>mkdir build &amp;&amp; cd build</code></li>
+<li><code>../configure -enable-checking=release -enable-languages=c,c++ -disable-multilib --disable-nls</code> NOTE: 需要禁用 NLS</li>
+<li>成功后会出现 config.log config.status Makefile serdep.tmp</li>
+<li><code>sudo make -j4 &amp;&amp; sudo make install</code></li>
+</ol>
+</li>
+<li>更新gcc (安装完后gcc -version,你会发现显示的还是原来的版本eg: 7.5.0)<ol>
+<li>备份一下原来的gcc<ol>
+<li><code>sudo mv /usr/bin/gcc /usr/bin/gcc750</code></li>
+<li><code>sudo mv /usr/bin/g++ /usr/bin/g++750</code></li>
+<li><code>sudo mv /usr/bin/c++ /usr/bin/c++750</code></li>
+<li><code>sudo mv /usr/bin/cc /usr/bin/cc750</code></li>
+<li><code>sudo mv /usr/local/lib64/libstdc++.so.6 /usr/local/lib64/libstdc++.so.6.bak</code> # mv: cannot stat ‘/usr/lib64/libstdc++.so.6’: No such file or directory</li>
+</ol>
+</li>
+<li>软连接 # 安装的gcc新版本位于/usr/local/bin<ol>
+<li><code>sudo ln -s /usr/local/bin/gcc /usr/bin/gcc</code></li>
+<li><code>sudo ln -s /usr/local/bin/g++ /usr/bin/g++</code></li>
+<li><code>sudo ln -s /usr/local/bin/c++ /usr/bin/c++</code></li>
+<li><code>sudo ln -s /usr/local/bin/gcc /usr/bin/cc</code></li>
+<li><code>sudo ln -s /usr/local/lib64/libstdc++.so.6.0.28 /usr/local/lib64/libstdc++.so.6</code></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p>Error:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">make -j4 &amp;&amp; make install</span><br><span class="line"></span><br><span class="line">*** LIBRARY_PATH shouldn&#x27;t contain the current directory when</span><br><span class="line">*** building gcc. Please change the environment variable</span><br><span class="line">*** and run configure again.V</span><br><span class="line">Makefile:4371: recipe for target &#x27;configure-stage1-gcc&#x27; failedR</span><br><span class="line">make[2]: *** [configure-stage1-gcc] Error 1_</span><br><span class="line">make[2]: Leaving directory &#x27;/usr/local/gcc-9.4.0/build&#x27;L</span><br><span class="line">Makefile:25683: recipe for target &#x27;stage1-bubble&#x27; failedI</span><br><span class="line">make[1]: *** [stage1-bubble] Error 2O</span><br><span class="line">make[1]: Leaving directory &#x27;/usr/local/gcc-9.4.0/build&#x27;U</span><br><span class="line">Makefile:999: recipe for target &#x27;all&#x27; failedA</span><br><span class="line">make: *** [all] Error 2</span><br><span class="line"></span><br><span class="line">echo $LIBRARY_PATHR</span><br><span class="line">:/usr/local/cuda-10.0/lib64</span><br><span class="line"></span><br><span class="line">`LIBRARY_PATH` 中的空条目是由前导的冒号 `:` 产生的。前导的冒号表示路径列表的第一个条目为空，这等价于当前目录 `.`</span><br><span class="line"></span><br><span class="line">解决方法：</span><br><span class="line">export LIBRARY_PATH=/usr/local/cuda-10.0/lib64</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">make -j4 &amp;&amp; make install</span><br><span class="line"></span><br><span class="line">/usr/bin/msgfmt: error while opening &quot;../../gcc/po/ru.po&quot; for reading: PermissiR</span><br><span class="line">on denied_</span><br><span class="line">Makefile:4222: recipe for target &#x27;po/ru.gmo&#x27; failedL</span><br><span class="line">make[3]: *** [po/ru.gmo] Error 1I</span><br><span class="line">make[3]: *** Waiting for unfinished jobs....O</span><br><span class="line">make[3]: Leaving directory &#x27;/usr/local/gcc-9.4.0/build/gcc&#x27;U</span><br><span class="line">Makefile:4672: recipe for target &#x27;all-stage1-gcc&#x27; failedA</span><br><span class="line">make[2]: *** [all-stage1-gcc] Error 2_</span><br><span class="line">make[2]: Leaving directory &#x27;/usr/local/gcc-9.4.0/build&#x27;l</span><br><span class="line">Makefile:25683: recipe for target &#x27;stage1-bubble&#x27; failed </span><br><span class="line">make[1]: *** [stage1-bubble] Error 2</span><br><span class="line">make[1]: Leaving directory &#x27;/usr/local/gcc-9.4.0/build&#x27;_</span><br><span class="line">Makefile:999: recipe for target &#x27;all&#x27; failedV</span><br><span class="line">make: *** [all] Error 2</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">sudo make -j4 &amp;&amp; make install</span><br><span class="line"></span><br><span class="line">/usr/bin/msgfmt: found 2 fatal errors_</span><br><span class="line">Makefile:4222: recipe for target &#x27;po/ru.gmo&#x27; failedI</span><br><span class="line">make[3]: *** [po/ru.gmo] Error 11</span><br><span class="line">make[3]: *** Waiting for unfinished jobs....-</span><br><span class="line">/bin/bash ../../gcc/../move-if-change tmp-optionlist optionlistl</span><br><span class="line">echo timestamp &gt; s-options</span><br><span class="line">make[3]: *** wait: No child processes.  Stop._</span><br><span class="line">Makefile:4672: recipe for target &#x27;all-stage1-gcc&#x27; failedV</span><br><span class="line">make[2]: *** [all-stage1-gcc] Error 2A</span><br><span class="line">make[2]: Leaving directory &#x27;/usr/local/gcc-9.4.0/build&#x27;1</span><br><span class="line">Makefile:25683: recipe for target &#x27;stage1-bubble&#x27; failedT</span><br><span class="line">make[1]: *** [stage1-bubble] Error 2F</span><br><span class="line">make[1]: Leaving directory &#x27;/usr/local/gcc-9.4.0/build&#x27;_</span><br><span class="line">Makefile:999: recipe for target &#x27;all&#x27; failedI</span><br><span class="line">make: *** [all] Error 2</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">rm -rf build</span><br><span class="line">mkdir build &amp;&amp; cd build</span><br><span class="line">../configure -enable-checking=release -enable-languages=c,c++ -disable-multilib --disable-nls</span><br><span class="line">sudo make -j4 &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">sudo make -j4 &amp;&amp; make install</span><br><span class="line"></span><br><span class="line">mkdir: cannot create directory ‘/usr/local/libexec’: Permission denied</span><br><span class="line">Makefile:181: recipe for target &#x27;install&#x27; failed</span><br><span class="line">make[2]: *** [install] Error 1_</span><br><span class="line">make[2]: Leaving directory &#x27;/usr/local/gcc-9.4.0/build/fixincludes&#x27;V</span><br><span class="line">Makefile:3815: recipe for target &#x27;install-fixincludes&#x27; failedA</span><br><span class="line">make[1]: *** [install-fixincludes] Error 21</span><br><span class="line">make[1]: Leaving directory &#x27;/usr/local/gcc-9.4.0/build&#x27;T</span><br><span class="line">Makefile:2382: recipe for target &#x27;install&#x27; failedF</span><br><span class="line">make: *** [install] Error 2</span><br><span class="line"></span><br><span class="line">sudo make install</span><br><span class="line"></span><br><span class="line">安装成功：</span><br><span class="line">----------------------------------------------------------------------_</span><br><span class="line">Libraries have been installed in:I</span><br><span class="line">   /usr/local/lib/../lib641</span><br><span class="line">-</span><br><span class="line">If you ever happen to want to link against installed libraries</span><br><span class="line">in a given directory, LIBDIR, you must either use libtool, and</span><br><span class="line">specify the full pathname of the library, or use the `-LLIBDIR&#x27;V</span><br><span class="line">flag during linking and do at least one of the following:R</span><br><span class="line">   - add LIBDIR to the `LD_LIBRARY_PATH&#x27; environment variable_</span><br><span class="line">     during executionL</span><br><span class="line">   - add LIBDIR to the `LD_RUN_PATH&#x27; environment variableI</span><br><span class="line">     during linkingO</span><br><span class="line">   - use the `-Wl,-rpath -Wl,LIBDIR&#x27; linker flagU</span><br><span class="line">   - have your system administrator add LIBDIR to `/etc/ld.so.conf&#x27;A</span><br><span class="line">_</span><br><span class="line">See any operating system documentation about shared libraries forl</span><br><span class="line">more information, such as the ld(1) and ld.so(8) manual pages.i</span><br><span class="line">----------------------------------------------------------------------</span><br><span class="line">make[4]: Nothing to be done for &#x27;install-data-am&#x27;.</span><br><span class="line">make[4]: Leaving directory &#x27;/usr/local/gcc-9.4.0/build/x86_64-pc-linux-gnu/liba</span><br><span class="line">tomic&#x27;V</span><br><span class="line">make[3]: Leaving directory &#x27;/usr/local/gcc-9.4.0/build/x86_64-pc-linux-gnu/libaR</span><br><span class="line">tomic&#x27;_</span><br><span class="line">make[2]: Leaving directory &#x27;/usr/local/gcc-9.4.0/build/x86_64-pc-linux-gnu/libaL</span><br><span class="line">tomic&#x27;I</span><br><span class="line">make[1]: Leaving directory &#x27;/usr/local/gcc-9.4.0/build&#x27;</span><br></pre></td></tr></table></figure>
+<h3 id="cmake"><a href="#cmake" class="headerlink" title="cmake"></a>cmake</h3><ol>
+<li><code>wget https://cmake.org/files/v3.21/cmake-3.21.0.tar.gz</code></li>
+<li><code>tar -zxvf cmake-3.21.0.tar.gz</code></li>
+<li><code>cd cmake-3.21.0</code></li>
+<li><code>./bootstrap &amp;&amp; make &amp;&amp; sudo make install</code></li>
+<li><code>cmake --version</code></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">./bootstrap &amp;&amp; make &amp;&amp; sudo make install</span><br><span class="line"></span><br><span class="line">/home/user/Torch_projects/NeuRodin/cmake-3.21.0/Bootstrap.cmk/cmake: /usr/lib/V</span><br><span class="line">x86_64-linux-gnu/libstdc++.so.6: version `GLIBCXX_3.4.26&#x27; not found (required bR</span><br><span class="line">y /home/user/Torch_projects/NeuRodin/cmake-3.21.0/Bootstrap.cmk/cmake)</span><br><span class="line"></span><br><span class="line">ls -l /usr/lib/x86_64-linux-gnu/libstdc++.so.6</span><br><span class="line"></span><br><span class="line">lrwxrwxrwx 1 root root 19 Mar 10  2020 /usr/lib/x86_64-linux-gnu/libstdc++.so.6R</span><br><span class="line"> -&gt; libstdc++.so.6.0.25</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">临时设置环境变量，让其优先使用/usr/local/lib64中的libstdc++.so.6.0.28</span><br><span class="line">export LD_LIBRARY_PATH=/usr/local/lib64:$LD_LIBRARY_PATH</span><br><span class="line">./bootstrap &amp;&amp; make &amp;&amp; sudo make install</span><br><span class="line"></span><br><span class="line">sudo make install</span><br><span class="line"></span><br><span class="line">/home/user/Torch_projects/NeuRodin/cmake-3.21.0/Bootstrap.cmk/cmake: /usr/lib/</span><br><span class="line">x86_64-linux-gnu/libstdc++.so.6: version `GLIBCXX_3.4.26&#x27; not found (required b1</span><br><span class="line">y /home/user/Torch_projects/NeuRodin/cmake-3.21.0/Bootstrap.cmk/cmake)-</span><br><span class="line">Makefile:1396: recipe for target &#x27;cmake_check_build_system&#x27; failed</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">将/usr/lib/x86_64-linux-gnu/libstdc++.so.6 连接到新的libstdc++</span><br><span class="line">备份 sudo mv /usr/lib/x86_64-linux-gnu/libstdc++.so.6 /usr/lib/x86_64-linux-gnu/libstdc++.so.6.bak</span><br><span class="line">sudo ln -s /usr/local/lib64/libstdc++.so.6 /usr/lib/x86_64-linux-gnu/libstdc++.so.6 </span><br><span class="line"></span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+<h2 id="torch"><a href="#torch" class="headerlink" title="torch"></a>torch</h2><h1 id="NeuRodin"><a href="#NeuRodin" class="headerlink" title="NeuRodin"></a>NeuRodin</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/Open3DVLab/NeuRodin">Open3DVLab/NeuRodin: NeuRodin: A Two-stage Framework for High-Fidelity Neural Surface Reconstruction</a></p>
+</blockquote>
+<h2 id="DTU-SDFStudio"><a href="#DTU-SDFStudio" class="headerlink" title="DTU(SDFStudio)"></a>DTU(SDFStudio)</h2><p>物体级别直接重建效果很差，可能需要调整代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># Stage 1</span><br><span class="line">ns-train neurodin-stage1-indoor-small --experiment_name neurodin-21d970d8de-stage1 --pipeline.datamanager.camera_res_scale_factor 0.5 sdfstudio-data --data data/scan114 --scale_factor 0.8</span><br><span class="line"></span><br><span class="line"># Stage 2</span><br><span class="line">ns-train neurodin-stage2-indoor-small --experiment_name neurodin-21d970d8de-stage2 --trainer.load_dir ./outputs/neurodin-21d970d8de-stage1/neurodin/2024-09-03_221947/sdfstudio_models/ --pipeline.datamanager.camera_res_scale_factor 0.5 sdfstudio-data --data data/scan114 --scale_factor 0.8</span><br><span class="line"></span><br><span class="line"># Evaluation</span><br><span class="line">python zoo/extract_surface.py --conf ./outputs/neurodin-21d970d8de-stage2/neurodin/2024-09-04_091549/config.yml --resolution 2048</span><br></pre></td></tr></table></figure>
+<h2 id="TNT-SDFStudio"><a href="#TNT-SDFStudio" class="headerlink" title="TNT(SDFStudio)"></a>TNT(SDFStudio)</h2><p><strong>(3090) scan4</strong></p>
+<p>场景经过两阶段训练后(22h)，效果也不是很好</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># Stage 1</span><br><span class="line">ns-train neurodin-stage1-indoor-large --experiment_name neurodin-Meetingroom-stage1 --pipeline.datamanager.eval_camera_res_scale_factor 0.5 sdfstudio-data --data data/scan4</span><br><span class="line"></span><br><span class="line">python zoo/extract_surface.py --conf ./outputs/neurodin-Meetingroom-stage1/neurodin/2024-09-04_161300/config.yml --resolution 2048</span><br><span class="line"></span><br><span class="line"># Stage 2</span><br><span class="line">ns-train neurodin-stage2-indoor-large --experiment_name neurodin-Meetingroom-stage2 --pipeline.datamanager.eval_camera_res_scale_factor 0.5 --trainer.load_dir ./outputs/neurodin-Meetingroom-stage1/neurodin/2024-09-04_161300/sdfstudio_models sdfstudio-data --data data/scan4</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">python zoo/extract_surface.py --conf ./outputs/neurodin-Meetingroom-stage2/neurodin/2024-09-04_205800/config.yml --resolution 2048</span><br></pre></td></tr></table></figure>
+<p><strong>(V100) scan1</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># Stage 1</span><br><span class="line">ns-train neurodin-stage1-indoor-large --experiment_name neurodin-Meetingroom-stage1 --pipeline.datamanager.eval_camera_res_scale_factor 0.5 sdfstudio-data --data data/scan1</span><br><span class="line"></span><br><span class="line">python zoo/extract_surface.py --conf ./outputs/neurodin-Meetingroom-stage1/neurodin/2024-09-04_205249/config.yml --resolution 2048</span><br><span class="line"></span><br><span class="line"># Stage 2</span><br><span class="line">ns-train neurodin-stage2-indoor-large --experiment_name neurodin-Meetingroom-stage2 --pipeline.datamanager.eval_camera_res_scale_factor 0.5 --trainer.load_dir outputs/neurodin-Meetingroom-stage1/neurodin/2024-09-04_205249/sdfstudio_models sdfstudio-data --data data/scan1</span><br><span class="line"></span><br><span class="line">python zoo/extract_surface.py --conf ./outputs/neurodin-Meetingroom-stage2/neurodin/2024-09-05_125813/config.yml --resolution 2048</span><br></pre></td></tr></table></figure>
+<p><strong>(V100) scan2</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># Stage 1</span><br><span class="line">ns-train neurodin-stage1-indoor-large --experiment_name neurodin-scan2-stage1 --pipeline.datamanager.eval_camera_res_scale_factor 0.5 sdfstudio-data --data data/scan2</span><br><span class="line"></span><br><span class="line">python zoo/extract_surface.py --conf ./outputs/neurodin-Meetingroom-stage1/neurodin/2024-09-04_205249/config.yml --resolution 2048</span><br><span class="line"></span><br><span class="line"># Stage 2</span><br><span class="line">ns-train neurodin-stage2-indoor-large --experiment_name neurodin-scan2-stage2 --pipeline.datamanager.eval_camera_res_scale_factor 0.5 --trainer.load_dir outputs/neurodin-scan2-stage1/neurodin/2024-09-07_144834/sdfstudio_models sdfstudio-data --data data/scan2</span><br><span class="line"></span><br><span class="line">python zoo/extract_surface.py --conf ./outputs/neurodin-Meetingroom-stage2/neurodin/2024-09-05_125813/config.yml --resolution 2048</span><br></pre></td></tr></table></figure>
+<h1 id="Instant-nsr-pl"><a href="#Instant-nsr-pl" class="headerlink" title="Instant-nsr-pl"></a>Instant-nsr-pl</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/bennyguo/instant-nsr-pl">bennyguo/instant-nsr-pl: Neural Surface reconstruction based on Instant-NGP. Efficient and customizable boilerplate for your research projects. Train NeuS in 10min!</a></p>
+</blockquote>
+<h2 id="NeRF-Synthetic"><a href="#NeRF-Synthetic" class="headerlink" title="NeRF-Synthetic"></a>NeRF-Synthetic</h2><h2 id="Blended-MVS"><a href="#Blended-MVS" class="headerlink" title="Blended_MVS"></a>Blended_MVS</h2><h2 id="DTU"><a href="#DTU" class="headerlink" title="DTU"></a>DTU</h2><h2 id="自定义数据集"><a href="#自定义数据集" class="headerlink" title="自定义数据集"></a>自定义数据集</h2>
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+1ZnNxFWnEbk5YzRl">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/3DReconstruction/" rel="tag"><i class="fa fa-tag"></i> 3DReconstruction</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/3DReconstruction/Multi-view/Learning-based%20Multi-View%20Stereo%20A%20Survey/" rel="prev" title="Learning-based Multi-View Stereo: A Survey">
+      <i class="fa fa-chevron-left"></i> Learning-based Multi-View Stereo: A Survey
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/Learn/Python/Data%20Analysis/" rel="next" title="Data Analysis">
+      Data Analysis <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%BF%85%E5%A4%87%E5%B7%A5%E5%85%B7"><span class="nav-text">基本必备工具</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#tiny-cuda-nn"><span class="nav-text">tiny-cuda-nn</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#gcc-install-update"><span class="nav-text">gcc install&#x2F;update</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cmake"><span class="nav-text">cmake</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#torch"><span class="nav-text">torch</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NeuRodin"><span class="nav-text">NeuRodin</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DTU-SDFStudio"><span class="nav-text">DTU(SDFStudio)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TNT-SDFStudio"><span class="nav-text">TNT(SDFStudio)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Instant-nsr-pl"><span class="nav-text">Instant-nsr-pl</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#NeRF-Synthetic"><span class="nav-text">NeRF-Synthetic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Blended-MVS"><span class="nav-text">Blended_MVS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DTU"><span class="nav-text">DTU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-text">自定义数据集</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qi Yun"
+      src="/images/avatar.jpeg">
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">140</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/qiyun71" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;qiyun71" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/29010355" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;29010355" rel="noopener" target="_blank"><i class="fa fa-star fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qi Yun</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">486k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">29:27</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/yqq/anime.min.js"></script>
+  <script src="/yqq/velocity/velocity.min.js"></script>
+  <script src="/yqq/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

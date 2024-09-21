@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/yqq/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="通过多视图三维重建获得三维模型，用于有限元分析&#x2F;工业设计指导">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Finite Element Model 3D Reconstruction">
+<meta property="og:url" content="http://example.com/3DReconstruction/Finite%20Element%20Model%203D%20Reconstruction/index.html">
+<meta property="og:site_name" content="QiYun">
+<meta property="og:description" content="通过多视图三维重建获得三维模型，用于有限元分析&#x2F;工业设计指导">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-08-27T13:32:35.000Z">
+<meta property="article:modified_time" content="2024-09-07T09:18:14.017Z">
+<meta property="article:author" content="Qi Yun">
+<meta property="article:tag" content="3DReconstruction">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/3DReconstruction/Finite%20Element%20Model%203D%20Reconstruction/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Finite Element Model 3D Reconstruction | QiYun</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">QiYun</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Note</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/3DReconstruction/Finite%20Element%20Model%203D%20Reconstruction/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiYun">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Finite Element Model 3D Reconstruction
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2024-08-27 21:32:35" itemprop="dateCreated datePublished" datetime="2024-08-27T21:32:35+08:00">2024-08-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-09-07 17:18:14" itemprop="dateModified" datetime="2024-09-07T17:18:14+08:00">2024-09-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/3DReconstruction/" itemprop="url" rel="index"><span itemprop="name">3DReconstruction</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>1.1k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>4 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>通过多视图三维重建获得三维模型，用于有限元分析/工业设计指导</p>
+<span id="more"></span>
+<h1 id="IDEA"><a href="#IDEA" class="headerlink" title="IDEA"></a>IDEA</h1><h2 id="直接重建模型"><a href="#直接重建模型" class="headerlink" title="直接重建模型"></a>直接重建模型</h2><p>三维重建出点云模型，然后根据点云得到有限元模型，并对有限元模型进行修正。难点在于：</p>
+<ul>
+<li><strong>三维重建</strong>：三维重建出来的点云精度要高，要能准确得到重建物体的尺寸(摄影测量)</li>
+<li>格式转换：点云模型如何转换成有限元模型(例如Patran的.x_t格式文件，或者经过处理直接用点云坐标替换bdf文件中的网格节点坐标)<ul>
+<li>Surface mesh to Volume mesh</li>
+</ul>
+</li>
+<li>模型修正：确定的or区间的or随机的，修正出来的有限元仿真响应能否真实反映实际测量的响应特征</li>
+<li>数据集：<ul>
+<li>图片数据，要拍摄哪些种类的物体(工况)，要有实际的意义(例如机械结构、土木结构等)</li>
+<li>模型修正响应，得到有限元模型后，通过Nastran仿真计算输出响应，响应特征的选取</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://support.ntop.com/hc/en-us/articles/360037005234-How-to-create-an-FE-Volume-Mesh">How to create an FE Volume Mesh – nTop</a> Design Analysis 设计分析 + Topology Optimization 拓扑优化(<a target="_blank" rel="noopener" href="https://www.ntop.com/software/products/">nTop</a>软件不错)</p>
+</blockquote>
+<h2 id="间接重建模型"><a href="#间接重建模型" class="headerlink" title="间接重建模型"></a>间接重建模型</h2><p>首先获得物体的边缘，然后根据CAD或者Solidworks建立准确的三维模型</p>
+<h1 id="文献调研"><a href="#文献调研" class="headerlink" title="文献调研"></a>文献调研</h1><h2 id="3D边缘重建"><a href="#3D边缘重建" class="headerlink" title="3D边缘重建"></a>3D边缘重建</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2405.19295">3D Neural Edge Reconstruction | PDF</a></p>
+</blockquote>
+<h2 id="CAD-指令流"><a href="#CAD-指令流" class="headerlink" title="CAD 指令流"></a>CAD 指令流</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Year</th>
+<th>Paper</th>
+<th>研究对象</th>
+<th>研究内容</th>
+<th>研究方法</th>
+<th>Important for me</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2023</td>
+<td><a target="_blank" rel="noopener" href="https://content.iospress.com/articles/integrated-computer-aided-engineering/ica230710">3D reconstruction based on hierarchical reinforcement learning with transferability - IOS Press</a><br></td>
+<td>3D模型</td>
+<td>3D重建 CAD 指令</td>
+<td>Reinforcement Learning (RL), CAD</td>
+<td>强化学习、CAD指令学习</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="激光雷达扫描仪"><a href="#激光雷达扫描仪" class="headerlink" title="激光雷达扫描仪"></a>激光雷达扫描仪</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Year</th>
+<th>Paper</th>
+<th>研究对象</th>
+<th>研究内容</th>
+<th>研究方法</th>
+<th>Important for me</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2023</td>
+<td><a href="Concrete%20spalling%20damage%20detection%20and%20seismic%20performance%20evaluation%20for%20RC%20shear%20walls%20via%203D%20reconstruction%20technique%20and%20numerical%20model%20updating.md">Concrete spalling damage detection and seismic performance evaluation for RC shear walls via 3D reconstruction technique and numerical model updating</a><br>Automation in Construction<br></td>
+<td>钢筋混凝土<em>RC</em>剪力墙<br></td>
+<td>损伤检测，抗震性能评估</td>
+<td>Numerical model updating+3D reconstruction(智能手机内置的激光雷达扫描仪)</td>
+<td>通过<strong>信息转移点矩阵</strong>的新概念，建立了被检墙重构的三维点云模型中隐藏的缺陷信息与其对应有限元模型的性能变化之间的映射关系。实验结果表明，所提出的方法能够成功定位混凝土剥落损伤，量化被检测试件的承载力变化<br>创新：之前很少研究混凝土剥落损伤与钢筋混凝土剪力墙残余承载力之间的关系</td>
+</tr>
+<tr>
+<td>2021<br><br></td>
+<td><a target="_blank" rel="noopener" href="https://journals.sagepub.com/doi/10.1177/14759217211010238">A novel intelligent inspection robot with deep stereo vision for three-dimensional concrete damage detection and quantification - Cheng Yuan, Bing Xiong, Xiuquan Li, Xiaohan Sang, Qingzhao Kong, 2022</a> <br>Structural Health Monitoring</td>
+<td><em>RC</em><br>reinforced concrete structures</td>
+<td>裂纹评估</td>
+<td>智能检测机器人 with deep stereo vision</td>
+<td></td>
+</tr>
+<tr>
+<td>2021</td>
+<td><a target="_blank" rel="noopener" href="https://onlinelibrary.wiley.com/doi/10.1002/suco.202100194">Automated finite element modeling and analysis of cracked reinforced concrete beams from three dimensional point cloud - Yu - 2021 - Structural Concrete - Wiley Online Library</a><br>Structural Concrete<br></td>
+<td>裂纹RC梁</td>
+<td>自动有限元建模和分析</td>
+<td>点云三维建模</td>
+<td>利用收集到的三维点数据自动生成了被检测梁的数值模型</td>
+</tr>
+<tr>
+<td>2021</td>
+<td><a target="_blank" rel="noopener" href="https://link.springer.com/article/10.1007/s13349-021-00525-5">Automated generation of FE models of cracked RC beams based on 3D point clouds and 2D images Journal of Civil Structural Health Monitoring</a><br>Journal Article</td>
+<td>裂纹RC梁</td>
+<td>自动有限元模型</td>
+<td>3D点云和2D图像，点云配准算法ICP-based DLT</td>
+<td>点云配准算法ICP-based DLT将图像上的裂纹配准到3D点云上，从而自动生成有限元模型</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Year</th>
+<th>Paper</th>
+<th>研究对象</th>
+<th>研究内容</th>
+<th>研究方法</th>
+<th>Important for me</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2022</td>
+<td><a target="_blank" rel="noopener" href="https://pubs.aip.org/aip/adv/article/12/10/105111/2819776/Laser-based-finite-element-model-reconstruction">Laser-based finite element model reconstruction for structural mechanics</a><br>北京科技大学土木与资源工程学院城市地下空间工程北京市重点实验室<br></td>
+<td>structural mechanics</td>
+<td>finite element model reconstruction, 自动识别损坏部件,The non-destructive evaluation (NDE无损评估)</td>
+<td>Laser-based，HLS(手持激光扫描仪型号：Creaform Handyscan 3D 700)</td>
+<td>将来自 3D 激光扫描系统的条件数据转换为能够描述组件机械响应的 FEM。对如桥梁等大型物体，自动识别受损部位并局部更新到有限元模型中<br></td>
+</tr>
+<tr>
+<td>2016</td>
+<td><a target="_blank" rel="noopener" href="https://ascelibrary.org/doi/10.1061/%28ASCE%29CF.1943-5509.0000807">Exploitation of Geometric Data provided by Laser Scanning to Create FEM Structural Models of Bridges</a></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Year</th>
+<th>Paper</th>
+<th>研究对象</th>
+<th>研究内容</th>
+<th>研究方法</th>
+<th>Important for me</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2024</td>
+<td><a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S167477552300272X">Three-dimensional finite element simulation and reconstruction of jointed rock models using CT scanning and photogrammetry - ScienceDirect</a><br></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="生成式方法"><a href="#生成式方法" class="headerlink" title="生成式方法"></a>生成式方法</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Year</th>
+<th>Paper</th>
+<th>研究对象</th>
+<th>研究内容</th>
+<th>研究方法</th>
+<th>Important for me</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>2022R</strong></td>
+<td><a target="_blank" rel="noopener" href="https://dl.acm.org/doi/10.1145/3554920">Hex-Mesh Generation and Processing: A Survey</a></td>
+<td>FE Volume Mesh(Hex-Mesh)</td>
+<td>Mesh Generation and Processing</td>
+<td>Review</td>
+<td>六面体网格生成技术综述</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+1ZnNxFWnEbk5YzRl">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/3DReconstruction/" rel="tag"><i class="fa fa-tag"></i> 3DReconstruction</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/Project/Unpack%20Snowbreak%20File/" rel="prev" title="Unpack Game File (Snowbreak)">
+      <i class="fa fa-chevron-left"></i> Unpack Game File (Snowbreak)
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/Project/Visualize%20Interval%20uncertainty%20quantification%20metrics/" rel="next" title="Visualize Interval uncertainty quantification metrics">
+      Visualize Interval uncertainty quantification metrics <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#IDEA"><span class="nav-text">IDEA</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E9%87%8D%E5%BB%BA%E6%A8%A1%E5%9E%8B"><span class="nav-text">直接重建模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%B4%E6%8E%A5%E9%87%8D%E5%BB%BA%E6%A8%A1%E5%9E%8B"><span class="nav-text">间接重建模型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%87%E7%8C%AE%E8%B0%83%E7%A0%94"><span class="nav-text">文献调研</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3D%E8%BE%B9%E7%BC%98%E9%87%8D%E5%BB%BA"><span class="nav-text">3D边缘重建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CAD-%E6%8C%87%E4%BB%A4%E6%B5%81"><span class="nav-text">CAD 指令流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BF%80%E5%85%89%E9%9B%B7%E8%BE%BE%E6%89%AB%E6%8F%8F%E4%BB%AA"><span class="nav-text">激光雷达扫描仪</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E5%BC%8F%E6%96%B9%E6%B3%95"><span class="nav-text">生成式方法</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qi Yun"
+      src="/images/avatar.jpeg">
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">140</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/qiyun71" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;qiyun71" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/29010355" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;29010355" rel="noopener" target="_blank"><i class="fa fa-star fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qi Yun</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">486k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">29:27</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/yqq/anime.min.js"></script>
+  <script src="/yqq/velocity/velocity.min.js"></script>
+  <script src="/yqq/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

@@ -29,7 +29,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231101151141.png">
 <meta property="article:published_time" content="2023-06-25T05:01:00.000Z">
-<meta property="article:modified_time" content="2024-08-23T07:28:39.064Z">
+<meta property="article:modified_time" content="2024-09-20T14:11:12.923Z">
 <meta property="article:author" content="Qi Yun">
 <meta property="article:tag" content="NeRF">
 <meta property="article:tag" content="Review">
@@ -229,7 +229,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-08-23 15:28:39" itemprop="dateModified" datetime="2024-08-23T15:28:39+08:00">2024-08-23</time>
+                <time title="Modified: 2024-09-20 22:11:12" itemprop="dateModified" datetime="2024-09-20T22:11:12+08:00">2024-09-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -246,13 +246,13 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>2.6k</span>
+              <span>3k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span>10 mins.</span>
+              <span>11 mins.</span>
             </span>
 
         </div>
@@ -276,7 +276,7 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="NeRF.md">NeRF</a> + <a href="NeRF-code.md">Code</a></td>
+<td><a href="3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeRF.md">NeRF</a> + <a href="NeRF-code.md">Code</a></td>
 <td>NeRF 原理 + 代码理解</td>
 <td>Completed</td>
 </tr>
@@ -306,7 +306,7 @@
 <td>In Processing</td>
 </tr>
 <tr>
-<td><a href="NeRF-Mine.md">NeRF-Mine</a></td>
+<td><a href="Project/NeRF.md">NeRF</a></td>
 <td>基于 Instant-nsr-pl 创建的项目</td>
 <td>Completed</td>
 </tr>
@@ -328,7 +328,7 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="NeRF.md">2020</a></td>
+<td><a href="3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeRF.md">2020</a></td>
 <td style="text-align:center"><a target="_blank" rel="noopener" href="https://www.matthewtancik.com/nerf">NeRF:Representing Scenes as Neural Radiance Fields for View Synthesis</a></td>
 <td style="text-align:center">初始文</td>
 <td style="text-align:center">ECCV</td>
@@ -767,6 +767,11 @@
 <td style="text-align:center">666](<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240628104645.png">https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240628104645.png</a>)</td>
 <td>AAAI</td>
 </tr>
+<tr>
+<td>2024</td>
+<td><a target="_blank" rel="noopener" href="https://gaussianobject.github.io/">GaussianObject: High-Quality 3D Object Reconstruction from Four Views with Gaussian Splatting</a></td>
+<td></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -792,6 +797,162 @@
 <td><a target="_blank" rel="noopener" href="https://jonbarron.info/mipnerf360/">mip-NeRF 360</a></td>
 <td>将单位球外的背景参数化，小型提议网络进行精采样，正则化dist消除小区域云雾</td>
 <td style="text-align:center">CVPR</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="Uncertainty-in-NeRF"><a href="#Uncertainty-in-NeRF" class="headerlink" title="Uncertainty in NeRF"></a>Uncertainty in NeRF</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Year</th>
+<th>Paper</th>
+<th>研究对象</th>
+<th>研究内容</th>
+<th>研究方法</th>
+<th>Important for me</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2024</td>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2405.02568">[2405.02568] ActiveNeuS: Active 3D Reconstruction using Neural Implicit Surface Uncertainty</a></td>
+<td>3D scene reconstruction</td>
+<td>Active learning主动学习</td>
+<td>Neural Implicit Surface Uncertainty</td>
+<td>图像渲染或几何不确定性<br>利用不同类型的不确定性可以减少在早期训练阶段因输入稀疏而出现的偏差</td>
+</tr>
+<tr>
+<td>2024</td>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2404.06727">[2404.06727] Bayesian NeRF: Quantifying Uncertainty with Volume Density in Neural Radiance Fields</a></td>
+<td>Volume Density in Neural Radiance Fields</td>
+<td>quantifying uncertainty based on the geometric structure</td>
+<td>Bayesian</td>
+<td>几何体积结构中的不确定性</td>
+</tr>
+<tr>
+<td>2024</td>
+<td><a target="_blank" rel="noopener" href="https://bayesrays.github.io/">Bayes’ Rays</a></td>
+<td>NeRF</td>
+<td>BaysRays</td>
+<td>Uncertainty Quantification</td>
+<td>Bayes, 坐标perturbation</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Year</th>
+<th>Paper</th>
+<th>研究对象</th>
+<th>研究内容</th>
+<th>研究方法</th>
+<th>Important for me</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2024</td>
+<td><a target="_blank" rel="noopener" href="https://actnerf.github.io/">ActNeRF</a></td>
+<td>Robot Manipulators</td>
+<td>Uncertainty-aware Active Learning of NeRF-based Object Models</td>
+<td>Visual and Re-orientation Actions</td>
+<td>允许机器人在收集视觉观察结果的同时重新定向物体</td>
+</tr>
+<tr>
+<td>2024</td>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2404.01400">[2404.01400] NVINS: Robust Visual Inertial Navigation Fused with NeRF-augmented Camera Pose Regressor and Uncertainty Quantification</a></td>
+<td>real-time and robust robotic tasks(机器人实时导航)</td>
+<td>NeRF-augmented Camera Pose Regressor and Uncertainty Quantification</td>
+<td>Fused</td>
+<td></td>
+</tr>
+<tr>
+<td>2024</td>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2403.18476">[2403.18476] Modeling uncertainty for Gaussian Splatting</a></td>
+<td>Gaussian Splatting</td>
+<td>Modeling uncertainty</td>
+<td>Variational Inference-based approach +  Area Under Sparsification Error (AUSE)</td>
+<td>在<strong>图像渲染质量</strong>和不确定性估计精度方面都优于现有方法</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Year</th>
+<th>Paper</th>
+<th>研究对象</th>
+<th>研究内容</th>
+<th>研究方法</th>
+<th>Important for me</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2024</td>
+<td><a target="_blank" rel="noopener" href="https://sites.google.com/view/nvf-cvpr24/">Neural Visibility Field for Uncertainty-Driven Active Mapping</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td>NVF 自然会为未观察区域分配更高的不确定性，帮助机器人选择最具信息量的下一个视点</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Year</th>
+<th>Paper</th>
+<th>研究对象</th>
+<th>研究内容</th>
+<th>研究方法</th>
+<th>Important for me</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2024</td>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2407.08154">Bayesian uncertainty analysis for underwater 3D reconstruction with neural radiance fields</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -1149,11 +1310,11 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/Learn/Learn-PyTorch/" rel="prev" title="PyTorch代码学习笔记">
-      <i class="fa fa-chevron-left"></i> PyTorch代码学习笔记
+    <a href="/Learn/Neural%20Network/PyTorch/" rel="prev" title="PyTorch学习笔记">
+      <i class="fa fa-chevron-left"></i> PyTorch学习笔记
     </a></div>
       <div class="post-nav-item">
-    <a href="/Learn/Learn-Git/" rel="next" title="Git学习">
+    <a href="/Learn/Blog%20Basic/Learn-Git/" rel="next" title="Git学习">
       Git学习 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -1214,7 +1375,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#NeRF"><span class="nav-text">NeRF</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Review"><span class="nav-text">Review</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E6%9C%BA%E4%BD%8D%E5%A7%BF%E7%B2%BE%E5%BA%A6%E9%97%AE%E9%A2%98"><span class="nav-text">相机位姿精度问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E5%83%8F%E6%8B%8D%E6%91%84%E8%B4%A8%E9%87%8F%E9%97%AE%E9%A2%98"><span class="nav-text">图像拍摄质量问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%9D%E5%A4%96%E7%9B%91%E7%9D%A3-%E5%85%88%E9%AA%8C"><span class="nav-text">额外监督&#x2F;先验</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%BB%BA%E7%B2%BE%E5%BA%A6-%E9%80%9F%E5%BA%A6"><span class="nav-text">重建精度&#x2F;速度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shadow-amp-Highlight"><span class="nav-text">Shadow&amp;Highlight</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sparse-images-Generalization"><span class="nav-text">Sparse images&#x2F;Generalization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Large-Scale-Scene"><span class="nav-text">Large Scale Scene</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8E%9F%E7%90%86"><span class="nav-text">原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Activation-Functions"><span class="nav-text">Activation Functions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Encoding"><span class="nav-text">Encoding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sampling"><span class="nav-text">Sampling</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Volume-Rendering-Function"><span class="nav-text">Volume Rendering Function</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PointCloud"><span class="nav-text">PointCloud</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BA%94%E7%94%A8"><span class="nav-text">应用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8E%E9%9A%90%E5%BC%8F%E5%9C%BA%E4%B8%AD%E6%8F%90%E5%8F%96%E8%A1%A8%E9%9D%A2"><span class="nav-text">从隐式场中提取表面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Framework"><span class="nav-text">Framework</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%89%E8%B6%A3%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-text">有趣的应用</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#NeRF"><span class="nav-text">NeRF</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Review"><span class="nav-text">Review</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E6%9C%BA%E4%BD%8D%E5%A7%BF%E7%B2%BE%E5%BA%A6%E9%97%AE%E9%A2%98"><span class="nav-text">相机位姿精度问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E5%83%8F%E6%8B%8D%E6%91%84%E8%B4%A8%E9%87%8F%E9%97%AE%E9%A2%98"><span class="nav-text">图像拍摄质量问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%9D%E5%A4%96%E7%9B%91%E7%9D%A3-%E5%85%88%E9%AA%8C"><span class="nav-text">额外监督&#x2F;先验</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%BB%BA%E7%B2%BE%E5%BA%A6-%E9%80%9F%E5%BA%A6"><span class="nav-text">重建精度&#x2F;速度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shadow-amp-Highlight"><span class="nav-text">Shadow&amp;Highlight</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sparse-images-Generalization"><span class="nav-text">Sparse images&#x2F;Generalization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Large-Scale-Scene"><span class="nav-text">Large Scale Scene</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Uncertainty-in-NeRF"><span class="nav-text">Uncertainty in NeRF</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8E%9F%E7%90%86"><span class="nav-text">原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Activation-Functions"><span class="nav-text">Activation Functions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Encoding"><span class="nav-text">Encoding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sampling"><span class="nav-text">Sampling</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Volume-Rendering-Function"><span class="nav-text">Volume Rendering Function</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PointCloud"><span class="nav-text">PointCloud</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BA%94%E7%94%A8"><span class="nav-text">应用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8E%E9%9A%90%E5%BC%8F%E5%9C%BA%E4%B8%AD%E6%8F%90%E5%8F%96%E8%A1%A8%E9%9D%A2"><span class="nav-text">从隐式场中提取表面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Framework"><span class="nav-text">Framework</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%89%E8%B6%A3%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-text">有趣的应用</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -1229,20 +1390,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">133</span>
+          <span class="site-state-item-count">140</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">24</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-count">55</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -1290,12 +1451,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">466k</span>
+    <span title="Symbols count total">486k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">28:15</span>
+    <span title="Reading time total">29:27</span>
 </div>
 
         

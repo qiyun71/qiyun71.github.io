@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/yqq/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Loss Functions and Metrics in Deep Learning 这篇Review中提到的loss函数比较全面  Loss Functions vs. Performance Metrics损失函数在训练过程中用于优化模型参数。它衡量的是模型预测输出与预期输出之间的差值，而训练的目标就是尽量减小这一差值。(可微)性能指标用于评估训练后的模型。它衡量的是模型对新数据的泛化程度">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Loss Functions">
+<meta property="og:url" content="http://example.com/Learn/Neural%20Network/Loss%20Functions/index.html">
+<meta property="og:site_name" content="QiYun">
+<meta property="og:description" content="Loss Functions and Metrics in Deep Learning 这篇Review中提到的loss函数比较全面  Loss Functions vs. Performance Metrics损失函数在训练过程中用于优化模型参数。它衡量的是模型预测输出与预期输出之间的差值，而训练的目标就是尽量减小这一差值。(可微)性能指标用于评估训练后的模型。它衡量的是模型对新数据的泛化程度">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240522110145.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230919194046.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20240104172937.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20240122183451.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230801170138.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231010101549.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20240124100320.png">
+<meta property="article:published_time" content="2024-06-29T12:46:55.000Z">
+<meta property="article:modified_time" content="2024-09-21T06:09:48.922Z">
+<meta property="article:author" content="Qi Yun">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240522110145.png">
+
+<link rel="canonical" href="http://example.com/Learn/Neural%20Network/Loss%20Functions/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Loss Functions | QiYun</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">QiYun</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Note</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/Learn/Neural%20Network/Loss%20Functions/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiYun">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Loss Functions
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2024-06-29 20:46:55" itemprop="dateCreated datePublished" datetime="2024-06-29T20:46:55+08:00">2024-06-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-09-21 14:09:48" itemprop="dateModified" datetime="2024-09-21T14:09:48+08:00">2024-09-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Learn/" itemprop="url" rel="index"><span itemprop="name">Learn</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>2.4k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>9 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2307.02694">Loss Functions and Metrics in Deep Learning</a> 这篇<strong>Review</strong>中提到的loss函数比较全面</p>
+</blockquote>
+<p><strong>Loss Functions vs. Performance Metrics</strong><br><strong>损失函数</strong>在训练过程中用于优化模型参数。它衡量的是模型预测输出与预期输出之间的差值，而训练的目标就是尽量减小这一差值。(<strong>可微</strong>)<br><strong>性能指标</strong>用于评估训练后的模型。它衡量的是模型对新数据的泛化程度以及预测的准确性。性能指标还可以对不同的模型或配置进行比较，以确定性能最佳的模型或配置。(<strong>不需要可微</strong>)</p>
+<span id="more"></span>
+<h1 id="常用的loss"><a href="#常用的loss" class="headerlink" title="常用的loss"></a>常用的loss</h1><h2 id="L1-Loss-MAE-Mean-Absolute-Error"><a href="#L1-Loss-MAE-Mean-Absolute-Error" class="headerlink" title="L1 Loss(MAE, Mean Absolute Error)"></a>L1 Loss(MAE, Mean Absolute Error)</h2><script type="math/tex; mode=display">MAE =\sum_{i=1}^n|y_i-\hat{y_{i}}|</script><ul>
+<li>$y_i$为真实值</li>
+<li>$\hat{y_{i}}$为预测值</li>
+</ul>
+<h2 id="L2-Loss-MSE-Mean-Squared-Error"><a href="#L2-Loss-MSE-Mean-Squared-Error" class="headerlink" title="L2 Loss(MSE, Mean Squared Error)"></a>L2 Loss(MSE, Mean Squared Error)</h2><script type="math/tex; mode=display">MSE=\sum_{i=1}^n(y_i-\hat{y_{i}})^2</script><h2 id="交并比损失-IoU-Intersection-over-Union"><a href="#交并比损失-IoU-Intersection-over-Union" class="headerlink" title="交并比损失(IoU, Intersection over Union)"></a>交并比损失(IoU, Intersection over Union)</h2><script type="math/tex; mode=display">IoU=\frac1n\sum_{i=1}^n\frac{y_i\cap\hat{y_i}}{y_i\cup\hat{y_i}}</script><p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240522110145.png" alt="image.png|666"></p>
+<h2 id="交叉熵损失-Cross-Entropy-Loss"><a href="#交叉熵损失-Cross-Entropy-Loss" class="headerlink" title="交叉熵损失(Cross Entropy Loss)"></a>交叉熵损失(Cross Entropy Loss)</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/tardis/zm/art/35709485?source_id=1003">损失函数｜交叉熵损失函数</a></p>
+</blockquote>
+<h3 id="二分类-BCE-Binary-Cross-Entropy-Loss"><a href="#二分类-BCE-Binary-Cross-Entropy-Loss" class="headerlink" title="二分类(BCE, Binary Cross-Entropy Loss)"></a>二分类(BCE, Binary Cross-Entropy Loss)</h3><script type="math/tex; mode=display">L=\frac{1}{N}\sum_{i}L_{i}=\frac{1}{N}\sum_{i}-[y_{i}\cdot log(p_{i})+(1-y_{i})\cdot log(1-p_{i})]</script><ul>
+<li>$y_i$表示样本$i$的label，正类为1，负类为0</li>
+<li>$p_i$样本$i$预测为正类的概率</li>
+</ul>
+<h3 id="多分类-CCE-Categorical-Cross-entropy-Loss"><a href="#多分类-CCE-Categorical-Cross-entropy-Loss" class="headerlink" title="多分类(CCE, Categorical Cross-entropy Loss)"></a>多分类(CCE, Categorical Cross-entropy Loss)</h3><script type="math/tex; mode=display">L=\frac{1}{N}\sum_iL_i=-\frac{1}{N}\sum_i\sum_{c=1}^My_{ic}\log(p_{ic})</script><hr>
+<h1 id="Time-series-Loss"><a href="#Time-series-Loss" class="headerlink" title="Time series Loss"></a>Time series Loss</h1><h2 id="FFT-Loss"><a href="#FFT-Loss" class="headerlink" title="FFT Loss"></a>FFT Loss</h2><p>(Fast fourier transform and convolution algorithms)</p>
+<p><a target="_blank" rel="noopener" href="https://openreview.net/pdf?id=4h1apFjO99">DIFFUSION-TS: INTERPRETABLE DIFFUSION FOR GENERAL TIME SERIES GENERATION</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># target: batch_size, seq_length, feature_dim</span></span><br><span class="line"><span class="comment"># loss_fn is L1 loss or L2 loss</span></span><br><span class="line"></span><br><span class="line">train_loss = self.loss_fn(model_out, target, reduction=<span class="string">&#x27;none&#x27;</span>)</span><br><span class="line"></span><br><span class="line">fft1 = torch.fft.fft(model_out.transpose(<span class="number">1</span>, <span class="number">2</span>), norm=<span class="string">&#x27;forward&#x27;</span>)</span><br><span class="line">fft2 = torch.fft.fft(target.transpose(<span class="number">1</span>, <span class="number">2</span>), norm=<span class="string">&#x27;forward&#x27;</span>)</span><br><span class="line"></span><br><span class="line">fft1, fft2 = fft1.transpose(<span class="number">1</span>, <span class="number">2</span>), fft2.transpose(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">fourier_loss = self.loss_fn(torch.real(fft1), torch.real(fft2), reduction=<span class="string">&#x27;none&#x27;</span>)\</span><br><span class="line">               + self.loss_fn(torch.imag(fft1), torch.imag(fft2), reduction=<span class="string">&#x27;none&#x27;</span>)</span><br><span class="line">train_loss +=  self.ff_weight * fourier_loss</span><br></pre></td></tr></table></figure>
+<h1 id="三维重建-Loss-Functions"><a href="#三维重建-Loss-Functions" class="headerlink" title="三维重建 Loss Functions"></a>三维重建 Loss Functions</h1><h2 id="Eikonal-loss"><a href="#Eikonal-loss" class="headerlink" title="Eikonal loss"></a>Eikonal loss</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2002.10099">Implicit Geometric Regularization for Learning Shapes</a></p>
+</blockquote>
+<p>确保SDF在空间中的梯度大小保持恒定，这有助于保持SDF场的一致性和准确性</p>
+<script type="math/tex; mode=display">\mathcal{L}_{r e g}=\frac{1}{n m}\sum_{k,i}(\|\nabla f(\hat{\mathbf{p}}_{k,i})\|_{2}-1)^{2}.</script><h2 id="RGB-Loss"><a href="#RGB-Loss" class="headerlink" title="RGB Loss"></a>RGB Loss</h2><p>L2 损失：<code>F.mse_loss(pred_rgb, gt_rgb)</code> $L=\sum_{i=1}^n(y_i-f(x_i))^2$<br>L1 损失：<code>F.l1_loss(pred_rgb, gt_rgb)</code>更稳定？ $L=\sum_{i=1}^n|y_i-f(x_i)|$</p>
+<h2 id="Mask-Loss"><a href="#Mask-Loss" class="headerlink" title="Mask Loss"></a>Mask Loss</h2><p>$\mathcal{L}_{mask}=\mathrm{BCE}(M_k,\hat{O}_k)$</p>
+<ul>
+<li>$\hat{O}_k=\sum_{i=1}^n T_{k,i}\alpha_{k,i}$</li>
+<li>$M_{k} ∈ {0, 1}$</li>
+</ul>
+<p>BCE 二值交叉熵损失：让输出$\hat{O}_k$去逼近 label $M_{k}$</p>
+<p>Spatial-BCE</p>
+<blockquote>
+<p>一种新的 BCE loss<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/593711934">ECCV’22 ｜ Spatial-BCE - 知乎 (zhihu.com)</a></p>
+</blockquote>
+<h2 id="Opacity-Loss"><a href="#Opacity-Loss" class="headerlink" title="Opacity Loss"></a>Opacity Loss</h2><p><code>loss_opaque = -(opacity * torch.log(opacity) + (1 - opacity) * torch.log(1 - opacity)).mean()</code><br>$opaque = BCE(opaque,opaque) = -[opaque <em> ln(opaque) + (1-opaque) </em>ln(1-opaque)]$</p>
+<p>使得 opacity 更加接近 0 或者 1</p>
+<h2 id="Sparsity-Loss"><a href="#Sparsity-Loss" class="headerlink" title="Sparsity Loss"></a>Sparsity Loss</h2><p><code>loss_sparsity = torch.exp(-self.conf.loss.sparsity_scale * out[&#39;sdf_samples&#39;].abs()).mean()</code><br>$sparsity = \frac{1}{N} \sum e^{-scale * sdf}$<br>让 sdf 的平均值更小，前景物体更加稀疏，物体内的点往外发散</p>
+<h2 id="Geo-Neus"><a href="#Geo-Neus" class="headerlink" title="Geo-Neus"></a>Geo-Neus</h2><ul>
+<li>sdf loss<ul>
+<li><code>sdf_loss = F.l1_loss(pts2sdf, torch.zeros_like(pts2sdf), reduction=&#39;sum&#39;) / pts2sdf.shape[0]</code></li>
+<li>$\mathcal{L}_{sdf} = \frac{1}{N} \sum |sdf(spoint) - 0|$</li>
+</ul>
+</li>
+</ul>
+<h2 id="Other-loss"><a href="#Other-loss" class="headerlink" title="Other loss"></a>Other loss</h2><h3 id="加强Eikonal对SDF的优化"><a href="#加强Eikonal对SDF的优化" class="headerlink" title="加强Eikonal对SDF的优化"></a>加强Eikonal对SDF的优化</h3><p><a target="_blank" rel="noopener" href="https://github.com/sunyx523/StEik">sunyx523/StEik (github.com)</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/649921965">NeurIPS 2023 | 三维重建中的Neural SDF(Neural Implicit Surface) - 知乎 (zhihu.com)</a><br>一个好的SDF其实只需要其法线方向上的二阶导数为0，如果在切线方向上的二阶导数为0的话，得到的SDF轮廓会非常平滑，不利于学习到一些细节。</p>
+<p>$L_\text{L. n.}(u)=\int_{\Omega}|\nabla u(x)^TD^2u(x)\cdot\nabla u(x)|dx.$</p>
+<h3 id="随机结构相似性损失-S3IM-Stochastic-Structural-SIMilarity-loss"><a href="#随机结构相似性损失-S3IM-Stochastic-Structural-SIMilarity-loss" class="headerlink" title="随机结构相似性损失(S3IM, Stochastic Structural SIMilarity loss)"></a>随机结构相似性损失(S3IM, Stochastic Structural SIMilarity loss)</h3><blockquote>
+<p>Project Page <a target="_blank" rel="noopener" href="https://madaoer.github.io/s3im_nerf/">S3IM Stochastic Structural SIMilarity and Its Unreasonable Effectiveness for Neural Fields</a><br>Paper <a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2308.07032">S3IM: Stochastic Structural SIMilarity and Its Unreasonable Effectiveness for Neural Fields</a></p>
+</blockquote>
+<script type="math/tex; mode=display">\begin{aligned}L_{\mathrm{S3IM}}(\Theta,\mathcal{R})=&1-\mathrm{S3IM}(\hat{\mathcal{R}},\mathcal{R})\\=&1-\frac1M\sum_{m=1}^M\mathrm{SSIM}(\mathcal{P}^{(m)}(\hat{\mathcal{C}}),\mathcal{P}^{(m)}(\mathcal{C})).\end{aligned}</script><h3 id="Smoothness-Loss"><a href="#Smoothness-Loss" class="headerlink" title="Smoothness Loss"></a>Smoothness Loss</h3><p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230919194046.png" alt="image.png|666"></p>
+<h3 id="可学习倒角距离-LCN-Learnable-Chamfer-Distance"><a href="#可学习倒角距离-LCN-Learnable-Chamfer-Distance" class="headerlink" title="可学习倒角距离(LCN, Learnable Chamfer Distance)"></a>可学习倒角距离(LCN, Learnable Chamfer Distance)</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2312.16582">Learnable Chamfer Distance for Point Cloud Reconstruction</a></p>
+</blockquote>
+<script type="math/tex; mode=display">\begin{aligned}L_{R}(S_{i},S_{o})&=\frac12(\frac1{|S_i|}\sum_{x\in S_i}W_i\cdot\min_{y\in S_o}\|x-y\|_2\\&+\frac1{|S_o|}\sum_{x\in S_o}W_o\cdot\min_{y\in S_i}\|x-y\|_2).\end{aligned}</script><p>我们提出了一种简单但有效的重建损失，称为可学习倒角距离（LCD），通过动态关注由一组可学习网络控制的不同权重分布的匹配距离</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20240104172937.png" alt="image.png|666"></p>
+<h3 id="DirDist"><a href="#DirDist" class="headerlink" title="DirDist"></a>DirDist</h3><p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2401.09736">[2401.09736] Measuring the Discrepancy between 3D Geometric Models using Directional Distance Fields (arxiv.org)</a><br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20240122183451.png" alt="image.png|666"></p>
+<hr>
+<h1 id="三维重建-Performance-Metrics"><a href="#三维重建-Performance-Metrics" class="headerlink" title="三维重建 Performance Metrics"></a>三维重建 Performance Metrics</h1><h2 id="倒角距离-CD↓-Chamfer-Distance"><a href="#倒角距离-CD↓-Chamfer-Distance" class="headerlink" title="倒角距离(CD↓, Chamfer Distance)"></a>倒角距离(CD↓, Chamfer Distance)</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/jzhangbs/DTUeval-python">jzhangbs/DTUeval-python: A fast python implementation of DTU MVS 2014 evaluation (github.com)</a></p>
+</blockquote>
+<p>点云或 mesh 重建模型评估指标，它度量两个点集之间的距离，其中一个点集是参考点集，另一个点集是待评估点集</p>
+<script type="math/tex; mode=display">d_{\mathrm{CD}}(S_1,S_2)=\frac{1}{S_1}\sum_{x\in S_1}\min_{y\in S_2}\lVert x-y\rVert_2^2+\frac{1}{S_2}\sum_{y\in S_2}\min_{x\in S_1}\lVert y-x\rVert_2^2</script><ul>
+<li>$S_{1}$ 和 $S_{2}$ 分别表示两组 3D 点云，第一项代表 $S_{1}$ 中任意一点 x 到 $S_{2}$ 的最小距离之和，第二项则表示 $S_{2}$ 中任意一点 y 到 $S_{1}$ 的最小距离之和。</li>
+</ul>
+<p>如果该距离较大，则说明两组点云区别较大；如果距离较小，则说明重建效果较好。</p>
+<p>$\begin{aligned}\mathcal{L}_{CD}&amp;=\sum_{y’\in Y’}min_{y\in Y}||y’-y||_2^2+\sum_{y\in Y}min_{y’\in Y’}||y-y’||_2^2,\end{aligned}$</p>
+<h2 id="PSNR↑"><a href="#PSNR↑" class="headerlink" title="PSNR↑"></a>PSNR↑</h2><p>峰值信噪比 Peak Signal to Noise Ratio<br>PSNR 是一个无参考的质量评估指标<br>$PSNR(I)=10\cdot\log_{10}(\dfrac{MAX(I)^2}{MSE(I)})$<br>$MSE=\frac1{mn}\sum_{i=0}^{m-1}\sum_{j=0}^{n-1}[I(i,j)-K(i,j)]^2$<br>$MAX(I)^{2}$（动态范围可能的最大像素值，b 位：$2^{b}-1$），eg: 8 位图像则$MAX(I)^{2} = 255$</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Neus</span></span><br><span class="line">psnr = <span class="number">20.0</span> * torch.log10(<span class="number">1.0</span> / (((color_fine - true_rgb)**<span class="number">2</span> * mask).<span class="built_in">sum</span>() / (mask_sum * <span class="number">3.0</span>)).sqrt())</span><br><span class="line"></span><br><span class="line"><span class="comment"># instant-nsr-pl</span></span><br><span class="line">psnr = -<span class="number">10.</span> * torch.log10(torch.mean((pred_rgb.to(gt_rgb)-gt_rgb)**<span class="number">2</span>))</span><br></pre></td></tr></table></figure>
+<h2 id="SSIM↑"><a href="#SSIM↑" class="headerlink" title="SSIM↑"></a>SSIM↑</h2><p><a target="_blank" rel="noopener" href="https://github.com/VainF/pytorch-msssim">VainF/pytorch-msssim: Fast and differentiable MS-SSIM and SSIM for pytorch. (github.com)</a></p>
+<p>结构相似性 Structural Similarity Index Measure<br>SSIM 是一个完整的参考质量评估指标。<br>$SSIM(x,y)=\dfrac{(2\mu_x\mu_y+C_1)(2\sigma_{xy}+C_2)}{(\mu_x^2+\mu_y^2+C_1)(\sigma_x^2+\sigma_y^2+C_2)}$<br>衡量了两张图片之间相似度：($C_1,C_2$为常数防止除以 0)</p>
+<p>$S(x,y)=l(x,y)^{\alpha}\cdot c(x,y)^{\beta}\cdot s(x,y)^{\gamma}$</p>
+<p>$C_1=(K_1L)^2,C_2=(K_2L)^2,C_3=C_2/2$<br>$K_{1}= 0.01 , K_{2} = 0.03 , L = 2^{b}-1$</p>
+<ul>
+<li>亮度，图像 x 与图像 y 亮度 $l(x,y) =\frac{2\mu_x\mu_y+C_1}{\mu_x^2+\mu_y^2+C_1}$<ul>
+<li>$\mu_{x} =\frac1N\sum_{i=1}^Nx_i$像素均值<ul>
+<li>$x_i$像素值，N 总像素数</li>
+</ul>
+</li>
+<li>当 x 与 y 相同时，$l(x,y) = 1$</li>
+</ul>
+</li>
+<li>对比度，$c(x,y)=\frac{2\sigma_x\sigma_y+C_2}{\sigma_x^2+\sigma_y^2+C_2}$<ul>
+<li>图像标准差$\sigma_x=(\frac1{N-1}\sum_{i=1}^N(x_i-\mu_x)^2)^{\frac12}$</li>
+</ul>
+</li>
+<li>结构对比，$s(x,y)=\frac{\sigma_{xy}+C_3}{\sigma_x\sigma_y+C_3}$ - 图像的协方差$\sigma_{xy}=\frac1{N-1}\sum_{i=1}^N(x_i-\mu_x)(y_i-\mu_y)$<br>实际使用中(圆对称高斯加权公式)，使用一个高斯核对局部像素求 SSIM，最后对所有的局部 SSIM 求平均得到 MSSIM</li>
+</ul>
+<p>使用高斯核，均值、标准差和协方差变为：<br>$\mu_{x}=\sum_{i}w_{i}x_{i}$<br>$\sigma_{x}=(\sum_{i}w_{i}(x_{i}-\mu_{x})^{2})^{1/2}$<br>$\sigma_{xy}=\sum_{i}w_{i}(x_{i}-\mu_{x})(y_{i}-\mu_{y})$</p>
+<h2 id="学习感知图像块相似度-LPIPS↓-Learned-Perceptual-Image-Patch-Similarity"><a href="#学习感知图像块相似度-LPIPS↓-Learned-Perceptual-Image-Patch-Similarity" class="headerlink" title="学习感知图像块相似度(LPIPS↓, Learned Perceptual Image Patch Similarity)"></a>学习感知图像块相似度(LPIPS↓, Learned Perceptual Image Patch Similarity)</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1801.03924">The Unreasonable Effectiveness of Deep Features as a Perceptual Metric</a></p>
+</blockquote>
+<p><strong>LPIPS 比传统方法（比如 L2/PSNR, SSIM, FSIM）更符合人类的感知情况</strong>。<strong>LPIPS 的值越低表示两张图像越相似，反之，则差异越大。</strong>。LPIPS 是一个完整的参考质量评估指标，它使用了学习的卷积特征。分数是由多层特征映射的加权像素级 MSE 给出的。</p>
+<script type="math/tex; mode=display">LPIPS(x,y)=\sum\limits_{l}^{L}\dfrac{1}{H_lW_l}\sum\limits_{h,w}^{H_l,W_l}||w_l\odot(x^l_{hw}-y^l_{hw})||^2_2</script><p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230801170138.png" alt="image.png|666"></p>
+<h2 id="平均点到面距离-P2S↓-average-point-to-surface-distance"><a href="#平均点到面距离-P2S↓-average-point-to-surface-distance" class="headerlink" title="平均点到面距离(P2S↓, average point-to-surface distance)"></a>平均点到面距离(P2S↓, average point-to-surface distance)</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2112.09127">ICON: Implicit Clothed humans Obtained from Normals</a></p>
+</blockquote>
+<p><strong>P2S距离：</strong> 是CD的单向版本。(CAPE数据集scan包含大的空洞，为了排除孔洞影响，ICON论文记录scan点到最近重构表面点之间距离)</p>
+<h2 id="Normal↓"><a href="#Normal↓" class="headerlink" title="Normal↓"></a>Normal↓</h2><p>average surface normal error平均表面法向损失</p>
+<p><strong>Normal difference:</strong> 表示使用重构的及真值surface分别进行渲染normal图片，计算两者之间L2距离，用于捕获高频几何细节误差。<br>For both reconstructed and ground truth surfaces, we <strong>render their normal maps</strong> in the image space from the input viewpoint respectively. We then <strong>calculate the L2 error</strong> between these two normal maps.</p>
+<h2 id="IoU↑"><a href="#IoU↑" class="headerlink" title="IoU↑"></a>IoU↑</h2><p>Intersection over Union(IoU)交并比<br>在目标检测中用到的指标$IOU = \frac{A \cap B}{A \cup B}$<br>一般来说，这个比值 ＞ 0.5 就可以认为是一个不错的结果了。</p>
+<ul>
+<li>A: GT bounding box</li>
+<li>B: Predicted bounding box</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231010101549.png" alt="image.png|333"></p>
+<h2 id="推土距离-EMD↓-Earth-Mover’s-distance"><a href="#推土距离-EMD↓-Earth-Mover’s-distance" class="headerlink" title="推土距离(EMD↓, Earth Mover’s distance)"></a>推土距离(EMD↓, Earth Mover’s distance)</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2102.12833">[2102.12833] Diffusion Earth Mover’s Distance and Distribution Embeddings</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/145739750">EMD(earth mover’s distances)距离 - 知乎 (zhihu.com)</a><br><a target="_blank" rel="noopener" href="https://github.com/facebookresearch/pytorch3d/issues/211">Earth Mover’s Distance (EMD) loss · Issue #211 · facebookresearch/pytorch3d</a><br><strong>EMD指标可以用来评价结果，但是无法用作损失loss</strong>，已有的loss_ED无法用于中型规模以上的点云中</p>
+</blockquote>
+<p>度量两个分布之间的距离，$\phi$ indicates a parameter of bijection.</p>
+<script type="math/tex; mode=display">d_{EMD}(S_1,S_2)=\min_{\phi:S_1\to S_2}\sum_{x\in S_1}\|x-\phi(x)\|_2</script><p>$\mathcal{L}_{EMD}=min_{\phi:Y\rightarrow Y^{\prime}}\sum_{x\in Y}||x-\phi(x)||_{2}$ , φ indicates a parameter of bijection.</p>
+<h2 id="Accuracy、Precision、Recall-amp-F-score"><a href="#Accuracy、Precision、Recall-amp-F-score" class="headerlink" title="Accuracy、Precision、Recall &amp; F-score"></a>Accuracy、Precision、Recall &amp; F-score</h2><p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/19645541/answer/379024071">如何解释召回率与精确率？ - 朝暾的回答 - 知乎</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/364253497">机器学习的评价指标（一）：Accuracy、Precision、Recall、F1 Score - 知乎 (zhihu.com)</a></p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20240124100320.png" alt="image.png|666"></p>
+<h3 id="Accuracy"><a href="#Accuracy" class="headerlink" title="Accuracy"></a>Accuracy</h3><p>预测正确的样本数÷样本数总数<br>$accuracy=\frac{TP+TN}{TP+TN+FP+FN}$</p>
+<h3 id="Precision"><a href="#Precision" class="headerlink" title="Precision"></a>Precision</h3><p>精确率是<strong>针对我们预测结果而言的</strong>，它表示的是<strong>预测为正的样本中有多少是真正的正样本</strong>。<br>$precision=\frac{TP}{TP+FP}$</p>
+<h3 id="Recall"><a href="#Recall" class="headerlink" title="Recall"></a>Recall</h3><p>召回率是<strong>针对我们原来的样本而言的</strong>，它表示的是<strong>原来样本中的正例有多少被预测正确</strong>了，也即 真实准确的正预测在原来样本的正例中所占的百分比。<br>$recall=sensitivity=\frac{TP}{TP+FN}$</p>
+<h3 id="F-score"><a href="#F-score" class="headerlink" title="F-score"></a>F-score</h3><p>F-Measure是Precision和Recall的加权调和平均<br>$F=\frac{(a^2+1)<em>precision</em>recall}{a^2*precision+recall}$</p>
+<p>当参数α=1时，就是最常见的F1，也即$F1=\frac{2<em>precision</em>recall}{precision+recall}$</p>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+1ZnNxFWnEbk5YzRl">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/3DReconstruction/Multi-view/NeuS-based%203D%20Reconstruction/" rel="prev" title="Multi-view 3D Reconstruction based on SDF and volume rendering">
+      <i class="fa fa-chevron-left"></i> Multi-view 3D Reconstruction based on SDF and volume rendering
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/3DReconstruction/Anime%20Image%203D%20Reconstruction/" rel="next" title="Anime Image 3D Reconstruction">
+      Anime Image 3D Reconstruction <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84loss"><span class="nav-text">常用的loss</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#L1-Loss-MAE-Mean-Absolute-Error"><span class="nav-text">L1 Loss(MAE, Mean Absolute Error)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#L2-Loss-MSE-Mean-Squared-Error"><span class="nav-text">L2 Loss(MSE, Mean Squared Error)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%A4%E5%B9%B6%E6%AF%94%E6%8D%9F%E5%A4%B1-IoU-Intersection-over-Union"><span class="nav-text">交并比损失(IoU, Intersection over Union)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%A4%E5%8F%89%E7%86%B5%E6%8D%9F%E5%A4%B1-Cross-Entropy-Loss"><span class="nav-text">交叉熵损失(Cross Entropy Loss)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E5%88%86%E7%B1%BB-BCE-Binary-Cross-Entropy-Loss"><span class="nav-text">二分类(BCE, Binary Cross-Entropy Loss)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E5%88%86%E7%B1%BB-CCE-Categorical-Cross-entropy-Loss"><span class="nav-text">多分类(CCE, Categorical Cross-entropy Loss)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Time-series-Loss"><span class="nav-text">Time series Loss</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#FFT-Loss"><span class="nav-text">FFT Loss</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA-Loss-Functions"><span class="nav-text">三维重建 Loss Functions</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Eikonal-loss"><span class="nav-text">Eikonal loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RGB-Loss"><span class="nav-text">RGB Loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mask-Loss"><span class="nav-text">Mask Loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Opacity-Loss"><span class="nav-text">Opacity Loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sparsity-Loss"><span class="nav-text">Sparsity Loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Geo-Neus"><span class="nav-text">Geo-Neus</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Other-loss"><span class="nav-text">Other loss</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E5%BC%BAEikonal%E5%AF%B9SDF%E7%9A%84%E4%BC%98%E5%8C%96"><span class="nav-text">加强Eikonal对SDF的优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9A%8F%E6%9C%BA%E7%BB%93%E6%9E%84%E7%9B%B8%E4%BC%BC%E6%80%A7%E6%8D%9F%E5%A4%B1-S3IM-Stochastic-Structural-SIMilarity-loss"><span class="nav-text">随机结构相似性损失(S3IM, Stochastic Structural SIMilarity loss)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Smoothness-Loss"><span class="nav-text">Smoothness Loss</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E5%AD%A6%E4%B9%A0%E5%80%92%E8%A7%92%E8%B7%9D%E7%A6%BB-LCN-Learnable-Chamfer-Distance"><span class="nav-text">可学习倒角距离(LCN, Learnable Chamfer Distance)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DirDist"><span class="nav-text">DirDist</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA-Performance-Metrics"><span class="nav-text">三维重建 Performance Metrics</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%80%92%E8%A7%92%E8%B7%9D%E7%A6%BB-CD%E2%86%93-Chamfer-Distance"><span class="nav-text">倒角距离(CD↓, Chamfer Distance)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PSNR%E2%86%91"><span class="nav-text">PSNR↑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSIM%E2%86%91"><span class="nav-text">SSIM↑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%A6%E4%B9%A0%E6%84%9F%E7%9F%A5%E5%9B%BE%E5%83%8F%E5%9D%97%E7%9B%B8%E4%BC%BC%E5%BA%A6-LPIPS%E2%86%93-Learned-Perceptual-Image-Patch-Similarity"><span class="nav-text">学习感知图像块相似度(LPIPS↓, Learned Perceptual Image Patch Similarity)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%B3%E5%9D%87%E7%82%B9%E5%88%B0%E9%9D%A2%E8%B7%9D%E7%A6%BB-P2S%E2%86%93-average-point-to-surface-distance"><span class="nav-text">平均点到面距离(P2S↓, average point-to-surface distance)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Normal%E2%86%93"><span class="nav-text">Normal↓</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IoU%E2%86%91"><span class="nav-text">IoU↑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A8%E5%9C%9F%E8%B7%9D%E7%A6%BB-EMD%E2%86%93-Earth-Mover%E2%80%99s-distance"><span class="nav-text">推土距离(EMD↓, Earth Mover’s distance)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Accuracy%E3%80%81Precision%E3%80%81Recall-amp-F-score"><span class="nav-text">Accuracy、Precision、Recall &amp; F-score</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Accuracy"><span class="nav-text">Accuracy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Precision"><span class="nav-text">Precision</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Recall"><span class="nav-text">Recall</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#F-score"><span class="nav-text">F-score</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qi Yun"
+      src="/images/avatar.jpeg">
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">140</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/qiyun71" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;qiyun71" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/29010355" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;29010355" rel="noopener" target="_blank"><i class="fa fa-star fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qi Yun</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">486k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">29:27</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/yqq/anime.min.js"></script>
+  <script src="/yqq/velocity/velocity.min.js"></script>
+  <script src="/yqq/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/yqq/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="CS 148: Introduction to Computer Graphics and Imaging (stanford.edu)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Learn-cs148">
+<meta property="og:url" content="http://example.com/Learn/CG%20or%20CV/Learn-cs148/index.html">
+<meta property="og:site_name" content="QiYun">
+<meta property="og:description" content="CS 148: Introduction to Computer Graphics and Imaging (stanford.edu)">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230816184143.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230816184315.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230816184900.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230816190517.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230816190549.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230816191216.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230816191354.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230816201009.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230816202528.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230816203747.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230816204530.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230816210323.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230816210737.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230816211756.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230816212333.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/GIF%202023-8-17%2016-43-19.gif">
+<meta property="article:published_time" content="2023-08-16T11:02:57.000Z">
+<meta property="article:modified_time" content="2024-08-27T13:19:40.394Z">
+<meta property="article:author" content="Qi Yun">
+<meta property="article:tag" content="CG">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230816184143.png">
+
+<link rel="canonical" href="http://example.com/Learn/CG%20or%20CV/Learn-cs148/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Learn-cs148 | QiYun</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">QiYun</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Note</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/Learn/CG%20or%20CV/Learn-cs148/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiYun">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Learn-cs148
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-08-16 19:02:57" itemprop="dateCreated datePublished" datetime="2023-08-16T19:02:57+08:00">2023-08-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-08-27 21:19:40" itemprop="dateModified" datetime="2024-08-27T21:19:40+08:00">2024-08-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Learn/" itemprop="url" rel="index"><span itemprop="name">Learn</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>2.3k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>9 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><a target="_blank" rel="noopener" href="https://web.stanford.edu/class/cs148/index.html">CS 148: Introduction to Computer Graphics and Imaging (stanford.edu)</a></p>
+<span id="more"></span>
+<h1 id="Introduction-amp-Geometry-and-Transformations"><a href="#Introduction-amp-Geometry-and-Transformations" class="headerlink" title="Introduction &amp; Geometry and Transformations"></a>Introduction &amp; Geometry and Transformations</h1><p>Blender操作和两个作业(Sphere&amp;Transformation)</p>
+<p>Sphere<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> bpy</span><br><span class="line"><span class="keyword">import</span> bmesh </span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"></span><br><span class="line"><span class="comment"># Your job is to write a program that fills in </span></span><br><span class="line"><span class="comment"># the right vertex locations and faces to make a sphere. </span></span><br><span class="line"></span><br><span class="line"><span class="comment"># I is the number of stacks minus 1 (Since we count from 0)</span></span><br><span class="line">I = <span class="number">10</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># J is the number of sectors</span></span><br><span class="line">J = <span class="number">15</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># r is the radius </span></span><br><span class="line">r = <span class="number">10</span></span><br><span class="line"></span><br><span class="line">vertex_locations = []</span><br><span class="line">faces = []</span><br><span class="line"></span><br><span class="line"><span class="comment">############## <span class="doctag">TODO:</span> ADD VERTICES ##############</span></span><br><span class="line"><span class="comment"># 1. Add the top vertex (i = 0)</span></span><br><span class="line"><span class="comment"># 2. For each stack, and each sector in that stack, </span></span><br><span class="line"><span class="comment">#    add a vertex (i between 1 and I - 1)</span></span><br><span class="line"><span class="comment"># 3. Add the bottom vertex (i = I)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># <span class="doctag">TODO:</span> Add the top vertex (i = 0)</span></span><br><span class="line">vertex_locations.append((<span class="number">0.</span>,<span class="number">0.</span>,-<span class="number">10.</span>)) <span class="comment"># FIX THIS LINE</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># <span class="doctag">TODO:</span> For each stack, and each sector in that stack, </span></span><br><span class="line"><span class="comment">#       add a vertex (i between 1 and I - 1)</span></span><br><span class="line"><span class="comment"># <span class="doctag">NOTE:</span> You could use theta and phi to find the correct (x,y,z) coordinate</span></span><br><span class="line"><span class="comment">#       You could also figure out the height of each stack to find z,</span></span><br><span class="line"><span class="comment">#       use the radius and z to find the radius of that stack,</span></span><br><span class="line"><span class="comment">#       and use the stack radius and theta to find x and y.</span></span><br><span class="line"><span class="comment">#       Or you could find some other intuition! How do you parse a sphere?</span></span><br><span class="line"><span class="comment"># <span class="doctag">NOTE:</span> Just make sure to take note of the vertex order - you&#x27;ll need that!         </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,I):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(J):</span><br><span class="line">        <span class="comment"># x = 10 # FIX THESE LINES</span></span><br><span class="line">        z = (i * <span class="number">2</span> * r / I) - r</span><br><span class="line">        stack_raidus = math.sqrt(r**<span class="number">2</span> - z**<span class="number">2</span>)  </span><br><span class="line">        theta = <span class="number">2</span> * math.pi * j / J</span><br><span class="line">        x = stack_raidus * math.cos(theta)</span><br><span class="line">        y = stack_raidus * math.sin(theta)</span><br><span class="line">        vertex_locations.append((x,y,z))</span><br><span class="line"></span><br><span class="line"><span class="comment"># <span class="doctag">TODO:</span> Add the bottom vertex (i = I)</span></span><br><span class="line">vertex_locations.append((<span class="number">0.</span>,<span class="number">0.</span>,<span class="number">10.</span>)) <span class="comment"># FIX THIS LINE</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">############## <span class="doctag">TODO:</span> ADD FACES ##############</span></span><br><span class="line"><span class="comment"># 1. Add the top face ring (i = 0)</span></span><br><span class="line"><span class="comment"># 2. Between every two sectors in a stack, add two triangles </span></span><br><span class="line"><span class="comment">#    to form a quad below them. (i between 1 and I - 2)</span></span><br><span class="line"><span class="comment">#    (I - 1 is the bottom sector, so there is only the bottom ring below)</span></span><br><span class="line"><span class="comment"># 3. Add the bottom face ring (i = I)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># <span class="doctag">TODO:</span> Add the top face ring (i = 0)</span></span><br><span class="line"><span class="comment"># <span class="doctag">NOTE:</span> For every sector, you want the face to connect </span></span><br><span class="line"><span class="comment">#       your point with the following point and the top point</span></span><br><span class="line"><span class="comment">#       EXCEPT the last sector, which you want to wrap back around </span></span><br><span class="line"><span class="comment">#       to the first sector in the stack. You&#x27;ll need a separate case here. </span></span><br><span class="line"><span class="comment"># <span class="doctag">NOTE:</span> What index is the top point? If it&#x27;s the first point in your array, </span></span><br><span class="line"><span class="comment">#       it should be 0</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># FIX AND EXPAND THIS BEYOND JUST ONE LINE OF CODE</span></span><br><span class="line"><span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(J):</span><br><span class="line">    <span class="keyword">if</span> j == J - <span class="number">1</span>:</span><br><span class="line">        faces.append((<span class="number">0</span>, j + <span class="number">1</span>, <span class="number">1</span>))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        faces.append((<span class="number">0</span>, j + <span class="number">1</span>, j + <span class="number">2</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># <span class="doctag">TODO:</span> Between every two sectors in a stack, add two triangles </span></span><br><span class="line"><span class="comment">#       to form a quad below them. (i between 1 and I - 2)</span></span><br><span class="line"><span class="comment"># <span class="doctag">NOTE:</span> Looking at two consecutive sectors in a stack: v1 and v2,</span></span><br><span class="line"><span class="comment">#       what are the indices of v1 and v2? What are the indices of the </span></span><br><span class="line"><span class="comment">#       two points below v1 and v2? </span></span><br><span class="line"><span class="comment">#       How will you compose 2 triangles out of these 4 points? </span></span><br><span class="line"><span class="comment"># <span class="doctag">NOTE:</span> As before, when you get to the last sector, you must wrap back around </span></span><br><span class="line"><span class="comment">#       to the first sector in that stack. This is a different case for </span></span><br><span class="line"><span class="comment">#       calculating the indices.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, I-<span class="number">2</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(J):</span><br><span class="line">        n = J * i + <span class="number">1</span> + j</span><br><span class="line">        <span class="keyword">if</span> j == J - <span class="number">1</span>:</span><br><span class="line">            faces.append((n , n + <span class="number">1</span> - J, n + J))</span><br><span class="line">            faces.append((n + <span class="number">1</span> - J, n + J, n + <span class="number">1</span>))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            faces.append((n , n + <span class="number">1</span>, n + J))</span><br><span class="line">            faces.append((n + <span class="number">1</span>, n + J, n + J + <span class="number">1</span>))</span><br><span class="line"><span class="built_in">print</span>(faces)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ADD LINES OF CODE TO GENERATE TWO TRIANGLES</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># <span class="doctag">TODO:</span> Add the bottom face ring (i = I)</span></span><br><span class="line"><span class="comment"># <span class="doctag">NOTE:</span> For every sector, you want the face to connect </span></span><br><span class="line"><span class="comment">#       your point with the following point and the bottom point</span></span><br><span class="line"><span class="comment">#       EXCEPT the last sector, which you want to wrap back around </span></span><br><span class="line"><span class="comment">#       to the first sector in the stack. You&#x27;ll need a separate case here. </span></span><br><span class="line"><span class="comment"># <span class="doctag">NOTE:</span> What index is the bottom point? If you have &quot;x&quot; points total, it should be</span></span><br><span class="line"><span class="comment">#       indexed &quot;x - 1&quot;. How can you calculate the index? This should follow the</span></span><br><span class="line"><span class="comment">#       same pattern as finding the indices above. </span></span><br><span class="line"></span><br><span class="line"><span class="comment"># FIX AND EXPAND THIS BEYOND JUST ONE LINE OF CODE</span></span><br><span class="line"><span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(J):</span><br><span class="line">    <span class="keyword">if</span> j == J - <span class="number">1</span>:</span><br><span class="line">        faces.append((<span class="built_in">len</span>(vertex_locations) - <span class="number">1</span>, <span class="built_in">len</span>(vertex_locations) - <span class="number">2</span> - j, <span class="built_in">len</span>(vertex_locations) - <span class="number">2</span>))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        faces.append((<span class="built_in">len</span>(vertex_locations) - <span class="number">1</span>, <span class="built_in">len</span>(vertex_locations) - <span class="number">2</span> - j, <span class="built_in">len</span>(vertex_locations) - <span class="number">3</span> - j))</span><br><span class="line"></span><br><span class="line"><span class="comment">################ Don&#x27;t worry about anything below this! ################</span></span><br><span class="line"><span class="comment">#### Although it&#x27;s good to read if you&#x27;re interested in Blender scripting! ####</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Delete any old object - rename anything you want to keep! </span></span><br><span class="line"><span class="keyword">for</span> o <span class="keyword">in</span> bpy.context.scene.objects:</span><br><span class="line">    <span class="keyword">if</span> o.name == <span class="string">&quot;mySphere&quot;</span>:</span><br><span class="line">        o.select_set(<span class="literal">True</span>)</span><br><span class="line">        bpy.ops.<span class="built_in">object</span>.delete()</span><br><span class="line"></span><br><span class="line"><span class="comment"># Find collection, and make one if none exists</span></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">len</span>(bpy.data.collections) &lt; <span class="number">1</span>:</span><br><span class="line">    new_collection = bpy.data.collections.new(<span class="string">&#x27;Scene Collection&#x27;</span>)</span><br><span class="line">    bpy.context.scene.collection.children.link(new_collection)</span><br><span class="line">        </span><br><span class="line">collection = bpy.data.collections[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create a new mesh and object to put the data into</span></span><br><span class="line">sphere_mesh = bpy.data.meshes.new(<span class="string">&#x27;mySphere_mesh&#x27;</span>)</span><br><span class="line">sphere_object = bpy.data.objects.new(<span class="string">&#x27;mySphere&#x27;</span>, sphere_mesh)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Add object to scene collection</span></span><br><span class="line">collection.objects.link(sphere_object)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Bmesh is a method of editing the mesh data within an object</span></span><br><span class="line">bm = bmesh.new()</span><br><span class="line">bm.from_mesh(sphere_object.data) </span><br><span class="line"></span><br><span class="line"><span class="comment"># Now we&#x27;ll add all the vertices into the new mesh</span></span><br><span class="line">vertices = []</span><br><span class="line"><span class="keyword">for</span> v <span class="keyword">in</span> vertex_locations:</span><br><span class="line">    vertices.append(bm.verts.new(v))</span><br><span class="line"></span><br><span class="line"><span class="comment"># For the faces, we want the bmesh vertices, instead of the integer indices </span></span><br><span class="line"><span class="keyword">for</span> f <span class="keyword">in</span> faces:</span><br><span class="line">    face = [vertices[i] <span class="keyword">for</span> i <span class="keyword">in</span> f]</span><br><span class="line">    bm.faces.new(face)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Finally, we&#x27;ll reload the mesh into the object! </span></span><br><span class="line">bm.to_mesh(sphere_object.data)  </span><br><span class="line">bm.free()</span><br></pre></td></tr></table></figure></p>
+<p>Transformation<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> bpy</span><br><span class="line"><span class="keyword">import</span> bmesh </span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">cones = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">reset_scene</span>():</span><br><span class="line">    <span class="keyword">for</span> o <span class="keyword">in</span> bpy.context.scene.objects:</span><br><span class="line">        o.select_set(<span class="literal">True</span>)</span><br><span class="line">        bpy.ops.<span class="built_in">object</span>.delete()</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">add_cone</span>(<span class="params">name</span>):</span><br><span class="line">    <span class="comment"># Create a new mesh and object to put the data into</span></span><br><span class="line">    bpy.ops.mesh.primitive_cone_add(location=(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>))</span><br><span class="line">    cone_object = bpy.context.active_object</span><br><span class="line">    cone_object.name = name</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Bmesh is a method of editing the mesh data within an object</span></span><br><span class="line">    bm = bmesh.new()</span><br><span class="line">    bm.from_mesh(cone_object.data) </span><br><span class="line">    cones.append((cone_object, bm))</span><br><span class="line">    <span class="keyword">return</span> bm</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">apply_transforms</span>():</span><br><span class="line">    <span class="keyword">for</span> cone <span class="keyword">in</span> cones:</span><br><span class="line">        bm = cone[<span class="number">1</span>]</span><br><span class="line">        cone_object = cone[<span class="number">0</span>]</span><br><span class="line">        bm.to_mesh(cone_object.data)  </span><br><span class="line">        bm.free()</span><br><span class="line">        </span><br><span class="line"><span class="comment">####################### DO NOT EDIT ABOVE THIS LINE! #######################</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">translate_matrix</span> (distance, axis):</span><br><span class="line">    <span class="comment"># <span class="doctag">TODO:</span> Edit this matrix to be the correct translation matrix</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># X_AXIS = 0, Y_AXIS = 1, Z_AXIS = 2</span></span><br><span class="line">    <span class="keyword">if</span> axis == <span class="number">0</span>:</span><br><span class="line">        arr = np.array([ [<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, distance],</span><br><span class="line">                            [<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">                            [<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>],</span><br><span class="line">                            [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>]])</span><br><span class="line">    <span class="keyword">elif</span> axis == <span class="number">1</span>:</span><br><span class="line">        arr = np.array([ [<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">                            [<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, distance],</span><br><span class="line">                            [<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>],</span><br><span class="line">                            [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>]])</span><br><span class="line">    <span class="keyword">elif</span> axis == <span class="number">2</span>:</span><br><span class="line">        arr = np.array([ [<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">                    [<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>,<span class="number">0</span>],</span><br><span class="line">                    [<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, distance],</span><br><span class="line">                    [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>]])</span><br><span class="line">    <span class="keyword">return</span> arr</span><br><span class="line">               </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">rotate_matrix</span> (degrees, axis):</span><br><span class="line">    <span class="comment"># <span class="doctag">TODO:</span> Edit this matrix to be the correct rotation matrix</span></span><br><span class="line">    <span class="comment"># We want to keep the 4x4 version so that we can multiply it with the</span></span><br><span class="line">    <span class="comment"># translation matrix, which has to be 4x4 as discussed in lecture.</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># X_AXIS = 0, Y_AXIS = 1, Z_AXIS = 2</span></span><br><span class="line">    <span class="keyword">if</span> axis == <span class="number">0</span>:</span><br><span class="line">        arr = np.array([ [<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">                    [<span class="number">0</span>, math.cos(math.radians(degrees)), -math.sin(math.radians(degrees)), <span class="number">0</span>],</span><br><span class="line">                    [<span class="number">0</span>, math.sin(math.radians(degrees)), math.cos(math.radians(degrees)), <span class="number">0</span>],</span><br><span class="line">                    [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>]])</span><br><span class="line">    <span class="keyword">elif</span> axis == <span class="number">1</span>:</span><br><span class="line">        arr = np.array([ [math.cos(math.radians(degrees)), <span class="number">0</span>, math.sin(math.radians(degrees)), <span class="number">0</span>],</span><br><span class="line">                    [<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">                    [-math.sin(math.radians(degrees)), <span class="number">0</span>, math.cos(math.radians(degrees)), <span class="number">0</span>],</span><br><span class="line">                    [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>]])</span><br><span class="line">    <span class="keyword">elif</span> axis == <span class="number">2</span>:</span><br><span class="line">        arr = np.array([ [math.cos(math.radians(degrees)), -math.sin(math.radians(degrees)), <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">                    [math.sin(math.radians(degrees)), math.cos(math.radians(degrees)), <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">                    [<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>],</span><br><span class="line">                    [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>]])</span><br><span class="line">    <span class="keyword">return</span> arr </span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">transform_cone</span>(<span class="params">cone_bm, matrix</span>):</span><br><span class="line">    <span class="comment"># You do not need to edit this function, but you might want to include</span></span><br><span class="line">    <span class="comment"># more print statements to the OS console for debugging!</span></span><br><span class="line">    <span class="keyword">for</span> v <span class="keyword">in</span> cone_bm.verts:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;----------Vertex BEFORE transformation (x, y, z)----------&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(v.co)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Apply the transformation matrix to every vertex</span></span><br><span class="line">        r = np.matmul(matrix, np.append(np.asarray(v.co), <span class="number">1</span>))</span><br><span class="line">        v.co = r[:-<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;----------Vertices AFTER transformation (x, y, z)----------&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(v.co)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Do not touch this line. This just clears the scene.</span></span><br><span class="line">reset_scene()</span><br><span class="line"></span><br><span class="line"><span class="comment"># These add 4 cones, each with the names in quotes as you see below.</span></span><br><span class="line"><span class="comment"># The names will show up in the Scene Collection in Blender to let you</span></span><br><span class="line"><span class="comment"># differentiate amongst the cones.</span></span><br><span class="line"><span class="comment"># You should not need to edit these lines.</span></span><br><span class="line">q1 = add_cone(<span class="string">&quot;rot_45_x_rot_45_y&quot;</span>)</span><br><span class="line">q2 = add_cone(<span class="string">&quot;rot_45_y_rot_45_x&quot;</span>)</span><br><span class="line">q3 = add_cone(<span class="string">&quot;trans_10_x_rot_45_y&quot;</span>)</span><br><span class="line">q4 = add_cone(<span class="string">&quot;rot_45_y_trans_10_x&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># <span class="doctag">TODO:</span> Uncomment the lines below to apply the appropriate transformations</span></span><br><span class="line"><span class="comment"># to all 4 cones. They are commented out for now, since you&#x27;ll likely prefer</span></span><br><span class="line"><span class="comment"># to just work with 1 cone at first for debugging purposes.</span></span><br><span class="line"><span class="comment"># When debugging your matrices, you&#x27;ll want to only enable one transformation</span></span><br><span class="line"><span class="comment"># at a time, as your OS console will get flooded by print outs of all the</span></span><br><span class="line"><span class="comment"># changed cone vertices for each transformation.</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Rotate X 45&quot;</span>)</span><br><span class="line">transform_cone(q1, rotate_matrix(<span class="number">45</span>, <span class="number">0</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Rotate Y 45&quot;</span>)</span><br><span class="line">transform_cone(q1, rotate_matrix(<span class="number">45</span>, <span class="number">1</span>))</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Rotate Y 45&quot;</span>)</span><br><span class="line">transform_cone(q2, rotate_matrix(<span class="number">45</span>, <span class="number">1</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Rotate X 45&quot;</span>)</span><br><span class="line">transform_cone(q2, rotate_matrix(<span class="number">45</span>, <span class="number">0</span>))</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Translate X 10&quot;</span>)</span><br><span class="line">transform_cone(q3, translate_matrix(<span class="number">10</span>, <span class="number">0</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Rotate Y 45&quot;</span>)</span><br><span class="line">transform_cone(q3, rotate_matrix(<span class="number">45</span>, <span class="number">1</span>))</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Rotate Y 45&quot;</span>)</span><br><span class="line">transform_cone(q4, rotate_matrix(<span class="number">45</span>, <span class="number">1</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Translate X 10&quot;</span>)</span><br><span class="line">transform_cone(q4, translate_matrix(<span class="number">10</span>, <span class="number">0</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Do not touch this line. This applys the transformations above.</span></span><br><span class="line">apply_transforms()</span><br></pre></td></tr></table></figure></p>
+<h1 id="Rasterization-and-Shading"><a href="#Rasterization-and-Shading" class="headerlink" title="Rasterization and Shading"></a>Rasterization and Shading</h1><h2 id="Phong-Reflection-Model"><a href="#Phong-Reflection-Model" class="headerlink" title="Phong Reflection Model"></a>Phong Reflection Model</h2><p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230816184143.png" alt="image.png"></p>
+<p>$c=c_{a}+c_{d}c_{l}max(0,n\cdot l)+c_{specular}$</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230816184315.png" alt="image.png"></p>
+<p>$c_{specular}=c_sc_lmax(0,e\cdot r)$<br>=&gt;+ shininess value: how shiny we want to tune the material<br>$c_{specular}=c_sc_lmax(0,e\cdot r)^\alpha$<br>=&gt;+ 反射r不好计算<br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230816184900.png" alt="image.png"><br>计算l和e的halfway vector h， 当e与r对齐时，h与n对齐<br>$h=\frac{e+l}{|e+l|}$<br>$c_{specular}=c_sc_lmax(0,n\cdot h)^\alpha$</p>
+<p>最终：$c=c_{ambient}+c_{diffuse}+c_{specular}$<br>$\begin{aligned}c&amp;=c_a+c_dc_lmax(0,n\cdot l)+c_sc_lmax(0,n\cdot h)^\alpha\end{aligned}$</p>
+<h2 id="How-do-we-make-the-teapot-image-look-smooth"><a href="#How-do-we-make-the-teapot-image-look-smooth" class="headerlink" title="How do we make the teapot image look smooth?"></a>How do we make the teapot image look smooth?</h2><p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230816190517.png" alt="image.png"></p>
+<p>Gourad Shading:</p>
+<p>a. b. c. 三个vertex的颜色值和法向量，则三角形中任意一点v</p>
+<p>$c_{v}=\frac{A_{a}}{A_{total}}c_{a}+\frac{A_{b}}{A_{total}}c_{b}+\frac{A_{c}}{A_{total}}c_{c}$<br>$n_{v}=\frac{A_{a}}{A_{total}}n_{a}+\frac{A_{b}}{A_{total}}n_{b}+\frac{A_{c}}{A_{total}}n_{c}$</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230816190549.png" alt="image.png"></p>
+<p>对比三种不同计算颜色的方法：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>方法描述</th>
+<th>result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Flat</td>
+<td>使用每个顶点计算出的颜色平均值为三角形着色</td>
+<td>simple, fast, but looks bad.</td>
+</tr>
+<tr>
+<td>Gourad</td>
+<td>通过对每个顶点的颜色进行内插，对三角形进行阴影处理</td>
+<td>good balance between speed and visual result</td>
+</tr>
+<tr>
+<td>Phong</td>
+<td>内插每个顶点的法线，然后计算三角形中每个点的颜色</td>
+<td>expensive but best look!</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230816191216.png" alt="image.png"></p>
+<ul>
+<li>光栅化的pipeline</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230816191354.png" alt="image.png"></p>
+<h1 id="Color-Images-and-Cameras"><a href="#Color-Images-and-Cameras" class="headerlink" title="Color, Images, and Cameras"></a>Color, Images, and Cameras</h1><p><strong>The images we create ARE NOT intended to duplicate reality, only to fool humans into believing such</strong></p>
+<h2 id="Camera"><a href="#Camera" class="headerlink" title="Camera"></a>Camera</h2><p>相机坐标系</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230816201009.png" alt="image.png"></p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230816202528.png" alt="image.png"></p>
+<p>投影变换矩阵，将锥形空间转换到正方体空间orthographic clipping space<br><em>transform viewing frustrum to an orthographic bounding box</em></p>
+<p>$\begin{pmatrix}\frac{1}{r_x}&amp;0&amp;0&amp;0\\0&amp;\frac{1}{r_y}&amp;0&amp;0\\0&amp;0&amp;\frac{d0+d1}{d0-d1}&amp;2\frac{d0d1}{d0-d1}\\0&amp;0&amp;-1&amp;0\end{pmatrix}\begin{pmatrix}x\\y\\z\\1\end{pmatrix}$</p>
+<p>焦距f越小，传感器h越大==&gt;视野越宽<br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230816203747.png" alt="image.png"></p>
+<p>光圈越大，景深越大还是越小？</p>
+<ul>
+<li>F = 焦距/入瞳直径 ==&gt; 控制曝光，影响景深</li>
+<li>F越小 —&gt; 光圈越大 —&gt; 入瞳直径越大 —&gt; 景深越小</li>
+</ul>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1t24y1k7Ye">https://www.bilibili.com/video/BV1t24y1k7Ye</a></p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230816204530.png" alt="image.png"></p>
+<h1 id="Light-and-Optics"><a href="#Light-and-Optics" class="headerlink" title="Light and Optics"></a>Light and Optics</h1><p>3D ==&gt; solid angle</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230816210323.png" alt="image.png"></p>
+<p>辐射强度Radiant Intensity：$I(\omega)=\frac{dP}{d\omega}$ 光源在每个solid angle上的功率power，单位w</p>
+<ul>
+<li>各项异性光源：辐射强度在整个光源中都是不同的，需要function of steradians立体角的函数</li>
+<li>各项同性点光源：对$\begin{aligned}dP=Id\omega\end{aligned}$积分 ==&gt; $P=\int_{sphere}Id\omega=4\pi I$</li>
+</ul>
+<p>辐照度Irradiance: 光照射物体单位表面积的功率。光的单位表面积功率$E=\frac{dP}{dA}$</p>
+<ul>
+<li>如果表面倾斜，则辐照度减小：$E=\frac{dP}{dA}\rightarrow E_{tilted}=\frac{\frac{A\cos\theta}{A}P}{A}=E\cos\theta$</li>
+<li><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230816210737.png" alt="image.png"></li>
+<li>Irradiance <ul>
+<li>varies based on tilt angle of surface with light</li>
+<li>varies based on distance from light</li>
+</ul>
+</li>
+</ul>
+<p>现实世界中，光源不是点，而是一个单位面积，因此将辐射度定义为<strong>单位面积</strong>chunk的辐射强度<br>辐射度radiance：$L=\frac{dI}{dA\cos\theta}$<br>$L=\frac{dI}{dA\cos\theta}=\left(\frac{d(dP)}{d\omega dA\cos\theta}=\frac{dE}{d\omega\cos\theta}\right)$</p>
+<p>现实世界中，光源来自各个可以看见的物体，光线传播到一个物体material上后，会发生：反射、吸收、传输（散射）</p>
+<p>建模materials的方法：</p>
+<ul>
+<li>BRDF —&gt; Reflectance $BRDF(\omega_i,\omega_o)=\frac{dL_o(\omega_o)}{dE_i(\omega_i)}$<ul>
+<li>BRDF 模拟在入射方向不变的情况下，每个向外方向反射多少光</li>
+</ul>
+</li>
+<li>BTDF —&gt; Transmittance</li>
+<li>BSSRDF —&gt; Surface Scattering散射 Reflectance</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230816211756.png" alt="image.png"></p>
+<p>更精确Lighting方程：根据BRDF<br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230816212333.png" alt="image.png"></p>
+<p>得出：$L_o(\omega_o)=\int_{i\in in}BRDF(\omega_i,\omega_o)L_i\cos\theta_id\omega_i$</p>
+<p>HW2</p>
+<ul>
+<li>焦距和距离等比例变化，焦距越大，照片的信息越多(耳朵变大)</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/GIF%202023-8-17%2016-43-19.gif" alt="GIF 2023-8-17 16-43-19.gif"></p>
+<h1 id="Raytracing"><a href="#Raytracing" class="headerlink" title="Raytracing"></a>Raytracing</h1>
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+1ZnNxFWnEbk5YzRl">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/CG/" rel="tag"><i class="fa fa-tag"></i> CG</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/3DReconstruction/Multi-view/Generative%20Models/PlankAssembly/" rel="prev" title="PlankAssembly">
+      <i class="fa fa-chevron-left"></i> PlankAssembly
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/3DReconstruction/Multi-view/Explicit%20Volumetric/GS-based/3D%20Gaussian%20Splatting/" rel="next" title="3D Gaussian Splatting">
+      3D Gaussian Splatting <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction-amp-Geometry-and-Transformations"><span class="nav-text">Introduction &amp; Geometry and Transformations</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Rasterization-and-Shading"><span class="nav-text">Rasterization and Shading</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Phong-Reflection-Model"><span class="nav-text">Phong Reflection Model</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-do-we-make-the-teapot-image-look-smooth"><span class="nav-text">How do we make the teapot image look smooth?</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Color-Images-and-Cameras"><span class="nav-text">Color, Images, and Cameras</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Camera"><span class="nav-text">Camera</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Light-and-Optics"><span class="nav-text">Light and Optics</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Raytracing"><span class="nav-text">Raytracing</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qi Yun"
+      src="/images/avatar.jpeg">
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">140</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/qiyun71" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;qiyun71" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/29010355" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;29010355" rel="noopener" target="_blank"><i class="fa fa-star fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qi Yun</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">486k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">29:27</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/yqq/anime.min.js"></script>
+  <script src="/yqq/velocity/velocity.min.js"></script>
+  <script src="/yqq/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

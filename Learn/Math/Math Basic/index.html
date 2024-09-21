@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/yqq/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="MATH">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Math">
+<meta property="og:url" content="http://example.com/Learn/Math/Math%20Basic/index.html">
+<meta property="og:site_name" content="QiYun">
+<meta property="og:description" content="MATH">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20240316151511.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240328193106.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240328193446.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/v2-eb0945aa2185df958f4568e58300e77a_1440w.gif">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230801135729.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230801135800.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240722141841.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240401085715.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240921142810.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230810162118.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240503135053.png">
+<meta property="article:published_time" content="2024-03-29T14:24:11.000Z">
+<meta property="article:modified_time" content="2024-09-21T06:28:16.681Z">
+<meta property="article:author" content="Qi Yun">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20240316151511.png">
+
+<link rel="canonical" href="http://example.com/Learn/Math/Math%20Basic/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Math | QiYun</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">QiYun</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Note</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/Learn/Math/Math%20Basic/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiYun">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Math
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2024-03-29 22:24:11" itemprop="dateCreated datePublished" datetime="2024-03-29T22:24:11+08:00">2024-03-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-09-21 14:28:16" itemprop="dateModified" datetime="2024-09-21T14:28:16+08:00">2024-09-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Learn/" itemprop="url" rel="index"><span itemprop="name">Learn</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>3.6k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>13 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>MATH</p>
+<span id="more"></span>
+<h1 id="泛函"><a href="#泛函" class="headerlink" title="泛函"></a>泛函</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/21938224">(72 封私信 / 80 条消息) 「泛函」究竟是什么意思？ - 知乎</a><br><a target="_blank" rel="noopener" href="https://www.pynumerical.com/archives/48/">Calculus of Variations：变分计算 - 分享我的学习心得</a> 变分：自变量x不变，函数$y(\cdot)$改变</p>
+</blockquote>
+<p>研究不同的函数，对输出的影响。<br>例如MLP要拟合一个函数，让预测的输出与标签非常相近。又如有限元求解偏微分方程，是要根据<strong>最小作用量原理</strong>，求得一个满足边界条件的、相对准确的近似解</p>
+<h1 id="数学基础"><a href="#数学基础" class="headerlink" title="数学基础"></a>数学基础</h1><h2 id="摄动法"><a href="#摄动法" class="headerlink" title="摄动法"></a>摄动法</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://kexue.fm/archives/1878">轻微的扰动——摄动法简介(1) - 科学空间|Scientific Spaces</a> </p>
+</blockquote>
+<h2 id="泰勒"><a href="#泰勒" class="headerlink" title="泰勒"></a>泰勒</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://dezeming.top/wp-content/uploads/2021/06/%E5%A4%9A%E5%85%83%E5%87%BD%E6%95%B0%EF%BC%88%E5%8F%8A%E5%90%91%E9%87%8F%E5%87%BD%E6%95%B0%EF%BC%89%E7%9A%84%E6%B3%B0%E5%8B%92%E5%B1%95%E5%BC%80.pdf">dezeming.top/wp-content/uploads/2021/06/多元函数（及向量函数）的泰勒展开.pdf</a></p>
+</blockquote>
+<p>泰勒展开本质上是求近似</p>
+<h1 id="概率论"><a href="#概率论" class="headerlink" title="概率论"></a>概率论</h1><p>Follow:</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/people/chenxran0916/posts">KERO - 知乎</a></p>
+</blockquote>
+<ul>
+<li>最大似然</li>
+</ul>
+<script type="math/tex; mode=display">\begin{aligned}
+\widehat{\theta}_{\mathrm{MLE}}& =\arg\max P(X;\theta)  \\
+&=\arg\max P(x_1;\theta)P(x_2;\theta)\cdot\cdots P(x_n;\theta) \\
+&=\arg\max\log\prod_{i=1}^nP(x_i;\theta) \\
+&=\arg\max\sum_{i=1}^n\log P(x_i;\theta) \\
+&=\arg\min-\sum_{i=1}^n\log P(x_i;\theta)
+\end{aligned}</script><ul>
+<li>最大后验</li>
+</ul>
+<script type="math/tex; mode=display">\begin{aligned}
+\hat{\theta}_{\mathrm{MAP}}& =\arg\max P(\theta|X)  \\
+&=\arg\min-\log P(\theta|X) \\
+&=\arg\min-\log P(X|\theta)-\log P(\theta)+\log P(X) \\
+&=\arg\min-\log P(X|\theta)-\log P(\theta)
+\end{aligned}</script><h2 id="Bayes"><a href="#Bayes" class="headerlink" title="Bayes"></a>Bayes</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=HZGCoVF3YvM">贝叶斯定理，改变信念的几何学 - YouTube</a> ——数形结合<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/401258319">走进贝叶斯统计（一）—— 先验分布与后验分布 - 知乎</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/USTC-ZCC/p/12786860.html">超详细讲解贝叶斯网络(Bayesian network) - USTC丶ZCC - 博客园</a></p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20240316151511.png" alt="image.png|666"></p>
+<p>全概率公式：$\mathbf{P(H)}=\mathbf{P(H|A)P(A)}+\mathbf{P(H|B)P(B)}$，结果H发生的概率</p>
+<p>贝叶斯公式：$\mathbf{P}(\mathbf{A}|\mathbf{H})=\frac{P(A)P(H|A)}{P(H)}$，H结果发生时，是由A导致的概率</p>
+<ul>
+<li>连续$p(y_0|x)=\frac{p(x|y_0)p(y_0)}{\int_{-\infty}^{+\infty}p(x|y)p(y)dy}$</li>
+<li>离散$p(y_j|x)=\frac{p(x|y_j)p(y_j)}{\sum_{i=0}^np(x|y_i)p(y_i)}$</li>
+</ul>
+<p>在使用数据估计参数$\theta$之前，我们需要给这个参数设定一个分布，即先验分布$p(\theta)$（根据经验得到）</p>
+<p>$p(\theta|X)=\frac{p(\theta,X)}{p(X)}=\frac{p(X|\theta)p(\theta)}{\int_{-\infty}^{+\infty}p(X|\theta)p(\theta)d\theta}.$</p>
+<ul>
+<li>$p(\theta|X)$是$\theta$的后验分布</li>
+<li>$p(X|\theta)$是在给定$\theta$下关于数据样本的似然函数</li>
+<li>$\int_{-\infty}^{+\infty}p(X|\theta)p(\theta)d\theta$ 为常数c，可以写为$p(\theta|X)\propto p(X|\theta)p(\theta).$</li>
+</ul>
+<h2 id="Distribution"><a href="#Distribution" class="headerlink" title="Distribution"></a>Distribution</h2><p>Gamma Function：$\Gamma(z)=\int_0^\infty t^{z-1}e^{-t}\mathrm{d}t,\quad\Re(z)&gt;0.$ or $\Gamma(n)=(n-1)!.$</p>
+<h3 id="Gamma-分布"><a href="#Gamma-分布" class="headerlink" title="Gamma 分布"></a>Gamma 分布</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Gamma_distribution">Gamma distribution - Wikipedia</a></p>
+</blockquote>
+<p>$f(x)=\frac{\beta^{\alpha}}{\Gamma(\alpha)}x^{\alpha-1}e^{-\beta x}$</p>
+<p>图中k对应$\alpha$，$\theta$对应$\beta$</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240328193106.png" alt="image.png|333"></p>
+<h3 id="Beta-分布"><a href="#Beta-分布" class="headerlink" title="Beta 分布"></a>Beta 分布</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Beta_distribution">Beta distribution - Wikipedia</a></p>
+</blockquote>
+<p>通常是概率分布的分布</p>
+<p>$\mathbf{B}(\alpha,\beta)={\frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha+\beta)}}$</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240328193446.png" alt="image.png|333"></p>
+<h3 id="多元高斯分布"><a href="#多元高斯分布" class="headerlink" title="多元高斯分布"></a>多元高斯分布</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/kailugaji/p/15542845.html">多元/多维高斯/正态分布概率密度函数推导 (Derivation of the Multivariate/Multidimensional Normal/Gaussian Density) - 凯鲁嘎吉 - 博客园</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/bingjianing/p/9117330.html">多元高斯分布（The Multivariate normal distribution） - bingjianing - 博客园</a></p>
+</blockquote>
+<p>概率密度函数<br>$p(x)=p(x_{1},x_{2},\ldots,x_{D})=\frac{1}{(2\pi)^{D/2}}\exp\left(-\frac{1}{2}(x-\mu)^{T}\Sigma^{-1}(x-\mu)\right)$</p>
+<h3 id="混合高斯分布"><a href="#混合高斯分布" class="headerlink" title="混合高斯分布"></a>混合高斯分布</h3><p>GMM</p>
+<h3 id="联合高斯分布"><a href="#联合高斯分布" class="headerlink" title="联合高斯分布"></a>联合高斯分布</h3><p>如何构造两个协方差标准分布</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/kdazhe/article/details/104599229">生成一定相关性的二元正态分布_怎么产生二元正态分布的随机数-CSDN博客</a></p>
+</blockquote>
+<p>AB为两个独立的标准正态分布：</p>
+<p>$\begin{aligned}\mathrm{X}&amp;=\alpha\mathrm{A}+\beta\mathrm{B},\\\\\mathrm{Y}&amp;=\gamma\mathrm{A}+\delta\mathrm{B}\end{aligned}$</p>
+<p>$\alpha,\beta,\gamma,\delta$是四个待确定的参数，希望找到这四个参数，使得X和Y也服从标准正态分布$N(0,1)$，并且相关系数$Cor(X,Y)=\rho$。</p>
+<p>由标准正态分布性质可得：$\mathrm{X}\sim\mathrm{N}(0,\alpha^2+\beta^2),\mathrm{Y}\sim\mathrm{N}(0,\gamma^2+\delta^2)。$<br>要想：$\bar{\alpha}^{2}+\beta^{2}=1,\gamma^{2}+\delta^{2}=1$<br>则可以假设：$\alpha=\cos\theta,\beta=\sin\theta;\gamma=\sin\theta,\delta=\cos\theta,$</p>
+<p>由相关系数：$\mathrm{Cor(X,~Y)}=\frac{\mathrm{Cov(X,~Y)}}{\sqrt{\mathrm{Var(X)Var(Y)}}}$，$\operatorname{Var}(\mathrm{X})=1$，$\operatorname{Var}(\mathrm{Y})=1$<br>因此使得：</p>
+<script type="math/tex; mode=display">\begin{aligned}
+\mathrm{Cov}(\mathrm{X,Y})& =\mathrm{Cov}\Big((\cos\theta)\mathrm{A}+(\sin\theta)\mathrm{B},(\sin\theta)\mathrm{A}+(\cos\theta)\mathrm{B}\Big)  \\
+&=\cos\theta\sin\theta+\sin\theta\cos\theta  \\
+&=\sin2\theta 
+\end{aligned}</script><ul>
+<li>（$Cov(A,A)=1,Cov(A,B)=0$）</li>
+<li>$\text{Cov}(x_1 + x_2, y_1 + y_2) = \text{Cov}(x_1, y_1) + \text{Cov}(x_2, y_1) + \text{Cov}(x_1, y_2) + \text{Cov}(x_2, y_2)$</li>
+<li>$\mathrm{Cov}(aX,Y)=a\mathrm{Cov}(X,Y)$</li>
+</ul>
+<p>则有：$\theta=\frac{\arcsin\rho}2$，然后令$\begin{cases}\mathrm X=(\cos\theta)\mathrm A+(\sin\theta)\mathrm B\\\mathrm Y=(\sin\theta)\mathrm A+(\cos\theta)\mathrm B\end{cases}$，则计算出来的X和Y就是相关性为$\rho$的标准正态分布</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">bivariateNormal</span>:</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, rho: <span class="string">&#x27;float&#x27;</span>, m: <span class="built_in">int</span></span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        Suppose we want to generate a pair of </span></span><br><span class="line"><span class="string">        random variables X, Y, with X ~ N(0, 1), </span></span><br><span class="line"><span class="string">        Y ~ N(0, 1), and Cor(X, Y) = rho. m is </span></span><br><span class="line"><span class="string">        the number of data pairs we want to generate.</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        self.rho = rho</span><br><span class="line">        self.m = m</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">generateBivariate</span>(<span class="params">self</span>) -&gt; <span class="string">&#x27;tuple(np.array, np.array)&#x27;</span>:</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        Generate two random variables X, Y, with X ~ N(0, 1), </span></span><br><span class="line"><span class="string">        Y ~ N(0, 1), and Cor(X, Y) = rho. </span></span><br><span class="line"><span class="string">        self.m is the number of sample points we generated.</span></span><br><span class="line"><span class="string">        We return a tuple (X, Y). </span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        theta = np.arcsin(self.rho) / <span class="number">2</span></span><br><span class="line">        A = np.random.normal(<span class="number">0</span>, <span class="number">1</span>, self.m)</span><br><span class="line">        B = np.random.normal(<span class="number">0</span>, <span class="number">1</span>, self.m)</span><br><span class="line">        X = np.cos(theta) * A + np.sin(theta) * B</span><br><span class="line">        Y = np.sin(theta) * A + np.cos(theta) * B</span><br><span class="line">        <span class="keyword">return</span> X, Y</span><br><span class="line"></span><br><span class="line">m = <span class="number">10</span> ** <span class="number">3</span></span><br><span class="line">rho = -<span class="number">0.4</span></span><br><span class="line">a = bivariateNormal(rho, m)</span><br><span class="line">X, Y = a.generateBivariate()</span><br><span class="line">np.corrcoef(X, Y)</span><br></pre></td></tr></table></figure>
+<h3 id="P-box"><a href="#P-box" class="headerlink" title="P-box"></a>P-box</h3><h2 id="Markov-Chains"><a href="#Markov-Chains" class="headerlink" title="Markov Chains"></a>Markov Chains</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://setosa.io/ev/markov-chains/">Markov Chains explained visually</a> 入门</p>
+</blockquote>
+<h2 id="Sampling"><a href="#Sampling" class="headerlink" title="Sampling"></a>Sampling</h2><p>如何在不知道目标概率密度函数的情况下，抽取所需数量的样本，使得这些样本符合目标概率密度函数。这个问题简称为抽样</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://onlinelibrary.wiley.com/doi/full/10.1155/2018/8980756">Finite Element Model Updating in Bridge Structures Using Kriging Model and Latin Hypercube Sampling Method - Wu - 2018 - Advances in Civil Engineering - Wiley Online Library</a> 不同采样方法的讨论(simple random sampling (SRS), stratified sampling method, cluster sampling method, and systematic sampling) <strong>Latin Hypercube Sampling 属于 =分层采样</strong><br><a target="_blank" rel="noopener" href="https://huangc.top/2019/03/24/sampling-2019/">It’s all about Sampling - 子淳的博客 | Just Me</a></p>
+</blockquote>
+<h3 id="Monte-Carlo"><a href="#Monte-Carlo" class="headerlink" title="Monte Carlo"></a>Monte Carlo</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/338103692">一文看懂蒙特卡洛采样方法 - 知乎 (zhihu.com)</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/39628670">简明例析蒙特卡洛（Monte Carlo）抽样方法 - 知乎 (zhihu.com)</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/406256344">走进贝叶斯统计（四）—— 蒙特卡洛方法 - 知乎</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/barwe/p/14140681.html">逆变换采样和拒绝采样 - barwe - 博客园 (cnblogs.com)</a><br><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Monte_Carlo_method">Monte Carlo method - Wikipedia</a><br><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=c2WrJY8tnGE">【数之道 22】巧妙使用”接受-拒绝”方法，玩转复杂分布抽样 - YouTube</a></p>
+</blockquote>
+<p>MC Sampling<br><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/v2-eb0945aa2185df958f4568e58300e77a_1440w.gif" alt="v2-eb0945aa2185df958f4568e58300e77a_1440w.gif|222"></p>
+<p>对某一种概率分布p(x)进行蒙特卡洛采样的方法主要分为直接采样、拒绝采样与重要性采样三种:</p>
+<ul>
+<li>Naive Method<ul>
+<li>根据概率分布进行采样。对一个已知概率密度函数与累积概率密度函数的概率分布，我们可以直接从累积分布函数（cdf）进行采样（类似逆变换采样）</li>
+</ul>
+</li>
+<li>Acceptance-Rejection Method <ul>
+<li>逆变换采样虽然简单有效，但是当累积分布函数或者反函数难求时却难以实施，可使用MC的接受拒绝采样</li>
+<li>对于累积分布函数未知的分布，我们可以采用接受-拒绝采样。如下图所示，p(z)是我们希望采样的分布，q(z)是我们提议的分布(proposal distribution)，令kq(z)&gt;p(z)，我们首先在kq(z)中按照直接采样的方法采样粒子，接下来判断这个粒子落在途中什么区域，对于落在灰色区域的粒子予以拒绝，落在红线下的粒子接受，最终得到符合p(z)的N个粒子</li>
+<li><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230801135729.png" alt="image.png|333"></li>
+<li>数学推导：<ul>
+<li><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230801135800.png" alt="image.png|500"></li>
+</ul>
+<ol>
+<li>从 $f_r(x)$ 进行一次采样 $x_i$</li>
+<li>计算 $x_i$ 的 <strong>接受概率</strong> $\alpha$（Acceptance Probability）:$\alpha=\frac{f\left(x_i\right)}{f_r\left(x_i\right)}$</li>
+<li>从 (0,1) 均匀分布中进行一次采样 u</li>
+<li>如果 $\alpha$≥u，接受 $x_i$ 作为一个来自 f(x) 的采样；否则，重复第1步</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">N=<span class="number">1000</span> <span class="comment">#number of samples needed</span></span><br><span class="line">i = <span class="number">1</span></span><br><span class="line">X = np.array([])</span><br><span class="line"><span class="keyword">while</span> i &lt; N:</span><br><span class="line">    u = np.random.rand()</span><br><span class="line">    x = (np.random.rand()-<span class="number">0.5</span>)*<span class="number">8</span></span><br><span class="line">    res = u &lt; <span class="built_in">eval</span>(x)/ref(x)</span><br><span class="line">    <span class="keyword">if</span> res:</span><br><span class="line">        X = np.hstack((X,x[res])) <span class="comment">#accept</span></span><br><span class="line">        ++i</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>Importance Sampling</strong><ul>
+<li>接受拒绝采样完美的解决了累积分布函数不可求时的采样问题。但是接受拒绝采样非常依赖于提议分布(proposal distribution)的选择，如果提议分布选择的不好，可能采样时间很长却获得很少满足分布的粒子。</li>
+<li>$E_{p(x)}[f(x)]=\int_a^bf(x)\frac{p(x)}{q(x)}q(x)dx=E_{q(x)}[f(x)\frac{p(x)}{q(x)}]$</li>
+<li>我们从提议分布q(x)中采样大量粒子$x_1,x_2,…,x_n$，每个粒子的权重是 $\frac{p(x_i)}{q(x_i)}$，通过加权平均的方式可以计算出期望:</li>
+<li>$E_{p(x)}[f(x)]=\frac{1}{N}\sum f(x_i)\frac{p(x_i)}{q(x_i)}$<ul>
+<li>q提议的分布，p希望的采样分布</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">N=<span class="number">100000</span></span><br><span class="line">M=<span class="number">5000</span></span><br><span class="line">x = (np.random.rand(N)-<span class="number">0.5</span>)*<span class="number">16</span></span><br><span class="line">w_x = <span class="built_in">eval</span>(x)/ref(x)</span><br><span class="line">w_x = w_x/<span class="built_in">sum</span>(w_x)</span><br><span class="line">w_xc = np.cumsum(w_x) <span class="comment">#accumulate</span></span><br><span class="line"></span><br><span class="line">X=np.array([])</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(M):</span><br><span class="line">    u = np.random.rand()</span><br><span class="line">    X = np.hstack((X,x[w_xc&gt;u][<span class="number">0</span>])) <span class="comment"># 其中，w_xc是对归一化后的权重计算的累计分布概率。每次取最终样本时，都会先随机一个(0,1)之间的随机数，并使用这个累计分布概率做选择。样本的权重越大，被选中的概率就越高。</span></span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+<h3 id="分层采样"><a href="#分层采样" class="headerlink" title="分层采样"></a>分层采样</h3><h4 id="分层抖动采样"><a href="#分层抖动采样" class="headerlink" title="分层抖动采样"></a>分层抖动采样</h4><blockquote>
+<p><a target="_blank" rel="noopener" href="https://yangwc.com/2020/04/11/Sampling2/">Physically Based Rendering：采样和重建（二） | YangWC’s Blog</a></p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240722141841.png" alt="image.png|666"></p>
+<ul>
+<li>随机采样</li>
+<li>分层均匀采样</li>
+<li>分层抖动采样。理想的分层抖动采样很容易陷入<strong>维数灾难</strong>，因此有人提出了高维转低维采样+随机串联(or随机配对)的方法</li>
+</ul>
+<h4 id="Latin-Hypercube-Sampling"><a href="#Latin-Hypercube-Sampling" class="headerlink" title="Latin Hypercube Sampling"></a>Latin Hypercube Sampling</h4><ol>
+<li>将每个维度的区间划分为m个不重叠的区间，每个区间概率相等（取均匀分布，区间大小应相等）</li>
+<li>从均匀分布中随机采样，每个维度的每个间隔中的一个点</li>
+<li>将每个维度的点随机配对（相同可能的组合）</li>
+</ol>
+<p>相较于Simple Random Sampling，LHS的方法更加分散，且不存在聚类效应</p>
+<h3 id="MCMC"><a href="#MCMC" class="headerlink" title="MCMC"></a>MCMC</h3><p>(Markov Chain Monte Carlo)</p>
+<p>Blog:</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/37121528">马尔可夫链蒙特卡罗算法（MCMC） - 知乎</a><br>动画 <a target="_blank" rel="noopener" href="https://chi-feng.github.io/mcmc-demo/">The Markov-chain Monte Carlo Interactive Gallery</a> | 代码 <a target="_blank" rel="noopener" href="https://github.com/chi-feng/mcmc-demo">Javascript demos</a><br><a target="_blank" rel="noopener" href="https://prappleizer.github.io/Tutorials/MCMC/MCMC_Tutorial.html">MCMC</a> MCMC: A (very) Beginnner’s Guide</p>
+</blockquote>
+<p>Paper:</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2204.10145">An effective introduction to the Markov Chain Monte Carlo method</a> <strong>For physics</strong><br><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1909.12313">A Conceptual Introduction to Markov Chain Monte Carlo Methods</a><br><a target="_blank" rel="noopener" href="https://www.taylorfrancis.com/books/mono/10.1201/b14835/markov-chain-monte-carlo-practice-david-spiegelhalter-gilks-richardson">Markov Chain Monte Carlo in Practice | W.R. Gilks, S. Richardson, Davi</a> MCMC需要小心地初始化，早期阶段需要warm-up time</p>
+</blockquote>
+<h4 id="M-H采样"><a href="#M-H采样" class="headerlink" title="M-H采样"></a>M-H采样</h4><blockquote>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/411689417">走进贝叶斯统计（五）—— Metropolis-Hasting 算法 - 知乎</a></p>
+</blockquote>
+<h4 id="Gibbs采样"><a href="#Gibbs采样" class="headerlink" title="Gibbs采样"></a>Gibbs采样</h4><blockquote>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/416670115">走进贝叶斯统计（六）—— 吉布斯抽样 （Gibbs Sampling） - 知乎</a></p>
+</blockquote>
+<h4 id="TMCMC"><a href="#TMCMC" class="headerlink" title="TMCMC"></a>TMCMC</h4><blockquote>
+<p><a href="Transitional%20Markov%20Chain%20Monte%20Carlo%20Method%20for%20Bayesian%20Model%20Updating,%20Model%20Class%20Selection,%20and%20Model%20Averaging.md">Transitional Markov Chain Monte Carlo Method for Bayesian Model Updating, Model Class Selection, and Model Averaging</a></p>
+</blockquote>
+<h4 id="拉丁超立方采样-Latin-hypercube-sampling-LHS"><a href="#拉丁超立方采样-Latin-hypercube-sampling-LHS" class="headerlink" title="拉丁超立方采样(Latin hypercube sampling, LHS)"></a>拉丁超立方采样(Latin hypercube sampling, LHS)</h4><blockquote>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/385966408">拉丁超立方采样(Latin hypercube sampling, LHS)及蒙特卡洛模拟简介 - 知乎</a></p>
+</blockquote>
+<p>拉丁超立方采样先把样本空间分层，在此问题下要分为5层，于是便有了 [1,20],[21,40],[41,60],[61,80],[81,100] 共5个样本空间，在各样本空间内进行随机抽样，然后再打乱顺序，得到结果。这样就结束了~</p>
+<p>可以看出拉丁超立方采样分为了三步——<strong>分层、采样、乱序</strong>。</p>
+<h4 id="Langevin-Monte-Carlo-LMC"><a href="#Langevin-Monte-Carlo-LMC" class="headerlink" title="Langevin Monte Carlo(LMC)"></a>Langevin Monte Carlo(LMC)</h4><h4 id="Hamiltonian-Monte-Carlo-HMC"><a href="#Hamiltonian-Monte-Carlo-HMC" class="headerlink" title="Hamiltonian Monte Carlo(HMC)"></a>Hamiltonian Monte Carlo(HMC)</h4><h2 id="置信区间"><a href="#置信区间" class="headerlink" title="置信区间"></a>置信区间</h2><p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/68%E2%80%9395%E2%80%9399.7%E6%B3%95%E5%89%87">68–95–99.7法则 - 维基百科，自由的百科全书</a></p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240401085715.png" alt="image.png|444"></p>
+<h2 id="图像展示"><a href="#图像展示" class="headerlink" title="图像展示"></a>图像展示</h2><h3 id="箱型图"><a href="#箱型图" class="headerlink" title="箱型图"></a>箱型图</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/347067055">如何深刻理解箱线图（boxplot） - 知乎</a></p>
+</blockquote>
+<h3 id="t-SNE-数据降维"><a href="#t-SNE-数据降维" class="headerlink" title="t-SNE 数据降维"></a>t-SNE 数据降维</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/426068503">降维方法之t-SNE - 知乎</a><br><a target="_blank" rel="noopener" href="https://medium.com/swlh/everything-about-t-sne-dde964f0a8c1">Everything About t-SNE. t-SNE means t-distribution Stochastic… | by Ram Thiagu | The Startup | Medium</a></p>
+</blockquote>
+<p>PCA是一种常用的降维方式，但是不方便展示结果。例如对两类数据进行降维(二维)，PCA和t-SNE两种方法的展示结果为：</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240921142810.png" alt="image.png|666"></p>
+<h1 id="线性代数"><a href="#线性代数" class="headerlink" title="线性代数"></a>线性代数</h1><h2 id="特殊矩阵定义"><a href="#特殊矩阵定义" class="headerlink" title="特殊矩阵定义"></a>特殊矩阵定义</h2><p><strong>正交矩阵</strong> <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%AD%A3%E4%BA%A4%E7%9F%A9%E9%98%B5">正交矩阵 - 维基百科，自由的百科全书</a></p>
+<ul>
+<li>$Q^T=Q^{-1}\Leftrightarrow Q^TQ=QQ^T=I.$ 其中$I$为单位矩阵</li>
+<li>正交矩阵的行列式值必定为+1或−1。</li>
+<li>行列式值为+1的正交矩阵，称为<strong>特殊正交矩阵</strong>，它是一个旋转矩阵。</li>
+<li>行列式值为-1的正交矩阵，称为瑕旋转矩阵。瑕旋转是旋转加上镜射。镜射也是一种瑕旋转。</li>
+</ul>
+<p><strong>正定矩阵</strong><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/234967628">【线性代数】详解正定矩阵、实对称矩阵、矩阵特征值分解、矩阵 SVD 分解 - 知乎</a></p>
+<ul>
+<li>任意非零向量$\mathbf{x}$，若$\mathbf{x}^{T}\mathbf{A}\mathbf{x}&gt;0$恒成立，则$\mathbf{A}$为正定矩阵。若$\mathbf{x}^{T}\mathbf{A}\mathbf{x}\geq0$恒成立，则$\mathbf{A}$为半正定矩阵</li>
+<li></li>
+</ul>
+<h2 id="变换"><a href="#变换" class="headerlink" title="变换"></a>变换</h2><h3 id="2D"><a href="#2D" class="headerlink" title="2D"></a>2D</h3><p>仿射变换</p>
+<h3 id="3D"><a href="#3D" class="headerlink" title="3D"></a>3D</h3><p>像素Pixel | 相机Camera | 世界World</p>
+<p>内参矩阵 = c2p<br>外参矩阵 = w2c<br>根据世界坐标计算像素坐标 = <code>c2p * w2c * world_position</code></p>
+<h1 id="Computer-Graphics"><a href="#Computer-Graphics" class="headerlink" title="Computer Graphics"></a>Computer Graphics</h1><h2 id="SDF计算与求导"><a href="#SDF计算与求导" class="headerlink" title="SDF计算与求导"></a>SDF计算与求导</h2><p>空间中的子集$\partial\Omega$，SDF值定义为：$\left.f(x)=\left\{\begin{array}{ll}d(x,\partial\Omega)&amp;\mathrm{~if~}x\in\Omega\-d(x,\partial\Omega)&amp;\mathrm{~if~}x\in\Omega^c\end{array}\right.\right.$<br>其中$d(x,\partial\Omega):=\inf_{y\in\partial\Omega}d(x,y)$表示x到表面子集上一点的距离，inf表示infimum最大下界</p>
+<h1 id="Computer-Vision"><a href="#Computer-Vision" class="headerlink" title="Computer Vision"></a>Computer Vision</h1><h2 id="卷积图像大小计算公式"><a href="#卷积图像大小计算公式" class="headerlink" title="卷积图像大小计算公式"></a>卷积图像大小计算公式</h2><p>图像卷积后的大小计算公式： $N=\left\lfloor\frac{W-F+2P}{Step}\right\rfloor+1$</p>
+<ul>
+<li>输入图片大小 $W \times W$</li>
+<li>Filter（卷积核）大小 $F \times F$</li>
+<li>步长 Step</li>
+<li>padding（填充）的像素数 $P$</li>
+<li>输出图片的大小为$N \times N$</li>
+</ul>
+<h2 id="linearColor-2-sRGB"><a href="#linearColor-2-sRGB" class="headerlink" title="linearColor 2 sRGB"></a>linearColor 2 sRGB</h2><p>(Why)为什么要将线性RGB转换成sRGB</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.zhangxinxu.com/wordpress/2017/12/linear-rgb-srgb-js-convert/">小tip: 了解LinearRGB和sRGB以及使用JS相互转换 « 张鑫旭-鑫空间-鑫生活 (zhangxinxu.com)</a></p>
+</blockquote>
+<p><strong>人这种动物，对于真实世界的颜色感受，并不是线性的，而是曲线的</strong></p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230810162118.png" alt="image.png|444"></p>
+<p>(How)线性RGB与sRGB相互转化</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/bby1987/article/details/109522126">RGB与Lab转换_rgb转lab-CSDN博客</a></p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">linear_to_srgb</span>(<span class="params">linear</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">isinstance</span>(linear, torch.Tensor):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;Assumes `linear` is in [0, 1], see https://en.wikipedia.org/wiki/SRGB.&quot;&quot;&quot;</span></span><br><span class="line">        eps = torch.finfo(torch.float32).eps</span><br><span class="line">        srgb0 = <span class="number">323</span> / <span class="number">25</span> * linear</span><br><span class="line">        srgb1 = (<span class="number">211</span> * torch.clamp(linear, <span class="built_in">min</span>=eps)**(<span class="number">5</span> / <span class="number">12</span>) - <span class="number">11</span>) / <span class="number">200</span></span><br><span class="line">        <span class="keyword">return</span> torch.where(linear &lt;= <span class="number">0.0031308</span>, srgb0, srgb1)</span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">isinstance</span>(linear, np.ndarray):</span><br><span class="line">        eps = np.finfo(np.float32).eps</span><br><span class="line">        srgb0 = <span class="number">323</span> / <span class="number">25</span> * linear</span><br><span class="line">        srgb1 = (<span class="number">211</span> * np.maximum(eps, linear) ** (<span class="number">5</span> / <span class="number">12</span>) - <span class="number">11</span>) / <span class="number">200</span></span><br><span class="line">        <span class="keyword">return</span> np.where(linear &lt;= <span class="number">0.0031308</span>, srgb0, srgb1)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">raise</span> NotImplementedError</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">srgb_to_linear</span>(<span class="params">srgb</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">isinstance</span>(srgb, torch.Tensor):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;Assumes `srgb` is in [0, 1], see https://en.wikipedia.org/wiki/SRGB.&quot;&quot;&quot;</span></span><br><span class="line">        eps = torch.finfo(torch.float32).eps</span><br><span class="line">        linear0 = <span class="number">25</span> / <span class="number">323</span> * srgb</span><br><span class="line">        linear1 = torch.clamp(((<span class="number">200</span> * srgb + <span class="number">11</span>) / (<span class="number">211</span>)), <span class="built_in">min</span>=eps)**(<span class="number">12</span> / <span class="number">5</span>)</span><br><span class="line">        <span class="keyword">return</span> torch.where(srgb &lt;= <span class="number">0.04045</span>, linear0, linear1)</span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">isinstance</span>(srgb, np.ndarray):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;Assumes `srgb` is in [0, 1], see https://en.wikipedia.org/wiki/SRGB.&quot;&quot;&quot;</span></span><br><span class="line">        eps = np.finfo(np.float32).eps</span><br><span class="line">        linear0 = <span class="number">25</span> / <span class="number">323</span> * srgb</span><br><span class="line">        linear1 = np.maximum(((<span class="number">200</span> * srgb + <span class="number">11</span>) / (<span class="number">211</span>)), eps)**(<span class="number">12</span> / <span class="number">5</span>)</span><br><span class="line">        <span class="keyword">return</span> np.where(srgb &lt;= <span class="number">0.04045</span>, linear0, linear1)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">raise</span> NotImplementedError</span><br></pre></td></tr></table></figure>
+<h1 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h1><p><a href="DeepLearning.md">DeepLearning</a></p>
+<h2 id="数据处理方法"><a href="#数据处理方法" class="headerlink" title="数据处理方法"></a>数据处理方法</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/73534694">SOM(自组织映射神经网络)——理论篇 - 知乎</a><br><a target="_blank" rel="noopener" href="https://nice-ai.top/posts/SelfOrganizingMaps-SOM.html">自组织映射（SOM）理论基础与Python NumPy实现 | 美美智能博客站</a><br>针对数据量大的情况</p>
+</blockquote>
+<p>自组织映射(Self-organizing map, SOM)通过学习输入空间中的数据，生成一个低维、离散的映射(Map)，从某种程度上也可看成一种降维算法。（<em>降维或者升为可以由输入和输出尺寸决定</em>，SOM输入为1E6，输出为70x70，本质上数据量变少，因此为降维算法）</p>
+<h2 id="希腊字母"><a href="#希腊字母" class="headerlink" title="希腊字母"></a>希腊字母</h2><p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240503135053.png" alt="image.png|666"></p>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+1ZnNxFWnEbk5YzRl">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/Learn/Python/Linux%20OS/" rel="prev" title="Linux">
+      <i class="fa fa-chevron-left"></i> Linux
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/3DReconstruction/Multi-view/Explicit%20Volumetric/GS-based/2DGS/" rel="next" title="2DGS">
+      2DGS <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B3%9B%E5%87%BD"><span class="nav-text">泛函</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80"><span class="nav-text">数学基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%91%84%E5%8A%A8%E6%B3%95"><span class="nav-text">摄动法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%B0%E5%8B%92"><span class="nav-text">泰勒</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A6%82%E7%8E%87%E8%AE%BA"><span class="nav-text">概率论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Bayes"><span class="nav-text">Bayes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Distribution"><span class="nav-text">Distribution</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Gamma-%E5%88%86%E5%B8%83"><span class="nav-text">Gamma 分布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Beta-%E5%88%86%E5%B8%83"><span class="nav-text">Beta 分布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E5%85%83%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83"><span class="nav-text">多元高斯分布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%B7%E5%90%88%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83"><span class="nav-text">混合高斯分布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%81%94%E5%90%88%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83"><span class="nav-text">联合高斯分布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#P-box"><span class="nav-text">P-box</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Markov-Chains"><span class="nav-text">Markov Chains</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sampling"><span class="nav-text">Sampling</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Monte-Carlo"><span class="nav-text">Monte Carlo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%B1%82%E9%87%87%E6%A0%B7"><span class="nav-text">分层采样</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E5%B1%82%E6%8A%96%E5%8A%A8%E9%87%87%E6%A0%B7"><span class="nav-text">分层抖动采样</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Latin-Hypercube-Sampling"><span class="nav-text">Latin Hypercube Sampling</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MCMC"><span class="nav-text">MCMC</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#M-H%E9%87%87%E6%A0%B7"><span class="nav-text">M-H采样</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Gibbs%E9%87%87%E6%A0%B7"><span class="nav-text">Gibbs采样</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TMCMC"><span class="nav-text">TMCMC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8B%89%E4%B8%81%E8%B6%85%E7%AB%8B%E6%96%B9%E9%87%87%E6%A0%B7-Latin-hypercube-sampling-LHS"><span class="nav-text">拉丁超立方采样(Latin hypercube sampling, LHS)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Langevin-Monte-Carlo-LMC"><span class="nav-text">Langevin Monte Carlo(LMC)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hamiltonian-Monte-Carlo-HMC"><span class="nav-text">Hamiltonian Monte Carlo(HMC)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%AE%E4%BF%A1%E5%8C%BA%E9%97%B4"><span class="nav-text">置信区间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E5%83%8F%E5%B1%95%E7%A4%BA"><span class="nav-text">图像展示</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%B1%E5%9E%8B%E5%9B%BE"><span class="nav-text">箱型图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#t-SNE-%E6%95%B0%E6%8D%AE%E9%99%8D%E7%BB%B4"><span class="nav-text">t-SNE 数据降维</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0"><span class="nav-text">线性代数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%B9%E6%AE%8A%E7%9F%A9%E9%98%B5%E5%AE%9A%E4%B9%89"><span class="nav-text">特殊矩阵定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%98%E6%8D%A2"><span class="nav-text">变换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2D"><span class="nav-text">2D</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3D"><span class="nav-text">3D</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Computer-Graphics"><span class="nav-text">Computer Graphics</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SDF%E8%AE%A1%E7%AE%97%E4%B8%8E%E6%B1%82%E5%AF%BC"><span class="nav-text">SDF计算与求导</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Computer-Vision"><span class="nav-text">Computer Vision</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%B7%E7%A7%AF%E5%9B%BE%E5%83%8F%E5%A4%A7%E5%B0%8F%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F"><span class="nav-text">卷积图像大小计算公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linearColor-2-sRGB"><span class="nav-text">linearColor 2 sRGB</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other"><span class="nav-text">Other</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95"><span class="nav-text">数据处理方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%8C%E8%85%8A%E5%AD%97%E6%AF%8D"><span class="nav-text">希腊字母</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qi Yun"
+      src="/images/avatar.jpeg">
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">140</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/qiyun71" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;qiyun71" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/29010355" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;29010355" rel="noopener" target="_blank"><i class="fa fa-star fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qi Yun</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">486k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">29:27</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/yqq/anime.min.js"></script>
+  <script src="/yqq/velocity/velocity.min.js"></script>
+  <script src="/yqq/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
