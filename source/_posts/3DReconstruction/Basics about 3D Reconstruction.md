@@ -7,8 +7,8 @@ categories: 3DReconstruction
 ---
 
 3D Reconstruction 相关数学方法
-[NeRF](NeRF.md)
-[NeRF-Mine](NeRF-Mine.md)
+[NeRF](3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeRF.md)
+[NeRF](Project/NeRF.md)
 [NeRF-code](NeRF-code.md)
 
 <!-- more -->

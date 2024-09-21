@@ -21,7 +21,15 @@ NeRF将三维空间中所有点，通过MLP预测出对应的密度/SDF，**是�
   1. 损失函数(对比像素颜色、深度、法向量、SDF梯度累积`<Eikonal term>`[Eikonal Equation and SDF - Lin’s site](https://marlinilram.github.io/posts/2022/06/eikonal/))
 3. PointCloud后处理，根据不同用途如3D打印、有限元仿真分析、游戏assets，有许多格式mesh/FEMode/AMs
 
+
 <!-- more -->
+
+# Tools
+
+相机位姿360°视频渲染:
+
+> https://github.com/hbb1/2d-gaussian-splatting/blob/main/render.py 可以参考这里的generate_path 把训练相机丢进去就可以fit出一个360路径进行渲染
+
 
 # COLMAP
 

@@ -1,204 +1,200 @@
 {
   "recentFiles": [
     {
-      "basename": "Linux",
-      "path": "Mine/Configuration of computer/OS/Linux.md"
+      "basename": "Journal&Conference",
+      "path": "Blog&Book&Paper/Write Paper/Journal&Conference.md"
     },
     {
-      "basename": "Make-PyNastran",
-      "path": "Python Practise/Make-PyNastran.md"
-    },
-    {
-      "basename": "Learn-Matlab",
-      "path": "Learn/Learn-Matlab.md"
-    },
-    {
-      "basename": "Learn-FEA",
-      "path": "Learn/Learn-FEA.md"
-    },
-    {
-      "basename": "3DReconstruction_with_ModelUpdating",
-      "path": "Mine/Paper Cross/3DReconstruction_with_ModelUpdating.md"
-    },
-    {
-      "basename": "Linux",
-      "path": "Mine/Note/Linux.md"
-    },
-    {
-      "basename": "MyGo",
-      "path": "Mine/Note/MyGo.md"
-    },
-    {
-      "basename": "Tools",
-      "path": "Mine/Note/Tools.md"
-    },
-    {
-      "basename": "World",
-      "path": "Mine/Note/World.md"
+      "basename": "Time Series Generation",
+      "path": "Blog&Book&Paper/Read/Papers/Time Series Generation.md"
     },
     {
       "basename": "Write tips",
-      "path": "Mine/Note/Write tips.md"
+      "path": "Blog&Book&Paper/Write Paper/Write tips.md"
     },
     {
-      "basename": "A fast interval model updating method based on MLP neural network",
-      "path": "Mine/Write/Model Updating/A fast interval model updating method based on MLP neural network.md"
+      "basename": "OpenCV",
+      "path": "Learn/CG or CV/OpenCV.md"
     },
     {
-      "basename": "A fast stochastic model updating technique based on an inverse FE surrogate model",
-      "path": "Mine/Write/Model Updating/A fast stochastic model updating technique based on an inverse FE surrogate model.md"
+      "basename": "Tools",
+      "path": "Blog&Book&Paper/Write/Source/Tools.md"
     },
     {
-      "basename": "Stoachastic Model Updating with the Ellipse Similarity Metric",
-      "path": "Mine/Write/Model Updating/Stoachastic Model Updating with the Ellipse Similarity Metric.md"
+      "basename": "Data Analysis",
+      "path": "Learn/Python/Data Analysis.md"
     },
     {
-      "basename": "Learn-Arduino",
-      "path": "Learn/Learn-Arduino.md"
+      "basename": "DeepLearning",
+      "path": "Learn/Neural Network/DeepLearning.md"
     },
     {
-      "basename": "Learn-Algo",
-      "path": "Learn/Learn-Algo.md"
+      "basename": "Paper about ModelUpdating",
+      "path": "ModelUpdating/Paper about ModelUpdating.md"
     },
     {
-      "basename": "Learn-Colmap",
-      "path": "Learn/Learn-Colmap.md"
+      "basename": "Figure",
+      "path": "Learn/Python/Figure.md"
     },
     {
-      "basename": "Learn-cs148",
-      "path": "Learn/Learn-cs148.md"
+      "basename": "Math Basic",
+      "path": "Learn/Math/Math Basic.md"
     },
     {
-      "basename": "Learn-Csharp",
-      "path": "Learn/Learn-Csharp.md"
+      "basename": "Linux OS",
+      "path": "Learn/Python/Linux OS.md"
     },
     {
-      "basename": "Learn-DeepLearning",
-      "path": "Learn/Learn-DeepLearning.md"
+      "basename": "Python Basic",
+      "path": "Learn/Python/Python Basic.md"
     },
     {
-      "basename": "Learn-Git",
-      "path": "Learn/Learn-Git.md"
+      "basename": "Spider",
+      "path": "Learn/Python/Spider.md"
     },
     {
-      "basename": "Learn-HCJ前端",
-      "path": "Learn/Learn-HCJ前端.md"
-    },
-    {
-      "basename": "Learn-Hexo",
-      "path": "Learn/Learn-Hexo.md"
-    },
-    {
-      "basename": "Learn-Hexo2",
-      "path": "Learn/Learn-Hexo2.md"
-    },
-    {
-      "basename": "Learn-Markdown",
-      "path": "Learn/Learn-Markdown.md"
-    },
-    {
-      "basename": "Learn-Python",
-      "path": "Learn/Learn-Python.md"
-    },
-    {
-      "basename": "Learn-Python_Matplotlib",
-      "path": "Learn/Learn-Python_Matplotlib.md"
-    },
-    {
-      "basename": "Learn-Python_OPEN_CV",
-      "path": "Learn/Learn-Python_OPEN_CV.md"
-    },
-    {
-      "basename": "Learn-Python_Threading",
-      "path": "Learn/Learn-Python_Threading.md"
-    },
-    {
-      "basename": "Learn-Python-LCU",
-      "path": "Learn/Learn-Python-LCU.md"
-    },
-    {
-      "basename": "Learn-PyTorch",
-      "path": "Learn/Learn-PyTorch.md"
-    },
-    {
-      "basename": "Learn-Spider",
-      "path": "Learn/Learn-Spider.md"
-    },
-    {
-      "basename": "WSL2",
-      "path": "Mine/Configuration of computer/OS/WSL2.md"
-    },
-    {
-      "basename": "Environment",
-      "path": "Mine/Configuration of computer/python/Environment.md"
-    },
-    {
-      "basename": "Terminal",
-      "path": "Mine/Configuration of computer/python/Terminal.md"
-    },
-    {
-      "basename": "蓝叠模拟器",
-      "path": "Mine/Configuration of computer/Software/蓝叠模拟器.md"
-    },
-    {
-      "basename": "V2rayN",
-      "path": "Mine/Configuration of computer/Software/V2rayN.md"
-    },
-    {
-      "basename": "Vim",
-      "path": "Mine/Configuration of computer/Software/Vim.md"
-    },
-    {
-      "basename": "COLMAP",
-      "path": "Mine/Configuration of computer/Software/COLMAP.md"
-    },
-    {
-      "basename": "Conda",
-      "path": "Mine/Configuration of computer/Software/Conda.md"
-    },
-    {
-      "basename": "FFmpeg",
-      "path": "Mine/Configuration of computer/Software/FFmpeg.md"
-    },
-    {
-      "basename": "Git",
-      "path": "Mine/Configuration of computer/Software/Git.md"
-    },
-    {
-      "basename": "Concrete spalling damage detection and seismic performance evaluation for RC shear walls via 3D reconstruction technique and numerical model updating",
-      "path": "Mine/Paper Cross/Concrete spalling damage detection and seismic performance evaluation for RC shear walls via 3D reconstruction technique and numerical model updating.md"
-    },
-    {
-      "basename": "Master Paper(3DReconstruction)",
-      "path": "Mine/Write/3D Reconstruction/Master Paper(3DReconstruction).md"
-    },
-    {
-      "basename": "Front-matter.md",
-      "path": "Templates/Front-matter.md.md"
-    },
-    {
-      "basename": "AllBug",
-      "path": "Mine/Note/AllBug.md"
-    },
-    {
-      "basename": "Math",
-      "path": "Mine/Note/Math.md"
+      "basename": "Threading",
+      "path": "Learn/Python/Threading.md"
     },
     {
       "basename": "Loss Functions",
-      "path": "3DReconstruction/Loss Functions.md"
+      "path": "Learn/Neural Network/Loss Functions.md"
     },
     {
-      "basename": "Computer",
-      "path": "Mine/Note/Computer.md"
+      "basename": "Self-superviside Model Updating through inverse calibration model",
+      "path": "Blog&Book&Paper/Write Paper/Model Updating/Self-superviside Model Updating through inverse calibration model.md"
+    },
+    {
+      "basename": "Interval identification of structural parameters using interval overlap ratio and Monte Carlo simulation",
+      "path": "ModelUpdating/Interval Model Updating/Interval identification of structural parameters using interval overlap ratio and Monte Carlo simulation.md"
+    },
+    {
+      "basename": "Interval model updating using perturbation method and Radial Basis Function neural networks",
+      "path": "ModelUpdating/Interval Model Updating/Interval model updating using perturbation method and Radial Basis Function neural networks.md"
+    },
+    {
+      "basename": "An interval model updating strategy using interval response surface models",
+      "path": "ModelUpdating/Interval Model Updating/An interval model updating strategy using interval response surface models.md"
+    },
+    {
+      "basename": "Interval model updating with irreducible uncertainty using the Kriging predictor",
+      "path": "ModelUpdating/Interval Model Updating/Interval model updating with irreducible uncertainty using the Kriging predictor.md"
+    },
+    {
+      "basename": "2K2K",
+      "path": "3DReconstruction/Single-view/Depth Estimation/2K2K.md"
+    },
+    {
+      "basename": "ECON",
+      "path": "3DReconstruction/Single-view/Depth Estimation/ECON.md"
+    },
+    {
+      "basename": "Single-view Reconstruction Review",
+      "path": "3DReconstruction/Single-view/Single-view Reconstruction Review.md"
+    },
+    {
+      "basename": "NeuS-based 3D Reconstruction",
+      "path": "3DReconstruction/Multi-view/NeuS-based 3D Reconstruction.md"
+    },
+    {
+      "basename": "Finite Element Model 3D Reconstruction",
+      "path": "3DReconstruction/Finite Element Model 3D Reconstruction.md"
+    },
+    {
+      "basename": "Multi-view Human Body Reconstruction",
+      "path": "3DReconstruction/Multi-view/Multi-view Human Body Reconstruction.md"
+    },
+    {
+      "basename": "人生七年",
+      "path": "Blog&Book&Paper/Read/人生七年.md"
+    },
+    {
+      "basename": "蛊真人",
+      "path": "Blog&Book&Paper/Read/蛊真人.md"
+    },
+    {
+      "basename": "AllBug",
+      "path": "Blog&Book&Paper/Write/Source/AllBug.md"
+    },
+    {
+      "basename": "WSL2",
+      "path": "Blog&Book&Paper/Write/Source/Configuration of computer/OS/WSL2.md"
+    },
+    {
+      "basename": "A fast interval model updating method based on MLP neural network",
+      "path": "Blog&Book&Paper/Write Paper/Model Updating/A fast interval model updating method based on MLP neural network.md"
+    },
+    {
+      "basename": "A fast stochastic model updating technique based on an inverse FE surrogate model",
+      "path": "Blog&Book&Paper/Write Paper/Model Updating/A fast stochastic model updating technique based on an inverse FE surrogate model.md"
+    },
+    {
+      "basename": "通俗形象地分析比较生成模型",
+      "path": "Blog&Book&Paper/Read/Blog/通俗形象地分析比较生成模型.md"
+    },
+    {
+      "basename": "Book Lists",
+      "path": "Blog&Book&Paper/Read/Book Lists.md"
+    },
+    {
+      "basename": "Cookies and Tokens是什么",
+      "path": "Blog&Book&Paper/Read/Blog/Cookies and Tokens是什么.md"
+    },
+    {
+      "basename": "从感知机到Transformer，一文概述深度学习简史",
+      "path": "Blog&Book&Paper/Read/Blog/从感知机到Transformer，一文概述深度学习简史.md"
+    },
+    {
+      "basename": "核领域可靠性",
+      "path": "Blog&Book&Paper/Read/Papers/核领域可靠性.md"
+    },
+    {
+      "basename": "World",
+      "path": "Blog&Book&Paper/Write/World.md"
+    },
+    {
+      "basename": "MyGo",
+      "path": "Blog&Book&Paper/Write/MyGo.md"
+    },
+    {
+      "basename": "Master Paper(3DReconstruction)",
+      "path": "Blog&Book&Paper/Write Paper/3D Reconstruction/Master Paper(3DReconstruction).md"
+    },
+    {
+      "basename": "Case about ModelUpdating",
+      "path": "ModelUpdating/Case about ModelUpdating.md"
+    },
+    {
+      "basename": "Basics about ModelUpdating",
+      "path": "ModelUpdating/Basics about ModelUpdating.md"
     },
     {
       "basename": "IPV6",
-      "path": "Mine/Note/IPV6.md"
+      "path": "Blog&Book&Paper/Write/Source/IPV6.md"
     },
     {
-      "basename": "Journal",
-      "path": "Mine/Note/Journal.md"
+      "basename": "Audio Visualization",
+      "path": "Project/Audio Visualization.md"
+    },
+    {
+      "basename": "Automatic detection of pointer instrument",
+      "path": "Project/Automatic detection of pointer instrument.md"
+    },
+    {
+      "basename": "NeRF",
+      "path": "Project/NeRF.md"
+    },
+    {
+      "basename": "PyNastran",
+      "path": "Project/PyNastran.md"
+    },
+    {
+      "basename": "Python API",
+      "path": "Project/Python API.md"
+    },
+    {
+      "basename": "Python Scripts",
+      "path": "Project/Python Scripts.md"
     }
   ],
   "omittedPaths": [],

@@ -1,12 +1,12 @@
 {
   "baseFontSize": 15,
-  "theme": "moonstone",
+  "theme": "obsidian",
   "translucency": false,
-  "cssTheme": "Border",
+  "cssTheme": "Blue Topaz",
   "interfaceFontFamily": "MiSans Semibold",
   "textFontFamily": "MiSans,MiSans Semibold,HarmonyOS Sans SC,HYRunYuan 55W",
   "monospaceFontFamily": "Maple Mono",
-  "accentColor": "#025ced",
+  "accentColor": "",
   "nativeMenus": false,
   "enabledCssSnippets": [
     "custom-admonitions.838117"

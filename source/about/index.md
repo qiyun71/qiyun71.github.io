@@ -17,13 +17,14 @@ layout: "about"
     </div>
     <!-- border-left:25px solid #000; -->
     <div style="width: 60%; padding: 40px; font-size: 18px">
-        <div style="text-align: left; font-weight: bold; font-size: 23px">Qi Yun  <i class="fa fa-cogs" aria-hidden="true"></i><i class="fa fa-bolt" aria-hidden="true"></i></div>
-        <div style="text-align: left;">(2022~2025) A master student in <a href="https://www.ustb.edu.cn/" onmouseover="this.style.color='#6F7276'" onmouseout="this.style.color='#252A2F'">USTB(University of Science and Technology Beijing)</a>
+        <div style="text-align: left; font-weight: bold; font-size: 23px">Qi Yun</div>
+        <div style="text-align: left;"> <i class="fa fa-circle" aria-hidden="true"></i> (2022~2025) A master student at <a href="https://me.ustb.edu.cn/" onmouseover="this.style.color='#6F7276'" onmouseout="this.style.color='#252A2F'">School of Mechanical Engineering (SME)</a> in <a href="https://www.ustb.edu.cn/" onmouseover="this.style.color='#6F7276'" onmouseout="this.style.color='#252A2F'">University of Science and Technology Beijing (USTB) </a> <i class="fa fa-cogs" aria-hidden="true"></i><i class="fa fa-bolt" aria-hidden="true"></i>
         </div>
-        <!-- <div><b>Research direction</b>: NeRF & 3D Reconstruction</div>
-        <div><b>Interest</b>: 3D Printing; DIY; Robot; Modeling</div>
-        <div><b>Language</b>: Python; C++; C#; VB; Arduino</div>
-        <div><b>Tools</b>: Pytorch; Blender; Creo; Arduino IDE</div> -->
+        <div><b>Research Interest</b>: 3D Reconstruction; FE Model Updating</div>
+        <div><b>Other Interest</b>: Anime; 3D Printing; DIY; Robot; Modeling</div>
+        <div><b>Language/Tools</b>: $\LaTeX$; Python; C/C++; C#; VB; Solidworks/Creo; Patran&Nastran; CAD; Blender</div>
+        <div><b>Blog Sys based on</b>: Obsidian & Hexo & Github</div>
+        <!-- <div><b>Tools</b>: Pytorch; Blender; Creo; Arduino IDE</div> -->
         <div><b>Mail:</b>
         <a href="mailto:yunqi1771@gmail.com" style="text-decoration: none; color: #252A2F; font-size: 17px;" onmouseover="this.style.color='#6F7276'" onmouseout="this.style.color='#252A2F'">yunqi1771@gmail.com</a></div>
     </div>

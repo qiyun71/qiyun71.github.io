@@ -1,4 +1,9 @@
 {
   "Appearance-light@@card-layout-open-light": false,
-  "Appearance-light@@theme-light-style-select": "theme-light-background-adapt"
+  "Appearance-light@@theme-light-style-select": "theme-light-background-adapt",
+  "blue-topaz-theme@@left-ribbon-style": "default-left-ribbon-style",
+  "blue-topaz-theme@@color-scheme-options": "color-scheme-options-simplicity-topaz",
+  "blue-topaz-theme@@disable-auto-hide-header": false,
+  "blue-topaz-theme@@simple-p-kanban": false,
+  "blue-topaz-theme@@remove-shadow-p-kanban": false
 }

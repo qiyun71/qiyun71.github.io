@@ -557,6 +557,8 @@ error_rate_each2=:0.08872962392607951=(0.08887535240501165/1.0016423881053924)
 
 # Mass Spring System
 
+The absolute value of the first component of the first eigenvector reflects some vibration information. The introduction of structural vibration modes as output responses will increase the difficulty of IMU.
+
 
 **Numerical case studies: a mass-spring system**
 

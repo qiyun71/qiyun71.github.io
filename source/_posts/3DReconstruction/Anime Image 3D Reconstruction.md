@@ -137,6 +137,8 @@ ControlNet:
 > [Shakes on a Plane: Unsupervised Depth Estimation from Unstabilized Photography – Princeton Computing Imaging Lab](https://light.princeton.edu/publication/soap/) 手持微抖的图像序列
 
 
+> [Fine-Tuning Image-Conditional Diffusion Models is Easier than You Think](https://gonzalomartingarcia.github.io/diffusion-e2e-ft/)扩散模型
+
 
 ## 一致性多视图生成
 
@@ -146,6 +148,18 @@ ControlNet:
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240823202814.png)
 
+
+>[EscherNet: A Generative Model for Scalable View Synthesis](https://kxhit.github.io/EscherNet)
+
+它可以在单个消费级 GPU 上同时生成 100 多个一致的目标视图，以任何相机姿势的任意数量的参考视图为条件。
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240914150918.png)
+
+> [Cycle3D: High-quality and Consistent Image-to-3D Generation via Generation-Reconstruction Cycle](https://pku-yuangroup.github.io/Cycle3D/)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240920110142.png)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240920110225.png)
 
 ## 多视图三维重建
 

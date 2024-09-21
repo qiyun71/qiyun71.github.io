@@ -1,30 +1,30 @@
 Note for Knowledge graph
 
 Learn:
-[Learn-Colmap](/Learn/Learn-Colmap)
-[Learn-cs148](/Learn/Learn-cs148)
-[Learn-DeepLearning](/Learn/Learn-DeepLearning)
-[Learn-Git](/Learn/Learn-Git)
-[Learn-PyTorch](/Learn/Learn-PyTorch)
-[Learn-Spider](Learn-Spider.md)
-[Learn-Python_Matplotlib](Learn-Python_Matplotlib.md)
-[Learn-Python_Threading](/Learn/Learn-Python_Threading)
-[Learn-Python](/Learn/Learn-Python)
-[Learn-Python_OPEN_CV](/Learn/Learn-Python_OPEN_CV)
+[Colmap](Learn/CG%20or%20CV/Colmap.md)
+[Learn-cs148](Learn-cs148.md)
+[DeepLearning](DeepLearning.md)
+[Learn-Git](Learn-Git.md)
+[PyTorch](PyTorch.md)
+[Spider](Spider.md)
+[Figure](Figure.md)
+[Threading](Threading.md)
+[Python Basic](Python%20Basic.md)
+[OpenCV](OpenCV.md)
 [Learn-Python-LCU](/Learn/Learn-Python-LCU)
-[Learn-Markdown](/Learn/Learn-Markdown)
-[Learn-Hexo2](/Learn/Learn-Hexo2)
-[Learn-Hexo](/Learn/Learn-Hexo)
-[Learn-HCJ前端](/Learn/Learn-HCJ前端)
-[Learn-Csharp](/Learn/Learn-Csharp)
-[Learn-Arduino](/Learn/Learn-Arduino)
+[Learn-Markdown](Learn-Markdown.md)
+[Learn-Hexo2](Learn-Hexo2.md)
+[Learn-Hexo](Learn-Hexo.md)
+[Learn-HCJ前端](Learn-HCJ前端.md)
+[Learn-Csharp](Learn-Csharp.md)
+[Arduino](Arduino.md)
 
 
 Python Practise:
-[Make-Py-Tools](/Python%20Practise/Make-Py-Tools)
-[Make-mengya](/Python%20Practise/Make-mengya)
-[Make-Python_爬虫](/Python%20Practise/Make-Python_爬虫)
-[Make-Python_bilibili](/Python%20Practise/Make-Python_bilibili)
+[Python Scripts](Python%20Scripts.md)
+[Automatic detection of pointer instrument](Automatic%20detection%20of%20pointer%20instrument.md)
+[Python Spider](Python%20Spider.md)
+[Python API](Python%20API.md)
 
 
 Reports:

@@ -4,17 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "64efd1043b5b0fac",
+        "id": "2f4415db9447baf3",
         "type": "tabs",
         "children": [
           {
-            "id": "b1922386e752a561",
+            "id": "206798080b6da3f1",
             "type": "leaf",
             "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Mine/Note/Math.md",
+                "file": "Learn/Math/Math Basic.md",
                 "mode": "source",
                 "backlinks": false,
                 "source": false
@@ -23,13 +23,13 @@
             }
           },
           {
-            "id": "2924286b0d3fa35a",
+            "id": "fa6576dd762b0c64",
             "type": "leaf",
             "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Mine/Note/MyGo.md",
+                "file": "Learn/Python/Linux OS.md",
                 "mode": "source",
                 "backlinks": false,
                 "source": false
@@ -38,22 +38,74 @@
             }
           },
           {
-            "id": "e89b56be3e26933a",
+            "id": "35aaeb746e9eb012",
             "type": "leaf",
             "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Mine/Configuration of computer/OS/Linux.md",
+                "file": "Blog&Book&Paper/Write Paper/Write tips.md",
                 "mode": "source",
                 "backlinks": false,
                 "source": false
               },
               "pinned": true
+            }
+          },
+          {
+            "id": "393852ed1ec449e1",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Blog&Book&Paper/Write Paper/Model Updating/Self-superviside Model Updating through inverse calibration model.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "95febf8235048bb0",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Blog&Book&Paper/Write Paper/Journal&Conference.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "7e36190b2d6e4344",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Blog&Book&Paper/Read/Papers/Time Series Generation.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "970b6afd829aa2b9",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "ModelUpdating/Paper about ModelUpdating.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              }
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -63,9 +115,8 @@
     "type": "split",
     "children": [
       {
-        "id": "6711a83b129914d6",
+        "id": "2b8407f2a45fc061",
         "type": "tabs",
-        "dimension": 53.551912568306015,
         "children": [
           {
             "id": "56b71c2811fd7340",
@@ -73,7 +124,23 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Mine/Configuration of computer/OS/Linux.md"
+                "file": "Blog&Book&Paper/Write Paper/Journal&Conference.md"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "id": "6711a83b129914d6",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "0d68bfa346c465d5",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabeticalReverse"
               }
             }
           },
@@ -109,27 +176,10 @@
             }
           }
         ]
-      },
-      {
-        "id": "e23e39140febf341",
-        "type": "tabs",
-        "dimension": 46.44808743169399,
-        "children": [
-          {
-            "id": "0d68bfa346c465d5",
-            "type": "leaf",
-            "state": {
-              "type": "file-explorer",
-              "state": {
-                "sortOrder": "alphabeticalReverse"
-              }
-            }
-          }
-        ]
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 256.5
   },
   "right": {
     "id": "a4155c200cdf0433",
@@ -184,12 +234,11 @@
             "state": {
               "type": "file-properties",
               "state": {
-                "file": "Mine/Configuration of computer/OS/Linux.md"
+                "file": "Blog&Book&Paper/Write Paper/Journal&Conference.md"
               }
             }
           }
-        ],
-        "currentTab": 4
+        ]
       }
     ],
     "direction": "horizontal",
@@ -212,44 +261,44 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "e89b56be3e26933a",
+  "active": "95febf8235048bb0",
   "lastOpenFiles": [
-    "Python Practise/Make-PyNastran.md",
-    "Learn/Learn-Matlab.md",
-    "Learn/Learn-FEA.md",
-    "Mine/Configuration of computer/OS/Linux.md",
-    "Mine/Paper Cross/3DReconstruction_with_ModelUpdating.md",
-    "Mine/Note/Linux.md",
-    "Mine/Note/MyGo.md",
-    "Mine/Note/Tools.md",
-    "Mine/Note/World.md",
-    "Mine/Note/Write tips.md",
-    "Mine/Write/Model Updating/A fast interval model updating method based on MLP neural network.md",
-    "Mine/Write/Model Updating/A fast stochastic model updating technique based on an inverse FE surrogate model.md",
-    "Mine/Write/Model Updating/Stoachastic Model Updating with the Ellipse Similarity Metric.md",
-    "Learn/Learn-Arduino.md",
-    "Learn/Learn-Algo.md",
-    "Learn/Learn-Colmap.md",
-    "Learn/Learn-cs148.md",
-    "Learn/Learn-Csharp.md",
-    "Learn/Learn-DeepLearning.md",
-    "Learn/Learn-Git.md",
-    "Learn/Learn-HCJ前端.md",
-    "Learn/Learn-Hexo.md",
-    "Learn/Learn-Hexo2.md",
-    "Learn/Learn-Markdown.md",
-    "Learn/Learn-Python.md",
-    "Learn/Learn-Python_Matplotlib.md",
-    "Game",
-    "3DReconstruction/未命名",
-    "Blog&Books/Read/file/《蛊真人》精校版.txt",
-    "Blog&Books/Read/file/Writing science.pdf",
-    "Mine/Configuration of computer/OS",
-    "Mine/Configuration of computer/OS/windows",
-    "Mine/Configuration of computer/github",
-    "Mine/Configuration of computer/Software/VPN",
-    "Mine/Configuration of computer/python",
-    "Mine/Configuration of computer/gpt",
+    "Blog&Book&Paper/Read/Papers/Time Series Generation.md",
+    "Blog&Book&Paper/Write Paper/Journal&Conference.md",
+    "Blog&Book&Paper/Write Paper/Write tips.md",
+    "Learn/CG or CV/OpenCV.md",
+    "Blog&Book&Paper/Write/Source/Tools.md",
+    "Learn/CG or CV/Computer Vision.md",
+    "Learn/Python/Data Analysis.md",
+    "Learn/Neural Network/DeepLearning.md",
+    "ModelUpdating/Paper about ModelUpdating.md",
+    "Learn/Python/Figure.md",
+    "Learn/Math/Math Basic.md",
+    "Learn/Python/Linux OS.md",
+    "Learn/Python/Python Basic.md",
+    "Learn/Python/Spider.md",
+    "Learn/Python/Threading.md",
+    "Learn/Neural Network/Loss Functions.md",
+    "Blog&Book&Paper/Write Paper/Model Updating/Self-superviside Model Updating through inverse calibration model.md",
+    "ModelUpdating/Interval Model Updating/Interval identification of structural parameters using interval overlap ratio and Monte Carlo simulation.md",
+    "ModelUpdating/Interval Model Updating/Interval model updating using perturbation method and Radial Basis Function neural networks.md",
+    "ModelUpdating/Interval Model Updating/An interval model updating strategy using interval response surface models.md",
+    "ModelUpdating/Interval Model Updating/Interval model updating with irreducible uncertainty using the Kriging predictor.md",
+    "3DReconstruction/Single-view/Depth Estimation/2K2K.md",
+    "3DReconstruction/Single-view/Depth Estimation/ECON.md",
+    "3DReconstruction/Single-view/Single-view Reconstruction Review.md",
+    "3DReconstruction/Multi-view/NeuS-based 3D Reconstruction.md",
+    "3DReconstruction/Finite Element Model 3D Reconstruction.md",
+    "Blog&Book&Paper/Read/Papers",
+    "Blog&Book&Paper/Write/Source",
+    "Blog&Book&Paper/Write",
+    "Blog&Book&Paper/Write Paper",
+    "Learn/Math",
+    "Learn/CG or CV",
+    "Learn/Other Interest",
+    "Learn/Finite Element",
+    "Learn/Neural Network",
+    "Learn/Embedded system",
     "3DReconstruction/Basic Knowledge/NeRF/NeRF.canvas",
     "未命名.canvas"
   ]

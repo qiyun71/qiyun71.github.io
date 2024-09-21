@@ -18,7 +18,7 @@ categories: 3DReconstruction
 
 COLMAP + Blender(neuralangelo)
 
-> [Learn-Colmap](/Learn/Learn-Colmap)
+> [Colmap](Learn/CG%20or%20CV/Colmap.md)
 
 # DTU
 

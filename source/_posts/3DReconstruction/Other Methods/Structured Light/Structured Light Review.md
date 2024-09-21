@@ -3,7 +3,7 @@ title: Structured Light Review
 date: 2023-12-02 19:35:17
 tags:
   - 3DReconstruction
-categories: 3DReconstruction/Other Methods/Structured Light
+categories: 3DReconstruction/Other Methods
 ---
 
 结构光三维重建

@@ -3,7 +3,7 @@ title: Stereo Matching Review
 date: 2023-12-23 16:43:16
 tags:
   - 3DReconstruction
-categories: 3DReconstruction/Other Methods/Stereo Matching
+categories: 3DReconstruction/Other Methods
 ---
 
 双目立体匹配

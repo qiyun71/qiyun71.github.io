@@ -5,15 +5,19 @@ tags:
 categories: 3DReconstruction/Multi-view/Explicit Volumetric/GS-based
 ---
 
-| Title     | SuGaR |
-| --------- | ----- |
-| Author    |       |
-| Conf/Jour |       |
-| Year      |       |
-| Project   | [Anttwo/SuGaR: Official implementation of SuGaR: Surface-Aligned Gaussian Splatting for Efficient 3D Mesh Reconstruction and High-Quality Mesh Rendering (github.com)](https://github.com/Anttwo/SuGaR)      |
-| Paper     |       |
+| Title     | SuGaR                                                                                                                                                                                                   |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Author    | `Gu{\'e}don, Antoine and Lepetit, Vincent`                                                                                                                                                              |
+| Conf/Jour | CVPR                                                                                                                                                                                                    |
+| Year      | 2024                                                                                                                                                                                                    |
+| Project   | [Anttwo/SuGaR: Official implementation of SuGaR: Surface-Aligned Gaussian Splatting for Efficient 3D Mesh Reconstruction and High-Quality Mesh Rendering (github.com)](https://github.com/Anttwo/SuGaR) |
+| Paper     | [SuGaR: Surface-Aligned Gaussian Splatting for Efficient 3D Mesh Reconstruction and High-Quality Mesh Rendering](https://arxiv.org/pdf/2311.12775)                                                      |
 
 <!-- more -->
+
+
+
+
 
 # 实验(win10)
 
