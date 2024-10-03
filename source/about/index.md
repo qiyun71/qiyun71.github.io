@@ -13,7 +13,7 @@ layout: "about"
 
 <div style="display: flex; align-items: center;">
     <div style="width: 40%; text-align: center;">
-        <img src="https://qiyun71.github.io/images/df.jpeg" style="width: 200px; border-radius: 30%;">
+        <img src="https://qiyun71.github.io/images/df.png" style="width: 317px; border-radius: 17%;">
     </div>
     <!-- border-left:25px solid #000; -->
     <div style="width: 60%; padding: 40px; font-size: 18px">
