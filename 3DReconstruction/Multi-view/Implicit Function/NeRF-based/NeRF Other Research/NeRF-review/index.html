@@ -27,14 +27,15 @@
 <meta property="og:site_name" content="QiYun">
 <meta property="og:description" content="NeRF相关的论文 at CVPR&#x2F;ICCV&#x2F;ECCV&#x2F;NIPS&#x2F;ICML&#x2F;ICLR&#x2F;SIGGRAPH计算机视觉顶会2022截稿时间及会议时间_ijcai2024截稿日期-CSDN博客ccf-deadlines (ccfddl.github.io)     My post Brief description status     NeRF + Code NeRF 原理 + 代码理解 Complet">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240929204911.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231101151141.png">
 <meta property="article:published_time" content="2023-06-25T05:01:00.000Z">
-<meta property="article:modified_time" content="2024-09-20T14:11:12.923Z">
+<meta property="article:modified_time" content="2024-10-03T05:58:39.239Z">
 <meta property="article:author" content="Qi Yun">
 <meta property="article:tag" content="NeRF">
 <meta property="article:tag" content="Review">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231101151141.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240929204911.png">
 
 <link rel="canonical" href="http://example.com/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeRF%20Other%20Research/NeRF-review/">
 
@@ -229,7 +230,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-09-20 22:11:12" itemprop="dateModified" datetime="2024-09-20T22:11:12+08:00">2024-09-20</time>
+                <time title="Modified: 2024-10-03 13:58:39" itemprop="dateModified" datetime="2024-10-03T13:58:39+08:00">2024-10-03</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -246,7 +247,7 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>3k</span>
+              <span>3.1k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -429,6 +430,24 @@
 <tr>
 <td>2023</td>
 <td><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2312.15238">[2312.15238] NoPose-NeuS: Jointly Optimizing Camera Poses with Neural Implicit Surfaces for Multi-view Reconstruction (arxiv.org)</a></td>
+<td></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>2024</td>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2409.05407">KRONC: Keypoint-based Robust Camera Optimization for 3D Car Reconstruction</a></td>
+<td>利用物体的先验，只针对汽车场景的重建</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>2024<br>⭐</td>
+<td><a target="_blank" rel="noopener" href="https://europe.naverlabs.com/research/publications/dust3r-geometric-3d-vision-made-easy/#demo">DUSt3R: Geometric 3D Vision Made Easy - Naver Labs Europe</a></td>
+<td>直接抛弃相机位姿，使用Transformer来预测点云，并进行点云配准，配准后反向求位姿。<strong>可以直接估计点云</strong></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td></td>
+<td><a target="_blank" rel="noopener" href="https://github.com/naver/mast3r/tree/mast3r_sfm?tab=readme-ov-file">Grounding Image Matching in 3D with MASt3R</a></td>
 <td></td>
 </tr>
 </tbody>
@@ -685,6 +704,13 @@
 <td>2023</td>
 <td><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2312.08118">[2312.08118] Neural Radiance Fields for Transparent Object Using Visual Hull (arxiv.org)</a></td>
 <td></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>2024</td>
+<td>[Rethinking Directional Parameterization in Neural Implicit Surface Reconstruction \</td>
+<td>PDF](<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2409.06923">https://arxiv.org/pdf/2409.06923</a>)</td>
+<td style="text-align:center">混合方向参数化输入</td>
 </tr>
 </tbody>
 </table>
@@ -771,6 +797,13 @@
 <td>2024</td>
 <td><a target="_blank" rel="noopener" href="https://gaussianobject.github.io/">GaussianObject: High-Quality 3D Object Reconstruction from Four Views with Gaussian Splatting</a></td>
 <td></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>2024</td>
+<td>[Spurfies: Sparse Surface Reconstruction using Local Geometry Priors \</td>
+<td>PDF](<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2408.16544">https://arxiv.org/pdf/2408.16544</a>)</td>
+<td style="text-align:center"></td>
 </tr>
 </tbody>
 </table>
@@ -839,28 +872,14 @@
 <td>Bayes, 坐标perturbation</td>
 </tr>
 <tr>
-<td></td>
-<td></td>
-<td></td>
+<td>2024<br>⭐</td>
+<td>[Sources of Uncertainty in 3D Scene Reconstruction \</td>
+<td>PDF](<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2409.06407">https://arxiv.org/pdf/2409.06407</a>)</td>
+<td>NeRF and 3DGS</td>
+<td><br></td>
 <td></td>
 <td></td>
 </tr>
-</tbody>
-</table>
-</div>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>Year</th>
-<th>Paper</th>
-<th>研究对象</th>
-<th>研究内容</th>
-<th>研究方法</th>
-<th>Important for me</th>
-</tr>
-</thead>
-<tbody>
 <tr>
 <td>2024</td>
 <td><a target="_blank" rel="noopener" href="https://actnerf.github.io/">ActNeRF</a></td>
@@ -886,29 +905,6 @@
 <td>在<strong>图像渲染质量</strong>和不确定性估计精度方面都优于现有方法</td>
 </tr>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>Year</th>
-<th>Paper</th>
-<th>研究对象</th>
-<th>研究内容</th>
-<th>研究方法</th>
-<th>Important for me</th>
-</tr>
-</thead>
-<tbody>
-<tr>
 <td>2024</td>
 <td><a target="_blank" rel="noopener" href="https://sites.google.com/view/nvf-cvpr24/">Neural Visibility Field for Uncertainty-Driven Active Mapping</a></td>
 <td></td>
@@ -917,46 +913,16 @@
 <td>NVF 自然会为未观察区域分配更高的不确定性，帮助机器人选择最具信息量的下一个视点</td>
 </tr>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>Year</th>
-<th>Paper</th>
-<th>研究对象</th>
-<th>研究内容</th>
-<th>研究方法</th>
-<th>Important for me</th>
-</tr>
-</thead>
-<tbody>
-<tr>
 <td>2024</td>
 <td><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2407.08154">Bayesian uncertainty analysis for underwater 3D reconstruction with neural radiance fields</a></td>
 <td></td>
 <td></td>
 <td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
 </tr>
 </tbody>
 </table>
 </div>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240929204911.png" alt="image.png|666"></p>
 <h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><h2 id="Activation-Functions"><a href="#Activation-Functions" class="headerlink" title="Activation Functions"></a>Activation Functions</h2><div class="table-container">
 <table>
 <thead>
@@ -1390,14 +1356,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">140</span>
+          <span class="site-state-item-count">143</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -1451,12 +1417,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">486k</span>
+    <span title="Symbols count total">496k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">29:27</span>
+    <span title="Reading time total">30:02</span>
 </div>
 
         

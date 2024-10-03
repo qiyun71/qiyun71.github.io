@@ -38,8 +38,10 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240620160134.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240620170649.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240620151248.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240928172853.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240928172804.png">
 <meta property="article:published_time" content="2024-06-17T09:11:22.000Z">
-<meta property="article:modified_time" content="2024-09-21T01:25:57.574Z">
+<meta property="article:modified_time" content="2024-09-29T15:24:12.284Z">
 <meta property="article:author" content="Qi Yun">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240902141345.png">
@@ -241,7 +243,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-09-21 09:25:57" itemprop="dateModified" datetime="2024-09-21T09:25:57+08:00">2024-09-21</time>
+                <time title="Modified: 2024-09-29 23:24:12" itemprop="dateModified" datetime="2024-09-29T23:24:12+08:00">2024-09-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -258,13 +260,13 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>5.7k</span>
+              <span>6.2k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span>21 mins.</span>
+              <span>23 mins.</span>
             </span>
 
         </div>
@@ -608,6 +610,38 @@
 </li>
 </ul>
 <p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240620151248.png" alt="image.png|666"></p>
+<h3 id="Expansive-Supervision"><a href="#Expansive-Supervision" class="headerlink" title="Expansive Supervision"></a>Expansive Supervision</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2409.08056">Expansive Supervision for Neural Radiance Field | PDF</a></p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240928172853.png" alt="image.png|333"></p>
+<p>本文思路：pixels within the same batch must derive from identical input views</p>
+<ul>
+<li><strong>Strict Sequential order</strong> in image：this approach results in a significant decrease in model performance due to the <strong>reduced entropy of the training data</strong> This reduction in entropy negatively impacts the learning performance during each iteration.</li>
+<li><strong>Permutation algorithm</strong>(maximizes the entropy) 将从同一张图片中采样得到的batch进行打乱顺序：$P^<em>=\arg\max_PH(P(\mathcal{D}))$ 找到熵$H(\cdot)$最大时的 permutation $P^{</em>}$<ul>
+<li>$\text{s.t.}C:B\cap I=B,\forall B\in\mathcal{B},\exists I\in I$ 用数学公式描述 Batch B of Batch set $\mathcal{B}$ 中的所有像素在 image set $\mathcal{I}$ 中的图片$I$中 </li>
+<li>$\mathcal{D} = g(\mathcal{B}) = g(\mathcal{I})$ 其中 $g(\cdot)$表示reshape function 将多维集映射为单位集并保存element order: 将从单个图片$I$中抽取得到的$\mathcal{B}$ 中的多个$B$ 展成一维数据，最终获得单维集$\mathcal{D}$，然后进行P排列，得到$P(\mathcal{D})$</li>
+<li>最终得到shuffled的batch set $\mathcal{B}=P^{*}(\mathcal{D})$ 和 the image set $\mathcal{I}$</li>
+</ul>
+</li>
+</ul>
+<p><strong>Section 3.2 Content-aware Permutation</strong></p>
+<p>$\hat{P}_{\mathrm{intra}}^{I}(B)$表示对从相同的输入视图中抽取的不同batch的像素进行排序<br>$\hat{P}_{\mathrm{inter}}^{\mathcal{B}}(\mathcal{D})$表示对同一个batch的像素进行排序</p>
+<p><strong>Section 3.3 Expansive Supervision</strong></p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240928172804.png" alt="image.png|666"></p>
+<ul>
+<li>The anchor area are computed by the light-wight edge detector to displays prominent error patterns. 这一区域从where patterns exhibit larger errors进行选择</li>
+<li>And source area are sampled to expand its values to the reaming area. 🤔为什么还要有sorce area，除了重要边缘区域，还考虑一下其他区域？In my opinion：<ul>
+<li>The source set is composed of sampled points, and the error is estimated based on these source points, which expand to cover all remaining areas。<strong>通过采样一些除了anchor set之外的像素，用这些像素的error来代表其他地方的error，从而不需要计算所有像素的error，节省了时间</strong></li>
+</ul>
+</li>
+</ul>
+<p>最终的损失：</p>
+<script type="math/tex; mode=display">\begin{aligned}
+\hat{L}=& \frac1{|A^*|}\sum_{r_A\in A^*}||\hat{C}(r_A)-C(r_A)||_2^2+ \\
+&\frac{1}{|S|}(\frac{1}{\beta_{A}+\beta_{S}}-1)\sum_{r_{S}\in S}||\hat{C}(r_{S})-C(r_{S})||_{2}^{2},
+\end{aligned}</script><ul>
+<li>$\beta_{A}$和$\beta_{S}$分别用来控制anchor area 和 source area的大小</li>
+</ul>
 
     </div>
 
@@ -707,7 +741,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#IDEA"><span class="nav-text">IDEA</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Accuracy"><span class="nav-text">Accuracy</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Camera-Pose-Estimation"><span class="nav-text">Camera Pose Estimation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3D-Point-Sampling"><span class="nav-text">3D Point Sampling</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NerfAcc"><span class="nav-text">NerfAcc</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Loss-Function"><span class="nav-text">Loss Function</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#S3IM"><span class="nav-text">S3IM</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Volume-Rendering"><span class="nav-text">Volume Rendering</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NeuS"><span class="nav-text">NeuS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NeuRodin"><span class="nav-text">NeuRodin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ReTR"><span class="nav-text">ReTR</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mixture-of-Experts-MoE"><span class="nav-text">Mixture of Experts (MoE)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Boost-Your-NeRF"><span class="nav-text">Boost Your NeRF</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Efficiency"><span class="nav-text">Efficiency</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Explicit-Grids"><span class="nav-text">Explicit Grids</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NGP-RT"><span class="nav-text">NGP-RT</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MIMO-MLP"><span class="nav-text">MIMO MLP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MIMO-NeRF"><span class="nav-text">MIMO-NeRF</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Points-Sampling"><span class="nav-text">Points Sampling</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HashPoint"><span class="nav-text">HashPoint</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pixel-Sampling"><span class="nav-text">Pixel Sampling</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Soft-Mining"><span class="nav-text">Soft Mining</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Shooting-Much-Fewer-Rays"><span class="nav-text">Shooting Much Fewer Rays</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iNeRF"><span class="nav-text">iNeRF</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#IDEA"><span class="nav-text">IDEA</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Accuracy"><span class="nav-text">Accuracy</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Camera-Pose-Estimation"><span class="nav-text">Camera Pose Estimation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3D-Point-Sampling"><span class="nav-text">3D Point Sampling</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NerfAcc"><span class="nav-text">NerfAcc</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Loss-Function"><span class="nav-text">Loss Function</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#S3IM"><span class="nav-text">S3IM</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Volume-Rendering"><span class="nav-text">Volume Rendering</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NeuS"><span class="nav-text">NeuS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NeuRodin"><span class="nav-text">NeuRodin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ReTR"><span class="nav-text">ReTR</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mixture-of-Experts-MoE"><span class="nav-text">Mixture of Experts (MoE)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Boost-Your-NeRF"><span class="nav-text">Boost Your NeRF</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Efficiency"><span class="nav-text">Efficiency</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Explicit-Grids"><span class="nav-text">Explicit Grids</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NGP-RT"><span class="nav-text">NGP-RT</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MIMO-MLP"><span class="nav-text">MIMO MLP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MIMO-NeRF"><span class="nav-text">MIMO-NeRF</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Points-Sampling"><span class="nav-text">Points Sampling</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HashPoint"><span class="nav-text">HashPoint</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pixel-Sampling"><span class="nav-text">Pixel Sampling</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Soft-Mining"><span class="nav-text">Soft Mining</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Shooting-Much-Fewer-Rays"><span class="nav-text">Shooting Much Fewer Rays</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iNeRF"><span class="nav-text">iNeRF</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Expansive-Supervision"><span class="nav-text">Expansive Supervision</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -722,14 +756,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">140</span>
+          <span class="site-state-item-count">143</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -783,12 +817,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">486k</span>
+    <span title="Symbols count total">496k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">29:27</span>
+    <span title="Reading time total">30:02</span>
 </div>
 
         

@@ -189,7 +189,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeUDF/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/Learn/CG%20or%20CV/OpenCV/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpeg">
@@ -203,7 +203,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeUDF/" class="post-title-link" itemprop="url">NeUDF</a>
+            <a href="/Learn/CG%20or%20CV/OpenCV/" class="post-title-link" itemprop="url">Python OpenCV</a>
         </h2>
 
         <div class="post-meta">
@@ -214,313 +214,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2023-08-25 15:10:32" itemprop="dateCreated datePublished" datetime="2023-08-25T15:10:32+08:00">2023-08-25</time>
+              <time title="Created: 2020-02-18 20:42:34" itemprop="dateCreated datePublished" datetime="2020-02-18T20:42:34+08:00">2020-02-18</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-11-24 14:42:43" itemprop="dateModified" datetime="2023-11-24T14:42:43+08:00">2023-11-24</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/3DReconstruction-Multi-view-Implicit-Function-NeRF-based/" itemprop="url" rel="index"><span itemprop="name">3DReconstruction/Multi-view/Implicit Function/NeRF-based</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>4.1k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span>15 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <div class="table-container">
-<table>
-<thead>
-<tr>
-<th>Title</th>
-<th>NeUDF: Leaning Neural Unsigned Distance Fields with Volume Rendering</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Author</td>
-<td>Yu-Tao Liu1,2          Li Wang1,2          Jie Yang1,2          Weikai Chen3          Xiaoxu Meng3          Bo Yang3          Lin Gao1,2*</td>
-</tr>
-<tr>
-<td>Conf/Jour</td>
-<td>CVPR</td>
-</tr>
-<tr>
-<td>Year</td>
-<td>2023</td>
-</tr>
-<tr>
-<td>Project</td>
-<td><a target="_blank" rel="noopener" href="http://geometrylearning.com/neudf/">NeUDF (CVPR 2023) (geometrylearning.com)</a></td>
-</tr>
-<tr>
-<td>Paper</td>
-<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4746971745559265281&amp;noteId=1931719993718658048">NeUDF: Leaning Neural Unsigned Distance Fields with Volume Rendering (readpaper.com)</a></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230825151238.png" alt="image.png"></p>
-<p>解决了Neus中SDF的一个限制：仅限于封闭表面的重建，无法重建包含开放表面结构的广泛的现实世界对象<br>NeUDF使用UDF：仅从多视图监督中<strong>重建具有任意拓扑的表面</strong></p>
-<ul>
-<li>提出了两个专门为基于UDF的体渲染量身定制的权重函数的新公式<ul>
-<li>$w_r(t)=\tau_r(t)e^{-\int_0^t\tau_r(u)du}$ Eq.4</li>
-<li>$\tau_r(t)=\left|\frac{\frac{\partial(\varsigma_r\circ\Psi\circ p)}{\partial t}(t)}{\varsigma_r\circ\Psi\circ p(t)}\right|$ Eq.5<ul>
-<li>$\varsigma_{r}(d) = \frac x{1+x}$</li>
-<li>UDF: $d=\Psi_{\mathcal{O}}(x)$</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>为了应对开放表面渲染，当输入/输出测试不再有效时，我们提出了一种专用的<strong>法向正则化策略</strong>来解决表面方向模糊问题<ul>
-<li>用邻近的插值法向替换原始采样的表面法向</li>
-</ul>
-</li>
-</ul>
-<p>局限：</p>
-<ul>
-<li>无法重建透明表面</li>
-<li>平滑度和高频细节无法同时拥有</li>
-<li>需要额外的网格划分工具，导致重构误差</li>
-<li>展望：透明表面、稀疏视图</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeUDF/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/3DReconstruction/Multi-view/Explicit%20Volumetric/Point-NeRF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-      <meta itemprop="name" content="Qi Yun">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiYun">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/3DReconstruction/Multi-view/Explicit%20Volumetric/Point-NeRF/" class="post-title-link" itemprop="url">Point-NeRF</a>
-        </h2>
-
-        <div class="post-meta">
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-08-24 16:52:32" itemprop="dateCreated datePublished" datetime="2023-08-24T16:52:32+08:00">2023-08-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-12-01 17:17:07" itemprop="dateModified" datetime="2023-12-01T17:17:07+08:00">2023-12-01</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/3DReconstruction-Multi-view-Explicit-Volumetric/" itemprop="url" rel="index"><span itemprop="name">3DReconstruction/Multi-view/Explicit Volumetric</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>6.7k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span>24 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <div class="table-container">
-<table>
-<thead>
-<tr>
-<th>Title</th>
-<th>Point-NeRF: Point-based Neural Radiance Fields</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Author</td>
-<td>Qiangeng Xu, Zexiang Xu, Julien Philip, Sai Bi, Zhixin ShuKalyan Sunkavalli , Ulrich Neumann</td>
-</tr>
-<tr>
-<td>Conf/Jour</td>
-<td>CVPR 2022 Oral</td>
-</tr>
-<tr>
-<td>Year</td>
-<td>2022</td>
-</tr>
-<tr>
-<td>Project</td>
-<td><a target="_blank" rel="noopener" href="https://xharlie.github.io/projects/project_sites/pointnerf/">Point-NeRF: Point-based Neural Radiance Fields (xharlie.github.io)</a></td>
-</tr>
-<tr>
-<td>Paper</td>
-<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4734283362588442625&amp;noteId=1930369628502938624">Point-NeRF: Point-based Neural Radiance Fields (readpaper.com)</a></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230824165453.png" alt="image.png"></p>
-<ul>
-<li>生成初始点云(本文)，<em>此外还有Colmap和Metashape等方法生成</em><ul>
-<li>基于MVS Net的$G_{p,γ}$，生成每个点的位置和置信度（点是否在表面上）</li>
-<li>基于2D CNN的$G_f$，生成每个点的特征</li>
-</ul>
-</li>
-<li>点云处理：排除降低渲染质量的孔和异常值 <strong>每10K次迭代</strong><ul>
-<li>Point pruning 对置信度低于0.1的点进行删除</li>
-<li>Point growing 当ray marching中密度最大点(表面附近的点)周围的点比较少时，添加点来填补空白</li>
-</ul>
-</li>
-<li>MLP获取点x的信息<ul>
-<li>MLP F：x点周围点的新特征$f_{i,x}=F(f_{i},x-p_{i}).$</li>
-<li>MLP R：x点的辐射值(or颜色) $r=R(f_{x},d).$<ul>
-<li>x点的聚合特征$f_{x}=\sum_{i}\gamma_{i}\frac{w_{i}}{\sum w_{i}}f_{i,x},\mathrm{~where~}w_{i}=\frac{1}{|p_{i}-x|}.$</li>
-</ul>
-</li>
-<li>MLP T：x点周围点的密度 $\sigma_i=T(f_{i,x})$<ul>
-<li>x点的聚合密度$\sigma=\sum_{i}\sigma_{i}\gamma_{i}\frac{w_{i}}{\sum w_{i}},w_{i}=\frac{1}{|p_{i}-x|}.$</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/3DReconstruction/Multi-view/Explicit%20Volumetric/Point-NeRF/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/Learn/CG%20or%20CV/Colmap/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-      <meta itemprop="name" content="Qi Yun">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiYun">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/Learn/CG%20or%20CV/Colmap/" class="post-title-link" itemprop="url">COLMAP Basic Knowlege</a>
-        </h2>
-
-        <div class="post-meta">
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-08-23 17:00:00" itemprop="dateCreated datePublished" datetime="2023-08-23T17:00:00+08:00">2023-08-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-09-20 21:52:22" itemprop="dateModified" datetime="2024-09-20T21:52:22+08:00">2024-09-20</time>
+                <time title="Modified: 2024-09-21 14:31:58" itemprop="dateModified" datetime="2024-09-21T14:31:58+08:00">2024-09-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -537,13 +238,13 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>657</span>
+              <span>6k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span>2 mins.</span>
+              <span>22 mins.</span>
             </span>
 
         </div>
@@ -555,17 +256,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><a target="_blank" rel="noopener" href="https://colmap.github.io/tutorial.html">colmap tutorial</a></p>
-<p>更好的重建效果需要拍摄的图片保证:</p>
-<ul>
-<li>好的纹理</li>
-<li>相似的照明条件，避免高动态范围场景（例如，逆光阴影或透过门窗的照片），避免在光滑表面上出现反射光</li>
-<li>高视觉重叠度，确保每个对象至少在 3 张图像中可见，图像越多越好</li>
-<li>从不同的视角拍摄图像，不要只通过旋转相机来拍摄相同位置的图像</li>
-</ul>
+          <p>Python中opencv的学习和使用，可以操作图片，跟ps中知识挺像的hhh<br>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/Learn/CG%20or%20CV/Colmap/#more" rel="contents">
+              <a class="btn" href="/Learn/CG%20or%20CV/OpenCV/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -589,7 +283,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeRF%20Other%20Research/Review/NeRF%20in%20the%20industrial%20and%20robotics%20domain/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/Project/Python%20API/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpeg">
@@ -603,7 +297,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeRF%20Other%20Research/Review/NeRF%20in%20the%20industrial%20and%20robotics%20domain/" class="post-title-link" itemprop="url">NeRF in the industrial and robotics domain</a>
+            <a href="/Project/Python%20API/" class="post-title-link" itemprop="url">Learn API (Python)</a>
         </h2>
 
         <div class="post-meta">
@@ -614,144 +308,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2023-08-21 14:10:55" itemprop="dateCreated datePublished" datetime="2023-08-21T14:10:55+08:00">2023-08-21</time>
+              <time title="Created: 2020-02-14 14:31:32" itemprop="dateCreated datePublished" datetime="2020-02-14T14:31:32+08:00">2020-02-14</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-06-29 20:16:19" itemprop="dateModified" datetime="2024-06-29T20:16:19+08:00">2024-06-29</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/3DReconstruction-Multi-view-Implicit-Function/" itemprop="url" rel="index"><span itemprop="name">3DReconstruction/Multi-view/Implicit Function</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>19k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span>1:07</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <div class="table-container">
-<table>
-<thead>
-<tr>
-<th>Title</th>
-<th>Neural Radiance Fields in the Industrial and Robotics Domain: Applications, Research Opportunities and Use Cases</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Author</td>
-<td>Eugen ˇSlapak, Enric Pardo, Mat ́uˇs Dopiriak, Taras Maksymyuk and Juraj Gazda</td>
-</tr>
-<tr>
-<td>Conf/Jour</td>
-<td>cs.RO</td>
-</tr>
-<tr>
-<td>Year</td>
-<td>2023</td>
-</tr>
-<tr>
-<td>Project</td>
-<td><a target="_blank" rel="noopener" href="https://github.com/Maftej/iisnerf">Maftej/iisnerf (github.com)</a></td>
-</tr>
-<tr>
-<td>Paper</td>
-<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4789767752768290817&amp;noteId=1925861245942862080">Neural radiance fields in the industrial and robotics domain: applications, research opportunities and use cases (readpaper.com)</a></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>探索了NeRF在工业和机器人领域的应用</p>
-<ul>
-<li>Instant-NGP 基于NeRF的视频压缩技术</li>
-<li>D-NeRF 根据过去的arm位置来预测未来的arm运动</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeRF%20Other%20Research/Review/NeRF%20in%20the%20industrial%20and%20robotics%20domain/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/Project/Audio%20Visualization/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-      <meta itemprop="name" content="Qi Yun">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiYun">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/Project/Audio%20Visualization/" class="post-title-link" itemprop="url">Audio Visualization</a>
-        </h2>
-
-        <div class="post-meta">
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-08-20 22:14:08" itemprop="dateCreated datePublished" datetime="2023-08-20T22:14:08+08:00">2023-08-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-09-20 22:14:18" itemprop="dateModified" datetime="2024-09-20T22:14:18+08:00">2024-09-20</time>
+                <time title="Modified: 2024-09-20 21:49:38" itemprop="dateModified" datetime="2024-09-20T21:49:38+08:00">2024-09-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -768,268 +332,7 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>73</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span>1 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <div class="table-container">
-<table>
-<thead>
-<tr>
-<th>Title</th>
-<th>Audio Visualization</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Author</td>
-<td></td>
-</tr>
-<tr>
-<td>Conf/Jour</td>
-<td></td>
-</tr>
-<tr>
-<td>Year</td>
-<td></td>
-</tr>
-<tr>
-<td>Project</td>
-<td></td>
-</tr>
-<tr>
-<td>Paper</td>
-</tr>
-</tbody>
-</table>
-</div>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/Project/Audio%20Visualization/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/3DReconstruction/Multi-view/Explicit%20Volumetric/GS-based/3D%20Gaussian%20Splatting/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-      <meta itemprop="name" content="Qi Yun">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiYun">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/3DReconstruction/Multi-view/Explicit%20Volumetric/GS-based/3D%20Gaussian%20Splatting/" class="post-title-link" itemprop="url">3D Gaussian Splatting</a>
-        </h2>
-
-        <div class="post-meta">
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-08-17 19:43:10" itemprop="dateCreated datePublished" datetime="2023-08-17T19:43:10+08:00">2023-08-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-04-17 15:40:43" itemprop="dateModified" datetime="2024-04-17T15:40:43+08:00">2024-04-17</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/3DReconstruction-Multi-view-Explicit-Volumetric-GS-based/" itemprop="url" rel="index"><span itemprop="name">3DReconstruction/Multi-view/Explicit Volumetric/GS-based</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>11k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span>39 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <div class="table-container">
-<table>
-<thead>
-<tr>
-<th>Title</th>
-<th>3D Gaussian Splatting for Real-Time Radiance Field Rendering</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Author</td>
-<td><a target="_blank" rel="noopener" href="https://scholar.google.at/citations?user=jeasMB0AAAAJ&amp;hl=en">Bernhard Kerbl</a><em> 1,2      <a target="_blank" rel="noopener" href="https://grgkopanas.github.io/">Georgios Kopanas</a></em> 1,2      <a target="_blank" rel="noopener" href="https://people.mpi-inf.mpg.de/~tleimkue/">Thomas Leimkühler</a>3      <a target="_blank" rel="noopener" href="http://www-sop.inria.fr/members/George.Drettakis/">George Drettakis</a>1,2</td>
-</tr>
-<tr>
-<td>Conf/Jour</td>
-<td>SIGGRAPH</td>
-</tr>
-<tr>
-<td>Year</td>
-<td>2023</td>
-</tr>
-<tr>
-<td>Project</td>
-<td><a target="_blank" rel="noopener" href="https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/">3D Gaussian Splatting for Real-Time Radiance Field Rendering (inria.fr)</a></td>
-</tr>
-<tr>
-<td>Paper</td>
-<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4786887855003664385&amp;noteId=1920399556132916992">3D Gaussian Splatting for Real-Time Radiance Field Rendering (readpaper.com)</a></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230817194605.png" alt="image.png"></p>
-<ul>
-<li>将点描述成高斯体，对点云进行<strong>优化</strong>（点云模型）<ul>
-<li>高质量、非结构化的离散表示——高斯体：均值控制位置，协方差控制高斯体形状（缩放+旋转）</li>
-<li>针对3D高斯特性的优化方法，并同时进行自适应密度控制</li>
-</ul>
-</li>
-<li>Splatting的渲染方式，区别于体渲染<ul>
-<li>实现了使用GPU进行快速可微的渲染，允许各向异性的抛雪球(Splatting)和快速反向传播</li>
-</ul>
-</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/3DReconstruction/Multi-view/Explicit%20Volumetric/GS-based/3D%20Gaussian%20Splatting/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/Learn/CG%20or%20CV/Learn-cs148/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-      <meta itemprop="name" content="Qi Yun">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiYun">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/Learn/CG%20or%20CV/Learn-cs148/" class="post-title-link" itemprop="url">Learn-cs148</a>
-        </h2>
-
-        <div class="post-meta">
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-08-16 19:02:57" itemprop="dateCreated datePublished" datetime="2023-08-16T19:02:57+08:00">2023-08-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-08-27 21:19:40" itemprop="dateModified" datetime="2024-08-27T21:19:40+08:00">2024-08-27</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Learn/" itemprop="url" rel="index"><span itemprop="name">Learn</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>2.3k</span>
+              <span>2.6k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -1047,10 +350,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><a target="_blank" rel="noopener" href="https://web.stanford.edu/class/cs148/index.html">CS 148: Introduction to Computer Graphics and Imaging (stanford.edu)</a></p>
+          <p>Python 调用API结构</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/Learn/CG%20or%20CV/Learn-cs148/#more" rel="contents">
+              <a class="btn" href="/Project/Python%20API/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -1074,7 +377,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/3DReconstruction/Multi-view/Generative%20Models/PlankAssembly/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/Project/Python%20Spider/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpeg">
@@ -1088,7 +391,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/3DReconstruction/Multi-view/Generative%20Models/PlankAssembly/" class="post-title-link" itemprop="url">PlankAssembly</a>
+            <a href="/Project/Python%20Spider/" class="post-title-link" itemprop="url">自己写的几个爬虫程序(入门)</a>
         </h2>
 
         <div class="post-meta">
@@ -1099,14 +402,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2023-08-13 16:03:58" itemprop="dateCreated datePublished" datetime="2023-08-13T16:03:58+08:00">2023-08-13</time>
+              <time title="Created: 2020-02-10 16:43:47" itemprop="dateCreated datePublished" datetime="2020-02-10T16:43:47+08:00">2020-02-10</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-06-29 20:19:42" itemprop="dateModified" datetime="2024-06-29T20:19:42+08:00">2024-06-29</time>
+                <time title="Modified: 2024-09-20 21:44:10" itemprop="dateModified" datetime="2024-09-20T21:44:10+08:00">2024-09-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1114,7 +417,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/3DReconstruction-Multi-view-Generative-Models/" itemprop="url" rel="index"><span itemprop="name">3DReconstruction/Multi-view/Generative Models</span></a>
+                  <a href="/categories/Project/" itemprop="url" rel="index"><span itemprop="name">Project</span></a>
                 </span>
             </span>
 
@@ -1123,13 +426,13 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>6.3k</span>
+              <span>1.6k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span>23 mins.</span>
+              <span>6 mins.</span>
             </span>
 
         </div>
@@ -1141,52 +444,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <div class="table-container">
-<table>
-<thead>
-<tr>
-<th>Title</th>
-<th>PlankAssembly: Robust 3D Reconstruction from Three Orthographic Views with Learnt Shape Programs</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Author</td>
-<td><a target="_blank" rel="noopener" href="https://github.com/Huenao">Wentao Hu</a>    <a target="_blank" rel="noopener" href="https://bertjiazheng.github.io/">Jia Zheng</a>     <a target="_blank" rel="noopener" href="https://github.com/Elsa-zhang">Zixin Zhang</a>     <a target="_blank" rel="noopener" href="https://yuan-xiaojun.github.io/Yuan-Xiaojun/">Xiaojun Yuan</a>     <a target="_blank" rel="noopener" href="https://sai.sysu.edu.cn/teacher/teacher01/1385356.htm">Jian Yin</a>     <a target="_blank" rel="noopener" href="https://zihan-z.github.io/">Zihan Zhou</a></td>
-</tr>
-<tr>
-<td>Conf/Jour</td>
-<td>ICCV</td>
-</tr>
-<tr>
-<td>Year</td>
-<td>2023</td>
-</tr>
-<tr>
-<td>Project</td>
-<td><a target="_blank" rel="noopener" href="https://manycore-research.github.io/PlankAssembly/">PlankAssembly: Robust 3D Reconstruction from Three Orthographic Views with Learnt Shape Programs (manycore-research.github.io)</a></td>
-</tr>
-<tr>
-<td>Paper</td>
-<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4787600278115319809&amp;noteId=1912848205953901312">PlankAssembly: Robust 3D Reconstruction from Three Orthographic Views with Learnt Shape Programs (readpaper.com)</a></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230813211026.png" alt="image.png"></p>
-<p>贡献：</p>
-<ul>
-<li>基于Transform的自注意力提出模型，用于将2D的三个orthographic的line drawing转化为3D模型，可以实现从图纸不完美的输入中生成正确的3D模型</li>
-<li>输入的三个orthographic图纸被编码，输出的是3D模型程序的编码，最后解码后即3D模型对应的程序DSL</li>
-</ul>
-<p>挑战：</p>
-<ul>
-<li>应用于无法获得甚至不存在大规模CAD数据的领域，例如建筑物或复杂的机械设备</li>
-<li>没有考虑图纸中的符号、图层等信息</li>
-</ul>
+          <blockquote>
+<p><strong>自己动手做的 python 爬虫</strong>&emsp;&emsp;&emsp;<a target="_blank" rel="noopener" href="https://github.com/yq010105/spider_learn" title="github">GitHub 链接</a></p>
+</blockquote>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/3DReconstruction/Multi-view/Generative%20Models/PlankAssembly/#more" rel="contents">
+              <a class="btn" href="/Project/Python%20Spider/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -1210,7 +473,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeRF%20Other%20Research/Review/A%20Critical%20Analysis%20of%20NeRF-Based%203D%20Reconstruction/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/Learn/Python/Python%20Basic/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpeg">
@@ -1224,7 +487,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeRF%20Other%20Research/Review/A%20Critical%20Analysis%20of%20NeRF-Based%203D%20Reconstruction/" class="post-title-link" itemprop="url">A Critical Analysis of NeRF-Based 3D Reconstruction</a>
+            <a href="/Learn/Python/Python%20Basic/" class="post-title-link" itemprop="url">Python-Note</a>
         </h2>
 
         <div class="post-meta">
@@ -1235,14 +498,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2023-08-12 15:32:14" itemprop="dateCreated datePublished" datetime="2023-08-12T15:32:14+08:00">2023-08-12</time>
+              <time title="Created: 2020-02-09 15:38:38" itemprop="dateCreated datePublished" datetime="2020-02-09T15:38:38+08:00">2020-02-09</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-06-29 20:16:24" itemprop="dateModified" datetime="2024-06-29T20:16:24+08:00">2024-06-29</time>
+                <time title="Modified: 2024-09-27 15:33:47" itemprop="dateModified" datetime="2024-09-27T15:33:47+08:00">2024-09-27</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1250,7 +513,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/3DReconstruction-Multi-view-Implicit-Function/" itemprop="url" rel="index"><span itemprop="name">3DReconstruction/Multi-view/Implicit Function</span></a>
+                  <a href="/categories/Learn/" itemprop="url" rel="index"><span itemprop="name">Learn</span></a>
                 </span>
             </span>
 
@@ -1259,7 +522,195 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>9.1k</span>
+              <span>6k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>22 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Python查缺补漏</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Learn/Python/Python%20Basic/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/Learn/Blog%20Basic/Learn-Markdown/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiYun">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/Learn/Blog%20Basic/Learn-Markdown/" class="post-title-link" itemprop="url">Markdown基本知识</a>
+        </h2>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-08 12:00:45" itemprop="dateCreated datePublished" datetime="2020-02-08T12:00:45+08:00">2020-02-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-06-29 20:51:21" itemprop="dateModified" datetime="2024-06-29T20:51:21+08:00">2024-06-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Learn/" itemprop="url" rel="index"><span itemprop="name">Learn</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>651</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>2 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>关于我使用 Markdown 以来学到的知识，即markdown的操作方法<br>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Learn/Blog%20Basic/Learn-Markdown/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/Learn/Python/Spider/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiYun">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/Learn/Python/Spider/" class="post-title-link" itemprop="url">Spider-Note</a>
+        </h2>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-08 11:40:18" itemprop="dateCreated datePublished" datetime="2020-02-08T11:40:18+08:00">2020-02-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-06-29 20:51:08" itemprop="dateModified" datetime="2024-06-29T20:51:08+08:00">2024-06-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Learn/" itemprop="url" rel="index"><span itemprop="name">Learn</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>8.9k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -1277,59 +728,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <div class="table-container">
-<table>
-<thead>
-<tr>
-<th>Title</th>
-<th>A Critical Analysis of NeRF-Based 3D Reconstruction</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Author</td>
-<td>Fabio Remondino , Ali Karami  , Ziyang Yan, Gabriele Mazzacca , Simone Rigon and Rongjun Qin</td>
-</tr>
-<tr>
-<td>Conf/Jour</td>
-<td>MDPI remote sensing</td>
-</tr>
-<tr>
-<td>Year</td>
-<td>2023</td>
-</tr>
-<tr>
-<td>Project</td>
-<td><a target="_blank" rel="noopener" href="https://www.mdpi.com/2072-4292/15/14/3585">A Critical Analysis of NeRF-Based 3D Reconstruction</a></td>
-</tr>
-<tr>
-<td>Paper</td>
-<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4787981282168537089&amp;noteId=1912892973790366720">A Critical Analysis of NeRF-Based 3D Reconstruction (readpaper.com)</a></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230812171053.png" alt="image.png"></p>
-<p>对比photogrammetry与NeRF在3D Reconstruction中的表现，提供数据集<a target="_blank" rel="noopener" href="https://github.com/3DOM-FBK/NeRFBK">Github_NeRFBK</a></p>
-<ul>
-<li>photogrammetry(Colmap)<ul>
-<li>对无纹理物体重建效果很差(non-collaborative surfaces的3D测量)，例如镜面反射物体<ul>
-<li>非协作表面: 反射、无纹理等</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>NeRF(InstantNGP | NerfStudio | SDFstudio)</li>
-</ul>
-<p>结论：</p>
-<ul>
-<li>在传统摄影测量方法失败或产生嘈杂结果的情况下，例如无纹理、金属、高反射和透明物体，NeRF优于摄影测量</li>
-<li>对于纹理良好和部分纹理的物体，摄影测量仍然表现更好</li>
-</ul>
-<p>该研究为NeRF在不同现实场景中的适用性提供了有价值的见解，特别是在遗产和工业场景中，这些场景的表面可能特别具有挑战性，未来的研究可以探索NeRF和摄影测量的结合，以提高具有挑战性场景下三维重建的质量和效率</p>
+          <blockquote>
+<p>参考 Github 上的<a target="_blank" rel="noopener" href="https://github.com/kingname/SourceCodeOfBook" title="Github">教程</a>学习<br>一个连 python 都没有完全学会的菜鸡来学爬虫</p>
+</blockquote>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeRF%20Other%20Research/Review/A%20Critical%20Analysis%20of%20NeRF-Based%203D%20Reconstruction/#more" rel="contents">
+              <a class="btn" href="/Learn/Python/Spider/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -1353,7 +757,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/Shadow&Highlight/NeRFactor/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/Learn/Blog%20Basic/Learn-Hexo/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpeg">
@@ -1367,7 +771,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/Shadow&Highlight/NeRFactor/" class="post-title-link" itemprop="url">NeRFactor</a>
+            <a href="/Learn/Blog%20Basic/Learn-Hexo/" class="post-title-link" itemprop="url">Hexo搭建博客的基本知识</a>
         </h2>
 
         <div class="post-meta">
@@ -1378,14 +782,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2023-08-11 13:27:25" itemprop="dateCreated datePublished" datetime="2023-08-11T13:27:25+08:00">2023-08-11</time>
+              <time title="Created: 2020-02-04 15:34:18" itemprop="dateCreated datePublished" datetime="2020-02-04T15:34:18+08:00">2020-02-04</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-11-24 14:43:37" itemprop="dateModified" datetime="2023-11-24T14:43:37+08:00">2023-11-24</time>
+                <time title="Modified: 2023-11-24 15:55:37" itemprop="dateModified" datetime="2023-11-24T15:55:37+08:00">2023-11-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1393,7 +797,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/3DReconstruction-Multi-view-Implicit-Function-NeRF-based-Shadow-Highlight/" itemprop="url" rel="index"><span itemprop="name">3DReconstruction/Multi-view/Implicit Function/NeRF-based/Shadow&Highlight</span></a>
+                  <a href="/categories/Learn/" itemprop="url" rel="index"><span itemprop="name">Learn</span></a>
                 </span>
             </span>
 
@@ -1402,13 +806,13 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>11k</span>
+              <span>2.2k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span>42 mins.</span>
+              <span>8 mins.</span>
             </span>
 
         </div>
@@ -1420,50 +824,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <div class="table-container">
-<table>
-<thead>
-<tr>
-<th>Title</th>
-<th>NeRFactor: Neural Factorization of Shape and Reflectance Under an Unknown Illumination</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Author</td>
-<td><a target="_blank" rel="noopener" href="http://people.csail.mit.edu/xiuming/">Xiuming Zhang</a>    <a target="_blank" rel="noopener" href="https://pratulsrinivasan.github.io/">Pratul P. Srinivasan</a>    <a target="_blank" rel="noopener" href="https://boyangdeng.com/">Boyang Deng</a>    <a target="_blank" rel="noopener" href="http://www.pauldebevec.com/">Paul Debevec</a>    <a target="_blank" rel="noopener" href="http://billf.mit.edu/">William T. Freeman</a>    <a target="_blank" rel="noopener" href="https://jonbarron.info/">Jonathan T. Barron</a></td>
-</tr>
-<tr>
-<td>Conf/Jour</td>
-<td>TOG 2021 (Proc. SIGGRAPH Asia)</td>
-</tr>
-<tr>
-<td>Year</td>
-<td>2021</td>
-</tr>
-<tr>
-<td>Project</td>
-<td><a target="_blank" rel="noopener" href="https://xiuming.info/projects/nerfactor/">NeRFactor (xiuming.info)</a></td>
-</tr>
-<tr>
-<td>Paper</td>
-<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4667303505241849857&amp;noteId=1915674464034570496">NeRFactor: Neural Factorization of Shape and Reflectance Under an Unknown Illumination (readpaper.com)</a></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230814133227.png" alt="image.png"></p>
-<p>贡献：</p>
-<ul>
-<li>NeRFactor在未知光照条件下从图像中恢复物体形状和反射率<ul>
-<li>在没有任何监督的情况下，仅使用重渲染损失、简单的平滑先验和从真实世界BRDF测量中学习的数据驱动的BRDF先验，恢复了表面法线、光能见度、反照率和双向反射分布函数(BRDFs)的3D神经场</li>
-</ul>
-</li>
-<li>通过NeRFactor的分解，我们可以用点光或光探针图像重新照亮物体，从任意视点渲染图像，甚至编辑物体的反照率和BRDF</li>
-</ul>
+          <p>Hexo博客基本操作，包括主题的修改和博客文件的备份等等</p>
+<blockquote>
+<p><strong>建立 hexo_blog，参考 b 站 up:<a target="_blank" rel="noopener" href="https://space.bilibili.com/384068749">CodeSheep</a>的<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av44544186">视频</a></strong><br>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/Shadow&Highlight/NeRFactor/#more" rel="contents">
+              <a class="btn" href="/Learn/Blog%20Basic/Learn-Hexo/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -1486,7 +852,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span>
   </nav>
 
 
@@ -1553,14 +919,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">140</span>
+          <span class="site-state-item-count">143</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -1614,12 +980,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">486k</span>
+    <span title="Symbols count total">496k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">29:27</span>
+    <span title="Reading time total">30:02</span>
 </div>
 
         

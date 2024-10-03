@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/yqq/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Time Series Generation | Papers With Code  生成样本，解决样本不足的问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Time Series Generation (Uncertainty)">
+<meta property="og:url" content="http://example.com/Other%20Interest/Time%20Series%20Generation/index.html">
+<meta property="og:site_name" content="QiYun">
+<meta property="og:description" content="Time Series Generation | Papers With Code  生成样本，解决样本不足的问题">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240924163352.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240923180228.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240920223417.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240921202408.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240920224613.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240923145250.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240920224735.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240920224814.png">
+<meta property="article:published_time" content="2024-09-20T14:33:08.000Z">
+<meta property="article:modified_time" content="2024-09-24T11:44:03.835Z">
+<meta property="article:author" content="Qi Yun">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240924163352.png">
+
+<link rel="canonical" href="http://example.com/Other%20Interest/Time%20Series%20Generation/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Time Series Generation (Uncertainty) | QiYun</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">QiYun</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Note</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/Other%20Interest/Time%20Series%20Generation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiYun">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Time Series Generation (Uncertainty)
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2024-09-20 22:33:08" itemprop="dateCreated datePublished" datetime="2024-09-20T22:33:08+08:00">2024-09-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-09-24 19:44:03" itemprop="dateModified" datetime="2024-09-24T19:44:03+08:00">2024-09-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Other-Interest/" itemprop="url" rel="index"><span itemprop="name">Other Interest</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>1.6k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>6 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><a target="_blank" rel="noopener" href="https://paperswithcode.com/task/time-series-generation/latest">Time Series Generation | Papers With Code</a></p>
+<ul>
+<li>生成样本，解决样本不足的问题</li>
+</ul>
+<span id="more"></span>
+<h1 id="Review"><a href="#Review" class="headerlink" title="Review"></a>Review</h1><h2 id="GAN"><a href="#GAN" class="headerlink" title="GAN"></a><a target="_blank" rel="noopener" href="https://dl.acm.org/doi/pdf/10.1145/3559540">GAN</a></h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://dl.acm.org/doi/pdf/10.1145/3559540">Generative Adversarial Networks in Time Series: A Systematic Literature Review</a></p>
+</blockquote>
+<ul>
+<li>Autoregressive (AR) to forecast data point of time series：$x_{t+1} = c + \theta_1x_t + \theta_2x_{t-1} + \epsilon$。然而其内在是确定性的由于没有在未来系统状态的计算中引入随机性</li>
+<li>Generative Methods：<ul>
+<li>Autoencoder (AE)</li>
+<li>variational autoencoders (VAEs)</li>
+<li>recurrent neural network (RNN)</li>
+<li>GAN is inherent instability, suffer from issues: <ul>
+<li>non-convergence, A non-converging model does not stabilize and continuously oscillates, causing it to diverge. </li>
+<li>diminishing/vanishing gradients, Diminishing gradients prevent the generator from learning anything, as the discriminator becomes too successful. </li>
+<li>mode collapse. Mode collapse is when the generator collapses, producing only uniform samples with little to no variety.</li>
+<li>没有比较好的评价指标</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>GAN Model task: 生成器G要最大化判别器D的错误率，而判别器D则是要最小化其错误率</p>
+<script type="math/tex; mode=display">\min_{G}\max_{D}V(G,D)=\mathbb{E}_{x\sim p_{data}(x)}[logD(\mathbf{x})]+\mathbb{E}_{z\sim p_{z}(z)}[log(1-D(G(\mathbf{z})))]</script><p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240924163352.png" alt="image.png|666"></p>
+<p>应用：</p>
+<ul>
+<li>Data Augumentation</li>
+<li>Imputation</li>
+<li>Denoising</li>
+<li>Anomaly Detection异常检测</li>
+</ul>
+<h1 id="Diffusion"><a href="#Diffusion" class="headerlink" title="Diffusion"></a>Diffusion</h1><h2 id="Diffusion-TS-2024"><a href="#Diffusion-TS-2024" class="headerlink" title="Diffusion TS 2024"></a><a target="_blank" rel="noopener" href="https://openreview.net/pdf?id=4h1apFjO99">Diffusion TS</a> 2024</h2><p>Diffusion + Transformer</p>
+<p>UNCONDITIONAL TIME SERIES GENERATION，输入的是噪声数据 <code>img = torch.randn(shape, device=device)</code><br>CONDITIONAL TIME SERIES GENERATION：这里的条件代表的也是time series(缺失部分数据)</p>
+<ul>
+<li>Imputation 补全</li>
+<li>Forecasting 预测</li>
+</ul>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/y-debug-sys/diffusion-ts">Y-debug-sys/Diffusion-TS: [ICLR 2024] Official Implementation of “Diffusion-TS: Interpretable Diffusion for General Time Series Generation”</a> code</p>
+</blockquote>
+<p>时间序列数据可分为: </p>
+<ul>
+<li>趋势项 Trend+周期项 Seasonality+误差项 Error</li>
+<li>$x_j=\zeta_j+\sum_{i=1}^ms_{i,j}+e_j,\quad j=0,1,\ldots,\tau-1,$</li>
+<li>$\hat{x}_0(x_t,t,\theta)=V_{tr}^t+\sum_{i=1}^DS_{i,t}+R$</li>
+</ul>
+<p>Trend: $V_{tr}^t=\sum_{i=1}^D(\boldsymbol{C}\cdot\mathrm{Linear}(w_{tr}^{i,t})+\mathcal{X}_{tr}^{i,t}),\quad\boldsymbol{C}=[1,c,\ldots,c^p]$</p>
+<ul>
+<li>D 代表由 D 个 Decoder block</li>
+<li>$\mathcal{X}_{tr}^{i,t}$ 是 i-th 个 Decoder block 输出的均值，<em>趋势项加上这个可以让其在y轴上下移动</em>，该项的累加在代码中并不是简单的求和， 而是通过一个conv1d来动态调整求和时的权重，此外还会加上最后一个decoder block输出的均值</li>
+<li>C is the matrix of powers of vector $c=\frac{[0,1,2,\dots,\tau-2,\tau-1]^{T}}{\tau}$ $\tau$ is the time series length<ul>
+<li>$y=a_{0}+a_{1}x+a_{2}x^{2}+a_{3}x^{3}+\dots+a_{p}x^{p}$ , <ul>
+<li>系数a即网络的输出$\mathrm{Linear}(w_{tr}^{i,t})$</li>
+<li>$x,x^{2},x^{3}\dots,x^{p}$  <strong>本质上是通过C来表示</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>P is a small degree (p=3) to model low frequency behavior  p=3代表用3阶来拟合趋势项已经足够</li>
+</ul>
+<p>TrendBlock:</p>
+<ul>
+<li>Input: input $w_{tr}^{i,t}$ </li>
+<li>Output: trend_vals $\boldsymbol{C}\cdot\mathrm{Linear}(w_{tr}^{i,t})$</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">###### TrendBlock ######</span></span><br><span class="line"><span class="comment"># forward:</span></span><br><span class="line">b, c, h = <span class="built_in">input</span>.shape <span class="comment"># (batch_size, seq_len, d_model)</span></span><br><span class="line">x = self.trend(<span class="built_in">input</span>).transpose(<span class="number">1</span>, <span class="number">2</span>) <span class="comment"># (batch_size, trend_poly, out_feat)</span></span><br><span class="line">trend_vals = torch.matmul(x.transpose(<span class="number">1</span>, <span class="number">2</span>), self.poly_space.to(x.device))</span><br><span class="line">trend_vals = trend_vals.transpose(<span class="number">1</span>, <span class="number">2</span>) <span class="comment"># (batch_size, seq_len, out_feat)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># __init__: </span></span><br><span class="line">trend_poly = <span class="number">3</span></span><br><span class="line">self.trend = nn.Sequential(</span><br><span class="line">    nn.Conv1d(in_channels=in_dim, out_channels=trend_poly, kernel_size=<span class="number">3</span>, padding=<span class="number">1</span>),</span><br><span class="line">    act,</span><br><span class="line">    Transpose(shape=(<span class="number">1</span>, <span class="number">2</span>)),</span><br><span class="line">    nn.Conv1d(in_feat, out_feat, <span class="number">3</span>, stride=<span class="number">1</span>, padding=<span class="number">1</span>)</span><br><span class="line">)</span><br><span class="line">lin_space = torch.arange(<span class="number">1</span>, out_dim + <span class="number">1</span>, <span class="number">1</span>) / (out_dim + <span class="number">1</span>) <span class="comment"># out_dim = seq_len = time series length</span></span><br><span class="line">self.poly_space = torch.stack([lin_space ** <span class="built_in">float</span>(p + <span class="number">1</span>) <span class="keyword">for</span> p <span class="keyword">in</span> <span class="built_in">range</span>(trend_poly)], dim=<span class="number">0</span>) <span class="comment"># trend_poly, out_dim</span></span><br></pre></td></tr></table></figure>
+<p>Seasonality: $S_{i,t}=\sum_{k=1}^{K}A_{i,t}^{\kappa_{i,t}^{(k)}}\left[\cos(2\pi f_{\kappa_{i,t}^{(k)}}\tau c+\Phi_{i,t}^{\kappa_{i,t}^{(k)}})+\cos(2\pi\bar{f}_{\kappa_{i,t}^{(k)}}\tau c+\bar{\Phi}_{i,t}^{\kappa_{i,t}^{(k)}})\right],$  </p>
+<ul>
+<li>Amplitude $A_{i,t}^{(k)}=\left|\mathcal{F}(w_{seas}^{i,t})_{k}\right|$</li>
+<li>Phase $\Phi_{i,t}^{(k)}=\phi\left(\mathcal{F}(w_{seas}^{i,t})_{k}\right)$</li>
+<li>$\mathcal{F}$ is the discrete Fourier transform</li>
+<li>$\kappa_{i,t}^{(1)},\cdots,\kappa_{i,t}^{(K)}=\arg\text{TopK}\\k\in\{1,\cdots,\lfloor\tau/2\rfloor+1\}$ 选择 top K 的幅值和相位，K is a hyperparameter</li>
+<li>$f_{k}$ represents the Fourier frequency of the corresponding index k, $\bar{f}_{k}$ 为 $f_{k}$ 的共轭</li>
+<li>$\tau c=\tau \cdot\frac{[0,1,2,\dots,\tau-2,\tau-1]^{T}}{\tau}=[0,1,2,\dots,\tau-2,\tau-1]^{T}$</li>
+</ul>
+<p>FourierLayer:</p>
+<ul>
+<li>Input: x $w_{seas}^{i,t}$ </li>
+<li>Output:  x_time $S_{i,t}$ <ul>
+<li><code>x_freq, x_freq.conj()</code> 是$\mathcal{F}(w_{seas}^{i,t})_{k}$ 和其共轭，通过abs 和 angle 得到幅值和相位</li>
+<li><code>f, -f</code> is $f_{k}$ and $\bar{f}_{k}$</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">###### FourierLayer ######</span></span><br><span class="line"><span class="keyword">from</span> einops <span class="keyword">import</span> rearrange, reduce, repeat</span><br><span class="line"></span><br><span class="line"><span class="comment"># forward:</span></span><br><span class="line">b, t, d = x.shape</span><br><span class="line">x_freq = torch.fft.rfft(x, dim=<span class="number">1</span>)  <span class="comment"># (b, t, d) -&gt; (b, t//2+1, d)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> t % <span class="number">2</span> == <span class="number">0</span>:</span><br><span class="line">    x_freq = x_freq[:, self.low_freq:-<span class="number">1</span>]</span><br><span class="line">    f = torch.fft.rfftfreq(t)[self.low_freq:-<span class="number">1</span>]</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    x_freq = x_freq[:, self.low_freq:]</span><br><span class="line">    f = torch.fft.rfftfreq(t)[self.low_freq:]</span><br><span class="line"><span class="comment"># print(x_freq.shape) # (b, t//2 - sel.low_freq, d)</span></span><br><span class="line"><span class="comment"># print(f.shape) # (t//2 - sel.low_freq)</span></span><br><span class="line">x_freq, index_tuple = self.topk_freq(x_freq) <span class="comment"># (b, top_k, d)</span></span><br><span class="line">f = repeat(f, <span class="string">&#x27;f -&gt; b f d&#x27;</span>, b=x_freq.size(<span class="number">0</span>), d=x_freq.size(<span class="number">2</span>)).to(x_freq.device) <span class="comment"># (b, t//2 - sel.low_freq, d)</span></span><br><span class="line">f = rearrange(f[index_tuple], <span class="string">&#x27;b f d -&gt; b f () d&#x27;</span>).to(x_freq.device) <span class="comment"># (b, top_k, 1, d)</span></span><br><span class="line">x_freq = torch.cat([x_freq, x_freq.conj()], dim=<span class="number">1</span>)</span><br><span class="line">f = torch.cat([f, -f], dim=<span class="number">1</span>)</span><br><span class="line">t = rearrange(torch.arange(t, dtype=torch.<span class="built_in">float</span>),</span><br><span class="line">              <span class="string">&#x27;t -&gt; () () t ()&#x27;</span>).to(x_freq.device)</span><br><span class="line">amp = rearrange(x_freq.<span class="built_in">abs</span>(), <span class="string">&#x27;b f d -&gt; b f () d&#x27;</span>)</span><br><span class="line">phase = rearrange(x_freq.angle(), <span class="string">&#x27;b f d -&gt; b f () d&#x27;</span>)</span><br><span class="line">x_time = amp * torch.cos(<span class="number">2</span> * math.pi * f * t + phase)</span><br><span class="line"><span class="keyword">return</span> reduce(x_time, <span class="string">&#x27;b f t d -&gt; b t d&#x27;</span>, <span class="string">&#x27;sum&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># __init__ and function:</span></span><br><span class="line">self.d_model = d_model</span><br><span class="line">self.factor = factor</span><br><span class="line">self.low_freq = low_freq</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">topk_freq</span>(<span class="params">self, x_freq</span>):</span><br><span class="line">  length = x_freq.shape[<span class="number">1</span>]</span><br><span class="line">  top_k = <span class="built_in">int</span>(self.factor * math.log(length))</span><br><span class="line">  <span class="comment"># print(top_k)</span></span><br><span class="line">  values, indices = torch.topk(x_freq.<span class="built_in">abs</span>(), top_k, dim=<span class="number">1</span>, largest=<span class="literal">True</span>, <span class="built_in">sorted</span>=<span class="literal">True</span>) <span class="comment"># (b, top_k, d)</span></span><br><span class="line">  <span class="comment"># print(values.shape, indices.shape); print(values); print(indices)</span></span><br><span class="line">  mesh_a, mesh_b = torch.meshgrid(torch.arange(x_freq.size(<span class="number">0</span>)), torch.arange(x_freq.size(<span class="number">2</span>)), indexing=<span class="string">&#x27;ij&#x27;</span>) <span class="comment"># (b, d)</span></span><br><span class="line">  index_tuple = (mesh_a.unsqueeze(<span class="number">1</span>), indices, mesh_b.unsqueeze(<span class="number">1</span>)) <span class="comment"># (b, 1, d) (b, top_k, d) (b, 1, d)</span></span><br><span class="line">  x_freq = x_freq[index_tuple] <span class="comment"># (b, top_k, d) 🤔高级索引方法(元组)</span></span><br><span class="line">  <span class="keyword">return</span> x_freq, index_tuple</span><br></pre></td></tr></table></figure>
+<p>Error: R is the output of the last decoder block, which can be regarded as the sum of residual<br>periodicity and other noise. 代码中的R为最后一个decoder block输出减去其平均值，并将平均值加到趋势项中，让周期项不包含任何的y轴方向信息</p>
+<p>时间序列数据被表示为 $\hat{x}_0(x_t,t,\theta)=V_{tr}^t+\sum_{i=1}^DS_{i,t}+R$，然后通过DDPM来直接预测原始样本，反向生成过程被表示为：$x_{t-1}=\frac{\sqrt{\bar{\alpha}_{t-1}}\beta_t}{1-\bar{\alpha}_t}\hat{x}_0(x_t,t,\theta)+\frac{\sqrt{\alpha_t}(1-\bar{\alpha}_{t-1})}{1-\bar{\alpha}_t}x_t+\frac{1-\bar{\alpha}_{t-1}}{1-\bar{\alpha}_t}\beta_tz_t,$ </p>
+<ul>
+<li>$z_t\sim\mathcal{N}(0,\mathbf{I}), \alpha_t=1-\beta_t\text{ and }\bar{\alpha}_t=\prod_{s=1}^t\alpha_s$</li>
+</ul>
+<p>损失函数：<br>时域+FFT频域监督：$\mathcal{L}_\theta=\mathbb{E}_{t,x_0}\left[w_t\left[\lambda_1|x_0-\hat{x}_0(x_t,t,\theta)|^2+\lambda_2|\mathcal{F}\mathcal{FT}(x_0)-\mathcal{FFT}(\hat{x}_0(x_t,t,\theta))|^2\right]\right]$</p>
+<ul>
+<li>$\mathcal{L}_{simple}=\mathbb{E}_{t,x_{0}}\left[w_{t}|x_{0}-\hat{x}_{0}(x_{t},t,\theta)|^{2}\right],\quad w_{t}=\frac{\lambda\alpha_{t}(1-\bar{\alpha}_{t})}{\beta_{t}^{2}}$<ul>
+<li>其中权重被设置为当在 small t 时权重变小，让网络集中在更大的 diffusion step t(噪声较多的时候)</li>
+<li>由 $x_t=\sqrt{\bar{\alpha}_t}x_0+\sqrt{1-\bar{\alpha}_t}\epsilon.$，随着t的增大，$\alpha_{t}$ 在逐渐变小</li>
+</ul>
+</li>
+</ul>
+<p>上述过程为无条件 time series generation，本文还描述了conditional extensions of Diffusion-TS，即the modeled $x_{0}$ 以 targets y 为条件。</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240923180228.png" alt="image.png|666"><br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240920223417.png" alt="image.png|666"><br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240921202408.png" alt="image.png|666"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 环境配置</span></span><br><span class="line">conda create -n Diffusion-TS</span><br><span class="line">conda activate Diffusion-TS</span><br><span class="line"></span><br><span class="line">pip install torch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2 --index-url https://download.pytorch.org/whl/cu118</span><br><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># train with stocks dataset with gpu 0</span></span><br><span class="line">python main.py --name stocks_exp1 --config_file ./Config/stocks.yaml --gpu 0 --train</span><br></pre></td></tr></table></figure>
+<h1 id="GANs"><a href="#GANs" class="headerlink" title="GANs"></a>GANs</h1><h2 id="RGANs-Most⭐2017"><a href="#RGANs-Most⭐2017" class="headerlink" title="RGANs Most⭐2017"></a><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1706.02633v2">RGANs</a> Most⭐2017</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/ratschlab/RGAN">ratschlab/RGAN: Recurrent (conditional) generative adversarial networks for generating real-valued time series data.</a> code</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240920224613.png" alt="image.png|666"></p>
+<h2 id="SigCGANs"><a href="#SigCGANs" class="headerlink" title="SigCGANs"></a><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2006.05421v2">SigCGANs</a></h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/SigCGANs/Conditional-Sig-Wasserstein-GANs">SigCGANs/Conditional-Sig-Wasserstein-GANs</a> code</p>
+</blockquote>
+<h2 id="TimeGAN"><a href="#TimeGAN" class="headerlink" title="TimeGAN"></a><a target="_blank" rel="noopener" href="https://papers.nips.cc/paper/2019/file/c9efe5f26cd17ba6216bbe2a7d26d490-Paper.pdf">TimeGAN</a></h2><p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240923145250.png" alt="image.png|666"></p>
+<h1 id="VAE"><a href="#VAE" class="headerlink" title="VAE"></a>VAE</h1><h2 id="TimeVAE"><a href="#TimeVAE" class="headerlink" title="TimeVAE"></a><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2111.08095v3">TimeVAE</a></h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/abudesai/timeVAE">abudesai/timeVAE: TimeVAE implementation in keras/tensorflow</a><br><a target="_blank" rel="noopener" href="https://github.com/abudesai/syntheticdatagen">abudesai/syntheticdatagen: synthetic data generation of time-series data</a></p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240920224735.png" alt="image.png|666"></p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240920224814.png" alt="image.png|666"></p>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+1ZnNxFWnEbk5YzRl">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/3DReconstruction/Multi-view/Code%20of%20Multi-view%203D%20Reconstruction%20based%20on%20SDF%20and%20volume%20rendering/" rel="prev" title="Code of Multi-view 3D Reconstruction based on SDF and volume rendering">
+      <i class="fa fa-chevron-left"></i> Code of Multi-view 3D Reconstruction based on SDF and volume rendering
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/Learn/Python/Data%20Analysis/" rel="next" title="Data Analysis">
+      Data Analysis <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Review"><span class="nav-text">Review</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#GAN"><span class="nav-text">GAN</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Diffusion"><span class="nav-text">Diffusion</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Diffusion-TS-2024"><span class="nav-text">Diffusion TS 2024</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GANs"><span class="nav-text">GANs</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#RGANs-Most%E2%AD%902017"><span class="nav-text">RGANs Most⭐2017</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SigCGANs"><span class="nav-text">SigCGANs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TimeGAN"><span class="nav-text">TimeGAN</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VAE"><span class="nav-text">VAE</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#TimeVAE"><span class="nav-text">TimeVAE</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qi Yun"
+      src="/images/avatar.jpeg">
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">143</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/qiyun71" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;qiyun71" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/29010355" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;29010355" rel="noopener" target="_blank"><i class="fa fa-star fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qi Yun</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">496k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">30:02</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/yqq/anime.min.js"></script>
+  <script src="/yqq/velocity/velocity.min.js"></script>
+  <script src="/yqq/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

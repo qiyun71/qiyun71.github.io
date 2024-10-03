@@ -29,7 +29,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230702204507.png">
 <meta property="article:published_time" content="2023-06-21T04:26:14.000Z">
-<meta property="article:modified_time" content="2024-09-20T13:58:21.607Z">
+<meta property="article:modified_time" content="2024-09-23T06:28:58.321Z">
 <meta property="article:author" content="Qi Yun">
 <meta property="article:tag" content="Python">
 <meta property="article:tag" content="Pytorch">
@@ -229,7 +229,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-09-20 21:58:21" itemprop="dateModified" datetime="2024-09-20T21:58:21+08:00">2024-09-20</time>
+                <time title="Modified: 2024-09-23 14:28:58" itemprop="dateModified" datetime="2024-09-23T14:28:58+08:00">2024-09-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -246,13 +246,13 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>984</span>
+              <span>1.3k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span>4 mins.</span>
+              <span>5 mins.</span>
             </span>
 
         </div>
@@ -376,6 +376,13 @@
 </div>
 <h3 id="Tips-1"><a href="#Tips-1" class="headerlink" title="Tips"></a>Tips</h3><p>在使用SequentialLR将多个scheduler连接起来时，SequentialLR的每个milestones都会从每个scheduler的0处开始，因此Step_scheduler的milestones要设置成<code>milestones=[1]</code>，这样设置会导致当Exp_scheduler结束时，先跳一下到<code>ori_lr</code>，然后step到<code>ori_lr * 0.4</code></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Con_scheduler = optim.lr_scheduler.ConstantLR(optimizer, factor=<span class="number">1.0</span>, total_iters=total_iters)</span><br><span class="line">Exp_scheduler = optim.lr_scheduler.ExponentialLR(optimizer, gamma=gamma)</span><br><span class="line">Step_scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[<span class="number">1</span>], gamma=<span class="number">0.4</span>)</span><br><span class="line">scheduler = optim.lr_scheduler.SequentialLR(optimizer, schedulers=[Con_scheduler,Exp_scheduler, Step_scheduler], milestones=[total_iters,total_iters+exp_iters])</span><br></pre></td></tr></table></figure>
+<h1 id="EMA指数移动平均"><a href="#EMA指数移动平均" class="headerlink" title="EMA指数移动平均"></a>EMA指数移动平均</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/68748778">【炼丹技巧】指数移动平均（EMA）的原理及PyTorch实现 - 知乎</a></p>
+</blockquote>
+<p>在深度学习中，经常会使用EMA（指数移动平均）这个方法对模型的参数做平均，以求提高测试指标并增加模型鲁棒。</p>
+<p>普通的平均：<br>EMA：$v_t=\beta\cdot v_{t-1}+(1-\beta)\cdot\theta_t$ $v_{t}$前t条数据的平均值，$\beta$是加权权重值 (一般设为0.9-0.999)。</p>
+<p>上面讲的是广义的ema定义和计算方法，特别的，在深度学习的优化过程中， $\theta_{t}$ 是t时刻的模型权重weights， $v_{t}$是t时刻的影子权重（shadow weights）。在梯度下降的过程中，会一直维护着这个影子权重，但是这个影子权重并不会参与训练。基本的假设是，模型权重在最后的n步内，会在实际的最优点处抖动，所以我们取最后n步的平均，能使得模型更加的鲁棒。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">ema:</span><br><span class="line">  decay: <span class="number">0.995</span></span><br><span class="line">  update_interval: <span class="number">10</span></span><br><span class="line">  </span><br><span class="line"><span class="keyword">from</span> ema_pytorch <span class="keyword">import</span> EMA</span><br><span class="line">self.ema = EMA(self.model, beta=ema_decay, update_every=ema_update_every).to(self.device)</span><br><span class="line"></span><br><span class="line"><span class="comment"># train</span></span><br><span class="line">self.ema.update()</span><br><span class="line"></span><br><span class="line"><span class="comment">## self.ema.ema_model == self.model, 直接调用 model 中的函数</span></span><br><span class="line">sample = self.ema.ema_model.generate_mts(batch_size=size_every)</span><br></pre></td></tr></table></figure>
 <h1 id="私有成员"><a href="#私有成员" class="headerlink" title="私有成员"></a>私有成员</h1><p>带双下划线函数</p>
 <div class="table-container">
 <table>
@@ -503,7 +510,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Tips"><span class="nav-text">Tips</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Loss-NAN"><span class="nav-text">Loss (NAN)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="nav-text">环境配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#windows"><span class="nav-text">windows</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GPU"><span class="nav-text">GPU</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Autograd"><span class="nav-text">Autograd</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Optimizer"><span class="nav-text">Optimizer</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Adam%E5%A4%9A%E4%B8%AAmodel%E5%8F%82%E6%95%B0%EF%BC%8C%E7%84%B6%E5%90%8E%E6%9B%B4%E6%96%B0lr"><span class="nav-text">Adam多个model参数，然后更新lr</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lr%E5%AD%A6%E4%B9%A0%E7%8E%87"><span class="nav-text">lr学习率</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Tips-1"><span class="nav-text">Tips</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A7%81%E6%9C%89%E6%88%90%E5%91%98"><span class="nav-text">私有成员</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#torch-cuda"><span class="nav-text">torch.cuda</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#cuda%E4%BA%8B%E4%BB%B6%E8%AE%A1%E7%AE%97%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C%E6%97%B6%E9%97%B4"><span class="nav-text">cuda事件计算程序运行时间</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Tips"><span class="nav-text">Tips</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Loss-NAN"><span class="nav-text">Loss (NAN)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="nav-text">环境配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#windows"><span class="nav-text">windows</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GPU"><span class="nav-text">GPU</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Autograd"><span class="nav-text">Autograd</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Optimizer"><span class="nav-text">Optimizer</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Adam%E5%A4%9A%E4%B8%AAmodel%E5%8F%82%E6%95%B0%EF%BC%8C%E7%84%B6%E5%90%8E%E6%9B%B4%E6%96%B0lr"><span class="nav-text">Adam多个model参数，然后更新lr</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lr%E5%AD%A6%E4%B9%A0%E7%8E%87"><span class="nav-text">lr学习率</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Tips-1"><span class="nav-text">Tips</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#EMA%E6%8C%87%E6%95%B0%E7%A7%BB%E5%8A%A8%E5%B9%B3%E5%9D%87"><span class="nav-text">EMA指数移动平均</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A7%81%E6%9C%89%E6%88%90%E5%91%98"><span class="nav-text">私有成员</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#torch-cuda"><span class="nav-text">torch.cuda</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#cuda%E4%BA%8B%E4%BB%B6%E8%AE%A1%E7%AE%97%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C%E6%97%B6%E9%97%B4"><span class="nav-text">cuda事件计算程序运行时间</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -518,14 +525,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">140</span>
+          <span class="site-state-item-count">143</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -579,12 +586,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">486k</span>
+    <span title="Symbols count total">496k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">29:27</span>
+    <span title="Reading time total">30:02</span>
 </div>
 
         
