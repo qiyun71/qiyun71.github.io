@@ -33,6 +33,7 @@ gpt:学术gpt项目
 
 
 # conda 清华源
+
 vi  ~/.condarc
 修改为以下内容
 channels:

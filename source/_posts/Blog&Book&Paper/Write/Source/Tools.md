@@ -54,6 +54,11 @@
 
 NeuralNet 图片绘制
 [HarisIqbal88/PlotNeuralNet: Latex code for making neural networks diagrams (github.com)](https://github.com/HarisIqbal88/PlotNeuralNet)
+just by typing notation in plain text.
+[Penrose](https://penrose.cs.cmu.edu/examples)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240925110003.png)
+
 
 ## 表格
 

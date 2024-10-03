@@ -62,6 +62,13 @@
 > [我为什么放弃北美全奖博士学位 - 激流网](https://jiliuwang.net/archives/55682)
 > [我眼中的中国科研：一个中科院退学博士生的感想 - 阮一峰的网络日志](https://www.ruanyifeng.com/blog/2010/07/my_thoughts_on_china_scientific_research.html)
 
+
+
+| 公司                                                                                     | 岗位        |
+| -------------------------------------------------------------------------------------- | --------- |
+| [比亚迪招聘](https://job.byd.com/portal/pc/#/school/schoolSangfor?1wdfb1LbMwhz4TymXhCJbg==) | 自动化设备数字孪生 |
+
+
 # 毕业
 
 

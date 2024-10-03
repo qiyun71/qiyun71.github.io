@@ -354,4 +354,37 @@ Based on the above observation, we propose two strategies to optimize ray distri
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240620151248.png)
 
 
+### Expansive Supervision
+
+>[Expansive Supervision for Neural Radiance Field | PDF](https://arxiv.org/pdf/2409.08056)
+
+
+![image.png|333](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240928172853.png)
+
+本文思路：pixels within the same batch must derive from identical input views
+- **Strict Sequential order** in image：this approach results in a significant decrease in model performance due to the **reduced entropy of the training data** This reduction in entropy negatively impacts the learning performance during each iteration.
+- **Permutation algorithm**(maximizes the entropy) 将从同一张图片中采样得到的batch进行打乱顺序：$P^*=\arg\max_PH(P(\mathcal{D}))$ 找到熵$H(\cdot)$最大时的 permutation $P^{*}$
+  - $\text{s.t.}C:B\cap I=B,\forall B\in\mathcal{B},\exists I\in I$ 用数学公式描述 Batch B of Batch set $\mathcal{B}$ 中的所有像素在 image set $\mathcal{I}$ 中的图片$I$中 
+  - $\mathcal{D} = g(\mathcal{B}) = g(\mathcal{I})$ 其中 $g(\cdot)$表示reshape function 将多维集映射为单位集并保存element order: 将从单个图片$I$中抽取得到的$\mathcal{B}$ 中的多个$B$ 展成一维数据，最终获得单维集$\mathcal{D}$，然后进行P排列，得到$P(\mathcal{D})$
+  - 最终得到shuffled的batch set $\mathcal{B}=P^{*}(\mathcal{D})$ 和 the image set $\mathcal{I}$
+
+**Section 3.2 Content-aware Permutation**
+
+$\hat{P}_{\mathrm{intra}}^{I}(B)$表示对从相同的输入视图中抽取的不同batch的像素进行排序
+$\hat{P}_{\mathrm{inter}}^{\mathcal{B}}(\mathcal{D})$表示对同一个batch的像素进行排序
+
+**Section 3.3 Expansive Supervision**
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240928172804.png)
+
+- The anchor area are computed by the light-wight edge detector to displays prominent error patterns. 这一区域从where patterns exhibit larger errors进行选择
+- And source area are sampled to expand its values to the reaming area. 🤔为什么还要有sorce area，除了重要边缘区域，还考虑一下其他区域？In my opinion：
+  - The source set is composed of sampled points, and the error is estimated based on these source points, which expand to cover all remaining areas。**通过采样一些除了anchor set之外的像素，用这些像素的error来代表其他地方的error，从而不需要计算所有像素的error，节省了时间**
+
+最终的损失：
+$$\begin{aligned}
+\hat{L}=& \frac1{|A^*|}\sum_{r_A\in A^*}||\hat{C}(r_A)-C(r_A)||_2^2+ \\
+&\frac{1}{|S|}(\frac{1}{\beta_{A}+\beta_{S}}-1)\sum_{r_{S}\in S}||\hat{C}(r_{S})-C(r_{S})||_{2}^{2},
+\end{aligned}$$
+- $\beta_{A}$和$\beta_{S}$分别用来控制anchor area 和 source area的大小
 

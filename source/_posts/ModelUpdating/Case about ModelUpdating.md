@@ -10,7 +10,25 @@ Model Updating算例
 
 <!-- more -->
 
-# 飞机模型(标)
+# NASA challenge 2019
+
+> [NASA Langley UQ Challenge on Optimization Under Uncertainty](https://uqtools.larc.nasa.gov/nasa-uq-challenge-problem-2020/)
+
+- **Model Calibration** & Uncertainty Quantification of Subsystems
+- Uncertainty Model Reduction
+- Reliability Analysis
+- Reliability-Based Design
+- Model Updating and Design Parameter Tuning
+- Risk-based Design
+T
+**Model Calibration:**
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20240307224720.png)
+
+
+
+
+
+# Airplane Model (Sifeng Bi & BiaoYang)
 
 > [Stochastic Model Updating with Uncertainty Quantification: An Overview and Tutorial - ScienceDirect](https://www.sciencedirect.com/science/article/pii/S0888327023006921)
 
@@ -67,7 +85,7 @@ $\mu_a,\sigma_a,\mu_b,\sigma_b,E_1,E_2,\rho$ 7个参数 --> $f_1,f_2,f_3,f_4,f_5
 - $E_{1} \in [0.5,0.9]$ ($10^{11}Pa$) Young’s modulus of fuselage/wing join
 - $E_{2} \in [0.5,0.9]$ ($10^{11}Pa$) Young’s modulus of fuselage/tail joint
 
-#### 方案1(废除)
+#### 生成结果1(废除)
 杨标生成：**(ab的方差不能生成得太大)** [飞机算例数据集生成](飞机算例数据集生成.md)
 - $\mu_{a}\in [290,310]$ , $\sigma_{a} \in [1.217,4.049]$ (mm)
 - $\mu_{b}\in [20,30]$ , $\sigma_{b} \in [1.025,2.101]$ (mm)
@@ -94,7 +112,7 @@ $\mu_a,\sigma_a,\mu_b,\sigma_b,E_1,E_2,\rho$ 7个参数在各自的区间内均�
 总共需要使用Nastran进行$1,000 \times 100 = 100,000$次计算
 按照每次计算花费10s计算，共需要100万 s = 278 h = 11.57 day
 
-#### 方案2
+#### 生成结果2
 
 - $\mu_{a}\in [290,310]$ , $\sigma_{a} \in [0,5]$ (mm)
 - $\mu_{b}\in [20,30]$ , $\sigma_{b} \in [0,5]$ (mm)
@@ -115,15 +133,18 @@ f5 tensor(123.9420) tensor(152.1165) 135, 145
 
 ### 网络结构
 
-#### 方案1: 一组频率预测一组参数
+#### Method 1
+ **单次测量频率预测单组参数(反向代理模型——确定的)**
 
-根据一组参数的值来计算这组参数的均值和方差or区间边界
+根据多组参数的值$\{a,b,E_{1},E_{2},\rho\}_{i=1}^{1e6}$来计算参数的均值和方差or区间边界
 
-#### 方案2: 直接预测均值和方差or区间边界
+#### Method 2
+
+**直接预测均值和方差or区间边界(反向代理模型——随机/区间)**
 
 神经网络训练：
 - 输入：5x100大小的数组（100组 $f_1,f_2,f_3,f_4,f_5$）
-- 标签：7x1的向量（$\mu_a,\sigma_a,\mu_b,\sigma_b,E_1,E_2,\rho$ ）
+- 输出/标签标签：7x1的向量（$\mu_a,\sigma_a,\mu_b,\sigma_b,E_1,E_2,\rho$ ）
 
 训练思路：
 1. 输入5x100大小的数组通过FC(全连接层)计算得到中间向量，然后reshape成3通道图片，使用CNN处理图片，提取特征并解码为7x1的向量
@@ -134,8 +155,7 @@ f5 tensor(123.9420) tensor(152.1165) 135, 145
 方法缺点：
 - 训练完成的NN，必须要输入固定大小的数组
 
-### 问题讨论
-#### 问题1(Airplane)
+### 讨论
 
 对于小区间例如$[302.2234,302.2323]$预测的效果不好$[302.2415,302.2204]$
 
@@ -179,50 +199,11 @@ tensor([
 | ------- | ------- | ------- | ------- | -------- | -------- |
 | 290,308 | 292,310 | 20,29.8 | 20.2,30 | 1.1,1.18 | 1.12,1.2 |
 
-#### 问题2(Airplane)
-
-对T(mm)的修正误差很大，**发现是数据的问题**(ab固定，T上下改变，输出的频率几乎不变)，**重新生成数据** --> 解决
-
-
-
-
-# NASA challenge 2019
-
-> [NASA Langley UQ Challenge on Optimization Under Uncertainty](https://uqtools.larc.nasa.gov/nasa-uq-challenge-problem-2020/)
-
-- **Model Calibration** & Uncertainty Quantification of Subsystems
-- Uncertainty Model Reduction
-- Reliability Analysis
-- Reliability-Based Design
-- Model Updating and Design Parameter Tuning
-- Risk-based Design
-
-**Model Calibration:**
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20240307224720.png)
-
-## 传统方法
-
-
-## 基于NN方法
+取消小区间后还是有问题：对T(mm)的修正误差很大
+真正问题：**发现是数据的问题**(ab固定，T上下改变，输出的频率几乎不变)，**重新生成数据** --> 解决
 
 
 # 卫星模型
-
-## 传统方法
-
-- 有限元方法获取数据集耗费时间长，使用一个代理模型来代替有限元计算模型。
-- 根据随机样本 $X_{s}$ 通过代理模型得到模拟响应 $Y_{s}$，动力学实验得到实验响应 $Y_{e}(f_{1} ... f_{6})$
-- 用子区间相似度计算模拟样本 $Y_{s}$ 和试验样本 $Y_{e}$ 之间的值，并作为目标函数。
-- 用麻雀搜索算法将目标函数迭代寻优，得到修正后的均值 $\mu$ 和标准差 $\sigma$
-
-目标函数：子区间相似度、标准差椭圆
-
-## 基于NN方法
-
-### 复现 Satellite_UCNN
-
-#### 数据集生成与预处理
-
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231225211854.png)
 
@@ -238,9 +219,25 @@ tensor([
 
 卫星模型选取了 11 个节点，并测量了水平 X 和竖直 Y 两个方向的加速度频响数据，频率范围为 ==0-50Hz==（实际使用30Hz），频率间隔为 0.5。得到最终输入网络的频响图像尺寸为 2×11×61，对应标签形状为 4×1。
 
-FR 数据转图：
+FR 数据转三维数组(多通道图片)：
+
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231225212852.png)
 
+
+## 传统方法
+
+- 有限元方法获取数据集耗费时间长，使用一个代理模型来代替有限元计算模型。
+- 根据随机样本 $X_{s}$ 通过代理模型得到模拟响应 $Y_{s}$，动力学实验得到实验响应 $Y_{e}(f_{1} ... f_{6})$
+- 用子区间相似度计算模拟样本 $Y_{s}$ 和试验样本 $Y_{e}$ 之间的值，并作为目标函数。
+- 用麻雀搜索算法将目标函数迭代寻优，得到修正后的均值 $\mu$ 和标准差 $\sigma$
+
+目标函数：子区间相似度、标准差椭圆
+
+## 基于NN方法
+
+### UCNN
+
+#### 数据集生成与预处理
 
 数据集：
 - 输入：测量的卫星模型加速度频响数据，将加速度频响数据经处理转化为频响图像
@@ -288,7 +285,7 @@ UCNN 单向卷积
 
 测试集错误率：$错误率 = \frac{|预测值-标签GT|}{标签GT}$
 
-### 改进方法(Mine)
+### Improvement
 
 #### 数据集生成
 
@@ -320,7 +317,6 @@ data/
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20240111145858.png) 
 
 **ResNet50**
-
 ![resnet.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/picturesresnet.png) <br>                                                                                                              |
 #### 实验记录
 
@@ -446,7 +442,7 @@ error_rate_each2=:0.08872962392607951=(0.08887535240501165/1.0016423881053924)
 ```
 
 
-#### 讨论
+### 讨论
 
 [基于NN的卫星算例问题](基于NN的卫星算例问题.md)
 
@@ -470,6 +466,7 @@ error_rate_each2=:0.08872962392607951=(0.08887535240501165/1.0016423881053924)
 | $\sigma_{T_3}$ | 0.2  | **0.1954** | 0.1959 | 0.1928 | 0.1916 | **0.1932** | 0.1928 | 0.1912 | 0.1899 |
 | ER_T(%)        | 0    | 2.82       | 3.31   | 3.67   | 5.30   | 1.93       | 2.31   | 2.56   | 3.58   |
 | ER(%)          |      | 0          | 1.14   | 1.07   | 3.26   | 0          | 2.12   | 1.40   | 2.21   |
+|                |      |            |        |        |        |            |        |        |        |
 
 说明
 - pred1：归一化处理FR数据、500epoch训练结果
@@ -504,7 +501,7 @@ error_rate_each2=:0.08872962392607951=(0.08887535240501165/1.0016423881053924)
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20240308165855.png)
 
-##### 猜想1（错误）
+#### 猜想1（错误）
 
 与**结构参数归一化**有关，将FR和结构参数，也就是NN的输入和输出都归一化后，结果：
 
@@ -513,14 +510,14 @@ error_rate_each2=:0.08872962392607951=(0.08887535240501165/1.0016423881053924)
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20240308201704.png)
 
 
-##### 猜想2（错误）
+#### 猜想2（错误）
 
 训练过程就识别不到其他位置的参数了，训练的1个epoch，发现除了边缘无法很好预测，其他地方也很满（中间有的地方也很空，但不会出现聚集在特定值的现象）
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20240308203251.png)
 
 
-##### 猜想3（错误）
+#### 猜想3（错误）
 
 可能FR数据生成有问题，数据生成根据4个参数的均值和方差，生成1000组正态分布数据，然后根据1000组四参数，使用Nastran生成FR数据
 可能当改变剪切板厚度$T_3$时，生成的FR数据过于相似，例如将$T_{3}=1.12$或者$T_{3}=1.13$等生成的FR数据跟$T_{3}=1.1$生成的FR数据近似，NN分辨不出来
@@ -529,7 +526,7 @@ error_rate_each2=:0.08872962392607951=(0.08887535240501165/1.0016423881053924)
 ![image.png|222](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20240309164056.png)
 
    
-##### 解法（真正问题）
+#### 真正原因
 
 在test和exp的时候，添加了`model.eval()`代码，会将网络中的BN层和Dropout层关闭（训练时是开启的），(test数据batchsize是直接设置成整个test dataset的大小，可以)不使用eval，相当于在训练集上过拟合了以后，可以更好地对先验区间中的实验数据进行更好的预测
 
@@ -559,7 +556,6 @@ error_rate_each2=:0.08872962392607951=(0.08887535240501165/1.0016423881053924)
 
 The absolute value of the first component of the first eigenvector reflects some vibration information. The introduction of structural vibration modes as output responses will increase the difficulty of IMU.
 
-
 **Numerical case studies: a mass-spring system**
 
 ![massSpring.png|555](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/massSpring.png)
@@ -576,7 +572,7 @@ The absolute value of the first component of the first eigenvector reflects some
 | M-K matrix (FE)             |                                    |                 |
 | Response Surface Model(RSM) |                                    |                 |
 
-### Uncertainty Propagation
+### Interval Uncertainty Propagation
 
 #### Interval perturbation
 
@@ -587,13 +583,13 @@ $\underline{\widehat{\boldsymbol{f}}}=F(\boldsymbol\theta^c)-\sum_{j=1}^N\frac{\
 
 #### Monte Carlo
 
-### FE
+### FE Simulation
 
 FE or Surrogate Model
 
-#### M&K matrix
+#### M&K matrix(FE)
 
-![massSpring.png|555](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/massSpring.png)
+
 
 M-K matrix (FE): $M\ddot{X} + KX = 0$
 
@@ -612,7 +608,7 @@ $\omega_{2}^{2} = \Sigma(2,2)$
 $\omega_{3}^{2} = \Sigma(2,2)$
 $|\varphi(1,1)| = Q(1,1)$
 
-#### Response Surface Model(RSM)
+#### Response Surface Model (RSM)
 
 ##### Well-separated modes
 $$
@@ -746,9 +742,6 @@ MLP：
 - 输入：60x4
 - 输出：
 #### Close modes
-
-
-
 
 
 # Steel Plate Structures

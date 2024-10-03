@@ -2,8 +2,19 @@
   "Appearance-light@@card-layout-open-light": false,
   "Appearance-light@@theme-light-style-select": "theme-light-background-adapt",
   "blue-topaz-theme@@left-ribbon-style": "default-left-ribbon-style",
-  "blue-topaz-theme@@color-scheme-options": "color-scheme-options-simplicity-topaz",
   "blue-topaz-theme@@disable-auto-hide-header": false,
   "blue-topaz-theme@@simple-p-kanban": false,
-  "blue-topaz-theme@@remove-shadow-p-kanban": false
+  "blue-topaz-theme@@remove-shadow-p-kanban": false,
+  "blue-topaz-theme@@color-scheme-options": "color-scheme-options-lillimon-topaz",
+  "anuppuccin-theme-settings@@anuppuccin-theme-light": "ctp-latte",
+  "notation-2-theme@@notation-colors": true,
+  "notation-2-theme@@font-select": "default-mono",
+  "obsidian-prism-theme@@color-scheme-style-dt": "pt-color-scheme-style-two-tone-and-border-dt",
+  "obsidian-prism-theme@@accent-style-dt": "pt-accent-style-borderandfilled-dt",
+  "obsidian-prism-theme@@pt-disable-kanban-title-count": false,
+  "obsidian-prism-theme@@pt-icons-accent": false,
+  "obsidian-prism-theme@@pt-focused-mode": false,
+  "anuppuccin-theme-settings@@anuppuccin-theme-accents": "ctp-accent-sapphire",
+  "anuppuccin-theme-settings@@anuppuccin-light-theme-accents": "ctp-accent-light-flamingo",
+  "obsidian-prism-theme@@color-schemes-dt": "pt-color-scheme-cherry-dt"
 }

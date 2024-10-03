@@ -189,6 +189,32 @@ scheduler = optim.lr_scheduler.SequentialLR(optimizer, schedulers=[Con_scheduler
 ```
 
 
+# EMA指数移动平均
+
+> [【炼丹技巧】指数移动平均（EMA）的原理及PyTorch实现 - 知乎](https://zhuanlan.zhihu.com/p/68748778)
+
+在深度学习中，经常会使用EMA（指数移动平均）这个方法对模型的参数做平均，以求提高测试指标并增加模型鲁棒。
+
+普通的平均：
+EMA：$v_t=\beta\cdot v_{t-1}+(1-\beta)\cdot\theta_t$ $v_{t}$前t条数据的平均值，$\beta$是加权权重值 (一般设为0.9-0.999)。
+
+上面讲的是广义的ema定义和计算方法，特别的，在深度学习的优化过程中， $\theta_{t}$ 是t时刻的模型权重weights， $v_{t}$是t时刻的影子权重（shadow weights）。在梯度下降的过程中，会一直维护着这个影子权重，但是这个影子权重并不会参与训练。基本的假设是，模型权重在最后的n步内，会在实际的最优点处抖动，所以我们取最后n步的平均，能使得模型更加的鲁棒。
+
+```python
+ema:
+  decay: 0.995
+  update_interval: 10
+  
+from ema_pytorch import EMA
+self.ema = EMA(self.model, beta=ema_decay, update_every=ema_update_every).to(self.device)
+
+# train
+self.ema.update()
+
+## self.ema.ema_model == self.model, 直接调用 model 中的函数
+sample = self.ema.ema_model.generate_mts(batch_size=size_every)
+```
+
 # 私有成员
 带双下划线函数
 

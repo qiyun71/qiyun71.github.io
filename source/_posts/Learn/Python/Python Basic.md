@@ -12,6 +12,30 @@ Python查缺补漏
 
 <!-- more -->
 
+
+# Python (with matlab)
+
+>[安装用于 Python 的 MATLAB Engine API - MATLAB & Simulink - MathWorks 中国](https://ww2.mathworks.cn/help/matlab/matlab_external/install-the-matlab-engine-for-python.html)
+
+- 要从 MATLAB 文件夹安装，请在 Windows® 上键入：
+  - `cd "_matlabroot_\extern\engines\python"`
+  - `python -m pip install .`
+- 使用以下命令从 [https://pypi.org/project/matlabengine](https://pypi.org/project/matlabengine) 安装引擎 API：
+  - `python -m pip install matlabengine`
+
+### 启动 MATLAB Engine
+
+启动 Python。在 Python 提示符下键入以下命令，以导入 MATLAB 模块并启动引擎：
+
+```python
+import matlab.engine
+eng = matlab.engine.start_matlab()
+```
+
+matlab2023 最低python版本为 3.9
+matlab2019 最高python版本为 3.7
+
+
 # Project
 
 | Project introduction                                                                                                                    | Link                                                                                                                                                                           |
@@ -24,6 +48,22 @@ Python查缺补漏
 
 
 # 积累编写技巧
+
+## 元组索引列表
+
+```python
+def topk_freq(self, x_freq):
+  length = x_freq.shape[1]
+  top_k = int(self.factor * math.log(length))
+  # print(top_k)
+  values, indices = torch.topk(x_freq.abs(), top_k, dim=1, largest=True, sorted=True) # (b, top_k, d)
+  # print(values.shape, indices.shape); print(values); print(indices)
+  mesh_a, mesh_b = torch.meshgrid(torch.arange(x_freq.size(0)), torch.arange(x_freq.size(2)), indexing='ij') # (b, d)
+  index_tuple = (mesh_a.unsqueeze(1), indices, mesh_b.unsqueeze(1)) # (b, 1, d) (b, top_k, d) (b, 1, d)
+  x_freq = x_freq[index_tuple] # (b, top_k, d)
+return x_freq, index_tuple
+```
+
 
 - 变量的交换`a,b = b,a`
 - 字符串格式化
@@ -114,6 +154,15 @@ new_list = list(map(list, zip(address, temp)))
 jsonify({
     'data': new_list
 })
+
+## partial
+
+```python
+from functools import partial
+
+# 如果 clip_x_start 则创建一个maybe_clip函数，根据输入的x_ 输出 torch.clamp(x_, min=-1., max=1.)
+maybe_clip = partial(torch.clamp, min=-1., max=1.) if clip_x_start else identity
+```
 
 # Python基础
 

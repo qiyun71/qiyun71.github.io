@@ -5,7 +5,7 @@ tags:
 categories: Learn
 ---
 
-MATH
+MATH $e^{i\pi}+1=0$
   
 <!-- more -->
 
@@ -19,6 +19,22 @@ MATH
 
 # 数学基础
 
+## 卷积
+
+> [但什么是卷积呢？ - YouTube](https://www.youtube.com/watch?v=KuXjwB4LzSA)
+
+$f\left(t\right)*g\left(t\right)=\int_{0}^{t}f\left(\tau\right)g\left(t-\tau\right)d\tau$
+
+
+Example1：已知$f(x) = a_{0}+a_{1}x+\dots+a_{n}x^{n}$ 和 $g(x)=b_{0}+b_{1}x+\dots b_{n}x^{n}$，求$h(x)=f(x) \cdot g(x)$
+- $h(x)$的系数c是ab两系数的卷积结果：直接计算的话时间复杂度为$\mathcal{O}(n^{2})$
+
+$$\left.\mathbf{a}*\mathbf{b}=\left[\begin{array}{c}a_0b_0,\\a_0b_1+a_1b_0,\\a_0b_2+a_1b_1+a_2b_0,\\\vdots\\a_{n-1}b_{m-1}\end{array}\right.\right]$$
+
+- 另一种思路是先将$f(x)$于$g(x)$进行FFT$f(\omega),g(\omega)$，频域的系数$\hat{\mathbf{a}}=[\hat{a}_0,\hat{a}_1,\hat{a}_2,\ldots,\hat{a}_{m+n-1}]$ 和$\hat{\mathbf{b}}=[\hat{b}_0,\hat{b}_1,\hat{b}_2,\ldots,\hat{b}_{m+n-1}]$，两者直接相乘得到$\hat{\mathbf{a}}\cdot\hat{\mathbf{b}}=[\hat{a}_0\hat{b}_0,\hat{a}_1\hat{b}_1,\hat{a}_2\hat{b}_2,\ldots,]$，然后进行逆FFT，得到的$h(x)$系数即想要的结果，时间复杂度为$\mathcal{O}(n\log n)$
+
+>[【官方双语】卷积的两种可视化|概率论中的X+Y既美妙又复杂_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1Yk4y1K7Az/?spm_id_from=333.999.0.0&vd_source=1dba7493016a36a32b27a14ed2891088) 最好的动画⭐
+
 ## 摄动法
 
 > [轻微的扰动——摄动法简介(1) - 科学空间|Scientific Spaces](https://kexue.fm/archives/1878) 
@@ -29,13 +45,190 @@ MATH
 
 泰勒展开本质上是求近似
 
+## Domain Transform
+
+> [The intuition behind Fourier and Laplace transforms I was never taught in school - YouTube](https://www.youtube.com/watch?v=3gjJDuCAEQQ)
+
+### Fourier Transform
+
+>[频域处理Frequency domain processing：傅里叶变换 | YangWC's Blog](https://yangwc.com/2019/10/24/FFT/)
+
+
+$Fourier: F(\omega)=\int_{-\infty}^{\infty}f(t)e^{-i\omega t}dt$
+$F(\omega)=\int_{-\infty}^{\infty}f(t)\cos{(\omega t)}dt-i\int_{-\infty}^{\infty}f(t)\sin{(\omega t)}dt$ 
+
+傅里叶变换可以看作使用不同频率$\omega$的sin和cos对原始时域信号进行积分，sin和cos积分得到的值越大，则虚部和实部的值越大，直观的模/振幅 magnitude 也越大，该频率$\omega$成分下的值也越大
+
+对于信号$cos\pi t$ 进行FT，其虚部$\cos \pi t \cdot \sin \omega t$一直为0，实部$\sin \pi t \cdot \sin \omega t$在其他地方为0，在$\omega =\pi$时达到正无穷
+
+#### DFT
+
+#### FFT
+
+#### STFT
+
+>[短时傅里叶变换和小波变换有何不同？ - Mr.看海的回答 - 知乎](https://www.zhihu.com/question/26673889/answer/3292923354)
+
+可见当信号的频率成分随时间显著变化时，即所谓的非平稳信号，传统频谱分析就不太合适了。
+举几个例子：
+- 研究信号的局部特性：如爆炸声、机器的故障噪声等，这些信号的特性在短时间内变化很大。
+- 语音处理：在自动语音识别和语音合成中，语音的特征如音高和音量随着时间而变化。
+- 雷达和无线电信号分析：雷达信号的特性依赖于时间和观测的角度，需分析这些信号随时间的变化。
+- 生物医学信号分析：比如心电图（ECG）和脑电图（EEG）这样的生理信号，它们的频率特性随时间改变。
+
+![image.png|333](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241001123745.png)
+
+
+在短时傅里叶变换（STFT）中，窗口函数及其大小选择是分析的关键。窗口函数决定了在任何给定时间点，信号的哪一部分被用于分析。窗口大小的选择直接影响了分析结果的时间分辨率和频率分辨率，这是进行有效STFT分析的最重要的权衡。
+
+窗口大小的时间分辨率影响：时间分辨率与窗口的宽度密切相关。一个窄窗口提供较高的时间分辨率，因为它捕捉了信号在很短时间内的变化。这对于分析包含快速变化的瞬态事件，如敲击声或爆炸声，是非常有用的。然而，较小的窗口将限制频率分辨率，因为频率分析需要足够的周期来准确估计。
+
+窗口大小的频率分辨率影响：频率分辨率与窗口的宽度呈反比。一个宽窗口覆盖了信号的较长时间段，提供了较高的频率分辨率。这是因为更多的周期可以在窗口内被分析，从而更准确地确定低频成分。但是，这会牺牲时间分辨率，因为窗口中的信号被假定在这段时间内是平稳的。
+
+**那有没有一种可能，窗口大小是可调的呢？**
+
+#### Wavelet Transform
+
+可以发现其特点：高频部分具有较高的时间分辨率和较低的频率分辨率，而低频部分具有较高的频率分辨率和较低的时间分辨率，这就恰好解决了STFT的痛点
+
+
+### Laplace Transform
+
+> [What does the Laplace Transform really tell us? A visual explanation (plus applications) - YouTube](https://www.youtube.com/watch?v=n2y7n6jw5d0)
+
+
+$X(s)=\int_0^\infty x(t)e^{-st}dt$
+
+$Laplace:F(s)=\int_0^\infty f(t)e^{-st}dt$
+
+$s=\alpha+i\omega$
+
+$F(s)=\int_0^\infty f(t)e^{-i\omega t}e^{-\alpha t}dt$
+- $e^{-i\omega t}$ scans for sinusoids
+- $e^{-\alpha t}$ scans for exponentials
+
+时域的微积分在s域中可以很好地计算
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240925100202.png)
+
+
+## 复数 Complex Number
+
+> [傅里叶变换(Fourier Transform) | Long Luo's Life Notes](https://www.longluo.me/blog/2021/12/29/fourier-transform/)
+
+在复平面上，1 有 n 个不同的 n 次方根，它们位于复平面的单位圆上，构成**正多边形的顶点**，但最多只可有两个顶点同时标在实数线上
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240921212004.png)
+
+
+## KL 散度
+
+> [KL 散度（Kullback-Leibler Divergence）：图示+公式+代码](https://www.vectorexplore.com/tech/loss-functions/kl-divergence/)
+> [机器学习中的散度 - 知乎](https://zhuanlan.zhihu.com/p/45131536)
+
+概率分布P的概率密度函数为 $p(x_i)$ 
+信息理论的主要目标是量化数据中的信息量。信息理论中最重要的度量标准称为熵（Entropy），通常表示为 H其信息熵：$H(X)=-\sum_{i=1}^np(x_i)\log p(x_i)$ , ***可以将-log(p)看成权重，概率p越大，权重越小*** (如果有人告诉我们一个相当不可能的事件发生了，我们收到的信息要多于我们被告知某个很可能发生的事件发生时收到的信息。如果我们知道某件事情一定会发生，那么我们就不会接收到信息。)
+- 如果我们在计算中使用 $log_{2}$​ 我们可以将熵解释为“编码我们的信息所需的最小比特数”。
+  - 【例1】A、B、C、D 四个字母分别占 1/2（4096个），1/4（2048个），1/8（1024个），1/8（1024个）。那么最有效的一种编码方式为 A(0)，B（10），C（110），D(111)。整个语料库的长度 4096 x 1 + 2048 x 2 + 1024 x 3 x 2 = 14336，平均长度为 14336/8192 = 1.75。和下面代码中的【结果1】一致。*如果使用另一种编码方式(例2)即  A（110），B（111），C（0），D（10），则熵为(4096 * 3 + 2048 * 3 + 1024 * 1 + 1024 * 2 )/8192 = 2.625*
+    - 其中如果p(x)=0.5，则只需要$-log_{2}(0.5)=1$个bit的编码；如果p(x)=0.25，则需要2 bit的编码，以此类推
+    - 依照这种规律的编码，可以保证信息中的熵最小
+  - 【例2】ABCD 四个字母占比变成了1/8（1024 个），1/8（1024 个），1/2（4096 个），1/4（2048 个），这样最有效的一种编码方式为 A（110），B（111），C（0），D（10），计算平均长度为1.75，和代码中的【结果3】一致。 *如果使用另一种编码方式(例1)即  A(0)，B（10），C（110），D(111)，则熵为(1024 * 1 + 1024 * 2 + 4096 * 3 + 2048 * 3 )/8192 = 2.625*
+  - 相对熵(KL散度)：
+    - 例1 相对于 例2 的相对熵为 $p(x)\log_{2}\left( \frac{p(x)}{q(x)} \right)$=(4096 * -(1-3) + 2048 * -(2-3) + 1024 * -(3-1) + 1024 * -(3-2) )/8192 = 0.875 = 2.625 - 1.75。 这说明针对例子中的这一分布，使用法1编码相对于法2来说，平均可以省下0.875bit
+    - 例2 相对于 例1 的相对熵为 $q(x)\log_{2}\left( \frac{q(x)}{p(x)} \right)$=(1024 * -(3-1) + 1024 * -(3-2) + 4096 * -(1-3) + 2048 * -(2-3) )/8192 =0.875 = 2.625 - 1.75
+    - 两个例子尽管编码方式不同，但字母的频率分布是一致的。因此，在计算KL散度时，由于 p(x) 和 q(x) 实际上是相同的，导致 KL散度的两个方向相等。**为什么是0.875而不是0？** 这说明即使两种编码方案都能描述相同的概率分布，**但由于它们在信息表示方式上的差异**，导致了每种编码方式在另一种分布下都有额外的冗余。KL散度反映了这种冗余：即使分布相同，编码方式的差异会导致你用一种方式来编码另一种信息时需要额外的0.875 bits。**KL散度真正衡量的是概率分布之间的差异，而不是编码方案之间的差异。**
+
+KL散度的值越大，表示用一个分布近似另一个分布时引入的信息损失或误差越大：
+- 非对称性：KL散度是非对称的，即从 P 分布到 Q 分布的 KL 散度与从 Q 分布到 P 分布的 KL 散度可能不同。
+  - 虽然KL散度通常是非对称的，但在特定条件下**KL散度从 P 到 Q** 与 **从 Q 到 P** 的值可以相等：
+    - **在某些特定的离散分布情况下**，当 P(x)和 Q(x)的概率质量函数具有某种对称结构时，它们的KL散度可能相等（但这仍是概率分布的特殊情况，而不是普遍现象）。
+    - 。当且仅当两个概率分布完全相同时，KL散度的值为零
+- 非负性：KL散度的值始终为非负数。KL散度值越大，表示两个概率分布越不相似。
+- 非度量性：KL散度并不满足度量空间的性质，特别是三角不等式。由于非对称性和非度量性，KL 散度不能用于计算两个分布之间的“距离”或“相似度”。
+
+>[KL 散度（相对熵） - 小时百科 (wuli.wiki)](https://wuli.wiki/online/KLD.html)
+
+**KL 散度**（Kullback–Leibler divergence，缩写 KLD）是一种统计学度量，**表示的是一个概率分布相对于另一个概率分布的差异程度**，在信息论中又称为**相对熵**（Relative entropy）。对于随机变量Q的概率分布，相对于随机变量P的概率分布的KL散度定义为： $D_{KL}(P||Q)=H(P,Q)-H(P)$
+$$\begin{equation}
+D_{KL}(P||Q)=\sum_{x\in X}P(x)ln(\frac{P(x)}{Q(x)})=\sum_{x\in X}P(x)(ln(P(x))-ln(Q(x)))~.
+\end{equation}$$
+
+对于连续型随机变量，设概率空间 X 上有两个概率分布 P 和 Q，其概率密度分别为 p 和 q，那么，P 相对于 Q 的 KL 散度定义如下：
+$$\begin{equation}
+D_{KL}(P||Q)=\int_{-\infty}^{+\infty}p(x)ln(\frac{p(x)}{q(x)})dx~.
+\end{equation}$$
+
+ 显然，当 P=Q 时，$D_{KL}=0$
+
+两个一维高斯分布的 KL 散度公式：
+> [KL散度(Kullback-Leibler Divergence)介绍及详细公式推导 | HsinJhao's Blogs](https://hsinjhao.github.io/2019/05/22/KL-DivergenceIntroduction/)
+
+$$\begin{aligned}
+KL(p,q)& =\int[\left.p(x)\log(p(x))-p(x)\log(q(x))\right]dx  \\
+&=-\frac12\left[1+\log(2\pi\sigma_1^2)\right]-\left[-\frac12\log(2\pi\sigma_2^2)-\frac{\sigma_1^2+(\mu_1-\mu_2)^2}{2\sigma_2^2}\right] \\
+&=\log\frac{\sigma_2}{\sigma_1}+\frac{\sigma_1^2+(\mu_1-\mu_2)^2}{2\sigma_2^2}-\frac12
+\end{aligned}$$
+
+## 凸函数与Jensen不等式
+凸函数是一个定义在某个向量空间的凸子集 C（区间）上的实值函数 f，如果在其定义域 C 上的任意两点$x_{1},x_{2}$，$0\leq t\leq 1$，有：
+满足$tf(x_1)+(1-t)f(x_2)\geq f\left(tx_1+(1-t)x_2\right)$
+也就是说凸函数任意两点的割线位于函数图形上方， **这也是Jensen不等式的两点形式**
+
+
+若对于任意点集 $\{x_{i}\}$，若 $\lambda_i≥0$且 $∑_{i}\lambda_{i}=1$ ，使用**数学归纳法**，可以证明凸函数 f (x) 满足：
+$f(\sum_{i=1}^M\lambda_ix_i)\leq\sum_{i=1}^M\lambda_if(x_i)$ 即为Jesen不等式
+
+**在概率论中**，如果把 $\lambda_i$ 看成取值为 $x_{i}$的离散变量 x 的概率分布$p_{i}$，那么公式(2)就可以写成
+$f(E[x])\leq E[f(x)]$ , $E[\cdot]$代表期望
+
+对于连续变量，Jensen不等式给出了积分的凸函数值和凸函数的积分值间的关系：
+$f(\int xp(x)dx)\leq\int f(x)p(x)dx$
+
+
 # 概率论
+
+## Basic
+
+### 均值方差
+
+为什么样本估计方差要除以n-1 [【浅谈】样本方差的分母“n”为什么要改为“n-1” - 知乎](https://zhuanlan.zhihu.com/p/550427703)
+
+其实就是自由度，当你算标准差的时候，已经知道均值了，那么就只有n-1个数字是自由的，第n个数值可以由前面的n-1个数字和均值算出来了，所以他实际上不包含任何关于数据波动的信息
+
+无偏估计的方差：
+$\left\{\begin{array}{c}M_n=\frac{X_1+X_2+\cdots+X_n}n\\\hat{S}_n^2=\frac{\sum_{i=1}^n(X_i-M_n)^2}{n-1}\end{array}\right.$
+
+
+### 概率/似然
+
+> [通俗理解“极大似然估计” - 知乎](https://zhuanlan.zhihu.com/p/334890990)
+
+概率函数：由因到果，已知参数(概率)，根据真实参数（或已经发生的观测结果）去推测未来的观测结果
+似然函数：由果到因，根据已经发生的观测结果去猜想真实参数，这个过程叫做**估计**；估计正确的可能性叫做**似然性**。估计参数的似然性，其目的是帮助我们根据已观测的结果，推测出最符合观测结果、最合理的参数。
+
+假设一个参数p，则在这一参数基础上出现结果的概率即为似然
+$$\begin{aligned}
+&L(p)=L(p|x_1,\ldots,x_n) \\
+&=P(X_1=x_1|p)•\ldots•P(X_n=x_n|p) \\
+&=\prod_{i=1}^nP(X_i=x_i|p)
+\end{aligned}$$
+
+极大似然估计（maximum likelihood estimation，缩写为MLE），也称[最大似然估计](https://zhida.zhihu.com/search?content_id=162550522&content_type=Article&match_order=2&q=%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1&zhida_source=entity)。
+$\arg\max_pL(p)=\arg\max_p\prod_{i=1}^nP(X_i=x_i|p)$
+将$L(p)$看作p的函数，对其求导，导数为0，即可得到最大的似然值对应的参数p
+
+求导前为什么要取对数？：**（1）避免下溢出** **（2）便于计算** 将累积乘法转换成累加
+
+
+## Bayes
 
 Follow:
 
 > [KERO - 知乎](https://www.zhihu.com/people/chenxran0916/posts)
 
 - 最大似然
+
+最大似然估计(Maximum Likelihood Estimation, MLE)，就是利用已知的样本结果信息，反推最具有可能（最大概率）导致这些样本结果出现的模型参数值！样本从某一个客观存在的模型中抽样得来，然后根据样本来计算该模型的数学参数，即：模型已定，参数未知！
 
 $$\begin{aligned}
 \widehat{\theta}_{\mathrm{MLE}}& =\arg\max P(X;\theta)  \\
@@ -55,8 +248,6 @@ $$\begin{aligned}
 \end{aligned}$$
 
 
-
-## Bayes
 
 > [贝叶斯定理，改变信念的几何学 - YouTube](https://www.youtube.com/watch?v=HZGCoVF3YvM) ——数形结合
 > [走进贝叶斯统计（一）—— 先验分布与后验分布 - 知乎](https://zhuanlan.zhihu.com/p/401258319)
@@ -80,11 +271,17 @@ $p(\theta|X)=\frac{p(\theta,X)}{p(X)}=\frac{p(X|\theta)p(\theta)}{\int_{-\infty}
 
 ## Distribution
 
-Gamma Function：$\Gamma(z)=\int_0^\infty t^{z-1}e^{-t}\mathrm{d}t,\quad\Re(z)>0.$ or $\Gamma(n)=(n-1)!.$
+### 核密度估计
+
+> [核密度估计 (KDE, Kernel Density Estimation) | Blog](https://viruspc.github.io/blog/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/2021/09/27/kde.html)
+
+
 
 ### Gamma 分布
 
 > [Gamma distribution - Wikipedia](https://en.wikipedia.org/wiki/Gamma_distribution)
+
+Gamma Function：$\Gamma(z)=\int_0^\infty t^{z-1}e^{-t}\mathrm{d}t,\quad\Re(z)>0.$ or $\Gamma(n)=(n-1)!.$
 
 $f(x)=\frac{\beta^{\alpha}}{\Gamma(\alpha)}x^{\alpha-1}e^{-\beta x}$
 
@@ -101,6 +298,11 @@ $f(x)=\frac{\beta^{\alpha}}{\Gamma(\alpha)}x^{\alpha-1}e^{-\beta x}$
 $\mathbf{B}(\alpha,\beta)={\frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha+\beta)}}$
 
 ![image.png|333](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240328193446.png)
+
+### 高斯分布
+$X\sim N(\mu,\sigma^2)$
+
+PDF：$f(x)=\frac1{\sigma\sqrt{2\pi}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}$
 
 
 ### 多元高斯分布
@@ -319,6 +521,7 @@ Paper:
 
 #### Langevin Monte Carlo(LMC)
 
+>[什么是diffusion model? 它为什么好用？ - Zephyr的回答 - 知乎](https://www.zhihu.com/question/613579202/answer/3310826408)
 
 
 #### Hamiltonian Monte Carlo(HMC)

@@ -34,6 +34,7 @@ categories: ModelUpdating
 
 > [结构动力学中的阻尼(2) —— 几种常见形式 - 知乎](https://zhuanlan.zhihu.com/p/362801022)
 
+- 粘性阻尼 $F=c \dot{x}$
 - 单元阻尼(Element Damping)
 - 模态阻尼比(Modal Damping/Modal Damping Ratio)
 - 常值阻尼比(Constant Damping Ratio)

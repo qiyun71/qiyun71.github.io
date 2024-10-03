@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "2f4415db9447baf3",
+        "id": "a7318f927d0c0378",
         "type": "tabs",
         "children": [
           {
-            "id": "206798080b6da3f1",
+            "id": "46ef2a13092623e6",
             "type": "leaf",
             "pinned": true,
             "state": {
@@ -23,42 +23,12 @@
             }
           },
           {
-            "id": "fa6576dd762b0c64",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Learn/Python/Linux OS.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              },
-              "pinned": true
-            }
-          },
-          {
-            "id": "35aaeb746e9eb012",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Blog&Book&Paper/Write Paper/Write tips.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              },
-              "pinned": true
-            }
-          },
-          {
-            "id": "393852ed1ec449e1",
+            "id": "6e2d3d35d09bfa7f",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Blog&Book&Paper/Write Paper/Model Updating/Self-superviside Model Updating through inverse calibration model.md",
+                "file": "Blog&Book&Paper/Read/Papers/(WX) Dynamics experiment.md",
                 "mode": "source",
                 "backlinks": false,
                 "source": false
@@ -66,12 +36,12 @@
             }
           },
           {
-            "id": "95febf8235048bb0",
+            "id": "fa6265ddb8f806ee",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Blog&Book&Paper/Write Paper/Journal&Conference.md",
+                "file": "Blog&Book&Paper/Write/Write Paper/Model Updating/A fast interval model updating method based on MLP neural network.md",
                 "mode": "source",
                 "backlinks": false,
                 "source": false
@@ -79,25 +49,12 @@
             }
           },
           {
-            "id": "7e36190b2d6e4344",
+            "id": "0916b979d62d338e",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Blog&Book&Paper/Read/Papers/Time Series Generation.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "970b6afd829aa2b9",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "ModelUpdating/Paper about ModelUpdating.md",
+                "file": "3DReconstruction/Multi-view/NeuS-based 3D Reconstruction.md",
                 "mode": "source",
                 "backlinks": false,
                 "source": false
@@ -105,7 +62,7 @@
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -124,7 +81,22 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Blog&Book&Paper/Write Paper/Journal&Conference.md"
+                "file": "3DReconstruction/Multi-view/NeuS-based 3D Reconstruction.md"
+              }
+            }
+          },
+          {
+            "id": "d58789544432cb9f",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "dust3",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
               }
             }
           }
@@ -159,27 +131,12 @@
               "type": "advanced-tables-toolbar",
               "state": {}
             }
-          },
-          {
-            "id": "d58789544432cb9f",
-            "type": "leaf",
-            "state": {
-              "type": "search",
-              "state": {
-                "query": "",
-                "matchingCase": false,
-                "explainSearch": false,
-                "collapseAll": false,
-                "extraContext": false,
-                "sortOrder": "alphabetical"
-              }
-            }
           }
         ]
       }
     ],
     "direction": "horizontal",
-    "width": 256.5
+    "width": 220.5
   },
   "right": {
     "id": "a4155c200cdf0433",
@@ -234,7 +191,7 @@
             "state": {
               "type": "file-properties",
               "state": {
-                "file": "Blog&Book&Paper/Write Paper/Journal&Conference.md"
+                "file": "3DReconstruction/Multi-view/NeuS-based 3D Reconstruction.md"
               }
             }
           }
@@ -257,48 +214,47 @@
       "audio-recorder:开始/结束录音": false,
       "workspaces:管理工作区布局": false,
       "table-editor-obsidian:Advanced Tables Toolbar": false,
-      "media-extended:Open media": false,
       "templater-obsidian:Templater": false
     }
   },
-  "active": "95febf8235048bb0",
+  "active": "0916b979d62d338e",
   "lastOpenFiles": [
-    "Blog&Book&Paper/Read/Papers/Time Series Generation.md",
-    "Blog&Book&Paper/Write Paper/Journal&Conference.md",
-    "Blog&Book&Paper/Write Paper/Write tips.md",
-    "Learn/CG or CV/OpenCV.md",
-    "Blog&Book&Paper/Write/Source/Tools.md",
-    "Learn/CG or CV/Computer Vision.md",
-    "Learn/Python/Data Analysis.md",
-    "Learn/Neural Network/DeepLearning.md",
-    "ModelUpdating/Paper about ModelUpdating.md",
-    "Learn/Python/Figure.md",
     "Learn/Math/Math Basic.md",
-    "Learn/Python/Linux OS.md",
+    "Blog&Book&Paper/Write/Write Paper/Model Updating/A fast interval model updating method based on MLP neural network.md",
+    "3DReconstruction/Multi-view/NeuS-based 3D Reconstruction.md",
+    "3DReconstruction/Paper About 3D Reconstruction.md",
+    "ModelUpdating/Paper about ModelUpdating.md",
+    "Blog&Book&Paper/Read/Papers/(WX) Dynamics experiment.md",
+    "3DReconstruction/Datasets.md",
+    "3DReconstruction/Basics about 3D Reconstruction.md",
+    "3DReconstruction/Finite Element Model 3D Reconstruction.md",
+    "3DReconstruction/Multi-view/Implicit Function/NeRF-based/NeRF Other Research/NeRF-review.md",
+    "Blog&Book&Paper/Write/Write Paper/Write tips.md",
+    "Blog&Book&Paper/Write/MyGo.md",
+    "Learn/Neural Network/DeepLearning.md",
+    "ModelUpdating/Interval Model Updating/Interval identification of structural parameters using interval overlap ratio and Monte Carlo simulation.md",
+    "3DReconstruction/Multi-view/Learning-based Multi-View Stereo A Survey.md",
+    "Blog&Book&Paper/Write/Write Paper/Model Updating/A fast stochastic model updating technique based on an inverse FE surrogate model.md",
+    "Blog&Book&Paper/Write/Write Paper/Model Updating/Self-superviside Model Updating through inverse calibration model.md",
+    "Blog&Book&Paper/Write/Write Paper/3D Reconstruction/Master Paper(3DReconstruction).md",
+    "3DReconstruction/Multi-view/Code of Multi-view 3D Reconstruction based on SDF and volume rendering.md",
+    "3DReconstruction/Multi-view/Multi-view Human Body Reconstruction.md",
+    "Blog&Book&Paper/Write/Source/Tools.md",
+    "Blog&Book&Paper/Write/Source/Configuration of computer/Software/Git.md",
+    "Other Interest/Time Series Generation.md",
     "Learn/Python/Python Basic.md",
     "Learn/Python/Spider.md",
-    "Learn/Python/Threading.md",
-    "Learn/Neural Network/Loss Functions.md",
-    "Blog&Book&Paper/Write Paper/Model Updating/Self-superviside Model Updating through inverse calibration model.md",
-    "ModelUpdating/Interval Model Updating/Interval identification of structural parameters using interval overlap ratio and Monte Carlo simulation.md",
-    "ModelUpdating/Interval Model Updating/Interval model updating using perturbation method and Radial Basis Function neural networks.md",
-    "ModelUpdating/Interval Model Updating/An interval model updating strategy using interval response surface models.md",
-    "ModelUpdating/Interval Model Updating/Interval model updating with irreducible uncertainty using the Kriging predictor.md",
-    "3DReconstruction/Single-view/Depth Estimation/2K2K.md",
-    "3DReconstruction/Single-view/Depth Estimation/ECON.md",
-    "3DReconstruction/Single-view/Single-view Reconstruction Review.md",
-    "3DReconstruction/Multi-view/NeuS-based 3D Reconstruction.md",
-    "3DReconstruction/Finite Element Model 3D Reconstruction.md",
+    "Blog&Book&Paper/Write/World.md",
+    "Blog&Book&Paper/Read/file/Mechanical Vibrations Theory and Application to Structural Dynamics (Michel Geradin, Daniel J. Rixen).pdf",
+    "Blog&Book&Paper/Write/Write Paper/Model Updating",
+    "Blog&Book&Paper/Write/Write Paper/3D Reconstruction",
+    "Blog&Book&Paper/Write/Write Paper",
+    "Blog&Book&Paper/Read/Book",
+    "Other Interest",
+    "3DReconstruction/未命名",
     "Blog&Book&Paper/Read/Papers",
     "Blog&Book&Paper/Write/Source",
     "Blog&Book&Paper/Write",
-    "Blog&Book&Paper/Write Paper",
-    "Learn/Math",
-    "Learn/CG or CV",
-    "Learn/Other Interest",
-    "Learn/Finite Element",
-    "Learn/Neural Network",
-    "Learn/Embedded system",
     "3DReconstruction/Basic Knowledge/NeRF/NeRF.canvas",
     "未命名.canvas"
   ]

@@ -78,8 +78,9 @@ S：步长大小
 
 ### LSTM
 
-[人人都能看懂的LSTM - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/32085405)
-讲的很好：[三分钟吃透RNN和LSTM神经网络](https://www.zhihu.com/tardis/zm/art/86006495?source_id=1003)
+>[人人都能看懂的LSTM - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/32085405)
+>讲的很好：[三分钟吃透RNN和LSTM神经网络](https://www.zhihu.com/tardis/zm/art/86006495?source_id=1003)
+
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20240112195022.png)
 
@@ -118,11 +119,50 @@ Maximize ： Lower bound of $logP(x)$
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231022204951.png)
 
 
+## GAN
+
+> [生成对抗网络——原理解释和数学推导 - 黄钢的部落格|Canary Blog](https://alberthg.github.io/2018/05/05/introduction-gan/)
+
+GAN在结构上受博弈论中的二人零和博弈 （即二人的利益之和为零，一方的所得正是另一方的所失）的启发，训练过程：
+- 训练判别器：首先我们随机初始化生成器 G，并输入一组随机向量(Randomly sample a vactor)，以此产生一些图片，并把这些图片标注成 0（假图片）。同时把来自真实分布中的图片标注成 1（真图片）。两者同时丢进判别器 D 中，以此来训练判别器 D 。实现当输入是真图片的时候，判别器给出接近于 1 的分数，而输入假图片的时候，判别器给出接近于 0 的低分。
+- 训练生成器：对于生成网络，目的是生成尽可能逼真的样本。所以在训练生成网络的时候，我们需要联合判别网络一起才能达到训练的目的。也就是说，通过将两者串接的方式来产生误差从而得以训练生成网络。步骤是：我们通过随机向量（噪声数据）经由生成网络产生一组假数据，并将这些假数据都标记为 1 。然后将这些假数据输入到判别网路里边，火眼金睛的判别器肯定会发现这些标榜为真实数据（标记为1）的输入都是假数据（给出低分），这样就产生了误差。在训练这个串接的网络的时候，一个很重要的操作就是不要让判别网络的参数发生变化，只是把误差一直传，传到生成网络那块后更新生成网络的参数。这样就完成了生成网络的训练了。
+
+已知真实的分布$p_{data}(x)$，如何找到最合适的参数z，来使得生成的$p_{model}(x;z)$与真实分布之间的差异最小——极大似然估计：
+- $\theta_{ML}=arg\operatorname*{\max}_{\theta}p_{model}(X;\theta)=arg\operatorname*{max}_{\theta}\prod_{i=1}^mp_{model}(x^{(i)};\theta)$
+- $\theta_{ML}=arg\underset{\theta}{\operatorname*{max}}\sum_{i=1}^mlog\left.p_{model}(x^{(i)};\theta)\right.$ 通过log将累乘变成累加
+- $\theta_{ML} = arg\max_{\theta} E_{x \sim \hat{p}_{data}} log p_{model}(x;\theta)$ 由于缩放代价函数不会影响求导和求argmax，因此除以m来将求和变成期望，当m-->$\infty$ 时，经验分布就会是真实数据的分布$\hat{p}_{data}\to p_{data}(x)$
+
+通过$p_{model(x)}$与$p_{data}(x)$之间的差异衡量，来训练G和D:
+$$\min_{G}\max_{D}V(G,D)=\mathbb{E}_{x\sim p_{data}(x)}[logD(\mathbf{x})]+\mathbb{E}_{z\sim p_{z}(z)}[log(1-D(G(\mathbf{z})))]$$
+- $D^{*}=arg\max_{D}V(G,D)$ 生成器固定，判别器D判断的越好，V=1+1越大，D越差，V=0+0越小
+- $G^{*}=arg\min_{G}\max_{D}V(G,D)$ 判别器固定，生成器G生成的越好，V=1+0越小
+
+
 ## Diffusion Model
 
+> [2. 扩散概率模型（diffusion probabilistic models） — 张振虎的博客 张振虎 文档](https://www.zhangzhenhu.com/aigc/%E6%89%A9%E6%95%A3%E6%A6%82%E7%8E%87%E6%A8%A1%E5%9E%8B.html#diffusion-probabilistic-model)
 
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231022210535.png)
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231022210617.png)
+$q(x_t|x_{t-1}) = \mathcal{N} (\sqrt{\alpha_t} \ x_{t-1}, (1- \alpha_t ) \textit{I} )$
+
+$\begin{align}\begin{aligned}x_{t} &=\sqrt{\alpha_t} \ x_{t-1} + \mathcal{N} (0, (1- \alpha_t ) \textit{I} )\\&=\sqrt{\alpha_t} \ x_{t-1} +  \sqrt{1- \alpha_t } \ \epsilon \ \ \ ,\epsilon \sim \mathcal{N} (0, \textit{I} )\end{aligned}\end{align}$
+
+随着t的增大，$\alpha_{t}$在逐渐变小。这是由于前期如果加的噪声太多，会使得数据扩展的太快（比如突变），使得逆向还原变得困难； 同样因为后期数据本身已经接近随机噪声数据了，后期如果加的噪声不够多，相当于变化幅度小，扩散的太慢，这会使得链路变长需要的事件变多。 我们希望扩散的前期慢一点，后期快一点
+
+通过设定超参数$\alpha_{0:T}$可以看出**前向加噪**的过程是可以直接通过公式计算的，没有未知参数。
+
+$$
+\begin{align}\begin{aligned}x_t &= \sqrt{\alpha_t} \ x_{t-1} + \sqrt{1-\alpha_t} \ \epsilon_{t}\\&= \sqrt{\alpha_t} \left(   \sqrt{\alpha_{t-1}} \ x_{t-2} + \sqrt{1-\alpha_{t-1}} \ \epsilon_{t-1}  \right ) + \sqrt{1-\alpha_t} \ \epsilon_{t}\\&=  \sqrt{\alpha_t \alpha_{t-1} }  \ x_{t-2}
++ \underbrace{ \sqrt{\alpha_t - \alpha_t \alpha_{t-1} }\ \epsilon_{t-1} + \sqrt{1- \alpha_t} \ \epsilon_{t}
+  }_{\text{两个相互独立的0均值的高斯分布相加}}\\
+&=  \sqrt{\alpha_t \alpha_{t-1} }  \ x_{t-2}
++ \underbrace{  \sqrt{ \sqrt{\alpha_t - \alpha_t \alpha_{t-1} }^2 + \sqrt{1- \alpha_t}^2  } \ \epsilon
+}_{\text{两个方差相加，用一个新的高斯分布代替}}\\&= \sqrt{\alpha_t \alpha_{t-1} }  \ x_{t-2} + \sqrt{1- \alpha_t \alpha_{t-1}} \ \epsilon\\&= ...\\&= \sqrt{\prod_{i=1}^t \alpha_i} \ x_0 + \sqrt{1- \prod_{i=1}^t \alpha_i }  \ \epsilon\\&= \sqrt{\bar{ \alpha}_t } \ x_0 + \sqrt{1- \bar{ \alpha}_t }  \ \epsilon  \ \ \ ,
+\bar{\alpha} = \prod_{i=1}^t \alpha_i ,\ \ \epsilon \sim \mathcal{N}(0,\textit{I})\\&\sim \mathcal{N}(\sqrt{\bar{\alpha}_t } \ x_0,  (1- \bar{ \alpha}_t)    \textit{I})\end{aligned}\end{align}
+$$
+
+而逆向过程需要从噪声开始，逐步解码成一个有意义的数据 $p(x_{0:T}) = p(x_T) \prod_{t={T-1}}^0 p(x_{t}|x_{t+1})$
+- 在这里$p(x_T) \sim \mathcal{N}(0,\textit{I})$ 是高斯分布，但是$p_{\theta}(x_{t}|x_{t+1})$ 是难以求解的(分母部分含有积分，且没有解析解)，依次使用网络来拟合学习这一条件概率分布 $p(x_{t}|x_{t+1})=\frac{p(x_{t},x_{t+1})}{p(x_{t+1})}=\frac{p(x_{t+1}|x_{t})p(x_{t})}{\int_{-\infty}^{+\infty}p(x_{t+1}|x_{t})p(x_{t})dx_{t}}.$
+- 目标函数（ELBO）我们知道学习一个概率分布的未知参数的常用算法是极大似然估计， 极大似然估计是通过极大化观测数据的对数概率（似然）实现的
 
 ### DDPM(Denoising Diffusion Probabilistic Models)
 
@@ -133,13 +173,66 @@ $q(x_t|x_0)$ 可以只做一次 sample(给定一系列 $\beta$)
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023100329.png)
 
 DDPM 的 Lower bound of $logP(x)$ 
-复杂公式推导得到：
+复杂公式推导得到： ELBO函数来约束网络训练
 $logP(x) \geq \operatorname{E}_{q(x_1|x_0)}[logP(x_0|x_1)]-KL\big(q(x_T|x_0)||P(x_T)\big)-\sum_{t=2}^{T}\mathrm{E}_{q(x_{t}|x_{0})}\bigl[KL\bigl(q(x_{t-1}|x_{t},x_{0})||P(x_{t-1}|x_{t})\bigr)\bigr]$
+- $\mathbb{E}_{q(x_{1}|x_0)}\left[\ln p_{\theta}(x_0|x_1)\right]$ 重建项，从隐式变量中重建出原来的数据$x_{0}$
+- $\mathbb{E}_{q(x_{T-1}|x_0)}\left[D_{KL}{q(x_T|x_{T-1})}{p(x_T)}\right]$ 最后一个数据是高斯噪声，因此当T足够大，这一项趋于0
+- $\mathbb{E}_{q(x_{t-1}, x_{t+1}|x_0)}\left[D_{KL}{q(x_{t}|x_{t-1})}{p_{{\theta}}(x_{t}|x_{t+1})}\right]$ KL散度度量， consistency term。这一项用来最小化$q(x_{t}|x_{t-1})$ 与 $p_{{\theta}}(x_{t}|x_{t+1})$ 之间的差异。期望是关于两个变量的，用采样法（MCMC）同时对两个随机变量进行采样，会导致更大的方差，这会使得优化过程不稳定，不容易收敛，可以将$p_{{\theta}}(x_{t}|x_{t+1})$优化为：$q(x_{t-1}|x_t, x_0)$
 
-- $q(x_{t-1}|x_{t},x_{0}) =\frac{q(x_{t}|x_{t-1})q(x_{t-1}|x_{0})}{q(x_{t}|x_{0})}$ 为一个 Gaussian distribution
-  -  $mean = \frac{\sqrt{\bar{\alpha}_{t-1}}\beta_{t}x_{0}+\sqrt{\alpha_{t}}(1-\bar{\alpha}_{t-1})x_{t}}{1-\bar{\alpha}_{t}}$ ，$variance = \frac{1-\bar{\alpha}_{t-1}}{1-\bar{\alpha}_{t}}\beta$
+$q(x_t | x_{t-1}, x_0) = \frac{q(x_{t-1} \mid x_t, x_0)q(x_t \mid x_0)}{q(x_{t-1} \mid x_0)}$
 
+条件独立性：假设有三个随机变量A，B，C，三者依赖关系：A-->B-->C，当B值已知时，A和C相互独立，此时$P(C|B)=P(C|B,A)$ 成立  $q(x_t | x_{t-1}) = q(x_t | x_{t-1}, x_0)$
+联合概率的基本性质：$q(x_t, x_{t-1}, x_0) = q(x_t \mid x_{t-1}, x_0) q(x_{t-1} \mid x_0) q(x_0)$ 另一种形式$q(x_t, x_{t-1}, x_0) = q(x_{t-1} \mid x_t, x_0) q(x_t \mid x_0) q(x_0)$
+
+$q(x_t \mid x_{t-1}, x_0) q(x_{t-1} \mid x_0) q(x_0) = q(x_{t-1} \mid x_t, x_0) q(x_t \mid x_0) q(x_0)$
+即得$q(x_t | x_{t-1}, x_0) = \frac{q(x_{t-1} \mid x_t, x_0)q(x_t \mid x_0)}{q(x_{t-1} \mid x_0)}$ 和 $q(x_{t-1}|x_{t},x_{0}) =\frac{q(x_{t}|x_{t-1})q(x_{t-1}|x_{0})}{q(x_{t}|x_{0})}$
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240923093718.png)
+
+
+**直接预测原始样本** $x_t=\sqrt{\bar{\alpha}_t}x_0+\sqrt{1-\bar{\alpha}_t}\epsilon.$
+- $q(x_{t-1}|x_{t},x_{0}) =\frac{q(x_{t}|x_{t-1})q(x_{t-1}|x_{0})}{q(x_{t}|x_{0})}$ 为一个 Gaussian distribution [推导过程](https://www.zhangzhenhu.com/aigc/%E6%89%A9%E6%95%A3%E6%A6%82%E7%8E%87%E6%A8%A1%E5%9E%8B.html#equation-eq-ddpm-036)
+  - 均值+方差： $mean = \frac{\sqrt{\bar{\alpha}_{t-1}}\beta_{t}x_{0}+\sqrt{\alpha_{t}}(1-\bar{\alpha}_{t-1})x_{t}}{1-\bar{\alpha}_{t}}$ ，$variance = \frac{1-\bar{\alpha}_{t-1}}{1-\bar{\alpha}_{t}}\beta$
+
+$x_0$需要通过网络预测来获得，因此：
+$\mu_q(x_t, x_0) = { \frac{\sqrt{\alpha_t}(1-\bar\alpha_{t-1})x_{t} + \sqrt{\bar\alpha_{t-1}}(1-\alpha_t)x_0}{1 -\bar\alpha_{t}}}$
+$\mu_{\theta}={\mu}_{{\theta}}(x_t, t) = \frac{\sqrt{\alpha_t}(1-\bar\alpha_{t-1})x_{t} + \sqrt{\bar\alpha_{t-1}}(1-\alpha_t)\hat x_{{\theta}}(x_t, t)}{1 -\bar\alpha_{t}}$ 网络预测$\hat{x}_{\theta}$ ，然后这个分布，采样得到$x_{t-1}$
+
+**然而直接预测$x_{0}$时非常困难得，每个步骤都只给定每一步的t来预测同样的输出，(trained)相同的网络参数很难完成这样的预测**
+
+因此DDPM转换思路来**预测每步t中添加的噪声**：
+$x_0 =  \frac{x_t -\sqrt{1- \bar{ \alpha}_t }  \ \epsilon_t }{ \sqrt{\bar{\alpha}_t }  },\ \ \epsilon_t \sim \mathcal{N}(0,\textit{I})$
+
+均值：$\mu_{\theta}={\mu}_{{\theta}}(x_t, t) = \frac{1}{\sqrt{\alpha_t}}x_t - \frac{1 - \alpha_t}{\sqrt{1 - \bar\alpha_t}\sqrt{\alpha_t}} {\hat\epsilon}_{ {\theta}}(x_t, t)$ [推导过程](https://www.zhangzhenhu.com/aigc/%E6%89%A9%E6%95%A3%E6%A6%82%E7%8E%87%E6%A8%A1%E5%9E%8B.html#equation-eq-ddpm-054) (将$x_{0}$重写成$\epsilon$)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231022210535.png)
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231022210617.png)
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023102747.png)
+
+
+### DDPM 三种形式
+
+逆向生成过程：$q(x_{t-1}|x_t,x_0) \sim \mathcal{N}(x_{t-1},\mu_q,\Sigma_{q(t)})$
+
+方差：
+$\Sigma_q(t) = \frac{(1 - \alpha_t)(1 - \bar\alpha_{t-1})}{ 1 -\bar\alpha_{t}}  \textit{I} = \sigma_q^2(t)   \textit{I}$
+
+
+#### 1）直接预测初始样本
+$\mu_q(x_t, x_0) = { \frac{\sqrt{\alpha_t}(1-\bar\alpha_{t-1})x_{t} + \sqrt{\bar\alpha_{t-1}}(1-\alpha_t)x_0}{1 -\bar\alpha_{t}}}$
+
+$\mu_{\theta}={\mu}_{{\theta}}(x_t, t) = \frac{\sqrt{\alpha_t}(1-\bar\alpha_{t-1})x_{t} + \sqrt{\bar\alpha_{t-1}}(1-\alpha_t)\hat x_{{\theta}}(x_t, t)}{1 -\bar\alpha_{t}}$
+
+#### 2）预测噪声
+$\mu_q(x_t, x_0) = \frac{1}{\sqrt{\alpha_t}}x_t - \frac{1 - \alpha_t}{\sqrt{1 - \bar\alpha_t}\sqrt{\alpha_t}}\ \epsilon$
+
+$\mu_{\theta}={\mu}_{{\theta}}(x_t, t) = \frac{1}{\sqrt{\alpha_t}}x_t - \frac{1 - \alpha_t}{\sqrt{1 - \bar\alpha_t}\sqrt{\alpha_t}} {\hat\epsilon}_{ {\theta}}(x_t, t)$
+
+#### 3）预测分数
+${\mu}_q(x_t, x_0) =  \frac{1}{\sqrt{\alpha_t}}x_t + \frac{1 - \alpha_t}{\sqrt{\alpha_t}}\nabla\log p(x_t)$
+
+${\mu}_q(x_t, x_0) =  \frac{1}{\sqrt{\alpha_t}}x_t + \frac{1 - \alpha_t}{\sqrt{\alpha_t}} s_{\theta}(x_t,t)$
+
 
 ### DDPM Code
 
@@ -152,6 +245,39 @@ $logP(x) \geq \operatorname{E}_{q(x_1|x_0)}[logP(x_0|x_1)]-KL\big(q(x_T|x_0)||P(
 * `alphas_sqrt`:  $\sqrt{\alpha_t}$
 * `alphas_prod`: $\bar{\alpha}_t=\prod_{i=0}^{t}\alpha_i$
 * `alphas_prod_sqrt`: $\sqrt{\bar{\alpha}_t}$
+
+diffusion step 0,1,...,t,...T：随着t增大，beta应该逐渐增大
+- cosine: 
+  - $\alpha_{cumprod} =\cos\left( \left( \frac{\frac{t}{T}+s}{(1+s)}\cdot \pi \cdot 0.5 \right)^{2} \right)$ ，value: $\cos\left( \frac{s}{1+s} \cdot \frac{\pi}{2} \right)$ ~$\cos\left( \frac{\pi}{2} \right)$ = $\cos(0)$ ~ $\cos\left( \frac{\pi}{2} \right)$ if s --> 0
+  - $\alpha_{cumprod} = \frac{\alpha_{cumprod}}{\alpha_{cumprod}^{max}}$, 让最大的$\alpha$不超过1
+  - $\beta$ = `1 - (alphas_cumprod[1:] / alphas_cumprod[:-1])`
+- linear: 
+  - $linspace\left( scale*0.0001,scale*0.02,T \right)$ , $scale=\frac{1000}{T}$
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240924095523.png)
+
+
+```python
+# consine beta
+def cosine_beta_schedule(timesteps, s=0.008):
+  """
+  cosine schedule
+  as proposed in https://openreview.net/forum?id=-NEXDKk8gZ
+  """
+  steps = timesteps + 1
+  x = torch.linspace(0, timesteps, steps, dtype=torch.float64)
+  alphas_cumprod = torch.cos(((x / timesteps) + s) / (1 + s) * math.pi * 0.5) ** 2
+  alphas_cumprod = alphas_cumprod / alphas_cumprod[0]
+  betas = 1 - (alphas_cumprod[1:] / alphas_cumprod[:-1])
+  return torch.clip(betas, 0, 0.999)
+
+# linear beta
+def linear_beta_schedule(timesteps):
+  scale = 1000 / timesteps
+  beta_start = scale * 0.0001
+  beta_end = scale * 0.02
+  return torch.linspace(beta_start, beta_end, timesteps, dtype=torch.float64)
+```
 
 #### Forward Process
 
@@ -350,8 +476,43 @@ $$
 
 ## Transformer
 
+> [The Illustrated Transformer – Jay Alammar – Visualizing machine learning one concept at a time.](https://jalammar.github.io/illustrated-transformer/)
+> [The Transformer Family | Lil'Log](https://lilianweng.github.io/posts/2020-04-07-the-transformer-family/)
+> [注意力机制的本质|Self-Attention|Transformer|QKV矩阵_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1dt4y1J7ov/?spm_id_from=333.337.search-card.all.click&vd_source=1dba7493016a36a32b27a14ed2891088) 
 
 
+输入X，通过三个不同的权重
+$f(X)=softmax(XW_QX^TW_K/\sqrt{d})XW_V$  OR $\text{Attention}(\mathbf{Q}, \mathbf{K}, \mathbf{V}) = \text{softmax}(\frac{\mathbf{Q} {\mathbf{K}}^\top}{\sqrt{d_k}})\mathbf{V}$
+- $a_{ij} = \text{softmax}(\frac{\mathbf{q}_i {\mathbf{k}_j}^\top}{\sqrt{d_k}})= \frac{\exp(\mathbf{q}_i {\mathbf{k}_j}^\top)}{ \sqrt{d_k} \sum_{r \in S_i} \exp(\mathbf{q}_i {\mathbf{k}_r}^\top) }$
+- 其中$\sqrt{d}$是为了防止维度过高导致的梯度消失，d是数据的维度
+
+**softmax(Q与K的乘积)** 可以看作权重，通过权重来插值V得到最终的输出。通过使Q与K距离越小时，对
+应的权重更大，即此时Key对应的Value对输出的贡献更大，让网络注意到这个贡献更大的Key
+
+![image.png|333](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240923164610.png)
+![image.png|333](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240923164633.png)
+
+
+一个$\text{Attention}(\mathbf{Q}, \mathbf{K}, \mathbf{V}) = \text{softmax}(\frac{\mathbf{Q} {\mathbf{K}}^\top}{\sqrt{d_k}})\mathbf{V}$计算为Attention的一个Head，多头注意力就是多个Head：
+- $\begin{aligned}\text{MultiHeadAttention}(\mathbf{X}_q, \mathbf{X}_k, \mathbf{X}_v) &= [\text{head}_1; \dots; \text{head}_h] \mathbf{W}^o \\ \text{where head}_i &= \text{Attention}(\mathbf{X}_q\mathbf{W}^q_i, \mathbf{X}_k\mathbf{W}^k_i, \mathbf{X}_v\mathbf{W}^v_i)\end{aligned}$
+- $\mathbf{W}^o \in \mathbb{R}^{d_v \times d}$ 为输出的线性transformation
+
+vanilla Transformer model:
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240923165513.png)
+
+
+Positiolal Encoding
+
+$$\text{PE}(i,\delta) = 
+\begin{cases}
+\sin(\frac{i}{10000^{2\delta'/d}}) & \text{if } \delta = 2\delta'\\
+\cos(\frac{i}{10000^{2\delta'/d}}) & \text{if } \delta = 2\delta' + 1\\
+\end{cases}$$
+- the token position $i=1,\dots,L$
+- the dimension $\delta=1,\dots,d$
+
+_Learned positional encoding_, as its name suggested, assigns each element with a learned column vector which encodes its _absolute_ position
+[Convolutional Sequence to Sequence Learning | Abstract](https://arxiv.org/abs/1705.03122)
 
 ## INN
 
@@ -383,30 +544,6 @@ INN offers greater fitting flexibility due to the interval of weight and bias
 
 # 其他概念
 
-## KL 散度
-
-[KL 散度（相对熵） - 小时百科 (wuli.wiki)](https://wuli.wiki/online/KLD.html)
-
-**KL 散度**（Kullback–Leibler divergence，缩写 KLD）是一种统计学度量，**表示的是一个概率分布相对于另一个概率分布的差异程度**，在信息论中又称为**相对熵**（Relative entropy）。
-$$\begin{equation}
-D_{KL}(P||Q)=\sum_{x\in X}P(x)ln(\frac{P(x)}{Q(x)})=\sum_{x\in X}P(x)(ln(P(x))-ln(Q(x)))~.
-\end{equation}$$
-
-对于连续型随机变量，设概率空间 X 上有两个概率分布 P 和 Q，其概率密度分别为 p 和 q，那么，P 相对于 Q 的 KL 散度定义如下：
-$$\begin{equation}
-D_{KL}(P||Q)=\int_{-\infty}^{+\infty}p(x)ln(\frac{p(x)}{q(x)})dx~.
-\end{equation}$$
-
- 显然，当 P=Q 时，$D_{KL}=0$
-
-两个一维高斯分布的 KL 散度公式：
-> [KL散度(Kullback-Leibler Divergence)介绍及详细公式推导 | HsinJhao's Blogs](https://hsinjhao.github.io/2019/05/22/KL-DivergenceIntroduction/)
-
-$$\begin{aligned}
-KL(p,q)& =\int[\left.p(x)\log(p(x))-p(x)\log(q(x))\right]dx  \\
-&=-\frac12\left[1+\log(2\pi\sigma_1^2)\right]-\left[-\frac12\log(2\pi\sigma_2^2)-\frac{\sigma_1^2+(\mu_1-\mu_2)^2}{2\sigma_2^2}\right] \\
-&=\log\frac{\sigma_2}{\sigma_1}+\frac{\sigma_1^2+(\mu_1-\mu_2)^2}{2\sigma_2^2}-\frac12
-\end{aligned}$$
 
 ## 参数重整化
 
@@ -424,6 +561,7 @@ Position Embedding 与 Position encoding的区别
 
 
 position embedding：随网络一起训练出来的位置向量，与前面说的一致，可以理解成动态的，即每次训练结果可能不一样。
+
 
 position encoding：根据一定的编码规则计算出来位置表示，比如
 
