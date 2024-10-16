@@ -19,7 +19,7 @@
   "showFrontmatter": true,
   "useTab": false,
   "communityThemeSortOrder": "download",
-  "newLinkFormat": "shortest",
+  "newLinkFormat": "relative",
   "showUnsupportedFiles": false,
   "spellcheck": false,
   "rightToLeft": false,

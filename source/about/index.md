@@ -13,7 +13,7 @@ layout: "about"
 
 <div style="display: flex; align-items: center;">
     <div style="width: 40%; text-align: center;">
-        <img src="https://qiyun71.github.io/images/df.png" style="width: 317px; border-radius: 17%;">
+        <a href="https://x.com/Its_you_dan/status/1515651529071476736"><img src="https://qiyun71.github.io/images/df.png" style="width: 317px; border-radius: 17%;"></a>
     </div>
     <!-- border-left:25px solid #000; -->
     <div style="width: 60%; padding: 40px; font-size: 18px">

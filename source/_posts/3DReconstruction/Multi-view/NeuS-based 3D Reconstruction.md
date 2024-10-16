@@ -6,6 +6,11 @@ categories: 3DReconstruction/Multi-view
 top: true
 ---
 
+- NeRF系列的多视图三维重建方法关键有两点:
+  - 如何表示3D model: mesh, voxel, pointcloud, RGBD, Implicit Density Field, SDF or Other Primitive(高斯体, 椭圆体, 球)
+  - 如何将3D model 可微渲染成2D图像: Volume Rendering or Rasterization?
+
+
 - **Accuracy** 重建的模型精度不好，影响因素：
   - 数据集质量：照片拍摄质量(设备)、相机位姿估计精度(COLMAP)
     - 照片质量问题：混叠、模糊、滚动快门 (RS) 效应、HDR/LDR、运动模糊、低光照
@@ -15,11 +20,19 @@ top: true
   - MLP计算次数多 --> MIMO MLP、NGP-RT、
   - MLP层数多计算慢--> InstantNGP
 
+
 <!-- more -->
 
-# IDEA
+*Other link about 3D Reconstruction: (need to add " ../ " in obsidian)*
+- [Paper About 3D Reconstruction](../../Paper%20About%203D%20Reconstruction)
+  - [Finite Element Model 3D Reconstruction](../../Finite%20Element%20Model%203D%20Reconstruction)
+  - [Anime Image 3D Reconstruction](../../Anime%20Image%203D%20Reconstruction)
+  - [Multi-view Human Body Reconstruction](Multi-view%20Human%20Body%20Reconstruction)
+- [Basics about 3D Reconstruction](../../Basics%20about%203D%20Reconstruction)
+- [Datasets](../../Datasets)
+- [Code of Multi-view 3D Reconstruction based on SDF and volume rendering](Code%20of%20Multi-view%203D%20Reconstruction%20based%20on%20SDF%20and%20volume%20rendering)
 
-- 监督深度图信息
+[Master Paper(3DReconstruction)](../../Blog&Book&Paper/Write/Write%20Paper/3D%20Reconstruction/Master%20Paper(3DReconstruction).md)
 
 # Accuracy
 
@@ -388,3 +401,27 @@ $$\begin{aligned}
 \end{aligned}$$
 - $\beta_{A}$和$\beta_{S}$分别用来控制anchor area 和 source area的大小
 
+
+# Uncertainty
+
+## Sources of Uncertainty
+
+[Sources of Uncertainty in 3D Scene Reconstruction](Sources%20of%20Uncertainty%20in%203D%20Scene%20Reconstruction.md)
+
+- 环境光照是否可以通过不确定性进行量化
+- 不同的cuda/显卡环境是否也是不确定性
+
+## ActiveNeRF
+
+[ActiveNeRF](ActiveNeRF.md)
+
+## FisherRF
+
+[FisherRF: Active View Selection and Uncertainty Quantification for Radiance Fields using Fisher Information](https://jiangwenpl.github.io/FisherRF/)
+
+limited availability of 2D images poses uncertainties stemming from occlusions, depth ambiguities, and imaging errors
+
+FisherRF computes the Fisher Information for the model and could select next best views or quantify pixel-wise uncertainty for its renderings.
+
+![teaser-cropped.gif (1320×1080)|333](https://jiangwenpl.github.io/FisherRF/static/images/teaser-cropped.gif)
+![teaser.jpg (986×863)|555](https://jiangwenpl.github.io/FisherRF/static/images/teaser.jpg)

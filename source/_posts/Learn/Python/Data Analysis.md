@@ -1,9 +1,8 @@
 ---
 title: Data Analysis
 date: 2024-09-21 14:32:41
-tags:
-  - 
-categories: Learn/Python
+tags: 
+categories: Learn
 ---
 
 sklearn | numpy | pandas

@@ -2,7 +2,7 @@
 title: "Learning-based Multi-View Stereo: A Survey"
 date: 2024-09-02 18:19:55
 tags: 
-categories: 3DReconstruction/Multi-view
+categories: 3DReconstruction/Multi-view/Depth Estimation
 ---
 
 | Title     | Learning-based Multi-View Stereo A Survey                                                                                                        |
@@ -17,3 +17,9 @@ categories: 3DReconstruction/Multi-view
 
 
 <!-- more -->
+
+Multi-view Stero: 
+
+- SUPERVISED METHOD WITH DEPTH ESTIMATION
+- UNSUPERVISED & SEMI-SUPERVISED METHODS WITH DEPTH ESTIMATION
+- LEARNING-BASED MVS WITHOUT DEPTH ESTIMATION

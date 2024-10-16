@@ -2,7 +2,7 @@
 title: Structural Dynamics
 date: 2024-09-24 21:32:23
 tags: 
-categories: Blog&Book&Paper/Read/Blog
+categories: Learn
 ---
 
 Structural Dynamics Basic Knowledge.
@@ -18,7 +18,9 @@ Book ToDo：
 
 Nice Video
 - [x] [Understanding Vibration and Resonance - YouTube](https://www.youtube.com/watch?v=vLaFAKnaRJU) 三自由度弹簧系统中每个质量块都有自己的位移$x_{1}(t),x_{2}(t),x_{3}(t)$，因此该系统会有三个固有频率和模态振型
+- [ ] [《非线性动力学与混沌》——康奈尔大学 中英字幕_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1rM411k7Ja/?spm_id_from=333.337.search-card.all.click&vd_source=1dba7493016a36a32b27a14ed2891088)
 
+Blog:
 
 > [「结构动力学入门」引入 - 知乎](https://zhuanlan.zhihu.com/p/377733382)
 
@@ -37,3 +39,7 @@ Nice Video
 有外力：$P(t)=F_{0}\sin(\omega_{f}t)$ $\omega_{f}$是外加力的频率
 - $u(t)=Ae^{-\xi\omega t}\sin(\omega_0 t+\phi) + \frac{F_0/k \sin(w_ft-\theta)}{\sqrt{ (1-r^{2})^{2}+(2r \xi)^{2} }}$
 
+> [非线性动力学 nonlinear dynamics-CSDN博客](https://blog.csdn.net/qq_37083038/article/details/113624209)
+
+线性弹簧：$kx$
+非线性弹簧：$kx+hx^{3}$

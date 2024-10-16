@@ -5,13 +5,7 @@ tags:
 categories: Project
 ---
 
-| Title       | Audio Visualization |
-| ----------- | ------------------- |
-| Author      |                     |
-| Conf/Jour   |                     |
-| Year        |                     |
-| Project     |                     |
-| Paper       |                     |
+Audio Visualization(一般用来显示音乐的频谱信息，可以直观地看出乐器/人声的频率)
 
 <!-- more -->
 

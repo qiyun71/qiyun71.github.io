@@ -12,15 +12,15 @@ NeRF相关的论文 at CVPR/ICCV/ECCV/NIPS/ICML/ICLR/SIGGRAPH
 [计算机视觉顶会2022截稿时间及会议时间_ijcai2024截稿日期-CSDN博客](https://blog.csdn.net/weixin_43962054/article/details/121762182)
 [ccf-deadlines (ccfddl.github.io)](https://ccfddl.github.io/)
 
-| My post                                                                        | Brief description       | status          |
-| ------------------------------------------------------------------------------ | ----------------------- | --------------- |
-| [NeRF](3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeRF.md) + [Code](NeRF-code.md)                               | NeRF 原理 + 代码理解          | Completed       |
-| [NeuS](NeuS.md) + [Code](Neus-code.md)                                         | 表面重建方法 SDFNetwork       | Completed       |
-| [InstantNGP](NeRF-InstantNGP.md) + [Tiny-cuda-nn](NeRF-InstantNGP-code.md)     | 加速 NeRF 的训练和推理          | Completed（Tcnn） |
-| [Instant-nsr-pl](Neus-Instant-nsr-pl.md) + [Code](Neus-Instant-nsr-pl-code.md) | Neus+Tcnn+NSR+pl        | Completed       |
-| [Instant-NSR](Instant-NSR.md) + [Code](Instant-NSR-code.md)                    | 快速表面重建                  | Completed       |
-| [NeRO](NeRO.md) + [Code](NeRO-code.md)                                         | 考虑镜面和漫反射的体渲染函数          | In Processing   |
-| [NeRF](Project/NeRF.md)                                                      | 基于 Instant-nsr-pl 创建的项目 | Completed       |
+| My post                                                                                           | Brief description       | status          |
+| ------------------------------------------------------------------------------------------------- | ----------------------- | --------------- |
+| [NeRF](3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeRF.md) + [Code](NeRF-code.md) | NeRF 原理 + 代码理解          | Completed       |
+| [NeuS](NeuS.md) + [Code](Neus-code.md)                                                            | 表面重建方法 SDFNetwork       | Completed       |
+| [InstantNGP](NeRF-InstantNGP.md) + [Tiny-cuda-nn](NeRF-InstantNGP-code.md)                        | 加速 NeRF 的训练和推理          | Completed（Tcnn） |
+| [Instant-nsr-pl](Neus-Instant-nsr-pl.md) + [Code](Neus-Instant-nsr-pl-code.md)                    | Neus+Tcnn+NSR+pl        | Completed       |
+| [Instant-NSR](Instant-NSR.md) + [Code](Instant-NSR-code.md)                                       | 快速表面重建                  | Completed       |
+| [NeRO](NeRO.md) + [Code](NeRO-code.md)                                                            | 考虑镜面和漫反射的体渲染函数          | In Processing   |
+| [NeRF](Project/NeRF.md)                                                                           | 基于 Instant-nsr-pl 创建的项目 | Completed       |
 
 Related link : [3D Reconstruction](https://paperswithcode.com/task/3d-reconstruction) | [awesome-NeRF-papers](https://github.com/lif314/awesome-NeRF-papers)
 
@@ -157,6 +157,15 @@ Other paper about camera pose
 | 2024      | [[2403.18476] Modeling uncertainty for Gaussian Splatting](https://arxiv.org/abs/2403.18476)                                                                             | Gaussian Splatting                          | Modeling uncertainty                                                | Variational Inference-based approach +  Area Under Sparsification Error (AUSE) | 在**图像渲染质量**和不确定性估计精度方面都优于现有方法                    |
 | 2024      | [Neural Visibility Field for Uncertainty-Driven Active Mapping](https://sites.google.com/view/nvf-cvpr24/)                                                               |                                             |                                                                     |                                                                                | NVF 自然会为未观察区域分配更高的不确定性，帮助机器人选择最具信息量的下一个视点        |
 | 2024      | [Bayesian uncertainty analysis for underwater 3D reconstruction with neural radiance fields](https://arxiv.org/pdf/2407.08154)                                           |                                             |                                                                     |                                                                                |                                                  |
+
+- Aleatoric Uncertainty
+  - random effects in the observations include varying lighting and motion blur
+- Epistemic Uncertainty
+  - lack of information in the scene such as occluded (can be reduced by observing more data from new poses)
+- Confounding outliers
+  - non-static scenes (passers by, moving object)
+- Pose Uncertainty
+  - Sensitivity to the camera poses in the scene
 
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240929204911.png)

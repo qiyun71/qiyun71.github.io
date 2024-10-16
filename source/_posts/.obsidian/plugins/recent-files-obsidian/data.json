@@ -1,96 +1,112 @@
 {
   "recentFiles": [
     {
+      "basename": "Journal&Conference",
+      "path": "Blog&Book&Paper/Write/Write Paper/Journal&Conference.md"
+    },
+    {
       "basename": "NeuS-based 3D Reconstruction",
       "path": "3DReconstruction/Multi-view/NeuS-based 3D Reconstruction.md"
-    },
-    {
-      "basename": "Math Basic",
-      "path": "Learn/Math/Math Basic.md"
-    },
-    {
-      "basename": "A fast interval model updating method based on MLP neural network",
-      "path": "Blog&Book&Paper/Write/Write Paper/Model Updating/A fast interval model updating method based on MLP neural network.md"
-    },
-    {
-      "basename": "Paper About 3D Reconstruction",
-      "path": "3DReconstruction/Paper About 3D Reconstruction.md"
-    },
-    {
-      "basename": "Paper about ModelUpdating",
-      "path": "ModelUpdating/Paper about ModelUpdating.md"
-    },
-    {
-      "basename": "(WX) Dynamics experiment",
-      "path": "Blog&Book&Paper/Read/Papers/(WX) Dynamics experiment.md"
-    },
-    {
-      "basename": "Datasets",
-      "path": "3DReconstruction/Datasets.md"
-    },
-    {
-      "basename": "Basics about 3D Reconstruction",
-      "path": "3DReconstruction/Basics about 3D Reconstruction.md"
-    },
-    {
-      "basename": "Finite Element Model 3D Reconstruction",
-      "path": "3DReconstruction/Finite Element Model 3D Reconstruction.md"
-    },
-    {
-      "basename": "NeRF-review",
-      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/NeRF Other Research/NeRF-review.md"
-    },
-    {
-      "basename": "Write tips",
-      "path": "Blog&Book&Paper/Write/Write Paper/Write tips.md"
-    },
-    {
-      "basename": "MyGo",
-      "path": "Blog&Book&Paper/Write/MyGo.md"
-    },
-    {
-      "basename": "DeepLearning",
-      "path": "Learn/Neural Network/DeepLearning.md"
-    },
-    {
-      "basename": "Interval identification of structural parameters using interval overlap ratio and Monte Carlo simulation",
-      "path": "ModelUpdating/Interval Model Updating/Interval identification of structural parameters using interval overlap ratio and Monte Carlo simulation.md"
-    },
-    {
-      "basename": "Learning-based Multi-View Stereo A Survey",
-      "path": "3DReconstruction/Multi-view/Learning-based Multi-View Stereo A Survey.md"
-    },
-    {
-      "basename": "A fast stochastic model updating technique based on an inverse FE surrogate model",
-      "path": "Blog&Book&Paper/Write/Write Paper/Model Updating/A fast stochastic model updating technique based on an inverse FE surrogate model.md"
-    },
-    {
-      "basename": "Self-superviside Model Updating through inverse calibration model",
-      "path": "Blog&Book&Paper/Write/Write Paper/Model Updating/Self-superviside Model Updating through inverse calibration model.md"
-    },
-    {
-      "basename": "Master Paper(3DReconstruction)",
-      "path": "Blog&Book&Paper/Write/Write Paper/3D Reconstruction/Master Paper(3DReconstruction).md"
     },
     {
       "basename": "Code of Multi-view 3D Reconstruction based on SDF and volume rendering",
       "path": "3DReconstruction/Multi-view/Code of Multi-view 3D Reconstruction based on SDF and volume rendering.md"
     },
     {
+      "basename": "Math Basic",
+      "path": "Learn/Math/Math Basic.md"
+    },
+    {
+      "basename": "Unpack Snowbreak File",
+      "path": "Project/Unpack Snowbreak File.md"
+    },
+    {
+      "basename": "Visualize Interval uncertainty quantification metrics",
+      "path": "Project/Visualize Interval uncertainty quantification metrics.md"
+    },
+    {
+      "basename": "Six Legged Spider Robot",
+      "path": "Project/Six Legged Spider Robot.md"
+    },
+    {
+      "basename": "Dynamic Response Prediction (Deterministic)",
+      "path": "Other Interest/Dynamic Response Prediction (Deterministic).md"
+    },
+    {
+      "basename": "Python Spider",
+      "path": "Project/Python Spider.md"
+    },
+    {
+      "basename": "Python Scripts",
+      "path": "Project/Python Scripts.md"
+    },
+    {
+      "basename": "Learn-FEA",
+      "path": "Learn/Finite Element/Learn-FEA.md"
+    },
+    {
+      "basename": "Audio Visualization",
+      "path": "Project/Audio Visualization.md"
+    },
+    {
+      "basename": "Automatic detection of pointer instrument",
+      "path": "Project/Automatic detection of pointer instrument.md"
+    },
+    {
+      "basename": "NeRF",
+      "path": "Project/NeRF.md"
+    },
+    {
+      "basename": "PyNastran",
+      "path": "Project/PyNastran.md"
+    },
+    {
+      "basename": "Python API",
+      "path": "Project/Python API.md"
+    },
+    {
+      "basename": "Structural Dynamics",
+      "path": "Learn/Finite Element/Structural Dynamics.md"
+    },
+    {
       "basename": "Multi-view Human Body Reconstruction",
       "path": "3DReconstruction/Multi-view/Multi-view Human Body Reconstruction.md"
     },
     {
-      "basename": "Tools",
-      "path": "Blog&Book&Paper/Write/Source/Tools.md"
+      "basename": "Basics about 3D Reconstruction",
+      "path": "3DReconstruction/Basics about 3D Reconstruction.md"
     },
     {
-      "basename": "Git",
-      "path": "Blog&Book&Paper/Write/Source/Configuration of computer/Software/Git.md"
+      "basename": "Datasets",
+      "path": "3DReconstruction/Datasets.md"
     },
     {
-      "basename": "Time Series Generation",
-      "path": "Other Interest/Time Series Generation.md"
+      "basename": "Master Paper(3DReconstruction)",
+      "path": "Blog&Book&Paper/Write/Write Paper/3D Reconstruction/Master Paper(3DReconstruction).md"
+    },
+    {
+      "basename": "Paper About 3D Reconstruction",
+      "path": "3DReconstruction/Paper About 3D Reconstruction.md"
+    },
+    {
+      "basename": "NeRF-code",
+      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/NeRF Other Research/NeRF-code.md"
+    },
+    {
+      "basename": "Data Analysis",
+      "path": "Learn/Python/Data Analysis.md"
+    },
+    {
+      "basename": "Algorithm",
+      "path": "Learn/Python/Algorithm.md"
+    },
+    {
+      "basename": "Figure",
+      "path": "Learn/Python/Figure.md"
+    },
+    {
+      "basename": "Linux OS",
+      "path": "Learn/Python/Linux OS.md"
     },
     {
       "basename": "Python Basic",
@@ -101,104 +117,88 @@
       "path": "Learn/Python/Spider.md"
     },
     {
-      "basename": "World",
-      "path": "Blog&Book&Paper/Write/World.md"
-    },
-    {
-      "basename": "Dynamic Response Prediction (Deterministic)",
-      "path": "Other Interest/Dynamic Response Prediction (Deterministic).md"
-    },
-    {
-      "basename": "Basics about ModelUpdating",
-      "path": "ModelUpdating/Basics about ModelUpdating.md"
-    },
-    {
-      "basename": "Structural Dynamics",
-      "path": "Learn/Finite Element/Structural Dynamics.md"
-    },
-    {
-      "basename": "Learn-FEA",
-      "path": "Learn/Finite Element/Learn-FEA.md"
-    },
-    {
-      "basename": "Mechanical Vibrations Theory and Application to Structural Dynamics",
-      "path": "Blog&Book&Paper/Read/Book/Mechanical Vibrations Theory and Application to Structural Dynamics.md"
-    },
-    {
-      "basename": "Case about ModelUpdating",
-      "path": "ModelUpdating/Case about ModelUpdating.md"
+      "basename": "Threading",
+      "path": "Learn/Python/Threading.md"
     },
     {
       "basename": "Learn-Matlab",
       "path": "Learn/Finite Element/Learn-Matlab.md"
     },
     {
-      "basename": "通俗形象地分析比较生成模型",
-      "path": "Blog&Book&Paper/Read/Blog/通俗形象地分析比较生成模型.md"
+      "basename": "A fast interval model updating method based on MLP neural network",
+      "path": "Blog&Book&Paper/Write/Write Paper/Model Updating/A fast interval model updating method based on MLP neural network.md"
     },
     {
-      "basename": "Linux OS",
-      "path": "Learn/Python/Linux OS.md"
+      "basename": "DMTet",
+      "path": "3DReconstruction/Single-view/Generative Models/DMTet.md"
     },
     {
-      "basename": "Learn-Csharp",
-      "path": "Learn/Other Interest/Learn-Csharp.md"
+      "basename": "Finite Element Model 3D Reconstruction",
+      "path": "3DReconstruction/Finite Element Model 3D Reconstruction.md"
     },
     {
-      "basename": "Loss Functions",
-      "path": "Learn/Neural Network/Loss Functions.md"
+      "basename": "Learning-based Multi-View Stereo A Survey",
+      "path": "3DReconstruction/Multi-view/Depth Estimation/Learning-based Multi-View Stereo A Survey.md"
     },
     {
-      "basename": "Single-view Reconstruction Review",
-      "path": "3DReconstruction/Single-view/Single-view Reconstruction Review.md"
+      "basename": "MVSNet",
+      "path": "3DReconstruction/Multi-view/Depth Estimation/MVSNet.md"
     },
     {
-      "basename": "Conda",
-      "path": "Blog&Book&Paper/Write/Source/Configuration of computer/python/Conda.md"
+      "basename": "Basics about ModelUpdating",
+      "path": "ModelUpdating/Basics about ModelUpdating.md"
     },
     {
-      "basename": "Book Lists",
-      "path": "Blog&Book&Paper/Read/Book/Book Lists.md"
+      "basename": "NeRF-review",
+      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/NeRF Other Research/NeRF-review.md"
     },
     {
-      "basename": "PyTorch",
-      "path": "Learn/Neural Network/PyTorch.md"
+      "basename": "NeRO",
+      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Shadow&Highlight/NeRO.md"
     },
     {
-      "basename": "Writing Science",
-      "path": "Blog&Book&Paper/Read/Book/Writing Science.md"
+      "basename": "NeRF",
+      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/NeRF.md"
     },
     {
-      "basename": "基于NN飞机算例修正思路",
-      "path": "Reports/PDF导出/基于NN飞机算例修正思路.md"
+      "basename": "Anime Image 3D Reconstruction",
+      "path": "3DReconstruction/Anime Image 3D Reconstruction.md"
     },
     {
-      "basename": "飞机模型修正方案",
-      "path": "Reports/PDF导出/飞机模型修正方案.md"
+      "basename": "Mechanical Vibrations Theory and Application to Structural Dynamics",
+      "path": "Blog&Book&Paper/Read/Book/Mechanical Vibrations Theory and Application to Structural Dynamics.md"
     },
     {
-      "basename": "OpenCV",
-      "path": "Learn/CG or CV/OpenCV.md"
+      "basename": "Life",
+      "path": "Blog&Book&Paper/Read/Life.md"
     },
     {
-      "basename": "Data Analysis",
-      "path": "Learn/Python/Data Analysis.md"
+      "basename": "核领域可靠性",
+      "path": "Blog&Book&Paper/Read/Papers/核领域可靠性.md"
     },
     {
-      "basename": "Figure",
-      "path": "Learn/Python/Figure.md"
+      "basename": "(WX) Dynamics experiment",
+      "path": "Blog&Book&Paper/Read/Papers/(WX) Dynamics experiment.md"
     },
     {
-      "basename": "Threading",
-      "path": "Learn/Python/Threading.md"
+      "basename": "Case about ModelUpdating",
+      "path": "ModelUpdating/Case about ModelUpdating.md"
     },
     {
-      "basename": "Interval model updating using perturbation method and Radial Basis Function neural networks",
-      "path": "ModelUpdating/Interval Model Updating/Interval model updating using perturbation method and Radial Basis Function neural networks.md"
+      "basename": "2024-10-14",
+      "path": "Reports/Daily/2024-10-14.md"
     },
     {
-      "basename": "An interval model updating strategy using interval response surface models",
-      "path": "ModelUpdating/Interval Model Updating/An interval model updating strategy using interval response surface models.md"
+      "basename": "Write tips",
+      "path": "Blog&Book&Paper/Write/Write Paper/Write tips.md"
+    },
+    {
+      "basename": "World",
+      "path": "Blog&Book&Paper/Write/World.md"
+    },
+    {
+      "basename": "Self-superviside Model Updating through inverse calibration model",
+      "path": "Blog&Book&Paper/Write/Write Paper/Model Updating/Self-superviside Model Updating through inverse calibration model.md"
     }
   ],
   "omittedPaths": [],

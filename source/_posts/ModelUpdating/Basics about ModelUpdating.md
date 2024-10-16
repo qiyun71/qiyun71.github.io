@@ -8,6 +8,9 @@ categories: ModelUpdating
 **模型修正 Model Updating**
 *(结构<-->振动)通过有限元模型输出响应特征(频率响应等)对有限元模型结构参数进行更新*
 
+- 有限元模型的前向计算可不可以进行微分?
+  - 可微仿真（Differentiable Simulation）：[\[WIP\] 可微仿真（Differentiable Simulation） - 知乎](https://zhuanlan.zhihu.com/p/566294757?utm_psn=1829181001001201664)
+
 <!-- more -->
 
 # 概念基础

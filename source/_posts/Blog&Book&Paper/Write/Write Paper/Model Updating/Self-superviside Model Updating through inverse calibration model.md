@@ -5,13 +5,13 @@ tags:
 categories:
 ---
 
-| Title     |     |
-| --------- | --- |
-| Author    |     |
-| Conf/Jour |     |
-| Year      |     |
-| Project   |     |
-| Paper     |     |
+| Title     | 带记忆的快速model updating by self-supervised learning network |
+| --------- | -------------------------------------------------------- |
+| Author    |                                                          |
+| Conf/Jour |                                                          |
+| Year      |                                                          |
+| Project   |                                                          |
+| Paper     |                                                          |
 
 <!-- more -->
 

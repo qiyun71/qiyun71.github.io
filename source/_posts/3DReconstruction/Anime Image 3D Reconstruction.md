@@ -168,6 +168,18 @@ NeRF-based 的 NeuS 系列
 
 # Related Work
 
+some github repo:
+
+>[emanuelevivoli/aswesome-comics-understanding: The official repo of the Comics Survey: "A missing piece in Vision and Language: A Survey on Comics Understanding"](https://github.com/emanuelevivoli/awesome-comics-understanding)
+
+
+## Dataset
+
+> [kangyeolk/AnimeCeleb: Official implementation of "AnimeCeleb: Large-Scale Animation CelebHeads Dataset for Head Reenactment" (ECCV 2022)](https://github.com/kangyeolk/AnimeCeleb?tab=readme-ov-file)
+
+![raw.githubusercontent.com/kangyeolk/AnimeCeleb/main/assets/teaser.png](https://raw.githubusercontent.com/kangyeolk/AnimeCeleb/main/assets/teaser.png)
+
+
 ## PAniC-3D
 
 > [ShuhongChen/panic3d-anime-reconstruction: CVPR 2023: PAniC-3D Stylized Single-view 3D Reconstruction from Portraits of Anime Characters](https://github.com/shuhongchen/panic3d-anime-reconstruction)
@@ -224,8 +236,25 @@ texels(纹理元素，纹素)
 
 动漫中的环境场景，动漫中的手绘图像没有3D一致性，本文致力解决这一问题
 
+![teaser.png (1828×464)](https://toon3d.studio/static/images/teaser.png)
+
 数据集生成
 - Marigold 进行深度估计
 - SAM 进行mask获取
 - 自制的Toon3D Labeler进行
 
+## Sketch-A-Shape
+
+>[Sketch-A-Shape: Zero-Shot Sketch-to-3D Shape Generation](https://arxiv.org/pdf/2307.03869)
+
+从草图中生成3D shape (across voxel, implicit, and CAD representations and synthesize consistent 3D shapes)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241011110424.png)
+
+## ShapeFromSketches
+
+[3D Shape Reconstruction from Sketches via Multi-view Convolutional Networks:](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8374559&tag=1)
+
+很简单的思路，就是直接输入sketches 然后使用卷积构建单个编码器和两个解码器，生成多个视图的depth 和 normal maps，然后出点云
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241011141941.png)

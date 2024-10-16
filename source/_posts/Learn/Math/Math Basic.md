@@ -63,6 +63,12 @@ $F(\omega)=\int_{-\infty}^{\infty}f(t)\cos{(\omega t)}dt-i\int_{-\infty}^{\infty
 
 #### DFT
 
+>[Understanding The Discrete Fourier Transform « The blog at the bottom of the sea](https://blog.demofox.org/2016/08/11/understanding-the-discrete-fourier-transform/)
+
+$X_{k}=\sum_{n=0}^{N-1}x_{n}\cdot e^{-2\pi ikn/N}$
+
+
+
 #### FFT
 
 #### STFT
@@ -198,6 +204,8 @@ $f(\int xp(x)dx)\leq\int f(x)p(x)dx$
 无偏估计的方差：
 $\left\{\begin{array}{c}M_n=\frac{X_1+X_2+\cdots+X_n}n\\\hat{S}_n^2=\frac{\sum_{i=1}^n(X_i-M_n)^2}{n-1}\end{array}\right.$
 
+[【AP统计】期望E(X)与方差Var(X) - 知乎](https://zhuanlan.zhihu.com/p/64859161)
+
 
 ### 概率/似然
 
@@ -221,6 +229,8 @@ $\arg\max_pL(p)=\arg\max_p\prod_{i=1}^nP(X_i=x_i|p)$
 
 
 ## Bayes
+
+![GZsfHmbaAAE1ZFD (1264×1128)|555](https://pbs.twimg.com/media/GZsfHmbaAAE1ZFD?format=jpg&name=large)
 
 Follow:
 

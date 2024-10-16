@@ -45,19 +45,23 @@ $u_{(dir)}=\sum_{m=1}^{N_\kappa}A_m^{(dir)}\cos\left(2\pi mf_pt+\varphi_m^{(dir)
 
 ### Full-field Measurement
 
-MISO vibration controller 使用 force appropriation algorithm(使用单点测量的数据进行反馈调节) 来维持结构振动在其某个resonances共振态，来保证3D SLDV的测量。使用3D SLDV来测量各个scan point的XYZ三方向加速度，对每个点测量很小的sample interval 来减少总体测试时间
+MISO vibration controller 使用 force appropriation algorithm(使用单点测量的数据进行反馈调节) 来维持结构振动在其某个resonances(共振态)，来保证3D SLDV的测量。使用3D SLDV来测量各个scan point的XYZ三方向加速度，对每个点测量很小的sample interval 来减少总体测试时间
 
-two estimates of driving force 来处理空间测量不一致的问题：
+two estimates of driving force $\boldsymbol{p}(t)$ 来处理空间测量不一致的问题：
 - average estimates: vibration controller 提供的估计值，large interval
 - Instantaneous estimates：3D SLDV测量得到的值，small interval
 - 这两个估计值之间的差异越小，则说明数据集越准确
 
 Scan Point Measurement:
-Sampling rate of 3D SLDV $f^{\mathrm{SLDV~}}=1/\Delta t$ ， 为了抗混叠应远高于响应信号最高谐波Nyquist rate：$f^{\mathrm{SLDV}}>2.56\cdot N_{\kappa}f_{p},$
+Sampling rate of 3D SLDV $f^{\mathrm{SLDV~}}=1/\Delta t$ ， 每个scan point 采样时长为$T=N\Delta t$，为了抗混叠应远高于响应信号最高谐波Nyquist rate：$f^{\mathrm{SLDV}}>2.56\cdot N_{\kappa}f_{p},$
+
+时间信号：
+- External excitation Force: $p(k\Delta t){=A_p\cos(2\pi f_p\Delta t+\varphi_p),}\quad k=0,1\cdots,N-1\mathrm{~,}$
+- Response Signals of 3 directions: $u_{(dir)}(k\Delta t){=\sum_{m=1}^{N_\kappa}A_m^{(dir)}\cos\left(2\pi mf_p\Delta t+\varphi_m^{(dir)}\right)},\quad k=0,1\cdots,N-1 ,$
 
 DFT:
-- Force: $P(n)=\frac{A_p}2\Big[e^{\mathrm{j}\varphi_p}D(n-f_p/\Delta f) + e^{-\mathrm{j}\varphi_p}D(n+f_p/\Delta f)\Big],$
-- Response Signals: $U(n)=\sum_{m=1}^{N_\kappa}\frac{A_m}2\Big[e^{\mathrm{j}\varphi_m}D(n-mf_p/\Delta f) + e^{-\mathrm{j}\varphi_m}D(n+mf_p/\Delta f)\Big]$
+- External excitation Force: $P(n)=\frac{A_p}2\Big[e^{\mathrm{j}\varphi_p}D(n-f_p/\Delta f) + e^{-\mathrm{j}\varphi_p}D(n+f_p/\Delta f)\Big],$
+- Response Signals of 3 directions: $U(n)=\sum_{m=1}^{N_\kappa}\frac{A_m}2\Big[e^{\mathrm{j}\varphi_m}D(n-mf_p/\Delta f) + e^{-\mathrm{j}\varphi_m}D(n+mf_p/\Delta f)\Big]$
   - Dirichlet kernel $D(\theta){=e^{{-\mathrm{j}\pi\theta[(N-1)/N]}}\frac{\sin(\pi\theta)}{N\sin(\pi\theta/N)}.}$
 
 

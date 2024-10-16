@@ -2,13 +2,16 @@
 
 ## Colors
 
+
 | Reference                                                                                                         | Color                                                                                                                                              |
 | ----------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
 | ![image.png\|222](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240801201206.png) | Blue: [# 论文配色 \| 顶刊科研绘图高级配色汇总！](https://mp.weixin.qq.com/s/iAPY89fbYJkd5hBZ3I9dlw)<br>1E4C9C<br>345D82 <br>3371B3 <br>5795C7 <br>81B5D5 <br>AED4E5 |
 | ![image.png\|222](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240917194520.png) | Miku : [Hatsune Miku Color Palette](https://www.color-hex.com/color-palette/19601)<br>蓝色 37C8D4<br>红色 C92930<br>黑色 3A3E46                          |
+| ![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241014185345.png)      | [色圖網站](https://colorsite.librian.net/)                                                                                                             |
 |                                                                                                                   |                                                                                                                                                    |
-|                                                                                                                   |                                                                                                                                                    |
-|                                                                                                                   |                                                                                                                                                    |
+
+
+
 
 
 ## Latex
@@ -74,7 +77,7 @@ windows:
 
 ### Aurora伪代码
 
-**(for word)**
+**(for word)** 插入——对象——Aurora Equation
 
 > [使用Aurora在Word中插入算法伪代码教程，亲测有效，写论文必备_aurora word-CSDN博客](https://blog.csdn.net/jucksu/article/details/116307244)
 > [使用Aurora+Algorithm2e在word中输入伪码 - 知乎](https://zhuanlan.zhihu.com/p/367884765)
@@ -126,7 +129,7 @@ algorithm2e语法 [mlg.ulb.ac.be/files/algorithm2e.pdf](https://mlg.ulb.ac.be/fi
 
 # Write Paper
 
-## Write Approach
+## Write Points
 
 ### 自定义loss
 
@@ -177,6 +180,12 @@ algorithm2e语法 [mlg.ulb.ac.be/files/algorithm2e.pdf](https://mlg.ulb.ac.be/fi
 - Conclusion
   - 简要地回顾你解决了什么问题，你是怎么解决的，你主要做了什么样的贡献。后面的人如果在这个方向接着做，应当做什么？千万不要跟引言和摘要相同，他们有不同的作用。引言是让人家读完之后能知道你的问题是否重要，摘要是读完之后知道这篇文章值不值得往下读，而总结是我读完了会决定要不要在你这个方向继续往下研究。
 
+### Conference Papers
+
+[hzwer/WritingAIPaper: Writing AI Conference Papers: A Handbook for Beginners](https://github.com/hzwer/WritingAIPaper)
+
+
+
 ## 科研习惯
 
 1. 动手之前先动脑。
@@ -206,6 +215,16 @@ algorithm2e语法 [mlg.ulb.ac.be/files/algorithm2e.pdf](https://mlg.ulb.ac.be/fi
 
 
 [用随机梯度下降来优化人生 - 李沐的文章 - 知乎](https://zhuanlan.zhihu.com/p/414009313)
+
+
+【TED科普】长时间保持大脑清晰的7个习惯！ 课代表总结： 视频讲述了7个帮助提高精神清晰度的习惯:1)清空思维,如写日记;2)定期休息,保证充足睡眠;3)每日冥想,使大脑平静;4)专注于重要事情,将任务分组;5)去散步,刺激内啡肽释放;6)注意摄入健康食物;7)清理心理垃圾邮件,释放无关信息。通过这些习惯,可帮助减轻压力,提高大脑工作效率。 要点: 
+- 定期清空思维,如写日记,释放多余思绪 
+- 保证充足睡眠,清理大脑废物,提高记忆力和集中力
+- 冥想使大脑平静,提高清晰度,可使用计时器辅助 
+- 聚焦重要任务,将杂事分组,避免碎片化思考 
+- 散步增加血流,刺激内啡肽释放,带来更多灵感 
+- 摄入健康食物,避免过多糖分,维持血糖平衡
+- 清理心理垃圾,释放无关信息,为重要事情留出空间
 
 
 ## English细节
@@ -253,5 +272,11 @@ Here is a prompt that we use to **revise manuscript abstracts**, which we crafte
 - You are a professional copy editor with ample experience handling scientific texts. Revise the following abstract from a manuscript so that it follows a context–content–conclusion scheme. (1) The context portion communicates to the reader the gap that the paper will fill. The first sentence orients the reader by introducing the broader field. Then, the context is narrowed until it lands on the open question that the research answers. A successful context section distinguishes the research’s contributions from the current state of the art, communicating what is missing in the literature (that is, the specific gap) and why that matters (that is, the connection between the specific gap and the broader context). (2) The content portion (for example, ‘here, we ...’) first describes the new method or approach that was used to fill the gap, then presents an executive summary of results. (3) The conclusion portion interprets the results to answer the question that was posed at the end of the context portion. There might be a second part to the conclusion portion that highlights how this conclusion moves the broader field forward (for example, ‘broader significance’).
 
 你是一名专业的中翻英和学术润色专家，请帮我把以下中文翻译成英文，并进行专业的学术润色：
+
+# Academic presentation PPT
+
+Hi i'm xxx, and this is joint work with xxx and xxx on 论文标题
+Good afternoon, my name is xxx, my co-authors are xxx. and our paper is titled xxx
+
 
 

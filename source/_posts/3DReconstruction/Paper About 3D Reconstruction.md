@@ -24,6 +24,14 @@ NeRF将三维空间中所有点，通过MLP预测出对应的密度/SDF，**是�
 
 <!-- more -->
 
+>[3D Representation Methods: A Survey | PDF](https://arxiv.org/pdf/2410.06475)
+>[A Review on Deep Learning Approaches for 3D Data Representations in Retrieval and Classifications](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9043500)
+
+
+![image.png|555](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241010195323.png)
+
+
+
 # Tools
 
 相机位姿360°视频渲染:
@@ -89,40 +97,40 @@ We are highly inspired by [colmap](https://github.com/colmap/colmap), [pycolma
 
 ## Important Papers
 
-| Year             | Note                                                                                                                                              | Overview                                                                                                                                 | Description           |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | --------------------- |
-| 2020             | [IDR](IDR.md)                                                                                                                                     | ![image.png\|555](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230906183157.png)                                |                       |
-| 2020             | [DVR](DVR.md)                                                                                                                                     | ![image.png\|555](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231208100556.png)                                 |                       |
-| 2021             | [VolSDF](VolSDF.md)                                                                                                                               | ![image.png\|555](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231201160653.png)                                 |                       |
-| 2021             | [UNISURF](UNISURF.md)                                                                                                                             | ![image.png\|555](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230806143334.png)                                |                       |
-| 2021             | [NeuS](NeuS.md)                                                                                                                                   | ![Pasted image 20230531185214.png\|555](https://raw.githubusercontent.com/yq010105/Blog_images/main/Pasted%20image%2020230531185214.png) |                       |
-| 2022             | [HF-NeuS](HF-NeuS.md)                                                                                                                             |                                                                                                                                          |                       |
-| 2022             | [Geo-Neus](Geo-Neus.md)                                                                                                                           | ![image.png\|555](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230911165550.png)                                |                       |
-| 2022             | [Instant-NSR](Instant-NSR.md)                                                                                                                     | ![pipeline\|555](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/pipeline.jpg)                                      |                       |
-| 2022             | [Neus-Instant-nsr-pl](Neus-Instant-nsr-pl.md)                                                                                                     | Paper No!!! Just Code                                                                                                                    |                       |
-| 2023             | [RayDF](RayDF.md)                                                                                                                                 | ![image.png\|555](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231113155552.png)                                 |                       |
-| 2023             | [NISR](NISR.md)                                                                                                                                   | ![image.png\|555](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230925133140.png)                                |                       |
-| 2023             | [NeUDF](NeUDF.md)                                                                                                                                 | ![image.png\|555](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230825151238.png)                                |                       |
-| 2023             | [LoD-NeuS](LoD-NeuS.md)                                                                                                                           | ![image.png\|555](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20240104132053.png)                                 |                       |
-| 2023             | [D-NeuS](D-NeuS.md)                                                                                                                               | ![image.png\|555](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230927202731.png)                                |                       |
-| 2023             | [Color-NeuS](Color-NeuS.md)                                                                                                                       | ![image.png\|555](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230901123131.png)                                |                       |
-| 2023             | [BakedSDF](BakedSDF.md)                                                                                                                           | ![image.png\|555](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230913154905.png)                                |                       |
-| 2023             | [Neuralangelo](Neuralangelo.md)                                                                                                                   | ![image.png\|555](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230716140552.png)                               |                       |
-| 2023             | [NeuS2](NeuS2.md)                                                                                                                                 | ![image.png\|555](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230826151714.png)                                |                       |
-| 2023             | [PermutoSDF](PermutoSDF.md)                                                                                                                       | ![image.png\|555](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230716172220.png)                               |                       |
-| [2023](NeuDA.md) | [NeuDA](https://3d-front-future.github.io/neuda/)                                                                                                 | ![image.png\|555](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240929220847.png)                        |                       |
-| 2023             | [Ref-NeuS](Ref-NeuS.md)                                                                                                                           |                                                                                                                                          |                       |
-| 2023             | [ShadowNeuS](ShadowNeuS.md)                                                                                                                       |                                                                                                                                          |                       |
-| 2023             | [NoPose-NeuS](NoPose-NeuS.md)                                                                                                                     |                                                                                                                                          |                       |
-| 2022             | [MonoSDF](MonoSDF.md)                                                                                                                             |                                                                                                                                          |                       |
-| 2022             | [RegNeRF](RegNeRF.md)                                                                                                                             |                                                                                                                                          |                       |
-|                  |                                                                                                                                                   |                                                                                                                                          |                       |
-| 2023             | [ashawkey/nerf2mesh: [ICCV2023] Delicate Textured Mesh Recovery from NeRF via Adaptive Surface Refinement](https://github.com/ashawkey/nerf2mesh) | ![image.png\|555](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240717101942.png)                        |                       |
-|                  |                                                                                                                                                   |                                                                                                                                          |                       |
-| 2024             | [PSDF: Prior-Driven Neural Implicit Surface Learning for Multi-view Reconstruction \| PDF](https://arxiv.org/pdf/2401.12751)                      | ![image.png\|555](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240823133432.png)                        | 法向量先验+多视图一致，使用深度图引导采样 |
-|                  |                                                                                                                                                   |                                                                                                                                          |                       |
-|                  |                                                                                                                                                   |                                                                                                                                          |                       |
-|                  |                                                                                                                                                   |                                                                                                                                          |                       |
+| Year             | Note                                                                                                                                              | Overview                                                                                                                            | Description           |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | --------------------- |
+| 2020             | [IDR](IDR.md)                                                                                                                                     | ![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230906183157.png)                                |                       |
+| 2020             | [DVR](DVR.md)                                                                                                                                     | ![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231208100556.png)                                 |                       |
+| 2021             | [VolSDF](VolSDF.md)                                                                                                                               | ![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231201160653.png)                                 |                       |
+| 2021             | [UNISURF](UNISURF.md)                                                                                                                             | ![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230806143334.png)                                |                       |
+| 2021             | [NeuS](NeuS.md)                                                                                                                                   | ![Pasted image 20230531185214.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/Pasted%20image%2020230531185214.png) |                       |
+| 2022             | [HF-NeuS](HF-NeuS.md)                                                                                                                             |                                                                                                                                     |                       |
+| 2022             | [Geo-Neus](Geo-Neus.md)                                                                                                                           | ![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230911165550.png)                                |                       |
+| 2022             | [Instant-NSR](Instant-NSR.md)                                                                                                                     | ![pipeline](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/pipeline.jpg)                                      |                       |
+| 2022             | [Neus-Instant-nsr-pl](Neus-Instant-nsr-pl.md)                                                                                                     | Paper No!!! Just Code                                                                                                               |                       |
+| 2023             | [RayDF](RayDF.md)                                                                                                                                 | ![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231113155552.png)                                 |                       |
+| 2023             | [NISR](NISR.md)                                                                                                                                   | ![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230925133140.png)                                |                       |
+| 2023             | [NeUDF](NeUDF.md)                                                                                                                                 | ![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230825151238.png)                                |                       |
+| 2023             | [LoD-NeuS](LoD-NeuS.md)                                                                                                                           | ![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20240104132053.png)                                 |                       |
+| 2023             | [D-NeuS](D-NeuS.md)                                                                                                                               | ![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230927202731.png)                                |                       |
+| 2023             | [Color-NeuS](Color-NeuS.md)                                                                                                                       | ![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230901123131.png)                                |                       |
+| 2023             | [BakedSDF](BakedSDF.md)                                                                                                                           | ![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230913154905.png)                                |                       |
+| 2023             | [Neuralangelo](Neuralangelo.md)                                                                                                                   | ![image.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230716140552.png)                               |                       |
+| 2023             | [NeuS2](NeuS2.md)                                                                                                                                 | ![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230826151714.png)                                |                       |
+| 2023             | [PermutoSDF](PermutoSDF.md)                                                                                                                       | ![image.png](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230716172220.png)                               |                       |
+| [2023](NeuDA.md) | [NeuDA](https://3d-front-future.github.io/neuda/)                                                                                                 | ![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240929220847.png)                        |                       |
+| 2023             | [Ref-NeuS](Ref-NeuS.md)                                                                                                                           |                                                                                                                                     |                       |
+| 2023             | [ShadowNeuS](ShadowNeuS.md)                                                                                                                       |                                                                                                                                     |                       |
+| 2023             | [NoPose-NeuS](NoPose-NeuS.md)                                                                                                                     |                                                                                                                                     |                       |
+| 2022             | [MonoSDF](MonoSDF.md)                                                                                                                             |                                                                                                                                     |                       |
+| 2022             | [RegNeRF](RegNeRF.md)                                                                                                                             |                                                                                                                                     |                       |
+|                  |                                                                                                                                                   |                                                                                                                                     |                       |
+| 2023             | [ashawkey/nerf2mesh: [ICCV2023] Delicate Textured Mesh Recovery from NeRF via Adaptive Surface Refinement](https://github.com/ashawkey/nerf2mesh) | ![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240717101942.png)                        |                       |
+|                  |                                                                                                                                                   |                                                                                                                                     |                       |
+| 2024             | [PSDF: Prior-Driven Neural Implicit Surface Learning for Multi-view ReconstructionPDF](https://arxiv.org/pdf/2401.12751)                          | ![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240823133432.png)                        | 法向量先验+多视图一致，使用深度图引导采样 |
+|                  |                                                                                                                                                   |                                                                                                                                     |                       |
+|                  |                                                                                                                                                   |                                                                                                                                     |                       |
+|                  |                                                                                                                                                   |                                                                                                                                     |                       |
 
 ## ActiveNeRF
 
@@ -304,6 +312,13 @@ MorpheuS: Neural Dynamic 360° Surface Reconstruction from **Monocular RGB-D Vid
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240617101305.png)
 
 
+## IGS
+
+> [Implicit Gaussian Splatting with Efficient Multi-Level Tri-Plane Representation](https://arxiv.org/pdf/2408.10041)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241011152837.png)
+
+
 
 ## DN-Splatter
 
@@ -392,6 +407,27 @@ and unofficial implementation [TimSong412/2D-surfel-gaussian](https://github.com
 
 
 # Mesh-based
+
+
+## PuzzleAvatar
+
+>[PuzzleAvatar: Assembling 3D Avatars from Personal Albums](https://arxiv.org/pdf/2405.14869)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241013212059.png)
+
+
+
+## MagicClay
+
+[MagicClay: Sculpting Meshes With Generative Neural Fields](https://arxiv.org/pdf/2403.02460)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241009140625.png)
+
+- [ROAR: Robust Adaptive Reconstruction of Shapes Using Planar Projections](https://arxiv.org/pdf/2307.00690) 使用该方法将SDF更新到mesh 的local topology上
+- 
+
+
+
 
 ## MeshAnything
 

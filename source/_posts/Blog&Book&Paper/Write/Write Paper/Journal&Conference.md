@@ -2,6 +2,18 @@
 
 周二周三投稿
 
+[SCI论文投稿过程中的十种状态 - 爱科学](https://www.iikx.com/news/article/1192.html)
+- **Submitted to Journal**
+- **With editor**
+- **Reviewer(s) invited**
+- **Under review**
+- **required review completed**
+- **Decision in Process**
+- **Minor revision/Major revision**
+- **Revision Submitted to Journal**
+- **Accepted**
+- **Rejected**
+
 # Model Updating
 
 | 中科院分区                  | Journal                                                                                                                                                                                                                                  | [ISSN](https://www.letpub.com.cn/index.php?page=journalapp) | [周期(月)](https://www.letpub.com.cn/index.php?page=journalapp) | 录用比例 |

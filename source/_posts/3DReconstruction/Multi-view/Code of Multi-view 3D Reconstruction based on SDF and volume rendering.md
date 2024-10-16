@@ -31,10 +31,87 @@ categories: 3DReconstruction/Multi-view
 3. `git clone --recursive "https://github.com/nvlabs/tiny-cuda-nn"`
   1. `cd tiny-cuda-nn`
   2. `cmake . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo`
-  3. `cmake --build build --config RelWithDebInfo -j`
+  3. `cmake --build build --config RelWithDebInfo -j` If compilation fails inexplicably or takes longer than an hour, you might be running **out of memory**. Try running the above command without `-j` in that case.
 4. 最后运行setup.py，如果不在全局环境安装，亦可在conda虚拟环境中安装
   1. `cd bindings/torch`
   2. `python setup.py install`
+
+in wsl2 with Ubuntu:
+> [CUDA Toolkit 11.3 Update 1 Downloads | NVIDIA Developer](https://developer.nvidia.com/cuda-11-3-1-download-archive?target_os=Linux&target_arch=x86_64&Distribution=WSL-Ubuntu&target_version=2.0&target_type=deb_network)
+> [CUDA Toolkit 12.6 Update 1 Downloads | NVIDIA Developer](https://developer.nvidia.com/cuda-12-6-1-download-archive?target_os=Linux&target_arch=x86_64&Distribution=WSL-Ubuntu&target_version=2.0&target_type=deb_network)
+> [Notice: CUDA Linux Repository Key Rotation - Accelerated Computing / Announcements - NVIDIA Developer Forums](https://forums.developer.nvidia.com/t/notice-cuda-linux-repository-key-rotation/212772) key失效了
+
+
+```bash
+# cuda 11.3
+sudo apt install gcc
+sudo apt install cmake
+sudo apt install nvidia-cuda-toolkit # unknown source
+
+# cuda 官网
+wget https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/cuda-wsl-ubuntu.pin
+sudo mv cuda-wsl-ubuntu.pin /etc/apt/preferences.d/cuda-repository-pin-600
+
+# 这个key 无法使用了 
+sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/7fa2af80.pub 
+# 换成这个key：
+sudo apt-key del 7fa2af80
+wget https://developer.download.nvidia.com/compute/cuda/repos/$distro/$arch/cuda-keyring_1.0-1_all.deb
+sudo dpkg -i cuda-keyring_1.0-1_all.deb
+
+# $distro/$arch：
+debian10/x86_64
+debian11/x86_64
+ubuntu1604/x86_64
+ubuntu1804/cross-linux-sbsa
+ubuntu1804/ppc64el
+ubuntu1804/sbsa
+ubuntu1804/x86_64
+ubuntu2004/cross-linux-sbsa
+ubuntu2004/sbsa
+ubuntu2004/x86_64
+ubuntu2204/sbsa
+ubuntu2204/x86_64
+wsl-ubuntu/x86_64
+
+sudo add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/ /"
+sudo apt-get update
+sudo apt-get -y install cuda # 默认安装最高版本
+sudo apt-get -y install cuda-toolkit-11-3
+
+# 更高版本 12.6
+
+wget https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/cuda-keyring_1.1-1_all.deb
+sudo dpkg -i cuda-keyring_1.1-1_all.deb
+sudo apt-get update
+sudo apt-get -y install cuda-toolkit-12-6
+```
+
+```
+# cudann 对应cuda版本 11.3
+tar -zxvf cudnn-自己补全版本号.tgz
+sudo cp -P cuda/lib64/libcudnn* /usr/local/cuda-11.3/lib64/
+sudo cp cuda/include/cudnn.h /usr/local/cuda-11.3/include/
+ 
+#为更改读取权限：
+sudo chmod a+r /usr/local/cuda-11.3/include/cudnn.h
+sudo chmod a+r /usr/local/cuda-11.3/lib64/libcudnn*
+
+## test
+cd /usr/local/cuda/samples/4_Finance/BlackScholes
+sudo make
+./BlackScholes
+```
+
+[通过修改软链接升高 gcc 版本、降低 gcc 版本_gcc软连接-CSDN博客](https://blog.csdn.net/wohu1104/article/details/107371779)
+[CUDA incompatible with my gcc version - Stack Overflow](https://stackoverflow.com/questions/6622454/cuda-incompatible-with-my-gcc-version) CUDA对应gcc版本
+
+- `sudo apt install gcc-$MAX_GCC_VERSION g++-$MAX_GCC_VERSION`
+- `sudo rm gcc g++` in /usr/bin/
+- `sudo ln -s gcc-$MAX_GCC_VERSION gcc`
+  - `sudo ln -s /usr/bin/gcc-$MAX_GCC_VERSION /usr/local/cuda/bin/gcc `
+  - `sudo ln -s /usr/bin/g++-$MAX_GCC_VERSION /usr/local/cuda/bin/g++`
+
 
 ### gcc install/update
 
@@ -236,7 +313,57 @@ sudo make install
 
 ## torch
 
+```bash
+pip install torch
+```
 
+## pytorch3d
+
+> [pytorch3d/INSTALL.md at main · facebookresearch/pytorch3d](https://github.com/facebookresearch/pytorch3d/blob/main/INSTALL.md)
+
+```bash
+conda install -c fvcore -c iopath -c conda-forge fvcore iopath
+conda install pytorch3d=0.7.5 -c pytorch3d # 可能torch版本太高了
+
+# torch 2.4.1 使用预编译的pytorch3d
+pip install torch==2.4.1
+pip install --extra-index-url https://miropsota.github.io/torch_packages_builder pytorch3d==0.7.8+pt2.4.1cu121
+```
+
+> [ImportError: libtorch_cuda_cu.so: cannot open shared object file · Issue #438 · open-mmlab/mmdetection3d](https://github.com/open-mmlab/mmdetection3d/issues/438) 不是pytorch3d的问题
+> [Prebuilt wheels provided via 3rd party repository · facebookresearch/pytorch3d · Discussion #1752](https://github.com/facebookresearch/pytorch3d/discussions/1752) 用大佬编译好的pytorch3d
+
+
+## visual in Jupyter
+
+### pyvista
+
+`pip install ipywidgets widgetsnbextension pandas-profiling`
+
+> [PyVista + Trame = Jupyter 3D Visualization - Announcements - VTK](https://discourse.vtk.org/t/pyvista-trame-jupyter-3d-visualization/10610)
+
+`pip install 'pyvista[jupyter]>=0.38.1'`
+
+>[apt - Issues installing libgl1-mesa-glx - Ask Ubuntu](https://askubuntu.com/questions/1517352/issues-installing-libgl1-mesa-glx)
+
+this solve my problem in Ubuntu 24.04LTS libgl1-mesa-glx_23.0.4-0ubuntu1.22.04.1_amd64.deb DOWNLOAD https://github.com/PetrusNoleto/Error-in-install-cisco-packet-tracer-in-ubuntu-23.10-unmet-dependencies/releases/tag/CiscoPacketTracerFixUnmetDependenciesUbuntu23.10
+
+exec :
+
+`sudo dpkg -i libgl1-mesa-glx_23.0.4-0ubuntu1.22.04.1_amd64.deb`
+
+
+> [MESA and glx errors when running glxinfo Ubuntu 24.04 - Ask Ubuntu](https://askubuntu.com/questions/1516040/mesa-and-glx-errors-when-running-glxinfo-ubuntu-24-04)
+
+MESA: error: ZINK: failed to choose pdev glx: failed to create drisw screen
+
+Kisak-mesa PPA 提供了 Mesa 的最新小版本。您可以通过在终端中逐个输入以下命令来使用它：
+
+```
+sudo add-apt-repository ppa:kisak/kisak-mesa
+sudo apt update
+sudo apt upgrade
+```
 
 # NeuRodin
 

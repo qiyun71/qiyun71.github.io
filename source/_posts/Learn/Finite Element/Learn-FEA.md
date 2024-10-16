@@ -118,6 +118,13 @@ Ansys:
 Nastran: 
 > [Welcome to pyNastran’s documentation for v1.3! — pyNastran 1.3 1.3 documentation (pynastran-git.readthedocs.io)](https://pynastran-git.readthedocs.io/en/1.3/index.html)
 
+pynastranGUI 支持对有限元模型和仿真结果的可视化，支持的模型文件格式：
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241016122523.png)
+
+
+
+
 # Other
 
 ## FE & Blender

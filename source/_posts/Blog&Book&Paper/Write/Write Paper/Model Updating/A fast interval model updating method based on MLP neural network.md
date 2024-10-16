@@ -243,9 +243,10 @@ Deterministic
 ---
 
 - [ ] 检查流程框图的字符和文中的是否对应
-- [ ] 缩进是否一致
+- [ ] 缩进是否一致，每段开头空两个字符
 - [ ] 表格图例 序号是否与文中对应
 - [ ] 有过简写的，要用简写，检查简写问题，只出现一次
+- [ ] loss函数的描述统一使用 简写 or 全称
 
 **几个容易被误解的地方**：
 - 由于Interval propagation中使用了Reparameterization-based MC sampling 或者 interval perturbation method，但是如果使用FE模型，其照样是不可微分的，无法用于反向传播训练calibration model，因此必须要用FE surrogate model based on MLP/otherNN 来保证反向传播
@@ -268,8 +269,15 @@ Introduction后/relatedwork后，都用interval model calibration (第一章之�
 - Multi-Layer Perceptron (MLP)
 - Relative Position Operator (RPO)
 - response-consistent supervised Interval model calibration (RCS-IMC),
-- interval calibration model (ICM)
+- response-consistent supervised interval calibration model (RCS-ICM)
+- interval similarity (IS)
 - naive supervised interval model calibration (NS-IMC)
+- Sparrow Search Algorithm (SSA)
+- Particle Swarm Optimization (PSO)
+- Rectified Linear Unit (ReLU)
+- Mean Absolute Error (MAE)
+- Mean Squared Error (MSE)
+- 
 
 
 

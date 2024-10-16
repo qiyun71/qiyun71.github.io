@@ -11,7 +11,7 @@ categories: Project
 
 <!-- more -->
 
-# BDF
+# BDF file
 
 BDF文件是使用Patran对模型进行前处理产生的，包括划网格、定义结构参数、添加约束等操作
 
@@ -61,3 +61,137 @@ print("cd.cid = %s" % eid100.nodes_ref[0].cd_ref.cid)
 |---|---|---|---|---|---|---|---|---|
 |GRID|NID|CP|X1|X2|X3|CD|PS|SEID|
 
+# Example (Steel Plate Structure)
+
+Generate simulation datasets by FE (solidworks & patran & nastran & python)
+
+Model and Simulate to get `.bdf` file
+- solidworks project Part.SLDPRT, export `.x_t` file
+- patran 材料属性参数设置+网格划分+约束+负载，并定义好输出的类型(mode shape/FRF...) to get `.bdf` file(其中保存着有限元模型前处理的结果，包括网格节点编号、坐标，材料属性)
+- run nastran
+  - input: `.bdf` file 使用python修改bdf中的参数，可以获得多个bdf，然后输入到nastran中进行仿真计算
+  - output: `.f06` file 包含仿真输出的结果
+
+
+## python
+
+修改钢板厚度 Tickness思路：
+- 读取所有节点坐标 nodes
+- 计算厚度缩放比例 `ratio = T / T_origin`，T是需要修改的厚度，T是bdf文件中初始的厚度
+- 将nodes坐标沿着厚度反向进行缩放，得到nodes_modify
+- 将修改后的nodes坐标写入bdf文件中
+- 然后运行nastran根据修改后的bdf文件仿真计算得到f06文件
+- 读取f06文件中的结果并保存
+
+main code
+
+```python
+def get_output(bdf_path,input_path,nastran_path,save_dir):
+  N_samples = 1000
+  Tickness = np.random.uniform(2, 4, N_samples) # 2~4 mm
+  
+  for i in range(0,len(Tickness)):
+      T = Tickness[i]
+      bdf_copy_path = f'gangban_{i}.bdf'
+      status_copy = shutil.copyfile(bdf_path, bdf_copy_path)
+      if status_copy == bdf_copy_path:
+          nodes = read_bdf_nodes(bdf_copy_path)
+          T_origin = nodes[:, 1].max() - nodes[:, 1].min() # 3mm
+          ratio_T = T / T_origin
+          ratio = [1, ratio_T, 1]
+          nodes_modify = nodes * ratio
+          write_bdf_nodes(bdf_copy_path, nodes_modify)
+  
+          p = subprocess.Popen(nastran_path+' '+bdf_copy_path, shell=True)
+          return_code = p.wait(timeout=1000)
+          # time.sleep(15)
+          time.sleep(7)
+          print(f'Finished running Nastran for {i+1}th sample, T_origin: {T_origin}mm, T: {T}mm')
+          
+          modes = get_modes(bdf_copy_path.replace('.bdf', '.f06'))
+          # all_modes.append(modes)
+          # create a new txt file to store the modes
+          save_txt = open(bdf_path.replace('.bdf', '.txt'), 'a')
+          save_txt.write(str(modes) + '\n')
+          save_txt.close()
+      else:
+          print(f'Error in copying file {bdf_copy_path}')
+  
+      bdf_copy_path_prefix = bdf_copy_path.split('.')[0]
+      for suffix in ['.bdf', '.f04', '.f06', '.log', '.op2','.h5']:
+          os.remove(bdf_copy_path_prefix + suffix)
+  
+  # all_modes = np.array(all_modes)
+  read_save_txt = open(bdf_path.replace('.bdf', '.txt'), 'r')
+  all_modes = read_save_txt.readlines()
+  read_save_txt.close()
+  
+  all_modes = np.array([eval(mode) for mode in all_modes])
+  if "updated" in input_path:
+      np.savez(os.path.join(save_dir, 'modes_updated.npz'), modes = all_modes)
+  else:
+      np.savez(os.path.join(save_dir, 'modes.npz'), modes = all_modes)
+  # np.savez(os.path.join(save_dir, 'modes_updated.npz'), modes = all_modes)
+  print("Finished saving modes, shape is ", all_modes.shape)
+```
+
+```python
+def read_bdf_nodes(bdf_filename:str) -> np.ndarray:
+  """
+  Read the node information from the bdf file
+  """
+  model = BDF()
+  bdf = read_bdf(bdf_filename, xref=False,debug=False)
+  # print(bdf.get_bdf_stats())
+  # print('____________________________________________________________________________')
+  # print(object_attributes(bdf))
+  # print(object_methods(bdf))
+  node_pos_all = []
+  for nid,node in sorted(bdf.nodes.items()):
+      # print(bdf.nodes[nid].xyz)
+      # print(node)
+      # print(node.get_position())
+      # exit()
+      node_pos = node.get_position()
+      node_pos_all.append(node_pos)
+  
+  node_pos_all = np.array(node_pos_all)
+  # print('Nodes shape:', node_pos_all.shape)
+  # exit()
+  
+  return node_pos_all
+
+def write_bdf_nodes(bdf_filename:str, nodes:np.ndarray):
+  """
+  Write the node information to the bdf file
+  """
+  model = BDF()
+  bdf_xref = read_bdf(bdf_filename, xref=True,debug=False)
+  # wrte the nodes to the bdf file
+  for nid,node in sorted(bdf_xref.nodes.items()):
+      node_pos = nodes[nid-1]
+      # print(node.xyz)
+      node.xyz = node_pos
+      # print(node.xyz)
+  bdf_xref.write_bdf(bdf_filename)
+
+def get_modes(f06_copy_path:str):
+  """
+  Get the modes from the f06 file
+  """
+  find_txt = "NO.       ORDER                                                                       MASS              STIFFNESS"
+  line_num = 0
+  f = open(f06_copy_path, 'r')
+  lines_mode = f.readlines()
+  while True:
+      line = lines_mode[line_num]
+      if find_txt in line:
+          break
+      line_num += 1 # python 从0开始计数
+  # print(line_num)
+  modes = []
+  for i in range(line_num+7, line_num+7+5):
+      line_mode = lines_mode[i]
+      modes.append(float(line_mode[67:80]))
+  return modes
+```

@@ -5,13 +5,7 @@ tags:
 categories: Project
 ---
 
-| Title       | Six Legged Spider Robot |
-| ----------- | ------------------- |
-| Author      |                     |
-| Conf/Jour   |                     |
-| Year        |                     |
-| Project     |                     |
-| Paper       |                     |
+Six Legged Spider Robot
 
 <!-- more -->
 
@@ -36,3 +30,17 @@ categories: Project
 - 电路设计(嘉立创EDA)
 - 机器人动力学+运动学
 - 控制系统设计+编程
+
+
+
+理想模型效果：
+
+> [86－不存在的戰區－／86-エイティシックス- 機體列表 | RoboInfo 機器人作品資訊網](https://srw.wingzero.tw/robot/mechanical/zh-TW/336) 模型
+> [𝟖𝟔 𝐄𝐢𝐠𝐡𝐭𝐲 𝐒𝐢𝐱 ~ lofi hiphop and lofi remix - YouTube](https://www.youtube.com/watch?v=PsQVRKgT7aw) 自带BGM
+
+聖瑪格諾利亞共和國製 無人戰鬥機械〈M1A4破壞神〉
+サンマグノリア共和国製　無人戦闘機械〈M1A4 ジャガーノート〉
+Height: 2.1 m
+Pilot: シンエイ・ノウゼン／シン
+
+![0e6d4-img_mecha_01.jpg (670×670)|555](https://srw.wingzero.tw/assets/robot/0e6d4-img_mecha_01.jpg)
