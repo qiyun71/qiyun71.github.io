@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Accuracy 重建的模型精度不好，影响因素： 数据集质量：照片拍摄质量(设备)、相机位姿估计精度(COLMAP) 照片质量问题：混叠、模糊、滚动快门 (RS) 效应、HDR&#x2F;LDR、运动模糊、低光照   NeuS方法的问题：Loss函数约束、体渲染的过度简化、缺少监督(深度or法向量) 网格提取方法(Marching Cube)   Efficiency 训练&#x2F;渲染的速度太慢，影响因素： M">
+  <meta name="description" content="NeRF系列的多视图三维重建方法关键有两点: 如何表示3D model: mesh, voxel, pointcloud, RGBD, Implicit Density Field, SDF or Other Primitive(高斯体, 椭圆体, 球) 如何将3D model 可微渲染成2D图像: Volume Rendering or Rasterization?     Accuracy">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Multi-view 3D Reconstruction based on SDF and volume rendering">
 <meta property="og:url" content="http://example.com/3DReconstruction/Multi-view/NeuS-based%203D%20Reconstruction/index.html">
 <meta property="og:site_name" content="QiYun">
-<meta property="og:description" content="Accuracy 重建的模型精度不好，影响因素： 数据集质量：照片拍摄质量(设备)、相机位姿估计精度(COLMAP) 照片质量问题：混叠、模糊、滚动快门 (RS) 效应、HDR&#x2F;LDR、运动模糊、低光照   NeuS方法的问题：Loss函数约束、体渲染的过度简化、缺少监督(深度or法向量) 网格提取方法(Marching Cube)   Efficiency 训练&#x2F;渲染的速度太慢，影响因素： M">
+<meta property="og:description" content="NeRF系列的多视图三维重建方法关键有两点: 如何表示3D model: mesh, voxel, pointcloud, RGBD, Implicit Density Field, SDF or Other Primitive(高斯体, 椭圆体, 球) 如何将3D model 可微渲染成2D图像: Volume Rendering or Rasterization?     Accuracy">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240902141345.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240902132257.png">
@@ -40,8 +40,10 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240620151248.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240928172853.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240928172804.png">
+<meta property="og:image" content="https://jiangwenpl.github.io/FisherRF/static/images/teaser-cropped.gif">
+<meta property="og:image" content="https://jiangwenpl.github.io/FisherRF/static/images/teaser.jpg">
 <meta property="article:published_time" content="2024-06-17T09:11:22.000Z">
-<meta property="article:modified_time" content="2024-09-29T15:24:12.284Z">
+<meta property="article:modified_time" content="2024-10-16T02:34:24.130Z">
 <meta property="article:author" content="Qi Yun">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240902141345.png">
@@ -243,7 +245,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-09-29 23:24:12" itemprop="dateModified" datetime="2024-09-29T23:24:12+08:00">2024-09-29</time>
+                <time title="Modified: 2024-10-16 10:34:24" itemprop="dateModified" datetime="2024-10-16T10:34:24+08:00">2024-10-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -260,7 +262,7 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>6.2k</span>
+              <span>6.5k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -279,6 +281,13 @@
 
       
         <ul>
+<li>NeRF系列的多视图三维重建方法关键有两点:<ul>
+<li>如何表示3D model: mesh, voxel, pointcloud, RGBD, Implicit Density Field, SDF or Other Primitive(高斯体, 椭圆体, 球)</li>
+<li>如何将3D model 可微渲染成2D图像: Volume Rendering or Rasterization?</li>
+</ul>
+</li>
+</ul>
+<ul>
 <li><strong>Accuracy</strong> 重建的模型精度不好，影响因素：<ul>
 <li>数据集质量：照片拍摄质量(设备)、相机位姿估计精度(COLMAP)<ul>
 <li>照片质量问题：混叠、模糊、滚动快门 (RS) 效应、HDR/LDR、运动模糊、低光照</li>
@@ -295,9 +304,19 @@
 </li>
 </ul>
 <span id="more"></span>
-<h1 id="IDEA"><a href="#IDEA" class="headerlink" title="IDEA"></a>IDEA</h1><ul>
-<li>监督深度图信息</li>
+<p><em>Other link about 3D Reconstruction: (need to add “ ../ “ in obsidian)</em></p>
+<ul>
+<li><a href="../../Paper%20About%203D%20Reconstruction">Paper About 3D Reconstruction</a><ul>
+<li><a href="../../Finite%20Element%20Model%203D%20Reconstruction">Finite Element Model 3D Reconstruction</a></li>
+<li><a href="../../Anime%20Image%203D%20Reconstruction">Anime Image 3D Reconstruction</a></li>
+<li><a href="Multi-view%20Human%20Body%20Reconstruction">Multi-view Human Body Reconstruction</a></li>
 </ul>
+</li>
+<li><a href="../../Basics%20about%203D%20Reconstruction">Basics about 3D Reconstruction</a></li>
+<li><a href="../../Datasets">Datasets</a></li>
+<li><a href="Code%20of%20Multi-view%203D%20Reconstruction%20based%20on%20SDF%20and%20volume%20rendering">Code of Multi-view 3D Reconstruction based on SDF and volume rendering</a></li>
+</ul>
+<p><a href="../../Blog&amp;Book&amp;Paper/Write/Write%20Paper/3D%20Reconstruction/Master%20Paper(3DReconstruction">Master Paper(3DReconstruction)</a>.md)</p>
 <h1 id="Accuracy"><a href="#Accuracy" class="headerlink" title="Accuracy"></a>Accuracy</h1><h2 id="Camera-Pose-Estimation"><a href="#Camera-Pose-Estimation" class="headerlink" title="Camera Pose Estimation"></a>Camera Pose Estimation</h2><h2 id="3D-Point-Sampling"><a href="#3D-Point-Sampling" class="headerlink" title="3D Point Sampling"></a>3D Point Sampling</h2><h3 id="NerfAcc"><a href="#NerfAcc" class="headerlink" title="NerfAcc"></a>NerfAcc</h3><p>NerfAcc：占据+逆变换采样 混合采样方式<br>先使用占据网格确定哪些区域需要采样，再通过粗采样得到的权重使用逆变换采样进行精采样得到采样点</p>
 <h2 id="Loss-Function"><a href="#Loss-Function" class="headerlink" title="Loss Function"></a>Loss Function</h2><h3 id="S3IM"><a href="#S3IM" class="headerlink" title="S3IM"></a>S3IM</h3><blockquote>
 <p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2308.07032">S3IM: Stochastic Structural SIMilarity and Its Unreasonable Effectiveness for Neural Fields</a></p>
@@ -642,6 +661,16 @@
 \end{aligned}</script><ul>
 <li>$\beta_{A}$和$\beta_{S}$分别用来控制anchor area 和 source area的大小</li>
 </ul>
+<h1 id="Uncertainty"><a href="#Uncertainty" class="headerlink" title="Uncertainty"></a>Uncertainty</h1><h2 id="Sources-of-Uncertainty"><a href="#Sources-of-Uncertainty" class="headerlink" title="Sources of Uncertainty"></a>Sources of Uncertainty</h2><p><a href="Sources%20of%20Uncertainty%20in%203D%20Scene%20Reconstruction.md">Sources of Uncertainty in 3D Scene Reconstruction</a></p>
+<ul>
+<li>环境光照是否可以通过不确定性进行量化</li>
+<li>不同的cuda/显卡环境是否也是不确定性</li>
+</ul>
+<h2 id="ActiveNeRF"><a href="#ActiveNeRF" class="headerlink" title="ActiveNeRF"></a>ActiveNeRF</h2><p><a href="ActiveNeRF.md">ActiveNeRF</a></p>
+<h2 id="FisherRF"><a href="#FisherRF" class="headerlink" title="FisherRF"></a>FisherRF</h2><p><a target="_blank" rel="noopener" href="https://jiangwenpl.github.io/FisherRF/">FisherRF: Active View Selection and Uncertainty Quantification for Radiance Fields using Fisher Information</a></p>
+<p>limited availability of 2D images poses uncertainties stemming from occlusions, depth ambiguities, and imaging errors</p>
+<p>FisherRF computes the Fisher Information for the model and could select next best views or quantify pixel-wise uncertainty for its renderings.</p>
+<p><img src="https://jiangwenpl.github.io/FisherRF/static/images/teaser-cropped.gif" alt="teaser-cropped.gif (1320×1080)|333"><br><img src="https://jiangwenpl.github.io/FisherRF/static/images/teaser.jpg" alt="teaser.jpg (986×863)|555"></p>
 
     </div>
 
@@ -741,7 +770,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#IDEA"><span class="nav-text">IDEA</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Accuracy"><span class="nav-text">Accuracy</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Camera-Pose-Estimation"><span class="nav-text">Camera Pose Estimation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3D-Point-Sampling"><span class="nav-text">3D Point Sampling</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NerfAcc"><span class="nav-text">NerfAcc</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Loss-Function"><span class="nav-text">Loss Function</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#S3IM"><span class="nav-text">S3IM</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Volume-Rendering"><span class="nav-text">Volume Rendering</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NeuS"><span class="nav-text">NeuS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NeuRodin"><span class="nav-text">NeuRodin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ReTR"><span class="nav-text">ReTR</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mixture-of-Experts-MoE"><span class="nav-text">Mixture of Experts (MoE)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Boost-Your-NeRF"><span class="nav-text">Boost Your NeRF</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Efficiency"><span class="nav-text">Efficiency</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Explicit-Grids"><span class="nav-text">Explicit Grids</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NGP-RT"><span class="nav-text">NGP-RT</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MIMO-MLP"><span class="nav-text">MIMO MLP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MIMO-NeRF"><span class="nav-text">MIMO-NeRF</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Points-Sampling"><span class="nav-text">Points Sampling</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HashPoint"><span class="nav-text">HashPoint</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pixel-Sampling"><span class="nav-text">Pixel Sampling</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Soft-Mining"><span class="nav-text">Soft Mining</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Shooting-Much-Fewer-Rays"><span class="nav-text">Shooting Much Fewer Rays</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iNeRF"><span class="nav-text">iNeRF</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Expansive-Supervision"><span class="nav-text">Expansive Supervision</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Accuracy"><span class="nav-text">Accuracy</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Camera-Pose-Estimation"><span class="nav-text">Camera Pose Estimation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3D-Point-Sampling"><span class="nav-text">3D Point Sampling</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NerfAcc"><span class="nav-text">NerfAcc</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Loss-Function"><span class="nav-text">Loss Function</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#S3IM"><span class="nav-text">S3IM</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Volume-Rendering"><span class="nav-text">Volume Rendering</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NeuS"><span class="nav-text">NeuS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NeuRodin"><span class="nav-text">NeuRodin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ReTR"><span class="nav-text">ReTR</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mixture-of-Experts-MoE"><span class="nav-text">Mixture of Experts (MoE)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Boost-Your-NeRF"><span class="nav-text">Boost Your NeRF</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Efficiency"><span class="nav-text">Efficiency</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Explicit-Grids"><span class="nav-text">Explicit Grids</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NGP-RT"><span class="nav-text">NGP-RT</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MIMO-MLP"><span class="nav-text">MIMO MLP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MIMO-NeRF"><span class="nav-text">MIMO-NeRF</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Points-Sampling"><span class="nav-text">Points Sampling</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HashPoint"><span class="nav-text">HashPoint</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pixel-Sampling"><span class="nav-text">Pixel Sampling</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Soft-Mining"><span class="nav-text">Soft Mining</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Shooting-Much-Fewer-Rays"><span class="nav-text">Shooting Much Fewer Rays</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iNeRF"><span class="nav-text">iNeRF</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Expansive-Supervision"><span class="nav-text">Expansive Supervision</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Uncertainty"><span class="nav-text">Uncertainty</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Sources-of-Uncertainty"><span class="nav-text">Sources of Uncertainty</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ActiveNeRF"><span class="nav-text">ActiveNeRF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FisherRF"><span class="nav-text">FisherRF</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -756,14 +785,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">143</span>
+          <span class="site-state-item-count">145</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -817,12 +846,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">496k</span>
+    <span title="Symbols count total">500k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">30:02</span>
+    <span title="Reading time total">30:16</span>
 </div>
 
         

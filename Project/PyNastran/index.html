@@ -28,7 +28,7 @@
 <meta property="og:description" content="Welcome to pyNastran’s documentation for v1.3! — pyNastran 1.3 1.3 documentation (pynastran-git.readthedocs.io)  使用PyNastran库对 Patran&amp;Nastran有限元分析软件进行二次开发，可以自动对目标模型进行有限元分析">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-05-10T03:25:26.000Z">
-<meta property="article:modified_time" content="2024-09-20T14:24:08.361Z">
+<meta property="article:modified_time" content="2024-10-16T04:44:53.741Z">
 <meta property="article:author" content="Qi Yun">
 <meta name="twitter:card" content="summary">
 
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-09-20 22:24:08" itemprop="dateModified" datetime="2024-09-20T22:24:08+08:00">2024-09-20</time>
+                <time title="Modified: 2024-10-16 12:44:53" itemprop="dateModified" datetime="2024-10-16T12:44:53+08:00">2024-10-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -242,13 +242,13 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>341</span>
+              <span>957</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span>1 mins.</span>
+              <span>3 mins.</span>
             </span>
 
         </div>
@@ -265,7 +265,7 @@
 </blockquote>
 <p>使用PyNastran库对 Patran&amp;Nastran有限元分析软件进行二次开发，可以自动对目标模型进行有限元分析</p>
 <span id="more"></span>
-<h1 id="BDF"><a href="#BDF" class="headerlink" title="BDF"></a>BDF</h1><p>BDF文件是使用Patran对模型进行前处理产生的，包括划网格、定义结构参数、添加约束等操作</p>
+<h1 id="BDF-file"><a href="#BDF-file" class="headerlink" title="BDF file"></a>BDF file</h1><p>BDF文件是使用Patran对模型进行前处理产生的，包括划网格、定义结构参数、添加约束等操作</p>
 <ul>
 <li>xref：Cross-referencing，可以很方便地追踪对象，如果xref=False，只会返回数据对象的raw data，需要分别对bdf的element和node做索引</li>
 </ul>
@@ -307,7 +307,29 @@
 </tbody>
 </table>
 </div>
-
+<h1 id="Example-Steel-Plate-Structure"><a href="#Example-Steel-Plate-Structure" class="headerlink" title="Example (Steel Plate Structure)"></a>Example (Steel Plate Structure)</h1><p>Generate simulation datasets by FE (solidworks &amp; patran &amp; nastran &amp; python)</p>
+<p>Model and Simulate to get <code>.bdf</code> file</p>
+<ul>
+<li>solidworks project Part.SLDPRT, export <code>.x_t</code> file</li>
+<li>patran 材料属性参数设置+网格划分+约束+负载，并定义好输出的类型(mode shape/FRF…) to get <code>.bdf</code> file(其中保存着有限元模型前处理的结果，包括网格节点编号、坐标，材料属性)</li>
+<li>run nastran<ul>
+<li>input: <code>.bdf</code> file 使用python修改bdf中的参数，可以获得多个bdf，然后输入到nastran中进行仿真计算</li>
+<li>output: <code>.f06</code> file 包含仿真输出的结果</li>
+</ul>
+</li>
+</ul>
+<h2 id="python"><a href="#python" class="headerlink" title="python"></a>python</h2><p>修改钢板厚度 Tickness思路：</p>
+<ul>
+<li>读取所有节点坐标 nodes</li>
+<li>计算厚度缩放比例 <code>ratio = T / T_origin</code>，T是需要修改的厚度，T是bdf文件中初始的厚度</li>
+<li>将nodes坐标沿着厚度反向进行缩放，得到nodes_modify</li>
+<li>将修改后的nodes坐标写入bdf文件中</li>
+<li>然后运行nastran根据修改后的bdf文件仿真计算得到f06文件</li>
+<li>读取f06文件中的结果并保存</li>
+</ul>
+<p>main code</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_output</span>(<span class="params">bdf_path,input_path,nastran_path,save_dir</span>):</span><br><span class="line">  N_samples = <span class="number">1000</span></span><br><span class="line">  Tickness = np.random.uniform(<span class="number">2</span>, <span class="number">4</span>, N_samples) <span class="comment"># 2~4 mm</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="built_in">len</span>(Tickness)):</span><br><span class="line">      T = Tickness[i]</span><br><span class="line">      bdf_copy_path = <span class="string">f&#x27;gangban_<span class="subst">&#123;i&#125;</span>.bdf&#x27;</span></span><br><span class="line">      status_copy = shutil.copyfile(bdf_path, bdf_copy_path)</span><br><span class="line">      <span class="keyword">if</span> status_copy == bdf_copy_path:</span><br><span class="line">          nodes = read_bdf_nodes(bdf_copy_path)</span><br><span class="line">          T_origin = nodes[:, <span class="number">1</span>].<span class="built_in">max</span>() - nodes[:, <span class="number">1</span>].<span class="built_in">min</span>() <span class="comment"># 3mm</span></span><br><span class="line">          ratio_T = T / T_origin</span><br><span class="line">          ratio = [<span class="number">1</span>, ratio_T, <span class="number">1</span>]</span><br><span class="line">          nodes_modify = nodes * ratio</span><br><span class="line">          write_bdf_nodes(bdf_copy_path, nodes_modify)</span><br><span class="line">  </span><br><span class="line">          p = subprocess.Popen(nastran_path+<span class="string">&#x27; &#x27;</span>+bdf_copy_path, shell=<span class="literal">True</span>)</span><br><span class="line">          return_code = p.wait(timeout=<span class="number">1000</span>)</span><br><span class="line">          <span class="comment"># time.sleep(15)</span></span><br><span class="line">          time.sleep(<span class="number">7</span>)</span><br><span class="line">          <span class="built_in">print</span>(<span class="string">f&#x27;Finished running Nastran for <span class="subst">&#123;i+<span class="number">1</span>&#125;</span>th sample, T_origin: <span class="subst">&#123;T_origin&#125;</span>mm, T: <span class="subst">&#123;T&#125;</span>mm&#x27;</span>)</span><br><span class="line">          </span><br><span class="line">          modes = get_modes(bdf_copy_path.replace(<span class="string">&#x27;.bdf&#x27;</span>, <span class="string">&#x27;.f06&#x27;</span>))</span><br><span class="line">          <span class="comment"># all_modes.append(modes)</span></span><br><span class="line">          <span class="comment"># create a new txt file to store the modes</span></span><br><span class="line">          save_txt = <span class="built_in">open</span>(bdf_path.replace(<span class="string">&#x27;.bdf&#x27;</span>, <span class="string">&#x27;.txt&#x27;</span>), <span class="string">&#x27;a&#x27;</span>)</span><br><span class="line">          save_txt.write(<span class="built_in">str</span>(modes) + <span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">          save_txt.close()</span><br><span class="line">      <span class="keyword">else</span>:</span><br><span class="line">          <span class="built_in">print</span>(<span class="string">f&#x27;Error in copying file <span class="subst">&#123;bdf_copy_path&#125;</span>&#x27;</span>)</span><br><span class="line">  </span><br><span class="line">      bdf_copy_path_prefix = bdf_copy_path.split(<span class="string">&#x27;.&#x27;</span>)[<span class="number">0</span>]</span><br><span class="line">      <span class="keyword">for</span> suffix <span class="keyword">in</span> [<span class="string">&#x27;.bdf&#x27;</span>, <span class="string">&#x27;.f04&#x27;</span>, <span class="string">&#x27;.f06&#x27;</span>, <span class="string">&#x27;.log&#x27;</span>, <span class="string">&#x27;.op2&#x27;</span>,<span class="string">&#x27;.h5&#x27;</span>]:</span><br><span class="line">          os.remove(bdf_copy_path_prefix + suffix)</span><br><span class="line">  </span><br><span class="line">  <span class="comment"># all_modes = np.array(all_modes)</span></span><br><span class="line">  read_save_txt = <span class="built_in">open</span>(bdf_path.replace(<span class="string">&#x27;.bdf&#x27;</span>, <span class="string">&#x27;.txt&#x27;</span>), <span class="string">&#x27;r&#x27;</span>)</span><br><span class="line">  all_modes = read_save_txt.readlines()</span><br><span class="line">  read_save_txt.close()</span><br><span class="line">  </span><br><span class="line">  all_modes = np.array([<span class="built_in">eval</span>(mode) <span class="keyword">for</span> mode <span class="keyword">in</span> all_modes])</span><br><span class="line">  <span class="keyword">if</span> <span class="string">&quot;updated&quot;</span> <span class="keyword">in</span> input_path:</span><br><span class="line">      np.savez(os.path.join(save_dir, <span class="string">&#x27;modes_updated.npz&#x27;</span>), modes = all_modes)</span><br><span class="line">  <span class="keyword">else</span>:</span><br><span class="line">      np.savez(os.path.join(save_dir, <span class="string">&#x27;modes.npz&#x27;</span>), modes = all_modes)</span><br><span class="line">  <span class="comment"># np.savez(os.path.join(save_dir, &#x27;modes_updated.npz&#x27;), modes = all_modes)</span></span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;Finished saving modes, shape is &quot;</span>, all_modes.shape)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">read_bdf_nodes</span>(<span class="params">bdf_filename:<span class="built_in">str</span></span>) -&gt; np.ndarray:</span><br><span class="line">  <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">  Read the node information from the bdf file</span></span><br><span class="line"><span class="string">  &quot;&quot;&quot;</span></span><br><span class="line">  model = BDF()</span><br><span class="line">  bdf = read_bdf(bdf_filename, xref=<span class="literal">False</span>,debug=<span class="literal">False</span>)</span><br><span class="line">  <span class="comment"># print(bdf.get_bdf_stats())</span></span><br><span class="line">  <span class="comment"># print(&#x27;____________________________________________________________________________&#x27;)</span></span><br><span class="line">  <span class="comment"># print(object_attributes(bdf))</span></span><br><span class="line">  <span class="comment"># print(object_methods(bdf))</span></span><br><span class="line">  node_pos_all = []</span><br><span class="line">  <span class="keyword">for</span> nid,node <span class="keyword">in</span> <span class="built_in">sorted</span>(bdf.nodes.items()):</span><br><span class="line">      <span class="comment"># print(bdf.nodes[nid].xyz)</span></span><br><span class="line">      <span class="comment"># print(node)</span></span><br><span class="line">      <span class="comment"># print(node.get_position())</span></span><br><span class="line">      <span class="comment"># exit()</span></span><br><span class="line">      node_pos = node.get_position()</span><br><span class="line">      node_pos_all.append(node_pos)</span><br><span class="line">  </span><br><span class="line">  node_pos_all = np.array(node_pos_all)</span><br><span class="line">  <span class="comment"># print(&#x27;Nodes shape:&#x27;, node_pos_all.shape)</span></span><br><span class="line">  <span class="comment"># exit()</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> node_pos_all</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">write_bdf_nodes</span>(<span class="params">bdf_filename:<span class="built_in">str</span>, nodes:np.ndarray</span>):</span><br><span class="line">  <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">  Write the node information to the bdf file</span></span><br><span class="line"><span class="string">  &quot;&quot;&quot;</span></span><br><span class="line">  model = BDF()</span><br><span class="line">  bdf_xref = read_bdf(bdf_filename, xref=<span class="literal">True</span>,debug=<span class="literal">False</span>)</span><br><span class="line">  <span class="comment"># wrte the nodes to the bdf file</span></span><br><span class="line">  <span class="keyword">for</span> nid,node <span class="keyword">in</span> <span class="built_in">sorted</span>(bdf_xref.nodes.items()):</span><br><span class="line">      node_pos = nodes[nid-<span class="number">1</span>]</span><br><span class="line">      <span class="comment"># print(node.xyz)</span></span><br><span class="line">      node.xyz = node_pos</span><br><span class="line">      <span class="comment"># print(node.xyz)</span></span><br><span class="line">  bdf_xref.write_bdf(bdf_filename)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_modes</span>(<span class="params">f06_copy_path:<span class="built_in">str</span></span>):</span><br><span class="line">  <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">  Get the modes from the f06 file</span></span><br><span class="line"><span class="string">  &quot;&quot;&quot;</span></span><br><span class="line">  find_txt = <span class="string">&quot;NO.       ORDER                                                                       MASS              STIFFNESS&quot;</span></span><br><span class="line">  line_num = <span class="number">0</span></span><br><span class="line">  f = <span class="built_in">open</span>(f06_copy_path, <span class="string">&#x27;r&#x27;</span>)</span><br><span class="line">  lines_mode = f.readlines()</span><br><span class="line">  <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">      line = lines_mode[line_num]</span><br><span class="line">      <span class="keyword">if</span> find_txt <span class="keyword">in</span> line:</span><br><span class="line">          <span class="keyword">break</span></span><br><span class="line">      line_num += <span class="number">1</span> <span class="comment"># python 从0开始计数</span></span><br><span class="line">  <span class="comment"># print(line_num)</span></span><br><span class="line">  modes = []</span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(line_num+<span class="number">7</span>, line_num+<span class="number">7</span>+<span class="number">5</span>):</span><br><span class="line">      line_mode = lines_mode[i]</span><br><span class="line">      modes.append(<span class="built_in">float</span>(line_mode[<span class="number">67</span>:<span class="number">80</span>]))</span><br><span class="line">  <span class="keyword">return</span> modes</span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -406,7 +428,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#BDF"><span class="nav-text">BDF</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%87%A0%E4%BD%95%E5%B0%BA%E5%AF%B8"><span class="nav-text">修改几何尺寸</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#BDF-file"><span class="nav-text">BDF file</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%87%A0%E4%BD%95%E5%B0%BA%E5%AF%B8"><span class="nav-text">修改几何尺寸</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Example-Steel-Plate-Structure"><span class="nav-text">Example (Steel Plate Structure)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#python"><span class="nav-text">python</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -421,14 +443,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">143</span>
+          <span class="site-state-item-count">145</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -482,12 +504,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">496k</span>
+    <span title="Symbols count total">500k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">30:02</span>
+    <span title="Reading time total">30:16</span>
 </div>
 
         
