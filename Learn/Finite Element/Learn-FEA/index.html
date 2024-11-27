@@ -27,13 +27,14 @@
 <meta property="og:site_name" content="QiYun">
 <meta property="og:description" content="Basic of Finite Element Analysis">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcommunity.altair.com%2F82dc6cb8db978d90e8863978f496193d.iix&amp;f=1&amp;nofb=1&amp;ipt=e29041e57c827ed2faf008c7ddd57993d080f93b25ead70858bd52bf7800e97c&amp;ipo=images">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240708153849.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241016122523.png">
 <meta property="article:published_time" content="2024-05-25T14:10:37.000Z">
-<meta property="article:modified_time" content="2024-10-16T04:26:11.506Z">
+<meta property="article:modified_time" content="2024-11-01T02:28:07.109Z">
 <meta property="article:author" content="Qi Yun">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240708153849.png">
+<meta name="twitter:image" content="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcommunity.altair.com%2F82dc6cb8db978d90e8863978f496193d.iix&amp;f=1&amp;nofb=1&amp;ipt=e29041e57c827ed2faf008c7ddd57993d080f93b25ead70858bd52bf7800e97c&amp;ipo=images">
 
 <link rel="canonical" href="http://example.com/Learn/Finite%20Element/Learn-FEA/">
 
@@ -228,7 +229,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-10-16 12:26:11" itemprop="dateModified" datetime="2024-10-16T12:26:11+08:00">2024-10-16</time>
+                <time title="Modified: 2024-11-01 10:28:07" itemprop="dateModified" datetime="2024-11-01T10:28:07+08:00">2024-11-01</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -245,13 +246,13 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>1.2k</span>
+              <span>1.9k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span>4 mins.</span>
+              <span>7 mins.</span>
             </span>
 
         </div>
@@ -270,7 +271,7 @@
 </blockquote>
 <p>有限元分析（Finite Element Analysis，FEA）有时又被称作有限元方法（Finite Element Method，FEM），二者基本可以混用，微小的区别在于，FEM 侧重于整套理论而 FEA 侧重于应用 FEM 于具体工程问题。</p>
 <h2 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h2><blockquote>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/681621600">有限元入门—Understanding the Finite Element Method | The Efficient Engineer的部分笔记 - 知乎</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/348729395">网格划分：六面体和四面体该怎么选择？ - 知乎</a> 六面体计算收敛速度快，四面体计算收敛慢。<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/56326567">有限元分析（FEA）是个什么东东 - 知乎</a> <strong>有限元法就是为了求解偏微分方程！</strong> <strong>获得微分方程的“弱形式”解</strong><br>    <a target="_blank" rel="noopener" href="https://cn.comsol.com/multiphysics/finite-element-method">有限元法（FEM）详解</a><br><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/523893840">(72 封私信 / 80 条消息) 数值pde与深度学习结合是未来发展方向吗？ - 知乎</a> PINN <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/468748367">​内嵌物理知识神经网络（PINN）是个坑吗？ - 知乎</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/681621600">有限元入门—Understanding the Finite Element Method | The Efficient Engineer的部分笔记 - 知乎</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/348729395">网格划分：六面体和四面体该怎么选择？ - 知乎</a> 六面体计算收敛速度快，四面体计算收敛慢。<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/56326567">有限元分析（FEA）是个什么东东 - 知乎</a> <strong>有限元法就是为了求解偏微分方程！</strong> <strong>获得微分方程的“弱形式”解</strong></p>
 </blockquote>
 <p>有限元模型：</p>
 <ul>
@@ -282,7 +283,43 @@
 </li>
 <li>自由度：有限元网格中的每个节点都有一定数量的自由度，<em>在二维应力分析中，每个节点有3个自由度——在X轴和Y轴上平移，以及绕Z轴旋转。对于热分析，每个节点都有一个自由度，即节点温度。</em></li>
 </ul>
-<h1 id="有限元分析软件"><a href="#有限元分析软件" class="headerlink" title="有限元分析软件"></a>有限元分析软件</h1><h2 id="Solidworks"><a href="#Solidworks" class="headerlink" title="Solidworks"></a>Solidworks</h2><p>建立好的模型导出为<code>.x_t</code>格式</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/55816169">通俗易懂的有限元基础原理 - 知乎</a></p>
+</blockquote>
+<ol>
+<li>微分方程大大降低了使用固体力学法的效率，甚至让求解成为不可能</li>
+<li>那么怎样才能绕开微分方程呢？答案是在计算一开始就去<strong>猜结构受力后的位移</strong>。这个位移最好满足边界条件（注意，这里是“最好”），之后算出结构在假设位移下的内外力虚功，或者是应变能，令其满足对应的能量原理。<strong>人们通过猜位移并引入能量原理的方式终于摆脱了微分方程，可以通过积分来分析结构了</strong>。</li>
+<li>用传统书写方式进行计算效率贼低，一大堆类似的方程算来算去，好不自在。于是有人引入了矩阵（Matrix）来改善计算效率，把相似计算写成矩阵形式，使得书写更加简洁，效率也更高。</li>
+<li><strong>把结构分成很多很多份，去猜每一份上的位移</strong>，比如都猜成线性，只要结构被划分的够多，每一份上猜的准不准就无所谓，在满足收敛条件的前提下，算出来的位移就会很靠近真实的位移</li>
+</ol>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/27696855/answer/3276666220">有限元方法的核心思想是什么？ - 慢慢闲者的回答 - 知乎</a></p>
+</blockquote>
+<p><strong>试函数</strong>（_trial function_）作为有限元分析的数学基础，其基本原理是：先假定满足一定边界条件的试函数，然后将其代入需要求解的<strong>控制方程</strong>（_governing equation_），通过使用与原方程的误差残值最小来确定试函数中的待定系数。</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=se1MergCnh8&amp;list=PLLwttJaA6dBJGd1FaLziRqXXCefZbOfX8">1 3 微分方程求解的方法 - YouTube</a></p>
+</blockquote>
+<p>求解微分方程方法：</p>
+<ul>
+<li>解析方法</li>
+<li>近似方法(差分)，将整体分为很多小部分，每个部分进行求解，细分越多越接近解析解</li>
+<li>近似方法(试函数)，选择满足边界条件的试函数(有待定系数)，带入控制方程(微分方程)，大概率不满足方程，带入控制方程得到残差函数并让残差最小。加权余量法——(残差函数与基底函数加权求和/求积分并令其为0，确当待定系数) 当残差与基函数的积分为零时，意味着在这些方向上的残差投影为零。</li>
+</ul>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://ethz.ch/content/dam/ethz/special-interest/mavt/mechanical-systems/mm-dam/documents/Notes/IntroToFEA_red.pdf">ethz.ch/content/dam/ethz/special-interest/mavt/mechanical-systems/mm-dam/documents/Notes/IntroToFEA_red.pdf</a> </p>
+</blockquote>
+<p>Really nice book!!!</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://chaoskey.github.io/notes/docs/fem/0097/">有限元方法（一）【翻译】 | 学习笔记</a><br>《Automated Solution of Differential Equations by the Finite Element Method》读书笔记 by chaoskey</p>
+</blockquote>
+<h2 id="PINN"><a href="#PINN" class="headerlink" title="PINN"></a>PINN</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/523893840">(72 封私信 / 80 条消息) 数值pde与深度学习结合是未来发展方向吗？ - 知乎</a> PINN <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/468748367">​内嵌物理知识神经网络（PINN）是个坑吗？ - 知乎</a><br>  <a target="_blank" rel="noopener" href="https://www.zhihu.com/question/523893840/answer/2961123949">数值pde与深度学习结合是未来发展方向吗？ - Martingale的回答 - 知乎</a></p>
+</blockquote>
+<p><img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcommunity.altair.com%2F82dc6cb8db978d90e8863978f496193d.iix&amp;f=1&amp;nofb=1&amp;ipt=e29041e57c827ed2faf008c7ddd57993d080f93b25ead70858bd52bf7800e97c&amp;ipo=images" alt="iu (1172×464)"></p>
+<h2 id="VEM-Virtual-Element-Method"><a href="#VEM-Virtual-Element-Method" class="headerlink" title="VEM (Virtual Element Method)"></a>VEM (Virtual Element Method)</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://space.bilibili.com/76753039/dynamic">草莓Ye子酱个人动态-草莓Ye子酱动态记录-哔哩哔哩视频</a> <a target="_blank" rel="noopener" href="https://github.com/Qinxiaoye/xpfem?tab=readme-ov-file">Qinxiaoye/xpfem: A python package for finite element method (FEM) in solid mechanics</a> Bingbing Xu大佬<br><a target="_blank" rel="noopener" href="https://maths.dur.ac.uk/lms/101/talks/0493daveiga.pdf">An introduction to the Virtual Element Method</a></p>
+</blockquote>
+<h1 id="Software-about-FE"><a href="#Software-about-FE" class="headerlink" title="Software (about FE)"></a>Software (about FE)</h1><h2 id="Solidworks"><a href="#Solidworks" class="headerlink" title="Solidworks"></a>Solidworks</h2><p>建立好的模型导出为<code>.x_t</code>格式</p>
 <p>将Solid 转换成Surface：</p>
 <ul>
 <li><strong>Delete Face</strong></li>
@@ -308,7 +345,7 @@
 <li>Menu —&gt; Preferences —&gt; Geometry —&gt; 1000.0 (Millimeters) —&gt; <strong>Apply</strong></li>
 <li>File —&gt; Import —&gt; <code>*.x_t</code> —&gt; <strong>Apply</strong> (Display —&gt; Smooth Shade)</li>
 <li>Meshing —&gt;(RHS) Mesh —&gt; Solid —&gt;(Main window) select solid —&gt; Automatic Calculation  —&gt; <strong>Apply</strong></li>
-<li>Properties —&gt; Isotropic —&gt;(RHS) <em>Material Name</em> —&gt; Input properties (Elastic Modulus: 210000, Shear Modulus: 83000, Density: 7.86E-09) —&gt; <strong>Apply</strong></li>
+<li>Properties —&gt; Isotropic —&gt;(RHS) <em>Material Name</em> —&gt; Input properties (Elastic Modulus: 210000MPa, Shear Modulus: 83000, Density: 7.86E-09 Kg/m^3) —&gt; <strong>Apply</strong></li>
 <li>Properties —&gt; Solid —&gt; Propert Set Name —&gt;(RHS) Input properties —&gt; Mat Prop Name select <em>gangban(Material Name)</em> —&gt;  Select Application Region —&gt;(Main window) select solid —&gt; Add —&gt; <strong>Apply</strong></li>
 <li>Analysis —&gt; Solution Type —&gt; NORMAL MODES —&gt; Solution Type —&gt; Solution Parameters —&gt; Results Output Format(XDB or OP2) —&gt; Subcase —&gt; Subcase Parameters —&gt; Number of Desired Roots : 20 —&gt; <strong>Apply</strong> Run nastran —&gt; Get .bdf</li>
 </ol>
@@ -437,7 +474,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Finite-Element"><span class="nav-text">Finite Element</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic"><span class="nav-text">Basic</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%89%E9%99%90%E5%85%83%E5%88%86%E6%9E%90%E8%BD%AF%E4%BB%B6"><span class="nav-text">有限元分析软件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Solidworks"><span class="nav-text">Solidworks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Patran"><span class="nav-text">Patran</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mode-Frequency"><span class="nav-text">Mode Frequency</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nastran"><span class="nav-text">Nastran</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%AB%E6%98%9F%E7%AE%97%E4%BE%8B-bdf"><span class="nav-text">卫星算例.bdf</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#FEA%E4%BA%8C%E6%AC%A1%E5%BC%80%E5%8F%91-Python"><span class="nav-text">FEA二次开发(Python)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other"><span class="nav-text">Other</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#FE-amp-Blender"><span class="nav-text">FE &amp; Blender</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Finite-Element"><span class="nav-text">Finite Element</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic"><span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PINN"><span class="nav-text">PINN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VEM-Virtual-Element-Method"><span class="nav-text">VEM (Virtual Element Method)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Software-about-FE"><span class="nav-text">Software (about FE)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Solidworks"><span class="nav-text">Solidworks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Patran"><span class="nav-text">Patran</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mode-Frequency"><span class="nav-text">Mode Frequency</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nastran"><span class="nav-text">Nastran</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%AB%E6%98%9F%E7%AE%97%E4%BE%8B-bdf"><span class="nav-text">卫星算例.bdf</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#FEA%E4%BA%8C%E6%AC%A1%E5%BC%80%E5%8F%91-Python"><span class="nav-text">FEA二次开发(Python)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other"><span class="nav-text">Other</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#FE-amp-Blender"><span class="nav-text">FE &amp; Blender</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -452,14 +489,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">145</span>
+          <span class="site-state-item-count">149</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -513,12 +550,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">500k</span>
+    <span title="Symbols count total">507k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">30:16</span>
+    <span title="Reading time total">30:43</span>
 </div>
 
         

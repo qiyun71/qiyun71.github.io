@@ -20,13 +20,14 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="NeRF系列的多视图三维重建方法关键有两点: 如何表示3D model: mesh, voxel, pointcloud, RGBD, Implicit Density Field, SDF or Other Primitive(高斯体, 椭圆体, 球) 如何将3D model 可微渲染成2D图像: Volume Rendering or Rasterization?     Accuracy">
+  <meta name="description" content="Accuracy 重建的模型精度不好，影响因素： 数据集质量：照片拍摄质量(设备)、相机位姿估计精度(COLMAP) 照片质量问题：混叠、模糊、滚动快门 (RS) 效应、HDR&#x2F;LDR、运动模糊、低光照 相机位姿误差：SFM位姿估计时的误差   NeuS方法的问题：体渲染公式的过度简化、表面几何与颜色的偏差、缺少几何约束(深度or法向量) 网格提取方法(Marching Cube)：分辨率太低">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Multi-view 3D Reconstruction based on SDF and volume rendering">
 <meta property="og:url" content="http://example.com/3DReconstruction/Multi-view/NeuS-based%203D%20Reconstruction/index.html">
 <meta property="og:site_name" content="QiYun">
-<meta property="og:description" content="NeRF系列的多视图三维重建方法关键有两点: 如何表示3D model: mesh, voxel, pointcloud, RGBD, Implicit Density Field, SDF or Other Primitive(高斯体, 椭圆体, 球) 如何将3D model 可微渲染成2D图像: Volume Rendering or Rasterization?     Accuracy">
+<meta property="og:description" content="Accuracy 重建的模型精度不好，影响因素： 数据集质量：照片拍摄质量(设备)、相机位姿估计精度(COLMAP) 照片质量问题：混叠、模糊、滚动快门 (RS) 效应、HDR&#x2F;LDR、运动模糊、低光照 相机位姿误差：SFM位姿估计时的误差   NeuS方法的问题：体渲染公式的过度简化、表面几何与颜色的偏差、缺少几何约束(深度or法向量) 网格提取方法(Marching Cube)：分辨率太低">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241010195323.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240902141345.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240902132257.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231109094904.png">
@@ -43,10 +44,10 @@
 <meta property="og:image" content="https://jiangwenpl.github.io/FisherRF/static/images/teaser-cropped.gif">
 <meta property="og:image" content="https://jiangwenpl.github.io/FisherRF/static/images/teaser.jpg">
 <meta property="article:published_time" content="2024-06-17T09:11:22.000Z">
-<meta property="article:modified_time" content="2024-10-16T02:34:24.130Z">
+<meta property="article:modified_time" content="2024-11-26T06:28:45.556Z">
 <meta property="article:author" content="Qi Yun">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240902141345.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241010195323.png">
 
 <link rel="canonical" href="http://example.com/3DReconstruction/Multi-view/NeuS-based%203D%20Reconstruction/">
 
@@ -245,7 +246,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-10-16 10:34:24" itemprop="dateModified" datetime="2024-10-16T10:34:24+08:00">2024-10-16</time>
+                <time title="Modified: 2024-11-26 14:28:45" itemprop="dateModified" datetime="2024-11-26T14:28:45+08:00">2024-11-26</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -262,13 +263,13 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>6.5k</span>
+              <span>7.6k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span>23 mins.</span>
+              <span>27 mins.</span>
             </span>
 
         </div>
@@ -281,20 +282,14 @@
 
       
         <ul>
-<li>NeRF系列的多视图三维重建方法关键有两点:<ul>
-<li>如何表示3D model: mesh, voxel, pointcloud, RGBD, Implicit Density Field, SDF or Other Primitive(高斯体, 椭圆体, 球)</li>
-<li>如何将3D model 可微渲染成2D图像: Volume Rendering or Rasterization?</li>
-</ul>
-</li>
-</ul>
-<ul>
 <li><strong>Accuracy</strong> 重建的模型精度不好，影响因素：<ul>
 <li>数据集质量：照片拍摄质量(设备)、相机位姿估计精度(COLMAP)<ul>
 <li>照片质量问题：混叠、模糊、滚动快门 (RS) 效应、HDR/LDR、运动模糊、低光照</li>
+<li>相机位姿误差：SFM位姿估计时的误差</li>
 </ul>
 </li>
-<li>NeuS方法的问题：Loss函数约束、体渲染的过度简化、缺少监督(<em>深度or法向量</em>)</li>
-<li>网格提取方法(Marching Cube)</li>
+<li>NeuS方法的问题：体渲染公式的过度简化、表面几何与颜色的偏差、缺少几何约束(<em>深度or法向量</em>)</li>
+<li>网格提取方法(Marching Cube)：分辨率太低</li>
 </ul>
 </li>
 <li><strong>Efficiency</strong> 训练/渲染的速度太慢，影响因素：<ul>
@@ -306,17 +301,56 @@
 <span id="more"></span>
 <p><em>Other link about 3D Reconstruction: (need to add “ ../ “ in obsidian)</em></p>
 <ul>
-<li><a href="../../Paper%20About%203D%20Reconstruction">Paper About 3D Reconstruction</a><ul>
-<li><a href="../../Finite%20Element%20Model%203D%20Reconstruction">Finite Element Model 3D Reconstruction</a></li>
-<li><a href="../../Anime%20Image%203D%20Reconstruction">Anime Image 3D Reconstruction</a></li>
-<li><a href="Multi-view%20Human%20Body%20Reconstruction">Multi-view Human Body Reconstruction</a></li>
+<li><a href="../../Paper%20About%203D%20Reconstruction">Paper About 3D Reconstruction</a> <a href="Implicit%20Function/NeRF-based/NeRF%20Other%20Research/NeRF-review.md">NeRF-review</a><ul>
+<li><a href="../../Finite%20Element%20Model%203D%20Reconstruction">Finite Element Model 3D Reconstruction</a> 三维重建出有限元模型 (医学领域较多研究, 工业领域目前研究比较少✊)</li>
+<li><a href="../../Anime%20Image%203D%20Reconstruction">Anime Image 3D Reconstruction</a> 根据动漫图像重建三维模型 (结合3D彩色打印实现手办自由😊)</li>
+<li><a href="Multi-view%20Human%20Body%20Reconstruction">Multi-view Human Body Reconstruction</a> 重建三维人体模型 (数字人直播, 真人手办😊)</li>
 </ul>
 </li>
 <li><a href="../../Basics%20about%203D%20Reconstruction">Basics about 3D Reconstruction</a></li>
 <li><a href="../../Datasets">Datasets</a></li>
-<li><a href="Code%20of%20Multi-view%203D%20Reconstruction%20based%20on%20SDF%20and%20volume%20rendering">Code of Multi-view 3D Reconstruction based on SDF and volume rendering</a></li>
+<li><a href="Code%20of%20Multi-view%203D%20Reconstruction%20based%20on%20SDF%20and%20volume%20rendering">Code of Multi-view 3D Reconstruction based on SDF and volume rendering</a> 一些环境配置记录</li>
 </ul>
-<p><a href="../../Blog&amp;Book&amp;Paper/Write/Write%20Paper/3D%20Reconstruction/Master%20Paper(3DReconstruction">Master Paper(3DReconstruction)</a>.md)</p>
+<p><a href="../../Blog&amp;Book&amp;Paper/Write/Write%20Paper/3D%20Reconstruction/Master%20Paper(3DReconstruction">Master Paper(3DReconstruction)</a>) 硕论思路，打算沿着NeuS的路线进行相关改进</p>
+<p><strong>多视图三维重建方法的关键在于</strong>:</p>
+<ol>
+<li>如何表示3D model: mesh, voxel, pointcloud, RGBD, occupancy function,  Implicit Density Field, SDF or Other Primitive(高斯体, 椭圆体, 球)</li>
+<li>如何将3D model 可微地渲染成2D图像: Volume Rendering or Rasterization?</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241010195323.png" alt="image.png|555"></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>3D represent</th>
+<th>Rendering method</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NeRF</td>
+<td>Implicit Density Field (MLP)</td>
+<td>Volume Rendering</td>
+</tr>
+<tr>
+<td><strong>NeuS</strong></td>
+<td>Implicit SDF (MLP)</td>
+<td>Volume Rendering</td>
+</tr>
+<tr>
+<td>3DGS</td>
+<td>高斯体<br>形状/方向——中心点+协方差 <br>颜色——球谐函数, 不透明度</td>
+<td>Splatting (Rasterization)</td>
+</tr>
+<tr>
+<td>EVER</td>
+<td>椭圆体</td>
+<td>Volume Rendering</td>
+</tr>
+</tbody>
+</table>
+</div>
 <h1 id="Accuracy"><a href="#Accuracy" class="headerlink" title="Accuracy"></a>Accuracy</h1><h2 id="Camera-Pose-Estimation"><a href="#Camera-Pose-Estimation" class="headerlink" title="Camera Pose Estimation"></a>Camera Pose Estimation</h2><h2 id="3D-Point-Sampling"><a href="#3D-Point-Sampling" class="headerlink" title="3D Point Sampling"></a>3D Point Sampling</h2><h3 id="NerfAcc"><a href="#NerfAcc" class="headerlink" title="NerfAcc"></a>NerfAcc</h3><p>NerfAcc：占据+逆变换采样 混合采样方式<br>先使用占据网格确定哪些区域需要采样，再通过粗采样得到的权重使用逆变换采样进行精采样得到采样点</p>
 <h2 id="Loss-Function"><a href="#Loss-Function" class="headerlink" title="Loss Function"></a>Loss Function</h2><h3 id="S3IM"><a href="#S3IM" class="headerlink" title="S3IM"></a>S3IM</h3><blockquote>
 <p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2308.07032">S3IM: Stochastic Structural SIMilarity and Its Unreasonable Effectiveness for Neural Fields</a></p>
@@ -330,15 +364,17 @@
 </ul>
 </li>
 <li>将B个像素/光线构成一个rendered patch $\mathcal{P}(\hat{\mathcal{C}})$，同时有一个gt image patch $\mathcal{P}(\mathcal{C})$</li>
-<li>计算rendered和gt patch之间的$SSIM(\mathcal{P}(\hat{\mathcal{C}}),\mathcal{P}(\mathcal{C}))$ with kernel size KxK and stride size s =K</li>
+<li>计算rendered和gt patch之间的$SSIM(\mathcal{P}(\hat{\mathcal{C}}),\mathcal{P}(\mathcal{C}))$ with kernel si ze KxK and stride size s =K</li>
 <li>由于patch是随机的，重复M次上述两步，并计算M次SSIM的平均值</li>
 </ul>
 <p>$\mathrm{S3IM}(\hat{\mathcal{R}},\mathcal{R})=\frac{1}{M}\sum_{m=1}^{M}\mathrm{SSIM}(\mathcal{P}^{(m)}(\hat{\mathcal{C}}),\mathcal{P}^{(m)}(\mathcal{C}))$</p>
 <p>$L_{\mathrm{S3IM}}(\Theta,\mathcal{R})=1-\mathrm{S3IM}(\hat{\mathcal{R}},\mathcal{R}) = =1-\frac1M\sum_{m=1}^M\mathrm{SSIM}(\mathcal{P}^{(m)}(\hat{\mathcal{C}}),\mathcal{P}^{(m)}(\mathcal{C}))$</p>
-<h2 id="Volume-Rendering"><a href="#Volume-Rendering" class="headerlink" title="Volume Rendering"></a>Volume Rendering</h2><h3 id="NeuS"><a href="#NeuS" class="headerlink" title="NeuS"></a>NeuS</h3><blockquote>
+<h2 id="Volume-Rendering-SDF2Density"><a href="#Volume-Rendering-SDF2Density" class="headerlink" title="Volume Rendering (SDF2Density)"></a>Volume Rendering (SDF2Density)</h2><h3 id="VolSDF"><a href="#VolSDF" class="headerlink" title="VolSDF"></a>VolSDF</h3><p>$\sigma(\mathbf{r}(t))=\Psi_s(f(\mathbf{r}(t)))=\begin{cases}\frac{1}{2s}\exp\left(\frac{-f(\mathbf{r}(t))}{s}\right)&amp;\text{if }f(\mathbf{r}(t))\geq0,\\\frac{1}{s}\left(1-\frac{1}{2}\exp\left(\frac{f(\mathbf{r}(t))}{s}\right)\right)&amp;\text{if }f(\mathbf{r}(t))&lt;0.\end{cases}$</p>
+<h3 id="NeuS"><a href="#NeuS" class="headerlink" title="NeuS"></a>NeuS</h3><blockquote>
 <p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2106.10689">NeuS: Learning Neural Implicit Surfaces by Volume Rendering for Multi-view Reconstruction</a></p>
 </blockquote>
-<p>SDF内部-1，外部1，表面0<br>NeuS没有与NeRF一样直接使用MLP输出的不透明度$\sigma$作为$\rho$，而是使用预测的sdf进行相应计算得到$\rho$，以及权重</p>
+<p>SDF内部-1，外部1，表面0<br>$f(x)=\left\{\begin{matrix}d(x,\partial\Omega)&amp;\mathrm{if~}x\in\Omega\-d(x,\partial\Omega)&amp;\mathrm{if~}x\not\in\Omega.\end{matrix}\right.$</p>
+<p>NeuS没有与NeRF一样直接使用MLP输出的不透明度$\sigma$作为$\rho$，而是使用预测的sdf进行相应计算得到$\rho$，以及权重</p>
 <ul>
 <li>$C(\mathbf{o},\mathbf{v})=\int_{0}^{+\infty}w(t)c(\mathbf{p}(t),\mathbf{v})\mathrm{d}t$  $\omega(t)=T(t)\rho(t),\text{where}T(t)=\exp\left(-\int_0^t\rho(u)\mathrm{d}u\right)$</li>
 <li>$\rho(t)=\max\left(\frac{-\frac{\mathrm{d}\Phi_s}{\mathrm{d}t}(f(\mathbf{p}(t)))}{\Phi_s(f(\mathbf{p}(t)))},0\right)$ , MLP预测的sdf即$f(\mathbf{p}(t))$ </li>
@@ -354,8 +390,9 @@
 <ul>
 <li>where m is batch size(ray scalar), n is the point sampling size</li>
 </ul>
+<h3 id="TUVR"><a href="#TUVR" class="headerlink" title="TUVR"></a>TUVR</h3><p>$\sigma(t)=\begin{cases}\frac{1}{s(t)}\exp\left(\frac{-f(t)}{s(t)|f’(t)|}\right)&amp;\text{if}f(t)\geq0,\\\frac{2}{s(t)}\left(1-\frac{1}{2}\exp\left(\frac{f(t)}{s(t)|f’(t)|}\right)\right)&amp;\text{if}f(t)&lt;0.\end{cases}$</p>
 <h3 id="NeuRodin"><a href="#NeuRodin" class="headerlink" title="NeuRodin"></a>NeuRodin</h3><blockquote>
-<p><a target="_blank" rel="noopener" href="https://open3dvlab.github.io/NeuRodin/">NeuRodin: A Two-stage Framework for High-Fidelity Neural Surface Reconstruction</a></p>
+<p><a target="_blank" rel="noopener" href="https://open3dvlab.github.io/NeuRodin/">NeuRodin: A Two-stage Framework for High-Fidelity Neural Surface Reconstruction</a><br><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2408.10178">arxiv.org/pdf/2408.10178</a></p>
 </blockquote>
 <p>室内外大场景，之前方法存在的问题：</p>
 <ul>
@@ -399,7 +436,7 @@
 </li>
 <li>本文解决方法:  <script type="math/tex">\mathcal{L}_{\mathrm{bias}}=\frac1m\sum_{\mathbf{r}\in\mathcal{R}}\max\left(f(\mathbf{r}(t^*+\epsilon_{\mathrm{bias}})),0\right),\quad t^{*}=\arg\max_{t\in(0,+\infty)}T(t)\sigma(\mathbf{r}(t))</script> <ul>
 <li>通过约束每条光线上A($t^*$ with bias correction factor $\epsilon_{\mathrm{bias}}$)与C的差异，且仅约束sdf为正(即模型外部)的部分 </li>
-<li><strong><em>为什么不约束模型内部呢？：鼓励SDF在A位置之后取负值，经验测试出来的(附录C)，且提供了<a target="_blank" rel="noopener" href="https://www.desmos.com/calculator/k1jklfvd5y?lang=zh-CN">数学解释</a>:</em></strong> 当A在C之前时，随着$\theta$的变化AC之间差异变化的更大；当A在C之后时，随着$\theta$的变化AC之间差异变化较小 </li>
+<li><strong><em>为什么不约束模型内部呢？：鼓励SDF在A位置之后取负值，经验测试出来的(附录C)，且提供了<a target="_blank" rel="noopener" href="https://www.desmos.com/calculator/k1jklfvd5y?lang=zh-CN">数学解释</a>:</em></strong> 当A在C之前时，随着$\theta$ 的变化AC之间差异变化的更大；当A在C之后时，随着$\theta$的变化AC之间差异变化较小 </li>
 <li>$\epsilon_{\mathrm{bias}}$ 是由于选取maximum的方法导致的：直接使用采样点的最大权重来近似$t^*$</li>
 </ul>
 </li>
@@ -523,6 +560,7 @@
 <h2 id="Pixel-Sampling"><a href="#Pixel-Sampling" class="headerlink" title="Pixel Sampling"></a>Pixel Sampling</h2><p><strong>Pixel Sampling (Efficiency of Training)</strong></p>
 <p><strong>(减少MLP计算次数)</strong></p>
 <p>之前方法对train_data中所有的像素rgb三个值，进行预测+l1 loss+反向传播，训练速度很慢</p>
+<h3 id="Uniform-sampling"><a href="#Uniform-sampling" class="headerlink" title="Uniform sampling"></a>Uniform sampling</h3><figure class="highlight python"><figcaption><span>pseudocode</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(epochs):</span><br><span class="line">  <span class="comment"># 每个epoch对每张图片进行训练一轮，每张图片挑选n_rays个像素</span></span><br><span class="line">  <span class="keyword">for</span> batch_data <span class="keyword">in</span> dataloader: <span class="comment"># batch_size = n_images</span></span><br><span class="line">    batch_rays = n_images * n_rays <span class="comment"># 选取像素位置个数</span></span><br><span class="line">    gt_rgb = Select_rgb(batch_rays) <span class="comment"># 根据位置获得 gt rgb</span></span><br><span class="line">    render_rgb = F(batch_rays) <span class="comment"># 根据位置渲染 render rgb</span></span><br><span class="line">    loss = <span class="built_in">abs</span>(render_rgb, gt_rgb) <span class="comment"># 求loss</span></span><br><span class="line">    backward() <span class="comment"># 反向传播</span></span><br></pre></td></tr></table></figure>
 <p>通过量化rendering image 与 g.t. image 之间的差异，来指导在图像上采样像素的位置/数量：根据error map between rendering image and g.t. image，消除loss比较小的区域，对loss大的区域进行更多的采样</p>
 <p><strong>idea</strong>：</p>
 <ul>
@@ -542,6 +580,7 @@
 <li>Metropolis-Hastings Sampling：需要计算接受率, 在高维时计算量大, 并且由于接受率的原因导致算法收敛时间变长. 对于高维数据, 往往数据的条件概率分布易得, 而联合概率分布不易得.</li>
 <li>Gibbs Sampling：</li>
 </ul>
+<h3 id="LMC-sampling"><a href="#LMC-sampling" class="headerlink" title="LMC sampling"></a>LMC sampling</h3><figure class="highlight python"><figcaption><span>pseudocode</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(epochs):</span><br><span class="line">  <span class="comment"># 每个epoch对每张图片进行训练一轮，每张图片挑选n_rays个像素</span></span><br><span class="line">  <span class="keyword">for</span> batch_data <span class="keyword">in</span> dataloader: <span class="comment"># batch_size = 1 最准确</span></span><br><span class="line">    <span class="keyword">for</span> sample_t <span class="keyword">in</span> <span class="built_in">range</span>(sa)</span><br><span class="line">      batch_rays = n_images * n_rays <span class="comment"># 选取像素位置个数</span></span><br><span class="line">      gt_rgb = Select_rgb(batch_rays) <span class="comment"># 根据位置获得 gt rgb</span></span><br><span class="line">      render_rgb = F(batch_rays) <span class="comment"># 根据位置渲染 render rgb</span></span><br><span class="line">      loss = <span class="built_in">abs</span>(render_rgb, gt_rgb) <span class="comment"># 求loss</span></span><br><span class="line">      backward() <span class="comment"># 反向传播</span></span><br></pre></td></tr></table></figure>
 <h3 id="Soft-Mining"><a href="#Soft-Mining" class="headerlink" title="Soft Mining"></a>Soft Mining</h3><blockquote>
 <p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2312.00075">Accelerating Neural Field Training via Soft Mining</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S0262885623000446">EGRA-NeRF: Edge-Guided Ray Allocation for Neural Radiance Fields</a> NeRF 的渲染显得过于模糊，并且在某些纹理或边缘中包含锯齿伪影，为此提出了边缘引导光线分配（EGRA-NeRF）模块，以<strong>在训练阶段将更多光线集中在场景的纹理和边缘上</strong> <strong>(没有加速)</strong></p>
@@ -571,7 +610,17 @@
 <li>采样是局部的，因此采样的开销很小</li>
 <li>log的作用应该是把乘除转换成加减, eg: $w_i=\frac{p(x_i)}{q(x_i)}, \log w_i=\log p(x_i)-\log q(x_i)$</li>
 </ul>
-<p>Sample (re-)initialization.(采样的初始化很重要)：We first initialize the sampling distribution to be uniform over the domain of interest as $\mathbf{x}_{0}{\sim}\mathcal{U}(\mathcal{R})$. We further re-initialize samples that either move out of $\mathcal{R}$ or have too low error value causing samples to get ‘stuck’. We use uniform sampling as well as edge-based sampling for 2D workloads.<br>Warming up soft mining. Start with $\alpha=0$, i.e., no correction, then linearly increase it to the desired $\alpha$ value at 1k iterations.<br>Alternative: multinomial sampling. To use multinomial sampling, one needs to do a forward pass of all data points to build a probability density function, which is computationally expensive. Hence an alternative strategy, such as those based on Markov Chain Monte Carlo (MCMC) is required. 为了防止对所有像素点进行前向计算以计算PDF的高耗费，使用MCMC采样</p>
+<h4 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h4><p>Hello, I have the same question about the code in line 280 of “examples/train_ngp_nerf_prop.py”.</p>
+<p>According to the previous code, the <code>correction</code> and <code>loss_per_pix</code> are respectively:</p>
+<script type="math/tex; mode=display">correction = \frac{1}{sg(Q(\mathbf{x}))^{\alpha}}</script><script type="math/tex; mode=display">loss\_per\_pix=\frac{Q(\mathbf{x})^{2}}{sg(Q(\mathbf{x}))^{\alpha}}</script><p>Then the <code>net_grad</code> should be:</p>
+<script type="math/tex; mode=display">\begin{align} {netgrad} &= \frac{\partial loss\_per\_pix}{\partial\mathbf{x}} = \frac{2Q(\mathbf{x})}{sg(Q(\mathbf{x}))^{\alpha}} \nabla Q(\mathbf{x}) \\
+\end{align}</script><script type="math/tex; mode=display">\begin{align}\nabla\log Q(\mathbf{x}) &= \frac{1}{Q(\mathbf{x})} \nabla Q(\mathbf{x}) \\
+&=\frac{1}{Q(\mathbf{x})} \frac{netgrad \cdot sg(Q(\mathbf{x}))^{\alpha}}{2Q(\mathbf{x})}
+ \\
+&=\frac{netgrad}{2\cdot loss\_per\_pix}\end{align}</script><p>I don’t know why <code>net_grad</code> in the code is need to divide by <code>correction</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net_grad = net_grad / ((grad_scaler._scale * (correction * loss_per_pix).unsqueeze(<span class="number">1</span>))+ torch.finfo(net_grad.dtype).eps)</span><br></pre></td></tr></table></figure>
+<p>Maybe my understanding about the partial of <code>loss_per_pix</code> is wrong… Could u give me some advice about that, thank u very much.</p>
+<h4 id="Other-tricks"><a href="#Other-tricks" class="headerlink" title="Other tricks"></a>Other tricks</h4><p>Sample (re-)initialization.(采样的初始化很重要)：We first initialize the sampling distribution to be uniform over the domain of interest as $\mathbf{x}_{0}{\sim}\mathcal{U}(\mathcal{R})$. We further re-initialize samples that either move out of $\mathcal{R}$ or have too low error value causing samples to get ‘stuck’. We use uniform sampling as well as edge-based sampling for 2D workloads.<br>Warming up soft mining. Start with $\alpha=0$, i.e., no correction, then linearly increase it to the desired $\alpha$ value at 1k iterations.<br>Alternative: multinomial sampling. To use multinomial sampling, one needs to do a forward pass of all data points to build a probability density function, which is computationally expensive. Hence an alternative strategy, such as those based on Markov Chain Monte Carlo (MCMC) is required. 为了防止对所有像素点进行前向计算以计算PDF的高耗费，使用MCMC采样</p>
 <p>Ablation studies中: 即使LMC采样的精度比multinomial sampling低一点，但仍然比Uniform sampling更高，且更effective(效率与精度的折中(compromise/trade-off))</p>
 <p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240708102314.png" alt="image.png|666"></p>
 <h3 id="Shooting-Much-Fewer-Rays"><a href="#Shooting-Much-Fewer-Rays" class="headerlink" title="Shooting Much Fewer Rays"></a>Shooting Much Fewer Rays</h3><blockquote>
@@ -661,11 +710,137 @@
 \end{aligned}</script><ul>
 <li>$\beta_{A}$和$\beta_{S}$分别用来控制anchor area 和 source area的大小</li>
 </ul>
-<h1 id="Uncertainty"><a href="#Uncertainty" class="headerlink" title="Uncertainty"></a>Uncertainty</h1><h2 id="Sources-of-Uncertainty"><a href="#Sources-of-Uncertainty" class="headerlink" title="Sources of Uncertainty"></a>Sources of Uncertainty</h2><p><a href="Sources%20of%20Uncertainty%20in%203D%20Scene%20Reconstruction.md">Sources of Uncertainty in 3D Scene Reconstruction</a></p>
+<h1 id="Uncertainty"><a href="#Uncertainty" class="headerlink" title="Uncertainty"></a>Uncertainty</h1><p>Basic Paper:</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Year</th>
+<th>Paper</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2021</td>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2110.12122v1">Quantifying Epistemic Uncertainty in Deep Learning</a></td>
+</tr>
+<tr>
+<td>2021</td>
+<td><a target="_blank" rel="noopener" href="https://link.springer.com/article/10.1007/s10994-021-05946-3">Aleatoric and epistemic uncertainty in machine learning: an introduction to concepts and methods</a></td>
+</tr>
+<tr>
+<td>2022</td>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2107.03342#page=21.35">A Survey of Uncertainty in Deep Neural Networks</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>三维模型不确定性：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_50910915/article/details/134133658">【论文阅读】使用神经形状先验的多视图三维重建和不确定性建模-CSDN博客</a></li>
+</ul>
+<h2 id="Sources-of-Uncertainty"><a href="#Sources-of-Uncertainty" class="headerlink" title="Sources of Uncertainty"></a>Sources of Uncertainty</h2><p><a href="Sources%20of%20Uncertainty%20in%203D%20Scene%20Reconstruction.md">Sources of Uncertainty in 3D Scene Reconstruction</a></p>
 <ul>
 <li>环境光照是否可以通过不确定性进行量化</li>
 <li>不同的cuda/显卡环境是否也是不确定性</li>
 </ul>
+<h2 id="Ensembles"><a href="#Ensembles" class="headerlink" title="Ensembles"></a>Ensembles</h2><p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2209.08718">Density-aware NeRF Ensembles: Quantifying Predictive Uncertainty in Neural Radiance Fields</a> 2022</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Year</th>
+<th>Paper</th>
+<th>研究对象</th>
+<th>研究内容</th>
+<th>研究方法</th>
+<th>Important for me</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2021</td>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2109.02123">Stochastic Neural Radiance Fields: Quantifying Uncertainty in Implicit 3D Representations</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>2024⭐</td>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2404.06727">[2404.06727] Bayesian NeRF: Quantifying Uncertainty with Volume Density in Neural Radiance Fields</a></td>
+<td>Volume Density in Neural Radiance Fields</td>
+<td>quantifying uncertainty based on the geometric structure</td>
+<td>Bayesian</td>
+<td>几何体积结构中的不确定性，不仅RGB，还有深度</td>
+</tr>
+<tr>
+<td>2024</td>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2405.02568">[2405.02568] ActiveNeuS: Active 3D Reconstruction using Neural Implicit Surface Uncertainty</a></td>
+<td>3D scene reconstruction</td>
+<td>Active learning主动学习</td>
+<td>Neural Implicit Surface Uncertainty</td>
+<td>图像渲染或几何不确定性<br>利用不同类型的不确定性可以减少在早期训练阶段因输入稀疏而出现的偏差</td>
+</tr>
+<tr>
+<td>2024</td>
+<td><a target="_blank" rel="noopener" href="https://bayesrays.github.io/">Bayes’ Rays</a></td>
+<td>NeRF</td>
+<td>BaysRays</td>
+<td>Uncertainty Quantification</td>
+<td>Bayes, 坐标perturbation</td>
+</tr>
+<tr>
+<td>2024<br>⭐</td>
+<td>[Sources of Uncertainty in 3D Scene Reconstruction \</td>
+<td>PDF](<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2409.06407">https://arxiv.org/pdf/2409.06407</a>)</td>
+<td>NeRF and 3DGS</td>
+<td><br></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>2024</td>
+<td><a target="_blank" rel="noopener" href="https://actnerf.github.io/">ActNeRF</a></td>
+<td>Robot Manipulators</td>
+<td>Uncertainty-aware Active Learning of NeRF-based Object Models</td>
+<td>Visual and Re-orientation Actions</td>
+<td>允许机器人在收集视觉观察结果的同时重新定向物体</td>
+</tr>
+<tr>
+<td>2024</td>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2404.01400">[2404.01400] NVINS: Robust Visual Inertial Navigation Fused with NeRF-augmented Camera Pose Regressor and Uncertainty Quantification</a></td>
+<td>real-time and robust robotic tasks(机器人实时导航)</td>
+<td>NeRF-augmented Camera Pose Regressor and Uncertainty Quantification</td>
+<td>Fused</td>
+<td></td>
+</tr>
+<tr>
+<td>2024</td>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2403.18476">[2403.18476] Modeling uncertainty for Gaussian Splatting</a></td>
+<td>Gaussian Splatting</td>
+<td>Modeling uncertainty</td>
+<td>Variational Inference-based approach +  Area Under Sparsification Error (AUSE)</td>
+<td>在<strong>图像渲染质量</strong>和不确定性估计精度方面都优于现有方法</td>
+</tr>
+<tr>
+<td>2024</td>
+<td><a target="_blank" rel="noopener" href="https://sites.google.com/view/nvf-cvpr24/">Neural Visibility Field for Uncertainty-Driven Active Mapping</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td>NVF 自然会为未观察区域分配更高的不确定性，帮助机器人选择最具信息量的下一个视点</td>
+</tr>
+<tr>
+<td>2024</td>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2407.08154">Bayesian uncertainty analysis for underwater 3D reconstruction with neural radiance fields</a></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
 <h2 id="ActiveNeRF"><a href="#ActiveNeRF" class="headerlink" title="ActiveNeRF"></a>ActiveNeRF</h2><p><a href="ActiveNeRF.md">ActiveNeRF</a></p>
 <h2 id="FisherRF"><a href="#FisherRF" class="headerlink" title="FisherRF"></a>FisherRF</h2><p><a target="_blank" rel="noopener" href="https://jiangwenpl.github.io/FisherRF/">FisherRF: Active View Selection and Uncertainty Quantification for Radiance Fields using Fisher Information</a></p>
 <p>limited availability of 2D images poses uncertainties stemming from occlusions, depth ambiguities, and imaging errors</p>
@@ -770,7 +945,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Accuracy"><span class="nav-text">Accuracy</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Camera-Pose-Estimation"><span class="nav-text">Camera Pose Estimation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3D-Point-Sampling"><span class="nav-text">3D Point Sampling</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NerfAcc"><span class="nav-text">NerfAcc</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Loss-Function"><span class="nav-text">Loss Function</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#S3IM"><span class="nav-text">S3IM</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Volume-Rendering"><span class="nav-text">Volume Rendering</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NeuS"><span class="nav-text">NeuS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NeuRodin"><span class="nav-text">NeuRodin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ReTR"><span class="nav-text">ReTR</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mixture-of-Experts-MoE"><span class="nav-text">Mixture of Experts (MoE)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Boost-Your-NeRF"><span class="nav-text">Boost Your NeRF</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Efficiency"><span class="nav-text">Efficiency</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Explicit-Grids"><span class="nav-text">Explicit Grids</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NGP-RT"><span class="nav-text">NGP-RT</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MIMO-MLP"><span class="nav-text">MIMO MLP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MIMO-NeRF"><span class="nav-text">MIMO-NeRF</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Points-Sampling"><span class="nav-text">Points Sampling</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HashPoint"><span class="nav-text">HashPoint</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pixel-Sampling"><span class="nav-text">Pixel Sampling</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Soft-Mining"><span class="nav-text">Soft Mining</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Shooting-Much-Fewer-Rays"><span class="nav-text">Shooting Much Fewer Rays</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iNeRF"><span class="nav-text">iNeRF</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Expansive-Supervision"><span class="nav-text">Expansive Supervision</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Uncertainty"><span class="nav-text">Uncertainty</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Sources-of-Uncertainty"><span class="nav-text">Sources of Uncertainty</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ActiveNeRF"><span class="nav-text">ActiveNeRF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FisherRF"><span class="nav-text">FisherRF</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Accuracy"><span class="nav-text">Accuracy</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Camera-Pose-Estimation"><span class="nav-text">Camera Pose Estimation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3D-Point-Sampling"><span class="nav-text">3D Point Sampling</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NerfAcc"><span class="nav-text">NerfAcc</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Loss-Function"><span class="nav-text">Loss Function</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#S3IM"><span class="nav-text">S3IM</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Volume-Rendering-SDF2Density"><span class="nav-text">Volume Rendering (SDF2Density)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#VolSDF"><span class="nav-text">VolSDF</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NeuS"><span class="nav-text">NeuS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TUVR"><span class="nav-text">TUVR</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NeuRodin"><span class="nav-text">NeuRodin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ReTR"><span class="nav-text">ReTR</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mixture-of-Experts-MoE"><span class="nav-text">Mixture of Experts (MoE)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Boost-Your-NeRF"><span class="nav-text">Boost Your NeRF</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Efficiency"><span class="nav-text">Efficiency</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Explicit-Grids"><span class="nav-text">Explicit Grids</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NGP-RT"><span class="nav-text">NGP-RT</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MIMO-MLP"><span class="nav-text">MIMO MLP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MIMO-NeRF"><span class="nav-text">MIMO-NeRF</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Points-Sampling"><span class="nav-text">Points Sampling</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HashPoint"><span class="nav-text">HashPoint</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pixel-Sampling"><span class="nav-text">Pixel Sampling</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Uniform-sampling"><span class="nav-text">Uniform sampling</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LMC-sampling"><span class="nav-text">LMC sampling</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Soft-Mining"><span class="nav-text">Soft Mining</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Question"><span class="nav-text">Question</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Other-tricks"><span class="nav-text">Other tricks</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Shooting-Much-Fewer-Rays"><span class="nav-text">Shooting Much Fewer Rays</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iNeRF"><span class="nav-text">iNeRF</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Expansive-Supervision"><span class="nav-text">Expansive Supervision</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Uncertainty"><span class="nav-text">Uncertainty</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Sources-of-Uncertainty"><span class="nav-text">Sources of Uncertainty</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ensembles"><span class="nav-text">Ensembles</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ActiveNeRF"><span class="nav-text">ActiveNeRF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FisherRF"><span class="nav-text">FisherRF</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -785,14 +960,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">145</span>
+          <span class="site-state-item-count">149</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -846,12 +1021,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">500k</span>
+    <span title="Symbols count total">507k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">30:16</span>
+    <span title="Reading time total">30:43</span>
 </div>
 
         

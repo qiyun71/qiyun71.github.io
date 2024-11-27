@@ -28,8 +28,10 @@
 <meta property="og:description" content="Title MonoSDF: Exploring Monocular Geometric Cues for Neural Implicit Surface Reconstruction     Author Zehao Yu1     Songyou Peng2,3     Michael Niemeyer1,3     Torsten Sattler4     Andreas Geige">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231219132905.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241022151811.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241022151937.png">
 <meta property="article:published_time" content="2023-12-19T05:27:21.000Z">
-<meta property="article:modified_time" content="2024-06-29T12:21:35.309Z">
+<meta property="article:modified_time" content="2024-10-23T04:50:31.398Z">
 <meta property="article:author" content="Qi Yun">
 <meta property="article:tag" content="3DReconstruction">
 <meta property="article:tag" content="NeRF">
@@ -230,7 +232,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-06-29 20:21:35" itemprop="dateModified" datetime="2024-06-29T20:21:35+08:00">2024-06-29</time>
+                <time title="Modified: 2024-10-23 12:50:31" itemprop="dateModified" datetime="2024-10-23T12:50:31+08:00">2024-10-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -247,13 +249,13 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>52</span>
+              <span>873</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span>1 mins.</span>
+              <span>3 mins.</span>
             </span>
 
         </div>
@@ -292,7 +294,8 @@
 </tr>
 <tr>
 <td>Paper</td>
-<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4678115703736238081&amp;noteId=2084231918355671808">MonoSDF: Exploring Monocular Geometric Cues for Neural Implicit Surface Reconstruction (readpaper.com)</a></td>
+<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4678115703736238081&amp;noteId=2084231918355671808">MonoSDF: Exploring Monocular Geometric Cues for Neural Implicit Surface Reconstruction (readpaper.com)</a><br>[MonoSDF: Exploring Monocular Geometric Cues for Neural Implicit Surface Reconstruction \</td>
+<td>PDF](<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2206.00665">https://arxiv.org/pdf/2206.00665</a>)</td>
 </tr>
 </tbody>
 </table>
@@ -300,6 +303,62 @@
 <p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231219132905.png" alt="image.png|666"></p>
 <p>深度+法向量监督</p>
 <span id="more"></span>
+<h1 id="AIR"><a href="#AIR" class="headerlink" title="AIR"></a>AIR</h1><p>目前的 neural implicit surface reconstruction方法无法处理大的、复杂的和稀疏视图的场景重建。主要是由于RGB 重建loss的内在模糊性无法提供足够的约束，in particular in less-observed and textureless areas</p>
+<p>本文 demonstrate that <strong>depth and normal cues, predicted by general-purpose monocular estimators</strong>, significantly <strong>improve reconstruction quality and optimization time</strong>. 都有着提升</p>
+<ul>
+<li>不管是什么表示方法：monolithic MLP models over single-grid to multi-resolution grid representations.</li>
+<li>也不管是什么场景：small-scale single-object as well as large-scale multi-object scenes</li>
+</ul>
+<h1 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h1><p>Implicit scene representations：$f:\mathbb{R}^3\to\mathbb{R}\quad\mathrm{~x}\mapsto s=\mathrm{SDF}(\mathbf{x})$ 根据3Dpoint 坐标得到该点的SDF值</p>
+<p>SDF Prediction</p>
+<ul>
+<li>Dense SDF Grid</li>
+<li>Single MLP</li>
+<li>Single-Resolution Feature Grid with MLP Decoder</li>
+<li>Multi-Resolution Feature Grid with MLP Decoder</li>
+</ul>
+<p>Color Prediction：$\hat{\mathbf{c}}=\mathbf{c}_\theta(\mathbf{x},\mathbf{v},\hat{\mathbf{n}},\hat{\mathbf{z}})$</p>
+<ul>
+<li>其中$\hat{\mathbf{n}}$为SDF函数的分析梯度 torch.autograd.grad</li>
+<li>特征向量$\hat{\mathbf{z}}$为SDF网络的输出</li>
+</ul>
+<p>Volume Rendering of Implicit Surfaces (VolSDF)</p>
+<ul>
+<li>Density values $\sigma_\beta(s)=\begin{cases}\frac{1}{2\beta}\exp\left(\frac{s}{\beta}\right)&amp;\text{if} s\leq0\\\frac{1}{\beta}\left(1-\frac{1}{2}\exp\left(-\frac{s}{\beta}\right)\right)&amp;\text{if} s&gt;0\end{cases}$  $\beta$ 是一个可学习的参数</li>
+<li>$\hat{C}(\mathbf{r})=\sum_{i=1}^MT_\mathbf{r}^i\alpha_\mathbf{r}^i\hat{\mathbf{c}}_\mathbf{r}^i$ </li>
+<li>$T_\mathbf{r}^i=\prod_{j=1}^{i-1}\left(1-\alpha_\mathbf{r}^j\right)$</li>
+<li>$\alpha_\mathbf{r}^i=1-\exp\left(-\sigma_\mathbf{r}^i\delta_\mathbf{r}^i\right)$</li>
+</ul>
+<p>rendering 深度or法向量</p>
+<ul>
+<li>$\hat{D}(\mathbf{r})=\sum_{i=1}^MT_\mathbf{r}^i \alpha_\mathbf{r}^i t_\mathbf{r}^i$</li>
+<li>$\hat{N}(\mathbf{r})=\sum_{i=1}^MT_\mathbf{r}^i \alpha_\mathbf{r}^i \hat{\mathbf{n}}_\mathbf{r}^i$</li>
+</ul>
+<p>guided 深度or法向量：使用 pretrained Omnidata model 来当作 monocular depth/normal map predictor</p>
+<p>损失函数：$\mathcal{L}=\mathcal{L}_\mathrm{rgb}+\lambda_1\mathcal{L}_\mathrm{eikonal}+\lambda_2\mathcal{L}_\mathrm{depth}+\lambda_3\mathcal{L}_\mathrm{normal}$</p>
+<ul>
+<li>$\mathcal{L}_{\mathrm{rgb}}=\sum_{\mathbf{r}\in\mathcal{R}}\left|\hat{C}(\mathbf{r})-C(\mathbf{r})\right|_1$</li>
+<li>$\mathcal{L}_{\mathrm{eikonal}}=\sum_{\mathbf{x}\in\mathcal{X}}(\left|\nabla f_\theta(\mathbf{x})\right|_2-1)^2$</li>
+<li>$\mathcal{L}_{\mathrm{depth}}=\sum_{\mathbf{r}\in\mathcal{R}}\left|(w\hat{D}(\mathbf{r})+q)-\bar{D}(\mathbf{r})\right|^2$<ul>
+<li>$w$ and $q$ are scale and shift used to aligh $\hat{D}$与$\bar{D}$ <strong><em>每个batch需要被独立估计??</em></strong></li>
+<li>$(w,q)=\underset{w,q}{\arg\min}\sum\limits_{\mathbf{r}\in\mathcal{R}}\Big(w\hat{D}(\mathbf{r})+q-\bar{D}(\mathbf{r})\Big)^2$ solve w and q with a least-squares criterion</li>
+<li>$\mathbf{h}^{\mathrm{opt}}=\underset{\mathbf{h}}{\operatorname*{\arg\min}}\sum_{\mathbf{r}\in\mathcal{R}}\left(\mathbf{d}_{\mathbf{r}}^T\mathbf{h}-\bar{D}(\mathbf{r})\right)^2$  $:\text{Let h}=(w,q)^T\text{ and }\mathbf{d_r}=(\hat{D}(\mathbf{r}),1)^T$</li>
+<li>$\mathbf{h}=\left(\sum_\mathbf{r}\mathbf{d_r}\mathbf{d_r}^T\right)^{-1}\left(\sum_\mathbf{r}\mathbf{d_r}\bar{D}(\mathbf{r})\right)$</li>
+<li>对一个从单张图中随机采样光线的一个batch必须被独立估计 由于depth maps predicted by the monocular depth predictor can differ in scale and shift and the underlying scene geometry changes at each iteration.</li>
+</ul>
+</li>
+<li>$\mathcal{L}_{\mathrm{normal}}=\sum_{\mathrm{r}\in\mathcal{R}}|\hat{N}(\mathbf{r})-\bar{N}(\mathbf{r})|_1+|1-\hat{N}(\mathbf{r})^\top\bar{N}(\mathbf{r})|_1$</li>
+</ul>
+<h1 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h1><p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241022151811.png" alt="image.png|666"></p>
+<p>深度图的作用没那么明显，并且depth和normal先验都无法重建出开关处的细节</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241022151937.png" alt="image.png|666"></p>
+<h1 id="Discussion"><a href="#Discussion" class="headerlink" title="Discussion"></a>Discussion</h1><p>Future：</p>
+<ul>
+<li>使用更加精确的 depth or normal estimator</li>
+<li>exploring other cues such as occlusion edges, plane, or curvature is an interesting future direction</li>
+<li>更加高分辨率的 depth or normal cues</li>
+<li>相机噪声Joint optimization of scene representations and camera parameters [4, 92] is another interesting direction, especially for multi-resolution grids, in order to better handle noisy camera poses.</li>
+</ul>
 
     </div>
 
@@ -405,6 +464,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#AIR"><span class="nav-text">AIR</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Method"><span class="nav-text">Method</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Experiments"><span class="nav-text">Experiments</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Discussion"><span class="nav-text">Discussion</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -419,14 +479,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">145</span>
+          <span class="site-state-item-count">149</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -480,12 +540,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">500k</span>
+    <span title="Symbols count total">507k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">30:16</span>
+    <span title="Reading time total">30:43</span>
 </div>
 
         

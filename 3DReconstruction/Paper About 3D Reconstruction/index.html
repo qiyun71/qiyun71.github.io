@@ -28,15 +28,18 @@
 <meta property="og:description" content="NeRF-based重建方法之于前作监督的重建(新视图生成)方式，如MVS需要真实的深度图作监督，之前的包括生成式的方法需要三维模型的信息(PointCloud、Voxel、Mesh)作监督，NeRF-based方法构建了一种自监督的重建方式，从图像中重建物体只需要用图像作监督 NeRF将三维空间中所有点，通过MLP预测出对应的密度&#x2F;SDF，是一种连续的方法(理论上，实际上由于计算机精度还是离散的">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241010195323.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241022193306.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231005200141.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/cvg/Hierarchical-Localization/master/doc/hloc.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240617145211.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240731185452.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240808142917.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230906183157.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231208100556.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230906183157.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231201160653.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230806143334.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/Pasted%20image%2020230531185214.png">
+<meta property="og:image" content="https://imagine.enpc.fr/~darmonf/NeuralWarp/teaser.jpg">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230911165550.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/pipeline.jpg">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231113155552.png">
@@ -90,7 +93,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20240204211248.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023163503.png">
 <meta property="article:published_time" content="2023-09-21T08:00:14.000Z">
-<meta property="article:modified_time" content="2024-10-15T13:52:29.963Z">
+<meta property="article:modified_time" content="2024-11-10T08:32:04.055Z">
 <meta property="article:author" content="Qi Yun">
 <meta property="article:tag" content="3DReconstruction">
 <meta property="article:tag" content="SurfaceReconstruction">
@@ -293,7 +296,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-10-15 21:52:29" itemprop="dateModified" datetime="2024-10-15T21:52:29+08:00">2024-10-15</time>
+                <time title="Modified: 2024-11-10 16:32:04" itemprop="dateModified" datetime="2024-11-10T16:32:04+08:00">2024-11-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -310,13 +313,13 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>2.5k</span>
+              <span>3k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span>9 mins.</span>
+              <span>11 mins.</span>
             </span>
 
         </div>
@@ -344,15 +347,74 @@
 <p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2410.06475">3D Representation Methods: A Survey | PDF</a><br><a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=9043500">A Review on Deep Learning Approaches for 3D Data Representations in Retrieval and Classifications</a></p>
 </blockquote>
 <p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241010195323.png" alt="image.png|555"></p>
-<h1 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h1><p>相机位姿360°视频渲染:</p>
+<h1 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h1><p>数据集处理</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/Totoro97/NeuS/tree/main/preprocess_custom_data">NeuS/preprocess_custom_data at main · Totoro97/NeuS</a></li>
+<li>Neuralangelo<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/NVlabs/neuralangelo/blob/main/DATA_PROCESSING.md">neuralangelo/DATA_PROCESSING.md at main · NVlabs/neuralangelo</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/mli0603/BlenderNeuralangelo">mli0603/BlenderNeuralangelo: Blender addon to inspect and preprocess COLMAP data for Neuralangelo (CVPR 2023)</a></li>
+</ul>
+</li>
+</ul>
+<p>相机外参可视化<br><a target="_blank" rel="noopener" href="https://github.com/demul/extrinsic2pyramid">demul/extrinsic2pyramid: Visualize Camera’s Pose Using Extrinsic Parameter by Plotting Pyramid Model on 3D Space (github.com)</a></p>
+<p>相机位姿360°视频渲染:</p>
 <blockquote>
 <p><a target="_blank" rel="noopener" href="https://github.com/hbb1/2d-gaussian-splatting/blob/main/render.py">https://github.com/hbb1/2d-gaussian-splatting/blob/main/render.py</a> 可以参考这里的generate_path 把训练相机丢进去就可以fit出一个360路径进行渲染</p>
 </blockquote>
 <p>SuperSplat 是一个免费的开源工具，用于检查和编辑 3D 高斯 Splat。它基于 Web 技术构建并在浏览器中运行，因此无需下载或安装任何内容。<br><a target="_blank" rel="noopener" href="https://playcanvas.com/supersplat/editor">https://playcanvas.com/supersplat/editor</a><br><a target="_blank" rel="noopener" href="https://github.com/playcanvas/supersplat">playcanvas/supersplat: 3D Gaussian Splat Editor</a></p>
+<p>从sdf查询中提取表面</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/SarahWeiii/diso">SarahWeiii/diso: Differentiable Iso-Surface Extraction Package (DISO)</a><br>对比DMTet    FlexiCubes    DiffMC    DiffDMC</p>
 <h1 id="COLMAP"><a href="#COLMAP" class="headerlink" title="COLMAP"></a>COLMAP</h1><blockquote>
-<p><a target="_blank" rel="noopener" href="https://colmap.github.io/tutorial.html">colmap tutorial</a></p>
+<p><a target="_blank" rel="noopener" href="https://demuc.de/tutorials/cvpr2017/">CVPR 2017 Tutorial - Large-­scale 3D Modeling from Crowdsourced Data</a> 大尺度3D modeling</p>
+</blockquote>
+<p>3D modeling pipeline：<a target="_blank" rel="noopener" href="https://demuc.de/tutorials/cvpr2017/introduction1.pdf">demuc.de/tutorials/cvpr2017/introduction1.pdf</a></p>
+<ul>
+<li>Data Association，找到图片之间的相关性<ul>
+<li>Descriptors：好的图片特征应该有以下特性：Repeatability, Saliency, Compactness and efficiency, Locality，也存在一些挑战——需要在different scales (sizes) and different orientations 甚至是 不同光照条件下进行探测特征<ul>
+<li>Global image descriptor,<ul>
+<li>Color histograms 颜色直方图来作为描述符</li>
+<li>GIST-feature, eg: Several frequency bands and orientations for each image location. Tiling of the image, for example 4x4, and at different resolutions. Color histogram</li>
+</ul>
+</li>
+<li>Local image descriptor<ul>
+<li>SIFT-detector(Scale and image-plane-rotation invariant feature descriptor)</li>
+<li>DSP-SIFT</li>
+<li>BRIEF</li>
+<li>ORB: Fast Corner Detector</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>3D points &amp; camera pose</li>
+<li>Dense 3D</li>
+<li>Model generation</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://demuc.de/tutorials/cvpr2017/sparse-modeling.pdf">demuc.de/tutorials/cvpr2017/sparse-modeling.pdf</a> 增量式的全部流程解析</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241022193306.png" alt="image.png|666"></p>
+<p>几大挑战：</p>
+<ul>
+<li>Watermarks, timestamps, frames (WTFs)</li>
+<li>Calibration：Focal length unknown、Image distortion</li>
+<li>Scale ambiguity 无法得知场景具体的尺寸<ul>
+<li>Use GPS EXIF tags for geo-registration</li>
+<li>Use semantics to infer scale 基于语义和先验来进行赋予尺寸</li>
+</ul>
+</li>
+<li>Dynamic objects</li>
+<li>Repetitive Structure (对称结构)</li>
+<li>Illumination Change</li>
+<li>视图选择(初始化视图、next best view)</li>
+</ul>
+<h3 id="COLMAP-1"><a href="#COLMAP-1" class="headerlink" title="COLMAP"></a>COLMAP</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://colmap.github.io/tutorial.html">colmap tutorial</a><br>Document：<a target="_blank" rel="noopener" href="https://colmap.github.io/">COLMAP — COLMAP 3.11.0.dev0 documentation</a><br>windows pre-release<a target="_blank" rel="noopener" href="https://github.com/colmap/colmap/releases">Releases · colmap/colmap</a></p>
 </blockquote>
 <p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231005200141.png" alt="image.png|666"></p>
+<h3 id="HLOC"><a href="#HLOC" class="headerlink" title="HLOC"></a>HLOC</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/cvg/Hierarchical-Localization">cvg/Hierarchical-Localization: Visual localization made easy with hloc</a><br><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1812.03506">From Coarse to Fine: Robust Hierarchical Localization at Large Scale</a></p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/cvg/Hierarchical-Localization/master/doc/hloc.png" alt="hloc.png (856×529)"></p>
 <h2 id="VGGSfM"><a href="#VGGSfM" class="headerlink" title="VGGSfM"></a>VGGSfM</h2><p><a target="_blank" rel="noopener" href="https://vggsfm.github.io/">VGGSfM: Visual Geometry Grounded Deep Structure From Motion</a><br>We are highly inspired by <a target="_blank" rel="noopener" href="https://github.com/colmap/colmap">colmap</a>, <a target="_blank" rel="noopener" href="https://github.com/colmap/pycolmap">pycolmap</a>, <a target="_blank" rel="noopener" href="https://github.com/facebookresearch/PoseDiffusion">posediffusion</a>, <a target="_blank" rel="noopener" href="https://github.com/facebookresearch/co-tracker">cotracker</a>, and <a target="_blank" rel="noopener" href="https://github.com/kornia/kornia">kornia</a>.</p>
 <p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240617145211.png" alt="image.png|666"></p>
 <h2 id="GLOMAP"><a href="#GLOMAP" class="headerlink" title="GLOMAP"></a>GLOMAP</h2><p><a target="_blank" rel="noopener" href="https://github.com/colmap/glomap?tab=readme-ov-file">colmap/glomap: GLOMAP - Global Structured-from-Motion Revisited</a></p>
@@ -406,14 +468,14 @@
 <tbody>
 <tr>
 <td>2020</td>
-<td><a href="IDR.md">IDR</a></td>
-<td><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230906183157.png" alt="image.png"></td>
+<td><a href="DVR.md">DVR</a></td>
+<td><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231208100556.png" alt="image.png"></td>
 <td></td>
 </tr>
 <tr>
 <td>2020</td>
-<td><a href="DVR.md">DVR</a></td>
-<td><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231208100556.png" alt="image.png"></td>
+<td><a href="IDR.md">IDR</a></td>
+<td><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230906183157.png" alt="image.png"></td>
 <td></td>
 </tr>
 <tr>
@@ -442,9 +504,15 @@
 </tr>
 <tr>
 <td>2022</td>
+<td><a href="Multi-view/Implicit%20Function/NeRF-based/NeuralWarp.md">NeuralWarp</a></td>
+<td><img src="https://imagine.enpc.fr/~darmonf/NeuralWarp/teaser.jpg" alt="teaser.jpg (1304×708)"></td>
+<td>a direct photo-consistency term</td>
+</tr>
+<tr>
+<td>2022</td>
 <td><a href="Geo-Neus.md">Geo-Neus</a></td>
 <td><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230911165550.png" alt="image.png"></td>
-<td></td>
+<td>验证了颜色渲染偏差，基于SFM稀疏点云的几何监督, 基于光度一致性监督进行几何一致性监督</td>
 </tr>
 <tr>
 <td>2022</td>
@@ -455,7 +523,7 @@
 <tr>
 <td>2022</td>
 <td><a href="Neus-Instant-nsr-pl.md">Neus-Instant-nsr-pl</a></td>
-<td>Paper No!!! Just Code</td>
+<td>No Paper!!! Just Code</td>
 <td></td>
 </tr>
 <tr>
@@ -577,18 +645,6 @@
 <td><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2401.12751">PSDF: Prior-Driven Neural Implicit Surface Learning for Multi-view ReconstructionPDF</a></td>
 <td><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240823133432.png" alt="image.png"></td>
 <td>法向量先验+多视图一致，使用深度图引导采样</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
 </tr>
 <tr>
 <td></td>
@@ -844,7 +900,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Tools"><span class="nav-text">Tools</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#COLMAP"><span class="nav-text">COLMAP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#VGGSfM"><span class="nav-text">VGGSfM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GLOMAP"><span class="nav-text">GLOMAP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ACE-Zero"><span class="nav-text">ACE Zero</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NeRF-VR-Field"><span class="nav-text">NeRF (VR+Field)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Baseline"><span class="nav-text">Baseline</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Important-Papers"><span class="nav-text">Important Papers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ActiveNeRF"><span class="nav-text">ActiveNeRF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VF-NeRF"><span class="nav-text">VF-NeRF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#R-2-Mesh"><span class="nav-text">$R^2$-Mesh</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MIMO-NeRF"><span class="nav-text">MIMO-NeRF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ActiveNeuS"><span class="nav-text">ActiveNeuS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Binary-Opacity-Grids"><span class="nav-text">Binary Opacity Grids</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RNb-NeuS"><span class="nav-text">RNb-NeuS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ReTR"><span class="nav-text">ReTR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AutoRecon"><span class="nav-text">AutoRecon</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#G-Shell"><span class="nav-text">G-Shell</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Adaptive-Shells"><span class="nav-text">Adaptive Shells</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PonderV2"><span class="nav-text">PonderV2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spiking-NeRF"><span class="nav-text">Spiking NeRF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hyb-NeRF-%E5%A4%9A%E5%88%86%E8%BE%A8%E7%8E%87%E6%B7%B7%E5%90%88%E7%BC%96%E7%A0%81"><span class="nav-text">Hyb-NeRF 多分辨率混合编码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dynamic"><span class="nav-text">Dynamic</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#In-Hand-3D-Object"><span class="nav-text">In-Hand 3D Object</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DynamicSurf"><span class="nav-text">DynamicSurf</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MorpheuS"><span class="nav-text">MorpheuS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NPGs"><span class="nav-text">NPGs</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3DGS-Rasterize-Primitives"><span class="nav-text">3DGS (Rasterize+Primitives)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Idea"><span class="nav-text">Idea</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Localized-Points-Management"><span class="nav-text">Localized Points Management</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IGS"><span class="nav-text">IGS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DN-Splatter"><span class="nav-text">DN-Splatter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#InstantSplat-Sparse-view"><span class="nav-text">InstantSplat(Sparse-view)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VCR-GauS"><span class="nav-text">VCR-GauS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PGSR"><span class="nav-text">PGSR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TrimGS"><span class="nav-text">TrimGS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SuGaR"><span class="nav-text">SuGaR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2DGS"><span class="nav-text">2DGS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GS2mesh"><span class="nav-text">GS2mesh</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#EVER-VR-Primitives"><span class="nav-text">EVER (VR+Primitives)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Depth-based"><span class="nav-text">Depth-based</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Shakes-on-a-Plane"><span class="nav-text">Shakes on a Plane</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mono-ViFI"><span class="nav-text">Mono-ViFI</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mesh-based"><span class="nav-text">Mesh-based</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#PuzzleAvatar"><span class="nav-text">PuzzleAvatar</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MagicClay"><span class="nav-text">MagicClay</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MeshAnything"><span class="nav-text">MeshAnything</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pixel2Mesh"><span class="nav-text">Pixel2Mesh</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pixel2Mesh-1"><span class="nav-text">Pixel2Mesh++</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Voxel-based"><span class="nav-text">Voxel-based</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Voxurf"><span class="nav-text">Voxurf</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Tools"><span class="nav-text">Tools</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#COLMAP"><span class="nav-text">COLMAP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#COLMAP-1"><span class="nav-text">COLMAP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HLOC"><span class="nav-text">HLOC</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VGGSfM"><span class="nav-text">VGGSfM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GLOMAP"><span class="nav-text">GLOMAP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ACE-Zero"><span class="nav-text">ACE Zero</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NeRF-VR-Field"><span class="nav-text">NeRF (VR+Field)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Baseline"><span class="nav-text">Baseline</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Important-Papers"><span class="nav-text">Important Papers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ActiveNeRF"><span class="nav-text">ActiveNeRF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VF-NeRF"><span class="nav-text">VF-NeRF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#R-2-Mesh"><span class="nav-text">$R^2$-Mesh</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MIMO-NeRF"><span class="nav-text">MIMO-NeRF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ActiveNeuS"><span class="nav-text">ActiveNeuS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Binary-Opacity-Grids"><span class="nav-text">Binary Opacity Grids</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RNb-NeuS"><span class="nav-text">RNb-NeuS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ReTR"><span class="nav-text">ReTR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AutoRecon"><span class="nav-text">AutoRecon</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#G-Shell"><span class="nav-text">G-Shell</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Adaptive-Shells"><span class="nav-text">Adaptive Shells</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PonderV2"><span class="nav-text">PonderV2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spiking-NeRF"><span class="nav-text">Spiking NeRF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hyb-NeRF-%E5%A4%9A%E5%88%86%E8%BE%A8%E7%8E%87%E6%B7%B7%E5%90%88%E7%BC%96%E7%A0%81"><span class="nav-text">Hyb-NeRF 多分辨率混合编码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dynamic"><span class="nav-text">Dynamic</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#In-Hand-3D-Object"><span class="nav-text">In-Hand 3D Object</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DynamicSurf"><span class="nav-text">DynamicSurf</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MorpheuS"><span class="nav-text">MorpheuS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NPGs"><span class="nav-text">NPGs</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3DGS-Rasterize-Primitives"><span class="nav-text">3DGS (Rasterize+Primitives)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Idea"><span class="nav-text">Idea</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Localized-Points-Management"><span class="nav-text">Localized Points Management</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IGS"><span class="nav-text">IGS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DN-Splatter"><span class="nav-text">DN-Splatter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#InstantSplat-Sparse-view"><span class="nav-text">InstantSplat(Sparse-view)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VCR-GauS"><span class="nav-text">VCR-GauS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PGSR"><span class="nav-text">PGSR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TrimGS"><span class="nav-text">TrimGS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SuGaR"><span class="nav-text">SuGaR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2DGS"><span class="nav-text">2DGS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GS2mesh"><span class="nav-text">GS2mesh</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#EVER-VR-Primitives"><span class="nav-text">EVER (VR+Primitives)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Depth-based"><span class="nav-text">Depth-based</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Shakes-on-a-Plane"><span class="nav-text">Shakes on a Plane</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mono-ViFI"><span class="nav-text">Mono-ViFI</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mesh-based"><span class="nav-text">Mesh-based</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#PuzzleAvatar"><span class="nav-text">PuzzleAvatar</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MagicClay"><span class="nav-text">MagicClay</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MeshAnything"><span class="nav-text">MeshAnything</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pixel2Mesh"><span class="nav-text">Pixel2Mesh</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pixel2Mesh-1"><span class="nav-text">Pixel2Mesh++</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Voxel-based"><span class="nav-text">Voxel-based</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Voxurf"><span class="nav-text">Voxurf</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -859,14 +915,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">145</span>
+          <span class="site-state-item-count">149</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -920,12 +976,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">500k</span>
+    <span title="Symbols count total">507k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">30:16</span>
+    <span title="Reading time total">30:43</span>
 </div>
 
         

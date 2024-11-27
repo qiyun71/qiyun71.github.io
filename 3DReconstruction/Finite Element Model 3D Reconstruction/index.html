@@ -27,11 +27,17 @@
 <meta property="og:site_name" content="QiYun">
 <meta property="og:description" content="通过多视图三维重建获得三维模型，用于有限元分析&#x2F;工业设计指导">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://oup.silverchair-cdn.com/oup/backfile/Content_public/Journal/jcde/6/2/10.1016_j.jcde.2018.05.004/4/m_j.jcde.2018.05.004-fx1.jpeg?Expires=1732527016&amp;Signature=Eb9Hsdk5dB0etDgtIp-urXmxXTQgtqLRv1aiQzuPxjU13coGiq~HSSAAtHgWUCMhqBxBDil5xolFmPLIsrDmXtG4AogoqwFl~SHRKUrcdl7QcDpBE3fbp1mHR2Se9pMyOFfjWYu88IUjSrJMx-Z1vIJhCKVL0PwX0kdO81rR5c4AepKjlyEV-lJ3OEOzVP5sxmO9pPH72DdWvxE9sHWdA0foQxkcfU7WVcETuh1g3epYuP7wvRLdUprJQi5~snVCZiqWanqRGE~c4Loh7RydigL3ZBOdBNkzcFWBk833N2iT0yY9yIBaWhjfSjM3eyKOuHJXC-cWaJ0w6g6aTALNew__&amp;Key-Pair-Id=APKAIE5G5CRDK6RD3PGA">
+<meta property="og:image" content="https://neural-edge-map.github.io/resources/overview.jpg">
+<meta property="og:image" content="https://www.frontiersin.org/files/Articles/546485/fbioe-08-00967-HTML/image_m/fbioe-08-00967-g003.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241023144706.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241023144838.png">
 <meta property="article:published_time" content="2024-08-27T13:32:35.000Z">
-<meta property="article:modified_time" content="2024-09-07T09:18:14.017Z">
+<meta property="article:modified_time" content="2024-11-27T11:08:07.292Z">
 <meta property="article:author" content="Qi Yun">
 <meta property="article:tag" content="3DReconstruction">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://oup.silverchair-cdn.com/oup/backfile/Content_public/Journal/jcde/6/2/10.1016_j.jcde.2018.05.004/4/m_j.jcde.2018.05.004-fx1.jpeg?Expires=1732527016&amp;Signature=Eb9Hsdk5dB0etDgtIp-urXmxXTQgtqLRv1aiQzuPxjU13coGiq~HSSAAtHgWUCMhqBxBDil5xolFmPLIsrDmXtG4AogoqwFl~SHRKUrcdl7QcDpBE3fbp1mHR2Se9pMyOFfjWYu88IUjSrJMx-Z1vIJhCKVL0PwX0kdO81rR5c4AepKjlyEV-lJ3OEOzVP5sxmO9pPH72DdWvxE9sHWdA0foQxkcfU7WVcETuh1g3epYuP7wvRLdUprJQi5~snVCZiqWanqRGE~c4Loh7RydigL3ZBOdBNkzcFWBk833N2iT0yY9yIBaWhjfSjM3eyKOuHJXC-cWaJ0w6g6aTALNew__&amp;Key-Pair-Id=APKAIE5G5CRDK6RD3PGA">
 
 <link rel="canonical" href="http://example.com/3DReconstruction/Finite%20Element%20Model%203D%20Reconstruction/">
 
@@ -226,7 +232,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-09-07 17:18:14" itemprop="dateModified" datetime="2024-09-07T17:18:14+08:00">2024-09-07</time>
+                <time title="Modified: 2024-11-27 19:08:07" itemprop="dateModified" datetime="2024-11-27T19:08:07+08:00">2024-11-27</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -243,13 +249,13 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>1.1k</span>
+              <span>1.4k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span>4 mins.</span>
+              <span>5 mins.</span>
             </span>
 
         </div>
@@ -267,7 +273,12 @@
 <ul>
 <li><strong>三维重建</strong>：三维重建出来的点云精度要高，要能准确得到重建物体的尺寸(摄影测量)</li>
 <li>格式转换：点云模型如何转换成有限元模型(例如Patran的.x_t格式文件，或者经过处理直接用点云坐标替换bdf文件中的网格节点坐标)<ul>
-<li>Surface mesh to Volume mesh</li>
+<li>类似DMTet输入点云来优化mesh模型，</li>
+<li>Surface mesh to Volume mesh，然后通过从mesh模型中得到体网格模型 <ul>
+<li>必须首先保证 surface mesh 是水密的 内部结构不能复杂 <a target="_blank" rel="noopener" href="https://github.com/wildmeshing/fTetWild">wildmeshing/fTetWild: Fast Tetrahedral Meshing in the Wild</a> <a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43693967/article/details/134026594">【三维视觉】TetWild / fTetWild学习：将任意mesh处理成流形水密的mesh-CSDN博客</a></li>
+<li>然后将水密mesh体网格化<a target="_blank" rel="noopener" href="https://gmsh.info/#Documentation">Gmsh: a three-dimensional finite element mesh generator with built-in pre- and post-processing facilities</a> <a target="_blank" rel="noopener" href="https://mbarzegary.github.io/2022/06/27/surface-to-volume-mesh-using-gmsh/">https://mbarzegary.github.io/2022/06/27/surface-to-volume-mesh-using-gmsh/</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li>模型修正：确定的or区间的or随机的，修正出来的有限元仿真响应能否真实反映实际测量的响应特征</li>
@@ -281,9 +292,61 @@
 <p><a target="_blank" rel="noopener" href="https://support.ntop.com/hc/en-us/articles/360037005234-How-to-create-an-FE-Volume-Mesh">How to create an FE Volume Mesh – nTop</a> Design Analysis 设计分析 + Topology Optimization 拓扑优化(<a target="_blank" rel="noopener" href="https://www.ntop.com/software/products/">nTop</a>软件不错)</p>
 </blockquote>
 <h2 id="间接重建模型"><a href="#间接重建模型" class="headerlink" title="间接重建模型"></a>间接重建模型</h2><p>首先获得物体的边缘，然后根据CAD或者Solidworks建立准确的三维模型</p>
-<h1 id="文献调研"><a href="#文献调研" class="headerlink" title="文献调研"></a>文献调研</h1><h2 id="3D边缘重建"><a href="#3D边缘重建" class="headerlink" title="3D边缘重建"></a>3D边缘重建</h2><blockquote>
-<p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2405.19295">3D Neural Edge Reconstruction | PDF</a></p>
-</blockquote>
+<h1 id="文献调研"><a href="#文献调研" class="headerlink" title="文献调研"></a>文献调研</h1><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Year</th>
+<th>Paper</th>
+<th>Overview</th>
+<th>Important for me</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2024</td>
+<td><a target="_blank" rel="noopener" href="https://academic.oup.com/jcde/article/6/2/197/5732318?login=false">Surface reconstruction from FE mesh model</a><br></td>
+<td><img src="https://oup.silverchair-cdn.com/oup/backfile/Content_public/Journal/jcde/6/2/10.1016_j.jcde.2018.05.004/4/m_j.jcde.2018.05.004-fx1.jpeg?Expires=1732527016&amp;Signature=Eb9Hsdk5dB0etDgtIp-urXmxXTQgtqLRv1aiQzuPxjU13coGiq~HSSAAtHgWUCMhqBxBDil5xolFmPLIsrDmXtG4AogoqwFl~SHRKUrcdl7QcDpBE3fbp1mHR2Se9pMyOFfjWYu88IUjSrJMx-Z1vIJhCKVL0PwX0kdO81rR5c4AepKjlyEV-lJ3OEOzVP5sxmO9pPH72DdWvxE9sHWdA0foQxkcfU7WVcETuh1g3epYuP7wvRLdUprJQi5~snVCZiqWanqRGE~c4Loh7RydigL3ZBOdBNkzcFWBk833N2iT0yY9yIBaWhjfSjM3eyKOuHJXC-cWaJ0w6g6aTALNew__&amp;Key-Pair-Id=APKAIE5G5CRDK6RD3PGA" alt="m_j.jcde.2018.05.004-fx1.jpeg (520×297"></td>
+<td>本文提出了一种从FE网格模型中提取自由形状 B 样条曲面和某些特征曲线的方法</td>
+</tr>
+<tr>
+<td>2024</td>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2405.19295">3D Neural Edge Reconstruction</a></td>
+<td><img src="https://neural-edge-map.github.io/resources/overview.jpg" alt="overview.jpg (1294×699)"></td>
+<td>3D 模型边缘重建</td>
+</tr>
+<tr>
+<td>2020</td>
+<td><a target="_blank" rel="noopener" href="https://www.frontiersin.org/journals/bioengineering-and-biotechnology/articles/10.3389/fbioe.2020.00967/full">A Review on Finite Element Modeling and Simulation of the Anterior Cruciate Ligament Reconstruction</a></td>
+<td><img src="https://www.frontiersin.org/files/Articles/546485/fbioe-08-00967-HTML/image_m/fbioe-08-00967-g003.jpg" alt="fbioe-08-00967-g003.jpg (3353×817)"></td>
+<td></td>
+</tr>
+<tr>
+<td>2020</td>
+<td><a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/document/9042322">Personalized Knee Geometry Modeling Based on Multi-Atlas Segmentation and Mesh Refinement</a></td>
+<td><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241023144706.png" alt="image.png"></td>
+<td></td>
+</tr>
+<tr>
+<td>2020</td>
+<td><a target="_blank" rel="noopener" href="https://pasithee.library.upatras.gr/iisa/article/view/3329">SafeACL: Ligament reconstruction based on subject-specific musculoskeletal and finite element models </a></td>
+<td><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241023144838.png" alt="image.png"></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
 <h2 id="CAD-指令流"><a href="#CAD-指令流" class="headerlink" title="CAD 指令流"></a>CAD 指令流</h2><div class="table-container">
 <table>
 <thead>
@@ -441,6 +504,45 @@
 </tbody>
 </table>
 </div>
+<h2 id="根据三角网格优化体网格"><a href="#根据三角网格优化体网格" class="headerlink" title="根据三角网格优化体网格"></a>根据三角网格优化体网格</h2><p>可以无缝地从mesh直接得到hex mesh</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Year</th>
+<th>Paper</th>
+<th>研究对象</th>
+<th>研究内容</th>
+<th>研究方法</th>
+<th>Important for me</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2024</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>idea from：<ul>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2410.11656">Fast and Robust Hexahedral Mesh Optimization via Augmented Lagrangian, L-BFGS, and Line Search | PDF</a></li>
+<li><a target="_blank" rel="noopener" href="https://x.com/zhenjun_zhao/status/1846392374425276748">X 上的 Zhenjun Zhao：“Fast and Robust Hexahedral Mesh Optimization via Augmented Lagrangian, L-BFGS, and Line Search Hua Tong, Yongjie Jessica Zhang https://t.co/XAjGcAZxMp https://t.co/yu7zDYbdHY” / X</a></li>
+</ul>
+</li>
+</ul>
 
     </div>
 
@@ -544,7 +646,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#IDEA"><span class="nav-text">IDEA</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E9%87%8D%E5%BB%BA%E6%A8%A1%E5%9E%8B"><span class="nav-text">直接重建模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%B4%E6%8E%A5%E9%87%8D%E5%BB%BA%E6%A8%A1%E5%9E%8B"><span class="nav-text">间接重建模型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%87%E7%8C%AE%E8%B0%83%E7%A0%94"><span class="nav-text">文献调研</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3D%E8%BE%B9%E7%BC%98%E9%87%8D%E5%BB%BA"><span class="nav-text">3D边缘重建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CAD-%E6%8C%87%E4%BB%A4%E6%B5%81"><span class="nav-text">CAD 指令流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BF%80%E5%85%89%E9%9B%B7%E8%BE%BE%E6%89%AB%E6%8F%8F%E4%BB%AA"><span class="nav-text">激光雷达扫描仪</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E5%BC%8F%E6%96%B9%E6%B3%95"><span class="nav-text">生成式方法</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#IDEA"><span class="nav-text">IDEA</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E9%87%8D%E5%BB%BA%E6%A8%A1%E5%9E%8B"><span class="nav-text">直接重建模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%B4%E6%8E%A5%E9%87%8D%E5%BB%BA%E6%A8%A1%E5%9E%8B"><span class="nav-text">间接重建模型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%87%E7%8C%AE%E8%B0%83%E7%A0%94"><span class="nav-text">文献调研</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CAD-%E6%8C%87%E4%BB%A4%E6%B5%81"><span class="nav-text">CAD 指令流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BF%80%E5%85%89%E9%9B%B7%E8%BE%BE%E6%89%AB%E6%8F%8F%E4%BB%AA"><span class="nav-text">激光雷达扫描仪</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E5%BC%8F%E6%96%B9%E6%B3%95"><span class="nav-text">生成式方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%B9%E6%8D%AE%E4%B8%89%E8%A7%92%E7%BD%91%E6%A0%BC%E4%BC%98%E5%8C%96%E4%BD%93%E7%BD%91%E6%A0%BC"><span class="nav-text">根据三角网格优化体网格</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -559,14 +661,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">145</span>
+          <span class="site-state-item-count">149</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -620,12 +722,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">500k</span>
+    <span title="Symbols count total">507k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">30:16</span>
+    <span title="Reading time total">30:43</span>
 </div>
 
         
