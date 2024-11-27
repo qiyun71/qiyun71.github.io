@@ -115,6 +115,9 @@ sudo make
 
 ### gcc install/update
 
+简单方法：[linux - 【Ubuntu20.04】安装gcc11 g++11, Ubuntu18.04 - 个人文章 - SegmentFault 思否](https://segmentfault.com/a/1190000044587299)
+
+原始方法：
 1. 下载 [Index of /gnu/gcc/gcc-9.4.0](https://ftp.gnu.org/gnu/gcc/gcc-9.4.0/) 的 gcc-9.4.0.tar.gz
 2. 将文件解压到/usr/local目录下面 `tar -zvxf gcc-9.4.0.tar.gz --directory=/usr/local/`
 3. `vim /usr/local/gcc-9.4.0/contrib/download_prerequisites` 查看gcc所需依赖及其版本
@@ -314,18 +317,34 @@ sudo make install
 ## torch
 
 ```bash
-pip install torch
+pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
 ```
 
 ## pytorch3d
 
+使用pip安装torch与使用conda安装torch不同
+>  [全面总结 pip install 与 conda install 的使用区别_pytorch安装pip和conda的区别-CSDN博客](https://blog.csdn.net/whc18858/article/details/127135973)
+
+```bash
+pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
+conda install pytorch=2.4.1 torchvision pytorch-cuda=12.1 -c pytorch -c nvidia -y
+conda install -c iopath iopath
+conda install pytorch3d -c pytorch3d # 会报错
+# 直接从github安装 😊
+git clone https://github.com/facebookresearch/pytorch3d.git
+cd pytorch3d
+pip install -e .
+```
+
+
 > [pytorch3d/INSTALL.md at main · facebookresearch/pytorch3d](https://github.com/facebookresearch/pytorch3d/blob/main/INSTALL.md)
 
 ```bash
+# 行不通😵
 conda install -c fvcore -c iopath -c conda-forge fvcore iopath
 conda install pytorch3d=0.7.5 -c pytorch3d # 可能torch版本太高了
 
-# torch 2.4.1 使用预编译的pytorch3d
+# torch 2.4.1 使用预编译的pytorch3d 行不通😵
 pip install torch==2.4.1
 pip install --extra-index-url https://miropsota.github.io/torch_packages_builder pytorch3d==0.7.8+pt2.4.1cu121
 ```
@@ -359,11 +378,26 @@ MESA: error: ZINK: failed to choose pdev glx: failed to create drisw screen
 
 Kisak-mesa PPA 提供了 Mesa 的最新小版本。您可以通过在终端中逐个输入以下命令来使用它：
 
-```
+```bash
 sudo add-apt-repository ppa:kisak/kisak-mesa
 sudo apt update
 sudo apt upgrade
 ```
+
+## ipywidgets
+
+```bash
+ImportError: IProgress not found. Please update jupyter and ipywidgets. See [https://ipywidgets.readthedocs.io/en/stable/user_install.html](https://ipywidgets.readthedocs.io/en/stable/user_install.html)
+```
+
+[pandas - ImportError: IProgress not found. Please update jupyter and ipywidgets although it is installed - Stack Overflow](https://stackoverflow.com/questions/67998191/importerror-iprogress-not-found-please-update-jupyter-and-ipywidgets-although)
+
+
+```bash
+pip install jupyter
+pip install ipywidgets widgetsnbextension pandas-profiling
+```
+
 
 # NeuRodin
 
@@ -443,4 +477,308 @@ python zoo/extract_surface.py --conf ./outputs/neurodin-Meetingroom-stage2/neuro
 ## DTU
 
 ## 自定义数据集
+# Geo-Neus (AutoDL long time)
+
+> [GhiXu/Geo-Neus: Geo-Neus: Geometry-Consistent Neural Implicit Surfaces Learning for Multi-view Reconstruction (NeurIPS 2022)](https://github.com/GhiXu/Geo-Neus)
+
+```bash
+git clone https://github.com/GhiXu/Geo-Neus.git
+conda create -n geoneus python=3.7  
+conda activate geoneus  
+conda install pytorch==1.11.0 torchvision==0.12.0 cudatoolkit=11.3 -c pytorch  
+conda install fvcore iopath  
+conda install -c bottler nvidiacub  
+conda install pytorch3d -c pytorch3d  
+pip install -r requirements.txt
+pip install torch==1.11.0+cu113 torchvision==0.12.0+cu113 torchaudio==0.11.0 --extra-index-url https://download.pytorch.org/whl/cu113
+pip install tensorboard tqdm pytorch3d pickle5
+
+git clone https://github.com/facebookresearch/pytorch3d.git
+cd pytorch3d
+pip install -e .
+
+unzip DTU.zip -d ./data/
+```
+
+```python
+# 需要修改 womask.conf 中的 data_dir = ./data/DTU/CASE_NAME
+import os
+
+#106 #105 #97 #83 #69 #65 #63 #55 #40 #37 #24
+dtu_scenes = ['scan24', 'scan37', 'scan40', 'scan55', 'scan63', 'scan65', 'scan69', 'scan83', 'scan97', 'scan105', 'scan106', 'scan110', 'scan114', 'scan118', 'scan122']
+
+for scene in dtu_scenes:
+    os.system(f"python exp_runner.py --mode train --conf ./confs/womask.conf --case {scene}")
+
+刚开始跑scan69，中期来不及了，先停掉
+```
+
+# MonoSDF
+
+Given Mesh!!! Nice Author!!!
+
+# NeuS2 (wsl)
+
+- [x] Given weight!!! Test --> no background (with mask)
+
+## 环境配置
+
+```bash
+git clone --recursive https://github.com/19reborn/NeuS2
+cd NeuS2
+
+git submodule update --init --recursive
+cmake . -D TCNN_CUDA_ARCHITECTURES=86 -D CMAKE_CUDA_COMPILER=$(which nvcc) -B build
+cmake --build build --config RelWithDebInfo -j
+
+conda create -n neus2 python=3.9
+conda activate neus2
+pip install -r requirements.txt
+
+conda install -c conda-forge gcc=12.1.0
+pip install commentjson imageio scipy trimesh termcolor 
+
+git clone https://github.com/facebookresearch/pytorch3d.git
+cd pytorch3d
+pip install -e . 'OR' python3 setup.py install
+```
+
+```bash error
+Compiling the CUDA compiler identification source file
+"CMakeCUDACompilerId.cu" failed.
+
+Compiler: /usr/bin/nvcc
+
+Build flags:
+
+Id flags: --keep;--keep-dir;tmp -v
+
+解决方法：cmake . -D TCNN_CUDA_ARCHITECTURES=86 -D CMAKE_CUDA_COMPILER=$(which nvcc) -B build
+```
+
+
+Pytorch3d一直安装不上：
+
+```bash 
+#pip install torch==2.4.1 torchvision==0.19.1 torchaudio==2.4.1 --index-url https://download.pytorch.org/whl/cu124
+#pip install torch==2.4.0 torchvision==0.19.0 torchaudio==2.4.0 --index-url https://download.pytorch.org/whl/cu124
+
+pip install torch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 --index-url https://download.pytorch.org/whl/cu121
+
+git clone https://github.com/facebookresearch/pytorch3d.git
+cd pytorch3d
+pip install -e . 'OR' python3 setup.py install
+# 不知道为啥不行不行着就装上了😵    command = ['ninja', '-v']改了一下这个，又该回去
+# command = ['ninja', '--version']
+
+# conda install -c iopath iopath
+# pip install --no-index --no-cache-dir pytorch3d -f https://dl.fbaipublicfiles.com/pytorch3d/packaging/wheels/py39_cu121_pyt210/download.html
+```
+
+```bash error
+ImportError: /home/qi/miniconda3/envs/neus2/lib/python3.9/site-packages/numpy/_core/../../../../libstdc++.so.6: version `GLIBCXX_3.4.30' not found (required by /home/qi/Project/NeuS2/build/pyngp.cpython-39-x86_64-linux-gnu.so)
+
+pip install --upgrade numpy
+
+ImportError: /home/qi/miniconda3/envs/neus2/bin/../lib/libstdc++.so.6: version `GLIBCXX_3.4.30' not found (required by /home/qi/Project/NeuS2/build/pyngp.cpython-39-x86_64-linux-gnu.so)
+
+# 真正解法：替换为高版本的 libstdc++.so.6.0.33
+rm /home/qi/miniconda3/envs/neus2/bin/../lib/libstdc++.so.6.0.33
+cp /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.33 /home/qi/miniconda3/envs/neus2/bin/../lib
+ln -s /home/qi/miniconda3/envs/neus2/bin/../lib/libstdc++.so.6.0.33 /home/qi/miniconda3/envs/neus2/bin/../lib/libstdc++.so.6
+strings /home/qi/miniconda3/envs/neus2/bin/../lib/libstdc++.so.6 | grep GLIBCXX_3.4.29
+```
+
+## 运行
+
+```
+```bash
+python scripts/run.py --scene ${data_path}/transform.json --name ${your_experiment_name} --network ${config_name} --n_steps ${training_steps}
+
+python scripts/run.py --test --save_mesh --load_snapshot ./dtu_neus2_release/checkpoints/scan24.msgpack --network dtu.json --name scan24
+```
+
+# COLMAP (Known camera pose)
+
+## 环境配置
+
+> [Installation — COLMAP 3.11.0.dev0 documentation](https://colmap.github.io/install.html#linux)
+
+```bash
+sudo apt-get install \
+    git \
+    cmake \
+    ninja-build \
+    build-essential \
+    libboost-program-options-dev \
+    libboost-filesystem-dev \
+    libboost-graph-dev \
+    libboost-system-dev \
+    libeigen3-dev \
+    libflann-dev \
+    libfreeimage-dev \
+    libmetis-dev \
+    libgoogle-glog-dev \
+    libgtest-dev \
+    libgmock-dev \
+    libsqlite3-dev \
+    libglew-dev \
+    qtbase5-dev \
+    libqt5opengl5-dev \
+    libcgal-dev \
+    libceres-dev
+
+
+sudo apt-get install -y \
+    nvidia-cuda-toolkit \
+    nvidia-cuda-toolkit-gcc
+
+
+git clone https://github.com/colmap/colmap.git
+cd colmap
+mkdir build
+cd build
+cmake .. -GNinja # -DCMAKE_CUDA_ARCHITECTURES=native 代表只在本机上运行
+ninja
+sudo ninja install
+
+# cmake .. -GNinja时 wsl报错"CMakeCUDACompilerId.cu" failed. 解决方法：
+cmake .. -GNinja -D TCNN_CUDA_ARCHITECTURES=86 -D CMAKE_CUDA_COMPILER=$(which nvcc) -DCMAKE_CUDA_ARCHITECTURES=native
+
+# Ubuntu 22.04 还需要：
+sudo apt-get install gcc-10 g++-10
+export CC=/usr/bin/gcc-10
+export CXX=/usr/bin/g++-10
+export CUDAHOSTCXX=/usr/bin/g++-10
+```
+
+## 已知相机参数的重建
+
+[COLMAP已知相机内外参数重建稀疏/稠密模型 - thronsbird - 博客园](https://www.cnblogs.com/li-minghao/p/11865794.html)
+
+稀疏重建：
+- feature_extractor
+- 手动或者代码生成 cameras.txt images.txt和points3D.txt文件，并将其导入db文件中
+- exhaustive_matcher
+- point_triangulator
+- bundle_adjuster
+
+稠密重建：
+- image_undistorter 指定目录为dense时：
+  - 在 **dense/sparse/** 目录下的.bin文件的内容与之前建立的.txt文件内容相同。在 **dense/stereo/** 目录下的 **patch-match.cfg** 规定了源图像进行块匹配的参考图像，默认的`__auto__, 20`代表自动最优的20张，必须要进行了point_triangulator才可用。或者：`__all__`指定所有图像为参考图像，`image001.jpg, image003.jpg, image004.jpg, image007.jpg`手动指定参考图像
+- patch_match_stereo
+  - 如果同样没有稀疏点云，则需要根据场景手动指定最小和最大深度：--PatchMatchStereo.depth_min 0.0 --PatchMatchStereo.depth_max 20.0
+- stereo_fusion
+- poisson_mesher
+
+***如果相机位姿导入的时候不正确，则稀疏重建point_triangulator的点云数量很少，结果很差***
+
+![image.png|444](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241117040617.png)
+
+DTU数据集中给的矩阵为pixel2world矩阵：
+
+```python
+2607.429996 -3.844898 1498.178098 -533936.661373
+-192.076910 2862.552532 681.798177 23434.686572
+-0.241605 -0.030951 0.969881 22.540121
+```
+
+```python
+camera_poses = []
+for i in range(64):
+  poses = []
+  pose_file = os.path.join(pose_dir, f"pos_{i+1:03d}.txt")
+  # print(pose_file)
+  with open(pose_file, 'r') as f:
+      pose = f.readlines()
+  for l in pose:
+      l = l.strip().split()
+      poses.append([float(x) for x in l])
+  poses_np = np.array(poses)
+  P = poses_np
+  # pose is the c2w to COLMAP
+  intrinsics, pose = load_K_Rt_from_P(P)
+  camera_poses.append(pose)
+camera_poses = np.array(camera_poses)
+np.savez("xxx.npz", camera_poses=camera_poses)
+```
+
+
+# Mine 
+
+## Accuracy
+
+多类几何先验混合监督的方法： Depth | Normal | SFM points
+
+### Data Generation
+
+Colmap 生成点云的时候可以使用 GT camera pose（cameras.npz） 进行监督？
+
+>Method1:[DTU camera Poses · Issue #5 · hbb1/2d-gaussian-splatting](https://github.com/hbb1/2d-gaussian-splatting/issues/5)  https://github.com/NVlabs/neuralangelo/blob/main/projects/neuralangelo/scripts/convert_tnt_to_json.py
+>Method2: [How to run COLMAP with ground truth camera poses on DTU? · Issue #20 · dunbar12138/DSNeRF](https://github.com/dunbar12138/DSNeRF/issues/20) [Frequently Asked Questions — COLMAP 3.11.0.dev0 documentation](https://colmap.github.io/faq.html#reconstruct-sparse-dense-model-from-known-camera-poses)
+
+### RUN
+
+Geo-Neus的数据集，相机位姿和world坐标系下的点云与DTU数据集中的一致，可以评价CD指标：
+
+```bash
+# no cue
+python run.py --conf confs/neus-dtu_geo.yaml --train dataset.root_dir="scene_dir"
+# with depth
+python run.py --conf confs/neus-dtu_geo.yaml --train dataset.root_dir="scene_dir" tag='depth' dataset.apply_depth=True
+# with normal
+python run.py --conf confs/neus-dtu_geo.yaml --train dataset.root_dir="scene_dir" tag='normal' dataset.apply_normal=True
+# with sfm points
+python run.py --conf confs/neus-dtu_geo.yaml --train dataset.root_dir="scene_dir" tag='sfm' dataset.apply_sfm=True
+```
+
+dtu_like自定义数据集，colmap生成的点云坐标系可能与DTU的GT点云坐标系不同(**相机位姿也不同**)，因此无法评价CD指标：
+
+```bash
+# no cue
+python run.py --conf confs/neus-dtu.yaml --train dataset.root_dir="scene_dir" dataset.name='dtu_like'
+# with depth
+python run.py --conf confs/neus-dtu.yaml --train dataset.root_dir="scene_dir" dataset.name='dtu_like' tag='depth' dataset.apply_depth=True
+# with normal
+python run.py --conf confs/neus-dtu.yaml --train dataset.root_dir="scene_dir" dataset.name='dtu_like' tag='normal' dataset.apply_normal=True
+# with sfm points
+python run.py --conf confs/neus-dtu.yaml --train dataset.root_dir="scene_dir" dataset.name='dtu_like' tag='sfm' dataset.apply_sfm=True
+```
+
+### Comparison
+
+对比启用不同先验：
+- no cue
+- with depth
+- with normal
+- with sfm points
+- with all
+
+不同深度先验：
+- [DepthAnything/Depth-Anything-V2: \[NeurIPS 2024\] Depth Anything V2. A More Capable Foundation Model for Monocular Depth Estimation](https://github.com/DepthAnything/Depth-Anything-V2)
+- [LiheYoung/Depth-Anything: \[CVPR 2024\] Depth Anything: Unleashing the Power of Large-Scale Unlabeled Data. Foundation Model for Monocular Depth Estimation](https://github.com/LiheYoung/Depth-Anything)
+- [apple/ml-depth-pro: Depth Pro: Sharp Monocular Metric Depth in Less Than a Second.](https://github.com/apple/ml-depth-pro)
+- [VisualComputingInstitute/diffusion-e2e-ft: Fine-Tuning Image-Conditional Diffusion Models is Easier than You Think](https://github.com/VisualComputingInstitute/diffusion-e2e-ft)
+- [noahzn/Lite-Mono: \[CVPR2023\] Lite-Mono: A Lightweight CNN and Transformer Architecture for Self-Supervised Monocular Depth Estimation](https://github.com/noahzn/Lite-Mono)
+- [shariqfarooq123/AdaBins: Official implementation of Adabins: Depth Estimation using adaptive bins](https://github.com/shariqfarooq123/AdaBins)
+- [SysCV/P3Depth](https://github.com/SysCV/P3Depth)
+
+不同法向量先验：
+- [Stable-X/StableNormal: \[SIGGRAPH Asia 2024 (Journal Track)\] StableNormal: Reducing Diffusion Variance for Stable and Sharp Normal](https://github.com/Stable-X/StableNormal)
+- [VisualComputingInstitute/diffusion-e2e-ft: Fine-Tuning Image-Conditional Diffusion Models is Easier than You Think](https://github.com/VisualComputingInstitute/diffusion-e2e-ft)
+- [EPFL-VILAB/omnidata: A Scalable Pipeline for Making Steerable Multi-Task Mid-Level Vision Datasets from 3D Scans \[ICCV 2021\]](https://github.com/EPFL-VILAB/omnidata) 图片尺寸限制
+- [baegwangbin/DSINE: \[CVPR 2024 Oral\] Rethinking Inductive Biases for Surface Normal Estimation](https://github.com/baegwangbin/DSINE)
+- [YvanYin/Metric3D: The repo for "Metric3D: Towards Zero-shot Metric 3D Prediction from A Single Image" and "Metric3Dv2: A Versatile Monocular Geometric Foundation Model..."](https://github.com/yvanyin/metric3d)
+
+
+## Efficiency
+
+```bash
+# lmc
+python run.py --conf confs/neus-dtu_geo.yaml --train dataset.root_dir="scene_dir" dataset.sampling_type='lmc'
+# uniform
+python run.py --conf confs/neus-dtu_geo.yaml --train dataset.root_dir="scene_dir" dataset.sampling_type='uniform'
+```
+
+## Uncertainty
 

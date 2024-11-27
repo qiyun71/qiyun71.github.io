@@ -4,7 +4,7 @@ date: 2023-11-17 15:07:48
 tags:
   - NeRF
   - 3DReconstruction
-categories: 3DReconstruction/Single-view/Implicit Function
+categories: 3DReconstruction/Single-view
 ---
 
 | Title     | Adaptive Shells for Efficient Neural Radiance Field Rendering                                                                                                |

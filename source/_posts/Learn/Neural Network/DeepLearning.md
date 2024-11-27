@@ -528,6 +528,11 @@ INN offers greater fitting flexibility due to the interval of weight and bias
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240920163527.png)
 
 
+## RBFNN
+
+![image.png|444](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241026160849.png)
+
+
 ## KAN
 
 [KindXiaoming/pykan: Kolmogorov Arnold Networks](https://github.com/KindXiaoming/pykan?tab=readme-ov-file)

@@ -7,15 +7,18 @@ categories: 3DReconstruction
 ---
 
 3D Reconstruction 相关数学方法
-[NeRF](3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeRF.md)
-[NeRF](Project/NeRF.md)
-[NeRF-code](NeRF-code.md)
 
 <!-- more -->
 
 # Framework
 
-- 隐式implicit：场值(eg: SDF) $sdf=F(x,y,z)=0$通过一个隐式的函数表示表面
+- 相机内外惨：连接像素坐标系与空间坐标系之间的计算
+- 隐式implicit场：通过一个隐式表示的函数表示物体/场景，使用MLP来学习空间的隐式函数
+  - 密度场，表示该空间点的密度
+  - SDF $sdf=F(x,y,z)=0$，表示该空间点离物体表面的最近距离
+- 编码：由于直接使用输入坐标xyz，网络无法很好地学习低频特征，需要将其进行高频编码
+- 空间点采样：逆变换采样CDF
+- 体渲染：将沿着光线空间采样点的颜色和密度积分为像素颜色
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231219125859.png)
 
@@ -23,14 +26,14 @@ categories: 3DReconstruction
 
 Ray: $\mathbf{r} = \mathbf{o} +t\mathbf{d}$
 
-NeRF:
+密度场:（NeRF）
 $\mathrm{C}(r)=\int_{\mathrm{t}_{\mathrm{n}}}^{\mathrm{t}_{\mathrm{f}}} \mathrm{T}(\mathrm{t}) \sigma(\mathrm{r}(\mathrm{t})) \mathrm{c}(\mathrm{r}(\mathrm{t}), \mathrm{d}) \mathrm{dt}$
 - $\mathrm{T}(\mathrm{t})=\exp \left(-\int_{\mathrm{t}_{\mathrm{n}}}^{\mathrm{t}} \sigma(\mathrm{r}(\mathrm{s})) \mathrm{ds}\right)$
 - 累计透射率$T(t)$可以保证离相机位置近的地方有更大的权重(一条光线前面的点遮挡后面的点)
 离散化：$\hat{C}(\mathbf{r})=\sum_{i=1}^{N} T_{i}\alpha_{i}\mathbf{c}_{i}=\sum_{i=1}^{N} T_{i}\left(1-\exp \left(-\sigma_{i} \delta_{i}\right)\right) \mathbf{c}_{i}$  
 -  $T_{i}=\exp \left(-\sum_{j=1}^{i-1} \sigma_{j} \delta_{j}\right)=\prod_{j=1}^{i-1}(1-\alpha_j)$ 
 
-NeuS
+符号距离函数SDF：(NeuS)
 $C(\mathbf{o},\mathbf{v})=\int_{0}^{+\infty}w(t)c(\mathbf{p}(t),\mathbf{d})\mathrm{d}t$
 - $\omega(t)=T(t)\rho(t),\text{where}T(t)=\exp\left(-\int_0^t\rho(u)\mathrm{d}u\right)$ 
 - $\rho(t)=\max\left(\frac{-\frac{\mathrm{d}\Phi_s}{\mathrm{d}t}(f(\mathbf{p}(t)))}{\Phi_s(f(\mathbf{p}(t)))},0\right)$
@@ -38,46 +41,71 @@ $C(\mathbf{o},\mathbf{v})=\int_{0}^{+\infty}w(t)c(\mathbf{p}(t),\mathbf{d})\math
 - $T_i=\prod_{j=1}^{i-1}(1-\alpha_j)$
 - $\alpha_i=\max\left(\frac{\Phi_s(f(\mathbf{p}(t_i))))-\Phi_s(f(\mathbf{p}(t_{i+1})))}{\Phi_s(f(\mathbf{p}(t_i)))},0\right)$
 
-# Encoding
 
-> [NeRF from Scratch. Motivating the explanation from… | by Raja Parikshat | Medium](https://medium.com/@rparikshat1998/nerf-from-scratch-fe21c08b145d) 入门
-> [Fourier Features Let Networks Learn High Frequency Functions in Low  Dimensional Domains](https://arxiv.org/pdf/2006.10739)
-
-Frequency Encoding(Fourier Features), 作用：神经网络偏向于学习低频，提出的解决方案是使用位置编码，使用高频函数把输入映射到更高维的空间中，再传递到神经网络，可以更好地拟合具有高频变化的数据。
-$\gamma(p)=\left(\sin \left(2^{0} \pi p\right), \cos \left(2^{0} \pi p\right), \cdots, \sin \left(2^{L-1} \pi p\right), \cos \left(2^{L-1} \pi p\right)\right)$
-- $p=x|y|z$
-- $L= constant$
-
-
-# NeRF相关的数学知识
-
-## 坐标变换
+# 坐标变换
 
 > [【相机标定】相机标定原理 - welcome to x-jeff blog](https://shichaoxin.com/2022/12/07/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A-%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A%E5%8E%9F%E7%90%86/) 相机内外参+径切向畸变
 
 
-像素Pixel | 相机Camera | 世界World
+## 矩阵的QR分解
 
-内参矩阵 = c2p
-外参矩阵 = w2c
-根据世界坐标计算像素坐标 = `c2p * w2c * world_position`
+QR分解可以将任何实数方阵分解成一个正交矩阵Q与一个上三角矩阵R的积
 
-### 相机内参矩阵intrinsic_c2p
+$A=QR$
 
-![image.png|444](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230703144039.png)
+```python
+# This function is borrowed from IDR: https://github.com/lioryariv/idr
+def load_K_Rt_from_P(P=None):
+    # P : 3x4
+    out = cv.decomposeProjectionMatrix(P) # 基于QR分解
+    K = out[0] # 3x3
+    R = out[1] # 3x3
+    t = out[2] # 3x1
+
+    K = K / K[2, 2]
+    intrinsics = np.eye(4)
+    intrinsics[:3, :3] = K # intrinsics: 4x4 为相机内参矩阵
+
+    pose = np.eye(4, dtype=np.float32)
+    pose[:3, :3] = R.transpose()
+    pose[:3, 3] = (t[:3] / t[3])[:, 0] # pose: 4x4 为相机外参矩阵
+
+    return intrinsics, pose
+  
+P = (world_mat @ scale_mat)[:3, :4] # ws2p矩阵
+intrinsics, pose = load_K_Rt_from_P(P) # 将 ws2p矩阵分解为 c2p和c2ws矩阵
+```
+
+- world_mat 为 w2p矩阵
+- scale_mat 为 ws2w矩阵，其中ws是单位box坐标系，坐标原点在box中心
+- intrinsics 为相机内参矩阵，camera to pixel
+- pose 为逆相机外参矩阵， camera to world (scaled)
+
+三个坐标系：像素Pixel | 相机Camera | 世界World
+
+## 相机内参矩阵c2p
 
 > 理解与[NeRF OpenCV OpenGL COLMAP DeepVoxels坐标系朝向_nerf坐标系_培之的博客-CSDN博客](https://blog.csdn.net/OrdinaryMatthew/article/details/126670351)一致
 
-| Method | Pixel to Camera coordinate                                                                                                                                                                                                                                                                                         |
+不同软件的相机坐标朝向不同
+- NeRF采用与 OPENGL 和 Blender相同的朝向
+- NeuS采用与 COLMAP 相同的朝向
+
+![image.png|444](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230703144039.png)
+
+像素坐标到相机坐标：
+$\mathbf{p_c}=\begin{bmatrix}\dfrac{1}{f}&0&-\dfrac{W}{2\cdot f}\\0&\dfrac{1}{f}&-\dfrac{H}{2\cdot f}\\0&0&1\end{bmatrix}\begin{pmatrix}i\\j\\1\end{pmatrix}=\begin{pmatrix}\dfrac{i-\dfrac{W}{2}}{f}\\\dfrac{j-\dfrac{H}{2}}{f}\\1\end{pmatrix}$
+
+| Method | Pixel <--> Camera coordinate                                                                                                                                                                                                                                                                                       |
 | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | NeRF   | $\vec d = \begin{pmatrix} \frac{i-\frac{W}{2}}{f} \\ -\frac{j-\frac{H}{2}}{f} \\ -1 \\ \end{pmatrix}$ , $intrinsics = K = \begin{bmatrix} f & 0 & \frac{W}{2}  \\ 0 & f & \frac{H}{2}  \\ 0 & 0 & 1 \\ \end{bmatrix}$                                                                                              |
 | Neus   | $\vec d = intrinsics^{-1} \times  pixel = \begin{bmatrix} \frac{1}{f} & 0 & -\frac{W}{2 \cdot f}  \\ 0 & \frac{1}{f} & -\frac{H}{2 \cdot f} \\ 0 & 0 & 1 \\ \end{bmatrix} \begin{pmatrix} i \\ j \\ 1 \\ \end{pmatrix} = \begin{pmatrix} \frac{i-\frac{W}{2}}{f} \\ \frac{j-\frac{H}{2}}{f} \\ 1 \\ \end{pmatrix}$ |
-$\mathbf{p_c}=\begin{bmatrix}\dfrac{1}{f}&0&-\dfrac{W}{2\cdot f}\\0&\dfrac{1}{f}&-\dfrac{H}{2\cdot f}\\0&0&1\end{bmatrix}\begin{pmatrix}i\\j\\1\end{pmatrix}=\begin{pmatrix}\dfrac{i-\dfrac{W}{2}}{f}\\\dfrac{j-\dfrac{H}{2}}{f}\\1\end{pmatrix}$
 
-$\mathbf{d_{w}}= \begin{bmatrix}r_{11}&r_{12}&r_{13}&t_x\\ r_{21}&r_{22}&r_{23}&t_y\\ r_{31}&r_{32}&r_{33}&t_z\\ 0&0&0&1\end{bmatrix} \begin{bmatrix}X_w\\Y_w\\Z_w\\1\end{bmatrix} = \begin{bmatrix}X_c\\Y_c\\Z_c\\1\end{bmatrix}$
+可以在pixel求camera坐标时直接求反yz轴的朝向，`directions = torch.stack([(i - cx) / fx, -(j - cy) / fy, -torch.ones_like(i)], -1) # (H, W, 3)`，或者也可在c2w矩阵中直接修改，第一列和第三列求反，`c2w_[:3,1:3] *= -1. # flip input sign`
 
-$\mathbf{o_w}=\begin{bmatrix}r_{11}&r_{12}&r_{13}&t_x\\ r_{21}&r_{22}&r_{23}&t_y\\ r_{31}&r_{32}&r_{33}&t_z\\ 0&0&0&1\end{bmatrix} \begin{pmatrix}0\\0\\0\\1\end{pmatrix} = \begin{pmatrix}t_x\\t_y\\t_z\\1\end{pmatrix}$
-### 相机外参矩阵w2c
+由于NeuS使用的DTU数据集/自制数据集是与COLMAP相同的相机朝向，因此不用进行变换。
+
+## 相机外参矩阵w2c
 
 > [相机位姿(camera pose)与外参矩阵 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/642715876)
 
@@ -90,11 +118,9 @@ colmap处理得到的`/colmap/sparse/0`中文件cameras, images, points3D.bin or
 # Number of images: 2, mean observations per image: 2
 ```
 
-pose: QW, QX, QY, QZ, TX, TY, TZ
+由四元数得到旋转和位移矩阵
 
-由QW、QX、QY、QZ得到旋转矩阵
-
-```
+```python
 R = | 1 - 2*(qy^2 + qz^2)   2*(qx*qy - qw*qz)   2*(qx*qz + qw*qy) |
     | 2*(qx*qy + qw*qz)     1 - 2*(qx^2 + qz^2) 2*(qy*qz - qw*qx) |
     | 2*(qx*qz - qw*qy)     2*(qy*qz + qw*qx)   1 - 2*(qx^2 + qy^2) |
@@ -106,30 +132,49 @@ t = [[TX],
 
 横向catR和t得到：`w2c = [R, t]`
 
-#### Neus
-
 $c2w = \left[\begin{array}{c|c}\mathbf{R}_{c}&\mathbf{C}\\\hline\mathbf{0}&1\\\end{array}\right]$
 
-c2w矩阵的值直接描述了相机坐标系的朝向和原点，因此称为相机位姿。具体的，旋转矩阵的第一列到第三列分别表示了相机坐标系的X, Y, Z轴在世界坐标系下对应的方向；平移向量表示的是相机原点在世界坐标系的对应位置。
-![c2w.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230804191552.png)
-
+**c2w矩阵的值直接描述了相机坐标系的朝向和原点**，因此称为相机位姿。
+- 具体的，旋转矩阵的第一列到第三列分别表示了相机坐标系的X, Y, Z轴在世界坐标系下对应的方向；
+- 平移向量表示的是相机原点在世界坐标系的对应位置。
 
 $w2c = \left[\begin{array}{c|c}\mathbf{R}&t\\\hline\mathbf{0}&1\end{array}\right] = \left[\begin{array}{c|c}\mathbf{R}_{c}^{\top}&-\mathbf{R}_{c}^{\top}\mathbf{C}\\\hline\mathbf{0}&1\\\end{array}\right]$
+
+$\mathbf{d_{w}}= \begin{bmatrix}r_{11}&r_{12}&r_{13}&t_x\\ r_{21}&r_{22}&r_{23}&t_y\\ r_{31}&r_{32}&r_{33}&t_z\\ 0&0&0&1\end{bmatrix} \begin{bmatrix}X_w\\Y_w\\Z_w\\1\end{bmatrix} = \begin{bmatrix}X_c\\Y_c\\Z_c\\1\end{bmatrix}$
+
+$\mathbf{o_w}=\begin{bmatrix}r_{11}&r_{12}&r_{13}&t_x\\ r_{21}&r_{22}&r_{23}&t_y\\ r_{31}&r_{32}&r_{33}&t_z\\ 0&0&0&1\end{bmatrix} \begin{pmatrix}0\\0\\0\\1\end{pmatrix} = \begin{pmatrix}t_x\\t_y\\t_z\\1\end{pmatrix}$
 
 同理由于R转置为$R_c$，因此在w2c中，第一行的X为相机坐标系的X轴在世界坐标系下对应方向
 
 $w2c = [R ,t] = \begin{bmatrix} X & t_{x}  \\ Y & t_{y} \\ Z & t_{z} \\ \end{bmatrix}$
 
+$t=(t_{x},t_{y},t_{z})^{\top}$为世界坐标系原点在相机坐标系下的位置
+
 i.e.: 
 - $\mathbf{R} = \mathbf{R}_{c}^{\top}$ <==> $\mathbf{R}_{c} = \mathbf{R}^{\top}$
 - $t = - \mathbf{R}_{c}^{\top}\mathbf{C}$ <==> $\mathbf{C} = - \mathbf{R}_{c} t$
 
-在colmap_read_model.py中读取colmap文件信息，得到w2c并转换为c2w
-在gen_cameras.py中将c2w转换为w2c，然后world_mat = intrinsic @ w2c
-在Dataset()中加载world_mat，并P = world_mat @ scale_mat，对P进行decomposeProjectionMatrix，得到intrinsics和pose = w2c @ scale_mat，使得c2w时对世界坐标进行缩放`/scale_mat`，**使得训练时感兴趣物体在单位坐标系内**
+#### Neus(pose)
 
-##### 光线生成
-pose: c2w (3,4)
+在colmap_read_model.py中读取colmap文件信息，得到w2c并转换为c2w
+在gen_cameras.py中将c2w转换为w2c，然后world_mat = intrinsic @ w2c = w2p
+在Dataset()中：
+- 加载world_mat(w2p)，
+- P = world_mat @ scale_mat(ws2w) = ws2p
+- 对P进行decomposeProjectionMatrix，得到intrinsics(c2p)和pose(c2ws)
+  - 使用c2ws时对世界坐标进行缩放，**使得训练时感兴趣物体在单位坐标系内**
+
+intrinsic：(pixel to camera)
+
+```python
+fx, fy, cx, cy = intrinsics[0,0] * factor, intrinsics[1,1] * factor, intrinsics[0,2] * factor, intrinsics[1,2] * factor
+# OPENGL or Blender or NeRF 需要修改方向
+# directions = torch.stack([(i - cx) / fx, -(j - cy) / fy, -torch.ones_like(i)], -1) # (H, W, 3)
+# neus or COLMAP: 
+directions = torch.stack([(i - cx) / fx, (j - cy) / fy, torch.ones_like(i)], -1) # (H, W, 3)
+```
+
+pose：（camera to scaled world）
 - `rays_v = pose[:3,:3] @ directions_cams`
 - `rays_o = pose[:3, 3].expand(rays_v.shape)`
 
@@ -154,8 +199,6 @@ for img_id, pose in self.poses.items():
     self.poses[img_id] = np.concatenate([R_new, t_new[:,None]], -1)
 ```
 
-##### 光线生成
-
 pose: w2c (3,4)
 
 $w2c = \left[\begin{array}{c|c}\mathbf{R}&t\\\hline\mathbf{0}&1\end{array}\right] = \left[\begin{array}{c|c}\mathbf{R}_{c}^{\top}&-\mathbf{R}_{c}^{\top}\mathbf{C}\\\hline\mathbf{0}&1\\\end{array}\right]$
@@ -168,7 +211,7 @@ $\mathbf{C} = - \mathbf{R}^{\top} t$
 
 世界坐标系下光线方向：`rays_d = poses[idxs, :, :3].permute(0, 2, 1) @ rays_d.unsqueeze(-1)` # (rays_d = ray_batch['dirs'])
 
-## 反射Reflection
+# 镜面反射
 
 ![BRDF.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/BRDF.png)
 
@@ -296,7 +339,7 @@ specular用于描述光线击中物体表面后直接反射回去，使表面看
 金属度相当于镜面反射，金属度越高，镜面反射越强
 
 
-# Sampling
+# 采样方式
 
 
 将像素看成一个点，射出的光线是一条直线
@@ -418,7 +461,15 @@ Multisampling
 
 # 编码方式
 
-## 频率编码
+### 频率编码
+
+> [NeRF from Scratch. Motivating the explanation from… | by Raja Parikshat | Medium](https://medium.com/@rparikshat1998/nerf-from-scratch-fe21c08b145d) 入门
+> [Fourier Features Let Networks Learn High Frequency Functions in Low  Dimensional Domains](https://arxiv.org/pdf/2006.10739)
+
+Frequency Encoding(Fourier Features), 作用：神经网络偏向于学习低频，提出的解决方案是使用位置编码，使用高频函数把输入映射到更高维的空间中，再传递到神经网络，可以更好地拟合具有高频变化的数据。
+$\gamma(p)=\left(\sin \left(2^{0} \pi p\right), \cos \left(2^{0} \pi p\right), \cdots, \sin \left(2^{L-1} \pi p\right), \cos \left(2^{L-1} \pi p\right)\right)$
+- $p=x|y|z$
+- $L= constant$
 
 ### NeRF
 
@@ -475,64 +526,6 @@ def get_embedder(multires, input_dims=3):
 # use: get_embedder(args.multires, args.i_embed)
 ```
 
-### Instant-nsr-pl
-
-```python
-get_encoding.py:
-class CompositeEncoding(nn.Module):
-    def __init__(self, encoding, include_xyz=False, xyz_scale=1., xyz_offset=0.):
-        super(CompositeEncoding, self).__init__()
-        self.encoding = encoding
-        self.include_xyz, self.xyz_scale, self.xyz_offset = include_xyz, xyz_scale, xyz_offset
-        self.n_output_dims = int(self.include_xyz) * self.encoding.n_input_dims + self.encoding.n_output_dims
-    
-    def forward(self, x, *args):
-        return self.encoding(x, *args) if not self.include_xyz else torch.cat([x * self.xyz_scale + self.xyz_offset, self.encoding(x, *args)], dim=-1)
-
-def get_encoding(n_input_dims,conf):
-    if conf.otype == 'HashGrid':
-        encoding = HashGrid(n_input_dims, conf)
-    elif conf.otype == 'ProgressiveBandHashGrid':
-        encoding = ProgressiveBandHashGrid(n_input_dims, conf)
-    elif conf.otype == 'VanillaFrequency':
-        encoding = VanillaFrequency(n_input_dims, conf)
-    elif conf.otype == 'SphericalHarmonics':
-        encoding = SphericalHarmonics(n_input_dims, conf)
-    else:
-        raise NotImplementedError
-    encoding = CompositeEncoding(encoding, include_xyz = conf.get('include_xyz',False), xyz_scale =2, xyz_offset = -1)
-    return encoding
-
-frequency.py：
-class VanillaFrequency(nn.Module):
-    def __init__(self, in_channels, config):
-        super().__init__()
-        self.N_freqs = config['n_frequencies']
-        self.in_channels, self.n_input_dims = in_channels, in_channels
-        self.funcs = [torch.sin, torch.cos]
-        self.freq_bands = 2**torch.linspace(0, self.N_freqs-1, self.N_freqs)
-        self.n_output_dims = self.in_channels * (len(self.funcs) * self.N_freqs)
-
-    def forward(self, x):
-        out = []
-        for freq in zip(self.freq_bands):
-            for func in self.funcs:
-                out += [func(freq*x)]
-        return torch.cat(out, -1)     
-
-models/neus.py：
-class N(nn.Module):
-    __init__:
-    self.encoding = get_encoding(n_input_dims = 3, config)
-    forward:
-    h = self.encoding(x)
-
-yaml:
-    xyz_encoding: 
-      otype: HashGrid
-      include_xyz: true
-      n_frequencies: 10
-```
 
 ### IPE
 
@@ -552,7 +545,7 @@ IPE可以将大区域的高频编码求和为0
 
 
 
-## HashGrid 哈希编码
+## 多分辨率哈希编码
 
 ![image.png|666](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230703160333.png)
 
@@ -610,33 +603,6 @@ K_{l}^{m}=\sqrt{\frac{\left(2l+1\right)}{4\pi}\frac{\left(l-\left|m\right|\right
 \end{aligned}
 $$
 
-```python
-spherical.py:
-class SphericalHarmonics(nn.Module):
-    def __init__(self, n_input_dims, config):
-        super().__init__()
-        self.n_input_dims = n_input_dims
-        with torch.cuda.device(get_rank()):
-            self.encoding = tcnn.Encoding(self.n_input_dims, config_to_primitive(config))
-        self.n_output_dims = self.encoding.n_output_dims
-
-    def forward(self, x):
-        enc = self.encoding(x)
-        return enc
-
-models/neus.py：
-class N(nn.Module):
-    __init__:
-    self.encoding = get_encoding(n_input_dims = 3, config)
-    forward:
-    h = self.encoding(x)
-
-yaml:
-    dir_encoding: 
-      otype: SphericalHarmonics
-      degree: 4
-```
-
 ## IDE
 
 在Ref-NeRF中，借鉴Mip-NeR中的IPE，提出了IDE，基于球面谐波，将高频部分的编码输出置为0
@@ -649,145 +615,3 @@ $A_{\ell}(\kappa)\approx\exp\left(-\frac{\ell(\ell+1)}{2\kappa}\right).$
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230810152303.png)
 
-
-use:
-```python
-self.sph_enc = generate_ide_fn(5)
-
-dir_enc = self.sph_enc(reflections, 0)
-# 将reflections编码，粗糙度为0
-```
-
-```python
-import math
-
-import torch
-import numpy as np
-
-
-
-def generalized_binomial_coeff(a, k):
-    """Compute generalized binomial coefficients."""
-    return np.prod(a - np.arange(k)) / np.math.factorial(k)
-
-
-def assoc_legendre_coeff(l, m, k):
-    """Compute associated Legendre polynomial coefficients.
-
-      Returns the coefficient of the cos^k(theta)*sin^m(theta) term in the
-      (l, m)th associated Legendre polynomial, P_l^m(cos(theta)).
-
-      Args:
-        l: associated Legendre polynomial degree.
-        m: associated Legendre polynomial order.
-        k: power of cos(theta).
-
-      Returns:
-        A float, the coefficient of the term corresponding to the inputs.
-    """
-    return ((-1)**m * 2**l * np.math.factorial(l) / np.math.factorial(k) /
-          np.math.factorial(l - k - m) *
-          generalized_binomial_coeff(0.5 * (l + k + m - 1.0), l))
-
-
-def sph_harm_coeff(l, m, k):
-  """Compute spherical harmonic coefficients."""
-  return (np.sqrt(
-      (2.0 * l + 1.0) * np.math.factorial(l - m) /
-      (4.0 * np.pi * np.math.factorial(l + m))) * assoc_legendre_coeff(l, m, k))
-
-
-
-def get_ml_array(deg_view):
-    """Create a list with all pairs of (l, m) values to use in the encoding."""
-    ml_list = []
-    for i in range(deg_view):
-        l = 2**i
-        # Only use nonnegative m values, later splitting real and imaginary parts.
-        for m in range(l + 1):
-            ml_list.append((m, l))
-
-    # Convert list into a numpy array.
-    ml_array = np.array(ml_list).T
-    return ml_array
-
-def generate_ide_fn(deg_view):
-    """Generate integrated directional encoding (IDE) function.
-
-      This function returns a function that computes the integrated directional
-      encoding from Equations 6-8 of arxiv.org/abs/2112.03907.
-
-      Args:
-        deg_view: number of spherical harmonics degrees to use.
-
-      Returns:
-        A function for evaluating integrated directional encoding.
-
-      Raises:
-        ValueError: if deg_view is larger than 5.
-    """
-    if deg_view > 5:
-        raise ValueError('Only deg_view of at most 5 is numerically stable.')
-
-    ml_array = get_ml_array(deg_view)
-    l_max = 2**(deg_view - 1)
-
-    # Create a matrix corresponding to ml_array holding all coefficients, which,
-    # when multiplied (from the right) by the z coordinate Vandermonde matrix,
-    # results in the z component of the encoding.
-    mat = np.zeros((l_max + 1, ml_array.shape[1]))
-    for i, (m, l) in enumerate(ml_array.T):
-        for k in range(l - m + 1):
-            mat[k, i] = sph_harm_coeff(l, m, k)
-
-    # mat = torch.from_numpy(mat.astype(np.float32)).cuda()
-    mat = torch.from_numpy(mat.astype(np.float32)).cpu()
-    ml_array = torch.from_numpy(ml_array.astype(np.float32)).cpu()
-    # ml_array = torch.from_numpy(ml_array.astype(np.float32)).cuda()
-
-
-    def integrated_dir_enc_fn(xyz, kappa_inv):
-        """Function returning integrated directional encoding (IDE).
-
-        Args:
-          xyz: [..., 3] array of Cartesian coordinates of directions to evaluate at.
-          kappa_inv: [..., 1] reciprocal of the concentration parameter of the von
-            Mises-Fisher distribution.
-
-        Returns:
-          An array with the resulting IDE.
-        """
-        x = xyz[..., 0:1]
-        y = xyz[..., 1:2]
-        z = xyz[..., 2:3]
-
-        # Compute z Vandermonde matrix.
-        vmz = torch.concat([z**i for i in range(mat.shape[0])], dim=-1)
-
-        # Compute x+iy Vandermonde matrix.
-        vmxy = torch.concat([(x + 1j * y)**m for m in ml_array[0, :]], dim=-1)
-
-        # Get spherical harmonics.
-        sph_harms = vmxy * torch.matmul(vmz, mat)
-
-        # Apply attenuation function using the von Mises-Fisher distribution
-        # concentration parameter, kappa.
-        sigma = 0.5 * ml_array[1, :] * (ml_array[1, :] + 1)
-        ide = sph_harms * torch.exp(-sigma * kappa_inv)
-
-        # Split into real and imaginary parts and return
-        return torch.concat([torch.real(ide), torch.imag(ide)], dim=-1)
-
-    return integrated_dir_enc_fn
-
-def get_lat_long():
-    res = (1080, 1080*3)
-    gy, gx = torch.meshgrid(torch.linspace(0.0 + 1.0 / res[0], 1.0 - 1.0 / res[0], res[0], device='cuda'),
-                            torch.linspace(-1.0 + 1.0 / res[1], 1.0 - 1.0 / res[1], res[1], device='cuda'),
-                            indexing='ij') # [h,w]
-
-    sintheta, costheta = torch.sin(gy * np.pi), torch.cos(gy * np.pi)
-    sinphi, cosphi = torch.sin(gx * np.pi), torch.cos(gx * np.pi)
-    reflvec = torch.stack((sintheta * sinphi, costheta, -sintheta * cosphi), dim=-1)
-    return reflvec
-```

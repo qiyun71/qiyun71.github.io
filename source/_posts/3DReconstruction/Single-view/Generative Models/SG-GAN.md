@@ -3,7 +3,7 @@ title: SG-GAN
 date: 2023-10-21 19:42:03
 tags:
   - GAN
-categories: 3DReconstruction/Single-view/Generative Models
+categories: 3DReconstruction/Single-view
 ---
 
 | Title     | SG-GAN: Fine Stereoscopic-Aware Generation for 3D Brain Point Cloud Up-sampling from a Single Image                                                                                                                                                                                                              |

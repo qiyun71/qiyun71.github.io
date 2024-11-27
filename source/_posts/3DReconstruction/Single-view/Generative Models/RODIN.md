@@ -3,7 +3,7 @@ title: RODIN
 date: 2023-10-28 21:47:58
 tags:
   - Diffusion
-categories: 3DReconstruction/Single-view/Generative Models
+categories: 3DReconstruction/Single-view
 ---
 
 | Title     | Rodin: A Generative Model for Sculpting 3D Digital Avatars Using Diffusion                                                                                                                 |

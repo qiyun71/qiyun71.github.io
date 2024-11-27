@@ -6,33 +6,41 @@ categories: 3DReconstruction/Multi-view
 top: true
 ---
 
-- NeRF系列的多视图三维重建方法关键有两点:
-  - 如何表示3D model: mesh, voxel, pointcloud, RGBD, Implicit Density Field, SDF or Other Primitive(高斯体, 椭圆体, 球)
-  - 如何将3D model 可微渲染成2D图像: Volume Rendering or Rasterization?
-
-
 - **Accuracy** 重建的模型精度不好，影响因素：
   - 数据集质量：照片拍摄质量(设备)、相机位姿估计精度(COLMAP)
     - 照片质量问题：混叠、模糊、滚动快门 (RS) 效应、HDR/LDR、运动模糊、低光照
-  - NeuS方法的问题：Loss函数约束、体渲染的过度简化、缺少监督(*深度or法向量*)
-  - 网格提取方法(Marching Cube)
+    - 相机位姿误差：SFM位姿估计时的误差
+  - NeuS方法的问题：体渲染公式的过度简化、表面几何与颜色的偏差、缺少几何约束(*深度or法向量*)
+  - 网格提取方法(Marching Cube)：分辨率太低
 - **Efficiency** 训练/渲染的速度太慢，影响因素：
   - MLP计算次数多 --> MIMO MLP、NGP-RT、
   - MLP层数多计算慢--> InstantNGP
 
-
 <!-- more -->
 
 *Other link about 3D Reconstruction: (need to add " ../ " in obsidian)*
-- [Paper About 3D Reconstruction](../../Paper%20About%203D%20Reconstruction)
-  - [Finite Element Model 3D Reconstruction](../../Finite%20Element%20Model%203D%20Reconstruction)
-  - [Anime Image 3D Reconstruction](../../Anime%20Image%203D%20Reconstruction)
-  - [Multi-view Human Body Reconstruction](Multi-view%20Human%20Body%20Reconstruction)
+- [Paper About 3D Reconstruction](../../Paper%20About%203D%20Reconstruction) [NeRF-review](Implicit%20Function/NeRF-based/NeRF%20Other%20Research/NeRF-review.md)
+  - [Finite Element Model 3D Reconstruction](../../Finite%20Element%20Model%203D%20Reconstruction) 三维重建出有限元模型 (医学领域较多研究, 工业领域目前研究比较少✊)
+  - [Anime Image 3D Reconstruction](../../Anime%20Image%203D%20Reconstruction) 根据动漫图像重建三维模型 (结合3D彩色打印实现手办自由😊)
+  - [Multi-view Human Body Reconstruction](Multi-view%20Human%20Body%20Reconstruction) 重建三维人体模型 (数字人直播, 真人手办😊)
 - [Basics about 3D Reconstruction](../../Basics%20about%203D%20Reconstruction)
 - [Datasets](../../Datasets)
-- [Code of Multi-view 3D Reconstruction based on SDF and volume rendering](Code%20of%20Multi-view%203D%20Reconstruction%20based%20on%20SDF%20and%20volume%20rendering)
+- [Code of Multi-view 3D Reconstruction based on SDF and volume rendering](Code%20of%20Multi-view%203D%20Reconstruction%20based%20on%20SDF%20and%20volume%20rendering) 一些环境配置记录
 
-[Master Paper(3DReconstruction)](../../Blog&Book&Paper/Write/Write%20Paper/3D%20Reconstruction/Master%20Paper(3DReconstruction).md)
+[Master Paper(3DReconstruction)](../../Blog&Book&Paper/Write/Write%20Paper/3D%20Reconstruction/Master%20Paper(3DReconstruction)) 硕论思路，打算沿着NeuS的路线进行相关改进
+
+**多视图三维重建方法的关键在于**:
+1. 如何表示3D model: mesh, voxel, pointcloud, RGBD, occupancy function,  Implicit Density Field, SDF or Other Primitive(高斯体, 椭圆体, 球)
+2. 如何将3D model 可微地渲染成2D图像: Volume Rendering or Rasterization?
+
+![image.png|555](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241010195323.png)
+
+| Method   | 3D represent                             | Rendering method          |
+| -------- | ---------------------------------------- | ------------------------- |
+| NeRF     | Implicit Density Field (MLP)             | Volume Rendering          |
+| **NeuS** | Implicit SDF (MLP)                       | Volume Rendering          |
+| 3DGS     | 高斯体<br>形状/方向——中心点+协方差 <br>颜色——球谐函数, 不透明度 | Splatting (Rasterization) |
+| EVER     | 椭圆体                                      | Volume Rendering          |
 
 # Accuracy
 
@@ -58,21 +66,26 @@ MSE loss 是 point-wise 的，没有考虑到一组pixel的结构特征，而SSI
   - structure结构：$s(\boldsymbol{a},\boldsymbol{b})=\frac{\sigma_{ab}+C_3}{\sigma_a\sigma_b+C_3}.$
 *但是在NeRF训练过程中pixel在一个batch是随机的，丢失了局部patch的像素中位置相关的信息*，本文提出的S3IM，是SSIM的随机变体。每个minibatch有B个像素，核大小KxK，步长s=K(因为在minibatch中的随机patch是独立的，而且不需要重叠的情况)
 - 将B个像素/光线构成一个rendered patch $\mathcal{P}(\hat{\mathcal{C}})$，同时有一个gt image patch $\mathcal{P}(\mathcal{C})$
-- 计算rendered和gt patch之间的$SSIM(\mathcal{P}(\hat{\mathcal{C}}),\mathcal{P}(\mathcal{C}))$ with kernel size KxK and stride size s =K
+- 计算rendered和gt patch之间的$SSIM(\mathcal{P}(\hat{\mathcal{C}}),\mathcal{P}(\mathcal{C}))$ with kernel si ze KxK and stride size s =K
 - 由于patch是随机的，重复M次上述两步，并计算M次SSIM的平均值
 
 $\mathrm{S3IM}(\hat{\mathcal{R}},\mathcal{R})=\frac{1}{M}\sum_{m=1}^{M}\mathrm{SSIM}(\mathcal{P}^{(m)}(\hat{\mathcal{C}}),\mathcal{P}^{(m)}(\mathcal{C}))$
 
 $L_{\mathrm{S3IM}}(\Theta,\mathcal{R})=1-\mathrm{S3IM}(\hat{\mathcal{R}},\mathcal{R}) = =1-\frac1M\sum_{m=1}^M\mathrm{SSIM}(\mathcal{P}^{(m)}(\hat{\mathcal{C}}),\mathcal{P}^{(m)}(\mathcal{C}))$
 
-## Volume Rendering
+## Volume Rendering (SDF2Density)
 
+### VolSDF
+
+$\sigma(\mathbf{r}(t))=\Psi_s(f(\mathbf{r}(t)))=\begin{cases}\frac{1}{2s}\exp\left(\frac{-f(\mathbf{r}(t))}{s}\right)&\text{if }f(\mathbf{r}(t))\geq0,\\\frac{1}{s}\left(1-\frac{1}{2}\exp\left(\frac{f(\mathbf{r}(t))}{s}\right)\right)&\text{if }f(\mathbf{r}(t))<0.\end{cases}$
 
 ### NeuS
 
 > [NeuS: Learning Neural Implicit Surfaces by Volume Rendering for Multi-view Reconstruction](https://arxiv.org/pdf/2106.10689)
 
-SDF内部-1，外部1，表面0
+SDF内部-1，外部1，表面0 
+$f(x)=\left\{\begin{matrix}d(x,\partial\Omega)&\mathrm{if~}x\in\Omega\\-d(x,\partial\Omega)&\mathrm{if~}x\not\in\Omega.\end{matrix}\right.$
+
 NeuS没有与NeRF一样直接使用MLP输出的不透明度$\sigma$作为$\rho$，而是使用预测的sdf进行相应计算得到$\rho$，以及权重
 - $C(\mathbf{o},\mathbf{v})=\int_{0}^{+\infty}w(t)c(\mathbf{p}(t),\mathbf{v})\mathrm{d}t$  $\omega(t)=T(t)\rho(t),\text{where}T(t)=\exp\left(-\int_0^t\rho(u)\mathrm{d}u\right)$
 - $\rho(t)=\max\left(\frac{-\frac{\mathrm{d}\Phi_s}{\mathrm{d}t}(f(\mathbf{p}(t)))}{\Phi_s(f(\mathbf{p}(t)))},0\right)$ , MLP预测的sdf即$f(\mathbf{p}(t))$ 
@@ -86,11 +99,14 @@ NeuS没有与NeRF一样直接使用MLP输出的不透明度$\sigma$作为$\rho$�
 除了$\mathcal{L}1$和$\mathcal{L}_{mask}$损失之外还使用了$\mathcal{L}_{r e g}=\frac{1}{n m}\sum_{k,i}(\|\nabla f(\hat{\mathbf{p}}_{k,i})\|_{2}-1)^{2}.$ (Eikonal term)
 - where m is batch size(ray scalar), n is the point sampling size
 
+### TUVR
 
+$\sigma(t)=\begin{cases}\frac{1}{s(t)}\exp\left(\frac{-f(t)}{s(t)|f'(t)|}\right)&\text{if}f(t)\geq0,\\\frac{2}{s(t)}\left(1-\frac{1}{2}\exp\left(\frac{f(t)}{s(t)|f'(t)|}\right)\right)&\text{if}f(t)<0.\end{cases}$
 
 ### NeuRodin
 
 > [NeuRodin: A Two-stage Framework for High-Fidelity Neural Surface Reconstruction](https://open3dvlab.github.io/NeuRodin/)
+> [arxiv.org/pdf/2408.10178](https://arxiv.org/pdf/2408.10178)
 
 室内外大场景，之前方法存在的问题：
 - 过度几何正则化a); 
@@ -123,7 +139,7 @@ NeuS没有与NeRF一样直接使用MLP输出的不透明度$\sigma$作为$\rho$�
     - C: SDF zero level set
   - 本文解决方法:  $$\mathcal{L}_{\mathrm{bias}}=\frac1m\sum_{\mathbf{r}\in\mathcal{R}}\max\left(f(\mathbf{r}(t^*+\epsilon_{\mathrm{bias}})),0\right),\quad t^{*}=\arg\max_{t\in(0,+\infty)}T(t)\sigma(\mathbf{r}(t))$$ 
     - 通过约束每条光线上A($t^*$ with bias correction factor $\epsilon_{\mathrm{bias}}$)与C的差异，且仅约束sdf为正(即模型外部)的部分 
-    - ***为什么不约束模型内部呢？：鼓励SDF在A位置之后取负值，经验测试出来的(附录C)，且提供了[数学解释](https://www.desmos.com/calculator/k1jklfvd5y?lang=zh-CN):*** 当A在C之前时，随着$\theta$的变化AC之间差异变化的更大；当A在C之后时，随着$\theta$的变化AC之间差异变化较小 
+    - ***为什么不约束模型内部呢？：鼓励SDF在A位置之后取负值，经验测试出来的(附录C)，且提供了[数学解释](https://www.desmos.com/calculator/k1jklfvd5y?lang=zh-CN):*** 当A在C之前时，随着$\theta$ 的变化AC之间差异变化的更大；当A在C之后时，随着$\theta$的变化AC之间差异变化较小 
     - $\epsilon_{\mathrm{bias}}$ 是由于选取maximum的方法导致的：直接使用采样点的最大权重来近似$t^*$
 - **Two-Stage Optimization to Tackle Geometry Over-Regularization**
   - **Stage 1**——Geometry Over-Regularization (estimated gradients + local scale s(VolSDF SDF2Density) + $\mathcal{L}_{\mathrm{bias}}$)
@@ -253,6 +269,19 @@ Primary surface point sampling
 
 之前方法对train_data中所有的像素rgb三个值，进行预测+l1 loss+反向传播，训练速度很慢
 
+### Uniform sampling
+
+```python pseudocode
+for epoch in range(epochs):
+  # 每个epoch对每张图片进行训练一轮，每张图片挑选n_rays个像素
+  for batch_data in dataloader: # batch_size = n_images
+    batch_rays = n_images * n_rays # 选取像素位置个数
+    gt_rgb = Select_rgb(batch_rays) # 根据位置获得 gt rgb
+    render_rgb = F(batch_rays) # 根据位置渲染 render rgb
+    loss = abs(render_rgb, gt_rgb) # 求loss
+    backward() # 反向传播
+```
+
 通过量化rendering image 与 g.t. image 之间的差异，来指导在图像上采样像素的位置/数量：根据error map between rendering image and g.t. image，消除loss比较小的区域，对loss大的区域进行更多的采样
 
 **idea**：
@@ -272,6 +301,20 @@ Monte Carlo采样无法得到复杂的分布(二维分布)，加入Markov Chain�
 --> MCMC方法(与拒绝-接受采样的思路类似，其通过拒绝-接受概率拟合一个复杂分布, MCMC方法则通过拒绝-接受概率得到一个满足细致平稳条件的转移矩阵.)
 - Metropolis-Hastings Sampling：需要计算接受率, 在高维时计算量大, 并且由于接受率的原因导致算法收敛时间变长. 对于高维数据, 往往数据的条件概率分布易得, 而联合概率分布不易得.
 - Gibbs Sampling：
+
+### LMC sampling
+
+```python pseudocode
+for epoch in range(epochs):
+  # 每个epoch对每张图片进行训练一轮，每张图片挑选n_rays个像素
+  for batch_data in dataloader: # batch_size = 1 最准确
+    for sample_t in range(sa)
+      batch_rays = n_images * n_rays # 选取像素位置个数
+      gt_rgb = Select_rgb(batch_rays) # 根据位置获得 gt rgb
+      render_rgb = F(batch_rays) # 根据位置渲染 render rgb
+      loss = abs(render_rgb, gt_rgb) # 求loss
+      backward() # 反向传播
+```
 
 ### Soft Mining
 
@@ -306,6 +349,36 @@ $\mathbf{x}_{t+1}=\mathbf{x}_t+a\nabla\log Q(\mathbf{x}_t)+b\boldsymbol{\eta}_{t
 - b>0 is a hyperparameter defining the step size for the random walk $\boldsymbol{\eta}_{t\boldsymbol{+}1}\boldsymbol{\sim}\mathcal{N}(0,\mathbf{1})$
 - 采样是局部的，因此采样的开销很小
 - log的作用应该是把乘除转换成加减, eg: $w_i=\frac{p(x_i)}{q(x_i)}, \log w_i=\log p(x_i)-\log q(x_i)$
+
+#### Question
+
+Hello, I have the same question about the code in line 280 of "examples/train_ngp_nerf_prop.py".
+
+According to the previous code, the `correction` and `loss_per_pix` are respectively:
+
+$$correction = \frac{1}{sg(Q(\mathbf{x}))^{\alpha}}$$
+$$loss\_per\_pix=\frac{Q(\mathbf{x})^{2}}{sg(Q(\mathbf{x}))^{\alpha}}$$
+
+Then the `net_grad` should be:
+
+$$\begin{align} {netgrad} &= \frac{\partial loss\_per\_pix}{\partial\mathbf{x}} = \frac{2Q(\mathbf{x})}{sg(Q(\mathbf{x}))^{\alpha}} \nabla Q(\mathbf{x}) \\
+\end{align}$$
+
+$$\begin{align}\nabla\log Q(\mathbf{x}) &= \frac{1}{Q(\mathbf{x})} \nabla Q(\mathbf{x}) \\
+&=\frac{1}{Q(\mathbf{x})} \frac{netgrad \cdot sg(Q(\mathbf{x}))^{\alpha}}{2Q(\mathbf{x})}
+ \\
+&=\frac{netgrad}{2\cdot loss\_per\_pix}\end{align}$$
+
+I don't know why `net_grad` in the code is need to divide by `correction`
+
+```python
+net_grad = net_grad / ((grad_scaler._scale * (correction * loss_per_pix).unsqueeze(1))+ torch.finfo(net_grad.dtype).eps)
+```
+
+Maybe my understanding about the partial of `loss_per_pix` is wrong... Could u give me some advice about that, thank u very much.
+
+#### Other tricks
+
 
 Sample (re-)initialization.(采样的初始化很重要)：We first initialize the sampling distribution to be uniform over the domain of interest as $\mathbf{x}_{0}{\sim}\mathcal{U}(\mathcal{R})$. We further re-initialize samples that either move out of $\mathcal{R}$ or have too low error value causing samples to get ‘stuck’. We use uniform sampling as well as edge-based sampling for 2D workloads.
 Warming up soft mining. Start with $\alpha=0$, i.e., no correction, then linearly increase it to the desired $\alpha$ value at 1k iterations.
@@ -404,12 +477,43 @@ $$\begin{aligned}
 
 # Uncertainty
 
+Basic Paper:
+
+| Year | Paper                                                                                                                                                            |
+| ---- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2021 | [Quantifying Epistemic Uncertainty in Deep Learning](https://arxiv.org/pdf/2110.12122v1)                                                                         |
+| 2021 | [Aleatoric and epistemic uncertainty in machine learning: an introduction to concepts and methods](https://link.springer.com/article/10.1007/s10994-021-05946-3) |
+| 2022 | [A Survey of Uncertainty in Deep Neural Networks](https://arxiv.org/pdf/2107.03342#page=21.35)                                                                   |
+
+
+三维模型不确定性：
+- [【论文阅读】使用神经形状先验的多视图三维重建和不确定性建模-CSDN博客](https://blog.csdn.net/m0_50910915/article/details/134133658)
+
 ## Sources of Uncertainty
 
 [Sources of Uncertainty in 3D Scene Reconstruction](Sources%20of%20Uncertainty%20in%203D%20Scene%20Reconstruction.md)
 
 - 环境光照是否可以通过不确定性进行量化
 - 不同的cuda/显卡环境是否也是不确定性
+
+## Ensembles
+
+[Density-aware NeRF Ensembles: Quantifying Predictive Uncertainty in Neural Radiance Fields](https://arxiv.org/pdf/2209.08718) 2022
+
+
+| Year      | Paper                                                                                                                                                                    | 研究对象                                        | 研究内容                                                                | 研究方法                                                                           | Important for me                                 |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------------------ | ------------------------------------------------ |
+| 2021      | [Stochastic Neural Radiance Fields: Quantifying Uncertainty in Implicit 3D Representations](https://arxiv.org/pdf/2109.02123)                                            |                                             |                                                                     |                                                                                |                                                  |
+| 2024⭐     | [[2404.06727] Bayesian NeRF: Quantifying Uncertainty with Volume Density in Neural Radiance Fields](https://arxiv.org/abs/2404.06727)                                    | Volume Density in Neural Radiance Fields    | quantifying uncertainty based on the geometric structure            | Bayesian                                                                       | 几何体积结构中的不确定性，不仅RGB，还有深度                          |
+| 2024      | [[2405.02568] ActiveNeuS: Active 3D Reconstruction using Neural Implicit Surface Uncertainty](https://arxiv.org/abs/2405.02568)                                          | 3D scene reconstruction                     | Active learning主动学习                                                 | Neural Implicit Surface Uncertainty                                            | 图像渲染或几何不确定性<br>利用不同类型的不确定性可以减少在早期训练阶段因输入稀疏而出现的偏差 |
+| 2024      | [Bayes' Rays](https://bayesrays.github.io/)                                                                                                                              | NeRF                                        | BaysRays                                                            | Uncertainty Quantification                                                     | Bayes, 坐标perturbation                            |
+| 2024<br>⭐ | [Sources of Uncertainty in 3D Scene Reconstruction \| PDF](https://arxiv.org/pdf/2409.06407)                                                                             | NeRF and 3DGS                               | <br>                                                                |                                                                                |                                                  |
+| 2024      | [ActNeRF](https://actnerf.github.io/)                                                                                                                                    | Robot Manipulators                          | Uncertainty-aware Active Learning of NeRF-based Object Models       | Visual and Re-orientation Actions                                              | 允许机器人在收集视觉观察结果的同时重新定向物体                          |
+| 2024      | [[2404.01400] NVINS: Robust Visual Inertial Navigation Fused with NeRF-augmented Camera Pose Regressor and Uncertainty Quantification](https://arxiv.org/abs/2404.01400) | real-time and robust robotic tasks(机器人实时导航) | NeRF-augmented Camera Pose Regressor and Uncertainty Quantification | Fused                                                                          |                                                  |
+| 2024      | [[2403.18476] Modeling uncertainty for Gaussian Splatting](https://arxiv.org/abs/2403.18476)                                                                             | Gaussian Splatting                          | Modeling uncertainty                                                | Variational Inference-based approach +  Area Under Sparsification Error (AUSE) | 在**图像渲染质量**和不确定性估计精度方面都优于现有方法                    |
+| 2024      | [Neural Visibility Field for Uncertainty-Driven Active Mapping](https://sites.google.com/view/nvf-cvpr24/)                                                               |                                             |                                                                     |                                                                                | NVF 自然会为未观察区域分配更高的不确定性，帮助机器人选择最具信息量的下一个视点        |
+| 2024      | [Bayesian uncertainty analysis for underwater 3D reconstruction with neural radiance fields](https://arxiv.org/pdf/2407.08154)                                           |                                             |                                                                     |                                                                                |                                                  |
+
 
 ## ActiveNeRF
 
@@ -425,3 +529,5 @@ FisherRF computes the Fisher Information for the model and could select next bes
 
 ![teaser-cropped.gif (1320×1080)|333](https://jiangwenpl.github.io/FisherRF/static/images/teaser-cropped.gif)
 ![teaser.jpg (986×863)|555](https://jiangwenpl.github.io/FisherRF/static/images/teaser.jpg)
+
+

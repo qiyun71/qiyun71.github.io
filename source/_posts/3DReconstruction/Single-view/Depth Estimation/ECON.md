@@ -4,7 +4,7 @@ date: 2023-09-30 17:27:17
 tags:
   - ClothedHumans
   - DepthEstimation
-categories: 3DReconstruction/Single-view/Depth Estimation
+categories: 3DReconstruction/Single-view
 ---
 
 | Title     | ECON: Explicit Clothed humans Obtained from Normals                                                                                                                 |

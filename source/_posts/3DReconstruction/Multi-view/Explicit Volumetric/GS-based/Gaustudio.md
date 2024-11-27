@@ -2,7 +2,7 @@
 title: Gaustudio
 date: 2024-03-30 20:54:52
 tags: 
-categories: 3DReconstruction/Multi-view/Explicit Volumetric/GS-based
+categories: 3DReconstruction/Multi-view
 ---
 
 | Title     | GauStudio: A Modular Framework for 3D Gaussian Splatting and Beyond                                                                 |

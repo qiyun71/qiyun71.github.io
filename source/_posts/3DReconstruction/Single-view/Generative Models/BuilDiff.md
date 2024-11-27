@@ -3,7 +3,7 @@ title: BuilDiff
 date: 2023-10-23 19:54:54
 tags:
   - Diffusion
-categories: 3DReconstruction/Single-view/Generative Models
+categories: 3DReconstruction/Single-view
 ---
 
 | Title     | BuilDiff: 3D Building Shape Generation using Single-Image Conditional Point Cloud Diffusion Models                                                                                                                 |

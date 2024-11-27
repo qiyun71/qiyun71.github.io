@@ -4,7 +4,7 @@ date: 2023-10-18 17:10:29
 tags:
   - PointCloud
   - Registration
-categories: 3DReconstruction/Multi-view/PointCloud
+categories: 3DReconstruction/Multi-view
 ---
 
 | Title     | Geometric Transformer for Fast and Robust Point Cloud Registration                                                                                                                 |

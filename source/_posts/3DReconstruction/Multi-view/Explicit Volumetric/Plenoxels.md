@@ -4,7 +4,7 @@ date: 2023-11-20 15:44:48
 tags:
   - 3DReconstruction
   - Voxel
-categories: 3DReconstruction/Multi-view/Explicit Volumetric
+categories: 3DReconstruction/Multi-view
 ---
 
 | Title     | Plenoxels: Radiance Fields without Neural Networks                                                                                                                                                          |

@@ -2,7 +2,7 @@
 title: SuGaR
 date: 2023-12-19 14:26:13
 tags: 
-categories: 3DReconstruction/Multi-view/Explicit Volumetric/GS-based
+categories: 3DReconstruction/Multi-view
 ---
 
 | Title     | SuGaR                                                                                                                                                                                                   |

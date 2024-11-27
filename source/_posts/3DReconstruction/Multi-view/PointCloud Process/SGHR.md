@@ -4,7 +4,7 @@ date: 2023-10-17 21:49:14
 tags:
   - PointCloud
   - Registration
-categories: 3DReconstruction/Multi-view/PointCloud
+categories: 3DReconstruction/Multi-view
 ---
 
 | Title     | Robust Multiview Point Cloud Registration with Reliable Pose Graph Initialization and History Reweighting                                                                                                                 |

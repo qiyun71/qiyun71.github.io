@@ -17,7 +17,24 @@ MATH $e^{i\pi}+1=0$
 研究不同的函数，对输出的影响。
 例如MLP要拟合一个函数，让预测的输出与标签非常相近。又如有限元求解偏微分方程，是要根据**最小作用量原理**，求得一个满足边界条件的、相对准确的近似解
 
+## 范数
+
+> [L0,L1,L2范数（双竖线，有下标）_数学公式两对竖线右下角加个2-CSDN博客](https://blog.csdn.net/u013066730/article/details/83013885)
+
 # 数学基础
+
+## 偏微分方程
+
+拉普拉斯算子 $\Delta = \frac{\partial^{2}}{\partial x^{2}} + \frac{\partial^{2}}{\partial y^{2}}$
+
+Laplace eqn: $\Delta u = u_{xx}+u_{yy}=\nabla \cdot \nabla u = \nabla ^{2} u = 0$
+Possion eqn: $\Delta u = F(x,y)$
+
+二维平面D，边界为$\partial D$：$u(x,y)$
+边界条件：$(x,y) \in \partial D$
+- Dirichlet：$u(x,y)=g(x,y)$
+- Neumann：$\partial n u(x,y)=g(x,y)$ $where \partial n = \hat n \cdot \nabla，\hat{n}$为表面法向量
+- Robin：$u(x,y)+\alpha(x,y)\partial n u(x,y)=g(x,y)$
 
 ## 卷积
 
@@ -509,6 +526,7 @@ Paper:
 > [Markov Chain Monte Carlo in Practice | W.R. Gilks, S. Richardson, Davi](https://www.taylorfrancis.com/books/mono/10.1201/b14835/markov-chain-monte-carlo-practice-david-spiegelhalter-gilks-richardson) MCMC需要小心地初始化，早期阶段需要warm-up time
 
 
+
 #### M-H采样
 
 > [走进贝叶斯统计（五）—— Metropolis-Hasting 算法 - 知乎](https://zhuanlan.zhihu.com/p/411689417)
@@ -583,6 +601,7 @@ PCA是一种常用的降维方式，但是不方便展示结果。例如对两�
 ### 2D
 
 仿射变换
+
 ### 3D
 
 像素Pixel | 相机Camera | 世界World
@@ -590,6 +609,24 @@ PCA是一种常用的降维方式，但是不方便展示结果。例如对两�
 内参矩阵 = c2p
 外参矩阵 = w2c
 根据世界坐标计算像素坐标 = `c2p * w2c * world_position`
+
+
+### Homography
+
+>[单应性Homography估计：从传统算法到深度学习 - 你再好好想想的文章 - 知乎](https://zhuanlan.zhihu.com/p/74597564)
+
+单应性不严谨的定义：用 **[无镜头畸变]** 的相机从不同位置拍摄 **[同一平面物体]** 的图像之间存在单应性，可以用 **[透视变换]** 表示 。
+
+刚体变换：平移+旋转，只改变物体位置，不改变物体形状。
+$$\begin{pmatrix}x'\\y'\\1\end{pmatrix}=\begin{bmatrix}\mathrm{cos}\theta&-\mathrm{sin}\theta&t_x\\\mathrm{sin}\theta&\mathrm{cos}\theta&t_y\\0&0&1\end{bmatrix}\begin{pmatrix}x\\y\\1\end{pmatrix}=\begin{bmatrix}R_{2\times2}&T_{2\times1}\\0^T&1\end{bmatrix}\begin{pmatrix}x\\y\\1\end{pmatrix}$$
+
+仿射变换：改变物体位置和形状，但是原来平行的边依然平行。
+
+$$\begin{pmatrix}x'\\y'\\1\end{pmatrix}=\begin{bmatrix}A_{2\times2}&T_{2\times1}\\0^T&1\end{bmatrix}\begin{pmatrix}x\\y\\1\end{pmatrix}$$
+
+透视变换（也称投影变换）：彻底改变物体位置和形状
+
+$$\begin{pmatrix}x'\\y'\\1\end{pmatrix}=\begin{bmatrix}A_{2\times2}&T_{2\times1}\\V^T&s\end{bmatrix}\begin{pmatrix}x\\y\\1\end{pmatrix}=H_{3\times3}\begin{pmatrix}x\\y\\1\end{pmatrix}$$
 
 # Computer Graphics 
 

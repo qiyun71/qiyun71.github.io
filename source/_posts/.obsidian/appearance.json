@@ -1,10 +1,10 @@
 {
-  "baseFontSize": 14,
+  "baseFontSize": 15,
   "theme": "obsidian",
   "translucency": false,
   "cssTheme": "Blue Topaz",
   "interfaceFontFamily": "MiSans Semibold",
-  "textFontFamily": "MiSans,MiSans Semibold,HarmonyOS Sans SC,HYRunYuan 55W",
+  "textFontFamily": "仓耳今楷03,MiSans,MiSans Semibold,HarmonyOS Sans SC,HYRunYuan 55W",
   "monospaceFontFamily": "Maple Mono",
   "accentColor": "",
   "nativeMenus": false,

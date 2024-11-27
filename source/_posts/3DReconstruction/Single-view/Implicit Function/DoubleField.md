@@ -5,7 +5,7 @@ tags:
   - NeRF
   - 3DReconstruction
   - ClothedHumans
-categories: 3DReconstruction/Single-view/Implicit Function
+categories: 3DReconstruction/Single-view
 ---
 
 | Title     | DoubleField: Bridging the Neural Surface and Radiance Fields for High-fidelity Human Rendering                                                                                                                  |

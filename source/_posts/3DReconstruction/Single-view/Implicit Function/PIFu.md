@@ -3,7 +3,7 @@ title: PIFu
 date: 2023-09-28 17:44:42
 tags:
   - PIFu
-categories: 3DReconstruction/Single-view/Implicit Function
+categories: 3DReconstruction/Single-view
 ---
 
 | Title     | PIFu: Pixel-Aligned Implicit Function for High-Resolution Clothed Human Digitization                                                                                                                 |

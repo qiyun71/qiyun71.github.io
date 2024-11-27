@@ -2,7 +2,7 @@
 title: "Learning-based Multi-View Stereo: A Survey"
 date: 2024-09-02 18:19:55
 tags: 
-categories: 3DReconstruction/Multi-view/Depth Estimation
+categories: 3DReconstruction/Multi-view
 ---
 
 | Title     | Learning-based Multi-View Stereo A Survey                                                                                                        |

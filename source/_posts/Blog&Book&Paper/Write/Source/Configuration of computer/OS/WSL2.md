@@ -138,12 +138,11 @@ proxy_servers:
 # sudo apt
 
 # /etc/wgetrc
-https_proxy = http://10.23.248.114:10809
-http_proxy = http://10.23.248.114:10809
-ftp_proxy = http://10.23.248.114:10809
+https_proxy = http://ip_address:10809
+http_proxy = http://ip_address:10809
+ftp_proxy = http://ip_address:10809
 use_proxy = on
 ```
-
 
 
 修改内存和swap大小`C:\Users\Qiyun`下新建`/.wslconfig`文件

@@ -4,7 +4,7 @@ date: 2023-10-24 11:58:40
 tags:
   - PointCloud
   - Registration
-categories: 3DReconstruction/Multi-view/PointCloud
+categories: 3DReconstruction/Multi-view
 ---
 
 PointCloud

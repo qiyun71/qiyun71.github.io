@@ -1,207 +1,209 @@
 {
   "recentFiles": [
     {
-      "basename": "Journal&Conference",
-      "path": "Blog&Book&Paper/Write/Write Paper/Journal&Conference.md"
+      "basename": "Paper About 3D Reconstruction",
+      "path": "3DReconstruction/Paper About 3D Reconstruction.md"
     },
     {
-      "basename": "NeuS-based 3D Reconstruction",
-      "path": "3DReconstruction/Multi-view/NeuS-based 3D Reconstruction.md"
+      "basename": "Neus-code",
+      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Neus-code.md"
     },
     {
-      "basename": "Code of Multi-view 3D Reconstruction based on SDF and volume rendering",
-      "path": "3DReconstruction/Multi-view/Code of Multi-view 3D Reconstruction based on SDF and volume rendering.md"
+      "basename": "2024-10-05",
+      "path": "Reports/Daily/2024-10-05.md"
     },
     {
-      "basename": "Math Basic",
-      "path": "Learn/Math/Math Basic.md"
-    },
-    {
-      "basename": "Unpack Snowbreak File",
-      "path": "Project/Unpack Snowbreak File.md"
-    },
-    {
-      "basename": "Visualize Interval uncertainty quantification metrics",
-      "path": "Project/Visualize Interval uncertainty quantification metrics.md"
-    },
-    {
-      "basename": "Six Legged Spider Robot",
-      "path": "Project/Six Legged Spider Robot.md"
-    },
-    {
-      "basename": "Dynamic Response Prediction (Deterministic)",
-      "path": "Other Interest/Dynamic Response Prediction (Deterministic).md"
-    },
-    {
-      "basename": "Python Spider",
-      "path": "Project/Python Spider.md"
-    },
-    {
-      "basename": "Python Scripts",
-      "path": "Project/Python Scripts.md"
-    },
-    {
-      "basename": "Learn-FEA",
-      "path": "Learn/Finite Element/Learn-FEA.md"
-    },
-    {
-      "basename": "Audio Visualization",
-      "path": "Project/Audio Visualization.md"
-    },
-    {
-      "basename": "Automatic detection of pointer instrument",
-      "path": "Project/Automatic detection of pointer instrument.md"
-    },
-    {
-      "basename": "NeRF",
-      "path": "Project/NeRF.md"
-    },
-    {
-      "basename": "PyNastran",
-      "path": "Project/PyNastran.md"
-    },
-    {
-      "basename": "Python API",
-      "path": "Project/Python API.md"
-    },
-    {
-      "basename": "Structural Dynamics",
-      "path": "Learn/Finite Element/Structural Dynamics.md"
-    },
-    {
-      "basename": "Multi-view Human Body Reconstruction",
-      "path": "3DReconstruction/Multi-view/Multi-view Human Body Reconstruction.md"
+      "basename": "3D Model",
+      "path": "3DReconstruction/3D Model.md"
     },
     {
       "basename": "Basics about 3D Reconstruction",
       "path": "3DReconstruction/Basics about 3D Reconstruction.md"
     },
     {
-      "basename": "Datasets",
-      "path": "3DReconstruction/Datasets.md"
-    },
-    {
-      "basename": "Master Paper(3DReconstruction)",
-      "path": "Blog&Book&Paper/Write/Write Paper/3D Reconstruction/Master Paper(3DReconstruction).md"
-    },
-    {
-      "basename": "Paper About 3D Reconstruction",
-      "path": "3DReconstruction/Paper About 3D Reconstruction.md"
-    },
-    {
-      "basename": "NeRF-code",
-      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/NeRF Other Research/NeRF-code.md"
-    },
-    {
-      "basename": "Data Analysis",
-      "path": "Learn/Python/Data Analysis.md"
-    },
-    {
-      "basename": "Algorithm",
-      "path": "Learn/Python/Algorithm.md"
-    },
-    {
-      "basename": "Figure",
-      "path": "Learn/Python/Figure.md"
-    },
-    {
-      "basename": "Linux OS",
-      "path": "Learn/Python/Linux OS.md"
-    },
-    {
-      "basename": "Python Basic",
-      "path": "Learn/Python/Python Basic.md"
-    },
-    {
-      "basename": "Spider",
-      "path": "Learn/Python/Spider.md"
-    },
-    {
-      "basename": "Threading",
-      "path": "Learn/Python/Threading.md"
-    },
-    {
-      "basename": "Learn-Matlab",
-      "path": "Learn/Finite Element/Learn-Matlab.md"
-    },
-    {
-      "basename": "A fast interval model updating method based on MLP neural network",
-      "path": "Blog&Book&Paper/Write/Write Paper/Model Updating/A fast interval model updating method based on MLP neural network.md"
-    },
-    {
-      "basename": "DMTet",
-      "path": "3DReconstruction/Single-view/Generative Models/DMTet.md"
+      "basename": "NeuS-based 3D Reconstruction",
+      "path": "3DReconstruction/Multi-view/NeuS-based 3D Reconstruction.md"
     },
     {
       "basename": "Finite Element Model 3D Reconstruction",
       "path": "3DReconstruction/Finite Element Model 3D Reconstruction.md"
     },
     {
-      "basename": "Learning-based Multi-View Stereo A Survey",
-      "path": "3DReconstruction/Multi-view/Depth Estimation/Learning-based Multi-View Stereo A Survey.md"
+      "basename": "Code of Multi-view 3D Reconstruction based on SDF and volume rendering",
+      "path": "3DReconstruction/Multi-view/Code of Multi-view 3D Reconstruction based on SDF and volume rendering.md"
     },
     {
-      "basename": "MVSNet",
-      "path": "3DReconstruction/Multi-view/Depth Estimation/MVSNet.md"
+      "basename": "MyGo",
+      "path": "Blog&Book&Paper/Write/MyGo.md"
     },
     {
-      "basename": "Basics about ModelUpdating",
-      "path": "ModelUpdating/Basics about ModelUpdating.md"
-    },
-    {
-      "basename": "NeRF-review",
-      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/NeRF Other Research/NeRF-review.md"
-    },
-    {
-      "basename": "NeRO",
-      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Shadow&Highlight/NeRO.md"
+      "basename": "知乎",
+      "path": "Blog&Book&Paper/Write/Blog/知乎.md"
     },
     {
       "basename": "NeRF",
-      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/NeRF.md"
+      "path": "Project/NeRF.md"
     },
     {
-      "basename": "Anime Image 3D Reconstruction",
-      "path": "3DReconstruction/Anime Image 3D Reconstruction.md"
+      "basename": "Learn-Cpp",
+      "path": "Learn/Other Interest/Learn-Cpp.md"
     },
     {
-      "basename": "Mechanical Vibrations Theory and Application to Structural Dynamics",
-      "path": "Blog&Book&Paper/Read/Book/Mechanical Vibrations Theory and Application to Structural Dynamics.md"
+      "basename": "Learn-Csharp",
+      "path": "Learn/Other Interest/Learn-Csharp.md"
     },
     {
-      "basename": "Life",
-      "path": "Blog&Book&Paper/Read/Life.md"
+      "basename": "Learn-Rust",
+      "path": "Learn/Other Interest/Learn-Rust.md"
     },
     {
-      "basename": "核领域可靠性",
-      "path": "Blog&Book&Paper/Read/Papers/核领域可靠性.md"
-    },
-    {
-      "basename": "(WX) Dynamics experiment",
-      "path": "Blog&Book&Paper/Read/Papers/(WX) Dynamics experiment.md"
-    },
-    {
-      "basename": "Case about ModelUpdating",
-      "path": "ModelUpdating/Case about ModelUpdating.md"
-    },
-    {
-      "basename": "2024-10-14",
-      "path": "Reports/Daily/2024-10-14.md"
-    },
-    {
-      "basename": "Write tips",
-      "path": "Blog&Book&Paper/Write/Write Paper/Write tips.md"
+      "basename": "Math Basic",
+      "path": "Learn/Math/Math Basic.md"
     },
     {
       "basename": "World",
       "path": "Blog&Book&Paper/Write/World.md"
     },
     {
-      "basename": "Self-superviside Model Updating through inverse calibration model",
-      "path": "Blog&Book&Paper/Write/Write Paper/Model Updating/Self-superviside Model Updating through inverse calibration model.md"
+      "basename": "AllBug",
+      "path": "Blog&Book&Paper/Write/Source/AllBug.md"
+    },
+    {
+      "basename": "Computer",
+      "path": "Blog&Book&Paper/Write/Source/Computer.md"
+    },
+    {
+      "basename": "IPV6",
+      "path": "Blog&Book&Paper/Write/Source/IPV6.md"
+    },
+    {
+      "basename": "Tools",
+      "path": "Blog&Book&Paper/Write/Source/Tools.md"
+    },
+    {
+      "basename": "Anime Image 3D Reconstruction",
+      "path": "3DReconstruction/Anime Image 3D Reconstruction.md"
+    },
+    {
+      "basename": "Datasets",
+      "path": "3DReconstruction/Datasets.md"
+    },
+    {
+      "basename": "HRN",
+      "path": "3DReconstruction/Single-view/Other/HumanBody/HRN.md"
+    },
+    {
+      "basename": "Adaptive Shells",
+      "path": "3DReconstruction/Single-view/Implicit Function/Adaptive Shells.md"
+    },
+    {
+      "basename": "DoubleField",
+      "path": "3DReconstruction/Single-view/Implicit Function/DoubleField.md"
+    },
+    {
+      "basename": "ICON",
+      "path": "3DReconstruction/Single-view/Implicit Function/ICON.md"
+    },
+    {
+      "basename": "PIFu",
+      "path": "3DReconstruction/Single-view/Implicit Function/PIFu.md"
+    },
+    {
+      "basename": "PIFuHD",
+      "path": "3DReconstruction/Single-view/Implicit Function/PIFuHD.md"
+    },
+    {
+      "basename": "TransHuman",
+      "path": "3DReconstruction/Single-view/Implicit Function/TransHuman.md"
+    },
+    {
+      "basename": "Vid2Avatar",
+      "path": "3DReconstruction/Single-view/Implicit Function/Vid2Avatar.md"
+    },
+    {
+      "basename": "HaP",
+      "path": "3DReconstruction/Single-view/Hybrid Methods/HaP.md"
+    },
+    {
+      "basename": "BuilDiff",
+      "path": "3DReconstruction/Single-view/Generative Models/BuilDiff.md"
+    },
+    {
+      "basename": "CCD-3DR",
+      "path": "3DReconstruction/Single-view/Generative Models/CCD-3DR.md"
+    },
+    {
+      "basename": "DiT-3D",
+      "path": "3DReconstruction/Single-view/Generative Models/DiT-3D.md"
+    },
+    {
+      "basename": "DMTet",
+      "path": "3DReconstruction/Single-view/Generative Models/DMTet.md"
+    },
+    {
+      "basename": "FlowGAN",
+      "path": "3DReconstruction/Single-view/Generative Models/FlowGAN.md"
+    },
+    {
+      "basename": "RODIN",
+      "path": "3DReconstruction/Single-view/Generative Models/RODIN.md"
+    },
+    {
+      "basename": "SG-GAN",
+      "path": "3DReconstruction/Single-view/Generative Models/SG-GAN.md"
+    },
+    {
+      "basename": "2K2K",
+      "path": "3DReconstruction/Single-view/Depth Estimation/2K2K.md"
+    },
+    {
+      "basename": "ECON",
+      "path": "3DReconstruction/Single-view/Depth Estimation/ECON.md"
+    },
+    {
+      "basename": "Structured Light Review",
+      "path": "3DReconstruction/Other Methods/Structured Light/Structured Light Review.md"
+    },
+    {
+      "basename": "Stereo Matching Review",
+      "path": "3DReconstruction/Other Methods/Stereo Matching/Stereo Matching Review.md"
+    },
+    {
+      "basename": "Concrete spalling damage detection and seismic performance evaluation for RC shear walls via 3D reconstruction technique and numerical model updating",
+      "path": "3DReconstruction/Other Methods/Laser Scanning/Concrete spalling damage detection and seismic performance evaluation for RC shear walls via 3D reconstruction technique and numerical model updating.md"
+    },
+    {
+      "basename": "Multi-view Human Body Reconstruction",
+      "path": "3DReconstruction/Multi-view/Multi-view Human Body Reconstruction.md"
+    },
+    {
+      "basename": "DMV3D",
+      "path": "3DReconstruction/Multi-view/Hybrid Methods/DMV3D.md"
+    },
+    {
+      "basename": "ActiveNeRF",
+      "path": "3DReconstruction/Multi-view/Uncertainty/ActiveNeRF.md"
+    },
+    {
+      "basename": "Sources of Uncertainty in 3D Scene Reconstruction",
+      "path": "3DReconstruction/Multi-view/Uncertainty/Sources of Uncertainty in 3D Scene Reconstruction.md"
+    },
+    {
+      "basename": "GeoTransformer",
+      "path": "3DReconstruction/Multi-view/PointCloud Process/GeoTransformer.md"
+    },
+    {
+      "basename": "Greedy Grid Search",
+      "path": "3DReconstruction/Multi-view/PointCloud Process/Greedy Grid Search.md"
+    },
+    {
+      "basename": "PointCloud Review",
+      "path": "3DReconstruction/Multi-view/PointCloud Process/PointCloud Review.md"
     }
   ],
   "omittedPaths": [],
+  "omittedTags": [],
+  "omitBookmarks": false,
   "maxLength": null,
   "openType": "tab"
 }

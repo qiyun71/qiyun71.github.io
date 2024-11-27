@@ -1,5 +1,5 @@
 ---
-title: IPV6用法
+title: 校园网IPV4付费，利用IPV6苟活记录
 date: 2023-11-16 21:16:09
 tags:
   - Tools
@@ -88,15 +88,64 @@ index-url = https://mirrors6.tuna.tsinghua.edu.cn/pypi/web/simple/
 ```
 
 
-# WSL2配置代理
+## WSL2配置代理
 
 [WSL2 中访问宿主机 Windows 的代理 - ZingLix Blog](https://zinglix.xyz/2020/04/18/wsl2-proxy/)
 
 V2rayN中需要开启允许局域网的连接
 
+修改`.bashrc`
+
+```bash
+# Windows 宿主机 IP
+WINDOWS_IP=$(grep nameserver /etc/resolv.conf | awk '{print $2}' | head -1)
+# Windows 宿主机代理端口
+WINDOWS_PROXY_PORT=10809
+
+# 更新 Windows 网络信息
+function update_windows_net_info() {
+    WINDOWS_IP=$(grep nameserver /etc/resolv.conf | awk '{print $2}' | head -1)
+    WINDOWS_PROXY_PORT=10809
+}
+
+WINDOWS_IP=xxxx # 可以在win的cmd中使用ipconfig查看IP地址，复制到这里
+
+# 开启代理
+function proxy_on() {
+    export HTTP_PROXY="http://${WINDOWS_IP}:${WINDOWS_PROXY_PORT}" # http 或 socks5，取决于代理的协议
+    export HTTPS_PROXY="http://${WINDOWS_IP}:${WINDOWS_PROXY_PORT}" # http 或 socks5，取决于代理的协议
+    export ALL_PROXY="http://${WINDOWS_IP}:${WINDOWS_PROXY_PORT}" # http 或 socks5，取决于代理的协议
+    echo -e "Acquire::http::Proxy \"http://${WINDOWS_IP}:${WINDOWS_PROXY_PORT}\";" | sudo tee -a /etc/apt/apt.conf.d/proxy.conf > /dev/null
+    echo -e "Acquire::https::Proxy \"http://${WINDOWS_IP}:${WINDOWS_PROXY_PORT}\";" | sudo tee -a /etc/apt/apt.conf.d/proxy.conf > /dev/null
+    proxy_status
+}
+
+# 关闭代理
+function proxy_off() {
+    unset HTTP_PROXY
+    unset HTTPS_PROXY
+    unset ALL_PROXY
+    sudo sed -i -e '/Acquire::http::Proxy/d' /etc/apt/apt.conf.d/proxy.conf
+    sudo sed -i -e '/Acquire::https::Proxy/d' /etc/apt/apt.conf.d/proxy.conf
+    proxy_status
+}
+
+# 代理状态
+function proxy_status() {
+    echo "HTTP_PROXY:" "${HTTP_PROXY}"
+    echo "HTTPS_PROXY:" "${HTTPS_PROXY}"
+    echo "ALL_PROXY:" "${ALL_PROXY}"
+}
+
+proxy_on
+```
+
+`source ~/.bashrc`
+
+
 # 服务器v2ray
 
-## Vultr自建
+## Vultr自建 💴30/月
 
 > [实现校园网IPv6免流量上网与科学上网 | V2ray教程：X-ui与v2rayN ~ 极星网](https://www.jixing.one/vps/v2ray-xui-v2rayn/)
 
@@ -111,9 +160,15 @@ bash <(curl -Ls https://raw.githubusercontent.com/vaxilu/x-ui/master/install.sh)
 ### 开放端口+BBR加速
 
 ```
-firewall-cmd --permanent --add-port=54321/tcp --add-port=12345/tcp #开放端口（54321是面板端口，12345是后面节点要用的）
-firewall-cmd --permanent --list-ports #查看防火墙的开放的端口
-firewall-cmd --reload #重启防火墙(修改配置后要重启防火墙)
+firewall-cmd --permanent --add-port=54321/tcp --add-port=12345/tcp
+#开放端口（54321是面板端口，12345是后面节点要用的）
+
+firewall-cmd --permanent --list-ports 
+#查看防火墙的开放的端口
+
+firewall-cmd --reload
+
+#重启防火墙(修改配置后要重启防火墙)
 
 echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
 echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
@@ -130,7 +185,9 @@ reboot
 ipv4:port
 
 
+## Error
 
+[Centos8使用yum报错 Couldn‘t resolve host name for http://mirrorlist.centos.org/?releas_couldn't resolve host name for-CSDN博客](https://blog.csdn.net/qq_41688840/article/details/123299876)
 
 
 # 客户端v2ray
@@ -213,4 +270,6 @@ v2rayA 只有一个单独的二进制，下载下来放到 `/usr/local/bin/` �
 `install -Dm755 ./v2raya_linux_x64_$version /usr/local/bin/v2raya`
 
 一般情况下，在终端里面直接运行 `v2raya` 命令即可，配置文件夹默认会是 `/etc/v2raya/`。不过，为了方便，在 Linux 系统上一般采用服务的形式运行 v2rayA.
+
+
 

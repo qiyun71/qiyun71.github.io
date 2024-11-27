@@ -3,7 +3,7 @@ title: HaP
 date: 2023-11-07T19:41:11.000Z
 tags:
   - Diffusion
-categories: 3DReconstruction/Single-view/Hybrid Methods
+categories: 3DReconstruction/Single-view
 date updated: 2023-11-08T16:51:38.000Z
 ---
 

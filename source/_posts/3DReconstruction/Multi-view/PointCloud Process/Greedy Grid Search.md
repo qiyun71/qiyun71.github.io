@@ -2,7 +2,7 @@
 title: Greedy Grid Search
 date: 2023-10-19 09:50:28
 tags: 
-categories: 3DReconstruction/Multi-view/PointCloud
+categories: 3DReconstruction/Multi-view
 ---
 
 | Title     | Challenging universal representation of deep models for 3D point cloud registration                                                                                                                     |

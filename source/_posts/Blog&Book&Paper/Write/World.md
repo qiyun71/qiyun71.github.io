@@ -49,9 +49,9 @@ date created: 2024-10-05T16:51:15.000Z
 
 > [电磁波（M，G，T，P，E） - 知乎](https://zhuanlan.zhihu.com/p/506538952) 颜色(光波) or 声音(声波)
 
-**频率**从低到高：无线电波--人类耳朵(20Hz~20KHz)--微波--红外IR--紫外UV--X射线--$\gamma$射线
+**频率**从低到高：无线电波--人类耳朵(20Hz~20KHz)--毫米波--微波--红外IR--紫外UV--X射线--$\gamma$射线
 
-![image.png|333](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240815141212.png)
+![image.png|555](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240815141212.png)
 
 ## 科学
 

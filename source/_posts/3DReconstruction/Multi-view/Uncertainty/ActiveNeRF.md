@@ -1,9 +1,8 @@
 ---
 title: ActiveNeRF
 date: 2024-10-10 14:22:31
-tags:
-  - 
-categories: 3DReconstruction/Multi-view/Uncertainty
+tags: 
+categories: 3DReconstruction/Multi-view
 ---
 
 | Title     | ActiveNeRF                                                                                                      |

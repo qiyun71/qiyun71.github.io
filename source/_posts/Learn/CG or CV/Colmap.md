@@ -17,6 +17,8 @@ categories: Learn
 
 <!-- more -->
 
+[Neus-code](../../3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/Neus-code.md)
+
 Colmap 算法主要包括 SFM 和 MVS
 
 ![image.png|500](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230717204531.png)

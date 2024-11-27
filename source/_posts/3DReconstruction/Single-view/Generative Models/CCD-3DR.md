@@ -3,7 +3,7 @@ title: CCD-3DR
 date: 2023-11-07 17:25:01
 tags:
   - 3DReconstruction
-categories: 3DReconstruction/Single-view/Generative Models
+categories: 3DReconstruction/Single-view
 ---
 
 | Title     | CCD-3DR: Consistent Conditioning in Diffusion for Single-Image 3D Reconstruction                                                                                                                 |

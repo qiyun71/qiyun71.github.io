@@ -3,7 +3,7 @@ title: GeoMVSNet
 date: 2023-10-05 09:57:23
 tags:
   - MVS
-categories: 3DReconstruction/Multi-view/Depth Estimation
+categories: 3DReconstruction/Multi-view
 ---
 
 | Title     | GeoMVSNet: Learning Multi-View Stereo With Geometry Perception                                                                                                                                                                      |

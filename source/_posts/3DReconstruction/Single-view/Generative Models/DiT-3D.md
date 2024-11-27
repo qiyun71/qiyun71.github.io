@@ -4,7 +4,7 @@ date: 2023-10-20 11:31:02
 tags:
   - Diffusion
   - Transformer
-categories: 3DReconstruction/Single-view/Generative Models
+categories: 3DReconstruction/Single-view
 ---
 
 | Title     | DiT-3D: Exploring Plain Diffusion Transformers for 3D Shape Generation                                                                                                                                                                                                                                                                                                                                                                                                                              |

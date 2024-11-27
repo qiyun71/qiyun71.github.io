@@ -5,7 +5,7 @@ tags:
   - GAN
   - Flow
   - VAE
-categories: 3DReconstruction/Single-view/Generative Models
+categories: 3DReconstruction/Single-view
 ---
 
 | Title     | Flow-based GAN for 3D Point Cloud Generation from a Single Image                                                                                                                 |

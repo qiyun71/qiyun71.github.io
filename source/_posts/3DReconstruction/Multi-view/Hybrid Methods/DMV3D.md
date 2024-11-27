@@ -4,7 +4,7 @@ date: 2023-11-16 16:20:04
 tags:
   - 3DReconstruction
   - Diffusion
-categories: 3DReconstruction/Multi-view/Hybrid Methods
+categories: 3DReconstruction/Multi-view
 ---
 
 | Title     | DMV3D: Denoising Multi-View Diffusion using 3D Large Reconstruction Model                                                                                                  |

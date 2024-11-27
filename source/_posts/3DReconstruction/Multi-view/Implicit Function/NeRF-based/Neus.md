@@ -381,7 +381,7 @@ python imgs2poses.py ${data_dir}
 然后
 
 ```
-python gen_cameras.py ${data_dir}
+python gen_cameras.py ${data_dir} 
 ```
 
 就会在 ${data_dir}下生成 preprocessed，包括 image、mask 和 cameras_sphere.npz

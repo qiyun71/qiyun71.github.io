@@ -1,9 +1,8 @@
 ---
 title: Sources of Uncertainty in 3D Scene Reconstruction
 date: 2024-10-10 10:29:33
-tags:
-  - 
-categories: 3DReconstruction/Multi-view/Uncertainty
+tags: 
+categories: 3DReconstruction/Multi-view
 ---
 
 | Title     | Sources of Uncertainty in 3D Scene Reconstruction                                                                                                             |

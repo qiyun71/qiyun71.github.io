@@ -3,7 +3,7 @@ title: TransHuman
 date: 2023-10-25 20:46:02
 tags:
   - ClothedHumans
-categories: 3DReconstruction/Single-view/Implicit Function
+categories: 3DReconstruction/Single-view
 ---
 
 | Title     | TransHuman: A Transformer-based Human Representation for Generalizable Neural Human Rendering                                                                                                                                                                                                    |

@@ -4,7 +4,7 @@ date: 2023-11-11 12:07:22
 tags:
   - Diffusion
   - 3DReconstruction
-categories: 3DReconstruction/Multi-view/Generative Models
+categories: 3DReconstruction/Multi-view
 ---
 
 | Title     | DiffuStereo: High Quality Human Reconstruction via Diffusion-based Stereo Using Sparse Cameras                                                                                                                 |

@@ -20,8 +20,6 @@ Basic of Finite Element Analysis
 > [有限元入门--Understanding the Finite Element Method | The Efficient Engineer的部分笔记 - 知乎](https://zhuanlan.zhihu.com/p/681621600)
 > [网格划分：六面体和四面体该怎么选择？ - 知乎](https://zhuanlan.zhihu.com/p/348729395) 六面体计算收敛速度快，四面体计算收敛慢。
 > [有限元分析（FEA）是个什么东东 - 知乎](https://zhuanlan.zhihu.com/p/56326567) **有限元法就是为了求解偏微分方程！** **获得微分方程的“弱形式”解**
->     [有限元法（FEM）详解](https://cn.comsol.com/multiphysics/finite-element-method) 
-> [(72 封私信 / 80 条消息) 数值pde与深度学习结合是未来发展方向吗？ - 知乎](https://www.zhihu.com/question/523893840) PINN [​内嵌物理知识神经网络（PINN）是个坑吗？ - 知乎](https://zhuanlan.zhihu.com/p/468748367)
 
 有限元模型：
 - 节点nodes和元素/单元elements的集合称为有限元网格(finite element mesh)
@@ -31,7 +29,49 @@ Basic of Finite Element Analysis
 - 自由度：有限元网格中的每个节点都有一定数量的自由度，*在二维应力分析中，每个节点有3个自由度——在X轴和Y轴上平移，以及绕Z轴旋转。对于热分析，每个节点都有一个自由度，即节点温度。*
 
 
-# 有限元分析软件
+> [通俗易懂的有限元基础原理 - 知乎](https://zhuanlan.zhihu.com/p/55816169)
+
+1. 微分方程大大降低了使用固体力学法的效率，甚至让求解成为不可能
+2. 那么怎样才能绕开微分方程呢？答案是在计算一开始就去**猜结构受力后的位移**。这个位移最好满足边界条件（注意，这里是“最好”），之后算出结构在假设位移下的内外力虚功，或者是应变能，令其满足对应的能量原理。**人们通过猜位移并引入能量原理的方式终于摆脱了微分方程，可以通过积分来分析结构了**。
+3. 用传统书写方式进行计算效率贼低，一大堆类似的方程算来算去，好不自在。于是有人引入了矩阵（Matrix）来改善计算效率，把相似计算写成矩阵形式，使得书写更加简洁，效率也更高。
+4. **把结构分成很多很多份，去猜每一份上的位移**，比如都猜成线性，只要结构被划分的够多，每一份上猜的准不准就无所谓，在满足收敛条件的前提下，算出来的位移就会很靠近真实的位移
+
+> [有限元方法的核心思想是什么？ - 慢慢闲者的回答 - 知乎](https://www.zhihu.com/question/27696855/answer/3276666220)
+
+**试函数**（_trial function_）作为有限元分析的数学基础，其基本原理是：先假定满足一定边界条件的试函数，然后将其代入需要求解的**控制方程**（_governing equation_），通过使用与原方程的误差残值最小来确定试函数中的待定系数。
+
+
+>[1 3 微分方程求解的方法 - YouTube](https://www.youtube.com/watch?v=se1MergCnh8&list=PLLwttJaA6dBJGd1FaLziRqXXCefZbOfX8)
+
+求解微分方程方法：
+- 解析方法
+- 近似方法(差分)，将整体分为很多小部分，每个部分进行求解，细分越多越接近解析解
+- 近似方法(试函数)，选择满足边界条件的试函数(有待定系数)，带入控制方程(微分方程)，大概率不满足方程，带入控制方程得到残差函数并让残差最小。加权余量法——(残差函数与基底函数加权求和/求积分并令其为0，确当待定系数) 当残差与基函数的积分为零时，意味着在这些方向上的残差投影为零。
+
+
+>[ethz.ch/content/dam/ethz/special-interest/mavt/mechanical-systems/mm-dam/documents/Notes/IntroToFEA_red.pdf](https://ethz.ch/content/dam/ethz/special-interest/mavt/mechanical-systems/mm-dam/documents/Notes/IntroToFEA_red.pdf) 
+
+Really nice book!!!
+
+> [有限元方法（一）【翻译】 | 学习笔记](https://chaoskey.github.io/notes/docs/fem/0097/)
+> 《Automated Solution of Differential Equations by the Finite Element Method》读书笔记 by chaoskey
+
+
+## PINN
+
+> [(72 封私信 / 80 条消息) 数值pde与深度学习结合是未来发展方向吗？ - 知乎](https://www.zhihu.com/question/523893840) PINN [​内嵌物理知识神经网络（PINN）是个坑吗？ - 知乎](https://zhuanlan.zhihu.com/p/468748367)
+>   [数值pde与深度学习结合是未来发展方向吗？ - Martingale的回答 - 知乎](https://www.zhihu.com/question/523893840/answer/2961123949)
+
+![iu (1172×464)](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcommunity.altair.com%2F82dc6cb8db978d90e8863978f496193d.iix&f=1&nofb=1&ipt=e29041e57c827ed2faf008c7ddd57993d080f93b25ead70858bd52bf7800e97c&ipo=images)
+
+
+## VEM (Virtual Element Method)
+
+> [草莓Ye子酱个人动态-草莓Ye子酱动态记录-哔哩哔哩视频](https://space.bilibili.com/76753039/dynamic) [Qinxiaoye/xpfem: A python package for finite element method (FEM) in solid mechanics](https://github.com/Qinxiaoye/xpfem?tab=readme-ov-file) Bingbing Xu大佬
+> [An introduction to the Virtual Element Method](https://maths.dur.ac.uk/lms/101/talks/0493daveiga.pdf)
+
+
+# Software (about FE)
 
 ## Solidworks
 
@@ -65,7 +105,7 @@ mm制：
 2. Menu --> Preferences --> Geometry --> 1000.0 (Millimeters) --> **Apply**
 3. File --> Import --> `*.x_t` --> **Apply** (Display --> Smooth Shade)
 4. Meshing -->(RHS) Mesh --> Solid -->(Main window) select solid --> Automatic Calculation  --> **Apply**
-5. Properties --> Isotropic -->(RHS) *Material Name* --> Input properties (Elastic Modulus: 210000, Shear Modulus: 83000, Density: 7.86E-09) --> **Apply**
+5. Properties --> Isotropic -->(RHS) *Material Name* --> Input properties (Elastic Modulus: 210000MPa, Shear Modulus: 83000, Density: 7.86E-09 Kg/m^3) --> **Apply**
 6. Properties --> Solid --> Propert Set Name -->(RHS) Input properties --> Mat Prop Name select *gangban(Material Name)* -->  Select Application Region -->(Main window) select solid --> Add --> **Apply**
 7. Analysis --> Solution Type --> NORMAL MODES --> Solution Type --> Solution Parameters --> Results Output Format(XDB or OP2) --> Subcase --> Subcase Parameters --> Number of Desired Roots : 20 --> **Apply** Run nastran --> Get .bdf
 

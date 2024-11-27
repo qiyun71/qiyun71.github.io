@@ -4,7 +4,7 @@ date: 2023-12-01 17:13:07
 tags:
   - 3DReconstruction
   - Voxel
-categories: 3DReconstruction/Multi-view/Explicit Volumetric
+categories: 3DReconstruction/Multi-view
 ---
 
 | Title     | Voxurf: Voxel-based Efficient and Accurate Neural Surface Reconstruction                                                                                                                            |

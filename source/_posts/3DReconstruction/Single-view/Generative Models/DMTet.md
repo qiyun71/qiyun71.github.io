@@ -3,7 +3,7 @@ title: DMTet
 date: 2023-11-06T16:53:52.000Z
 tags:
   - 3DReconstruction
-categories: 3DReconstruction/Single-view/Generative Models
+categories: 3DReconstruction/Single-view
 date updated: 2023-11-07T10:21:01.000Z
 ---
 

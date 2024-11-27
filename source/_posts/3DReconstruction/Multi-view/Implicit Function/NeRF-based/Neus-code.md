@@ -1152,15 +1152,15 @@ output:
 
 >[Output Format — COLMAP 3.8-dev documentation](https://colmap.github.io/format.html#cameras-txt)
 
-| var     | example                                                                                                                                                                                                                                    | info                                         |
-| ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------- |
-| cameras | `{1: Camera(id=1, model='SIMPLE_RADIAL', width=960, height=544, params=array([ 5.07683492e+02,  4.80000000e+02,  2.72000000e+02, -5.37403479e-03])), ...}`                                                                                 | f, cx, cy, k=params                              |
+| var     | example                                                                                                                                                                                                                                    | info                                                  |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------- |
+| cameras | `{1: Camera(id=1, model='SIMPLE_RADIAL', width=960, height=544, params=array([ 5.07683492e+02,  4.80000000e+02,  2.72000000e+02, -5.37403479e-03])), ...}`                                                                                 | f, cx, cy, k=params                                   |
 | images  | `{1: Image(id=1, qvec=array([ 0.8999159 , -0.29030237,  0.07162026,  0.31740581]), tvec=array([ 0.29762954, -2.81576928,  1.41888716]), camera_id=1, name='000.png', xys=xys, point3D_ids=point3D_ids, ...}`                               | perm = np.argsort(names),qvec,tvec to m=w2c_mats:4x4, |
-| pts3D   | `{1054: Point3D(id=1054, xyz=array([1.03491375, 1.65809594, 3.83718124]), rgb=array([147, 146, 137]), error=array(0.57352093), image_ids=array([115, 116, 117, 114, 113, 112]), point2D_idxs=array([998, 822, 912, 977, 889, 817])), ...}` |                                              |
+| pts3D   | `{1054: Point3D(id=1054, xyz=array([1.03491375, 1.65809594, 3.83718124]), rgb=array([147, 146, 137]), error=array(0.57352093), image_ids=array([115, 116, 117, 114, 113, 112]), point2D_idxs=array([998, 822, 912, 977, 889, 817])), ...}` |                                                       |
 
 xys and point3D_ids in images be like:
 
-```
+```python  
 xys=array([[ 83.70032501,   2.57579875],
        [ 83.70032501,   2.57579875],
        [469.29092407,   2.57086968],
@@ -1230,7 +1230,7 @@ output:
 >[colmap 相机模型及参数 - 小小灰迪 - 博客园 (cnblogs.com)](https://www.cnblogs.com/xiaohuidi/p/15767477.html)
 
 使用:
-```
+```python
 camerasfile = os.path.join(realdir, 'sparse/0/cameras.bin')
 camdata = read_model.read_cameras_binary(camerasfile)
 
@@ -1250,7 +1250,7 @@ output:
 - images，一个长度为num_reg_images字典，key为image_id，value为Image对象
 
 使用:
-```
+```python
 imagesfile = os.path.join(realdir, 'sparse/0/images.bin')
 imdata = read_model.read_images_binary(imagesfile)
 

@@ -3,7 +3,7 @@ title: ICON
 date: 2023-09-30 16:28:20
 tags:
   - ClothedHumans
-categories: 3DReconstruction/Single-view/Implicit Function
+categories: 3DReconstruction/Single-view
 ---
 
 | Title     | ICON: Implicit Clothed humans Obtained from Normals                                                                                       |

@@ -3,7 +3,7 @@ title: MVSNet
 date: 2023-10-02 10:58:04
 tags:
   - MVS
-categories: 3DReconstruction/Multi-view/Depth Estimation
+categories: 3DReconstruction/Multi-view
 ---
 
 | Title     | MVSNet: Depth Inference for Unstructured Multi-view Stereo                                                                                                                 |

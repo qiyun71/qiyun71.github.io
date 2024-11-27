@@ -4,7 +4,7 @@ date: 2023-09-26 14:12:38
 tags:
   - Loss
   - NeRF
-categories: 3DReconstruction/Single-view/Implicit Function
+categories: 3DReconstruction/Single-view
 ---
 
 | Title     | Vid2Avatar: 3D Avatar Reconstruction from Videos in the Wild via Self-supervised Scene Decomposition                                                                                                                 |

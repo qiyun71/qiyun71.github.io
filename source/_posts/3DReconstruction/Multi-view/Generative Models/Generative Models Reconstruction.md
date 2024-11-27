@@ -6,7 +6,7 @@ tags:
   - GAN
   - Flow
   - Review
-categories: 3DReconstruction/Multi-view/Generative Models
+categories: 3DReconstruction/Multi-view
 top: false
 date updated: 2023-11-10T16:32:59.000Z
 ---

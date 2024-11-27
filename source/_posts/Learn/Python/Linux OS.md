@@ -136,3 +136,11 @@ amd64
 
 $ arch
 x86_64
+
+
+# screen 
+
+- `screen`：启动一个新的 `screen` 会话。
+- `screen -r`：恢复之前的 `screen` 会话。后面接名字可以恢复指定的窗口
+- `screen -ls`：列出当前存在的 `screen` 会话。
+- 

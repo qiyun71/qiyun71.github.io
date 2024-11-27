@@ -2,7 +2,7 @@
 title: 2DGS
 date: 2024-03-30 20:50:47
 tags: 
-categories: 3DReconstruction/Multi-view/Explicit Volumetric/GS-based
+categories: 3DReconstruction/Multi-view
 ---
 
 | Title     | 2D Gaussian Splatting for Geometrically Accurate Radiance Fields                                                  |

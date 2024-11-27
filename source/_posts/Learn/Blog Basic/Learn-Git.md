@@ -127,3 +127,17 @@ Git push 需要配置 token(2023.11.13)
 - Git config --global credential.Helper store
 
 测试没有百度网盘同步方法
+
+
+# 贡献 fork方法
+
+[如何在 GitHub 提交第一个 pull request](https://www.freecodecamp.org/chinese/news/how-to-make-your-first-pull-request-on-github/)
+
+fork后，克隆仓库 `$ git clone [HTTPS ADDRESS]`
+
+```bash
+# 创建分支
+$ git checkout -b [Branch Name]
+
+
+```

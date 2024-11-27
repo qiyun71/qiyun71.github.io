@@ -4,7 +4,7 @@ date: 2023-09-26 14:18:02
 tags:
   - Face
   - 3DReconstruction
-categories: 3DReconstruction/Single-view/Other/HumanBody
+categories: 3DReconstruction/Single-view
 ---
 
 | Title     | A Hierarchical Representation Network for Accurate and Detailed Face Reconstruction from In-The-Wild Images                                                                                                                 |

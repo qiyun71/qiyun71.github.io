@@ -5,7 +5,7 @@ tags:
   - CAD
   - Transformer
   - 3DReconstruction
-categories: 3DReconstruction/Multi-view/Generative Models
+categories: 3DReconstruction/Multi-view
 ---
 
 | Title     | PlankAssembly: Robust 3D Reconstruction from Three Orthographic Views with Learnt Shape Programs                                                                                                                                                                                                                            |

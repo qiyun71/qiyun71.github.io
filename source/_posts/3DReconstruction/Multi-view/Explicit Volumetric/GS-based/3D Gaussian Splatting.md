@@ -4,7 +4,7 @@ date: 2023-08-17 19:43:10
 tags:
   - PointCloud
   - Real-time
-categories: 3DReconstruction/Multi-view/Explicit Volumetric/GS-based
+categories: 3DReconstruction/Multi-view
 ---
 
 | Title     | 3D Gaussian Splatting for Real-Time Radiance Field Rendering                                                                                                                                                                                                                                     |
