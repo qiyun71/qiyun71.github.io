@@ -23,7 +23,7 @@
   <meta name="description" content="Accuracy 重建的模型精度不好，影响因素： 数据集质量：照片拍摄质量(设备)、相机位姿估计精度(COLMAP) 照片质量问题：混叠、模糊、滚动快门 (RS) 效应、HDR&#x2F;LDR、运动模糊、低光照 相机位姿误差：SFM位姿估计时的误差   NeuS方法的问题：体渲染公式的过度简化、表面几何与颜色的偏差、缺少几何约束(深度or法向量) 网格提取方法(Marching Cube)：分辨率太低">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Multi-view 3D Reconstruction based on SDF and volume rendering">
-<meta property="og:url" content="http://example.com/3DReconstruction/Multi-view/NeuS-based%203D%20Reconstruction/index.html">
+<meta property="og:url" content="http://example.com/3DReconstruction/NeuS-based%203D%20Reconstruction/index.html">
 <meta property="og:site_name" content="QiYun">
 <meta property="og:description" content="Accuracy 重建的模型精度不好，影响因素： 数据集质量：照片拍摄质量(设备)、相机位姿估计精度(COLMAP) 照片质量问题：混叠、模糊、滚动快门 (RS) 效应、HDR&#x2F;LDR、运动模糊、低光照 相机位姿误差：SFM位姿估计时的误差   NeuS方法的问题：体渲染公式的过度简化、表面几何与颜色的偏差、缺少几何约束(深度or法向量) 网格提取方法(Marching Cube)：分辨率太低">
 <meta property="og:locale" content="en_US">
@@ -44,12 +44,12 @@
 <meta property="og:image" content="https://jiangwenpl.github.io/FisherRF/static/images/teaser-cropped.gif">
 <meta property="og:image" content="https://jiangwenpl.github.io/FisherRF/static/images/teaser.jpg">
 <meta property="article:published_time" content="2024-06-17T09:11:22.000Z">
-<meta property="article:modified_time" content="2024-11-26T06:28:45.556Z">
+<meta property="article:modified_time" content="2024-12-15T13:54:32.353Z">
 <meta property="article:author" content="Qi Yun">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241010195323.png">
 
-<link rel="canonical" href="http://example.com/3DReconstruction/Multi-view/NeuS-based%203D%20Reconstruction/">
+<link rel="canonical" href="http://example.com/3DReconstruction/NeuS-based%203D%20Reconstruction/">
 
 
 <script id="page-configurations">
@@ -211,7 +211,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/3DReconstruction/Multi-view/NeuS-based%203D%20Reconstruction/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/3DReconstruction/NeuS-based%203D%20Reconstruction/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpeg">
@@ -246,7 +246,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-11-26 14:28:45" itemprop="dateModified" datetime="2024-11-26T14:28:45+08:00">2024-11-26</time>
+                <time title="Modified: 2024-12-15 21:54:32" itemprop="dateModified" datetime="2024-12-15T21:54:32+08:00">2024-12-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -269,7 +269,7 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span>27 mins.</span>
+              <span>28 mins.</span>
             </span>
 
         </div>
@@ -301,17 +301,22 @@
 <span id="more"></span>
 <p><em>Other link about 3D Reconstruction: (need to add “ ../ “ in obsidian)</em></p>
 <ul>
-<li><a href="../../Paper%20About%203D%20Reconstruction">Paper About 3D Reconstruction</a> <a href="Implicit%20Function/NeRF-based/NeRF%20Other%20Research/NeRF-review.md">NeRF-review</a><ul>
-<li><a href="../../Finite%20Element%20Model%203D%20Reconstruction">Finite Element Model 3D Reconstruction</a> 三维重建出有限元模型 (医学领域较多研究, 工业领域目前研究比较少✊)</li>
-<li><a href="../../Anime%20Image%203D%20Reconstruction">Anime Image 3D Reconstruction</a> 根据动漫图像重建三维模型 (结合3D彩色打印实现手办自由😊)</li>
-<li><a href="Multi-view%20Human%20Body%20Reconstruction">Multi-view Human Body Reconstruction</a> 重建三维人体模型 (数字人直播, 真人手办😊)</li>
+<li><a href="../Paper%20About%203D%20Reconstruction">Paper About 3D Reconstruction</a> <a href="../Multi-view/Implicit%20Function/NeRF-based/NeRF%20Other%20Research/NeRF-review">NeRF-review</a><ul>
+<li><a href="../Practical/Finite%20Element%20Model%203D%20Reconstruction">Finite Element Model 3D Reconstruction</a> 三维重建出有限元模型 (医学领域较多研究, 工业领域目前研究比较少✊)</li>
+<li><a href="../Practical/Anime%20Image%203D%20Reconstruction">Anime Image 3D Reconstruction</a> 根据动漫图像重建三维模型 (结合3D彩色打印实现手办自由😊)</li>
+<li><a href="../Practical/Multi-view%20Human%20Body%20Reconstruction">Multi-view Human Body Reconstruction</a> 重建三维人体模型 (数字人直播, 真人手办😊)</li>
 </ul>
 </li>
-<li><a href="../../Basics%20about%203D%20Reconstruction">Basics about 3D Reconstruction</a></li>
-<li><a href="../../Datasets">Datasets</a></li>
-<li><a href="Code%20of%20Multi-view%203D%20Reconstruction%20based%20on%20SDF%20and%20volume%20rendering">Code of Multi-view 3D Reconstruction based on SDF and volume rendering</a> 一些环境配置记录</li>
+<li><a href="../3D%20Model">3D Model</a> 三维模型的各种形式</li>
+<li><a href="../Basics%20about%203D%20Reconstruction">Basics about 3D Reconstruction</a> 三维重建基础</li>
+<li><a href="../Datasets">Datasets</a> 相关数据集</li>
+<li><a href="../Code%20of%20Multi-view%203D%20Reconstruction%20based%20on%20SDF%20and%20volume%20rendering">Code of Multi-view 3D Reconstruction based on SDF and volume rendering</a> 一些环境配置记录</li>
+<li>Other<ul>
+<li><a href="../Practical/Dimensions%20%20Measurement">Dimensions  Measurement</a> 真实的尺寸信息</li>
 </ul>
-<p><a href="../../Blog&amp;Book&amp;Paper/Write/Write%20Paper/3D%20Reconstruction/Master%20Paper(3DReconstruction">Master Paper(3DReconstruction)</a>) 硕论思路，打算沿着NeuS的路线进行相关改进</p>
+</li>
+</ul>
+<p><a href="../../Blog&amp;Book&amp;Paper/Write/Write%20Paper/3D%20Reconstruction/Master%20Paper">Master Paper</a> 硕论思路，打算沿着NeuS的路线进行相关改进</p>
 <p><strong>多视图三维重建方法的关键在于</strong>:</p>
 <ol>
 <li>如何表示3D model: mesh, voxel, pointcloud, RGBD, occupancy function,  Implicit Density Field, SDF or Other Primitive(高斯体, 椭圆体, 球)</li>
@@ -960,7 +965,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">149</span>
+          <span class="site-state-item-count">153</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -973,7 +978,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-count">56</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -1021,12 +1026,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">507k</span>
+    <span title="Symbols count total">513k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">30:43</span>
+    <span title="Reading time total">31:04</span>
 </div>
 
         

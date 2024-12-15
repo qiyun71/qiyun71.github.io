@@ -20,20 +20,25 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="三维模型的各种形式">
+  <meta name="description" content="三维模型的各种形式，初步探索  构造实体几何(eg: CAD) 多边形网格(eg: FEA) 近似网格编码——曲面细分 精确网格编码——样条(NURBS)   箱体建模(eg: 雕刻模型 for 游戏&#x2F;电影)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="3D Model">
 <meta property="og:url" content="http://example.com/3DReconstruction/3D%20Model/index.html">
 <meta property="og:site_name" content="QiYun">
-<meta property="og:description" content="三维模型的各种形式">
+<meta property="og:description" content="三维模型的各种形式，初步探索  构造实体几何(eg: CAD) 多边形网格(eg: FEA) 近似网格编码——曲面细分 精确网格编码——样条(NURBS)   箱体建模(eg: 雕刻模型 for 游戏&#x2F;电影)">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241010195323.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241127191609.png">
 <meta property="og:image" content="https://oup.silverchair-cdn.com/oup/backfile/Content_public/Journal/jcde/6/2/10.1016_j.jcde.2018.05.004/4/m_j.jcde.2018.05.004-fx1.jpeg?Expires=1734581105&amp;Signature=i7UokZKU8T5xAmC83tU~dAHWaA-7um29yiNNZeaPzn4KaXilULv7WShmgCXG2Uvb0Kmflw5lCCJIjZXo9nzfyv25KMqbCfwn82lMiE0vhUVaQfIQlIpU7L~RqIPQDZynWOEYHv~8v-G65Pd7vumZOcuwA5UU~ZkZbd6WyOfu8e6gxqEB2GwIe9IyriC~cyVQt1R6bEyV6j8QhyZ3E62IGtWR5F-JcJ8-fj2fiuohaDrLRb1DXknn7fcDwtjVgqiARuth9axhnLS-6rGWuqUWqMjeeilknqbbprToQ~yar-rauzMqa44S-kgc7r0LlkS5x~o14GeGzaEa8~WbJ92EZw__&amp;Key-Pair-Id=APKAIE5G5CRDK6RD3PGA">
+<meta property="og:image" content="https://pbs.twimg.com/media/GdX2bOjaoAM3EUG?format=jpg&amp;name=large">
 <meta property="og:image" content="https://buaacyw.github.io/meshanything-v2/teaser.png">
 <meta property="og:image" content="https://iso2mesh.sourceforge.net/upload/iso2mesh_workflow_v2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241201213001.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241208225035.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241212151830.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241212152919.png">
 <meta property="article:published_time" content="2024-11-27T09:26:47.000Z">
-<meta property="article:modified_time" content="2024-11-27T11:46:39.130Z">
+<meta property="article:modified_time" content="2024-12-15T12:05:48.044Z">
 <meta property="article:author" content="Qi Yun">
 <meta property="article:tag" content="3DReconstruction">
 <meta name="twitter:card" content="summary">
@@ -224,10 +229,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2024-11-27 17:26:47 / Modified: 19:46:39" itemprop="dateCreated datePublished" datetime="2024-11-27T17:26:47+08:00">2024-11-27</time>
+              <time title="Created: 2024-11-27 17:26:47" itemprop="dateCreated datePublished" datetime="2024-11-27T17:26:47+08:00">2024-11-27</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-12-15 20:05:48" itemprop="dateModified" datetime="2024-12-15T20:05:48+08:00">2024-12-15</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -243,13 +254,13 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>1.2k</span>
+              <span>2.7k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span>4 mins.</span>
+              <span>10 mins.</span>
             </span>
 
         </div>
@@ -261,12 +272,21 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>三维模型的各种形式</p>
+        <p>三维模型的各种形式，初步探索</p>
+<ul>
+<li>构造实体几何(eg: CAD)</li>
+<li>多边形网格(eg: FEA)<ul>
+<li>近似网格编码——曲面细分</li>
+<li>精确网格编码——样条(NURBS)</li>
+</ul>
+</li>
+<li>箱体建模(eg: 雕刻模型 for 游戏/电影)</li>
+</ul>
 <span id="more"></span>
 <p>3D Represent</p>
-<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241010195323.png" alt="image.png|555"></p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241010195323.png" alt="image.png|666"></p>
 <blockquote>
-<p><a target="_blank" rel="noopener" href="http://www.bimant.com/blog/top10-popular-3d-file-formats/">10种最流行的3D文件格式 - BimAnt</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.bimant.com/blog/top10-popular-3d-file-formats/">10种最流行的3D文件格式 - BimAnt</a><br><a target="_blank" rel="noopener" href="http://staff.ustc.edu.cn/~lgliu/Resources/CG/What_is_CG.htm">什么是计算机图形学</a></p>
 </blockquote>
 <p>目前，机械行业中不同的模型形式：</p>
 <ul>
@@ -281,9 +301,9 @@
 <h1 id="Solid"><a href="#Solid" class="headerlink" title="Solid"></a>Solid</h1><p>目前机械行业使用最多的模型形式</p>
 <h3 id="获取"><a href="#获取" class="headerlink" title="获取"></a>获取</h3><p>人工建模Solidworks、Creo、Rhino…</p>
 <p>强化学习重建CAD模型：<a target="_blank" rel="noopener" href="https://content.iospress.com/download/integrated-computer-aided-engineering/ica230710?id=integrated-computer-aided-engineering%2Fica230710#page=4.49">3D reconstruction based on hierarchical reinforcement learning with transferabilit</a></p>
-<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241127191609.png" alt="image.png|444"></p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241127191609.png" alt="image.png|666"></p>
 <p>从FE surface mesh model中提取 free-form B-spline surface：<a target="_blank" rel="noopener" href="https://watermark.silverchair.com/j.jcde.2018.05.004.pdf?token=AQECAHi208BE49Ooan9kkhW_Ercy7Dm3ZL_9Cf3qfKAc485ysgAAA18wggNbBgkqhkiG9w0BBwagggNMMIIDSAIBADCCA0EGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMwUnyFsLtbCJdBtjiAgEQgIIDEp9LVU5TBBEEUkKl4THHIULKGCsKlH7EI7pdhfNxxfX3umFNAxqNhmlpCigHdbo7gx0CRKO_NA7al7Fy1LN_nNc8b4OhJseTFj_7XbJ-PyyNl7uZgXUZypV9xgU2ZDrY3B6nxfs8GDsGfL2ralz-H1HGGatgOG6FWENXD6pSOD6-pUp7h7-REU_he6dFVXQ9sQUuNL-vjOESZgOdsJ3l6kFmsLfcKy_jLGbdnnrVkYY-uasnWOSU0btcbstWj6RYa0AXu_gjXf4f54BEKLPh1jMhKlJMaooADaL76r933yPRWJQJ-qGIlqqPNUoGJrJ5GBFNwud2le0y5BRJZQb3xBMFT8DrAKc1sw86ANa1jsuoqdOhSyueemJcVexQTo9ZS8J21YlAyTkQ09nQMpmBMsTwIRQq1nLsx7ZbShkOUj8W-1ocoPGb0H78t_XJcFEuFyJdryIc9skBF2AYGeSfmrromZvXc4Z34X5tVZtdJx29mLhIcrXb7KLdSnYDH0lM8XYt97bI1cceATNUcIFaSWKiIGerFIzCe4uoNrjX2MdaLTX8054um36E5XEWY7y6CvNK7jNjevSbdhJholMYAwuAJs76CuGHiALBg-6l6Qra6dRTC4B3cDalc8aIzMqQ3Sd_qjkJ_Sp315znKRRnJoYPTWLrd2S6y2in5k3KPTxrb7Ijs0-8bsaYbvwRtkWRwx-DW62UwNQHhszOBr0o9iaAxYm2GLTKc-EWp5ZeBfmlTLnEyjzQsjWJl1KwzNxt98o8DEreSjOfogI2mt3kL_QC-GFKYK3SyaWO5NdVcyTDi7dFbGgi1ptl8TVyBKEuPHLuSAEdUo4OK6CLCh8TZido1zMpbp3vZGUquDR2VTNJIRS2kzd9kdf5jKEnZyaLf9qCmEXNCEDn_qmWvtPwPMMfMWfFkVrv9bPsFcnKDVrhdgLA-NqIxbtF3iz03j0MZTRlvxnl1Aeh6Yl1s3jjAM8YJO-A_hAV6M8x0pnalcSnQHbfw5KuxR3J_fTdrRfDBKJ8hQc-ZZZ8DnNzQJAHq6IiZA">Surface reconstruction from FE mesh model</a></p>
-<p><img src="https://oup.silverchair-cdn.com/oup/backfile/Content_public/Journal/jcde/6/2/10.1016_j.jcde.2018.05.004/4/m_j.jcde.2018.05.004-fx1.jpeg?Expires=1734581105&amp;Signature=i7UokZKU8T5xAmC83tU~dAHWaA-7um29yiNNZeaPzn4KaXilULv7WShmgCXG2Uvb0Kmflw5lCCJIjZXo9nzfyv25KMqbCfwn82lMiE0vhUVaQfIQlIpU7L~RqIPQDZynWOEYHv~8v-G65Pd7vumZOcuwA5UU~ZkZbd6WyOfu8e6gxqEB2GwIe9IyriC~cyVQt1R6bEyV6j8QhyZ3E62IGtWR5F-JcJ8-fj2fiuohaDrLRb1DXknn7fcDwtjVgqiARuth9axhnLS-6rGWuqUWqMjeeilknqbbprToQ~yar-rauzMqa44S-kgc7r0LlkS5x~o14GeGzaEa8~WbJ92EZw__&amp;Key-Pair-Id=APKAIE5G5CRDK6RD3PGA" alt="m_j.jcde.2018.05.004-fx1.jpeg (520×297)"></p>
+<p><img src="https://oup.silverchair-cdn.com/oup/backfile/Content_public/Journal/jcde/6/2/10.1016_j.jcde.2018.05.004/4/m_j.jcde.2018.05.004-fx1.jpeg?Expires=1734581105&amp;Signature=i7UokZKU8T5xAmC83tU~dAHWaA-7um29yiNNZeaPzn4KaXilULv7WShmgCXG2Uvb0Kmflw5lCCJIjZXo9nzfyv25KMqbCfwn82lMiE0vhUVaQfIQlIpU7L~RqIPQDZynWOEYHv~8v-G65Pd7vumZOcuwA5UU~ZkZbd6WyOfu8e6gxqEB2GwIe9IyriC~cyVQt1R6bEyV6j8QhyZ3E62IGtWR5F-JcJ8-fj2fiuohaDrLRb1DXknn7fcDwtjVgqiARuth9axhnLS-6rGWuqUWqMjeeilknqbbprToQ~yar-rauzMqa44S-kgc7r0LlkS5x~o14GeGzaEa8~WbJ92EZw__&amp;Key-Pair-Id=APKAIE5G5CRDK6RD3PGA" alt="m_j.jcde.2018.05.004-fx1.jpeg (520×297)|666"></p>
 <h1 id="Polygon-mesh"><a href="#Polygon-mesh" class="headerlink" title="Polygon mesh"></a>Polygon mesh</h1><p>其中网格(mesh)为各个领域最常用的表示方法，其可以分为surface mesh和volume mesh：</p>
 <ul>
 <li>表面mesh：通过多个三角形/四边形组成物体表面，可用于3D打印</li>
@@ -303,6 +323,9 @@
 </ul>
 </li>
 </ul>
+<p>其他：</p>
+<p>NumGrad-Pull: Numerical Gradient Guided Tri-plane Representation for <strong>Surface Reconstruction from Point Clouds</strong>. <a target="_blank" rel="noopener" href="https://github.com/CuiRuikai/NumGrad-Pull">CuiRuikai/NumGrad-Pull</a></p>
+<p><img src="https://pbs.twimg.com/media/GdX2bOjaoAM3EUG?format=jpg&amp;name=large" alt="GdX2bOjaoAM3EUG (1697×980)|666"></p>
 <h3 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h3><p>从低质量的dense mesh/点云中生成高质量人造Mesh(网格规律，缺陷少)：</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://buaacyw.github.io/mesh-anything/">MeshAnything</a></li>
@@ -310,11 +333,12 @@
 </ul>
 <p><img src="https://buaacyw.github.io/meshanything-v2/teaser.png" alt="teaser.png (6507×6449)|666"></p>
 <h3 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h3><p>计算3D surface mesh的体积<br><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/1406029/how-to-calculate-the-volume-of-a-3d-mesh-object-the-surface-of-which-is-made-up">math - How to calculate the volume of a 3D mesh object the surface of which is made up triangles - Stack Overflow</a> | <a target="_blank" rel="noopener" href="http://chenlab.ece.cornell.edu/Publication/Cha/icip01_Cha.pdf">chenlab.ece.cornell.edu/Publication/Cha/icip01_Cha.pdf</a></p>
-<h2 id="volume-mesh"><a href="#volume-mesh" class="headerlink" title="volume mesh"></a>volume mesh</h2><h3 id="获取-2"><a href="#获取-2" class="headerlink" title="获取"></a>获取</h3><p>有限元网格划分：<a href="Finite%20Element%20Model%203D%20Reconstruction.md">Finite Element Model 3D Reconstruction</a> | <a href="Anime%20Image%203D%20Reconstruction.md">Anime Image 3D Reconstruction</a></p>
+<h2 id="volume-mesh"><a href="#volume-mesh" class="headerlink" title="volume mesh"></a>volume mesh</h2><h3 id="获取-2"><a href="#获取-2" class="headerlink" title="获取"></a>获取</h3><p>有限元网格划分：<a href="Practical/Finite%20Element%20Model%203D%20Reconstruction.md">Finite Element Model 3D Reconstruction</a> | <a href="Practical/Anime%20Image%203D%20Reconstruction.md">Anime Image 3D Reconstruction</a></p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://gmsh.info/">Gmsh: a three-dimensional finite element mesh generator with built-in pre- and post-processing facilities</a>，其也可以将surface mesh转化为volume mesh <a target="_blank" rel="noopener" href="https://mbarzegary.github.io/2022/06/27/surface-to-volume-mesh-using-gmsh/">Generate volume mesh from a surface mesh using GMSH · Mojtaba Barzegari</a></li>
 <li><a target="_blank" rel="noopener" href="https://github.com/wildmeshing/fTetWild">wildmeshing/fTetWild: Fast Tetrahedral Meshing in the Wild</a> <a target="_blank" rel="noopener" href="https://yixin-hu.github.io/ftetwild.pdf">yixin-hu.github.io/ftetwild.pdf</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.ntop.com/software/products/">Engineering, Design, and Simulation Software | nTop | nTop</a> 商业软件 <a target="_blank" rel="noopener" href="https://support.ntop.com/hc/en-us/articles/360037005234-How-to-create-an-FE-Volume-Mesh">How to create an FE Volume Mesh – nTop Support</a></li>
+<li><a target="_blank" rel="noopener" href="https://coreform.com/coreform-flex/">Coreform - Coreform Flex</a> 等几何分析(高阶样条mesh划分) 全自动的网格划分</li>
 </ul>
 <p>surface mesh转volume mesh</p>
 <ul>
@@ -328,6 +352,71 @@
 <li><a target="_blank" rel="noopener" href="https://dl.acm.org/doi/pdf/10.1145/3554920">Hex-Mesh Generation and Processing: A Survey</a></li>
 </ul>
 <h3 id="优化-1"><a href="#优化-1" class="headerlink" title="优化"></a>优化</h3><p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2410.11656">Fast and Robust Hexahedral Mesh Optimization via Augmented Lagrangian, L-BFGS, and Line Search | PDF</a><br><a target="_blank" rel="noopener" href="https://x.com/zhenjun_zhao/status/1846392374425276748">X 上的 Zhenjun Zhao：“Fast and Robust Hexahedral Mesh Optimization via Augmented Lagrangian, L-BFGS, and Line Search Hua Tong, Yongjie Jessica Zhang https://t.co/XAjGcAZxMp https://t.co/yu7zDYbdHY” / X</a></p>
+<h2 id="精确网格-样条"><a href="#精确网格-样条" class="headerlink" title="精确网格/样条"></a>精确网格/样条</h2><blockquote>
+<p>贝塞尔曲线 <a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903666361565191">深入理解贝塞尔曲线贝塞尔曲线于 1962 年，由法国工程师皮埃尔·贝济埃（Pierre Bézier）所广泛发表，他运用 - 掘金</a></p>
+</blockquote>
+<p>n阶贝塞尔曲线： $B(t)=\sum_{i=0}^nC_n^iP_i(1-t)^{n-i}t^i,t\in[0,1]$ 或者 $B(t)=\sum_{i=0}^nP_ib_{i,n}(t)\text{,}t\in[0,1]$</p>
+<ul>
+<li>$P_{i}$为控制点，通过n+1个控制点控制</li>
+<li>$b_{i,n}(t)$为基函数</li>
+<li>阶数为n，表示拟合曲线多项式的最高次方</li>
+</ul>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/686518292">B样条曲线和Nurbs曲线 图文并茂的理解节点和节点区间 - 知乎</a></p>
+</blockquote>
+<p>B样条曲线与Bezier曲线不同的是，其将控制点进行了分组，每几个控制点合并为一个“群组”，在“群组”内采用自定义阶数 k 的基函数的组合来拟合曲线： $P(t)=\sum_{i=0}^{n}N_{i,k} (t)P_{i}$ ，其中$N_{i,k}(t)$阶数k，次数为k-1(定义有混淆)，k阶曲线需要k+1个控制点。<br>(塞尔曲线的控制点“牵一发而动全身”、B样条曲线的控制点只影响“局部范围”)</p>
+<p>Bezier曲线可以视为均匀有理B样条，非均匀有理B样条(Non-uniform rational B-spline)：<br><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E9%9D%9E%E5%9D%87%E5%8C%80%E6%9C%89%E7%90%86B%E6%A0%B7%E6%9D%A1">非均匀有理B样条 - 维基百科，自由的百科全书</a> </p>
+<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Rp4LuwnXk-o&amp;list=PLpXx_DPfZvSutHr7pn23hjrnJFska59xJ">Traditional FEA vs Spline-based and Isogeometric FEA - YouTube</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/647671934">等几何分析（1） - NoN的文章 - 知乎</a> 等几何分析，将原来FEA在单元节点上的插值计算，变为在控制网格点上的插值计算，IGA目前主要问题在剪裁样条曲面和大量样条碎片难以处理上，且由于基函数比较复杂，有时候对于非线性问题求解容易发散，数值求解并不问题。个人认为IGA面临的问题不在于力学上，而是在几何和拓扑上，如果更好的解决复杂几何体的连续性、重构等问题，那么对IGA的推广应该有很大裨益。</p>
+<p><a target="_blank" rel="noopener" href="https://www.gs.jku.at/pubs/2012brunero-dipl.pdf">Discontinuous Galerkin Methods for Isogeometric Analysis</a></p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241201213001.png" alt="image.png|444"></p>
+<p><a target="_blank" rel="noopener" href="https://jiyess.github.io/files/pdf/publications/thesis_compressed.pdf">面向等几何分析的区域参数化方法研究 博论 jiyess.github.io/files/pdf/publications/thesis_compressed.pdf</a></p>
+<p><a href="file:///F:/Download/s40032-018-0462-6.pdf">IGA: A Simplified Introduction and Implementation Details for Finite Element Users</a></p>
+<p>Isogeometric analysis (IGA) is a recently introduced technique that employs the Computer Aided Design (CAD) concept of Non-uniform Rational B-splines (NURBS) tool to bridge the substantial bottleneck between the CAD and finite element analysis (FEA) fields</p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1yi4y1h7dx/?vd_source=1dba7493016a36a32b27a14ed2891088&amp;spm_id_from=333.788.videopod.sections">GAMES Webinar 306-CAD/CAE/CAM专题-魏小东-面向复杂几何的优化设计与分析_哔哩哔哩_bilibili</a></p>
+<p>实现复杂几何的一体化表征(CAD/CAE)：</p>
+<ul>
+<li>非结构化样条： CAD变、CAE不变</li>
+<li>非协调元：CAD不变、CAE变</li>
+</ul>
+<blockquote>
+<p> <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1fHzoYaE4a/?spm_id_from=333.1245.0.0">【Freya｜熟肉】线条函数的连续性_哔哩哔哩_bilibili</a></p>
+</blockquote>
+<p>贝塞尔 spline：分段三阶贝塞尔曲线构成的曲线，各段之间有三种连接形式：</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241208225035.png" alt="image.png|444"></p>
+<p>PPT中的曲线构建用的就是这种方法</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241212151830.png" alt="image.png|444"></p>
+<p>Broken 和 Aligned曲线是$C^{0}$连续的，但是其速度/一阶导数不连续<br>Mirrored 曲线则可以做到$C^{1}$连续，且同时必须是$C^{0}$连续的，<br>然而他们都不是$C^{2}$连续的，如果要构建$C^{2}$甚至$C^{3}$连续的曲线，则对于三阶贝塞尔曲线来说，可以控制的点会很少，只移动一个点，其他点都会发生很大的变动，无法构成一条曲线。</p>
+<p><strong><em>定义</em></strong>：两个函数A和B，如果在<strong>连接点</strong>出的0~n阶导数都相等，则他们是$C^{n}$连续的(参数连续性)</p>
+<p>Aligned曲线虽然在连接点处的速度有变化，但是其速度方向单位向量/法向向量始终保持不变，这被称为切线连续性$G^{1}$(几何连续性)</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241212152919.png" alt="image.png|444"></p>
+<p>$G^{2}$连续性—&gt;考虑曲率，曲率连续性(曲率梳是连续的)，$G^{3}$连续性—&gt;曲率梳的导数(变化率)是连续的<br>曲率$\kappa=\frac{\begin{vmatrix}\mathbf{P}^{\prime}&amp;\mathbf{P}_x^{\prime\prime}\\\mathbf{P}^{\prime}&amp;\mathbf{P}_y^{\prime\prime}\end{vmatrix}}{||\mathbf{P}^{\prime}||^3}$，半径为$1/\kappa$的圆</p>
+<p><strong><em>定义</em></strong>：两个曲线A和B，如果存在函数g(t)使得A(t)和B（g(t)）是$C^{n}$连续的，则两者是$G^{n}$连续的</p>
+<p>了解了连续性的定义后，可以拓展其他的样条曲线：</p>
+<p>固定曲线起点和终点位置，设置边界条件，求解曲线中间的控制点位置</p>
+<ul>
+<li>Hermite Spline，曲线两端点速度相同(已知边界速度)</li>
+<li>Linear Spline，直接连接两点成直线</li>
+<li>Cardinal Spline，每个点的速度为相邻两点的方向向量乘以一个缩放因子<ul>
+<li>Catmull-Rom Spline，缩放因子为1/2</li>
+</ul>
+</li>
+<li>Basis Spline $C^{2}$连续的</li>
+<li>Non-Uniform Rational B-Spline NURBS<ul>
+<li>Non-Uniform：改变节点值，每条曲线使用基于节点值的独特基函数</li>
+<li>Rational：可以控制每个控制点的优先级/权重值，使得曲线向特定控制点靠拢或者远离</li>
+</ul>
+</li>
+</ul>
+<p>Linear Spline 控制点特别多的时候，可以用线性来模拟非线性，<strong>FEA</strong></p>
+<p>样条的应用：也可以看成一个可控轨迹函数</p>
+<ul>
+<li>CAD/CAE</li>
+<li>相机轨迹生成</li>
+<li>动画的轨迹，物体位置/角度/大小，随时间的变化曲线</li>
+<li>颜色空间采样曲线，将灰度图片映射为特定颜色空间的图片</li>
+<li>…</li>
+</ul>
 
     </div>
 
@@ -369,7 +458,10 @@
     <a href="/Learn/Other%20Interest/Learn-Cpp/" rel="prev" title="Learn-Cpp">
       <i class="fa fa-chevron-left"></i> Learn-Cpp
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/3DReconstruction/Practical/Dimensions%20%20Measurement/" rel="next" title="Dimensions Measurement">
+      Dimensions Measurement <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -428,7 +520,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Solid"><span class="nav-text">Solid</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96"><span class="nav-text">获取</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Polygon-mesh"><span class="nav-text">Polygon mesh</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#surface-mesh"><span class="nav-text">surface mesh</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96-1"><span class="nav-text">获取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E5%8C%96"><span class="nav-text">优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Other"><span class="nav-text">Other</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#volume-mesh"><span class="nav-text">volume mesh</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96-2"><span class="nav-text">获取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E5%8C%96-1"><span class="nav-text">优化</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Solid"><span class="nav-text">Solid</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96"><span class="nav-text">获取</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Polygon-mesh"><span class="nav-text">Polygon mesh</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#surface-mesh"><span class="nav-text">surface mesh</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96-1"><span class="nav-text">获取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E5%8C%96"><span class="nav-text">优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Other"><span class="nav-text">Other</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#volume-mesh"><span class="nav-text">volume mesh</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96-2"><span class="nav-text">获取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E5%8C%96-1"><span class="nav-text">优化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B2%BE%E7%A1%AE%E7%BD%91%E6%A0%BC-%E6%A0%B7%E6%9D%A1"><span class="nav-text">精确网格&#x2F;样条</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -443,7 +535,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">149</span>
+          <span class="site-state-item-count">153</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -456,7 +548,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-count">56</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -504,12 +596,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">507k</span>
+    <span title="Symbols count total">513k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">30:43</span>
+    <span title="Reading time total">31:04</span>
 </div>
 
         

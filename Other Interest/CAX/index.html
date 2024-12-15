@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/yqq/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="CAD&#x2F;CAE&#x2F;CAM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CAX">
+<meta property="og:url" content="http://example.com/Other%20Interest/CAX/index.html">
+<meta property="og:site_name" content="QiYun">
+<meta property="og:description" content="CAD&#x2F;CAE&#x2F;CAM">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-12-15T13:43:39.000Z">
+<meta property="article:modified_time" content="2024-12-15T13:47:58.773Z">
+<meta property="article:author" content="Qi Yun">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/Other%20Interest/CAX/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>CAX | QiYun</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">QiYun</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Note</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/Other%20Interest/CAX/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiYun">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CAX
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2024-12-15 21:43:39 / Modified: 21:47:58" itemprop="dateCreated datePublished" datetime="2024-12-15T21:43:39+08:00">2024-12-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Other-Interest/" itemprop="url" rel="index"><span itemprop="name">Other Interest</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>1.8k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>7 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>CAD/CAE/CAM</p>
+<span id="more"></span>
+<p><a href="../../3DReconstruction/3D%20Model">3D Model</a></p>
+<h1 id="CAD-CAE-CAM专题"><a href="#CAD-CAE-CAM专题" class="headerlink" title="CAD/CAE/CAM专题"></a>CAD/CAE/CAM专题</h1><p>In <a target="_blank" rel="noopener" href="https://games-cn.org/">计算机图形学与混合现实在线平台 – GAMES: Graphics And Mixed Environment Symposium</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.csia-jpw.com/UserFiles/Article/file/6383805642412451143846136.pdf">中国三维CAD国产化研究报告</a></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/RL7_8-q_LwMXVd1gWOHcAg">《机械工程学报》专栏征稿 | “大模型时代的智能设计与制造 ”专栏</a></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Video</th>
+<th>Research</th>
+<th>Company</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV19e4y1x7f9?vd_source=1dba7493016a36a32b27a14ed2891088&amp;spm_id_from=333.788.videopod.sections">GAMES Webinar 253-CAD/CAE/CAM专题-蔺宏伟-CAD技术的新进展_哔哩哔哩_bilibili</a></td>
+<td>GAMES Webinar 253: 计算机辅助拓扑设计简介 - 蔺宏伟</td>
+<td>浙大</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Yd4y1F7ad?vd_source=1dba7493016a36a32b27a14ed2891088&amp;spm_id_from=333.788.videopod.sections">GAMES Webinar 253-CAD/CAE/CAM专题-朱春钢-CAD技术的新进展_哔哩哔哩_bilibili</a></td>
+<td>GAMES Webinar 253: 多边曲面的理论与性质 - 朱春钢</td>
+<td>大连理工</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1rv4y127RT?vd_source=1dba7493016a36a32b27a14ed2891088&amp;spm_id_from=333.788.videopod.sections">GAMES Webinar 255-CAD/CAE/CAM专题-袁春明-CAM前沿进展_哔哩哔哩_bilibili</a></td>
+<td>GAMES Webinar 255: 自由曲面刀具路径规划的现状和新进展 - 袁春明</td>
+<td>中科院数学机械化重点实验室</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1PW4y1X73m?vd_source=1dba7493016a36a32b27a14ed2891088&amp;spm_id_from=333.788.videopod.sections">GAMES Webinar 281-CAD/CAE/CAM专题-周子寒 -智能CAD建模_哔哩哔哩_bilibili</a></td>
+<td>GAMES Webinar 281: 基于深度学习图像特征的CAD建模 - 周子寒</td>
+<td>杭州群核信息技术有限公司(酷家乐)</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Am4y1e74A?vd_source=1dba7493016a36a32b27a14ed2891088&amp;spm_id_from=333.788.videopod.sections">GAMES Webinar 281-CAD/CAE/CAM专题-刘洋-智能CAD建模_哔哩哔哩_bilibili</a></td>
+<td>GAMES Webinar 281: 边界表示的重建与隐式化 - 刘洋</td>
+<td>微软亚洲研究院</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1v14y1d79Z?vd_source=1dba7493016a36a32b27a14ed2891088&amp;spm_id_from=333.788.videopod.sections">GAMES Webinar 282-CAD/CAE/CAM专题-赵康-CAE工业软件：开源、云化与异构计算_哔哩哔哩_bilibili</a></td>
+<td>GAMES Webinar 282: 云化CAE实践与展望- 赵康</td>
+<td>上海数巧信息科技有限公司</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1ak4y1N7UW?vd_source=1dba7493016a36a32b27a14ed2891088&amp;spm_id_from=333.788.videopod.sections">GAMES Webinar 282-CAD/CAE/CAM专题-唐滨-CAE工业软件：开源、云化与异构计算_哔哩哔哩_bilibili</a></td>
+<td>GAMES Webinar 282: 自主CAE软件开源生态探索 - 唐滨</td>
+<td>哈工程</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1M14y1o7pX?vd_source=1dba7493016a36a32b27a14ed2891088&amp;spm_id_from=333.788.videopod.sections">GAMES Webinar 282-CAD/CAE/CAM专题-张先轶-CAE工业软件：开源、云化与异构计算_哔哩哔哩_bilibili</a></td>
+<td>GAMES Webinar 282: 异构计算软件栈进展 - 张先轶 （北京）澎峰科技有限公司</td>
+<td>（北京）澎峰科技有限公司 创业</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1sk4y1P7QW?vd_source=1dba7493016a36a32b27a14ed2891088&amp;spm_id_from=333.788.videopod.sections">GAMES Webinar 283-CAD/CAE/CAM专题-贾晓红-曲面求交与设计分析一体化_哔哩哔哩_bilibili</a></td>
+<td>GAMES Webinar 283: CAD中的曲面相交理论及应用 - 贾晓红</td>
+<td>国科大数学与系统科学研究院</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1nh4y1E79V?vd_source=1dba7493016a36a32b27a14ed2891088&amp;spm_id_from=333.788.videopod.sections">GAMES Webinar 283-CAD/CAE/CAM专题-李新-曲面求交与设计分析一体化_哔哩哔哩_bilibili</a></td>
+<td>GAMES Webinar 283: 基于T样条的设计分析一体化 - 李新</td>
+<td>中科大</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Qx4y1o7fB?vd_source=1dba7493016a36a32b27a14ed2891088&amp;spm_id_from=333.788.videopod.sections">GAMES Webinar 284-CAD/CAE/CAM专题-方国鑫-结构优化与增材制造_哔哩哔哩_bilibili</a></td>
+<td>GAMES Webinar 284: 机器人辅助多轴增材制造：曲面切片和空间刀具路径规划 - 方国鑫</td>
+<td>曼彻斯特大学</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Gh4y1f7Mm?vd_source=1dba7493016a36a32b27a14ed2891088&amp;spm_id_from=333.788.videopod.sections">GAMES Webinar 284-CAD/CAE/CAM专题-翟晓雅-结构优化与增材制造_哔哩哔哩_bilibili</a></td>
+<td>GAMES Webinar 284: 增材制造中的结构设计与路径规划问题 - 翟晓雅</td>
+<td>中科大</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV19b4y1379m?vd_source=1dba7493016a36a32b27a14ed2891088&amp;spm_id_from=333.788.videopod.sections">GAMES Webinar 305-CAD/CAE/CAM专题-吕琳-智能CAD：建模与设计_哔哩哔哩_bilibili</a></td>
+<td>GAMES Webinar 305: 一种三周期极小曲面几何微结构的智能设计方法 - 吕琳</td>
+<td>山东大学</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Pi4y1h7Fq?vd_source=1dba7493016a36a32b27a14ed2891088&amp;spm_id_from=333.788.videopod.sections">GAMES Webinar 305-CAD/CAE/CAM专题-韦向植-智能CAD：建模与设计_哔哩哔哩_bilibili</a></td>
+<td>GAMES Webinar 305: AI助力智能建筑总图CAD——基于小样本行业数据的提效探索 - 韦向植</td>
+<td>粤港澳大湾区数字经济研究院 万科-IDEA联合实验室</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1pe411z7RA?vd_source=1dba7493016a36a32b27a14ed2891088&amp;spm_id_from=333.788.videopod.sections">GAMES Webinar 306-CAD/CAE/CAM专题-李好-面向复杂几何的优化设计与分析_哔哩哔哩_bilibili</a> ⭐</td>
+<td><strong>GAMES Webinar 306: 几何驱动的结构拓扑优化设计方法及应用 - 李好</strong></td>
+<td>华科 机械科学与工程学院<br><a target="_blank" rel="noopener" href="https://mse.hust.edu.cn/info/1151/1541.htm">李好</a></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1yi4y1h7dx?vd_source=1dba7493016a36a32b27a14ed2891088&amp;spm_id_from=333.788.videopod.sections">GAMES Webinar 306-CAD/CAE/CAM专题-魏小东-面向复杂几何的优化设计与分析_哔哩哔哩_bilibili</a></td>
+<td>GAMES Webinar 306: 面向复杂几何的<strong>等几何分析</strong> - 魏小东</td>
+<td>上交密西根学院</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Nk4y197yv?vd_source=1dba7493016a36a32b27a14ed2891088&amp;spm_id_from=333.788.videopod.sections">GAMES Webinar 307-CAD/CAE/CAM专题-方志刚-设计仿真类工业软件的 “下个十年”：思考与实践_哔哩哔哩_bilibili</a></td>
+<td>GAMES Webinar 307: 铸造工业软实力 共创数字新生态 - 方志刚</td>
+<td>华为云工业软件首席技术专家</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1KT4y1p798?vd_source=1dba7493016a36a32b27a14ed2891088&amp;spm_id_from=333.788.videopod.sections">GAMES Webinar 307-CAD/CAE/CAM专题-田锋-设计仿真类工业软件的 “下个十年”：思考与实践_哔哩哔哩_bilibili</a></td>
+<td>GAMES Webinar 307: 中国工业软件产业发展的10个误区 - 田锋</td>
+<td>安世亚太 深圳云泊公司</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1YT4y187qh?vd_source=1dba7493016a36a32b27a14ed2891088&amp;spm_id_from=333.788.videopod.sections">GAMES Webinar 308-CAD/CAE/CAM专题-王博伦-CAD曲面建模前沿进展_哔哩哔哩_bilibili</a></td>
+<td>GAMES Webinar 308: 基于从切面带的自由曲面构建 (Rectifying Strip Patterns) - 王博伦</td>
+<td>沙特阿卜杜拉国王科技大学</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1ft4y1R72T?vd_source=1dba7493016a36a32b27a14ed2891088&amp;spm_id_from=333.788.videopod.sections">GAMES Webinar 308-CAD/CAE/CAM专题-杜兴逸-CAD曲面建模前沿进展_哔哩哔哩_bilibili</a></td>
+<td>GAMES Webinar 308: 隐式曲面网络的鲁棒计算方法 - 杜兴逸</td>
+<td>腾讯光子技术中心</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1tn4y1d7yH?vd_source=1dba7493016a36a32b27a14ed2891088&amp;spm_id_from=333.788.videopod.sections">GAMES Webinar 326-CAD/CAE/CAM专题-邓重阳-CAD/CAE技术新进展_哔哩哔哩_bilibili</a></td>
+<td>GAMES Webinar 326: 广义Bezier体的构造与性质 - 邓重阳</td>
+<td>杭州电子科技大学<br><a target="_blank" rel="noopener" href="https://faculty.hdu.edu.cn/lxy/dzy/main.htm">杭州电子科技大学教师个人主页</a></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1uD421g7xC?vd_source=1dba7493016a36a32b27a14ed2891088&amp;spm_id_from=333.788.videopod.sections">GAMES Webinar 326-CAD/CAE/CAM专题-王伟-CAD/CAE技术新进展_哔哩哔哩_bilibili</a> ⭐</td>
+<td>GAMES Webinar 326: <strong>走向统一的网格与样条建模技术</strong> - 王伟</td>
+<td>北航 机械工程及自动化学院<br><a target="_blank" rel="noopener" href="https://shi.buaa.edu.cn/publius/zh_CN/index.htm">北京航空航天大学主页平台系统 王伟—LOGOS—研究领域</a></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Qy411q7xP?vd_source=1dba7493016a36a32b27a14ed2891088&amp;spm_id_from=333.788.videopod.sections">GAMES Webinar 327-CAD/CAE/CAM专题-王昌凌-智能CAD_哔哩哔哩_bilibili</a></td>
+<td>GAMES Webinar 327: 基于场计算方式的矢量3D打印规划 - 王昌凌</td>
+<td>曼彻斯特大学</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1sr421F7DX?vd_source=1dba7493016a36a32b27a14ed2891088&amp;spm_id_from=333.788.videopod.sections">GAMES Webinar 327-CAD/CAE/CAM专题-徐翔-智能CAD_哔哩哔哩_bilibili</a></td>
+<td>GAMES Webinar 327: Automating CAD Design with Deep Generative Models - 徐翔</td>
+<td>Autodesk</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Z4421S74u?vd_source=1dba7493016a36a32b27a14ed2891088&amp;spm_id_from=333.788.videopod.sections">GAMES Webinar 328-CAD/CAE/CAM专题-汪子琦-CAD/CAM技术新进展_哔哩哔哩_bilibili</a></td>
+<td>GAMES Webinar 328: Computational Assemblies: Bridging the Gap from Concept to Production - 汪子琦</td>
+<td>洛桑联邦理工/香港科技大学</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV18s421T7yG?vd_source=1dba7493016a36a32b27a14ed2891088&amp;spm_id_from=333.788.videopod.sections">GAMES Webinar 328-CAD/CAE/CAM专题-唐鹏斌-CAD/CAM技术新进展_哔哩哔哩_bilibili</a></td>
+<td>GAMES Webinar 328: Computational Modeling and Design of Nonlinear Materials and Structures - 唐鹏斌</td>
+<td>博士后，苏黎世联邦理工<br>机器人、材料</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1VZ421M76K?vd_source=1dba7493016a36a32b27a14ed2891088&amp;spm_id_from=333.788.videopod.sections">GAMES Webinar 329-CAD/CAE/CAM专题-李昌健-CAD程序语义注释与曲线参数化新进展_哔哩哔哩_bilibili</a></td>
+<td>GAMES Webinar 328: CAD程序语义注释与曲线参数化新进展 - 李昌健</td>
+<td>爱丁堡大学</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Hw4m1a7b4?vd_source=1dba7493016a36a32b27a14ed2891088&amp;spm_id_from=333.788.videopod.sections">GAMES Webinar 329-CAD/CAE/CAM专题-杨义军-二次曲线的SDL参数化_哔哩哔哩_bilibili</a></td>
+<td>GAMES Webinar 328: 二次曲线的SDL参数化 - 杨义军</td>
+<td>西安交通大学</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="结构拓扑优化"><a href="#结构拓扑优化" class="headerlink" title="结构拓扑优化"></a>结构拓扑优化</h2><p><a target="_blank" rel="noopener" href="https://icourse.club/uploads/files/b6dc1dc4e7a927801c6f2be5af427dbb7bb88edc.pdf">结构拓扑优化综述</a><br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1pe411z7RA?vd_source=1dba7493016a36a32b27a14ed2891088&amp;spm_id_from=333.788.videopod.sections">GAMES Webinar 306-CAD/CAE/CAM专题-李好-面向复杂几何的优化设计与分析_哔哩哔哩_bilibili</a><br><a target="_blank" rel="noopener" href="https://mse.hust.edu.cn/info/1151/1541.htm">李好</a></p>
+<h2 id="等几何分析"><a href="#等几何分析" class="headerlink" title="等几何分析"></a>等几何分析</h2><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Ze4y127Gx?vd_source=1dba7493016a36a32b27a14ed2891088&amp;spm_id_from=333.788.videopod.sections">GAMES Webinar 252-CAD/CAE/CAM专题-王琥-CAD/CAE一体化中的关键技术_哔哩哔哩_bilibili</a><br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Md4y1C7Ya?vd_source=1dba7493016a36a32b27a14ed2891088&amp;spm_id_from=333.788.videopod.sections">GAMES Webinar 252-CAD/CAE/CAM专题-李明-CAD/CAE一体化中的关键技术_哔哩哔哩_bilibili</a></p>
+<p>等几何isogeometric:在CAD/CAE过程中保持几何描述的一致性，实现两个领域数据（语言）的无缝融合</p>
+<p><a target="_blank" rel="noopener" href="https://www.thepaper.cn/newsDetail_forward_18267557">杭电团队采用等几何核心技术攻克CAD/CAE工业软件“语言鸿沟”难题_澎湃号·政务_澎湃新闻-The Paper</a><br><a target="_blank" rel="noopener" href="https://computer.hdu.edu.cn/2021/1217/c6757a140234/page.htm">徐岗</a></p>
+<h2 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h2><p>建模大佬 <a target="_blank" rel="noopener" href="https://bohanwang123.com/">Bohan Wang’s Personal Homepage</a> </p>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+1ZnNxFWnEbk5YzRl">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/Other%20Interest/Vibration%20Measurement/" rel="prev" title="Vibration Measurement">
+      <i class="fa fa-chevron-left"></i> Vibration Measurement
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CAD-CAE-CAM%E4%B8%93%E9%A2%98"><span class="nav-text">CAD&#x2F;CAE&#x2F;CAM专题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E6%8B%93%E6%89%91%E4%BC%98%E5%8C%96"><span class="nav-text">结构拓扑优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AD%89%E5%87%A0%E4%BD%95%E5%88%86%E6%9E%90"><span class="nav-text">等几何分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Others"><span class="nav-text">Others</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qi Yun"
+      src="/images/avatar.jpeg">
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">153</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">56</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/qiyun71" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;qiyun71" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/29010355" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;29010355" rel="noopener" target="_blank"><i class="fa fa-star fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qi Yun</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">513k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">31:04</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/yqq/anime.min.js"></script>
+  <script src="/yqq/velocity/velocity.min.js"></script>
+  <script src="/yqq/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
