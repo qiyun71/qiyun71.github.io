@@ -6,7 +6,7 @@ tags:
 categories: 3DReconstruction
 ---
 
-3D Reconstruction 相关数学方法
+Math basic of 3D Reconstruction
 
 <!-- more -->
 

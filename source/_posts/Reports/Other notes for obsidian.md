@@ -9,7 +9,7 @@ Learn:
 [Spider](Spider.md)
 [Figure](Figure.md)
 [Threading](Threading.md)
-[Python Basic](Python%20Basic.md)
+[Learn-Python](../Learn/Python/Learn-Python.md)
 [OpenCV](OpenCV.md)
 [Learn-Python-LCU](/Learn/Learn-Python-LCU)
 [Learn-Markdown](Learn-Markdown.md)

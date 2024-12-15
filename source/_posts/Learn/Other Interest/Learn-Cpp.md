@@ -42,3 +42,4 @@ int *ptrN = &varN; // ptrN points to varN address
 空指针不指向任何内容
 
 `ptrx = nullptr;`
+

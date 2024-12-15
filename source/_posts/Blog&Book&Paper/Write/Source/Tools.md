@@ -101,6 +101,9 @@ Paper2gui，一款 windows 应用，包含很多 AI 工具（with GUI）
 
 # 软件
 
+pdf全文档翻译
+[Byaidu/PDFMathTranslate: PDF scientific paper translation with preserved formats - 基于 AI 完整保留排版的 PDF 文档全文双语翻译，支持 Google/DeepL/Ollama/OpenAI 等服务，提供 CLI/GUI/Docker](https://github.com/Byaidu/PDFMathTranslate?tab=readme-ov-file)
+
 windows 图标icon 变白
 [Windows10系统桌面图标变白，显示不正常](https://www.honor.com/cn/support/content/zh-cn15825493/)
 

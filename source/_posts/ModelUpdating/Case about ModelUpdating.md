@@ -8,11 +8,18 @@ categories: ModelUpdating
 
 Model Updating算例
 
+传统方法Python复现：[qiyun71/TraditionalModelUpdating: Traditional Model Updating by optim algo and loss function(or metrics)](https://github.com/qiyun71/TraditionalModelUpdating)
+仿真数据训练：[qiyun71/NN-basedModelUpdating: NN-based Model Updating](https://github.com/qiyun71/NN-basedModelUpdating)
+实验数据训练：[qiyun71/SSMU: Self-supervised Model Updating (SSMU) based on time-domain response data.](https://github.com/qiyun71/SSMU)
+
 <!-- more -->
 
-# NASA challenge 2019
+# Simple
+
+## NASA challenge 2019
 
 > [NASA Langley UQ Challenge on Optimization Under Uncertainty](https://uqtools.larc.nasa.gov/nasa-uq-challenge-problem-2020/)
+> [Towards the NASA UQ Challenge 2019: Systematically forward and inverse approaches for uncertainty propagation and quantification - ScienceDirect](https://www.sciencedirect.com/science/article/pii/S0888327021007408?via%3Dihub)
 
 - **Model Calibration** & Uncertainty Quantification of Subsystems
 - Uncertainty Model Reduction
@@ -20,19 +27,353 @@ Model Updating算例
 - Reliability-Based Design
 - Model Updating and Design Parameter Tuning
 - Risk-based Design
-T
+
 **Model Calibration:**
+
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20240307224720.png)
 
+如何根据目标的y(a,e,t) 校准不确定性参数 a & e
+
+
+## Mass Spring System
+
+The absolute value of the first component of the first eigenvector reflects some vibration information. The introduction of structural vibration modes as output responses will increase the difficulty of IMU.
+
+**Numerical case studies: a mass-spring system**
+
+| 结构参数         | Well-Separated | Close      | 动力学响应                 |
+| ------------ | -------------- | ---------- | --------------------- |
+| $m_{1}$(kg)  | 1              | 1          | $\omega_1^2(rad/s)^2$ |
+| $m_{2}$(kg)  | 1              | 4          | $\omega_2^2(rad/s)^2$ |
+| $m_{3}$(kg)  | 1              | 1          | $\omega_3^2(rad/s)^2$ |
+| $k_{1}$(N/m) | [0.8, 1.2]     | 0          | $\|\varphi(1,1)\|$    |
+| $k_{2}$(N/m) | [0.8, 1.2]     | [7.5, 8.5] |                       |
+| $k_{3}$(N/m) | 1              | 0          |                       |
+| $k_{4}$(N/m) | 1              | [1.8, 2.2] |                       |
+| $k_{5}$(N/m) | [0.8, 1.2]     | [1.8, 2.2] |                       |
+| $k_{6}$(N/m) | 3              | 1          |                       |
 
 
 
+![massSpring.png|555](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/massSpring.png)
 
-# Airplane Model (Sifeng Bi & BiaoYang)
+
+### 传统优化方法
+
+#### Interval Uncertainty Propagation
+将参数的不确定性区间传播到动力学响应的不确定性区间
+
+***Interval perturbation***
+
+> 参考：[Interval parameter sensitivity analysis based on interval perturbation propagation and interval similarity operator](https://hal.science/hal-04273667v1/document)
+
+$\overline{\widehat{\boldsymbol{f}}}=F(\boldsymbol{\theta}^c)+\sum_{j=1}^N\frac{\boldsymbol{F}\left(\theta_j^c+\delta\theta_j\right)-\boldsymbol{F}\left(\theta_j^c\right)}{\delta\theta_j}\Delta\theta_j$
+$\underline{\widehat{\boldsymbol{f}}}=F(\boldsymbol\theta^c)-\sum_{j=1}^N\frac{\boldsymbol{F}\left(\theta_j^c+\delta\theta_j\right)-\boldsymbol{F}\left(\theta_j^c\right)}{\delta\theta_j}\Delta\theta_j$
+
+***Monte Carlo***
+
+随机采样结构参数，然后经过前向仿真计算得到对应的动力学响应
+
+***M&K matrix(FE calculation)***
+
+M-K matrix (FE): $M\ddot{X} + KX = 0$
+
+$M = \left( \begin{matrix}  m_{1} & 0 & 0\\ 0 & m_{2} & 0 \\ 0 & 0 & m_{3} \end{matrix} \right)$
+
+$K = \left( \begin{matrix}  k_{1}+k_{4}+k_{6} & -k_{4} & -k_{6}\\ -k_{4} & k_{2}+k_{4}+k_{5} & -k_{5} \\ -k_{6} & -k_{5} & k_{3}+k_{5}+k_{6} \end{matrix} \right)$
+
+
+$(-M \omega^{2}+K)A = 0$
+$|-M \omega^{2}+K| = 0$
+
+$\omega^{2} = M^{-1}K = Q\Sigma Q^{\top}$
+
+$\omega_{1}^{2} = \Sigma(1,1)$
+$\omega_{2}^{2} = \Sigma(2,2)$
+$\omega_{3}^{2} = \Sigma(2,2)$
+$|\varphi(1,1)| = Q(1,1)$
+
+***FE surrogate model***
+
+Response Surface Model (RSM)
+- Well-separated modes
+$$
+\begin{aligned}
+m_{1}& =1(\mathrm{kg}),\quad m_2=1(\mathrm{kg}),\quad m_3=1(\mathrm{kg}); \\
+k_{3}& =k_4=1\mathrm{(N/m)},\quad k_6=3\mathrm{(N/m)}; \\
+k_{1}& =k_2=k_5=[0.8,1.2]\text{(N/m).} 
+\end{aligned}
+$$
+
+
+
+$$
+\begin{aligned}\omega_1^2&=0.2840+0.3416k_1+0.4122k_2+0.0078k_5+0.0745k_1k_2+0.0011k_1k_5\\&-0.0014k_2k_5-0.0423k_1^2-0.0753k_2^2-0.0020k_5^2, \\
+\omega_2^2&=1.6117+0.1249k_1+0.5882k_2+1.7402k_5-0.0735k_1k_2+0.1243k_1k_5\\&-0.0015k_2k_5-0.0021k_1^2+0.0748k_2^2-0.1871k_5^2, \\
+\omega_3^2&=7.1036+0.5331k_1+0.0001k_2+0.2531k_5-0.0014k_1k_2-0.1247k_1k_5\\&+0.0025k_2k_5+0.0444k_1^2+0.0007k_2^2+0.1885k_5^2, \\
+|\varphi(1,1)|&=0.5642-0.0894k_1+0.1060k_2+0.0171k_5+0.0082k_1k_2+0.0059k_1k_5\\&-0.0194k_2k_5+0.0009k_1^2-0.0150k_2^2-0.0012k_5^2.\end{aligned}
+$$
+
+- Close modes
+
+$$
+\begin{aligned}
+m_{1}& =1(\mathrm{kg}),\quad m_2=4(\mathrm{kg}),\quad m_3=1(\mathrm{kg}); \\
+k_{1}& =k_3=0\mathrm{(N/m)},\quad k_6=1\mathrm{(N/m)}; \\
+k_{2}& =[7.5,8.5](\mathrm{N/m}),\quad k_4=k_5=[1.8,2.2](\mathrm{N/m}). 
+\end{aligned}
+$$
+
+$$
+\begin{aligned}\omega_1^2&=-0.0002+0.0830k_2+0.0839k_4+0.0842k_5+0.0186k_2k_4+0.0185k_2k_5\\&-0.0094k_4k_5-0.0046k_2^2-0.0325k_4^2-0.0325k_5^2,\\
+\omega_2^2&=1.6103+0.0104k_2+1.0455k_4-0.0937k_5-0.0097k_2k_4+0.0055k_2k_5\\&+0.0094k_5+0.0042k_2^2+0.0396k_4^2+0.0005k_5^2, \\
+\omega_3^2&=1.1103+0.0273k_2+0.0162k_4+1.1572k_5-0.0003k_2k_4-0.0165k_2k_5\\&+0.0104k_4k_5+0.0065k_2^2-0.0034k_4^2+0.0372k_5^2,\\
+|\varphi(1,1)|&=0.6658+0.0125k_2-0.0988k_4+0.0496k_5-0.0062k_2k_4+0.0072k_2k_5\\&+0.0020k_4k_5-0.0005k_2^2+0.0190k_4^2-0.0170k_5^2.\end{aligned}
+$$
+
+#### Compare
+
+| 区间传播方法                      | Interval Perturbation(First-order) | Monte Carlo(MC) |
+| --------------------------- | ---------------------------------- | --------------- |
+| M-K matrix (FE)             | 😊                                 |                 |
+| Response Surface Model(RSM) |                                    |                 |
+
+***well-separated modes***
+- 使用M&K(FE)或者RSM，与Monte Carlo方法得到的响应区间相比，区间摄动法得到的$|\varphi(1,1)|$ 区间误差很大，$\Delta|\varphi(1,1)|$ 计算的偏小
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240603104442.png)
+
+***close modes***
+- (绿色)通过质量刚度矩阵(M&K)和蒙特卡洛法得到的响应区间在ws模式时可以很准确，但是在cl模式下，使用M&K与RSM相比有一定误差，主要是对$\omega _{2}^{2}$和$\omega _{3}^{2}$预测的不好
+- (紫色)RSM和区间摄动法得到$|\varphi(1,1)|$的响应区间相较于(黑色)RSM和MC方法的误差还是很大
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240603104718.png)
+
+### 基于MLP方法(Interval)
+
+>  [qiyun71/MU_MassSpring](https://github.com/qiyun71/MU_MassSpring)
+
+***Well-separated modes***
+
+数据集生成：
+- 在区间$[0,2]$内均匀生成10000组$k_1,k_2,k_5$
+- 根据[Interval Identification of Structural Parameters Using Interval Deviation Degree and Monte Carlo Simulation](Interval%20Identification%20of%20Structural%20Parameters%20Using%20Interval%20Deviation%20Degree%20and%20Monte%20Carlo%20Simulation.md)，关于$\begin{aligned}\omega_1^2,\omega_2^2,\omega_3^2,\text{ and }|\varphi(1,1)|\end{aligned}$ 四个参数的二阶RSM(根据CCD(central composite design)生成15个samples)，得到10000组$\begin{aligned}\omega_1^2,\omega_2^2,\omega_3^2,\text{ and }|\varphi(1,1)|\end{aligned}$
+
+目标：网络可以根据一组输入的$\begin{aligned}\omega_1^2,\omega_2^2,\omega_3^2,\text{ and }|\varphi(1,1)|\end{aligned}$得到对应的一组$k_1,k_2,k_5$
+
+| 实验             | 初始区间(N/m)        | KP的*错误率*      | IRSM           | PF&RBF-NN | IOR&MC         | IDD&MC         | **本文方法**       |
+| -------------- | ---------------- | ------------- | -------------- | --------- | -------------- | -------------- | -------------- |
+| $[0.80, 1.20]$ | $k_1=[0.5, 1.5]$ | $[0.4,  0.0]$ | $[0.81, 1.20]$ | NAN       | $[0.79, 1.21]$ | $[0.80, 1.20]$ | $[0.80, 1.20]$ |
+| $[0.80, 1.20]$ | $k_2=[0.5, 1.5]$ | $[0.8, 1.7]$  | $[0.80, 1.21]$ | NAN       | $[0.80, 1.20]$ | $[0.80, 1.19]$ | $[0.80, 1.20]$ |
+| $[0.80, 1.20]$ | $k_5=[0.5, 1.5]$ | $[0.8, 1.7]$  | $[0.80, 1.20]$ | NAN       | $[0.80, 1.20]$ | $[0.80, 1.20]$ | $[0.80, 1.20]$ |
+| ER             |                  |               |                | NAN       |                |                |                |
+|                | $[37.5, 25]$     | $[0.4,  0.0]$ | $[1.3, 0]$     | NAN       | $[1.3, 0.8]$   | $[0, 0]$       | $[0, 0]$       |
+|                | $[37.5, 25]$     | $[0.8, 1.7]$  | $[0, 0.8]$     | NAN       | $[0, 0]$       | $[0, 0.8]$     | $[0, 0]$       |
+|                | $[37.5, 25]$     | $[0.8, 1.7]$  | $[0, 0]$       | NAN       | $[0, 0]$       | $[0,0]$        | $[0, 0]$       |
+| **mean**       | $[37.5, 25]$     | $[0.7, 1.1]$  | $[0.4, 0.3]$   | NAN       | $[0.4, 0.3]$   | $[0, 0.3]$     | $[0, 0]$       |
+
+***Close modes***
+
+数据集生成：10000组$k_2,k_4,k_5$-->10000组$\begin{aligned}\omega_1^2,\omega_2^2,\omega_3^2,\text{ and }|\varphi(1,1)|\end{aligned}$
+
+目标：网络可以根据一组输入的$\begin{aligned}\omega_1^2,\omega_2^2,\omega_3^2,\text{ and }|\varphi(1,1)|\end{aligned}$得到对应的一组$k_2,k_4,k_5$
+
+| 实验           | 初始区间(N/m)        | KP的*错误率*     | IRSM           | PF&RBF-NN | IOR&MC         | IDD&MC         | **本文方法**       |
+| ------------ | ---------------- | ------------ | -------------- | --------- | -------------- | -------------- | -------------- |
+| $[7.5, 8.5]$ | $k_2=[6.5, 9.5]$ | $[0.6, 0.7]$ | $[7.55, 8.54]$ | NAN       | $[7.48, 8.50]$ | $[7.46, 8.52]$ | $[7.50, 8.50]$ |
+| $[1.8, 2.2]$ | $k_4=[1.6, 2.4]$ | $[0.8, 1.0]$ | $[1.80, 2.19]$ | NAN       | $[1.80, 2.21]$ | $[1.80, 2.20]$ | $[1.80, 2.20]$ |
+| $[1.8, 2.2]$ | $k_5=[1.5, 2.4]$ | $[0.4, 0.5]$ | $[1.80, 2.20]$ | NAN       | $[1.80, 2.21]$ | $[1.81, 2.20]$ | $[1.80, 2.20]$ |
+| ER           |                  |              |                | NAN       |                |                |                |
+|              | $[13.3, 11.8]$   | $[0.6, 0.7]$ | $[0.7, 0.5]$   | NAN       | $[0.3, 0]$     | $[0.5, 0.2]$   | $[0, 0]$       |
+|              | $[11.1, 9.1]$    | $[0.8, 1.0]$ | $[0, 0.5]$     | NAN       | $[0, 0.5]$     | $[0, 0]$       | $[0, 0]$       |
+|              | $[11.1, 9.1]$    | $[0.4, 0.5]$ | $[0, 0]$       | NAN       | $[0, 0.5]$     | $[0.6, 0]$     | $[0, 0]$       |
+| **mean**     | $[11.8, 10.0]$   | $[0.6, 0.7]$ | $[0.2, 0.3]$   | NAN       | $[0.1, 0.3]$   | $[0.4, 0.1]$   | $[0, 0]$       |
+|              |                  |              |                |           |                |                |                |
+
+
+### 基于NN方法(Stochastic) 未完成
+
+***Well-separated modes***
+
+> [Interval Identification of Structural Parameters Using Interval Deviation Degree and Monte Carlo Simulation](Interval%20Identification%20of%20Structural%20Parameters%20Using%20Interval%20Deviation%20Degree%20and%20Monte%20Carlo%20Simulation.md)
+
+| 结构参数    | 待修正参数            | 区间范围(均匀生成1000) |
+| ------- | ---------------- | -------------- |
+| $k_{1}$ | $\mu_{k_{1}}$    | $[0,2]$        |
+|         | $\sigma_{k_{1}}$ | $[0,2]$        |
+| $k_{2}$ | $\mu_{k_{2}}$    | $[0,2]$        |
+|         | $\sigma_{k_{2}}$ | $[0.1,0.2]$    |
+| $k_{5}$ | $\mu_{k_{5}}$    | $[0.1,0.2]$    |
+|         | $\sigma_{k_{5}}$ | $[0.1,0.2]$    |
+
+- 在区间$[0,2]$ 和 $[0.1,0.2]$内均匀生成1000组的均值与方差：$\mu_{k_{1}}$, $\sigma_{k_{1}}$, $\mu_{k_{2}}$, $\sigma_{k_{2}}$, $\mu_{k_{5}}$, $\sigma_{k_{5}}$
+- 每一组均值与方差生成60组$k_{1}$, $k_{2}$, $k_{5}$
+- 根据RSM计算得到60组$\begin{aligned}\omega_1^2,\omega_2^2,\omega_3^2,\text{ and }|\varphi(1,1)|\end{aligned}$
+
+共需要计算60x1000次有限元模型(代理模型)
+
+目标：网络可以根据一组60个输入$\begin{aligned}\omega_1^2,\omega_2^2,\omega_3^2,\text{ and }|\varphi(1,1)|\end{aligned}$得到对应的$k_1,k_2,k_5$三个参数的分布(用PDF曲线表示)
+- 输入：60x4
+- 输出：
+
+***Close modes***
+
+
+# Complex
+
+## Steel Plate Structures
+
+### 基于NN方法
+
+Young’s modulus (E) and the shear modulus (G)
+
+| 材料参数       | Nominal value |     |
+| ---------- | ------------- | --- |
+| 弹性模量E(GPa) | 205           |     |
+| 剪切模量G(GPa) | 83            |     |
+
+![图片1.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/%E5%9B%BE%E7%89%871.png)
+
+***数据集生成***
+
+| 材料参数   | 区间均值 | 区间半径 | 区间          |
+| ------ | ---- | ---- | ----------- |
+| E(GPa) | 205  | 15   | $[190,220]$ |
+| G(GPa) | 83   | 6    | $[77,89]$   |
+
+$$\begin{gathered}
+f_{1} =13.1+0.2152E-0.01455G-0.0002813E^2-0.0004878E\cdot G+0.0006576G^2, \\
+f_{2} =44.08+0.5145E-0.1333G+0.0002943E^2-0.004055E\cdot G+0.005588G^2, \\
+f_{3} =52.85-0.1156E+1.445G+0.0006092E^2+0.0002019E\cdot G-0.005634G^2, \\
+f_{4} =375.4-3.207E-0.4291G+0.02202E^2-0.009699E\cdot G+0.01383G^2, \\
+f_{5} =79.55+0.255E+2.804G-0.0005059E^2-0.001249E\cdot G-0.009833G^2. 
+\end{gathered}$$
+
+在区间内生成10000组E和G，然后根据二阶RSM生成10000组的$f_1,f_2,f_3,f_4,f_5$
+
+***修正结果***
+
+| 实验  | 初始区间(GPa)     | IRSM            | PF&RBF-NN       | IOR&MC           | IDD&MC           | **本文方法**         |
+| --- | ------------- | --------------- | --------------- | ---------------- | ---------------- | ---------------- |
+| NAN | $E=[190,220]$ | $[196.5,203.6]$ | $[196.1,204.9]$ | $[196.2, 204.8]$ | $[196.2, 204.8]$ | $[196.8, 204.2]$ |
+| NAN | $G=[77,89]$   | $[79.5,83.4]$   | $[79.5,83.3]$   | $[79.1, 83.7]$   | $[79.2, 83.6]$   | $[80.3, 84.2]$   |
+
+
+根据修正后的E和G，得到相应的$f_1,f_2,f_3,f_4,f_5$，进行对比：
+
+| 参数    | 实验                 | 初始区间(Hz)           | IRSM(**初始不同**)     | PF&RBF-NN         | IOR&MC             | IDD&MC             | **本文方法** |
+| ----- | ------------------ | ------------------ | ------------------ | ----------------- | ------------------ | ------------------ | -------- |
+| $f_1$ | $[42.66, 43.64]$   | $[42.12, 45.50]$   | $[ 42.87, 43.71]$  | $[42.82,43.82]$   | $[42.81, 43.81]$   | $[42.83, 43.82]$   |          |
+| $f_2$ | $[118.29, 121.03]$ | $[116.16, 126.62]$ | $[118.45, 121.11]$ | $[118.28,121.38]$ | $[118.28, 121.38]$ | $[118.29, 121.38]$ |          |
+| $f_3$ | $[133.24, 136.54]$ | $[131.48, 141.32]$ | $[133.58, 136.79]$ | $[133.60,136.73]$ | $[133.25, 137.05]$ | $[133.36, 136.96]$ |          |
+| $f_4$ | $[234.07, 239.20]$ | $[227.77, 250.55]$ | $[232.78, 238.78]$ | $[232.28,239.03]$ | $[232.25, 239.10]$ | $[232.27, 239.08]$ |          |
+| $f_5$ | $[274.29, 280.64]$ | $[269.10, 289.20]$ | $[273.45, 279.86]$ | $[273.39,279.73]$ | $[272.77, 280.36]$ | $[272.96, 280.20]$ |          |
+| ER：   |                    |                    |                    |                   |                    |                    |          |
+| $f_1$ |                    | $[1.27, 4.26]$     | $[0.5, 0.2]$       | $[0.37, 0.41]$    | $[0.35,0.39]$      | $[0.40, 0.41]$     |          |
+| $f_2$ |                    | $[1.80, 4.62]$     | $[0.1, 0.1]$       | $[0.01, 0.29]$    | $[0.01,0.29]$      | $[0.00, 0.29]$     |          |
+| $f_3$ |                    | $[1.32, 3.50]$     | $[0.3, 0.2]$       | $[0.27, 0.14]$    | $[0.01,0.37]$      | $[0.09, 0.31]$     |          |
+| $f_4$ |                    | $[2.69, 4.74]$     | $[0.6, 0.2]$       | $[0.76, 0.07]$    | $[0.78,0.04]$      | $[0.77, 0.05]$     |          |
+| $f_5$ |                    | $[1.89, 3.05]$     | $[0.3, 0.3]$       | $[0.33, 0.32]$    | $[0.55,0.10]$      | $[0.48, 0.16]$     |          |
+| mean  |                    | $[1.79, 4.03]$     | $[0.4, 0.2]$       | $[0.35, 0.25]$    | $[0.34,0.24]$      | $[0.35, 0.24]$     |          |
+
+#### 问题讨论
+
+##### Surrogate Model 问题
+
+***FE surrogate model （RSM）问题***
+
+- IDD中的RSM
+
+[Interval Identification of Structural Parameters Using Interval Deviation Degree and Monte Carlo Simulation](Interval%20Identification%20of%20Structural%20Parameters%20Using%20Interval%20Deviation%20Degree%20and%20Monte%20Carlo%20Simulation.md)，这篇论文的RSM出来的$f_4$有问题(比较明显)，其他的如$f_5$也有一点问题
+
+`E = np.random.uniform(190.0, 220.0, 1000)`
+`G = np.random.uniform(77.0, 89.0, 1000)`
+
+```python
+f1 = 13.1  + 0.2152*E - 0.01455*G - 0.0002813*E**2 - 0.0004878*E*G + 0.0006576*G**2
+f2 = 44.08 + 0.5145*E - 0.1333 *G + 0.0002943*E**2 - 0.004055 *E*G + 0.005588 *G**2
+f3 = 52.85 - 0.1156*E + 1.445  *G + 0.0006092*E**2 + 0.0002019*E*G - 0.005634 *G**2
+f4 = 375.4 - 3.207 *E - 0.4291 *G + 0.02202  *E**2 - 0.009699 *E*G + 0.01383  *G**2
+f5 = 79.55 + 0.255 *E + 2.804  *G - 0.0005059*E**2 - 0.001249 *E*G - 0.009833 *G**2
+```
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20240321214722.png)
+
+- IRSM中的RSM
+
+[An interval model updating strategy using interval response surface models](An%20interval%20model%20updating%20strategy%20using%20interval%20response%20surface%20models.md)，差的更多
+
+```python
+f1 = 77.624    - 0.0202366  *(E-40.905  )**2 + 0.010914*(G-2.342 )**2
+f2 = -2214.965 + 0.002557626*(E+955.633 )**2 + 0.099410*(G-2.274 )**2
+f3 = 218.882   - 0.00043976 *(E-181.515 )**2 - 0.084119*(G-28.413)**2
+f4 = 45.397    + 0.137681   *(E+37.303  )**2 + 0.35152 *(G-2.201 )**2
+f5 = 1887.265  - 0.000257232*(E-2387.009)**2 - 0.139010*(G-31.986)**2
+```
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20240322095004.png)
+
+
+***解法：使用有限元模型***+不设置泊松比
+
+- Solidworks建立钢板模型，保存为`.x_t`文件
+- 使用Patran进行仿真，modes frequency和modes shape正常
+
+| Modes    | mode1   | mode2   | mode3   | mode4   | mode5   |
+| -------- | ------- | ------- | ------- | ------- | ------- |
+| 模态频率(Hz) | 44.3433 | 122.654 | 136.691 | 241.305 | 279.993 |
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240427210132.png)
+
+***问题***
+
+- Nastran仿真计算，$N=10000, E \in [190,220], G \in [77,89]$ ，仿真结果：(模态频率与E完全线性相关，而与G无关，此外模态频率之间也高度正相关)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240427224559.png)
+
+> [材料力学：如何证明弹性模量、泊松比和剪切模量之间的关系？G=E/2(1+μ) - 知乎](https://zhuanlan.zhihu.com/p/453054808)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240427225308.png)
+
+***解法***
+
+在Patran材料特性参数中只设置E和G(以及密度$\rho$)，让泊松比自动计算，计算出来的**模态频率正常**
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240503145843.png)
+
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240503145822.png)
+
+
+##### 区间or随机问题
+
+上述方法中，只要是用均匀分布生成数据的，都算是随机问题，而区间问题则需要等间隔进行生成，防止有的点没有采样到而导致的区间上下界有误差
+**但是**，等间隔分布由于其不连续，也会丢失一些部分。均匀分布与等间隔分布各有优势和缺点，到底哪个更好，哪个更能准确地把区间问题表示出来？**应该根据结合实际的情况进行考虑**
+
+MC仿真/区间不确定性传播：均匀分布生成数据，还是等间隔生成数据，哪一个能更好地得到输出特征响应的区间
+
+~~My view：~~
+- ~~采样量少的时候，等间隔生成的数据更好一点，因为随机在均匀分布中采样会出现很大的空白~~
+- ~~采样量多的时候，均匀分布生成的数据更好一点，均匀分布可以更好的出现一些~~
+
+均匀分布随机采样，会出现局部区域采样点密集，一些区域出现空白的情况，而等间隔采样则可以避免这个问题。
+- **进行模型修正的时候，使用等间隔进行采样更好一点**。
+- **但是在训练NN/构建逆代理模型时，使用随机采样得到的数据更好**
+
+## Airplane Model
 
 > [Stochastic Model Updating with Uncertainty Quantification: An Overview and Tutorial - ScienceDirect](https://www.sciencedirect.com/science/article/pii/S0888327023006921)
 
-![image.png|333](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20240307214120.png)![image.png|444](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20240307213826.png)
+| 结构参数                                               | nominal value | 实验模态频率     | Interval with 30 times measurements |
+| -------------------------------------------------- | ------------- | ---------- | ----------------------------------- |
+| a half wingspan a/mm                               | 300           | $f_{1}$/Hz | [18.57, 20.96]                      |
+| a wingtip chord b/mm                               | 25            | $f_{2}$/Hz | [38.24, 41.70]                      |
+| a wing structural thickness T/mm                   | 1.2           | $f_{3}$/Hz | [84.54, 95.14]                      |
+| Young’s modulus of fuselage/wing join $E_{1}$/GPa  | 70 铝合金        | $f_{4}$/Hz | [98.99, 109.25]                     |
+| Young’s modulus of fuselage/tail joint $E_{2}$/GPa | 70            | $f_{5}$/Hz | [135.43, 145.13]                    |
+
+![image.png|333](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20240307214120.png)
+![image.png|444](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20240307213826.png)
 
 $\mu_a,\sigma_a,\mu_b,\sigma_b,E_1,E_2,\rho$ --> $f_1,f_2,f_3,f_4,f_5$ 前5阶固有频率
 - $\mu_{a}\in [290,310]$ , $\sigma_{a} \in [0,5]$ (mm)
@@ -41,7 +382,7 @@ $\mu_a,\sigma_a,\mu_b,\sigma_b,E_1,E_2,\rho$ --> $f_1,f_2,f_3,f_4,f_5$ 前5阶�
 - $E_{1} \in [0.5,0.9]$ ($10^{11}Pa$) Young’s modulus of fuselage/wing join
 - $E_{2} \in [0.5,0.9]$ ($10^{11}Pa$) Young’s modulus of fuselage/tail joint
 
-## 传统方法
+### 传统优化方法
 
 [飞机模型修正方案](飞机模型修正方案.md)
 
@@ -73,9 +414,7 @@ up2 = (0.109211482107639-up2)*1000;
 
 修正$\mu$同理
 
-## 基于NN方法
-
-### 数据集生成
+### 基于MLP方法
 
 论文中：[基于NN飞机算例修正思路](基于NN飞机算例修正思路.md)
 $\mu_a,\sigma_a,\mu_b,\sigma_b,E_1,E_2,\rho$ 7个参数 --> $f_1,f_2,f_3,f_4,f_5$ 前5阶固有频率
@@ -85,7 +424,8 @@ $\mu_a,\sigma_a,\mu_b,\sigma_b,E_1,E_2,\rho$ 7个参数 --> $f_1,f_2,f_3,f_4,f_5
 - $E_{1} \in [0.5,0.9]$ ($10^{11}Pa$) Young’s modulus of fuselage/wing join
 - $E_{2} \in [0.5,0.9]$ ($10^{11}Pa$) Young’s modulus of fuselage/tail joint
 
-#### 生成结果1(废除)
+***数据生成结果1(废除)***
+
 杨标生成：**(ab的方差不能生成得太大)** [飞机算例数据集生成](飞机算例数据集生成.md)
 - $\mu_{a}\in [290,310]$ , $\sigma_{a} \in [1.217,4.049]$ (mm)
 - $\mu_{b}\in [20,30]$ , $\sigma_{b} \in [1.025,2.101]$ (mm)
@@ -112,8 +452,7 @@ $\mu_a,\sigma_a,\mu_b,\sigma_b,E_1,E_2,\rho$ 7个参数在各自的区间内均�
 总共需要使用Nastran进行$1,000 \times 100 = 100,000$次计算
 按照每次计算花费10s计算，共需要100万 s = 278 h = 11.57 day
 
-#### 生成结果2
-
+***数据生成结果2***
 - $\mu_{a}\in [290,310]$ , $\sigma_{a} \in [0,5]$ (mm)
 - $\mu_{b}\in [20,30]$ , $\sigma_{b} \in [0,5]$ (mm)
 - $\rho \in [-1.0,1.0]$  a,b is Joint Gaussian, $\rho$为a和b两分布的相关系数
@@ -131,14 +470,13 @@ f4 tensor(96.6111) tensor(117.1446) 100, 110
 f5 tensor(123.9420) tensor(152.1165) 135, 145
 ```
 
-### 网络结构
 
-#### Method 1
+***Method 1***
+
  **单次测量频率预测单组参数(反向代理模型——确定的)**
-
 根据多组参数的值$\{a,b,E_{1},E_{2},\rho\}_{i=1}^{1e6}$来计算参数的均值和方差or区间边界
 
-#### Method 2
+***Method 2***
 
 **直接预测均值和方差or区间边界(反向代理模型——随机/区间)**
 
@@ -146,16 +484,14 @@ f5 tensor(123.9420) tensor(152.1165) 135, 145
 - 输入：5x100大小的数组（100组 $f_1,f_2,f_3,f_4,f_5$）
 - 输出/标签标签：7x1的向量（$\mu_a,\sigma_a,\mu_b,\sigma_b,E_1,E_2,\rho$ ）
 
-训练思路：
-1. 输入5x100大小的数组通过FC(全连接层)计算得到中间向量，然后reshape成3通道图片，使用CNN处理图片，提取特征并解码为7x1的向量
+训练思路：输入5x100大小的数组通过FC(全连接层)计算得到中间向量，然后reshape成3通道图片，使用CNN处理图片，提取特征并解码为7x1的向量
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20240312161313.png)
 
 
-方法缺点：
-- 训练完成的NN，必须要输入固定大小的数组
+方法缺点：训练完成的NN，必须要输入固定大小的数组
 
-### 讨论
+### 问题讨论
 
 对于小区间例如$[302.2234,302.2323]$预测的效果不好$[302.2415,302.2204]$
 
@@ -203,7 +539,9 @@ tensor([
 真正问题：**发现是数据的问题**(ab固定，T上下改变，输出的频率几乎不变)，**重新生成数据** --> 解决
 
 
-# 卫星模型
+## Satellite Model
+
+>  [qiyun71/SatelliteModelUpdating: Satellite FE Model Updating](https://github.com/qiyun71/SatelliteModelUpdating)
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231225211854.png)
 
@@ -224,7 +562,7 @@ FR 数据转三维数组(多通道图片)：
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231225212852.png)
 
 
-## 传统方法
+### 传统优化方法
 
 - 有限元方法获取数据集耗费时间长，使用一个代理模型来代替有限元计算模型。
 - 根据随机样本 $X_{s}$ 通过代理模型得到模拟响应 $Y_{s}$，动力学实验得到实验响应 $Y_{e}(f_{1} ... f_{6})$
@@ -233,16 +571,15 @@ FR 数据转三维数组(多通道图片)：
 
 目标函数：子区间相似度、标准差椭圆
 
-## 基于NN方法
+### 基于NN方法
 
-### UCNN
+#### UCNN
 
-#### 数据集生成与预处理
+***数据集生成与预处理***
 
 数据集：
 - 输入：测量的卫星模型加速度频响数据，将加速度频响数据经处理转化为频响图像
 - 标签：选取的不确定性参数($\theta_1,\theta_2,\theta_3,\theta_5$)组成向量
-
 
 **数据集生成**
 - 先在一定范围内生成均匀生成 10000 组待修正参数
@@ -275,19 +612,19 @@ FR 数据转三维数组(多通道图片)：
   - xiangying.xlsx #80800x11
 ```
 
-#### 网络结构
+***网络结构***
 
 UCNN 单向卷积
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231227133859.png)
 
-#### 评价指标
+***评价指标***
 
 测试集错误率：$错误率 = \frac{|预测值-标签GT|}{标签GT}$
 
-### Improvement
+#### Improvement(Other NN)
 
-#### 数据集生成
+***数据集生成***
 
 data/
 - FE：生成数据集的matlab程序，需要调用nastran
@@ -300,7 +637,7 @@ data/
 - train_npy copy：train转为npy时选取的频率范围为0~50Hz，其他为30Hz，用于绘制数据处理例子的流程图
 - train_npy_24_3theta、test_npy_24_3theta为本科生的修正3个参数的数据
 
-#### 网络结构
+***网络结构***
 
 **UCNN**
 
@@ -317,8 +654,11 @@ data/
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20240111145858.png) 
 
 **ResNet50**
-![resnet.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/picturesresnet.png) <br>                                                                                                              |
-#### 实验记录
+
+![resnet.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/picturesresnet.png)
+
+
+***实验记录***
 
 ```python
 20231227-111217: 10, 0.9 UCNN
@@ -442,7 +782,7 @@ error_rate_each2=:0.08872962392607951=(0.08887535240501165/1.0016423881053924)
 ```
 
 
-### 讨论
+### 问题讨论
 
 [基于NN的卫星算例问题](基于NN的卫星算例问题.md)
 
@@ -466,6 +806,7 @@ error_rate_each2=:0.08872962392607951=(0.08887535240501165/1.0016423881053924)
 | $\sigma_{T_3}$ | 0.2  | **0.1954** | 0.1959 | 0.1928 | 0.1916 | **0.1932** | 0.1928 | 0.1912 | 0.1899 |
 | ER_T(%)        | 0    | 2.82       | 3.31   | 3.67   | 5.30   | 1.93       | 2.31   | 2.56   | 3.58   |
 | ER(%)          |      | 0          | 1.14   | 1.07   | 3.26   | 0          | 2.12   | 1.40   | 2.21   |
+|                |      |            |        |        |        |            |        |        |        |
 |                |      |            |        |        |        |            |        |        |        |
 
 说明
@@ -501,7 +842,7 @@ error_rate_each2=:0.08872962392607951=(0.08887535240501165/1.0016423881053924)
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20240308165855.png)
 
-#### 猜想1（错误）
+***猜想1（错误）***
 
 与**结构参数归一化**有关，将FR和结构参数，也就是NN的输入和输出都归一化后，结果：
 
@@ -510,14 +851,14 @@ error_rate_each2=:0.08872962392607951=(0.08887535240501165/1.0016423881053924)
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20240308201704.png)
 
 
-#### 猜想2（错误）
+***猜想2（错误）***
 
 训练过程就识别不到其他位置的参数了，训练的1个epoch，发现除了边缘无法很好预测，其他地方也很满（中间有的地方也很空，但不会出现聚集在特定值的现象）
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20240308203251.png)
 
 
-#### 猜想3（错误）
+***猜想3（错误）***
 
 可能FR数据生成有问题，数据生成根据4个参数的均值和方差，生成1000组正态分布数据，然后根据1000组四参数，使用Nastran生成FR数据
 可能当改变剪切板厚度$T_3$时，生成的FR数据过于相似，例如将$T_{3}=1.12$或者$T_{3}=1.13$等生成的FR数据跟$T_{3}=1.1$生成的FR数据近似，NN分辨不出来
@@ -526,7 +867,7 @@ error_rate_each2=:0.08872962392607951=(0.08887535240501165/1.0016423881053924)
 ![image.png|222](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20240309164056.png)
 
    
-#### 真正原因
+***真正原因***
 
 在test和exp的时候，添加了`model.eval()`代码，会将网络中的BN层和Dropout层关闭（训练时是开启的），(test数据batchsize是直接设置成整个test dataset的大小，可以)不使用eval，相当于在训练集上过拟合了以后，可以更好地对先验区间中的实验数据进行更好的预测
 
@@ -551,333 +892,4 @@ error_rate_each2=:0.08872962392607951=(0.08887535240501165/1.0016423881053924)
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20240309201706.png)
 
-
-# Mass Spring System
-
-The absolute value of the first component of the first eigenvector reflects some vibration information. The introduction of structural vibration modes as output responses will increase the difficulty of IMU.
-
-**Numerical case studies: a mass-spring system**
-
-![massSpring.png|555](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/massSpring.png)
-
-
-## 传统方法
-
-代理模型 & UP(uncertainty propagation)
-
-参数区间预测响应区间
-
-|                             | Interval Perturbation(First-order) | Monte Carlo(MC) |
-| --------------------------- | ---------------------------------- | --------------- |
-| M-K matrix (FE)             |                                    |                 |
-| Response Surface Model(RSM) |                                    |                 |
-
-### Interval Uncertainty Propagation
-
-#### Interval perturbation
-
-> 参考：[Interval parameter sensitivity analysis based on interval perturbation propagation and interval similarity operator](https://hal.science/hal-04273667v1/document)
-
-$\overline{\widehat{\boldsymbol{f}}}=F(\boldsymbol{\theta}^c)+\sum_{j=1}^N\frac{\boldsymbol{F}\left(\theta_j^c+\delta\theta_j\right)-\boldsymbol{F}\left(\theta_j^c\right)}{\delta\theta_j}\Delta\theta_j$
-$\underline{\widehat{\boldsymbol{f}}}=F(\boldsymbol\theta^c)-\sum_{j=1}^N\frac{\boldsymbol{F}\left(\theta_j^c+\delta\theta_j\right)-\boldsymbol{F}\left(\theta_j^c\right)}{\delta\theta_j}\Delta\theta_j$
-
-#### Monte Carlo
-
-### FE Simulation
-
-FE or Surrogate Model
-
-#### M&K matrix(FE)
-
-
-
-M-K matrix (FE): $M\ddot{X} + KX = 0$
-
-$M = \left( \begin{matrix}  m_{1} & 0 & 0\\ 0 & m_{2} & 0 \\ 0 & 0 & m_{3} \end{matrix} \right)$
-
-$K = \left( \begin{matrix}  k_{1}+k_{4}+k_{6} & -k_{4} & -k_{6}\\ -k_{4} & k_{2}+k_{4}+k_{5} & -k_{5} \\ -k_{6} & -k_{5} & k_{3}+k_{5}+k_{6} \end{matrix} \right)$
-
-
-$(-M \omega^{2}+K)A = 0$
-$|-M \omega^{2}+K| = 0$
-
-$\omega^{2} = M^{-1}K = Q\Sigma Q^{\top}$
-
-$\omega_{1}^{2} = \Sigma(1,1)$
-$\omega_{2}^{2} = \Sigma(2,2)$
-$\omega_{3}^{2} = \Sigma(2,2)$
-$|\varphi(1,1)| = Q(1,1)$
-
-#### Response Surface Model (RSM)
-
-##### Well-separated modes
-$$
-\begin{aligned}
-m_{1}& =1(\mathrm{kg}),\quad m_2=1(\mathrm{kg}),\quad m_3=1(\mathrm{kg}); \\
-k_{3}& =k_4=1\mathrm{(N/m)},\quad k_6=3\mathrm{(N/m)}; \\
-k_{1}& =k_2=k_5=[0.8,1.2]\text{(N/m).} 
-\end{aligned}
-$$
-
-
-
-$$
-\begin{aligned}\omega_1^2&=0.2840+0.3416k_1+0.4122k_2+0.0078k_5+0.0745k_1k_2+0.0011k_1k_5\\&-0.0014k_2k_5-0.0423k_1^2-0.0753k_2^2-0.0020k_5^2, \\
-\omega_2^2&=1.6117+0.1249k_1+0.5882k_2+1.7402k_5-0.0735k_1k_2+0.1243k_1k_5\\&-0.0015k_2k_5-0.0021k_1^2+0.0748k_2^2-0.1871k_5^2, \\
-\omega_3^2&=7.1036+0.5331k_1+0.0001k_2+0.2531k_5-0.0014k_1k_2-0.1247k_1k_5\\&+0.0025k_2k_5+0.0444k_1^2+0.0007k_2^2+0.1885k_5^2, \\
-|\varphi(1,1)|&=0.5642-0.0894k_1+0.1060k_2+0.0171k_5+0.0082k_1k_2+0.0059k_1k_5\\&-0.0194k_2k_5+0.0009k_1^2-0.0150k_2^2-0.0012k_5^2.\end{aligned}
-$$
-
-##### Close modes
-
-$$
-\begin{aligned}
-m_{1}& =1(\mathrm{kg}),\quad m_2=4(\mathrm{kg}),\quad m_3=1(\mathrm{kg}); \\
-k_{1}& =k_3=0\mathrm{(N/m)},\quad k_6=1\mathrm{(N/m)}; \\
-k_{2}& =[7.5,8.5](\mathrm{N/m}),\quad k_4=k_5=[1.8,2.2](\mathrm{N/m}). 
-\end{aligned}
-$$
-
-$$
-\begin{aligned}\omega_1^2&=-0.0002+0.0830k_2+0.0839k_4+0.0842k_5+0.0186k_2k_4+0.0185k_2k_5\\&-0.0094k_4k_5-0.0046k_2^2-0.0325k_4^2-0.0325k_5^2,\\
-\omega_2^2&=1.6103+0.0104k_2+1.0455k_4-0.0937k_5-0.0097k_2k_4+0.0055k_2k_5\\&+0.0094k_5+0.0042k_2^2+0.0396k_4^2+0.0005k_5^2, \\
-\omega_3^2&=1.1103+0.0273k_2+0.0162k_4+1.1572k_5-0.0003k_2k_4-0.0165k_2k_5\\&+0.0104k_4k_5+0.0065k_2^2-0.0034k_4^2+0.0372k_5^2,\\
-|\varphi(1,1)|&=0.6658+0.0125k_2-0.0988k_4+0.0496k_5-0.0062k_2k_4+0.0072k_2k_5\\&+0.0020k_4k_5-0.0005k_2^2+0.0190k_4^2-0.0170k_5^2.\end{aligned}
-$$
-
-### Campare
-
-#### well-separated modes
-
-- 使用M&K(FE)或者RSM，与Monte Carlo方法得到的响应区间相比，区间摄动法得到的$|\varphi(1,1)|$ 区间误差很大，$\Delta|\varphi(1,1)|$ 计算的偏小
-
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240603104442.png)
-
-#### close modes
-
-- (绿色)通过质量刚度矩阵(M&K)和蒙特卡洛法得到的响应区间在ws模式时可以很准确，但是在cl模式下，使用M&K与RSM相比有一定误差，主要是对$\omega _{2}^{2}$和$\omega _{3}^{2}$预测的不好
-- (紫色)RSM和区间摄动法得到$|\varphi(1,1)|$的响应区间相较于(黑色)RSM和MC方法的误差还是很大
-
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240603104718.png)
-
-
-
-## 基于NN方法(区间问题)
-
-### 数据集生成
-
-#### Well-separated modes
-
-- 在区间$[0,2]$内均匀生成10000组$k_1,k_2,k_5$
-- 根据[Interval Identification of Structural Parameters Using Interval Deviation Degree and Monte Carlo Simulation](Interval%20Identification%20of%20Structural%20Parameters%20Using%20Interval%20Deviation%20Degree%20and%20Monte%20Carlo%20Simulation.md)，关于$\begin{aligned}\omega_1^2,\omega_2^2,\omega_3^2,\text{ and }|\varphi(1,1)|\end{aligned}$ 四个参数的二阶RSM(根据CCD(central composite design)生成15个samples)，得到10000组$\begin{aligned}\omega_1^2,\omega_2^2,\omega_3^2,\text{ and }|\varphi(1,1)|\end{aligned}$
-
-目标：网络可以根据一组输入的$\begin{aligned}\omega_1^2,\omega_2^2,\omega_3^2,\text{ and }|\varphi(1,1)|\end{aligned}$得到对应的一组$k_1,k_2,k_5$
-
-##### 修正结果
-
-| 实验             | 初始区间(N/m)        | KP的*错误率*      | IRSM           | PF&RBF-NN | IOR&MC         | IDD&MC         | **本文方法**       |
-| -------------- | ---------------- | ------------- | -------------- | --------- | -------------- | -------------- | -------------- |
-| $[0.80, 1.20]$ | $k_1=[0.5, 1.5]$ | $[0.4,  0.0]$ | $[0.81, 1.20]$ | NAN       | $[0.79, 1.21]$ | $[0.80, 1.20]$ | $[0.80, 1.20]$ |
-| $[0.80, 1.20]$ | $k_2=[0.5, 1.5]$ | $[0.8, 1.7]$  | $[0.80, 1.21]$ | NAN       | $[0.80, 1.20]$ | $[0.80, 1.19]$ | $[0.80, 1.20]$ |
-| $[0.80, 1.20]$ | $k_5=[0.5, 1.5]$ | $[0.8, 1.7]$  | $[0.80, 1.20]$ | NAN       | $[0.80, 1.20]$ | $[0.80, 1.20]$ | $[0.80, 1.20]$ |
-| ER             |                  |               |                | NAN       |                |                |                |
-|                | $[37.5, 25]$     | $[0.4,  0.0]$ | $[1.3, 0]$     | NAN       | $[1.3, 0.8]$   | $[0, 0]$       | $[0, 0]$       |
-|                | $[37.5, 25]$     | $[0.8, 1.7]$  | $[0, 0.8]$     | NAN       | $[0, 0]$       | $[0, 0.8]$     | $[0, 0]$       |
-|                | $[37.5, 25]$     | $[0.8, 1.7]$  | $[0, 0]$       | NAN       | $[0, 0]$       | $[0,0]$        | $[0, 0]$       |
-| **mean**       | $[37.5, 25]$     | $[0.7, 1.1]$  | $[0.4, 0.3]$   | NAN       | $[0.4, 0.3]$   | $[0, 0.3]$     | $[0, 0]$       |
-
-#### Close modes
-
-10000组$k_2,k_4,k_5$-->10000组$\begin{aligned}\omega_1^2,\omega_2^2,\omega_3^2,\text{ and }|\varphi(1,1)|\end{aligned}$
-
-目标：网络可以根据一组输入的$\begin{aligned}\omega_1^2,\omega_2^2,\omega_3^2,\text{ and }|\varphi(1,1)|\end{aligned}$得到对应的一组$k_2,k_4,k_5$
-
-##### 修正结果
-
-| 实验           | 初始区间(N/m)        | KP的*错误率*     | IRSM           | PF&RBF-NN | IOR&MC         | IDD&MC         | **本文方法**       |
-| ------------ | ---------------- | ------------ | -------------- | --------- | -------------- | -------------- | -------------- |
-| $[7.5, 8.5]$ | $k_2=[6.5, 9.5]$ | $[0.6, 0.7]$ | $[7.55, 8.54]$ | NAN       | $[7.48, 8.50]$ | $[7.46, 8.52]$ | $[7.50, 8.50]$ |
-| $[1.8, 2.2]$ | $k_4=[1.6, 2.4]$ | $[0.8, 1.0]$ | $[1.80, 2.19]$ | NAN       | $[1.80, 2.21]$ | $[1.80, 2.20]$ | $[1.80, 2.20]$ |
-| $[1.8, 2.2]$ | $k_5=[1.5, 2.4]$ | $[0.4, 0.5]$ | $[1.80, 2.20]$ | NAN       | $[1.80, 2.21]$ | $[1.81, 2.20]$ | $[1.80, 2.20]$ |
-| ER           |                  |              |                | NAN       |                |                |                |
-|              | $[13.3, 11.8]$   | $[0.6, 0.7]$ | $[0.7, 0.5]$   | NAN       | $[0.3, 0]$     | $[0.5, 0.2]$   | $[0, 0]$       |
-|              | $[11.1, 9.1]$    | $[0.8, 1.0]$ | $[0, 0.5]$     | NAN       | $[0, 0.5]$     | $[0, 0]$       | $[0, 0]$       |
-|              | $[11.1, 9.1]$    | $[0.4, 0.5]$ | $[0, 0]$       | NAN       | $[0, 0.5]$     | $[0.6, 0]$     | $[0, 0]$       |
-| **mean**     | $[11.8, 10.0]$   | $[0.6, 0.7]$ | $[0.2, 0.3]$   | NAN       | $[0.1, 0.3]$   | $[0.4, 0.1]$   | $[0, 0]$       |
-|              |                  |              |                |           |                |                |                |
-
-### 神经网络结构
-
-MLP：
-
-- 8x256
-- in_dim = 4，out_dim = 3
-
-## 基于NN方法(随机问题)
-
-### 数据集生成
-
-#### Well-separated modes
-
-
-> [Interval Identification of Structural Parameters Using Interval Deviation Degree and Monte Carlo Simulation](Interval%20Identification%20of%20Structural%20Parameters%20Using%20Interval%20Deviation%20Degree%20and%20Monte%20Carlo%20Simulation.md)
-
-
-| 结构参数    | 待修正参数            | 区间范围(均匀生成1000) |
-| ------- | ---------------- | -------------- |
-| $k_{1}$ | $\mu_{k_{1}}$    | $[0,2]$        |
-|         | $\sigma_{k_{1}}$ | $[0,2]$        |
-| $k_{2}$ | $\mu_{k_{2}}$    | $[0,2]$        |
-|         | $\sigma_{k_{2}}$ | $[0.1,0.2]$    |
-| $k_{5}$ | $\mu_{k_{5}}$    | $[0.1,0.2]$    |
-|         | $\sigma_{k_{5}}$ | $[0.1,0.2]$    |
-
-- 在区间$[0,2]$ 和 $[0.1,0.2]$内均匀生成1000组的均值与方差：$\mu_{k_{1}}$, $\sigma_{k_{1}}$, $\mu_{k_{2}}$, $\sigma_{k_{2}}$, $\mu_{k_{5}}$, $\sigma_{k_{5}}$
-- 每一组均值与方差生成60组$k_{1}$, $k_{2}$, $k_{5}$
-- 根据RSM计算得到60组$\begin{aligned}\omega_1^2,\omega_2^2,\omega_3^2,\text{ and }|\varphi(1,1)|\end{aligned}$
-
-共需要计算60x1000次有限元模型(代理模型)
-
-目标：网络可以根据一组60个输入$\begin{aligned}\omega_1^2,\omega_2^2,\omega_3^2,\text{ and }|\varphi(1,1)|\end{aligned}$得到对应的$k_1,k_2,k_5$三个参数的分布(用PDF曲线表示)
-- 输入：60x4
-- 输出：
-#### Close modes
-
-
-# Steel Plate Structures
-
-## 基于NN方法
-
-> [模态-力锤法,激振器法 (FRF频率响应函数,传递函数,共振频率及阻尼系数,猝发随机激励,力窗/指数窗)](https://www.mek.net.cn/DataPhysics_Software_FRF.html)
-
-
-![图片1.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/%E5%9B%BE%E7%89%871.png)
-
-### 数据集生成
-
-#### 生成数据集  
-
-Young’s modulus (E) and the shear modulus (G)
-
-| 材料参数   | 区间均值 | 区间半径 | 区间          |
-| ------ | ---- | ---- | ----------- |
-| E(GPa) | 205  | 15   | $[190,220]$ |
-| G(GPa) | 83   | 6    | $[77,89]$   |
-
-$$\begin{gathered}
-f_{1} =13.1+0.2152E-0.01455G-0.0002813E^2-0.0004878E\cdot G+0.0006576G^2, \\
-f_{2} =44.08+0.5145E-0.1333G+0.0002943E^2-0.004055E\cdot G+0.005588G^2, \\
-f_{3} =52.85-0.1156E+1.445G+0.0006092E^2+0.0002019E\cdot G-0.005634G^2, \\
-f_{4} =375.4-3.207E-0.4291G+0.02202E^2-0.009699E\cdot G+0.01383G^2, \\
-f_{5} =79.55+0.255E+2.804G-0.0005059E^2-0.001249E\cdot G-0.009833G^2. 
-\end{gathered}$$
-
-在区间内生成10000组E和G，然后根据二阶RSM生成10000组的$f_1,f_2,f_3,f_4,f_5$
-
-
-#### 修正结果
-
-| 实验  | 初始区间(GPa)     | IRSM            | PF&RBF-NN       | IOR&MC           | IDD&MC           | **本文方法**         |
-| --- | ------------- | --------------- | --------------- | ---------------- | ---------------- | ---------------- |
-| NAN | $E=[190,220]$ | $[196.5,203.6]$ | $[196.1,204.9]$ | $[196.2, 204.8]$ | $[196.2, 204.8]$ | $[196.8, 204.2]$ |
-| NAN | $G=[77,89]$   | $[79.5,83.4]$   | $[79.5,83.3]$   | $[79.1, 83.7]$   | $[79.2, 83.6]$   | $[80.3, 84.2]$   |
-|     |               |                 |                 |                  |                  |                  |
-
-根据修正后的E和G，得到相应的$f_1,f_2,f_3,f_4,f_5$，进行对比：
-
-| 参数    | 实验                 | 初始区间(Hz)           | IRSM(**初始不同**)     | PF&RBF-NN         | IOR&MC             | IDD&MC             | **本文方法** |
-| ----- | ------------------ | ------------------ | ------------------ | ----------------- | ------------------ | ------------------ | -------- |
-| $f_1$ | $[42.66, 43.64]$   | $[42.12, 45.50]$   | $[ 42.87, 43.71]$  | $[42.82,43.82]$   | $[42.81, 43.81]$   | $[42.83, 43.82]$   |          |
-| $f_2$ | $[118.29, 121.03]$ | $[116.16, 126.62]$ | $[118.45, 121.11]$ | $[118.28,121.38]$ | $[118.28, 121.38]$ | $[118.29, 121.38]$ |          |
-| $f_3$ | $[133.24, 136.54]$ | $[131.48, 141.32]$ | $[133.58, 136.79]$ | $[133.60,136.73]$ | $[133.25, 137.05]$ | $[133.36, 136.96]$ |          |
-| $f_4$ | $[234.07, 239.20]$ | $[227.77, 250.55]$ | $[232.78, 238.78]$ | $[232.28,239.03]$ | $[232.25, 239.10]$ | $[232.27, 239.08]$ |          |
-| $f_5$ | $[274.29, 280.64]$ | $[269.10, 289.20]$ | $[273.45, 279.86]$ | $[273.39,279.73]$ | $[272.77, 280.36]$ | $[272.96, 280.20]$ |          |
-| ER：   |                    |                    |                    |                   |                    |                    |          |
-| $f_1$ |                    | $[1.27, 4.26]$     | $[0.5, 0.2]$       | $[0.37, 0.41]$    | $[0.35,0.39]$      | $[0.40, 0.41]$     |          |
-| $f_2$ |                    | $[1.80, 4.62]$     | $[0.1, 0.1]$       | $[0.01, 0.29]$    | $[0.01,0.29]$      | $[0.00, 0.29]$     |          |
-| $f_3$ |                    | $[1.32, 3.50]$     | $[0.3, 0.2]$       | $[0.27, 0.14]$    | $[0.01,0.37]$      | $[0.09, 0.31]$     |          |
-| $f_4$ |                    | $[2.69, 4.74]$     | $[0.6, 0.2]$       | $[0.76, 0.07]$    | $[0.78,0.04]$      | $[0.77, 0.05]$     |          |
-| $f_5$ |                    | $[1.89, 3.05]$     | $[0.3, 0.3]$       | $[0.33, 0.32]$    | $[0.55,0.10]$      | $[0.48, 0.16]$     |          |
-| mean  |                    | $[1.79, 4.03]$     | $[0.4, 0.2]$       | $[0.35, 0.25]$    | $[0.34,0.24]$      | $[0.35, 0.24]$     |          |
-
-### 问题讨论
-#### RSM问题
-
-##### IDD中的RSM
-
-[Interval Identification of Structural Parameters Using Interval Deviation Degree and Monte Carlo Simulation](Interval%20Identification%20of%20Structural%20Parameters%20Using%20Interval%20Deviation%20Degree%20and%20Monte%20Carlo%20Simulation.md)，这篇论文的RSM出来的$f_4$有问题(比较明显)，其他的如$f_5$也有一点问题
-
-`E = np.random.uniform(190.0, 220.0, 1000)`
-`G = np.random.uniform(77.0, 89.0, 1000)`
-
-```python
-f1 = 13.1  + 0.2152*E - 0.01455*G - 0.0002813*E**2 - 0.0004878*E*G + 0.0006576*G**2
-f2 = 44.08 + 0.5145*E - 0.1333 *G + 0.0002943*E**2 - 0.004055 *E*G + 0.005588 *G**2
-f3 = 52.85 - 0.1156*E + 1.445  *G + 0.0006092*E**2 + 0.0002019*E*G - 0.005634 *G**2
-f4 = 375.4 - 3.207 *E - 0.4291 *G + 0.02202  *E**2 - 0.009699 *E*G + 0.01383  *G**2
-f5 = 79.55 + 0.255 *E + 2.804  *G - 0.0005059*E**2 - 0.001249 *E*G - 0.009833 *G**2
-```
-
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20240321214722.png)
-
-##### IRSM中的RSM
-
-[An interval model updating strategy using interval response surface models](An%20interval%20model%20updating%20strategy%20using%20interval%20response%20surface%20models.md)，差的更多
-
-```python
-f1 = 77.624    - 0.0202366  *(E-40.905  )**2 + 0.010914*(G-2.342 )**2
-f2 = -2214.965 + 0.002557626*(E+955.633 )**2 + 0.099410*(G-2.274 )**2
-f3 = 218.882   - 0.00043976 *(E-181.515 )**2 - 0.084119*(G-28.413)**2
-f4 = 45.397    + 0.137681   *(E+37.303  )**2 + 0.35152 *(G-2.201 )**2
-f5 = 1887.265  - 0.000257232*(E-2387.009)**2 - 0.139010*(G-31.986)**2
-```
-
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20240322095004.png)
-
-
-##### 解法：使用有限元模型+不设置泊松比
-
-- Solidworks建立钢板模型，保存为`.x_t`文件
-- 使用Patran进行仿真，modes frequency和modes shape正常
-
-| Modes    | mode1   | mode2   | mode3   | mode4   | mode5   |
-| -------- | ------- | ------- | ------- | ------- | ------- |
-| 模态频率(Hz) | 44.3433 | 122.654 | 136.691 | 241.305 | 279.993 |
-
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240427210132.png)
-
-###### 问题
-
-- Nastran仿真计算，$N=10000, E \in [190,220], G \in [77,89]$ ，仿真结果：(模态频率与E完全线性相关，而与G无关，此外模态频率之间也高度正相关)
-
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240427224559.png)
-
-> [材料力学：如何证明弹性模量、泊松比和剪切模量之间的关系？G=E/2(1+μ) - 知乎](https://zhuanlan.zhihu.com/p/453054808)
-
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240427225308.png)
-
-###### 解法
-
-在Patran材料特性参数中只设置E和G(以及密度$\rho$)，让泊松比自动计算，计算出来的**模态频率正常**
-
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240503145843.png)
-
-
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240503145822.png)
-
-
-#### 区间or随机问题
-
-上述方法中，只要是用均匀分布生成数据的，都算是随机问题，而区间问题则需要等间隔进行生成，防止有的点没有采样到而导致的区间上下界有误差
-**但是**，等间隔分布由于其不连续，也会丢失一些部分。均匀分布与等间隔分布各有优势和缺点，到底哪个更好，哪个更能准确地把区间问题表示出来？**应该根据结合实际的情况进行考虑**
-
-MC仿真/区间不确定性传播：均匀分布生成数据，还是等间隔生成数据，哪一个能更好地得到输出特征响应的区间
-
-~~My view：~~
-- ~~采样量少的时候，等间隔生成的数据更好一点，因为随机在均匀分布中采样会出现很大的空白~~
-- ~~采样量多的时候，均匀分布生成的数据更好一点，均匀分布可以更好的出现一些~~
-
-均匀分布随机采样，会出现局部区域采样点密集，一些区域出现空白的情况，而等间隔采样则可以避免这个问题。
-- **进行模型修正的时候，使用等间隔进行采样更好一点**。
-- **但是在训练NN/构建逆代理模型时，使用随机采样得到的数据更好**
 

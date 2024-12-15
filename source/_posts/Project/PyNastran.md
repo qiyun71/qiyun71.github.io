@@ -4,10 +4,12 @@ date: 2024-05-10 11:25:26
 tags: 
 categories: Project
 ---
- 
-> [Welcome to pyNastran’s documentation for v1.3! — pyNastran 1.3 1.3 documentation (pynastran-git.readthedocs.io)](https://pynastran-git.readthedocs.io/en/1.3/index.html)
+Python--> Nastran
 
 使用PyNastran库对 Patran&Nastran有限元分析软件进行二次开发，可以自动对目标模型进行有限元分析
+
+> [Welcome to pyNastran’s documentation for v1.3! — pyNastran 1.3 1.3 documentation (pynastran-git.readthedocs.io)](https://pynastran-git.readthedocs.io/en/1.3/index.html)
+
 
 <!-- more -->
 

@@ -8,90 +8,53 @@
         "type": "tabs",
         "children": [
           {
+            "id": "ebf9c20d544cc4cf",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "Blog&Book&Paper/Write/Route.excalidraw.md"
+              },
+              "pinned": true,
+              "icon": "excalidraw-icon",
+              "title": "Route.excalidraw"
+            }
+          },
+          {
             "id": "cdb74a3eff8223e1",
             "type": "leaf",
             "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Learn/Math/Math Basic.md",
+                "file": "Learn/Math/Math.md",
                 "mode": "source",
                 "backlinks": false,
                 "source": false
               },
               "pinned": true,
               "icon": "lucide-file",
-              "title": "Math Basic"
+              "title": "Math"
             }
           },
           {
-            "id": "b1251b26aad153e5",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Blog&Book&Paper/Write/MyGo.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              },
-              "pinned": true,
-              "icon": "lucide-file",
-              "title": "MyGo"
-            }
-          },
-          {
-            "id": "a1babd44bf4344a8",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "3DReconstruction/Multi-view/NeuS-based 3D Reconstruction.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              },
-              "pinned": true,
-              "icon": "lucide-file",
-              "title": "NeuS-based 3D Reconstruction"
-            }
-          },
-          {
-            "id": "a3f3f9daf2a6fd63",
+            "id": "49c9379a1b3db376",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "3DReconstruction/Multi-view/Code of Multi-view 3D Reconstruction based on SDF and volume rendering.md",
+                "file": "ModelUpdating/Basics about ModelUpdating.md",
                 "mode": "source",
                 "backlinks": false,
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Code of Multi-view 3D Reconstruction based on SDF and volume rendering"
-            }
-          },
-          {
-            "id": "9d175d922d2a5957",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "3DReconstruction/Paper About 3D Reconstruction.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              },
-              "pinned": true,
-              "icon": "lucide-file",
-              "title": "Paper About 3D Reconstruction"
+              "title": "Basics about ModelUpdating"
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -110,10 +73,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "3DReconstruction/Paper About 3D Reconstruction.md"
+                "file": "ModelUpdating/Basics about ModelUpdating.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of Paper About 3D Reconstruction"
+              "title": "Outline of Basics about ModelUpdating"
             }
           },
           {
@@ -122,7 +85,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "搞笑",
+                "query": "Uncertainty",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -133,8 +96,7 @@
               "title": "Search"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       },
       {
         "id": "6711a83b129914d6",
@@ -176,7 +138,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 233.5
   },
   "right": {
     "id": "a4155c200cdf0433",
@@ -227,14 +189,43 @@
             "id": "1714c288e5385929",
             "type": "leaf",
             "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "d900b1801d32e42f",
+            "type": "leaf",
+            "state": {
               "type": "Saved Queries View",
               "state": {},
               "icon": "feather-mouse-pointer",
               "title": "Saved Queries"
             }
+          },
+          {
+            "id": "515b2e82e0a9c55f",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "ModelUpdating/Basics about ModelUpdating.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for Basics about ModelUpdating"
+            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
@@ -254,47 +245,50 @@
       "workspaces:Manage workspace layouts": false,
       "table-editor-obsidian:Advanced Tables Toolbar": false,
       "templater-obsidian:Templater": false,
-      "sheet-plus:Create excel file": false
+      "sheet-plus:Create excel file": false,
+      "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "9d175d922d2a5957",
+  "active": "49c9379a1b3db376",
   "lastOpenFiles": [
-    "3DReconstruction/Multi-view/Implicit Function/NeRF-based/Neus-code.md",
-    "Reports/Daily/2024-10-05.md",
-    "3DReconstruction/3D Model.md",
-    "3DReconstruction/Basics about 3D Reconstruction.md",
-    "3DReconstruction/Multi-view/NeuS-based 3D Reconstruction.md",
+    "Learn/Math/Math.md",
+    "Blog&Book&Paper/Write/LearningRoute.canvas",
+    "Blog&Book&Paper/Write/Route.excalidraw.md",
+    "Blog&Book&Paper/Write/Interest.excalidraw.md",
+    "3DReconstruction/NeuS-based 3D Reconstruction.md",
+    "ModelUpdating/Paper about ModelUpdating.md",
+    "Blog&Book&Paper/Write/Write Paper/3D Reconstruction/Master Paper.md",
+    "3DReconstruction/Code of Multi-view 3D Reconstruction based on SDF and volume rendering.md",
+    "3DReconstruction/Practical/Finite Element Model 3D Reconstruction.md",
+    "3DReconstruction/Multi-view/Implicit Function/NeRF-based/NeRF Other Research/NeRF-review.md",
     "3DReconstruction/Paper About 3D Reconstruction.md",
-    "3DReconstruction/Finite Element Model 3D Reconstruction.md",
-    "3DReconstruction/Multi-view/Code of Multi-view 3D Reconstruction based on SDF and volume rendering.md",
+    "Other Interest/CAX.md",
+    "3DReconstruction/3D Model.md",
+    "Blog&Book&Paper/Read/Papers/(WW) Isogeometric analysis.md",
     "Blog&Book&Paper/Write/MyGo.md",
-    "Blog&Book&Paper/Write/Blog/知乎.md",
-    "Blog&Book&Paper/Write/Blog/租用AutoDL的服务器完成三维重建算法(instant-nsr-pl)的环境配置.md",
+    "Blog&Book&Paper/Read/Papers/(BSF)Uncertainty.md",
+    "Other Interest/Uncertainty.md",
+    "Blog&Book&Paper/Read/Book Lists.md",
+    "ModelUpdating/Basics about ModelUpdating.md",
+    "Blog&Book&Paper/Write/Write Paper/Model Updating/Self-superviside Model Updating through inverse calibration model.md",
+    "Blog&Book&Paper/Write/Write Paper/Model Updating/A fast interval model updating method based on MLP neural network.md",
+    "Blog&Book&Paper/Write/Write Paper/Model Updating/A fast stochastic model updating technique based on an inverse FE surrogate model.md",
+    "Other Interest/Dynamic Response Prediction (Deterministic).md",
+    "ModelUpdating/Case about ModelUpdating.md",
+    "Other Interest/Vibration Measurement.md",
+    "3DReconstruction/Practical/Dimensions  Measurement.md",
+    "3DReconstruction/Practical",
+    "3DReconstruction/Basic Knowledge/NeRF/NeRF",
+    "3DReconstruction/Basic Knowledge/NeRF",
+    "3DReconstruction/Basic Knowledge",
+    "Blog&Book&Paper/Write/file/download.jpg",
+    "Blog&Book&Paper/Write/file/images.jpg",
+    "Blog&Book&Paper/Write/file",
     "Blog&Book&Paper/Write/Blog",
-    "Project/NeRF.md",
-    "Learn/Other Interest/Learn-Cpp.md",
-    "Learn/Other Interest/Learn-Csharp.md",
-    "Learn/Other Interest/Learn-Rust.md",
-    "Learn/Math/Math Basic.md",
-    "Blog&Book&Paper/Write/World.md",
-    "Blog&Book&Paper/Write/Source/AllBug.md",
-    "Blog&Book&Paper/Write/Source/Computer.md",
-    "Blog&Book&Paper/Write/Source/IPV6.md",
-    "Blog&Book&Paper/Write/Source/Tools.md",
-    "3DReconstruction/Anime Image 3D Reconstruction.md",
-    "3DReconstruction/Datasets.md",
-    "3DReconstruction/Single-view/Other/HumanBody/HRN.md",
-    "3DReconstruction/Single-view/Implicit Function/Adaptive Shells.md",
-    "3DReconstruction/Single-view/Implicit Function/DoubleField.md",
     "3DReconstruction/Multi-view/file/3DReconstruction-Results.xlsx",
     "3DReconstruction/Multi-view/file",
     "PT43D",
     "Blog&Book&Paper/Write/Write Paper/3D Reconstruction/file/基于神经辐射场的三维重建算法研究_夏月.pdf",
-    "Blog&Book&Paper/Write/Write Paper/3D Reconstruction/file/基于改进神经辐射场的三维重建技术研究_张志铭.pdf",
-    "Blog&Book&Paper/Write/Write Paper/3D Reconstruction/file/基于神经隐式学习的多视图三维重建算法研究_付前程.pdf",
-    "Blog&Book&Paper/Write/Write Paper/3D Reconstruction/file",
-    "3DReconstruction/Multi-view/Uncertainty",
-    "Reports/Daily",
     "3DReconstruction/Basic Knowledge/NeRF/NeRF.canvas",
     "未命名.canvas"
   ]

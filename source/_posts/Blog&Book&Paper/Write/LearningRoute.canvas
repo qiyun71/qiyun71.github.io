@@ -1,0 +1,39 @@
+{
+	"nodes":[
+		{"id":"138b6caca374dbb1","type":"group","x":-820,"y":-260,"width":1280,"height":1360,"label":"Learning Route"},
+		{"id":"a941da198f6c7b65","type":"text","text":"技能/工具\n- 有限元原理\n- 有限元软件\n- 软件二次开发","x":-780,"y":-220,"width":260,"height":142,"color":"4"},
+		{"id":"8fccf506606c623b","type":"file","file":"Learn/Finite Element/Learn-FEA.md","x":-440,"y":-220,"width":260,"height":77},
+		{"id":"2035de343c360807","type":"file","file":"3DReconstruction/Practical/Finite Element Model 3D Reconstruction.md","x":-440,"y":-78,"width":400,"height":140},
+		{"id":"e40e66141393bd90","type":"file","file":"Learn/Finite Element/Learn-Matlab.md","x":-628,"y":160,"width":165,"height":50},
+		{"id":"04d67f44831bef91","type":"file","file":"Project/PyNastran.md","x":-465,"y":280,"width":155,"height":88},
+		{"id":"265c95277cc5a3d6","type":"file","file":"Learn/Neural Network/Loss Functions.md","x":-48,"y":465,"width":255,"height":72},
+		{"id":"427f6b5faf0ec748","type":"file","file":"Learn/Neural Network/PyTorch.md","x":-48,"y":582,"width":255,"height":99},
+		{"id":"d837690330e793ab","type":"file","file":"3DReconstruction/3D Model.md","x":60,"y":-78,"width":200,"height":77},
+		{"id":"11f16647a9a90be8","type":"file","file":"3DReconstruction/Practical/Dimensions  Measurement.md","x":60,"y":62,"width":330,"height":77},
+		{"id":"cbdabd1b229f89fe","type":"text","text":"基础 （阅读/理解/写作）","x":-757,"y":465,"width":183,"height":60,"color":"4"},
+		{"id":"4a197affb67465dd","type":"file","file":"Learn/Neural Network/DeepLearning.md","x":-350,"y":561,"width":222,"height":71},
+		{"id":"e02224ee4c54f568","type":"file","file":"Blog&Book&Paper/Write/Write tips.md","x":-461,"y":880,"width":174,"height":50},
+		{"id":"32f179a70ea6785f","type":"file","file":"Learn/Math/Math.md","x":-351,"y":705,"width":171,"height":95},
+		{"id":"568529222c2a761b","type":"file","file":"Learn/Python/Learn-Python.md","x":-669,"y":299,"width":159,"height":50},
+		{"id":"1ff7c7c2c50a09f2","type":"file","file":"Blog&Book&Paper/Write/Journal&Conference.md","x":-180,"y":865,"width":197,"height":80},
+		{"id":"dda01f2217579898","type":"file","file":"Blog&Book&Paper/Read/Book/How to Read a Paper.md","x":-463,"y":440,"width":224,"height":50},
+		{"id":"8ed2efb79fa10f59","type":"file","file":"Blog&Book&Paper/Write/Source/Tools.md","x":-510,"y":1000,"width":174,"height":50}
+	],
+	"edges":[
+		{"id":"30e040e32fa44061","fromNode":"a941da198f6c7b65","fromSide":"right","toNode":"2035de343c360807","toSide":"left"},
+		{"id":"626b86b13604b9e3","fromNode":"a941da198f6c7b65","fromSide":"right","toNode":"8fccf506606c623b","toSide":"left"},
+		{"id":"ee83ed633f7a6d98","fromNode":"2035de343c360807","fromSide":"right","toNode":"d837690330e793ab","toSide":"left"},
+		{"id":"36725d1b8ea0353e","fromNode":"2035de343c360807","fromSide":"right","toNode":"11f16647a9a90be8","toSide":"left"},
+		{"id":"f40fb3147da680c0","fromNode":"a941da198f6c7b65","fromSide":"bottom","toNode":"568529222c2a761b","toSide":"left"},
+		{"id":"d32dedac0c1cb0aa","fromNode":"4a197affb67465dd","fromSide":"right","toNode":"265c95277cc5a3d6","toSide":"left"},
+		{"id":"d3b83316d008e780","fromNode":"4a197affb67465dd","fromSide":"right","toNode":"427f6b5faf0ec748","toSide":"left"},
+		{"id":"b2c86caf82c66a71","fromNode":"cbdabd1b229f89fe","fromSide":"right","toNode":"32f179a70ea6785f","toSide":"left"},
+		{"id":"7c858671e85b713c","fromNode":"cbdabd1b229f89fe","fromSide":"right","toNode":"4a197affb67465dd","toSide":"left"},
+		{"id":"5ad67e0376c377f3","fromNode":"cbdabd1b229f89fe","fromSide":"right","toNode":"e02224ee4c54f568","toSide":"left"},
+		{"id":"6def61f0f0bfc38a","fromNode":"e02224ee4c54f568","fromSide":"right","toNode":"1ff7c7c2c50a09f2","toSide":"left"},
+		{"id":"d2781e7927ef31d5","fromNode":"cbdabd1b229f89fe","fromSide":"right","toNode":"dda01f2217579898","toSide":"left"},
+		{"id":"973438d126d0a1e0","fromNode":"568529222c2a761b","fromSide":"right","toNode":"04d67f44831bef91","toSide":"left"},
+		{"id":"8110f296ae0bb03b","fromNode":"a941da198f6c7b65","fromSide":"bottom","toNode":"e40e66141393bd90","toSide":"left"},
+		{"id":"1183ec9132cf9605","fromNode":"cbdabd1b229f89fe","fromSide":"right","toNode":"8ed2efb79fa10f59","toSide":"left"}
+	]
+}

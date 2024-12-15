@@ -377,3 +377,8 @@ hmap.pop(10583)
 数组：Python 的 list 是动态数组，可以直接扩展
 
 
+# 算法
+
+## 排序算法
+
+可视化：[mszula/visual-sorting: 🔮 🔈 Visual Sorting (aka "The Sound Of Sorting") is a tool that provides a visualization of sorting algorithms, accompanied by an auditory experience.](https://github.com/mszula/visual-sorting)

@@ -18,7 +18,6 @@ categories: Learn
 
 >[深度学习·炼丹入门 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/23781756)
 
-
 <!-- more -->
 
 # 技巧
@@ -544,6 +543,18 @@ INN offers greater fitting flexibility due to the interval of weight and bias
 
 [第三代神经网络初探：脉冲神经网络（Spiking Neural Networks） - 知乎](https://zhuanlan.zhihu.com/p/531524477)
 
+
+## KNN
+
+
+
+## DKNN
+
+[in1311/DKNN](https://github.com/in1311/DKNN)
+deep kriging neural network 可以用来插值计算
+
+
+![320357068-0b1f8538-f751-43f3-85f8-cc72dd7decd2.png (2227×1802)](https://private-user-images.githubusercontent.com/140888660/320357068-0b1f8538-f751-43f3-85f8-cc72dd7decd2.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzQyNDczOTAsIm5iZiI6MTczNDI0NzA5MCwicGF0aCI6Ii8xNDA4ODg2NjAvMzIwMzU3MDY4LTBiMWY4NTM4LWY3NTEtNDNmMy04NWY4LWNjNzJkZDdkZWNkMi5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQxMjE1JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MTIxNVQwNzE4MTBaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT00YWNkYWI0MThjMjYyMjlkMjczMmE5NDIzMTE1ZDQ2ZDhkYzE2NzNkYTA3OThkYWZiMDRkNzkwYTljMTQwYzQ4JlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.7HwI7n6J6gm1o56R_IK9beqmtfvtA5p3HobA5x50XJM)
 
 
 

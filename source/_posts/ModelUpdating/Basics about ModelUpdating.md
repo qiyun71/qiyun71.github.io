@@ -13,7 +13,6 @@ categories: ModelUpdating
 - 有限元模型在有限元分析中的作用？有限元分析是一个使用最小势能原理来不断尝试得到位移
 - 有限元模型的前向计算可不可以进行微分?
   - 可微仿真（Differentiable Simulation）：[\[WIP\] 可微仿真（Differentiable Simulation） - 知乎](https://zhuanlan.zhihu.com/p/566294757?utm_psn=1829181001001201664)
-- 
 
 <!-- more -->
 
@@ -58,17 +57,8 @@ categories: ModelUpdating
 
 ## 不确定性
 
-> [浅谈Epistemic Uncertainty 和 Aleatoric Uncertainty - 知乎](https://zhuanlan.zhihu.com/p/656915794)
-> [【实验笔记】深度学习中的两种不确定性（上） - 知乎](https://zhuanlan.zhihu.com/p/56986840)
+[Uncertainty](../Other%20Interest/Uncertainty.md)
 
-不确定性根据系统内的不确定性来源可以分为Aleatoric Uncertainty和Epistemic Uncertainty，Aleatoric Uncertainty通常指的是数据不确定性，往往来自于数据本身的randomness或variability，是数据固有的一种属性。Epistemic uncertainty通常指的是模型不确定性或认知不确定性，其不确定性通常来源于缺乏足量信息的支撑。
-
-Uncertainty sources：Parameter uncertainty、Model form uncertainty、Experiment uncertainty
-根据参数是否存在认知epistemic和/或选择性(偶然)aleatory不确定性，**将不确定性参数分为四类**：
-- 既不具有认知不确定性，也不具有选择性不确定性的参数被表示为具有完全确定值的常数。
-- 只有认知不确定性的参数被表示为一个未知但固定的常数，落在预定义的区间内。
-- 将仅具有aleatory偶然不确定性的参数表示为具有完全确定的分布性质(如分布格式、均值、方差等)的随机变量。这种完全确定的分布称为“精确概率”。
-- 同时具有认知不确定性和选择性不确定性的参数被表示为一个分布性质不完全确定的随机变量，即“不精确概率”。这种不精确的概率由所谓的概率盒(P-box)来建模，其中无限数量的累积分布函数(CDF)曲线构成概率空间中的特定区域。
 
 不确定性模型：不确定性参数的分布/区间/P-box
 - BMM(Beta Mixture Model)

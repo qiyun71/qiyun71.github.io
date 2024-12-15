@@ -132,6 +132,15 @@ We are highly inspired by [colmap](https://github.com/colmap/colmap), [pycolma
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240808142917.png)
 
+
+## XFeat
+
+快速特征提取+匹配(轻量)
+
+[verlab/accelerated_features: Implementation of XFeat (CVPR 2024). Do you need robust and fast local feature extraction? You are in the right place!](https://github.com/verlab/accelerated_features/tree/main?tab=readme-ov-file)
+
+![xfeat_quali.jpg (833×764)](https://raw.githubusercontent.com/verlab/accelerated_features/refs/heads/main/figs/xfeat_quali.jpg)
+
 # NeRF (VR+Field)
 
 ```ad-note
