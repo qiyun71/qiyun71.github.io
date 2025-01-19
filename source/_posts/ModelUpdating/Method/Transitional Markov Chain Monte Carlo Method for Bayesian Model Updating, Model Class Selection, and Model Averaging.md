@@ -68,3 +68,32 @@ TMCMC
 > [Metropolis-Hastings sample - MATLAB mhsample - MathWorks 中国](https://ww2.mathworks.cn/help/stats/mhsample.html)
 > 
 > w.p.：with probability
+
+
+>  [mukeshramancha/transitional-mcmc: This repo contains the code of Transitional Markov chain Monte Carlo algorithm](https://github.com/mukeshramancha/transitional-mcmc)
+>  [civiltechnocrats.wordpress.com/wp-content/uploads/2013/11/bayesian-methods-for-structural-dynamics-and-civil-engineering.pdf#page=53.49](https://civiltechnocrats.wordpress.com/wp-content/uploads/2013/11/bayesian-methods-for-structural-dynamics-and-civil-engineering.pdf#page=53.49)
+
+
+example 2DOF system: 
+- `main_2DOF.py/log_likelihood`
+  - input: 每个参数值s, sig1 $\sigma_{1}$,sig2 $\sigma_{2}$
+  - 根据参数s计算对应的响应$\lambda_{1}, \phi_{1}^{2}$
+  - output: $LL=log\_likelihood = \log((2\pi \sigma_{1} \sigma_{2})^{-5}) + -\frac{1}{2}\sigma_{1}^{-2}\sum(\lambda_{1}-\lambda_{1\exp}) +$
+- `tmcmc.py/compute_beta_update_evidence`
+  - $w = exp^{ (LL -LL_{max}) \times (p_{j+1} - p_j)}$
+  - $w_{n} = \frac{w}{\sum w}$
+  - $ESS = \frac{1}{\sum w_{n}^{2}}$
+
+```python
+LL = (np.log((2*np.pi*sig1*sig2)**-5) +
+      (-0.5*(sig1**(-2))*sum((lambda1_s-data1)**2)) +
+      (-0.5*(sig2**-2)*sum((phi12_s-data3)**2)))
+```
+
+NASA subA:
+- $LL = log\_likelihood = -\frac{UQ^{2}}{\varepsilon^{2}}$
+- `tmcmc.py/compute_beta_update_evidence` $\mathrm{LogSumExp}(x_1\ldots x_n)=\log\left(\sum_{i=1}^ne^{x_i}\right)$
+  - $\log w= (p_{j+1} - p_j) \times LL$
+  - $\log w_{n}= \log w-\log\left( \sum e^{\log w} \right)$
+  - $ESS = e^{-\log \sum e^{2\log w_{n}}}$
+

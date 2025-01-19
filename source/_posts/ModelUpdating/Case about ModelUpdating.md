@@ -35,6 +35,54 @@ Model Updating算例
 如何根据目标的y(a,e,t) 校准不确定性参数 a & e
 
 
+## IMAC2023
+
+> [File:IMAC2023 FrameWing Nonlinear Substructuring Wiki.pptx - Dynamic Substructuring Focus Group Wiki](https://wiki.sem.org/wiki/File:IMAC2023_FrameWing_Nonlinear_Substructuring_Wiki.pptx)
+
+>  [VIBES at IMAC Conference 2023 - VIBES.technology](https://www.vibestechnology.com/news/vibes-at-imac-conference-2023/) 
+
+**The [International Modal Analysis Conference (IMAC)](https://sem.org/imac) is a yearly gathering of around 600 engineers, researchers and vendors active in the field of experimental mechanics. Specifically, it is seen as somewhat of the birthplace of Dynamic Substructuring technologies, as much of the pioneering research has been presented here.**
+
+>  [Dynamic Substructuring Wiki - Dynamic Substructuring Focus Group Wiki](https://wiki.sem.org/wiki/Dynamic_Substructuring_Wiki) the SEM/IMAC Dynamic Substructuring Technical Division's Wiki.
+
+### Dynamic substructuring
+
+[Dynamic substructuring - Wikipedia](https://en.wikipedia.org/wiki/Dynamic_substructuring)
+
+Dynamic Substructuring (DS) is an engineering tool used to model and analyse the dynamics of mechanical systems by means of its components or substructures. Using the dynamic substructuring approach one is able to analyse the dynamic behaviour of substructures separately and to later on calculate the assembled dynamics using **coupling procedures**. Dynamic substructuring has several advantages over the analysis of the fully assembled system:
+- Substructures can **be modelled in the domain that is most appropriate**, e.g. experimentally obtained substructures can be combined with numerical models——从实验得到的子结构数据可以与仿真数据进行组合 
+- **Large and/or complex systems** can be optimized on substructure level.
+- **Numerical computation load** can be reduced as solving several substructures is computationally less demanding than solving one large system.
+- Substructure models of different development groups can be shared and combined **without exposing the modelling details**.
+
+
+![Two levels of domain decomposition in dynamic substructuring.|666](https://upload.wikimedia.org/wikipedia/commons/c/ca/Two_different_levels_of_domain_decomposition.svg)
+
+## 结构参数
+
+**Finite element thin wing modes**
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20250110144922.png)
+
+
+Thickness: 3.147mm
+
+|          | Density $kg/m^3$ | Young's modulus Gpa | Poisson’s ratio |
+| -------- | ---------------- | ------------------- | --------------- |
+| Aluminum | 2708.3           | 70.38               | 0.33            |
+| Steel    | 7850.0           | 210.0               | 0.3             |
+
+**Finite element fuselage modes**
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20250110144943.png)
+
+
+Thickness: 12.7mm
+
+|          | Density $kg/m^3$ | Young's modulus Gpa | Poisson’s ratio |
+| -------- | ---------------- | ------------------- | --------------- |
+| Aluminum | 2699.4           | 69.8                |  0.315          |
+
 ## Mass Spring System
 
 The absolute value of the first component of the first eigenvector reflects some vibration information. The introduction of structural vibration modes as output responses will increase the difficulty of IMU.
@@ -382,6 +430,14 @@ $\mu_a,\sigma_a,\mu_b,\sigma_b,E_1,E_2,\rho$ --> $f_1,f_2,f_3,f_4,f_5$ 前5阶�
 - $E_{1} \in [0.5,0.9]$ ($10^{11}Pa$) Young’s modulus of fuselage/wing join
 - $E_{2} \in [0.5,0.9]$ ($10^{11}Pa$) Young’s modulus of fuselage/tail joint
 
+![1-s2.0-S0888327023006921-gr18_lrg.jpg (2672×1394)|666](https://ars.els-cdn.com/content/image/1-s2.0-S0888327023006921-gr18_lrg.jpg)
+
+模态试验：(数据大小: 3 x (6273, 52, 65) )
+- 测量点 (DOF)：共52个——翼展上有40个、尾翼上12个点
+- 试验产品：共30个不同sizes的飞机机翼
+- FRFs频率范围：10~500Hz共有6273个frequency sample points
+- FRFs： Displacement、Velocity、Acceleration FRFs
+
 ### 传统优化方法
 
 [飞机模型修正方案](飞机模型修正方案.md)
@@ -596,7 +652,7 @@ FR 数据转三维数组(多通道图片)：
   - sita2.xlsx
   - ...
   - sita6.xlsx
-  - xiangying.xlsx #80800x11 频响数据，每101×2行为一条，对应0-50Hz 101个频率点x、y两个方向的数据
+  - xiangying.xlsx #80800x11 频响数据，每101×2行 为一条，对应0-50Hz 101个频率点x、y两个方向的数据. 从第0行 (x方向)开始, 偶数列为x方向,奇数列为y方向
 - fre-400-2
 - fre-400-3
 - fre-400-4
@@ -612,6 +668,33 @@ FR 数据转三维数组(多通道图片)：
   - xiangying.xlsx #80800x11
 ```
 
+
+**卫星算例.bdf** 不同结构参数生成结构特征量FR
+
+```bdf file
+$ Elements and Element Properties for region : Shear_Panels
+PSHELL   1       1      .003     1               1
+
+- 36  行 .003 Shear_Panels 厚度 theta5
+- 429 行 .002 Central_Cylinder 厚度 theta3
+- 666 行 .001 Adapter 厚度 theta2 本来应该是密度2.7
+- 723 行 .002 Upper_platform 厚度 theta6
+- 864 行 .001 Lower_platform 厚度 theta4
+- 1020行 7.   mat_N 弹性模量  theta1  
+- 1023行 7.   mat_CC 弹性模量  theta1  
+- 1026行 7.   mat_L 弹性模量  theta1  
+- 1029行 7.   mat_SP 弹性模量  theta1  
+- 1032行 7.   mat_U 弹性模量  theta1  
+- 主弹性模量不包括 mat_A 适配器的材料属性
+```
+
+- **主弹性模量**$\theta_1$ 70Gpa，
+- **主密度** $\theta_2$  ，密度2.7x $10^{3} kg/m^{3}$ (英文论文) or 适配器厚度 1mm(本 1)
+- **中心筒厚度**$\theta_3$ 2mm
+- 底板厚度 $\theta_4$ 1mm
+- **剪切板厚度**$\theta_5$ 2mm
+- 顶板厚度 $\theta_6$ 2.5mm
+
 ***网络结构***
 
 UCNN 单向卷积
@@ -626,10 +709,44 @@ UCNN 单向卷积
 
 ***数据集生成***
 
-data/
+
+**将excel数据转换成处理更快的numpy数组**
+处理后训练集包含两类npy文件:
+- `train_FRdata{i}.npy` 存储FRF数据 --> 400条数据,共25组 (其中一组损坏,实际24组) ==> (9600, 2, 61, 11)
+- `label_{i}.npy` 存储 参数$\theta$ 数据 --> 400条数据,共25组 ==> (9600, 4)
+测试集包含: `test_FRdata.npy` (400, 2, 61, 11) 与 `label.npy` (400, 4)
+试验集包含: `test_FRdata.npy` (1000, 2, 61, 11) 与 `label.npy` (1000, 4) 
+
+excel： n为data sets，训练集和测试集都是25个文件(25个sita1.xlsx)，每个文件中n为400. 试验集只有一个文件，n为1000
+- **sita1.xlsx** 一列，n行
+- **sita2.xlsx**
+- **sita3.xlsx**
+- sita4.xlsx
+- **sita5.xlsx**
+- sita6.xlsx
+- **xiangying.xlsx**  80800行(400x101x2) 11列
+
+npy: 
+- test_FRdata.npy (data sets, 2, 61, 11) xy两方向、前61个频率点、选取的11个测量参考节点 
+- label.npy (data sets, 4)
+
+|              | $\theta_{1}$                    | $\theta_{2}$            | $\theta_{3}$            | $\theta_{4}$      | $\theta_{5}$            | $\theta_{6}$      |
+| ------------ | ------------------------------- | ----------------------- | ----------------------- | ----------------- | ----------------------- | ----------------- |
+| 物理参数         | 主弹性模量 E                         | Adapter 厚度              | Central_Cylinder 厚度     | Lower_platform 厚度 | Shear_Panels 厚度         | Upper_platform 厚度 |
+| 名义值          | 70Gpa                           | 1mm                     | 2 mm                    | 1 mm              | **2 mm**                | 2.5 mm            |
+| In Paper     | 70Gpa                           | 1mm                     | 2 mm                    | 2 mm 审稿后修改为1      | **1 mm**                | 2.5 mm            |
+| 训练集          |                                 |                         |                         |                   |                         |                   |
+| Excel        | $7 (\times 10^{10}Pa)$          | 0.001 (m)               | 0.002 (m)               | 0.001 (m)         | **0.001 (m)**           | 0.0025 (m)        |
+| Code(python) | $7 (\times 10^{10}Pa)$          | 1 (mm)                  | 2 (mm)                  | No                | 1 (mm)                  | No                |
+| 训练集 范围       | $[5.0, 9.0] (\times 10^{10}Pa)$ | $[0.5, 1.5] (mm)$       | $[1.0, 3.0] (mm)$       |                   | $[0.5, 1.5] (mm)$       |                   |
+| 试验集          |                                 |                         |                         |                   |                         |                   |
+| 试验数据 范围      | $E\sim N(7, 0.3^2)$             | $T_{1}\sim N(1, 0.2^2)$ | $T_{2}\sim N(2, 0.4^2)$ | $T_{4}=0.001$     | $T_{3}\sim N(1, 0.2^2)$ | $T_{5}=0.0025$    |
+|              |                                 |                         |                         |                   |                         |                   |
+
+数据集详细记录日志，data/
 - FE：生成数据集的matlab程序，需要调用nastran
 - test：测试网络精度数据集（均匀）
-- test_1：实验数据，测试网络修正结果的数据集（正态）
+- test_1：Exp实验数据(Target目标数据)，测试网络修正结果的数据集（正态）
 - test_1_pred：根据**test_1**预测的参数结果，输入nastran得到FR
 - test_1_pred_norm：根据**test_1归一化后**预测的结果，输入nastran得到FR
 - train：训练网络数据集（均匀）
@@ -637,8 +754,19 @@ data/
 - train_npy copy：train转为npy时选取的频率范围为0~50Hz，其他为30Hz，用于绘制数据处理例子的流程图
 - train_npy_24_3theta、test_npy_24_3theta为本科生的修正3个参数的数据
 
+将FRF归一化后，主要数据文件夹： data/
+- train_npy_norm 训练集 --> 训练网络
+- test_npy_norm 测试集 --> 测试网络的训练效果
+- test_1_npy_norm??? 实验集/目标集 --> 验证网络的校准效果(model calibration)
+- test_1_npy??? 试验集没有归一化，为了最后的模型验证
+
+添加噪声
+- test_1_npy_norm1000_noise？ --> Trained NN --> /pred.npy --> FEA --> test_1_pred_norm_npy1000_noise?
+- test_1_npy1000_noise？(Target without normalization)  <-->  test_1_pred_norm_npy1000_noise? (Calibrated)
+
 ***网络结构***
 
+```ad-tldr UCNN 
 **UCNN**
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20231227133859.png)
@@ -656,11 +784,12 @@ data/
 **ResNet50**
 
 ![resnet.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/picturesresnet.png)
+```
 
 
 ***实验记录***
 
-```python
+```ad-info
 20231227-111217: 10, 0.9 UCNN
 20231227-111738: 25, 0.99 UCNN
 20231227-160116: 25, 0.99 MLP 4x128
@@ -737,7 +866,7 @@ data/
 
 不论 MLP 还是 UCNN，中间 sita3 预测的误差都很大
 
-```powershell
+```ad-info
 (satellite) PS D:\0Proj\ModelUpdating\satellite_UCNN> python run.py --test --resume outputs\@20231227-163116_mlp\400_mlp.pth --net mlp   
 error_rate=:0.05787282592434471=(0.19222232587635518/3.321460855007172)
 =====================
@@ -780,7 +909,6 @@ error_rate_each0=:0.1063032449177=(0.7428898230195046/6.9884021282196045)
 error_rate_each1=:0.22810707873746822=(0.4503603637218475/1.9743375182151794)
 error_rate_each2=:0.08872962392607951=(0.08887535240501165/1.0016423881053924)
 ```
-
 
 ### 问题讨论
 
@@ -893,3 +1021,4 @@ error_rate_each2=:0.08872962392607951=(0.08887535240501165/1.0016423881053924)
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20240309201706.png)
 
 
+## Folding Fin

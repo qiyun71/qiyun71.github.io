@@ -1,5 +1,7 @@
 # Book
 
+- [ ] [专著-北航可靠性与系统工程学院](https://rse.buaa.edu.cn/kxyj1/kycg/zz.htm)
+
 
 - [ ] 奥赞·瓦罗尔（Ozan Varol）
   - [ ] [为自己思考 (豆瓣)](https://book.douban.com/subject/36582803/)

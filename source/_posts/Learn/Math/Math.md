@@ -4,8 +4,7 @@ date: 2024-03-29 22:24:11
 tags: 
 categories: Learn
 ---
-概率/微积分/矩阵/拓扑/泛函...
-
+概率/微积分/矩阵/拓扑/泛函/复变...
 
 MATH $e^{i\pi}+1=0$
   
@@ -23,7 +22,39 @@ MATH $e^{i\pi}+1=0$
 
 > [L0,L1,L2范数（双竖线，有下标）_数学公式两对竖线右下角加个2-CSDN博客](https://blog.csdn.net/u013066730/article/details/83013885)
 
+
+# 复变函数
+
+## 拉普拉斯变换
+
+(传递函数必用)
+
+[拉普拉斯变换 - 维基百科，自由的百科全书](https://zh.wikipedia.org/wiki/%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E5%8F%98%E6%8D%A2)
+
+$F(s)=\int_0^\infty e^{-st}f(t)\mathrm{d}t$
+
+
+
+## 留数
+
+[留数 - 维基百科，自由的百科全书](https://zh.wikipedia.org/wiki/%E7%95%99%E6%95%B0)
+
+
+[zh.wikipedia.org/wiki/留数定理](https://zh.wikipedia.org/wiki/%E7%95%99%E6%95%B0%E5%AE%9A%E7%90%86)
+计算解析函数沿着闭曲线的路径积分的一个有力的工具，也可以用来计算实函数的积分
+
+[从零开始的留数定理 - Monsoon的文章 - 知乎](https://zhuanlan.zhihu.com/p/708571624)
+
+
+
+
+
 # 数学基础
+
+## 帕斯瓦定理
+
+信号的能量在时域和频域是一样的
+$\int_{-\infty}^{+\infty}|x(t)|^2dt=\frac{1}{2\pi}\int_{-\infty}^{+\infty}|F_x(\omega)|^2d\omega=\int_{-\infty}^{+\infty}|F_x(2\pi f)|^2df$
 
 ## 偏微分方程
 
@@ -42,8 +73,7 @@ Possion eqn: $\Delta u = F(x,y)$
 
 > [但什么是卷积呢？ - YouTube](https://www.youtube.com/watch?v=KuXjwB4LzSA)
 
-$f\left(t\right)*g\left(t\right)=\int_{0}^{t}f\left(\tau\right)g\left(t-\tau\right)d\tau$
-
+$f\left(t\right)*g\left(t\right)=\int_{0}^{t}f\left(\tau\right)g\left(t-\tau\right)d\tau$ 时间信号的时间一般是从0开始的
 
 Example1：已知$f(x) = a_{0}+a_{1}x+\dots+a_{n}x^{n}$ 和 $g(x)=b_{0}+b_{1}x+\dots b_{n}x^{n}$，求$h(x)=f(x) \cdot g(x)$
 - $h(x)$的系数c是ab两系数的卷积结果：直接计算的话时间复杂度为$\mathcal{O}(n^{2})$
@@ -53,6 +83,11 @@ $$\left.\mathbf{a}*\mathbf{b}=\left[\begin{array}{c}a_0b_0,\\a_0b_1+a_1b_0,\\a_0
 - 另一种思路是先将$f(x)$于$g(x)$进行FFT$f(\omega),g(\omega)$，频域的系数$\hat{\mathbf{a}}=[\hat{a}_0,\hat{a}_1,\hat{a}_2,\ldots,\hat{a}_{m+n-1}]$ 和$\hat{\mathbf{b}}=[\hat{b}_0,\hat{b}_1,\hat{b}_2,\ldots,\hat{b}_{m+n-1}]$，两者直接相乘得到$\hat{\mathbf{a}}\cdot\hat{\mathbf{b}}=[\hat{a}_0\hat{b}_0,\hat{a}_1\hat{b}_1,\hat{a}_2\hat{b}_2,\ldots,]$，然后进行逆FFT，得到的$h(x)$系数即想要的结果，时间复杂度为$\mathcal{O}(n\log n)$
 
 >[【官方双语】卷积的两种可视化|概率论中的X+Y既美妙又复杂_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1Yk4y1K7Az/?spm_id_from=333.999.0.0&vd_source=1dba7493016a36a32b27a14ed2891088) 最好的动画⭐
+
+
+### 自相关
+
+[Modal Testing](../Finite%20Element/Modal%20Testing.md)
 
 ## 摄动法
 

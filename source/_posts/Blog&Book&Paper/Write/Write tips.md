@@ -117,10 +117,56 @@ algorithm2e语法 [mlg.ulb.ac.be/files/algorithm2e.pdf](https://mlg.ulb.ac.be/fi
 
 - code 代码块粘贴到Word/PPT https://github.com/Lord-Turmoil/CodePaste
 
+
+### 交叉引用
+[Word中的图标题是Figure X，但插入交叉引用是Fig. X的解决方法？_海根_新浪博客](https://blog.sina.com.cn/s/blog_4a46812b0102x4rm.html)
+
+然后右键鼠标，选择“切换域代码”
+出现形如 `“{REF _Ref491875136 \h}”`
+然后 在末尾 加上 `\# "0"`  , 如 `“{REF _Ref491875136 \h\#"0"}”`(ps: 是0两边是双引号，网页显示成单引号)
+然后，在鼠标右键，再次选择“切换域代码”，
+然后对着 刚才修改的交叉引用，按键”F9“，此时，交叉引用的"Figure 6"就变成 "6",
+
+直接按"F9"就可以
+
+### 编号问题
+
 - endnote 个别word无法插入编号问题
   - [Reference error hash (#) + number. - EndNote / EndNote How To - Discourse](https://community.endnote.com/t/reference-error-hash-number/310353)
   - [how can I change the citing format back? - EndNote / EndNote How To - Discourse](https://community.endnote.com/t/how-can-i-change-the-citing-format-back/310352/8)
   - [(2 条消息) endnote插入文献时出现{，#}这样的乱码，怎么解？ - 知乎](https://www.zhihu.com/question/44969655) [endnote插入文献时出现{，#}这样的乱码_endnote大括号和井号-CSDN博客](https://blog.csdn.net/qq_43739296/article/details/114420524) 
+
+
+Word 每章编号 使用多级列表
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241216135227.png)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241216135312.png)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241216135327.png)
+
+
+word 公式编号+交叉引用
+[220604-Word公式自动标注+免标签引用_word中插入公式不要标签只要编号-CSDN博客](https://blog.csdn.net/qq_33039859/article/details/125121822)
+
+插入-->文本-->文档部件-->域-->编号-->ListNum-->NumberDefault
+ - 列表中级别选择 4 或者 域代码 `\l 4`
+ - 起始值 `\s 1` 默认为1，可以不用设置
+
+![73f81ae407890cffd32447c0518b208c.png (2422×1634)](https://i-blog.csdnimg.cn/blog_migrate/73f81ae407890cffd32447c0518b208c.png)
+
+交叉引用 编号
+
+![01c09e15854211a5dc9d1717c0a0e5e0.png (2414×1632)](https://i-blog.csdnimg.cn/blog_migrate/01c09e15854211a5dc9d1717c0a0e5e0.png)
+
+
+### 样式迁移
+
+[如何快速便捷地将Word文档的样式复制/迁移到到另一个Word文档 - 哔哩哔哩](https://www.bilibili.com/opus/834338628962353158)
+
+![a765850a20a824ae81d4675e771e672aaf30a470.png@1192w.avif (901×750)|666](https://i2.hdslb.com/bfs/article/a765850a20a824ae81d4675e771e672aaf30a470.png@1192w.avif)
+
+![aee3ebb4f7238061b5f1a9375b6c488b9eaaeec0.png@1192w.avif (843×497)|666](https://i2.hdslb.com/bfs/article/aee3ebb4f7238061b5f1a9375b6c488b9eaaeec0.png@1192w.avif)
 
 ## PPT
 
@@ -240,6 +286,12 @@ As demonstrated in Figure 3,
 - 为此：To this end
 
 loss function 惩罚penalize
+
+
+#### 论文
+
+- 在每一个一级标题（Section 1,2,..)内，缩写词重新定义（非常通俗的如FE除外）。全文统一。也就是说，新的section中的自定义术语要有全称，方便读者阅读。
+
 
 ### which
 

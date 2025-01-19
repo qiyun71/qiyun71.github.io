@@ -10,13 +10,12 @@ categories:
 
 <!-- more -->
 
-| 区别        | EI 会议                   | SCI                                                                                                    |
+| 区别        | 会议                      | SCI                                                                                                    |
 | --------- | ----------------------- | ------------------------------------------------------------------------------------------------------ |
 | MLP-based | 动力学响应-->结构参数，单次对单次      | 动力学响应-->结构参数，区间对区间                                                                                     |
 | MLP       | Inverse surrogate model | Interval identification model                                                                          |
 | 算例        | 三自由度弹簧、钢板               | 三自由度弹簧、钢板、飞机                                                                                           |
 | 期刊        | ISRERM                  | [Chinese Journal of Aeronautics](https://www.sciencedirect.com/journal/chinese-journal-of-aeronautics) |
-
 
 Finite Element (FE)
 Monte Carlo (MC)
@@ -28,7 +27,7 @@ Back Propagation (BP)
 Multi-Layer Perceptron (MLP)
 Sparrow Search Algorithm (SSA)
 
-# EI
+# Conference
 
 ## Abstract
 
@@ -551,3 +550,25 @@ Other paper about Self-supervised learning:
 1. [The sub-interval similarity: A general uncertainty quantification metric for both stochastic and interval model updating - ScienceDirect](https://www.sciencedirect.com/science/article/pii/S0888327022004575?via%3Dihub) SIS
 2. [An interval model updating strategy using interval response surface models - ScienceDirect](https://www.sciencedirect.com/science/article/pii/S0888327015000229?via%3Dihub) IRSM
 
+
+# Reviewer
+
+Reviewer 2
+
+一些概念需要更多解释。一些符号被多次重新定义而另一些符号定义较少
+
+仿真模型的细节描述较少。
+
+实验测量数据的噪声被忽略
+
+文章各部分之间没有提示/衔接
+
+创新性不清晰，用这种VGG网络结构处理FRF数据已经被提过
+
+使用FE model生成的响应数据来训练数值模型，并与实验数据进行对比，着重点似乎有点反了。着重在了有限元模型而不是真实结构，然而任何FE model只是实际观察过程的理想化。
+
+How such model 可以捕获真实系统的复杂性
+
+缺少关于所提方法的critical overview，overview 表述比清晰
+
+本文方法的limitations也没有陈述

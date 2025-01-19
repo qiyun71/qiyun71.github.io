@@ -26,9 +26,23 @@ Uncertainty sources：Parameter uncertainty、Model form uncertainty、Experimen
 - 将仅具有aleatory偶然不确定性的参数表示为具有完全确定的分布性质(如分布格式、均值、方差等)的随机变量。这种完全确定的分布称为“精确概率”。
 - 同时具有认知不确定性和选择性不确定性的参数被表示为一个分布性质不完全确定的随机变量，即“不精确概率”。这种不精确的概率由所谓的概率盒(P-box)来建模，其中无限数量的累积分布函数(CDF)曲线构成概率空间中的特定区域。
 
+>  [Aleatory or epistemic? Does it matter? - ScienceDirect](https://www.sciencedirect.com/science/article/pii/S0167473008000556) Structural Safety
+
+Uncertainty is categorized
+- Epistemic: the modeler sees a possibility to reduce them by gathering more data or by refining models. 可以减少
+- Aleatory: the modeler does not foresee the possibility of reducing them. 无法减少
+
+
 >  [A Survey of Uncertainty in Deep Neural Networks](https://arxiv.org/pdf/2107.03342)
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241215213725.png)
+
+## quoFEM
+
+> [Quantified Uncertainty with Optimization for the Finite Element Method (quoFEM) — Quantified Uncertainty with Optimization for the FEM documentation](https://nheri-simcenter.github.io/quoFEM-Documentation/index.html)
+> When learning Bayesian Model Updating & TMCMC, find from [mukeshramancha/transitional-mcmc: This repo contains the code of Transitional Markov chain Monte Carlo algorithm](https://github.com/mukeshramancha/transitional-mcmc)
+
+
 
 
 # Seminar

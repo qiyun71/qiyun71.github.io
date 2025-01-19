@@ -22,7 +22,6 @@ categories:
 - 思路1：随机的辨识网络，直接网络根据一组响应数据辨识一组参数
 - 思路2：确定的辨识网络，网络根据单个响应数据辨识单个参数，对一组中的每个数据进行单独辨识
 
-
 # Time series Surrogate Model
 
 难点：
@@ -96,7 +95,6 @@ $loss_{ellipse} = \lambda_{distance} loss_{distance} + \lambda_{\alpha} loss_{\a
 **归一化处理不对**
 - 之前的归一化处理方式：将1000组的每组60x5的数据单独进行归一化处理，1000组60x5的图片可能会有重合的部分，导致ab一对多frequency的情况发生
 - ***修改后的归一化方式***：将1000组所有的60x5数据统一进行归一化处理，1000组图片的值大的还是大，小的还是小，不会出现ab一对多frequency的情况发生(**只要nastran生成的数据没有问题**)
-
 
 
 ### ~~Chamfer Distance Loss~~

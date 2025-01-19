@@ -31,7 +31,8 @@ categories: Learn
 
 ## CNN
 
-```text
+```python
+"""
 卷积神将网络的计算公式为：
 N=(W-F+2P)/S+1
 其中
@@ -40,6 +41,16 @@ W：输入大小
 F：卷积核大小
 P：填充值的大小
 S：步长大小
+"""
+
+W = 15 # width
+F = 2 # kernel_size
+P = 0 # padding
+S = 2 # stride
+
+N= (W-F+2*P)/S+1
+
+print(f"input width:{W},output width{N}")
 ```
 
 ### UCNN

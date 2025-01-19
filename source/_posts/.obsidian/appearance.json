@@ -1,15 +1,16 @@
 {
   "baseFontSize": 16,
-  "theme": "obsidian",
+  "theme": "system",
   "translucency": false,
-  "cssTheme": "AnuPpuccin",
-  "interfaceFontFamily": "MiSans Semibold",
+  "cssTheme": "Blue Topaz",
+  "interfaceFontFamily": "MiSans Semibold,Comic Sans MS",
   "textFontFamily": "仓耳今楷03,MiSans,MiSans Semibold,HarmonyOS Sans SC,HYRunYuan 55W",
-  "monospaceFontFamily": "Maple Mono",
+  "monospaceFontFamily": "Consolas,Maple Mono",
   "accentColor": "",
   "nativeMenus": false,
   "enabledCssSnippets": [
-    "custom-admonitions.838117"
+    "custom-admonitions.838117",
+    "obsidian-default-theme"
   ],
   "showViewHeader": false,
   "baseFontSizeAction": true

@@ -48,6 +48,10 @@ Basic of Finite Element Analysis
 - 近似方法(差分)，将整体分为很多小部分，每个部分进行求解，细分越多越接近解析解
 - 近似方法(试函数)，选择满足边界条件的试函数(有待定系数)，带入控制方程(微分方程)，大概率不满足方程，带入控制方程得到残差函数并让残差最小。加权余量法——(残差函数与基底函数加权求和/求积分并令其为0，确当待定系数) 当残差与基函数的积分为零时，意味着在这些方向上的残差投影为零。
 
+>  [(4 封私信) FDM、FVM、FEM之间到底有没有联系？ - 知乎](https://www.zhihu.com/question/26247876)
+
+CFD??? 固体的FEM,流体的FDM和FVM理论
+
 
 >[ethz.ch/content/dam/ethz/special-interest/mavt/mechanical-systems/mm-dam/documents/Notes/IntroToFEA_red.pdf](https://ethz.ch/content/dam/ethz/special-interest/mavt/mechanical-systems/mm-dam/documents/Notes/IntroToFEA_red.pdf) 
 
@@ -58,6 +62,21 @@ Really nice book!!!
 
 
 >  [有限元分析 知识点总结 - 谁说读书没用啊 | 小红书 - 你的生活指南](https://www.xiaohongshu.com/discovery/item/665e9cf6000000000c01bb5b?source=webshare&xhsshare=pc_web&xsec_token=ABNlASerFlVV_tT41rvRjoPOehNMaa3psDGu-ZZqwKgZA=&xsec_source=pc_share)
+
+## 网格划分
+
+>  [深入解析 | 有限元网格的常用生成算法](https://mp.weixin.qq.com/s/s0-3qvQoOh0IjYZOItqcwQ)
+
+- 映射法
+- 四（八）叉树法
+- Delaunay三角化法: 每个三角形的外接圆内不包含其它顶点
+- 前沿推进法：从边界到内部的精细构建
+
+>  [CAE底层网格算法的无穷美学【附专用网格处理工具】](https://mp.weixin.qq.com/s/IKWnToWELxGhVc8uRmBeNA)
+
+> [All there is to know about different mesh types in CFD!](https://www.manchestercfd.co.uk/post/all-there-is-to-know-about-different-mesh-types-in-cfd)
+
+![a27d24_76b7481957424129998d971dff193a3f~mv2.jpg (1055×505)|666](https://static.wixstatic.com/media/a27d24_76b7481957424129998d971dff193a3f~mv2.jpg/v1/fill/w_1055,h_505,al_c,q_85,enc_auto/a27d24_76b7481957424129998d971dff193a3f~mv2.jpg)
 
 
 ## PINN
@@ -101,7 +120,11 @@ PINN目的就是求解$u$，用神经网络来逼近这个解$u_\theta(z)\approx
 
 >  [Notes About Operator Learning | NeXT](https://lmy98129.github.io/2024/01/18/Notes-About-Operator-Learning/)
 
+### Paper
 
+>  [基于物理信息神经网络 (PINN) 方法的结构动力响应分析](https://engineeringmechanics.cn/cn/article/pdf/preview/10.6052/j.issn.1000-4750.2024.04.0314.pdf)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241229135610.png)
 
 ## VEM (Virtual Element Method)
 
@@ -109,104 +132,3 @@ PINN目的就是求解$u$，用神经网络来逼近这个解$u_\theta(z)\approx
 > [An introduction to the Virtual Element Method](https://maths.dur.ac.uk/lms/101/talks/0493daveiga.pdf)
 
 
-# Software (about FE)
-
-## Solidworks
-
-建立好的模型导出为`.x_t`格式
-
-将Solid 转换成Surface：
-- **Delete Face**
-- Offset
-
-> [How To Convert Solid To Surface Body In SolidWorks - YouTube](https://www.youtube.com/watch?v=Fx0jX_7aJHM)
-
-## Patran
-
-Preferences --> Geometry 单位制 inches/m/mm，不同的单位设置材料特性时会有差异
-
-eg(钢板): E = 210GPa，$\rho = 7860 Kg/m^{3}$
-mm制：
-- Elastic Modulus/Shear Modulus：(210000)MPa/(83000)MPa
-- Poisson Ratio(0.25)：注意设置了E和G后，Poisson Ratio会自动计算(根据钢板算例测试出来的)
-- Density：(7.8599998E-09)$Kgf \cdot s^{2} /mm^{4}$ $(Kg/m^{3} =kgf \cdot s^{2}/m^{4})$ $(1Kgf = 9.8N = 9.8 Kg \cdot m/s^{2})$
-
-> [patran中数据的输入输出单位 - 百度文库](https://wenku.baidu.com/view/9f2572f37c1cfad6195fa7d6.html?fr=income1-doc-search&_wkts_=1714641483975&wkQuery=patran%E4%B8%AD%E6%95%B0%E6%8D%AE%E7%9A%84%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E5%8D%95%E4%BD%8D)
-
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240708153849.png)
-
-### Mode Frequency
-
--->生成 **bdf**
-
-1. File --> New --> `*.db`
-2. Menu --> Preferences --> Geometry --> 1000.0 (Millimeters) --> **Apply**
-3. File --> Import --> `*.x_t` --> **Apply** (Display --> Smooth Shade)
-4. Meshing -->(RHS) Mesh --> Solid -->(Main window) select solid --> Automatic Calculation  --> **Apply**
-5. Properties --> Isotropic -->(RHS) *Material Name* --> Input properties (Elastic Modulus: 210000MPa, Shear Modulus: 83000, Density: 7.86E-09 Kg/m^3) --> **Apply**
-6. Properties --> Solid --> Propert Set Name -->(RHS) Input properties --> Mat Prop Name select *gangban(Material Name)* -->  Select Application Region -->(Main window) select solid --> Add --> **Apply**
-7. Analysis --> Solution Type --> NORMAL MODES --> Solution Type --> Solution Parameters --> Results Output Format(XDB or OP2) --> Subcase --> Subcase Parameters --> Number of Desired Roots : 20 --> **Apply** Run nastran --> Get .bdf
-
-
-## Nastran
-
-[如何用matlab被nastran给整的明明白白 PART 1 KNOW YOUR ENEMY——.bdf文件 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/33538970)
-
-Nastran的Python库：[Welcome to pyNastran’s documentation for v1.3! — pyNastran 1.3 1.3 documentation (pynastran-git.readthedocs.io)](https://pynastran-git.readthedocs.io/en/1.3/index.html)
-
-Debug: [Nastran Error List 1. | PDF](https://www.scribd.com/doc/70652924/Nastran-Error-List-1)
-
-`D:\Software\Nastran\Nastran_install\bin\nastranw.exe *.bdf`
-
-### 卫星算例.bdf
-
-不同结构参数生成结构特征量FR
-
-```bdf file
-$ Elements and Element Properties for region : Shear_Panels
-PSHELL   1       1      .003     1               1
-
-- 36  行 .003 Shear_Panels 厚度 theta5
-- 429 行 .002 Central_Cylinder 厚度 theta3
-- 666 行 .001 Adapter 厚度 theta2 本来应该是密度2.7
-- 723 行 .002 Upper_platform 厚度 theta6
-- 864 行 .001 Lower_platform 厚度 theta4
-- 1020行 7.   mat_N 弹性模量  theta1  
-- 1023行 7.   mat_CC
-- 1026行 7.   mat_L
-- 1029行 7.   mat_SP
-- 1032行 7.   mat_U
-- 
-```
-
-- **主弹性模量**$\theta_1$ 70Gpa，
-- **主密度** $\theta_2$  ，密度2.7x $10^{3} kg/m^{3}$ (英文论文) or 适配器厚度 1mm(本 1)
-- **中心筒厚度**$\theta_3$ 2mm
-- 底板厚度 $\theta_4$ 1mm
-- **剪切板厚度**$\theta_5$ 2mm
-- 顶板厚度 $\theta_6$ 2.5mm
-
-
-# FEA二次开发(Python)
-
-Ansys: 
-> [Ansys与Python：r/ANSYS --- Ansys with Python : r/ANSYS](https://www.reddit.com/r/ANSYS/comments/14pak2j/ansys_with_python/)
-> [PyAnsys — PyAnsys](https://docs.pyansys.com/version/stable/)
-
-Nastran: 
-> [Welcome to pyNastran’s documentation for v1.3! — pyNastran 1.3 1.3 documentation (pynastran-git.readthedocs.io)](https://pynastran-git.readthedocs.io/en/1.3/index.html)
-
-pynastranGUI 支持对有限元模型和仿真结果的可视化，支持的模型文件格式：
-
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241016122523.png)
-
-
-
-
-# Other
-
-## FE & Blender
-
-可否指教一下blender如何渲染abaqus求解文件odb？
-
-odb写个脚本导出obj文件，然后导进blender一张张渲染就好

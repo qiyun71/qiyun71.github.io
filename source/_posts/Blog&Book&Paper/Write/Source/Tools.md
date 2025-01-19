@@ -99,6 +99,15 @@ Paper2gui，一款 windows 应用，包含很多 AI 工具（with GUI）
 可重复使用的计算机视觉工具
 [roboflow/supervision: We write your reusable computer vision tools. 💜](https://github.com/roboflow/supervision)
 
+
+## 简历
+
+简历生成
+
+[Arman19941113/dnd-resume: 🚀 简历生成工具，支持在线预览、打印 PDF](https://github.com/Arman19941113/dnd-resume)
+
+![screen-shot-edit.png (2840×1488)](https://raw.githubusercontent.com/Arman19941113/dnd-resume/refs/heads/main/public/screen-shot-edit.png)
+
 # 软件
 
 pdf全文档翻译

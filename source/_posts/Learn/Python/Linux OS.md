@@ -25,6 +25,7 @@ Linux 万物皆可文件
 为特定程序设置：
 - `LD_LIBRARY_PATH=/usr/local/lib64:$LD_LIBRARY_PATH your_program`
 
+# 基础指令
 
 
 ## zip压缩
@@ -138,9 +139,13 @@ $ arch
 x86_64
 
 
-# screen 
+## screen 
 
 - `screen`：启动一个新的 `screen` 会话。
 - `screen -r`：恢复之前的 `screen` 会话。后面接名字可以恢复指定的窗口
 - `screen -ls`：列出当前存在的 `screen` 会话。
-- 
+
+
+
+>  [10 Essential Terminal Commands Every Developer Should Know](https://www.trevorlasn.com/blog/10-essential-terminal-commands-every-developer-should-know)
+

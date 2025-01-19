@@ -1,11 +1,13 @@
 {
   "pinned": [
     "markdown-prettifier:markdown-prettifier-run",
-    "obsidian-title-serial-number-plugin:set-title-serial-number-editor-command",
     "daily-notes",
     "obsidian-admonition:insert-admonition",
     "obsidian-plugin-toc:create-toc",
     "workspace:export-pdf",
-    "open-with-default-app:show"
+    "open-with-default-app:show",
+    "obsidian-day-planner:clock-in",
+    "obsidian-day-planner:clock-out",
+    "obsidian-day-planner:show-day-planner-today-note"
   ]
 }

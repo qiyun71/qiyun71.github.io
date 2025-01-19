@@ -57,18 +57,6 @@
       "path": "3DReconstruction/3D Model.md"
     },
     {
-      "basename": "(WW) Isogeometric analysis",
-      "path": "Blog&Book&Paper/Read/Papers/(WW) Isogeometric analysis.md"
-    },
-    {
-      "basename": "MyGo",
-      "path": "Blog&Book&Paper/Write/MyGo.md"
-    },
-    {
-      "basename": "(BSF)Uncertainty",
-      "path": "Blog&Book&Paper/Read/Papers/(BSF)Uncertainty.md"
-    },
-    {
       "basename": "Uncertainty",
       "path": "Other Interest/Uncertainty.md"
     },
@@ -103,10 +91,6 @@
     {
       "basename": "Dimensions  Measurement",
       "path": "3DReconstruction/Practical/Dimensions  Measurement.md"
-    },
-    {
-      "basename": "(WX) Dynamics experiment",
-      "path": "Blog&Book&Paper/Read/Papers/(WX) Dynamics experiment.md"
     },
     {
       "basename": "飞机算例数据集生成",
@@ -203,6 +187,7 @@
   ],
   "omittedPaths": [],
   "omittedTags": [],
+  "updateOn": "file-open",
   "omitBookmarks": false,
   "maxLength": null,
   "openType": "tab"

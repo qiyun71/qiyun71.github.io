@@ -8,49 +8,80 @@
         "type": "tabs",
         "children": [
           {
-            "id": "ebf9c20d544cc4cf",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "excalidraw",
-              "state": {
-                "file": "Blog&Book&Paper/Write/Route.excalidraw.md"
-              },
-              "pinned": true,
-              "icon": "excalidraw-icon",
-              "title": "Route.excalidraw"
-            }
-          },
-          {
-            "id": "cdb74a3eff8223e1",
+            "id": "2b2f68922169d229",
             "type": "leaf",
             "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Learn/Math/Math.md",
+                "file": "Blog&Book&Paper/Route.md",
                 "mode": "source",
                 "backlinks": false,
                 "source": false
               },
               "pinned": true,
               "icon": "lucide-file",
-              "title": "Math"
+              "title": "Route"
             }
           },
           {
-            "id": "49c9379a1b3db376",
+            "id": "a6fbc03e4542d4d5",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "ModelUpdating/Basics about ModelUpdating.md",
+                "file": "3DReconstruction/Code of Multi-view 3D Reconstruction based on SDF and volume rendering.md",
                 "mode": "source",
                 "backlinks": false,
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Basics about ModelUpdating"
+              "title": "Code of Multi-view 3D Reconstruction based on SDF and volume rendering"
+            }
+          },
+          {
+            "id": "e9e2092ccb61b3ba",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Blog&Book&Paper/Write/Write Paper/Model Updating/Stochastic Model Calibration with Image Encoding——Converting High-Dimensional Frequency-Domain Responses into RGB Images for Neural Network Inversion.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Stochastic Model Calibration with Image Encoding——Converting High-Dimensional Frequency-Domain Responses into RGB Images for Neural Network Inversion"
+            }
+          },
+          {
+            "id": "3dbd8fd6519923dc",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "ModelUpdating/Stochastic Model Updating/A feature map of frequency response functions based model updating method using the Bayesian convolutional neural network.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "A feature map of frequency response functions based model updating method using the Bayesian convolutional neural network"
+            }
+          },
+          {
+            "id": "a42366aa262d6c8a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Other Interest/模态试验悬挂方式.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "模态试验悬挂方式"
             }
           }
         ],
@@ -73,10 +104,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "ModelUpdating/Basics about ModelUpdating.md"
+                "file": "Blog&Book&Paper/Write/Write Paper/Model Updating/Stochastic Model Calibration with Image Encoding——Converting High-Dimensional Frequency-Domain Responses into RGB Images for Neural Network Inversion.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of Basics about ModelUpdating"
+              "title": "Stochastic Model Calibration with Image Encoding——Converting High-Dimensional Frequency-Domain Responses into RGB Images for Neural Network Inversion 的大纲"
             }
           },
           {
@@ -85,7 +116,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "Uncertainty",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -93,7 +124,7 @@
                 "sortOrder": "alphabetical"
               },
               "icon": "lucide-search",
-              "title": "Search"
+              "title": "搜索"
             }
           }
         ]
@@ -111,7 +142,7 @@
                 "sortOrder": "alphabeticalReverse"
               },
               "icon": "lucide-folder-closed",
-              "title": "Files"
+              "title": "文件列表"
             }
           },
           {
@@ -130,8 +161,8 @@
             "state": {
               "type": "advanced-tables-toolbar",
               "state": {},
-              "icon": "spreadsheet",
-              "title": "Advanced Tables"
+              "icon": "lucide-file",
+              "title": "插件不再活动"
             }
           }
         ]
@@ -154,8 +185,8 @@
             "state": {
               "type": "recent-files",
               "state": {},
-              "icon": "clock",
-              "title": "Recent Files"
+              "icon": "lucide-file",
+              "title": "插件不再活动"
             }
           },
           {
@@ -186,32 +217,12 @@
             }
           },
           {
-            "id": "1714c288e5385929",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "d900b1801d32e42f",
-            "type": "leaf",
-            "state": {
-              "type": "Saved Queries View",
-              "state": {},
-              "icon": "feather-mouse-pointer",
-              "title": "Saved Queries"
-            }
-          },
-          {
             "id": "515b2e82e0a9c55f",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "ModelUpdating/Basics about ModelUpdating.md",
+                "file": "Other Interest/Reliability.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -221,11 +232,141 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Basics about ModelUpdating"
+              "title": "Backlinks for Reliability"
+            }
+          },
+          {
+            "id": "1145d5e3497d1061",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "新标签页"
+            }
+          },
+          {
+            "id": "44157d0e5c88f839",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "新标签页"
+            }
+          },
+          {
+            "id": "348ff1c38e22d597",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "新标签页"
+            }
+          },
+          {
+            "id": "80ba7c26e9e7cdc4",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "新标签页"
+            }
+          },
+          {
+            "id": "a766f6f1beebc5d3",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "新标签页"
+            }
+          },
+          {
+            "id": "161b8637133fd23d",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "新标签页"
+            }
+          },
+          {
+            "id": "b20dd9718ab0704e",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "新标签页"
+            }
+          },
+          {
+            "id": "af8a38c0fdf42fca",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "新标签页"
+            }
+          },
+          {
+            "id": "915655910369c628",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "新标签页"
+            }
+          },
+          {
+            "id": "e729be5bec10b728",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "新标签页"
+            }
+          },
+          {
+            "id": "9b4943ad0cd49749",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "新标签页"
+            }
+          },
+          {
+            "id": "ac0b5f7e90d48cc4",
+            "type": "leaf",
+            "state": {
+              "type": "Saved Queries View",
+              "state": {},
+              "icon": "feather-mouse-pointer",
+              "title": "Saved Queries"
+            }
+          },
+          {
+            "id": "a9e43d0ff5630574",
+            "type": "leaf",
+            "state": {
+              "type": "Saved Queries View",
+              "state": {},
+              "icon": "feather-mouse-pointer",
+              "title": "Saved Queries"
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 16
       }
     ],
     "direction": "horizontal",
@@ -234,61 +375,71 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:Open quick switcher": false,
-      "graph:Open graph view": false,
-      "canvas:Create new canvas": false,
-      "daily-notes:Open today's daily note": false,
-      "templates:Insert template": false,
-      "command-palette:Open command palette": false,
-      "markdown-importer:Open format converter": false,
-      "audio-recorder:Start/stop recording": false,
-      "workspaces:Manage workspace layouts": false,
+      "obsidian42-brat:BRAT": false,
+      "sheet-plus:创建 Excel 文件": false,
+      "obsidian-excalidraw-plugin:新建绘图文件": false,
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "markdown-importer:打开 Markdown 格式转换器": false,
+      "audio-recorder:开始/结束录音": false,
+      "workspaces:管理工作区布局": false,
       "table-editor-obsidian:Advanced Tables Toolbar": false,
-      "templater-obsidian:Templater": false,
-      "sheet-plus:Create excel file": false,
-      "obsidian-excalidraw-plugin:Create new drawing": false
+      "templater-obsidian:Templater": false
     }
   },
-  "active": "49c9379a1b3db376",
+  "active": "e9e2092ccb61b3ba",
   "lastOpenFiles": [
-    "Learn/Math/Math.md",
-    "Blog&Book&Paper/Write/LearningRoute.canvas",
-    "Blog&Book&Paper/Write/Route.excalidraw.md",
-    "Blog&Book&Paper/Write/Interest.excalidraw.md",
-    "3DReconstruction/NeuS-based 3D Reconstruction.md",
-    "ModelUpdating/Paper about ModelUpdating.md",
-    "Blog&Book&Paper/Write/Write Paper/3D Reconstruction/Master Paper.md",
-    "3DReconstruction/Code of Multi-view 3D Reconstruction based on SDF and volume rendering.md",
-    "3DReconstruction/Practical/Finite Element Model 3D Reconstruction.md",
-    "3DReconstruction/Multi-view/Implicit Function/NeRF-based/NeRF Other Research/NeRF-review.md",
-    "3DReconstruction/Paper About 3D Reconstruction.md",
-    "Other Interest/CAX.md",
-    "3DReconstruction/3D Model.md",
-    "Blog&Book&Paper/Read/Papers/(WW) Isogeometric analysis.md",
+    "Blog&Book&Paper/Read/Book/模态实验/file/Pasted Image 20250113154118_794.png",
+    "Blog&Book&Paper/Read/Book/模态实验/file/Pasted Image 20250113105915_990.png",
+    "Blog&Book&Paper/Read/Book/模态实验/file/Pasted Image 20241223215530_735.png",
+    "Blog&Book&Paper/Read/Book/模态实验/file/Pasted Image 20241223215508_791.png",
+    "Blog&Book&Paper/Read/Book/模态实验/file/Pasted Image 20241223215436_004.png",
+    "Blog&Book&Paper/Read/Book/模态实验/file/Pasted Image 20241223215420_891.png",
+    "Blog&Book&Paper/Read/Book/模态实验/file/Pasted Image 20241223215402_410.png",
+    "Blog&Book&Paper/Read/Book/模态实验/file/Pasted Image 20241223215352_534.png",
+    "Blog&Book&Paper/Read/Book/模态实验/file/Pasted Image 20241223215327_991.png",
+    "Blog&Book&Paper/Read/Book/模态实验/file/Pasted Image 20241223215248_782.png",
+    "Blog&Book&Paper/Read/Book/模态实验/file/Pasted Image 20241223215243_151.png",
+    "Blog&Book&Paper/Read/Book/模态实验/file",
+    "Blog&Book&Paper/Read/Book/模态实验",
+    "Blog&Book&Paper/Read/Book/Japanse.md",
+    "Blog&Book&Paper/Read/Blog/CPU_VS_GPU.md",
+    "Blog&Book&Paper/Read/Blockchain.md",
     "Blog&Book&Paper/Write/MyGo.md",
+    "Blog&Book&Paper/Read/Papers/核领域可靠性.md",
+    "Blog&Book&Paper/Read/Papers/(WX) Dynamics experiment.md",
+    "Blog&Book&Paper/Read/Papers/(WW) Isogeometric analysis.md",
     "Blog&Book&Paper/Read/Papers/(BSF)Uncertainty.md",
-    "Other Interest/Uncertainty.md",
-    "Blog&Book&Paper/Read/Book Lists.md",
-    "ModelUpdating/Basics about ModelUpdating.md",
-    "Blog&Book&Paper/Write/Write Paper/Model Updating/Self-superviside Model Updating through inverse calibration model.md",
+    "Blog&Book&Paper/Read/Papers/(DLT_ZX).md",
+    "Blog&Book&Paper/Read/Papers",
+    "Blog&Book&Paper/Read/Life.md",
+    "Blog&Book&Paper/Write/Write Paper/Model Updating/Stochastic Model Calibration with Image Encoding——Converting High-Dimensional Frequency-Domain Responses into RGB Images for Neural Network Inversion.md",
+    "Blog&Book&Paper/Write/Omoshiroi.excalidraw.md",
     "Blog&Book&Paper/Write/Write Paper/Model Updating/A fast interval model updating method based on MLP neural network.md",
-    "Blog&Book&Paper/Write/Write Paper/Model Updating/A fast stochastic model updating technique based on an inverse FE surrogate model.md",
-    "Other Interest/Dynamic Response Prediction (Deterministic).md",
+    "3DReconstruction/Code of Multi-view 3D Reconstruction based on SDF and volume rendering.md",
+    "ModelUpdating/Stochastic Model Updating/A feature map of frequency response functions based model updating method using the Bayesian convolutional neural network.md",
+    "Blog&Book&Paper/Route.md",
+    "Blog&Book&Paper/Write/Source/Computer.md",
     "ModelUpdating/Case about ModelUpdating.md",
-    "Other Interest/Vibration Measurement.md",
-    "3DReconstruction/Practical/Dimensions  Measurement.md",
-    "3DReconstruction/Practical",
-    "3DReconstruction/Basic Knowledge/NeRF/NeRF",
-    "3DReconstruction/Basic Knowledge/NeRF",
-    "3DReconstruction/Basic Knowledge",
-    "Blog&Book&Paper/Write/file/download.jpg",
-    "Blog&Book&Paper/Write/file/images.jpg",
+    "Other Interest/模态试验悬挂方式.md",
+    "Learn/Finite Element/Modal Testing.md",
+    "qiyun71/Blog_images/MyBlogPic/202520250119171150837.png.md",
+    "qiyun71/Blog_images/MyBlogPic",
+    "qiyun71/Blog_images",
+    "qiyun71",
+    "Learn/Finite Element/Pa&Nastran.md",
+    "Project/PyNastran.md",
+    "Blog&Book&Paper/Write/Source/IPV6.md",
+    "Learn/Python/Figure.md",
+    "Blog&Book&Paper/Write/LearningRoute.canvas",
+    "Blog&Book&Paper/Write/Write Paper/Model Updating/file",
+    "Day Planners",
     "Blog&Book&Paper/Write/file",
-    "Blog&Book&Paper/Write/Blog",
-    "3DReconstruction/Multi-view/file/3DReconstruction-Results.xlsx",
-    "3DReconstruction/Multi-view/file",
-    "PT43D",
-    "Blog&Book&Paper/Write/Write Paper/3D Reconstruction/file/基于神经辐射场的三维重建算法研究_夏月.pdf",
+    "Excalidraw",
     "3DReconstruction/Basic Knowledge/NeRF/NeRF.canvas",
     "未命名.canvas"
   ]

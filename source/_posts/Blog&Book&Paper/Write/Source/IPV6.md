@@ -160,6 +160,9 @@ bash <(curl -Ls https://raw.githubusercontent.com/vaxilu/x-ui/master/install.sh)
 ### 开放端口+BBR加速
 
 ```
+yum install firewalld
+sudo systemctl start firewalld
+
 firewall-cmd --permanent --add-port=54321/tcp --add-port=12345/tcp
 #开放端口（54321是面板端口，12345是后面节点要用的）
 
@@ -170,6 +173,7 @@ firewall-cmd --reload
 
 #重启防火墙(修改配置后要重启防火墙)
 
+# 开启BBR
 echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
 echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
 sysctl -p
@@ -184,6 +188,31 @@ reboot
 浏览器打开
 ipv4:port
 
+#### 端口被封了
+
+新开一个
+```
+firewall-cmd --permanent --add-port=1771/tcp
+firewall-cmd --reload
+```
+
+### ssh连接
+
+```
+ssh -p port root@ip_address
+```
+
+### 日志滚动
+
+在x-ui面板设置中添加：
+```json
+"log": {
+      "access": "/var/log/xray/access.log",       
+      "error": "/var/log/xray/error.log",       
+      "loglevel": "debug"     }
+```
+
+然后再bash中输入： `tail -f /var/log/xray/access.log` 
 
 ## Error
 
