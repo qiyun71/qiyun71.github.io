@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/yqq/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Patran前处理 &amp; Nastran计算">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Pa&amp;Nastran">
+<meta property="og:url" content="http://example.com/Learn/Finite%20Element/Pa&Nastran/index.html">
+<meta property="og:site_name" content="QiYun">
+<meta property="og:description" content="Patran前处理 &amp; Nastran计算">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i2.hdslb.com/bfs/article/1564932c6e363ac45d0902478c047d4dc859a6a2.png@1192w.avif">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240708153849.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241016122523.png">
+<meta property="article:published_time" content="2024-12-25T02:21:16.000Z">
+<meta property="article:modified_time" content="2025-01-16T10:58:30.055Z">
+<meta property="article:author" content="Qi Yun">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i2.hdslb.com/bfs/article/1564932c6e363ac45d0902478c047d4dc859a6a2.png@1192w.avif">
+
+<link rel="canonical" href="http://example.com/Learn/Finite%20Element/Pa&Nastran/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Pa&Nastran | QiYun</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">QiYun</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Note</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/Learn/Finite%20Element/Pa&Nastran/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiYun">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Pa&Nastran
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2024-12-25 10:21:16" itemprop="dateCreated datePublished" datetime="2024-12-25T10:21:16+08:00">2024-12-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-01-16 18:58:30" itemprop="dateModified" datetime="2025-01-16T18:58:30+08:00">2025-01-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Learn-Finite-Element/" itemprop="url" rel="index"><span itemprop="name">Learn/Finite Element</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>1.9k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>7 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Patran前处理 &amp; Nastran计算</p>
+<span id="more"></span>
+<h2 id="Modeling"><a href="#Modeling" class="headerlink" title="Modeling"></a>Modeling</h2><p>Solidworks建立好的模型导出为<code>.x_t</code>格式</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Fx0jX_7aJHM">How To Convert Solid To Surface Body In SolidWorks - YouTube</a></p>
+</blockquote>
+<p>抽壳：将Solid 转换成Surface：</p>
+<ul>
+<li><strong>Delete Face</strong></li>
+<li>Offset</li>
+</ul>
+<p>Patran中进行网格划分—&gt;材料属性设置—&gt;边界条件和负载设置，得到bdf文件<br>Nastran利用bdf文件进行进行求解</p>
+<h2 id="Patran"><a href="#Patran" class="headerlink" title="Patran"></a>Patran</h2><p>Preferences —&gt; Geometry 单位制 inches/m/mm，不同的单位下材料特性的尺度会有所不同</p>
+<p>eg(钢板): E = 210GPa，$\rho = 7860 Kg/m^{3}$<br>常用的是mm制：</p>
+<ul>
+<li>Elastic Modulus/Shear Modulus：(210000)MPa/(83000)MPa</li>
+<li>Poisson Ratio(0.25)：注意设置了E和G后，Poisson Ratio会自动计算(根据钢板算例测试出来的)</li>
+<li>Density：(7.8599998E-09) $Mg/mm^3$</li>
+<li>$Kgf \cdot s^{2} /mm^{4}$ $(Kg/m^{3} =kgf \cdot s^{2}/m^{4})$ $(1Kgf = 9.8N = 9.8 Kg \cdot m/s^{2})$</li>
+</ul>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://wenku.baidu.com/view/9f2572f37c1cfad6195fa7d6.html?fr=income1-doc-search&amp;_wkts_=1714641483975&amp;wkQuery=patran%E4%B8%AD%E6%95%B0%E6%8D%AE%E7%9A%84%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E5%8D%95%E4%BD%8D">patran中数据的输入输出单位 - 百度文库</a></p>
+</blockquote>
+<p>$1Mg = 10^{3}Kg= 10^{6}g=10^{9}mg$ </p>
+<p><img src="https://i2.hdslb.com/bfs/article/1564932c6e363ac45d0902478c047d4dc859a6a2.png@1192w.avif" alt="1564932c6e363ac45d0902478c047d4dc859a6a2.png@1192w.avif (1192×457)|666"></p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240708153849.png" alt="image.png|666"></p>
+<h3 id="Mode-Frequency"><a href="#Mode-Frequency" class="headerlink" title="Mode Frequency"></a>Mode Frequency</h3><p>—&gt;生成 <strong>bdf</strong></p>
+<ol>
+<li>File —&gt; New —&gt; <code>*.db</code></li>
+<li>Menu —&gt; Preferences —&gt; Geometry —&gt; 1000.0 (Millimeters) —&gt; <strong>Apply</strong></li>
+<li>File —&gt; Import —&gt; <code>*.x_t</code> —&gt; <strong>Apply</strong> (Display —&gt; Smooth Shade)</li>
+<li>Meshing —&gt;(RHS) Mesh —&gt; Solid —&gt;(Main window) select solid —&gt; Automatic Calculation  —&gt; <strong>Apply</strong></li>
+<li>Properties —&gt; Isotropic —&gt;(RHS) <em>Material Name</em> —&gt; Input properties (Elastic Modulus: 210000MPa, Shear Modulus: 83000, Density: 7.86E-09 Kg/m^3) —&gt; <strong>Apply</strong></li>
+<li>Properties —&gt; Solid —&gt; Propert Set Name —&gt;(RHS) Input properties —&gt; Mat Prop Name select <em>gangban(Material Name)</em> —&gt;  Select Application Region —&gt;(Main window) select solid —&gt; Add —&gt; <strong>Apply</strong></li>
+<li>Analysis —&gt; Solution Type —&gt; NORMAL MODES —&gt; Solution Type —&gt; Solution Parameters —&gt; Results Output Format(XDB or OP2) —&gt; Subcase —&gt; Subcase Parameters —&gt; Number of Desired Roots : 20 —&gt; <strong>Apply</strong> Run nastran —&gt; Get .bdf</li>
+</ol>
+<h3 id="Frequency-Response-Function"><a href="#Frequency-Response-Function" class="headerlink" title="Frequency Response Function"></a>Frequency Response Function</h3><p>在Nastran动力学如频率响应和瞬态响应计算中，有模态法和直接法两种计算方法</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1eZ4y1A7F6/?buvid=XXA7157A2595D8DAA7D27D13F5911BB415F26&amp;from_spmid=search.search-result.0.0&amp;is_story_h5=false&amp;mid=5E%2FE0HONObjFbvgpVZnCxw%3D%3D&amp;plat_id=116&amp;share_from=ugc&amp;share_medium=android&amp;share_plat=android&amp;share_session_id=bbb8e522-8d38-49e4-8f32-d742b36779a7&amp;share_source=WEIXIN&amp;share_tag=s_i&amp;spmid=united.player-video-detail.0.0&amp;timestamp=1735035868&amp;unique_k=AoMBTyz&amp;up_id=624875096&amp;vd_source=1dba7493016a36a32b27a14ed2891088">MSC Patran-Nastran 2021应用实例—直接法频率响应分析（案例八）_哔哩哔哩_bilibili</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1ob4y1R7Yk/?share_source=copy_web&amp;vd_source=a372600987f019e355fd7480b9a36a68">MSC Patran-Nastran 2021应用实例—模态法频率响应分析（案例九）_哔哩哔哩_bilibili</a></li>
+</ul>
+<ol>
+<li>File —&gt; New —&gt; <code>*.db</code></li>
+<li>Menu —&gt; Preferences —&gt; Geometry —&gt; 1000.0 (Millimeters) —&gt; <strong>Apply</strong></li>
+<li>File —&gt; Import —&gt; <code>*.x_t</code> —&gt; <strong>Apply</strong> (Display —&gt; Smooth Shade)</li>
+<li>Meshing —&gt;(RHS) Mesh —&gt; Solid —&gt;(Main window) select solid —&gt; Automatic Calculation  —&gt; <strong>Apply</strong></li>
+<li>Properties —&gt; Isotropic —&gt;(RHS) <em>Material Name</em> —&gt; Input properties (Elastic Modulus: 210000MPa, Shear Modulus: 83000, Density: 7.86E-09 Kg/m^3) —&gt; <strong>Apply</strong></li>
+<li>Properties —&gt; Solid —&gt; Propert Set Name —&gt;(RHS) Input properties —&gt; Mat Prop Name select <em>gangban(Material Name)</em> —&gt;  Select Application Region —&gt;(Main window) select solid —&gt; Add —&gt; <strong>Apply</strong></li>
+</ol>
+<p>mesh —&gt; Properties create —&gt; set properties for solid 一样的步骤</p>
+<p>之后：<br>直接法：约束—&gt; 非空间场(频率范围？) —&gt; 时间依赖的工况 —&gt; 载荷 —&gt; 分析</p>
+<ol>
+<li>Loads/BCs —&gt; Nodal —&gt; Displacement Constraint —&gt; (RHS)<em>New Set Name</em> —&gt; Input Data —&gt; T1 T2 T3 R1 R2 R3 all is 0 (全约束) —&gt;  OK —&gt; Select Application Region —&gt; Select FEM —&gt; 一条边上的点 Node —&gt; Add —&gt; OK —&gt; Apply</li>
+<li>Loads/BCs —&gt; LBC Fields 选第一排第一个 —&gt; (RHS) 非空间场Non Spatial + Tabular Input —&gt; Field Name —&gt; Table Definition select Frequency —&gt; Input Data —&gt; f-1 2e1 1 | f-2 1e3 1 —&gt; OK—&gt; Apply</li>
+<li>Loads/BCs —&gt; Load Cases —&gt; Type: Time Dependent —&gt; Load Case Name —&gt; Input Data —&gt; Select Individual Loads/BCs —&gt; 选择之前设置的约束 —&gt; OK —&gt; Apply </li>
+<li>Loads/BCs —&gt; Nodal —&gt; Force —&gt; New Set Name —&gt; Input Data —&gt;  F1 F2 F3 &lt; 0 0 1&gt; 要看自己的力方向设置 —&gt; 同行Time/Freq. Dependence 选择非空间场 —&gt; Select Application Region —&gt; FEM select nodes —&gt; Add —&gt; OK —&gt; Apply</li>
+<li>Analysis —&gt; Solution Type —&gt; FREQUENCY RESPONSE —&gt; <strong>Formulation Direct 直接法</strong> —&gt; Solution Type —&gt; Solution Parameters —&gt; Results Output Format(XDB or OP2) —&gt; Subcase —&gt; 选择自定义时间依赖的case —&gt; Subcase Select —&gt; <strong>Apply</strong> Run nastran —&gt; Get .bdf</li>
+</ol>
+<p>nastran算不出来</p>
+<p>模态法：</p>
+<ol>
+<li>Loads/BCs —&gt; Nodal —&gt; Displacement Constraint —&gt; (RHS)<em>New Set Name</em> —&gt; Input Data —&gt; T1 T2 T3 R1 R2 R3 all is 0 (全约束) —&gt;  OK —&gt; Select Application Region —&gt; Select FEM —&gt; 一条边上的点 Node —&gt; Add —&gt; OK —&gt; Apply</li>
+<li>Loads/BCs —&gt; LBC Fields 选第一排第一个 —&gt; (RHS) 非空间场Non Spatial + Tabular Input —&gt; Field Name —&gt; Table Definition select Frequency 非空间场<ol>
+<li>与压力有关的数据 p —&gt; Field Type: Real —&gt; Input Data —&gt; f-1 2e1 1 | f-2 1e3 1 —&gt; OK—&gt; </li>
+<li>与集中力有关的数据 f —&gt; Field Type: Complex —&gt; Input Data —&gt; row1 2e1 1 -4.5e1 | row2 1e3 1 -4.5e1 —&gt; OK—&gt; </li>
+</ol>
+</li>
+<li>Loads/BCs —&gt; Load Cases —&gt; Type: Time Dependent —&gt; Load Case Name —&gt; Input Data —&gt; Select Individual Loads/BCs —&gt; 选择之前设置的约束 —&gt; OK —&gt; Apply </li>
+<li>Loads/BCs —&gt; Element Uniform —&gt; Pressure —&gt; New Set Name —&gt; Input Data —&gt;  压力+集中力载荷<ol>
+<li>Pressure: -0.3 —&gt; 同行Time/Freq. Dependence 选择非空间场 p —&gt; Select Application Region —&gt; 节点全选—&gt; Add —&gt; OK —&gt; Apply</li>
+<li>F1 F2 F3 &lt; 0 0 1&gt; 要看自己的力方向设置 —&gt; 同行Time/Freq. Dependence 选择非空间场 —&gt; Select Application Region —&gt; FEM select nodes —&gt; Add —&gt; OK —&gt; Apply</li>
+</ol>
+</li>
+<li>Analysis —&gt; Solution Type —&gt; FREQUENCY RESPONSE —&gt; <strong>Formulation Modal 模态法</strong> —&gt; Solution Type —&gt; Solution Parameters (Mass Calculation: Coupled) —&gt; Results Output Format(XDB or OP2) —&gt; Subcase —&gt; 选择自定义时间依赖的case —&gt; Subcase Select  —&gt; <strong>Apply</strong> Run nastran —&gt; Get .bdf</li>
+</ol>
+<h3 id="共节点"><a href="#共节点" class="headerlink" title="共节点"></a>共节点</h3><h2 id="Nastran"><a href="#Nastran" class="headerlink" title="Nastran"></a>Nastran</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/33538970">如何用matlab被nastran给整的明明白白 PART 1 KNOW YOUR ENEMY——.bdf文件 - 知乎 (zhihu.com)</a></p>
+<p>Nastran的Python库：<a target="_blank" rel="noopener" href="https://pynastran-git.readthedocs.io/en/1.3/index.html">Welcome to pyNastran’s documentation for v1.3! — pyNastran 1.3 1.3 documentation (pynastran-git.readthedocs.io)</a></p>
+<p>Debug: <a target="_blank" rel="noopener" href="https://www.scribd.com/doc/70652924/Nastran-Error-List-1">Nastran Error List 1. | PDF</a></p>
+<p><code>D:\Software\Nastran\Nastran_install\bin\nastranw.exe *.bdf</code></p>
+<h3 id="bdf文件"><a href="#bdf文件" class="headerlink" title="bdf文件"></a>bdf文件</h3><p>输出文件格式：<code>PARAM    POST    0</code></p>
+<ul>
+<li>POST 0 不输出op2文件</li>
+<li>POST,-1 生成 OP2 文件，但不包含几何数据</li>
+<li><strong>POST,1 生成 OP2 文件，并包含几何数据</strong></li>
+<li>POST,2 生成 OP2 文件，并包含几何数据和优化数据. (在卫星算例中需要改成POST 2，但是在折叠翼算例中只需要POST 1 即可，<strong><em>可能是版本不同的原因</em></strong>)</li>
+</ul>
+<p>输出节点定义：<code>SET xxx= 节点编号</code></p>
+<ul>
+<li>比如定义11个节点， <code>SET 1 = 118,237,255,381,416,446,521,556,587,728,827</code></li>
+</ul>
+<p><strong>Material ID</strong> 是材料的唯一标识符，用于在 BDF 文件中定义材料的属性。包括弹性模量、泊松比、密度等<br><code>MAT1    1       2.1+11   .3      7800.</code> 材料ID1，弹性模量E，泊松比nu，密度rho<br>修改材料属性：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">material_id = <span class="number">1</span></span><br><span class="line"><span class="keyword">if</span> material_id <span class="keyword">in</span> bdf_model.materials:</span><br><span class="line">    material = bdf_model.materials[material_id]</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;材料 ID <span class="subst">&#123;material_id&#125;</span> 的属性: <span class="subst">&#123;material&#125;</span>&quot;</span>)</span><br><span class="line">    material.E = <span class="number">3.0e11</span>  <span class="comment"># 修改弹性模量</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>Properties</strong> 是单元属性的定义，用于描述单元的几何和材料特性。单元类型、厚度、材料 ID 等<br><code>PSHELL  1       1       .01</code> 属性ID1，引用材料的ID1，厚度0.01m<br>修改单元属性：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">property_id = <span class="number">1</span></span><br><span class="line"><span class="keyword">if</span> property_id <span class="keyword">in</span> bdf_model.properties:</span><br><span class="line">    <span class="built_in">property</span> = bdf_model.properties[property_id]</span><br><span class="line">    <span class="built_in">property</span>.t = <span class="number">0.02</span>  <span class="comment"># 修改厚度</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;属性 ID <span class="subst">&#123;property_id&#125;</span> 的定义: <span class="subst">&#123;<span class="built_in">property</span>&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;引用的材料 ID: <span class="subst">&#123;<span class="built_in">property</span>.mid&#125;</span>&quot;</span>)  <span class="comment"># 获取属性引用的材料 ID</span></span><br></pre></td></tr></table></figure></p>
+<p>阻尼表<br><code>TABDMP1  ID   TYPE   F1   G1   F2   G2   ...   FN   GN</code></p>
+<ul>
+<li>ID：阻尼表的唯一标识符（整数）。</li>
+<li>TYPE：阻尼类型，通常为 G（模态阻尼比）。</li>
+<li>F1, F2, …, FN：频率值（Hz）。</li>
+<li>G1, G2, …, GN：对应频率的阻尼比。</li>
+</ul>
+<p>在模态分析（如 <code>EIGRL</code> 或 <code>EIGRA</code>）中，通过 <code>SDAMPING</code> 参数引用定义的阻尼表。<br><code>EIGRL    SID     V1      V2      ND      MSGLVL  MAXSET  SHFSCL  NORM</code></p>
+<blockquote>
+<p> <a target="_blank" rel="noopener" href="https://iberisa.wordpress.com/wp-content/uploads/2021/01/simcenter-nastran-basic-dynamics-user-guide.pdf">Simcenter Nastran Basic Dynamic Analysis User’s Guide</a></p>
+</blockquote>
+<h4 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h4><ul>
+<li>nastran没有输出指定的op2文件 —&gt; 取消勾选HDF5格式输出</li>
+<li>nastran无法得到运行结果：<ul>
+<li>内存不足，在log中有<code>OPEN CORE Allocation Failed</code> <a target="_blank" rel="noopener" href="https://jingyan.baidu.com/article/6b182309f8c46cba59e15961.html">Nastran求解只有log文件没有结果如何解决-百度经验</a> —&gt; <code>D:\Software\Nastran\Nastran_install\conf\NAST20200.rcf</code>修改 memory 为<code>0.4*physical</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="卫星算例-bdf"><a href="#卫星算例-bdf" class="headerlink" title="卫星算例.bdf"></a>卫星算例.bdf</h4><p>不同结构参数生成结构特征量FR</p>
+<figure class="highlight plaintext"><figcaption><span>file</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$ Elements and Element Properties for region : Shear_Panels</span><br><span class="line">PSHELL   1       1      .003     1               1</span><br><span class="line"></span><br><span class="line">- 36  行 .003 Shear_Panels 厚度 theta5 --&gt; P1</span><br><span class="line">- 429 行 .002 Central_Cylinder 厚度 theta3 --&gt; P2</span><br><span class="line">- 666 行 .001 Adapter 厚度 theta2 本来应该是密度2.7 --&gt; P3</span><br><span class="line">- 723 行 .002 Upper_platform 厚度 theta6 --&gt; P4</span><br><span class="line">- 864 行 .001 Lower_platform 厚度 theta4 --&gt; P5</span><br><span class="line">- 还有一个不用修改的P6 是 Navigation_Platform：一个实现导航功能的平台</span><br><span class="line">- 1020行 7.   mat_N 弹性模量  theta1   </span><br><span class="line">- 1023行 7.   mat_CC 弹性模量  theta1  </span><br><span class="line">- 1026行 7.   mat_L 弹性模量  theta1  </span><br><span class="line">- 1029行 7.   mat_SP 弹性模量  theta1   </span><br><span class="line">- 1032行 7.   mat_U 弹性模量  theta1  </span><br><span class="line">- 主弹性模量不包括 mat_A 适配器的材料属性</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>主弹性模量</strong>$\theta_1$ 70Gpa，</li>
+<li><strong>主密度</strong> $\theta_2$  ，密度2.7x $10^{3} kg/m^{3}$ (英文论文) or 适配器厚度 1mm(本 1)</li>
+<li><strong>中心筒厚度</strong>$\theta_3$ 2mm</li>
+<li>底板厚度 $\theta_4$ 1mm</li>
+<li><strong>剪切板厚度</strong>$\theta_5$ 2mm</li>
+<li>顶板厚度 $\theta_6$ 2.5mm</li>
+</ul>
+<h3 id="FEA二次开发-Python"><a href="#FEA二次开发-Python" class="headerlink" title="FEA二次开发(Python)"></a>FEA二次开发(Python)</h3><p>Ansys: </p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.reddit.com/r/ANSYS/comments/14pak2j/ansys_with_python/">Ansys与Python：r/ANSYS —- Ansys with Python : r/ANSYS</a><br><a target="_blank" rel="noopener" href="https://docs.pyansys.com/version/stable/">PyAnsys — PyAnsys</a></p>
+</blockquote>
+<p>Nastran: </p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://pynastran-git.readthedocs.io/en/1.3/index.html">Welcome to pyNastran’s documentation for v1.3! — pyNastran 1.3 1.3 documentation (pynastran-git.readthedocs.io)</a></p>
+</blockquote>
+<p><a href="../../Project/PyNastran.md">PyNastran</a> 项目代码</p>
+<p>pynastranGUI 支持对有限元模型和仿真结果的可视化，支持的模型文件格式：</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241016122523.png" alt="image.png|666"></p>
+<h1 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h1><h2 id="打开MBT"><a href="#打开MBT" class="headerlink" title="打开MBT"></a>打开MBT</h2><p>Model Browser Tree : <code>toggleModelTree()</code> in command</p>
+<h2 id="FE-amp-Blender"><a href="#FE-amp-Blender" class="headerlink" title="FE &amp; Blender"></a>FE &amp; Blender</h2><p>可否指教一下blender如何渲染abaqus求解文件odb？</p>
+<p>odb写个脚本导出obj文件，然后导进blender一张张渲染就好</p>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+1ZnNxFWnEbk5YzRl">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/Learn/Finite%20Element/Modal%20Testing/" rel="prev" title="Modal Testing">
+      <i class="fa fa-chevron-left"></i> Modal Testing
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/Other%20Interest/Reliability/" rel="next" title="Reliability">
+      Reliability <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Modeling"><span class="nav-text">Modeling</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Patran"><span class="nav-text">Patran</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mode-Frequency"><span class="nav-text">Mode Frequency</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Frequency-Response-Function"><span class="nav-text">Frequency Response Function</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B1%E8%8A%82%E7%82%B9"><span class="nav-text">共节点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nastran"><span class="nav-text">Nastran</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#bdf%E6%96%87%E4%BB%B6"><span class="nav-text">bdf文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Question"><span class="nav-text">Question</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%AB%E6%98%9F%E7%AE%97%E4%BE%8B-bdf"><span class="nav-text">卫星算例.bdf</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FEA%E4%BA%8C%E6%AC%A1%E5%BC%80%E5%8F%91-Python"><span class="nav-text">FEA二次开发(Python)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other"><span class="nav-text">Other</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%93%E5%BC%80MBT"><span class="nav-text">打开MBT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FE-amp-Blender"><span class="nav-text">FE &amp; Blender</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qi Yun"
+      src="/images/avatar.jpeg">
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">161</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/qiyun71" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;qiyun71" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/29010355" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;29010355" rel="noopener" target="_blank"><i class="fa fa-star fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qi Yun</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">521k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">31:36</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/yqq/anime.min.js"></script>
+  <script src="/yqq/velocity/velocity.min.js"></script>
+  <script src="/yqq/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/yqq/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Modal Testing、Experimental Modal Analysis (EMA)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Modal Testing">
+<meta property="og:url" content="http://example.com/Learn/Finite%20Element/Modal%20Testing/index.html">
+<meta property="og:site_name" content="QiYun">
+<meta property="og:description" content="Modal Testing、Experimental Modal Analysis (EMA)">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241227155120.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241224134016.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241224135514.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241224135637.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241224161302.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241226165455.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241227155146.png">
+<meta property="og:image" content="https://community.sw.siemens.com/servlet/rtaImage?eid=ka64O000000fyAM&amp;feoid=00N4O000006Yxpf&amp;refid=0EM4O0000010ntz">
+<meta property="og:image" content="https://community.sw.siemens.com/servlet/rtaImage?eid=ka64O000000fyAM&amp;feoid=00N4O000006Yxpf&amp;refid=0EM4O0000010nu4">
+<meta property="og:image" content="https://community.sw.siemens.com/servlet/rtaImage?eid=ka6Vb000000Ingb&amp;feoid=00N4O000006Yxpf&amp;refid=0EM4O00000112wk">
+<meta property="og:image" content="https://community.sw.siemens.com/servlet/rtaImage?eid=ka6Vb000000Ingb&amp;feoid=00N4O000006Yxpf&amp;refid=0EM4O00000112wl">
+<meta property="og:image" content="https://community.sw.siemens.com/servlet/rtaImage?eid=ka6Vb000000Ingb&amp;feoid=00N4O000006Yxpf&amp;refid=0EM4O00000112wm">
+<meta property="og:image" content="https://pic3.zhimg.com/v2-cd550e325a2cbb8381a4dbf95b9c6e4e_1440w.jpg">
+<meta property="article:published_time" content="2024-12-24T03:56:05.000Z">
+<meta property="article:modified_time" content="2025-01-17T09:09:00.680Z">
+<meta property="article:author" content="Qi Yun">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241227155120.png">
+
+<link rel="canonical" href="http://example.com/Learn/Finite%20Element/Modal%20Testing/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Modal Testing | QiYun</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">QiYun</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Note</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/Learn/Finite%20Element/Modal%20Testing/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiYun">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Modal Testing
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2024-12-24 11:56:05" itemprop="dateCreated datePublished" datetime="2024-12-24T11:56:05+08:00">2024-12-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-01-17 17:09:00" itemprop="dateModified" datetime="2025-01-17T17:09:00+08:00">2025-01-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Learn-Finite-Element/" itemprop="url" rel="index"><span itemprop="name">Learn/Finite Element</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>3.7k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>13 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Modal Testing、Experimental Modal Analysis (EMA)</p>
+<span id="more"></span>
+<blockquote>
+<p> 模态试验实用技术 谭祥军,钱小猛译 (美国)彼得·阿维塔比莱<br> 模态实验技术与实践 陈阳<br> <a target="_blank" rel="noopener" href="https://www.vibetech.com/resources/technical-papers/">Technical Papers | Vibrant Technology, Inc.</a></p>
+</blockquote>
+<ul>
+<li><a href="../../Blog&amp;Book&amp;Paper/Read/Book/模态实验/模态试验实用技术.excalidraw.md">模态试验实用技术.excalidraw</a> 简单了解</li>
+<li><a href="../../Blog&amp;Book&amp;Paper/Read/Book/模态实验/模态实验.excalidraw.md">模态实验.excalidraw</a> 实验设备学习+实验方案</li>
+</ul>
+<h1 id="模态试验实用技术"><a href="#模态试验实用技术" class="headerlink" title="模态试验实用技术"></a>模态试验实用技术</h1><h2 id="实验模态分析一般理论"><a href="#实验模态分析一般理论" class="headerlink" title="实验模态分析一般理论"></a>实验模态分析一般理论</h2><h3 id="SDOF"><a href="#SDOF" class="headerlink" title="SDOF"></a>SDOF</h3><h4 id="系统方程"><a href="#系统方程" class="headerlink" title="系统方程"></a>系统方程</h4><p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241227155120.png" alt="image.png|666"></p>
+<p><strong>单自由度系统方程</strong><br>$m\ddot{x}+c\dot{x}+kx=f(t)$</p>
+<ul>
+<li>质量是集中质量</li>
+<li>弹簧刚度线性正比于位移</li>
+<li>(黏性)阻尼线性正比于速度</li>
+</ul>
+<p>方程拉普拉斯域变换： $ms^2+cs+k=0$<br>方程的根: $P_{_{1,2}}=-\frac{c}{2m}\pm\sqrt{\left(\frac{c}{2m}\right)^2-\frac{k}{m}}$<br>可以重写为： $P_{_{1,2}}=-\zeta\omega_{_n}\pm\sqrt{\left(\zeta\omega_{_n}\right)^2-\omega_{_n}^2}=-\sigma\pm\mathrm{j}\omega_{_d}$</p>
+<ul>
+<li>阻尼因子：$\sigma=\zeta\omega_n$</li>
+<li>无阻尼固有频率：$\omega_n=\sqrt{\frac{k}{m}}$</li>
+<li>阻尼比：$\zeta=\frac{c}{c_c}$ , 当阻尼达到临界阻尼时，即$c=c_{c}, \zeta=1$</li>
+<li>临界阻尼：$c_{c}=2m\omega_n=2 \sqrt{km }$</li>
+<li>有阻尼固有频率：$\omega_d=\omega_n\sqrt{1-\zeta^2}$</li>
+</ul>
+<p><strong>无阻尼—欠阻尼—临界阻尼—过阻尼</strong></p>
+<ul>
+<li>$\zeta=0$，无阻尼 $\pm\mathrm{j}\omega_{_d}$</li>
+<li>$0&lt;\zeta&lt;1$，欠阻尼 $-\sigma\pm\mathrm{j}\omega_{_d} =-\zeta w_{n}\pm jw_{n}\sqrt{1-\zeta^{2}}$</li>
+<li>$\zeta=1$，临界阻尼 $-\sigma$</li>
+<li>$\zeta&gt;1$，过阻尼</li>
+</ul>
+<p>从图中可以看出，共振频率/固有频率/模态频率处的FRF由系统的阻尼决定</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241224134016.png" alt="image.png|666"></p>
+<h4 id="传递—-gt-频响函数"><a href="#传递—-gt-频响函数" class="headerlink" title="传递—&gt;频响函数"></a>传递—&gt;频响函数</h4><p>SDOF系统简谐激励下的响应：</p>
+<ul>
+<li>位移：$x=F_0/\sqrt{\left(k-m\omega^2\right)^2+\left(c\omega\right)^2}$</li>
+<li>相位：$\varphi=\tan^{-1}\left(\frac{c\omega}{k-m\omega^2}\right)$</li>
+</ul>
+<p>响应与激励之比：<br>$\frac{x}{\delta_{\mathrm{st}}}=\frac{1}{\sqrt{\left(1-\beta^{2}\right)^{2}+\left(2\zeta\beta\right)^{2}}}\quad\varphi=\tan^{-1}\left(\frac{2\zeta\beta}{1-\beta^{2}}\right)$，</p>
+<ul>
+<li>$\beta=\frac{\omega}{\omega_{n}}$为激励频率与系统固有频率之比 </li>
+</ul>
+<p><strong>阻尼估计</strong></p>
+<ul>
+<li>半功率带宽法：阻尼与(固有频率除以半功率点对应的频率差)相关，品质因子$Q=\frac{1}{2\zeta}=\frac{\omega_n}{\omega_2-\omega_1}$ <em>当频率分辨率不足时，精度较差</em></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241224135514.png" alt="image.png|666"></p>
+<ul>
+<li>对数衰减法：使用系统的时域响应幅值在一个或几个周期的衰减来确定阻尼，$\delta=\ln\frac{x_1}{x_2}\approx2\pi\zeta$ <em>时域响应只有一阶模态的情况较为少见，现实角度来看行不通</em></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241224135637.png" alt="image.png|666"></p>
+<ul>
+<li>使用模态参数估计工具(<em>以最小二乘方式处理数据以找到感兴趣参数的最佳拟合</em>)和模态数据来获取模态振型，进而估计模态阻尼</li>
+</ul>
+<p><strong>传递函数</strong></p>
+<p>运动方程拉氏变换：$(\begin{array}{c}ms^2+cs+k\end{array})x(\begin{array}{c}s\end{array})=f(\begin{array}{c}s\end{array})$<br>传递函数：$h\left(s\right)=\frac{1}{\left(ms^2+cs+k\right)}$<br>传函不同形式：</p>
+<ul>
+<li>多项式：$h\left(s\right)=\frac{1}{\left(ms^2+cs+k\right)}$</li>
+<li>极点-零点：$h\left(s\right)=\frac{1/m}{\left(s-p_{1}\right)\left(s-p_{1}^{*}\right)}$</li>
+<li>部分分式(实验模态常用)：<script type="math/tex">h\left(s\right)=\frac{a_1}{\left(s-p_1\right)}+\frac{a_1^*}{\left(s-p_1^*\right)}</script></li>
+<li>复指数：$h\begin{pmatrix}t\end{pmatrix}=\frac{1}{m\omega_d}\mathrm{e}^{-\zeta\omega t}\sin\omega_dt$</li>
+</ul>
+<blockquote>
+<p> <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/22513076">什么是频响函数FRF？ - 知乎</a><br> 这些FRF由留数和系统极点组成，<strong>而留数直接与模态振型相关</strong>，极点包含系统的频率和阻尼信息。<br> 模态参数提取时用的是频响函数的幅值谱，而非实部和虚部</p>
+</blockquote>
+<ul>
+<li>[ ] 留数： ============================= 需要复变知识 (为了估计传递函数在根位置的值)</li>
+</ul>
+<p>频响函数(二维)是传递函数(三维)，沿着$s=jw$轴上的取值。频响函数的形式有：伯德图(幅值相位)、实部虚部图、奈奎斯特图(实部虚部) <code>虚部半功率点==实部的峰值</code> 是否普适？<br>频响函数形式：</p>
+<ul>
+<li>多项式形式： $h\left(\mathrm{j}\omega\right)=\frac{1}{m\left(\mathrm{j}\omega\right)^2+c\left(\mathrm{j}\omega\right)+k}$</li>
+<li>极点-零点形式： $h\left(\mathrm{j}\omega\right)=\frac{1/m}{\left(\mathrm{j}\omega-p_1\right)\left(\mathrm{j}\omega-p_1^*\right)}$</li>
+<li>部分分式形式： <script type="math/tex">h\left(\text{j}\omega\right)=h\left( s \right) \Big|_{s\to\text{j}\omega}=\frac{a_1}{\left(\text{j}\omega-p_1 \right)}+\frac{a_1^*}{\left(\text{j}\omega-p_1^* \right)}</script></li>
+<li>实部-虚部形式(复数频响函数): $h(\mathrm{j}\omega)=\frac{1-\left(\frac{\omega}{\omega_n}\right)^2}{\left[1-\left(\frac{\omega}{\omega_n}\right)^2\right]^2+\left[2\zeta\left(\frac{\omega}{\omega_n}\right)\right]^2}-\mathrm{j}\frac{2\zeta\left(\frac{\omega}{\omega_n}\right)}{\left[1-\left(\frac{\omega}{\omega_n}\right)^2\right]^2+\left[2\zeta\left(\frac{\omega}{\omega_n}\right)\right]^2}$</li>
+</ul>
+<p>FRF of SDOF： $H(jw)=\frac{X(jw)}{F(jw)}=\frac{1}{(k-mw^{2})+jw}$</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241224161302.png" alt="image.png|666"></p>
+<p>传递函数—频响函数—S平面之间的关系</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241226165455.png" alt="image.png|666"></p>
+<blockquote>
+<p> <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/243340630">为什么测试与仿真低频能对上，高频却对不上？ - 知乎</a></p>
+</blockquote>
+<p>SDOF系统频响函数 $H(j\omega)=\frac{X(j\omega)}{F(j\omega)}=\frac{1}{(k-m\omega^{2})+jc\omega}$</p>
+<ul>
+<li>极低频区域$\omega \to 0$，$H(j\omega) \to \frac{1}{k}$ 主要由刚度控制</li>
+<li>固有频率$\omega =\sqrt{ \frac{k}{m} }$, $H(j \omega) =\frac{1}{jc\omega}$ 主要由阻尼控制</li>
+<li>极高频区域$\omega \to \infty$, $H(j \omega) \to \frac{1}{m \omega^{2}}$ 主要由质量控制</li>
+</ul>
+<p>FRF的y轴值：</p>
+<ul>
+<li>位移，FRF称为动柔度。位移倒数，动刚度</li>
+<li>速度，FRF称为移动性。速度倒数，阻抗</li>
+<li>加速度，FRF称为惯性。加速度倒数，动质量</li>
+</ul>
+<p>位移(D/F)—&gt; 乘以$j\omega$ —&gt; 速度(V/F) —&gt; 乘以$j\omega$ —&gt; 加速度(A/F) <em>时域求导=s域乘以s $=\sigma+j\omega$</em></p>
+<ul>
+<li>位移 $H(j\omega)=\frac{X(j\omega)}{F(j\omega)}=\frac{1}{(k-m\omega^{2})+jc\omega}$</li>
+<li>速度 $H(j\omega) * j\omega$</li>
+<li>加速度 $H(j\omega) * -\omega^{2}$</li>
+</ul>
+<h3 id="MDOF"><a href="#MDOF" class="headerlink" title="MDOF"></a>MDOF</h3><p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241227155146.png" alt="image.png|666"></p>
+<p>两自由度系统方程(矩阵形式)：</p>
+<script type="math/tex; mode=display">\begin{pmatrix}m_1&&\\&&m_2\end{pmatrix}\begin{pmatrix}\ddot{x}_1\\\ddot{x}_2\\\ddot{x}_2\end{pmatrix}+\begin{pmatrix}c_1+c_2&&-c_2\\\\-c_2&&c_2\end{pmatrix}\begin{pmatrix}\dot{x}_1\\\dot{x}_2\\\dot{x}_2\end{pmatrix}+\begin{pmatrix}k_1+k_2&&-k_2\\\\-k_2&&k_2\end{pmatrix}\begin{pmatrix}x_1\\x_2\end{pmatrix}=\begin{pmatrix}f_1\left(t\right)\\f_2\left(t\right)\end{pmatrix}</script><ul>
+<li>其中刚度和阻尼矩阵有非对角元素，表征了质量1与 质量2之间的耦合</li>
+<li>矩阵都是对称的，规模与自由度数有关</li>
+</ul>
+<p>推广到多自由度：$M\ddot{x}+C\dot{x}+Kx=F(t)$</p>
+<blockquote>
+<p> <a target="_blank" rel="noopener" href="https://oss0.changxianggu.com/book/chapter/269_9787040313956.pdf">多 自 由 度 系 统 的 振 动</a></p>
+</blockquote>
+<p>特征值求解只需要质量和刚度矩阵，假设阻尼矩阵为0或者正比例于质量/刚度矩阵(关注的是系统的<strong>自由振动模式</strong>（即没有外部强迫力或阻尼效应的情况下，系统如何振动)，<strong>阻尼的存在使得系统的特征值变为复数，表示系统在振动过程中的衰减特性</strong>。<br>方程 $(K-\lambda M)\mathrm{x}=0$  —&gt; $\mid K\mathrm{-}\omega^2M\mid =0$ 方程的解$\omega$即为特征频率 <strong>（方程的解为频响函数的零点）</strong> 对应的特征向量$\mathrm{x}$即为振动模式/模态振型。<br>求解方法：</p>
+<ul>
+<li>直接法：Jacobi、Givens、Householder</li>
+<li>间接法：(大型有限元模型) Subspace Iteration、Simultaneous Vector Iteration、Lanczos</li>
+</ul>
+<h1 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h1><p><a target="_blank" rel="noopener" href="https://community.sw.siemens.com/s/article/Modal-Testing-A-Guide">Modal Testing: A Practical Guide</a></p>
+<h2 id="双击影响"><a href="#双击影响" class="headerlink" title="双击影响"></a>双击影响</h2><p>测量的FRFs噪声很大</p>
+<p><img src="https://community.sw.siemens.com/servlet/rtaImage?eid=ka64O000000fyAM&amp;feoid=00N4O000006Yxpf&amp;refid=0EM4O0000010ntz" alt="rtaImage (669×410)"></p>
+<p><img src="https://community.sw.siemens.com/servlet/rtaImage?eid=ka64O000000fyAM&amp;feoid=00N4O000006Yxpf&amp;refid=0EM4O0000010nu4" alt="rtaImage (672×409)"></p>
+<h2 id="Mode-Frequency"><a href="#Mode-Frequency" class="headerlink" title="Mode Frequency"></a>Mode Frequency</h2><p><a target="_blank" rel="noopener" href="https://www.auto-testing.net/news/show-95724.html">模态空间│不同的模态指示函数有什么区别？_模态试验__汽车测试网</a></p>
+<p>SUM —和函数 所测的全部频响函数之和<br>MIF —模态指示函数  尽管SUM很有用，但是它并不能很清晰地区分密集模态，为了更好地进行区分，提出了最初的模态指示函数（MIF）。从本质上讲，MIF的数学公式就是频响函数的实部除以频响函数的幅值。由于实部在共振区快速穿过零点，MIF在某阶模态附近会发生剧变，共振时频响函数的实部为零。因此，MIF将在某阶模态附近将下降至最小值。<br>MMIF —多变量模态指示函数 针对多参考点频响函数数据的MIF的扩展。MMIF函数同样遵循单个MIF函数的基本特征，它的最大优点就是多参考点数据会有多个MIF（每个参考点各有一个），可以有效识别出重根<br>CMIF —复模态指示函数<br>SD stabilization diagram —稳态图 基本原理是如果极点是系统的全局特征，那么从模态阶数不断增长的数学模型中提取的极点将随着模态阶数的增加而重复出现</p>
+<h2 id="MAC"><a href="#MAC" class="headerlink" title="MAC"></a>MAC</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://community.sw.siemens.com/s/article/modal-assurance-criterion-mac">Modal Assurance Criterion (MAC)</a></p>
+</blockquote>
+<p>Modal Assurance Criterion (MAC) is used to determine the similarity of two mode shapes.</p>
+<p>判断是否有近似的模态，防止设置的测量点不够，而无法获取正确的振型</p>
+<p><img src="https://community.sw.siemens.com/servlet/rtaImage?eid=ka6Vb000000Ingb&amp;feoid=00N4O000006Yxpf&amp;refid=0EM4O00000112wk" alt="rtaImage (704×365)"></p>
+<p><img src="https://community.sw.siemens.com/servlet/rtaImage?eid=ka6Vb000000Ingb&amp;feoid=00N4O000006Yxpf&amp;refid=0EM4O00000112wl" alt="rtaImage (704×365)"></p>
+<p><img src="https://community.sw.siemens.com/servlet/rtaImage?eid=ka6Vb000000Ingb&amp;feoid=00N4O000006Yxpf&amp;refid=0EM4O00000112wm" alt="rtaImage (831×351)"></p>
+<h1 id="其他基本概念"><a href="#其他基本概念" class="headerlink" title="其他基本概念"></a>其他基本概念</h1><blockquote>
+<p> <a target="_blank" rel="noopener" href="https://cc.sjtu.edu.cn/upload/20150420122501860.pdf">实验模态分析初步</a><br> <a target="_blank" rel="noopener" href="https://cc.sjtu.edu.cn/upload/20130526080716716.pdf">模态分析理论与试验基础</a></p>
+</blockquote>
+<h2 id="功率谱密度"><a href="#功率谱密度" class="headerlink" title="功率谱密度"></a>功率谱密度</h2><blockquote>
+<p> <a target="_blank" rel="noopener" href="https://sunnyfhy.github.io/2019/11/09/MATLAB2/">SunnyFHY</a><br> <a target="_blank" rel="noopener" href="https://liquidinstruments.com/zh-CN/blog/what-is-power-spectral-density-and-why-is-it-important/">什么是功率谱密度？为什么它很重要？</a> 功率谱密度 (PSD) 是信号在不同频率上的功率分布</p>
+</blockquote>
+<p>要区分功率谱和能量谱，首先要清楚两种不同类型的信号：功率有限信号和能量有限信号。</p>
+<ul>
+<li>信号的归一化能量（简称信号的能量）定义为信号电压或电流f(t)加到1Ω电阻上所消耗的能量</li>
+<li>信号的平均功率（简称信号的功率）是指信号电压或电流在1Ω电阻上所消耗的功率</li>
+</ul>
+<p>一般来说，周期信号和随机信号是功率信号，而非周期的确定信号是能量信号。</p>
+<ul>
+<li>能量谱是信号幅度谱的模的平方，其量纲是焦/赫</li>
+<li>功率谱是信号自相关函数的傅里叶变换</li>
+</ul>
+<blockquote>
+<p> <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/579501643">今天，从头捋一捋功率谱和能量谱 - stayHungry的文章 - 知乎</a></p>
+</blockquote>
+<p>电流信号$f(t)$作用在$1 \Omega$ 电阻上消耗的能量： $E=\int_{-\infty}^\infty\left|f(t)\right|^2\mathrm{d}t$<br>平均功率：$P=\lim_{T\to\infty}\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}\left|f(t)\right|^2\mathrm{d}t$</p>
+<ul>
+<li>如果 E 是一个非无穷大也非0的常数，那么 f(t) 就定义为能量有限信号，简称<strong>能量信号</strong>。显然，能量信号的平均功率 P 为0；</li>
+<li>如果 P 是一个非无穷大也非0的常数，比如 f(t) 为周期信号或者统计量满足某一分布的随机信号时，那么 f(t) 就定义为功率有限信号，简称<strong>功率信号</strong>。显然，功率信号的能量 E 为无穷大。</li>
+</ul>
+<p>相关函数：<br>能量信号</p>
+<p>信号$f(t)$的自相关函数：$R(\tau)=\int_{-\infty}^\infty f(t)f(t-\tau)dt=\int_{-\infty}^\infty f(t+\tau)f(t)dt$</p>
+<ul>
+<li>$R(\tau)=R(-\tau)$  自相关函数 R(τ) 是时移 τ 的偶函数。</li>
+</ul>
+<p>$f_2(t)$和$f_1(t)$ 的互相关函数：$R_{12}(\tau)=\int_{-\infty}^\infty f_1(t)f_2(t-\tau)dt=\int_{-\infty}^\infty f_1(t+\tau)f_2(t)dt$</p>
+<p>$f_2(t)$和$f_1(t)$ 的互相关函数： $R_{21}(\tau)=\int_{-\infty}^\infty f_1(t-\tau)f_2(t)dt=\int_{-\infty}^\infty f_1(t)f_2(t+\tau)dt$</p>
+<p>功率信号</p>
+<p>自相关<br>$R(\tau)=\lim_{T\to\infty}\left[\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}f(t)f(t-\tau)\mathrm{d}t\right]$</p>
+<p><strong>功率信号的自相关函数与功率谱是一对傅里叶变换</strong>.</p>
+<p>互相关<br>$\left.\left\{\begin{array}{l}R_{12}(\tau)=\lim_{T\to\infty}\left[\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}f_1(t)f_2(t-\tau)\mathrm{d}t\right]\\R_{21}(\tau)=\lim_{T\to\infty}\left[\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}f_1(t-\tau)f_2(t)\mathrm{d}t\right]\end{array}\right.\right.$</p>
+<p>类似卷积</p>
+<blockquote>
+<p> <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/40481049">如何理解随机振动的功率谱密度？ - J Pan的文章 - 知乎</a> <strong>一个信号的功率密度谱，就是其自相关函数的傅里叶变换</strong>。</p>
+</blockquote>
+<p><strong>自相关函数</strong></p>
+<p>$R_x(\tau)=\lim_{T\to\infty}\frac{1}{T}\int_{-\infty}^{+\infty}x(t)x(t+\tau)dt$</p>
+<p>随机过程 x(t) 的自相关函数定义为在时刻 t 和时刻 t+τ 的随机变量乘积的平均值，反映了随机信号本身在不同时刻的相互关系</p>
+<p><strong>对于平稳随机信号，自相关函数将信号的平均功率向</strong> τ=0 <strong>这一点集中，</strong> τ≠0 <strong>时自相关函数快速衰减为零</strong></p>
+<p><strong>自相关函数能够检测出信号内部蕴藏的周期组分，而过滤掉了周期组分的相位信息。</strong></p>
+<p>帕斯瓦定理：信号的能量在时域和频域是一样的<br>$\int_{-\infty}^{+\infty}|x(t)|^2dt=\frac{1}{2\pi}\int_{-\infty}^{+\infty}|F_x(\omega)|^2d\omega=\int_{-\infty}^{+\infty}|F_x(2\pi f)|^2df$</p>
+<p>因此将自相关函数从时域通过FT到频域，即为<strong>功率密度谱</strong>：<br>$S_x(f)=\int_{-\infty}^{+\infty}R_x(\tau)e^{-i2\pi f\tau}d\tau$<br>$R_x(\tau)=\int_a^bS_x(f)e^{i2\pi f\tau}df$</p>
+<p><em>功率被定义成幅值的平方的时间平均分量，而这个过程，也可以看成是去除频域谐波分量的相位信息的过程，因为本质来说，一个简谐信号的相位是不影响其功率的。而自相关函数，也具有去除信号相位的功能</em></p>
+<h2 id="相干函数"><a href="#相干函数" class="headerlink" title="相干函数"></a>相干函数</h2><blockquote>
+<p> <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/674201498">数字信号处理基础-12 传递函数与相干（coherence）函数 - XYZ图像工作室的文章 - 知乎</a></p>
+</blockquote>
+<p>相干函数（Coherence Function），它对评测传递函数结果的可靠性非常重要。</p>
+<p>输出信号：$y(t)=v(t)+n(t)……(1)$， $v(t)$是输入信号$x(t)$经过系统后得到的输出信号，无法测量，$n(t)$为噪声</p>
+<p>由传递函数, 仅由输入信号x(t) 产生的输出信号 v(t) 功率谱的表达式为：$G_{vv}(f)=\left|H(f)\right|^2G_{xx}(f)$<br>相干函数 $\gamma^2(f)=\frac{G_{vv}(f)}{G_{yy}(f)}=\frac{\left|H(f)\right|^2G_{xx}(f)}{G_{yy}(f)}=\frac{\left|G_{xy}(f)\right|^2}{G_{xx}(f)G_{yy}(f)}$</p>
+<ul>
+<li>频响函数 $H(f)=\frac{G_{xy}(f)}{G_{xx}(f)}$ <a target="_blank" rel="noopener" href="https://www.zhihu.com/question/613279235">互相关功率谱密度和自相关功率谱密度相除得到系统的幅频特性的原理是什么？ - 知乎</a></li>
+</ul>
+<p><strong>相干函数</strong>，表示<strong>基于输入信号产生的功率</strong>在总输出功率中的占比，相干函数用于评估传递函数结果的可靠性。一般情况下，当相干函数大于等于0.9时，就可以认为得到的传递函数的结果比较可靠。</p>
+<blockquote>
+<p> <a target="_blank" rel="noopener" href="http://www.vibunion.com/thread-162769-1-1.html">信号处理方法 - 声振论坛 - 振动,动力学,声学,信号处理,故障诊断 - Powered by Discuz!</a></p>
+</blockquote>
+<p>相干性是频率的函数关系，它表示有多少输出是由FRF中的输入引起的。它可以作为FRF质量的指标。<strong>它评估从测量到重复相同测量的FRF的一致性。</strong><br>多次敲击的输入对输出的影响是否一致</p>
+<p><img src="https://pic3.zhimg.com/v2-cd550e325a2cbb8381a4dbf95b9c6e4e_1440w.jpg" alt="v2-cd550e325a2cbb8381a4dbf95b9c6e4e_1440w.jpg (753×400)"></p>
+<h2 id="倍频程扫描速率"><a href="#倍频程扫描速率" class="headerlink" title="倍频程扫描速率"></a>倍频程扫描速率</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1kNk2Y5E5m/?spm_id_from=333.1387.upload.video_card.click&amp;vd_source=1dba7493016a36a32b27a14ed2891088">振动试验中倍频程扫描速率这个参数的意义_哔哩哔哩_bilibili</a></p>
+</blockquote>
+<p>扫描速率：$n=2 (oct/min)$ 2倍频程每分钟<br>扫频范围：4~100Hz</p>
+<p>则扫频耗费时间为：<br>$\Delta t= \frac{60}{n\ln2} \ln(\frac{f_{2}}{f_{1}})$</p>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+1ZnNxFWnEbk5YzRl">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/Other%20Interest/Optimization%20Algorithm/" rel="prev" title="Optimization Algorithm">
+      <i class="fa fa-chevron-left"></i> Optimization Algorithm
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/Learn/Finite%20Element/Pa&Nastran/" rel="next" title="Pa&Nastran">
+      Pa&Nastran <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E6%80%81%E8%AF%95%E9%AA%8C%E5%AE%9E%E7%94%A8%E6%8A%80%E6%9C%AF"><span class="nav-text">模态试验实用技术</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E6%A8%A1%E6%80%81%E5%88%86%E6%9E%90%E4%B8%80%E8%88%AC%E7%90%86%E8%AE%BA"><span class="nav-text">实验模态分析一般理论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SDOF"><span class="nav-text">SDOF</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E6%96%B9%E7%A8%8B"><span class="nav-text">系统方程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%A0%E9%80%92%E2%80%94-gt-%E9%A2%91%E5%93%8D%E5%87%BD%E6%95%B0"><span class="nav-text">传递—&gt;频响函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MDOF"><span class="nav-text">MDOF</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E8%B7%B5"><span class="nav-text">实践</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8C%E5%87%BB%E5%BD%B1%E5%93%8D"><span class="nav-text">双击影响</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mode-Frequency"><span class="nav-text">Mode Frequency</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MAC"><span class="nav-text">MAC</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-text">其他基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%9F%E7%8E%87%E8%B0%B1%E5%AF%86%E5%BA%A6"><span class="nav-text">功率谱密度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E5%B9%B2%E5%87%BD%E6%95%B0"><span class="nav-text">相干函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%80%8D%E9%A2%91%E7%A8%8B%E6%89%AB%E6%8F%8F%E9%80%9F%E7%8E%87"><span class="nav-text">倍频程扫描速率</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qi Yun"
+      src="/images/avatar.jpeg">
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">161</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/qiyun71" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;qiyun71" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/29010355" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;29010355" rel="noopener" target="_blank"><i class="fa fa-star fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qi Yun</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">521k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">31:36</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/yqq/anime.min.js"></script>
+  <script src="/yqq/velocity/velocity.min.js"></script>
+  <script src="/yqq/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

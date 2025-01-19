@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/yqq/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Reliability：指产品在规定的条件下和规定的时间内，无差错地完成规定任务的概率。 针对产品，依靠数字孪生&#x2F;CAX技术，使用概率开展研究：  实物：实际生产出来的产品，必须了解实验对象（机械&#x2F;电子&#x2F;生化…产品），对不同类型产品有哪些故障失效形式 失效概率曲线…   设备：实验&#x2F;测量设备，学会如何开展测试实验（Modal Testing） 仿真：建模仿真技术，学会软件操作+脚本编写，懂原理更好">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Reliability">
+<meta property="og:url" content="http://example.com/Other%20Interest/Reliability/index.html">
+<meta property="og:site_name" content="QiYun">
+<meta property="og:description" content="Reliability：指产品在规定的条件下和规定的时间内，无差错地完成规定任务的概率。 针对产品，依靠数字孪生&#x2F;CAX技术，使用概率开展研究：  实物：实际生产出来的产品，必须了解实验对象（机械&#x2F;电子&#x2F;生化…产品），对不同类型产品有哪些故障失效形式 失效概率曲线…   设备：实验&#x2F;测量设备，学会如何开展测试实验（Modal Testing） 仿真：建模仿真技术，学会软件操作+脚本编写，懂原理更好">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-12-25T11:01:55.000Z">
+<meta property="article:modified_time" content="2025-01-16T02:44:36.591Z">
+<meta property="article:author" content="Qi Yun">
+<meta property="article:tag" content="Reliability">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/Other%20Interest/Reliability/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Reliability | QiYun</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">QiYun</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Note</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/Other%20Interest/Reliability/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiYun">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Reliability
+        </h1>
+
+        <div class="post-meta">
+          
+              <i class="fa fa-thumb-tack" aria-hidden="true"></i> 
+              <font color="GREEN">置顶</font>
+              <span class="post-meta-divider">|</span>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2024-12-25 19:01:55" itemprop="dateCreated datePublished" datetime="2024-12-25T19:01:55+08:00">2024-12-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-01-16 10:44:36" itemprop="dateModified" datetime="2025-01-16T10:44:36+08:00">2025-01-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Other-Interest/" itemprop="url" rel="index"><span itemprop="name">Other Interest</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>616</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>2 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Reliability：指产品在<strong>规定的条件</strong>下和<strong>规定的时间</strong>内，无差错地完成<strong>规定任务</strong>的概率。</p>
+<p>针对产品，依靠数字孪生/CAX技术，使用概率开展研究：</p>
+<ul>
+<li>实物：实际生产出来的产品，必须了解实验对象（机械/电子/生化…产品），对不同类型产品有哪些故障失效形式<ul>
+<li>失效概率曲线…</li>
+</ul>
+</li>
+<li>设备：实验/测量设备，学会如何开展测试实验（Modal Testing）</li>
+<li>仿真：建模仿真技术，学会软件操作+脚本编写，懂原理更好 (CAX)</li>
+<li>数学：概率论&lt;贝叶斯&gt;，机器学习/深度学习，可靠性分析基础理论/方法</li>
+<li>可靠性分析论文(前沿理论) + 可靠性分析项目(实践操作)</li>
+</ul>
+<span id="more"></span>
+<blockquote>
+<p> <a target="_blank" rel="noopener" href="https://rse.buaa.edu.cn/kxyj1/kycg/zz.htm">专著-北航可靠性与系统工程学院</a> Book list</p>
+<p> <a target="_blank" rel="noopener" href="http://www.crafe.net/files/%E5%8F%AF%E9%9D%A0%E6%80%A7%E7%A7%91%E5%AD%A6%E6%96%B9%E6%B3%95%E8%AE%BA-%E5%BA%B7%E9%94%90.pdf">crafe.net/files/可靠性科学方法论-康锐.pdf</a> 大致了解以下<br> <a target="_blank" rel="noopener" href="http://crafe.net/prod.html">电子产品可靠性云评估</a>  CRAFE 2.0 软件平台简介 电子产品可靠性综合评估软件</p>
+</blockquote>
+<p>可靠性数学方法</p>
+<ul>
+<li>故障数据的统计分析</li>
+<li>可靠性的理论话语</li>
+<li>可靠性统计试验<br>可靠性物理方法</li>
+<li>故障率——协变量模型</li>
+<li>故障时间模型</li>
+<li>性能裕量模型<br>可靠性逻辑方法</li>
+<li>功能逻辑方法——可靠性框图</li>
+<li>故障逻辑方法——故障树分析<br>可靠性设计方法</li>
+<li>电子产品降额设计法</li>
+<li>热设计</li>
+<li>电磁兼容设计</li>
+<li>防振动设计</li>
+<li>余度设计法</li>
+</ul>
+<h2 id="系统可靠性设计分析基础"><a href="#系统可靠性设计分析基础" class="headerlink" title="系统可靠性设计分析基础"></a>系统可靠性设计分析基础</h2><p>可靠度：产品在规定条件下和规定的时间内，完成规定功能的概率<br>$R(t)=P(\xi&gt;t)$</p>
+<ul>
+<li>$R(t)$可靠度函数</li>
+<li>$\xi$ 产品故障前的工作时间(h)</li>
+<li>t规定的时间</li>
+</ul>
+<p>$R(t) =\frac{N_{0}-r(t)}{N_{0}}$</p>
+<ul>
+<li>$N_{0}$ 在t=0时刻，规定条件下正常工作的产品数</li>
+<li>$r(t)$ 在0~t时刻产品的累计故障数(假设产品故障后不予修复)</li>
+</ul>
+<p>累积故障概率(累积故障分布函数)：产品在规定条件下和规定时间内，丧失规定功能的概率<br>$F(t)=P(\xi\leq t) = \frac{r(t)}{N_{0}}$<br>显然：$F(t)+R(t) =1$</p>
+<blockquote>
+<p> <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%A4%B1%E6%95%88%E7%8E%87">失效率 - 维基百科，自由的百科全书</a></p>
+</blockquote>
+<h1 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h1><blockquote>
+<p> <a target="_blank" rel="noopener" href="https://www.skler.cn/communication/meeting/202011/W020201105666593156082.pdf">系统可靠性设计与评估——从理论到应用</a></p>
+<p> <a target="_blank" rel="noopener" href="https://www.kekaoxing.com/3282.html">北航可靠性PPT讲义 – 可靠性网</a></p>
+</blockquote>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><blockquote>
+<p> <a target="_blank" rel="noopener" href="https://github.com/MatthewReid854/reliability">MatthewReid854/reliability: Reliability engineering toolkit for Python - https://reliability.readthedocs.io/en/latest/</a></p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+1ZnNxFWnEbk5YzRl">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Reliability/" rel="tag"><i class="fa fa-tag"></i> Reliability</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/Learn/Finite%20Element/Pa&Nastran/" rel="prev" title="Pa&Nastran">
+      <i class="fa fa-chevron-left"></i> Pa&Nastran
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/Other%20Interest/Small%20Sample%20Learning/" rel="next" title="Small Sample Learning">
+      Small Sample Learning <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E5%8F%AF%E9%9D%A0%E6%80%A7%E8%AE%BE%E8%AE%A1%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80"><span class="nav-text">系统可靠性设计分析基础</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Others"><span class="nav-text">Others</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code"><span class="nav-text">Code</span></a></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qi Yun"
+      src="/images/avatar.jpeg">
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">161</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/qiyun71" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;qiyun71" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/29010355" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;29010355" rel="noopener" target="_blank"><i class="fa fa-star fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qi Yun</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">521k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">31:36</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/yqq/anime.min.js"></script>
+  <script src="/yqq/velocity/velocity.min.js"></script>
+  <script src="/yqq/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

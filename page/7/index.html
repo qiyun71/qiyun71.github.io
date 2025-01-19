@@ -189,6 +189,991 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/3DReconstruction/Multi-view/Explicit%20Volumetric/Point-NeRF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiYun">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/3DReconstruction/Multi-view/Explicit%20Volumetric/Point-NeRF/" class="post-title-link" itemprop="url">Point-NeRF</a>
+        </h2>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-08-24 16:52:32" itemprop="dateCreated datePublished" datetime="2023-08-24T16:52:32+08:00">2023-08-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-11-24 13:55:17" itemprop="dateModified" datetime="2024-11-24T13:55:17+08:00">2024-11-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/3DReconstruction-Multi-view/" itemprop="url" rel="index"><span itemprop="name">3DReconstruction/Multi-view</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>6.7k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>24 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Title</th>
+<th>Point-NeRF: Point-based Neural Radiance Fields</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Author</td>
+<td>Qiangeng Xu, Zexiang Xu, Julien Philip, Sai Bi, Zhixin ShuKalyan Sunkavalli , Ulrich Neumann</td>
+</tr>
+<tr>
+<td>Conf/Jour</td>
+<td>CVPR 2022 Oral</td>
+</tr>
+<tr>
+<td>Year</td>
+<td>2022</td>
+</tr>
+<tr>
+<td>Project</td>
+<td><a target="_blank" rel="noopener" href="https://xharlie.github.io/projects/project_sites/pointnerf/">Point-NeRF: Point-based Neural Radiance Fields (xharlie.github.io)</a></td>
+</tr>
+<tr>
+<td>Paper</td>
+<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4734283362588442625&amp;noteId=1930369628502938624">Point-NeRF: Point-based Neural Radiance Fields (readpaper.com)</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230824165453.png" alt="image.png"></p>
+<ul>
+<li>生成初始点云(本文)，<em>此外还有Colmap和Metashape等方法生成</em><ul>
+<li>基于MVS Net的$G_{p,γ}$，生成每个点的位置和置信度（点是否在表面上）</li>
+<li>基于2D CNN的$G_f$，生成每个点的特征</li>
+</ul>
+</li>
+<li>点云处理：排除降低渲染质量的孔和异常值 <strong>每10K次迭代</strong><ul>
+<li>Point pruning 对置信度低于0.1的点进行删除</li>
+<li>Point growing 当ray marching中密度最大点(表面附近的点)周围的点比较少时，添加点来填补空白</li>
+</ul>
+</li>
+<li>MLP获取点x的信息<ul>
+<li>MLP F：x点周围点的新特征$f_{i,x}=F(f_{i},x-p_{i}).$</li>
+<li>MLP R：x点的辐射值(or颜色) $r=R(f_{x},d).$<ul>
+<li>x点的聚合特征$f_{x}=\sum_{i}\gamma_{i}\frac{w_{i}}{\sum w_{i}}f_{i,x},\mathrm{~where~}w_{i}=\frac{1}{|p_{i}-x|}.$</li>
+</ul>
+</li>
+<li>MLP T：x点周围点的密度 $\sigma_i=T(f_{i,x})$<ul>
+<li>x点的聚合密度$\sigma=\sum_{i}\sigma_{i}\gamma_{i}\frac{w_{i}}{\sum w_{i}},w_{i}=\frac{1}{|p_{i}-x|}.$</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/3DReconstruction/Multi-view/Explicit%20Volumetric/Point-NeRF/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/Learn/CG%20or%20CV/Colmap/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiYun">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/Learn/CG%20or%20CV/Colmap/" class="post-title-link" itemprop="url">COLMAP Basic Knowlege</a>
+        </h2>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-08-23 17:00:00" itemprop="dateCreated datePublished" datetime="2023-08-23T17:00:00+08:00">2023-08-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-10-29 09:58:49" itemprop="dateModified" datetime="2024-10-29T09:58:49+08:00">2024-10-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Learn/" itemprop="url" rel="index"><span itemprop="name">Learn</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>659</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>2 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://colmap.github.io/tutorial.html">colmap tutorial</a></p>
+<p>更好的重建效果需要拍摄的图片保证:</p>
+<ul>
+<li>好的纹理</li>
+<li>相似的照明条件，避免高动态范围场景（例如，逆光阴影或透过门窗的照片），避免在光滑表面上出现反射光</li>
+<li>高视觉重叠度，确保每个对象至少在 3 张图像中可见，图像越多越好</li>
+<li>从不同的视角拍摄图像，不要只通过旋转相机来拍摄相同位置的图像</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Learn/CG%20or%20CV/Colmap/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeRF%20Other%20Research/Review/NeRF%20in%20the%20industrial%20and%20robotics%20domain/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiYun">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeRF%20Other%20Research/Review/NeRF%20in%20the%20industrial%20and%20robotics%20domain/" class="post-title-link" itemprop="url">NeRF in the industrial and robotics domain</a>
+        </h2>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-08-21 14:10:55" itemprop="dateCreated datePublished" datetime="2023-08-21T14:10:55+08:00">2023-08-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-06-29 20:16:19" itemprop="dateModified" datetime="2024-06-29T20:16:19+08:00">2024-06-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/3DReconstruction-Multi-view-Implicit-Function/" itemprop="url" rel="index"><span itemprop="name">3DReconstruction/Multi-view/Implicit Function</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>19k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>1:07</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Title</th>
+<th>Neural Radiance Fields in the Industrial and Robotics Domain: Applications, Research Opportunities and Use Cases</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Author</td>
+<td>Eugen ˇSlapak, Enric Pardo, Mat ́uˇs Dopiriak, Taras Maksymyuk and Juraj Gazda</td>
+</tr>
+<tr>
+<td>Conf/Jour</td>
+<td>cs.RO</td>
+</tr>
+<tr>
+<td>Year</td>
+<td>2023</td>
+</tr>
+<tr>
+<td>Project</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/Maftej/iisnerf">Maftej/iisnerf (github.com)</a></td>
+</tr>
+<tr>
+<td>Paper</td>
+<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4789767752768290817&amp;noteId=1925861245942862080">Neural radiance fields in the industrial and robotics domain: applications, research opportunities and use cases (readpaper.com)</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>探索了NeRF在工业和机器人领域的应用</p>
+<ul>
+<li>Instant-NGP 基于NeRF的视频压缩技术</li>
+<li>D-NeRF 根据过去的arm位置来预测未来的arm运动</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeRF%20Other%20Research/Review/NeRF%20in%20the%20industrial%20and%20robotics%20domain/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/Project/Audio%20Visualization/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiYun">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/Project/Audio%20Visualization/" class="post-title-link" itemprop="url">Audio Visualization</a>
+        </h2>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-08-20 22:14:08" itemprop="dateCreated datePublished" datetime="2023-08-20T22:14:08+08:00">2023-08-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-10-15 22:15:48" itemprop="dateModified" datetime="2024-10-15T22:15:48+08:00">2024-10-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Project/" itemprop="url" rel="index"><span itemprop="name">Project</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>93</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>1 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Audio Visualization(一般用来显示音乐的频谱信息，可以直观地看出乐器/人声的频率)</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Project/Audio%20Visualization/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/3DReconstruction/Multi-view/Explicit%20Volumetric/GS-based/3D%20Gaussian%20Splatting/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiYun">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/3DReconstruction/Multi-view/Explicit%20Volumetric/GS-based/3D%20Gaussian%20Splatting/" class="post-title-link" itemprop="url">3D Gaussian Splatting</a>
+        </h2>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-08-17 19:43:10" itemprop="dateCreated datePublished" datetime="2023-08-17T19:43:10+08:00">2023-08-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-11-24 13:55:10" itemprop="dateModified" datetime="2024-11-24T13:55:10+08:00">2024-11-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/3DReconstruction-Multi-view/" itemprop="url" rel="index"><span itemprop="name">3DReconstruction/Multi-view</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>11k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>39 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Title</th>
+<th>3D Gaussian Splatting for Real-Time Radiance Field Rendering</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Author</td>
+<td><a target="_blank" rel="noopener" href="https://scholar.google.at/citations?user=jeasMB0AAAAJ&amp;hl=en">Bernhard Kerbl</a><em> 1,2      <a target="_blank" rel="noopener" href="https://grgkopanas.github.io/">Georgios Kopanas</a></em> 1,2      <a target="_blank" rel="noopener" href="https://people.mpi-inf.mpg.de/~tleimkue/">Thomas Leimkühler</a>3      <a target="_blank" rel="noopener" href="http://www-sop.inria.fr/members/George.Drettakis/">George Drettakis</a>1,2</td>
+</tr>
+<tr>
+<td>Conf/Jour</td>
+<td>SIGGRAPH</td>
+</tr>
+<tr>
+<td>Year</td>
+<td>2023</td>
+</tr>
+<tr>
+<td>Project</td>
+<td><a target="_blank" rel="noopener" href="https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/">3D Gaussian Splatting for Real-Time Radiance Field Rendering (inria.fr)</a></td>
+</tr>
+<tr>
+<td>Paper</td>
+<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4786887855003664385&amp;noteId=1920399556132916992">3D Gaussian Splatting for Real-Time Radiance Field Rendering (readpaper.com)</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230817194605.png" alt="image.png"></p>
+<ul>
+<li>将点描述成高斯体，对点云进行<strong>优化</strong>（点云模型）<ul>
+<li>高质量、非结构化的离散表示——高斯体：均值控制位置，协方差控制高斯体形状（缩放+旋转）</li>
+<li>针对3D高斯特性的优化方法，并同时进行自适应密度控制</li>
+</ul>
+</li>
+<li>Splatting的渲染方式，区别于体渲染<ul>
+<li>实现了使用GPU进行快速可微的渲染，允许各向异性的抛雪球(Splatting)和快速反向传播</li>
+</ul>
+</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/3DReconstruction/Multi-view/Explicit%20Volumetric/GS-based/3D%20Gaussian%20Splatting/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/Learn/CG%20or%20CV/Learn-cs148/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiYun">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/Learn/CG%20or%20CV/Learn-cs148/" class="post-title-link" itemprop="url">Learn-cs148</a>
+        </h2>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-08-16 19:02:57" itemprop="dateCreated datePublished" datetime="2023-08-16T19:02:57+08:00">2023-08-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-08-27 21:19:40" itemprop="dateModified" datetime="2024-08-27T21:19:40+08:00">2024-08-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Learn/" itemprop="url" rel="index"><span itemprop="name">Learn</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>2.3k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>9 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://web.stanford.edu/class/cs148/index.html">CS 148: Introduction to Computer Graphics and Imaging (stanford.edu)</a></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Learn/CG%20or%20CV/Learn-cs148/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/3DReconstruction/Multi-view/Generative%20Models/PlankAssembly/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiYun">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/3DReconstruction/Multi-view/Generative%20Models/PlankAssembly/" class="post-title-link" itemprop="url">PlankAssembly</a>
+        </h2>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-08-13 16:03:58" itemprop="dateCreated datePublished" datetime="2023-08-13T16:03:58+08:00">2023-08-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-11-24 13:55:36" itemprop="dateModified" datetime="2024-11-24T13:55:36+08:00">2024-11-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/3DReconstruction-Multi-view/" itemprop="url" rel="index"><span itemprop="name">3DReconstruction/Multi-view</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>6.3k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>23 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Title</th>
+<th>PlankAssembly: Robust 3D Reconstruction from Three Orthographic Views with Learnt Shape Programs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Author</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/Huenao">Wentao Hu</a>    <a target="_blank" rel="noopener" href="https://bertjiazheng.github.io/">Jia Zheng</a>     <a target="_blank" rel="noopener" href="https://github.com/Elsa-zhang">Zixin Zhang</a>     <a target="_blank" rel="noopener" href="https://yuan-xiaojun.github.io/Yuan-Xiaojun/">Xiaojun Yuan</a>     <a target="_blank" rel="noopener" href="https://sai.sysu.edu.cn/teacher/teacher01/1385356.htm">Jian Yin</a>     <a target="_blank" rel="noopener" href="https://zihan-z.github.io/">Zihan Zhou</a></td>
+</tr>
+<tr>
+<td>Conf/Jour</td>
+<td>ICCV</td>
+</tr>
+<tr>
+<td>Year</td>
+<td>2023</td>
+</tr>
+<tr>
+<td>Project</td>
+<td><a target="_blank" rel="noopener" href="https://manycore-research.github.io/PlankAssembly/">PlankAssembly: Robust 3D Reconstruction from Three Orthographic Views with Learnt Shape Programs (manycore-research.github.io)</a></td>
+</tr>
+<tr>
+<td>Paper</td>
+<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4787600278115319809&amp;noteId=1912848205953901312">PlankAssembly: Robust 3D Reconstruction from Three Orthographic Views with Learnt Shape Programs (readpaper.com)</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230813211026.png" alt="image.png"></p>
+<p>贡献：</p>
+<ul>
+<li>基于Transform的自注意力提出模型，用于将2D的三个orthographic的line drawing转化为3D模型，可以实现从图纸不完美的输入中生成正确的3D模型</li>
+<li>输入的三个orthographic图纸被编码，输出的是3D模型程序的编码，最后解码后即3D模型对应的程序DSL</li>
+</ul>
+<p>挑战：</p>
+<ul>
+<li>应用于无法获得甚至不存在大规模CAD数据的领域，例如建筑物或复杂的机械设备</li>
+<li>没有考虑图纸中的符号、图层等信息</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/3DReconstruction/Multi-view/Generative%20Models/PlankAssembly/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeRF%20Other%20Research/Review/A%20Critical%20Analysis%20of%20NeRF-Based%203D%20Reconstruction/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiYun">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeRF%20Other%20Research/Review/A%20Critical%20Analysis%20of%20NeRF-Based%203D%20Reconstruction/" class="post-title-link" itemprop="url">A Critical Analysis of NeRF-Based 3D Reconstruction</a>
+        </h2>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-08-12 15:32:14" itemprop="dateCreated datePublished" datetime="2023-08-12T15:32:14+08:00">2023-08-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-06-29 20:16:24" itemprop="dateModified" datetime="2024-06-29T20:16:24+08:00">2024-06-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/3DReconstruction-Multi-view-Implicit-Function/" itemprop="url" rel="index"><span itemprop="name">3DReconstruction/Multi-view/Implicit Function</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>9.1k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>33 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Title</th>
+<th>A Critical Analysis of NeRF-Based 3D Reconstruction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Author</td>
+<td>Fabio Remondino , Ali Karami  , Ziyang Yan, Gabriele Mazzacca , Simone Rigon and Rongjun Qin</td>
+</tr>
+<tr>
+<td>Conf/Jour</td>
+<td>MDPI remote sensing</td>
+</tr>
+<tr>
+<td>Year</td>
+<td>2023</td>
+</tr>
+<tr>
+<td>Project</td>
+<td><a target="_blank" rel="noopener" href="https://www.mdpi.com/2072-4292/15/14/3585">A Critical Analysis of NeRF-Based 3D Reconstruction</a></td>
+</tr>
+<tr>
+<td>Paper</td>
+<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4787981282168537089&amp;noteId=1912892973790366720">A Critical Analysis of NeRF-Based 3D Reconstruction (readpaper.com)</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230812171053.png" alt="image.png"></p>
+<p>对比photogrammetry与NeRF在3D Reconstruction中的表现，提供数据集<a target="_blank" rel="noopener" href="https://github.com/3DOM-FBK/NeRFBK">Github_NeRFBK</a></p>
+<ul>
+<li>photogrammetry(Colmap)<ul>
+<li>对无纹理物体重建效果很差(non-collaborative surfaces的3D测量)，例如镜面反射物体<ul>
+<li>非协作表面: 反射、无纹理等</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>NeRF(InstantNGP | NerfStudio | SDFstudio)</li>
+</ul>
+<p>结论：</p>
+<ul>
+<li>在传统摄影测量方法失败或产生嘈杂结果的情况下，例如无纹理、金属、高反射和透明物体，NeRF优于摄影测量</li>
+<li>对于纹理良好和部分纹理的物体，摄影测量仍然表现更好</li>
+</ul>
+<p>该研究为NeRF在不同现实场景中的适用性提供了有价值的见解，特别是在遗产和工业场景中，这些场景的表面可能特别具有挑战性，未来的研究可以探索NeRF和摄影测量的结合，以提高具有挑战性场景下三维重建的质量和效率</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeRF%20Other%20Research/Review/A%20Critical%20Analysis%20of%20NeRF-Based%203D%20Reconstruction/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/Shadow&Highlight/NeRFactor/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1346,1116 +2331,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeRF%20Other%20Research/Efficiency/Zip-NeRF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-      <meta itemprop="name" content="Qi Yun">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiYun">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeRF%20Other%20Research/Efficiency/Zip-NeRF/" class="post-title-link" itemprop="url">Zip-NeRF</a>
-        </h2>
-
-        <div class="post-meta">
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-07-29 12:59:25" itemprop="dateCreated datePublished" datetime="2023-07-29T12:59:25+08:00">2023-07-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-06-29 20:15:59" itemprop="dateModified" datetime="2024-06-29T20:15:59+08:00">2024-06-29</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/3DReconstruction-Multi-view-Implicit-Function/" itemprop="url" rel="index"><span itemprop="name">3DReconstruction/Multi-view/Implicit Function</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>6.7k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span>24 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <div class="table-container">
-<table>
-<thead>
-<tr>
-<th>Title</th>
-<th>Zip-NeRF: Anti-Aliased Grid-Based Neural Radiance Fields</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Author</td>
-<td><a target="_blank" rel="noopener" href="https://jonbarron.info/">Jonathan T. Barron</a><a target="_blank" rel="noopener" href="http://bmild.github.io/">Ben Mildenhall</a><a target="_blank" rel="noopener" href="http://dorverbin.github.io/">Dor Verbin</a><a target="_blank" rel="noopener" href="https://pratulsrinivasan.github.io/">Pratul P. Srinivasan</a><a target="_blank" rel="noopener" href="https://phogzone.com/">Peter Hedman</a></td>
-</tr>
-<tr>
-<td>Conf/Jour</td>
-<td>ICCV</td>
-</tr>
-<tr>
-<td>Year</td>
-<td>2023</td>
-</tr>
-<tr>
-<td>Project</td>
-<td><a target="_blank" rel="noopener" href="https://jonbarron.info/zipnerf/">Zip-NeRF (jonbarron.info)</a></td>
-</tr>
-<tr>
-<td>Paper</td>
-<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4762187901551247361&amp;noteId=1892446988470107392">Zip-NeRF: Anti-Aliased Grid-Based Neural Radiance Fields (readpaper.com)</a></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>Zip-NeRF在抗混叠(包括NeRF从空间坐标到颜色和密度的学习映射的空间混叠，以及沿每条射线在线蒸馏过程中使用的损失函数的z-混叠)方面都取得了很好的效果，并且速度相比前作Mip-NeRF 360 提高了24X</p>
-<p>mipNeRF 360+基于网格的模型(如Instant NGP)的技术</p>
-<ul>
-<li>错误率下降8~77%，并且比Mip-NeRF360提速了24X</li>
-<li>主要贡献：<ul>
-<li>多采样</li>
-<li>预滤波</li>
-</ul>
-</li>
-</ul>
-<p>多采样：train左，test右</p>
-<div style="display:flex; justify-content:space-between;"> <img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/hexify_train.gif" alt="Image 1" style="width:30%;"><div style="width:10px;"></div> <img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/hexify_test.gif" alt="Image 2" style="width:30%;"> </div>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeRF%20Other%20Research/Efficiency/Zip-NeRF/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/Shadow&Highlight/NeRO/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-      <meta itemprop="name" content="Qi Yun">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiYun">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/Shadow&Highlight/NeRO/" class="post-title-link" itemprop="url">NeRO</a>
-        </h2>
-
-        <div class="post-meta">
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-07-27 12:21:17" itemprop="dateCreated datePublished" datetime="2023-07-27T12:21:17+08:00">2023-07-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-11-24 14:43:39" itemprop="dateModified" datetime="2023-11-24T14:43:39+08:00">2023-11-24</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/3DReconstruction-Multi-view-Implicit-Function-NeRF-based-Shadow-Highlight/" itemprop="url" rel="index"><span itemprop="name">3DReconstruction/Multi-view/Implicit Function/NeRF-based/Shadow&Highlight</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>9k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span>33 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <div class="table-container">
-<table>
-<thead>
-<tr>
-<th>Title</th>
-<th>NeRO: Neural Geometry and BRDF Reconstruction of Reflective Objects from Multiview Images</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Author</td>
-<td><a target="_blank" rel="noopener" href="https://liuyuan-pal.github.io/">Yuan Liu</a>, <a target="_blank" rel="noopener" href="https://totoro97.github.io/">Peng Wang</a>, <a target="_blank" rel="noopener" href="https://clinplayer.github.io/">Cheng Lin</a>, <a target="_blank" rel="noopener" href="https://www.xxlong.site/">Xiaoxiao Long</a>, <a target="_blank" rel="noopener" href="https://jiepengwang.github.io/">Jiepeng Wang</a>, <a target="_blank" rel="noopener" href="https://lingjie0206.github.io/">Lingjie Liu</a>, <a target="_blank" rel="noopener" href="https://homepages.inf.ed.ac.uk/tkomura/">Taku Komura</a>, <a target="_blank" rel="noopener" href="https://engineering.tamu.edu/cse/profiles/Wang-Wenping.html">Wenping Wang</a></td>
-</tr>
-<tr>
-<td>Conf/Jour</td>
-<td>SIGGRAPH 2023</td>
-</tr>
-<tr>
-<td>Year</td>
-<td>2023</td>
-</tr>
-<tr>
-<td>Project</td>
-<td><a target="_blank" rel="noopener" href="https://liuyuan-pal.github.io/NeRO/">NeRO: Neural Geometry and BRDF Reconstruction of Reflective Objects from Multiview Images (liuyuan-pal.github.io)</a></td>
-</tr>
-<tr>
-<td>Paper</td>
-<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4761535311519940609&amp;noteId=1889502311513975040">NeRO: Neural Geometry and BRDF Reconstruction of Reflective Objects from Multiview Images (readpaper.com)</a></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>Reference</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://readpaper.com/paper/3204455502">[PDF] NeRD: Neural Reflectance Decomposition From Image Collections</a><br><a target="_blank" rel="noopener" href="https://readpaper.com/paper/692131090958098432">[PDF] SAMURAI: Shape And Material from Unconstrained Real-world Arbitrary Image collections</a><br><a target="_blank" rel="noopener" href="https://readpaper.com/paper/4645908786821742593">[PDF] Relighting4D: Neural Relightable Human from Videos</a><br><a target="_blank" rel="noopener" href="https://readpaper.com/paper/682591079116292096">[PDF] Neural 3D Scene Reconstruction with the Manhattan-world Assumption</a><br><a target="_blank" rel="noopener" href="https://readpaper.com/paper/640484809354805248">[PDF] NeROIC: Neural Rendering of Objects from Online Image Collections</a></p>
-</blockquote>
-<p>对金属反光材质的物体重建效果很好</p>
-<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230728162856.png" alt="imgae"></p>
-<p>提出了一种新的光表示方法，颜色由漫反射和镜面反射两部分组成，通过两个阶段的方法来实现</p>
-<ul>
-<li>Stage1：使用集成方向编码来近似光积分，使用shadow MLP对直接光和间接光进行model，学习到了表面几何形状</li>
-<li>Stage2：蒙特卡罗采样固定几何形状，重建更精确的表面BRDF和环境光<ul>
-<li>$\mathbf{c}_{\mathrm{diffuse}}=\frac{1}{N_{d}}\sum_{i}^{N_{d}}(1-m)\mathrm{a}L(\omega_{i}),$</li>
-<li>$\mathbf{c}_{\mathrm{specular}}=\frac{1}{N_{s}}\sum_{i}^{N_{s}}\frac{FG(\omega_{0}\cdot\mathbf{h})}{(\mathbf{n}\cdot\mathbf{h})(\mathbf{n}\cdot\omega_{\mathbf{0}})}L(\omega_{i}),$</li>
-</ul>
-</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/Shadow&Highlight/NeRO/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeRF%20Other%20Research/Efficiency/Tri-MipRF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-      <meta itemprop="name" content="Qi Yun">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiYun">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeRF%20Other%20Research/Efficiency/Tri-MipRF/" class="post-title-link" itemprop="url">Tri-MipRF</a>
-        </h2>
-
-        <div class="post-meta">
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-07-26 00:00:00" itemprop="dateCreated datePublished" datetime="2023-07-26T00:00:00+08:00">2023-07-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-06-29 20:16:01" itemprop="dateModified" datetime="2024-06-29T20:16:01+08:00">2024-06-29</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/3DReconstruction-Multi-view-Implicit-Function/" itemprop="url" rel="index"><span itemprop="name">3DReconstruction/Multi-view/Implicit Function</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>6.4k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span>23 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <div class="table-container">
-<table>
-<thead>
-<tr>
-<th>Title</th>
-<th>Tri-MipRF: Tri-Mip Representation for Efficient Anti-Aliasing Neural Radiance Fields</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Author</td>
-<td><a target="_blank" rel="noopener" href="https://wbhu.github.io/">Wenbo Hu</a>     Yuling Wang</td>
-</tr>
-<tr>
-<td>Conf/Jour</td>
-<td>ICCV</td>
-</tr>
-<tr>
-<td>Year</td>
-<td>2023</td>
-</tr>
-<tr>
-<td>Project</td>
-<td><a target="_blank" rel="noopener" href="https://wbhu.github.io/projects/Tri-MipRF/">Tri-MipRF: Tri-Mip Representation for Efficient Anti-Aliasing Neural Radiance Fields (wbhu.github.io)</a></td>
-</tr>
-<tr>
-<td>Paper</td>
-<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4781040535062183937&amp;noteId=1888227766799606528">Tri-MipRF: Tri-Mip Representation for Efficient Anti-Aliasing Neural Radiance Fields (readpaper.com)</a></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>2023.7.26 SOTA<br><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230726151828.png" alt="image.png|600"></p>
-<p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230726151646.png" alt="image.png"></p>
-<p>like <a target="_blank" rel="noopener" href="https://apchenstu.github.io/TensoRF/">TensoRF: Tensorial Radiance Fields (apchenstu.github.io)</a>+ Mip-NeRF + NGP</p>
-<ul>
-<li><p>类似Mip-NeRF中的采样锥形方法，但是Tri-MipRF使用了与圆锥相切的采样球S=(x,r)，代替Mip-NeRF中的多元高斯圆锥体</p>
-<ul>
-<li>采样球的半径通过像素圆盘半径$\dot r$（由像素大小in world Coordinate），焦距f和$t_i$确定</li>
-</ul>
-</li>
-<li><p>类似TensoRF中的分解方法，将空间采样球分解到三个平面上，编码类似NGP中的HashGrid 使用2D平面来存取特征值，构建一个base level:$M^{L_{0}}$，通过downscaling来获得其他level的2D grid平面。</p>
-<ul>
-<li>通过base level中interest space的AABB求出$\ddot r$，并联合采样球半径r得到采样球在平面投影的level，根据此level和投影到平面上的二维坐标，在相邻两level $\mathcal{M}_{XY}^{\lfloor l\rfloor}$和$\mathcal{M}_{XY}^{\lceil l\rceil}$的2D grid中采用3线性插值得到采样球的特征值，最后三个分解平面的特征值cat起来作为MLP的一个输入</li>
-</ul>
-</li>
-<li><p>一种更好的渲染视图方法：Hybrid Volume-Surface Rendering</p>
-<ul>
-<li>通过在密度场中marching cubes和网格抽取来获得代理网格，粗略确定相机原点到物体表面的距离</li>
-<li>对代理网格进行有效栅格化，以获得圆锥体中轴线表面上的命中点，然后我们在距圆锥体中轴线命中点∆t距离内均匀采样球体，这产生2∆t采样间隔。</li>
-<li>优点：可以减少需要采样点的数量，且不会影响渲染出来图片的质量</li>
-</ul>
-</li>
-<li><p>优点：</p>
-<ul>
-<li>fine-grained details in close-up views</li>
-<li>and free of aliasing in distant views</li>
-<li>5 minute and smaller model parameters</li>
-</ul>
-</li>
-<li><p>缺点：</p>
-<ul>
-<li>需要使用multi-view segmentation methods将In-the-wildIn数据集中感兴趣的物体提取出来<ul>
-<li>即需要mask</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeRF%20Other%20Research/Efficiency/Tri-MipRF/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeRF%20Other%20Research/LargeScaleScene/Mip-NeRF%20360/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-      <meta itemprop="name" content="Qi Yun">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiYun">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeRF%20Other%20Research/LargeScaleScene/Mip-NeRF%20360/" class="post-title-link" itemprop="url">Mip-NeRF 360</a>
-        </h2>
-
-        <div class="post-meta">
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-07-21 16:28:43" itemprop="dateCreated datePublished" datetime="2023-07-21T16:28:43+08:00">2023-07-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-06-29 20:16:17" itemprop="dateModified" datetime="2024-06-29T20:16:17+08:00">2024-06-29</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/3DReconstruction-Multi-view-Implicit-Function/" itemprop="url" rel="index"><span itemprop="name">3DReconstruction/Multi-view/Implicit Function</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>7.1k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span>26 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <div class="table-container">
-<table>
-<thead>
-<tr>
-<th>Title</th>
-<th>Mip-NeRF 360: Unbounded Anti-Aliased Neural Radiance Fields</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Author</td>
-<td><a target="_blank" rel="noopener" href="https://jonbarron.info/">Jonathan T. Barron</a>  <a target="_blank" rel="noopener" href="http://bmild.github.io/">Ben Mildenhall</a>  <a target="_blank" rel="noopener" href="https://scholar.harvard.edu/dorverbin/home">Dor Verbin</a> <a target="_blank" rel="noopener" href="https://pratulsrinivasan.github.io/">Pratul P. Srinivasan</a>  <a target="_blank" rel="noopener" href="https://phogzone.com/">Peter Hedman</a></td>
-</tr>
-<tr>
-<td>Conf/Jour</td>
-<td>CVPR 2022 (Oral Presentation)</td>
-</tr>
-<tr>
-<td>Year</td>
-<td>2022</td>
-</tr>
-<tr>
-<td>Project</td>
-<td><a target="_blank" rel="noopener" href="https://jonbarron.info/mipnerf360/">mip-NeRF 360 (jonbarron.info)</a></td>
-</tr>
-<tr>
-<td>Paper</td>
-<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4606723627252981761&amp;noteId=1881063981903029504">Mip-NeRF 360: Unbounded Anti-Aliased Neural Radiance Fields (readpaper.com)</a></td>
-</tr>
-</tbody>
-</table>
-</div>
-<ul>
-<li>novel Kalman-like scene parameterization：将场景参数化，将单位球外背景采样的截头锥参数化到r=2的球体内，单位球内的截头锥不受影响</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230722144216.png" alt="image.png"></p>
-<ul>
-<li>efficient proposal-based coarse-to-fine distillation framework：一个提议网络用来获取权重，用来进行精采样，再通过精采样的点根据NeRF 的MLP得到密度和颜色值</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230722152752.png" alt="image.png"></p>
-<ul>
-<li>regularizer designed for mipNeRF ray intervals：可以有效消除floaters(体积密集空间中不相连的小区域)和背景塌陷(远处的表面被错误地模拟成靠近相机的密集内容的半透明云)</li>
-</ul>
-<p>$\begin{gathered}\mathcal{L}_{\mathrm{dist}}(\mathbf{s},\mathbf{w}) =\sum_{i,j}w_iw_j\left|\frac{s_i+s_{i+1}}{2}-\frac{s_j+s_{j+1}}{2}\right| \+\frac13\sum_iw_i^2(s_{i+1}-s_i) \end{gathered}$</p>
-<p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230722154733.png" alt="image.png"></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeRF%20Other%20Research/LargeScaleScene/Mip-NeRF%20360/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeRF%20Other%20Research/Sampling/Mip-NeRF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-      <meta itemprop="name" content="Qi Yun">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiYun">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeRF%20Other%20Research/Sampling/Mip-NeRF/" class="post-title-link" itemprop="url">Mip-NeRF</a>
-        </h2>
-
-        <div class="post-meta">
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-07-21 12:50:45" itemprop="dateCreated datePublished" datetime="2023-07-21T12:50:45+08:00">2023-07-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-06-29 20:16:29" itemprop="dateModified" datetime="2024-06-29T20:16:29+08:00">2024-06-29</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/3DReconstruction-Multi-view-Implicit-Function/" itemprop="url" rel="index"><span itemprop="name">3DReconstruction/Multi-view/Implicit Function</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>5.9k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span>22 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <div class="table-container">
-<table>
-<thead>
-<tr>
-<th>Title</th>
-<th>Mip-NeRF: A Multiscale Representation for Anti-Aliasing Neural Radiance Fields</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Author</td>
-<td>Jonathan T. Barron and Ben Mildenhall and Matthew Tancik and Peter Hedman and Ricardo Martin-Brualla and Pratul P. Srinivasan</td>
-</tr>
-<tr>
-<td>Conf/Jour</td>
-<td>2021 IEEE/CVF International Conference on Computer Vision (ICCV)</td>
-</tr>
-<tr>
-<td>Year</td>
-<td>2021</td>
-</tr>
-<tr>
-<td>Project</td>
-<td><a target="_blank" rel="noopener" href="https://github.com/google/mipnerf">google/mipnerf (github.com)</a></td>
-</tr>
-<tr>
-<td>Paper</td>
-<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4557703956856315905&amp;noteId=1753570799523020032">Mip-NeRF: A Multiscale Representation for Anti-Aliasing Neural Radiance Fields (readpaper.com)</a></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230721125154.png" alt="image.png"></p>
-<ul>
-<li>一种新的采样方式：锥体采样<strong>conical frustums截头圆锥体</strong></li>
-<li>基于PE提出了IPE，可以平滑地编码空间体积的大小和形状</li>
-<li>将NeRF的粗精采样MLP合并为一个MLP</li>
-</ul>
-<p>IPE：当锥体区域较宽（正态分布很宽）时，会将高频的信息积分为0；当区域较窄时，保持原来的PEncoding<br><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/ipe_anim_horiz.gif" alt="ipe_anim_horiz.gif"></p>
-<p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230721153610.png" alt="image.png"></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeRF%20Other%20Research/Sampling/Mip-NeRF/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeRF%20Other%20Research/LargeScaleScene/NeRF++/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-      <meta itemprop="name" content="Qi Yun">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiYun">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeRF%20Other%20Research/LargeScaleScene/NeRF++/" class="post-title-link" itemprop="url">NeRF++</a>
-        </h2>
-
-        <div class="post-meta">
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-07-18 15:46:05" itemprop="dateCreated datePublished" datetime="2023-07-18T15:46:05+08:00">2023-07-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-07-17 15:40:14" itemprop="dateModified" datetime="2024-07-17T15:40:14+08:00">2024-07-17</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/3DReconstruction-Multi-view-Implicit-Function/" itemprop="url" rel="index"><span itemprop="name">3DReconstruction/Multi-view/Implicit Function</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>2.4k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span>9 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <div class="table-container">
-<table>
-<thead>
-<tr>
-<th>Title</th>
-<th>NeRF++: Analyzing and Improving Neural Radiance Fields</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Author</td>
-<td>Kai Zhang, Gernot Riegler, Noah Snavely, Vladlen Koltun</td>
-</tr>
-<tr>
-<td>Conf/Jour</td>
-<td>arXiv: Computer Vision and Pattern Recognition</td>
-</tr>
-<tr>
-<td>Year</td>
-<td>2020</td>
-</tr>
-<tr>
-<td>Project</td>
-<td><a target="_blank" rel="noopener" href="https://github.com/Kai-46/nerfplusplus">Kai-46/nerfplusplus: improves over nerf in 360 capture of unbounded scenes (github.com)</a></td>
-</tr>
-<tr>
-<td>Paper</td>
-<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4498415698728083457&amp;noteId=1798375069007427072">NeRF++: Analyzing and Improving Neural Radiance Fields. (readpaper.com)</a><br><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2010.07492">arxiv.org/pdf/2010.07492</a><br></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230718165249.png" alt="image.png"></p>
-<p>创新：一种前背景分离的方法<br>挑战：</p>
-<ul>
-<li>First, the training and testing of NeRF and NeRF++ on a single large-scale scene is quite <strong>time-consuming and memory-intensive</strong> —&gt; NGP解决了耗时</li>
-<li>Second, <strong>small camera calibration errors</strong> may impede阻碍 photorealistic synthesis. Robust loss functions, such as the contextual loss (Mechrez et al., 2018), could be applied.</li>
-<li>Third, photometric effects such as <strong>auto-exposure and vignetting渐晕</strong> can also be taken into account to increase image fidelity. This line of investigation is related to the lighting changes addressed in the orthogonal work of Martin-Brualla et al. (2020).</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeRF%20Other%20Research/LargeScaleScene/NeRF++/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeuDA/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-      <meta itemprop="name" content="Qi Yun">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiYun">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeuDA/" class="post-title-link" itemprop="url">NeuDA</a>
-        </h2>
-
-        <div class="post-meta">
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-07-18 13:56:14" itemprop="dateCreated datePublished" datetime="2023-07-18T13:56:14+08:00">2023-07-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-11-24 14:54:55" itemprop="dateModified" datetime="2023-11-24T14:54:55+08:00">2023-11-24</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/3DReconstruction-Multi-view-Implicit-Function-NeRF-based/" itemprop="url" rel="index"><span itemprop="name">3DReconstruction/Multi-view/Implicit Function/NeRF-based</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>2.3k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span>8 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <div class="table-container">
-<table>
-<thead>
-<tr>
-<th>Title</th>
-<th>NeuDA: Neural Deformable Anchor for High-Fidelity Implicit Surface Reconstruction</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Author</td>
-<td>Bowen Cai    ,Jinchi Huang,    Rongfei Jia    ,Chengfei Lv,    Huan Fu*</td>
-</tr>
-<tr>
-<td>Conf/Jour</td>
-<td>CVPR</td>
-</tr>
-<tr>
-<td>Year</td>
-<td>2023</td>
-</tr>
-<tr>
-<td>Project</td>
-<td><a target="_blank" rel="noopener" href="https://3d-front-future.github.io/neuda/">NeuDA (3d-front-future.github.io)</a></td>
-</tr>
-<tr>
-<td>Paper</td>
-<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?pdfId=4738274314005004289&amp;noteId=1876559968197187840">NeuDA: Neural Deformable Anchor for High-Fidelity Implicit Surface Reconstruction (readpaper.com)</a></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>NeuDA变形后的grid距离Surface更近一些，即可以使采样点插值时更多依赖于表面，即渲染时也会更多地考虑到3D空间相邻的信息</p>
-<p>创新：Deformable Anchors、HPE、$\mathcal{L}_{norm}$</p>
-<ul>
-<li>改进了NGP中的grid表示，8个顶点存储feature—&gt;存储锚点位置，锚点位置经过PE后输入进SDF网络</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230718145119.png" alt="image.png"></p>
-<p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230718144934.png" alt="image.png"></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/NeuDA/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/Sparse/SparseNeuS/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-      <meta itemprop="name" content="Qi Yun">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QiYun">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/Sparse/SparseNeuS/" class="post-title-link" itemprop="url">SparseNeuS</a>
-        </h2>
-
-        <div class="post-meta">
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-07-18 13:20:24" itemprop="dateCreated datePublished" datetime="2023-07-18T13:20:24+08:00">2023-07-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-12-31 22:22:45" itemprop="dateModified" datetime="2023-12-31T22:22:45+08:00">2023-12-31</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/3DReconstruction-Multi-view-Implicit-Function-NeRF-based-Sparse/" itemprop="url" rel="index"><span itemprop="name">3DReconstruction/Multi-view/Implicit Function/NeRF-based/Sparse</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>7.1k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span>26 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <div class="table-container">
-<table>
-<thead>
-<tr>
-<th>Title</th>
-<th>SparseNeuS: Fast Generalizable Neural Surface Reconstruction from Sparse Views</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Author</td>
-<td><a target="_blank" rel="noopener" href="https://www.xxlong.site/">Xiaoxiao Long</a>    <a target="_blank" rel="noopener" href="https://clinplayer.github.io/">Cheng Lin</a>    Peng Wang    <a target="_blank" rel="noopener" href="https://homepages.inf.ed.ac.uk/tkomura/">Taku Komura</a>   <a target="_blank" rel="noopener" href="https://www.cs.hku.hk/people/academic-staff/wenping/">Wenping Wang</a></td>
-</tr>
-<tr>
-<td>Conf/Jour</td>
-<td><a target="_blank" rel="noopener" href="https://eccv2022.ecva.net/">ECCV</a></td>
-</tr>
-<tr>
-<td>Year</td>
-<td>2022</td>
-</tr>
-<tr>
-<td>Project</td>
-<td><a target="_blank" rel="noopener" href="https://www.xxlong.site/SparseNeuS/">SparseNeuS: Fast Generalizable Neural Surface Reconstruction from Sparse Views (xxlong.site)</a></td>
-</tr>
-<tr>
-<td>Paper</td>
-<td><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?noteId=1876524675392434432">SparseNeuS: Fast Generalizable Neural Surface Reconstruction from Sparse views (readpaper.com)</a></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>从仅2~3张的稀疏输入中重建表面</p>
-<ul>
-<li>首先，我们提出了一个<strong>多层几何推理框架</strong>，以粗到细的方式恢复表面。</li>
-<li>其次，我们采用了一种<strong>多尺度颜色混合方案</strong>，该方案联合评估局部和背景亮度一致性，以获得更可靠的颜色预测。</li>
-<li>第三，采用<strong>一致性感知的微调方案</strong>，控制遮挡和图像噪声引起的不一致区域，得到准确、干净的重建。</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230718133443.png" alt="image.png"></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/3DReconstruction/Multi-view/Implicit%20Function/NeRF-based/Sparse/SparseNeuS/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -2522,20 +2401,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">153</span>
+          <span class="site-state-item-count">161</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">56</span>
+        <span class="site-state-item-count">59</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -2574,7 +2453,7 @@
 <div class="copyright">
   
   &copy; 2020 – 
-  <span itemprop="copyrightYear">2024</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -2583,12 +2462,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">513k</span>
+    <span title="Symbols count total">521k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">31:04</span>
+    <span title="Reading time total">31:36</span>
 </div>
 
         

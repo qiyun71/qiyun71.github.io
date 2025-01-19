@@ -28,7 +28,7 @@
 <meta property="og:description" content="Linux 万物皆可文件  A Complete Guide to Understanding Linux File System Tree | Cherry Servers">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-03-27T12:25:20.000Z">
-<meta property="article:modified_time" content="2024-11-24T05:53:01.700Z">
+<meta property="article:modified_time" content="2025-01-03T13:13:55.587Z">
 <meta property="article:author" content="Qi Yun">
 <meta name="twitter:card" content="summary">
 
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-11-24 13:53:01" itemprop="dateModified" datetime="2024-11-24T13:53:01+08:00">2024-11-24</time>
+                <time title="Modified: 2025-01-03 21:13:55" itemprop="dateModified" datetime="2025-01-03T21:13:55+08:00">2025-01-03</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -242,7 +242,7 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>947</span>
+              <span>959</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -279,7 +279,7 @@
 <ul>
 <li><code>LD_LIBRARY_PATH=/usr/local/lib64:$LD_LIBRARY_PATH your_program</code></li>
 </ul>
-<h2 id="zip压缩"><a href="#zip压缩" class="headerlink" title="zip压缩"></a>zip压缩</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 压缩。如果没有zip命令，安装命令：apt-get update &amp;&amp; apt-get install -y zip</span></span><br><span class="line">zip -r &lt;自定义压缩包名称&gt;.zip &lt;待压缩目录的路径&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压。如果没有zip命令，安装命令：apt-get update &amp;&amp; apt-get install -y unzip</span></span><br><span class="line">unzip  &lt;待解压压缩包名称&gt;.zip -d &lt;解压到哪个路径&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="基础指令"><a href="#基础指令" class="headerlink" title="基础指令"></a>基础指令</h1><h2 id="zip压缩"><a href="#zip压缩" class="headerlink" title="zip压缩"></a>zip压缩</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 压缩。如果没有zip命令，安装命令：apt-get update &amp;&amp; apt-get install -y zip</span></span><br><span class="line">zip -r &lt;自定义压缩包名称&gt;.zip &lt;待压缩目录的路径&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压。如果没有zip命令，安装命令：apt-get update &amp;&amp; apt-get install -y unzip</span></span><br><span class="line">unzip  &lt;待解压压缩包名称&gt;.zip -d &lt;解压到哪个路径&gt;</span><br></pre></td></tr></table></figure>
 <h2 id="tar"><a href="#tar" class="headerlink" title="tar"></a>tar</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 压缩（具体是指打包，未压缩，非常推荐这种方式，因为压缩/解压都耗时，但是图片等都无法再压缩）</span><br><span class="line">tar -cf &lt;自定义压缩包名称&gt;.tar &lt;待压缩目录的路径&gt;</span><br><span class="line"></span><br><span class="line"># 解压</span><br><span class="line">tar -xf &lt;待解压压缩包名称&gt;.tar -C &lt;解压到哪个路径&gt;</span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 压缩</span><br><span class="line">tar -czf &lt;自定义压缩包名称&gt;.tar &lt;待压缩目录的路径&gt;</span><br><span class="line"></span><br><span class="line"># 解压</span><br><span class="line">tar -xzf &lt;待解压压缩包名称&gt;.tar -C &lt;解压到哪个路径&gt;</span><br></pre></td></tr></table></figure>
 <h2 id="gdm"><a href="#gdm" class="headerlink" title="gdm"></a>gdm</h2><p>动作：关闭gdm <code>sudo systemctl disable gdm.service</code> | 更新附加驱动，使用Nvidia专有驱动重启</p>
@@ -317,12 +317,14 @@
 <h2 id="查看os"><a href="#查看os" class="headerlink" title="查看os"></a>查看os</h2><p>查看系统版本：<br>lsb_release -a</p>
 <p>查看操作系统架构<br>$ dpkg —print-architecture<br>amd64</p>
 <p>$ arch<br>x86_64</p>
-<h1 id="screen"><a href="#screen" class="headerlink" title="screen"></a>screen</h1><ul>
+<h2 id="screen"><a href="#screen" class="headerlink" title="screen"></a>screen</h2><ul>
 <li><code>screen</code>：启动一个新的 <code>screen</code> 会话。</li>
 <li><code>screen -r</code>：恢复之前的 <code>screen</code> 会话。后面接名字可以恢复指定的窗口</li>
 <li><code>screen -ls</code>：列出当前存在的 <code>screen</code> 会话。</li>
-<li></li>
 </ul>
+<blockquote>
+<p> <a target="_blank" rel="noopener" href="https://www.trevorlasn.com/blog/10-essential-terminal-commands-every-developer-should-know">10 Essential Terminal Commands Every Developer Should Know</a></p>
+</blockquote>
 
     </div>
 
@@ -422,7 +424,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A1%8C%E9%9D%A2"><span class="nav-text">桌面</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-text">环境变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zip%E5%8E%8B%E7%BC%A9"><span class="nav-text">zip压缩</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tar"><span class="nav-text">tar</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gdm"><span class="nav-text">gdm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#V100%E8%81%94%E7%BD%91"><span class="nav-text">V100联网</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chmod-%E4%BF%AE%E6%94%B9%E6%9D%83%E9%99%90"><span class="nav-text">chmod 修改权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ln"><span class="nav-text">ln</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ls"><span class="nav-text">ls</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#du"><span class="nav-text">du</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E8%BF%9B%E7%A8%8B"><span class="nav-text">查看进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8Bos"><span class="nav-text">查看os</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#screen"><span class="nav-text">screen</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A1%8C%E9%9D%A2"><span class="nav-text">桌面</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-text">环境变量</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E6%8C%87%E4%BB%A4"><span class="nav-text">基础指令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#zip%E5%8E%8B%E7%BC%A9"><span class="nav-text">zip压缩</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tar"><span class="nav-text">tar</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gdm"><span class="nav-text">gdm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#V100%E8%81%94%E7%BD%91"><span class="nav-text">V100联网</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chmod-%E4%BF%AE%E6%94%B9%E6%9D%83%E9%99%90"><span class="nav-text">chmod 修改权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ln"><span class="nav-text">ln</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ls"><span class="nav-text">ls</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#du"><span class="nav-text">du</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E8%BF%9B%E7%A8%8B"><span class="nav-text">查看进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8Bos"><span class="nav-text">查看os</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#screen"><span class="nav-text">screen</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -437,20 +439,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">153</span>
+          <span class="site-state-item-count">161</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">56</span>
+        <span class="site-state-item-count">59</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -489,7 +491,7 @@
 <div class="copyright">
   
   &copy; 2020 – 
-  <span itemprop="copyrightYear">2024</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -498,12 +500,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">513k</span>
+    <span title="Symbols count total">521k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">31:04</span>
+    <span title="Reading time total">31:36</span>
 </div>
 
         

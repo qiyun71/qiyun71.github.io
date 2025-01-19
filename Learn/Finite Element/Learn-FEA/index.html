@@ -27,14 +27,14 @@
 <meta property="og:site_name" content="QiYun">
 <meta property="og:description" content="Basic of Finite Element Analysis">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://static.wixstatic.com/media/a27d24_76b7481957424129998d971dff193a3f~mv2.jpg/v1/fill/w_1055,h_505,al_c,q_85,enc_auto/a27d24_76b7481957424129998d971dff193a3f~mv2.jpg">
 <meta property="og:image" content="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcommunity.altair.com%2F82dc6cb8db978d90e8863978f496193d.iix&amp;f=1&amp;nofb=1&amp;ipt=e29041e57c827ed2faf008c7ddd57993d080f93b25ead70858bd52bf7800e97c&amp;ipo=images">
-<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240708153849.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241016122523.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241229135610.png">
 <meta property="article:published_time" content="2024-05-25T14:10:37.000Z">
-<meta property="article:modified_time" content="2024-12-13T10:58:14.195Z">
+<meta property="article:modified_time" content="2025-01-10T09:28:23.449Z">
 <meta property="article:author" content="Qi Yun">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcommunity.altair.com%2F82dc6cb8db978d90e8863978f496193d.iix&amp;f=1&amp;nofb=1&amp;ipt=e29041e57c827ed2faf008c7ddd57993d080f93b25ead70858bd52bf7800e97c&amp;ipo=images">
+<meta name="twitter:image" content="https://static.wixstatic.com/media/a27d24_76b7481957424129998d971dff193a3f~mv2.jpg/v1/fill/w_1055,h_505,al_c,q_85,enc_auto/a27d24_76b7481957424129998d971dff193a3f~mv2.jpg">
 
 <link rel="canonical" href="http://example.com/Learn/Finite%20Element/Learn-FEA/">
 
@@ -229,7 +229,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-12-13 18:58:14" itemprop="dateModified" datetime="2024-12-13T18:58:14+08:00">2024-12-13</time>
+                <time title="Modified: 2025-01-10 17:28:23" itemprop="dateModified" datetime="2025-01-10T17:28:23+08:00">2025-01-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -246,13 +246,13 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>2.7k</span>
+              <span>2.3k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span>10 mins.</span>
+              <span>8 mins.</span>
             </span>
 
         </div>
@@ -306,6 +306,10 @@
 <li>近似方法(试函数)，选择满足边界条件的试函数(有待定系数)，带入控制方程(微分方程)，大概率不满足方程，带入控制方程得到残差函数并让残差最小。加权余量法——(残差函数与基底函数加权求和/求积分并令其为0，确当待定系数) 当残差与基函数的积分为零时，意味着在这些方向上的残差投影为零。</li>
 </ul>
 <blockquote>
+<p> <a target="_blank" rel="noopener" href="https://www.zhihu.com/question/26247876">(4 封私信) FDM、FVM、FEM之间到底有没有联系？ - 知乎</a></p>
+</blockquote>
+<p>CFD??? 固体的FEM,流体的FDM和FVM理论</p>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://ethz.ch/content/dam/ethz/special-interest/mavt/mechanical-systems/mm-dam/documents/Notes/IntroToFEA_red.pdf">ethz.ch/content/dam/ethz/special-interest/mavt/mechanical-systems/mm-dam/documents/Notes/IntroToFEA_red.pdf</a> </p>
 </blockquote>
 <p>Really nice book!!!</p>
@@ -313,6 +317,20 @@
 <p><a target="_blank" rel="noopener" href="https://chaoskey.github.io/notes/docs/fem/0097/">有限元方法（一）【翻译】 | 学习笔记</a><br>《Automated Solution of Differential Equations by the Finite Element Method》读书笔记 by chaoskey</p>
 <p> <a target="_blank" rel="noopener" href="https://www.xiaohongshu.com/discovery/item/665e9cf6000000000c01bb5b?source=webshare&amp;xhsshare=pc_web&amp;xsec_token=ABNlASerFlVV_tT41rvRjoPOehNMaa3psDGu-ZZqwKgZA=&amp;xsec_source=pc_share">有限元分析 知识点总结 - 谁说读书没用啊 | 小红书 - 你的生活指南</a></p>
 </blockquote>
+<h2 id="网格划分"><a href="#网格划分" class="headerlink" title="网格划分"></a>网格划分</h2><blockquote>
+<p> <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/s0-3qvQoOh0IjYZOItqcwQ">深入解析 | 有限元网格的常用生成算法</a></p>
+</blockquote>
+<ul>
+<li>映射法</li>
+<li>四（八）叉树法</li>
+<li>Delaunay三角化法: 每个三角形的外接圆内不包含其它顶点</li>
+<li>前沿推进法：从边界到内部的精细构建</li>
+</ul>
+<blockquote>
+<p> <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/IKWnToWELxGhVc8uRmBeNA">CAE底层网格算法的无穷美学【附专用网格处理工具】</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.manchestercfd.co.uk/post/all-there-is-to-know-about-different-mesh-types-in-cfd">All there is to know about different mesh types in CFD!</a></p>
+</blockquote>
+<p><img src="https://static.wixstatic.com/media/a27d24_76b7481957424129998d971dff193a3f~mv2.jpg/v1/fill/w_1055,h_505,al_c,q_85,enc_auto/a27d24_76b7481957424129998d971dff193a3f~mv2.jpg" alt="a27d24_76b7481957424129998d971dff193a3f~mv2.jpg (1055×505)|666"></p>
 <h2 id="PINN"><a href="#PINN" class="headerlink" title="PINN"></a>PINN</h2><blockquote>
 <p> <a target="_blank" rel="noopener" href="https://www.zhihu.com/question/52891698/answer/575686388">(2 封私信) 机器学习或者深度学习能替代有限元么？ - 知乎</a></p>
 </blockquote>
@@ -346,65 +364,13 @@
 <blockquote>
 <p> <a target="_blank" rel="noopener" href="https://lmy98129.github.io/2024/01/18/Notes-About-Operator-Learning/">Notes About Operator Learning | NeXT</a></p>
 </blockquote>
+<h3 id="Paper"><a href="#Paper" class="headerlink" title="Paper"></a>Paper</h3><blockquote>
+<p> <a target="_blank" rel="noopener" href="https://engineeringmechanics.cn/cn/article/pdf/preview/10.6052/j.issn.1000-4750.2024.04.0314.pdf">基于物理信息神经网络 (PINN) 方法的结构动力响应分析</a></p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241229135610.png" alt="image.png|666"></p>
 <h2 id="VEM-Virtual-Element-Method"><a href="#VEM-Virtual-Element-Method" class="headerlink" title="VEM (Virtual Element Method)"></a>VEM (Virtual Element Method)</h2><blockquote>
 <p><a target="_blank" rel="noopener" href="https://space.bilibili.com/76753039/dynamic">草莓Ye子酱个人动态-草莓Ye子酱动态记录-哔哩哔哩视频</a> <a target="_blank" rel="noopener" href="https://github.com/Qinxiaoye/xpfem?tab=readme-ov-file">Qinxiaoye/xpfem: A python package for finite element method (FEM) in solid mechanics</a> Bingbing Xu大佬<br><a target="_blank" rel="noopener" href="https://maths.dur.ac.uk/lms/101/talks/0493daveiga.pdf">An introduction to the Virtual Element Method</a></p>
 </blockquote>
-<h1 id="Software-about-FE"><a href="#Software-about-FE" class="headerlink" title="Software (about FE)"></a>Software (about FE)</h1><h2 id="Solidworks"><a href="#Solidworks" class="headerlink" title="Solidworks"></a>Solidworks</h2><p>建立好的模型导出为<code>.x_t</code>格式</p>
-<p>将Solid 转换成Surface：</p>
-<ul>
-<li><strong>Delete Face</strong></li>
-<li>Offset</li>
-</ul>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Fx0jX_7aJHM">How To Convert Solid To Surface Body In SolidWorks - YouTube</a></p>
-</blockquote>
-<h2 id="Patran"><a href="#Patran" class="headerlink" title="Patran"></a>Patran</h2><p>Preferences —&gt; Geometry 单位制 inches/m/mm，不同的单位设置材料特性时会有差异</p>
-<p>eg(钢板): E = 210GPa，$\rho = 7860 Kg/m^{3}$<br>mm制：</p>
-<ul>
-<li>Elastic Modulus/Shear Modulus：(210000)MPa/(83000)MPa</li>
-<li>Poisson Ratio(0.25)：注意设置了E和G后，Poisson Ratio会自动计算(根据钢板算例测试出来的)</li>
-<li>Density：(7.8599998E-09)$Kgf \cdot s^{2} /mm^{4}$ $(Kg/m^{3} =kgf \cdot s^{2}/m^{4})$ $(1Kgf = 9.8N = 9.8 Kg \cdot m/s^{2})$</li>
-</ul>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://wenku.baidu.com/view/9f2572f37c1cfad6195fa7d6.html?fr=income1-doc-search&amp;_wkts_=1714641483975&amp;wkQuery=patran%E4%B8%AD%E6%95%B0%E6%8D%AE%E7%9A%84%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E5%8D%95%E4%BD%8D">patran中数据的输入输出单位 - 百度文库</a></p>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240708153849.png" alt="image.png|666"></p>
-<h3 id="Mode-Frequency"><a href="#Mode-Frequency" class="headerlink" title="Mode Frequency"></a>Mode Frequency</h3><p>—&gt;生成 <strong>bdf</strong></p>
-<ol>
-<li>File —&gt; New —&gt; <code>*.db</code></li>
-<li>Menu —&gt; Preferences —&gt; Geometry —&gt; 1000.0 (Millimeters) —&gt; <strong>Apply</strong></li>
-<li>File —&gt; Import —&gt; <code>*.x_t</code> —&gt; <strong>Apply</strong> (Display —&gt; Smooth Shade)</li>
-<li>Meshing —&gt;(RHS) Mesh —&gt; Solid —&gt;(Main window) select solid —&gt; Automatic Calculation  —&gt; <strong>Apply</strong></li>
-<li>Properties —&gt; Isotropic —&gt;(RHS) <em>Material Name</em> —&gt; Input properties (Elastic Modulus: 210000MPa, Shear Modulus: 83000, Density: 7.86E-09 Kg/m^3) —&gt; <strong>Apply</strong></li>
-<li>Properties —&gt; Solid —&gt; Propert Set Name —&gt;(RHS) Input properties —&gt; Mat Prop Name select <em>gangban(Material Name)</em> —&gt;  Select Application Region —&gt;(Main window) select solid —&gt; Add —&gt; <strong>Apply</strong></li>
-<li>Analysis —&gt; Solution Type —&gt; NORMAL MODES —&gt; Solution Type —&gt; Solution Parameters —&gt; Results Output Format(XDB or OP2) —&gt; Subcase —&gt; Subcase Parameters —&gt; Number of Desired Roots : 20 —&gt; <strong>Apply</strong> Run nastran —&gt; Get .bdf</li>
-</ol>
-<h2 id="Nastran"><a href="#Nastran" class="headerlink" title="Nastran"></a>Nastran</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/33538970">如何用matlab被nastran给整的明明白白 PART 1 KNOW YOUR ENEMY——.bdf文件 - 知乎 (zhihu.com)</a></p>
-<p>Nastran的Python库：<a target="_blank" rel="noopener" href="https://pynastran-git.readthedocs.io/en/1.3/index.html">Welcome to pyNastran’s documentation for v1.3! — pyNastran 1.3 1.3 documentation (pynastran-git.readthedocs.io)</a></p>
-<p>Debug: <a target="_blank" rel="noopener" href="https://www.scribd.com/doc/70652924/Nastran-Error-List-1">Nastran Error List 1. | PDF</a></p>
-<p><code>D:\Software\Nastran\Nastran_install\bin\nastranw.exe *.bdf</code></p>
-<h3 id="卫星算例-bdf"><a href="#卫星算例-bdf" class="headerlink" title="卫星算例.bdf"></a>卫星算例.bdf</h3><p>不同结构参数生成结构特征量FR</p>
-<figure class="highlight plaintext"><figcaption><span>file</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ Elements and Element Properties for region : Shear_Panels</span><br><span class="line">PSHELL   1       1      .003     1               1</span><br><span class="line"></span><br><span class="line">- 36  行 .003 Shear_Panels 厚度 theta5</span><br><span class="line">- 429 行 .002 Central_Cylinder 厚度 theta3</span><br><span class="line">- 666 行 .001 Adapter 厚度 theta2 本来应该是密度2.7</span><br><span class="line">- 723 行 .002 Upper_platform 厚度 theta6</span><br><span class="line">- 864 行 .001 Lower_platform 厚度 theta4</span><br><span class="line">- 1020行 7.   mat_N 弹性模量  theta1  </span><br><span class="line">- 1023行 7.   mat_CC</span><br><span class="line">- 1026行 7.   mat_L</span><br><span class="line">- 1029行 7.   mat_SP</span><br><span class="line">- 1032行 7.   mat_U</span><br><span class="line">- </span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong>主弹性模量</strong>$\theta_1$ 70Gpa，</li>
-<li><strong>主密度</strong> $\theta_2$  ，密度2.7x $10^{3} kg/m^{3}$ (英文论文) or 适配器厚度 1mm(本 1)</li>
-<li><strong>中心筒厚度</strong>$\theta_3$ 2mm</li>
-<li>底板厚度 $\theta_4$ 1mm</li>
-<li><strong>剪切板厚度</strong>$\theta_5$ 2mm</li>
-<li>顶板厚度 $\theta_6$ 2.5mm</li>
-</ul>
-<h1 id="FEA二次开发-Python"><a href="#FEA二次开发-Python" class="headerlink" title="FEA二次开发(Python)"></a>FEA二次开发(Python)</h1><p>Ansys: </p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.reddit.com/r/ANSYS/comments/14pak2j/ansys_with_python/">Ansys与Python：r/ANSYS —- Ansys with Python : r/ANSYS</a><br><a target="_blank" rel="noopener" href="https://docs.pyansys.com/version/stable/">PyAnsys — PyAnsys</a></p>
-</blockquote>
-<p>Nastran: </p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://pynastran-git.readthedocs.io/en/1.3/index.html">Welcome to pyNastran’s documentation for v1.3! — pyNastran 1.3 1.3 documentation (pynastran-git.readthedocs.io)</a></p>
-</blockquote>
-<p>pynastranGUI 支持对有限元模型和仿真结果的可视化，支持的模型文件格式：</p>
-<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241016122523.png" alt="image.png|666"></p>
-<h1 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h1><h2 id="FE-amp-Blender"><a href="#FE-amp-Blender" class="headerlink" title="FE &amp; Blender"></a>FE &amp; Blender</h2><p>可否指教一下blender如何渲染abaqus求解文件odb？</p>
-<p>odb写个脚本导出obj文件，然后导进blender一张张渲染就好</p>
 
     </div>
 
@@ -504,7 +470,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Finite-Element"><span class="nav-text">Finite Element</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic"><span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PINN"><span class="nav-text">PINN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VEM-Virtual-Element-Method"><span class="nav-text">VEM (Virtual Element Method)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Software-about-FE"><span class="nav-text">Software (about FE)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Solidworks"><span class="nav-text">Solidworks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Patran"><span class="nav-text">Patran</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mode-Frequency"><span class="nav-text">Mode Frequency</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nastran"><span class="nav-text">Nastran</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%AB%E6%98%9F%E7%AE%97%E4%BE%8B-bdf"><span class="nav-text">卫星算例.bdf</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#FEA%E4%BA%8C%E6%AC%A1%E5%BC%80%E5%8F%91-Python"><span class="nav-text">FEA二次开发(Python)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other"><span class="nav-text">Other</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#FE-amp-Blender"><span class="nav-text">FE &amp; Blender</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Finite-Element"><span class="nav-text">Finite Element</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic"><span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E6%A0%BC%E5%88%92%E5%88%86"><span class="nav-text">网格划分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PINN"><span class="nav-text">PINN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Paper"><span class="nav-text">Paper</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VEM-Virtual-Element-Method"><span class="nav-text">VEM (Virtual Element Method)</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -519,20 +485,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">153</span>
+          <span class="site-state-item-count">161</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">56</span>
+        <span class="site-state-item-count">59</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -571,7 +537,7 @@
 <div class="copyright">
   
   &copy; 2020 – 
-  <span itemprop="copyrightYear">2024</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -580,12 +546,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">513k</span>
+    <span title="Symbols count total">521k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">31:04</span>
+    <span title="Reading time total">31:36</span>
 </div>
 
         
