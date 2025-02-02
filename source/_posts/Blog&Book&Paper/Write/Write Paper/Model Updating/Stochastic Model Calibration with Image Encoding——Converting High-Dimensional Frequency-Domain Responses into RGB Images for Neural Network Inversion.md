@@ -24,7 +24,7 @@ Introduction
 - 代理模型的使用 --> 然而其也有缺陷：过拟合、参数缩放困难、尤其在高维场景(例如 FRFs 和时序数据)
 - 传统修正方法无法用到实时领域 --> 并且：容易陷入局部最优、需要手工设置超参数(正则化项) 修正好结果是非常耗时的
 - 神经网络技术的发展，可以很方便地将高维数据处理成低维数据
-- 最近地一些工作通过神经网络，输入 FRFs 来直接获得 updated structural parameters --> ~~然而主要集中在确定性地模型修正中~~ 😵不太对
+- 最近地一些工作通过神经网络，输入 FRFs 来直接获得 updated structural parameters --> 然而目前方法主要集中在确定性模型修正中 
 - 在处理 FRFs 和时序数据中，CNN 和 RNN 方法被引入 --> However, when it comes to handling high-dimensional frequency-domain or time-domain data, these methods face significant limitations. Specifically, neural networks often struggle with the sheer complexity of such data, leading to challenges in accuracy and computational efficiency. 😵不太对
 
 Model calibration problem with frequency-domain quantity of interest
@@ -51,6 +51,7 @@ Case study: The satellite FE Model
 
 Conclusion and perspectives
 
+# Basic Information
 
 **随机模型修正** [Call for papers - Engineering Structures | ScienceDirect.com by Elsevier](https://www.sciencedirect.com/journal/engineering-structures/about/call-for-papers#computational-methods-for-stochastic-engineering-dynamics)
 - **提交截止日期为 2024 年 4 月 15 日**

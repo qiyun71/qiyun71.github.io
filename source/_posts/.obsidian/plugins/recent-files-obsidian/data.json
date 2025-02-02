@@ -1,12 +1,72 @@
 {
   "recentFiles": [
     {
-      "basename": "Basics about ModelUpdating",
-      "path": "ModelUpdating/Basics about ModelUpdating.md"
+      "basename": "IPV6",
+      "path": "Blog&Book&Paper/Write/Source/IPV6.md"
+    },
+    {
+      "basename": "Write tips",
+      "path": "Blog&Book&Paper/Write/Write tips.md"
     },
     {
       "basename": "Math",
       "path": "Learn/Math/Math.md"
+    },
+    {
+      "basename": "Route",
+      "path": "Blog&Book&Paper/Route.md"
+    },
+    {
+      "basename": "Stochastic Model Calibration with Image Encoding——Converting High-Dimensional Frequency-Domain Responses into RGB Images for Neural Network Inversion",
+      "path": "Blog&Book&Paper/Write/Write Paper/Model Updating/Stochastic Model Calibration with Image Encoding——Converting High-Dimensional Frequency-Domain Responses into RGB Images for Neural Network Inversion.md"
+    },
+    {
+      "basename": "Life",
+      "path": "Blog&Book&Paper/Write/Life.md"
+    },
+    {
+      "basename": "Case about ModelUpdating",
+      "path": "ModelUpdating/Case about ModelUpdating.md"
+    },
+    {
+      "basename": "Paper about ModelUpdating",
+      "path": "ModelUpdating/Paper about ModelUpdating.md"
+    },
+    {
+      "basename": "A feature map of frequency response functions based model updating method using the Bayesian convolutional neural network",
+      "path": "ModelUpdating/Stochastic Model Updating/A feature map of frequency response functions based model updating method using the Bayesian convolutional neural network.md"
+    },
+    {
+      "basename": "2023-2024寒假",
+      "path": "Reports/Daily/2023-2024寒假.md"
+    },
+    {
+      "basename": "A fast interval model updating method based on MLP neural network",
+      "path": "Blog&Book&Paper/Write/Write Paper/Model Updating/A fast interval model updating method based on MLP neural network.md"
+    },
+    {
+      "basename": "Abaqus",
+      "path": "Learn/Finite Element/Abaqus.md"
+    },
+    {
+      "basename": "CAX",
+      "path": "Other Interest/CAX.md"
+    },
+    {
+      "basename": "Code of Multi-view 3D Reconstruction based on SDF and volume rendering",
+      "path": "3DReconstruction/Code of Multi-view 3D Reconstruction based on SDF and volume rendering.md"
+    },
+    {
+      "basename": "Figure",
+      "path": "Learn/Python/Figure.md"
+    },
+    {
+      "basename": "模态试验悬挂方式",
+      "path": "Other Interest/模态试验悬挂方式.md"
+    },
+    {
+      "basename": "Basics about ModelUpdating",
+      "path": "ModelUpdating/Basics about ModelUpdating.md"
     },
     {
       "basename": "LearningRoute",
@@ -25,16 +85,8 @@
       "path": "3DReconstruction/NeuS-based 3D Reconstruction.md"
     },
     {
-      "basename": "Paper about ModelUpdating",
-      "path": "ModelUpdating/Paper about ModelUpdating.md"
-    },
-    {
       "basename": "Master Paper",
       "path": "Blog&Book&Paper/Write/Write Paper/3D Reconstruction/Master Paper.md"
-    },
-    {
-      "basename": "Code of Multi-view 3D Reconstruction based on SDF and volume rendering",
-      "path": "3DReconstruction/Code of Multi-view 3D Reconstruction based on SDF and volume rendering.md"
     },
     {
       "basename": "Finite Element Model 3D Reconstruction",
@@ -47,10 +99,6 @@
     {
       "basename": "Paper About 3D Reconstruction",
       "path": "3DReconstruction/Paper About 3D Reconstruction.md"
-    },
-    {
-      "basename": "CAX",
-      "path": "Other Interest/CAX.md"
     },
     {
       "basename": "3D Model",
@@ -69,20 +117,8 @@
       "path": "Blog&Book&Paper/Write/Write Paper/Model Updating/Self-superviside Model Updating through inverse calibration model.md"
     },
     {
-      "basename": "A fast interval model updating method based on MLP neural network",
-      "path": "Blog&Book&Paper/Write/Write Paper/Model Updating/A fast interval model updating method based on MLP neural network.md"
-    },
-    {
-      "basename": "A fast stochastic model updating technique based on an inverse FE surrogate model",
-      "path": "Blog&Book&Paper/Write/Write Paper/Model Updating/A fast stochastic model updating technique based on an inverse FE surrogate model.md"
-    },
-    {
       "basename": "Dynamic Response Prediction (Deterministic)",
       "path": "Other Interest/Dynamic Response Prediction (Deterministic).md"
-    },
-    {
-      "basename": "Case about ModelUpdating",
-      "path": "ModelUpdating/Case about ModelUpdating.md"
     },
     {
       "basename": "Vibration Measurement",
@@ -163,26 +199,6 @@
     {
       "basename": "Data Analysis",
       "path": "Learn/Python/Data Analysis.md"
-    },
-    {
-      "basename": "DeepLearning",
-      "path": "Learn/Neural Network/DeepLearning.md"
-    },
-    {
-      "basename": "Algorithm",
-      "path": "Learn/Python/Algorithm.md"
-    },
-    {
-      "basename": "Figure",
-      "path": "Learn/Python/Figure.md"
-    },
-    {
-      "basename": "Learn-Matlab",
-      "path": "Learn/Finite Element/Learn-Matlab.md"
-    },
-    {
-      "basename": "Tools",
-      "path": "Blog&Book&Paper/Write/Source/Tools.md"
     }
   ],
   "omittedPaths": [],

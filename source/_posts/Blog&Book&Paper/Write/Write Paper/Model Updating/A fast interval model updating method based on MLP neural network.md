@@ -491,7 +491,9 @@ UP(uncertainty propagation)
 41. [The sub-interval similarity: A general uncertainty quantification metric for both stochastic and interval model updating - ScienceDirect](https://www.sciencedirect.com/science/article/pii/S0888327022004575?via%3Dihub) SIS
 42. [Dynamic load identification based on deep convolution neural network - ScienceDirect](https://www.sciencedirect.com/science/article/pii/S0888327022008251#s0090)
 43. [A feature map of frequency response functions based model updating method using the Bayesian convolutional neural network - ScienceDirect](https://www.sciencedirect.com/science/article/pii/S0888327023007264?ref=pdf_download&fr=RR-2&rr=87df480b9ca904d1#s0060)
-44. [A Self-Supervised Representation Learner for Bearing Fault Diagnosis Based on Motor Current Signals | IEEE Journals & Magazine | IEEE Xplore](https://ieeexplore.ieee.org/document/10623379)
+
+
+1. [A Self-Supervised Representation Learner for Bearing Fault Diagnosis Based on Motor Current Signals | IEEE Journals & Magazine | IEEE Xplore](https://ieeexplore.ieee.org/document/10623379)
 
 
 

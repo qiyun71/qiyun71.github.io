@@ -308,6 +308,10 @@ which 的限定用法与非限定用法。 which当作关係代名词时，要�
 
 ## GPT (Write more, read less)
 
+WHWW: what, how, want, worry
+说人话：通俗易懂
+
+
 > [Chatbots in science: What can ChatGPT do for you?](https://www.nature.com/articles/d41586-024-02630-z)
 > [The Perfect Prompt: A Prompt Engineering Cheat Sheet | by Maximilian Vogel | The Generator | Medium](https://medium.com/the-generator/the-perfect-prompt-prompt-engineering-cheat-sheet-d0b9c62a2bba)
 > [The Perfect Prompt: Cheat Sheet With 100+ Best Practice Examples - PART 1](https://www.linkedin.com/pulse/perfect-prompt-engineering-cheat-sheet-snippets-part-vogel-mxkcf/)

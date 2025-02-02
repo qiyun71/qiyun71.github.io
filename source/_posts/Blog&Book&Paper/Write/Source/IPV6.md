@@ -145,7 +145,10 @@ proxy_on
 
 # 服务器v2ray
 
-## Vultr自建 💴30/月
+## VPS
+
+- Vultr自建 ￥30/月
+- claw.cloud自建 $7/年
 
 > [实现校园网IPv6免流量上网与科学上网 | V2ray教程：X-ui与v2rayN ~ 极星网](https://www.jixing.one/vps/v2ray-xui-v2rayn/)
 

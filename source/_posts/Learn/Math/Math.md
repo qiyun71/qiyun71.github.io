@@ -7,7 +7,7 @@ categories: Learn
 概率/微积分/矩阵/拓扑/泛函/复变...
 
 MATH $e^{i\pi}+1=0$
-  
+
 <!-- more -->
 
 # 泛函
@@ -33,7 +33,11 @@ MATH $e^{i\pi}+1=0$
 
 $F(s)=\int_0^\infty e^{-st}f(t)\mathrm{d}t$
 
+## 柯西积分公式
 
+[柯西积分公式 - 维基百科，自由的百科全书](https://zh.wikipedia.org/zh-cn/%E6%9F%AF%E8%A5%BF%E7%A9%8D%E5%88%86%E5%85%AC%E5%BC%8F)
+
+$f(a)=\frac{1}{2\pi i}\oint_\gamma\frac{f(z)}{z-a}dz.$
 
 ## 留数
 

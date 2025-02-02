@@ -1,6 +1,6 @@
 (数字孪生)通过有限元/数学建模，在计算机上(虚拟世界中)模拟真实世界的一些规律/现象，尽可能的与实际物体（实验测量）有相同的物理属性
 - 有限元分析将**构造实体几何CAD模型**通过网格划分变为**多边形网格Mesh**([3D Model](../3DReconstruction/3D%20Model.md))，然后进行求解，得到FRFs/模态频率(动力学)。
-- 对实际物体的测量依靠各种传感器完成，eg:[图像传感器](https://zh.wikipedia.org/wiki/%E5%9B%BE%E5%83%8F%E4%BC%A0%E6%84%9F%E5%99%A8)-->照片，[压电式传感器](https://baike.baidu.com/item/%E5%8E%8B%E7%94%B5%E5%BC%8F%E4%BC%A0%E6%84%9F%E5%99%A8/8835700)-->振动(d/v/a)...
+- 对实际物体工作过程中的测量依靠各种传感器完成，eg:[图像传感器](https://zh.wikipedia.org/wiki/%E5%9B%BE%E5%83%8F%E4%BC%A0%E6%84%9F%E5%99%A8)-->照片，[压电式传感器](https://baike.baidu.com/item/%E5%8E%8B%E7%94%B5%E5%BC%8F%E4%BC%A0%E6%84%9F%E5%99%A8/8835700)-->振动(d/v/a)...
 
 仿真 [CAX](../Other%20Interest/CAX.md)
 - 原理 [Learn-FEA](../Learn/Finite%20Element/Learn-FEA.md)

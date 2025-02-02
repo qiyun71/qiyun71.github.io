@@ -13,5 +13,6 @@
     "obsidian-default-theme"
   ],
   "showViewHeader": false,
-  "baseFontSizeAction": true
+  "baseFontSizeAction": true,
+  "showRibbon": false
 }

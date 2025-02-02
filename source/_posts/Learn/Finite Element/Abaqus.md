@@ -71,3 +71,7 @@ mesh node 编辑 merge，但是需要保证网格没有与几何连接(使用Del
 
 >  [结构模态分析详解](https://www.tup.com.cn/upload/books/yz/082156-01.pdf)
 
+
+# Python
+
+>  [abqpy 2025.7.10.dev9+g0175c7325 documentation](https://hailin.wang/abqpy/en/dev/)

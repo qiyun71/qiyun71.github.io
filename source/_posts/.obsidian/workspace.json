@@ -40,6 +40,21 @@
             }
           },
           {
+            "id": "20fa69571f57d213",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "ModelUpdating/Case about ModelUpdating.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Case about ModelUpdating"
+            }
+          },
+          {
             "id": "e9e2092ccb61b3ba",
             "type": "leaf",
             "state": {
@@ -55,37 +70,67 @@
             }
           },
           {
-            "id": "3dbd8fd6519923dc",
+            "id": "1aea84545996345d",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "ModelUpdating/Stochastic Model Updating/A feature map of frequency response functions based model updating method using the Bayesian convolutional neural network.md",
+                "file": "ModelUpdating/Paper about ModelUpdating.md",
                 "mode": "source",
                 "backlinks": false,
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "A feature map of frequency response functions based model updating method using the Bayesian convolutional neural network"
+              "title": "Paper about ModelUpdating"
             }
           },
           {
-            "id": "a42366aa262d6c8a",
+            "id": "80187f3b72417f2a",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Other Interest/模态试验悬挂方式.md",
+                "file": "Learn/Math/Math.md",
                 "mode": "source",
                 "backlinks": false,
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "模态试验悬挂方式"
+              "title": "Math"
+            }
+          },
+          {
+            "id": "cf31cbea9c550fa3",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Blog&Book&Paper/Write/Write tips.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "Write tips"
+            }
+          },
+          {
+            "id": "5296b72e0c48f159",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Blog&Book&Paper/Write/Source/IPV6.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "IPV6"
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 7
       }
     ],
     "direction": "vertical"
@@ -104,10 +149,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Blog&Book&Paper/Write/Write Paper/Model Updating/Stochastic Model Calibration with Image Encoding——Converting High-Dimensional Frequency-Domain Responses into RGB Images for Neural Network Inversion.md"
+                "file": "Blog&Book&Paper/Write/Source/IPV6.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Stochastic Model Calibration with Image Encoding——Converting High-Dimensional Frequency-Domain Responses into RGB Images for Neural Network Inversion 的大纲"
+              "title": "IPV6 的大纲"
             }
           },
           {
@@ -139,7 +187,8 @@
             "state": {
               "type": "file-explorer",
               "state": {
-                "sortOrder": "alphabeticalReverse"
+                "sortOrder": "alphabeticalReverse",
+                "autoReveal": false
               },
               "icon": "lucide-folder-closed",
               "title": "文件列表"
@@ -349,14 +398,44 @@
             "id": "ac0b5f7e90d48cc4",
             "type": "leaf",
             "state": {
-              "type": "Saved Queries View",
+              "type": "empty",
               "state": {},
-              "icon": "feather-mouse-pointer",
-              "title": "Saved Queries"
+              "icon": "lucide-file",
+              "title": "新标签页"
             }
           },
           {
             "id": "a9e43d0ff5630574",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "新标签页"
+            }
+          },
+          {
+            "id": "eea62332a9147dae",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "新标签页"
+            }
+          },
+          {
+            "id": "1fb890ae27d7dee7",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "新标签页"
+            }
+          },
+          {
+            "id": "501bf655e89398f1",
             "type": "leaf",
             "state": {
               "type": "Saved Queries View",
@@ -366,7 +445,7 @@
             }
           }
         ],
-        "currentTab": 16
+        "currentTab": 19
       }
     ],
     "direction": "horizontal",
@@ -388,11 +467,36 @@
       "audio-recorder:开始/结束录音": false,
       "workspaces:管理工作区布局": false,
       "table-editor-obsidian:Advanced Tables Toolbar": false,
-      "templater-obsidian:Templater": false
+      "templater-obsidian:Templater": false,
+      "pdf-plus:PDF++: Toggle auto-copy": false,
+      "pdf-plus:PDF++: Toggle auto-focus": false,
+      "pdf-plus:PDF++: Toggle auto-paste": false,
+      "float-search:Search obsidian in modal view": false
     }
   },
-  "active": "e9e2092ccb61b3ba",
+  "active": "5296b72e0c48f159",
   "lastOpenFiles": [
+    "Blog&Book&Paper/Write/Write tips.md",
+    "Blog&Book&Paper/Write/Source/IPV6.md",
+    "Learn/Math/Math.md",
+    "Blog&Book&Paper/Route.md",
+    "Blog&Book&Paper/Write/Write Paper/Model Updating/Stochastic Model Calibration with Image Encoding——Converting High-Dimensional Frequency-Domain Responses into RGB Images for Neural Network Inversion.md",
+    "Blog&Book&Paper/Write/Life.md",
+    "ModelUpdating/Case about ModelUpdating.md",
+    "ModelUpdating/Paper about ModelUpdating.md",
+    "ModelUpdating/Stochastic Model Updating/A feature map of frequency response functions based model updating method using the Bayesian convolutional neural network.md",
+    "Reports/Daily/2023-2024寒假.md",
+    "Blog&Book&Paper/Write/Write Paper/Model Updating/A fast interval model updating method based on MLP neural network.md",
+    "Learn/Finite Element/Abaqus.md",
+    "Other Interest/CAX.md",
+    "3DReconstruction/Code of Multi-view 3D Reconstruction based on SDF and volume rendering.md",
+    "Learn/Python/Figure.md",
+    "Other Interest/模态试验悬挂方式.md",
+    "Other Interest/1.canvas",
+    "Other Interest/Untitled.pdf",
+    "Blog&Book&Paper/Write/Write Paper/Model Updating/A fast stochastic model updating technique based on an inverse FE surrogate model.md",
+    "Blog&Book&Paper/Write/Omoshiroi.excalidraw.md",
+    "Blog&Book&Paper/Write/MyGo.md",
     "Blog&Book&Paper/Read/Book/模态实验/file/Pasted Image 20250113154118_794.png",
     "Blog&Book&Paper/Read/Book/模态实验/file/Pasted Image 20250113105915_990.png",
     "Blog&Book&Paper/Read/Book/模态实验/file/Pasted Image 20241223215530_735.png",
@@ -403,43 +507,23 @@
     "Blog&Book&Paper/Read/Book/模态实验/file/Pasted Image 20241223215352_534.png",
     "Blog&Book&Paper/Read/Book/模态实验/file/Pasted Image 20241223215327_991.png",
     "Blog&Book&Paper/Read/Book/模态实验/file/Pasted Image 20241223215248_782.png",
-    "Blog&Book&Paper/Read/Book/模态实验/file/Pasted Image 20241223215243_151.png",
     "Blog&Book&Paper/Read/Book/模态实验/file",
     "Blog&Book&Paper/Read/Book/模态实验",
     "Blog&Book&Paper/Read/Book/Japanse.md",
     "Blog&Book&Paper/Read/Blog/CPU_VS_GPU.md",
     "Blog&Book&Paper/Read/Blockchain.md",
-    "Blog&Book&Paper/Write/MyGo.md",
     "Blog&Book&Paper/Read/Papers/核领域可靠性.md",
     "Blog&Book&Paper/Read/Papers/(WX) Dynamics experiment.md",
     "Blog&Book&Paper/Read/Papers/(WW) Isogeometric analysis.md",
     "Blog&Book&Paper/Read/Papers/(BSF)Uncertainty.md",
-    "Blog&Book&Paper/Read/Papers/(DLT_ZX).md",
     "Blog&Book&Paper/Read/Papers",
-    "Blog&Book&Paper/Read/Life.md",
-    "Blog&Book&Paper/Write/Write Paper/Model Updating/Stochastic Model Calibration with Image Encoding——Converting High-Dimensional Frequency-Domain Responses into RGB Images for Neural Network Inversion.md",
-    "Blog&Book&Paper/Write/Omoshiroi.excalidraw.md",
-    "Blog&Book&Paper/Write/Write Paper/Model Updating/A fast interval model updating method based on MLP neural network.md",
-    "3DReconstruction/Code of Multi-view 3D Reconstruction based on SDF and volume rendering.md",
-    "ModelUpdating/Stochastic Model Updating/A feature map of frequency response functions based model updating method using the Bayesian convolutional neural network.md",
-    "Blog&Book&Paper/Route.md",
-    "Blog&Book&Paper/Write/Source/Computer.md",
-    "ModelUpdating/Case about ModelUpdating.md",
-    "Other Interest/模态试验悬挂方式.md",
-    "Learn/Finite Element/Modal Testing.md",
-    "qiyun71/Blog_images/MyBlogPic/202520250119171150837.png.md",
     "qiyun71/Blog_images/MyBlogPic",
     "qiyun71/Blog_images",
     "qiyun71",
-    "Learn/Finite Element/Pa&Nastran.md",
-    "Project/PyNastran.md",
-    "Blog&Book&Paper/Write/Source/IPV6.md",
-    "Learn/Python/Figure.md",
     "Blog&Book&Paper/Write/LearningRoute.canvas",
     "Blog&Book&Paper/Write/Write Paper/Model Updating/file",
     "Day Planners",
     "Blog&Book&Paper/Write/file",
-    "Excalidraw",
     "3DReconstruction/Basic Knowledge/NeRF/NeRF.canvas",
     "未命名.canvas"
   ]

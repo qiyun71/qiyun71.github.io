@@ -13,6 +13,13 @@ CAD/CAE/CAM
 
 # CAD/CAE/CAM专题
 
+## Code
+
+[qd-cae/awesome-CAE: A curated list of awesome CAE frameworks, libraries and software.](https://github.com/qd-cae/awesome-CAE?tab=readme-ov-file) 
+
+
+## 方向探索
+
 In [计算机图形学与混合现实在线平台 – GAMES: Graphics And Mixed Environment Symposium](https://games-cn.org/)
 
 [中国三维CAD国产化研究报告](http://www.csia-jpw.com/UserFiles/Article/file/6383805642412451143846136.pdf)
@@ -52,15 +59,14 @@ In [计算机图形学与混合现实在线平台 – GAMES: Graphics And Mixed 
 |                                                                                                                                                                                                           |                                                                                                  |                                                                                                    |
 |                                                                                                                                                                                                           |                                                                                                  |                                                                                                    |
 
-
-## 结构拓扑优化
+### 结构拓扑优化
 
 [结构拓扑优化综述](https://icourse.club/uploads/files/b6dc1dc4e7a927801c6f2be5af427dbb7bb88edc.pdf)
 [GAMES Webinar 306-CAD/CAE/CAM专题-李好-面向复杂几何的优化设计与分析_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1pe411z7RA?vd_source=1dba7493016a36a32b27a14ed2891088&spm_id_from=333.788.videopod.sections)
 [李好](https://mse.hust.edu.cn/info/1151/1541.htm)
 
 
-## 等几何分析
+### 等几何分析
 
 [GAMES Webinar 252-CAD/CAE/CAM专题-王琥-CAD/CAE一体化中的关键技术_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1Ze4y127Gx?vd_source=1dba7493016a36a32b27a14ed2891088&spm_id_from=333.788.videopod.sections)
 [GAMES Webinar 252-CAD/CAE/CAM专题-李明-CAD/CAE一体化中的关键技术_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1Md4y1C7Ya?vd_source=1dba7493016a36a32b27a14ed2891088&spm_id_from=333.788.videopod.sections)
@@ -72,7 +78,7 @@ In [计算机图形学与混合现实在线平台 – GAMES: Graphics And Mixed 
 [徐岗](https://computer.hdu.edu.cn/2021/1217/c6757a140234/page.htm)
 
 
-##  Others
+###  Others
 
 建模大佬 [Bohan Wang's Personal Homepage](https://bohanwang123.com/) 
 

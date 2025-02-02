@@ -137,5 +137,13 @@
       ],
       "key": "E"
     }
+  ],
+  "float-search:search-obsidian-globally": [
+    {
+      "modifiers": [
+        "Alt"
+      ],
+      "key": "S"
+    }
   ]
 }
