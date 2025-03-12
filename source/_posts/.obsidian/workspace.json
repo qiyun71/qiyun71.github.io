@@ -271,18 +271,6 @@
             }
           },
           {
-            "id": "2b0caefdabcadbc6",
-            "type": "leaf",
-            "state": {
-              "type": "excalidraw",
-              "state": {
-                "file": "3DReconstruction/Code Flow.excalidraw.md"
-              },
-              "icon": "excalidraw-icon",
-              "title": "Code Flow.excalidraw"
-            }
-          },
-          {
             "id": "9b13bf5aec4d0a05",
             "type": "leaf",
             "state": {
@@ -298,7 +286,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -318,13 +306,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Blog&Book&Paper/Write/Write Paper/3D Reconstruction/Master Paper.md",
+                "file": "3DReconstruction/NeuS-based 3D Reconstruction.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Master Paper"
+              "title": "Outline of NeuS-based 3D Reconstruction"
             }
           }
         ]
@@ -587,10 +575,13 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "26d33cf3a14981fd",
+  "active": "806f8fb1a663baac",
   "lastOpenFiles": [
-    "Blog&Book&Paper/Route.md",
+    "Blog&Book&Paper/Read/Book/模态实验/模态试验悬挂方式.md",
+    "Other Interest/Vibration Measurement.md",
+    "Blog&Book&Paper/Write/Write Paper/3D Reconstruction/Code Flow.excalidraw.md",
     "Blog&Book&Paper/Write/Write Paper/3D Reconstruction/Master Paper.md",
+    "Blog&Book&Paper/Route.md",
     "Other Interest/Time Series Data.md",
     "Other Interest/Uncertainty.md",
     "Blog&Book&Paper/Write/Write tips.md",
@@ -598,11 +589,9 @@
     "3DReconstruction/Multi-view/Uncertainty/Sources of Uncertainty in 3D Scene Reconstruction.md",
     "Learn/Neural Network/Loss Functions.md",
     "3DReconstruction/Basics about 3D Reconstruction.md",
-    "3DReconstruction/Code Flow.excalidraw.md",
     "3DReconstruction/NeuS-based 3D Reconstruction.md",
     "Blog&Book&Paper/Write/Source/Configuration of computer/OS/WSL2.md",
     "Other Interest/Reliability.md",
-    "Other Interest/Vibration Measurement.md",
     "Blog&Book&Paper/Write/Source/Tools.md",
     "Other Interest/CAX.md",
     "Blog&Book&Paper/Read/Book/Everyone-can-use-English.md",
@@ -616,7 +605,6 @@
     "Other Interest/PHM.md",
     "ModelUpdating/Paper about ModelUpdating.md",
     "Blog&Book&Paper/Write/Source/IPV6.md",
-    "ipv5.md",
     "ZtImgExcerpt/S358KWN7.png",
     "ZtImgExcerpt/8SPA2743.png",
     "ZtImgExcerpt/U9J9DTE5.png",
