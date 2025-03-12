@@ -164,8 +164,17 @@ A Big CAD Model Dataset
 室外场景[Carl Olsson (lth.se)](https://www.maths.lth.se/matematiklth/personal/calle/dataset/dataset.html)
 
 
-# OpenMaterial
+## OpenMaterial
 
 [OpenMaterial: A Comprehensive Dataset of Complex Materials for 3D Reconstruction](https://christy61.github.io/openmaterial.github.io/)
 
 用于全面分析NeRF和3DGS在challenging material条件下的重建和新视角合成任务表现。拥有1001个unique shape，295种material type，723个不同的lighting condition。含有丰富的reflection，refraction，和transmission的 scenario。
+
+## DL3DV-10K
+
+[DL3DV-10K/Dataset: News: the 10k dataset is ready for download.](https://github.com/DL3DV-10K/Dataset?tab=readme-ov-file#dataset-download)
+
+现有的基于深度学习的 3D 视觉场景级数据集，要么限于合成环境，要么仅限于少量真实场景的选择，相当不足。为了解决这一关键差距，我们提出了 DL3DV-10K，这是一个大规模场景数据集，包含从 65 种兴趣点（POI）位置捕获的 10,510 个视频中的 5,120 万帧，涵盖了有界和无界场景，以及不同级别的反射、透明度和光照。
+
+![teaser.jpg (4946×1458)](https://raw.githubusercontent.com/DL3DV-10K/Dataset/refs/heads/main/imgs/teaser.jpg)
+

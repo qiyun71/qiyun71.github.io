@@ -4,133 +4,301 @@
     "type": "split",
     "children": [
       {
-        "id": "a7318f927d0c0378",
+        "id": "7dac8a26ea40235f",
+        "type": "split",
+        "children": [
+          {
+            "id": "a7318f927d0c0378",
+            "type": "tabs",
+            "children": [
+              {
+                "id": "ca41f26997101d1b",
+                "type": "leaf",
+                "state": {
+                  "type": "markdown",
+                  "state": {
+                    "file": "ModelUpdating/Paper about ModelUpdating.md",
+                    "mode": "source",
+                    "source": false,
+                    "backlinks": false
+                  },
+                  "icon": "lucide-file",
+                  "title": "Paper about ModelUpdating"
+                }
+              },
+              {
+                "id": "16c1946b29e23b93",
+                "type": "leaf",
+                "state": {
+                  "type": "markdown",
+                  "state": {
+                    "file": "ModelUpdating/Case about ModelUpdating.md",
+                    "mode": "source",
+                    "source": false,
+                    "backlinks": false
+                  },
+                  "icon": "lucide-file",
+                  "title": "Case about ModelUpdating"
+                }
+              },
+              {
+                "id": "28c10367da094fee",
+                "type": "leaf",
+                "state": {
+                  "type": "markdown",
+                  "state": {
+                    "file": "ModelUpdating/Review/Stochastic Model Updating with Uncertainty Quantification_An Overview and Tutorial.md",
+                    "mode": "source",
+                    "source": false,
+                    "backlinks": false
+                  },
+                  "icon": "lucide-file",
+                  "title": "Stochastic Model Updating with Uncertainty Quantification_An Overview and Tutorial"
+                }
+              },
+              {
+                "id": "74b6dcfe3609e97a",
+                "type": "leaf",
+                "state": {
+                  "type": "markdown",
+                  "state": {
+                    "file": "ModelUpdating/Review/Towards the NASA UQ Challenge 2019——Systematically forward and inverse approaches for uncertainty propagation and quantification.md",
+                    "mode": "source",
+                    "source": false,
+                    "backlinks": false
+                  },
+                  "icon": "lucide-file",
+                  "title": "Towards the NASA UQ Challenge 2019——Systematically forward and inverse approaches for uncertainty propagation and quantification"
+                }
+              },
+              {
+                "id": "748046cf73841dfe",
+                "type": "leaf",
+                "state": {
+                  "type": "release-notes",
+                  "state": {
+                    "currentVersion": "1.8.9"
+                  },
+                  "icon": "lucide-book-up",
+                  "title": "Release Notes 1.8.9"
+                }
+              },
+              {
+                "id": "dda3d8fba7762fe8",
+                "type": "leaf",
+                "state": {
+                  "type": "markdown",
+                  "state": {
+                    "file": "Other Interest/PHM.md",
+                    "mode": "source",
+                    "source": false,
+                    "backlinks": false
+                  },
+                  "icon": "lucide-file",
+                  "title": "PHM"
+                }
+              }
+            ],
+            "currentTab": 4
+          },
+          {
+            "id": "65f13893b6b13ff3",
+            "type": "tabs",
+            "children": [
+              {
+                "id": "f8a4b2bc06596e1e",
+                "type": "leaf",
+                "pinned": true,
+                "state": {
+                  "type": "markdown",
+                  "state": {
+                    "file": "Blog&Book&Paper/Route.md",
+                    "mode": "source",
+                    "source": false,
+                    "backlinks": false
+                  },
+                  "pinned": true,
+                  "icon": "lucide-file",
+                  "title": "Route"
+                }
+              },
+              {
+                "id": "298369393a1e5288",
+                "type": "leaf",
+                "pinned": true,
+                "state": {
+                  "type": "markdown",
+                  "state": {
+                    "file": "Learn/Math/Math.md",
+                    "mode": "source",
+                    "source": false,
+                    "backlinks": false
+                  },
+                  "pinned": true,
+                  "icon": "lucide-file",
+                  "title": "Math"
+                }
+              },
+              {
+                "id": "dc6ea5255bcfe8c3",
+                "type": "leaf",
+                "pinned": true,
+                "state": {
+                  "type": "markdown",
+                  "state": {
+                    "file": "Blog&Book&Paper/Write/Write tips.md",
+                    "mode": "source",
+                    "source": false,
+                    "backlinks": false
+                  },
+                  "pinned": true,
+                  "icon": "lucide-file",
+                  "title": "Write tips"
+                }
+              },
+              {
+                "id": "4e6026d46b014cc4",
+                "type": "leaf",
+                "state": {
+                  "type": "markdown",
+                  "state": {
+                    "file": "Blog&Book&Paper/Write/Source/Tools.md",
+                    "mode": "source",
+                    "source": false,
+                    "backlinks": false
+                  },
+                  "icon": "lucide-file",
+                  "title": "Tools"
+                }
+              }
+            ]
+          }
+        ],
+        "direction": "horizontal"
+      },
+      {
+        "id": "e1e3cb56584b471c",
         "type": "tabs",
         "children": [
           {
-            "id": "2b2f68922169d229",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Blog&Book&Paper/Route.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              },
-              "pinned": true,
-              "icon": "lucide-file",
-              "title": "Route"
-            }
-          },
-          {
-            "id": "a6fbc03e4542d4d5",
+            "id": "aac69c4dd5587b25",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
                 "file": "3DReconstruction/Code of Multi-view 3D Reconstruction based on SDF and volume rendering.md",
                 "mode": "source",
-                "backlinks": false,
-                "source": false
+                "source": false,
+                "backlinks": false
               },
               "icon": "lucide-file",
               "title": "Code of Multi-view 3D Reconstruction based on SDF and volume rendering"
             }
           },
           {
-            "id": "20fa69571f57d213",
+            "id": "26d33cf3a14981fd",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "ModelUpdating/Case about ModelUpdating.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Case about ModelUpdating"
-            }
-          },
-          {
-            "id": "e9e2092ccb61b3ba",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Blog&Book&Paper/Write/Write Paper/Model Updating/Stochastic Model Calibration with Image Encoding——Converting High-Dimensional Frequency-Domain Responses into RGB Images for Neural Network Inversion.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Stochastic Model Calibration with Image Encoding——Converting High-Dimensional Frequency-Domain Responses into RGB Images for Neural Network Inversion"
-            }
-          },
-          {
-            "id": "1aea84545996345d",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "ModelUpdating/Paper about ModelUpdating.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Paper about ModelUpdating"
-            }
-          },
-          {
-            "id": "80187f3b72417f2a",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Learn/Math/Math.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Math"
-            }
-          },
-          {
-            "id": "cf31cbea9c550fa3",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Blog&Book&Paper/Write/Write tips.md",
+                "file": "Blog&Book&Paper/Write/Write Paper/3D Reconstruction/Master Paper.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "Write tips"
+              "title": "Master Paper"
             }
           },
           {
-            "id": "5296b72e0c48f159",
+            "id": "31a292a2187bf962",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Blog&Book&Paper/Write/Source/IPV6.md",
+                "file": "3DReconstruction/Basics about 3D Reconstruction.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "IPV6"
+              "title": "Basics about 3D Reconstruction"
+            }
+          },
+          {
+            "id": "172556d0be215c77",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Other Interest/Uncertainty.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "Uncertainty"
+            }
+          },
+          {
+            "id": "3ad7583f215eedc9",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "3DReconstruction/Multi-view/Uncertainty/Sources of Uncertainty in 3D Scene Reconstruction.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "Sources of Uncertainty in 3D Scene Reconstruction"
+            }
+          },
+          {
+            "id": "806f8fb1a663baac",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "3DReconstruction/NeuS-based 3D Reconstruction.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "NeuS-based 3D Reconstruction"
+            }
+          },
+          {
+            "id": "2b0caefdabcadbc6",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "3DReconstruction/Code Flow.excalidraw.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "Code Flow.excalidraw"
+            }
+          },
+          {
+            "id": "9b13bf5aec4d0a05",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Learn/Neural Network/Loss Functions.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "Loss Functions"
             }
           }
         ],
-        "currentTab": 7
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -140,8 +308,9 @@
     "type": "split",
     "children": [
       {
-        "id": "2b8407f2a45fc061",
+        "id": "67ded0de353c74e7",
         "type": "tabs",
+        "dimension": 29.05067808708066,
         "children": [
           {
             "id": "56b71c2811fd7340",
@@ -149,15 +318,22 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Blog&Book&Paper/Write/Source/IPV6.md",
+                "file": "Blog&Book&Paper/Write/Write Paper/3D Reconstruction/Master Paper.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "IPV6 的大纲"
+              "title": "Outline of Master Paper"
             }
-          },
+          }
+        ]
+      },
+      {
+        "id": "2b8407f2a45fc061",
+        "type": "tabs",
+        "dimension": 34.83226266952177,
+        "children": [
           {
             "id": "d58789544432cb9f",
             "type": "leaf",
@@ -172,14 +348,26 @@
                 "sortOrder": "alphabetical"
               },
               "icon": "lucide-search",
-              "title": "搜索"
+              "title": "Search"
+            }
+          },
+          {
+            "id": "251670dd5ed21f1e",
+            "type": "leaf",
+            "state": {
+              "type": "vertical-tabs",
+              "state": {},
+              "icon": "gallery-vertical",
+              "title": "Vertical tabs"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       },
       {
         "id": "6711a83b129914d6",
         "type": "tabs",
+        "dimension": 36.11705924339758,
         "children": [
           {
             "id": "0d68bfa346c465d5",
@@ -188,10 +376,10 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabeticalReverse",
-                "autoReveal": false
+                "autoReveal": true
               },
               "icon": "lucide-folder-closed",
-              "title": "文件列表"
+              "title": "Files"
             }
           },
           {
@@ -201,7 +389,7 @@
               "type": "bookmarks",
               "state": {},
               "icon": "lucide-bookmark",
-              "title": "书签"
+              "title": "Bookmarks"
             }
           },
           {
@@ -210,15 +398,15 @@
             "state": {
               "type": "advanced-tables-toolbar",
               "state": {},
-              "icon": "lucide-file",
-              "title": "插件不再活动"
+              "icon": "spreadsheet",
+              "title": "Advanced Tables"
             }
           }
         ]
       }
     ],
     "direction": "horizontal",
-    "width": 233.5
+    "width": 256.5
   },
   "right": {
     "id": "a4155c200cdf0433",
@@ -229,13 +417,28 @@
         "type": "tabs",
         "children": [
           {
+            "id": "1be7467f7dcc9a63",
+            "type": "leaf",
+            "state": {
+              "type": "zotero-annotation-view",
+              "state": {
+                "file": "Other Interest/Reliability.md",
+                "itemId": 740,
+                "attachmentId": 739,
+                "follow": null
+              },
+              "icon": "highlighter",
+              "title": "Zotero Annotations"
+            }
+          },
+          {
             "id": "876683fcfbb9d249",
             "type": "leaf",
             "state": {
               "type": "recent-files",
               "state": {},
-              "icon": "lucide-file",
-              "title": "插件不再活动"
+              "icon": "clock",
+              "title": "Recent Files"
             }
           },
           {
@@ -277,7 +480,7 @@
                 "sortOrder": "alphabetical",
                 "showSearch": false,
                 "searchQuery": "",
-                "backlinkCollapsed": false,
+                "backlinkCollapsed": true,
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
@@ -285,157 +488,67 @@
             }
           },
           {
-            "id": "1145d5e3497d1061",
+            "id": "ded289474d7dd42d",
             "type": "leaf",
             "state": {
               "type": "empty",
               "state": {},
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "New tab"
             }
           },
           {
-            "id": "44157d0e5c88f839",
+            "id": "3cfbb2511a70202c",
             "type": "leaf",
             "state": {
               "type": "empty",
               "state": {},
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "New tab"
             }
           },
           {
-            "id": "348ff1c38e22d597",
+            "id": "b01a771e580662b8",
             "type": "leaf",
             "state": {
               "type": "empty",
               "state": {},
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "New tab"
             }
           },
           {
-            "id": "80ba7c26e9e7cdc4",
+            "id": "5c033e7d44e5adb3",
             "type": "leaf",
             "state": {
               "type": "empty",
               "state": {},
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "New tab"
             }
           },
           {
-            "id": "a766f6f1beebc5d3",
+            "id": "06e22c0ebaf01abf",
             "type": "leaf",
             "state": {
               "type": "empty",
               "state": {},
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "New tab"
             }
           },
           {
-            "id": "161b8637133fd23d",
+            "id": "3db4c55a5daae2ed",
             "type": "leaf",
             "state": {
               "type": "empty",
               "state": {},
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "New tab"
             }
           },
           {
-            "id": "b20dd9718ab0704e",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "新标签页"
-            }
-          },
-          {
-            "id": "af8a38c0fdf42fca",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "新标签页"
-            }
-          },
-          {
-            "id": "915655910369c628",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "新标签页"
-            }
-          },
-          {
-            "id": "e729be5bec10b728",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "新标签页"
-            }
-          },
-          {
-            "id": "9b4943ad0cd49749",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "新标签页"
-            }
-          },
-          {
-            "id": "ac0b5f7e90d48cc4",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "新标签页"
-            }
-          },
-          {
-            "id": "a9e43d0ff5630574",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "新标签页"
-            }
-          },
-          {
-            "id": "eea62332a9147dae",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "新标签页"
-            }
-          },
-          {
-            "id": "1fb890ae27d7dee7",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "新标签页"
-            }
-          },
-          {
-            "id": "501bf655e89398f1",
+            "id": "a6dff47a7e4bcb1a",
             "type": "leaf",
             "state": {
               "type": "Saved Queries View",
@@ -445,7 +558,7 @@
             }
           }
         ],
-        "currentTab": 19
+        "currentTab": 11
       }
     ],
     "direction": "horizontal",
@@ -454,76 +567,76 @@
   },
   "left-ribbon": {
     "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "markdown-importer:Open format converter": false,
+      "audio-recorder:Start/stop recording": false,
+      "workspaces:Manage workspace layouts": false,
+      "sheet-plus:Create excel file": false,
       "obsidian42-brat:BRAT": false,
-      "sheet-plus:创建 Excel 文件": false,
-      "obsidian-excalidraw-plugin:新建绘图文件": false,
-      "switcher:打开快速切换": false,
-      "graph:查看关系图谱": false,
-      "canvas:新建白板": false,
-      "daily-notes:打开/创建今天的日记": false,
-      "templates:插入模板": false,
-      "command-palette:打开命令面板": false,
-      "markdown-importer:打开 Markdown 格式转换器": false,
-      "audio-recorder:开始/结束录音": false,
-      "workspaces:管理工作区布局": false,
       "table-editor-obsidian:Advanced Tables Toolbar": false,
       "templater-obsidian:Templater": false,
       "pdf-plus:PDF++: Toggle auto-copy": false,
       "pdf-plus:PDF++: Toggle auto-focus": false,
       "pdf-plus:PDF++: Toggle auto-paste": false,
-      "float-search:Search obsidian in modal view": false
+      "float-search:Search obsidian in modal view": false,
+      "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "5296b72e0c48f159",
+  "active": "26d33cf3a14981fd",
   "lastOpenFiles": [
-    "Blog&Book&Paper/Write/Write tips.md",
-    "Blog&Book&Paper/Write/Source/IPV6.md",
-    "Learn/Math/Math.md",
     "Blog&Book&Paper/Route.md",
-    "Blog&Book&Paper/Write/Write Paper/Model Updating/Stochastic Model Calibration with Image Encoding——Converting High-Dimensional Frequency-Domain Responses into RGB Images for Neural Network Inversion.md",
-    "Blog&Book&Paper/Write/Life.md",
-    "ModelUpdating/Case about ModelUpdating.md",
-    "ModelUpdating/Paper about ModelUpdating.md",
-    "ModelUpdating/Stochastic Model Updating/A feature map of frequency response functions based model updating method using the Bayesian convolutional neural network.md",
-    "Reports/Daily/2023-2024寒假.md",
-    "Blog&Book&Paper/Write/Write Paper/Model Updating/A fast interval model updating method based on MLP neural network.md",
-    "Learn/Finite Element/Abaqus.md",
-    "Other Interest/CAX.md",
+    "Blog&Book&Paper/Write/Write Paper/3D Reconstruction/Master Paper.md",
+    "Other Interest/Time Series Data.md",
+    "Other Interest/Uncertainty.md",
+    "Blog&Book&Paper/Write/Write tips.md",
     "3DReconstruction/Code of Multi-view 3D Reconstruction based on SDF and volume rendering.md",
-    "Learn/Python/Figure.md",
-    "Other Interest/模态试验悬挂方式.md",
+    "3DReconstruction/Multi-view/Uncertainty/Sources of Uncertainty in 3D Scene Reconstruction.md",
+    "Learn/Neural Network/Loss Functions.md",
+    "3DReconstruction/Basics about 3D Reconstruction.md",
+    "3DReconstruction/Code Flow.excalidraw.md",
+    "3DReconstruction/NeuS-based 3D Reconstruction.md",
+    "Blog&Book&Paper/Write/Source/Configuration of computer/OS/WSL2.md",
+    "Other Interest/Reliability.md",
+    "Other Interest/Vibration Measurement.md",
+    "Blog&Book&Paper/Write/Source/Tools.md",
+    "Other Interest/CAX.md",
+    "Blog&Book&Paper/Read/Book/Everyone-can-use-English.md",
+    "Learn/Math/Math.md",
+    "ModelUpdating/Review/Towards the NASA UQ Challenge 2019——Systematically forward and inverse approaches for uncertainty propagation and quantification.md",
+    "3DReconstruction/file/Pasted Image 20250303194506_758.png",
+    "3DReconstruction/file",
+    "Blog&Book&Paper/Write/Life.md",
+    "ModelUpdating/Review/Stochastic Model Updating with Uncertainty Quantification_An Overview and Tutorial.md",
+    "ModelUpdating/Case about ModelUpdating.md",
+    "Other Interest/PHM.md",
+    "ModelUpdating/Paper about ModelUpdating.md",
+    "Blog&Book&Paper/Write/Source/IPV6.md",
+    "ipv5.md",
+    "ZtImgExcerpt/S358KWN7.png",
+    "ZtImgExcerpt/8SPA2743.png",
+    "ZtImgExcerpt/U9J9DTE5.png",
+    "ZtImgExcerpt/8VIYWBLS.png",
+    "ZtImgExcerpt/JDIW69D3.png",
+    "ZtImgExcerpt/RPK4LWKE.png",
+    "ZtImgExcerpt/NV25EEIW.png",
+    "ZtImgExcerpt/4CDNJBIA.png",
+    "ZtImgExcerpt/PWGEPGSR.png",
+    "ZtImgExcerpt",
+    "LiteratureNotes",
+    "Excalidraw",
+    "Blog&Book&Paper/Write/Blog/file",
     "Other Interest/1.canvas",
     "Other Interest/Untitled.pdf",
-    "Blog&Book&Paper/Write/Write Paper/Model Updating/A fast stochastic model updating technique based on an inverse FE surrogate model.md",
-    "Blog&Book&Paper/Write/Omoshiroi.excalidraw.md",
-    "Blog&Book&Paper/Write/MyGo.md",
-    "Blog&Book&Paper/Read/Book/模态实验/file/Pasted Image 20250113154118_794.png",
-    "Blog&Book&Paper/Read/Book/模态实验/file/Pasted Image 20250113105915_990.png",
-    "Blog&Book&Paper/Read/Book/模态实验/file/Pasted Image 20241223215530_735.png",
-    "Blog&Book&Paper/Read/Book/模态实验/file/Pasted Image 20241223215508_791.png",
-    "Blog&Book&Paper/Read/Book/模态实验/file/Pasted Image 20241223215436_004.png",
-    "Blog&Book&Paper/Read/Book/模态实验/file/Pasted Image 20241223215420_891.png",
-    "Blog&Book&Paper/Read/Book/模态实验/file/Pasted Image 20241223215402_410.png",
-    "Blog&Book&Paper/Read/Book/模态实验/file/Pasted Image 20241223215352_534.png",
-    "Blog&Book&Paper/Read/Book/模态实验/file/Pasted Image 20241223215327_991.png",
-    "Blog&Book&Paper/Read/Book/模态实验/file/Pasted Image 20241223215248_782.png",
     "Blog&Book&Paper/Read/Book/模态实验/file",
     "Blog&Book&Paper/Read/Book/模态实验",
-    "Blog&Book&Paper/Read/Book/Japanse.md",
-    "Blog&Book&Paper/Read/Blog/CPU_VS_GPU.md",
-    "Blog&Book&Paper/Read/Blockchain.md",
-    "Blog&Book&Paper/Read/Papers/核领域可靠性.md",
-    "Blog&Book&Paper/Read/Papers/(WX) Dynamics experiment.md",
-    "Blog&Book&Paper/Read/Papers/(WW) Isogeometric analysis.md",
-    "Blog&Book&Paper/Read/Papers/(BSF)Uncertainty.md",
     "Blog&Book&Paper/Read/Papers",
     "qiyun71/Blog_images/MyBlogPic",
-    "qiyun71/Blog_images",
-    "qiyun71",
     "Blog&Book&Paper/Write/LearningRoute.canvas",
-    "Blog&Book&Paper/Write/Write Paper/Model Updating/file",
-    "Day Planners",
-    "Blog&Book&Paper/Write/file",
     "3DReconstruction/Basic Knowledge/NeRF/NeRF.canvas",
     "未命名.canvas"
   ]

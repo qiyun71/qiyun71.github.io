@@ -1,3 +1,9 @@
+缩写：
+w.r.t. 关于
+i.e. 即
+i.i.d. 独立同分布
+
+
 # Tools
 
 ## Colors
@@ -119,6 +125,7 @@ algorithm2e语法 [mlg.ulb.ac.be/files/algorithm2e.pdf](https://mlg.ulb.ac.be/fi
 
 
 ### 交叉引用
+
 [Word中的图标题是Figure X，但插入交叉引用是Fig. X的解决方法？_海根_新浪博客](https://blog.sina.com.cn/s/blog_4a46812b0102x4rm.html)
 
 然后右键鼠标，选择“切换域代码”

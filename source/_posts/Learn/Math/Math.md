@@ -249,25 +249,25 @@ $f(E[x])\leq E[f(x)]$ , $E[\cdot]$代表期望
 $f(\int xp(x)dx)\leq\int f(x)p(x)dx$
 
 
+## 定积分求导
+
+[老师对定积分的求导怎么求，能给点例子吗_百度知道](https://zhidao.baidu.com/question/940652843635700092.html)
+
+![f9198618367adab46e65f0ea87d4b31c8601e4e6 (559×302)](https://iknow-pic.cdn.bcebos.com/f9198618367adab46e65f0ea87d4b31c8601e4e6)
+
+
 # 概率论
 
 ## Basic
 
-### 均值方差
+[概率论_概率公式中的逗号( , ) 竖线( | ) 分号( ； )及其优先级_概率p里面的逗号-CSDN博客](https://blog.csdn.net/shyjhyp11/article/details/133969095)
 
-为什么样本估计方差要除以n-1 [【浅谈】样本方差的分母“n”为什么要改为“n-1” - 知乎](https://zhuanlan.zhihu.com/p/550427703)
-
-其实就是自由度，当你算标准差的时候，已经知道均值了，那么就只有n-1个数字是自由的，第n个数值可以由前面的n-1个数字和均值算出来了，所以他实际上不包含任何关于数据波动的信息
-
-无偏估计的方差：
-$\left\{\begin{array}{c}M_n=\frac{X_1+X_2+\cdots+X_n}n\\\hat{S}_n^2=\frac{\sum_{i=1}^n(X_i-M_n)^2}{n-1}\end{array}\right.$
-
-[【AP统计】期望E(X)与方差Var(X) - 知乎](https://zhuanlan.zhihu.com/p/64859161)
 
 
 ### 概率/似然
 
 > [通俗理解“极大似然估计” - 知乎](https://zhuanlan.zhihu.com/p/334890990)
+> [似然函数 - 维基百科，自由的百科全书](https://zh.wikipedia.org/zh-cn/%E4%BC%BC%E7%84%B6%E5%87%BD%E6%95%B0) 例子比较好理解
 
 概率函数：由因到果，已知参数(概率)，根据真实参数（或已经发生的观测结果）去推测未来的观测结果
 似然函数：由果到因，根据已经发生的观测结果去猜想真实参数，这个过程叫做**估计**；估计正确的可能性叫做**似然性**。估计参数的似然性，其目的是帮助我们根据已观测的结果，推测出最符合观测结果、最合理的参数。
@@ -285,6 +285,25 @@ $\arg\max_pL(p)=\arg\max_p\prod_{i=1}^nP(X_i=x_i|p)$
 
 求导前为什么要取对数？：**（1）避免下溢出** **（2）便于计算** 将累积乘法转换成累加
 
+
+### 均值方差
+
+为什么样本估计方差要除以n-1 [【浅谈】样本方差的分母“n”为什么要改为“n-1” - 知乎](https://zhuanlan.zhihu.com/p/550427703)
+
+其实就是自由度，当你算标准差的时候，已经知道均值了，那么就只有n-1个数字是自由的，第n个数值可以由前面的n-1个数字和均值算出来了，所以他实际上不包含任何关于数据波动的信息
+
+无偏估计的方差：
+$\left\{\begin{array}{c}M_n=\frac{X_1+X_2+\cdots+X_n}n\\\hat{S}_n^2=\frac{\sum_{i=1}^n(X_i-M_n)^2}{n-1}\end{array}\right.$
+
+[【AP统计】期望E(X)与方差Var(X) - 知乎](https://zhuanlan.zhihu.com/p/64859161)
+
+### 联合概率密度
+
+[概率论(二)——二维随机变量 - 知乎](https://zhuanlan.zhihu.com/p/670185196)
+
+
+
+[两个随机变量的函数的分布 - 知乎](https://zhuanlan.zhihu.com/p/340502318)
 
 ## Bayes
 
@@ -338,6 +357,14 @@ $p(\theta|X)=\frac{p(\theta,X)}{p(X)}=\frac{p(X|\theta)p(\theta)}{\int_{-\infty}
 - $\int_{-\infty}^{+\infty}p(X|\theta)p(\theta)d\theta$ 为常数c，可以写为$p(\theta|X)\propto p(X|\theta)p(\theta).$
 
 ## Distribution
+
+### 泊松分布
+
+[泊松分布，无穷分割玩的魔术_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1Ta4y1j7YK/?spm_id_from=333.788.recommend_more_video.-1)
+
+$P(X=k)=\frac{e^{-\lambda}\lambda^k}{k!}$
+- $\lambda$是随机事件发生次数的数学期望。
+- 分布律函数或概率密度函数是通过二项分布推导 (当n很大，p很小时，λ=np，二项分布可用泊松分布近似)。
 
 ### 核密度估计
 
@@ -622,6 +649,13 @@ PCA是一种常用的降维方式，但是不方便展示结果。例如对两�
 
 
 # 线性代数
+
+## 矩阵的范数
+
+[矩阵范数详解-CSDN博客](https://blog.csdn.net/qq_29540745/article/details/53102095)
+
+![20161109194405936 (733×384)](https://img-blog.csdn.net/20161109194405936?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
+
 
 ## 特殊矩阵定义
 

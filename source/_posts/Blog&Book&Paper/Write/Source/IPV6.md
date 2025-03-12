@@ -207,6 +207,8 @@ ssh -p port root@ip_address
 
 ### 日志滚动
 
+新建`/var/log/xray/`文件夹
+
 在x-ui面板设置中添加：
 ```json
 "log": {
@@ -216,6 +218,12 @@ ssh -p port root@ip_address
 ```
 
 然后再bash中输入： `tail -f /var/log/xray/access.log` 
+
+## Other
+
+>  [路由 (routing) 功能简析（上） | Project X](https://xtls.github.io/en/document/level-1/routing-lv1-part1.html#_3-3-%E8%B7%AF%E7%94%B1)
+
+路由功能实现针对不同得流量——> block/direct/proxy
 
 ## Error
 

@@ -17,6 +17,10 @@ CAD/CAE/CAM
 
 [qd-cae/awesome-CAE: A curated list of awesome CAE frameworks, libraries and software.](https://github.com/qd-cae/awesome-CAE?tab=readme-ov-file) 
 
+[亿级规模的稀疏矩阵数据从哪下载？你所不知道的两个稀疏矩阵数据网站](https://mp.weixin.qq.com/s/lm3tOIh2cVpe8LWG6uIX0A) 在稀疏矩阵线性方程组求解器开发中，经常需要采用不同规模，不同类型的稀疏矩阵进行测试。寻找大量的稀疏矩阵数据是一个重要的需求。
+- https://math.nist.gov/MatrixMarket/
+- https://sparse.tamu.edu/
+
 
 ## 方向探索
 

@@ -113,3 +113,60 @@ training M network with different weight initialization to different local minim
 
 $\mathbf{c}_{\mathrm{ens}}=\frac1M\sum_{m=1}^M\mathbf{c}_{\mathrm{NeRF/GS}}^{(m)}\text{ and Var}(\mathbf{c}_{\mathrm{ens}})\approx\frac1M\sum_{m=1}^M\mathbf{c}_{\mathrm{ens}}^2-\left(\frac1M\sum_{m=1}^M\mathbf{c}_{\mathrm{ens}}\right)^2.$
 
+同理这里方差公式也写错了，应该是：$\text{Var}(\mathbf{c}_{\mathrm{ens}})\approx\frac1M\sum_{m=1}^M\mathbf{c}_{\mathrm{NeRF/GS}}^2-\left(\frac1M\sum_{m=1}^M\mathbf{c}_{\mathrm{NeRF/GS}}\right)^2.$
+
+# Experiments
+
+aleatory：不可减少的随机不确定性
+epistemic：可减少的认知不确定性
+
+① a 观察时的随机影响，例如光照变化，或运动模糊
+② e 缺少场景的信息，如图片数量不足
+③ a+e 非静态场景，例如行人或移动的物体，导致重建模糊/幻觉
+④ a+e 相机位姿的敏感性
+
+Datasets: 
+- Mip-NeRF 360 and Blender datasets for ① and ②
+- Light Field (LF) data set and follow the few-shot setting for ②
+- RobustNeRF and On-the-go data sets to evaluate robustness against confounding objects in the training views for ③
+- Mip-NeRF 360 data set for ④
+
+Metrics：
+- 图片质量：PSNR、SSIM、LPIPS
+- 不确定性估计：negative log likelihood (NLL）
+- Area Under Sparsification Error (AUSE) 不确定性与预测误差之间的相关程度
+- Area Under Calibration Error (AUCE) to assess the calibration of each method
+
+
+
+| Experiments | Datasets                          | Trainsets                               | Testsets                |
+| ----------- | --------------------------------- | --------------------------------------- | ----------------------- |
+| ①           | Mip-NeRF 360 (1.0~1.6 megapixels) | Gaussian noise or Gaussian blur         | without noise           |
+| ②           | Mip-NeRF 360                      | randomly sample 10%, 25%, 50%, and 100% | regularly subsample 10% |
+|             | Mip-NeRF 360                      | 一个方向的视图                                 | 另一个方向的视图                |
+|             | LF data set                       | few-view setting                        |                         |
+| ③           | RobustNeRF and On-the-go data set | 非静态物体，导致渲染照片出现漂浮物                       |                         |
+|             | RobustNeRF                        | different clutter proportions           |                         |
+|             | On-the-go                         | different occlusion levels              |                         |
+| ④           |                                   |                                         |                         |
+
+
+① sensitivity under different confounding effects applied to the training images
+
+② (i) sensitivity to the number of training views; 
+(ii) sensitivity to views that are different from the training views (out-of-distribution, OOD); 
+OOD setting：separate the training and test sets by splitting all input images based on their camera pose positions
+
+![image.png|222](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20250304122905.png)
+
+
+
+
+(iii) sensitivity to few views with limited scene coverage.
+
+③ the sensitivity of each method to learning from cluttered(凌乱的) training views. （非静态物体，可以是玩具/人）
+
+
+④ the sensitivity (uncertainty) aspect of imprecise camera poses in 3D scene reconstruction
+使用颜色对相机位姿的梯度来量化敏感性 $\partial\mathbf{c}/\partial\mathbf{P}\in\mathbb{R}^{3\times4},$沿着z轴随机移动相机位置作为扰动，扰动足够小使得可以在扰动和非扰动gradient normal maps之间进行像素级的比较
+

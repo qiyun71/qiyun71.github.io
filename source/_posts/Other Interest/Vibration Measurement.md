@@ -31,3 +31,13 @@ Three-Dimensional Scanning Laser Doppler Vibrometry (**3D SLDV**)
 > [模态-力锤法,激振器法 (FRF频率响应函数,传递函数,共振频率及阻尼系数,猝发随机激励,力窗/指数窗)](https://www.mek.net.cn/DataPhysics_Software_FRF.html)
 
 ![ABUIABAEGAAgyZnBpwYoku2ixgcw9AM43QI.png (500×349)](https://188469.s21i.faiusr.com/4/ABUIABAEGAAgyZnBpwYoku2ixgcw9AM43QI.png)
+
+
+
+
+# 应变分析
+
+[Imaging Mueller Matrix Ellipsometry - Department of Physics - NTNU](https://www.ntnu.edu/physics/appliedphysics/ellipsometry)
+
+[elerac/EventEllipsometer: \[CVPR2025\] Event Ellipsometer: Event-based Mueller-Matrix Video Imaging](https://github.com/elerac/EventEllipsometer)
+

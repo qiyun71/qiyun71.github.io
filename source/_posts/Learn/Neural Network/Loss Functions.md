@@ -296,3 +296,77 @@ $F=\frac{(a^2+1)*precision*recall}{a^2*precision+recall}$
 
 当参数α=1时，就是最常见的F1，也即$F1=\frac{2*precision*recall}{precision+recall}$
 
+# 不确定性
+
+## Negative Log Likelihood (NLL) ↓
+
+>  [Uncertainty Quantification Metrics for Deep Regression](https://arxiv.org/pdf/2405.04278v2)
+
+$\mathrm{NLL}(S)=-\sum_{i=1}^{N}\operatorname{log}p(y_{i}|\mathbf{x}_{i};\theta).$ 
+
+Deep Ensemble (DE)
+$-\log p_\theta\left(y_n\mid\mathbf{x}_n\right)=\frac{\log\sigma_\theta^2(\mathbf{x})}{2}+\frac{\left(y-\mu_\theta(\mathbf{x})\right)^2}{2\sigma_\theta^2(\mathbf{x})}+\mathrm{C}$
+
+>  [Measuring predictive uncertainty with Negative Log Likelihood (NLL)? - Cross Validated](https://stats.stackexchange.com/questions/486007/measuring-predictive-uncertainty-with-negative-log-likelihood-nll)
+
+假设有数据集$\mathcal{D}=\{(t_n, {\bf x}_n)\vert t_n\in\mathbb{R}, \mathcal{x}_n\in\mathbb{R}^M\}_{n=1}^N$ ，和一个神经网络架构$f: \mathbb{R}^M\to\mathbb{R}$ ，数据集$t_{n}$服从正态分布：$t_n|\mathbf{x}_n\sim\mathcal{N}(t_n|f(\mathbf{x}_n,W),\sigma^2)$
+通过K个不同网络，得到不同权重W，则可以通过比较它们的似然度或等价地，它们的负对数似然度，来寻找最佳的（就训练数据集而言）NN，因为这将告诉我们每个配置生成观察到的训练数据集的可能性有多大。
+
+```python
+from torch.distributions import Normal
+
+mu = torch.tensor([1, 10], dtype=torch.float32)
+sigma = torch.tensor([1], dtype=torch.float32)
+ 
+dist = Normal(mu, sigma)  # 设置高斯分布的均值和方差
+ 
+dist.sample()  # 采样
+
+>>> tensor([-0.9153,  8.3727])
+
+x = torch.tensor([1, 10, 10, 1], dtype=torch.float32).reshape(-1, 2)
+
+dist.log_prob(x)
+
+>>> tensor([[ -0.9189,  -0.9189],
+        [-41.4189, -41.4189]])
+```
+
+
+对于正态分布$p(x)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)$的`log_prob`的公式为：$\log(p(x))=-\frac{1}{2}\log(2\pi)-\log(\sigma)-\frac{(x-\mu)^2}{2\sigma^2}$
+
+NLL为对所有的log_prob求和并取负：$\mathrm{NLL}=-\sum_{i=1}^N\log(p(x_i))$
+
+## Area Under Sparsification Error (AUSE)↓
+
+>  [Uncertainty Quantification Metrics for Deep Regression](https://arxiv.org/pdf/2405.04278v2)
+
+assess how well the predicted uncertainty coincides with the prediction error on a test datassets
+
+$\mathrm{MAE}(S)=\frac{1}{|S|}\sum_{(\mathbf{x}_i,y_i)\in S}|y_i-F(\mathbf{x}_i;\theta)|.$ 真实值与网络F预测值之间的差异，xy分别是数据集的一对输入与输出
+
+$\mathrm{AUSE}(S)=\frac{1}{\mathrm{MAE}(S)}\int_{0}^{1}\mathrm{MAE}(S_{\vee}^{U}(\alpha))-\mathrm{MAE}(S_{\vee}(\alpha))d\alpha.$ 评估预测的不确定性与预测误差之间的相关程度
+
+
+## Area Under Calibration Error (AUCE)↓
+
+>  [Uncertainty Quantification Metrics for Deep Regression](https://arxiv.org/pdf/2405.04278v2)
+>  [Evaluating Scalable Bayesian Deep Learning Methods for Robust Computer Vision](https://arxiv.org/pdf/1906.01620)
+
+
+from the Expected Calibration Error (ECE) which is originally diagnostic tools for classification models that compare sample accuracy against predicted confidence.
+
+predicted probability distribution of an input $x_{i}$ :$P_{\theta}^{i}=F(\mathbf{x}_{i};\theta)$
+then the predicted cumulative distribution function for the $y_{i}$ : $P(y_i|\theta)=P_\theta^i(y\leq y_i|\theta).$
+
+$\hat{p}_j=\frac{|\{y_i\mid P(y_i|\theta)\leq p_j,(\mathbf{x}_i,y_i)\in S\}|}{N}$ , 其中 $p_{j} \in [0,1]$ 表示 arbitrary threshold value,
+Then the calibrated error : $\operatorname{cal}(\hat{p}_1,\cdots,\hat{p}_N)=\sum_{j=1}^Mw_j(p_j-\hat{p}_j)^2$，其中$w_{j}$是 arbitrary scaling weight $w_j=\frac{1}{N/\hat{p}_j}.$
+
+AUCE construct prediction intervals for each pixel and **check the proportion of pixels for which their interval covers their corresponding true target value**
+
+predicted interval $\mu\pm\Phi^{-1}(\frac{p+1}{2})\beta,$ 其中 $p \in (0,1)$ is confidence level $\Phi$ is the cumulative distribution function (CDF) of the standard Normal distribution, $\mu, \beta$ is the predicted mean and standard deviation respectively e.g., rendered RGB and its uncertainty.
+
+The empirical coverage $\hat{p}$ of each confidence level $p$ 计算方法：构建一个预测区间 for every $(\mu_{i},\beta_{i})$ pair (根据不同的$p$?),然后计算有多少目标$y_{i}$落在这个区间。
+理想情况下(perfectly calibrated model)：$\hat{p}=p$
+the metric is computed using the absolute error with respect to perfect calibration:  $|\hat{p}-p|$
+

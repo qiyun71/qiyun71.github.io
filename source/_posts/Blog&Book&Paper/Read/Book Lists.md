@@ -12,6 +12,7 @@
 - [x] 蛊真人
 - [ ] 大道争锋
 - [ ] [datawhalechina/easy-rl: 强化学习中文教程（蘑菇书🍄），在线阅读地址：https://datawhalechina.github.io/easy-rl/](https://github.com/datawhalechina/easy-rl?tab=readme-ov-file) 
+- [ ] [ZJU-LLMs/Foundations-of-LLMs](https://github.com/ZJU-LLMs/Foundations-of-LLMs) LLM
 - [ ] [yeasy/blockchain_guide: Introduce blockchain related technologies, from theory to practice with bitcoin, ethereum and hyperledger.](https://github.com/yeasy/blockchain_guide)
 
 

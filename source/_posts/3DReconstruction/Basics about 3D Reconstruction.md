@@ -83,7 +83,7 @@ intrinsics, pose = load_K_Rt_from_P(P) # 将 ws2p矩阵分解为 c2p和c2ws矩�
 
 三个坐标系：像素Pixel | 相机Camera | 世界World
 
-## 相机内参矩阵c2p
+## 相机内参矩阵intrinsic（c2p）
 
 > 理解与[NeRF OpenCV OpenGL COLMAP DeepVoxels坐标系朝向_nerf坐标系_培之的博客-CSDN博客](https://blog.csdn.net/OrdinaryMatthew/article/details/126670351)一致
 
@@ -93,7 +93,7 @@ intrinsics, pose = load_K_Rt_from_P(P) # 将 ws2p矩阵分解为 c2p和c2ws矩�
 
 ![image.png|444](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/20230703144039.png)
 
-像素坐标到相机坐标：
+p2c 像素坐标到相机坐标：
 $\mathbf{p_c}=\begin{bmatrix}\dfrac{1}{f}&0&-\dfrac{W}{2\cdot f}\\0&\dfrac{1}{f}&-\dfrac{H}{2\cdot f}\\0&0&1\end{bmatrix}\begin{pmatrix}i\\j\\1\end{pmatrix}=\begin{pmatrix}\dfrac{i-\dfrac{W}{2}}{f}\\\dfrac{j-\dfrac{H}{2}}{f}\\1\end{pmatrix}$
 
 | Method | Pixel <--> Camera coordinate                                                                                                                                                                                                                                                                                       |
@@ -105,7 +105,7 @@ $\mathbf{p_c}=\begin{bmatrix}\dfrac{1}{f}&0&-\dfrac{W}{2\cdot f}\\0&\dfrac{1}{f}
 
 由于NeuS使用的DTU数据集/自制数据集是与COLMAP相同的相机朝向，因此不用进行变换。
 
-## 相机外参矩阵w2c
+## 相机外参矩阵pose(c2w)
 
 > [相机位姿(camera pose)与外参矩阵 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/642715876)
 
@@ -134,7 +134,7 @@ t = [[TX],
 
 $c2w = \left[\begin{array}{c|c}\mathbf{R}_{c}&\mathbf{C}\\\hline\mathbf{0}&1\\\end{array}\right]$
 
-**c2w矩阵的值直接描述了相机坐标系的朝向和原点**，因此称为相机位姿。
+**c2w矩阵的值直接描述了相机坐标系在世界坐标系中的朝向和原点位置**，因此称为相机位姿。
 - 具体的，旋转矩阵的第一列到第三列分别表示了相机坐标系的X, Y, Z轴在世界坐标系下对应的方向；
 - 平移向量表示的是相机原点在世界坐标系的对应位置。
 

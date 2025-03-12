@@ -1,3 +1,5 @@
+Life:
+
 (数字孪生)通过有限元/数学建模，在计算机上(虚拟世界中)模拟真实世界的一些规律/现象，尽可能的与实际物体（实验测量）有相同的物理属性
 - 有限元分析将**构造实体几何CAD模型**通过网格划分变为**多边形网格Mesh**([3D Model](../3DReconstruction/3D%20Model.md))，然后进行求解，得到FRFs/模态频率(动力学)。
 - 对实际物体工作过程中的测量依靠各种传感器完成，eg:[图像传感器](https://zh.wikipedia.org/wiki/%E5%9B%BE%E5%83%8F%E4%BC%A0%E6%84%9F%E5%99%A8)-->照片，[压电式传感器](https://baike.baidu.com/item/%E5%8E%8B%E7%94%B5%E5%BC%8F%E4%BC%A0%E6%84%9F%E5%99%A8/8835700)-->振动(d/v/a)...
@@ -101,6 +103,21 @@ Research Interest：
 
 人生 [Life](Write/Life.md)
 世界 [World](Write/World.md) 
-- [Travel to Japan](Write/Blog/Travel%20to%20Japan.md)
+- [Travel to Japan 2025](Write/Blog/Travel%20to%20Japan%202025.md)
 价值 [Blockchain](Read/Blockchain.md)
 
+
+
+---
+
+职位：
+
+[【可靠性工程师-理论方向招聘】_上海宇量昇科技有限公司招聘信息-猎聘](https://www.liepin.com/job/1972290995.shtml)
+
+"岗位介绍： 
+1、 应用可靠性工程方法（如FMEA、FTA、可靠性建模）识别潜在风险并提出改进方案。 
+2、制定可靠性测试计划（如寿命测试、加速老化测试、环境应力筛选），并负责专业测试台架搭建。 
+3、对现场故障数据进行根因分析，提出纠正措施。 
+4、制定企业内部的可靠性工程规范及流程、行业可靠性标准。 
+5、与研发、生产、质量、售后团队协作，推动可靠性目标落地。 
+任职要求： 1、硕士及以上学历，主修可靠性工程、机械工程、电子工程、材料科学等相关专业。 2、精通可靠性分析方法（FMEA、FTA、FRACAS）。 3、掌握数据分析工具（Reliasoft、Minitab、JMP）及相关可靠性测试设备。 4、5年以上可靠性工程或质量工程相关经验，复杂系统可靠性经验优先，博士可放宽。 5、沟通协调能力强，能推动跨部门合作。"

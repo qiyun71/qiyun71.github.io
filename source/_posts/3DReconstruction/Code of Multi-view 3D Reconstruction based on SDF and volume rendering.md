@@ -675,7 +675,7 @@ export CUDAHOSTCXX=/usr/bin/g++-10
 
 ![image.png|444](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241117040617.png)
 
-DTU数据集中给的矩阵为pixel2world矩阵：
+DTU数据集中给的矩阵为world2pixel矩阵：
 
 ```python
 2607.429996 -3.844898 1498.178098 -533936.661373
@@ -696,6 +696,7 @@ for i in range(64):
       poses.append([float(x) for x in l])
   poses_np = np.array(poses)
   P = poses_np
+  # 将w2p通过QR分解为c2p和c2w矩阵: w2p = c2p @ w2c <==> P = intrinsics @ np.linalg.inv(pose)
   # pose is the c2w to COLMAP
   intrinsics, pose = load_K_Rt_from_P(P)
   camera_poses.append(pose)
@@ -704,7 +705,9 @@ np.savez("xxx.npz", camera_poses=camera_poses)
 ```
 
 
-# Mine 
+# Mine
+
+
 
 ## Accuracy
 
@@ -712,14 +715,14 @@ np.savez("xxx.npz", camera_poses=camera_poses)
 
 ### Data Generation
 
-Colmap 生成点云的时候可以使用 GT camera pose（cameras.npz） 进行监督？
+Colmap 生成点云的时候可以指定图片的 GT camera pose（cameras.npz）？ 😀YES
 
 >Method1:[DTU camera Poses · Issue #5 · hbb1/2d-gaussian-splatting](https://github.com/hbb1/2d-gaussian-splatting/issues/5)  https://github.com/NVlabs/neuralangelo/blob/main/projects/neuralangelo/scripts/convert_tnt_to_json.py
 >Method2: [How to run COLMAP with ground truth camera poses on DTU? · Issue #20 · dunbar12138/DSNeRF](https://github.com/dunbar12138/DSNeRF/issues/20) [Frequently Asked Questions — COLMAP 3.11.0.dev0 documentation](https://colmap.github.io/faq.html#reconstruct-sparse-dense-model-from-known-camera-poses)
 
 ### RUN
 
-Geo-Neus的数据集，相机位姿和world坐标系下的点云与DTU数据集中的一致，可以评价CD指标：
+Geo-Neus的数据集根据GT相机位姿来生成稀疏点云，相机位姿和world坐标系下的点云与DTU数据集中的一致，可以评价CD指标：
 
 ```bash
 # no cue
@@ -732,7 +735,7 @@ python run.py --conf confs/neus-dtu_geo.yaml --train dataset.root_dir="scene_dir
 python run.py --conf confs/neus-dtu_geo.yaml --train dataset.root_dir="scene_dir" tag='sfm' dataset.apply_sfm=True
 ```
 
-dtu_like自定义数据集，colmap生成的点云坐标系可能与DTU的GT点云坐标系不同(**相机位姿也不同**)，因此无法评价CD指标：
+最早一版的dtu_like自定义数据集`./inputs/DTU_mine`通过一般的数据生成方法`generate_datasets.ipynb`生成，没有使用GT相机位姿，而是直接通过colmap默认的方式估计相机位姿。colmap生成的点云坐标系可能与DTU的GT点云坐标系不同(**相机位姿也不同**)，因此无法评价CD指标：
 
 ```bash
 # no cue
@@ -745,7 +748,16 @@ python run.py --conf confs/neus-dtu.yaml --train dataset.root_dir="scene_dir" da
 python run.py --conf confs/neus-dtu.yaml --train dataset.root_dir="scene_dir" dataset.name='dtu_like' tag='sfm' dataset.apply_sfm=True
 ```
 
+为此，编写了可以根据GT相机位姿生成点云数据的代码，`generate_colmap_mesh.py`：
+针对DTU等提供GT相机位姿的数据集，可以在获得
+
+
 ### Comparison
+
+对比不同的方法(SDF+VolumeRendering+NGP Grid)：
+- COLMAP
+- MonoSDF
+- NeuS2
 
 对比启用不同先验：
 - no cue
@@ -781,12 +793,43 @@ python run.py --conf confs/neus-dtu_geo.yaml --train dataset.root_dir="scene_dir
 ```
 
 single image training strategy：1000 epoch x 49/64 x 20 step lmc
-- importance sampling
-- no-importance (just lmc) 
-- uniform
+- [ ] importance sampling 效果不明显
+- [x] no-importance (just lmc)
+- [x] uniform
 
 all images training strategy：20000 x 60 epochs x 1 batch x 1 step lmc
 
 
 ## Uncertainty
 
+
+
+
+## Code testing
+
+```bash
+# 测试将背景的深度也进行归一化 NeusModel
+python run.py --conf confs/neus-dtu_geo.yaml --train dataset.root_dir="./inputs/DTU_geo/scan24" tag='depth' dataset.apply_depth=True trainer.train_data_batch_size=4 trainer.sampling_lmc_steps=-1 trainer.train_n_rays=256
+
+## 对比一下没用深度的效果
+python run.py --conf confs/neus-dtu_geo.yaml --train dataset.root_dir="./inputs/DTU_geo/scan24" trainer.train_data_batch_size=4 trainer.sampling_lmc_steps=-1 trainer.train_n_rays=256
+
+## 更长时间的深度监督
+python run.py --conf confs/neus-dtu_geo.yaml --train dataset.root_dir="./inputs/DTU_geo/scan24" tag='depth' dataset.apply_depth=True trainer.train_data_batch_size=4 trainer.sampling_lmc_steps=-1 trainer.train_n_rays=256 trainer.epochs=10000
+
+## 测试渲染opacity的图片
+python run.py --conf outputs/neus-dtu_geo-scan24/depth@20250220-142934/config/config.yaml --resume outputs/neus-dtu_geo-scan24/depth@20250220-142934/ckpt/ckpt_001000.pth --val
+```
+
+
+```bash
+# 之前val时渲染的图片全黑 eg: 对于scan55的all
+python run.py --conf outputs/neus-dtu_geo-scan55/all_lr1e-3@20241115-110605/config/config.yaml --resume outputs/neus-dtu_geo-scan55/all_lr1e-3@20241115-110605/ckpt/ckpt_001000.pth --val dataset.val_index=13 dataset.root_dir="./inputs/DTU_geo/scan55"
+
+## 渲染的背景rgb图有问题，除了单个像素有颜色，其余像素全黑
+```
+
+```bash
+# 测试lmc when sample_steps = -1
+python run.py --conf confs/neus-dtu_geo.yaml --train dataset.root_dir="./inputs/DTU_geo/scan24" trainer.train_data_batch_size=4 trainer.sampling_lmc_steps=20 trainer.train_n_rays=256
+```

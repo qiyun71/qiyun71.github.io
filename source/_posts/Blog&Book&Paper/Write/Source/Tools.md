@@ -1,5 +1,11 @@
 # Tools
 
+## 论文查重
+
+[PaperPass官网-论文查重-论文降重-论文检测-免费论文查重检测系统-智齿数汇](https://www.paperpass.com/)
+
+[fslongjin/TextRecogn: Uncovering AIGC Texts with Machine Learning](https://github.com/fslongjin/textrecogn)
+
 ## 笔记
 
 思维导图，免费开源
@@ -66,6 +72,9 @@ just by typing notation in plain text.
 
 ## 图像处理
 
+Windows桌面截图工具
+[RootKit-Org/BetterCam: World's Fastest high-performance Python screen capture library for Windows using Desktop Duplication API](https://github.com/RootKit-Org/BetterCam)
+
 图片背景移除
 - [danielgatis/rembg: Rembg is a tool to remove images background (github.com)](https://github.com/danielgatis/rembg)
 - https://0v0.ai/rmbg/
@@ -80,6 +89,9 @@ DragGAN
 [XingangPan/DragGAN: Official Code for DragGAN (SIGGRAPH 2023) (github.com)](https://github.com/XingangPan/DragGAN)
 
 ## 可视化
+
+简单的相机可视化
+[xt4d/CameraViewer: A lightweight tool for camera pose visualization](https://github.com/xt4d/CameraViewer)
 
 相机外参可视化
 [demul/extrinsic2pyramid: Visualize Camera's Pose Using Extrinsic Parameter by Plotting Pyramid Model on 3D Space (github.com)](https://github.com/demul/extrinsic2pyramid)

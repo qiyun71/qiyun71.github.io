@@ -25,6 +25,8 @@ Prognostics and health management
 
 ![1-s2.0-S0951832021006153-gr1_lrg.jpg (3167×1868)](https://ars.els-cdn.com/content/image/1-s2.0-S0951832021006153-gr1_lrg.jpg)
 
+>  [ChatGPT-Like Large-Scale Foundation Models for Prognostics and Health Management: A Survey and Roadmaps](https://arxiv.org/pdf/2305.06472)
+
 
 
 

@@ -57,6 +57,7 @@ categories: ModelUpdating
 | 2023 | [Active learning aided Bayesian nonparametric general regression for model updating using modal data - ScienceDirect](https://www.sciencedirect.com/science/article/pii/S0888327023007380)                                                                                 | Active learning  |
 | 2023 | [(PDF) Stochastic model updating based on sub-interval similarity and BP neural network](https://www.researchgate.net/publication/367239633_Stochastic_model_updating_based_on_sub-interval_similarity_and_BP_neural_network)                                              |                  |
 | 2024 | [Efficient Bayesian inference for finite element model updating with surrogate modeling techniques \| Journal of Civil Structural Health Monitoring](https://link.springer.com/article/10.1007/s13349-024-00768-y)                                                         |                  |
+| 2024 | [Latent Space-based Stochastic Model Updating \| alphaXiv](https://www.alphaxiv.org/abs/2410.03150)                                                                                                                                                                        |                  |
 
 # Interval Model Updating
 
@@ -122,3 +123,7 @@ categories: ModelUpdating
 
 > [Bayesian Neural Networks: An Introduction and Survey](https://arxiv.org/pdf/2006.12024)
 
+
+# Other
+
+global sensitivity analysis (GSA) [parameter-dependence · GitHub Topics](https://github.com/topics/parameter-dependence)

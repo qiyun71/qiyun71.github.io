@@ -22,7 +22,7 @@ wsl --update
 wsl --set-default-version 2
 ```
 
-### 安装Ubuntu
+### Ubuntu
 方法一：选好版本直接再Microsoft Store中下载，然后打开：
 
 ```bash
@@ -45,6 +45,28 @@ wsl --install -d Ubuntu-20.04
 ```
 
 
+### Archlinux
+
+>  [Install Arch Linux on WSL - ArchWiki](https://wiki.archlinux.org/title/Install_Arch_Linux_on_WSL)
+
+```cmd
+wsl --import _Distro_name_ _Install_location_ _WSL_image_
+
+useradd -G wheel -m foobar
+passwd foobar
+
+--> /etc/wsl.conf
+add:
+[user]
+default= foobar
+
+root 没有密码：
+wsl -d Arch -u root
+passwd
+
+```
+
+
 ## 常规操作
 
 移动到其他盘[WSL2安装Ubuntu20.04 - 王谷雨 - 博客园 (cnblogs.com)](https://www.cnblogs.com/konghuanxi/p/14731846.html)
@@ -52,6 +74,9 @@ wsl --install -d Ubuntu-20.04
 ```powershell
 # 查看当前wsl安装的虚拟机
 wsl -l -v
+
+# 启动
+wsl -d name
 
 # 关闭所有正在运行的虚拟机
 wsl --shutdown

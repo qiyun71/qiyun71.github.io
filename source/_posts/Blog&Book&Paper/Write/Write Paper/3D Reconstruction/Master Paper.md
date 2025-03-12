@@ -1,4 +1,44 @@
 
+>  [北京科技大学研究生学位论文模板_下载中心_北京科技大学研究生院](https://gs.ustb.edu.cn/index.php/cms/item-view-id-3319.shtml)
+
+北科提供了两种格式模板：
+- 《北京科技大学研究生学位论文书写指南》.docx
+- 《北京科技大学博士学位论文模板》.docx
+- 《北京科技大学硕士学位论文模板》.docx
+- 北京科技大学博士学位论文Latex模板.zip
+- 北京科技大学硕士学位论文Latex模板.zip
+  - 注：本模板要求使用者具备一定的LaTeX基础知识。安装好相关软件，例如Texlive2021以上+TexStudio（Windows），TeXShop（MAC）。
+  - 推荐XeLaTex
+
+>[在 WSL 中安装 TexLive 2023 记录 踩坑总结（openSUSE Tumbleweed）tlmgr更新 清华源-CSDN博客](https://blog.csdn.net/m0_73248035/article/details/130565440) 给wsl挂载windows字体 sudo ln -s /mnt/c/Windows/Fonts /usr/share/fonts/font
+>  [WSL+Texlive+Vscode（Texstudio）完美配置 - 知乎](https://zhuanlan.zhihu.com/p/9322988213)
+
+本地环境配置：
+- 首先在本地wsl2(Ubuntu)下安装并配置texlive2024编译环境。
+- 然后在win11中安装texstudio，并配置好texlive的相关路径。
+- 通过texstudio进行编写latex文档，并通过在wsl2下（XeLaTex）编译pdf
+
+可能会有查重问题，网上查询后可以直接在知网提交pdf，但texlive的版本必须在2023以上，不然会出问题(参考文献被查重)：
+
+@- 以前 macOS 有人报告过查重问题，升级到 TeXlive 2023 或更新可解决。
+https://github.com/BITNP/BIThesis/issues/326#issuecomment-1541271508
+https://github.com/BITNP/BIThesis/discussions/317?sort=new#discussioncomment-5855586
+如果不方便升级，但内容不敏感，可以用在线平台编译查重用的版本。
+https://github.com/BITNP/BIThesis/discussions/536
+
+---
+
+latex格式论文 tips
+
+```
+\figref{fig:fig1s5}
+```
+
+$(\sin(2^0\pi p)$
+
+$\eta | \mathbf{\eta} | \boldsymbol{\eta}$
+
+
 |                   3D Reconstruction                    |     Single-view      |       Multi-view        |
 | :----------------------------------------------------: | :------------------: | :---------------------: |
 |                           特点                           | **简单但信息不足，未见区域很难重建** |   **多视图信息互补但一致性很难保证**   |

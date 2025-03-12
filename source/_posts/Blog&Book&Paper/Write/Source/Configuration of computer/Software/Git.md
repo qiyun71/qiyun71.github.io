@@ -22,3 +22,13 @@ git checkout -b NEW_BRANCH_NAME
 
 ## clone repo with token
 git clone https://NeRF-Mine:#####token#####@github.com/qiyun71/NeRF-Mine.git
+
+## 忽略本地修改，强制拉取远程到本地
+
+[git pull时冲突的几种解决方式 - 雪山上的蒲公英 - 博客园](https://www.cnblogs.com/zjfjava/p/10280247.html)
+
+```bash
+git fetch --all
+git reset --hard origin/dev
+git pull
+```

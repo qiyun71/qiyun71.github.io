@@ -14,7 +14,6 @@
   "obsidian-image-auto-upload-plugin",
   "convert-url-to-iframe",
   "obsidian-excel-to-markdown-table",
-  "easy-typing-obsidian",
   "obsidian-local-rest-api",
   "obsidian-style-settings",
   "obsidian-latex-suite",
@@ -29,5 +28,8 @@
   "pdf-plus",
   "better-export-pdf",
   "float-search",
-  "various-complements"
+  "easy-typing-obsidian",
+  "obsidian-text-format",
+  "zotlit",
+  "vertical-tabs"
 ]

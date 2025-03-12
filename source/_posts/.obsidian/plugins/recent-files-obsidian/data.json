@@ -1,36 +1,164 @@
 {
   "recentFiles": [
     {
-      "basename": "IPV6",
-      "path": "Blog&Book&Paper/Write/Source/IPV6.md"
-    },
-    {
-      "basename": "Write tips",
-      "path": "Blog&Book&Paper/Write/Write tips.md"
-    },
-    {
-      "basename": "Math",
-      "path": "Learn/Math/Math.md"
+      "basename": "Master Paper",
+      "path": "Blog&Book&Paper/Write/Write Paper/3D Reconstruction/Master Paper.md"
     },
     {
       "basename": "Route",
       "path": "Blog&Book&Paper/Route.md"
     },
     {
-      "basename": "Stochastic Model Calibration with Image Encoding——Converting High-Dimensional Frequency-Domain Responses into RGB Images for Neural Network Inversion",
-      "path": "Blog&Book&Paper/Write/Write Paper/Model Updating/Stochastic Model Calibration with Image Encoding——Converting High-Dimensional Frequency-Domain Responses into RGB Images for Neural Network Inversion.md"
+      "basename": "Time Series Data",
+      "path": "Other Interest/Time Series Data.md"
+    },
+    {
+      "basename": "Uncertainty",
+      "path": "Other Interest/Uncertainty.md"
+    },
+    {
+      "basename": "Write tips",
+      "path": "Blog&Book&Paper/Write/Write tips.md"
+    },
+    {
+      "basename": "Code of Multi-view 3D Reconstruction based on SDF and volume rendering",
+      "path": "3DReconstruction/Code of Multi-view 3D Reconstruction based on SDF and volume rendering.md"
+    },
+    {
+      "basename": "Sources of Uncertainty in 3D Scene Reconstruction",
+      "path": "3DReconstruction/Multi-view/Uncertainty/Sources of Uncertainty in 3D Scene Reconstruction.md"
+    },
+    {
+      "basename": "Loss Functions",
+      "path": "Learn/Neural Network/Loss Functions.md"
+    },
+    {
+      "basename": "Basics about 3D Reconstruction",
+      "path": "3DReconstruction/Basics about 3D Reconstruction.md"
+    },
+    {
+      "basename": "Code Flow.excalidraw",
+      "path": "3DReconstruction/Code Flow.excalidraw.md"
+    },
+    {
+      "basename": "NeuS-based 3D Reconstruction",
+      "path": "3DReconstruction/NeuS-based 3D Reconstruction.md"
+    },
+    {
+      "basename": "Towards the NASA UQ Challenge 2019——Systematically forward and inverse approaches for uncertainty propagation and quantification",
+      "path": "ModelUpdating/Review/Towards the NASA UQ Challenge 2019——Systematically forward and inverse approaches for uncertainty propagation and quantification.md"
+    },
+    {
+      "basename": "WSL2",
+      "path": "Blog&Book&Paper/Write/Source/Configuration of computer/OS/WSL2.md"
+    },
+    {
+      "basename": "Reliability",
+      "path": "Other Interest/Reliability.md"
+    },
+    {
+      "basename": "Vibration Measurement",
+      "path": "Other Interest/Vibration Measurement.md"
+    },
+    {
+      "basename": "Tools",
+      "path": "Blog&Book&Paper/Write/Source/Tools.md"
+    },
+    {
+      "basename": "CAX",
+      "path": "Other Interest/CAX.md"
+    },
+    {
+      "basename": "Everyone-can-use-English",
+      "path": "Blog&Book&Paper/Read/Book/Everyone-can-use-English.md"
+    },
+    {
+      "basename": "Math",
+      "path": "Learn/Math/Math.md"
     },
     {
       "basename": "Life",
       "path": "Blog&Book&Paper/Write/Life.md"
     },
     {
+      "basename": "Stochastic Model Updating with Uncertainty Quantification_An Overview and Tutorial",
+      "path": "ModelUpdating/Review/Stochastic Model Updating with Uncertainty Quantification_An Overview and Tutorial.md"
+    },
+    {
       "basename": "Case about ModelUpdating",
       "path": "ModelUpdating/Case about ModelUpdating.md"
     },
     {
+      "basename": "PHM",
+      "path": "Other Interest/PHM.md"
+    },
+    {
       "basename": "Paper about ModelUpdating",
       "path": "ModelUpdating/Paper about ModelUpdating.md"
+    },
+    {
+      "basename": "IPV6",
+      "path": "Blog&Book&Paper/Write/Source/IPV6.md"
+    },
+    {
+      "basename": "模态实验.excalidraw",
+      "path": "Blog&Book&Paper/Read/Book/模态实验/模态实验.excalidraw.md"
+    },
+    {
+      "basename": "模态试验实用技术.excalidraw",
+      "path": "Blog&Book&Paper/Read/Book/模态实验/模态试验实用技术.excalidraw.md"
+    },
+    {
+      "basename": "人生七年",
+      "path": "Blog&Book&Paper/Read/Book/人生七年.md"
+    },
+    {
+      "basename": "Modal Testing",
+      "path": "Learn/Finite Element/Modal Testing.md"
+    },
+    {
+      "basename": "Transitional Markov Chain Monte Carlo Method for Bayesian Model Updating, Model Class Selection, and Model Averaging",
+      "path": "ModelUpdating/Method/Transitional Markov Chain Monte Carlo Method for Bayesian Model Updating, Model Class Selection, and Model Averaging.md"
+    },
+    {
+      "basename": "Datasets",
+      "path": "3DReconstruction/Datasets.md"
+    },
+    {
+      "basename": "Travel to Japan 2025",
+      "path": "Blog&Book&Paper/Write/Blog/Travel to Japan 2025.md"
+    },
+    {
+      "basename": "Mechanical Vibrations Theory and Application to Structural Dynamics",
+      "path": "Blog&Book&Paper/Read/Book/Mechanical Vibrations Theory and Application to Structural Dynamics.md"
+    },
+    {
+      "basename": "Elsevier Develop",
+      "path": "Project/Elsevier Develop.md"
+    },
+    {
+      "basename": "Book Lists",
+      "path": "Blog&Book&Paper/Read/Book Lists.md"
+    },
+    {
+      "basename": "Japanse",
+      "path": "Blog&Book&Paper/Read/Book/Japanse.md"
+    },
+    {
+      "basename": "Paper About 3D Reconstruction",
+      "path": "3DReconstruction/Paper About 3D Reconstruction.md"
+    },
+    {
+      "basename": "Proxy.excalidraw",
+      "path": "Blog&Book&Paper/Write/Blog/Proxy.excalidraw.md"
+    },
+    {
+      "basename": "Git",
+      "path": "Blog&Book&Paper/Write/Source/Configuration of computer/Software/Git.md"
+    },
+    {
+      "basename": "Stochastic Model Calibration with Image Encoding——Converting High-Dimensional Frequency-Domain Responses into RGB Images for Neural Network Inversion",
+      "path": "Blog&Book&Paper/Write/Write Paper/Model Updating/Stochastic Model Calibration with Image Encoding——Converting High-Dimensional Frequency-Domain Responses into RGB Images for Neural Network Inversion.md"
     },
     {
       "basename": "A feature map of frequency response functions based model updating method using the Bayesian convolutional neural network",
@@ -47,14 +175,6 @@
     {
       "basename": "Abaqus",
       "path": "Learn/Finite Element/Abaqus.md"
-    },
-    {
-      "basename": "CAX",
-      "path": "Other Interest/CAX.md"
-    },
-    {
-      "basename": "Code of Multi-view 3D Reconstruction based on SDF and volume rendering",
-      "path": "3DReconstruction/Code of Multi-view 3D Reconstruction based on SDF and volume rendering.md"
     },
     {
       "basename": "Figure",
@@ -79,126 +199,6 @@
     {
       "basename": "Interest.excalidraw",
       "path": "Blog&Book&Paper/Write/Interest.excalidraw.md"
-    },
-    {
-      "basename": "NeuS-based 3D Reconstruction",
-      "path": "3DReconstruction/NeuS-based 3D Reconstruction.md"
-    },
-    {
-      "basename": "Master Paper",
-      "path": "Blog&Book&Paper/Write/Write Paper/3D Reconstruction/Master Paper.md"
-    },
-    {
-      "basename": "Finite Element Model 3D Reconstruction",
-      "path": "3DReconstruction/Practical/Finite Element Model 3D Reconstruction.md"
-    },
-    {
-      "basename": "NeRF-review",
-      "path": "3DReconstruction/Multi-view/Implicit Function/NeRF-based/NeRF Other Research/NeRF-review.md"
-    },
-    {
-      "basename": "Paper About 3D Reconstruction",
-      "path": "3DReconstruction/Paper About 3D Reconstruction.md"
-    },
-    {
-      "basename": "3D Model",
-      "path": "3DReconstruction/3D Model.md"
-    },
-    {
-      "basename": "Uncertainty",
-      "path": "Other Interest/Uncertainty.md"
-    },
-    {
-      "basename": "Book Lists",
-      "path": "Blog&Book&Paper/Read/Book Lists.md"
-    },
-    {
-      "basename": "Self-superviside Model Updating through inverse calibration model",
-      "path": "Blog&Book&Paper/Write/Write Paper/Model Updating/Self-superviside Model Updating through inverse calibration model.md"
-    },
-    {
-      "basename": "Dynamic Response Prediction (Deterministic)",
-      "path": "Other Interest/Dynamic Response Prediction (Deterministic).md"
-    },
-    {
-      "basename": "Vibration Measurement",
-      "path": "Other Interest/Vibration Measurement.md"
-    },
-    {
-      "basename": "Dimensions  Measurement",
-      "path": "3DReconstruction/Practical/Dimensions  Measurement.md"
-    },
-    {
-      "basename": "飞机算例数据集生成",
-      "path": "Reports/PDF导出/飞机算例数据集生成.md"
-    },
-    {
-      "basename": "Anime Image 3D Reconstruction",
-      "path": "3DReconstruction/Practical/Anime Image 3D Reconstruction.md"
-    },
-    {
-      "basename": "Multi-view Human Body Reconstruction",
-      "path": "3DReconstruction/Practical/Multi-view Human Body Reconstruction.md"
-    },
-    {
-      "basename": "Basics about 3D Reconstruction",
-      "path": "3DReconstruction/Basics about 3D Reconstruction.md"
-    },
-    {
-      "basename": "Automatic detection of pointer instrument",
-      "path": "Project/Automatic detection of pointer instrument.md"
-    },
-    {
-      "basename": "NeRF",
-      "path": "Project/NeRF.md"
-    },
-    {
-      "basename": "PyNastran",
-      "path": "Project/PyNastran.md"
-    },
-    {
-      "basename": "Python API",
-      "path": "Project/Python API.md"
-    },
-    {
-      "basename": "Python Scripts",
-      "path": "Project/Python Scripts.md"
-    },
-    {
-      "basename": "Python Spider",
-      "path": "Project/Python Spider.md"
-    },
-    {
-      "basename": "Six Legged Spider Robot",
-      "path": "Project/Six Legged Spider Robot.md"
-    },
-    {
-      "basename": "Unpack Snowbreak File",
-      "path": "Project/Unpack Snowbreak File.md"
-    },
-    {
-      "basename": "Visualize Interval uncertainty quantification metrics",
-      "path": "Project/Visualize Interval uncertainty quantification metrics.md"
-    },
-    {
-      "basename": "Other notes for obsidian",
-      "path": "Reports/Other notes for obsidian.md"
-    },
-    {
-      "basename": "人生七年",
-      "path": "Blog&Book&Paper/Read/Book/人生七年.md"
-    },
-    {
-      "basename": "A robust stochastic model updating method with resampling processing",
-      "path": "ModelUpdating/Stochastic Model Updating/A robust stochastic model updating method with resampling processing.md"
-    },
-    {
-      "basename": "参考文献",
-      "path": "Reports/参考文献.md"
-    },
-    {
-      "basename": "Data Analysis",
-      "path": "Learn/Python/Data Analysis.md"
     }
   ],
   "omittedPaths": [],

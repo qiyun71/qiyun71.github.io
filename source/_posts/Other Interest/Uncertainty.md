@@ -35,14 +35,45 @@ Uncertainty is categorized
 
 >  [A Survey of Uncertainty in Deep Neural Networks](https://arxiv.org/pdf/2107.03342)
 
+Uncertainty factors in DNN:
+- Factor I: Variability in Real World Situations
+- Factor II: Error and Noise in Measurement Systems
+- Factor III: Errors in the Model Structure
+- Factor IV: Errors in the Training Procedure
+- Factor V: Errors Caused by Unknown Data
+
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241215213725.png)
+
+Predictive Uncertainty Model：由于神经网络的预测主要收到模型和数据误差的影响，因此预测不确定性通常被分为 model uncertainty （both aleatory and epistemic） 和 data uncertainty （both aleatory and epistemic），此外还有distributional uncertainty 主要由样本没有被训练data覆盖导致。
+- model uncertainty：caused by shortcomings in the model, either by errors in the training procedure, an insufficient model structure, or lack of knowledge due to unknown samples or a bad coverage of the training data set.
+- data uncertainty：directly stems from the data.
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20250304160404.png)
+
+On the basis of the input data domain，（predictive） Uncertainty Classification：
+- In-domain uncertainty，由于模型设计误差或者问题处理的复杂--> 通过增加训练集/训练过程质量解决
+- Domain-shift uncertainty，由于真实世界情况的固有变化，例如遮挡造成的不确定性可以通过网络学习遮挡样本来解决（认知），但是部分如固有的运动无法解决(随机)
+- Out-of-domain uncertainty，测试集完全与训练集数据不是一个分布，例如在猫狗数据上训练的分类网络让他去分类故障类型
+
+Uncertainty estimation: 与正常在预测中的数据不确定性部分(如分类网络预测的softmax output位每类概率，回归网络的显式标准差$\sigma$预测)不同，这些方法对模型不确定性进行建模，试图将其与数据不确定性分开，**以获取数据不确定性的准确表示**
+- Single Deterministic Methods
+- Bayesian Neural Networks
+- Ensemble Methods
+- Test Time Augmentation
+- Neural Network Uncertainty Quantification Approaches for Real Life Applications
+
+>  [集成学习(Ensemble learning)相关理论 | 珞珈村下山](https://whuxgxj.github.io/article/ensemble-learning-in-classification.html)
+
+Calibration Methods:
+- Regularization methods applied during the training phase
+- Post-processing methods applied after the training process of the DNN
+- Neural network uncertainty estimation methods
+
 
 ## quoFEM
 
 > [Quantified Uncertainty with Optimization for the Finite Element Method (quoFEM) — Quantified Uncertainty with Optimization for the FEM documentation](https://nheri-simcenter.github.io/quoFEM-Documentation/index.html)
 > When learning Bayesian Model Updating & TMCMC, find from [mukeshramancha/transitional-mcmc: This repo contains the code of Transitional Markov chain Monte Carlo algorithm](https://github.com/mukeshramancha/transitional-mcmc)
-
-
 
 
 # Seminar

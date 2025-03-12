@@ -6,8 +6,7 @@
     "obsidian-plugin-toc:create-toc",
     "workspace:export-pdf",
     "open-with-default-app:show",
-    "obsidian-day-planner:clock-in",
-    "obsidian-day-planner:clock-out",
-    "obsidian-day-planner:show-day-planner-today-note"
+    "obsidian-text-format:merge-line",
+    "obsidian-text-format:hyphen"
   ]
 }
