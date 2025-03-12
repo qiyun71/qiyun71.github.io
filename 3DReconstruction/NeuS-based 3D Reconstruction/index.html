@@ -44,7 +44,7 @@
 <meta property="og:image" content="https://jiangwenpl.github.io/FisherRF/static/images/teaser-cropped.gif">
 <meta property="og:image" content="https://jiangwenpl.github.io/FisherRF/static/images/teaser.jpg">
 <meta property="article:published_time" content="2024-06-17T09:11:22.000Z">
-<meta property="article:modified_time" content="2024-12-15T13:54:32.353Z">
+<meta property="article:modified_time" content="2025-03-05T11:03:18.460Z">
 <meta property="article:author" content="Qi Yun">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241010195323.png">
@@ -246,7 +246,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-12-15 21:54:32" itemprop="dateModified" datetime="2024-12-15T21:54:32+08:00">2024-12-15</time>
+                <time title="Modified: 2025-03-05 19:03:18" itemprop="dateModified" datetime="2025-03-05T19:03:18+08:00">2025-03-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -263,7 +263,7 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>7.6k</span>
+              <span>7.8k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -727,6 +727,10 @@
 <tbody>
 <tr>
 <td>2021</td>
+<td>A review of uncertainty quantification in deep learning: Techniques, applications and challenges</td>
+</tr>
+<tr>
+<td>2021</td>
 <td><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2110.12122v1">Quantifying Epistemic Uncertainty in Deep Learning</a></td>
 </tr>
 <tr>
@@ -749,7 +753,10 @@
 <li>环境光照是否可以通过不确定性进行量化</li>
 <li>不同的cuda/显卡环境是否也是不确定性</li>
 </ul>
-<h2 id="Ensembles"><a href="#Ensembles" class="headerlink" title="Ensembles"></a>Ensembles</h2><p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2209.08718">Density-aware NeRF Ensembles: Quantifying Predictive Uncertainty in Neural Radiance Fields</a> 2022</p>
+<h2 id="Ensembles"><a href="#Ensembles" class="headerlink" title="Ensembles"></a>Ensembles</h2><blockquote>
+<p> <a target="_blank" rel="noopener" href="https://whuxgxj.github.io/article/ensemble-learning-in-classification.html">集成学习(Ensemble learning)相关理论 | 珞珈村下山</a></p>
+</blockquote>
+<p>评价指标：NLL，评价像素真实值在高斯分布下的负对数似然，越小越好</p>
 <div class="table-container">
 <table>
 <thead>
@@ -764,12 +771,48 @@
 </thead>
 <tbody>
 <tr>
+<td>2024<br>⭐</td>
+<td>[Sources of Uncertainty in 3D Scene Reconstruction \</td>
+<td>PDF](<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2409.06407">https://arxiv.org/pdf/2409.06407</a>)</td>
+<td>NeRF and 3DGS</td>
+<td>Sources of Uncertainty</td>
+<td>review当前的多种方法(Active-NeRF/GS、MC-Dropout NeRF、Laplace NeRF、Ensemble NeRF/GS)</td>
+<td>分类不确定性(aleatory、epistemic)<br>Ensemble NeRF</td>
+</tr>
+<tr>
+<td>2022</td>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2209.08718">Density-aware NeRF Ensembles: Quantifying Predictive Uncertainty in Neural Radiance Fields</a></td>
+<td>NeRF</td>
+<td>Quantifying Predictive Uncertainty</td>
+<td>Density-aware NeRF Ensembles</td>
+<td>简单地ensemble无法捕捉未见区域的不确定性。本文计算RGB的$\sigma$时除了简单的多ensemble计算外，还添加了密度感知的$\sigma_{\mathrm{epi}}^2(\mathbf{r})=\left(1-\bar{q}(\mathbf{r})\right)^2$，$\bar{q}(\mathbf{r})$是多个ensemble的沿光线累积权重的均值</td>
+</tr>
+<tr>
+<td>⭐</td>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2312.14664">Density Uncertainty Quantification with NeRF-Ensembles: Impact of Data and Scene Constraints</a></td>
+<td>NeRF</td>
+<td>Density Uncertainty Quantification</td>
+<td>Density Ensembles<br>![image.png\</td>
+<td>333](<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20250305104136.png">https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20250305104136.png</a>)</td>
+<td></td>
+</tr>
+<tr>
+<td>2024</td>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2405.02568">[2405.02568] ActiveNeuS: Active 3D Reconstruction using Neural Implicit Surface Uncertainty</a></td>
+<td>3D scene reconstruction</td>
+<td>Active learning主动学习</td>
+<td>![image.png\</td>
+<td>222](<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20250304204610.png">https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20250304204610.png</a>)</td>
+<td>图像渲染或几何不确定性<br>利用不同类型的不确定性可以减少在早期训练阶段因输入稀疏而出现的偏差</td>
+</tr>
+<tr>
 <td>2021</td>
 <td><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2109.02123">Stochastic Neural Radiance Fields: Quantifying Uncertainty in Implicit 3D Representations</a></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>Stochastic Neural Radiance Fields</td>
+<td>Quantifying Uncertainty in Implicit 3D Representations</td>
+<td>![image.png\</td>
+<td>333](<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20250304204422.png">https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20250304204422.png</a>)</td>
+<td>does not guarantee accurate estimations due to the approximation of the probability distribution. MLP网络估计分布参数，而不是具体的值<br></td>
 </tr>
 <tr>
 <td>2024⭐</td>
@@ -781,28 +824,11 @@
 </tr>
 <tr>
 <td>2024</td>
-<td><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2405.02568">[2405.02568] ActiveNeuS: Active 3D Reconstruction using Neural Implicit Surface Uncertainty</a></td>
-<td>3D scene reconstruction</td>
-<td>Active learning主动学习</td>
-<td>Neural Implicit Surface Uncertainty</td>
-<td>图像渲染或几何不确定性<br>利用不同类型的不确定性可以减少在早期训练阶段因输入稀疏而出现的偏差</td>
-</tr>
-<tr>
-<td>2024</td>
 <td><a target="_blank" rel="noopener" href="https://bayesrays.github.io/">Bayes’ Rays</a></td>
 <td>NeRF</td>
 <td>BaysRays</td>
 <td>Uncertainty Quantification</td>
 <td>Bayes, 坐标perturbation</td>
-</tr>
-<tr>
-<td>2024<br>⭐</td>
-<td>[Sources of Uncertainty in 3D Scene Reconstruction \</td>
-<td>PDF](<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2409.06407">https://arxiv.org/pdf/2409.06407</a>)</td>
-<td>NeRF and 3DGS</td>
-<td><br></td>
-<td></td>
-<td></td>
 </tr>
 <tr>
 <td>2024</td>
@@ -822,14 +848,6 @@
 </tr>
 <tr>
 <td>2024</td>
-<td><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2403.18476">[2403.18476] Modeling uncertainty for Gaussian Splatting</a></td>
-<td>Gaussian Splatting</td>
-<td>Modeling uncertainty</td>
-<td>Variational Inference-based approach +  Area Under Sparsification Error (AUSE)</td>
-<td>在<strong>图像渲染质量</strong>和不确定性估计精度方面都优于现有方法</td>
-</tr>
-<tr>
-<td>2024</td>
 <td><a target="_blank" rel="noopener" href="https://sites.google.com/view/nvf-cvpr24/">Neural Visibility Field for Uncertainty-Driven Active Mapping</a></td>
 <td></td>
 <td></td>
@@ -842,6 +860,15 @@
 <td></td>
 <td></td>
 <td></td>
+<td></td>
+</tr>
+<tr>
+<td>2024</td>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2403.18476">[2403.18476] Modeling uncertainty for Gaussian Splatting</a></td>
+<td>Gaussian Splatting</td>
+<td>Modeling uncertainty</td>
+<td>Variational Inference-based approach +  Area Under Sparsification Error (AUSE)</td>
+<td>在<strong>图像渲染质量</strong>和不确定性估计精度方面都优于现有方法</td>
 </tr>
 </tbody>
 </table>
@@ -965,7 +992,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">161</span>
+          <span class="site-state-item-count">164</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -978,7 +1005,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-count">60</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -1026,12 +1053,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">521k</span>
+    <span title="Symbols count total">553k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">31:36</span>
+    <span title="Reading time total">33:29</span>
 </div>
 
         

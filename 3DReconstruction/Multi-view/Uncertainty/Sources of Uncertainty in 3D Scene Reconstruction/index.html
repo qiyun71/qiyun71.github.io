@@ -28,8 +28,9 @@
 <meta property="og:description" content="Title Sources of Uncertainty in 3D Scene Reconstruction     Author Marcus Klasson and Riccardo Mereu and Juho Kannala and Arno Solin   Conf&#x2F;Jour ECCV Workshop on Uncertainty Quantification for Com">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240929204911.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20250304122905.png">
 <meta property="article:published_time" content="2024-10-10T02:29:33.000Z">
-<meta property="article:modified_time" content="2024-11-24T05:56:00.017Z">
+<meta property="article:modified_time" content="2025-03-04T05:01:13.153Z">
 <meta property="article:author" content="Qi Yun">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240929204911.png">
@@ -227,7 +228,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-11-24 13:56:00" itemprop="dateModified" datetime="2024-11-24T13:56:00+08:00">2024-11-24</time>
+                <time title="Modified: 2025-03-04 13:01:13" itemprop="dateModified" datetime="2025-03-04T13:01:13+08:00">2025-03-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -244,13 +245,13 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>1.3k</span>
+              <span>1.8k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span>5 mins.</span>
+              <span>7 mins.</span>
             </span>
 
         </div>
@@ -385,6 +386,90 @@ c_{MC-Dropout} =\frac{1}{M}\sum_{m=1}^{M}\mathbf{c}_{\mathrm{NeRF}}^{(m)}=\frac{
 <p>pointcloud color mean $\hat{\mathbf{c}}$ and variance $\hat{\beta}$ for every input $\mathbf{x}$ along the ray via MC sampling from approximate posterior<br>$\mathbf{c}_{\text{Laplace}}=\sum_{i=1}^{N_s}T_i\alpha_i\hat{\mathbf{c}}_i\quad\text{and}\quad\text{Var}(\mathbf{c}_{\text{Laplace}})=\sum_{i=1}^{N_s}T_i^2\alpha_i^2\hat{\beta}_i.$</p>
 <h2 id="Ensemble-NeRF-GS"><a href="#Ensemble-NeRF-GS" class="headerlink" title="Ensemble NeRF/GS"></a>Ensemble NeRF/GS</h2><p>training M network with different weight initialization to different local minima</p>
 <p>$\mathbf{c}_{\mathrm{ens}}=\frac1M\sum_{m=1}^M\mathbf{c}_{\mathrm{NeRF/GS}}^{(m)}\text{ and Var}(\mathbf{c}_{\mathrm{ens}})\approx\frac1M\sum_{m=1}^M\mathbf{c}_{\mathrm{ens}}^2-\left(\frac1M\sum_{m=1}^M\mathbf{c}_{\mathrm{ens}}\right)^2.$</p>
+<p>同理这里方差公式也写错了，应该是：$\text{Var}(\mathbf{c}_{\mathrm{ens}})\approx\frac1M\sum_{m=1}^M\mathbf{c}_{\mathrm{NeRF/GS}}^2-\left(\frac1M\sum_{m=1}^M\mathbf{c}_{\mathrm{NeRF/GS}}\right)^2.$</p>
+<h1 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h1><p>aleatory：不可减少的随机不确定性<br>epistemic：可减少的认知不确定性</p>
+<p>① a 观察时的随机影响，例如光照变化，或运动模糊<br>② e 缺少场景的信息，如图片数量不足<br>③ a+e 非静态场景，例如行人或移动的物体，导致重建模糊/幻觉<br>④ a+e 相机位姿的敏感性</p>
+<p>Datasets: </p>
+<ul>
+<li>Mip-NeRF 360 and Blender datasets for ① and ②</li>
+<li>Light Field (LF) data set and follow the few-shot setting for ②</li>
+<li>RobustNeRF and On-the-go data sets to evaluate robustness against confounding objects in the training views for ③</li>
+<li>Mip-NeRF 360 data set for ④</li>
+</ul>
+<p>Metrics：</p>
+<ul>
+<li>图片质量：PSNR、SSIM、LPIPS</li>
+<li>不确定性估计：negative log likelihood (NLL）</li>
+<li>Area Under Sparsification Error (AUSE) 不确定性与预测误差之间的相关程度</li>
+<li>Area Under Calibration Error (AUCE) to assess the calibration of each method</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Experiments</th>
+<th>Datasets</th>
+<th>Trainsets</th>
+<th>Testsets</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>①</td>
+<td>Mip-NeRF 360 (1.0~1.6 megapixels)</td>
+<td>Gaussian noise or Gaussian blur</td>
+<td>without noise</td>
+</tr>
+<tr>
+<td>②</td>
+<td>Mip-NeRF 360</td>
+<td>randomly sample 10%, 25%, 50%, and 100%</td>
+<td>regularly subsample 10%</td>
+</tr>
+<tr>
+<td></td>
+<td>Mip-NeRF 360</td>
+<td>一个方向的视图</td>
+<td>另一个方向的视图</td>
+</tr>
+<tr>
+<td></td>
+<td>LF data set</td>
+<td>few-view setting</td>
+<td></td>
+</tr>
+<tr>
+<td>③</td>
+<td>RobustNeRF and On-the-go data set</td>
+<td>非静态物体，导致渲染照片出现漂浮物</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>RobustNeRF</td>
+<td>different clutter proportions</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>On-the-go</td>
+<td>different occlusion levels</td>
+<td></td>
+</tr>
+<tr>
+<td>④</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>① sensitivity under different confounding effects applied to the training images</p>
+<p>② (i) sensitivity to the number of training views;<br>(ii) sensitivity to views that are different from the training views (out-of-distribution, OOD);<br>OOD setting：separate the training and test sets by splitting all input images based on their camera pose positions</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20250304122905.png" alt="image.png|222"></p>
+<p>(iii) sensitivity to few views with limited scene coverage.</p>
+<p>③ the sensitivity of each method to learning from cluttered(凌乱的) training views. （非静态物体，可以是玩具/人）</p>
+<p>④ the sensitivity (uncertainty) aspect of imprecise camera poses in 3D scene reconstruction<br>使用颜色对相机位姿的梯度来量化敏感性 $\partial\mathbf{c}/\partial\mathbf{P}\in\mathbb{R}^{3\times4},$沿着z轴随机移动相机位置作为扰动，扰动足够小使得可以在扰动和非扰动gradient normal maps之间进行像素级的比较</p>
 
     </div>
 
@@ -484,7 +569,7 @@ c_{MC-Dropout} =\frac{1}{M}\sum_{m=1}^{M}\mathbf{c}_{\mathrm{NeRF}}^{(m)}=\frac{
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#AIR"><span class="nav-text">AIR</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Method"><span class="nav-text">Method</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Active-NeRF-GS"><span class="nav-text">Active-NeRF&#x2F;GS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MC-Dropout-NeRF"><span class="nav-text">MC-Dropout NeRF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Laplace-NeRF"><span class="nav-text">Laplace NeRF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ensemble-NeRF-GS"><span class="nav-text">Ensemble NeRF&#x2F;GS</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#AIR"><span class="nav-text">AIR</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Method"><span class="nav-text">Method</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Active-NeRF-GS"><span class="nav-text">Active-NeRF&#x2F;GS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MC-Dropout-NeRF"><span class="nav-text">MC-Dropout NeRF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Laplace-NeRF"><span class="nav-text">Laplace NeRF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ensemble-NeRF-GS"><span class="nav-text">Ensemble NeRF&#x2F;GS</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Experiments"><span class="nav-text">Experiments</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -499,7 +584,7 @@ c_{MC-Dropout} =\frac{1}{M}\sum_{m=1}^{M}\mathbf{c}_{\mathrm{NeRF}}^{(m)}=\frac{
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">161</span>
+          <span class="site-state-item-count">164</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -512,7 +597,7 @@ c_{MC-Dropout} =\frac{1}{M}\sum_{m=1}^{M}\mathbf{c}_{\mathrm{NeRF}}^{(m)}=\frac{
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-count">60</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -560,12 +645,12 @@ c_{MC-Dropout} =\frac{1}{M}\sum_{m=1}^{M}\mathbf{c}_{\mathrm{NeRF}}^{(m)}=\frac{
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">521k</span>
+    <span title="Symbols count total">553k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">31:36</span>
+    <span title="Reading time total">33:29</span>
 </div>
 
         
