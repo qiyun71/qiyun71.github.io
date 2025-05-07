@@ -28,6 +28,7 @@
 <meta property="og:description" content="三维模型的各种形式，初步探索  构造实体几何(eg: CAD) 多边形网格(eg: FEA) 近似网格编码——曲面细分 精确网格编码——样条(NURBS)   箱体建模(eg: 雕刻模型 for 游戏&#x2F;电影)">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241010195323.png">
+<meta property="og:image" content="https://i.pinimg.com/736x/1a/48/a9/1a48a9a92c4d016ebfd3c849c882ea1d.jpg">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241127191609.png">
 <meta property="og:image" content="https://oup.silverchair-cdn.com/oup/backfile/Content_public/Journal/jcde/6/2/10.1016_j.jcde.2018.05.004/4/m_j.jcde.2018.05.004-fx1.jpeg?Expires=1734581105&amp;Signature=i7UokZKU8T5xAmC83tU~dAHWaA-7um29yiNNZeaPzn4KaXilULv7WShmgCXG2Uvb0Kmflw5lCCJIjZXo9nzfyv25KMqbCfwn82lMiE0vhUVaQfIQlIpU7L~RqIPQDZynWOEYHv~8v-G65Pd7vumZOcuwA5UU~ZkZbd6WyOfu8e6gxqEB2GwIe9IyriC~cyVQt1R6bEyV6j8QhyZ3E62IGtWR5F-JcJ8-fj2fiuohaDrLRb1DXknn7fcDwtjVgqiARuth9axhnLS-6rGWuqUWqMjeeilknqbbprToQ~yar-rauzMqa44S-kgc7r0LlkS5x~o14GeGzaEa8~WbJ92EZw__&amp;Key-Pair-Id=APKAIE5G5CRDK6RD3PGA">
 <meta property="og:image" content="https://pbs.twimg.com/media/GdX2bOjaoAM3EUG?format=jpg&amp;name=large">
@@ -38,7 +39,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241212151830.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241212152919.png">
 <meta property="article:published_time" content="2024-11-27T09:26:47.000Z">
-<meta property="article:modified_time" content="2024-12-15T12:05:48.044Z">
+<meta property="article:modified_time" content="2025-04-19T02:58:01.018Z">
 <meta property="article:author" content="Qi Yun">
 <meta property="article:tag" content="3DReconstruction">
 <meta name="twitter:card" content="summary">
@@ -237,7 +238,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-12-15 20:05:48" itemprop="dateModified" datetime="2024-12-15T20:05:48+08:00">2024-12-15</time>
+                <time title="Modified: 2025-04-19 10:58:01" itemprop="dateModified" datetime="2025-04-19T10:58:01+08:00">2025-04-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -300,6 +301,10 @@
 </ul>
 <h1 id="Solid"><a href="#Solid" class="headerlink" title="Solid"></a>Solid</h1><p>目前机械行业使用最多的模型形式</p>
 <h3 id="获取"><a href="#获取" class="headerlink" title="获取"></a>获取</h3><p>人工建模Solidworks、Creo、Rhino…</p>
+<p>参数化建模： OpenSCAD</p>
+<blockquote>
+<p> <a target="_blank" rel="noopener" href="https://openscad.org/community.html">OpenSCAD - Community</a><br> <a target="_blank" rel="noopener" href="https://github.com/jhacksman/OpenSCAD-MCP-Server">jhacksman/OpenSCAD-MCP-Server: Devin’s attempt at creating an OpenSCAD MCP Server that takes a user prompt and generates a preview image and 3d file.</a><br> <a target="_blank" rel="noopener" href="https://github.com/chrisspen/gears">chrisspen/gears: OpenSCAD gear generator.</a><br><img src="https://i.pinimg.com/736x/1a/48/a9/1a48a9a92c4d016ebfd3c849c882ea1d.jpg" alt="1a48a9a92c4d016ebfd3c849c882ea1d.jpg (736×920)|333"></p>
+</blockquote>
 <p>强化学习重建CAD模型：<a target="_blank" rel="noopener" href="https://content.iospress.com/download/integrated-computer-aided-engineering/ica230710?id=integrated-computer-aided-engineering%2Fica230710#page=4.49">3D reconstruction based on hierarchical reinforcement learning with transferabilit</a></p>
 <p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241127191609.png" alt="image.png|666"></p>
 <p>从FE surface mesh model中提取 free-form B-spline surface：<a target="_blank" rel="noopener" href="https://watermark.silverchair.com/j.jcde.2018.05.004.pdf?token=AQECAHi208BE49Ooan9kkhW_Ercy7Dm3ZL_9Cf3qfKAc485ysgAAA18wggNbBgkqhkiG9w0BBwagggNMMIIDSAIBADCCA0EGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMwUnyFsLtbCJdBtjiAgEQgIIDEp9LVU5TBBEEUkKl4THHIULKGCsKlH7EI7pdhfNxxfX3umFNAxqNhmlpCigHdbo7gx0CRKO_NA7al7Fy1LN_nNc8b4OhJseTFj_7XbJ-PyyNl7uZgXUZypV9xgU2ZDrY3B6nxfs8GDsGfL2ralz-H1HGGatgOG6FWENXD6pSOD6-pUp7h7-REU_he6dFVXQ9sQUuNL-vjOESZgOdsJ3l6kFmsLfcKy_jLGbdnnrVkYY-uasnWOSU0btcbstWj6RYa0AXu_gjXf4f54BEKLPh1jMhKlJMaooADaL76r933yPRWJQJ-qGIlqqPNUoGJrJ5GBFNwud2le0y5BRJZQb3xBMFT8DrAKc1sw86ANa1jsuoqdOhSyueemJcVexQTo9ZS8J21YlAyTkQ09nQMpmBMsTwIRQq1nLsx7ZbShkOUj8W-1ocoPGb0H78t_XJcFEuFyJdryIc9skBF2AYGeSfmrromZvXc4Z34X5tVZtdJx29mLhIcrXb7KLdSnYDH0lM8XYt97bI1cceATNUcIFaSWKiIGerFIzCe4uoNrjX2MdaLTX8054um36E5XEWY7y6CvNK7jNjevSbdhJholMYAwuAJs76CuGHiALBg-6l6Qra6dRTC4B3cDalc8aIzMqQ3Sd_qjkJ_Sp315znKRRnJoYPTWLrd2S6y2in5k3KPTxrb7Ijs0-8bsaYbvwRtkWRwx-DW62UwNQHhszOBr0o9iaAxYm2GLTKc-EWp5ZeBfmlTLnEyjzQsjWJl1KwzNxt98o8DEreSjOfogI2mt3kL_QC-GFKYK3SyaWO5NdVcyTDi7dFbGgi1ptl8TVyBKEuPHLuSAEdUo4OK6CLCh8TZido1zMpbp3vZGUquDR2VTNJIRS2kzd9kdf5jKEnZyaLf9qCmEXNCEDn_qmWvtPwPMMfMWfFkVrv9bPsFcnKDVrhdgLA-NqIxbtF3iz03j0MZTRlvxnl1Aeh6Yl1s3jjAM8YJO-A_hAV6M8x0pnalcSnQHbfw5KuxR3J_fTdrRfDBKJ8hQc-ZZZ8DnNzQJAHq6IiZA">Surface reconstruction from FE mesh model</a></p>
@@ -330,6 +335,8 @@
 <ul>
 <li><a target="_blank" rel="noopener" href="https://buaacyw.github.io/mesh-anything/">MeshAnything</a></li>
 <li><a target="_blank" rel="noopener" href="https://buaacyw.github.io/meshanything-v2/">MeshAnything V2</a></li>
+<li><a target="_blank" rel="noopener" href="https://threedle.github.io/MeshUp/">MeshUP</a> </li>
+<li><a target="_blank" rel="noopener" href="https://zhaorw02.github.io/DeepMesh/">DeepMesh</a></li>
 </ul>
 <p><img src="https://buaacyw.github.io/meshanything-v2/teaser.png" alt="teaser.png (6507×6449)|666"></p>
 <h3 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h3><p>计算3D surface mesh的体积<br><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/1406029/how-to-calculate-the-volume-of-a-3d-mesh-object-the-surface-of-which-is-made-up">math - How to calculate the volume of a 3D mesh object the surface of which is made up triangles - Stack Overflow</a> | <a target="_blank" rel="noopener" href="http://chenlab.ece.cornell.edu/Publication/Cha/icip01_Cha.pdf">chenlab.ece.cornell.edu/Publication/Cha/icip01_Cha.pdf</a></p>
@@ -596,12 +603,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">533k</span>
+    <span title="Symbols count total">529k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">32:18</span>
+    <span title="Reading time total">32:05</span>
 </div>
 
         
