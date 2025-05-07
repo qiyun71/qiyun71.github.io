@@ -517,6 +517,14 @@ for scene in dtu_scenes:
 
 Given Mesh!!! Nice Author!!!
 
+```
+# DTU scan65 MLP
+CUDA_VISIBLE_DEVICES=0 python -m torch.distributed.launch --nproc_per_node 1 --nnodes=1 --node_rank=0 training/exp_runner.py --conf confs/dtu_mlp_3views.conf  --scan_id 65 --local_rank 0
+
+CUDA_VISIBLE_DEVICES=0 python -m torch.distributed.launch --nproc_per_node 1 --nnodes=1 --node_rank=0 training/exp_runner.py --conf confs/dtu_grids_fullres_allviews.conf  --scan_id 65 --local_rank 0
+```
+
+
 # NeuS2 (wsl)
 
 - [x] Given weight!!! Test --> no background (with mask)
@@ -707,7 +715,14 @@ np.savez("xxx.npz", camera_poses=camera_poses)
 
 # Mine
 
+Thanks to:
 
+> [bennyguo/instant-nsr-pl: Neural Surface reconstruction based on Instant-NGP. Efficient and customizable boilerplate for your research projects. Train NeuS in 10min!](https://github.com/bennyguo/instant-nsr-pl)
+> [autonomousvision/monosdf: \[NeurIPS'22\] MonoSDF: Exploring Monocular Geometric Cues for Neural Implicit Surface Reconstruction](https://github.com/autonomousvision/monosdf)
+> [19reborn/NeuS2: \[ICCV 2023\] Official code for NeuS2](https://github.com/19reborn/NeuS2)
+> [alisiahkoohi/Langevin-dynamics: Sampling with gradient-based Markov Chain Monte Carlo approaches](https://github.com/alisiahkoohi/Langevin-dynamics)
+> [ubc-vision/nf-soft-mining: (CVPR 2024) Accelerating Neural Field Training via Soft Mining](https://github.com/ubc-vision/nf-soft-mining)
+> [AaltoML/uncertainty-nerf-gs: Code release for the paper "Sources of Uncertainty in 3D Scene Reconstruction"](https://github.com/AaltoML/uncertainty-nerf-gs)
 
 ## Accuracy
 
@@ -751,7 +766,6 @@ python run.py --conf confs/neus-dtu.yaml --train dataset.root_dir="scene_dir" da
 为此，编写了可以根据GT相机位姿生成点云数据的代码，`generate_colmap_mesh.py`：
 针对DTU等提供GT相机位姿的数据集，可以在获得
 
-
 ### Comparison
 
 对比不同的方法(SDF+VolumeRendering+NGP Grid)：
@@ -774,6 +788,7 @@ python run.py --conf confs/neus-dtu.yaml --train dataset.root_dir="scene_dir" da
 - [noahzn/Lite-Mono: \[CVPR2023\] Lite-Mono: A Lightweight CNN and Transformer Architecture for Self-Supervised Monocular Depth Estimation](https://github.com/noahzn/Lite-Mono)
 - [shariqfarooq123/AdaBins: Official implementation of Adabins: Depth Estimation using adaptive bins](https://github.com/shariqfarooq123/AdaBins)
 - [SysCV/P3Depth](https://github.com/SysCV/P3Depth)
+- [GeometryCrafter](https://geometrycrafter.github.io/) 
 
 不同法向量先验：
 - [Stable-X/StableNormal: \[SIGGRAPH Asia 2024 (Journal Track)\] StableNormal: Reducing Diffusion Variance for Stable and Sharp Normal](https://github.com/Stable-X/StableNormal)
@@ -781,7 +796,6 @@ python run.py --conf confs/neus-dtu.yaml --train dataset.root_dir="scene_dir" da
 - [EPFL-VILAB/omnidata: A Scalable Pipeline for Making Steerable Multi-Task Mid-Level Vision Datasets from 3D Scans \[ICCV 2021\]](https://github.com/EPFL-VILAB/omnidata) 图片尺寸限制
 - [baegwangbin/DSINE: \[CVPR 2024 Oral\] Rethinking Inductive Biases for Surface Normal Estimation](https://github.com/baegwangbin/DSINE)
 - [YvanYin/Metric3D: The repo for "Metric3D: Towards Zero-shot Metric 3D Prediction from A Single Image" and "Metric3Dv2: A Versatile Monocular Geometric Foundation Model..."](https://github.com/yvanyin/metric3d)
-
 
 ## Efficiency
 
@@ -793,19 +807,27 @@ python run.py --conf confs/neus-dtu_geo.yaml --train dataset.root_dir="scene_dir
 ```
 
 single image training strategy：1000 epoch x 49/64 x 20 step lmc
-- [ ] importance sampling 效果不明显
-- [x] no-importance (just lmc)
+- [x] no-importance (just lmc) {importance sampling 效果不明显}
 - [x] uniform
 
 all images training strategy：20000 x 60 epochs x 1 batch x 1 step lmc
 
-
 ## Uncertainty
 
+view metrics
 
+```cmd
+## different gaussian noise / blur
+subl G:\NeRF-Mine\inputs\DTU_geo\scan40\uncertainty\outputs\save_image_weight1\21\metrics.txt G:\NeRF-Mine\inputs\DTU_geo\scan40_noise0\uncertainty\outputs\save_image_weight1\21\metrics.txt G:\NeRF-Mine\inputs\DTU_geo\scan40_noise1\uncertainty\outputs\save_image_weight1\21\metrics.txt G:\NeRF-Mine\inputs\DTU_geo\scan40_blur0\uncertainty\outputs\save_image_weight1\21\metrics.txt G:\NeRF-Mine\inputs\DTU_geo\scan40_blur1\uncertainty\outputs\save_image_weight1\21\metrics.txt
 
+## different numbers of images
+subl G:\NeRF-Mine\inputs\DTU_geo\scan110\uncertainty\outputs\save_image_weight1\22\metrics.txt G:\NeRF-Mine\inputs\DTU_geo\scan110_s1\uncertainty\outputs\save_image_weight1\22\metrics.txt G:\NeRF-Mine\inputs\DTU_geo\scan110_s4\uncertainty\outputs\save_image_weight1\22\metrics.txt G:\NeRF-Mine\inputs\DTU_geo\scan110_s7\uncertainty\outputs\save_image_weight1\22\metrics.txt
 
-## Code testing
+## different numbers of sticker and different camera pose noise
+subl G:\NeRF-Mine\inputs\DTU_geo\scan83\uncertainty\outputs\save_image_weight1\15\metrics.txt G:\NeRF-Mine\inputs\DTU_geo\scan83_d5l8\uncertainty\outputs\save_image_weight1\15\metrics.txt G:\NeRF-Mine\inputs\DTU_geo\scan83_dl8\uncertainty\outputs\save_image_weight1\15\metrics.txt G:\NeRF-Mine\inputs\DTU_geo\scan83_pn0\uncertainty\outputs\save_image_weight1\15\metrics.txt G:\NeRF-Mine\inputs\DTU_geo\scan83_pn1\uncertainty\outputs\save_image_weight1\15\metrics.txt G:\NeRF-Mine\inputs\DTU_geo\scan83_d5\uncertainty\outputs\save_image_weight1\15\metrics.txt G:\NeRF-Mine\inputs\DTU_geo\scan83_d\uncertainty\outputs\save_image_weight1\15\metrics.txt
+```
+
+## Other Code testing
 
 ```bash
 # 测试将背景的深度也进行归一化 NeusModel

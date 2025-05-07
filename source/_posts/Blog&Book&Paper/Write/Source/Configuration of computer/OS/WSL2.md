@@ -185,3 +185,7 @@ swap=8GB
 ## 系统指令
 
 查看 Ubuntu 版本`lsb_release -a`
+
+## GUI
+
+WSL GUI [microsoft/wslg: Enabling the Windows Subsystem for Linux to include support for Wayland and X server related scenarios (github.com)](https://github.com/microsoft/wslg)

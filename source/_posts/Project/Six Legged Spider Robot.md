@@ -44,3 +44,9 @@ Height: 2.1 m
 Pilot: シンエイ・ノウゼン／シン
 
 ![0e6d4-img_mecha_01.jpg (670×670)|555](https://srw.wingzero.tw/assets/robot/0e6d4-img_mecha_01.jpg)
+
+
+
+# Other
+
+> [Building a (T1D) Smartwatch from Scratch](https://andrewchilds.com/posts/building-a-t1d-smartwatch-from-scratch) 手表

@@ -40,6 +40,7 @@ skip_render:
   - '_posts/Source/**'
   - '_posts/ModelUpdating/**'
   - '_posts/BMO/**'
+  - '_posts/Excalidraw/**'
 
 
 # Writing

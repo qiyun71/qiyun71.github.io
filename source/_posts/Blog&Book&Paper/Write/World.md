@@ -66,6 +66,12 @@ date created: 2024-10-05T16:51:15.000Z
 
 ![image.png|555](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240815141212.png)
 
+
+[(13 封私信 / 20 条消息) 为什么进化选择用视觉感受电磁波，用听觉感受机械波呢？ - 知乎](https://www.zhihu.com/question/27711631/answer/38068738)
+
+- 视觉：电磁波--能量小--波长变化范围小
+- 听觉：机械波--能量大--波长变化范围大
+
 ## 科学
 
 ### Technology
@@ -91,6 +97,14 @@ date created: 2024-10-05T16:51:15.000Z
 
 ![image.png|333](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241014154144.png)
 
+
+> [李佳生的个人博客](http://47.115.32.177/article/detail/?id=16) **耳机ANC主动降噪算法简介**
+
+![47.115.32.177/media/upimg/image_20221220113018_399.png](http://47.115.32.177/media/upimg/image_20221220113018_399.png)
+
+>  [\[中英字幕\] 声音也要“光线追踪” - 射线追踪音频技术简介_哔哩哔哩bilibili_演示](https://www.bilibili.com/video/BV1vBRvYKE1F/?vd_source=1dba7493016a36a32b27a14ed2891088)
+
+使用声音来重建物体??
 
 ### Music
 

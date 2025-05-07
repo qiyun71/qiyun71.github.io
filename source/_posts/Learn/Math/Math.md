@@ -305,6 +305,20 @@ $\left\{\begin{array}{c}M_n=\frac{X_1+X_2+\cdots+X_n}n\\\hat{S}_n^2=\frac{\sum_{
 
 [两个随机变量的函数的分布 - 知乎](https://zhuanlan.zhihu.com/p/340502318)
 
+### 置信区间
+
+>  [置信区间全攻略 - 知乎](https://zhuanlan.zhihu.com/p/653263495)
+
+正态分布置信区间：
+$P(\overline{X}-Z^*\frac{\sigma}{\sqrt{n}}\leq\mu\leq\overline{X}+Z^*\frac{\sigma}{\sqrt{n}})=1-\alpha$
+- $n$为样本数量
+- $Z^{*}$为z-score，被定义为一种标准分数，当我们确定我们的置信水平时，可以通过查表的方式获取
+- $\alpha$为置信水平
+
+如果使用 $p < 0.05$ 的 $\alpha$ 值来表示统计显著性，那么置信水平就是 1 − 0.05 = 0.95，即置信度$1-\alpha$为95%
+- 区间估计的置信度越高，置信区间越宽，估计精度越低。
+- **样本数越多，置信区间也就越窄，其实也符合常识，即数据量越多，参数估计的值就越接近于真值。**
+
 ## Bayes
 
 ![GZsfHmbaAAE1ZFD (1264×1128)|555](https://pbs.twimg.com/media/GZsfHmbaAAE1ZFD?format=jpg&name=large)

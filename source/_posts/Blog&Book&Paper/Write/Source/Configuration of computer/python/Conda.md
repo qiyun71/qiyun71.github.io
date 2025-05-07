@@ -1,6 +1,18 @@
+```
+conda create -n name python=3.xx
+conda remove -n name --all
+conda rename -n name new_name
+
+conda activate name
+conda deactivate name
+```
+
 # 本地conda环境(主机win11)
 
 ## 三维重建
+
+Diffusion-TS: 时序信号生成 https://github.com/Y-debug-sys/Diffusion-TS  
+SuperRes：
 sccs: SC-CS 变形高斯，环境torch.func有问题
 sugar: SuGaR | CUDA 11.8
 gs: gaussian-splatting | python 3.7.13, torch 1.12.1, CUDA 11.6

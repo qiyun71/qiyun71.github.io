@@ -115,7 +115,6 @@ categories: ModelUpdating
 - CNN：strong anti-noise ability 由于他的卷积层，可以看作过滤器
 
 ## [A feature map of frequency response functions based model updating method using the Bayesian convolutional neural network - ScienceDirect](https://www.sciencedirect.com/science/article/pii/S0888327023007264?ref=pdf_download&fr=RR-2&rr=87df480b9ca904d1#s0060)
-
 - 多测量点的FRFs可以反映大多数结构信息，如natural frequency, mode shape, damping。训练集由具有不同噪声水平的FRF训练样本组成
 - 使用BCNN可以为CNN引入权重的概率分布，使得CNN可以在预测中添加适度的不确定性和正则化，能够在小数据集上避免overfitting
 - *另外，需要指出的是，频响函数的特征图中没有考虑测量点的空间信息，原则上测量点的空间位置也包含重要的实际意义。空间位置信息将来可以扩展到FRF的特征图。* **没有在输入中融合空间的位置信息**

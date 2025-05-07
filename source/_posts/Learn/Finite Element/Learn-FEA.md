@@ -132,3 +132,6 @@ PINN目的就是求解$u$，用神经网络来逼近这个解$u_\theta(z)\approx
 > [An introduction to the Virtual Element Method](https://maths.dur.ac.uk/lms/101/talks/0493daveiga.pdf)
 
 
+[Vemhub](https://www.vemhub.com/) 代码开源了
+
+虚单元法能否计算固体动力学问题，例如Model shape or FRF ...

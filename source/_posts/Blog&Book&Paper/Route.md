@@ -1,8 +1,25 @@
-Life:
+项目：
+- Gennaro Scarselli 
+  - 复合材料实验 [Glass fibre reinforced thermoplastic composites.excalidraw](Write/Write%20Paper/Composites%20Simulation/Glass%20fibre%20reinforced%20thermoplastic%20composites.excalidraw.md)
+  - 多源不确定性下制动盘连接螺栓故障机理分析及诊断研究
+- 折叠翼模态实验
 
+论文：
+- RCS-IMC修改
+- 随机模型修正综述，论文调研
+- 自监督，时序信号
+
+会议：
+- [第二届空间科学与技术国际学术研讨会](http://b3.svipmeeting.com/web/zh)
+
+---
+
+Life:
 (数字孪生)通过有限元/数学建模，在计算机上(虚拟世界中)模拟真实世界的一些规律/现象，尽可能的与实际物体（实验测量）有相同的物理属性
 - 有限元分析将**构造实体几何CAD模型**通过网格划分变为**多边形网格Mesh**([3D Model](../3DReconstruction/3D%20Model.md))，然后进行求解，得到FRFs/模态频率(动力学)。
 - 对实际物体工作过程中的测量依靠各种传感器完成，eg:[图像传感器](https://zh.wikipedia.org/wiki/%E5%9B%BE%E5%83%8F%E4%BC%A0%E6%84%9F%E5%99%A8)-->照片，[压电式传感器](https://baike.baidu.com/item/%E5%8E%8B%E7%94%B5%E5%BC%8F%E4%BC%A0%E6%84%9F%E5%99%A8/8835700)-->振动(d/v/a)...
+
+**专业技能**
 
 仿真 [CAX](../Other%20Interest/CAX.md)
 - 原理 [Learn-FEA](../Learn/Finite%20Element/Learn-FEA.md)
@@ -11,9 +28,10 @@ Life:
 - 软件操作
   - 网格划分 Hypermesh
   - [Pa&Nastran](../Learn/Finite%20Element/Pa&Nastran.md)
-  - [Abaqus](../Learn/Finite%20Element/Abaqus.md)
+  - [Abaqus](../Learn/Finite%20Element/Abaqus.md) ⭐
   - 结合编程语言二次开发
     - [PyNastran](../Project/PyNastran.md)
+    - 
 
 实验 [Vibration Measurement](../Other%20Interest/Vibration%20Measurement.md)
 - Modal Testing (LMS)
@@ -23,27 +41,30 @@ Life:
 
 ---
 
-***Must***： [Math](../Learn/Math/Math.md) 
+**基础知识**
+
+***Must***： [Math](../Learn/Math/Math.md) ⭐
 Other Learn：
 - [ ] [Book Lists](Read/Book%20Lists.md)
   - [ ] [How to Read a Paper](Read/Book/How%20to%20Read%20a%20Paper.md)
   - [ ] [Writing Science](Read/Book/Writing%20Science.md)
-- [ ] 语言学习
+- [ ] 语言学习/写作训练
   - [ ] [Japanse](Read/Book/Japanse.md)
   - [ ] [Everyone-can-use-English](Read/Book/Everyone-can-use-English.md)
-  - [ ] [Write tips](Write/Write%20tips.md) paper写作工具/语言
+  - [ ] [Write tips](Write/Write%20tips.md) paper写作工具/语言 ⭐
 
 ---
 
-研究兴趣/方向 (Master, Phd or Life) [Interest.excalidraw](Write/Interest.excalidraw.md)
+**专业知识**
 
+[Interest.excalidraw](Write/Interest.excalidraw.md)
 Research Interest：
-- [Uncertainty](../Other%20Interest/Uncertainty.md)
+- [Uncertainty](../Other%20Interest/Uncertainty.md) 
   - [(BSF)Uncertainty](Read/Interest%20Papers/(BSF)Uncertainty.md)
-- [Reliability](../Other%20Interest/Reliability.md)
+- [Reliability](../Other%20Interest/Reliability.md) ⭐⭐⭐
   - [核领域可靠性](Read/Interest%20Papers/核领域可靠性.md)
 - [PHM](../Other%20Interest/PHM.md)
-- Model Updating
+- Model Updating ⭐
   - [ModelUpdating.excalidraw](Write/Write%20Paper/Model%20Updating/ModelUpdating.excalidraw.md) 思考 --> Write Paper:
     - [Stochastic Model Calibration with Image Encoding——Converting High-Dimensional Frequency-Domain Responses into RGB Images for Neural Network Inversion](Write/Write%20Paper/Model%20Updating/Stochastic%20Model%20Calibration%20with%20Image%20Encoding——Converting%20High-Dimensional%20Frequency-Domain%20Responses%20into%20RGB%20Images%20for%20Neural%20Network%20Inversion.md)
     - [A fast interval model updating method based on MLP neural network](Write/Write%20Paper/Model%20Updating/A%20fast%20interval%20model%20updating%20method%20based%20on%20MLP%20neural%20network.md)
@@ -51,7 +72,6 @@ Research Interest：
   - [Basics about ModelUpdating](../ModelUpdating/Basics%20about%20ModelUpdating.md)
   - [Paper about ModelUpdating](../ModelUpdating/Paper%20about%20ModelUpdating.md)
   - [Case about ModelUpdating](../ModelUpdating/Case%20about%20ModelUpdating.md)
-    - [折叠翼](Read/Interest%20Papers/折叠翼.md)
 - 3D Reconstruction
   - [Basics about 3D Reconstruction](../3DReconstruction/Basics%20about%203D%20Reconstruction.md)
   - [Paper About 3D Reconstruction](../3DReconstruction/Paper%20About%203D%20Reconstruction.md)
@@ -66,8 +86,6 @@ Research Interest：
 - Others
   - [Time Series Data](../Other%20Interest/Time%20Series%20Data.md) 时间序列数据 --> 回归/分类
   - [Small Sample Learning](../Other%20Interest/Small%20Sample%20Learning.md) 小子样问题
-
----
 
 编程语言
 - [Learn-Python](../Learn/Python/Learn-Python.md)
@@ -85,7 +103,6 @@ Research Interest：
   - [Loss Functions](../Learn/Neural%20Network/Loss%20Functions.md)
   - [PyTorch](../Learn/Neural%20Network/PyTorch.md)
 
-
 ---
 
 兴趣：
@@ -94,7 +111,7 @@ Research Interest：
   - [Computer](Write/Source/Computer.md)
   - [Six Legged Spider Robot](../Project/Six%20Legged%20Spider%20Robot.md)
 - 软件 
-  - [Tools](Write/Source/Tools.md) 
+  - [Tools](Write/Source/Tools.md)  ⭐
   - [IPV6](Write/Source/IPV6.md) 
   - [Unpack Snowbreak File](../Project/Unpack%20Snowbreak%20File.md)
   - [Visualize Interval uncertainty quantification metrics](../Project/Visualize%20Interval%20uncertainty%20quantification%20metrics.md)
@@ -104,9 +121,7 @@ Research Interest：
 人生 [Life](Write/Life.md)
 世界 [World](Write/World.md) 
 - [Travel to Japan 2025](Write/Blog/Travel%20to%20Japan%202025.md)
-价值 [Blockchain](Read/Blockchain.md)
-
-
+价值 [Blockchain](Read/Book/Blockchain.md)
 
 ---
 
@@ -121,3 +136,16 @@ Research Interest：
 4、制定企业内部的可靠性工程规范及流程、行业可靠性标准。 
 5、与研发、生产、质量、售后团队协作，推动可靠性目标落地。 
 任职要求： 1、硕士及以上学历，主修可靠性工程、机械工程、电子工程、材料科学等相关专业。 2、精通可靠性分析方法（FMEA、FTA、FRACAS）。 3、掌握数据分析工具（Reliasoft、Minitab、JMP）及相关可靠性测试设备。 4、5年以上可靠性工程或质量工程相关经验，复杂系统可靠性经验优先，博士可放宽。 5、沟通协调能力强，能推动跨部门合作。"
+
+---
+
+Follow 大佬:
+
+>  [关于 | 西山晴雪的知识笔记](https://xishansnow.github.io/about/)
+
+濮国梁，北京大学。计算机科学与技术专业学士，地图制图学与地理信息工程专业硕士，地球探测与信息技术专业工学博士。2005 年至 2012 年就职于北京大学地球与空间科学学院遥感与地理信息系统研究所；2012 年至今，就职于北京大学工学院航空航天工程系。
+
+主要兴趣方向：
+- 空间信息中的不确定性研究 （Uncertainty In Spatial Information）
+- 高斯过程及其空间统计应用 （Gaussian Process and its application in Spatial Statics)
+- 深度神经网络的不确定性量化 （Uncertainty Quantization of Deep Neural Network）

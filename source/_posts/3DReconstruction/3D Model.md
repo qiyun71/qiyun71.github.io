@@ -37,6 +37,13 @@ categories: 3DReconstruction
 
 人工建模Solidworks、Creo、Rhino...
 
+参数化建模： OpenSCAD
+
+>  [OpenSCAD - Community](https://openscad.org/community.html) 
+>  [jhacksman/OpenSCAD-MCP-Server: Devin's attempt at creating an OpenSCAD MCP Server that takes a user prompt and generates a preview image and 3d file.](https://github.com/jhacksman/OpenSCAD-MCP-Server)
+>  [chrisspen/gears: OpenSCAD gear generator.](https://github.com/chrisspen/gears)
+![1a48a9a92c4d016ebfd3c849c882ea1d.jpg (736×920)|333](https://i.pinimg.com/736x/1a/48/a9/1a48a9a92c4d016ebfd3c849c882ea1d.jpg)
+
 强化学习重建CAD模型：[3D reconstruction based on hierarchical reinforcement learning with transferabilit](https://content.iospress.com/download/integrated-computer-aided-engineering/ica230710?id=integrated-computer-aided-engineering%2Fica230710#page=4.49)
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241127191609.png)
@@ -78,6 +85,8 @@ NumGrad-Pull: Numerical Gradient Guided Tri-plane Representation for **Surface R
 从低质量的dense mesh/点云中生成高质量人造Mesh(网格规律，缺陷少)：
 - [MeshAnything](https://buaacyw.github.io/mesh-anything/)
 - [MeshAnything V2](https://buaacyw.github.io/meshanything-v2/)
+- [MeshUP](https://threedle.github.io/MeshUp/) 
+- [DeepMesh](https://zhaorw02.github.io/DeepMesh/)
 
 ![teaser.png (6507×6449)|666](https://buaacyw.github.io/meshanything-v2/teaser.png)
 

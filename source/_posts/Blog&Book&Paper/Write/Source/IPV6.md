@@ -232,6 +232,8 @@ ssh -p port root@ip_address
 
 # 客户端v2ray
 
+[V2rayN](Configuration%20of%20computer/Software/V2rayN.md)
+
 ## Windows
 
 > [2dust/v2rayN: A GUI client for Windows, support Xray core and v2fly core and others](https://github.com/2dust/v2rayN)

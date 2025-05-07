@@ -1,96 +1,152 @@
 {
   "recentFiles": [
     {
-      "basename": "NeuS-based 3D Reconstruction",
-      "path": "3DReconstruction/NeuS-based 3D Reconstruction.md"
-    },
-    {
-      "basename": "模态试验悬挂方式",
-      "path": "Blog&Book&Paper/Read/Book/模态实验/模态试验悬挂方式.md"
-    },
-    {
-      "basename": "Vibration Measurement",
-      "path": "Other Interest/Vibration Measurement.md"
-    },
-    {
-      "basename": "Code Flow.excalidraw",
-      "path": "Blog&Book&Paper/Write/Write Paper/3D Reconstruction/Code Flow.excalidraw.md"
-    },
-    {
-      "basename": "Master Paper",
-      "path": "Blog&Book&Paper/Write/Write Paper/3D Reconstruction/Master Paper.md"
+      "basename": "Travel to Japan 2025",
+      "path": "Blog&Book&Paper/Write/Blog/Travel to Japan 2025.md"
     },
     {
       "basename": "Route",
       "path": "Blog&Book&Paper/Route.md"
     },
     {
-      "basename": "Time Series Data",
-      "path": "Other Interest/Time Series Data.md"
+      "basename": "Journal&Conference",
+      "path": "Blog&Book&Paper/Write/Journal&Conference.md"
     },
     {
-      "basename": "Uncertainty",
-      "path": "Other Interest/Uncertainty.md"
-    },
-    {
-      "basename": "Write tips",
-      "path": "Blog&Book&Paper/Write/Write tips.md"
-    },
-    {
-      "basename": "Code of Multi-view 3D Reconstruction based on SDF and volume rendering",
-      "path": "3DReconstruction/Code of Multi-view 3D Reconstruction based on SDF and volume rendering.md"
-    },
-    {
-      "basename": "Sources of Uncertainty in 3D Scene Reconstruction",
-      "path": "3DReconstruction/Multi-view/Uncertainty/Sources of Uncertainty in 3D Scene Reconstruction.md"
-    },
-    {
-      "basename": "Loss Functions",
-      "path": "Learn/Neural Network/Loss Functions.md"
-    },
-    {
-      "basename": "Basics about 3D Reconstruction",
-      "path": "3DReconstruction/Basics about 3D Reconstruction.md"
-    },
-    {
-      "basename": "Towards the NASA UQ Challenge 2019——Systematically forward and inverse approaches for uncertainty propagation and quantification",
-      "path": "ModelUpdating/Review/Towards the NASA UQ Challenge 2019——Systematically forward and inverse approaches for uncertainty propagation and quantification.md"
-    },
-    {
-      "basename": "WSL2",
-      "path": "Blog&Book&Paper/Write/Source/Configuration of computer/OS/WSL2.md"
-    },
-    {
-      "basename": "Reliability",
-      "path": "Other Interest/Reliability.md"
-    },
-    {
-      "basename": "Tools",
-      "path": "Blog&Book&Paper/Write/Source/Tools.md"
-    },
-    {
-      "basename": "CAX",
-      "path": "Other Interest/CAX.md"
-    },
-    {
-      "basename": "Everyone-can-use-English",
-      "path": "Blog&Book&Paper/Read/Book/Everyone-can-use-English.md"
-    },
-    {
-      "basename": "Math",
-      "path": "Learn/Math/Math.md"
+      "basename": "Interest.excalidraw",
+      "path": "Blog&Book&Paper/Write/Interest.excalidraw.md"
     },
     {
       "basename": "Life",
       "path": "Blog&Book&Paper/Write/Life.md"
     },
     {
-      "basename": "Stochastic Model Updating with Uncertainty Quantification_An Overview and Tutorial",
-      "path": "ModelUpdating/Review/Stochastic Model Updating with Uncertainty Quantification_An Overview and Tutorial.md"
+      "basename": "World",
+      "path": "Blog&Book&Paper/Write/World.md"
+    },
+    {
+      "basename": "Write tips",
+      "path": "Blog&Book&Paper/Write/Write tips.md"
+    },
+    {
+      "basename": "Uncertainty",
+      "path": "Other Interest/Uncertainty.md"
+    },
+    {
+      "basename": "Reliability",
+      "path": "Other Interest/Reliability.md"
+    },
+    {
+      "basename": "Self-superviside Model Updating through inverse calibration model",
+      "path": "Blog&Book&Paper/Write/Write Paper/Model Updating/Self-superviside Model Updating through inverse calibration model.md"
+    },
+    {
+      "basename": "Learn-FEA",
+      "path": "Learn/Finite Element/Learn-FEA.md"
+    },
+    {
+      "basename": "CAX",
+      "path": "Other Interest/CAX.md"
+    },
+    {
+      "basename": "Math",
+      "path": "Learn/Math/Math.md"
     },
     {
       "basename": "Case about ModelUpdating",
       "path": "ModelUpdating/Case about ModelUpdating.md"
+    },
+    {
+      "basename": "Blockchain",
+      "path": "Blog&Book&Paper/Read/Book/Blockchain.md"
+    },
+    {
+      "basename": "(BSF)Uncertainty",
+      "path": "Blog&Book&Paper/Read/Interest Papers/(BSF)Uncertainty.md"
+    },
+    {
+      "basename": "Glass fibre reinforced thermoplastic composites.excalidraw",
+      "path": "Blog&Book&Paper/Write/Write Paper/Composites Simulation/Glass fibre reinforced thermoplastic composites.excalidraw.md"
+    },
+    {
+      "basename": "Stochastic Model Updating with Uncertainty Quantification_An Overview and Tutorial",
+      "path": "ModelUpdating/Review/Stochastic Model Updating with Uncertainty Quantification_An Overview and Tutorial.md"
+    },
+    {
+      "basename": "Set Grid",
+      "path": "Excalidraw/Scripts/Downloaded/Set Grid.svg"
+    },
+    {
+      "basename": "Set Grid",
+      "path": "Excalidraw/Scripts/Downloaded/Set Grid.md"
+    },
+    {
+      "basename": "Basics about ModelUpdating",
+      "path": "ModelUpdating/Basics about ModelUpdating.md"
+    },
+    {
+      "basename": "参考文献",
+      "path": "Reports/参考文献.md"
+    },
+    {
+      "basename": "Book Lists",
+      "path": "Blog&Book&Paper/Read/Book Lists.md"
+    },
+    {
+      "basename": "Tools",
+      "path": "Blog&Book&Paper/Write/Source/Tools.md"
+    },
+    {
+      "basename": "Review.excalidraw",
+      "path": "Blog&Book&Paper/Write/Write Paper/Model Updating/Review.excalidraw.md"
+    },
+    {
+      "basename": "Writing Science",
+      "path": "Blog&Book&Paper/Read/Book/Writing Science.md"
+    },
+    {
+      "basename": "Conda",
+      "path": "Blog&Book&Paper/Write/Source/Configuration of computer/python/Conda.md"
+    },
+    {
+      "basename": "GPT prompt",
+      "path": "Blog&Book&Paper/Write/Source/Configuration of computer/Software/GPT prompt.md"
+    },
+    {
+      "basename": "IPV6",
+      "path": "Blog&Book&Paper/Write/Source/IPV6.md"
+    },
+    {
+      "basename": "V2rayN",
+      "path": "Blog&Book&Paper/Write/Source/Configuration of computer/Software/V2rayN.md"
+    },
+    {
+      "basename": "Computer",
+      "path": "Blog&Book&Paper/Write/Source/Computer.md"
+    },
+    {
+      "basename": "Vim",
+      "path": "Blog&Book&Paper/Write/Source/Configuration of computer/Software/Vim.md"
+    },
+    {
+      "basename": "Windows",
+      "path": "Blog&Book&Paper/Write/Source/Configuration of computer/OS/Windows.md"
+    },
+    {
+      "basename": "WSL2",
+      "path": "Blog&Book&Paper/Write/Source/Configuration of computer/OS/WSL2.md"
+    },
+    {
+      "basename": "Time Series Data",
+      "path": "Other Interest/Time Series Data.md"
+    },
+    {
+      "basename": "Japanse",
+      "path": "Blog&Book&Paper/Read/Book/Japanse.md"
+    },
+    {
+      "basename": "Pasted Image 20250428142127_407",
+      "path": "Blog&Book&Paper/Write/Write Paper/Composites Simulation/file/Pasted Image 20250428142127_407.png"
     },
     {
       "basename": "PHM",
@@ -101,104 +157,44 @@
       "path": "ModelUpdating/Paper about ModelUpdating.md"
     },
     {
-      "basename": "IPV6",
-      "path": "Blog&Book&Paper/Write/Source/IPV6.md"
+      "basename": "3D Model",
+      "path": "3DReconstruction/3D Model.md"
     },
     {
-      "basename": "模态实验.excalidraw",
-      "path": "Blog&Book&Paper/Read/Book/模态实验/模态实验.excalidraw.md"
+      "basename": "How to Read a Paper",
+      "path": "Blog&Book&Paper/Read/Book/How to Read a Paper.md"
     },
     {
-      "basename": "模态试验实用技术.excalidraw",
-      "path": "Blog&Book&Paper/Read/Book/模态实验/模态试验实用技术.excalidraw.md"
+      "basename": "cropped_20240427210132_0",
+      "path": "Blog&Book&Paper/Write/Write Paper/Model Updating/file/cropped_20240427210132_0.md"
     },
     {
-      "basename": "人生七年",
-      "path": "Blog&Book&Paper/Read/Book/人生七年.md"
+      "basename": "cropped_20240427210132",
+      "path": "Blog&Book&Paper/Write/Write Paper/Model Updating/file/cropped_20240427210132.md"
     },
     {
-      "basename": "Modal Testing",
-      "path": "Learn/Finite Element/Modal Testing.md"
+      "basename": "ModelUpdating.excalidraw",
+      "path": "Blog&Book&Paper/Write/Write Paper/Model Updating/ModelUpdating.excalidraw.md"
     },
     {
-      "basename": "Transitional Markov Chain Monte Carlo Method for Bayesian Model Updating, Model Class Selection, and Model Averaging",
-      "path": "ModelUpdating/Method/Transitional Markov Chain Monte Carlo Method for Bayesian Model Updating, Model Class Selection, and Model Averaging.md"
-    },
-    {
-      "basename": "Datasets",
-      "path": "3DReconstruction/Datasets.md"
-    },
-    {
-      "basename": "Travel to Japan 2025",
-      "path": "Blog&Book&Paper/Write/Blog/Travel to Japan 2025.md"
-    },
-    {
-      "basename": "Mechanical Vibrations Theory and Application to Structural Dynamics",
-      "path": "Blog&Book&Paper/Read/Book/Mechanical Vibrations Theory and Application to Structural Dynamics.md"
-    },
-    {
-      "basename": "Elsevier Develop",
-      "path": "Project/Elsevier Develop.md"
-    },
-    {
-      "basename": "Book Lists",
-      "path": "Blog&Book&Paper/Read/Book Lists.md"
-    },
-    {
-      "basename": "Japanse",
-      "path": "Blog&Book&Paper/Read/Book/Japanse.md"
+      "basename": "Towards the NASA UQ Challenge 2019——Systematically forward and inverse approaches for uncertainty propagation and quantification",
+      "path": "ModelUpdating/Review/Towards the NASA UQ Challenge 2019——Systematically forward and inverse approaches for uncertainty propagation and quantification.md"
     },
     {
       "basename": "Paper About 3D Reconstruction",
       "path": "3DReconstruction/Paper About 3D Reconstruction.md"
     },
     {
-      "basename": "Proxy.excalidraw",
-      "path": "Blog&Book&Paper/Write/Blog/Proxy.excalidraw.md"
+      "basename": "Master Paper",
+      "path": "Blog&Book&Paper/Write/Write Paper/3D Reconstruction/Master Paper.md"
     },
     {
-      "basename": "Git",
-      "path": "Blog&Book&Paper/Write/Source/Configuration of computer/Software/Git.md"
+      "basename": "Basics about 3D Reconstruction",
+      "path": "3DReconstruction/Basics about 3D Reconstruction.md"
     },
     {
-      "basename": "Stochastic Model Calibration with Image Encoding——Converting High-Dimensional Frequency-Domain Responses into RGB Images for Neural Network Inversion",
-      "path": "Blog&Book&Paper/Write/Write Paper/Model Updating/Stochastic Model Calibration with Image Encoding——Converting High-Dimensional Frequency-Domain Responses into RGB Images for Neural Network Inversion.md"
-    },
-    {
-      "basename": "A feature map of frequency response functions based model updating method using the Bayesian convolutional neural network",
-      "path": "ModelUpdating/Stochastic Model Updating/A feature map of frequency response functions based model updating method using the Bayesian convolutional neural network.md"
-    },
-    {
-      "basename": "2023-2024寒假",
-      "path": "Reports/Daily/2023-2024寒假.md"
-    },
-    {
-      "basename": "A fast interval model updating method based on MLP neural network",
-      "path": "Blog&Book&Paper/Write/Write Paper/Model Updating/A fast interval model updating method based on MLP neural network.md"
-    },
-    {
-      "basename": "Abaqus",
-      "path": "Learn/Finite Element/Abaqus.md"
-    },
-    {
-      "basename": "Figure",
-      "path": "Learn/Python/Figure.md"
-    },
-    {
-      "basename": "Basics about ModelUpdating",
-      "path": "ModelUpdating/Basics about ModelUpdating.md"
-    },
-    {
-      "basename": "LearningRoute",
-      "path": "Blog&Book&Paper/Write/LearningRoute.canvas"
-    },
-    {
-      "basename": "Route.excalidraw",
-      "path": "Blog&Book&Paper/Write/Route.excalidraw.md"
-    },
-    {
-      "basename": "Interest.excalidraw",
-      "path": "Blog&Book&Paper/Write/Interest.excalidraw.md"
+      "basename": "Sources of Uncertainty in 3D Scene Reconstruction",
+      "path": "3DReconstruction/Multi-view/Uncertainty/Sources of Uncertainty in 3D Scene Reconstruction.md"
     }
   ],
   "omittedPaths": [],

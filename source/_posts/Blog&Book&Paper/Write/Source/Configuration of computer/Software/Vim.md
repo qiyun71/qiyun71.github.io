@@ -1,3 +1,6 @@
+nvim(lazy vim) [folke/lazy.nvim: 💤 A modern plugin manager for Neovim](https://github.com/folke/lazy.nvim)
+NeoVim [AstroNvim/AstroNvim: AstroNvim is an aesthetic and feature-rich neovim config that is extensible and easy to use with a great set of plugins](https://github.com/AstroNvim/AstroNvim)
+
 # Vim
 
 ## 光标跳转

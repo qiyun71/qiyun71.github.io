@@ -544,7 +544,6 @@ f5 tensor(123.9420) tensor(152.1165) 135, 145
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20240312161313.png)
 
-
 方法缺点：训练完成的NN，必须要输入固定大小的数组
 
 ### 问题讨论
@@ -1113,3 +1112,22 @@ if need_select_node:
 ```
 
 ## Folding Fin
+
+非线性的折叠翼（folding fins）：
+- 前板
+- 后板
+- 转轴
+
+
+>  [飞行器非线性振动试验与模型修正研究进展](https://lxjz.cstam.org.cn/cn/article/doi/10.6052/1000-0992-24-011)
+
+>  [基于热/力试验的折叠舵连接刚度与颤振分析](https://hkxb.buaa.edu.cn/CN/10.7527/S1000-6893.2022.27927) 中国运载火箭技术研究院
+>  [航天飞行器折叠翼锁紧机构力学模型](http://www.jasp.com.cn/hkdlxb/article/pdf/preview/20220032.pdf)
+
+
+> [有间隙折叠舵面的振动实验与非线性建模研究](https://lxxb.cstam.org.cn/cn/article/doi/10.6052/0459-1879-19-119) 哈工大
+> [Nonlinear system identification framework of folding fins with freeplay using backbone curves - ScienceDirect](https://www.sciencedirect.com/science/article/pii/S1000936122001030?via%3Dihub) 
+> [Nonlinear aeroelastic analysis of the folding fin with freeplay under thermal environment - ScienceDirect](https://www.sciencedirect.com/science/article/pii/S1000936120302089#f0005)
+
+
+

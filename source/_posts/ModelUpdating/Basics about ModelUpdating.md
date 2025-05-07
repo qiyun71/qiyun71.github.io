@@ -137,6 +137,7 @@ NN的训练十分依赖数据集，数据集范围要足够大，将实验的数
 
 ~~如果无论如何改变**影响有限元输出的因素(结构参数、网格划分、有限元简化...)**，都无法使得有限元模型可以仿真出与实验相近的结果，则很难进行修正。(*一般工程上建立的有限元模型都很准确吧？与实验测量的数据近似吧？*)~~ : 有限元模型修正应该是建立在有限元模型相对来说比较准确的基础上的
 
+
 ## Traditional Model Updating with Optimization algorithms(OptimAlgo)
 
 Traditional Model Updating is a class of inverse problem, it continually find the optimal structural parameters by OptimAlgo to minimize loss or metrics(don't need differentiable to back propagation).

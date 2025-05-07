@@ -28,16 +28,43 @@ https://github.com/BITNP/BIThesis/discussions/536
 
 ---
 
-latex格式论文 tips
+Pre-defense：
+- [ ] 格式问题，参考文献格式
+- [x] 标题题目问题
+- [x] 章节流程安排应另起一章，结构图也不对
+- [ ] 机械标准件，评价指标 ? 无
+- [ ] 塑料玩具立意问题 ？
+- [x] 采样要体现时间
+- [x] 降重
 
-```
-\figref{fig:fig1s5}
-```
+> [浅谈LaTeX与Word度量单位对应关系_letex和word页边距转换-CSDN博客](https://blog.csdn.net/Null_0_lluN/article/details/107097236)
+> [latex 中的长度单位，尺寸_latex 单位-CSDN博客](https://blog.csdn.net/robert_chen1988/article/details/52739825)
+> [(10 封私信 / 18 条消息) LaTeX 设置的行距与 Word 的行距如何对应？ - 知乎](https://www.zhihu.com/question/62327906) 行距与字体格式有关(word)
+> [LaTex 页面设置 | Xiaoqiang Wu](https://wuxiaoqiang12.github.io/_posts/2019-09-15-latex%E9%A1%B5%E9%9D%A2%E8%AE%BE%E7%BD%AE/)
+> [Latex新手入门手册_latex.js-CSDN博客](https://blog.csdn.net/qq_52964132/article/details/128617502)
+> [LaTex之fancy宏包设置--页眉页脚_latex fancy-CSDN博客](https://blog.csdn.net/wanjiac/article/details/80050105)
 
-$(\sin(2^0\pi p)$
+- topmargin（从上页边到页眉的距离）;
+- headsep（页眉基线到正文顶部的距离）;
 
-$\eta | \mathbf{\eta} | \boldsymbol{\eta}$
+![16c8e5e6a253d0134c9f1cdd0cfda744.png (535×798)|555](https://i-blog.csdnimg.cn/blog_migrate/16c8e5e6a253d0134c9f1cdd0cfda744.png)
 
+> [表格 - 哔哩哔哩](https://www.bilibili.com/opus/622991942666388991)
+
+三线表： 宏包booktabs
+- `\toprule`
+- `\midrule`
+- `\cmidrule` 与 `\cline`类似，但是可以改线宽 `\cmidrule[0.5pt]{2-7} `
+- `\bottomrule`
+
+>  [hushidong/biblatex-gb7714-2015: A biblatex implementation of the GB/T7714-2015 bibliography style || GB/T 7714-2015 参考文献著录和标注的biblatex样式包](https://github.com/hushidong/biblatex-gb7714-2015?tab=readme-ov-file)
+>  [zepinglee/gbt7714-bibtex-style: GB/T 7714-2015 BibTeX Style](https://github.com/zepinglee/gbt7714-bibtex-style)
+>  [在latex中使用GB/T 7714-2015，解决会议论文\[C\]后面出现//的问题_gbt7714-2015 latex-CSDN博客](https://blog.csdn.net/Zhong_ty/article/details/145082927)
+
+参考文献：
+- C会议格式，不用析出文献格式`[C]//`，而是用`[C]. `
+
+---
 
 |                   3D Reconstruction                    |     Single-view      |       Multi-view        |
 | :----------------------------------------------------: | :------------------: | :---------------------: |
@@ -47,7 +74,6 @@ $\eta | \mathbf{\eta} | \boldsymbol{\eta}$
 | 生成模型 **[GM](Generative%20Models%20Reconstruction.md)** |   BuilDIff, SG-GAN   |       DiffuStereo       |
 |                      混合方法 **HM**                       |         HaP          |          DMV3D          |
 |                        显式表示 ER                         |     Pixel2Mesh++     | 3DGS, SuGaR, Pixel2Mesh |
-|                                                        |                      |                         |
 
 Follow: [NeRF and Beyond日报](https://www.zhihu.com/column/c_1710703836652716032) | [nerf and beyond docs](https://github.com/yangjiheng/nerf_and_beyond_docs) | **[ventusff/neurecon](https://github.com/ventusff/neurecon)** | [Surface Reconstruction](https://paperswithcode.com/task/surface-reconstruction) | [传统3D Reconstruction](https://github.com/openMVG/awesome_3DReconstruction_list) | [Jianfei Guo](https://longtimenohack.com/) | [Nerf Tags | Yin的笔记本](http://www.yindaheng98.top/tag/Nerf/)
 

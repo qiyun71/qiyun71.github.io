@@ -62,3 +62,18 @@
 > [3] T. Roscoe, “Writing Reviews for Systems Conferences,” http://people.inf.ethz.ch/troscoe/pubs/review-writing.pdf
 > [4] H. Schulzrinne, “Writing Technical Articles,” http://www.cs.columbia.edu/∼hgs/etc/writing-style.html
 > [5] G.M. Whitesides, “Whitesides’ Group: Writing a Paper,” http://www.ee.ucr.edu/∼rlake/Whitesides_writing_res_paper.pdf
+
+
+
+
+
+
+> [知乎热议：大牛如何读文献？](https://www.lianxh.cn/details/891.html)
+
+- 红：研究方法，包括方法内容/解决过程/求解技巧算法；
+- 橙：模型场景，包括场景模型/数学模型/实验设计等；
+- 黄：方法适用范围，包括假设条件/忽略因素/约束条件；
+- 绿：研究结果，包括结果/结论；
+- 青：研究目的，包括解决了什么问题/论文创新点；
+- 蓝：研究背景，包括论文研究领域/背景是什么；
+- 紫：提炼思考，包括可借鉴内容/不足/未解决问题/展望。

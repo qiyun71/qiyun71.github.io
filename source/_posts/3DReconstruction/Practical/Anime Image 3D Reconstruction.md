@@ -180,6 +180,14 @@ some github repo:
 ![raw.githubusercontent.com/kangyeolk/AnimeCeleb/main/assets/teaser.png](https://raw.githubusercontent.com/kangyeolk/AnimeCeleb/main/assets/teaser.png)
 
 
+## HoloPart
+
+> [HoloPart: Generative 3D Part Amodal Segmentation](https://vast-ai-research.github.io/HoloPart/)
+
+3D模型拆件+分别补全
+
+![teaser.png (5999×1865)](https://vast-ai-research.github.io/HoloPart/assets/images/teaser.png)
+
 ## PAniC-3D
 
 > [ShuhongChen/panic3d-anime-reconstruction: CVPR 2023: PAniC-3D Stylized Single-view 3D Reconstruction from Portraits of Anime Characters](https://github.com/shuhongchen/panic3d-anime-reconstruction)

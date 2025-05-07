@@ -6,23 +6,13 @@ i.i.d. 独立同分布
 
 # Tools
 
-## Colors
+## 配色
 
-
-| Reference                                                                                                         | Color                                                                                                                                              |
-| ----------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ![image.png\|222](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240801201206.png) | Blue: [# 论文配色 \| 顶刊科研绘图高级配色汇总！](https://mp.weixin.qq.com/s/iAPY89fbYJkd5hBZ3I9dlw)<br>1E4C9C<br>345D82 <br>3371B3 <br>5795C7 <br>81B5D5 <br>AED4E5 |
-| ![image.png\|222](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240917194520.png) | Miku : [Hatsune Miku Color Palette](https://www.color-hex.com/color-palette/19601)<br>蓝色 37C8D4<br>红色 C92930<br>黑色 3A3E46                          |
-| ![image.png](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241014185345.png)      | [色圖網站](https://colorsite.librian.net/)                                                                                                             |
-|                                                                                                                   |                                                                                                                                                    |
-
-
-
-
+| Reference | ![image.png\|222](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240801201206.png)                                  | 小红书分享                                                                                                                                                                                      | ![image.png\|222](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240917194520.png)         | ![image.png\|222](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241014185345.png) |
+| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| Color     | Blue: [# 论文配色 \| 顶刊科研绘图高级配色汇总！](https://mp.weixin.qq.com/s/iAPY89fbYJkd5hBZ3I9dlw)<br>1E4C9C<br>345D82 <br>3371B3 <br>5795C7 <br>81B5D5 <br>AED4E5 | [论文配色](https://www.xiaohongshu.com/discovery/item/680b6435000000000900ef98?source=webshare&xhsshare=pc_web&xsec_token=ABKUayNv95aib2sDfatshVFtQolUgEAZqM3Reb0YfFfVo=&xsec_source=pc_share) | Miku : [Hatsune Miku Color Palette](https://www.color-hex.com/color-palette/19601)<br>蓝色 37C8D4<br>红色 C92930<br>黑色 3A3E46 | [色圖網站](https://colorsite.librian.net/)                                                                            |
 
 ## Latex
-
-[公式 - 科学空间|Scientific Spaces](https://kexue.fm/latex.html)
 
 ### Basic
 
@@ -41,10 +31,15 @@ i.i.d. 独立同分布
 \end{document}
 ```
 
+一些字符地加粗需要使用`\boldsymbol`，而不能用`\mathbf`: $\eta | \mathbf{\eta} | \boldsymbol{\eta}$
 
 ### Cheatsheet 
 
-约等于 $\approx$ $\thickapprox$
+[公式 - 科学空间|Scientific Spaces](https://kexue.fm/latex.html) 一些常用指令
+
+约等于 
+- `\approx` $\approx$ 
+- `thickapprox` $\thickapprox$
 
 ```latex
 \documentclass{article}
@@ -54,7 +49,6 @@ i.i.d. 独立同分布
    \[ p \thickapprox q \]
 \end{document}
 ```
-
 
 求和符号上下标位置：
 - `\sum\nolimits_{j=1}^{M}`   上下标位于求和符号的水平右端，$\sum\nolimits_{j=1}^{M}$
@@ -69,6 +63,55 @@ i.i.d. 独立同分布
 符号花体：[What are all the font styles I can use in math mode? - TeX - LaTeX Stack Exchange](https://tex.stackexchange.com/questions/58098/what-are-all-the-font-styles-i-can-use-in-math-mode)
 
 ![image.png|333](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240626091625.png)
+
+### bibtex代码
+
+文章类型，简要标识符
+标题、作者、期刊、年份...
+
+```
+@article{lin2020birds,
+  title={Birds have four legs?! NumerSense: Probing Numerical Commonsense Knowledge of Pre-trained Language Models},
+  author={Lin, Bill Yuchen and Lee, Seyeon and Khanna, Rahul and Ren, Xiang},
+  journal={arXiv preprint arXiv:2005.00683},
+  year={2020}
+}
+```
+
+
+自动查询补全文章数据库的工具：[yuchenlin/rebiber: A simple tool to update bib entries with their official information (e.g., DBLP or the ACL anthology).](https://github.com/yuchenlin/rebiber)
+
+- 安装：`pip install -e git+https://github.com/yuchenlin/rebiber.git#egg=rebiber -U`
+- 使用：`rebiber -i /path/to/input.bib -o /path/to/output.bib`
+
+效果：
+
+```latex
+Before：
+@article{lin2020birds,
+	title={Birds have four legs?! NumerSense: Probing Numerical Commonsense Knowledge of Pre-trained Language Models},
+	author={Lin, Bill Yuchen and Lee, Seyeon and Khanna, Rahul and Ren, Xiang},
+	journal={arXiv preprint arXiv:2005.00683},
+	year={2020}
+}
+
+After：
+@inproceedings{lin2020birds,
+    title = "{B}irds have four legs?! {N}umer{S}ense: {P}robing {N}umerical {C}ommonsense {K}nowledge of {P}re-{T}rained {L}anguage {M}odels",
+    author = "Lin, Bill Yuchen  and
+      Lee, Seyeon  and
+      Khanna, Rahul  and
+      Ren, Xiang",
+    booktitle = "Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP)",
+    month = nov,
+    year = "2020",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/2020.emnlp-main.557",
+    doi = "10.18653/v1/2020.emnlp-main.557",
+    pages = "6862--6868",
+}
+```
 
 ### latex2word
 
@@ -118,11 +161,8 @@ algorithm2e语法 [mlg.ulb.ac.be/files/algorithm2e.pdf](https://mlg.ulb.ac.be/fi
 ## Word
 
 - 方框打勾，2611选中，alt+s快捷键
-
 - 英文单词自动换行 [word中英文单词间距过大——换行或断字加横杠_英文单词换行断开加一横怎么加-CSDN博客](https://blog.csdn.net/Netceor/article/details/126480000)
-
 - code 代码块粘贴到Word/PPT https://github.com/Lord-Turmoil/CodePaste
-
 
 ### 交叉引用
 
@@ -160,11 +200,11 @@ word 公式编号+交叉引用
  - 列表中级别选择 4 或者 域代码 `\l 4`
  - 起始值 `\s 1` 默认为1，可以不用设置
 
-![73f81ae407890cffd32447c0518b208c.png (2422×1634)](https://i-blog.csdnimg.cn/blog_migrate/73f81ae407890cffd32447c0518b208c.png)
+![73f81ae407890cffd32447c0518b208c.png (2422×1634)|666](https://i-blog.csdnimg.cn/blog_migrate/73f81ae407890cffd32447c0518b208c.png)
 
 交叉引用 编号
 
-![01c09e15854211a5dc9d1717c0a0e5e0.png (2414×1632)](https://i-blog.csdnimg.cn/blog_migrate/01c09e15854211a5dc9d1717c0a0e5e0.png)
+![01c09e15854211a5dc9d1717c0a0e5e0.png (2414×1632)|666](https://i-blog.csdnimg.cn/blog_migrate/01c09e15854211a5dc9d1717c0a0e5e0.png)
 
 
 ### 样式迁移
@@ -178,7 +218,7 @@ word 公式编号+交叉引用
 ## PPT
 
  PPT风格文字
- ![](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240813172055.png)
+ ![1|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240813172055.png)
 
 # Write Paper
 
@@ -197,7 +237,6 @@ word 公式编号+交叉引用
 ## Basic Framework
 
 > [科学网—How to Supervise Yourself (怎么自导博士论文) - 何毓琦的博文](https://blog.sciencenet.cn/blog-1565-242182.html) 广域搜索+深度发掘
-
 
 > [害怕写论文？你需要通过这个练习来训练你的写论文技能_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1tE421A7rM/?vd_source=1dba7493016a36a32b27a14ed2891088)
 
@@ -237,38 +276,15 @@ word 公式编号+交叉引用
 
 [hzwer/WritingAIPaper: Writing AI Conference Papers: A Handbook for Beginners](https://github.com/hzwer/WritingAIPaper)
 
-
-
 ## 科研习惯
 
-1. 动手之前先动脑。
+1. 动手之前先动脑。有了新的idea时，不要着急做，先查文献了解有没有别人做过。如果符合基本原理，则要提前设计好实验方案，准备好相应的实验设备、材料等，并规划好实验时间。切记不要用行动的勤奋掩盖思维的懒惰！
+2. 搞课题研究要先定框架，再填内容。读研阶段你会发现无论是开题报告、组会汇报、实验方案、大论文和小论文的撰写等工作都是先列框架，再填充内容。然后，再不断修改和完善框架。
+3. 每天坚持写一些东西。无论是大论文、小论文，项目申报书，文献综述或是实验总结，给自己定个目标每天至少500字，坚持下来后你会发现写东西并不难，而且前期写的多的话后期完成毕业论文和小论文就可以直接复制粘贴了。
+4. 文献不建议零散的看，一定要批量看。文献下载下来先做好分类，每次打算看多少就下多少，比如下载了30篇文献，那就集中时间几天内把30篇文献全部看完，并且做一个文献综述的总结。将这30篇文献进行梳理都总结到这篇文献综述中来，这样整理完写完，你对这些文献的理解可以上升至少一个层级。
+5. 规划好实验数据用途。做完实验，马上整理数据并作图分析，留好原始图 (origin PS等)，方便以后使用，把图片、数据表格，数据分析的文字填充到大论文相应的章节里，再填充到列好框架的小论文里。
 
-有了新的idea时，不要着急做，先查文献了解有没有别人做过。
-
-如果符合基本原理，则要提前设计好实验方案，准备好相应的实验设备、材料等，并规划好实验时间。切记不要用行动的勤奋掩盖思维的懒惰！
-
-2. 搞课题研究要先定框架，再填内容。
-
-读研阶段你会发现无论是开题报告、组会汇报、实验方案、大论文和小论文的撰写等工作都是先列框架，再填充内容。然后，再不断修改和完善框架。
-
-3. 每天坚持写一些东西。
-
-无论是大论文、小论文，项目申报书，文献综述或是实验总结，给自己定个目标每天至少500字，坚持下来后你会发现写东西并不难，而且前期写的多的话后期完成毕业论文和小论文就可以直接复制粘贴了。
-
-4. 文献不建议零散的看，一定要批量看。
-
-文献下载下来先做好分类，每次打算看多少就下多少，比如下载了30篇文献，那就集中时间几天内把30篇文献全部看完，并且做一个文献综述的总结。
-
-将这30篇文献进行梳理都总结到这篇文献综述中来，这样整理完写完，你对这些文献的理解可以上升至少一个层级。
-
-5. 规划好实验数据用途。
-
-做完实验，马上整理数据并作图分析，留好原始图 (origin PS等)，方便以后使用，把图片、数据表格，数据分析的文字填充到大论文相应的章节里，再填充到列好框架的小论文里。
-
-
-
-[用随机梯度下降来优化人生 - 李沐的文章 - 知乎](https://zhuanlan.zhihu.com/p/414009313)
-
+> [用随机梯度下降来优化人生 - 李沐的文章 - 知乎](https://zhuanlan.zhihu.com/p/414009313)
 
 【TED科普】长时间保持大脑清晰的7个习惯！ 课代表总结： 视频讲述了7个帮助提高精神清晰度的习惯:1)清空思维,如写日记;2)定期休息,保证充足睡眠;3)每日冥想,使大脑平静;4)专注于重要事情,将任务分组;5)去散步,刺激内啡肽释放;6)注意摄入健康食物;7)清理心理垃圾邮件,释放无关信息。通过这些习惯,可帮助减轻压力,提高大脑工作效率。 要点: 
 - 定期清空思维,如写日记,释放多余思绪 
@@ -279,8 +295,7 @@ word 公式编号+交叉引用
 - 摄入健康食物,避免过多糖分,维持血糖平衡
 - 清理心理垃圾,释放无关信息,为重要事情留出空间
 
-
-## English细节
+## English 语言学习
 
 图片：
 As demonstrated in Figure 3,
@@ -296,9 +311,7 @@ loss function 惩罚penalize
 
 
 #### 论文
-
 - 在每一个一级标题（Section 1,2,..)内，缩写词重新定义（非常通俗的如FE除外）。全文统一。也就是说，新的section中的自定义术语要有全称，方便读者阅读。
-
 
 ### which
 
@@ -306,18 +319,15 @@ loss function 惩罚penalize
 前无逗号，指代前面的事物(可以是宾语)
 
 which 的限定用法与非限定用法。 which当作关係代名词时，要特别注意限定用法与非限定用法。
-
 例：Tom has a cat which can sleep all day. 汤姆有一隻可以睡整天的猫。
-
 说明：which前面没逗号，所以which指的是”猫”，表示汤姆可能有很多猫，而这裡指的是整天在睡觉的那隻猫。这是限定用法。
-
 例：Tom has a cat, which can sleep all day. 汤姆有一隻猫，可以睡整天。
+
 
 ## GPT (Write more, read less)
 
 WHWW: what, how, want, worry
 说人话：通俗易懂
-
 
 > [Chatbots in science: What can ChatGPT do for you?](https://www.nature.com/articles/d41586-024-02630-z)
 > [The Perfect Prompt: A Prompt Engineering Cheat Sheet | by Maximilian Vogel | The Generator | Medium](https://medium.com/the-generator/the-perfect-prompt-prompt-engineering-cheat-sheet-d0b9c62a2bba)
@@ -336,10 +346,18 @@ Here is a prompt that we use to **revise manuscript abstracts**, which we crafte
 
 你是一名专业的中翻英和学术润色专家，请帮我把以下中文翻译成英文，并进行专业的学术润色：
 
+[GPT prompt](Source/Configuration%20of%20computer/Software/GPT%20prompt.md)
+
+
+## 论文查重/AIGC
+
+- [PaperPass官网-论文查重-论文降重-论文检测-免费论文查重检测系统-智齿数汇](https://www.paperpass.com/)
+- [fslongjin/TextRecogn: Uncovering AIGC Texts with Machine Learning](https://github.com/fslongjin/textrecogn)
+- [提交查重--学信网 • 万方数据文献相似性检测服务系统](https://chsi.wanfangtech.net/check/order)
+- [北京科技大学图书馆-数据库导航](https://lib.ustb.edu.cn/info/80936.jspx) 笔杆 免费5次 [笔杆网_论文检测_论文查重_毕业论文抄袭检测](https://www.bigan.net/)
+
+
 # Academic presentation PPT
 
 Hi i'm xxx, and this is joint work with xxx and xxx on 论文标题
 Good afternoon, my name is xxx, my co-authors are xxx. and our paper is titled xxx
-
-
-
