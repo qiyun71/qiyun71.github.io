@@ -122,6 +122,12 @@ date created: 2024-10-05T16:51:15.000Z
 人：B G R
 跳蛛：UV G | UV G R | ....
 
+### 生物电磁学
+
+Transduction of DNA information through water and electromagnetic waves. by Luc Montagnier
+
+
+
 ## 玄幻
 
 ### Brain脑波

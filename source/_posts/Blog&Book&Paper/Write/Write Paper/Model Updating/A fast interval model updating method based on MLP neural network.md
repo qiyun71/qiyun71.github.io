@@ -392,6 +392,18 @@ print(a,'\n',b,'\n',c)
 
 ## 公式
 
+Interval Representation
+
+$\begin{aligned}\boldsymbol{X}^\mathbf{I}&=\left\{x_i^I,i=1,2,...,m\right\}=\left(\left[\underline{x}_i,\bar{x}_i\right]\right)_m\\&=\left(\left[x_i^C-\Delta x_i,x_i^C+\Delta x_i\right]\right)_m\\&=\boldsymbol{X}^\mathbf{C}+\Delta \boldsymbol{X}^\mathbf{I}\end{aligned}$
+- $x_i^I$ 
+- $x_i^C=(\underline{x_i}+\bar{x_i})/2\cdot$
+- $\Delta x_i=(\bar{x_i}-\underline{x_i})/2,$
+- $\Delta X^1\in[-\Delta X,\Delta X]$
+
+Interval Propagation
+
+
+
 Interval:
 $\mathbf{a}^{\mathrm{I}}$
 

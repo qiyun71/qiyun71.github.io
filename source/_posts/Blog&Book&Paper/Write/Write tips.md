@@ -1,16 +1,17 @@
-缩写：
-w.r.t. 关于
-i.e. 即
-i.i.d. 独立同分布
-
-
 # Tools
 
 ## 配色
 
-| Reference | ![image.png\|222](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240801201206.png)                                  | 小红书分享                                                                                                                                                                                      | ![image.png\|222](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240917194520.png)         | ![image.png\|222](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241014185345.png) |
-| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| Color     | Blue: [# 论文配色 \| 顶刊科研绘图高级配色汇总！](https://mp.weixin.qq.com/s/iAPY89fbYJkd5hBZ3I9dlw)<br>1E4C9C<br>345D82 <br>3371B3 <br>5795C7 <br>81B5D5 <br>AED4E5 | [论文配色](https://www.xiaohongshu.com/discovery/item/680b6435000000000900ef98?source=webshare&xhsshare=pc_web&xsec_token=ABKUayNv95aib2sDfatshVFtQolUgEAZqM3Reb0YfFfVo=&xsec_source=pc_share) | Miku : [Hatsune Miku Color Palette](https://www.color-hex.com/color-palette/19601)<br>蓝色 37C8D4<br>红色 C92930<br>黑色 3A3E46 | [色圖網站](https://colorsite.librian.net/)                                                                            |
+| Reference | ![image.png\|222](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240801201206.png)                                                                            | 小红书分享                                                                                                                                                                                                                                         | ![image.png\|222](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240917194520.png)         | ![image.png\|222](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241014185345.png) |
+| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| Color     | Blue: [# 论文配色 \| 顶刊科研绘图高级配色汇总！](https://mp.weixin.qq.com/s/iAPY89fbYJkd5hBZ3I9dlw)<br>1E4C9C<br>345D82 <br>3371B3 <br>5795C7 <br>81B5D5 <br>AED4E5                                           | [论文配色](https://www.xiaohongshu.com/discovery/item/680b6435000000000900ef98?source=webshare&xhsshare=pc_web&xsec_token=ABKUayNv95aib2sDfatshVFtQolUgEAZqM3Reb0YfFfVo=&xsec_source=pc_share)<br>[淡蓝、淡绿、淡黄]( http://xhslink.com/a/EjDnriGRcJjeb) | Miku : [Hatsune Miku Color Palette](https://www.color-hex.com/color-palette/19601)<br>蓝色 37C8D4<br>红色 C92930<br>黑色 3A3E46 | [色圖網站](https://colorsite.librian.net/)                                                                            |
+|           |                                                                                                                                                                                              |                                                                                                                                                                                                                                               |                                                                                                                           |                                                                                                                   |
+| Reference | ![Camera_1040g0k031icdc5qfns005orh1asnqt0u2j79gk0.jpg\|333](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/Camera_1040g0k031icdc5qfns005orh1asnqt0u2j79gk0.jpg) |                                                                                                                                                                                                                                               |                                                                                                                           |                                                                                                                   |
+| Color     | http://xhslink.com/a/CzQWDC3PiTneb                                                                                                                                                           |                                                                                                                                                                                                                                               |                                                                                                                           |                                                                                                                   |
+
+
+
+
 
 ## Latex
 
@@ -33,9 +34,7 @@ i.i.d. 独立同分布
 
 一些字符地加粗需要使用`\boldsymbol`，而不能用`\mathbf`: $\eta | \mathbf{\eta} | \boldsymbol{\eta}$
 
-### Cheatsheet 
-
-[公式 - 科学空间|Scientific Spaces](https://kexue.fm/latex.html) 一些常用指令
+Cheatsheet：[公式 - 科学空间|Scientific Spaces](https://kexue.fm/latex.html) 一些常用指令
 
 约等于 
 - `\approx` $\approx$ 
@@ -64,7 +63,17 @@ i.i.d. 独立同分布
 
 ![image.png|333](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240626091625.png)
 
-### bibtex代码
+
+bullet styles
+
+> [Bullet styles in LaTeX: Full list - LaTeX-Tutorial.com](https://latex-tutorial.com/bullet-styles/)
+
+```latex
+\begin{itemize}[label=\ding{227}]
+```
+![Bullet-styles-pifonts-1024x790.webp (1024×790)|555](https://latex-tutorial.com/wp-content/uploads/2021/12/Bullet-styles-pifonts-1024x790.webp)
+
+### Biblatex参考文献
 
 文章类型，简要标识符
 标题、作者、期刊、年份...
@@ -79,7 +88,7 @@ i.i.d. 独立同分布
 ```
 
 
-自动查询补全文章数据库的工具：[yuchenlin/rebiber: A simple tool to update bib entries with their official information (e.g., DBLP or the ACL anthology).](https://github.com/yuchenlin/rebiber)
+自动查询补全文章数据库的工具(计算机会议)：[yuchenlin/rebiber: A simple tool to update bib entries with their official information (e.g., DBLP or the ACL anthology).](https://github.com/yuchenlin/rebiber)
 
 - 安装：`pip install -e git+https://github.com/yuchenlin/rebiber.git#egg=rebiber -U`
 - 使用：`rebiber -i /path/to/input.bib -o /path/to/output.bib`
@@ -124,7 +133,7 @@ windows:
 转换成带格式的word: `pandoc main.tex --reference-doc=template.docx -o main.docx`
 带参考文献的word: `pandoc main.tex --bibliography=refs.bib --reference-doc=template.docx -o main.docx` (不是很好用)
 
-### Aurora伪代码
+### Aurora伪代码(for word)
 
 **(for word)** 插入——对象——Aurora Equation
 
@@ -159,6 +168,8 @@ algorithm2e语法 [mlg.ulb.ac.be/files/algorithm2e.pdf](https://mlg.ulb.ac.be/fi
 ```
 
 ## Word
+
+Check/Review时，快捷键F11可以检查下一个超链接
 
 - 方框打勾，2611选中，alt+s快捷键
 - 英文单词自动换行 [word中英文单词间距过大——换行或断字加横杠_英文单词换行断开加一横怎么加-CSDN博客](https://blog.csdn.net/Netceor/article/details/126480000)
@@ -217,14 +228,105 @@ word 公式编号+交叉引用
 
 ## PPT
 
- PPT风格文字
+ **PPT风格文字** 带点阴影
  ![1|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240813172055.png)
 
-# Write Paper
+**Academic presentation PPT**
+Hi i'm xxx, and this is joint work with xxx and xxx on 论文标题
+Good afternoon, my name is xxx, my co-authors are xxx. and our paper is titled xxx
 
-## Write Points
+# 论文写作
 
-### 自定义loss
+## 英文词汇/短语/句式
+
+[Academic Phrasebank | Introducing work](https://www.phrasebank.manchester.ac.uk/introducing-work/)
+ - [Introducing work](https://www.phrasebank.manchester.ac.uk/introducing-work/)
+ - [Referring to sources](https://www.phrasebank.manchester.ac.uk/referring-to-sources/)
+ - [Describing methods](https://www.phrasebank.manchester.ac.uk/describing-methods/)
+ - [Reporting results](https://www.phrasebank.manchester.ac.uk/reporting-results/)
+ - [Discussing findings](https://www.phrasebank.manchester.ac.uk/discussing-findings/)
+ - [Writing conclusions](https://www.phrasebank.manchester.ac.uk/writing-conclusions/)
+
+缩写：
+- w.r.t. 关于
+- i.e. 即
+- i.i.d. 独立同分布
+
+图片描述：
+As demonstrated in Figure 3,
+- demonstrated
+- shown
+- illustrated
+- depicted
+
+关系：
+- 因果：为此To this end
+- 
+
+loss function 惩罚penalize
+
+缩写词汇
+- 在每一个一级标题（Section 1,2,..)内，缩写词重新定义（非常通俗的如FE除外）。全文统一。也就是说，新的section中的自定义术语要有全称，方便读者阅读。
+
+which用法
+- 前有逗号，指代最前面整句的主语
+- 前无逗号，指代前面的事物(可以是宾语)
+
+which 的限定用法与非限定用法。 which当作关係代名词时，要特别注意限定用法与非限定用法。
+例：Tom has a cat which can sleep all day. 汤姆有一隻可以睡整天的猫。
+说明：which前面没逗号，所以which指的是”猫”，表示汤姆可能有很多猫，而这裡指的是整天在睡觉的那隻猫。这是限定用法。
+例：Tom has a cat, which can sleep all day. 汤姆有一隻猫，可以睡整天。
+
+公式关于xxx展开时用“about”: xxx is expanded about xxx
+
+## GPT 提示词
+
+(Write more, read less)
+WHWW: what, how, want, worry
+说人话：通俗易懂
+
+
+[GPT 学术优化](http://localhost:53015/) 本地部署，需要api
+
+润色：
+Below is a paragraph from an academic paper. Polish the writing to meet the academic style, improve the spelling, grammar, clarity, concision and overall readability. When necessary, rewrite the whole sentence. Firstly, you should provide the polished paragraph (in English). Secondly, you should list all your modification and explain the reasons to do so in markdown table.
+
+> [Chatbots in science: What can ChatGPT do for you?](https://www.nature.com/articles/d41586-024-02630-z)
+> [The Perfect Prompt: A Prompt Engineering Cheat Sheet | by Maximilian Vogel | The Generator | Medium](https://medium.com/the-generator/the-perfect-prompt-prompt-engineering-cheat-sheet-d0b9c62a2bba)
+> [The Perfect Prompt: Cheat Sheet With 100+ Best Practice Examples - PART 1](https://www.linkedin.com/pulse/perfect-prompt-engineering-cheat-sheet-snippets-part-vogel-mxkcf/)
+
+The basic principles of good prompt：
+- **Be clear about what you want the model to do**. (use commands such as ‘Summarize’ or ‘Explain’)
+- Ask the model to **adopt a role or persona** (‘You are a professional copy editor’).
+- **Provide examples** of real input and output, potentially covering tricky ‘corner’ cases, that show the model what you want it to do.
+- Specify **how the model should answer** (‘Explain it to someone who has a basic understanding of epigenetics’) or even the exact output format (for instance, as an analysis-friendly JSON or CSV file).
+- Optionally, specify a word limit, whether the text should use the active or passive voice, and any other requirements. Check out the ‘[Prompt Engineering Cheat Sheet](https://medium.com/the-generator/the-perfect-prompt-prompt-engineering-cheat-sheet-d0b9c62a2bba)’ for more tips.
+
+Here is a prompt that we use to **revise manuscript abstracts**, which we crafted on the basis of guidelines[1](https://www.nature.com/articles/d41586-024-02630-z#ref-CR1) published in 2017：
+- You are a professional copy editor with ample experience handling scientific texts. Revise the following abstract from a manuscript so that it follows a context–content–conclusion scheme. (1) The context portion communicates to the reader the gap that the paper will fill. The first sentence orients the reader by introducing the broader field. Then, the context is narrowed until it lands on the open question that the research answers. A successful context section distinguishes the research’s contributions from the current state of the art, communicating what is missing in the literature (that is, the specific gap) and why that matters (that is, the connection between the specific gap and the broader context). (2) The content portion (for example, ‘here, we ...’) first describes the new method or approach that was used to fill the gap, then presents an executive summary of results. (3) The conclusion portion interprets the results to answer the question that was posed at the end of the context portion. There might be a second part to the conclusion portion that highlights how this conclusion moves the broader field forward (for example, ‘broader significance’).
+
+你是一名专业的中翻英和学术润色专家，请帮我把以下中文翻译成英文，并进行专业的学术润色：
+
+[GPT prompt](Source/Configuration%20of%20computer/Software/GPT%20prompt.md)
+
+
+## 审稿意见回复
+
+29 学术迷因鸦发布了一篇小红书笔记，快来看吧！ 😆 GaJScUsVcmJgfwf 😆 http://xhslink.com/a/bsKMBAYLpajeb，复制本条信息，打开【小红书】App查看精彩内容！
+
+## 创新点
+
+“Miles (2017) proposed a new model built on the two previous models that consist of seven core research gaps renamed: (a) Evidence Gap; (b) Knowledge Gap; (c) Practical-Knowledge Conflict Gap; (d) Methodological Gap; (e) Empirical Gap; and (f) Theoretical Gap; (g) Population Gap [see Figure 1].” ([Miles, p. 2](zotero://select/library/items/RCVSCRHP)) ([pdf](zotero://open-pdf/library/items/XLXTCR9L?page=3&annotation=GXKBFZVU))
+ 
+七种研究差距（p1-p2）
+①证据差距：研究结果在抽象层面存在矛盾（如不同研究结论相互冲突）。
+②知识差距：特定领域缺乏基础性研究成果。
+③实践-知识差距：专业实践与现有研究发现脱节。
+④方法论差距：现有方法局限导致研究偏差，需采用新方法。
+⑤实证差距：理论命题尚未经过实证检验。
+⑥理论差距：现象解释缺乏统一理论框架，或理论未适应新范式。
+⑦人群差距：特定群体（如少数族裔、性别、年龄）在研究中代表性不足。
+
 
 > [An Interval Neural Network Method for Identifying Static Concentrated Loads in a Population of Structures](https://www.mdpi.com/2226-4310/11/9/770)
 
@@ -234,7 +336,7 @@ word 公式编号+交叉引用
 
 针对NeRF随机光线采样，导致SSIM评价指标无法捕捉图像中的区块相似度
 
-## Basic Framework
+## 写作方法
 
 > [科学网—How to Supervise Yourself (怎么自导博士论文) - 何毓琦的博文](https://blog.sciencenet.cn/blog-1565-242182.html) 广域搜索+深度发掘
 
@@ -272,11 +374,7 @@ word 公式编号+交叉引用
 - Conclusion
   - 简要地回顾你解决了什么问题，你是怎么解决的，你主要做了什么样的贡献。后面的人如果在这个方向接着做，应当做什么？千万不要跟引言和摘要相同，他们有不同的作用。引言是让人家读完之后能知道你的问题是否重要，摘要是读完之后知道这篇文章值不值得往下读，而总结是我读完了会决定要不要在你这个方向继续往下研究。
 
-### Conference Papers
-
-[hzwer/WritingAIPaper: Writing AI Conference Papers: A Handbook for Beginners](https://github.com/hzwer/WritingAIPaper)
-
-## 科研习惯
+Conference Papers： [hzwer/WritingAIPaper: Writing AI Conference Papers: A Handbook for Beginners](https://github.com/hzwer/WritingAIPaper)
 
 1. 动手之前先动脑。有了新的idea时，不要着急做，先查文献了解有没有别人做过。如果符合基本原理，则要提前设计好实验方案，准备好相应的实验设备、材料等，并规划好实验时间。切记不要用行动的勤奋掩盖思维的懒惰！
 2. 搞课题研究要先定框架，再填内容。读研阶段你会发现无论是开题报告、组会汇报、实验方案、大论文和小论文的撰写等工作都是先列框架，再填充内容。然后，再不断修改和完善框架。
@@ -295,59 +393,6 @@ word 公式编号+交叉引用
 - 摄入健康食物,避免过多糖分,维持血糖平衡
 - 清理心理垃圾,释放无关信息,为重要事情留出空间
 
-## English 语言学习
-
-图片：
-As demonstrated in Figure 3,
-- demonstrated
-- shown
-- illustrated
-- depicted
-
-因果
-- 为此：To this end
-
-loss function 惩罚penalize
-
-
-#### 论文
-- 在每一个一级标题（Section 1,2,..)内，缩写词重新定义（非常通俗的如FE除外）。全文统一。也就是说，新的section中的自定义术语要有全称，方便读者阅读。
-
-### which
-
-前有逗号，指代最前面整句的主语
-前无逗号，指代前面的事物(可以是宾语)
-
-which 的限定用法与非限定用法。 which当作关係代名词时，要特别注意限定用法与非限定用法。
-例：Tom has a cat which can sleep all day. 汤姆有一隻可以睡整天的猫。
-说明：which前面没逗号，所以which指的是”猫”，表示汤姆可能有很多猫，而这裡指的是整天在睡觉的那隻猫。这是限定用法。
-例：Tom has a cat, which can sleep all day. 汤姆有一隻猫，可以睡整天。
-
-
-## GPT (Write more, read less)
-
-WHWW: what, how, want, worry
-说人话：通俗易懂
-
-> [Chatbots in science: What can ChatGPT do for you?](https://www.nature.com/articles/d41586-024-02630-z)
-> [The Perfect Prompt: A Prompt Engineering Cheat Sheet | by Maximilian Vogel | The Generator | Medium](https://medium.com/the-generator/the-perfect-prompt-prompt-engineering-cheat-sheet-d0b9c62a2bba)
-> [The Perfect Prompt: Cheat Sheet With 100+ Best Practice Examples - PART 1](https://www.linkedin.com/pulse/perfect-prompt-engineering-cheat-sheet-snippets-part-vogel-mxkcf/)
-
-
-The basic principles of good prompt：
-- **Be clear about what you want the model to do**. (use commands such as ‘Summarize’ or ‘Explain’)
-- Ask the model to **adopt a role or persona** (‘You are a professional copy editor’).
-- **Provide examples** of real input and output, potentially covering tricky ‘corner’ cases, that show the model what you want it to do.
-- Specify **how the model should answer** (‘Explain it to someone who has a basic understanding of epigenetics’) or even the exact output format (for instance, as an analysis-friendly JSON or CSV file).
-- Optionally, specify a word limit, whether the text should use the active or passive voice, and any other requirements. Check out the ‘[Prompt Engineering Cheat Sheet](https://medium.com/the-generator/the-perfect-prompt-prompt-engineering-cheat-sheet-d0b9c62a2bba)’ for more tips.
-
-Here is a prompt that we use to **revise manuscript abstracts**, which we crafted on the basis of guidelines[1](https://www.nature.com/articles/d41586-024-02630-z#ref-CR1) published in 2017：
-- You are a professional copy editor with ample experience handling scientific texts. Revise the following abstract from a manuscript so that it follows a context–content–conclusion scheme. (1) The context portion communicates to the reader the gap that the paper will fill. The first sentence orients the reader by introducing the broader field. Then, the context is narrowed until it lands on the open question that the research answers. A successful context section distinguishes the research’s contributions from the current state of the art, communicating what is missing in the literature (that is, the specific gap) and why that matters (that is, the connection between the specific gap and the broader context). (2) The content portion (for example, ‘here, we ...’) first describes the new method or approach that was used to fill the gap, then presents an executive summary of results. (3) The conclusion portion interprets the results to answer the question that was posed at the end of the context portion. There might be a second part to the conclusion portion that highlights how this conclusion moves the broader field forward (for example, ‘broader significance’).
-
-你是一名专业的中翻英和学术润色专家，请帮我把以下中文翻译成英文，并进行专业的学术润色：
-
-[GPT prompt](Source/Configuration%20of%20computer/Software/GPT%20prompt.md)
-
 
 ## 论文查重/AIGC
 
@@ -357,7 +402,4 @@ Here is a prompt that we use to **revise manuscript abstracts**, which we crafte
 - [北京科技大学图书馆-数据库导航](https://lib.ustb.edu.cn/info/80936.jspx) 笔杆 免费5次 [笔杆网_论文检测_论文查重_毕业论文抄袭检测](https://www.bigan.net/)
 
 
-# Academic presentation PPT
 
-Hi i'm xxx, and this is joint work with xxx and xxx on 论文标题
-Good afternoon, my name is xxx, my co-authors are xxx. and our paper is titled xxx

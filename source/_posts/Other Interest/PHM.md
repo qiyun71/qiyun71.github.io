@@ -14,7 +14,6 @@ Prognostics and health management
 
 > [故障预测与健康管理 (PHM) - MATLAB & Simulink](https://ww2.mathworks.cn/discovery/prognostics-and-health-management.html)
 
-
 # Paper
 
 >  [Prognostics and health management: A review from the perspectives of design, development and decision - ScienceDirect](https://www.sciencedirect.com/science/article/pii/S0951832021005652#fig0001)

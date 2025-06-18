@@ -23,37 +23,7 @@
             }
           },
           {
-            "id": "b838bdc478ca3471",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "ModelUpdating/Review/Stochastic Model Updating with Uncertainty Quantification_An Overview and Tutorial.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": false
-              },
-              "icon": "lucide-file",
-              "title": "Stochastic Model Updating with Uncertainty Quantification_An Overview and Tutorial"
-            }
-          },
-          {
-            "id": "afb288bbc2c63f4e",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Other Interest/Reliability.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": false
-              },
-              "icon": "lucide-file",
-              "title": "Reliability"
-            }
-          },
-          {
-            "id": "446fb94943781018",
+            "id": "65602c48e4b0b76c",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -68,37 +38,52 @@
             }
           },
           {
-            "id": "94de1394ad593712",
+            "id": "135340e54101123e",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Blog&Book&Paper/Route.md",
+                "file": "Blog&Book&Paper/Write/Write tips.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "Route"
+              "title": "Write tips"
             }
           },
           {
-            "id": "c6502c4526337354",
+            "id": "0a7d90b7fdb60543",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Blog&Book&Paper/Write/Blog/Travel to Japan 2025.md",
+                "file": "ModelUpdating/Method/Sensitivity Analysis.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "Travel to Japan 2025"
+              "title": "Sensitivity Analysis"
+            }
+          },
+          {
+            "id": "ed61ab921c5f43df",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Blog&Book&Paper/Write/Write Paper/Model Updating/A fast interval model updating method based on MLP neural network.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "A fast interval model updating method based on MLP neural network"
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -135,13 +120,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Blog&Book&Paper/Write/Blog/Travel to Japan 2025.md",
+                "file": "ModelUpdating/Method/Sensitivity Analysis.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Travel to Japan 2025"
+              "title": "Outline of Sensitivity Analysis"
             }
           }
         ],
@@ -205,8 +190,8 @@
             "state": {
               "type": "recent-files",
               "state": {},
-              "icon": "lucide-file",
-              "title": "Plugin no longer active"
+              "icon": "clock",
+              "title": "Recent Files"
             }
           },
           {
@@ -244,7 +229,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "ModelUpdating/Paper about ModelUpdating.md",
+                "file": "Reports/Daily/2025-06-13.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -254,11 +239,11 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Paper about ModelUpdating"
+              "title": "Backlinks for 2025-06-13"
             }
           },
           {
-            "id": "b1fdd73ab67a5147",
+            "id": "f2eac87f3084aec7",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -268,7 +253,7 @@
             }
           },
           {
-            "id": "64e502efc1eb8bf7",
+            "id": "044b20ebf1b79fa7",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -278,7 +263,7 @@
             }
           },
           {
-            "id": "5d51f89cb8fbe53c",
+            "id": "e721d6fca913aa81",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -288,57 +273,17 @@
             }
           },
           {
-            "id": "7386b00ce6246df6",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "f4e642f63f857959",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "f55f5e5fc9994d0c",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "273e328e7b7dcd26",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "ea53b2505f1f3bfa",
+            "id": "a17ab066c1237e05",
             "type": "leaf",
             "state": {
               "type": "Saved Queries View",
               "state": {},
-              "icon": "lucide-file",
-              "title": "Plugin no longer active"
+              "icon": "feather-mouse-pointer",
+              "title": "Saved Queries"
             }
           },
           {
-            "id": "d7abbcb7a5dd2d89",
+            "id": "03bae6df273b5aca",
             "type": "leaf",
             "state": {
               "type": "Saved Queries View",
@@ -348,7 +293,7 @@
             }
           }
         ],
-        "currentTab": 12
+        "currentTab": 8
       }
     ],
     "direction": "horizontal",
@@ -377,55 +322,55 @@
       "float-search:Search obsidian in modal view": false
     }
   },
-  "active": "c6502c4526337354",
+  "active": "0a7d90b7fdb60543",
   "lastOpenFiles": [
+    "ModelUpdating/Paper about ModelUpdating.md",
+    "Reports/Daily/2025-06-17.md",
     "Blog&Book&Paper/Route.md",
-    "Blog&Book&Paper/Write/Journal&Conference.md",
-    "Blog&Book&Paper/Write/Interest.excalidraw.md",
-    "Blog&Book&Paper/Write/Life.md",
-    "Blog&Book&Paper/Write/World.md",
+    "ModelUpdating/Method/Sensitivity Analysis.md",
+    "ModelUpdating/Basics about ModelUpdating.md",
+    "Other Interest/Time Series Data.md",
+    "Reports/Teams教程.md",
+    "Reports/Daily/2025-06-15.md",
+    "Reports/Zoom使用教程.md",
+    "Reports/Daily/2025-06-13.md",
+    "Reports/Daily/2025-06-12.md",
     "Blog&Book&Paper/Write/Write tips.md",
-    "Other Interest/Uncertainty.md",
-    "Blog&Book&Paper/Write/Route.excalidraw.md",
+    "3DReconstruction/Practical/Anime Image 3D Reconstruction.md",
+    "3DReconstruction/NeuS-based 3D Reconstruction.md",
+    "Blog&Book&Paper/Write/Write Paper/Model Updating/A fast interval model updating method based on MLP neural network.md",
+    "Reports/Daily/2025-06-11.md",
+    "Reports/new.md",
+    "Templates/Front-matter.md.md",
+    "test",
+    "New folder",
     "Other Interest/Reliability.md",
-    "Read/Interest Papers/折叠翼.md",
+    "Blog&Book&Paper/Write/Interest.excalidraw.md",
+    "Blog&Book&Paper/draft.excalidraw.md",
+    "Blog&Book&Paper/Write/Write Paper/Model Updating/ModelUpdating.excalidraw.md",
+    "Blog&Book&Paper/Write/Write Paper/Model Updating/Review.excalidraw.md",
+    "ZtImgExcerpt/UFN725FV.png",
+    "ZtImgExcerpt/YVKSYF62.png",
+    "ZtImgExcerpt/S358KWN7.png",
+    "ZtImgExcerpt/R7PYYWXR.png",
+    "ZtImgExcerpt/F3DZ7RV5.png",
+    "ZtImgExcerpt/8ITZJSHT.png",
+    "ZtImgExcerpt/8VIYWBLS.png",
+    "ZtImgExcerpt/BMVV8S2I.png",
+    "ZtImgExcerpt/D5XVYQ2X.png",
+    "ZtImgExcerpt/XU5K5DEL.png",
+    "Other Interest/PHM.md",
+    "Blog&Book&Paper/Write/Write Paper/Model Updating/Self-superviside Model Updating through inverse calibration model.md",
+    "Learn/Finite Element/HyperMesh.md",
     "Read/Interest Papers",
     "Read",
-    "Blog&Book&Paper/Write/Write Paper/Model Updating/Self-superviside Model Updating through inverse calibration model.md",
-    "Learn/Finite Element/Learn-FEA.md",
-    "Other Interest/CAX.md",
-    "Learn/Math/Math.md",
-    "ModelUpdating/Case about ModelUpdating.md",
-    "Blog&Book&Paper/Read/Interest Papers/折叠翼.md",
-    "Blog&Book&Paper/Read/Book/Blockchain.md",
-    "Blog&Book&Paper/Read/Interest Papers/(BSF)Uncertainty.md",
-    "Blog&Book&Paper/Write/Write Paper/Composites Simulation/Glass fibre reinforced thermoplastic composites.excalidraw.md",
-    "ModelUpdating/Review/Stochastic Model Updating with Uncertainty Quantification_An Overview and Tutorial.md",
-    "Excalidraw/Scripts/Downloaded/Set Grid.svg",
-    "Excalidraw/Scripts/Downloaded/Set Grid.md",
-    "ModelUpdating/Basics about ModelUpdating.md",
-    "Reports/参考文献.md",
     "Blog&Book&Paper/Write/LearningRoute.canvas",
-    "Blog&Book&Paper/Write/file/Pasted Image 20241224165148_975.png",
-    "Blog&Book&Paper/Read/Book Lists.md",
-    "Blog&Book&Paper/Write/Source/Tools.md",
-    "Blog&Book&Paper/Write/Write Paper/Model Updating/Review.excalidraw.md",
-    "Blog&Book&Paper/Write/Write Paper/Composites Simulation/file/Pasted Image 20250428142127_407.png",
-    "Blog&Book&Paper/Write/Write Paper/Composites Simulation/file/Pasted Image 20250424123919_095.png",
-    "Blog&Book&Paper/Write/Write Paper/Composites Simulation/file/Pasted Image 20250424113319_579.png",
-    "Blog&Book&Paper/Write/Write Paper/Composites Simulation/file/Pasted Image 20250424113219_087.png",
     "Blog&Book&Paper/Write/Write Paper/Composites Simulation/file",
     "Blog&Book&Paper/Write/Write Paper/Composites Simulation",
-    "Blog&Book&Paper/Write/Write Paper/Model Updating/file/Pasted Image 20250419111410_036.png",
-    "Blog&Book&Paper/Write/Write Paper/Model Updating/file/Pasted Image 20250419110943_759.png",
-    "Blog&Book&Paper/Write/Write Paper/Model Updating/file/Pasted Image 20250419110853_136.png",
     "Excalidraw/Scripts/Downloaded",
     "Excalidraw/Scripts",
     "Excalidraw",
-    "ZtImgExcerpt/4CDNJBIA.png",
     "ZtImgExcerpt",
-    "LiteratureNotes",
-    "Blog&Book&Paper/Write/Write Paper/3D Reconstruction/file 1",
     "Other Interest/1.canvas",
     "3DReconstruction/Basic Knowledge/NeRF/NeRF.canvas",
     "未命名.canvas"

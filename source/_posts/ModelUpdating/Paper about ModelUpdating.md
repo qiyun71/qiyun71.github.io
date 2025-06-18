@@ -18,6 +18,11 @@ categories: ModelUpdating
 
 <!-- more -->
 
+"web of science" search results:
+https://www.webofscience.com/wos/alldb/summary/2476080f-19c8-476d-a43c-136a99535f14-01672444ff/times-cited-descending/1
+
+
+
 # Review
 
 | Year     | Paper                                                                                                                                                                                       | Summarize&*Case*                                                                                                                 |
@@ -32,7 +37,6 @@ categories: ModelUpdating
 | 2021     | [Overview of Stochastic Model Updating in Aerospace Application Under Uncertainty Treatment \| SpringerLink](https://link.springer.com/chapter/10.1007/978-3-030-83640-5_8)                 |                                                                                                                                  |
 | 2022     | [Review of finite element model updating methods for structural applications - ScienceDirect](https://www.sciencedirect.com/science/article/pii/S2352012422004039)                          |                                                                                                                                  |
 | **2023** | [Stochastic Model Updating with Uncertainty Quantification_An Overview and Tutorial](Stochastic%20Model%20Updating%20with%20Uncertainty%20Quantification_An%20Overview%20and%20Tutorial.md) | 不确定性来源：参数不确定性、模型不确定性、实验不确定性<br>*NASA UQ挑战2014、飞机模型*                                                                              |
-
 
 # Deterministic Model Updating
 
@@ -81,7 +85,6 @@ categories: ModelUpdating
 |      |                                                                                                                                                                                                                                                                           |                                                                                                                                                          |
 |      |                                                                                                                                                                                                                                                                           |                                                                                                                                                          |
 | 2024 | [An Interval Neural Network Method for Identifying Static Concentrated Loads in a Population of Structures](https://www.mdpi.com/2226-4310/11/9/770)                                                                                                                      | [Interval Neural Networks 2020](https://arxiv.org/pdf/2003.11566) 通过物理参数和measured response来辨识 集中负载。没有用 Gradients-based的算法，而是使用了GA(Genetic Algorithm)进行优化 |
-|      |                                                                                                                                                                                                                                                                           |                                                                                                                                                          |
 
 # 通用Method
 

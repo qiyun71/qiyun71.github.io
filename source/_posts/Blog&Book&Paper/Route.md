@@ -1,16 +1,15 @@
-项目：
-- Gennaro Scarselli 
-  - 复合材料实验 [Glass fibre reinforced thermoplastic composites.excalidraw](Write/Write%20Paper/Composites%20Simulation/Glass%20fibre%20reinforced%20thermoplastic%20composites.excalidraw.md)
-  - 多源不确定性下制动盘连接螺栓故障机理分析及诊断研究
-- 折叠翼模态实验
-
-论文：
-- RCS-IMC修改
-- 随机模型修正综述，论文调研
-- 自监督，时序信号
-
-会议：
-- [第二届空间科学与技术国际学术研讨会](http://b3.svipmeeting.com/web/zh)
+- 急急急：
+    - 论文|RCS-IMC修改
+    - 项目|AK-kriging 代码转成matlab一周内
+- 不急：
+    - 项目|Gennaro Scarselli复合材料实验 [Glass fibre reinforced thermoplastic composites.excalidraw](Write/Write%20Paper/Composites%20Simulation/Glass%20fibre%20reinforced%20thermoplastic%20composites.excalidraw.md) DCB test 仿真 
+    - 项目|多源不确定性下制动盘连接螺栓故障机理分析及诊断研究
+    - 项目|折叠翼模态实验
+    - 论文|随机模型修正综述，论文调研
+    - 论文|自监督，时序信号
+    - 其他|配眼镜 [Kai丨【2025年眼镜的选择全攻略】v1.0.3 - 搞七捻三 - LINUX DO](https://linux.do/t/topic/103275)
+    - 其他|[想要成为影之实力者 (更新至 第2季12) - 低端影视](https://ddys.mov/the-eminence-in-shadow/)
+    - 其他|[人生切割术 (更新至 第2季10) - 低端影视](https://ddys.mov/severance/?ep=2)
 
 ---
 

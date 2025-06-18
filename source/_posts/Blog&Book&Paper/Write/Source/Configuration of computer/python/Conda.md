@@ -23,23 +23,13 @@ voxurf/voxurf113: voxurf，环境一直不对
 clone mine:
   innsr: old_version\instantNGP成功了，instant-nsr-pl 编译通过不了
 
-
-
-dtu_eval: 评估CD的程序
-
-depth_anything: Depth Anything项目
-
 ## 模型修正
-satellite卫星
-massspring质量弹簧系统
+satellite卫星的模型修正环境(初学)
+massspring质量弹簧系统 --> model updating(大部分模型修正项目)
 
 ## other
 npyviewer: Other_Proj\NPYViewer 查看npy文件
 wopas: web operate scripts 保留autodl实例
-plot: ...
-dmodel: https://github.com/NVlabs/nvdiffrec
-dm: diffusion model learn
-latexocr: 识别latex公式
 wechatAI: 微信接入GPT模型
 gpt:学术gpt项目
 

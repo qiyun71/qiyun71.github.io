@@ -12,6 +12,10 @@ categories: 3DReconstruction
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240825220242.png)
 
+革命性成果：[Sparc3D: Sparse Representation and Construction for High-Resolution 3D Shapes Modeling](https://lizhihao6.github.io/Sparc3D/)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20250615103029.png)
+
 
 <!-- more -->
 
@@ -171,6 +175,18 @@ NeRF-based 的 NeuS 系列
 some github repo:
 
 >[emanuelevivoli/aswesome-comics-understanding: The official repo of the Comics Survey: "A missing piece in Vision and Language: A Survey on Comics Understanding"](https://github.com/emanuelevivoli/awesome-comics-understanding)
+
+
+# Sparc3D
+
+>  [Sparc3D: Sparse Representation and Construction for High-Resolution 3D Shapes Modeling](https://lizhihao6.github.io/Sparc3D/)
+
+效果非常厉害(细节丰富)，一些小瑕疵：[这里发一发我遇到的问题吧 · Issue #5 · lizhihao6/Sparc3D](https://github.com/lizhihao6/Sparc3D/issues/5)
+- 人物面部崩坏
+
+![PixPin_2025-06-15_10-25-18.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/PixPin_2025-06-15_10-25-18.png)
+
+![PixPin_2025-06-15_10-27-48.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/PixPin_2025-06-15_10-27-48.png)
 
 
 ## Dataset
