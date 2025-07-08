@@ -37,3 +37,20 @@ Prognostics and health management
 # Project
 
 ![ynZMhGSlAueAFouRAAYFahZKDfU665.jpg (1600×780)](https://faculty.dlut.edu.cn/_resources/group1/M00/00/89/ynZMhGSlAueAFouRAAYFahZKDfU665.jpg)
+
+
+# Other
+
+## 风电设备
+
+胡伟飞
+浙江大学
+
+> [【报告】浙江大学胡伟飞研究员：AI赋能的大型风电装备设计制造运维全生命周期研究_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1F9T4z2Eeh/?vd_source=1dba7493016a36a32b27a14ed2891088)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202520250702204103341.png)
+
+Costas Papadimitriou
+University of Thessaly, Greece
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202520250703215620235.png)

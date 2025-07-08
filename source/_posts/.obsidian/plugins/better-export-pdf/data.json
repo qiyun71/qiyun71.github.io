@@ -13,18 +13,20 @@
   "enabledCss": false,
   "concurrency": "5",
   "prevConfig": {
-    "pageSize": "A4",
+    "pageSize": "Custom",
     "marginType": "0",
     "showTitle": true,
     "open": true,
     "scale": 100,
-    "landscape": true,
+    "landscape": false,
     "marginTop": "10",
     "marginBottom": "10",
     "marginLeft": "10",
     "marginRight": "10",
-    "displayHeader": true,
-    "displayFooter": true,
-    "cssSnippet": "0"
+    "displayHeader": false,
+    "displayFooter": false,
+    "cssSnippet": "0",
+    "pageWidth": "210",
+    "pageHeight": "912"
   }
 }

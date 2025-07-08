@@ -64,7 +64,8 @@
     - [Browse :: Nyaa](https://nyaa.land/) 动漫音乐
     - Ban掉吸血的BT客户端 [PBH-BTN/PeerBanHelper: Automatically block unwanted, leeches and abnormal BT peers with support for customized and cloud rules.| BT 反吸血工具 - 自动封禁不受欢迎、吸血和异常的 BT 客户端，并支持自定义规则。支持 qB/qBEE/Deluge/BiglyBT/BitComet](https://github.com/PBH-BTN/PeerBanHelper)
 - 图书： Zlibrary/ Telegram Bot / [freeok/so-novel: 小说下载器 | 小说下载工具 | 小说下载神器 | 免费小说 | 网络小说 | 免费下载 | 网文下载](https://github.com/freeok/so-novel)
-- 
+- 爬虫
+  - [NanmiCoder/MediaCrawler: 小红书笔记 | 评论爬虫、抖音视频 | 评论爬虫、快手视频 | 评论爬虫、B 站视频 ｜ 评论爬虫、微博帖子 ｜ 评论爬虫、百度贴吧帖子 ｜ 百度贴吧评论回复爬虫 | 知乎问答文章｜评论爬虫](https://github.com/NanmiCoder/MediaCrawler)
 
 梯子：[IPV6](IPV6.md)
 - 机场： [猫猫云](https://www.maomaovpn.com/#/dashboard)

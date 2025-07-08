@@ -1,3 +1,8 @@
+目标：通过测量值来推断材料参数的值/不确定性(from Component material level)，更多的是对DCB时断裂机理的仿真，该如何用有限元模型中的某个参数进行描述
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202520250703230226890.png)
+
+
 Glass fibre epoxy composites / glass fibre reinforced thermoplastic composites
 - Scarselli, G.; Quan, D.; Prasad, V.; Rao, P.S.; Hardiman, M.; Reid, I.; O’Dowd, N.P.; Murphy, N.; Ivankovic, A. (2023): Mode I fracture toughness of glass fibre reinforced thermoplastic composites after UV and atmospheric plasma treatments, Composites Science and Technology, 236, Article 109982. DOI: [10.1016/j.compscitech.2023.109982](https://doi.org/10.1016/j.compscitech.2023.109982);
 - Scarselli, G.; Prasad, V.; Quan, D.; Maffezzoli, A.; Murphy, N.; Ivankovic, A. (2025): Interlaminar fracture properties of UV and plasma‐treated glass fiber epoxy composites, Polymer Composites, 46, Article 1871–1883. DOI: [10.1002/pc.29079](https://doi.org/10.1002/pc.29079);

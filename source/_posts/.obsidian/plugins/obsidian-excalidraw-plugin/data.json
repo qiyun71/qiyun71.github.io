@@ -22,7 +22,9 @@
   "drawingFilnameEmbedPostfix": " ",
   "drawingFilenameDateTime": "YYYY-MM-DD HH.mm.ss",
   "useExcalidrawExtension": true,
+  "cropSuffix": "",
   "cropPrefix": "cropped_",
+  "annotateSuffix": "",
   "annotatePrefix": "annotated_",
   "annotatePreserveSize": false,
   "previewImageType": "SVGIMG",
@@ -101,7 +103,7 @@
   "library2": {
     "type": "excalidrawlib",
     "version": 2,
-    "source": "https://github.com/zsviczian/obsidian-excalidraw-plugin/releases/tag/2.11.1",
+    "source": "https://github.com/zsviczian/obsidian-excalidraw-plugin/releases/tag/2.12.4",
     "libraryItems": [
       {
         "status": "unpublished",
@@ -167,7 +169,8 @@
             "boundElements": [],
             "updated": 1744964487612,
             "link": null,
-            "locked": false
+            "locked": false,
+            "polygon": false
           }
         ],
         "id": "sKbYiN0Fg9Myvpdf3OUK8",
@@ -289,7 +292,8 @@
             "boundElements": [],
             "updated": 1744964487613,
             "link": null,
-            "locked": false
+            "locked": false,
+            "polygon": false
           },
           {
             "id": "3CMZYj34FwjhgPB7jUC3f",
@@ -360,7 +364,8 @@
             "boundElements": [],
             "updated": 1744964487613,
             "link": null,
-            "locked": false
+            "locked": false,
+            "polygon": false
           },
           {
             "id": "DX3fUhBWtlJwYyrBDhebG",
@@ -431,7 +436,8 @@
             "boundElements": [],
             "updated": 1744964487613,
             "link": null,
-            "locked": false
+            "locked": false,
+            "polygon": false
           },
           {
             "type": "ellipse",
@@ -805,7 +811,8 @@
             "boundElements": [],
             "updated": 1744964487613,
             "link": null,
-            "locked": false
+            "locked": false,
+            "polygon": false
           },
           {
             "id": "TYsYe2VvJ60T_yKa3kyOw",
@@ -876,7 +883,8 @@
             "boundElements": [],
             "updated": 1744964487613,
             "link": null,
-            "locked": false
+            "locked": false,
+            "polygon": false
           },
           {
             "id": "VIuxhGjvYUBniitomEkKm",
@@ -947,7 +955,8 @@
             "boundElements": [],
             "updated": 1744964487613,
             "link": null,
-            "locked": false
+            "locked": false,
+            "polygon": false
           },
           {
             "type": "ellipse",
@@ -1170,7 +1179,8 @@
             "link": null,
             "locked": false,
             "startBinding": null,
-            "endBinding": null
+            "endBinding": null,
+            "polygon": false
           },
           {
             "type": "line",
@@ -1221,7 +1231,8 @@
             "link": null,
             "locked": false,
             "startBinding": null,
-            "endBinding": null
+            "endBinding": null,
+            "polygon": false
           },
           {
             "type": "line",
@@ -1276,7 +1287,8 @@
             "link": null,
             "locked": false,
             "startBinding": null,
-            "endBinding": null
+            "endBinding": null,
+            "polygon": false
           },
           {
             "type": "line",
@@ -1335,7 +1347,8 @@
             "link": null,
             "locked": false,
             "startBinding": null,
-            "endBinding": null
+            "endBinding": null,
+            "polygon": false
           },
           {
             "type": "line",
@@ -1386,7 +1399,8 @@
             "link": null,
             "locked": false,
             "startBinding": null,
-            "endBinding": null
+            "endBinding": null,
+            "polygon": false
           },
           {
             "type": "line",
@@ -1441,7 +1455,8 @@
             "link": null,
             "locked": false,
             "startBinding": null,
-            "endBinding": null
+            "endBinding": null,
+            "polygon": false
           }
         ],
         "id": "gov1fbh0UiV0zK7XCQCrj",
@@ -1525,7 +1540,8 @@
             "boundElements": [],
             "updated": 1744964487613,
             "link": null,
-            "locked": false
+            "locked": false,
+            "polygon": false
           },
           {
             "id": "FHX0ZsIzUUfYPJqrZ8Lso",
@@ -1772,7 +1788,8 @@
             "boundElements": [],
             "updated": 1744964487613,
             "link": null,
-            "locked": false
+            "locked": false,
+            "polygon": false
           },
           {
             "id": "LX6kTl9A8K36ld2MEV4tI",
@@ -1819,7 +1836,8 @@
             "boundElements": [],
             "updated": 1744964487613,
             "link": null,
-            "locked": false
+            "locked": false,
+            "polygon": false
           },
           {
             "id": "SHmV_QtcwxIE-peI_QOX1",
@@ -1890,7 +1908,8 @@
             "boundElements": [],
             "updated": 1744964487613,
             "link": null,
-            "locked": false
+            "locked": false,
+            "polygon": false
           },
           {
             "id": "PKRg6SqIetkWIgRqBAnDY",
@@ -1987,7 +2006,8 @@
             "boundElements": [],
             "updated": 1744964487613,
             "link": null,
-            "locked": false
+            "locked": false,
+            "polygon": false
           }
         ],
         "id": "1uT2EyIdcuDNbb1DGwFTa",
@@ -2161,7 +2181,7 @@
   "mdCSS": "",
   "scriptEngineSettings": {},
   "defaultTrayMode": false,
-  "previousRelease": "2.11.1",
+  "previousRelease": "2.12.4",
   "showReleaseNotes": true,
   "showNewVersionNotification": true,
   "latexBoilerplate": "\\color{blue}",

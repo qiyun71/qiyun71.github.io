@@ -1,14 +1,14 @@
 - 急急急：
-    - 论文|RCS-IMC修改
-    - 项目|AK-kriging 代码转成matlab一周内
+    - 项目|AK-kriging 代码转成matlab
 - 不急：
     - 项目|Gennaro Scarselli复合材料实验 [Glass fibre reinforced thermoplastic composites.excalidraw](Write/Write%20Paper/Composites%20Simulation/Glass%20fibre%20reinforced%20thermoplastic%20composites.excalidraw.md) DCB test 仿真 
     - 项目|多源不确定性下制动盘连接螺栓故障机理分析及诊断研究
     - 项目|折叠翼模态实验
     - 论文|随机模型修正综述，论文调研
     - 论文|自监督，时序信号
+    - 算例|非线性
+    - 会议|AIAA
     - 其他|配眼镜 [Kai丨【2025年眼镜的选择全攻略】v1.0.3 - 搞七捻三 - LINUX DO](https://linux.do/t/topic/103275)
-    - 其他|[想要成为影之实力者 (更新至 第2季12) - 低端影视](https://ddys.mov/the-eminence-in-shadow/)
     - 其他|[人生切割术 (更新至 第2季10) - 低端影视](https://ddys.mov/severance/?ep=2)
 
 ---
@@ -16,7 +16,7 @@
 Life:
 (数字孪生)通过有限元/数学建模，在计算机上(虚拟世界中)模拟真实世界的一些规律/现象，尽可能的与实际物体（实验测量）有相同的物理属性
 - 有限元分析将**构造实体几何CAD模型**通过网格划分变为**多边形网格Mesh**([3D Model](../3DReconstruction/3D%20Model.md))，然后进行求解，得到FRFs/模态频率(动力学)。
-- 对实际物体工作过程中的测量依靠各种传感器完成，eg:[图像传感器](https://zh.wikipedia.org/wiki/%E5%9B%BE%E5%83%8F%E4%BC%A0%E6%84%9F%E5%99%A8)-->照片，[压电式传感器](https://baike.baidu.com/item/%E5%8E%8B%E7%94%B5%E5%BC%8F%E4%BC%A0%E6%84%9F%E5%99%A8/8835700)-->振动(d/v/a)...
+- 对实际物体工作过程中的测量依靠各种传感器完成，e.g.[图像传感器](https://zh.wikipedia.org/wiki/%E5%9B%BE%E5%83%8F%E4%BC%A0%E6%84%9F%E5%99%A8)-->照片，[压电式传感器](https://baike.baidu.com/item/%E5%8E%8B%E7%94%B5%E5%BC%8F%E4%BC%A0%E6%84%9F%E5%99%A8/8835700)-->振动(d/v/a)...
 
 **专业技能**
 
@@ -32,9 +32,9 @@ Life:
     - [PyNastran](../Project/PyNastran.md)
     - 
 
-实验 [Vibration Measurement](../Other%20Interest/Vibration%20Measurement.md)
+实验 [Vibration Measurement](../Other%20Interest/Technology/Vibration%20Measurement.md)
 - Modal Testing (LMS)
-  - [模态试验实用技术.excalidraw](Read/Book/模态实验/模态试验实用技术.excalidraw.md)  --> [Modal Testing](../Learn/Finite%20Element/Modal%20Testing.md) 原理公式
+  - [模态试验实用技术.excalidraw](Read/Book/模态实验/模态试验实用技术.excalidraw.md) --> [Modal Testing](../Learn/Finite%20Element/Modal%20Testing.md) 原理公式
   - [模态实验.excalidraw](Read/Book/模态实验/模态实验.excalidraw.md) 实验设备/软件
 - [(WX) Dynamics experiment](Read/Interest%20Papers/(WX)%20Dynamics%20experiment.md)
 
@@ -83,8 +83,8 @@ Research Interest：
     - [Dimensions  Measurement](../3DReconstruction/Practical/Dimensions%20%20Measurement.md) 测量物体的尺寸
     - [Anime Image 3D Reconstruction](../3DReconstruction/Practical/Anime%20Image%203D%20Reconstruction.md)
 - Others
-  - [Time Series Data](../Other%20Interest/Time%20Series%20Data.md) 时间序列数据 --> 回归/分类
-  - [Small Sample Learning](../Other%20Interest/Small%20Sample%20Learning.md) 小子样问题
+  - [Time Series Data Processing](../Other%20Interest/Technology/Time%20Series%20Data%20Processing.md) 时间序列数据 --> 回归/分类
+  - [Small Sample Learning](../Other%20Interest/Technology/Small%20Sample%20Learning.md) 小子样问题
 
 编程语言
 - [Learn-Python](../Learn/Python/Learn-Python.md)
@@ -120,7 +120,7 @@ Research Interest：
 人生 [Life](Write/Life.md)
 世界 [World](Write/World.md) 
 - [Travel to Japan 2025](Write/Blog/Travel%20to%20Japan%202025.md)
-价值 [Blockchain](Read/Book/Blockchain.md)
+价值 [Values](Write/Values.md)
 
 ---
 

@@ -10,7 +10,7 @@ categories: Project
 [Elsevier Developer Portal support](https://dev.elsevier.com/support.html)
 
 TODO:
-- [ ] 根据关键词检索得到doi、摘要、endnote参考文献文件(RIS)
+- [x] ~~根据关键词检索得到doi、摘要、endnote参考文献文件(RIS)~~ -->直接用Zotero
 
 <!-- more -->
 

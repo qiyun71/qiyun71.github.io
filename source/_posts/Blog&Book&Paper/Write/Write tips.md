@@ -10,9 +10,6 @@
 | Color     | http://xhslink.com/a/CzQWDC3PiTneb                                                                                                                                                           |                                                                                                                                                                                                                                               |                                                                                                                           |                                                                                                                   |
 
 
-
-
-
 ## Latex
 
 ### Basic

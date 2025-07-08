@@ -64,23 +64,27 @@ categories: ModelUpdating
 - BMM(Beta Mixture Model)
 
 
-
 # 模型修正MU
 
 ## 基础知识
 
-[有限元模型修正方法 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/400178176)
+> [有限元模型修正方法 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/400178176)
+
+分类：
 - 基于动力有限元模型修正：矩阵型修正方法、**设计参数型修正方法**
   - 矩阵型有限元模型修正法是对有限元模型的刚度矩阵和质量矩阵进行直接修正
   - 设计参数型模型修正是对结构的设计参数，如材料的弹性模量，质量密度，截面积，弯曲、扭转惯量等参数进行修正。
 - 基于静力有限元模型修正
 
+***目前主流/常说的模型修正就是设计参数型模型修正***
+
+
 模型修正术语：
-- Model updating
-- Model verification(计算模型是否准确地表示底层数学方程及其解的过程)
-- Model validation(从其预期用途的角度确定模型准确表示专用物理实验的程度)
-- Uncertainty quantification
-- Uncertainty propagation
+- **Model updating**“adjusting physical or non-physical parameters in the computational model to improve agreement with experimental results.” ([Bi 等, 2023, p. 2](zotero://select/library/items/5JEKED2M)) ([pdf](zotero://open-pdf/library/items/5Y239HYU?page=2&annotation=C2N2YWH8)) 🔤调整计算模型中的物理或非物理参数，以提高与实验结果的一致性。🔤
+- **Model verification**“a computational model accurately represents the underlying mathematical equation and its solution.” ([Bi 等, 2023, p. 2](zotero://select/library/items/5JEKED2M)) ([pdf](zotero://open-pdf/library/items/5Y239HYU?page=2&annotation=WRH5KXHU)) 🔤计算模型准确地表示基础数学方程及其解。🔤
+- **Model validation**“the degree to which the model is an accurate representation of dedicated physical experiments from the perspective of its intended use” ([Bi 等, 2023, p. 2](zotero://select/library/items/5JEKED2M)) ([pdf](zotero://open-pdf/library/items/5Y239HYU?page=2&annotation=NHPQNNUH)) 🔤从预期用途的角度来看，模型准确表示专用物理实验的程度🔤
+- **Uncertainty quantification**“characterising all uncertainties in the model or experiment and of quantifying their effect on the simulation or experimental outputs” ([Bi 等, 2023, p. 2](zotero://select/library/items/5JEKED2M)) ([pdf](zotero://open-pdf/library/items/5Y239HYU?page=2&annotation=LUSTGYTW)) 🔤描述模型或实验中的所有不确定性，并量化它们对模拟或实验输出的影响🔤
+- **Uncertainty propagation**“transferring the uncertainty characteristics from the input parameters to the output quantify of interest through the numerical model (or a specific pathway among multiple sub-models thereof).” ([Bi 等, 2023, p. 2](zotero://select/library/items/5JEKED2M)) ([pdf](zotero://open-pdf/library/items/5Y239HYU?page=2&annotation=5LPY7VRR)) 🔤通过数值模型（或其多个子模型之间的特定路径）将不确定性特性从输入参数传输到感兴趣的输出量化。🔤
 
 ### Uncertainty in Model updating
 
@@ -118,8 +122,6 @@ Variational Bayesian methods [46], [47]
 
 
 #### IntervalMU (样本数量少，无法得到具体的分布，用区间表示)
-
-
 
 ## Traditional VS NN-based Method
 
