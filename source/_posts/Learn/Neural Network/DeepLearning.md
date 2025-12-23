@@ -29,7 +29,8 @@ categories: Learn
 
 # Model
 
-## CNN
+## CNN(Spatial)
+
 
 ```python
 """
@@ -52,6 +53,15 @@ N= (W-F+2*P)/S+1
 
 print(f"input width:{W},output width{N}")
 ```
+
+maxpooling时，会向下取整，丢弃掉多余的行/列
+例如251，一次maxpooling(kernel=2，stride=2)，则变成125，第二次则变成了62
+
+
+[nn.ConvTranspose2d | PyTorch function fully discussed | stride, padding, output_padding, dilation - YouTube](https://www.youtube.com/watch?v=Vu5xXCKG5q8)
+ConvTranspose2d 的输出尺寸公式:  
+H_out = (H_in - 1) * stride_h - 2 * padding_h + kernel_size_h + output_padding_h  
+W_out = (W_in - 1) * stride_w - 2 * padding_w + kernel_size_w + output_padding_w
 
 ### UCNN
 
@@ -82,19 +92,40 @@ print(f"input width:{W},output width{N}")
 
 [ResNet中的BasicBlock与bottleneck-CSDN博客](https://blog.csdn.net/sazass/article/details/116864275)
 
-## RNN
+## RNN(Temporal)
 
 相比一般的神经网络来说，他能够处理序列变化的数据
 
 ### LSTM
 
 >[人人都能看懂的LSTM - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/32085405)
->讲的很好：[三分钟吃透RNN和LSTM神经网络](https://www.zhihu.com/tardis/zm/art/86006495?source_id=1003)
+> 讲的很好：[三分钟吃透RNN和LSTM神经网络](https://www.zhihu.com/tardis/zm/art/86006495?source_id=1003)
 
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20240112195022.png)
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures20240112194924.png)
+```python
+self.rnn = nn.LSTM(input_size=in_dim,
+                hidden_size=hidden_dim,
+                num_layers=num_layers,
+                batch_first=batch_first,
+                bidirectional=bidirectional,
+                dropout=self.dropout)
+```
+
+> [LSTM — PyTorch 2.8 documentation](https://docs.pytorch.org/docs/stable/generated/torch.nn.LSTM.html)
+> [PyTorch 中 LSTM 的 output、h_n 和 c_n 之间的关系_lstm 最终output h c有什么关系-CSDN博客](https://blog.csdn.net/sdnuwjw/article/details/111221937)
+
+batch_first，设为True，让Batch size为第一维
+bidirectional，是否双向，默认False
+输入(B, Seq, feature)的数据，self.rnn输出:
+- output: (B, seq, hidden_size)
+- h_n：（n_layers, B, hidden_size）
+- c_n: （n_layers, B, hidden_size）
+
+可以直接把`h_n[-1]`，即最后一层输出output的最后一个数seq=-1作为输出
+也可以把output直接作为输出，然后通过线性层继续提取特征
 
 ## U-Net
 
@@ -107,7 +138,41 @@ print(f"input width:{W},output width{N}")
 
 图像分割
 
-## VAE
+
+
+## Generate Model
+
+>  [概览：VAE, GAN, Flow Model 和 Diffusion 的关系_vae gan diffusion 知乎-CSDN博客](https://blog.csdn.net/m0_63635128/article/details/139817046)
+![cb94bf430b1d1ed2ff20a59eec725ba5.png (1063×729)](https://i-blog.csdnimg.cn/blog_migrate/cb94bf430b1d1ed2ff20a59eec725ba5.png)
+
+### GAN
+
+> [生成对抗网络——原理解释和数学推导 - 黄钢的部落格|Canary Blog](https://alberthg.github.io/2018/05/05/introduction-gan/)
+
+GAN在结构上受博弈论中的二人零和博弈 （即二人的利益之和为零，一方的所得正是另一方的所失）的启发，训练过程：
+- 训练判别器：首先我们随机初始化生成器 G，并输入一组随机向量(Randomly sample a vactor)，以此产生一些图片，并把这些图片标注成 0（假图片）。同时把来自真实分布中的图片标注成 1（真图片）。两者同时丢进判别器 D 中，以此来训练判别器 D 。实现当输入是真图片的时候，判别器给出接近于 1 的分数，而输入假图片的时候，判别器给出接近于 0 的低分。
+- 训练生成器：对于生成网络，目的是生成尽可能逼真的样本。所以在训练生成网络的时候，我们需要联合判别网络一起才能达到训练的目的。也就是说，通过将两者串接的方式来产生误差从而得以训练生成网络。步骤是：我们通过随机向量（噪声数据）经由生成网络产生一组假数据，并将这些假数据都标记为 1 。然后将这些假数据输入到判别网路里边，火眼金睛的判别器肯定会发现这些标榜为真实数据（标记为1）的输入都是假数据（给出低分），这样就产生了误差。在训练这个串接的网络的时候，一个很重要的操作就是不要让判别网络的参数发生变化，只是把误差一直传，传到生成网络那块后更新生成网络的参数。这样就完成了生成网络的训练了。
+
+已知真实的分布$p_{data}(x)$，如何找到最合适的参数z，来使得生成的$p_{model}(x;z)$与真实分布之间的差异最小——极大似然估计：
+- $\theta_{ML}=arg\operatorname*{\max}_{\theta}p_{model}(X;\theta)=arg\operatorname*{max}_{\theta}\prod_{i=1}^mp_{model}(x^{(i)};\theta)$
+- $\theta_{ML}=arg\underset{\theta}{\operatorname*{max}}\sum_{i=1}^mlog\left.p_{model}(x^{(i)};\theta)\right.$ 通过log将累乘变成累加
+- $\theta_{ML} = arg\max_{\theta} E_{x \sim \hat{p}_{data}} log p_{model}(x;\theta)$ 由于缩放代价函数不会影响求导和求argmax，因此除以m来将求和变成期望，当m-->$\infty$ 时，经验分布就会是真实数据的分布$\hat{p}_{data}\to p_{data}(x)$
+
+通过$p_{model(x)}$与$p_{data}(x)$之间的差异衡量，来训练G和D:
+$$\min_{G}\max_{D}V(G,D)=\mathbb{E}_{x\sim p_{data}(x)}[logD(\mathbf{x})]+\mathbb{E}_{z\sim p_{z}(z)}[log(1-D(G(\mathbf{z})))]$$
+- $D^{*}=arg\max_{D}V(G,D)$ 生成器固定，判别器D判断的越好，V=1+1越大，D越差，V=0+0越小
+- $G^{*}=arg\min_{G}\max_{D}V(G,D)$ 判别器固定，生成器G生成的越好，V=1+0越小
+
+
+
+### VAE
+
+AE:[PyTorch-Tutorial/tutorial-contents/404_autoencoder.py at master · MorvanZhou/PyTorch-Tutorial](https://github.com/MorvanZhou/PyTorch-Tutorial/blob/master/tutorial-contents/404_autoencoder.py)
+
+
+VAE:相较于AE的离散潜在空间，VAE的目标是使得潜在空间连续(正态分布)，这样才能从任意潜在空间样本生成目标数据
+$D_{KL}(P||Q)=\int p(x)\log\left(\frac{p(x)}{q(x)}\right)dx\mathrm{。}$ $D_{KL}(P||Q)=\log\frac{\sigma_{2}}{\sigma_{1}}+\frac{\sigma_{1}^{2}+(\mu_{1}-\mu_{2})^{2}}{2\sigma_{2}^{2}}-\frac{1}{2}$
+$Loss_{recon}=-\mathbb{E}_{q(\mathbf{z}|\mathbf{x})}\left[\log p(\mathbf{x}|\mathbf{z})\right]$
 
 [【生成式AI】Diffusion Model 原理剖析 (2/4) (optional) - YouTube](https://www.youtube.com/watch?v=73qwu77ZsTM)
 
@@ -129,262 +194,13 @@ Maximize ： Lower bound of $logP(x)$
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231022204951.png)
 
 
-## GAN
+### Flow-based Model
 
-> [生成对抗网络——原理解释和数学推导 - 黄钢的部落格|Canary Blog](https://alberthg.github.io/2018/05/05/introduction-gan/)
+[Flow-based generative model](DeepLearning/Flow-based%20generative%20model.md)
 
-GAN在结构上受博弈论中的二人零和博弈 （即二人的利益之和为零，一方的所得正是另一方的所失）的启发，训练过程：
-- 训练判别器：首先我们随机初始化生成器 G，并输入一组随机向量(Randomly sample a vactor)，以此产生一些图片，并把这些图片标注成 0（假图片）。同时把来自真实分布中的图片标注成 1（真图片）。两者同时丢进判别器 D 中，以此来训练判别器 D 。实现当输入是真图片的时候，判别器给出接近于 1 的分数，而输入假图片的时候，判别器给出接近于 0 的低分。
-- 训练生成器：对于生成网络，目的是生成尽可能逼真的样本。所以在训练生成网络的时候，我们需要联合判别网络一起才能达到训练的目的。也就是说，通过将两者串接的方式来产生误差从而得以训练生成网络。步骤是：我们通过随机向量（噪声数据）经由生成网络产生一组假数据，并将这些假数据都标记为 1 。然后将这些假数据输入到判别网路里边，火眼金睛的判别器肯定会发现这些标榜为真实数据（标记为1）的输入都是假数据（给出低分），这样就产生了误差。在训练这个串接的网络的时候，一个很重要的操作就是不要让判别网络的参数发生变化，只是把误差一直传，传到生成网络那块后更新生成网络的参数。这样就完成了生成网络的训练了。
+### Diffusion Model
 
-已知真实的分布$p_{data}(x)$，如何找到最合适的参数z，来使得生成的$p_{model}(x;z)$与真实分布之间的差异最小——极大似然估计：
-- $\theta_{ML}=arg\operatorname*{\max}_{\theta}p_{model}(X;\theta)=arg\operatorname*{max}_{\theta}\prod_{i=1}^mp_{model}(x^{(i)};\theta)$
-- $\theta_{ML}=arg\underset{\theta}{\operatorname*{max}}\sum_{i=1}^mlog\left.p_{model}(x^{(i)};\theta)\right.$ 通过log将累乘变成累加
-- $\theta_{ML} = arg\max_{\theta} E_{x \sim \hat{p}_{data}} log p_{model}(x;\theta)$ 由于缩放代价函数不会影响求导和求argmax，因此除以m来将求和变成期望，当m-->$\infty$ 时，经验分布就会是真实数据的分布$\hat{p}_{data}\to p_{data}(x)$
-
-通过$p_{model(x)}$与$p_{data}(x)$之间的差异衡量，来训练G和D:
-$$\min_{G}\max_{D}V(G,D)=\mathbb{E}_{x\sim p_{data}(x)}[logD(\mathbf{x})]+\mathbb{E}_{z\sim p_{z}(z)}[log(1-D(G(\mathbf{z})))]$$
-- $D^{*}=arg\max_{D}V(G,D)$ 生成器固定，判别器D判断的越好，V=1+1越大，D越差，V=0+0越小
-- $G^{*}=arg\min_{G}\max_{D}V(G,D)$ 判别器固定，生成器G生成的越好，V=1+0越小
-
-
-## Diffusion Model
-
-> [2. 扩散概率模型（diffusion probabilistic models） — 张振虎的博客 张振虎 文档](https://www.zhangzhenhu.com/aigc/%E6%89%A9%E6%95%A3%E6%A6%82%E7%8E%87%E6%A8%A1%E5%9E%8B.html#diffusion-probabilistic-model)
-
-$q(x_t|x_{t-1}) = \mathcal{N} (\sqrt{\alpha_t} \ x_{t-1}, (1- \alpha_t ) \textit{I} )$
-
-$\begin{align}\begin{aligned}x_{t} &=\sqrt{\alpha_t} \ x_{t-1} + \mathcal{N} (0, (1- \alpha_t ) \textit{I} )\\&=\sqrt{\alpha_t} \ x_{t-1} +  \sqrt{1- \alpha_t } \ \epsilon \ \ \ ,\epsilon \sim \mathcal{N} (0, \textit{I} )\end{aligned}\end{align}$
-
-随着t的增大，$\alpha_{t}$在逐渐变小。这是由于前期如果加的噪声太多，会使得数据扩展的太快（比如突变），使得逆向还原变得困难； 同样因为后期数据本身已经接近随机噪声数据了，后期如果加的噪声不够多，相当于变化幅度小，扩散的太慢，这会使得链路变长需要的事件变多。 我们希望扩散的前期慢一点，后期快一点
-
-通过设定超参数$\alpha_{0:T}$可以看出**前向加噪**的过程是可以直接通过公式计算的，没有未知参数。
-
-$$
-\begin{align}\begin{aligned}x_t &= \sqrt{\alpha_t} \ x_{t-1} + \sqrt{1-\alpha_t} \ \epsilon_{t}\\&= \sqrt{\alpha_t} \left(   \sqrt{\alpha_{t-1}} \ x_{t-2} + \sqrt{1-\alpha_{t-1}} \ \epsilon_{t-1}  \right ) + \sqrt{1-\alpha_t} \ \epsilon_{t}\\&=  \sqrt{\alpha_t \alpha_{t-1} }  \ x_{t-2}
-+ \underbrace{ \sqrt{\alpha_t - \alpha_t \alpha_{t-1} }\ \epsilon_{t-1} + \sqrt{1- \alpha_t} \ \epsilon_{t}
-  }_{\text{两个相互独立的0均值的高斯分布相加}}\\
-&=  \sqrt{\alpha_t \alpha_{t-1} }  \ x_{t-2}
-+ \underbrace{  \sqrt{ \sqrt{\alpha_t - \alpha_t \alpha_{t-1} }^2 + \sqrt{1- \alpha_t}^2  } \ \epsilon
-}_{\text{两个方差相加，用一个新的高斯分布代替}}\\&= \sqrt{\alpha_t \alpha_{t-1} }  \ x_{t-2} + \sqrt{1- \alpha_t \alpha_{t-1}} \ \epsilon\\&= ...\\&= \sqrt{\prod_{i=1}^t \alpha_i} \ x_0 + \sqrt{1- \prod_{i=1}^t \alpha_i }  \ \epsilon\\&= \sqrt{\bar{ \alpha}_t } \ x_0 + \sqrt{1- \bar{ \alpha}_t }  \ \epsilon  \ \ \ ,
-\bar{\alpha} = \prod_{i=1}^t \alpha_i ,\ \ \epsilon \sim \mathcal{N}(0,\textit{I})\\&\sim \mathcal{N}(\sqrt{\bar{\alpha}_t } \ x_0,  (1- \bar{ \alpha}_t)    \textit{I})\end{aligned}\end{align}
-$$
-
-而逆向过程需要从噪声开始，逐步解码成一个有意义的数据 $p(x_{0:T}) = p(x_T) \prod_{t={T-1}}^0 p(x_{t}|x_{t+1})$
-- 在这里$p(x_T) \sim \mathcal{N}(0,\textit{I})$ 是高斯分布，但是$p_{\theta}(x_{t}|x_{t+1})$ 是难以求解的(分母部分含有积分，且没有解析解)，依次使用网络来拟合学习这一条件概率分布 $p(x_{t}|x_{t+1})=\frac{p(x_{t},x_{t+1})}{p(x_{t+1})}=\frac{p(x_{t+1}|x_{t})p(x_{t})}{\int_{-\infty}^{+\infty}p(x_{t+1}|x_{t})p(x_{t})dx_{t}}.$
-- 目标函数（ELBO）我们知道学习一个概率分布的未知参数的常用算法是极大似然估计， 极大似然估计是通过极大化观测数据的对数概率（似然）实现的
-
-### DDPM(Denoising Diffusion Probabilistic Models)
-
-$\text{Maximize E}_{q(x_1:x_T|x_0)}[log\left(\frac{P(x_0;x_T)}{q(x_1:x_T|x_0)}\right)]$
-
-$q(x_t|x_0)$ 可以只做一次 sample(给定一系列 $\beta$)
-
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023100329.png)
-
-DDPM 的 Lower bound of $logP(x)$ 
-复杂公式推导得到： ELBO函数来约束网络训练
-$logP(x) \geq \operatorname{E}_{q(x_1|x_0)}[logP(x_0|x_1)]-KL\big(q(x_T|x_0)||P(x_T)\big)-\sum_{t=2}^{T}\mathrm{E}_{q(x_{t}|x_{0})}\bigl[KL\bigl(q(x_{t-1}|x_{t},x_{0})||P(x_{t-1}|x_{t})\bigr)\bigr]$
-- $\mathbb{E}_{q(x_{1}|x_0)}\left[\ln p_{\theta}(x_0|x_1)\right]$ 重建项，从隐式变量中重建出原来的数据$x_{0}$
-- $\mathbb{E}_{q(x_{T-1}|x_0)}\left[D_{KL}{q(x_T|x_{T-1})}{p(x_T)}\right]$ 最后一个数据是高斯噪声，因此当T足够大，这一项趋于0
-- $\mathbb{E}_{q(x_{t-1}, x_{t+1}|x_0)}\left[D_{KL}{q(x_{t}|x_{t-1})}{p_{{\theta}}(x_{t}|x_{t+1})}\right]$ KL散度度量， consistency term。这一项用来最小化$q(x_{t}|x_{t-1})$ 与 $p_{{\theta}}(x_{t}|x_{t+1})$ 之间的差异。期望是关于两个变量的，用采样法（MCMC）同时对两个随机变量进行采样，会导致更大的方差，这会使得优化过程不稳定，不容易收敛，可以将$p_{{\theta}}(x_{t}|x_{t+1})$优化为：$q(x_{t-1}|x_t, x_0)$
-
-$q(x_t | x_{t-1}, x_0) = \frac{q(x_{t-1} \mid x_t, x_0)q(x_t \mid x_0)}{q(x_{t-1} \mid x_0)}$
-
-条件独立性：假设有三个随机变量A，B，C，三者依赖关系：A-->B-->C，当B值已知时，A和C相互独立，此时$P(C|B)=P(C|B,A)$ 成立  $q(x_t | x_{t-1}) = q(x_t | x_{t-1}, x_0)$
-联合概率的基本性质：$q(x_t, x_{t-1}, x_0) = q(x_t \mid x_{t-1}, x_0) q(x_{t-1} \mid x_0) q(x_0)$ 另一种形式$q(x_t, x_{t-1}, x_0) = q(x_{t-1} \mid x_t, x_0) q(x_t \mid x_0) q(x_0)$
-
-$q(x_t \mid x_{t-1}, x_0) q(x_{t-1} \mid x_0) q(x_0) = q(x_{t-1} \mid x_t, x_0) q(x_t \mid x_0) q(x_0)$
-即得$q(x_t | x_{t-1}, x_0) = \frac{q(x_{t-1} \mid x_t, x_0)q(x_t \mid x_0)}{q(x_{t-1} \mid x_0)}$ 和 $q(x_{t-1}|x_{t},x_{0}) =\frac{q(x_{t}|x_{t-1})q(x_{t-1}|x_{0})}{q(x_{t}|x_{0})}$
-
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240923093718.png)
-
-
-**直接预测原始样本** $x_t=\sqrt{\bar{\alpha}_t}x_0+\sqrt{1-\bar{\alpha}_t}\epsilon.$
-- $q(x_{t-1}|x_{t},x_{0}) =\frac{q(x_{t}|x_{t-1})q(x_{t-1}|x_{0})}{q(x_{t}|x_{0})}$ 为一个 Gaussian distribution [推导过程](https://www.zhangzhenhu.com/aigc/%E6%89%A9%E6%95%A3%E6%A6%82%E7%8E%87%E6%A8%A1%E5%9E%8B.html#equation-eq-ddpm-036)
-  - 均值+方差： $mean = \frac{\sqrt{\bar{\alpha}_{t-1}}\beta_{t}x_{0}+\sqrt{\alpha_{t}}(1-\bar{\alpha}_{t-1})x_{t}}{1-\bar{\alpha}_{t}}$ ，$variance = \frac{1-\bar{\alpha}_{t-1}}{1-\bar{\alpha}_{t}}\beta$
-
-$x_0$需要通过网络预测来获得，因此：
-$\mu_q(x_t, x_0) = { \frac{\sqrt{\alpha_t}(1-\bar\alpha_{t-1})x_{t} + \sqrt{\bar\alpha_{t-1}}(1-\alpha_t)x_0}{1 -\bar\alpha_{t}}}$
-$\mu_{\theta}={\mu}_{{\theta}}(x_t, t) = \frac{\sqrt{\alpha_t}(1-\bar\alpha_{t-1})x_{t} + \sqrt{\bar\alpha_{t-1}}(1-\alpha_t)\hat x_{{\theta}}(x_t, t)}{1 -\bar\alpha_{t}}$ 网络预测$\hat{x}_{\theta}$ ，然后这个分布，采样得到$x_{t-1}$
-
-**然而直接预测$x_{0}$时非常困难得，每个步骤都只给定每一步的t来预测同样的输出，(trained)相同的网络参数很难完成这样的预测**
-
-因此DDPM转换思路来**预测每步t中添加的噪声**：
-$x_0 =  \frac{x_t -\sqrt{1- \bar{ \alpha}_t }  \ \epsilon_t }{ \sqrt{\bar{\alpha}_t }  },\ \ \epsilon_t \sim \mathcal{N}(0,\textit{I})$
-
-均值：$\mu_{\theta}={\mu}_{{\theta}}(x_t, t) = \frac{1}{\sqrt{\alpha_t}}x_t - \frac{1 - \alpha_t}{\sqrt{1 - \bar\alpha_t}\sqrt{\alpha_t}} {\hat\epsilon}_{ {\theta}}(x_t, t)$ [推导过程](https://www.zhangzhenhu.com/aigc/%E6%89%A9%E6%95%A3%E6%A6%82%E7%8E%87%E6%A8%A1%E5%9E%8B.html#equation-eq-ddpm-054) (将$x_{0}$重写成$\epsilon$)
-
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231022210535.png)
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231022210617.png)
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231023102747.png)
-
-
-### DDPM 三种形式
-
-逆向生成过程：$q(x_{t-1}|x_t,x_0) \sim \mathcal{N}(x_{t-1},\mu_q,\Sigma_{q(t)})$
-
-方差：
-$\Sigma_q(t) = \frac{(1 - \alpha_t)(1 - \bar\alpha_{t-1})}{ 1 -\bar\alpha_{t}}  \textit{I} = \sigma_q^2(t)   \textit{I}$
-
-
-#### 1）直接预测初始样本
-$\mu_q(x_t, x_0) = { \frac{\sqrt{\alpha_t}(1-\bar\alpha_{t-1})x_{t} + \sqrt{\bar\alpha_{t-1}}(1-\alpha_t)x_0}{1 -\bar\alpha_{t}}}$
-
-$\mu_{\theta}={\mu}_{{\theta}}(x_t, t) = \frac{\sqrt{\alpha_t}(1-\bar\alpha_{t-1})x_{t} + \sqrt{\bar\alpha_{t-1}}(1-\alpha_t)\hat x_{{\theta}}(x_t, t)}{1 -\bar\alpha_{t}}$
-
-#### 2）预测噪声
-$\mu_q(x_t, x_0) = \frac{1}{\sqrt{\alpha_t}}x_t - \frac{1 - \alpha_t}{\sqrt{1 - \bar\alpha_t}\sqrt{\alpha_t}}\ \epsilon$
-
-$\mu_{\theta}={\mu}_{{\theta}}(x_t, t) = \frac{1}{\sqrt{\alpha_t}}x_t - \frac{1 - \alpha_t}{\sqrt{1 - \bar\alpha_t}\sqrt{\alpha_t}} {\hat\epsilon}_{ {\theta}}(x_t, t)$
-
-#### 3）预测分数
-${\mu}_q(x_t, x_0) =  \frac{1}{\sqrt{\alpha_t}}x_t + \frac{1 - \alpha_t}{\sqrt{\alpha_t}}\nabla\log p(x_t)$
-
-${\mu}_q(x_t, x_0) =  \frac{1}{\sqrt{\alpha_t}}x_t + \frac{1 - \alpha_t}{\sqrt{\alpha_t}} s_{\theta}(x_t,t)$
-
-
-### DDPM Code
-
-[mikonvergence/DiffusionFastForward: DiffusionFastForward: a free course and experimental framework for diffusion-based generative models (github.com)](https://github.com/mikonvergence/DiffusionFastForward)
-
-#### Schedule
-
-* `betas`: $\beta_t$ , `betas=torch.linspace(1e-4,2e-2,num_timesteps)`
-* `alphas`: $\alpha_t=1-\beta_t$ 
-* `alphas_sqrt`:  $\sqrt{\alpha_t}$
-* `alphas_prod`: $\bar{\alpha}_t=\prod_{i=0}^{t}\alpha_i$
-* `alphas_prod_sqrt`: $\sqrt{\bar{\alpha}_t}$
-
-diffusion step 0,1,...,t,...T：随着t增大，beta应该逐渐增大
-- cosine: 
-  - $\alpha_{cumprod} =\cos\left( \left( \frac{\frac{t}{T}+s}{(1+s)}\cdot \pi \cdot 0.5 \right)^{2} \right)$ ，value: $\cos\left( \frac{s}{1+s} \cdot \frac{\pi}{2} \right)$ ~$\cos\left( \frac{\pi}{2} \right)$ = $\cos(0)$ ~ $\cos\left( \frac{\pi}{2} \right)$ if s --> 0
-  - $\alpha_{cumprod} = \frac{\alpha_{cumprod}}{\alpha_{cumprod}^{max}}$, 让最大的$\alpha$不超过1
-  - $\beta$ = `1 - (alphas_cumprod[1:] / alphas_cumprod[:-1])`
-- linear: 
-  - $linspace\left( scale*0.0001,scale*0.02,T \right)$ , $scale=\frac{1000}{T}$
-
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240924095523.png)
-
-
-```python
-# consine beta
-def cosine_beta_schedule(timesteps, s=0.008):
-  """
-  cosine schedule
-  as proposed in https://openreview.net/forum?id=-NEXDKk8gZ
-  """
-  steps = timesteps + 1
-  x = torch.linspace(0, timesteps, steps, dtype=torch.float64)
-  alphas_cumprod = torch.cos(((x / timesteps) + s) / (1 + s) * math.pi * 0.5) ** 2
-  alphas_cumprod = alphas_cumprod / alphas_cumprod[0]
-  betas = 1 - (alphas_cumprod[1:] / alphas_cumprod[:-1])
-  return torch.clip(betas, 0, 0.999)
-
-# linear beta
-def linear_beta_schedule(timesteps):
-  scale = 1000 / timesteps
-  beta_start = scale * 0.0001
-  beta_end = scale * 0.02
-  return torch.linspace(beta_start, beta_end, timesteps, dtype=torch.float64)
-```
-
-#### Forward Process
-
-Forward step:
-$$q(x_t|x_{t−1}) := \mathcal{N}(x_t; \sqrt{1 − \beta_t}x_{t−1}, \beta_tI) \tag{1}$$
-Forward jump:
-$$q(x_t|x_0) = \mathcal{N}(x_t;\sqrt{\bar{\alpha_t}}x_0, (1 − \bar{\alpha_t})I) \tag{2}$$
-
-```python
-def forward_step(t, condition_img, return_noise=False):
-    """
-        forward step: t-1 -> t
-    """
-    assert t >= 0
-
-    mean=alphas_sqrt[t]*condition_img
-    std=betas[t].sqrt()
-
-    # sampling from N
-    if not return_noise:
-        return mean+std*torch.randn_like(img)
-    else:
-        noise=torch.randn_like(img)
-        return mean+std*noise, noise
-
-def forward_jump(t, condition_img, condition_idx=0, return_noise=False):
-    """
-        forward jump: 0 -> t
-    """
-    assert t >= 0
-
-    mean=alphas_cumprod_sqrt[t]*condition_img
-    std=(1-alphas_cumprod[t]).sqrt()
-
-    # sampling from N
-    if not return_noise:
-        return mean+std*torch.randn_like(img)
-    else:
-        noise=torch.randn_like(img)
-        return mean+std*noise, noise
-```
-
-#### Reverse Process
-至少三种逆向过程的求法，从 $x_{t}$ 到 $x_{0}$
-There are **at least 3 ways of parameterizing the mean** of the reverse step distribution $p_\theta(x_{t-1}|x_t)$:
-* Directly (a neural network will estimate $\mu_\theta$)直接用网络预测 $\mu_\theta$
-* Via $x_0$ (a neural network will estimate $x_0$)用网络预测 $x_0$
-$$\tilde{\mu}_\theta = \frac{\sqrt{\bar{\alpha}_{t-1}}\beta_t}{1-\bar{\alpha}_t}x_0 + \frac{\sqrt{\alpha_t}(1-\bar{\alpha}_{t-1})}{1-\bar{\alpha}_t}x_t\tag{4}$$
-* Via noise $\epsilon$ subtraction from $x_0$ (a neural network will estimate $\epsilon$)用网络预测噪声 $\epsilon$
-$$x_0=\frac{1}{\sqrt{\bar{\alpha}_t}}(x_t-\sqrt{1-\bar{\alpha}_t}\epsilon)\tag{5}$$
-
-### Why Does Diffusion Work Better than Auto-Regression?
-
-> [Why Does Diffusion Work Better than Auto-Regression? - YouTube](https://www.youtube.com/watch?v=zc5NTeJbk-k)
-
-- 分类任务：图片-->类别
-
-如何生成图片(Thinking)：
-- 从任意数据中预测整张图片(真实图片做标签)，这样训练集标签图片的mean value会变blurring(**blurry mess**)。(分类任务中训练集标签01的meaning value不会收到很大影响)
-- **Auto-Regressor**: 正向过程是不断擦除图像，网络被训练为undo这个过程，即不断预测图片的下一个像素是什么颜色(like ChatGPT)
-  - 考虑来预测图片中的单个像素，这样训练集标签的mean value是另一个颜色值(网络根据输入的图片来预测单个颜色值)。每个像素的颜色训练一个网络来进行预测，通过多个网络，依次预测每个像素值，最终得到整张图片。这样就能生成plausible(似乎是真的) image，out of nothing(凭空)。**然而每次生成的图片是相同的**
-  - 考虑添加随机，之前predicted pixel是概率分布中概率最大的那个颜色值，**不去这样选择而是随机选择某个概率的颜色作为本次的预测**
-  - 缺点是随着像素量的增大，计算量非常大，要生成一张大像素图像是非常耗时的。当然可以造数据集时一次remove多个像素，在训练中一次预测多个像素。**但是不能过多，这样依然会造成blurry mess** Trade-off：更快但是blurry mess，更慢但是更准确
-
-**Blurry mess**：
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240808183321.png)
-
-**Why predicting one pixel is work**： 
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240808183400.png)
-
-该问题只会出现在预测的值是互相关的情况(在图像中相近的像素通常是强相关的，这在按顺序remove时出现)，假设预测的值相互独立的情况(随机remove像素)。**remove像素可以从另一种角度进行实现，即给每个像素添加噪声**
-
-### Stable Diffusion
-
-> [Stable Diffusion 图片生成原理简述 « bang’s blog](https://blog.cnbang.net/tech/3766/)
-
-目前常见的 UI 有 WebUI 和 ComfyUI
-
-#### 模型
-
-模型格式：
-- 主模型 checkpoints：*ckpt, safetensors*
-- 微调模型
-  - LoRA 和 LyCORIS 控制画风和角色：*safetensors*
-  - 文本编码器模型：*pt,safetensors*
-    - Embedding 输入文本 prompt 进行编码 *pt*
-  - Hypernetworks 低配版的 lora *pt*
-  - ControlNet
-  - VAE 图片与潜在空间 *pt*
-
-
-#### 采样器
-
-[Stable diffusion采样器全解析，30种采样算法教程](https://www.bilibili.com/video/BV1FN411i7sB/)
-DPM++2M Karras，收敛+速度快+质量 OK
-
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20231022195103.png)
+[Diffusion Model](DeepLearning/Diffusion%20Model.md)
 
 
 ## MLP
@@ -555,19 +371,16 @@ INN offers greater fitting flexibility due to the interval of weight and bias
 [第三代神经网络初探：脉冲神经网络（Spiking Neural Networks） - 知乎](https://zhuanlan.zhihu.com/p/531524477)
 
 
-## KNN
+
+## Kriging(Physical-law embedded)
+
+[Kriging](DeepLearning/Kriging.md)
 
 
+## GNN
 
-## DKNN
-
-[in1311/DKNN](https://github.com/in1311/DKNN)
-deep kriging neural network 可以用来插值计算
-
-
-![320357068-0b1f8538-f751-43f3-85f8-cc72dd7decd2.png (2227×1802)](https://private-user-images.githubusercontent.com/140888660/320357068-0b1f8538-f751-43f3-85f8-cc72dd7decd2.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzQyNDczOTAsIm5iZiI6MTczNDI0NzA5MCwicGF0aCI6Ii8xNDA4ODg2NjAvMzIwMzU3MDY4LTBiMWY4NTM4LWY3NTEtNDNmMy04NWY4LWNjNzJkZDdkZWNkMi5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQxMjE1JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MTIxNVQwNzE4MTBaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT00YWNkYWI0MThjMjYyMjlkMjczMmE5NDIzMTE1ZDQ2ZDhkYzE2NzNkYTA3OThkYWZiMDRkNzkwYTljMTQwYzQ4JlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.7HwI7n6J6gm1o56R_IK9beqmtfvtA5p3HobA5x50XJM)
-
-
+[A Gentle Introduction to Graph Neural Networks](https://distill.pub/2021/gnn-intro/)
+[(21 封私信 / 3 条消息) 图神经网络（GNN）最简单全面原理与代码实现！ - 知乎](https://zhuanlan.zhihu.com/p/603486955)
 
 # 其他概念
 

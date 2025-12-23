@@ -30,5 +30,12 @@
   "blue-topaz-theme@@search-bar-style-option": "default-search-bar",
   "blue-topaz-theme@@layout-style-options": "layout-style-options-default",
   "blue-topaz-theme@@background-settings-workplace-theme-light": "background-settings-workplace-theme-light-in-the-note",
-  "blue-topaz-theme@@blur-depth": 10
+  "blue-topaz-theme@@blur-depth": 10,
+  "baseline-style@@color-scheme-light": "things-light",
+  "baseline-style@@background-contrast-light": "contrast-light",
+  "Blue-Topaz-Codebox-Highlight@@code-theme-selection": "code-theme-bt-default",
+  "Blue-Topaz-Codebox-Highlight@@mute-code-indent-line": false,
+  "Blue-Topaz-Codebox-Highlight@@code-box-style-option": "codebox-default-style",
+  "Blue-Topaz-Codebox-Highlight@@code-line-number": true,
+  "blue-topaz-theme@@fancy-hr": "fancy-hr-number"
 }

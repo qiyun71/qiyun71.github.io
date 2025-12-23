@@ -94,3 +94,6 @@ Fracture toughness: $G_C=G_m+G_p+G_f+G_{deb}$
 - $G_{f}$ is the work needed for the **fibre fracture**
 - $G_{deb}$ is the energy associated with the fibre/matrix interfacial debonding. **已知**
 
+### Other
+
+[Yang-shengze/Cohesive-insert: Insert cohesive element](https://github.com/Yang-shengze/Cohesive-insert)

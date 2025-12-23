@@ -15,6 +15,13 @@ matplotlib | seaborn
 
 <!--more-->
 
+> [Matplotlib cheatsheets — Visualization with Python](https://matplotlib.org/cheatsheets/)
+
+![cheatsheets-1.png (1754×1240)](https://matplotlib.org/cheatsheets/_images/cheatsheets-1.png)
+
+![cheatsheets-2.png (1754×1240)](https://matplotlib.org/cheatsheets/_images/cheatsheets-2.png)
+
+
 # 其他
 
 ## 布局
@@ -22,11 +29,24 @@ matplotlib | seaborn
 plt.tight_layout()
 通常在绘制多个子图时使用，用于自动调整图形中的子图布局，以避免子图之间的重叠或太过拥挤
 
-
+```python
+# 手动创建图例，因为matplotlib的3D图例支持不完美
+from matplotlib.lines import Line2D
+from matplotlib.patches import Patch
+legend_elements = [Line2D([0], [0], color='gray', lw=1, label='Real function'),
+                   Patch(facecolor=cm.Blues(0.8), edgecolor=cm.Blues(1.0), label='Kriging predict'),
+                   Line2D([0], [0], marker='o', color='w', label='Train data', markerfacecolor='black', markersize=10)]
+ax.legend(handles=legend_elements, loc='upper right')
+```
 
 # Property
 
 ```python
+import matplotlib.pyplot as plt
+plt.style.use('ggplot')
+plt.rcParams.update({'font.size': 24, 'font.family': 'Times New Roman', 'lines.linewidth': 4,"text.color": "black", "xtick.color": "black","ytick.color": "black","axes.labelcolor": "black"}) # , "axes.edgecolor": "black"})
+colors = {"Function": "#3A3E46", "Kriging": "#dc3223", "AE-Kriging": "#fc8e59", "MLP": "#92bee1", "AE-MLP": "#4c76b2", "AE-Kriging-Latent": "#fee191", "AE-MLP-Latent": "#e7eef6"}
+
 color: 
 rcolor = '#AA232E'
 bcolor = '#3C53A6'
@@ -44,6 +64,8 @@ axs.tick_params(labelsize=22, pad=5)
 axs.grid(linewidth=1.5, linestyle='--')
 
 plt.legend(loc='upper center',fontsize=26,ncol=4, bbox_to_anchor=(1.25, 1.25))
+legend font:18
+
 plt.subplots_adjust(wspace=0.3, hspace=0.3, left=0.07, right=0.98, top=0.92, bottom=0.1)
 ```
 

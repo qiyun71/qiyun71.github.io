@@ -106,7 +106,42 @@ Debug: [Nastran Error List 1. | PDF](https://www.scribd.com/doc/70652924/Nastran
 
 `D:\Software\Nastran\Nastran_install\bin\nastranw.exe *.bdf`
 
+
 ### bdf文件
+
+#### MSC/NX Nastran Quick Reference Guide
+
+> “MSC Nastran 2020 Service Pack 1 Reference Guide” ([“Reference Guide - MSC Nastran 2020”, pp. -](zotero://select/library/items/RYT2LXQG)) ([pdf](zotero://open-pdf/library/items/HIIHJJ79?page=1&annotation=VRUHKPVZ))
+> “MSC Nastran 2022.1 Quick Reference Guide” ([“MSC Nastran 2022.1 Quick Reference Guide”, p. 1](zotero://select/library/items/YPDDMHIV)) ([pdf](zotero://open-pdf/library/items/8XP78ELS?page=1&annotation=JRQYK5KC))
+
+##### Executive Control Section
+
+> [基于Patran/Nastran频响分析文件的全解析 - 知乎](https://zhuanlan.zhihu.com/p/296877634)
+
+SOL 111（模态法的频率响应）
+CEND(“Case Control End”的缩写，标志着执行控制部分)
+
+##### Case Control Section
+
+$ Direct Text Input for Global Case Control Data
+TITLE = MSC.Nastran job created on 07-Oct-20 at 14:35:22
+ECHO = NONE
+RESVEC = YES
+LOADSET = 1(载荷关联，1与下文LSEQ对应)
+SUBCASE 1 
+SUBTITLE=freq（载荷工况名称） 
+METHOD = 1（模态求解，1与下文EIGRL对应） 
+FREQUENCY = 1（求解频率范围设置，1与下文FREQ1对应） 
+SPC = 2（约束设置，2与SPCADD对应） 
+DLOAD = 2（载荷工况，2与下文DLOAD对应） 
+DISPLACEMENT(SORT1,REAL)=ALL（输出位移，ALL指输出所有节点） ACCELERATION(SORT1,REAL)=ALL（输出加速度，ALL指输出所有节点）
+
+$ Direct Text Input for this Subcase
+BEGIN BULK
+$ Direct Text Input for Bulk Data
+MDLPRM HDF5 0 (控制 HDF5 格式结果文件的输出行为)
+
+PARAM POST 0（输出结果文件格式为XBD）
 
 输出文件格式：`PARAM    POST    0`
 - POST 0 不输出op2文件
@@ -114,8 +149,59 @@ Debug: [Nastran Error List 1. | PDF](https://www.scribd.com/doc/70652924/Nastran
 - **POST,1 生成 OP2 文件，并包含几何数据**
 - POST,2 生成 OP2 文件，并包含几何数据和优化数据. (在卫星算例中需要改成POST 2，但是在折叠翼算例中只需要POST 1 即可，***可能是版本不同的原因***)
 
+PARAM G .04（结构阻尼比）
+PARAM, PRTMAXIM, YES (控制是否在 .f06 文本输出文件中打印出结果的最大/最小值摘要)
+
+FREQ1 1 5. 1. 95（计算起始频率5Hz，增量1Hz，增量步95）
+EIGRL 1 10 0（10指截断前10阶模态）
+
+$ Elements and Element Properties for region : beam （下文为模型信息，节点、单元、材料、属性）
+PBARL 1 1 ROD .005
+$ Pset: "beam" will be imported as: "pbarl.1" (单元信息)
+CBAR 1 1 1 2 0. 1. 0.CBAR 2 1 2 3 0. 1. 0.CBAR 3 1 3 4 0. 1. 0.CBAR 4 1 4 5 0. 1. 0.CBAR 5 1 5 6 0. 1. 0.CBAR 6 1 6 7 0. 1. 0.CBAR 7 1 7 8 0. 1. 0.CBAR 8 1 8 9 0. 1. 0.CBAR 9 1 9 10 0. 1. 0.CBAR 10 1 10 11 0. 1. 0.
+
+$ Referenced Material Records (材料信息)
+$ Material Record : aluminium_iso_SI
+$ Description of Material : Date: 26-Jul-94 Time: 17:54:56
+MAT1 1 7.+10 .3 2700. 2.32-5
+
+$ Nodes of the Entire Model (节点信息)
+GRID 1 0. 0. 0.GRID 2 .1 0. 0.GRID 3 .2 0. 0.GRID 4 .3 0. 0.GRID 5 .4 0. 0.GRID 6 .5 0. 0.GRID 7 .6 0. 0.GRID 8 .7 0. 0.GRID 9 .8 0. 0.GRID 10 .9 0. 0.GRID 11 1. 0. 0.
+
+$ Loads for Load Case : freq
+SPCADD 2 1
+RLOAD1 4 5 1
+LSEQ 1 5 3
+DLOAD 2 1. 1. 4
+
+$ Displacement Constraints of Load Set : disp
+SPC1 1 123456 1
+
+$ Nodal Forces of Load Set : force02
+FORCE 3 11 0 10. 0. 1. 0.（激励作用位置、幅值和方向）
+
+$ Referenced Dynamic Load Tables
+$ Dynamic Load Table : freq
+TABLED1 1（激励随频率变化的场） 0. 1. 5. 1. 100. 1. 2000. 1. ENDT
+
+$ Referenced Coordinate Frames
+$ 
+$
+ENDDATA ecfd488e
+
+#### 单元类型
+
+`CTETRA   912     1       2979    2539    2631    2192    3103    1969  \n 2727    1968    2294    1846`
+
+[CTETRA](https://2021.help.altair.com/2021/hwsolvers/os/topics/solvers/os/ctetra_bulk_r.htm)
+
+![image.png|333](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20250821202236.png)
+
+
 输出节点定义：`SET xxx= 节点编号`
 - 比如定义11个节点， `SET 1 = 118,237,255,381,416,446,521,556,587,728,827`
+
+#### 材料属性
 
 **Material ID** 是材料的唯一标识符，用于在 BDF 文件中定义材料的属性。包括弹性模量、泊松比、密度等
 `MAT1    1       2.1+11   .3      7800.` 材料ID1，弹性模量E，泊松比nu，密度rho
@@ -151,6 +237,11 @@ if property_id in bdf_model.properties:
 `EIGRL    SID     V1      V2      ND      MSGLVL  MAXSET  SHFSCL  NORM`
 
 >  [Simcenter Nastran Basic Dynamic Analysis User's Guide](https://iberisa.wordpress.com/wp-content/uploads/2021/01/simcenter-nastran-basic-dynamics-user-guide.pdf)
+
+
+#### 节点坐标
+
+`GRID*    2305                           -292.75540161132-13.976940155029 \n *       350.3125`
 
 
 #### Question

@@ -54,3 +54,23 @@ Costas Papadimitriou
 University of Thessaly, Greece
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202520250703215620235.png)
+
+
+---
+
+#  Operational Modal Analysis
+
+>  Extracting In-situ Structural Dynamic Properties with Bayesian Approach
+
+- 传感器如何布置
+- 参数的先验如何选择
+  - Thank you for the insightful talk. My question is about the role of the prior in your Bayesian framework. Could you elaborate on how you selected the prior distributions for your modal parameters? And have you performed a sensitivity analysis to investigate how much your final posterior results are influenced by this choice of prior, especially if the data quality is limited?
+
+ My question is  how you selected the prior distributions for your modal parameters in your Bayesian framework? And How much your final posterior results are influenced by this choice of prior, especially if the data quality is limited?
+ 
+- 模态阶数的选择问题
+  - One of the most challenging aspects of OMA is determining the correct model order, or the number of modes to include. Could you explain how you addressed this model selection problem within your Bayesian framework?
+
+- 环境激励的平稳高斯假设
+  - Your analysis relies on the standard assumption that the ambient excitation can be modeled as a stationary white noise process. However, real-world sources like traffic or wind can be highly non-stationary. How sensitive are your identification results to potential violations of this stationarity assumption, and did you perform any specific checks for this in your data?
+

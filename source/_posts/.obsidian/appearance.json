@@ -1,10 +1,10 @@
 {
-  "baseFontSize": 16,
+  "baseFontSize": 15,
   "theme": "system",
   "translucency": false,
   "cssTheme": "Blue Topaz",
   "interfaceFontFamily": "MiSans Semibold,Comic Sans MS",
-  "textFontFamily": "仓耳今楷03,MiSans,MiSans Semibold,HarmonyOS Sans SC,HYRunYuan 55W",
+  "textFontFamily": "仓耳今楷03,Comic Sans MS,MiSans,MiSans Semibold,HarmonyOS Sans SC,HYRunYuan 55W",
   "monospaceFontFamily": "Consolas,Maple Mono",
   "accentColor": "",
   "nativeMenus": false,
@@ -12,7 +12,7 @@
     "custom-admonitions.838117",
     "obsidian-default-theme"
   ],
-  "showViewHeader": false,
+  "showViewHeader": true,
   "baseFontSizeAction": true,
   "showRibbon": false
 }

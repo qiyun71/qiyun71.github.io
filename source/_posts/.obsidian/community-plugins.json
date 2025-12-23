@@ -21,7 +21,6 @@
   "ink",
   "file-explorer-note-count",
   "obsidian-hider",
-  "sheet-plus",
   "obsidian-excalidraw-plugin",
   "dataview",
   "obsidian42-brat",
@@ -31,6 +30,9 @@
   "easy-typing-obsidian",
   "obsidian-text-format",
   "obsidian-emoji-toolbar",
+  "webpage-html-export",
   "zotlit",
-  "webpage-html-export"
+  "sheet-plus",
+  "github-copilot",
+  "pseudocode-in-obs"
 ]

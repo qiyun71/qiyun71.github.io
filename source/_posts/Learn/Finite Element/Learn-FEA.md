@@ -15,6 +15,11 @@ Basic of Finite Element Analysis
 
 有限元分析（Finite Element Analysis，FEA）有时又被称作有限元方法（Finite Element Method，FEM），二者基本可以混用，微小的区别在于，FEM 侧重于整套理论而 FEA 侧重于应用 FEM 于具体工程问题。
 
+## Follow
+
+[冷风 有限元方法学习笔记专栏 - 知乎](https://www.zhihu.com/column/c_1533518371937497088)
+
+
 ## Basic
 
 > [有限元入门--Understanding the Finite Element Method | The Efficient Engineer的部分笔记 - 知乎](https://zhuanlan.zhihu.com/p/681621600)

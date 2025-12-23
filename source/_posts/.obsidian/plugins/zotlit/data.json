@@ -1,7 +1,7 @@
 {
-  "logLevel": "INFO",
+  "logLevel": "DEBUG",
   "citationEditorSuggester": true,
-  "showCitekeyInSuggester": false,
+  "showCitekeyInSuggester": true,
   "literatureNoteFolder": "LiteratureNotes",
   "enableServer": true,
   "serverPort": 9091,
@@ -9,7 +9,7 @@
   "template": {
     "folder": "ZtTemplates",
     "templates": {
-      "filename": "<%= it.citekey ?? it.DOI ?? it.title ?? it.key %>.md"
+      "filename": "<%= it.citekey ??\nit.DOl ?? it.title ??\nit.key %>.md"
     }
   },
   "updateAnnotBlock": false,
@@ -22,6 +22,6 @@
   "autoRefresh": true,
   "zoteroDataDir": "D:\\Download\\Zotero_data",
   "citationLibrary": 1,
-  "imgExcerptImport": "copy",
+  "imgExcerptImport": false,
   "imgExcerptPath": "ZtImgExcerpt"
 }

@@ -204,7 +204,7 @@ Loss represents discrepancies between the model simulated outputs and experiment
 
 Q1：不确定性传播与FE代理模型的关系？
 A1：不确定性传播是指通过一组输入参数，经过FE/代理模型计算，得到一组输出响应。
-> Uncertainty propagation is the process of transferring the uncertainty characteristics from the input parameters to the output quantify of interest through the numerical model (or a specific pathway among multiple sub-models thereof). By [Stochastic Model Updating with Uncertainty Quantification_An Overview and Tutorial](Stochastic%20Model%20Updating%20with%20Uncertainty%20Quantification_An%20Overview%20and%20Tutorial.md)
+> Uncertainty propagation is the process of transferring the uncertainty characteristics from the input parameters to the output quantify of interest through the numerical model (or a specific pathway among multiple sub-models thereof). By [Stochastic Model Updating with Uncertainty Quantification_An Overview and Tutorial](Review/Stochastic%20Model%20Updating%20with%20Uncertainty%20Quantification_An%20Overview%20and%20Tutorial.md)
 
 
 # FEA

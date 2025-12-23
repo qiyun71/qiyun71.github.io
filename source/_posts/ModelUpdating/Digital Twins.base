@@ -1,0 +1,28 @@
+views:
+  - type: table
+    name: View
+    filters:
+      and:
+        - '!note["zotero-key"].isEmpty()'
+    order:
+      - Year
+      - file.path
+      - file.name
+      - publication
+    sort:
+      - property: file.path
+        direction: ASC
+      - property: file.name
+        direction: ASC
+      - property: formula.Untitled
+        direction: ASC
+      - property: title
+        direction: ASC
+    cardSize: 180
+    image: note.publication
+    imageFit: ""
+    imageAspectRatio: 0.5
+    rowHeight: medium
+    columnSize:
+      note.Year: 53
+      note.publication: 167

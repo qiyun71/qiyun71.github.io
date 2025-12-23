@@ -33,3 +33,13 @@ Based on the Finite Element Method (FEM), analysts (engineers and physicists) ma
 **网格划分** --> 网格质量检查 --> 网格文件导出
 
 
+# 
+
+[六面体网格划分_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1zi42117wc/?spm_id_from=333.1387.collection.video_card.click&vd_source=1dba7493016a36a32b27a14ed2891088)
+
+15:00中网格划分方法：
+- 先2d panel mesh将圆柱(轴)底面网格与孔的网格对齐
+- 然后3d hex 路径引导划分圆柱上的网格
+- 然后需要共节点：validate中的equivalence 
+- 检查face，隐藏几何，隐藏表面的mesh，观察内部网格质量
+

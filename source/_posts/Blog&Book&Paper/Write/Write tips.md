@@ -6,8 +6,8 @@
 | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
 | Color     | Blue: [# 论文配色 \| 顶刊科研绘图高级配色汇总！](https://mp.weixin.qq.com/s/iAPY89fbYJkd5hBZ3I9dlw)<br>1E4C9C<br>345D82 <br>3371B3 <br>5795C7 <br>81B5D5 <br>AED4E5                                           | [论文配色](https://www.xiaohongshu.com/discovery/item/680b6435000000000900ef98?source=webshare&xhsshare=pc_web&xsec_token=ABKUayNv95aib2sDfatshVFtQolUgEAZqM3Reb0YfFfVo=&xsec_source=pc_share)<br>[淡蓝、淡绿、淡黄]( http://xhslink.com/a/EjDnriGRcJjeb) | Miku : [Hatsune Miku Color Palette](https://www.color-hex.com/color-palette/19601)<br>蓝色 37C8D4<br>红色 C92930<br>黑色 3A3E46 | [色圖網站](https://colorsite.librian.net/)                                                                            |
 |           |                                                                                                                                                                                              |                                                                                                                                                                                                                                               |                                                                                                                           |                                                                                                                   |
-| Reference | ![Camera_1040g0k031icdc5qfns005orh1asnqt0u2j79gk0.jpg\|333](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/Camera_1040g0k031icdc5qfns005orh1asnqt0u2j79gk0.jpg) |                                                                                                                                                                                                                                               |                                                                                                                           |                                                                                                                   |
-| Color     | http://xhslink.com/a/CzQWDC3PiTneb                                                                                                                                                           |                                                                                                                                                                                                                                               |                                                                                                                           |                                                                                                                   |
+| Reference | ![Camera_1040g0k031icdc5qfns005orh1asnqt0u2j79gk0.jpg\|333](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/Camera_1040g0k031icdc5qfns005orh1asnqt0u2j79gk0.jpg) | dc3223<br>fc8e59<br>fee191<br>e7eef6<br>92bee1<br>4c76b2<br>![i-blog.csdnimg.cn/blog_migrate/bc3285cdd5978389816d84754198b621.png](https://i-blog.csdnimg.cn/blog_migrate/bc3285cdd5978389816d84754198b621.png)                               |                                                                                                                           |                                                                                                                   |
+| Color     | http://xhslink.com/a/CzQWDC3PiTneb                                                                                                                                                           | [SCI论文图表配色方案：经典与渐变色指南,-CSDN博客](https://blog.csdn.net/weixin_45847320/article/details/131035940)                                                                                                                                               |                                                                                                                           |                                                                                                                   |
 
 
 ## Latex
@@ -232,6 +232,126 @@ word 公式编号+交叉引用
 Hi i'm xxx, and this is joint work with xxx and xxx on 论文标题
 Good afternoon, my name is xxx, my co-authors are xxx. and our paper is titled xxx
 
+
+## Zotero参考文献格式
+
+[(10 封私信) \[Zotero\]如何设置Zotero生成的参考文献格式，刷新后不变？ - 知乎](https://zhuanlan.zhihu.com/p/58969571)
+
+
+## Zotero better bibTex快速复制Eta模板
+
+```
+<%~
+// This template generates a list of Markdown links.
+// Each link's text is in the format [Author et al., Year, Publication Title]
+// and it points to the Zotero item using a zotero://select link.
+// It is robust and handles items with missing metadata gracefully.
+
+it.items.map(item => {
+  // --- PART 1: Generate the zotero://select link (URL part) ---
+  // This logic is reused from your original template.
+  const match = item.uri.match(/^https?:\/\/zotero\.org\/(users|groups)\/((?:local\/)?[^/]+)\/items\/(.+)/);
+
+  if (!match) return `[Error: Could not parse URI for item ${item.citekey || item.key}]()`;
+
+  const [ , kind, lib, key ] = match;
+  let zoteroLink = '';
+  if (kind === 'users') {
+    zoteroLink = `zotero://select/library/items/${key}`;
+  } else {
+    zoteroLink = `zotero://select/groups/${lib}/items/${key}`;
+  }
+
+  // --- PART 2: Build the display text for the Markdown link ---
+  const displayTextParts = [];
+ // 2a. Add Author(s) -
+  // MODIFIED to handle Chinese single-field names
+  if (item.creators && item.creators.length > 0) {
+    const firstCreator = item.creators[0];
+    let authorStr = '';
+
+    // 判断作者姓名格式
+    if (firstCreator.name) {
+      // 优先使用 'name' 字段 (通常用于机构或单字段姓名)
+      authorStr = firstCreator.name;
+    } else if (firstCreator.lastName && !firstCreator.firstName) {
+      // 如果只有 lastName，没有 firstName，说明可能是合并后的中文名
+      authorStr = firstCreator.lastName;
+    } else if (firstCreator.lastName) {
+      // 否则，使用标准的 lastName (适用于西文名)
+      authorStr = firstCreator.lastName;
+    }
+
+    // 添加 "et al." 或 "等"
+    if (item.creators.length > 1) {
+      // 您可以根据喜好选择 " et al." 或是 " 等"
+      authorStr += " et al.";
+      // authorStr += " 等";
+    }
+    displayTextParts.push(authorStr);
+  }
+
+  // 2b. Add Title
+  if (item.title) {
+    displayTextParts.push(item.title);
+  }
+
+  // 2b. Add Year
+  if (item.date) {
+    displayTextParts.push(item.date);
+  }
+
+  // 2c. Add Publication Title (e.g., Journal name, Book title)
+  if (item.publicationTitle) {
+    displayTextParts.push(item.publicationTitle);
+  }
+
+  // --- PART 3: Assemble the final Markdown link ---
+  // Filter out any empty parts and join them with a comma and space.
+  let displayText = displayTextParts.filter(part => part).join(', ');
+
+  // FINAL FALLBACK: If all metadata was missing, use the item's main title or citekey
+  // to ensure the link text is never empty.
+  if (!displayText) {
+    displayText = item.title || item.citekey;
+  }
+
+  return `[${displayText}](${zoteroLink})`;
+
+}).join('\\n')
+%>
+```
+
+## latex公式转word宏
+
+绑定快捷键 ctrl+shift+del
+
+```
+Sub 宏1()
+'
+' 宏1 宏
+'
+'
+    Selection.EscapeKey
+    Selection.EscapeKey
+    Selection.EscapeKey
+End Sub
+Sub 公式转换()
+'
+' 公式转换 宏
+'
+'
+   
+    Selection.OMaths.Add Range:=Selection.Range
+    Selection.OMaths(1).BuildUp
+    ActiveDocument.Save
+End Sub
+
+```
+
+
+
+
 # 论文写作
 
 ## 英文词汇/短语/句式
@@ -278,10 +398,21 @@ which 的限定用法与非限定用法。 which当作关係代名词时，要�
 
 ## GPT 提示词
 
+### 文献查找
+
+查找上述描述在模型修正/损伤辨识/结构健康监测领域的英文文献
+
+
+
+### 文献总结
+
+
+
+### 写作润色
+
 (Write more, read less)
 WHWW: what, how, want, worry
 说人话：通俗易懂
-
 
 [GPT 学术优化](http://localhost:53015/) 本地部署，需要api
 
@@ -310,6 +441,16 @@ Here is a prompt that we use to **revise manuscript abstracts**, which we crafte
 ## 审稿意见回复
 
 29 学术迷因鸦发布了一篇小红书笔记，快来看吧！ 😆 GaJScUsVcmJgfwf 😆 http://xhslink.com/a/bsKMBAYLpajeb，复制本条信息，打开【小红书】App查看精彩内容！
+
+## 论文审稿
+
+- [ ] 检索同作者论文；
+- [ ] 检索已有相关方法论文（比如这里为model updating & unscented transform;
+- [ ] 方法是否有对比；
+- [ ] 结果是否可复现；
+- [ ] 任何技术细节：概念是否阐述正确，公式问题(符号表述是否清楚)，
+- [ ] 新算例？
+
 
 ## 创新点
 

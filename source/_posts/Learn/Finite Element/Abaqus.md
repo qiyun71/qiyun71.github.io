@@ -8,6 +8,9 @@ categories: Learn/Finite Element
 
 Abaqus Learning note
 
+[ABAQUS Version 6.6 Documentation](https://classes.engineering.wustl.edu/2009/spring/mase5513/abaqus/docs/v6.6/index.html) [Abaqus Analysis User's Manual (6.11)](http://abaqusdocs.eait.uq.edu.au/v6.11/books/usb/default.htm?startat=pt03ch06s03abo06.html)
+- [ABAQUS Benchmarks Manual (v6.6)](https://classes.engineering.wustl.edu/2009/spring/mase5513/abaqus/docs/v6.6/books/bmk/default.htm)
+
 <!-- more -->
 
 # Basic
@@ -16,11 +19,35 @@ ABAQUS/CAE 由以下功能模块构成: Part (部件)、 Property (特性)、 As
 
 每个 ABAQUS 模型中只能有→个装配件(assembly) ，它是由一个或多个实体( instance) 组成的，一个部件( part) 可以对应多个实体。
 
-Interactions 的主要作用
+## Interactions
+
 - 定义接触：模拟两个或多个表面之间的接触行为（如滑动、分离、摩擦等）。
 - 定义约束：限制模型各部分之间的相对运动（如绑定、刚体约束等）。
 - 定义连接：模拟部件之间的连接行为（如螺栓、铰链、弹簧等）。
 - 定义热传导：模拟热分析中的热接触或热交换行为。
+
+>  [(14 封私信) ABAQUS制动盘热力耦合分析 - 知乎](https://zhuanlan.zhihu.com/p/409132487)
+
+接触时有两个方向的行为需要定义
+- Tangential Behavior 设置为 Penalty 摩擦系数 (e.g. 0.15)
+- Normal Behavior 设置为 “Hard” Contact
+
+## Step
+
+Step：
+在ABAQUS中有两类分析步：一般分析步（general analysis steps），可以用来分析线性或非线性响应；线性摄动步（linear perturbation steps），只能用来分析线性问题。
+
+## BCs
+
+BC or Load：
+- [【ABAQUS】什么是幅值Amplitude？如何设置Amplitude？ - 哔哩哔哩](https://www.bilibili.com/opus/642671920971513865)
+
+
+> [喵星人呕心沥血总结—ABAQUS易出错的边界条件_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1WwLyz9Ee4/?spm_id_from=333.788.recommend_more_video.4&vd_source=1dba7493016a36a32b27a14ed2891088)
+
+面约束的时候，约束完y方向的位移，此时x和z方向的旋转也会被约束住
+- 通过一个interaction中参考点，并于面进行耦合，对这个参考点进行约束。
+
 
 Abaqus中，S、U、V、E、CF
 - S (Stress) 应力 Pa
@@ -75,3 +102,9 @@ mesh node 编辑 merge，但是需要保证网格没有与几何连接(使用Del
 # Python
 
 >  [abqpy 2025.7.10.dev9+g0175c7325 documentation](https://hailin.wang/abqpy/en/dev/)
+> [命令行提交 Abaqus 任务 | Abaqus 学习笔记](https://cnzhx.net/fe/2015/02/08/cli-submit-abaqus-job/)
+
+
+in cmd:
+- `abaqus job=jobname1 int`
+  - 提交任务：（int 就是 interactive）

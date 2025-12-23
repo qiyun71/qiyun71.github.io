@@ -10,7 +10,32 @@ Uncertainty in everything
 
 <!-- more -->
 
+
+> “**Uncertainty quantification** involves several key steps, which include data collection, mathematical modeling, uncertainty propagation, identifying critical outcomes, and making decisions under uncertainty.” ([Faes 等, 2025, p. 14](zotero://select/library/items/VDSP95B3)) ([pdf](zotero://open-pdf/library/items/JAJIB8AA?page=15&annotation=C37JFVWD))
+
 # Uncertainty
+
+Uncertainty来源：
+- 参数不确定性：缺乏知识（尤其是针对复杂的结构系统、新型复合材料、非线性动力学系统...）
+- 模型形式不确定性：非线性特性的线性化、复杂连接关系用简单单元代替
+- 试验不确定性：实验中难以控制的随机性，例如环境噪声、系统误差，主观判断...
+
+Uncertainty分类：
+- Epistemic Uncertainty源自认知信息不足，可以减少乃至消除
+- Aleatory Uncertainty源自系统/结构固有的随机性
+
+根据参数中是否存在Epistemic Uncertainty/Aleatory Uncertainty，将参数分为四类
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240412091330.png)
+
+- Category 1：具有完全确定值的常数
+- Category 2：未知但固定的常数(区间)
+- Category 3：具有完全确定分布性质的随机变量(分布格式、均值和方差)，称为精确概率
+- Category 4：随机变量，分布性质尚未完全确定，称为不精确概率，可以通过P-box来建模，P-box中无限数量的CDF曲线构成了概率空间中的特定区域
+
+确定模型修正适用于Category 2参数，确定预定义区间内的特定值
+随机模型修正适用于Category 2~4类参数，可以通过
+- 减少二类和四类参数的认知不确定性
+- 合适地特征化三类参数的随机不确定性
 
 > [浅谈Epistemic Uncertainty 和 Aleatoric Uncertainty - 知乎](https://zhuanlan.zhihu.com/p/656915794)
 > [【实验笔记】深度学习中的两种不确定性（上） - 知乎](https://zhuanlan.zhihu.com/p/56986840)
@@ -34,13 +59,15 @@ Uncertainty is categorized
 
 
 >  [A Survey of Uncertainty in Deep Neural Networks](https://arxiv.org/pdf/2107.03342)
+>  [Gawlikowski et al., A Survey of Uncertainty in Deep Neural Networks, 2022-01-18](zotero://select/library/items/BFP84528)
 
 Uncertainty factors in DNN:
-- Factor I: Variability in Real World Situations
-- Factor II: Error and Noise in Measurement Systems
-- Factor III: Errors in the Model Structure
-- Factor IV: Errors in the Training Procedure
-- Factor V: Errors Caused by Unknown Data
+- “Factor I: Variability in Real World Situations” ([Gawlikowski 等, 2022, p. 3](zotero://select/library/items/BFP84528)) ([pdf](zotero://open-pdf/library/items/CL5737MU?page=3&annotation=JQX6AZBW))
+- “Factor II: Error and Noise in Measurement Systems” ([Gawlikowski 等, 2022, p. 3](zotero://select/library/items/BFP84528)) ([pdf](zotero://open-pdf/library/items/CL5737MU?page=3&annotation=38Y6UEN7))
+- “Factor III: Errors in the Model Structure” ([Gawlikowski 等, 2022, p. 3](zotero://select/library/items/BFP84528)) ([pdf](zotero://open-pdf/library/items/CL5737MU?page=3&annotation=MDSBZP4Y))
+- “Factor IV: Errors in the Training Procedure” ([Gawlikowski 等, 2022, p. 4](zotero://select/library/items/BFP84528)) ([pdf](zotero://open-pdf/library/items/CL5737MU?page=4&annotation=8ZSBR6JK))
+- “Factor V: Errors Caused by Unknown Data” ([Gawlikowski 等, 2022, p. 4](zotero://select/library/items/BFP84528)) ([pdf](zotero://open-pdf/library/items/CL5737MU?page=4&annotation=AQRG3CNI))
+
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241215213725.png)
 
@@ -61,6 +88,11 @@ Uncertainty estimation: 与正常在预测中的数据不确定性部分(如分�
 - Ensemble Methods
 - Test Time Augmentation
 - Neural Network Uncertainty Quantification Approaches for Real Life Applications
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20251027205906.png)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20251028164911.png)
+
 
 >  [集成学习(Ensemble learning)相关理论 | 珞珈村下山](https://whuxgxj.github.io/article/ensemble-learning-in-classification.html)
 

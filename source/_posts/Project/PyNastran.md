@@ -73,9 +73,9 @@ print("--cd--\n%s" % eid100.nodes_ref[0].cd)
 print("cd.cid = %s" % eid100.nodes_ref[0].cd_ref.cid)
 ```
 
-|1|2|3|4|5|6|7|8|9|
-|---|---|---|---|---|---|---|---|---|
-|GRID|NID|CP|X1|X2|X3|CD|PS|SEID|
+| 1    | 2   | 3   | 4   | 5   | 6   | 7   | 8   | 9    |
+| ---- | --- | --- | --- | --- | --- | --- | --- | ---- |
+| GRID | NID | CP  | X1  | X2  | X3  | CD  | PS  | SEID |
 
 😵要不还是学学ABAQUS，看看是否可行。
 
@@ -120,7 +120,6 @@ def get_modes(f06_copy_path:str):
 ## op2
 
 >  [OP2 Introduction — pyNastran 1.5-dev 1.5-dev documentation](https://pynastran-git.readthedocs.io/en/latest/quick_start/op2_demo.html#why-use-the-op2-why-not-use-the-f06-pch-file)
-
 
 op2与f06的内容相同，只是格式不同，相较于f06解析困难，OP2 非常结构化
 
@@ -226,6 +225,8 @@ Model and Simulate to get `.bdf` file
   - input: `.bdf` file 使用python修改bdf中的参数，可以获得多个bdf，然后输入到nastran中进行仿真计算
   - output: `.f06` file 包含仿真输出的结果
 
+## 修改厚度T
+
 修改钢板厚度 Tickness思路：
 - 读取所有节点坐标 nodes
 - 计算厚度缩放比例 `ratio = T / T_origin`，T是需要修改的厚度，T是bdf文件中初始的厚度
@@ -236,7 +237,7 @@ Model and Simulate to get `.bdf` file
 
 main code
 
-```python
+```python   
 def get_output(bdf_path,input_path,nastran_path,save_dir):
   N_samples = 1000
   Tickness = np.random.uniform(2, 4, N_samples) # 2~4 mm
@@ -348,4 +349,57 @@ def get_modes(f06_copy_path:str):
 ```
 
 
+## 修改弹性模量E和剪切模量G
 
+```python
+def get_output(bdf_path,input_path,nastran_path,save_dir):
+    N_samples = 10000
+    # Generate random data
+    E_modulus = np.random.uniform(190, 220, N_samples) * 1000
+    G_modulus = np.random.uniform(77, 89, N_samples) * 1000
+
+    for i in range(0,len(E_modulus)):
+        E = E_modulus[i]
+        G = G_modulus[i]
+        bdf_copy_path = f'gangban_{i}.bdf'
+        status_copy = shutil.copyfile(bdf_path, bdf_copy_path)
+        if status_copy == bdf_copy_path:
+            bdf_copy = open(bdf_copy_path, 'r+')
+            lines = bdf_copy.readlines()
+            lines[8682] = lines[8682].replace('210000.', f'{E:.3f}')
+            lines[8682] = lines[8682].replace('83000.', f'{G:.3f}')
+            bdf_copy.seek(0)
+            bdf_copy.writelines(lines)
+            # os.remove(bdf_copy_path)
+            bdf_copy.close()
+            # exit()
+            p = subprocess.Popen(nastran_path+' '+bdf_copy_path, shell=True)
+            return_code = p.wait(timeout=1000)
+            # time.sleep(15)
+            time.sleep(7)
+            print(f'Finished running Nastran for {i+1}th sample')
+            
+            modes = get_modes(bdf_copy_path.replace('.bdf', '.f06'))
+            # all_modes.append(modes)
+            # create a new txt file to store the modes
+            save_txt = open(bdf_path.replace('.bdf', '.txt'), 'a')
+            save_txt.write(str(modes) + '\n')
+            save_txt.close()
+        else:
+            print(f'Error in copying file {bdf_copy_path}')
+
+        bdf_copy_path_prefix = bdf_copy_path.split('.')[0]
+        for suffix in ['.bdf', '.f04', '.f06', '.log', '.op2','.h5']:
+            os.remove(bdf_copy_path_prefix + suffix)
+
+    read_save_txt = open(bdf_path.replace('.bdf', '.txt'), 'r')
+    all_modes = read_save_txt.readlines()
+    read_save_txt.close()
+
+    all_modes = np.array([eval(mode) for mode in all_modes])
+    if "updated" in input_path:
+        np.savez(os.path.join(save_dir, 'modes_updated.npz'), modes = all_modes)
+    else:
+        np.savez(os.path.join(save_dir, 'modes.npz'), modes = all_modes)
+    print("Finished saving modes, shape is ", all_modes.shape)
+```

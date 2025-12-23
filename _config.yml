@@ -39,9 +39,12 @@ skip_render:
   - '_posts/Blog&Book&Paper/**'
   - '_posts/Source/**'
   - '_posts/ModelUpdating/**'
+  - '_posts/Reliability/**'
+  - '_posts/PHM&SHM/**' 
+  - '_posts/LiteratureNotes/**'
   - '_posts/BMO/**'
   - '_posts/Excalidraw/**'
-
+  - '_posts/ZtTemplates/**'
 
 # Writing
 new_post_name: :title.md # File name of new posts

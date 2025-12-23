@@ -10,7 +10,8 @@
 - [ ] [置身事内 - 读书笔记 - Tw93](https://tw93.fun/2024-06-30/china.html)
 - [ ] [我看见的世界 (豆瓣)](https://book.douban.com/subject/36672955/)
 - [x] 蛊真人
-- [ ] 大道争锋
+- [ ] ~~大道争锋~~
+- [ ] 普罗之主
 - [ ] [datawhalechina/easy-rl: 强化学习中文教程（蘑菇书🍄），在线阅读地址：https://datawhalechina.github.io/easy-rl/](https://github.com/datawhalechina/easy-rl?tab=readme-ov-file) 
 - [ ] [ZJU-LLMs/Foundations-of-LLMs](https://github.com/ZJU-LLMs/Foundations-of-LLMs) LLM
 - [ ] [yeasy/blockchain_guide: Introduce blockchain related technologies, from theory to practice with bitcoin, ethereum and hyperledger.](https://github.com/yeasy/blockchain_guide)

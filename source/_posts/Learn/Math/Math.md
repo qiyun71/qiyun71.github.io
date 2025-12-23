@@ -1,7 +1,7 @@
 ---
 title: Math
 date: 2024-03-29 22:24:11
-tags: 
+tags:
 categories: Learn
 ---
 概率/微积分/矩阵/拓扑/泛函/复变...
@@ -295,6 +295,14 @@ $\arg\max_pL(p)=\arg\max_p\prod_{i=1}^nP(X_i=x_i|p)$
 无偏估计的方差：
 $\left\{\begin{array}{c}M_n=\frac{X_1+X_2+\cdots+X_n}n\\\hat{S}_n^2=\frac{\sum_{i=1}^n(X_i-M_n)^2}{n-1}\end{array}\right.$
 
+$Var(X)=E[X-E(X)]^{2}=E\{X^{2}-2XE(X)+[E(X)]^{2}\}=E(X^{2})-2[E(X)]^{2}+[E(X)]^{2}$
+$Var(X)=E(X^{2})-[E(X)]^{2}$
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20250805145812.png)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20250805145843.png)
+
+
 [【AP统计】期望E(X)与方差Var(X) - 知乎](https://zhuanlan.zhihu.com/p/64859161)
 
 ### 联合概率密度
@@ -504,137 +512,10 @@ np.corrcoef(X, Y)
 
 
 
-## Sampling
+## Sampling Method
 
-如何在不知道目标概率密度函数的情况下，抽取所需数量的样本，使得这些样本符合目标概率密度函数。这个问题简称为抽样
+[Sampling Method](Sampling%20Method.md)
 
-> [Finite Element Model Updating in Bridge Structures Using Kriging Model and Latin Hypercube Sampling Method - Wu - 2018 - Advances in Civil Engineering - Wiley Online Library](https://onlinelibrary.wiley.com/doi/full/10.1155/2018/8980756) 不同采样方法的讨论(simple random sampling (SRS), stratified sampling method, cluster sampling method, and systematic sampling) **Latin Hypercube Sampling 属于 =分层采样**
-> [It's all about Sampling - 子淳的博客 | Just Me](https://huangc.top/2019/03/24/sampling-2019/)
-
-### Monte Carlo
-
->[一文看懂蒙特卡洛采样方法 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/338103692)
->[简明例析蒙特卡洛（Monte Carlo）抽样方法 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/39628670)
->[走进贝叶斯统计（四）—— 蒙特卡洛方法 - 知乎](https://zhuanlan.zhihu.com/p/406256344)
->[逆变换采样和拒绝采样 - barwe - 博客园 (cnblogs.com)](https://www.cnblogs.com/barwe/p/14140681.html)
->[Monte Carlo method - Wikipedia](https://en.wikipedia.org/wiki/Monte_Carlo_method)
->[【数之道 22】巧妙使用"接受-拒绝"方法，玩转复杂分布抽样 - YouTube](https://www.youtube.com/watch?v=c2WrJY8tnGE)
-
-MC Sampling
-![v2-eb0945aa2185df958f4568e58300e77a_1440w.gif|222](https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/v2-eb0945aa2185df958f4568e58300e77a_1440w.gif)
-
-对某一种概率分布p(x)进行蒙特卡洛采样的方法主要分为直接采样、拒绝采样与重要性采样三种:
-- Naive Method
-    - 根据概率分布进行采样。对一个已知概率密度函数与累积概率密度函数的概率分布，我们可以直接从累积分布函数（cdf）进行采样（类似逆变换采样）
-- Acceptance-Rejection Method 
-    - 逆变换采样虽然简单有效，但是当累积分布函数或者反函数难求时却难以实施，可使用MC的接受拒绝采样
-    - 对于累积分布函数未知的分布，我们可以采用接受-拒绝采样。如下图所示，p(z)是我们希望采样的分布，q(z)是我们提议的分布(proposal distribution)，令kq(z)>p(z)，我们首先在kq(z)中按照直接采样的方法采样粒子，接下来判断这个粒子落在途中什么区域，对于落在灰色区域的粒子予以拒绝，落在红线下的粒子接受，最终得到符合p(z)的N个粒子
-    - ![image.png|333](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230801135729.png)
-    - 数学推导：
-        - ![image.png|500](https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230801135800.png)
-        1. 从 $f_r(x)$ 进行一次采样 $x_i$
-        2. 计算 $x_i$ 的 **接受概率** $\alpha$（Acceptance Probability）:$\alpha=\frac{f\left(x_i\right)}{f_r\left(x_i\right)}$
-        3. 从 (0,1) 均匀分布中进行一次采样 u
-        4. 如果 $\alpha$≥u，接受 $x_i$ 作为一个来自 f(x) 的采样；否则，重复第1步
-
-```python
-N=1000 #number of samples needed
-i = 1
-X = np.array([])
-while i < N:
-    u = np.random.rand()
-    x = (np.random.rand()-0.5)*8
-    res = u < eval(x)/ref(x)
-    if res:
-        X = np.hstack((X,x[res])) #accept
-        ++i
-```
-
-- **Importance Sampling**
-    - 接受拒绝采样完美的解决了累积分布函数不可求时的采样问题。但是接受拒绝采样非常依赖于提议分布(proposal distribution)的选择，如果提议分布选择的不好，可能采样时间很长却获得很少满足分布的粒子。
-    - $E_{p(x)}[f(x)]=\int_a^bf(x)\frac{p(x)}{q(x)}q(x)dx=E_{q(x)}[f(x)\frac{p(x)}{q(x)}]$
-    - 我们从提议分布q(x)中采样大量粒子$x_1,x_2,...,x_n$，每个粒子的权重是 $\frac{p(x_i)}{q(x_i)}$，通过加权平均的方式可以计算出期望:
-    - $E_{p(x)}[f(x)]=\frac{1}{N}\sum f(x_i)\frac{p(x_i)}{q(x_i)}$
-        - q提议的分布，p希望的采样分布
-
-```python
-N=100000
-M=5000
-x = (np.random.rand(N)-0.5)*16
-w_x = eval(x)/ref(x)
-w_x = w_x/sum(w_x)
-w_xc = np.cumsum(w_x) #accumulate
-
-X=np.array([])
-for i in range(M):
-    u = np.random.rand()
-    X = np.hstack((X,x[w_xc>u][0])) # 其中，w_xc是对归一化后的权重计算的累计分布概率。每次取最终样本时，都会先随机一个(0,1)之间的随机数，并使用这个累计分布概率做选择。样本的权重越大，被选中的概率就越高。
-    
-```
-
-### 分层采样
-
-#### 分层抖动采样
-
-> [Physically Based Rendering：采样和重建（二） | YangWC's Blog](https://yangwc.com/2020/04/11/Sampling2/)
-
-![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240722141841.png)
-
-- 随机采样
-- 分层均匀采样
-- 分层抖动采样。理想的分层抖动采样很容易陷入**维数灾难**，因此有人提出了高维转低维采样+随机串联(or随机配对)的方法
-
-#### Latin Hypercube Sampling
-
-1. 将每个维度的区间划分为m个不重叠的区间，每个区间概率相等（取均匀分布，区间大小应相等）
-2. 从均匀分布中随机采样，每个维度的每个间隔中的一个点
-3. 将每个维度的点随机配对（相同可能的组合）
-
-相较于Simple Random Sampling，LHS的方法更加分散，且不存在聚类效应
-
-
-### MCMC
-
-(Markov Chain Monte Carlo)
-
-Blog:
-> [马尔可夫链蒙特卡罗算法（MCMC） - 知乎](https://zhuanlan.zhihu.com/p/37121528)
-> 动画 [The Markov-chain Monte Carlo Interactive Gallery](https://chi-feng.github.io/mcmc-demo/) | 代码 [Javascript demos](https://github.com/chi-feng/mcmc-demo)
-> [MCMC](https://prappleizer.github.io/Tutorials/MCMC/MCMC_Tutorial.html) MCMC: A (very) Beginnner’s Guide
-
-Paper:
-> [An effective introduction to the Markov Chain Monte Carlo method](https://arxiv.org/pdf/2204.10145) **For physics**
-> [A Conceptual Introduction to Markov Chain Monte Carlo Methods](https://arxiv.org/pdf/1909.12313)
-> [Markov Chain Monte Carlo in Practice | W.R. Gilks, S. Richardson, Davi](https://www.taylorfrancis.com/books/mono/10.1201/b14835/markov-chain-monte-carlo-practice-david-spiegelhalter-gilks-richardson) MCMC需要小心地初始化，早期阶段需要warm-up time
-
-
-
-#### M-H采样
-
-> [走进贝叶斯统计（五）—— Metropolis-Hasting 算法 - 知乎](https://zhuanlan.zhihu.com/p/411689417)
-
-#### Gibbs采样
-
-> [走进贝叶斯统计（六）—— 吉布斯抽样 （Gibbs Sampling） - 知乎](https://zhuanlan.zhihu.com/p/416670115)
-
-#### TMCMC
-
-> [Transitional Markov Chain Monte Carlo Method for Bayesian Model Updating, Model Class Selection, and Model Averaging](Transitional%20Markov%20Chain%20Monte%20Carlo%20Method%20for%20Bayesian%20Model%20Updating,%20Model%20Class%20Selection,%20and%20Model%20Averaging.md)
-
-#### 拉丁超立方采样(Latin hypercube sampling, LHS)
-
-> [拉丁超立方采样(Latin hypercube sampling, LHS)及蒙特卡洛模拟简介 - 知乎](https://zhuanlan.zhihu.com/p/385966408)
-
-拉丁超立方采样先把样本空间分层，在此问题下要分为5层，于是便有了 [1,20],[21,40],[41,60],[61,80],[81,100] 共5个样本空间，在各样本空间内进行随机抽样，然后再打乱顺序，得到结果。这样就结束了~
-
-可以看出拉丁超立方采样分为了三步——**分层、采样、乱序**。
-
-#### Langevin Monte Carlo(LMC)
-
->[什么是diffusion model? 它为什么好用？ - Zephyr的回答 - 知乎](https://www.zhihu.com/question/613579202/answer/3310826408)
-
-
-#### Hamiltonian Monte Carlo(HMC)
 
 
 

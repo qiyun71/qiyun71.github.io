@@ -10,110 +10,96 @@
           {
             "id": "69e12bbb54cde461",
             "type": "leaf",
+            "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Blog&Book&Paper/Route.md",
+                "file": "Blog&Book&Paper/⭐Route.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
+              "pinned": true,
               "icon": "lucide-file",
-              "title": "Route"
+              "title": "⭐Route"
             }
           },
           {
-            "id": "c8bc92cd0c3f0b9b",
+            "id": "1a5bb322a11d9029",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "ModelUpdating/Case about ModelUpdating.md",
+                "file": "ModelUpdating/Cases/NASA challenge 2019.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "Case about ModelUpdating"
+              "title": "NASA challenge 2019"
             }
           },
           {
-            "id": "71478304609d01f5",
+            "id": "a238786f4ae1a228",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Reports/Daily/2025-07-08.md",
+                "file": "Blog&Book&Paper/Write/Write Paper/Model Updating/J2 C1 A fast interval model updating method based on MLP neural network.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "2025-07-08"
+              "title": "J2 C1 A fast interval model updating method based on MLP neural network"
             }
           },
           {
-            "id": "0e41abdf9cef49ce",
+            "id": "b5d251a4104d8623",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "ModelUpdating/Method/Sensitivity Analysis.md",
+                "file": "Learn/Finite Element/Multiphysics.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "Sensitivity Analysis"
+              "title": "Multiphysics"
             }
           },
           {
-            "id": "b793fdcabc1c6984",
+            "id": "ad88a3d3c685ce9a",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "ModelUpdating/Review/结构动力学有限元模型修正的发展------模型确认.md",
+                "file": "LiteratureNotes/Merging physics and neural network_A promising tool for prognostics and health management.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "结构动力学有限元模型修正的发展------模型确认"
+              "title": "Merging physics and neural network_A promising tool for prognostics and health management"
             }
           },
           {
-            "id": "74838b8c429d0070",
+            "id": "0988c9579528732f",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Blog&Book&Paper/Read/Book/How to Read a Paper.md",
+                "file": "Other Interest/Uncertainty.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "How to Read a Paper"
-            }
-          },
-          {
-            "id": "6d0c7e4f68c4b948",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "ModelUpdating/Paper about ModelUpdating.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": false
-              },
-              "icon": "lucide-file",
-              "title": "Paper about ModelUpdating"
+              "title": "Uncertainty"
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -125,15 +111,30 @@
       {
         "id": "2b8407f2a45fc061",
         "type": "tabs",
-        "dimension": 43.6817472698908,
+        "dimension": 41.549953314659184,
         "children": [
+          {
+            "id": "56b71c2811fd7340",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Blog&Book&Paper/⭐Route.md",
+                "followCursor": false,
+                "showSearch": true,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of ⭐Route"
+            }
+          },
           {
             "id": "d58789544432cb9f",
             "type": "leaf",
             "state": {
               "type": "search",
               "state": {
-                "query": "zotero",
+                "query": "pip matlab",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -141,31 +142,37 @@
                 "sortOrder": "alphabetical"
               },
               "icon": "lucide-search",
-              "title": "搜索"
+              "title": "Search"
             }
           },
           {
-            "id": "56b71c2811fd7340",
+            "id": "876683fcfbb9d249",
             "type": "leaf",
             "state": {
-              "type": "outline",
+              "type": "recent-files",
+              "state": {},
+              "icon": "clock",
+              "title": "Recent Files"
+            }
+          },
+          {
+            "id": "b96bac9209025e0d",
+            "type": "leaf",
+            "state": {
+              "type": "footnotes",
               "state": {
-                "file": "Reports/Daily/2025-07-08.md",
-                "followCursor": false,
-                "showSearch": false,
-                "searchQuery": ""
+                "file": "ModelUpdating/Review/Stochastic Model Updating with Uncertainty Quantification_An Overview and Tutorial.md"
               },
-              "icon": "lucide-list",
-              "title": "2025-07-08 的大纲"
+              "icon": "lucide-file-signature",
+              "title": "Footnotes"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       },
       {
         "id": "6711a83b129914d6",
         "type": "tabs",
-        "dimension": 56.31825273010921,
+        "dimension": 58.450046685340816,
         "children": [
           {
             "id": "0d68bfa346c465d5",
@@ -177,7 +184,7 @@
                 "autoReveal": true
               },
               "icon": "lucide-folder-closed",
-              "title": "文件列表"
+              "title": "Files"
             }
           },
           {
@@ -196,15 +203,15 @@
             "state": {
               "type": "advanced-tables-toolbar",
               "state": {},
-              "icon": "lucide-file",
-              "title": "插件不再活动"
+              "icon": "spreadsheet",
+              "title": "Advanced Tables"
             }
           }
         ]
       }
     ],
     "direction": "horizontal",
-    "width": 256.5
+    "width": 242.49999618530273
   },
   "right": {
     "id": "a4155c200cdf0433",
@@ -214,16 +221,6 @@
         "id": "d30c1c41ae28f9b7",
         "type": "tabs",
         "children": [
-          {
-            "id": "876683fcfbb9d249",
-            "type": "leaf",
-            "state": {
-              "type": "recent-files",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "插件不再活动"
-            }
-          },
           {
             "id": "c0e0fc087c57629c",
             "type": "leaf",
@@ -254,246 +251,376 @@
             }
           },
           {
-            "id": "515b2e82e0a9c55f",
+            "id": "cb989d4c622bea66",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "7d2134aa467dffba",
+            "type": "leaf",
+            "state": {
+              "type": "github-copilot-chat-view",
+              "state": {},
+              "icon": "bot-message-square",
+              "title": "Copilot Chat"
+            }
+          },
+          {
+            "id": "6ba8de5eb759324a",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Reports/Daily/2025-06-13.md",
+                "file": "Blog&Book&Paper/Write/Write Paper/Model Updating/4 NN-based Global Sensitivity Analysis.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
                 "showSearch": false,
                 "searchQuery": "",
-                "backlinkCollapsed": true,
+                "backlinkCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for 2025-06-13"
+              "title": "Backlinks for 4 NN-based Global Sensitivity Analysis"
             }
           },
           {
-            "id": "f2eac87f3084aec7",
+            "id": "bed1ec3bee6cf7ba",
             "type": "leaf",
             "state": {
               "type": "empty",
               "state": {},
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "New tab"
             }
           },
           {
-            "id": "044b20ebf1b79fa7",
+            "id": "5c13490bc6cf7568",
             "type": "leaf",
             "state": {
               "type": "empty",
               "state": {},
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "New tab"
             }
           },
           {
-            "id": "e721d6fca913aa81",
+            "id": "b2123433bbf9abc9",
             "type": "leaf",
             "state": {
               "type": "empty",
               "state": {},
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "New tab"
             }
           },
           {
-            "id": "a17ab066c1237e05",
+            "id": "4f9a7042df2d28b6",
             "type": "leaf",
             "state": {
               "type": "empty",
               "state": {},
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "New tab"
             }
           },
           {
-            "id": "03bae6df273b5aca",
+            "id": "07b377ee57ae3023",
             "type": "leaf",
             "state": {
               "type": "empty",
               "state": {},
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "New tab"
             }
           },
           {
-            "id": "a7372123ee93859a",
+            "id": "e7f1306c1df6bd16",
             "type": "leaf",
             "state": {
               "type": "empty",
               "state": {},
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "New tab"
             }
           },
           {
-            "id": "4ac2fcb55b56d7c3",
+            "id": "ff7f71a7491af2f8",
             "type": "leaf",
             "state": {
               "type": "empty",
               "state": {},
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "New tab"
             }
           },
           {
-            "id": "9822b8c03aec3288",
+            "id": "4ed03d43460b992e",
             "type": "leaf",
             "state": {
               "type": "empty",
               "state": {},
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "New tab"
             }
           },
           {
-            "id": "db586590b28f9426",
+            "id": "00c9b62640cf9d63",
             "type": "leaf",
             "state": {
               "type": "empty",
               "state": {},
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "New tab"
             }
           },
           {
-            "id": "bc4bd4aa77307533",
+            "id": "45ac8d6ba6fad5c9",
             "type": "leaf",
             "state": {
               "type": "empty",
               "state": {},
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "New tab"
             }
           },
           {
-            "id": "533fa93d205971cb",
+            "id": "1142eb8b87a99cb4",
             "type": "leaf",
             "state": {
               "type": "empty",
               "state": {},
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "New tab"
             }
           },
           {
-            "id": "8599d07815a8f545",
+            "id": "d7d926c36ab3146e",
             "type": "leaf",
             "state": {
               "type": "empty",
               "state": {},
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "New tab"
             }
           },
           {
-            "id": "9cb14e96f5bb253c",
+            "id": "2c2b92f7522bfa7c",
             "type": "leaf",
             "state": {
               "type": "empty",
               "state": {},
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "New tab"
             }
           },
           {
-            "id": "fc7a89316a336c20",
+            "id": "8b7bf0bebae240d3",
             "type": "leaf",
             "state": {
               "type": "empty",
               "state": {},
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "New tab"
             }
           },
           {
-            "id": "79bd32afdd6c7722",
+            "id": "6b0b2682a9ac2a48",
             "type": "leaf",
             "state": {
               "type": "empty",
               "state": {},
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "New tab"
             }
           },
           {
-            "id": "516d71ab01444f6d",
+            "id": "fb9e4a36f044702a",
             "type": "leaf",
             "state": {
               "type": "empty",
               "state": {},
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "New tab"
             }
           },
           {
-            "id": "a46bad428d11634b",
+            "id": "7f21d8f3c82704af",
             "type": "leaf",
             "state": {
               "type": "empty",
               "state": {},
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "New tab"
             }
           },
           {
-            "id": "2482e99d93800b62",
+            "id": "a2bbc14904d8e2f0",
             "type": "leaf",
             "state": {
               "type": "empty",
               "state": {},
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "New tab"
             }
           },
           {
-            "id": "8107ebd2ab57d406",
+            "id": "38b33569f6c3262d",
             "type": "leaf",
             "state": {
               "type": "empty",
               "state": {},
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "New tab"
             }
           },
           {
-            "id": "65a2740139202a75",
+            "id": "87211b441cf17df6",
             "type": "leaf",
             "state": {
               "type": "empty",
               "state": {},
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "New tab"
             }
           },
           {
-            "id": "6366e107fcc877a1",
+            "id": "d6f67afad23085a7",
             "type": "leaf",
             "state": {
-              "type": "Saved Queries View",
+              "type": "empty",
               "state": {},
-              "icon": "feather-mouse-pointer",
-              "title": "Saved Queries"
+              "icon": "lucide-file",
+              "title": "New tab"
             }
           },
           {
-            "id": "896115c4c5f289fb",
+            "id": "237d3cadc94552bb",
             "type": "leaf",
             "state": {
-              "type": "Saved Queries View",
+              "type": "empty",
               "state": {},
-              "icon": "feather-mouse-pointer",
-              "title": "Saved Queries"
+              "icon": "lucide-file",
+              "title": "New tab"
             }
           },
           {
-            "id": "1648b8e20f9ec889",
+            "id": "4ff539cb570e0f70",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "b554a7c5593efffe",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "44708fc5c3940dd9",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "8c38bc181dbcf611",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "d1140dcee90e9a7c",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "41bf81a8a0bc0a16",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "e7c0c5a032e0b084",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "1728a4d87c053496",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "76d2481f75ecade4",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "78d8a8d254ac502c",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "bc2e7e4e72180769",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          },
+          {
+            "id": "d43605b17f89da3d",
             "type": "leaf",
             "state": {
               "type": "Saved Queries View",
@@ -503,84 +630,85 @@
             }
           }
         ],
-        "currentTab": 26
+        "currentTab": 38
       }
     ],
     "direction": "horizontal",
-    "width": 280.5,
+    "width": 291.5,
     "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:打开快速切换": false,
-      "graph:查看关系图谱": false,
-      "canvas:新建白板": false,
-      "daily-notes:打开/创建今天的日记": false,
-      "templates:插入模板": false,
-      "command-palette:打开命令面板": false,
-      "markdown-importer:打开 Markdown 格式转换器": false,
-      "audio-recorder:开始/结束录音": false,
-      "workspaces:管理工作区布局": false,
+      "bases:Create new base": false,
+      "webpage-html-export:Export as HTML": false,
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "markdown-importer:Open format converter": false,
+      "audio-recorder:Start/stop recording": false,
+      "workspaces:Manage workspace layouts": false,
+      "sheet-plus:Create excel file": false,
+      "obsidian-excalidraw-plugin:New drawing": false,
       "table-editor-obsidian:Advanced Tables Toolbar": false,
       "templater-obsidian:Templater": false,
-      "sheet-plus:创建 Excel 文件": false,
-      "obsidian-excalidraw-plugin:新建绘图文件": false,
       "obsidian42-brat:BRAT": false,
       "pdf-plus:PDF++: Toggle auto-copy": false,
       "pdf-plus:PDF++: Toggle auto-focus": false,
       "pdf-plus:PDF++: Toggle auto-paste": false,
-      "float-search:Search obsidian in modal view": false,
-      "webpage-html-export:Export Vault to HTML": false
+      "float-search:Search obsidian in modal view": false
     }
   },
-  "active": "71478304609d01f5",
+  "active": "69e12bbb54cde461",
   "lastOpenFiles": [
-    "ModelUpdating/Case about ModelUpdating.md",
-    "Reports/Daily/2025-07-08.md",
-    "Blog&Book&Paper/Route.md",
-    "Blog&Book&Paper/Write/Source/Tools.md",
-    "ModelUpdating/Paper about ModelUpdating.md",
-    "ModelUpdating/Basics about ModelUpdating.md",
-    "Blog&Book&Paper/Write/Write Paper/Composites Simulation/Simulation.md",
-    "Blog&Book&Paper/Write/Write Paper/Composites Simulation/Glass fibre reinforced thermoplastic composites.excalidraw.md",
-    "Blog&Book&Paper/Read/Book/How to Read a Paper.md",
-    "ModelUpdating/Review/结构动力学有限元模型修正的发展------模型确认.md",
-    "ModelUpdating/Method/Sensitivity Analysis.md",
-    "ModelUpdating/DFDC9200",
-    "ModelUpdating/0BCC9200",
-    "ModelUpdating/2F5C9200",
-    "ModelUpdating/DB5C9200",
-    "ModelUpdating/C54C9200",
-    "ModelUpdating/863C9200",
-    "ModelUpdating/85CB9200",
-    "ModelUpdating/~$Paper about ModelUpdating.xlsx",
-    "ModelUpdating/Paper about ModelUpdating.xlsx",
-    "ModelUpdating/新建... Microsoft Excel Worksheet.xlsx",
-    "ModelUpdating/Excel 2025-07-03 22.33.26.univer.md",
-    "Other Interest/Technology/Vibration Measurement.md",
-    "Other Interest/PHM.md",
-    "Reports/Daily/2025-06-30.md",
-    "Reports/Daily/2025-07-01.md",
-    "Reports/Daily/2025-07-02.md",
-    "Blog&Book&Paper/Write/Interest.excalidraw.md",
-    "Other Interest/Reliability.md",
+    "LiteratureNotes/Merging physics and neural network_A promising tool for prognostics and health management.md",
+    "Other Interest/Uncertainty.md",
+    "Learn/Finite Element/Pa&Nastran.md",
+    "Learn/Finite Element/Multiphysics.md",
+    "Learn/Neural Network/PyTorch.md",
+    "Blog&Book&Paper/Write/Write Paper/Model Updating/J2 C1 A fast interval model updating method based on MLP neural network.md",
+    "Blog&Book&Paper/Write/Write Paper/Model Updating/J3 NN-based Global Sensitivity Analysis.md",
+    "ModelUpdating/Cases/Folding Fin.md",
+    "Blog&Book&Paper/Read/Book/模态实验/模态实验.excalidraw.md",
+    "ModelUpdating/Cases/NASA challenge 2019.md",
+    "Blog&Book&Paper/Read/Book/模态实验/模态试验实用技术.excalidraw.md",
+    "Blog&Book&Paper/Write/Write Paper/Model Updating/ModelUpdating.excalidraw.md",
+    "ModelUpdating/Cases/Simple.md",
+    "Blog&Book&Paper/Write/Write Paper/Model Updating/Review.excalidraw.md",
+    "Blog&Book&Paper/⭐Route.md",
+    "Blog&Book&Paper/Write/Values.md",
+    "Blog&Book&Paper/Write/Write Paper/Model Updating/J1 Stochastic Model Calibration with Image Encoding——Converting High-Dimensional Frequency-Domain Responses into RGB Images for Neural Network Inversion.md",
+    "Blog&Book&Paper/Write/Write Paper/Model Updating/J3 Case results.md",
+    "Learn/Finite Element/Modal Testing.md",
+    "Blog&Book&Paper/Write/Write Paper/Model Updating/C2 NVTA2025.md",
     "Blog&Book&Paper/Write/Write tips.md",
-    "Blog&Book&Paper/Write/Life.md",
-    "Blog&Book&Paper/Read/Book/人生七年.md",
-    "Blog&Book&Paper/Read/Book/Everyone-can-use-English.md",
-    "Blog&Book&Paper/Read/Book/Japanse.md",
-    "Blog&Book&Paper/Read/Book/Mechanical Vibrations Theory and Application to Structural Dynamics.md",
-    "Blog&Book&Paper/Read/Book/Writing Science.md",
-    "Excalidraw/Scripts/Downloaded/Set Grid.svg",
-    "ZtImgExcerpt/UFN725FV.png",
-    "ZtImgExcerpt/YVKSYF62.png",
-    "ZtImgExcerpt/S358KWN7.png",
-    "ZtImgExcerpt/R7PYYWXR.png",
-    "ZtImgExcerpt/F3DZ7RV5.png",
-    "ZtImgExcerpt/8ITZJSHT.png",
-    "ZtImgExcerpt/8VIYWBLS.png",
-    "ZtImgExcerpt/BMVV8S2I.png",
-    "ZtImgExcerpt/D5XVYQ2X.png",
+    "Learn/Neural Network/DeepLearning.md",
+    "ModelUpdating/Basics about ModelUpdating.md",
+    "ModelUpdating/Types of model updating with machine learning.md",
+    "Learn/Python/Figure.md",
+    "Blog&Book&Paper/Write/Write Paper/Model Updating/C2 EURODYN.md",
+    "PHM&SHM/Others",
+    "Untitled 1.base",
+    "Untitled.base",
+    "PHM&SHM/AI",
+    "PHM&SHM/Review",
+    "PHM&SHM",
+    "ModelUpdating/AI",
+    "Reliability/Untitled",
+    "Blog&Book&Paper/Write/Write Paper/Model Updating/4 Case results.xlsx",
+    "ModelUpdating/Digital Twins.base",
+    "ZtImgExcerpt/VJUKCB6M.png",
+    "ZtImgExcerpt/YLGIWPDT.png",
+    "ZtImgExcerpt/RN4HDGYZ.png",
+    "ZtImgExcerpt/VFZSSWEZ.png",
+    "ZtImgExcerpt/YPDUHCYV.png",
+    "ZtImgExcerpt/I6BD3EV3.png",
+    "ZtImgExcerpt/JB4VXXVJ.png",
+    "ZtImgExcerpt/XMUF52HX.png",
+    "ZtImgExcerpt/IYVDUHTV.png",
+    "ZtImgExcerpt/5WLVNM76.png",
     "Blog&Book&Paper/Write/LearningRoute.canvas",
     "Other Interest/1.canvas",
     "3DReconstruction/Basic Knowledge/NeRF/NeRF.canvas",

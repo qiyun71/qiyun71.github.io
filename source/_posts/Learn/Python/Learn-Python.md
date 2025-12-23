@@ -18,7 +18,7 @@ Python查缺补漏
 >[安装用于 Python 的 MATLAB Engine API - MATLAB & Simulink - MathWorks 中国](https://ww2.mathworks.cn/help/matlab/matlab_external/install-the-matlab-engine-for-python.html)
 
 - 要从 MATLAB 文件夹安装，请在 Windows® 上键入：
-  - `cd "_matlabroot_\extern\engines\python"`
+  - `cd "_matlabroot_\extern\engines\python cd D:\Software\Matlab\extern\engines\python"`
   - `python -m pip install .`
 - 使用以下命令从 [https://pypi.org/project/matlabengine](https://pypi.org/project/matlabengine) 安装引擎 API：
   - `python -m pip install matlabengine`

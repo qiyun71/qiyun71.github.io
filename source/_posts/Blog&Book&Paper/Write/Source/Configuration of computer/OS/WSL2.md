@@ -189,3 +189,38 @@ swap=8GB
 ## GUI
 
 WSL GUI [microsoft/wslg: Enabling the Windows Subsystem for Linux to include support for Wayland and X server related scenarios (github.com)](https://github.com/microsoft/wslg)
+
+
+## Fonts
+
+wsl中使用windows字体：
+https://github.com/OsbertWang/install-latex-guide-zh-cn/issues/14#issuecomment-595758291
+
+其实就是找到 Windows 系统中的字体文件夹，通常是 `C:\Windows\Fonts`，然后在 WSL 中建立文件
+
+```
+sudo vim /etc/fonts/local.conf
+```
+
+内容为
+
+```
+<?xml version="1.0"?>
+<!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+<fontconfig>
+    <dir>/mnt/c/Windows/Fonts</dir>
+</fontconfig>
+```
+
+之后刷新字体缓存即可
+
+```
+fc-cache -fv
+```
+
+
+```
+export http_proxy="http://127.0.0.1:10808"
+
+export https_proxy="http://127.0.0.1:10808"
+```

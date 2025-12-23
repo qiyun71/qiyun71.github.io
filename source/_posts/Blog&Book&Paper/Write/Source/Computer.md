@@ -40,3 +40,49 @@
 系统激活：[Microsoft Activation Scripts (MAS)](https://massgrave.dev/)
 
 [massgravel/Microsoft-Activation-Scripts: A Windows and Office activator using HWID / Ohook / KMS38 / Online KMS activation methods, with a focus on open-source code and fewer antivirus detections.](https://github.com/massgravel/Microsoft-Activation-Scripts)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# 工作站
+
+[GPU Database | TechPowerUp](https://www.techpowerup.com/gpu-specs/)
+
+
+
+| 配件  | 型号   | 价格          |
+| --- | ---- | ----------- |
+| CPU |      |             |
+| 主板  |      |             |
+| 内存  |      |             |
+| 显卡  | 4090 | 22499-23999 |
+| 电源  |      |             |
+| 硬盘  |      |             |
+| 散热  |      |             |
+| 机箱  |      |             |
+| 风扇  |      |             |
+| 总价  |      |             |
+
+
+显式计算，CPU核越多越好，主频越高计算越快
+- U 285K与i9 14900K与R9 9950X分别是24核32线程、24核24线程和16核32线程
+- EPYC 9654 96核192线程，适合大规模并行计算
+
+
+30系除了3090和3090Ti外，40系所有不支持Nvlink(Nvlink可以提高多卡并行训练时的速度)。
+支持nvlink
+- Tesla/Quadro 系列中的 P100、V100、A100、H100 等。
+- 方便的话还是4090魔改的48G

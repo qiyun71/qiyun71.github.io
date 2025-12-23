@@ -1,0 +1,38 @@
+{
+  "nodePath": "D:\\Software\\NodeJS\\node.exe",
+  "nodePathUpdatedToNode20": true,
+  "enabled": true,
+  "hotkeys": {
+    "accept": "Alt-q",
+    "cancel": "Escape",
+    "request": "Ctrl-Shift-?",
+    "partial": "Ctrl-Shift->",
+    "next": "Ctrl-Shift-ArrowDown",
+    "disable": ""
+  },
+  "suggestionDelay": 500,
+  "debug": true,
+  "onlyOnHotkey": false,
+  "onlyInCodeBlock": false,
+  "exclude": [],
+  "deviceSpecificSettings": [
+    "nodePath"
+  ],
+  "useDeviceSpecificSettings": false,
+  "proxy": "http://127.0.0.1:10808",
+  "chatSettings": {
+    "deviceCode": null,
+    "pat": null,
+    "accessToken": {
+      "token": null,
+      "expiresAt": null
+    },
+    "selectedModel": {
+      "label": "GPT-o4-mini",
+      "value": "o4-mini"
+    }
+  },
+  "systemPrompt": "You are GitHub Copilot, an AI assistant. You are helping the user with their tasks in Obsidian.",
+  "invertEnterSendBehavior": false,
+  "extraCACerts": ""
+}

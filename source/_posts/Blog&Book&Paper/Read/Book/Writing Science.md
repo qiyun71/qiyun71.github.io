@@ -6,7 +6,7 @@ tags:
 categories: Learn
 ---
 
-[Writing Science](Writing%20science.pdf)
+“As a scientist, you are a professional writer.” ([Schimel, 2012, p. 3](zotero://select/library/items/2G5C22P8)) ([pdf](zotero://open-pdf/library/items/BD56V6CE?page=18&annotation=9JVTDU5U))
 
 <!-- more -->
 

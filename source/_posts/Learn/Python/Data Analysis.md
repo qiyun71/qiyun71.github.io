@@ -13,7 +13,9 @@ seaborn | matplotlib
 <!-- more -->
 
 
-# 数据降维(Dimension Reduction)
+# 数据降维
+
+(Dimension Reduction)
 
 >  [常见的PCA、tSNE、UMAP降维及聚类基本原理及代码实例_umap聚类-CSDN博客](https://blog.csdn.net/qq_43337249/article/details/116612811)
 
@@ -34,7 +36,13 @@ How：
 
 ### PCA
 
-PCA是将数据的最主要成分提取出来代替原始数据，也就是将n维特征映射到新的维度中，由k维正交特征组成的特征空间就是主成分，使用的降维方法就是投影。
+> [【转载】奇异值分解(SVD)计算过程示例 - marsggbo - 博客园](https://www.cnblogs.com/marsggbo/p/10155801.html)
+> [(10 封私信) 主成分分析（PCA）原理详解 - 知乎](https://zhuanlan.zhihu.com/p/37777074)
+
+
+### KPCA
+
+nonlinear dimensionality reduction methods (kernel principal component analysis (KPCA),
 
 
 ### t-SNE
@@ -99,3 +107,14 @@ tsne_results = tsne_results[:anal_sample_no, :] # 3000,2
 pca_hat_results = tsne_results[anal_sample_no:, :] # 3000,2
 ```
 
+### LDA
+
+> [线性判别分析 - 维基百科，自由的百科全书](https://zh.wikipedia.org/zh-cn/%E7%B7%9A%E6%80%A7%E5%88%A4%E5%88%A5%E5%88%86%E6%9E%90)
+> [1.2. Linear and Quadratic Discriminant Analysis — scikit-learn 1.7.1 documentation](https://scikit-learn.org/stable/modules/lda_qda.html)
+
+LDA 明确地尝试在不同数据类之间建立模型，而 PCA 则不考虑类别上的不同（只是在保留大部分讯息的前提下降低维度数）
+相较于 PCA，LDA 是一种有监督的方法
+
+PCA是将数据的最主要成分提取出来代替原始数据，也就是将n维特征映射到新的维度中，由k维正交特征组成的特征空间就是主成分，使用的降维方法就是投影。
+
+LDA在**线性模型**中具有重要的地位，它结合了降维和分类的优点，是一种非常实用的算法。
