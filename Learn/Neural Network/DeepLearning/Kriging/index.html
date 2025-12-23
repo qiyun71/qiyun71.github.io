@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/yqq/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Kriging Model">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kriging">
+<meta property="og:url" content="http://example.com/Learn/Neural%20Network/DeepLearning/Kriging/index.html">
+<meta property="og:site_name" content="QiYun">
+<meta property="og:description" content="Kriging Model">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20250918163854.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20250811110117.png">
+<meta property="article:published_time" content="2025-08-05T06:30:10.000Z">
+<meta property="article:modified_time" content="2025-09-18T10:48:04.555Z">
+<meta property="article:author" content="Qi Yun">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20250918163854.png">
+
+<link rel="canonical" href="http://example.com/Learn/Neural%20Network/DeepLearning/Kriging/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Kriging | QiYun</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">QiYun</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Note</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/Learn/Neural%20Network/DeepLearning/Kriging/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiYun">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Kriging
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-08-05 14:30:10" itemprop="dateCreated datePublished" datetime="2025-08-05T14:30:10+08:00">2025-08-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-09-18 18:48:04" itemprop="dateModified" datetime="2025-09-18T18:48:04+08:00">2025-09-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Learn-Neural-Network-DeepLearning/" itemprop="url" rel="index"><span itemprop="name">Learn/Neural Network/DeepLearning</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>4.8k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>17 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Kriging Model</p>
+<span id="more"></span>
+<h2 id="Kriging"><a href="#Kriging" class="headerlink" title="Kriging"></a>Kriging</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/377620800">(11 封私信) 克里金(Kriging)模型详细推导 - 知乎</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/75589452">(11 封私信) 高斯过程 Gaussian Processes 原理、可视化及代码实现 - 知乎</a></p>
+</blockquote>
+<p>文献形式：<br>$\left.\left\{\begin{array}{l}\hat{y}_1(x)=\hat{\mu}+r^TC^{-1}(y-\mathbf{1}\hat{\mu})\\s_1^2(x)=\hat{\sigma}^2[1-r^TC^{-1}r+\frac{(1-\mathbf{1}^TC^{-1}r)^2}{\mathbf{1}^TC^{-1}\mathbf{1}}]\end{array}\right.\right.$<br>$\left\{\begin{array}{l}\hat{\mu}=\frac{\mathbf{1}^TC^{-1}y}{\mathbf{1}^TC^{-1}\mathbf{1}}\\\hat{\sigma}^2=\frac{(y-\mathbf{1}\hat{\mu})^TC^{-1}(y-\mathbf{1}\hat{\mu})}{n}\end{array}\right.$</p>
+<ul>
+<li>其中$\hat{y}(x)$为预测点x的均值，$s^{2}(x)$为预测点x的方差，$r$是数据点X和预测点x之间的协方差矩阵，C是数据点X的协方差矩阵，$y$是数据点的目标值。$\mathbf{1}$是$n \times 1$的矩阵</li>
+</ul>
+<p>DACE(matlab)程序形式：当基函数是0次函数，f(x)=1时，$F=\mathbf{1}$是$n \times 1$的矩阵，f=1为标量，此时可以推导出文献形式的公式</p>
+<script type="math/tex; mode=display">\begin{aligned}&\left\{\begin{array}{l}\hat{y}_2(x)=f(x)^T\beta^*+r^T(x)\gamma^*\\s_2^2(x)=\sigma^2(1+u^T(F^TR^{-1}F)^{-1}u-r^TR^{-1}r)\end{array}\right.\\&\text{其中}\begin{cases}\beta^*=(F^TR^{-1}F)^{-1}F^TR^{-1}Y\\R\gamma^*=Y-F\beta^*\\u=F^TR^{-1}r-f(x)\\\sigma^2=\frac{1}{m}(Y-F\beta^*)^TR^{-1}(Y-F\beta^*)&&\end{cases}\end{aligned}</script><ul>
+<li>其中$f(x)$是回归的模型，可选0/1/2次多项式。$r(x)$是相关函数(高斯核函数/指数核函数)</li>
+</ul>
+<h3 id="Train-Fit"><a href="#Train-Fit" class="headerlink" title="Train/Fit"></a>Train/Fit</h3><p>对于给定数据集$\{\mathbf{X},\mathbf{y}\}_{i=1}^{n}$，Kriging假设数据都服从n维正态分布，因此目标函数维<strong>随机过程</strong><sup><a href="#fn_1" id="reffn_1">1</a></sup>：</p>
+<blockquote id="fn_1">
+<sup>1</sup>. <a target="_blank" rel="noopener" href="https://www.zhihu.com/question/26694486">(12 封私信) 如何从深刻地理解随机过程的含义？ - 知乎</a> （目标函数随机过程中每个变量都是一个随机变量）<a href="#reffn_1" title="Jump back to footnote [1] in the text."> &#8617;</a>
+</blockquote>
+<p>$\begin{pmatrix}Y(\mathbf{x^{1}})\\Y(\mathbf{x^{2}})\\\vdots\\Y(\mathbf{x^{n}})\end{pmatrix} \sim N(\mathbf{\mu},C)$ , 取均值为常数$\mathbf{1\mu}<script type="math/tex">,</script>\mathbf{1} \in \mathbb{R}^{n \times 1}$，协方差为:</p>
+<p>$C=\begin{pmatrix}&amp;cor(Y(\boldsymbol{x^{1}}),Y(\boldsymbol{x^{1}})),&amp;\ldots,&amp;cor(Y(\boldsymbol{x^{1}}),Y(\boldsymbol{x^{n}}))\\&amp;\vdots,&amp;\ddots,&amp;\vdots\\&amp;cor(Y(\boldsymbol{x^{n}}),Y(\boldsymbol{x^{1}})),&amp;\ldots,&amp;cor(Y(\boldsymbol{x^{n}}),Y(\boldsymbol{x^{n}}))\end{pmatrix}$</p>
+<p>其中$cor[Y(\boldsymbol{x}^i),Y(\boldsymbol{x}^l)]=exp(-\sum_{j=1}^k\theta_j|x_j^i-x_j^l|^2)$为相关函数/核函数</p>
+<p>在特定值下的条件概率为(似然函数)：<br>$L(\boldsymbol{Y}^1,\boldsymbol{Y}^2,\ldots,\boldsymbol{Y}^n|\mu,\sigma)=\frac{1}{\left(2\pi\sigma^2\right)^{n/2}}exp(-\frac{\Sigma(\boldsymbol{Y}^i-\boldsymbol{\mu})^2}{2\sigma^2}) = \frac{1}{(2\pi\sigma^2)^{n/2}|C|^{1/2}}exp[-\frac{(\boldsymbol{y}-\boldsymbol{1}\mu)^TC^{-1}(\boldsymbol{y}-\boldsymbol{1}\mu)}{2\sigma^2}]$</p>
+<p>取对数：$ln(L)=-\frac{n}{2}ln(2\pi)-\frac{n}{2}ln(\sigma^2)-\frac{1}{2}ln|C|-\frac{(\boldsymbol{y}-\boldsymbol{1}\mu)^TC^{-1}(\boldsymbol{y}-\boldsymbol{1}\mu)}{2\sigma^2}$</p>
+<p>如何取合适的$\mu,\sigma$使得概率最大？ ==&gt; 求偏导，并分别令偏导数为0，将对应的$\hat{\mu},\hat{\sigma}$带入可得：</p>
+<p>$lnL\approx-\frac{n}{2}ln(\hat{\sigma}^2)-\frac{1}{2}ln(|C|)$</p>
+<p><strong>因此Kriging的训练(fit)过程就是寻找合适的超参数$\theta$(in $C$)使得$\ln L$最大</strong></p>
+<h3 id="Predict"><a href="#Predict" class="headerlink" title="Predict"></a>Predict</h3><p><strong>训练后的预测过程目的是寻找合适的$\tilde{\mathbf{y}}$取多少可以让$\ln L$最大</strong></p>
+<p>训练后的kriging可以得到$\hat{\mu},\hat{\sigma},\theta_{i}$<br>假设需要预测的点为$\hat{y}$，将$\mathbf{y}$与$\hat{y}$放在一起，得到$\tilde{\mathbf{y}}=\{\mathbf{y}^T,\hat{y}\}^T$，则协方差矩阵为：</p>
+<p>$\tilde{C}=\begin{pmatrix}C&amp;\boldsymbol{r}\\\boldsymbol{r}^T&amp;1\end{pmatrix}$</p>
+<p>对应似然函数：$ln(L)=-\frac{n}{2}ln(2\pi)-\frac{n}{2}ln(\hat{\sigma}^2)-\frac{1}{2}ln|\widetilde{C}|-\frac{(\tilde{\boldsymbol{y}}-\mathbf{1}\hat{\mu})^T\widetilde{C}^{-1}(\tilde{\boldsymbol{y}}-\mathbf{1}\hat{\mu})}{2\hat{\sigma}^2}$<br>只考虑最后一项：$lnL\approx-\frac{\begin{pmatrix}\boldsymbol{y}-\boldsymbol{1}\hat{\mu}\\\hat{y}-\hat{\mu}\end{pmatrix}^T\begin{pmatrix}C&amp;\boldsymbol{r}\\\boldsymbol{r}^T&amp;1\end{pmatrix}^{-1}\begin{pmatrix}\boldsymbol{y}-\boldsymbol{1}\hat{\mu}\\\hat{y}-\hat{\mu}\end{pmatrix}}{2\hat{\sigma}^2}$<br>中间部分对协方差矩阵根据Partitioned Inverse method求逆</p>
+<p>可得：$lnL=-\frac{(\boldsymbol{y}-\boldsymbol{1}\hat{\mu})^{T}A(\boldsymbol{y}-\boldsymbol{1}\hat{\mu})+(\boldsymbol{y}-\boldsymbol{1}\hat{\mu})^{T}B(\hat{y}-\hat{\mu})+(\hat{y}-\hat{\mu})^{T}D(\boldsymbol{y}-\boldsymbol{1}\hat{\mu})+(\hat{y}-\hat{\mu})^{T}E(\hat{y}-\hat{\mu})}{2\hat{\sigma}^{2}}$</p>
+<p>==&gt; 对$\hat{y}$求偏导，可得：</p>
+<p>$\hat{y}_1(x)=\hat{\mu}+r^TC^{-1}(y-\mathbf{1}\hat{\mu})$</p>
+<h3 id="Kernal-Function"><a href="#Kernal-Function" class="headerlink" title="Kernal Function"></a>Kernal Function</h3><p><a target="_blank" rel="noopener" href="https://scikit-learn.org/stable/modules/gaussian_process.html#kernels-for-gaussian-processes">1.7. Gaussian Processes — scikit-learn 1.7.1 documentation</a></p>
+<p> Kernel operators: </p>
+<ul>
+<li>sum: $k_{sum}(X, Y) = k_1(X, Y) + k_2(X, Y)$</li>
+<li>product: $k_{product}(X, Y) = k_1(X, Y) * k_2(X, Y)$</li>
+<li>exp: $k_{exp}(X, Y) = k(X, Y)^p$</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Equation</th>
+<th>特性</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Constant Kernel</td>
+<td>$k(x_i, x_j) = constant_value \;\forall\; x_i, x_j$</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>White Kernel</td>
+<td>$k(x_i, x_j) = noise_level \text{ if } x_i == x_j \text{ else } 0$</td>
+<td><strong>噪声</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>RBF/Gaussian Kernel</td>
+<td>$k(x_i, x_j) = \text{exp}\left(- \frac{d(x_i, x_j)^2}{2l^2} \right)$</td>
+<td><strong>平滑</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>Matérn kernel</td>
+<td>$k(x_i, x_j) = \frac{1}{\Gamma(\nu)2^{\nu-1}}\Bigg(\frac{\sqrt{2\nu}}{l} d(x_i , x_j )\Bigg)^\nu K_\nu\Bigg(\frac{\sqrt{2\nu}}{l} d(x_i , x_j )\Bigg),$</td>
+<td><strong>平滑</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>Rational quadratic kernel</td>
+<td>$k(x_i, x_j) = \left(1 + \frac{d(x_i, x_j)^2}{2\alpha l^2}\right)^{-\alpha}$</td>
+<td><strong>多个尺度</strong>上变化</td>
+<td></td>
+</tr>
+<tr>
+<td>Dot-Product kernel</td>
+<td>$k(x_i, x_j) = \sigma_0 ^ 2 + x_i \cdot x_j$</td>
+<td><strong>线性</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>Exp-Sine-Squared kernel</td>
+<td>$k(x_i, x_j) = \text{exp}\left(- \frac{ 2\sin^2(\pi d(x_i, x_j) / p) }{ l^ 2} \right)$</td>
+<td><strong>周期性</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>选择核函数的过程，本质上是在回答一个问题：<strong>“我认为我正在建模的这个未知函数具有什么样的内在特性？”</strong></p>
+<ul>
+<li>是<strong>平滑</strong>的吗？（RBF, Matérn）</li>
+<li>是<strong>周期性</strong>的吗？（Exp-Sine-Squared）</li>
+<li>是<strong>线性</strong>的吗？（Dot-Product）</li>
+<li>包含<strong>噪声</strong>吗？（White Kernel）</li>
+<li>是在<strong>多个尺度</strong>上变化的吗？（Rational Quadratic）</li>
+</ul>
+<p>通常，最佳实践是通过<strong>最大化边际似然函数 (Marginal Likelihood)</strong> 来让数据本身“告诉”我们哪个核函数（及其超参数）最合适。然而，一个好的初始选择会大大加速和稳定这个优化过程。</p>
+<ol>
+<li>Radial Basis Function / Gaussian Kernel</li>
+</ol>
+<ul>
+<li><strong>方程</strong>: $k(x_i, x_j) = \text{exp}\left(- \frac{d(x_i, x_j)^2}{2l^2} \right)$</li>
+<li><strong>核心假设</strong>: 函数是<strong>无限可微的</strong>，意味着它极其平滑。</li>
+<li><strong>超参数</strong>:<ul>
+<li><code>l</code> (length-scale): 长度尺度。决定了函数变化的“剧烈”程度。<code>l</code> 越大，函数越平缓，影响范围越远；<code>l</code> 越小，函数波动越剧烈。</li>
+</ul>
+</li>
+<li><strong>优势</strong>:<ul>
+<li>这是一个非常通用和默认的选择，因为它对平滑函数的建模效果非常好。</li>
+<li>只有一个核心超参数 <code>l</code>，相对简单。</li>
+</ul>
+</li>
+<li><strong>如何选择 (适用场景)</strong>:<ul>
+<li><strong>当你对函数的具体特性一无所知时，RBF是一个绝佳的起点。</strong></li>
+<li>当你相信目标函数是连续且非常平滑的（没有尖锐的突变）。例如，物理系统中温度、压力的平稳变化。</li>
+</ul>
+</li>
+<li><p><strong>注意事项</strong>: RBF的“过度平滑”假设有时可能过于强烈，如果你的函数存在突变或不那么平滑，它可能会掩盖这些细节。</p>
+<ol>
+<li>Matérn Kernel</li>
+</ol>
+</li>
+<li><strong>方程</strong>: $k(x_i, x_j) = \frac{1}{\Gamma(\nu)2^{\nu-1}}\Bigg(\frac{\sqrt{2\nu}}{l} d(x_i , x_j )\Bigg)^\nu K_\nu\Bigg(\frac{\sqrt{2\nu}}{l} d(x_i , x_j )\Bigg)$</li>
+<li><strong>核心假设</strong>: 函数的<strong>平滑度是可调节的</strong>。</li>
+<li><strong>超参数</strong>:<ul>
+<li><code>l</code>: 长度尺度，与RBF中的作用相同。</li>
+<li><code>ν</code> (nu): <strong>平滑度参数</strong>。这是Matérn核的关键。它控制了函数的可微性。</li>
+</ul>
+</li>
+<li><strong>优势</strong>:<ul>
+<li><strong>灵活性极高</strong>。通过调整 <code>ν</code>，Matérn核可以涵盖从非常粗糙到非常平滑的各种函数。</li>
+<li>当 <code>ν → ∞</code> 时，Matérn核等价于RBF核。</li>
+<li>当 <code>ν = 1/2</code> 时，它等价于绝对指数核，适用于模拟非常粗糙、不连续的函数。</li>
+<li><code>ν = 3/2</code> 和 <code>ν = 5/2</code> 是非常流行的选择，它们假设函数是一次或两次可微的，这在现实世界中比无限可微的假设更为常见。</li>
+</ul>
+</li>
+<li><p><strong>如何选择 (适用场景)</strong>:</p>
+<ul>
+<li><strong>当RBF的平滑假设太强时，Matérn是更好的选择</strong>。</li>
+<li>当你需要精确控制函数的平滑度时。在机器学习中，通常将 <code>ν</code> 设为几个固定值之一（如1/2, 3/2, 5/2）进行比较，而不是直接优化它。</li>
+<li>对于大多数物理或工程问题，Matérn 3/2 或 5/2 通常比RBF更现实。</li>
+</ul>
+<ol>
+<li>Rational Quadratic Kernel</li>
+</ol>
+</li>
+<li><strong>方程</strong>: $k(x_i, x_j) = \left(1 + \frac{d(x_i, x_j)^2}{2\alpha l^2}\right)^{-\alpha}$</li>
+<li><strong>核心假设</strong>: 函数是在<strong>多种尺度上变化的特征的叠加</strong>。</li>
+<li><strong>超参数</strong>:<ul>
+<li><code>l</code>: 长度尺度。</li>
+<li><code>α</code> (alpha): 尺度混合参数。决定了不同长度尺度的权重。</li>
+</ul>
+</li>
+<li><strong>优势</strong>:<ul>
+<li>可以看作是无穷多个不同长度尺度的RBF核的加和。</li>
+<li>非常适合于建模那些同时包含长期趋势和短期波动的函数。</li>
+</ul>
+</li>
+<li><strong>如何选择 (适用场景)</strong>:<ul>
+<li>当你的数据表现出多尺度行为时。例如，股票价格数据，既有长期的牛熊趋势，又有每日的短期波动。</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>Exp-Sine-Squared Kernel</li>
+</ol>
+<ul>
+<li><strong>方程</strong>: $k(x_i, x_j) = \text{exp}\left(- \frac{ 2\sin^2(\pi d(x_i, x_j) / p) }{ l^ 2} \right)$</li>
+<li><strong>核心假设</strong>: 函数具有<strong>周期性</strong>。</li>
+<li><strong>超参数</strong>:<ul>
+<li><code>l</code>: 长度尺度，控制一个周期内函数形状的平滑度。</li>
+<li><code>p</code> (periodicity): <strong>周期</strong>。决定了函数重复的间隔。</li>
+</ul>
+</li>
+<li><strong>优势</strong>:<ul>
+<li>专门用于对周期性模式进行建模。</li>
+</ul>
+</li>
+<li><strong>如何选择 (适用场景)</strong>:<ul>
+<li>当数据明显表现出周期性规律时。例如，季节性温度变化、每日的交通流量、电力消耗等。</li>
+<li><strong>注意</strong>: 这个核会强制模型在整个定义域内都具有严格的周期性，如果周期性只在局部存在，可能会导致效果不佳。</li>
+</ul>
+</li>
+</ul>
+<p>以下核函数通常不单独使用，而是与其他核函数<strong>相加</strong>或<strong>相乘</strong>，以构建更复杂的模型。</p>
+<ol>
+<li>White Kernel</li>
+</ol>
+<ul>
+<li><strong>方程</strong>: $k(x_i, x_j) = noise_level \text{ if } x_i == x_j \text{ else } 0$</li>
+<li><strong>核心假设</strong>: 每个数据点都包含独立的、不相关的噪声。</li>
+<li><strong>超参数</strong>:<ul>
+<li><code>noise_level</code>: 噪声的方差。</li>
+</ul>
+</li>
+<li><strong>优势</strong>:<ul>
+<li>允许模型不必精确穿过每个数据点，从而对带有噪声的观测数据进行建模。</li>
+</ul>
+</li>
+<li><strong>如何选择 (适用场景)</strong>:<ul>
+<li><strong>几乎总是需要！</strong> 只要你认为你的观测数据不是完全精确的（这在现实世界中几乎是肯定的），就应该将一个White Kernel<strong>加到</strong>你的主核函数（如RBF或Matérn）上。</li>
+<li><code>k_final = k_RBF + k_White</code></li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>Constant Kernel</li>
+</ol>
+<ul>
+<li><strong>方程</strong>: $k(x_i, x_j) = constant_value \;\forall\; x_i, x_j$</li>
+<li><strong>核心假设</strong>: 控制所有样本点协方差的平均水平。</li>
+<li><strong>超参数</strong>:<ul>
+<li><code>constant_value</code>: 信号方差。</li>
+</ul>
+</li>
+<li><strong>优势</strong>:<ul>
+<li>用作其他核函数的<strong>缩放因子</strong>。</li>
+</ul>
+</li>
+<li><strong>如何选择 (适用场景)</strong>:<ul>
+<li>几乎总是与其他核函数<strong>相乘</strong>使用。它控制了函数输出的平均变化幅度（信号方差）。例如 <code>k_final = C * k_RBF</code>。许多库（如GPy, scikit-learn）会默认将这个常数因子包含在其他核的实现中。</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>Dot-Product Kernel</li>
+</ol>
+<ul>
+<li><strong>方程</strong>: $k(x_i, x_j) = \sigma_0 ^ 2 + x_i \cdot x_j$</li>
+<li><strong>核心假设</strong>: 函数是<strong>线性</strong>的，可能还有一个偏移量。</li>
+<li><strong>超参数</strong>:<ul>
+<li><code>σ_0^2</code> (sigma_0_squared): 偏移量。控制模型是非齐次（<code>σ_0^2 &gt; 0</code>）还是齐次（<code>σ_0^2 = 0</code>）的。</li>
+</ul>
+</li>
+<li><strong>优势</strong>:<ul>
+<li>可以恢复贝叶斯线性回归。</li>
+<li>当与非线性核函数相加时，可以为模型增加一个线性的基准趋势。</li>
+</ul>
+</li>
+<li><strong>如何选择 (适用场景)</strong>:<ul>
+<li>当你相信数据主要由一个线性趋势主导时。</li>
+<li>当你想构建一个包含线性成分和非线性成分的组合模型时，例如 <code>k_final = k_Linear + k_RBF</code>。</li>
+</ul>
+</li>
+</ul>
+<p>总结与实践建议</p>
+<ol>
+<li><strong>从组合开始</strong>: 一个最强大、最通用的起点是 <strong>RBF + White Kernel</strong> 或 <strong>Matérn(ν=5/2) + White Kernel</strong>。<ul>
+<li><code>k(x, x&#39;) = C * k_Matérn(x, x&#39;) + k_White(x, x&#39;)</code></li>
+</ul>
+</li>
+<li><strong>观察数据</strong>: 在选择之前，先绘制你的数据图。是否存在明显的周期性？是否存在清晰的线性趋势？数据的平滑程度如何？</li>
+<li><strong>组合核函数</strong>: 核函数的强大之处在于可以组合。<ul>
+<li><strong>相加</strong>: <code>k1 + k2</code>，表示模型是两种效应的叠加。例如，一个长期线性趋势加上一个周期性波动 <code>k_Linear + k_Periodic</code>。</li>
+<li><strong>相乘</strong>: <code>k1 * k2</code>，表示一种效应在另一种效应的影响下发生变化。例如，用一个RBF核去乘以一个周期核 <code>k_RBF * k_Periodic</code>，可以建模一个周期性在不同区域平滑度不同的函数。</li>
+</ul>
+</li>
+<li><strong>模型选择</strong>: 如果你不确定，可以尝试几种不同的核函数（或组合），然后通过交叉验证或比较它们的边际似然值来选择最优的一个。</li>
+</ol>
+<h3 id="Category"><a href="#Category" class="headerlink" title="Category"></a>Category</h3><p>普通克里金 (Ordinary Kriging)<br>普通克里金是最常用的一种克里金插值方法。它的核心假设是数据的<strong>均值在一个局部范围内是未知但恒定的</strong>。这意味着它在进行插值时，不会考虑数据中可能存在的全局性趋势或漂移。普通克里金的插值结果是基于样本点之间的空间自相关性，通过变异函数来量化这种关系，并对未知点进行加权平均。</p>
+<p>泛克里金 (Universal Kriging)<br>与普通克里金不同，泛克里金假设数据中存在一个主导的趋势 (trend) 或漂移 (drift)。<strong>假设均值不是恒定的，而是随着空间坐标/其他外部变量而变化的函数</strong>。这个趋势可以用一个确定性的函数，例如多项式函数来描述。泛克里金会将数据分解为两部分：一个描述趋势的确定性函数和一个包含随机变化的残差项。它首先拟合出数据的趋势，然后对残差进行克里金插值，最后将趋势和插值结果相加得到最终的预测值。因此，当你已知研究区域内存在某种趋势性变化时，例如风向、坡度等，使用泛克里金会更合适。</p>
+<h1 id="Co-Kriging-MF"><a href="#Co-Kriging-MF" class="headerlink" title="Co-Kriging(MF)"></a>Co-Kriging(MF)</h1><p>Multi-fidelity kriging model with large numbers of cheap LF data and small numbers of expensive HF data</p>
+<h2 id="MF-model分类"><a href="#MF-model分类" class="headerlink" title="MF model分类"></a>MF model分类</h2><p>“The stochastic Kriging model enables the GCK model to consider the predictive uncertainty from the LF Kriging model at HF sampling points” (<a href="zotero://select/library/items/HYYRPYQS">Zhou 等, 2020, p. 1885</a>) (<a href="zotero://open-pdf/library/items/DQDX3ZQ4?page=1&amp;annotation=ZA687CXT">pdf</a>)</p>
+<p>“There are mainly <strong>three kinds of MF surrogate modeling approaches</strong>,” (<a href="zotero://select/library/items/HYYRPYQS">Zhou 等, 2020, p. 1886</a>) (<a href="zotero://open-pdf/library/items/DQDX3ZQ4?page=2&amp;annotation=PDCNFQZP">pdf</a>)</p>
+<ul>
+<li>“the scaling function–based modeling” (<a href="zotero://select/library/items/HYYRPYQS">Zhou 等, 2020, p. 1886</a>) (<a href="zotero://open-pdf/library/items/DQDX3ZQ4?page=2&amp;annotation=MZBM9EAE">pdf</a>) 构建缩放函数捕捉HF和LF models之间的差异和ratios</li>
+<li>“the space mapping” (<a href="zotero://select/library/items/HYYRPYQS">Zhou 等, 2020, p. 1886</a>) (<a href="zotero://open-pdf/library/items/DQDX3ZQ4?page=2&amp;annotation=N98K8WIB">pdf</a>) 构建mapping from LF output space to HF output space</li>
+<li>“the co-Kriging model” (<a href="zotero://select/library/items/HYYRPYQS">Zhou 等, 2020, p. 1886</a>) (<a href="zotero://open-pdf/library/items/DQDX3ZQ4?page=2&amp;annotation=G7X48MLF">pdf</a>) 空间插值方法，e.g. KOH autoregressive model</li>
+</ul>
+<p>hybrid Kriging scaling mode 和 KOH autoregressive model的公式都可以表示为：$\widehat{y}_h(x)=\rho\widehat{y}_l(x)+\widehat{\delta}(x)$，不同的是，<strong>缩放因子的确定方法</strong>：</p>
+<ul>
+<li><strong>hybrid Kriging scaling mode</strong>：“the scaling factor ρ is determined by <strong>minimizing the discrepancy between the scaled LF Kriging model and the HF sampling data</strong>” (<a href="zotero://select/library/items/HYYRPYQS">Zhou 等, 2020, p. 1888</a>) (<a href="zotero://open-pdf/library/items/DQDX3ZQ4?page=4&amp;annotation=ICU6YYUU">pdf</a>)</li>
+<li><strong>KOH autoregressive model</strong>：“estimates the scaling factor ρ together with other hyper-parameters of the discrepancy model” (<a href="zotero://select/library/items/HYYRPYQS">Zhou 等, 2020, p. 1888</a>) (<a href="zotero://open-pdf/library/items/DQDX3ZQ4?page=4&amp;annotation=DZX8QVHD">pdf</a>)</li>
+</ul>
+<p>“<strong>the multi-fidelity modeling approaches</strong> can be divided into two types” (<a href="zotero://select/library/items/HYYRPYQS">Zhou 等, 2020, p. 1887</a>) (<a href="zotero://open-pdf/library/items/DQDX3ZQ4?page=3&amp;annotation=TZDQBPDK">pdf</a>)</p>
+<ul>
+<li>“hierarchical MF modeling” (<a href="zotero://select/library/items/HYYRPYQS">Zhou 等, 2020, p. 1887</a>) (<a href="zotero://open-pdf/library/items/DQDX3ZQ4?page=3&amp;annotation=AM6PXH9N">pdf</a>) 假设存在clear的分层模型</li>
+<li>“the nonhierarchical MF modeling” (<a href="zotero://select/library/items/HYYRPYQS">Zhou 等, 2020, p. 1887</a>) (<a href="zotero://open-pdf/library/items/DQDX3ZQ4?page=3&amp;annotation=VUP797GH">pdf</a>) 假设每个模型的fidelity level无法clearly辨识和排序</li>
+</ul>
+<p>LF and HF sample points （nested or non-nested）</p>
+<p>co-kriging方法中通常假设采样点是可分配的，以便于HF和LF的采样点nested，i.e. HF采样点是LF的一个子集，这篇文章提出了“a generalized hierarchical co-Kriging (GCK) surrogate model is proposed for MF data fusion with <strong>both nested and non-nested sampling data</strong>” (<a href="zotero://select/library/items/HYYRPYQS">Zhou 等, 2020, p. 1885</a>) (<a href="zotero://open-pdf/library/items/DQDX3ZQ4?page=1&amp;annotation=ABZURJBV">pdf</a>)</p>
+<ul>
+<li>（左）对于nested data，在HF采样点处HF与LF的差异是确定的，可以使用Kriging近似</li>
+<li>（右）而对于non-nested，在HF采样点处HF与LF的差异是不确定的，使用stochastic kriging model，差异被建模为$\delta(x)=y_h(x)–\rho y_l(x)=y_h(x)–\rho \widehat{y}_l(x)+\rho \varepsilon_l(x)$</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20250918163854.png" alt="image.png|666"></p>
+<h2 id="Train-process"><a href="#Train-process" class="headerlink" title="Train process"></a>Train process</h2><ul>
+<li>Construct LF dataset $\mathcal{D}_{l}=\{x^{i}_{l},y^{i}_{l}\}_{i=0}^{n_{l}}$和HF dataset $\mathcal{D}_{h}=\{x^{i}_{h},y^{i}_{h}\}_{i=0}^{n_{h}}$</li>
+<li>Train LF kriging model $Y_{l}(x)$ in $\mathcal{D}_{l}$</li>
+<li>Construct discrepancy dataset $\mathcal{D}_{d}=\{x^{i}_{h},y^{i}_{h}-Y_{l}(x_{h}^{i})\}_{i=0}^{n_{h}}$ based on LF kriging model and HF dataset</li>
+<li>Train discrepancy kriging model $\delta(x)=Y_{h}(x)-\lambda Y_{l}(x)$ in $\mathcal{D}_{d}$</li>
+</ul>
+<h2 id="Code-of-kriging"><a href="#Code-of-kriging" class="headerlink" title="Code of kriging"></a>Code of kriging</h2><h3 id="Kriging-with-different-library"><a href="#Kriging-with-different-library" class="headerlink" title="Kriging with different library"></a>Kriging with different library</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/cornellius-gp/gpytorch">cornellius-gp/gpytorch: A highly efficient implementation of Gaussian Processes in PyTorch</a></p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> gpytorch</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># Training data is 100 points in [0,1] inclusive regularly spaced</span></span><br><span class="line">train_x = torch.linspace(<span class="number">0</span>, <span class="number">1</span>, <span class="number">100</span>)</span><br><span class="line"><span class="comment"># True function is sin(2*pi*x) with Gaussian noise</span></span><br><span class="line">train_y = torch.sin(train_x * (<span class="number">2</span> * math.pi)) + torch.randn(train_x.size()) * math.sqrt(<span class="number">0.04</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># We will use the simplest form of GP model, exact inference</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ExactGPModel</span>(gpytorch.models.ExactGP):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, train_x, train_y, likelihood</span>):</span><br><span class="line">        <span class="built_in">super</span>(ExactGPModel, self).__init__(train_x, train_y, likelihood)</span><br><span class="line">        self.mean_module = gpytorch.means.ConstantMean()</span><br><span class="line">        self.covar_module = gpytorch.kernels.ScaleKernel(gpytorch.kernels.RBFKernel())</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        mean_x = self.mean_module(x)</span><br><span class="line">        covar_x = self.covar_module(x)</span><br><span class="line">        <span class="keyword">return</span> gpytorch.distributions.MultivariateNormal(mean_x, covar_x)</span><br><span class="line"></span><br><span class="line"><span class="comment"># initialize likelihood and model</span></span><br><span class="line">likelihood = gpytorch.likelihoods.GaussianLikelihood()</span><br><span class="line">model = ExactGPModel(train_x, train_y, likelihood)</span><br><span class="line"></span><br><span class="line"><span class="comment"># this is for running the notebook in our testing framework</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line">smoke_test = (<span class="string">&#x27;CI&#x27;</span> <span class="keyword">in</span> os.environ)</span><br><span class="line">training_iter = <span class="number">2</span> <span class="keyword">if</span> smoke_test <span class="keyword">else</span> <span class="number">50</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Find optimal model hyperparameters</span></span><br><span class="line">model.train()</span><br><span class="line">likelihood.train()</span><br><span class="line"></span><br><span class="line"><span class="comment"># Use the adam optimizer</span></span><br><span class="line">optimizer = torch.optim.Adam(model.parameters(), lr=<span class="number">0.1</span>)  <span class="comment"># Includes GaussianLikelihood parameters</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># &quot;Loss&quot; for GPs - the marginal log likelihood</span></span><br><span class="line">mll = gpytorch.mlls.ExactMarginalLogLikelihood(likelihood, model)</span><br><span class="line">  </span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(training_iter):</span><br><span class="line">    <span class="comment"># Zero gradients from previous iteration</span></span><br><span class="line">    optimizer.zero_grad()</span><br><span class="line">    <span class="comment"># Output from model</span></span><br><span class="line">    output = model(train_x)</span><br><span class="line">    <span class="comment"># Calc loss and backprop gradients</span></span><br><span class="line">    loss = -mll(output, train_y)</span><br><span class="line">    loss.backward()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Iter %d/%d - Loss: %.3f   lengthscale: %.3f   noise: %.3f&#x27;</span> % (</span><br><span class="line">        i + <span class="number">1</span>, training_iter, loss.item(),</span><br><span class="line">        model.covar_module.base_kernel.lengthscale.item(),</span><br><span class="line">        model.likelihood.noise.item()</span><br><span class="line">    ))</span><br><span class="line">    optimizer.step()</span><br><span class="line">    </span><br><span class="line"><span class="comment"># Get into evaluation (predictive posterior) mode</span></span><br><span class="line">model.<span class="built_in">eval</span>()</span><br><span class="line">likelihood.<span class="built_in">eval</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment"># Test points are regularly spaced along [0,1]</span></span><br><span class="line"><span class="comment"># Make predictions by feeding model through likelihood</span></span><br><span class="line"><span class="keyword">with</span> torch.no_grad(), gpytorch.settings.fast_pred_var():</span><br><span class="line">    test_x = torch.linspace(<span class="number">0</span>, <span class="number">1</span>, <span class="number">51</span>)</span><br><span class="line">    <span class="built_in">print</span>(model(test_x))</span><br><span class="line">    observed_pred = likelihood(model(test_x))</span><br><span class="line">    <span class="built_in">print</span>(observed_pred)</span><br><span class="line">    </span><br><span class="line"><span class="keyword">with</span> torch.no_grad():</span><br><span class="line">    <span class="comment"># Initialize plot</span></span><br><span class="line">    f, ax = plt.subplots(<span class="number">1</span>, <span class="number">1</span>, figsize=(<span class="number">4</span>, <span class="number">3</span>))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Get upper and lower confidence bounds</span></span><br><span class="line">    lower, upper = observed_pred.confidence_region()</span><br><span class="line">    <span class="comment"># Plot training data as black stars</span></span><br><span class="line">    ax.plot(train_x.numpy(), train_y.numpy(), <span class="string">&#x27;k*&#x27;</span>)</span><br><span class="line">    <span class="comment"># Plot predictive means as blue line</span></span><br><span class="line">    ax.plot(test_x.numpy(), observed_pred.mean.numpy(), <span class="string">&#x27;b&#x27;</span>)</span><br><span class="line">    <span class="comment"># Shade between the lower and upper confidence bounds</span></span><br><span class="line">    ax.fill_between(test_x.numpy(), lower.numpy(), upper.numpy(), alpha=<span class="number">0.5</span>)</span><br><span class="line">    ax.set_ylim([-<span class="number">3</span>, <span class="number">3</span>])</span><br><span class="line">    ax.legend([<span class="string">&#x27;Observed Data&#x27;</span>, <span class="string">&#x27;Mean&#x27;</span>, <span class="string">&#x27;Confidence&#x27;</span>])</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://scikit-learn.org/stable/modules/gaussian_process.html">1.7. Gaussian Processes — scikit-learn 1.7.1 documentation</a></p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> sklearn.gaussian_process <span class="keyword">import</span> GaussianProcessRegressor</span><br><span class="line"><span class="keyword">from</span> sklearn.gaussian_process.kernels <span class="keyword">import</span> RBF, ConstantKernel <span class="keyword">as</span> C</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">f</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span> x * np.sin(x)</span><br><span class="line"></span><br><span class="line">X_train = np.array([<span class="number">1.</span>, <span class="number">3.</span>, <span class="number">5.</span>, <span class="number">6.</span>, <span class="number">7.</span>, <span class="number">8.</span>]).reshape(-<span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">y_train = f(X_train).ravel()</span><br><span class="line"></span><br><span class="line">x_pred = np.atleast_2d(np.linspace(<span class="number">0</span>, <span class="number">10</span>, <span class="number">1000</span>)).T</span><br><span class="line"></span><br><span class="line">kernel = C(<span class="number">1.0</span>, (<span class="number">1e-3</span>, <span class="number">1e3</span>)) * RBF(<span class="number">10</span>, (<span class="number">1e-2</span>, <span class="number">1e2</span>))</span><br><span class="line">gp = GaussianProcessRegressor(kernel=kernel, n_restarts_optimizer=<span class="number">10</span>, alpha=<span class="number">0.1</span>, normalize_y=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">gp.fit(X_train, y_train)</span><br><span class="line"></span><br><span class="line">y_pred, sigma = gp.predict(x_pred, return_std=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">7</span>))</span><br><span class="line">plt.plot(x_pred, f(x_pred), <span class="string">&#x27;r:&#x27;</span>, label=<span class="string">&#x27;f(x) = x * sin(x)&#x27;</span>)</span><br><span class="line">plt.plot(X_train, y_train, <span class="string">&#x27;r.&#x27;</span>, markersize=<span class="number">10</span>, label=<span class="string">&#x27;观测数据 (Observations)&#x27;</span>)</span><br><span class="line">plt.plot(x_pred, y_pred, <span class="string">&#x27;b-&#x27;</span>, label=<span class="string">&#x27;预测均值 (Prediction)&#x27;</span>)</span><br><span class="line">plt.fill_between(x_pred.ravel(), y_pred - <span class="number">1.96</span> * sigma, y_pred + <span class="number">1.96</span> * sigma,</span><br><span class="line">                 alpha=<span class="number">.2</span>, color=<span class="string">&#x27;blue&#x27;</span>, label=<span class="string">&#x27;95% 置信区间 (Confidence Interval)&#x27;</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;高斯过程回归 (Kriging) 示例&#x27;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&#x27;X&#x27;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;Y&#x27;</span>)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.grid(<span class="literal">True</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h3 id="DKNN"><a href="#DKNN" class="headerlink" title="DKNN"></a>DKNN</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/in1311/DKNN">in1311/DKNN</a></p>
+</blockquote>
+<p>deep kriging neural network 可以用来插值计算</p>
+<ul>
+<li>“PGRN for nonlinear mapping” (<a href="zotero://select/library/items/YYUV4ILX">Chen 等, 2024, p. 1497</a>) (<a href="zotero://open-pdf/library/items/NWD699CG?page=13&amp;annotation=MZMUPH7M">pdf</a>)</li>
+<li>“SSAN for multivariate correlations” (<a href="zotero://select/library/items/YYUV4ILX">Chen 等, 2024, p. 1497</a>) (<a href="zotero://open-pdf/library/items/NWD699CG?page=13&amp;annotation=P4PF5CGX">pdf</a>)</li>
+<li>“Meta-PN for trend surface” (<a href="zotero://select/library/items/YYUV4ILX">Chen 等, 2024, p. 1500</a>) (<a href="zotero://open-pdf/library/items/NWD699CG?page=16&amp;annotation=BPRPQY35">pdf</a>)</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20250811110117.png" alt="image.png|666"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, input_coods, input_features, input_pe, know_coods, know_features</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot; </span></span><br><span class="line"><span class="string">    Forward process of DKNN</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    ----------</span></span><br><span class="line"><span class="string">    Parameters</span></span><br><span class="line"><span class="string">    input_coods: Tensor with shape [batch_size, 2]</span></span><br><span class="line"><span class="string">    input_features: Tensor with shape [batch_size, d_input]</span></span><br><span class="line"><span class="string">    input_pe: Tensor with shape [batch_size, d_model]</span></span><br><span class="line"><span class="string">    know_coods: Tensor with shape [know_num, 2]</span></span><br><span class="line"><span class="string">    know_features: Tensor with shape [know_num, d_input]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    -------</span></span><br><span class="line"><span class="string">    Returns</span></span><br><span class="line"><span class="string">    output: Tensor with shape [batch_size, 1]</span></span><br><span class="line"><span class="string">    out_trend: Tensor with shape [batch_size, 1]</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">##### attribute representation #####</span></span><br><span class="line">    ae_unknow = self.AttRe(input_features)  <span class="comment"># attribute representation of unknown points</span></span><br><span class="line">    ae_know = self.AttRe(know_features)  <span class="comment"># attribute representation of known points</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">##### SSAN #####</span></span><br><span class="line">    cov_unknow = self.Ssan(ae_unknow, ae_know, input_pe, self.pe_know)  <span class="comment"># covariance matrix of unknown points</span></span><br><span class="line">    cov_know = self.Ssan(ae_know, ae_know, self.pe_know, self.pe_know)  <span class="comment"># covariance matrix of known points</span></span><br><span class="line">    <span class="comment"># Zero the diagonal of the matrix cov_know</span></span><br><span class="line">    cov_know = cov_know - torch.diag_embed(torch.diag(cov_know))</span><br><span class="line">    </span><br><span class="line">    <span class="comment">##### PGRN #####</span></span><br><span class="line">    known_z = torch.mean(self.Pgrn(ae_know, self.pe_know),-<span class="number">1</span>)  <span class="comment"># PGRN output of known points</span></span><br><span class="line">        </span><br><span class="line">    <span class="comment">##### Meta-PN #####</span></span><br><span class="line">    trend_know = self.MetaPN(know_coods, self.pe_know)  <span class="comment"># trend matrix of known points</span></span><br><span class="line">    trend_unknow = self.MetaPN(input_coods, input_pe)  <span class="comment"># trend matrix of unknown points</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">##### kriging decoder and interpolation #####</span></span><br><span class="line">    output, out_trend = self.kriging_decoder(known_z, cov_know, cov_unknow, trend_unknow, trend_know)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> output, out_trend</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">kriging_decoder</span>(<span class="params">self, z_know, cov_know, cov_unknow, trend_unknow, trend_know</span>):</span><br><span class="line">    </span><br><span class="line">    <span class="comment">##### kriging decoder and interpolation  #####</span></span><br><span class="line">    device = <span class="built_in">str</span>(cov_know.device) </span><br><span class="line">    k = trend_know.shape[-<span class="number">1</span>]</span><br><span class="line">    batch_size = cov_unknow.shape[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Kriging system matrix</span></span><br><span class="line">    sys_mat_know = torch.zeros(self.known_num + k, self.known_num + k).to(device)</span><br><span class="line">    sys_mat_unknow = torch.zeros(batch_size, self.known_num + k).to(device)</span><br><span class="line"></span><br><span class="line">    sys_mat_know[<span class="number">0</span>:self.known_num, <span class="number">0</span>:self.known_num] = cov_know</span><br><span class="line">    sys_mat_know[<span class="number">0</span>:self.known_num, self.known_num:self.known_num + k] = trend_know</span><br><span class="line">    sys_mat_know[self.known_num:self.known_num + k, <span class="number">0</span>:self.known_num] = trend_know.T</span><br><span class="line"></span><br><span class="line">    sys_mat_unknow[<span class="number">0</span>:batch_size, <span class="number">0</span>:self.known_num] = cov_unknow</span><br><span class="line">    sys_mat_unknow[<span class="number">0</span>:batch_size, self.known_num:self.known_num + k] = trend_unknow</span><br><span class="line">    </span><br><span class="line">    <span class="comment">##### Solving the K-equation #####</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        sys_mat_know_inv = torch.linalg.inv(sys_mat_know)</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        sys_mat_know_inv = torch.linalg.pinv(sys_mat_know)</span><br><span class="line">    lamda = torch.matmul(sys_mat_unknow, sys_mat_know_inv.T)</span><br><span class="line">    lamda = lamda[:, :-k]</span><br><span class="line">    self.lamda = lamda</span><br><span class="line">    </span><br><span class="line">    <span class="comment">##### Estimated based on interpolation formula #####</span></span><br><span class="line">    <span class="comment"># Residual output</span></span><br><span class="line">    residual_pre = torch.matmul(lamda, z_know)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Trend output</span></span><br><span class="line">    trend_pre = torch.<span class="built_in">sum</span>(trend_unknow,-<span class="number">1</span>) / k</span><br><span class="line"></span><br><span class="line">    <span class="comment"># interpolation output</span></span><br><span class="line">    prediction = residual_pre + trend_pre</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> prediction, trend_pre</span><br></pre></td></tr></table></figure>
+<h3 id="KCN"><a href="#KCN" class="headerlink" title="KCN"></a>KCN</h3><p><a target="_blank" rel="noopener" href="https://github.com/tufts-ml/kcn-torch">tufts-ml/kcn-torch</a> A PyTorch Implementation of Kriging Convolutional Networks</p>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+1ZnNxFWnEbk5YzRl">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/Learn/Neural%20Network/DeepLearning/Diffusion%20Model/" rel="prev" title="Diffusion Model">
+      <i class="fa fa-chevron-left"></i> Diffusion Model
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/Learn/Math/Sampling%20Method/" rel="next" title="Sampling Method">
+      Sampling Method <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Kriging"><span class="nav-text">Kriging</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Train-Fit"><span class="nav-text">Train&#x2F;Fit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Predict"><span class="nav-text">Predict</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kernal-Function"><span class="nav-text">Kernal Function</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Category"><span class="nav-text">Category</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Co-Kriging-MF"><span class="nav-text">Co-Kriging(MF)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#MF-model%E5%88%86%E7%B1%BB"><span class="nav-text">MF model分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Train-process"><span class="nav-text">Train process</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code-of-kriging"><span class="nav-text">Code of kriging</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Kriging-with-different-library"><span class="nav-text">Kriging with different library</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DKNN"><span class="nav-text">DKNN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#KCN"><span class="nav-text">KCN</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qi Yun"
+      src="/images/avatar.jpeg">
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">172</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/qiyun71" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;qiyun71" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/29010355" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;29010355" rel="noopener" target="_blank"><i class="fa fa-star fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qi Yun</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">542k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">32:52</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/yqq/anime.min.js"></script>
+  <script src="/yqq/velocity/velocity.min.js"></script>
+  <script src="/yqq/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

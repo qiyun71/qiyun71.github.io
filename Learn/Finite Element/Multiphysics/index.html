@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/yqq/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="多物理场耦合(Multiphysics Coupling)是指在有限元分析中同时考虑多个物理现象之间的相互作用和影响。这些物理现象可以包括结构力学、热传导、流体力学、电磁学等。通过多物理场耦合，可以更准确地模拟和分析复杂系统的行为，捕捉不同物理场之间的相互作用，从而提高仿真结果的精度和可靠性。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Multiphysics">
+<meta property="og:url" content="http://example.com/Learn/Finite%20Element/Multiphysics/index.html">
+<meta property="og:site_name" content="QiYun">
+<meta property="og:description" content="多物理场耦合(Multiphysics Coupling)是指在有限元分析中同时考虑多个物理现象之间的相互作用和影响。这些物理现象可以包括结构力学、热传导、流体力学、电磁学等。通过多物理场耦合，可以更准确地模拟和分析复杂系统的行为，捕捉不同物理场之间的相互作用，从而提高仿真结果的精度和可靠性。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20251201161928.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20251202114357.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20251130212758.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20251201161804.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20251201152655.png">
+<meta property="article:published_time" content="2025-11-29T12:22:34.000Z">
+<meta property="article:modified_time" content="2025-12-11T14:40:07.719Z">
+<meta property="article:author" content="Qi Yun">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20251201161928.png">
+
+<link rel="canonical" href="http://example.com/Learn/Finite%20Element/Multiphysics/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Multiphysics | QiYun</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">QiYun</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Note</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/Learn/Finite%20Element/Multiphysics/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiYun">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Multiphysics
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-11-29 20:22:34" itemprop="dateCreated datePublished" datetime="2025-11-29T20:22:34+08:00">2025-11-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-12-11 22:40:07" itemprop="dateModified" datetime="2025-12-11T22:40:07+08:00">2025-12-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Learn-Finite-Element/" itemprop="url" rel="index"><span itemprop="name">Learn/Finite Element</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>1.7k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>6 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>多物理场耦合(Multiphysics Coupling)是指在有限元分析中同时考虑多个物理现象之间的相互作用和影响。这些物理现象可以包括结构力学、热传导、流体力学、电磁学等。通过多物理场耦合，可以更准确地模拟和分析复杂系统的行为，捕捉不同物理场之间的相互作用，从而提高仿真结果的精度和可靠性。</p>
+<span id="more"></span>
+<h1 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h1><h2 id="气动热力学"><a href="#气动热力学" class="headerlink" title="气动热力学"></a>气动热力学</h2><p>气动热</p>
+<p>气动力</p>
+<h2 id="热-结构动力学"><a href="#热-结构动力学" class="headerlink" title="热-结构动力学"></a>热-结构动力学</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/30546924957">(30 封私信 / 2 条消息) 详解热应力：从原理到应用，掌握控制与管理的那些事儿 - 知乎</a></p>
+<p>温度变化引起材料热膨胀或收缩，若这种变形受到约束，就会在材料内部产生应力，这种应力称为热应力。</p>
+<p>对于线性弹性材料，热应力$\sigma=E\alpha \Delta T$ (Pa)</p>
+<ul>
+<li>$E$：材料的弹性模量(Pa)</li>
+<li>$\alpha$：材料的线膨胀系数(1/°C)</li>
+<li>$\Delta T$：温度变化(°C)</li>
+</ul>
+<h2 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Cassplm/article/details/148845357">一文掌握Abaqus多物理场耦合_多场耦合-CSDN博客</a></p>
+<p>“多 场 、多 域 和 多 尺 度 的 概 念” (<a href="zotero://select/library/items/84LD63YT">桂业伟 等, 2017, p. 2</a>) (<a href="zotero://open-pdf/library/items/MRRKLXDY?page=2&amp;annotation=PIW5M6CN">pdf</a>)</p>
+<ul>
+<li>多场是指分析中的物理场,包括气动场、热场、结构场等</li>
+<li>多域是指存在共同的边界条件且存在相互作用的系统 ,包括气动域和结构域</li>
+</ul>
+<h1 id="气动-热-结构-流-热-固"><a href="#气动-热-结构-流-热-固" class="headerlink" title="气动-热-结构(流-热-固)"></a>气动-热-结构(流-热-固)</h1><p>Aerodynamic-thermal</p>
+<p>1958 年 , Roger .M Aerothermoelasticity</p>
+<blockquote>
+<p>没有考虑阻尼吗？</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20251201161928.png" alt="image.png|333"></p>
+<p>“耦合问题分析方法” (<a href="zotero://select/library/items/TW87Z6LQ">李莎靓 等, 2025, p. 22</a>) (<a href="zotero://open-pdf/library/items/SULM2UMP?page=3&amp;annotation=QELY7EEU">pdf</a>)</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20251202114357.png" alt="image.png|333"></p>
+<p>“<strong>气动热力耦合关系</strong> from 中国空气动力研究与发展中心” (<a href="zotero://select/library/items/84LD63YT">桂业伟 等, 2017, p. 3</a>) (<a href="zotero://open-pdf/library/items/MRRKLXDY?page=3&amp;annotation=3MUBMLF5">pdf</a>) </p>
+<p>“桂业伟 [44-45] 等 自主研发的热环境/热响应耦合计算分析平台 FLCAPTER (Coupled Analysis Platform for Thermal Environment and Structure Response),基于热环境、 热防护、热管理、热布局等研究基础,耦合分析 高速飞行器气动热与热防护综合设计问题。” (<a href="zotero://select/library/items/TW87Z6LQ">李莎靓 等, 2025, p. 25</a>) (<a href="zotero://open-pdf/library/items/SULM2UMP?page=6&amp;annotation=XL78N5I6">pdf</a>)</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20251130212758.png" alt="image.png|333"></p>
+<p>根据研究者的能力和理解水平,可将其分为3个不同耦合问题:</p>
+<ul>
+<li>热-固耦合问题：其主要解决的是流-固交界面上气动热与结构表面温度间的双向强耦合问题。</li>
+<li>流-固耦合问题：其主要解决的是流-固耦合界面上气动力、惯性力与弹性力间的耦合问题</li>
+<li>流-热-固耦合问题：其主要解决的是流-固交界面上气动力、惯性力、弹性力与气动热、结构温度间的多物理场强耦合问题。</li>
+</ul>
+<p>“多 场 耦 合 问 题 场 间 数 据 流 7K 意 图” (<a href="zotero://select/library/items/KWHRAS4J">桂业伟 等, 2015, p. 3</a>) (<a href="zotero://open-pdf/library/items/BCS82ZJ5?page=3&amp;annotation=HFEMDQBN">pdf</a>)<br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20251201161804.png" alt="image.png|333"></p>
+<h2 id="Equation"><a href="#Equation" class="headerlink" title="Equation"></a>Equation</h2><p>“数值计算理论” (<a href="zotero://select/library/items/IXV8JCN9">张佳明 等, 2021, p. 136</a>) (<a href="zotero://open-pdf/library/items/AYFS4YAW?page=2&amp;annotation=2SJ8BGXV">pdf</a>)</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Examples</th>
+<th>Methods</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>“数值模拟” (<a href="zotero://select/library/items/5AAZBJMU">张佳明 等, 2021, p. 88</a>) (<a href="zotero://open-pdf/library/items/3MBBUGIG?page=2&amp;annotation=BWUV599F">pdf</a>)<br><br></td>
+<td>![image.png\</td>
+<td>333](<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20251201152424.png">https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20251201152424.png</a>)<br>同时建立流体域模型和固体域模型,利用基于有限体积法的<strong>Fluent求解器</strong>,通过求解连续方程、动量守恒方程和能量守恒方程,计算流体域的温度、压强、速度及耦合面上的温度分布。然后通过<strong>SystemCoupling模块将流体域网格节点上的热流和压力数据插值映射到固体域表面网格上</strong>,并作为结构场求解的边界条件。利用<strong>Transient Structural求解器</strong>计算结构上的温度、应力、应变与位移分布。然后再此通过<strong>SystemCoupling模块将结构的温度和位移场数据插值映射到流体域网格上</strong>,并以此作为边界条件进行流体域的求解,直到达到所需的耦合计算时间。</td>
+</tr>
+<tr>
+<td>“耦合计算策略” (<a href="zotero://select/library/items/MNY8A8JD">刘深深 等, 2025, p. 120</a>) (<a href="zotero://open-pdf/library/items/A7Y33S6Z?page=3&amp;annotation=KRNRBEEC">pdf</a>)</td>
+<td>![image.png\</td>
+<td>444](<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20251201160854.png">https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20251201160854.png</a>)<br>1. 根据结构几何形态和热力学状态，计算气动力载荷和热流分布<br>2. 将气动压力和热流载荷传递至结构场，计算结构变形和温度场分布<br>3. 将结构变形后的几何外形与温度场变化反馈至气动力热数值求解器</td>
+</tr>
+<tr>
+<td>“Fig. 1. Schematic of fluid-thermal-structural analysis framework based on CFD/CTSD.” (<a href="zotero://select/library/items/94373JVT">Yang 等, 2021, p. 3</a>) (<a href="zotero://open-pdf/library/items/2LWPPHJY?page=3&amp;annotation=CWVDHSUG">pdf</a>)</td>
+<td>![image.png\</td>
+<td>444](<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20251202142816.png">https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20251202142816.png</a>)</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/59049404">(34 封私信 / 20 条消息) ANSYS Workbench 中如何使 Transient Structure 模块实现多核求解？ - 知乎</a></td>
+<td>我现在使用ANSYS Workbench + Fluent + Transient Structure + System Coupling 的组合实现了一个 2-way Fluid-Solid Interaction 瞬态模型。 此模型描述的是固体颗粒在流体中“随波逐流”的过程。  <br>我现在遇到了一个问题：  <br>- Fluent模块可以完全利用CPU提供的八个线程进行并行计算，从而获得不错的加速效果。  <br>- 但是Transient Structure模块使用的是 Mechanical APDL 的求解器，只能使用两个线程，导致仿真的瓶颈居然出现在固体力学方程求解这一部分  <br>每次使用workbench开始仿真的时候，都会出现一个名为 “Distributed Mechanical APDL with requesting 2 cores” 的窗口，可以由此得出结论，Mechanical模块只利用了两个线程。  <br>试过以下的方法：  <br>1. 设置license的使用方式为 use a separate license for each application, 然后在options -&gt; Solution Process 中设置 Default Execution mode 为 Parallel  <br>2. 设置 options -&gt;Mechanical APDL 中设置 Processors = 8； 设置Command Line options = -np 8  <br>以上方法均无效。  <br>向知乎上各位大神求教，在下一介苦逼博士生，希望用ANSYS仿真以完成科研任务，先在此谢谢各位了！</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Fluid-Solid</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1ef4y1S7se/?spm_id_from=333.337.search-card.all.click&amp;vd_source=1dba7493016a36a32b27a14ed2891088">【ANSYS流固耦合】基本流程_哔哩哔哩_bilibili</a></td>
+<td>Fluent+System Coupling+Transient Structural</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="Case"><a href="#Case" class="headerlink" title="Case"></a>Case</h2><h3 id="Simulation"><a href="#Simulation" class="headerlink" title="Simulation"></a>Simulation</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Case</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>“圆管绕流试验” (<a href="zotero://select/library/items/IXV8JCN9">张佳明 等, 2021, p. 137</a>) (<a href="zotero://open-pdf/library/items/AYFS4YAW?page=3&amp;annotation=AHEPU8NU">pdf</a>) Allan R. Wieting 在 NASA LANGLEY 8 - foot 高温风洞</td>
+<td>![image.png\</td>
+<td>333](<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20251201150822.png">https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20251201150822.png</a>)</td>
+</tr>
+<tr>
+<td>“舵翼结构模型” (<a href="zotero://select/library/items/IXV8JCN9">张佳明 等, 2021, p. 138</a>) (<a href="zotero://open-pdf/library/items/AYFS4YAW?page=4&amp;annotation=5HEGZQBV">pdf</a>)<br>“舵翼结构气动热力耦合模拟” (<a href="zotero://select/library/items/5AAZBJMU">张佳明 等, 2021, p. 89</a>) (<a href="zotero://open-pdf/library/items/3MBBUGIG?page=3&amp;annotation=E4YQX434">pdf</a>)</td>
+<td>![image.png\</td>
+<td>333](<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20251201151504.png">https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20251201151504.png</a>)<br></td>
+</tr>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Aerodynamic</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://github.com/WyllDuck/OpenFOAM-ToolChain-for-Rocket-Aerodynamic-Analysis">WyllDuck/OpenFOAM-ToolChain-for-Rocket-Aerodynamic-Analysis: This project provides a complete toolchain for evaluating different rocket geometries at subsonic, transonic, and supersonic regimes. The work contained in this repository is part of a student project carried out at the Technical University of Munich (TUM) under the Master of Science (M.Sc) in Aerospace (year 2023).</a><br><a target="_blank" rel="noopener" href="https://github.com/WyllDuck/OpenFOAM-ToolChain-helperFunctions?tab=readme-ov-file">WyllDuck/OpenFOAM-ToolChain-helperFunctions: WARR thermal simulation</a></td>
+<td>![results.png (898×865)\</td>
+<td>333](<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/WyllDuck/OpenFOAM-ToolChain-for-Rocket-Aerodynamic-Analysis/refs/heads/main/images/results.png">https://raw.githubusercontent.com/WyllDuck/OpenFOAM-ToolChain-for-Rocket-Aerodynamic-Analysis/refs/heads/main/images/results.png</a>)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="Experiment"><a href="#Experiment" class="headerlink" title="Experiment"></a>Experiment</h3><p>“集束射流气动热环境模拟实验原理示意图” (<a href="zotero://select/library/items/5AAZBJMU">张佳明 等, 2021, p. 88</a>) (<a href="zotero://open-pdf/library/items/3MBBUGIG?page=2&amp;annotation=YG52KZVN">pdf</a>)</p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20251201152655.png" alt="image.png|333"></p>
+<p>Measurement：</p>
+<ul>
+<li>气体压力：喷管出口处流场参数。“测量探头使流场产生激波,测量得到的压力为激波后的 流场总压,流场实际静压值为:” (<a href="zotero://select/library/items/5AAZBJMU">张佳明 等, 2021, p. 92</a>) (<a href="zotero://open-pdf/library/items/3MBBUGIG?page=6&amp;annotation=U8EZVRZ5">pdf</a>)</li>
+<li>结构变形：高温应变片布置在舵翼结构尾部背风面上部</li>
+<li>结构温度：“将 S 型热电偶布置在背风面下部” (<a href="zotero://select/library/items/5AAZBJMU">张佳明 等, 2021, p. 92</a>) (<a href="zotero://open-pdf/library/items/3MBBUGIG?page=6&amp;annotation=D8RCGLCA">pdf</a>)</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+1ZnNxFWnEbk5YzRl">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/Other%20Interest/SHM/" rel="prev" title="SHM">
+      <i class="fa fa-chevron-left"></i> SHM
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Basic"><span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B0%94%E5%8A%A8%E7%83%AD%E5%8A%9B%E5%AD%A6"><span class="nav-text">气动热力学</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%83%AD-%E7%BB%93%E6%9E%84%E5%8A%A8%E5%8A%9B%E5%AD%A6"><span class="nav-text">热-结构动力学</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5"><span class="nav-text">基础概念</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B0%94%E5%8A%A8-%E7%83%AD-%E7%BB%93%E6%9E%84-%E6%B5%81-%E7%83%AD-%E5%9B%BA"><span class="nav-text">气动-热-结构(流-热-固)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Equation"><span class="nav-text">Equation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Case"><span class="nav-text">Case</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Simulation"><span class="nav-text">Simulation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Experiment"><span class="nav-text">Experiment</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qi Yun"
+      src="/images/avatar.jpeg">
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">172</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/qiyun71" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;qiyun71" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/29010355" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;29010355" rel="noopener" target="_blank"><i class="fa fa-star fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qi Yun</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">542k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">32:52</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/yqq/anime.min.js"></script>
+  <script src="/yqq/velocity/velocity.min.js"></script>
+  <script src="/yqq/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

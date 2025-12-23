@@ -27,14 +27,17 @@
 <meta property="og:site_name" content="QiYun">
 <meta property="og:description" content="Uncertainty in everything">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240412091330.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241215213725.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20250304160404.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20251027205906.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20251028164911.png">
 <meta property="article:published_time" content="2023-12-15T13:31:34.000Z">
-<meta property="article:modified_time" content="2025-03-05T11:03:27.349Z">
+<meta property="article:modified_time" content="2025-12-16T08:32:06.799Z">
 <meta property="article:author" content="Qi Yun">
 <meta property="article:tag" content="Uncertainty">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241215213725.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240412091330.png">
 
 <link rel="canonical" href="http://example.com/Other%20Interest/Uncertainty/">
 
@@ -229,7 +232,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-03-05 19:03:27" itemprop="dateModified" datetime="2025-03-05T19:03:27+08:00">2025-03-05</time>
+                <time title="Modified: 2025-12-16 16:32:06" itemprop="dateModified" datetime="2025-12-16T16:32:06+08:00">2025-12-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -246,13 +249,13 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>1.4k</span>
+              <span>1.8k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span>5 mins.</span>
+              <span>7 mins.</span>
             </span>
 
         </div>
@@ -266,7 +269,33 @@
       
         <p>Uncertainty in everything</p>
 <span id="more"></span>
-<h1 id="Uncertainty"><a href="#Uncertainty" class="headerlink" title="Uncertainty"></a>Uncertainty</h1><blockquote>
+<blockquote>
+<p>“<strong>Uncertainty quantification</strong> involves several key steps, which include data collection, mathematical modeling, uncertainty propagation, identifying critical outcomes, and making decisions under uncertainty.” (<a href="zotero://select/library/items/VDSP95B3">Faes 等, 2025, p. 14</a>) (<a href="zotero://open-pdf/library/items/JAJIB8AA?page=15&amp;annotation=C37JFVWD">pdf</a>)</p>
+</blockquote>
+<h1 id="Uncertainty"><a href="#Uncertainty" class="headerlink" title="Uncertainty"></a>Uncertainty</h1><p>Uncertainty来源：</p>
+<ul>
+<li>参数不确定性：缺乏知识（尤其是针对复杂的结构系统、新型复合材料、非线性动力学系统…）</li>
+<li>模型形式不确定性：非线性特性的线性化、复杂连接关系用简单单元代替</li>
+<li>试验不确定性：实验中难以控制的随机性，例如环境噪声、系统误差，主观判断…</li>
+</ul>
+<p>Uncertainty分类：</p>
+<ul>
+<li>Epistemic Uncertainty源自认知信息不足，可以减少乃至消除</li>
+<li>Aleatory Uncertainty源自系统/结构固有的随机性</li>
+</ul>
+<p>根据参数中是否存在Epistemic Uncertainty/Aleatory Uncertainty，将参数分为四类<br><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240412091330.png" alt="image.png|666"></p>
+<ul>
+<li>Category 1：具有完全确定值的常数</li>
+<li>Category 2：未知但固定的常数(区间)</li>
+<li>Category 3：具有完全确定分布性质的随机变量(分布格式、均值和方差)，称为精确概率</li>
+<li>Category 4：随机变量，分布性质尚未完全确定，称为不精确概率，可以通过P-box来建模，P-box中无限数量的CDF曲线构成了概率空间中的特定区域</li>
+</ul>
+<p>确定模型修正适用于Category 2参数，确定预定义区间内的特定值<br>随机模型修正适用于Category 2~4类参数，可以通过</p>
+<ul>
+<li>减少二类和四类参数的认知不确定性</li>
+<li>合适地特征化三类参数的随机不确定性</li>
+</ul>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/656915794">浅谈Epistemic Uncertainty 和 Aleatoric Uncertainty - 知乎</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/56986840">【实验笔记】深度学习中的两种不确定性（上） - 知乎</a></p>
 </blockquote>
 <p>不确定性根据系统内的不确定性来源可以分为Aleatoric Uncertainty和Epistemic Uncertainty，Aleatoric Uncertainty通常指的是数据不确定性，往往来自于数据本身的randomness或variability，是数据固有的一种属性。Epistemic uncertainty通常指的是模型不确定性或认知不确定性，其不确定性通常来源于缺乏足量信息的支撑。</p>
@@ -289,15 +318,15 @@
 <li>Aleatory: the modeler does not foresee the possibility of reducing them. 无法减少</li>
 </ul>
 <blockquote>
-<p> <a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2107.03342">A Survey of Uncertainty in Deep Neural Networks</a></p>
+<p> <a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2107.03342">A Survey of Uncertainty in Deep Neural Networks</a><br> <a href="zotero://select/library/items/BFP84528">Gawlikowski et al., A Survey of Uncertainty in Deep Neural Networks, 2022-01-18</a></p>
 </blockquote>
 <p>Uncertainty factors in DNN:</p>
 <ul>
-<li>Factor I: Variability in Real World Situations</li>
-<li>Factor II: Error and Noise in Measurement Systems</li>
-<li>Factor III: Errors in the Model Structure</li>
-<li>Factor IV: Errors in the Training Procedure</li>
-<li>Factor V: Errors Caused by Unknown Data</li>
+<li>“Factor I: Variability in Real World Situations” (<a href="zotero://select/library/items/BFP84528">Gawlikowski 等, 2022, p. 3</a>) (<a href="zotero://open-pdf/library/items/CL5737MU?page=3&amp;annotation=JQX6AZBW">pdf</a>)</li>
+<li>“Factor II: Error and Noise in Measurement Systems” (<a href="zotero://select/library/items/BFP84528">Gawlikowski 等, 2022, p. 3</a>) (<a href="zotero://open-pdf/library/items/CL5737MU?page=3&amp;annotation=38Y6UEN7">pdf</a>)</li>
+<li>“Factor III: Errors in the Model Structure” (<a href="zotero://select/library/items/BFP84528">Gawlikowski 等, 2022, p. 3</a>) (<a href="zotero://open-pdf/library/items/CL5737MU?page=3&amp;annotation=MDSBZP4Y">pdf</a>)</li>
+<li>“Factor IV: Errors in the Training Procedure” (<a href="zotero://select/library/items/BFP84528">Gawlikowski 等, 2022, p. 4</a>) (<a href="zotero://open-pdf/library/items/CL5737MU?page=4&amp;annotation=8ZSBR6JK">pdf</a>)</li>
+<li>“Factor V: Errors Caused by Unknown Data” (<a href="zotero://select/library/items/BFP84528">Gawlikowski 等, 2022, p. 4</a>) (<a href="zotero://open-pdf/library/items/CL5737MU?page=4&amp;annotation=AQRG3CNI">pdf</a>)</li>
 </ul>
 <p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241215213725.png" alt="image.png|666"></p>
 <p>Predictive Uncertainty Model：由于神经网络的预测主要收到模型和数据误差的影响，因此预测不确定性通常被分为 model uncertainty （both aleatory and epistemic） 和 data uncertainty （both aleatory and epistemic），此外还有distributional uncertainty 主要由样本没有被训练data覆盖导致。</p>
@@ -320,6 +349,8 @@
 <li>Test Time Augmentation</li>
 <li>Neural Network Uncertainty Quantification Approaches for Real Life Applications</li>
 </ul>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20251027205906.png" alt="image.png|666"></p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20251028164911.png" alt="image.png|666"></p>
 <blockquote>
 <p> <a target="_blank" rel="noopener" href="https://whuxgxj.github.io/article/ensemble-learning-in-classification.html">集成学习(Ensemble learning)相关理论 | 珞珈村下山</a></p>
 </blockquote>
@@ -475,14 +506,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-count">172</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -536,12 +567,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">530k</span>
+    <span title="Symbols count total">542k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">32:08</span>
+    <span title="Reading time total">32:52</span>
 </div>
 
         

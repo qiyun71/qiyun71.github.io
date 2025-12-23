@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/yqq/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Structural health monitoring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SHM">
+<meta property="og:url" content="http://example.com/Other%20Interest/SHM/index.html">
+<meta property="og:site_name" content="QiYun">
+<meta property="og:description" content="Structural health monitoring">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-09-13T08:25:11.000Z">
+<meta property="article:modified_time" content="2025-09-16T10:46:59.305Z">
+<meta property="article:author" content="Qi Yun">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/Other%20Interest/SHM/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>SHM | QiYun</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">QiYun</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Note</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/Other%20Interest/SHM/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiYun">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SHM
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-09-13 16:25:11" itemprop="dateCreated datePublished" datetime="2025-09-13T16:25:11+08:00">2025-09-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-09-16 18:46:59" itemprop="dateModified" datetime="2025-09-16T18:46:59+08:00">2025-09-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Other-Interest/" itemprop="url" rel="index"><span itemprop="name">Other Interest</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>629</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>2 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Structural health monitoring</p>
+<span id="more"></span>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/596603647">2023-01-04 结构健康监测 Structural Health Monitoring - 知乎</a> 一些SHM的期刊</p>
+</blockquote>
+<ul>
+<li>土木：Topic Cluster TC.514: Structural Health Monitoring; Damage Detection; Modal Analysis</li>
+<li>机械、航空航天：Topic Cluster TC.520: Guided Electromagnetic Wave Propagation; Structural Health Monitoring; Ultrasonic Waves</li>
+</ul>
+<h1 id="Follow"><a href="#Follow" class="headerlink" title="Follow"></a>Follow</h1><p><a target="_blank" rel="noopener" href="http://www.ase.buaa.edu.cn/new/ysxq.jsp?urltype=news.NewsContentUrl&amp;wbtreeid=1079&amp;wbnewsid=14775">王 磊-航空科学与工程学院</a></p>
+<h1 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h1><h2 id="OMA"><a href="#OMA" class="headerlink" title="OMA"></a>OMA</h2><p>实验模态分析 (Experimental Modal Analysis, EMA) 到运行模态分析 (Operational Modal Analysis, OMA)的改变:</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>特征</th>
+<th>实验模态分析 (EMA)</th>
+<th>运行模态分析 (OMA)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>激励源</strong></td>
+<td>已知、可控的人工激励（如力锤、激振器）[<a target="_blank" rel="noopener" href="https://www.google.com/url?sa=E&amp;q=https%3A%2F%2Fvertexaisearch.cloud.google.com%2Fgrounding-api-redirect%2FAUZIYQEVKc5HvBW0HF8DyTvbLkfdQ6jQI2Cw50RWCrlXHhVkm0XwYWrZXFF3ipHkbe9oNL99pBVy9fyoxzk3GjMeDV7hv7gWJcwesp_jRFSjsf5IwlJs6O4bllcw-rjK5Tc8MouKsFJyAxD38xbwzmDh8S5q7g-Wwp1GuYuA33gT_XoA88tH9jZbhh_UT0i-GXQUnkg8xw6Y8YUyb-Oo2_pPnLp99BhC">3</a>][<a target="_blank" rel="noopener" href="https://www.google.com/url?sa=E&amp;q=https%3A%2F%2Fvertexaisearch.cloud.google.com%2Fgrounding-api-redirect%2FAUZIYQGm6E1neDHfnQLwblVipUKmXFJ973M3tUxLIEsLiXCB82VV8Ajbh2gCnyjgbtz9dJ2H2ffbhbUcMqbAnBMvjDYL86GEfpY0vsdThfAubpVr9CwyqpG0ElmL4E2JKgJGSKZ0bItgcw%3D%3D">4</a>]</td>
+<td>未知、不可控的环境或运行激励（如风、交通、设备振动）[<a target="_blank" rel="noopener" href="https://www.google.com/url?sa=E&amp;q=https%3A%2F%2Fvertexaisearch.cloud.google.com%2Fgrounding-api-redirect%2FAUZIYQE8B9eA_RBCkbY3nIBUrAFUH6Ug90xRzLneyKPOw1b_gRVKM_tux9WgA7I6MsDAN1pMTD836BvuSAGsaek48UoU2HO7rUDcLTb1UUJqcFDeohYq3VBrgdAzo0zjYvwoha_Hamw37w-PUD4tSKrWqWyxhY9R">9</a>][<a target="_blank" rel="noopener" href="https://www.google.com/url?sa=E&amp;q=https%3A%2F%2Fvertexaisearch.cloud.google.com%2Fgrounding-api-redirect%2FAUZIYQEvhwT7vIDhGnANMZXr_cV31vu3gyt72gHA86vMItMUdd_v7iieozsdGZhPWwZcmro6AWWWQt5yqB-jQLSlakTGcolQVRzySQuTM9eRCWgaT8tDTtCIfpLN9WZshLEIcRkEtzetybQ4RR2LXbfKFXT5jyZ-9cc6YrdAUj9gB-HdPSuLbMXL4FZzu_amnPJIhTTubxCcqsGuESDROoSqepz-Cr8K1FWH_kvXC4mI">12</a>]</td>
+</tr>
+<tr>
+<td><strong>测试条件</strong></td>
+<td>通常在实验室或受控环境下进行，结构需要处于静止状态[<a target="_blank" rel="noopener" href="https://www.google.com/url?sa=E&amp;q=https%3A%2F%2Fvertexaisearch.cloud.google.com%2Fgrounding-api-redirect%2FAUZIYQFcq7yl2Zmaxs8gWFAFmq7uWx5DngkoH_ZzQM5HiQJXqRJ3NiDmG6SrRn5zB5z0mnl8ivrSVIj1fDpEFQrnCmaifSCvXNfnW-swFU3tqbMjjOO8OLfmFiuElrTVkzC_DpjGqQZqQNHRpLZeLqkkE1O-4lTWJkGQJKwo-mQlO8pRDw%3D%3D">16</a>][<a target="_blank" rel="noopener" href="https://www.google.com/url?sa=E&amp;q=https%3A%2F%2Fvertexaisearch.cloud.google.com%2Fgrounding-api-redirect%2FAUZIYQFNzmGma66hKdH8ZvNDmEeGOwhlSwdkgbur7V1yQjj0V7GkmV8ot28BL8jEcwzIzR4eYDkqSd2oJEiDyGGXf1c1M9r3HnG0V4zs1_HhRmBTtod7Asx-gliDXNmO8UJBshSyuMigb6tUbYlW-QZClNSKR8q7wxudvjpwzeGb_n3iTWmRPKmme2IUdUbLjzF4xNCzPmRZxOT7GghZomWe3CZAQ2taZEE_KRpHmo7Yl9KEoowWCetrbEJX-BCVm0Yf68cWSAzk8F6bn770Xk_F">17</a>]</td>
+<td>在结构实际运行工况下进行，无需停机或中断正常运行[<a target="_blank" rel="noopener" href="https://www.google.com/url?sa=E&amp;q=https%3A%2F%2Fvertexaisearch.cloud.google.com%2Fgrounding-api-redirect%2FAUZIYQFcq7yl2Zmaxs8gWFAFmq7uWx5DngkoH_ZzQM5HiQJXqRJ3NiDmG6SrRn5zB5z0mnl8ivrSVIj1fDpEFQrnCmaifSCvXNfnW-swFU3tqbMjjOO8OLfmFiuElrTVkzC_DpjGqQZqQNHRpLZeLqkkE1O-4lTWJkGQJKwo-mQlO8pRDw%3D%3D">16</a>][<a target="_blank" rel="noopener" href="https://www.google.com/url?sa=E&amp;q=https%3A%2F%2Fvertexaisearch.cloud.google.com%2Fgrounding-api-redirect%2FAUZIYQGhS8gVkpSzkcUfZbHKUa-PY55f9WXI2l0FeRUMb_cB09EhHO477kGKz5twCh1kUccjuMGgzW2dZM7xqIHvYxJ8Z3VkUqMIVvKVJ1XVd53w20GdDqIOYijQ07WS8Bd8_ejp4grlIoRGP38Huy2ggJo%3D">18</a>]</td>
+</tr>
+<tr>
+<td><strong>所需测量</strong></td>
+<td>同时测量输入（激励力）和输出（响应）信号[<a target="_blank" rel="noopener" href="https://www.google.com/url?sa=E&amp;q=https%3A%2F%2Fvertexaisearch.cloud.google.com%2Fgrounding-api-redirect%2FAUZIYQHNkQOUX8i-zgJPfduV23yT8AYKQom0CA8XejLSl57rxg6DhYRAsfil0a2juFdJjTpYO52Sey_PGdJ6xx_UOtiTpWWI7ou2kwms4Uny9eZpLjeW_X9t2FtnHAcGkLhmGzc3cfN4w23Vt5_v9mtx0PE-sZOXb-r_znMKUQu15qwZhmKYxCwZec4w5Z__r8zC6iQnP0i-8kI9NGIsVTZAdC5Z82lAWn6i17uMg2bto-thTFu1yiNz1kbicjI56YsOouzkMjU%3D">8</a>]</td>
+<td>仅测量输出（响应）信号[<a target="_blank" rel="noopener" href="https://www.google.com/url?sa=E&amp;q=https%3A%2F%2Fvertexaisearch.cloud.google.com%2Fgrounding-api-redirect%2FAUZIYQGXdHqY4x_Z-Lo0LUJedc-3KoUAAj-SHdZA-jC7jawOEPnjymoQYL8V3VExhWGcnxHG7aGkgpErZfahEd77Iy_F1RmKHhSKMjt5_XTSdEVXT_Ci2zXc0AGOokVWeT9JnVcTCOLnEJeag4NmS0bD4CrxB0_ECGt38f_j0dqmEQ%3D%3D">13</a>][<a target="_blank" rel="noopener" href="https://www.google.com/url?sa=E&amp;q=https%3A%2F%2Fvertexaisearch.cloud.google.com%2Fgrounding-api-redirect%2FAUZIYQEt9pNAzWj_DHAqpZ9mogwLj8AvB8CYbBD_P2zcSVi1HkONVst8l4j65i1TC-tJtadVLLgVSeQC7kjp39irxPDpjFXI7HhiY-K7Sp-eXQDBiB8TH8E5auuYPFyuWo6x4STXkl23HE-EYsjB5bufvETiBawz6zIfcZM4Ky93GiC4lQglKvPJLdyJeu6br5Xz-ILMr9ILWoUx2ffBpx-c3LhmSmeneVRTuB6NZSBj-hXij5DD2ITxRHnQZE0kO330Gw%3D%3D">15</a>]</td>
+</tr>
+<tr>
+<td><strong>核心函数</strong></td>
+<td>频率响应函数 (Frequency Response Functions, FRFs)[<a target="_blank" rel="noopener" href="https://www.google.com/url?sa=E&amp;q=https%3A%2F%2Fvertexaisearch.cloud.google.com%2Fgrounding-api-redirect%2FAUZIYQF18DLby2vmYTxBon-mbfxjb6K0shsoiopCdiZRsZ0dpwJMI4brEsvN2RpecHkMAPL_PoTkJkvY6-45llexNZkxAO0V15AM92kCvCMagP7AUcy0fv5Js-ONrx1Pshq9pGv9nYwbkNBx5N8c6tGeWw9JL5nX_Y5X18FKMsUcihzc6u-KzEXLMwGjfLC--TvF">5</a>][<a target="_blank" rel="noopener" href="https://www.google.com/url?sa=E&amp;q=https%3A%2F%2Fvertexaisearch.cloud.google.com%2Fgrounding-api-redirect%2FAUZIYQGXee0nfJ8ZL-mTLNLFwkqronsD7PwWZsNyjZUBS5ub9slpvVvlFwmw7YIsqn7xGvp4O_HkV43mRAS8B6-mhWWf1KvvoG6PAyrc9rh1WENRJXHTE8RXFDuV1tB3h4_JZReEVpnw08o%3D">19</a>]</td>
+<td>自功率谱、互功率谱或相关函数[<a target="_blank" rel="noopener" href="https://www.google.com/url?sa=E&amp;q=https%3A%2F%2Fvertexaisearch.cloud.google.com%2Fgrounding-api-redirect%2FAUZIYQF18DLby2vmYTxBon-mbfxjb6K0shsoiopCdiZRsZ0dpwJMI4brEsvN2RpecHkMAPL_PoTkJkvY6-45llexNZkxAO0V15AM92kCvCMagP7AUcy0fv5Js-ONrx1Pshq9pGv9nYwbkNBx5N8c6tGeWw9JL5nX_Y5X18FKMsUcihzc6u-KzEXLMwGjfLC--TvF">5</a>][<a target="_blank" rel="noopener" href="https://www.google.com/url?sa=E&amp;q=https%3A%2F%2Fvertexaisearch.cloud.google.com%2Fgrounding-api-redirect%2FAUZIYQHNkQOUX8i-zgJPfduV23yT8AYKQom0CA8XejLSl57rxg6DhYRAsfil0a2juFdJjTpYO52Sey_PGdJ6xx_UOtiTpWWI7ou2kwms4Uny9eZpLjeW_X9t2FtnHAcGkLhmGzc3cfN4w23Vt5_v9mtx0PE-sZOXb-r_znMKUQu15qwZhmKYxCwZec4w5Z__r8zC6iQnP0i-8kI9NGIsVTZAdC5Z82lAWn6i17uMg2bto-thTFu1yiNz1kbicjI56YsOouzkMjU%3D">8</a>][<a target="_blank" rel="noopener" href="https://www.google.com/url?sa=E&amp;q=https%3A%2F%2Fvertexaisearch.cloud.google.com%2Fgrounding-api-redirect%2FAUZIYQGXee0nfJ8ZL-mTLNLFwkqronsD7PwWZsNyjZUBS5ub9slpvVvlFwmw7YIsqn7xGvp4O_HkV43mRAS8B6-mhWWf1KvvoG6PAyrc9rh1WENRJXHTE8RXFDuV1tB3h4_JZReEVpnw08o%3D">19</a>]</td>
+</tr>
+<tr>
+<td><strong>应用场景</strong></td>
+<td>适用于小型、可在实验室测试的结构，如汽车零部件、航空航天组件等[<a target="_blank" rel="noopener" href="https://www.google.com/url?sa=E&amp;q=https%3A%2F%2Fvertexaisearch.cloud.google.com%2Fgrounding-api-redirect%2FAUZIYQE9ocB9JJWHLjJAO5v19GisUfZpda_8TwzsnkdMwdbdCFIqNgArjlrebm6jepWuEWHdDeTb9EEOqWHI1hRhDh4O9n-64HwgPsTH8obEB92zyZFGukZOmUvPWdkXUA57okKbuw8FPoHfkGrDHAyqEKeINS1C9g8nNm57JJ9SYfa4rIjoEbtotThB4Qe63OJThd_Q3LU%3D">14</a>][<a target="_blank" rel="noopener" href="https://www.google.com/url?sa=E&amp;q=https%3A%2F%2Fvertexaisearch.cloud.google.com%2Fgrounding-api-redirect%2FAUZIYQFNzmGma66hKdH8ZvNDmEeGOwhlSwdkgbur7V1yQjj0V7GkmV8ot28BL8jEcwzIzR4eYDkqSd2oJEiDyGGXf1c1M9r3HnG0V4zs1_HhRmBTtod7Asx-gliDXNmO8UJBshSyuMigb6tUbYlW-QZClNSKR8q7wxudvjpwzeGb_n3iTWmRPKmme2IUdUbLjzF4xNCzPmRZxOT7GghZomWe3CZAQ2taZEE_KRpHmo7Yl9KEoowWCetrbEJX-BCVm0Yf68cWSAzk8F6bn770Xk_F">17</a>]</td>
+<td>适用于大型土木工程结构（桥梁、建筑、大坝）、运行中的机械设备（风力发电机、船舶）等难以施加人工激励的结构[<a target="_blank" rel="noopener" href="https://www.google.com/url?sa=E&amp;q=https%3A%2F%2Fvertexaisearch.cloud.google.com%2Fgrounding-api-redirect%2FAUZIYQE9ocB9JJWHLjJAO5v19GisUfZpda_8TwzsnkdMwdbdCFIqNgArjlrebm6jepWuEWHdDeTb9EEOqWHI1hRhDh4O9n-64HwgPsTH8obEB92zyZFGukZOmUvPWdkXUA57okKbuw8FPoHfkGrDHAyqEKeINS1C9g8nNm57JJ9SYfa4rIjoEbtotThB4Qe63OJThd_Q3LU%3D">14</a>][<a target="_blank" rel="noopener" href="https://www.google.com/url?sa=E&amp;q=https%3A%2F%2Fvertexaisearch.cloud.google.com%2Fgrounding-api-redirect%2FAUZIYQFcq7yl2Zmaxs8gWFAFmq7uWx5DngkoH_ZzQM5HiQJXqRJ3NiDmG6SrRn5zB5z0mnl8ivrSVIj1fDpEFQrnCmaifSCvXNfnW-swFU3tqbMjjOO8OLfmFiuElrTVkzC_DpjGqQZqQNHRpLZeLqkkE1O-4lTWJkGQJKwo-mQlO8pRDw%3D%3D">16</a>][<a target="_blank" rel="noopener" href="https://www.google.com/url?sa=E&amp;q=https%3A%2F%2Fvertexaisearch.cloud.google.com%2Fgrounding-api-redirect%2FAUZIYQGUZLMvMkfKIG4iFdIz47AHa_4yLRy5DzSa4zW3DIMDXq7lUlmas_K53LFjTguvelahUcD8Lb4VIqZQ5WC9V-xEt5fqu0i585bP3Ukltnx3nwpfscen4MTk7b_LuSmaJQdoGInot5KFinU4dg8%3D">20</a>]</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>OMA劣势：</p>
+<ul>
+<li>由于激励源未知，模态参数的识别精度可能受到激励信号特性的影响。</li>
+<li>无法确定模态的绝对缩放比例，只能得到相对的模态振型。</li>
+<li>存在漏掉某些模态的风险，特别是当该模态在运行工况下没有被充分激励时。</li>
+</ul>
+<h2 id="Damage-identification"><a href="#Damage-identification" class="headerlink" title="Damage identification"></a>Damage identification</h2><p>“Most nondestructive damage identification methods can be categorized as either local or global damage identification techniques” (<a href="zotero://select/library/items/MG3JB7QG">Wei Fan和Pizhong Qiao, 2011, p. 83</a>) (<a href="zotero://open-pdf/library/items/B24MFY2T?page=2&amp;annotation=32UX846L">pdf</a>)</p>
+<ul>
+<li>local：例如超声/X光检测技术，需要靠近损伤位置进行测量，不适用于土木/航空等大型设备</li>
+<li>global：the vibration-based method<ul>
+<li>natural frequency</li>
+<li>mode shape</li>
+<li>curvature mode shape 振型位移的二阶导数</li>
+<li>both mode shape and frequencies</li>
+</ul>
+</li>
+</ul>
+<p>“Damage identification methods can also be classified as ‘model-based method’ or ‘responsebased method’.” (<a href="zotero://select/library/items/MG3JB7QG">Wei Fan和Pizhong Qiao, 2011, p. 84</a>) (<a href="zotero://open-pdf/library/items/B24MFY2T?page=3&amp;annotation=LGBQ9TNU">pdf</a>)</p>
+<ul>
+<li><strong>model-based: 为结构建立一个精细的数值模型用于损伤辨识</strong>(✅需要有限元仿真)</li>
+<li>response-based:只依赖结构的试验响应数据(❎无需有限元仿真)</li>
+</ul>
+<p>natural frequency，可以通过结构上少量测量点获取，并且很少被试验噪声污染</p>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+1ZnNxFWnEbk5YzRl">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/Learn/Math/Statistical%20process%20control/" rel="prev" title="Statistical process control">
+      <i class="fa fa-chevron-left"></i> Statistical process control
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/Learn/Finite%20Element/Multiphysics/" rel="next" title="Multiphysics">
+      Multiphysics <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Follow"><span class="nav-text">Follow</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Basic"><span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#OMA"><span class="nav-text">OMA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Damage-identification"><span class="nav-text">Damage identification</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qi Yun"
+      src="/images/avatar.jpeg">
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">172</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/qiyun71" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;qiyun71" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/29010355" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;29010355" rel="noopener" target="_blank"><i class="fa fa-star fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qi Yun</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">542k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">32:52</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/yqq/anime.min.js"></script>
+  <script src="/yqq/velocity/velocity.min.js"></script>
+  <script src="/yqq/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

@@ -27,6 +27,8 @@
 <meta property="og:site_name" content="QiYun">
 <meta property="og:description" content="matplotlib | seaborn import matplotlib.pyplot as pltimport seaborn as sns">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://matplotlib.org/cheatsheets/_images/cheatsheets-1.png">
+<meta property="og:image" content="https://matplotlib.org/cheatsheets/_images/cheatsheets-2.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/plot1.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/plot2.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/plot3.png">
@@ -35,11 +37,11 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/xticks.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/title1.png">
 <meta property="article:published_time" content="2020-02-21T03:37:01.000Z">
-<meta property="article:modified_time" content="2025-01-17T09:04:39.435Z">
+<meta property="article:modified_time" content="2025-11-25T10:37:45.925Z">
 <meta property="article:author" content="Qi Yun">
 <meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/plot1.png">
+<meta name="twitter:image" content="https://matplotlib.org/cheatsheets/_images/cheatsheets-1.png">
 
 <link rel="canonical" href="http://example.com/Learn/Python/Figure/">
 
@@ -234,7 +236,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-01-17 17:04:39" itemprop="dateModified" datetime="2025-01-17T17:04:39+08:00">2025-01-17</time>
+                <time title="Modified: 2025-11-25 18:37:45" itemprop="dateModified" datetime="2025-11-25T18:37:45+08:00">2025-11-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -251,7 +253,7 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>1.4k</span>
+              <span>1.5k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -272,8 +274,14 @@
         <p>matplotlib | seaborn</p>
 <p><code>import matplotlib.pyplot as plt</code><br><code>import seaborn as sns</code></p>
 <span id="more"></span>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://matplotlib.org/cheatsheets/">Matplotlib cheatsheets — Visualization with Python</a></p>
+</blockquote>
+<p><img src="https://matplotlib.org/cheatsheets/_images/cheatsheets-1.png" alt="cheatsheets-1.png (1754×1240)"></p>
+<p><img src="https://matplotlib.org/cheatsheets/_images/cheatsheets-2.png" alt="cheatsheets-2.png (1754×1240)"></p>
 <h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h2 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h2><p>plt.tight_layout()<br>通常在绘制多个子图时使用，用于自动调整图形中的子图布局，以避免子图之间的重叠或太过拥挤</p>
-<h1 id="Property"><a href="#Property" class="headerlink" title="Property"></a>Property</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">color: </span><br><span class="line">rcolor = <span class="string">&#x27;#AA232E&#x27;</span></span><br><span class="line">bcolor = <span class="string">&#x27;#3C53A6&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># plot parameters</span></span><br><span class="line">plt.rcParams.update(&#123;<span class="string">&#x27;font.size&#x27;</span>: <span class="number">24</span>, <span class="string">&#x27;font.family&#x27;</span>: <span class="string">&#x27;Times New Roman&#x27;</span>&#125;)</span><br><span class="line"></span><br><span class="line">scatter: omega1, omega2, label=<span class="string">&#x27;Target&#x27;</span>,s=<span class="number">140</span>,marker=<span class="string">&#x27;x&#x27;</span>,c=c1,alpha=alpha,linewidths=<span class="number">5</span></span><br><span class="line">- alpha=<span class="number">0.7</span></span><br><span class="line">- c1 = <span class="string">&#x27;r&#x27;</span> <span class="keyword">or</span> <span class="string">&#x27;b&#x27;</span></span><br><span class="line">  </span><br><span class="line">label: fontsize=<span class="number">24</span>,labelpad = <span class="number">10</span>,fontname=<span class="string">&#x27;Times New Roman&#x27;</span></span><br><span class="line"></span><br><span class="line">axs.tick_params(labelsize=<span class="number">22</span>, pad=<span class="number">5</span>)</span><br><span class="line">axs.grid(linewidth=<span class="number">1.5</span>, linestyle=<span class="string">&#x27;--&#x27;</span>)</span><br><span class="line"></span><br><span class="line">plt.legend(loc=<span class="string">&#x27;upper center&#x27;</span>,fontsize=<span class="number">26</span>,ncol=<span class="number">4</span>, bbox_to_anchor=(<span class="number">1.25</span>, <span class="number">1.25</span>))</span><br><span class="line">plt.subplots_adjust(wspace=<span class="number">0.3</span>, hspace=<span class="number">0.3</span>, left=<span class="number">0.07</span>, right=<span class="number">0.98</span>, top=<span class="number">0.92</span>, bottom=<span class="number">0.1</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 手动创建图例，因为matplotlib的3D图例支持不完美</span></span><br><span class="line"><span class="keyword">from</span> matplotlib.lines <span class="keyword">import</span> Line2D</span><br><span class="line"><span class="keyword">from</span> matplotlib.patches <span class="keyword">import</span> Patch</span><br><span class="line">legend_elements = [Line2D([<span class="number">0</span>], [<span class="number">0</span>], color=<span class="string">&#x27;gray&#x27;</span>, lw=<span class="number">1</span>, label=<span class="string">&#x27;Real function&#x27;</span>),</span><br><span class="line">                   Patch(facecolor=cm.Blues(<span class="number">0.8</span>), edgecolor=cm.Blues(<span class="number">1.0</span>), label=<span class="string">&#x27;Kriging predict&#x27;</span>),</span><br><span class="line">                   Line2D([<span class="number">0</span>], [<span class="number">0</span>], marker=<span class="string">&#x27;o&#x27;</span>, color=<span class="string">&#x27;w&#x27;</span>, label=<span class="string">&#x27;Train data&#x27;</span>, markerfacecolor=<span class="string">&#x27;black&#x27;</span>, markersize=<span class="number">10</span>)]</span><br><span class="line">ax.legend(handles=legend_elements, loc=<span class="string">&#x27;upper right&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h1 id="Property"><a href="#Property" class="headerlink" title="Property"></a>Property</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">plt.style.use(<span class="string">&#x27;ggplot&#x27;</span>)</span><br><span class="line">plt.rcParams.update(&#123;<span class="string">&#x27;font.size&#x27;</span>: <span class="number">24</span>, <span class="string">&#x27;font.family&#x27;</span>: <span class="string">&#x27;Times New Roman&#x27;</span>, <span class="string">&#x27;lines.linewidth&#x27;</span>: <span class="number">4</span>,<span class="string">&quot;text.color&quot;</span>: <span class="string">&quot;black&quot;</span>, <span class="string">&quot;xtick.color&quot;</span>: <span class="string">&quot;black&quot;</span>,<span class="string">&quot;ytick.color&quot;</span>: <span class="string">&quot;black&quot;</span>,<span class="string">&quot;axes.labelcolor&quot;</span>: <span class="string">&quot;black&quot;</span>&#125;) <span class="comment"># , &quot;axes.edgecolor&quot;: &quot;black&quot;&#125;)</span></span><br><span class="line">colors = &#123;<span class="string">&quot;Function&quot;</span>: <span class="string">&quot;#3A3E46&quot;</span>, <span class="string">&quot;Kriging&quot;</span>: <span class="string">&quot;#dc3223&quot;</span>, <span class="string">&quot;AE-Kriging&quot;</span>: <span class="string">&quot;#fc8e59&quot;</span>, <span class="string">&quot;MLP&quot;</span>: <span class="string">&quot;#92bee1&quot;</span>, <span class="string">&quot;AE-MLP&quot;</span>: <span class="string">&quot;#4c76b2&quot;</span>, <span class="string">&quot;AE-Kriging-Latent&quot;</span>: <span class="string">&quot;#fee191&quot;</span>, <span class="string">&quot;AE-MLP-Latent&quot;</span>: <span class="string">&quot;#e7eef6&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line">color: </span><br><span class="line">rcolor = <span class="string">&#x27;#AA232E&#x27;</span></span><br><span class="line">bcolor = <span class="string">&#x27;#3C53A6&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># plot parameters</span></span><br><span class="line">plt.rcParams.update(&#123;<span class="string">&#x27;font.size&#x27;</span>: <span class="number">24</span>, <span class="string">&#x27;font.family&#x27;</span>: <span class="string">&#x27;Times New Roman&#x27;</span>&#125;)</span><br><span class="line"></span><br><span class="line">scatter: omega1, omega2, label=<span class="string">&#x27;Target&#x27;</span>,s=<span class="number">140</span>,marker=<span class="string">&#x27;x&#x27;</span>,c=c1,alpha=alpha,linewidths=<span class="number">5</span></span><br><span class="line">- alpha=<span class="number">0.7</span></span><br><span class="line">- c1 = <span class="string">&#x27;r&#x27;</span> <span class="keyword">or</span> <span class="string">&#x27;b&#x27;</span></span><br><span class="line">  </span><br><span class="line">label: fontsize=<span class="number">24</span>,labelpad = <span class="number">10</span>,fontname=<span class="string">&#x27;Times New Roman&#x27;</span></span><br><span class="line"></span><br><span class="line">axs.tick_params(labelsize=<span class="number">22</span>, pad=<span class="number">5</span>)</span><br><span class="line">axs.grid(linewidth=<span class="number">1.5</span>, linestyle=<span class="string">&#x27;--&#x27;</span>)</span><br><span class="line"></span><br><span class="line">plt.legend(loc=<span class="string">&#x27;upper center&#x27;</span>,fontsize=<span class="number">26</span>,ncol=<span class="number">4</span>, bbox_to_anchor=(<span class="number">1.25</span>, <span class="number">1.25</span>))</span><br><span class="line">legend font:<span class="number">18</span></span><br><span class="line"></span><br><span class="line">plt.subplots_adjust(wspace=<span class="number">0.3</span>, hspace=<span class="number">0.3</span>, left=<span class="number">0.07</span>, right=<span class="number">0.98</span>, top=<span class="number">0.92</span>, bottom=<span class="number">0.1</span>)</span><br></pre></td></tr></table></figure>
 <h1 id="Seaborn"><a href="#Seaborn" class="headerlink" title="Seaborn"></a>Seaborn</h1><h2 id="distplot"><a href="#distplot" class="headerlink" title="distplot"></a>distplot</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"></span><br><span class="line"><span class="comment"># 核密度函数</span></span><br><span class="line">sns.distplot(prep_data, hist=<span class="literal">False</span>, kde=<span class="literal">True</span>, kde_kws=&#123;<span class="string">&#x27;linewidth&#x27;</span>: <span class="number">5</span>&#125;, label=<span class="string">&#x27;Original&#x27;</span>, color=<span class="string">&quot;red&quot;</span>)</span><br><span class="line">sns.distplot(prep_data_hat, hist=<span class="literal">False</span>, kde=<span class="literal">True</span>, kde_kws=&#123;<span class="string">&#x27;linewidth&#x27;</span>: <span class="number">5</span>, <span class="string">&#x27;linestyle&#x27;</span>:<span class="string">&#x27;--&#x27;</span>&#125;, label=<span class="string">&#x27;Synthetic&#x27;</span>, color=<span class="string">&quot;blue&quot;</span>)</span><br></pre></td></tr></table></figure>
 <h1 id="Matplotlib"><a href="#Matplotlib" class="headerlink" title="Matplotlib"></a>Matplotlib</h1><h2 id="plt-clf-动态图片展示"><a href="#plt-clf-动态图片展示" class="headerlink" title="plt.clf 动态图片展示"></a>plt.clf 动态图片展示</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 动态图片展示</span></span><br><span class="line">plt.clf()</span><br><span class="line"></span><br><span class="line">plt.pause(<span class="number">0.01</span>)</span><br><span class="line">plt.ioff()</span><br></pre></td></tr></table></figure>
 <h2 id="plt-plot"><a href="#plt-plot" class="headerlink" title="plt.plot"></a>plt.plot</h2><p><code>format_string的内容</code></p>
@@ -445,14 +453,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-count">172</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -506,12 +514,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">530k</span>
+    <span title="Symbols count total">542k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">32:08</span>
+    <span title="Reading time total">32:52</span>
 </div>
 
         

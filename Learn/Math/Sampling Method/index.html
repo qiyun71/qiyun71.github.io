@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/yqq/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Sampling Method">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sampling Method">
+<meta property="og:url" content="http://example.com/Learn/Math/Sampling%20Method/index.html">
+<meta property="og:site_name" content="QiYun">
+<meta property="og:description" content="Sampling Method">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/v2-eb0945aa2185df958f4568e58300e77a_1440w.gif">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230801135729.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230801135800.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240722141841.png">
+<meta property="article:published_time" content="2025-08-06T04:27:25.000Z">
+<meta property="article:modified_time" content="2025-08-06T09:55:52.090Z">
+<meta property="article:author" content="Qi Yun">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/v2-eb0945aa2185df958f4568e58300e77a_1440w.gif">
+
+<link rel="canonical" href="http://example.com/Learn/Math/Sampling%20Method/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Sampling Method | QiYun</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">QiYun</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Note</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/Learn/Math/Sampling%20Method/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Qi Yun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QiYun">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Sampling Method
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-08-06 12:27:25 / Modified: 17:55:52" itemprop="dateCreated datePublished" datetime="2025-08-06T12:27:25+08:00">2025-08-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Learn-Math/" itemprop="url" rel="index"><span itemprop="name">Learn/Math</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>2.6k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>9 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Sampling Method</p>
+<span id="more"></span>
+<h2 id="Sampling"><a href="#Sampling" class="headerlink" title="Sampling"></a>Sampling</h2><p>如何在不知道目标概率密度函数的情况下，抽取所需数量的样本，使得这些样本符合目标概率密度函数。这个问题简称为抽样</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://onlinelibrary.wiley.com/doi/full/10.1155/2018/8980756">Finite Element Model Updating in Bridge Structures Using Kriging Model and Latin Hypercube Sampling Method - Wu - 2018 - Advances in Civil Engineering - Wiley Online Library</a> 不同采样方法的讨论(simple random sampling (SRS), stratified sampling method, cluster sampling method, and systematic sampling) <strong>Latin Hypercube Sampling 属于 =分层采样</strong><br><a target="_blank" rel="noopener" href="https://huangc.top/2019/03/24/sampling-2019/">It’s all about Sampling - 子淳的博客 | Just Me</a></p>
+</blockquote>
+<h3 id="Monte-Carlo"><a href="#Monte-Carlo" class="headerlink" title="Monte Carlo"></a>Monte Carlo</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/338103692">一文看懂蒙特卡洛采样方法 - 知乎 (zhihu.com)</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/39628670">简明例析蒙特卡洛（Monte Carlo）抽样方法 - 知乎 (zhihu.com)</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/406256344">走进贝叶斯统计（四）—— 蒙特卡洛方法 - 知乎</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/barwe/p/14140681.html">逆变换采样和拒绝采样 - barwe - 博客园 (cnblogs.com)</a><br><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Monte_Carlo_method">Monte Carlo method - Wikipedia</a><br><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=c2WrJY8tnGE">【数之道 22】巧妙使用”接受-拒绝”方法，玩转复杂分布抽样 - YouTube</a></p>
+</blockquote>
+<p>MC Sampling<br><img src="https://raw.githubusercontent.com/yq010105/Blog_images/main/pictures/v2-eb0945aa2185df958f4568e58300e77a_1440w.gif" alt="v2-eb0945aa2185df958f4568e58300e77a_1440w.gif|222"></p>
+<p>对某一种概率分布p(x)进行蒙特卡洛采样的方法主要分为直接采样、拒绝采样与重要性采样三种:</p>
+<ul>
+<li>Naive Method<ul>
+<li>根据概率分布进行采样。对一个已知概率密度函数与累积概率密度函数的概率分布，我们可以直接从累积分布函数（cdf）进行采样（类似逆变换采样）</li>
+</ul>
+</li>
+<li>Acceptance-Rejection Method <ul>
+<li>逆变换采样虽然简单有效，但是当累积分布函数或者反函数难求时却难以实施，可使用MC的接受拒绝采样</li>
+<li>对于累积分布函数未知的分布，我们可以采用接受-拒绝采样。如下图所示，p(z)是我们希望采样的分布，q(z)是我们提议的分布(proposal distribution)，令kq(z)&gt;p(z)，我们首先在kq(z)中按照直接采样的方法采样粒子，接下来判断这个粒子落在途中什么区域，对于落在灰色区域的粒子予以拒绝，落在红线下的粒子接受，最终得到符合p(z)的N个粒子</li>
+<li><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230801135729.png" alt="image.png|333"></li>
+<li>数学推导：<ul>
+<li><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/pictures/20230801135800.png" alt="image.png|500"></li>
+</ul>
+<ol>
+<li>从 $f_r(x)$ 进行一次采样 $x_i$</li>
+<li>计算 $x_i$ 的 <strong>接受概率</strong> $\alpha$（Acceptance Probability）:$\alpha=\frac{f\left(x_i\right)}{f_r\left(x_i\right)}$</li>
+<li>从 (0,1) 均匀分布中进行一次采样 u</li>
+<li>如果 $\alpha$≥u，接受 $x_i$ 作为一个来自 f(x) 的采样；否则，重复第1步</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">N=<span class="number">1000</span> <span class="comment">#number of samples needed</span></span><br><span class="line">i = <span class="number">1</span></span><br><span class="line">X = np.array([])</span><br><span class="line"><span class="keyword">while</span> i &lt; N:</span><br><span class="line">    u = np.random.rand()</span><br><span class="line">    x = (np.random.rand()-<span class="number">0.5</span>)*<span class="number">8</span></span><br><span class="line">    res = u &lt; <span class="built_in">eval</span>(x)/ref(x)</span><br><span class="line">    <span class="keyword">if</span> res:</span><br><span class="line">        X = np.hstack((X,x[res])) <span class="comment">#accept</span></span><br><span class="line">        ++i</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>Importance Sampling</strong><ul>
+<li>接受拒绝采样完美的解决了累积分布函数不可求时的采样问题。但是接受拒绝采样非常依赖于提议分布(proposal distribution)的选择，如果提议分布选择的不好，可能采样时间很长却获得很少满足分布的粒子。</li>
+<li>$E_{p(x)}[f(x)]=\int_a^bf(x)\frac{p(x)}{q(x)}q(x)dx=E_{q(x)}[f(x)\frac{p(x)}{q(x)}]$</li>
+<li>我们从提议分布q(x)中采样大量粒子$x_1,x_2,…,x_n$，每个粒子的权重是 $\frac{p(x_i)}{q(x_i)}$，通过加权平均的方式可以计算出期望:</li>
+<li>$E_{p(x)}[f(x)]=\frac{1}{N}\sum f(x_i)\frac{p(x_i)}{q(x_i)}$<ul>
+<li>q提议的分布，p希望的采样分布</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">N=<span class="number">100000</span></span><br><span class="line">M=<span class="number">5000</span></span><br><span class="line">x = (np.random.rand(N)-<span class="number">0.5</span>)*<span class="number">16</span></span><br><span class="line">w_x = <span class="built_in">eval</span>(x)/ref(x)</span><br><span class="line">w_x = w_x/<span class="built_in">sum</span>(w_x)</span><br><span class="line">w_xc = np.cumsum(w_x) <span class="comment">#accumulate</span></span><br><span class="line"></span><br><span class="line">X=np.array([])</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(M):</span><br><span class="line">    u = np.random.rand()</span><br><span class="line">    X = np.hstack((X,x[w_xc&gt;u][<span class="number">0</span>])) <span class="comment"># 其中，w_xc是对归一化后的权重计算的累计分布概率。每次取最终样本时，都会先随机一个(0,1)之间的随机数，并使用这个累计分布概率做选择。样本的权重越大，被选中的概率就越高。</span></span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+<h3 id="分层采样"><a href="#分层采样" class="headerlink" title="分层采样"></a>分层采样</h3><h4 id="分层抖动采样"><a href="#分层抖动采样" class="headerlink" title="分层抖动采样"></a>分层抖动采样</h4><blockquote>
+<p><a target="_blank" rel="noopener" href="https://yangwc.com/2020/04/11/Sampling2/">Physically Based Rendering：采样和重建（二） | YangWC’s Blog</a></p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240722141841.png" alt="image.png|666"></p>
+<ul>
+<li>随机采样</li>
+<li>分层均匀采样</li>
+<li>分层抖动采样。理想的分层抖动采样很容易陷入<strong>维数灾难</strong>，因此有人提出了高维转低维采样+随机串联(or随机配对)的方法</li>
+</ul>
+<h4 id="Latin-Hypercube-Sampling"><a href="#Latin-Hypercube-Sampling" class="headerlink" title="Latin Hypercube Sampling"></a>Latin Hypercube Sampling</h4><ol>
+<li>将每个维度的区间划分为m个不重叠的区间，每个区间概率相等（取均匀分布，区间大小应相等）</li>
+<li>从均匀分布中随机采样，每个维度的每个间隔中的一个点</li>
+<li>将每个维度的点随机配对（相同可能的组合）</li>
+</ol>
+<p>相较于Simple Random Sampling，LHS的方法更加分散，且不存在聚类效应</p>
+<h3 id="MCMC"><a href="#MCMC" class="headerlink" title="MCMC"></a>MCMC</h3><p>(Markov Chain Monte Carlo)</p>
+<p>Blog:</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/37121528">马尔可夫链蒙特卡罗算法（MCMC） - 知乎</a><br>动画 <a target="_blank" rel="noopener" href="https://chi-feng.github.io/mcmc-demo/">The Markov-chain Monte Carlo Interactive Gallery</a> | 代码 <a target="_blank" rel="noopener" href="https://github.com/chi-feng/mcmc-demo">Javascript demos</a><br><a target="_blank" rel="noopener" href="https://prappleizer.github.io/Tutorials/MCMC/MCMC_Tutorial.html">MCMC</a> MCMC: A (very) Beginnner’s Guide</p>
+</blockquote>
+<p>Paper:</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2204.10145">An effective introduction to the Markov Chain Monte Carlo method</a> <strong>For physics</strong><br><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1909.12313">A Conceptual Introduction to Markov Chain Monte Carlo Methods</a><br><a target="_blank" rel="noopener" href="https://www.taylorfrancis.com/books/mono/10.1201/b14835/markov-chain-monte-carlo-practice-david-spiegelhalter-gilks-richardson">Markov Chain Monte Carlo in Practice | W.R. Gilks, S. Richardson, Davi</a> MCMC需要小心地初始化，早期阶段需要warm-up time</p>
+</blockquote>
+<h4 id="M-H采样"><a href="#M-H采样" class="headerlink" title="M-H采样"></a>M-H采样</h4><blockquote>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/411689417">走进贝叶斯统计（五）—— Metropolis-Hasting 算法 - 知乎</a></p>
+</blockquote>
+<h4 id="Gibbs采样"><a href="#Gibbs采样" class="headerlink" title="Gibbs采样"></a>Gibbs采样</h4><blockquote>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/416670115">走进贝叶斯统计（六）—— 吉布斯抽样 （Gibbs Sampling） - 知乎</a></p>
+</blockquote>
+<h4 id="TMCMC"><a href="#TMCMC" class="headerlink" title="TMCMC"></a>TMCMC</h4><blockquote>
+<p><a href="Transitional%20Markov%20Chain%20Monte%20Carlo%20Method%20for%20Bayesian%20Model%20Updating,%20Model%20Class%20Selection,%20and%20Model%20Averaging.md">Transitional Markov Chain Monte Carlo Method for Bayesian Model Updating, Model Class Selection, and Model Averaging</a></p>
+</blockquote>
+<h4 id="拉丁超立方采样-Latin-hypercube-sampling-LHS"><a href="#拉丁超立方采样-Latin-hypercube-sampling-LHS" class="headerlink" title="拉丁超立方采样(Latin hypercube sampling, LHS)"></a>拉丁超立方采样(Latin hypercube sampling, LHS)</h4><blockquote>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/385966408">拉丁超立方采样(Latin hypercube sampling, LHS)及蒙特卡洛模拟简介 - 知乎</a></p>
+</blockquote>
+<p>拉丁超立方采样先把样本空间分层，在此问题下要分为5层，于是便有了 [1,20],[21,40],[41,60],[61,80],[81,100] 共5个样本空间，在各样本空间内进行随机抽样，然后再打乱顺序，得到结果。这样就结束了~</p>
+<p>可以看出拉丁超立方采样分为了三步——<strong>分层、采样、乱序</strong>。</p>
+<h4 id="Hammersley-sampling"><a href="#Hammersley-sampling" class="headerlink" title="Hammersley sampling"></a>Hammersley sampling</h4><p>Hammersley采样是一种确定性的、低差异度的采样方法，属于准蒙特卡洛（Quasi-Monte Carlo）方法的范畴。 与依赖伪随机数生成器的传统蒙特卡洛方法不同，Hammersley采样使用一种基于Hammersley点集的准随机数生成器，旨在在一个单位超立方体中生成高度均匀的样本点。 这种均匀分布的特性使得Hammersley采样在许多应用中比随机采样或其他采样方法（如拉丁超立方采样）更有效率。</p>
+<h5 id="Hammersley采样如何工作？"><a href="#Hammersley采样如何工作？" class="headerlink" title="Hammersley采样如何工作？"></a>Hammersley采样如何工作？</h5><p>Hammersley采样通过一种被称为“激进逆”（radical inverse）的构造方法生成样本点，该方法与哈尔顿序列（Halton sequence）密切相关。 一个d维的Hammersley点集是这样生成的：</p>
+<ul>
+<li><strong>第一维</strong>：对于要生成的N个样本点，第一维的坐标是简单地将区间[0, 1)均匀划分为N份，即 <code>i/N</code>，其中 <code>i</code> 从0到N-1。</li>
+<li><strong>其他维度</strong>：对于剩下的d-1个维度，其坐标是通过“激进逆”函数，并使用d-1个互为质数的基数（通常是最小的d-1个素数，如2, 3, 5, …）来生成的。</li>
+</ul>
+<p><strong>激进逆函数</strong> 的基本思想是：对于一个整数 <code>i</code> 和一个基数 <code>p</code>，首先将 <code>i</code> 表示为p进制数，然后将这个p进制数的各位数字颠倒顺序，并将其放在小数点后，从而得到一个在[0, 1)区间内的数。</p>
+<p>例如，要生成一个二维的Hammersley点集，我们会：</p>
+<ol>
+<li><strong>第一维</strong>：使用均匀间隔的点：0/N, 1/N, 2/N, …</li>
+<li><strong>第二维</strong>：使用基数为2的激进逆（也称为Van der Corput序列）。</li>
+</ol>
+<p>这种构造方法保证了点集在整个空间中分布得非常均匀，避免了随机采样中可能出现的点簇和空白区域。</p>
+<h5 id="主要特点和优势"><a href="#主要特点和优势" class="headerlink" title="主要特点和优势"></a>主要特点和优势</h5><ul>
+<li><strong>高均匀性和低差异度</strong>：Hammersley点集被设计为在k维超立方体上实现最优的点布局。 这种优良的均匀分布特性意味着与随机采样相比，它能用更少的样本点来获得对输出统计数据（如均值）的可靠估计。</li>
+<li><strong>高效率</strong>：在计算不确定性时，Hammersley采样可以将所需的样本数量减少2到100倍。</li>
+<li><strong>确定性</strong>：与随机采样不同，Hammersley序列是完全确定的，不涉及随机数生成。</li>
+<li><strong>优于拉丁超立方采样（LHS）</strong>：虽然LHS在每个维度上都保证了均匀分布，但Hammersley在整个k维超立方体上提供了更好的整体均匀性。</li>
+</ul>
+<h5 id="应用领域"><a href="#应用领域" class="headerlink" title="应用领域"></a>应用领域</h5><p>Hammersley采样及其相关的低差异序列被广泛应用于需要高效数值积分和空间采样的领域，例如：</p>
+<ul>
+<li><strong>计算机图形学</strong>：在光线追踪和辐射度算法中，用于生成均匀的采样模式以减少图像噪点。</li>
+<li><strong>优化与不确定性分析</strong>：在需要探索参数空间的设计实验（DOE）和不确定性量化中，Hammersley采样是一种高效的选择。</li>
+<li><strong>金融建模</strong>：用于准蒙特卡洛积分，以评估复杂的金融衍生品。</li>
+</ul>
+<h5 id="局限性"><a href="#局限性" class="headerlink" title="局限性"></a>局限性</h5><p>尽管Hammersley采样非常有效，但它也有一些局限性：</p>
+<ul>
+<li><strong>维度限制</strong>：当维度增加时（通常超过10维），Hammersley序列的性能会下降，点之间可能会出现不希望的相关性。 在更高维度的问题中，像Sobol序列这样的其他低差异序列可能表现更好。</li>
+<li><strong>固定样本数</strong>：标准的Hammersley点集需要预先知道总样本数N。 如果需要增量式地添加样本，哈尔顿序列是更好的选择，因为哈尔顿序列的所有前缀都保持了良好的分布特性。</li>
+</ul>
+<p>总而言之，Hammersley采样是一种强大而高效的确定性采样技术，特别适用于低维空间中的均匀采样。它通过生成低差异度的点集，能够在保证精度的同时，显著减少蒙特卡洛模拟所需的样本数量。低差异度的点集，能够在保证精度的同时，显著减少蒙特卡洛模拟所需的样本数量。</p>
+<h4 id="Langevin-Monte-Carlo-LMC"><a href="#Langevin-Monte-Carlo-LMC" class="headerlink" title="Langevin Monte Carlo(LMC)"></a>Langevin Monte Carlo(LMC)</h4><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/613579202/answer/3310826408">什么是diffusion model? 它为什么好用？ - Zephyr的回答 - 知乎</a></p>
+</blockquote>
+<p>$\mathbf{x}_{t+1}=\mathbf{x}_t+a\nabla\log Q(\mathbf{x}_t)+b\boldsymbol{\eta}_{t+1},$</p>
+<ul>
+<li>a&gt;0 is a hyperparameter defining the step size for the gradient-based walks</li>
+<li>b&gt;0 is a hyperparameter defining the step size for the random walk $\boldsymbol{\eta}_{t\boldsymbol{+}1}\boldsymbol{\sim}\mathcal{N}(0,\mathbf{1})$</li>
+<li>采样是局部的，因此采样的开销很小</li>
+<li>log的作用应该是把乘除转换成加减, eg: $w_i=\frac{p(x_i)}{q(x_i)}, \log w_i=\log p(x_i)-\log q(x_i)$</li>
+</ul>
+<h4 id="Hamiltonian-Monte-Carlo-HMC"><a href="#Hamiltonian-Monte-Carlo-HMC" class="headerlink" title="Hamiltonian Monte Carlo(HMC)"></a>Hamiltonian Monte Carlo(HMC)</h4>
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/+1ZnNxFWnEbk5YzRl">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/Learn/Neural%20Network/DeepLearning/Kriging/" rel="prev" title="Kriging">
+      <i class="fa fa-chevron-left"></i> Kriging
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/Learn/Neural%20Network/DeepLearning/Flow-based%20generative%20model/" rel="next" title="Flow-based generative model">
+      Flow-based generative model <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Sampling"><span class="nav-text">Sampling</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Monte-Carlo"><span class="nav-text">Monte Carlo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%B1%82%E9%87%87%E6%A0%B7"><span class="nav-text">分层采样</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E5%B1%82%E6%8A%96%E5%8A%A8%E9%87%87%E6%A0%B7"><span class="nav-text">分层抖动采样</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Latin-Hypercube-Sampling"><span class="nav-text">Latin Hypercube Sampling</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MCMC"><span class="nav-text">MCMC</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#M-H%E9%87%87%E6%A0%B7"><span class="nav-text">M-H采样</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Gibbs%E9%87%87%E6%A0%B7"><span class="nav-text">Gibbs采样</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TMCMC"><span class="nav-text">TMCMC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8B%89%E4%B8%81%E8%B6%85%E7%AB%8B%E6%96%B9%E9%87%87%E6%A0%B7-Latin-hypercube-sampling-LHS"><span class="nav-text">拉丁超立方采样(Latin hypercube sampling, LHS)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hammersley-sampling"><span class="nav-text">Hammersley sampling</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Hammersley%E9%87%87%E6%A0%B7%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%EF%BC%9F"><span class="nav-text">Hammersley采样如何工作？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E7%89%B9%E7%82%B9%E5%92%8C%E4%BC%98%E5%8A%BF"><span class="nav-text">主要特点和优势</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E9%A2%86%E5%9F%9F"><span class="nav-text">应用领域</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B1%80%E9%99%90%E6%80%A7"><span class="nav-text">局限性</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Langevin-Monte-Carlo-LMC"><span class="nav-text">Langevin Monte Carlo(LMC)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hamiltonian-Monte-Carlo-HMC"><span class="nav-text">Hamiltonian Monte Carlo(HMC)</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qi Yun"
+      src="/images/avatar.jpeg">
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">172</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/qiyun71" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;qiyun71" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/29010355" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;29010355" rel="noopener" target="_blank"><i class="fa fa-star fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qi Yun</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">542k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">32:52</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/yqq/anime.min.js"></script>
+  <script src="/yqq/velocity/velocity.min.js"></script>
+  <script src="/yqq/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

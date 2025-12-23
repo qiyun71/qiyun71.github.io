@@ -29,9 +29,10 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://i2.hdslb.com/bfs/article/1564932c6e363ac45d0902478c047d4dc859a6a2.png@1192w.avif">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20240708153849.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20250821202236.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20241016122523.png">
 <meta property="article:published_time" content="2024-12-25T02:21:16.000Z">
-<meta property="article:modified_time" content="2025-01-16T10:58:30.055Z">
+<meta property="article:modified_time" content="2025-09-03T01:52:48.679Z">
 <meta property="article:author" content="Qi Yun">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://i2.hdslb.com/bfs/article/1564932c6e363ac45d0902478c047d4dc859a6a2.png@1192w.avif">
@@ -229,7 +230,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-01-16 18:58:30" itemprop="dateModified" datetime="2025-01-16T18:58:30+08:00">2025-01-16</time>
+                <time title="Modified: 2025-09-03 09:52:48" itemprop="dateModified" datetime="2025-09-03T09:52:48+08:00">2025-09-03</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -246,13 +247,13 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>1.9k</span>
+              <span>2.6k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span>7 mins.</span>
+              <span>9 mins.</span>
             </span>
 
         </div>
@@ -343,18 +344,41 @@
 <p>Nastran的Python库：<a target="_blank" rel="noopener" href="https://pynastran-git.readthedocs.io/en/1.3/index.html">Welcome to pyNastran’s documentation for v1.3! — pyNastran 1.3 1.3 documentation (pynastran-git.readthedocs.io)</a></p>
 <p>Debug: <a target="_blank" rel="noopener" href="https://www.scribd.com/doc/70652924/Nastran-Error-List-1">Nastran Error List 1. | PDF</a></p>
 <p><code>D:\Software\Nastran\Nastran_install\bin\nastranw.exe *.bdf</code></p>
-<h3 id="bdf文件"><a href="#bdf文件" class="headerlink" title="bdf文件"></a>bdf文件</h3><p>输出文件格式：<code>PARAM    POST    0</code></p>
+<h3 id="bdf文件"><a href="#bdf文件" class="headerlink" title="bdf文件"></a>bdf文件</h3><h4 id="MSC-NX-Nastran-Quick-Reference-Guide"><a href="#MSC-NX-Nastran-Quick-Reference-Guide" class="headerlink" title="MSC/NX Nastran Quick Reference Guide"></a>MSC/NX Nastran Quick Reference Guide</h4><blockquote>
+<p>“MSC Nastran 2020 Service Pack 1 Reference Guide” (<a href="zotero://select/library/items/RYT2LXQG">“Reference Guide - MSC Nastran 2020”, pp. -</a>) (<a href="zotero://open-pdf/library/items/HIIHJJ79?page=1&amp;annotation=VRUHKPVZ">pdf</a>)<br>“MSC Nastran 2022.1 Quick Reference Guide” (<a href="zotero://select/library/items/YPDDMHIV">“MSC Nastran 2022.1 Quick Reference Guide”, p. 1</a>) (<a href="zotero://open-pdf/library/items/8XP78ELS?page=1&amp;annotation=JRQYK5KC">pdf</a>)</p>
+</blockquote>
+<h5 id="Executive-Control-Section"><a href="#Executive-Control-Section" class="headerlink" title="Executive Control Section"></a>Executive Control Section</h5><blockquote>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/296877634">基于Patran/Nastran频响分析文件的全解析 - 知乎</a></p>
+</blockquote>
+<p>SOL 111（模态法的频率响应）<br>CEND(“Case Control End”的缩写，标志着执行控制部分)</p>
+<h5 id="Case-Control-Section"><a href="#Case-Control-Section" class="headerlink" title="Case Control Section"></a>Case Control Section</h5><p>$ Direct Text Input for Global Case Control Data<br>TITLE = MSC.Nastran job created on 07-Oct-20 at 14:35:22<br>ECHO = NONE<br>RESVEC = YES<br>LOADSET = 1(载荷关联，1与下文LSEQ对应)<br>SUBCASE 1<br>SUBTITLE=freq（载荷工况名称）<br>METHOD = 1（模态求解，1与下文EIGRL对应）<br>FREQUENCY = 1（求解频率范围设置，1与下文FREQ1对应）<br>SPC = 2（约束设置，2与SPCADD对应）<br>DLOAD = 2（载荷工况，2与下文DLOAD对应）<br>DISPLACEMENT(SORT1,REAL)=ALL（输出位移，ALL指输出所有节点） ACCELERATION(SORT1,REAL)=ALL（输出加速度，ALL指输出所有节点）</p>
+<p>$ Direct Text Input for this Subcase<br>BEGIN BULK<br>$ Direct Text Input for Bulk Data<br>MDLPRM HDF5 0 (控制 HDF5 格式结果文件的输出行为)</p>
+<p>PARAM POST 0（输出结果文件格式为XBD）</p>
+<p>输出文件格式：<code>PARAM    POST    0</code></p>
 <ul>
 <li>POST 0 不输出op2文件</li>
 <li>POST,-1 生成 OP2 文件，但不包含几何数据</li>
 <li><strong>POST,1 生成 OP2 文件，并包含几何数据</strong></li>
 <li>POST,2 生成 OP2 文件，并包含几何数据和优化数据. (在卫星算例中需要改成POST 2，但是在折叠翼算例中只需要POST 1 即可，<strong><em>可能是版本不同的原因</em></strong>)</li>
 </ul>
+<p>PARAM G .04（结构阻尼比）<br>PARAM, PRTMAXIM, YES (控制是否在 .f06 文本输出文件中打印出结果的最大/最小值摘要)</p>
+<p>FREQ1 1 5. 1. 95（计算起始频率5Hz，增量1Hz，增量步95）<br>EIGRL 1 10 0（10指截断前10阶模态）</p>
+<p>$ Elements and Element Properties for region : beam （下文为模型信息，节点、单元、材料、属性）<br>PBARL 1 1 ROD .005<br>$ Pset: “beam” will be imported as: “pbarl.1” (单元信息)<br>CBAR 1 1 1 2 0. 1. 0.CBAR 2 1 2 3 0. 1. 0.CBAR 3 1 3 4 0. 1. 0.CBAR 4 1 4 5 0. 1. 0.CBAR 5 1 5 6 0. 1. 0.CBAR 6 1 6 7 0. 1. 0.CBAR 7 1 7 8 0. 1. 0.CBAR 8 1 8 9 0. 1. 0.CBAR 9 1 9 10 0. 1. 0.CBAR 10 1 10 11 0. 1. 0.</p>
+<p>$ Referenced Material Records (材料信息)<br>$ Material Record : aluminium_iso_SI<br>$ Description of Material : Date: 26-Jul-94 Time: 17:54:56<br>MAT1 1 7.+10 .3 2700. 2.32-5</p>
+<p>$ Nodes of the Entire Model (节点信息)<br>GRID 1 0. 0. 0.GRID 2 .1 0. 0.GRID 3 .2 0. 0.GRID 4 .3 0. 0.GRID 5 .4 0. 0.GRID 6 .5 0. 0.GRID 7 .6 0. 0.GRID 8 .7 0. 0.GRID 9 .8 0. 0.GRID 10 .9 0. 0.GRID 11 1. 0. 0.</p>
+<p>$ Loads for Load Case : freq<br>SPCADD 2 1<br>RLOAD1 4 5 1<br>LSEQ 1 5 3<br>DLOAD 2 1. 1. 4</p>
+<p>$ Displacement Constraints of Load Set : disp<br>SPC1 1 123456 1</p>
+<p>$ Nodal Forces of Load Set : force02<br>FORCE 3 11 0 10. 0. 1. 0.（激励作用位置、幅值和方向）</p>
+<p>$ Referenced Dynamic Load Tables<br>$ Dynamic Load Table : freq<br>TABLED1 1（激励随频率变化的场） 0. 1. 5. 1. 100. 1. 2000. 1. ENDT</p>
+<p>$ Referenced Coordinate Frames<br>$<br>$<br>ENDDATA ecfd488e</p>
+<h4 id="单元类型"><a href="#单元类型" class="headerlink" title="单元类型"></a>单元类型</h4><p><code>CTETRA   912     1       2979    2539    2631    2192    3103    1969  \n 2727    1968    2294    1846</code></p>
+<p><a target="_blank" rel="noopener" href="https://2021.help.altair.com/2021/hwsolvers/os/topics/solvers/os/ctetra_bulk_r.htm">CTETRA</a></p>
+<p><img src="https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20250821202236.png" alt="image.png|333"></p>
 <p>输出节点定义：<code>SET xxx= 节点编号</code></p>
 <ul>
 <li>比如定义11个节点， <code>SET 1 = 118,237,255,381,416,446,521,556,587,728,827</code></li>
 </ul>
-<p><strong>Material ID</strong> 是材料的唯一标识符，用于在 BDF 文件中定义材料的属性。包括弹性模量、泊松比、密度等<br><code>MAT1    1       2.1+11   .3      7800.</code> 材料ID1，弹性模量E，泊松比nu，密度rho<br>修改材料属性：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">material_id = <span class="number">1</span></span><br><span class="line"><span class="keyword">if</span> material_id <span class="keyword">in</span> bdf_model.materials:</span><br><span class="line">    material = bdf_model.materials[material_id]</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;材料 ID <span class="subst">&#123;material_id&#125;</span> 的属性: <span class="subst">&#123;material&#125;</span>&quot;</span>)</span><br><span class="line">    material.E = <span class="number">3.0e11</span>  <span class="comment"># 修改弹性模量</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="材料属性"><a href="#材料属性" class="headerlink" title="材料属性"></a>材料属性</h4><p><strong>Material ID</strong> 是材料的唯一标识符，用于在 BDF 文件中定义材料的属性。包括弹性模量、泊松比、密度等<br><code>MAT1    1       2.1+11   .3      7800.</code> 材料ID1，弹性模量E，泊松比nu，密度rho<br>修改材料属性：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">material_id = <span class="number">1</span></span><br><span class="line"><span class="keyword">if</span> material_id <span class="keyword">in</span> bdf_model.materials:</span><br><span class="line">    material = bdf_model.materials[material_id]</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;材料 ID <span class="subst">&#123;material_id&#125;</span> 的属性: <span class="subst">&#123;material&#125;</span>&quot;</span>)</span><br><span class="line">    material.E = <span class="number">3.0e11</span>  <span class="comment"># 修改弹性模量</span></span><br></pre></td></tr></table></figure></p>
 <p><strong>Properties</strong> 是单元属性的定义，用于描述单元的几何和材料特性。单元类型、厚度、材料 ID 等<br><code>PSHELL  1       1       .01</code> 属性ID1，引用材料的ID1，厚度0.01m<br>修改单元属性：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">property_id = <span class="number">1</span></span><br><span class="line"><span class="keyword">if</span> property_id <span class="keyword">in</span> bdf_model.properties:</span><br><span class="line">    <span class="built_in">property</span> = bdf_model.properties[property_id]</span><br><span class="line">    <span class="built_in">property</span>.t = <span class="number">0.02</span>  <span class="comment"># 修改厚度</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;属性 ID <span class="subst">&#123;property_id&#125;</span> 的定义: <span class="subst">&#123;<span class="built_in">property</span>&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;引用的材料 ID: <span class="subst">&#123;<span class="built_in">property</span>.mid&#125;</span>&quot;</span>)  <span class="comment"># 获取属性引用的材料 ID</span></span><br></pre></td></tr></table></figure></p>
 <p>阻尼表<br><code>TABDMP1  ID   TYPE   F1   G1   F2   G2   ...   FN   GN</code></p>
 <ul>
@@ -367,6 +391,7 @@
 <blockquote>
 <p> <a target="_blank" rel="noopener" href="https://iberisa.wordpress.com/wp-content/uploads/2021/01/simcenter-nastran-basic-dynamics-user-guide.pdf">Simcenter Nastran Basic Dynamic Analysis User’s Guide</a></p>
 </blockquote>
+<h4 id="节点坐标"><a href="#节点坐标" class="headerlink" title="节点坐标"></a>节点坐标</h4><p><code>GRID*    2305                           -292.75540161132-13.976940155029 \n *       350.3125</code></p>
 <h4 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h4><ul>
 <li>nastran没有输出指定的op2文件 —&gt; 取消勾选HDF5格式输出</li>
 <li>nastran无法得到运行结果：<ul>
@@ -497,7 +522,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Modeling"><span class="nav-text">Modeling</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Patran"><span class="nav-text">Patran</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mode-Frequency"><span class="nav-text">Mode Frequency</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Frequency-Response-Function"><span class="nav-text">Frequency Response Function</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B1%E8%8A%82%E7%82%B9"><span class="nav-text">共节点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nastran"><span class="nav-text">Nastran</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#bdf%E6%96%87%E4%BB%B6"><span class="nav-text">bdf文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Question"><span class="nav-text">Question</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%AB%E6%98%9F%E7%AE%97%E4%BE%8B-bdf"><span class="nav-text">卫星算例.bdf</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FEA%E4%BA%8C%E6%AC%A1%E5%BC%80%E5%8F%91-Python"><span class="nav-text">FEA二次开发(Python)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other"><span class="nav-text">Other</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%93%E5%BC%80MBT"><span class="nav-text">打开MBT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FE-amp-Blender"><span class="nav-text">FE &amp; Blender</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Modeling"><span class="nav-text">Modeling</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Patran"><span class="nav-text">Patran</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mode-Frequency"><span class="nav-text">Mode Frequency</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Frequency-Response-Function"><span class="nav-text">Frequency Response Function</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B1%E8%8A%82%E7%82%B9"><span class="nav-text">共节点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nastran"><span class="nav-text">Nastran</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#bdf%E6%96%87%E4%BB%B6"><span class="nav-text">bdf文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MSC-NX-Nastran-Quick-Reference-Guide"><span class="nav-text">MSC&#x2F;NX Nastran Quick Reference Guide</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Executive-Control-Section"><span class="nav-text">Executive Control Section</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Case-Control-Section"><span class="nav-text">Case Control Section</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%95%E5%85%83%E7%B1%BB%E5%9E%8B"><span class="nav-text">单元类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9D%90%E6%96%99%E5%B1%9E%E6%80%A7"><span class="nav-text">材料属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8A%82%E7%82%B9%E5%9D%90%E6%A0%87"><span class="nav-text">节点坐标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Question"><span class="nav-text">Question</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%AB%E6%98%9F%E7%AE%97%E4%BE%8B-bdf"><span class="nav-text">卫星算例.bdf</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FEA%E4%BA%8C%E6%AC%A1%E5%BC%80%E5%8F%91-Python"><span class="nav-text">FEA二次开发(Python)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other"><span class="nav-text">Other</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%93%E5%BC%80MBT"><span class="nav-text">打开MBT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FE-amp-Blender"><span class="nav-text">FE &amp; Blender</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -512,14 +537,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-count">172</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -573,12 +598,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">530k</span>
+    <span title="Symbols count total">542k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">32:08</span>
+    <span title="Reading time total">32:52</span>
 </div>
 
         

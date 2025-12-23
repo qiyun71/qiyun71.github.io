@@ -28,7 +28,7 @@
 <meta property="og:description" content="数据降维&#x2F; sklearn | numpy | pandasseaborn | matplotlib">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-09-21T06:32:41.000Z">
-<meta property="article:modified_time" content="2024-12-15T11:41:56.835Z">
+<meta property="article:modified_time" content="2025-07-24T13:28:29.524Z">
 <meta property="article:author" content="Qi Yun">
 <meta name="twitter:card" content="summary">
 
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-12-15 19:41:56" itemprop="dateModified" datetime="2024-12-15T19:41:56+08:00">2024-12-15</time>
+                <time title="Modified: 2025-07-24 21:28:29" itemprop="dateModified" datetime="2025-07-24T21:28:29+08:00">2025-07-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -242,13 +242,13 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>667</span>
+              <span>838</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span>2 mins.</span>
+              <span>3 mins.</span>
             </span>
 
         </div>
@@ -263,7 +263,8 @@
         <p>数据降维/</p>
 <p>sklearn | numpy | pandas<br>seaborn | matplotlib</p>
 <span id="more"></span>
-<h1 id="数据降维-Dimension-Reduction"><a href="#数据降维-Dimension-Reduction" class="headerlink" title="数据降维(Dimension Reduction)"></a>数据降维(Dimension Reduction)</h1><blockquote>
+<h1 id="数据降维"><a href="#数据降维" class="headerlink" title="数据降维"></a>数据降维</h1><p>(Dimension Reduction)</p>
+<blockquote>
 <p> <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43337249/article/details/116612811">常见的PCA、tSNE、UMAP降维及聚类基本原理及代码实例_umap聚类-CSDN博客</a></p>
 </blockquote>
 <p>What：<br>降维是指通过保留一些比较重要的特征，去除一些冗余的特征，减少数据特征的维度。而特征的重要性取决于该特征能够表达多少数据集的信息，也取决于使用什么方法进行降维。一般情况会先使用线性的降维方法再使用非线性的降维方法，通过结果去判断哪种方法比较合适。<br>降维算法一般分为两类: 1.寻求在数据中保存距离结构的:PCA、MDS等算法 2倾向于保存局部距离而不是全局距离的。<code>t-SNE</code> diffusion maps(UMAP)</p>
@@ -275,12 +276,21 @@
 <li><del>当数据的特征太多，无法很好地展示时，需要降维</del></li>
 </ul>
 <p>How：</p>
-<h2 id="Method-about-Dimension-Reduction"><a href="#Method-about-Dimension-Reduction" class="headerlink" title="Method about Dimension Reduction"></a>Method about Dimension Reduction</h2><h3 id="PCA"><a href="#PCA" class="headerlink" title="PCA"></a>PCA</h3><p>PCA是将数据的最主要成分提取出来代替原始数据，也就是将n维特征映射到新的维度中，由k维正交特征组成的特征空间就是主成分，使用的降维方法就是投影。</p>
+<h2 id="Method-about-Dimension-Reduction"><a href="#Method-about-Dimension-Reduction" class="headerlink" title="Method about Dimension Reduction"></a>Method about Dimension Reduction</h2><h3 id="PCA"><a href="#PCA" class="headerlink" title="PCA"></a>PCA</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/marsggbo/p/10155801.html">【转载】奇异值分解(SVD)计算过程示例 - marsggbo - 博客园</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/37777074">(10 封私信) 主成分分析（PCA）原理详解 - 知乎</a></p>
+</blockquote>
+<h3 id="KPCA"><a href="#KPCA" class="headerlink" title="KPCA"></a>KPCA</h3><p>nonlinear dimensionality reduction methods (kernel principal component analysis (KPCA),</p>
 <h3 id="t-SNE"><a href="#t-SNE" class="headerlink" title="t-SNE"></a>t-SNE</h3><p>t-distributed Stochastic Neighbor Embedding</p>
 <h3 id="UMAP"><a href="#UMAP" class="headerlink" title="UMAP"></a>UMAP</h3><blockquote>
 <p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1802.03426">UMAP: Uniform Manifold Approximation and Projection for Dimension Reduction</a><br><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/21550185/answer/3363179389">下一次数学突破会在哪里？</a> UMAP</p>
 </blockquote>
 <h2 id="Code-about-t-SNE-and-PCA："><a href="#Code-about-t-SNE-and-PCA：" class="headerlink" title="Code about t-SNE and PCA："></a>Code about t-SNE and PCA：</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.manifold <span class="keyword">import</span> TSNE</span><br><span class="line"><span class="keyword">from</span> sklearn.decomposition <span class="keyword">import</span> PCA</span><br><span class="line"></span><br><span class="line"><span class="comment"># n_samples, seq_length, feature_dim</span></span><br><span class="line"><span class="comment"># ori_data 3000,24,6</span></span><br><span class="line"><span class="comment"># generate_data 3000,24,6</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># compare设置的比ori_data.shape[0]小一点方便计算</span></span><br><span class="line">anal_sample_no = <span class="built_in">min</span>([compare, ori_data.shape[<span class="number">0</span>]])</span><br><span class="line"></span><br><span class="line">idx = np.random.permutation(ori_data.shape[<span class="number">0</span>])[:anal_sample_no]</span><br><span class="line">ori_data = ori_data[idx]</span><br><span class="line">generated_data = generated_data[idx]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 对 feature_dim 取平均 3000,24,6 --&gt; 3000,24</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(anal_sample_no):</span><br><span class="line">  <span class="keyword">if</span> (i == <span class="number">0</span>):</span><br><span class="line">    prep_data = np.reshape(np.mean(ori_data[<span class="number">0</span>, :, :], <span class="number">1</span>), [<span class="number">1</span>, seq_len])</span><br><span class="line">    prep_data_hat = np.reshape(np.mean(generated_data[<span class="number">0</span>, :, :], <span class="number">1</span>), [<span class="number">1</span>, seq_len])</span><br><span class="line">  <span class="keyword">else</span>:</span><br><span class="line">    prep_data = np.concatenate((prep_data,np.reshape(np.mean(ori_data[i, :, :], <span class="number">1</span>), [<span class="number">1</span>, seq_len])))</span><br><span class="line">    prep_data_hat = np.concatenate((prep_data_hat,np.reshape(np.mean(generated_data[i, :, :], <span class="number">1</span>), [<span class="number">1</span>, seq_len])))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据降维</span></span><br><span class="line"><span class="comment"># # prep_data 3000,24</span></span><br><span class="line"><span class="comment"># # prep_data_hat 3000,24</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## PCA</span></span><br><span class="line">pca = PCA(n_components=<span class="number">2</span>)</span><br><span class="line">pca.fit(prep_data) <span class="comment"># 对`prep_data`进行训练，计算主成分（方向向量）</span></span><br><span class="line"><span class="comment">### 将原始数据投影到2个主成分的空间上，`pca_results`是降维后的数据</span></span><br><span class="line">pca_results = pca.transform(prep_data) <span class="comment"># (3000, 2) ori</span></span><br><span class="line">pca_hat_results = pca.transform(prep_data_hat) <span class="comment"># (3000, 2) gen</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## t-SNE</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### Do t-SNE Analysis together</span></span><br><span class="line">prep_data_final = np.concatenate((prep_data, prep_data_hat), axis=<span class="number">0</span>) <span class="comment"># 6000, 24</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### TSNE anlaysis</span></span><br><span class="line">tsne = TSNE(n_components=<span class="number">2</span>, verbose=<span class="number">1</span>, perplexity=<span class="number">40</span>, n_iter=<span class="number">300</span>)</span><br><span class="line">tsne_results = tsne.fit_transform(prep_data_final) <span class="comment"># 6000,2</span></span><br><span class="line"><span class="comment">### 降维后的数据</span></span><br><span class="line">tsne_results = tsne_results[:anal_sample_no, :] <span class="comment"># 3000,2</span></span><br><span class="line">pca_hat_results = tsne_results[anal_sample_no:, :] <span class="comment"># 3000,2</span></span><br></pre></td></tr></table></figure>
+<h3 id="LDA"><a href="#LDA" class="headerlink" title="LDA"></a>LDA</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-cn/%E7%B7%9A%E6%80%A7%E5%88%A4%E5%88%A5%E5%88%86%E6%9E%90">线性判别分析 - 维基百科，自由的百科全书</a><br><a target="_blank" rel="noopener" href="https://scikit-learn.org/stable/modules/lda_qda.html">1.2. Linear and Quadratic Discriminant Analysis — scikit-learn 1.7.1 documentation</a></p>
+</blockquote>
+<p>LDA 明确地尝试在不同数据类之间建立模型，而 PCA 则不考虑类别上的不同（只是在保留大部分讯息的前提下降低维度数）<br>相较于 PCA，LDA 是一种有监督的方法</p>
+<p>PCA是将数据的最主要成分提取出来代替原始数据，也就是将n维特征映射到新的维度中，由k维正交特征组成的特征空间就是主成分，使用的降维方法就是投影。</p>
+<p>LDA在<strong>线性模型</strong>中具有重要的地位，它结合了降维和分类的优点，是一种非常实用的算法。</p>
 
     </div>
 
@@ -315,8 +325,8 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/Other%20Interest/Time%20Series%20Data/" rel="prev" title="Time Series Data">
-      <i class="fa fa-chevron-left"></i> Time Series Data
+    <a href="/Other%20Interest/Technology/Time%20Series%20Data%20Processing/" rel="prev" title="Time Series Data Processing">
+      <i class="fa fa-chevron-left"></i> Time Series Data Processing
     </a></div>
       <div class="post-nav-item">
     <a href="/Learn/Finite%20Element/Structural%20Dynamics/" rel="next" title="Structural Dynamics">
@@ -380,7 +390,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%99%8D%E7%BB%B4-Dimension-Reduction"><span class="nav-text">数据降维(Dimension Reduction)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Method-about-Dimension-Reduction"><span class="nav-text">Method about Dimension Reduction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PCA"><span class="nav-text">PCA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#t-SNE"><span class="nav-text">t-SNE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UMAP"><span class="nav-text">UMAP</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code-about-t-SNE-and-PCA%EF%BC%9A"><span class="nav-text">Code about t-SNE and PCA：</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%99%8D%E7%BB%B4"><span class="nav-text">数据降维</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Method-about-Dimension-Reduction"><span class="nav-text">Method about Dimension Reduction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PCA"><span class="nav-text">PCA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#KPCA"><span class="nav-text">KPCA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#t-SNE"><span class="nav-text">t-SNE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UMAP"><span class="nav-text">UMAP</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code-about-t-SNE-and-PCA%EF%BC%9A"><span class="nav-text">Code about t-SNE and PCA：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#LDA"><span class="nav-text">LDA</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -395,14 +405,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-count">172</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -456,12 +466,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">530k</span>
+    <span title="Symbols count total">542k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">32:08</span>
+    <span title="Reading time total">32:52</span>
 </div>
 
         
