@@ -70,6 +70,8 @@ $$\mathrm{V}\mathrm{a}\mathrm{r}\left(y\right)=\sum _{i=1}^{n}{\mathrm{V}\mathrm
 1. 固定$X_{i}$，变化$X_{\sim i}$，得到一组Y，求Y的期望$E_{X_{\sim i}}(Y|X_{i})$
 2. 变化$X_{i}$，$E_{X_{\sim i}}(Y|X_{i})$随之变化，求其方差，即为$X_{i}$单独作用下的效应
 
+https://aistudio.google.com/app/prompts?state=%7B%22ids%22:%5B%2216apCYtuC3e64zJRQd5dAVX-6o214535w%22%5D,%22action%22:%22open%22,%22userId%22:%22107403435292964343607%22,%22resourceKeys%22:%7B%7D%7D&usp=sharing
+
 总阶：$S_{Ti}=\frac{E_{\mathbf{X}_{\sim i}}\left(\mathrm{Var}_{X_i}\left(Y\mid\mathbf{X}_{\sim i}\right)\right)}{\mathrm{Var}(Y)}=1-\frac{\mathrm{Var}_{\mathbf{X}_{\sim i}}\left(E_{X_i}\left(Y\mid\mathbf{X}_{\sim i}\right)\right)}{\mathrm{Var}(Y)}$
 1. 固定$X_{\sim i}$
 

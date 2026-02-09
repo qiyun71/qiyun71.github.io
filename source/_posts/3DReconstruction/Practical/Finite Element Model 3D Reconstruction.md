@@ -29,6 +29,26 @@ categories: 3DReconstruction
 > [How to create an FE Volume Mesh – nTop](https://support.ntop.com/hc/en-us/articles/360037005234-How-to-create-an-FE-Volume-Mesh) Design Analysis 设计分析 + Topology Optimization 拓扑优化([nTop](https://www.ntop.com/software/products/)软件不错)
 > 
 
+
+### Mesh optimization
+
+> [Zheng, Integrated Pipeline for Monocular 3D Reconstruction and Finite Element Simulation in Industrial Applications, 2025-06-16](zotero://select/library/items/MQIKFYPC)
+
+QuadRemesh (Rhino/Blender) 将三角形网格优化为规则的四边形网格
+
+[ksami/QRemeshify: A Blender extension for an easy-to-use remesher that outputs good-quality quad topology](https://github.com/ksami/QRemeshify)
+
+![raw.githubusercontent.com/ksami/QRemeshify/refs/heads/main/images/suzanne.png|666](https://raw.githubusercontent.com/ksami/QRemeshify/refs/heads/main/images/suzanne.png)
+
+Hypermesh 将四边形网格（面）优化为六面体网格（体）
+
+可能还需要对网格质量进行检查和修复
+
+> [hypermesh2023_四面体网格三种画法总结_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1Pm421M7XS/?vd_source=1dba7493016a36a32b27a14ed2891088) 17:00 直接使用3D中的Tet create 体网格，选中所有面element
+
+Abaqus 对六面体网格进行有限元仿真分析
+
+
 ## 间接重建模型
 
 首先获得物体的边缘，然后根据CAD或者Solidworks建立准确的三维模型

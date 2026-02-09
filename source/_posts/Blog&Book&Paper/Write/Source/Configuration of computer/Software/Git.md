@@ -16,6 +16,7 @@ git add .
 git commit -m xxx
 git push -u origin xxxx -f 
 
+`git push --set-upstream origin main`
 
 新建分支
 git checkout -b NEW_BRANCH_NAME

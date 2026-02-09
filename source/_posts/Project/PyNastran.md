@@ -403,3 +403,11 @@ def get_output(bdf_path,input_path,nastran_path,save_dir):
         np.savez(os.path.join(save_dir, 'modes.npz'), modes = all_modes)
     print("Finished saving modes, shape is ", all_modes.shape)
 ```
+
+
+# 网格变形
+
+>  [径向基函数RBF三维网格变形_rbf变形-CSDN博客](https://blog.csdn.net/zb1165048017/article/details/111182901)
+>  [SU2 Conference 22: Adjoint Optimization With RBF as Mesh Deformation and Sensitivity Smoothing Tech. - YouTube](https://www.youtube.com/watch?v=_AVHa34tcnI)
+>  [mathLab/PyGeM: Python Geometrical Morphing](https://github.com/mathLab/PyGeM)
+

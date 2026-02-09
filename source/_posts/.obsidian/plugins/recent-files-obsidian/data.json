@@ -1,128 +1,184 @@
 {
   "recentFiles": [
     {
-      "basename": "⭐Route",
-      "path": "Blog&Book&Paper/⭐Route.md"
+      "basename": "C2_NVTA2025_Virtual sampling for model updating under data scarcity challenges",
+      "path": "Blog&Book&Paper/Write/Write Paper/Model Updating/C2_NVTA2025_Virtual sampling for model updating under data scarcity challenges.md"
     },
     {
-      "basename": "Merging physics and neural network_A promising tool for prognostics and health management",
-      "path": "LiteratureNotes/Merging physics and neural network_A promising tool for prognostics and health management.md"
+      "basename": "Extract",
+      "path": "Blog&Book&Paper/Write/Extract.md"
     },
     {
-      "basename": "Uncertainty",
-      "path": "Other Interest/Uncertainty.md"
+      "basename": "J4_Virtual sampling generation",
+      "path": "Blog&Book&Paper/Write/Write Paper/Model Updating/J4_Virtual sampling generation.md"
     },
     {
-      "basename": "Pa&Nastran",
-      "path": "Learn/Finite Element/Pa&Nastran.md"
-    },
-    {
-      "basename": "Multiphysics",
-      "path": "Learn/Finite Element/Multiphysics.md"
-    },
-    {
-      "basename": "PyTorch",
-      "path": "Learn/Neural Network/PyTorch.md"
-    },
-    {
-      "basename": "J2 C1 A fast interval model updating method based on MLP neural network",
-      "path": "Blog&Book&Paper/Write/Write Paper/Model Updating/J2 C1 A fast interval model updating method based on MLP neural network.md"
-    },
-    {
-      "basename": "J3 NN-based Global Sensitivity Analysis",
-      "path": "Blog&Book&Paper/Write/Write Paper/Model Updating/J3 NN-based Global Sensitivity Analysis.md"
-    },
-    {
-      "basename": "Folding Fin",
-      "path": "ModelUpdating/Cases/Folding Fin.md"
-    },
-    {
-      "basename": "模态实验.excalidraw",
-      "path": "Blog&Book&Paper/Read/Book/模态实验/模态实验.excalidraw.md"
-    },
-    {
-      "basename": "NASA challenge 2019",
-      "path": "ModelUpdating/Cases/NASA challenge 2019.md"
-    },
-    {
-      "basename": "模态试验实用技术.excalidraw",
-      "path": "Blog&Book&Paper/Read/Book/模态实验/模态试验实用技术.excalidraw.md"
-    },
-    {
-      "basename": "ModelUpdating.excalidraw",
-      "path": "Blog&Book&Paper/Write/Write Paper/Model Updating/ModelUpdating.excalidraw.md"
-    },
-    {
-      "basename": "Simple",
-      "path": "ModelUpdating/Cases/Simple.md"
-    },
-    {
-      "basename": "Review.excalidraw",
-      "path": "Blog&Book&Paper/Write/Write Paper/Model Updating/Review.excalidraw.md"
-    },
-    {
-      "basename": "Values",
-      "path": "Blog&Book&Paper/Write/Values.md"
-    },
-    {
-      "basename": "J1 Stochastic Model Calibration with Image Encoding——Converting High-Dimensional Frequency-Domain Responses into RGB Images for Neural Network Inversion",
-      "path": "Blog&Book&Paper/Write/Write Paper/Model Updating/J1 Stochastic Model Calibration with Image Encoding——Converting High-Dimensional Frequency-Domain Responses into RGB Images for Neural Network Inversion.md"
-    },
-    {
-      "basename": "J3 Case results",
-      "path": "Blog&Book&Paper/Write/Write Paper/Model Updating/J3 Case results.md"
-    },
-    {
-      "basename": "Modal Testing",
-      "path": "Learn/Finite Element/Modal Testing.md"
-    },
-    {
-      "basename": "C2 NVTA2025",
-      "path": "Blog&Book&Paper/Write/Write Paper/Model Updating/C2 NVTA2025.md"
+      "basename": "SHM",
+      "path": "Other Interest/SHM.md"
     },
     {
       "basename": "Write tips",
       "path": "Blog&Book&Paper/Write/Write tips.md"
     },
     {
-      "basename": "DeepLearning",
-      "path": "Learn/Neural Network/DeepLearning.md"
+      "basename": "C3_ISRERM2026_A generative data augmentation framework for model updating via Dual-VAE and Metropolis-Hastings sampling",
+      "path": "Blog&Book&Paper/Write/Write Paper/Model Updating/C3_ISRERM2026_A generative data augmentation framework for model updating via Dual-VAE and Metropolis-Hastings sampling.md"
     },
     {
-      "basename": "Basics about ModelUpdating",
-      "path": "ModelUpdating/Basics about ModelUpdating.md"
+      "basename": "C4X CSC2026",
+      "path": "Blog&Book&Paper/Write/Write Paper/Model Updating/C4X CSC2026.md"
     },
     {
-      "basename": "Types of model updating with machine learning",
-      "path": "ModelUpdating/Types of model updating with machine learning.md"
+      "basename": "C2X_EURODYN",
+      "path": "Blog&Book&Paper/Write/Write Paper/Model Updating/C2X_EURODYN.md"
+    },
+    {
+      "basename": "⭐Route",
+      "path": "Blog&Book&Paper/⭐Route.md"
+    },
+    {
+      "basename": "R2write_Control system of large aircraft",
+      "path": "Blog&Book&Paper/Write/Write Paper/Model Updating/R2write_Control system of large aircraft.md"
+    },
+    {
+      "basename": "Aerodynamic parameter identification",
+      "path": "Other Interest/Aerodynamic parameter identification.md"
+    },
+    {
+      "basename": "R2_Control system of large aircraft",
+      "path": "Blog&Book&Paper/Write/Write Paper/Model Updating/R2_Control system of large aircraft.md"
+    },
+    {
+      "basename": "Uncertainty",
+      "path": "Other Interest/Uncertainty.md"
+    },
+    {
+      "basename": "J3_AE-GSA",
+      "path": "Blog&Book&Paper/Write/Write Paper/Model Updating/J3_AE-GSA.md"
+    },
+    {
+      "basename": "Write",
+      "path": "Reliability/Write.md"
+    },
+    {
+      "basename": "J2_Interval Model Calibration with Response-Consistent Supervised Learning Network",
+      "path": "Blog&Book&Paper/Write/Write Paper/Model Updating/J2_Interval Model Calibration with Response-Consistent Supervised Learning Network.md"
+    },
+    {
+      "basename": "Japanse",
+      "path": "Blog&Book&Paper/Read/Book/Japanse.md"
+    },
+    {
+      "basename": "Multiphysics",
+      "path": "Learn/Finite Element/Multiphysics.md"
+    },
+    {
+      "basename": "R1_Numerical model with multi-source uncertainty",
+      "path": "Blog&Book&Paper/Write/Write Paper/Model Updating/R1_Numerical model with multi-source uncertainty.md"
+    },
+    {
+      "basename": "J5_SSL_Stochastic",
+      "path": "Blog&Book&Paper/Write/Write Paper/Model Updating/J5_SSL_Stochastic.md"
+    },
+    {
+      "basename": "Data-driven stochastic model updating and damage detection with deep generative model",
+      "path": "ModelUpdating/AI/Data-driven stochastic model updating and damage detection with deep generative model.md"
     },
     {
       "basename": "Figure",
       "path": "Learn/Python/Figure.md"
     },
     {
-      "basename": "C2 EURODYN",
-      "path": "Blog&Book&Paper/Write/Write Paper/Model Updating/C2 EURODYN.md"
+      "basename": "Learn-Matlab",
+      "path": "Learn/Other Interest/Learn-Matlab.md"
     },
     {
-      "basename": "Fault detection in nonstationary industrial processes via kolmogorov-arnold networks with test-time training",
-      "path": "LiteratureNotes/Fault detection in nonstationary industrial processes via kolmogorov-arnold networks with test-time training.md"
+      "basename": "Condition-aware AI framework for automated structural health monitoring",
+      "path": "LiteratureNotes/Condition-aware AI framework for automated structural health monitoring.md"
     },
     {
-      "basename": "A model-free deep learning-based health prognosis methodology with epistemic and aleatoric uncertainties",
-      "path": "LiteratureNotes/A model-free deep learning-based health prognosis methodology with epistemic and aleatoric uncertainties.md"
+      "basename": "PyNastran",
+      "path": "Project/PyNastran.md"
+    },
+    {
+      "basename": "Pa&Nastran",
+      "path": "Learn/Finite Element/Pa&Nastran.md"
     },
     {
       "basename": "AI+RSE",
       "path": "Reliability/AI+RSE.md"
     },
     {
-      "basename": "2025-11-13",
-      "path": "Reports/Daily/2025-11-13.md"
+      "basename": "Git",
+      "path": "Blog&Book&Paper/Write/Source/Configuration of computer/Software/Git.md"
     },
     {
-      "basename": "Paper about ModelUpdating",
-      "path": "ModelUpdating/Paper about ModelUpdating.md"
+      "basename": "HyperMesh",
+      "path": "Learn/Finite Element/HyperMesh.md"
+    },
+    {
+      "basename": "Finite Element Model 3D Reconstruction",
+      "path": "3DReconstruction/Practical/Finite Element Model 3D Reconstruction.md"
+    },
+    {
+      "basename": "Sensitivity Analysis",
+      "path": "ModelUpdating/Sensitivity Analysis/Sensitivity Analysis.md"
+    },
+    {
+      "basename": "A model-free deep learning-based health prognosis methodology with epistemic and aleatoric uncertainties",
+      "path": "LiteratureNotes/A model-free deep learning-based health prognosis methodology with epistemic and aleatoric uncertainties.md"
+    },
+    {
+      "basename": "Fault detection in nonstationary industrial processes via kolmogorov-arnold networks with test-time training",
+      "path": "LiteratureNotes/Fault detection in nonstationary industrial processes via kolmogorov-arnold networks with test-time training.md"
+    },
+    {
+      "basename": "Graph Neural Networks (GNNs) based accelerated numerical simulation",
+      "path": "LiteratureNotes/Graph Neural Networks (GNNs) based accelerated numerical simulation.md"
+    },
+    {
+      "basename": "Machine learning for reliability engineering and safety applications_ Review of current status and future opportunities",
+      "path": "LiteratureNotes/Machine learning for reliability engineering and safety applications_ Review of current status and future opportunities.md"
+    },
+    {
+      "basename": "Merging physics and neural network_A promising tool for prognostics and health management",
+      "path": "LiteratureNotes/Merging physics and neural network_A promising tool for prognostics and health management.md"
+    },
+    {
+      "basename": "跨域飞行器结构与变构型设计技术进展与挑战",
+      "path": "LiteratureNotes/跨域飞行器结构与变构型设计技术进展与挑战.md"
+    },
+    {
+      "basename": "J3 Case results",
+      "path": "Blog&Book&Paper/Write/Write Paper/Model Updating/J3 Case results.md"
+    },
+    {
+      "basename": "C1_ISRERM2024_A fast interval model updating method based on MLP neural network",
+      "path": "Blog&Book&Paper/Write/Write Paper/Model Updating/C1_ISRERM2024_A fast interval model updating method based on MLP neural network.md"
+    },
+    {
+      "basename": "CAX",
+      "path": "Other Interest/CAX.md"
+    },
+    {
+      "basename": "B1_UncertaintyQuantification",
+      "path": "Blog&Book&Paper/Write/Write Paper/Model Updating/B1_UncertaintyQuantification.md"
+    },
+    {
+      "basename": "Math",
+      "path": "Learn/Math/Math.md"
+    },
+    {
+      "basename": "J1_Stochastic model calibration with image encoding Converting high-dimensional sequential responses into RGB images for neural network inversion",
+      "path": "Blog&Book&Paper/Write/Write Paper/Model Updating/J1_Stochastic model calibration with image encoding Converting high-dimensional sequential responses into RGB images for neural network inversion.md"
+    },
+    {
+      "basename": "NASA challenge 2019",
+      "path": "ModelUpdating/Cases/NASA challenge 2019.md"
+    },
+    {
+      "basename": "DeepLearning",
+      "path": "Learn/Neural Network/DeepLearning.md"
     },
     {
       "basename": "Stochastic Model Updating with Uncertainty Quantification_An Overview and Tutorial",
@@ -133,72 +189,16 @@
       "path": "3DReconstruction/Multi-view/Generative Models/Generative Models Reconstruction.md"
     },
     {
-      "basename": "A feature map of frequency response functions based model updating method using the Bayesian convolutional neural network",
-      "path": "ModelUpdating/Stochastic Model Updating/A feature map of frequency response functions based model updating method using the Bayesian convolutional neural network.md"
+      "basename": "Basics about ModelUpdating",
+      "path": "ModelUpdating/Basics about ModelUpdating.md"
     },
     {
-      "basename": "A frequency response model updating method based on unidirectional convolutional neural network",
-      "path": "ModelUpdating/Stochastic Model Updating/A frequency response model updating method based on unidirectional convolutional neural network.md"
+      "basename": "Towards the NASA UQ Challenge 2019——Systematically forward and inverse approaches for uncertainty propagation and quantification",
+      "path": "ModelUpdating/Review/Towards the NASA UQ Challenge 2019——Systematically forward and inverse approaches for uncertainty propagation and quantification.md"
     },
     {
-      "basename": "A robust stochastic model updating method with resampling processing",
-      "path": "ModelUpdating/Stochastic Model Updating/A robust stochastic model updating method with resampling processing.md"
-    },
-    {
-      "basename": "Frequency response function-based model updating using Kriging model",
-      "path": "ModelUpdating/Stochastic Model Updating/Frequency response function-based model updating using Kriging model.md"
-    },
-    {
-      "basename": "Bayesian finite element model updating with a variational autoencoder and polynomial chaos expansion",
-      "path": "ModelUpdating/AI/Bayesian finite element model updating with a variational autoencoder and polynomial chaos expansion.md"
-    },
-    {
-      "basename": "Data-driven stochastic model updating and damage detection with deep generative model",
-      "path": "ModelUpdating/AI/Data-driven stochastic model updating and damage detection with deep generative model.md"
-    },
-    {
-      "basename": "Latent space-based stochastic model updating",
-      "path": "ModelUpdating/AI/Latent space-based stochastic model updating.md"
-    },
-    {
-      "basename": "Graph Neural Networks (GNNs) based accelerated numerical simulation",
-      "path": "LiteratureNotes/Graph Neural Networks (GNNs) based accelerated numerical simulation.md"
-    },
-    {
-      "basename": "G-Twin：基于图神经网络的海上风力涡轮机实时高保真结构健康监测数字孪生",
-      "path": "Reports/G-Twin：基于图神经网络的海上风力涡轮机实时高保真结构健康监测数字孪生.md"
-    },
-    {
-      "basename": "Computer",
-      "path": "Blog&Book&Paper/Write/Source/Computer.md"
-    },
-    {
-      "basename": "RT-FEMU_A reinforcement and transfer learning-based framework for continuous finite element model updating",
-      "path": "LiteratureNotes/RT-FEMU_A reinforcement and transfer learning-based framework for continuous finite element model updating.md"
-    },
-    {
-      "basename": "Write",
-      "path": "Reliability/Write.md"
-    },
-    {
-      "basename": "new",
-      "path": "Reports/new.md"
-    },
-    {
-      "basename": "飞机位置与姿态不确定性估计",
-      "path": "PHM&SHM/Others/飞机位置与姿态不确定性估计.md"
-    },
-    {
-      "basename": "PHM",
-      "path": "Other Interest/PHM.md"
-    },
-    {
-      "basename": "zt-note.eta",
-      "path": "ZtTemplates/zt-note.eta.md"
-    },
-    {
-      "basename": "An outline of Prognostics and health management Large Model_Concepts, Paradigms, and challenges",
-      "path": "PHM&SHM/Review/An outline of Prognostics and health management Large Model_Concepts, Paradigms, and challenges.md"
+      "basename": "Learn-FEA",
+      "path": "Learn/Finite Element/Learn-FEA.md"
     }
   ],
   "omittedPaths": [],

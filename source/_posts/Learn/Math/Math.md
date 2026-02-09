@@ -329,6 +329,8 @@ $P(\overline{X}-Z^*\frac{\sigma}{\sqrt{n}}\leq\mu\leq\overline{X}+Z^*\frac{\sigm
 
 ## Bayes
 
+> ⭐[一文搞懂贝叶斯定理（原理篇） - Blogs - 廖雪峰的官方网站](https://liaoxuefeng.com/blogs/all/2023-08-27-bayes-explain/index.html)
+
 ![GZsfHmbaAAE1ZFD (1264×1128)|555](https://pbs.twimg.com/media/GZsfHmbaAAE1ZFD?format=jpg&name=large)
 
 Follow:

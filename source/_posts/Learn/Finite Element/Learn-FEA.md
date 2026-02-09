@@ -45,7 +45,6 @@ Basic of Finite Element Analysis
 
 **试函数**（_trial function_）作为有限元分析的数学基础，其基本原理是：先假定满足一定边界条件的试函数，然后将其代入需要求解的**控制方程**（_governing equation_），通过使用与原方程的误差残值最小来确定试函数中的待定系数。
 
-
 >[1 3 微分方程求解的方法 - YouTube](https://www.youtube.com/watch?v=se1MergCnh8&list=PLLwttJaA6dBJGd1FaLziRqXXCefZbOfX8)
 
 求解微分方程方法：
@@ -94,7 +93,6 @@ PINN相较于FEM加了data driven，相较于Neural network加了物理先验信
 >   [数值pde与深度学习结合是未来发展方向吗？ - Martingale的回答 - 知乎](https://www.zhihu.com/question/523893840/answer/2961123949)
 
 ![iu (1172×464)](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcommunity.altair.com%2F82dc6cb8db978d90e8863978f496193d.iix&f=1&nofb=1&ipt=e29041e57c827ed2faf008c7ddd57993d080f93b25ead70858bd52bf7800e97c&ipo=images)
-
 
 
 >  [(2 封私信) PINN还有研究的必要吗？ - 知乎](https://www.zhihu.com/question/526459912)

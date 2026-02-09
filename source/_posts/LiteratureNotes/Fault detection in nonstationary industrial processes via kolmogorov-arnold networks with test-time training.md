@@ -57,9 +57,8 @@ KAN ***训练耗时***
   - KAN bottleneck: capture the nonlinear feature, feature compression and transform into meaningful latent representations
   - KAN decoder:  reconstruct the original input data from the latent representations
 2. 进行statistic in the extracted latent features，并选择合适的控制阈值
-  - K-Nearest Neighbours (KNN) approach, based on Euclidean distance： 被用于量化deviations indicative of potential faults
-  - mean Euclidean distance to its K nearest neighbours： 用于根据confidence level $\alpha$ 确定控制阈值
-3. 在test-time阶段，利用TTT机制在线更新KAN模型参数
+  - K-Nearest Neighbours (KNN) approach, based on Euclidean distance： 被用于量化deviations indicative of potential faultsmean Euclidean distance to its K nearest neighbours： 用于根据confidence level $\alpha$ 确定控制阈值
+1. 在test-time阶段，利用TTT机制在线更新KAN模型参数
   - Initialisation of TTT mechanism
     - 滑动窗口确保“temporal correlations and dynamics within the data are effectively captured and leveraged” ([Li 等, 2025, p. 11](zotero://select/library/items/2JTFKDQQ)) ([pdf](zotero://open-pdf/library/items/TVC6QHPY?page=11&annotation=ANHNKU3F))
   - Feature Extraction and Model Parameter Update

@@ -65,6 +65,7 @@ SHM与PHM的异同点：
 - 可靠性分析(Reliability analysis)：评估结构在不确定性条件下的性能和失效概率。
 - 不确定性量化(Uncertainty quantification)：评估输入参数的不确定性对结构响应的影响。
 - 可靠性设计与优化(Reliability-based design optimization, RBDO)：结合可靠性分析和优化设计，寻找在满足可靠性要求下的最佳结构参数组合（如成本、重量等）。
+- [【参数识别】频域MIMO模态参数辨识（Matlab实现）_频响函数法 参数辨识-CSDN博客](https://blog.csdn.net/qq_46009436/article/details/141037991) 从FRF辨识模态频率、阻尼比和振型等模态参数。
 
 不太熟悉：
 - 结构动力学分析(Structural dynamics analysis)：研究结构在动态载荷作用下的响应和行为。

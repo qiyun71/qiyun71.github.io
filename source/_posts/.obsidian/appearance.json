@@ -1,11 +1,11 @@
 {
-  "baseFontSize": 15,
+  "baseFontSize": 17,
   "theme": "system",
   "translucency": false,
   "cssTheme": "Blue Topaz",
-  "interfaceFontFamily": "MiSans Semibold,Comic Sans MS",
-  "textFontFamily": "仓耳今楷03,Comic Sans MS,MiSans,MiSans Semibold,HarmonyOS Sans SC,HYRunYuan 55W",
-  "monospaceFontFamily": "Consolas,Maple Mono",
+  "interfaceFontFamily": "STIX Two Text,MiSans Semibold,Comic Sans MS",
+  "textFontFamily": "STIX Two Text,仓耳今楷03,Comic Sans MS,MiSans,MiSans Semibold,HarmonyOS Sans SC,HYRunYuan 55W",
+  "monospaceFontFamily": "STIX Two Math,Consolas,Maple Mono",
   "accentColor": "",
   "nativeMenus": false,
   "enabledCssSnippets": [

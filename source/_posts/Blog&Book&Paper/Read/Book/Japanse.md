@@ -5,7 +5,7 @@ tags:
   - 
 categories: Blog&Book&Paper/Read/Book
 ---
-
+2
 [日语语法指南 | Learn Japanese](https://res.wokanxing.info/jpgramma/stateofbeing.html)
 
 <!-- more -->

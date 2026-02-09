@@ -150,3 +150,11 @@ updated/posterior distribution (arbitrarily damaged)
 
 根据参数(刚度or...)初始分布$\mu,\sigma$，设定损伤阈值$\delta=\delta|_{p_{thre}=0.05}=\mu_{ud}-1.645\sigma_{ud}$(低于阈值表示进入damage状态)
 如果后验分布的pdf中大部分都位于阈值以下，则Probability of Damage (PoD)很大，反之PoD则很小，标志结构更可能仍然处于安全状态
+
+
+### Train
+
+数据集：X（n, params）, Y(n, n_y)
+- 每个批次大小bs，训练轮数epochs
+
+训练后的推理/修正：X_exp（m, params），Y_exp(m, n_y)

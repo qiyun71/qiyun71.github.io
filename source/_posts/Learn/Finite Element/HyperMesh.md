@@ -43,3 +43,5 @@ Based on the Finite Element Method (FEM), analysts (engineers and physicists) ma
 - 然后需要共节点：validate中的equivalence 
 - 检查face，隐藏几何，隐藏表面的mesh，观察内部网格质量
 
+[hypermesh2023_四面体网格三种画法总结_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1Pm421M7XS/?vd_source=1dba7493016a36a32b27a14ed2891088)
+

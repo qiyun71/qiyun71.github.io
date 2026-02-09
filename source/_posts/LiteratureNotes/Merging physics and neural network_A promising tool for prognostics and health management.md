@@ -43,7 +43,7 @@ author:
 - II-3：PINN “This method provides new physical insights under limited experimental measurement data, ensuring that the model’s predictions satisfy the laws of physics.” ([Wang 等, 2026, p. 8](zotero://select/library/items/AC66GB5S)) ([pdf](zotero://open-pdf/library/items/CD62T744?page=8&annotation=E2DKMSP8))
 - II-4：将特定的计算过程用NN代替“designs the NN based on PM or attributes (Fig. 6(b)), allowing specific computational processes to be replaced by NN, such as Fourier transforms and wavelet transforms commonly used in signal analysis.” ([Wang 等, 2026, p. 8](zotero://select/library/items/AC66GB5S)) ([pdf](zotero://open-pdf/library/items/CD62T744?page=8&annotation=B8SQVZZD))
 
-II-1是将NN代替PM中的参数(NN作为PM的一部分)，而II-2是用NN学习/输出PM的参数(参数辨识)
+Physical model-centric中，II-1是将NN代替PM中的参数(NN作为PM的一部分)，而II-2是用NN学习/输出PM的参数(参数辨识)
 
 ![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20251209170256.png)
 
@@ -53,5 +53,21 @@ II-1是将NN代替PM中的参数(NN作为PM的一部分)，而II-2是用NN学习
 ## Outlook
 
 ## Cases
+
+### Physical model-centric BattNN for voltage prediction (II-1 architecture)
+
+> [wang-fujin/BattNN](https://github.com/wang-fujin/BattNN)
+
+将公式中$\delta, V_{b}, R_{sp}$的计算用三个小型NN代替
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20251223172041.png)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20251223172048.png)
+
+### Neural network-centric method for SOH estimation (II-3 architecture)
+
+> [wang-fujin/PINN4SOH: A physics-informed neural network for battery SOH estimation](https://github.com/wang-fujin/PINN4SOH)
+
+![image.png|666](https://raw.githubusercontent.com/qiyun71/Blog_images/main/MyBlogPic/202403/20251223172323.png)
 
 ## Equation

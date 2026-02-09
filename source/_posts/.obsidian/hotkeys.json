@@ -154,5 +154,31 @@
       ],
       "key": "M"
     }
+  ],
+  "editor:table-row-before": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "PageUp"
+    }
+  ],
+  "obsidian-footnotes:insert-named-footnote": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "PageDown"
+    }
+  ],
+  "footnotes:open": [
+    {
+      "modifiers": [
+        "Alt"
+      ],
+      "key": "="
+    }
   ]
 }

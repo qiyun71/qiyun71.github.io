@@ -1,48 +1,26 @@
 # Schedule
 
-✅
-
-| Status               | Important | Event                                             | DDL        | Local file path                                                                                                                                                                                                                                      |                                                                               |
-| -------------------- | --------- | ------------------------------------------------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| **Conference Paper** | ❌         | 基于AI的可靠性系统工程综述                                    | 2025.10.31 | [20251012_Paper_Review_AIReliability](file:///D:%5CDownload%5CBaiduSyncdisk%5CReport%5C20251012_Paper_Review_AIReliability)<br>[AI+RSE](../Reliability/AI+RSE.md)                                                                                    | 近10~15年100篇文献，每节算例验证                                                          |
-|                      | ❌         | Interval model updating                           | 2024.10.23 | [C1_ISRERM2024_FastIntervalMU_InverseSM_EI](file:///D:%5CDownload%5CBaiduSyncdisk%5CReport%5CC1_ISRERM2024_FastIntervalMU_InverseSM_EI)                                                                                                              |                                                                               |
-|                      | ⭐         | Virtual sample generation                         | 2025.12.5  | [C2_20251028_ConferencePaper_abstract_fullpaper_for_NVTA2025](file:///D:%5CDownload%5CBaiduSyncdisk%5CReport%5CC2_20251028_ConferencePaper_abstract_fullpaper_for_NVTA2025)                                                                          | PPT展示<br>VAE生成扩充样本                                                            |
-|                      | ⭐         | Data augumented                                   | 2025.11.30 | [C3_20251130_ISRERM2026](file:///D:%5CDownload%5CBaiduSyncdisk%5CReport%5CC3_20251130_ISRERM2026)<br>[ISRERM2026 - 10th International Symposium on Reliability Engineering and Risk Management](https://ec-mice.com/ISRERM2026/)                     | 提交摘要<br>Diffusion<br>experimental sample                                      |
-|                      |           | Multi-physical uncertainty propagation            | 2025.12.20 | [C4_20251012_ConferencePaper_abstract_for_CSC2026](file:///D:%5CDownload%5CBaiduSyncdisk%5CReport%5CC4_20251012_ConferencePaper_abstract_for_CSC2026)<br>[CSA通知 \| 2026年中国航天大会（CSC2026）征文通知（第二轮）](https://mp.weixin.qq.com/s/UjyBHYowUITdW8ZtPhvjOA) | 参加 8.复用运输系统促进太空经济可持续发展专题                                                      |
-|                      |           |                                                   |            |                                                                                                                                                                                                                                                      |                                                                               |
-| **Journal Paper**    | ❌         | Fast inverse surrogate model                      |            | [J1_FastStochasticMU_InverseSM_SCI](file:///D:%5CDownload%5CBaiduSyncdisk%5CReport%5CJ1_FastStochasticMU_InverseSM_SCI)                                                                                                                              |                                                                               |
-|                      |           | Response-consistent inverse surrogate model       |            | [J2_FastIntervalMU_ResponseConsistentSupervisedModel_SCI](file:///D:%5CDownload%5CBaiduSyncdisk%5CReport%5CJ2_FastIntervalMU_ResponseConsistentSupervisedModel_SCI)                                                                                  |                                                                               |
-|                      | ⭐         | Dimension reduction + Global sensitivity analysis | 2025.11.30 | [J3 NN-based Global Sensitivity Analysis](Write/Write%20Paper/Model%20Updating/J3%20NN-based%20Global%20Sensitivity%20Analysis.md)<br>[J3_GSA+AK model+SIS_SCI](file:///D:%5CDownload%5CBaiduSyncdisk%5CReport%5CJ3_GSA+AK%20model+SIS_SCI)          | 论文的理论部分。1、在可以增加图的部分，增加图，包括网络结构图，整体流程图，程序编码图等内容。2、尽快开始撰写算例。完成图的部分和第一个算例即发给我文本。 |
-|                      |           | Self-supervised                                   |            |                                                                                                                                                                                                                                                      | 时序信号，论文+折叠翼FRF实验算例+仿真软件操作（找杨标讨论），有限元模型线性刚度的修正<br>可以往test-time training方面靠     |
-|                      |           |                                                   |            |                                                                                                                                                                                                                                                      |                                                                               |
-| **Other**            |           | novel point on review paper                       | 2025.10.17 | [20250920_PeerReview+PaperRead_MSSP25-4858_reviewer](file:///D:%5CDownload%5CBaiduSyncdisk%5CReport%5C20250920_PeerReview+PaperRead_MSSP25-4858_reviewer)                                                                                            |                                                                               |
-|                      |           |                                                   |            | [高铁发票](file:///D:%5CDownload%5CBaiduSyncdisk%5CReport%5C20250918_Workshop_International_11月15-16%5C发票%5C高铁发票)                                                                                                                                        |                                                                               |
-|                      |           |                                                   | 2025.12.4  | [20251120_PeerReview_RUENG-1910](file:///D:%5CDownload%5CBaiduSyncdisk%5CReport%5CPeerReview%5C20251120_PeerReview_RUENG-1910)                                                                                                                       |                                                                               |
+| Event                                             | DDL           | Local file path                                                                                                                                                                                                                                                                                                                                                                                                                                   |                                                                               |
+| ------------------------------------------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| ⭐Conference                                       | ⭐             | ⭐                                                                                                                                                                                                                                                                                                                                                                                                                                                 | ⭐                                                                             |
+| Interval model updating                           | 2024.10.23    | [C1_ISRERM2024_A fast interval model updating method based on MLP neural network](Write/Write%20Paper/Model%20Updating/C1_ISRERM2024_A%20fast%20interval%20model%20updating%20method%20based%20on%20MLP%20neural%20network.md)                                                                                                                                                                                                                    |                                                                               |
+| Virtual sample generation                         | 2025.12.5     | [C2_NVTA2025_Virtual sampling for model updating under data scarcity challenges](Write/Write%20Paper/Model%20Updating/C2_NVTA2025_Virtual%20sampling%20for%20model%20updating%20under%20data%20scarcity%20challenges.md)                                                                                                                                                                                                                          | PPT展示<br>VAE生成扩充样本                                                            |
+| Data augumented                                   | 2025.12.30    | [C3_ISRERM2026_A generative data augmentation framework for model updating via Dual-VAE and Metropolis-Hastings sampling](Write/Write%20Paper/Model%20Updating/C3_ISRERM2026_A%20generative%20data%20augmentation%20framework%20for%20model%20updating%20via%20Dual-VAE%20and%20Metropolis-Hastings%20sampling.md)<br>[ISRERM2026 - 10th International Symposium on Reliability Engineering and Risk Management](https://ec-mice.com/ISRERM2026/) | 提交摘要<br>Diffusion<br>experimental sample                                      |
+| ~~Multi-physical uncertainty propagation~~        | ~~2026.1.10~~ | ~~[C4X CSC2026](Write/Write%20Paper/Model%20Updating/C4X%20CSC2026.md)<br>[CSA通知 \| 2026年中国航天大会（CSC2026）征文通知（第二轮）](https://mp.weixin.qq.com/s/UjyBHYowUITdW8ZtPhvjOA)~~                                                                                                                                                                                                                                                                             | ~~参加 8.复用运输系统促进太空经济可持续发展专题~~                                                  |
+| ⭐Journal                                          | ⭐             | ⭐                                                                                                                                                                                                                                                                                                                                                                                                                                                 | ⭐                                                                             |
+| Fast inverse surrogate model                      |               | [J1_Stochastic model calibration with image encoding Converting high-dimensional sequential responses into RGB images for neural network inversion](Write/Write%20Paper/Model%20Updating/J1_Stochastic%20model%20calibration%20with%20image%20encoding%20Converting%20high-dimensional%20sequential%20responses%20into%20RGB%20images%20for%20neural%20network%20inversion.md)                                                                    |                                                                               |
+| Response-consistent inverse surrogate model       |               | [J2_Interval Model Calibration with Response-Consistent Supervised Learning Network](Write/Write%20Paper/Model%20Updating/J2_Interval%20Model%20Calibration%20with%20Response-Consistent%20Supervised%20Learning%20Network.md)                                                                                                                                                                                                                    |                                                                               |
+| Dimension reduction + Global sensitivity analysis | 2025.12.30    | [J3_AE-GSA](Write/Write%20Paper/Model%20Updating/J3_AE-GSA.md)<br>                                                                                                                                                                                                                                                                                                                                                                                | 论文的理论部分。1、在可以增加图的部分，增加图，包括网络结构图，整体流程图，程序编码图等内容。2、尽快开始撰写算例。完成图的部分和第一个算例即发给我文本。 |
+| Virtual sample generation                         |               | [J4_Virtual sampling generation](Write/Write%20Paper/Model%20Updating/J4_Virtual%20sampling%20generation.md)                                                                                                                                                                                                                                                                                                                                      | 使用VAE进行虚拟样本生成/样本增广                                                            |
+| Self-supervised                                   |               | [J5_SSL_Stochastic](Write/Write%20Paper/Model%20Updating/J5_SSL_Stochastic.md)                                                                                                                                                                                                                                                                                                                                                                    | 时序信号，论文+折叠翼FRF实验算例+仿真软件操作（找杨标讨论），有限元模型线性刚度的修正<br>可以往test-time training方面靠     |
+|                                                   |               |                                                                                                                                                                                                                                                                                                                                                                                                                                                   |                                                                               |
+| ⭐Patent                                           | ⭐             | ⭐                                                                                                                                                                                                                                                                                                                                                                                                                                                 | ⭐                                                                             |
+| Response-consistent inverse surrogate model       |               |                                                                                                                                                                                                                                                                                                                                                                                                                                                   |                                                                               |
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+- B-spline曲线拟合概率密度函数[Jing-Lin et al., Shaping of Output PDF Based on the Rational Square-root B-spline Model1)](zotero://select/library/items/LLP4HY2L)
 
 
 
@@ -105,9 +83,9 @@ Research Interest：
 - [PHM](../Other%20Interest/PHM.md)
 - Model Updating ⭐
   - [ModelUpdating.excalidraw](Write/Write%20Paper/Model%20Updating/ModelUpdating.excalidraw.md) 思考 --> Write Paper:
-    - [J1 Stochastic Model Calibration with Image Encoding——Converting High-Dimensional Frequency-Domain Responses into RGB Images for Neural Network Inversion](Write/Write%20Paper/Model%20Updating/J1%20Stochastic%20Model%20Calibration%20with%20Image%20Encoding——Converting%20High-Dimensional%20Frequency-Domain%20Responses%20into%20RGB%20Images%20for%20Neural%20Network%20Inversion.md)
-    - [J2 C1 A fast interval model updating method based on MLP neural network](Write/Write%20Paper/Model%20Updating/J2%20C1%20A%20fast%20interval%20model%20updating%20method%20based%20on%20MLP%20neural%20network.md)
-    - [J4 Self-superviside Model Updating through inverse calibration model](Write/Write%20Paper/Model%20Updating/J4%20Self-superviside%20Model%20Updating%20through%20inverse%20calibration%20model.md)
+    - [J1_Stochastic model calibration with image encoding Converting high-dimensional sequential responses into RGB images for neural network inversion](Write/Write%20Paper/Model%20Updating/J1_Stochastic%20model%20calibration%20with%20image%20encoding%20Converting%20high-dimensional%20sequential%20responses%20into%20RGB%20images%20for%20neural%20network%20inversion.md)
+    - [J2_Interval Model Calibration with Response-Consistent Supervised Learning Network](Write/Write%20Paper/Model%20Updating/J2_Interval%20Model%20Calibration%20with%20Response-Consistent%20Supervised%20Learning%20Network.md)
+    - [J5_SSL_Stochastic](Write/Write%20Paper/Model%20Updating/J5_SSL_Stochastic.md)
   - [Basics about ModelUpdating](../ModelUpdating/Basics%20about%20ModelUpdating.md)
   - [Paper about ModelUpdating](../ModelUpdating/Paper%20about%20ModelUpdating.md)
   - [Case about ModelUpdating](../ModelUpdating/Case%20about%20ModelUpdating.md)
@@ -193,21 +171,7 @@ Follow 大佬:
 
 
 
-
-
-
 [全链条加速布局 商业航天迎产业扩张期-新华网](https://www.news.cn/tech/20250812/9ae36f45fd3a4cee81dd9b489b315936/c.html)
 
 
 
-
-
-
-
-
-
-
----
-
-
-[1] Bi S, Yun Q, Zhao Y, et al. Stochastic Model Calibration with Image Encoding: Converting High-Dimensional Sequential Responses into RGB Images for Neural Network Inversion[J]. Mechanical Systems and Signal Processing, 2025,230: 112606

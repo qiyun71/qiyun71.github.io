@@ -8,6 +8,7 @@
     "workspace:export-pdf",
     "open-with-default-app:show",
     "obsidian-text-format:merge-line",
-    "obsidian-text-format:hyphen"
+    "obsidian-text-format:hyphen",
+    "editor:table-row-before"
   ]
 }
